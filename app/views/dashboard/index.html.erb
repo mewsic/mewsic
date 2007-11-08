@@ -1,328 +1,284 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Myousica - play and share</title>
-<%= stylesheet_link_tag "style" %>
-<%= javascript_include_tag :defaults %>
-<style type="text/css">
-.bg-top-body, .bg-bottom-body, .whiteblock-shadow, .box-rounded-gray, img{ behavior: url(/stylesheets/iepngfix.htc) }
-</style>
-</head>
-<body class="home">
-<div id="header" class="page-width clear-block">
-  <div id="top-menu">
-    <ul class="list-menu">
-      <li><a href="#">Sign Up</a></li>
-      <li><a href="#">My Account</a></li>
-      <li><a href="#">Help</a></li>
-    </ul>
-  </div>
-  <div id="logo" class="float-left"><img src="/images/logo_myousica.gif" alt="Myousica" /></div>
-  <div id="nav-menu">
-    <ul class="list-menu">
-      <li><a href="#">people</a></li>
-      <li><a href="#"> bands &amp; dj </a></li>
-      <li><a href="#"> music</a></li>
-      <li><a href="#">ideas</a></li>
-      <li><a href="#">answers</a></li>
-      <li id="search">
-        <p><span>search</span></p>
-        <p class="search-input">
-          <input name="" type="text" />
-          <input name="search" type="image" src="/images/search_button.gif" alt="search" class="input-button" />
-        </p>
-      </li>
-    </ul>
-  </div>
+<div id="content-body" class="page-width clear-block">
+  <div id="rightcol">
+    <div class="banner-right-col"><a href="#"><img src="/images/banner_instruction_right.png" alt="guarda come condividere le tracce" width="214" height="176" /></a></div>
+	<div id="log-in" class="clear-block">
+	<div class="log-in-input">
+		<p><input type="text" value="user" /></p>
+		<p><input type="password" value="password" /></p>
+		<p><input name="log-in" type="image" src="/images/login_button.png" class="input-button" /></p>
+	</div>
+	<div class="log-in-link">
+		<p><a href="#">Registrati</a></p>
+		<p><a href="#">Password dimenticata?</a></p>
+	</div>
+	</div>
+		<div id="mlab-box" class="clear-block">
+			<p><img src="/images/mlab_scroll_title.png" alt="" width="214" height="45" class="float-left" /></p>
+				<div class="mlab-container clear-block">
+					<p><a href="#"><img src="/images/mlab_scroll_button_top.png" alt="" width="204" height="22" class="float-left" /></a></p>
+					<div id="mlab-scroll" class="clear-block">
+						<div class="elements even clear-block">
+							<div class="float-left">
+								<p class="name"><a href="#">Pinco Pallino</a></p>
+								<p class="abstract">Saltellando qua e la tellan Saltellando qua e la</p>
+							</div>
+							<div class="float-left align-right">
+								<p class="button"><a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
+							</div>
+						</div>
+						<div class="elements odd clear-block">
+							<div class="float-left">
+								<p class="name"><a href="#">Pinco Pallino</a></p>
+								<p class="abstract">Saltellando qua e la tellan Saltellando qua e la</p>
+							</div>
+							<div class="float-left align-right">
+								<p class="button"><a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
+							</div>
+						</div>
+						<div class="elements even clear-block">
+							<div class="float-left">
+								<p class="name"><a href="#">Pinco Pallino</a></p>
+								<p class="abstract">Saltellando qua e la tellan Saltellando qua e la</p>
+							</div>
+							<div class="float-left align-right">
+								<p class="button"><a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
+							</div>
+						</div>
+						<div class="elements odd clear-block">
+							<div class="float-left">
+								<p class="name"><a href="#">Pinco Pallino</a></p>
+								<p class="abstract">Saltellando qua e la tellan Saltellando qua e la</p>
+							</div>
+							<div class="float-left align-right">
+								<p class="button"><a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
+							</div>
+						</div>							
+					</div>
+					<p><a href="#"><img src="/images/mlab_scroll_button_down.png" alt="" width="204" height="25" class="float-left" /></a></p>
+			<p><img src="/images/linguetta_mlab_bottom.png" alt="" width="125" height="32" class="float-left" /></p>
+				</div>
+			</div>
 </div>
-<div class="bg-body">
-  <div class="bg-top-body"></div>
-  <div id="content-body" class="page-width clear-block">
-    <div id="rightcol">
-      <div class="banner-right-col"><a href="#"><img src="/images/banner_instruction_right.png" alt="guarda come condividere le tracce" width="214" height="176" /></a></div>
-		<div id="log-in" class="clear-block">
-		<div class="log-in-input">
-			<p><input type="text" value="user" /></p>
-			<p><input type="password" value="password" /></p>
-			<p><input name="log-in" type="image" src="/images/login_button.png" class="input-button" /></p>
-		</div>
-		<div class="log-in-link">
-			<p><a href="#">Registrati</a></p>
-			<p><a href="#">Password dimenticata?</a></p>
-		</div>
-		</div>
-			<div id="mlab-box" class="clear-block">
-				<p><img src="/images/mlab_scroll_title.png" alt="" width="214" height="45" class="float-left" /></p>
-					<div class="mlab-container clear-block">
-						<p><a href="#"><img src="/images/mlab_scroll_button_top.png" alt="" width="204" height="22" class="float-left" /></a></p>
-						<div id="mlab-scroll" class="clear-block">
-							<div class="elements even clear-block">
-								<div class="float-left">
-									<p class="name"><a href="#">Pinco Pallino</a></p>
-									<p class="abstract">Saltellando qua e la tellan Saltellando qua e la</p>
-								</div>
-								<div class="float-left align-right">
-									<p class="button"><a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-								</div>
-							</div>
-							<div class="elements odd clear-block">
-								<div class="float-left">
-									<p class="name"><a href="#">Pinco Pallino</a></p>
-									<p class="abstract">Saltellando qua e la tellan Saltellando qua e la</p>
-								</div>
-								<div class="float-left align-right">
-									<p class="button"><a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-								</div>
-							</div>
-							<div class="elements even clear-block">
-								<div class="float-left">
-									<p class="name"><a href="#">Pinco Pallino</a></p>
-									<p class="abstract">Saltellando qua e la tellan Saltellando qua e la</p>
-								</div>
-								<div class="float-left align-right">
-									<p class="button"><a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-								</div>
-							</div>
-							<div class="elements odd clear-block">
-								<div class="float-left">
-									<p class="name"><a href="#">Pinco Pallino</a></p>
-									<p class="abstract">Saltellando qua e la tellan Saltellando qua e la</p>
-								</div>
-								<div class="float-left align-right">
-									<p class="button"><a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-								</div>
-							</div>							
-						</div>
-						<p><a href="#"><img src="/images/mlab_scroll_button_down.png" alt="" width="204" height="25" class="float-left" /></a></p>
-				<p><img src="/images/linguetta_mlab_bottom.png" alt="" width="125" height="32" class="float-left" /></p>
-					</div>
-				</div>
-	</div>
-    <div class="banner-instr-home"><img src="/images/banner_instruction_home.png" alt="" width="732" height="189" /></div>
-    <div class="whiteblock-shadow clear-block">
-      <div id="path">path</div>
-      <div class="tags clear-block margin-top-bottom">
-		  <a href="#" style="font-size:100%">nome tag</a><a href="#" style="font-size:110%">nome tag</a><a href="#" style="font-size:200%">nome tag</a><a href="#" style="font-size:150%">nome tag</a><a href="#" style="font-size:130%">nome tag</a>
-		  <a href="#" style="font-size:100%">nome tag</a><a href="#" style="font-size:110%">nome tag</a><a href="#" style="font-size:200%">nome tag</a><a href="#" style="font-size:150%">nome tag</a><a href="#" style="font-size:130%">nome tag</a>
-		  <a href="#" style="font-size:100%">nome tag</a><a href="#" style="font-size:110%">nome tag</a><a href="#" style="font-size:200%">nome tag</a><a href="#" style="font-size:150%">nome tag</a><a href="#" style="font-size:130%">nome tag</a>
-		  <a href="#" style="font-size:100%">nome tag</a><a href="#" style="font-size:110%">nome tag</a><a href="#" style="font-size:200%">nome tag</a><a href="#" style="font-size:150%">nome tag</a><a href="#" style="font-size:130%">nome tag</a>
-		  <a href="#" style="font-size:100%">nome tag</a><a href="#" style="font-size:110%">nome tag</a><a href="#" style="font-size:200%">nome tag</a><a href="#" style="font-size:150%">nome tag</a><a href="#" style="font-size:130%">nome tag</a>
-	  </div>
-	  <div class="float-left margin-top-bottom"><a href="#"><img src="/images/banner_mband.gif" alt="crea una Mband" width="179" height="165" /></a></div>
-
-		<div class="box-list one-col clear-block">
-		  <div class="people-list clear-block">
-			<h1>PEOPLE</h1>
-			<div class="top-box clear-block">
-				<div class="bottom-box clear-block">
-				  <div class="elements clear-block"> 
-					<p class="star"><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /></p>
-					<p class="thumb"><a href="#"><img src="/avatars/photo_60X60.jpg" alt="Pinco Pallino" width="60" height="60" /></a></p>
-					<p class="name"><a href="#">Pinco Pallino</a></p>
-					<p class="country">Italy, Pescara</p>
-				  </div>
-				  <div class="elements clear-block"> 
-					<p class="star"><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /></p>
-					<p class="thumb"><a href="#"><img src="/avatars/photo_60X60.jpg" alt="Pinco Pallino" width="60" height="60" /></a></p>
-					<p class="name"><a href="#">Pinco Pallino</a></p>
-					<p class="country">Italy, Pescara</p>
-				  </div>			  
-				  <div class="elements clear-block"> 
-					<p class="star"><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /></p>
-					<p class="thumb"><a href="#"><img src="/avatars/photo_60X60.jpg" alt="Pinco Pallino" width="60" height="60" /></a></p>
-					<p class="name"><a href="#">Pinco Pallino</a></p>
-					<p class="country">Italy, Pescara</p>
-				  </div>
-				  <div class="elements clear-block"> 
-					<p class="star"><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /></p>
-					<p class="thumb"><a href="#"><img src="/avatars/photo_60X60.jpg" alt="Pinco Pallino" width="60" height="60" /></a></p>
-					<p class="name"><a href="#">Pinco Pallino</a></p>
-					<p class="country">Italy, Pescara</p>
-				  </div>			  
-				  <div class="elements clear-block"> 
-					<p class="star"><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /></p>
-					<p class="thumb"><a href="#"><img src="/avatars/photo_60X60.jpg" alt="Pinco Pallino" width="60" height="60" /></a></p>
-					<p class="name"><a href="#">Pinco Pallino</a></p>
-					<p class="country">Italy, Pescara</p>
-				  </div>
-				  <div class="elements clear-block"> 
-					<p class="star"><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /></p>
-					<p class="thumb"><a href="#"><img src="/avatars/photo_60X60.jpg" alt="Pinco Pallino" width="60" height="60" /></a></p>
-					<p class="name"><a href="#">Pinco Pallino</a></p>
-					<p class="country">Italy, Pescara</p>
-				  </div>
-				</div>
-			</div>
-		  </div>
-	  </div>
-	  
-	<div class="box-list two-col clear-block">
-		<div id="bands-dj" class="bands-dj-list clear-block">
-		<h1>BANDS & DJ</h1>
-			<div class="top-box clear-block">
-				<div class="bottom-box clear-block">
-					<div class="elements clear-block"> 
-						<p class="thumb"><a href="#"><img src="/avatars/photo_42X42.jpg" alt="Band" width="42" height="42" /></a></p>
-						<p class="name"><a href="#">Pinco Pallino</a></p>
-						<p class="country">Italy, Pescara</p>
-						<table width="100%" border="0" cellpadding="0" cellspacing="0">
-						  <tr class="even">
-							<td>Pinco Pallino,<em> titolo titolo titolo</em></td>
-							<td class="star"><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /></td>
-							<td class="button"><a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></td>
-						  </tr>
-						  <tr class="odd">
-							<td class="even">Pinco Pallino,<em> titolo titolo titolo</em></td>
-							<td class="star"><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /></td>
-							<td class="button"><a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></td>
-						  </tr>
-						  <tr class="even">
-							<td>Pinco Pallino,<em> titolo titolo titolo</em></td>
-							<td class="star"><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /></td>
-							<td class="button"><a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></td>
-						  </tr>
-					  </table>
-					</div>
-					<div class="elements clear-block"> 
-						<p class="thumb"><a href="#"><img src="/avatars/photo_42X42.jpg" alt="Band" width="42" height="42" /></a></p>
-						<p class="name"><a href="#">Pinco Pallino</a></p>
-						<p class="country">Italy, Pescara</p>
-						<table width="100%" border="0" cellpadding="0" cellspacing="0">
-						  <tr class="even">
-							<td>Pinco Pallino,<em> titolo titolo titolo</em></td>
-							<td class="star"><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /></td>
-							<td class="button"><a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></td>
-						  </tr>
-						  <tr class="odd">
-							<td class="even">Pinco Pallino,<em> titolo titolo titolo</em></td>
-							<td class="star"><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /></td>
-							<td class="button"><a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></td>
-						  </tr>
-						  <tr class="even">
-							<td>Pinco Pallino,<em> titolo titolo titolo</em></td>
-							<td class="star"><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /></td>
-							<td class="button"><a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></td>
-						  </tr>
-					  </table>
-					</div>				
-					
-				</div>
-			</div>	
-		</div>
-	</div>
-
-	<div class="box-list three-col clear-block">
-		<div class="music-list clear-block">
-		<h1>MUSIC</h1>
-			<div class="top-box clear-block">
-				<div class="bottom-box clear-block">
-					<div class="elements clear-block">
-						<div class="border-angle-top clear-block">
-							<p class="thumb"><a href="#"><img src="/avatars/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></a></p>
-							<p class="name align-right"><a href="#">Pinco Pallino</a></p>
-							<p class="star"><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /></p>
-							<p class="title"><a href="#">titolo titolo titolo</a></p>
-							<p>Jimmy Hendrix</p>
-							<p class="abstract">"questa per mamma"</p>
-							<p class="button float-right"><a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-							<p class="float-left">listened 2000 </p>
-						</div>
-					</div>
-					<div class="elements clear-block">
-						<div class="border-angle-top clear-block">
-							<p class="thumb"><a href="#"><img src="/avatars/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></a></p>
-							<p class="name align-right"><a href="#">Pinco Pallino</a></p>
-							<p class="star"><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /></p>
-							<p class="title"><a href="#">titolo titolo titolo</a></p>
-							<p>Jimmy Hendrix</p>
-							<p class="abstract">"questa per mamma"</p>
-							<p class="button float-right"><a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-							<p class="float-left">listened 2000 </p>
-						</div>
-					</div>				
-					<div class="elements clear-block">
-						<div class="border-angle-top clear-block">
-							<p class="thumb"><a href="#"><img src="/avatars/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></a></p>
-							<p class="name align-right"><a href="#">Pinco Pallino</a></p>
-							<p class="star"><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /></p>
-							<p class="title"><a href="#">titolo titolo titolo</a></p>
-							<p>Jimmy Hendrix</p>
-							<p class="abstract">"questa per mamma"</p>
-							<p class="button float-right"><a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-							<p class="float-left">listened 2000 </p>
-						</div>
-					</div>				
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="box-list two-col clear-block">
-		<div class="collaboration-list clear-block">
-		<h1>COLLABORATION</h1>
-			<div class="top-box clear-block">
-				<div class="bottom-box clear-block">
-					<div class="elements clear-block">
-						<p class="thumb"><a href="#"><img src="/images/instrument_mic.png" alt="" width="29" height="29" /></a></p>
-						<p class="thumb"><a href="#"><img src="/avatars/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></a></p>
-						<p class="name align-right"><a href="#">Pinco Pallino</a></p>
-						<p class="title"><a href="#">titolo titolo titolo</a></p>
-						<p class="abstract">"Motto motto motto  motto  motto motto motto motto motto"</p>
-						<p class="button float-right"><a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-						<p class="float-left">bpm 180<br />
-						15'</p>					
-					</div>
-					
-					<div class="elements clear-block">
-						<p class="thumb"><a href="#"><img src="/images/instrument_mic.png" alt="" width="29" height="29" /></a></p>
-						<p class="thumb"><a href="#"><img src="/avatars/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></a></p>
-						<p class="name align-right"><a href="#">Pinco Pallino</a></p>
-						<p class="title"><a href="#">titolo titolo titolo</a></p>
-						<p class="abstract">"Motto motto motto  motto  motto motto motto motto motto"</p>
-						<p class="button float-right"><a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-						<p class="float-left">bpm 180<br />
-						15'</p>					
-					</div>
-					
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="banner-instr-home"><img src="/images/banner_instruction_home.png" alt="" width="732" height="189" /></div>
+  <div class="whiteblock-shadow clear-block">
+    <div id="path">path</div>
+    <div class="tags clear-block margin-top-bottom">
+	  <a href="#" style="font-size:100%">nome tag</a><a href="#" style="font-size:110%">nome tag</a><a href="#" style="font-size:200%">nome tag</a><a href="#" style="font-size:150%">nome tag</a><a href="#" style="font-size:130%">nome tag</a>
+	  <a href="#" style="font-size:100%">nome tag</a><a href="#" style="font-size:110%">nome tag</a><a href="#" style="font-size:200%">nome tag</a><a href="#" style="font-size:150%">nome tag</a><a href="#" style="font-size:130%">nome tag</a>
+	  <a href="#" style="font-size:100%">nome tag</a><a href="#" style="font-size:110%">nome tag</a><a href="#" style="font-size:200%">nome tag</a><a href="#" style="font-size:150%">nome tag</a><a href="#" style="font-size:130%">nome tag</a>
+	  <a href="#" style="font-size:100%">nome tag</a><a href="#" style="font-size:110%">nome tag</a><a href="#" style="font-size:200%">nome tag</a><a href="#" style="font-size:150%">nome tag</a><a href="#" style="font-size:130%">nome tag</a>
+	  <a href="#" style="font-size:100%">nome tag</a><a href="#" style="font-size:110%">nome tag</a><a href="#" style="font-size:200%">nome tag</a><a href="#" style="font-size:150%">nome tag</a><a href="#" style="font-size:130%">nome tag</a>
+  </div>
+  <div class="float-left margin-top-bottom"><a href="#"><img src="/images/banner_mband.gif" alt="crea una Mband" width="179" height="165" /></a></div>
 
 	<div class="box-list one-col clear-block">
-		<div class="answer-list clear-block">
-		<h1>ANSWER</h1>
-			<div class="top-box clear-block">
-				<div class="bottom-box clear-block">
-					<div class="elements clear-block">
-						<p class="thumb"><a href="#"><img src="/avatars/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></a></p>
-						<div class="text-elements">
-							<p class="name"><a href="#">Pinco Pallino</a></p>
-							<p class="abstract">Non riesco a sputare pi˘ in alto di tre metri, come funziona questíaffare?</p>
-							<p class="abstract align-right">15 risposte </p>
-						</div>
-					</div>
-					
-					<div class="elements clear-block">
-						<p class="thumb"><a href="#"><img src="/avatars/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></a></p>
-						<div class="text-elements">
-							<p class="name"><a href="#">Pinco Pallino</a></p>
-							<p class="abstract">Non riesco a sputare pi˘ in alto di tre metri, come funziona questíaffare?</p>
-							<p class="abstract align-right">15 risposte </p>
-						</div>
-					</div>
-									
+	  <div class="people-list clear-block">
+		<h1>PEOPLE</h1>
+		<div class="top-box clear-block">
+			<div class="bottom-box clear-block">
+			  <div class="elements clear-block"> 
+				<p class="star"><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /></p>
+				<p class="thumb"><a href="#"><img src="/avatars/photo_60X60.jpg" alt="Pinco Pallino" width="60" height="60" /></a></p>
+				<p class="name"><a href="#">Pinco Pallino</a></p>
+				<p class="country">Italy, Pescara</p>
+			  </div>
+			  <div class="elements clear-block"> 
+				<p class="star"><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /></p>
+				<p class="thumb"><a href="#"><img src="/avatars/photo_60X60.jpg" alt="Pinco Pallino" width="60" height="60" /></a></p>
+				<p class="name"><a href="#">Pinco Pallino</a></p>
+				<p class="country">Italy, Pescara</p>
+			  </div>			  
+			  <div class="elements clear-block"> 
+				<p class="star"><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /></p>
+				<p class="thumb"><a href="#"><img src="/avatars/photo_60X60.jpg" alt="Pinco Pallino" width="60" height="60" /></a></p>
+				<p class="name"><a href="#">Pinco Pallino</a></p>
+				<p class="country">Italy, Pescara</p>
+			  </div>
+			  <div class="elements clear-block"> 
+				<p class="star"><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /></p>
+				<p class="thumb"><a href="#"><img src="/avatars/photo_60X60.jpg" alt="Pinco Pallino" width="60" height="60" /></a></p>
+				<p class="name"><a href="#">Pinco Pallino</a></p>
+				<p class="country">Italy, Pescara</p>
+			  </div>			  
+			  <div class="elements clear-block"> 
+				<p class="star"><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /></p>
+				<p class="thumb"><a href="#"><img src="/avatars/photo_60X60.jpg" alt="Pinco Pallino" width="60" height="60" /></a></p>
+				<p class="name"><a href="#">Pinco Pallino</a></p>
+				<p class="country">Italy, Pescara</p>
+			  </div>
+			  <div class="elements clear-block"> 
+				<p class="star"><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /><img src="/images/star_scarlet.png" alt="" width="10" height="9" /></p>
+				<p class="thumb"><a href="#"><img src="/avatars/photo_60X60.jpg" alt="Pinco Pallino" width="60" height="60" /></a></p>
+				<p class="name"><a href="#">Pinco Pallino</a></p>
+				<p class="country">Italy, Pescara</p>
+			  </div>
+			</div>
+		</div>
+	  </div>
+  </div>
+  
+<div class="box-list two-col clear-block">
+	<div id="bands-dj" class="bands-dj-list clear-block">
+	<h1>BANDS & DJ</h1>
+		<div class="top-box clear-block">
+			<div class="bottom-box clear-block">
+				<div class="elements clear-block"> 
+					<p class="thumb"><a href="#"><img src="/avatars/photo_42X42.jpg" alt="Band" width="42" height="42" /></a></p>
+					<p class="name"><a href="#">Pinco Pallino</a></p>
+					<p class="country">Italy, Pescara</p>
+					<table width="100%" border="0" cellpadding="0" cellspacing="0">
+					  <tr class="even">
+						<td>Pinco Pallino,<em> titolo titolo titolo</em></td>
+						<td class="star"><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /></td>
+						<td class="button"><a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></td>
+					  </tr>
+					  <tr class="odd">
+						<td class="even">Pinco Pallino,<em> titolo titolo titolo</em></td>
+						<td class="star"><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /></td>
+						<td class="button"><a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></td>
+					  </tr>
+					  <tr class="even">
+						<td>Pinco Pallino,<em> titolo titolo titolo</em></td>
+						<td class="star"><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /></td>
+						<td class="button"><a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></td>
+					  </tr>
+				  </table>
 				</div>
+				<div class="elements clear-block"> 
+					<p class="thumb"><a href="#"><img src="/avatars/photo_42X42.jpg" alt="Band" width="42" height="42" /></a></p>
+					<p class="name"><a href="#">Pinco Pallino</a></p>
+					<p class="country">Italy, Pescara</p>
+					<table width="100%" border="0" cellpadding="0" cellspacing="0">
+					  <tr class="even">
+						<td>Pinco Pallino,<em> titolo titolo titolo</em></td>
+						<td class="star"><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /></td>
+						<td class="button"><a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></td>
+					  </tr>
+					  <tr class="odd">
+						<td class="even">Pinco Pallino,<em> titolo titolo titolo</em></td>
+						<td class="star"><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /></td>
+						<td class="button"><a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></td>
+					  </tr>
+					  <tr class="even">
+						<td>Pinco Pallino,<em> titolo titolo titolo</em></td>
+						<td class="star"><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /></td>
+						<td class="button"><a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></td>
+					  </tr>
+				  </table>
+				</div>				
+				
+			</div>
+		</div>	
+	</div>
+</div>
+
+<div class="box-list three-col clear-block">
+	<div class="music-list clear-block">
+	<h1>MUSIC</h1>
+		<div class="top-box clear-block">
+			<div class="bottom-box clear-block">
+				<div class="elements clear-block">
+					<div class="border-angle-top clear-block">
+						<p class="thumb"><a href="#"><img src="/avatars/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></a></p>
+						<p class="name align-right"><a href="#">Pinco Pallino</a></p>
+						<p class="star"><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /></p>
+						<p class="title"><a href="#">titolo titolo titolo</a></p>
+						<p>Jimmy Hendrix</p>
+						<p class="abstract">"questa per mamma"</p>
+						<p class="button float-right"><a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
+						<p class="float-left">listened 2000 </p>
+					</div>
+				</div>
+				<div class="elements clear-block">
+					<div class="border-angle-top clear-block">
+						<p class="thumb"><a href="#"><img src="/avatars/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></a></p>
+						<p class="name align-right"><a href="#">Pinco Pallino</a></p>
+						<p class="star"><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /></p>
+						<p class="title"><a href="#">titolo titolo titolo</a></p>
+						<p>Jimmy Hendrix</p>
+						<p class="abstract">"questa per mamma"</p>
+						<p class="button float-right"><a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
+						<p class="float-left">listened 2000 </p>
+					</div>
+				</div>				
+				<div class="elements clear-block">
+					<div class="border-angle-top clear-block">
+						<p class="thumb"><a href="#"><img src="/avatars/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></a></p>
+						<p class="name align-right"><a href="#">Pinco Pallino</a></p>
+						<p class="star"><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /></p>
+						<p class="title"><a href="#">titolo titolo titolo</a></p>
+						<p>Jimmy Hendrix</p>
+						<p class="abstract">"questa per mamma"</p>
+						<p class="button float-right"><a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
+						<p class="float-left">listened 2000 </p>
+					</div>
+				</div>				
 			</div>
 		</div>
 	</div>
-
-	  
-    </div>
-  </div>
-  <div class="bg-bottom-body"></div>
 </div>
-<div id="footer" class="page-width"> footer </div>
-</body>
-</html>
+
+<div class="box-list two-col clear-block">
+	<div class="collaboration-list clear-block">
+	<h1>COLLABORATION</h1>
+		<div class="top-box clear-block">
+			<div class="bottom-box clear-block">
+				<div class="elements clear-block">
+					<p class="thumb"><a href="#"><img src="/images/instrument_mic.png" alt="" width="29" height="29" /></a></p>
+					<p class="thumb"><a href="#"><img src="/avatars/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></a></p>
+					<p class="name align-right"><a href="#">Pinco Pallino</a></p>
+					<p class="title"><a href="#">titolo titolo titolo</a></p>
+					<p class="abstract">"Motto motto motto  motto  motto motto motto motto motto"</p>
+					<p class="button float-right"><a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
+					<p class="float-left">bpm 180<br />
+					15'</p>					
+				</div>
+				
+				<div class="elements clear-block">
+					<p class="thumb"><a href="#"><img src="/images/instrument_mic.png" alt="" width="29" height="29" /></a></p>
+					<p class="thumb"><a href="#"><img src="/avatars/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></a></p>
+					<p class="name align-right"><a href="#">Pinco Pallino</a></p>
+					<p class="title"><a href="#">titolo titolo titolo</a></p>
+					<p class="abstract">"Motto motto motto  motto  motto motto motto motto motto"</p>
+					<p class="button float-right"><a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
+					<p class="float-left">bpm 180<br />
+					15'</p>					
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="box-list one-col clear-block">
+	<div class="answer-list clear-block">
+	<h1>ANSWER</h1>
+		<div class="top-box clear-block">
+			<div class="bottom-box clear-block">
+				<div class="elements clear-block">
+					<p class="thumb"><a href="#"><img src="/avatars/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></a></p>
+					<div class="text-elements">
+						<p class="name"><a href="#">Pinco Pallino</a></p>
+						<p class="abstract">Non riesco a sputare pi˘ in alto di tre metri, come funziona questíaffare?</p>
+						<p class="abstract align-right">15 risposte </p>
+					</div>
+				</div>
+				
+				<div class="elements clear-block">
+					<p class="thumb"><a href="#"><img src="/avatars/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></a></p>
+					<div class="text-elements">
+						<p class="name"><a href="#">Pinco Pallino</a></p>
+						<p class="abstract">Non riesco a sputare pi˘ in alto di tre metri, come funziona questíaffare?</p>
+						<p class="abstract align-right">15 risposte </p>
+					</div>
+				</div>
+								
+			</div>
+		</div>
+	</div>
+</div>
+
+  
+  </div>
+</div>
+
