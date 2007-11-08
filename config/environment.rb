@@ -30,7 +30,7 @@ Rails::Initializer.run do |config|
   # Your secret key for verifying cookie session data integrity.
   # If you change this key, all old sessions will become invalid!
   config.action_controller.session = {
-    :session_key => '_trunk_session',
+    :session_key => '_myousica_session_key',
     :secret      => '02cedf3882e78b5a99c0bec5cc75c3fc'
   }
 
