@@ -1,46 +1,25 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Myousica - play and share</title>
-<%= stylesheet_link_tag "style" %>
-<%= javascript_include_tag :defaults %>
-<style type="text/css">
-.bg-top-body, .bg-bottom-body, .whiteblock-shadow, .box-rounded-gray, img{ behavior: url(/stylesheets/iepngfix.htc) }
-</style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Myousica - play and share</title>
+  <%= stylesheet_link_tag "style" %>
+  <%= javascript_include_tag :defaults %>
+  <style type="text/css">
+    .bg-top-body, .bg-bottom-body, .whiteblock-shadow, .box-rounded-gray, img{ behavior: url(/stylesheets/iepngfix.htc) }
+  </style>
 </head>
 <body class="home">
-<div id="header" class="page-width clear-block">
-  <div id="top-menu">
-    <ul class="list-menu">
-      <li><a href="#">Sign Up</a></li>
-      <li><a href="#">My Account</a></li>
-      <li><a href="#">Help</a></li>
-    </ul>
+  <div id="header" class="page-width clear-block">
+    <%= render :partial => 'shared/top_menu' %>
+    <div id="logo" class="float-left"><img src="/images/logo_myousica.gif" alt="Myousica" /></div>
+    <%= render :partial => 'shared/nav_menu' %>
   </div>
-  <div id="logo" class="float-left"><img src="/images/logo_myousica.gif" alt="Myousica" /></div>
-  <div id="nav-menu">
-    <ul class="list-menu">
-      <li><a href="#">people</a></li>
-      <li><a href="#"> bands &amp; dj </a></li>
-      <li><a href="#"> music</a></li>
-      <li><a href="#">ideas</a></li>
-      <li><a href="#">answers</a></li>
-      <li id="search">
-        <p><span>search</span></p>
-        <p class="search-input">
-          <input name="" type="text" />
-          <input name="search" type="image" src="/images/search_button.gif" alt="search" class="input-button" />
-        </p>
-      </li>
-    </ul>
+  <div class="bg-body">
+    <div class="bg-top-body"></div>
+    <%= yield %>
+    <div class="bg-bottom-body"></div>
   </div>
-</div>
-<div class="bg-body">
-  <div class="bg-top-body"></div>
-  <%= yield %>
-  <div class="bg-bottom-body"></div>
-</div>
-<div id="footer" class="page-width"> footer </div>
+  <div id="footer" class="page-width"> footer </div>
 </body>
 </html>
