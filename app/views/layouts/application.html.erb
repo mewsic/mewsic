@@ -9,15 +9,22 @@
     .bg-top-body, .bg-bottom-body, .whiteblock-shadow, .box-rounded-gray, img{ behavior: url(/stylesheets/iepngfix.htc) }
   </style>
 </head>
-<body class="home">
+<body class="<%= body_class %>">
   <div id="header" class="page-width clear-block">
     <%= render :partial => 'shared/top_menu' %>
-    <div id="logo" class="float-left"><img src="/images/logo_myousica.gif" alt="Myousica" /></div>
+    <div id="logo" class="float-left"><%= clickable_logo %></div>
     <%= render :partial => 'shared/nav_menu' %>
   </div>
   <div class="bg-body">
     <div class="bg-top-body"></div>
-    <%= yield %>
+    <div id="content-body" class="page-width clear-block">
+      <div id="rightcol">
+        <%= render :partial => 'shared/instructions_banner' %>
+        <%= render :partial => 'shared/login_box' %>
+        <%= render :partial => 'shared/mlab' %>
+      </div>
+      <%= yield %>
+    </div>
     <div class="bg-bottom-body"></div>
   </div>
   <div id="footer" class="page-width"> footer </div>

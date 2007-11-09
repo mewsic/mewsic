@@ -1,63 +1,65 @@
-<div id="content-body" class="page-width clear-block">
-  <div id="rightcol">
-    <%= render :partial => 'instructions_banner' %>
-    <%= render :partial => 'login_box' %>
-    <%= render :partial => 'shared/mlab' %>
+<div class="banner-instr-home">
+  <img src="/images/banner_instruction_home.png" alt="" width="732" height="189" />
+</div>
+<div class="whiteblock-shadow clear-block">
+  <!--
+    TODO Inserire un metodo per il calcolo del path
+  -->
+  <%= breadcrumb %>
+  <%= render :partial => 'tag_cloud' %>
+  <div class="float-left margin-top-bottom">
+    <a href="#">
+      <img src="/images/banner_mband.gif" alt="crea una Mband" width="179" height="165" />
+    </a>
   </div>
-  <div class="banner-instr-home">
-    <img src="/images/banner_instruction_home.png" alt="" width="732" height="189" />
+  <div class="box-list one-col clear-block">
+    <div class="people-list clear-block">
+      <h1>PEOPLE</h1>
+      <div class="top-box clear-block">
+  	    <div class="bottom-box clear-block">
+          <%= render :partial => 'shared/person', :collection => [1,2,3,4,5,6], :locals => {:color => "scarlet"} %>
+  	    </div>
+      </div>
+    </div>
   </div>
-  <div class="whiteblock-shadow clear-block">
-    <!--
-      TODO Inserire un metodo per il calcolo del path
-    -->
-    <div id="path">path</div>
-    <%= render :partial => 'tag_cloud' %>
-    <div class="float-left margin-top-bottom">
-      <a href="#">
-        <img src="/images/banner_mband.gif" alt="crea una Mband" width="179" height="165" />
-      </a>
+  <div class="box-list two-col clear-block">
+    <div id="bands-dj" class="bands-dj-list clear-block">
+      <h1>BANDS &amp; DJ</h1>
+      <div class="top-box clear-block">
+  	    <div class="bottom-box clear-block">
+  	      <%= render :partial => 'shared/band', :collection => [1, 2]  %>
+  	    </div>
+      </div>	
     </div>
-    <%= render :partial => 'people' %>
-    <div class="box-list two-col clear-block">
-      <div id="bands-dj" class="bands-dj-list clear-block">
-        <h1>BANDS &amp; DJ</h1>
-        <div class="top-box clear-block">
-    	    <div class="bottom-box clear-block">
-    	      <%= render :partial => 'band', :collection => [1, 2]  %>
-    	    </div>
-        </div>	
+  </div>
+  <div class="box-list three-col clear-block">
+    <div class="music-list clear-block">
+      <h1>MUSIC</h1>
+      <div class="top-box clear-block">
+  	    <div class="bottom-box clear-block">
+          <%= render :partial => 'music', :collection => [1,2,3] %>
+  	    </div>
       </div>
     </div>
-    <div class="box-list three-col clear-block">
-      <div class="music-list clear-block">
-        <h1>MUSIC</h1>
-        <div class="top-box clear-block">
-    	    <div class="bottom-box clear-block">
-            <%= render :partial => 'music', :collection => [1,2,3] %>
-    	    </div>
-        </div>
+  </div>
+  <div class="box-list two-col clear-block">
+    <div class="collaboration-list clear-block">
+      <h1>COLLABORATION</h1>
+      <div class="top-box clear-block">
+  	    <div class="bottom-box clear-block">
+          <%= render :partial => 'collaboration', :collection => [1,2] %>		
+  	    </div>
       </div>
     </div>
-    <div class="box-list two-col clear-block">
-      <div class="collaboration-list clear-block">
-        <h1>COLLABORATION</h1>
-        <div class="top-box clear-block">
-    	    <div class="bottom-box clear-block">
-            <%= render :partial => 'collaboration', :collection => [1,2] %>		
-    	    </div>
-        </div>
-      </div>
-    </div>
-    <div class="box-list one-col clear-block">
-      <div class="answer-list clear-block">
-        <h1>ANSWER</h1>
-    	  <div class="top-box clear-block">
-    		  <div class="bottom-box clear-block">
-    		    <%= render :partial => 'answer', :collection => [1,2] %>
-    		  </div>
-    	  </div>
-      </div>
+  </div>
+  <div class="box-list one-col clear-block">
+    <div class="answer-list clear-block">
+      <h1>ANSWER</h1>
+  	  <div class="top-box clear-block">
+  		  <div class="bottom-box clear-block">
+  		    <%= render :partial => 'answer', :collection => [1,2] %>
+  		  </div>
+  	  </div>
     </div>
   </div>
 </div>

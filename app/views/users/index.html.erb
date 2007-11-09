@@ -1,0 +1,69 @@
+<div class="whiteblock-shadow clear-block">
+  <%= breadcrumb %>
+	<div class="box-list one-col clear-block">
+	  <div class="people-list clear-block">
+		  <h1>COOLEST</h1>
+		  <div class="top-box clear-block">
+			  <div class="bottom-box clear-block">
+          <%= render :partial => 'shared/person', :collection => [1,2,3,4,5,6,7,8,9], :locals => {:color => "blue"} %>			  
+			  </div>
+		  </div>
+	  </div>
+  </div>
+  
+  <div class="box-list two-col clear-block">
+	  <div class="bands-dj-list clear-block">
+	    <h1>BEST MYOUSICIANS </h1>
+		  <div class="top-box clear-block">
+			  <div class="bottom-box clear-block">
+			    <%= render :partial => 'shared/band', :collection => [1,2,3] %>
+			  </div>
+		  </div>	
+	  </div>
+  </div>
+  
+  <div class="box-list one-col clear-block clear-float">
+    
+	  <div class="simple-list clear-block">
+		  <h1>CON PI&Ugrave; CANZONI </h1>
+		  <div class="top-box clear-block">
+			  <div class="bottom-box clear-block">
+          <%= render :partial => 'person_short', :collection => [1,2,3]%>
+			  </div>
+		  </div>
+	  </div>
+	
+    <div class="simple-list yellow-box clear-block">
+      <h1>NEWEST</h1>
+	    <div class="top-box clear-block">
+		    <div class="bottom-box clear-block">
+          <%= render :partial => 'person_medium', :collection => [1,2,3] %>			
+		    </div>
+	    </div>
+    </div>		
+    
+	</div>
+
+  <div class="box-list two-col clear-block">
+	  <div class="box-rounded-gray clear-block">
+		  <h1>CON PI&Ugrave; AMICI </h1>
+		  <div class="top-box clear-block">
+        <%= render :partial => 'most_friends' %>
+			</div>
+		</div>
+	
+	  <div class="box-rounded-gray clear-block">
+		  <h1>CON PI&Ugrave; M-BAND </h1>
+		  <div class="top-box clear-block">
+        <%= render :partial => 'most_bands' %>
+		  </div>
+	  </div>
+	
+  	<div class="box-rounded-gray clear-block">
+  		<h1>CON PI&Ugrave; STRUMENTI </h1>
+  		<div class="top-box clear-block">
+        <%= render :partial => 'most_instruments' %>
+  		</div>
+  	</div>
+  </div>
+</div>

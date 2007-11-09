@@ -2,6 +2,9 @@ class UsersController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
 
+  def index
+  end
+
   # render new.rhtml
   def new
   end
@@ -15,5 +18,5 @@ class UsersController < ApplicationController
   rescue ActiveRecord::RecordInvalid
     render :action => 'new'
   end
-
+  
 end
