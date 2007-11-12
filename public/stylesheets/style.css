@@ -525,6 +525,15 @@ tr.odd{
 	padding:5px;
 	width:70px;
 }
+
+#log-in-errors {
+  background-color: #ffe4e4;
+  color:#ff0000;
+  text-align: center;
+  font-size: 11px;
+  border: 2px solid red;
+}
+
 /* footer */
 #footer{
 	text-align:center;

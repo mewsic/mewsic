@@ -34,4 +34,7 @@ class Test::Unit::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def deny(assertion)
+    assert !assertion
+  end
 end

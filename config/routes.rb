@@ -11,6 +11,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :users
   map.resources :sessions
+  
+  map.logout '/logout', :controller => 'sessions', :action => 'destroy'
 
   # Sample resource route with options:
   #   map.resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }
