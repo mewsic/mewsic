@@ -93,7 +93,17 @@ class UserTest < Test::Unit::TestCase
     assert_not_nil users(:quentin).remember_token_expires_at
     assert users(:quentin).remember_token_expires_at.between?(before, after)
   end
-
+  
+  def test_compiled_location_should_work_with_blank_values
+    assert_nil users(:quentin).compiled_location
+    users(:quentin).city = "Modugno"
+    assert_equal "Modugno", users(:quentin).compiled_location
+    users(:quentin).country = "Italy"
+    assert_equal "Modugno, Italy", users(:quentin).compiled_location
+    users(:quentin).city = nil
+    assert_equal "Italy", users(:quentin).compiled_location
+  end
+  
   protected
     def create_user(options = {})
       User.create({ :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire' }.merge(options))

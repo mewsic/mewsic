@@ -17,7 +17,7 @@
       <h1>PEOPLE</h1>
       <div class="top-box clear-block">
   	    <div class="bottom-box clear-block">
-          <%= render :partial => 'shared/person', :collection => [1,2,3,4,5,6], :locals => {:color => "scarlet"} %>
+          <%= render :partial => 'shared/person', :collection => @people, :locals => {:color => "scarlet"} %>
   	    </div>
       </div>
     </div>

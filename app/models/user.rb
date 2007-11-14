@@ -1,3 +1,23 @@
+# == Schema Information
+# Schema version: 1
+#
+# Table name: users
+#
+#  id                        :integer       not null, primary key
+#  login                     :string(255)   
+#  email                     :string(255)   
+#  remember_token            :string(255)   
+#  country                   :string(255)   
+#  city                      :string(255)   
+#  crypted_pasword           :string(40)    
+#  salt                      :string(40)    
+#  motto                     :text          
+#  tastes                    :text          
+#  remember_token_expires_at :datetime      
+#  created_at                :datetime      
+#  updated_at                :datetime      
+#
+
 require 'digest/sha1'
 class User < ActiveRecord::Base
   # Virtual attribute for the unencrypted password
@@ -13,6 +33,19 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :login, :email, :case_sensitive => false
   before_save :encrypt_password
   
+  # TODO 
+  # aggiungere le seguenti relazioni:
+  # 
+  # * strumenti
+  # * canzoni
+  # * mband
+  # * tracce
+  # * annunci
+  # * amici
+  # * ammiratori
+  # * answers
+  # * gallery
+      
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
   attr_accessible :login, :email, :password, :password_confirmation
@@ -60,6 +93,11 @@ class User < ActiveRecord::Base
     self.remember_token_expires_at = nil
     self.remember_token            = nil
     save(false)
+  end
+
+  def compiled_location
+    result = (city.to_s + ", " + country.to_s).gsub(/^, /, "").gsub(/, $/, "")
+    result.blank? ? nil : result
   end
 
   protected

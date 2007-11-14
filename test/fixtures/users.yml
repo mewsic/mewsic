@@ -1,3 +1,23 @@
+# == Schema Information
+# Schema version: 1
+#
+# Table name: users
+#
+#  id                        :integer       not null, primary key
+#  login                     :string(255)   
+#  email                     :string(255)   
+#  remember_token            :string(255)   
+#  country                   :string(255)   
+#  city                      :string(255)   
+#  crypted_pasword           :string(40)    
+#  salt                      :string(40)    
+#  motto                     :text          
+#  tastes                    :text          
+#  remember_token_expires_at :datetime      
+#  created_at                :datetime      
+#  updated_at                :datetime      
+#
+
 quentin:
   id: 1
   login: quentin
@@ -15,3 +35,11 @@ aaron:
   crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
   created_at: <%= 1.days.ago.to_s :db %>
 
+<% for i in 3..500 %>user_<%= i %>:
+  id: <%= i %>
+  login: user<%= i %>
+  email: user<%= i %>@medlar.it
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  created_at: <%= 5.days.ago.to_s :db %>
+<% end %>
