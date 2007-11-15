@@ -3,8 +3,8 @@
     <%= stars(5, color) %>
   </p>
   <p class="thumb">
-    <a href="#"><img src="/avatars/photo_60X60.jpg" alt="<%= person.login %>" width="60" height="60" /></a>
+    <a href="<%= user_path person %>"><img src="/avatars/photo_60X60.jpg" alt="<%= person.login %>" width="60" height="60" /></a>
   </p>
-  <p class="name"><a href="#"><%= person.login %></a></p>
+  <p class="name"><a href="<%= user_path person %>"><%= person.login %></a></p>
   <p class="country"><%= person.compiled_location || "Nowhere" %></p>
 </div>

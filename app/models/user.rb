@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 1
+# Schema version: 2
 #
 # Table name: users
 #
@@ -9,11 +9,12 @@
 #  remember_token            :string(255)   
 #  country                   :string(255)   
 #  city                      :string(255)   
-#  crypted_pasword           :string(40)    
+#  crypted_password          :string(40)    
 #  salt                      :string(40)    
 #  motto                     :text          
 #  tastes                    :text          
 #  remember_token_expires_at :datetime      
+#  friends_count             :integer       
 #  created_at                :datetime      
 #  updated_at                :datetime      
 #
@@ -33,6 +34,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :login, :email, :case_sensitive => false
   before_save :encrypt_password
   
+  has_many_friends
+  
   # TODO 
   # aggiungere le seguenti relazioni:
   # 
@@ -41,7 +44,6 @@ class User < ActiveRecord::Base
   # * mband
   # * tracce
   # * annunci
-  # * amici
   # * ammiratori
   # * answers
   # * gallery
@@ -96,10 +98,36 @@ class User < ActiveRecord::Base
   end
 
   def compiled_location
-    result = (city.to_s + ", " + country.to_s).gsub(/^, /, "").gsub(/, $/, "")
-    result.blank? ? nil : result
+    (result = [city, country].compact.join(", ")).blank? ? nil : result
   end
-
+  
+  # TODO: è solo uno stub fino a quando decidiamo le caratteristiche dei coolest.
+  def self.find_coolest(options)
+    self.find(:all, options)
+  end
+  
+  # TODO: stub sino a quando abbiamo le canzoni
+  def self.find_best_myousicians(options)
+    self.find(:all, options)
+  end
+  
+  # TODO: stub sino a quando abbiamo le canzoni
+  def self.find_prolific(options)
+  end
+  
+  def self.find_friendliest(options)
+    
+  end
+  # @friendliest = User.find_friendliest :limit => 1
+  # @most_mbands = User.find_most_banded :limit => 1
+  # @newest = User.find_newest :limit => 3
+  
+  # ATTENZIONE: METODO MOLTO COSTOSO
+  def update_friends_count
+    update_attribute(:friends_count, friends.size)
+    friends_count
+  end
+  
   protected
     # before filter 
     def encrypt_password

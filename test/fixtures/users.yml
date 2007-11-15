@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 1
+# Schema version: 2
 #
 # Table name: users
 #
@@ -9,11 +9,12 @@
 #  remember_token            :string(255)   
 #  country                   :string(255)   
 #  city                      :string(255)   
-#  crypted_pasword           :string(40)    
+#  crypted_password          :string(40)    
 #  salt                      :string(40)    
 #  motto                     :text          
 #  tastes                    :text          
 #  remember_token_expires_at :datetime      
+#  friends_count             :integer       
 #  created_at                :datetime      
 #  updated_at                :datetime      
 #

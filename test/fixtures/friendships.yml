@@ -1,0 +1,36 @@
+# == Schema Information
+# Schema version: 2
+#
+# Table name: friendships
+#
+#  id          :integer       not null, primary key
+#  user_id     :integer       not null
+#  friend_id   :integer       not null
+#  created_at  :datetime      
+#  accepted_at :datetime      
+#
+
+# quentin has 50 friends
+# aaron has asked for 100 friends
+<% for i in 1..50 %>
+quentin_relationship_<%= i %>:
+  id: <%= i %>
+  user_id: 1
+  friend_id: <%= i + 2 %>
+  created_at: <%= 5.days.ago %>
+  accepted_at: <%= 3.days.ago %>
+<% end %>
+<% for i in 51..151 %>
+aaron_relationship_<%= i %>:
+  id: <%= i %>
+  user_id: 2
+  friend_id: <%= i + 2 %>
+  created_at: <% 4.days.ago %>
+<% end  %>
+<% for i in 152..201 %>
+quentin_relationship_<%= i %>:
+  id: <%= i %>
+  user_id: <%= i + 2 %>
+  friend_id: 1
+  created_at: <% 4.days.ago %>
+<% end %>

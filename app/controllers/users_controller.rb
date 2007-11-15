@@ -1,7 +1,12 @@
 class UsersController < ApplicationController
   
   def index
-    @coolest = User.find :all, :limit => 9
+    @coolest = User.find_coolest :limit => 9
+    @best_myousicians = User.find_best_myousicians :limit  => 3
+    @prolific = User.find_prolific :limit => 3
+    @friendliest = User.find_friendliest :limit => 1
+    @most_mbands = User.find_most_banded :limit => 1
+    @newest = User.find_newest :limit => 3
   end
 
   # render new.rhtml
