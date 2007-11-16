@@ -1,9 +1,9 @@
 <div class="elements clear-block"> 
   <p class="thumb">
-    <a href="#"><img src="/avatars/photo_42X42.jpg" alt="Band" width="42" height="42" /></a>
+    <a href="<%= user_path band %>"><img src="/avatars/photo_42X42.jpg" alt="Band" width="42" height="42" /></a>
   </p>
-  <p class="name"><a href="#">Pinco Pallino</a></p>
-  <p class="country">Italy, Pescara</p>
+  <p class="name"><a href="#"><%= h band.login %></a></p>
+  <p class="country"><%= h band.compiled_location %></p>
   <table width="100%" border="0" cellpadding="0" cellspacing="0">
     <%= render :partial => 'shared/band_song_row', :collection  => [1,2,3] %>
   </table>

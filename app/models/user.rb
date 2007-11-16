@@ -98,7 +98,7 @@ class User < ActiveRecord::Base
   end
 
   def compiled_location
-    (result = [city, country].compact.join(", ")).blank? ? nil : result
+    (result = [city, country].compact.join(", ")).blank? ? "Unknown" : result
   end
   
   # TODO: è solo uno stub fino a quando decidiamo le caratteristiche dei coolest.
@@ -113,14 +113,21 @@ class User < ActiveRecord::Base
   
   # TODO: stub sino a quando abbiamo le canzoni
   def self.find_prolific(options)
+    self.find(:all, options)
   end
   
   def self.find_friendliest(options)
-    
+    self.find :all, options.merge({:order => 'friends_count DESC'})
   end
-  # @friendliest = User.find_friendliest :limit => 1
-  # @most_mbands = User.find_most_banded :limit => 1
-  # @newest = User.find_newest :limit => 3
+  
+  # TODO: stub sino a quando abbimo le band
+  def self.find_most_banded(options)
+    self.find(:all, options)
+  end
+  
+  def self.find_newest(options)
+    self.find(:all, options.merge({:order => 'created_at DESC'}))
+  end
   
   # ATTENZIONE: METODO MOLTO COSTOSO
   def update_friends_count

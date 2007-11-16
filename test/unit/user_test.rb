@@ -95,7 +95,9 @@ class UserTest < Test::Unit::TestCase
   end
   
   def test_compiled_location_should_work_with_blank_values
-    assert_nil users(:quentin).compiled_location
+    users(:quentin).city = nil
+    users(:quentin).country = nil
+    assert_equal "Unknown", users(:quentin).compiled_location
     users(:quentin).city = "Modugno"
     assert_equal "Modugno", users(:quentin).compiled_location
     users(:quentin).country = "Italy"

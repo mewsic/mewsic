@@ -26,8 +26,9 @@ quentin:
   salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
   crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
   created_at: <%= 5.days.ago.to_s :db %>
-
-
+  country: Italy
+  city: Bari
+  motto: Arma Virumque Cano Troiae qui primus ab oris
 aaron:
   id: 2
   login: aaron
@@ -35,6 +36,9 @@ aaron:
   salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
   crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
   created_at: <%= 1.days.ago.to_s :db %>
+  country: Italy
+  city: Bari
+  motto: Nel mezzo del cammin di nostra vita mi ritrovai nel culo una matita. Ahi, che dolor! Era una carioca a dodici color.
 
 <% for i in 3..500 %>user_<%= i %>:
   id: <%= i %>
@@ -43,4 +47,7 @@ aaron:
   salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
   crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
   created_at: <%= 5.days.ago.to_s :db %>
+  country: <%= ['Italy', 'Usa', 'Canada', 'Japan', 'Germany', 'Portugal', 'Spain'][rand(7)] %>
+  city: <%= ['Rome', 'Geneve', 'Seattle', 'Milan', 'Bari', 'Modugno', 'Tokyo', 'Beijing'][rand(8)] %>
+  motto: <%= %w( un in insieme a caso di parole tra cui prenderne un paio per fare il motto random della persona random ).sort_by {rand}.join(" ") %>
 <% end %>

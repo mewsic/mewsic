@@ -1,6 +1,6 @@
 <div class="elements clear-block">
-	<p class="country align-right">Italy, Pescara</p>
-	<p class="thumb float-right"><a href="#"><img src="/avatars/photo_42X42.jpg" alt="Pinco Pallino" width="42" height="42" /></a></p>
-	<p class="name"><a href="#">Pinco Pallino</a></p>
-	<p class="abstract">Motto motto  motto  motto  motto  motto  motto  motto  motto  motto </p>
+	<p class="country align-right"><%= h person_medium.compiled_location %></p>
+	<p class="thumb float-right"><a href="<%= user_path(person_medium) %>"><img src="/avatars/photo_42X42.jpg" alt="<%= h person_medium.login %>" width="42" height="42" /></a></p>
+	<p class="name"><a href="<%= user_path(person_medium) %>"><%= h person_medium.login %></a></p>
+	<p class="abstract"><%= h person_medium.motto %></p>
 </div>
