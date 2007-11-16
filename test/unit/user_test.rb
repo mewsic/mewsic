@@ -106,7 +106,7 @@ class UserTest < Test::Unit::TestCase
     assert_equal "Italy", users(:quentin).compiled_location
   end
   
-  def test_should_have_many_friends
+  def test_should_have_many_friend
     assert users(:quentin).respond_to?(:friends)
   end
   
@@ -169,6 +169,14 @@ class UserTest < Test::Unit::TestCase
   def test_update_friends_count
     users(:quentin).update_friends_count
     assert_equal 50, users(:quentin).friends_count
+  end
+  
+  def test_find_prolific
+    top_ten_users = Song.count(:include => :user, :order => "count_all desc", :group => :user_id).map {|s| s.first}[0,10]
+    prolific_users = User.find_prolific(:limit => 10)
+    
+    assert_equal top_ten_users.first, prolific_users.first.id
+    assert_equal top_ten_users.last, prolific_users.last.id
   end
     
   protected

@@ -36,6 +36,8 @@ class User < ActiveRecord::Base
   
   has_many_friends
   
+  has_many :songs
+  
   # TODO 
   # aggiungere le seguenti relazioni:
   # 
@@ -106,14 +108,15 @@ class User < ActiveRecord::Base
     self.find(:all, options)
   end
   
-  # TODO: stub sino a quando abbiamo le canzoni
+  # TODO: stub sino a quando abbiamo i voti
   def self.find_best_myousicians(options)
     self.find(:all, options)
   end
   
-  # TODO: stub sino a quando abbiamo le canzoni
-  def self.find_prolific(options)
-    self.find(:all, options)
+  def self.find_prolific(options = {})
+    qry = "SELECT users.*, songs.title, count(songs.id) AS songs_count FROM users LEFT JOIN songs ON users.id = songs.user_id GROUP BY users.id ORDER BY songs_count DESC"
+    qry += " LIMIT #{options[:limit]}" if options.has_key?(:limit)
+    User.find_by_sql(qry)
   end
   
   def self.find_friendliest(options)

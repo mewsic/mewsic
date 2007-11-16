@@ -19,9 +19,9 @@ ActiveRecord::Base.class_eval do
     limit = options.delete(:limit)
     qry = "select id from #{table_name} order by "
     
-    if connection.class == ActiveRecord::ConnectionAdapters::SQLite3Adapter
+    if connection.class.to_s == "ActiveRecord::ConnectionAdapters::SQLite3Adapter"
       qry += 'random()'
-    elsif connection.class == ActiveRecord::ConnectionAdapters::MysqlAdapter
+    elsif connection.class.to_s == "ActiveRecord::ConnectionAdapters::MysqlAdapter"
       qry += 'rand()'
     else
       raise "Unsupported adapter for random extraction."
