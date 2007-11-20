@@ -120,10 +120,11 @@ class User < ActiveRecord::Base
   end
   
   def self.find_friendliest(options)
+    # FIXME: This should be fixed to it loads the associated objects in a single query.
     self.find :all, options.merge({:order => 'friends_count DESC'})
   end
   
-  # TODO: stub sino a quando abbimo le band
+  # TODO: stub sino a quando abbiamo le band
   def self.find_most_banded(options)
     self.find(:all, options)
   end
