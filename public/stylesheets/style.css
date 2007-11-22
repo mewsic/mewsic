@@ -256,6 +256,9 @@ tr.odd{
 .semi-one-col{
 	width:225px;
 }
+.small-col{
+	width:170px;
+}
 .two-col{
 	width:400px;
 }
@@ -271,6 +274,17 @@ tr.odd{
 .button{
 	width:60px;
 }
+/* pre lancio */
+.pre-lancio{
+	width: 700px;
+	margin:20px 20px 20px 0px;
+	color:#808080;
+}
+.pre-lancio h1{
+	color:#009DC2;
+	font-size:35px;
+}
+
 /* box */
 .thumb{
 	float:left;
@@ -293,8 +307,8 @@ tr.odd{
 }
 .people-list p.name, .people-list p.country{
 	overflow:hidden;
-	line-height:10px;
-	height:20px;
+	line-height:12px;
+	height:25px;
 	margin-bottom:0px !important;
 }
 /* bands */
@@ -311,6 +325,7 @@ tr.odd{
 .music-list .thumb{
 	float:right;
 	margin-left:8px;
+	margin-right:0px;
 	margin-bottom:0px !important;
 }
 .music-list .border-angle-top{
@@ -404,7 +419,10 @@ tr.odd{
 	width:315px;
 	text-align:center;
 	float:left;
+	height: 29px;
+	overflow:hidden;
 }
+
 .horizontal-scroll img{
 	float:left;
 	margin:0px 3px;
@@ -430,12 +448,108 @@ tr.odd{
 /* green  box */
 .green-box .top-box{
 	background:#EFF7EC;
-	padding:15px;
+	padding:15px 15px 0px;
+}
+.green-box .rounded-white-bottom{
+	background: url(/images/rounded_box_top_245px.png) no-repeat top left;
+	padding-top:10px;
+}
+.green-box .rounded-white-top{
+	background: url(/images/rounded_box_bottom_245px.png) no-repeat bottom left;
+	padding-bottom:10px;
+	margin-bottom:4px;
+}
+*html .green-box .rounded-white-bottom{
+	background-image: url(/images/rounded_box_top_245px.gif);
+}
+*html .green-box .rounded-white-top{
+	background-image: url(/images/rounded_box_bottom_245px.gif);
+}
+.green-box .elements{
+	border-bottom: none;
+	padding:0px 10px;
+	margin-bottom:0px;
+}
+.green-box .elements p{
+	margin-bottom:3px !important;
+}
+.green-box .thumb{
+	float:right;
+	margin:2px 2px 0px 8px !important;
+}
+.tracks-number{
+	background:url(/images/tracks_number_BG.png) no-repeat top left;
+	height:29px;
+	width:29px;
+	display:block;
+	float:left;
+	margin:2px 8px 0px 2px;
+	text-align:center;
+	color:#fff;
+	font-weight:bold;
+	font-size:12px;
+}
+.green-box .green-bg{
+	background:#EFF7EC;
+	height:33px;
+	overflow:hidden;
+}
+.green-box .name{
+	padding-top:8px;
 }
 /* orange  box */
 .orange-box .top-box{
 	background:#FDF3E5;
-	padding:15px;
+	padding:15px 15px 0px;
+}
+.orange-box .rounded-white-bottom{
+	background: url(/images/rounded_box_top_195px.png) no-repeat top left;
+	padding-top:10px;
+}
+.orange-box .rounded-white-top{
+	background: url(/images/rounded_box_bottom_195px.png) no-repeat bottom left;
+	padding-bottom:10px;
+	margin-bottom:4px;
+}
+*html .orange-box .rounded-white-bottom{
+	background-image: url(/images/rounded_box_top_195px.gif);
+}
+*html .orange-box .rounded-white-top{
+	background-image: url(/images/rounded_box_bottom_195px.gif);
+}
+.orange-box .elements{
+	border-bottom: none;
+	padding:0px 10px;
+	margin-bottom:0px;
+}
+.orange-box .elements p{
+	margin-bottom:3px !important;
+}
+.orange-box .orange-bg{
+	background:#FDF3E5;
+	height:33px;
+	overflow:hidden;
+}
+.orange-box .thumb{
+	margin:2px 8px 0px 2px !important;
+}
+.orange-box .name{
+	padding-top:8px;
+}
+/* section tags */
+.section-tags{
+	float:right;
+	padding:30px 20px 0px 20px;
+	text-align:right;
+}
+.section-tags .elements{
+	font-weight:bold;
+	color:#28548B;
+	border:none;
+}
+.section-tags .elements a{
+	font-weight:bold;
+	color:#28548B;
 }
 /* section tab */
 .tit-sezion-tab{
@@ -478,6 +592,20 @@ tr.odd{
 .mlab-container{
 	padding:0px 5px;
 	clear:both;
+}
+.mlab-enter{
+	background:url(/images/mlab_scroll_title.png) no-repeat top left;
+	height:45px;
+	width:214px;
+	text-align:right;
+	font-weight:bold;
+	color:#0099CC;
+}
+.mlab-enter a{
+	display:block;
+	color:#0099CC;
+	padding-right:15px;
+	margin-top:18px;
 }
 #mlab-scroll{
 	padding:5px 0px;
@@ -525,15 +653,13 @@ tr.odd{
 	padding:5px;
 	width:70px;
 }
-
 #log-in-errors {
-  background-color: #ffe4e4;
-  color:#ff0000;
-  text-align: center;
-  font-size: 11px;
-  border: 2px solid red;
+	background-color: #ffe4e4;
+	color:#ff0000;
+	text-align: center;
+	font-size: 11px;
+	border: 2px solid red;
 }
-
 /* footer */
 #footer{
 	text-align:center;
@@ -541,11 +667,18 @@ tr.odd{
 	background:#fff;
 }
 /* generici correttori */
+
+.white-bg .bg-body{
+	background:#fff;
+}
 .float-left{
 	float:left;
 }
 .float-right{
 	float:right;
+}
+.centered{
+	text-align:center;
 }
 .input-button{
 	width:auto!important;
@@ -569,4 +702,8 @@ tr.odd{
 .thumb.float-right{
 	margin-right:0px;
 	margin-left:20px;
+}
+.wraptext{
+	width:180px;
+	overflow:hidden;
 }

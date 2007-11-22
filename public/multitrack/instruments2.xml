@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<instrument>
+	<instr songid="1" instrid="1" suxer="The Viking" author="Test" title="Brano 4" instr="Basso" genre="Elettronica" speed="125" tone="DO" descr="test bass" vote="800" file="data/brano4basso125bpm.mp3" />
+	<instr songid="1" instrid="2" suxer="The Viking" author="Test" title="Brano 4" instr="Beat" genre="Elettronica" speed="125" tone="DO" descr="test beat" vote="900" file="data/brano4beat125bpm.mp3" />
+	<instr songid="1" instrid="3" suxer="The Viking" author="Test" title="Brano 4" instr="Ghitarra" genre="Elettronica" speed="125" tone="DO" descr="test ghitarra" vote="850" file="data/brano4chitarra125bpm.mp3" />
+</instrument>

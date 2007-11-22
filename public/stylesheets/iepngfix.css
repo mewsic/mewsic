@@ -1,0 +1,16 @@
+img,
+.bg-top-body,
+.bg-bottom-body,
+.whiteblock-shadow,
+.box-rounded-gray,
+.mlab-enter,
+.yellow-box h1,
+.yellow-box .bottom-box,
+.tracks-number
+{
+behavior: url(css/iepngfix.htc)
+}
+* html .yellow-box h1
+{
+	width:235px;
+}

@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<songs>
+	<song id="1" suxer="The Viking" author="Test" title="Brano4" instr="9" genre="Elettronica" speed="125" tone="DO" descr="this is just a test song" vote="1000" />
+</songs>

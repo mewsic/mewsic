@@ -8,16 +8,18 @@
 	  <p class="country"><%= h most_friends.compiled_location %></p>
   </div>
   
-  <div class="horizontal-scroll-box">
+  <div class="horizontal-scroll-box" id="most-friends-scroller">
     <p class="button">
-      <a href="#"><img src="/images/arrow_simple_left.png" alt="" width="7" height="9" /></a>
+      <a href="#" onclick="return false" class="trigger left"><img src="/images/arrow_simple_left.png" alt="" width="7" height="9" /></a>
     </p>
 	  <div class="horizontal-scroll">
-		  <img src="/avatars/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /><img src="/avatars/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /><img src="/avatars/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /><img src="/avatars/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /><img src="/avatars/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /><img src="/avatars/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /><img src="/avatars/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /><img src="/avatars/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /><img src="/avatars/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" />
+	    <div style="width: <%=  most_friends.friends_count * 35 %>px">
+	      <%= render :partial => 'friend_icon', :collection => most_friends.friends %>
+	    </div>
 	  </div>
     
     <p class="button">
-      <a href="#"><img src="/images/arrow_simple_right.png" alt="" width="7" height="9" /></a>
+      <a href="#" onclick="return false" class="trigger right"><img src="/images/arrow_simple_right.png" alt="" width="7" height="9" /></a>
     </p>
   </div>				  	
 </div>
