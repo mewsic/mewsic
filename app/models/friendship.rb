@@ -1,11 +1,11 @@
 # == Schema Information
-# Schema version: 2
+# Schema version: 5
 #
 # Table name: friendships
 #
-#  id          :integer       not null, primary key
-#  user_id     :integer       not null
-#  friend_id   :integer       not null
+#  id          :integer(11)   not null, primary key
+#  user_id     :integer(11)   not null
+#  friend_id   :integer(11)   not null
 #  created_at  :datetime      
 #  accepted_at :datetime      
 #
@@ -19,7 +19,7 @@ class Friendship < ActiveRecord::Base
 
   after_save :fix_friends_count
   after_destroy :fix_friends_count
-  
+    
   protected  
   def fix_friends_count
     friendshipped_by_me.reload.update_friends_count

@@ -1,9 +1,9 @@
 # == Schema Information
-# Schema version: 2
+# Schema version: 5
 #
 # Table name: users
 #
-#  id                        :integer       not null, primary key
+#  id                        :integer(11)   not null, primary key
 #  login                     :string(255)   
 #  email                     :string(255)   
 #  remember_token            :string(255)   
@@ -14,7 +14,7 @@
 #  motto                     :text          
 #  tastes                    :text          
 #  remember_token_expires_at :datetime      
-#  friends_count             :integer       
+#  friends_count             :integer(11)   
 #  created_at                :datetime      
 #  updated_at                :datetime      
 #
@@ -136,7 +136,11 @@ class User < ActiveRecord::Base
   # ATTENZIONE: METODO MOLTO COSTOSO
   def update_friends_count
     update_attribute(:friends_count, friends.size)
-    friends_count
+    friends.size
+  end
+  
+  def friends_count
+    @friends_count ||= (attributes[:friends_count] || update_friends_count)
   end
   
   protected

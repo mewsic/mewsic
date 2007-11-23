@@ -1,21 +1,37 @@
+# == Schema Information
+# Schema version: 5
+#
+# Table name: songs
+#
+#  id              :integer(11)   not null, primary key
+#  title           :string(255)   
+#  original_author :string(255)   
+#  user_id         :integer(11)   
+#  created_at      :datetime      
+#  updated_at      :datetime      
+#
+
 let_it_be:
   id: 1
   created_at: <%= Time.now.to_s :db %>
   updated_at: <%= Time.now.to_s :db %>
   title: Let It Be
   user_id: 1
+  original_author: Beatles
 radio_ga_ga:
   id: 2
   created_at: <%= Time.now.to_s :db %>
   updated_at: <%= Time.now.to_s :db %>
   title: Radio Ga Ga
   user_id: 1
+  original_author: Queen
 i_want_to_break_free:
   id: 3
   created_at: <%= Time.now.to_s :db %>
   updated_at: <%= Time.now.to_s :db %>
   title: I Want to Break Free
   user_id: 2
+  original_author: Queen
 <% 1000.times do |i| %>
 song_<%= i + 4 %>:
   id: <%= i + 4 %>
@@ -23,4 +39,5 @@ song_<%= i + 4 %>:
   updated_at: <%= Time.now.to_s :db %>
   title: <%= %w( Love Honesty Roma Sex Radio Let It Be Radio Want I Live Forever My Way Bohemian Rhapsody ).sort_by {rand}[rand(17), rand(17)].join(" ") %>
   user_id: <%= rand(499) + 1 %>
+  original_author: %w(Queen Beatles Elvis Vasco R.E.M.)[rand(5)]
 <% end %>

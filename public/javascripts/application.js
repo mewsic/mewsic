@@ -15,12 +15,16 @@ var PictureSlider = Class.create({
 		},
 
 		slideLeft: function(event) {
-			this.slide(315);
+			if (parseInt(this.scrolling_div.getStyle('left')) < 0) {
+				this.slide(315);				
+			}
 			Event.stop(event);
 		},
 
 		slideRight: function(event) {
-			this.slide(-315);
+			if (parseInt(this.scrolling_div.getStyle('left')) + parseInt(this.scrolling_div.getStyle('width')) > 315) {
+				this.slide(-315);				
+			}
 			Event.stop(event);
 		},
 
@@ -52,5 +56,9 @@ document.observe('dom:loaded', function(event) {
 	if ( $('most-friends-scroller') != null ) {
 		new PictureSlider('most-friends-scroller');
 	} 
+	
+	if ( $('most-mbands-scroller') != null ) {
+		new PictureSlider('most-mbands-scroller');
+	}
 
 });

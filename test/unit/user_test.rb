@@ -4,7 +4,7 @@ class UserTest < Test::Unit::TestCase
   # Be sure to include AuthenticatedTestHelper in test/test_helper.rb instead.
   # Then, you can remove it from this and the functional test.
   include AuthenticatedTestHelper
-  fixtures :users
+  fixtures :all
 
   def test_should_create_user
     assert_difference 'User.count' do
@@ -167,7 +167,7 @@ class UserTest < Test::Unit::TestCase
   end
   
   def test_update_friends_count
-    users(:quentin).update_friends_count
+    # implicit testing via attribute override
     assert_equal 50, users(:quentin).friends_count
   end
   
@@ -181,15 +181,9 @@ class UserTest < Test::Unit::TestCase
   
   def test_find_friendliest
     # WARNING: This test heavily depends on the fixtures. Change the fixtures and it might not run
-    User.find(:all).each {|u| u.update_friends_count}
     assert_equal users(:quentin), User.find_friendliest(:limit => 1).first
   end
-  
-  # def self.find_friendliest(options)
-  #   self.find :all, options.merge({:order => 'friends_count DESC', :include => [:friends_by_me, :friends_for_me]})
-  # end
-  
-    
+        
   protected
     def create_user(options = {})
       User.create({ :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire' }.merge(options))
