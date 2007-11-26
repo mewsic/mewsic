@@ -1,14 +1,23 @@
 img,
+input,
 .bg-top-body,
 .bg-bottom-body,
 .whiteblock-shadow,
+.bottom-shadow,
+.bottom-shadow-big,
 .box-rounded-gray,
 .mlab-enter,
 .yellow-box h1,
 .yellow-box .bottom-box,
-.tracks-number
+.tracks-number,
+.keycode-button,
+.rounded-cyan-top,
+.rounded-cyan-bottom,
+.rounded-lightblue-top,
+.rounded-lightblue-bottom,
+.rounded-angle-white-370
 {
-behavior: url(css/iepngfix.htc)
+behavior: url(/stylesheets/iepngfix.htc)
 }
 * html .yellow-box h1
 {

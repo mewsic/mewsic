@@ -18,6 +18,7 @@ class FriendshipTest < Test::Unit::TestCase
   
   def test_should_update_friendship_count_on_destroyed_friendship
     users(:user_20).update_friends_count
+    assert users(:quentin).is_friends_with?(users(:user_20))
     
     assert_difference(['User.find_by_login("quentin").friends_count', 'User.find_by_login("user20").friends_count'], -1, "Should decrease friends count") do
       users(:quentin).delete_friendship_with(users(:user_20))

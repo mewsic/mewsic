@@ -6,7 +6,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :crypted_password, :salt, :limit => 40
       t.text :motto, :tastes
       t.datetime :remember_token_expires_at
-      t.integer :friends_count
+      t.integer :friends_count, :default  => nil
       t.timestamps      
       
     end

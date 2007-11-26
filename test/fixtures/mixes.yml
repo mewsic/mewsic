@@ -12,34 +12,19 @@
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 one:
-  id: 1
-  song_id: 1
-  track_id: 1
-  created_at: 2007-11-22 23:48:26
-  updated_at: 2007-11-22 23:48:26
+  song: let_it_be
+  track: bass_for_let_it_be
 two:
-  id: 2
-  song_id: 1
-  track_id: 2
-  created_at: 2007-11-22 23:48:26
-  updated_at: 2007-11-22 23:48:26
+  song: let_it_be
+  track: guitar_for_let_it_be
 three:
-  id: 3
-  song_id: 1
-  track_id: 3
-  created_at: 2007-11-22 23:48:26
-  updated_at: 2007-11-22 23:48:26
+  song: let_it_be
+  track: voice_for_let_it_be
 four:
-  id: 4
-  song_id: 1
-  track_id: 4
-  created_at: 2007-11-22 23:48:26
-  updated_at: 2007-11-22 23:48:26
+  song: let_it_be
+  track: voice_for_radio_ga_ga
 five:
-  id: 5
-  song_id: 2
-  track_id: 4
-  created_at: 2007-11-22 23:48:26
-  updated_at: 2007-11-22 23:48:26
+  song: radio_ga_ga
+  track: voice_for_radio_ga_ga
   
   

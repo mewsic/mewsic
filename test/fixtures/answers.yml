@@ -1,0 +1,14 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+quentin_asks_about_magic:
+  user: quentin
+  body: Come si gioca a Magic The Gathering
+  
+aaron_asks_about_soccer:
+  user: aaron
+  body: What is your favorite soccer team?
+  
+<% 100.times do |i| %>
+answer_<%= i + 3 %>:
+  user: aaron
+  body: Nel mezzo del cammin di nostra vita mi ritrovai nel culo una matita. Ahi, che dolor! Era una carioca a dodici color.
+<% end %>

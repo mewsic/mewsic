@@ -1,0 +1,188 @@
+acid_jazz:
+  name: Acid Jazz
+acid_punk:
+  name: Acid Punk
+acustic:
+  name: Acustic
+alternative_rock:
+  name: Alternative Rock
+ambient:
+  name: Ambient
+avantgarde:
+  name: Avantgarde
+black_metal:
+  name: Black Metal
+blues:
+  name: Blues
+british_pop:
+  name: British Pop
+celtic:
+  name: Celtic
+chorus:
+  name: Chorus
+christian_rap:
+  name: Christian Rap
+christian_rock:
+  name: Christian Rock
+classic_rock:
+  name: Classic Rock
+classical:
+  name: Classical
+club:
+  name: Club
+club-house:
+  name: Club-House
+country:
+  name: Country
+crossover:
+  name: Crossover
+dance:
+  name: Dance
+dance_hall:
+  name: Dance Hall
+dark_ambient:
+  name: Dark Ambient
+dark_trance:
+  name: Dark Trance
+darkwave:
+  name: Darkwave
+death_metal:
+  name: Death metal
+death_rock:
+  name: Death Rock
+digital_hardcore:
+  name: Digital Hardcore
+disco:
+  name: Disco
+drum_&_bass:
+  name: Drum & Bass
+dub:
+  name: Dub
+ebm:
+  name: EBM
+electronic:
+  name: Electronic
+ethnic:
+  name: Ethnic
+folk:
+  name: Folk
+folk-rock:
+  name: Folk-Rock
+funk:
+  name: Funk
+fusion:
+  name: Fusion
+future_pop:
+  name: Future Pop
+goa:
+  name: Goa
+gospel:
+  name: Gospel
+gothic:
+  name: Gothic
+gothic_rock:
+  name: Gothic Rock
+grunge:
+  name: Grunge
+hard_rock:
+  name: Hard Rock
+hardcore:
+  name: Hardcore
+harsh:
+  name: Harsh
+heavy_metal:
+  name: Heavy Metal
+hip-hop:
+  name: Hip-Hop
+house:
+  name: House
+indie:
+  name: Indie
+industrial:
+  name: Industrial
+instrumental:
+  name: Instrumental
+jazz:
+  name: Jazz
+jungle:
+  name: Jungle
+latin:
+  name: Latin
+merengue:
+  name: Merengue
+metal:
+  name: Metal
+metal_industrial:
+  name: Metal Industrial
+new_age:
+  name: New Age
+new_wave:
+  name: New Wave
+noise:
+  name: Noise
+nu_metal:
+  name: Nu Metal
+opera:
+  name: Opera
+pop:
+  name: Pop
+pop-folk:
+  name: Pop-Folk
+pop/funk:
+  name: Pop/Funk
+power_metal:
+  name: Power Metal
+progressive_rock:
+  name: Progressive Rock
+progressive_metal:
+  name: Progressive Metal
+psychedelic_rock:
+  name: Psychedelic Rock
+punk:
+  name: Punk
+punk_metal:
+  name: Punk Metal
+punk-rock:
+  name: Punk-Rock
+r&b:
+  name: R&B
+rap:
+  name: Rap
+rave:
+  name: Rave
+reggae:
+  name: Reggae
+rhythmic_soul:
+  name: Rhythmic Soul
+rock:
+  name: Rock
+rock_&_roll:
+  name: Rock & Roll
+salsa:
+  name: Salsa
+samba:
+  name: Samba
+ska:
+  name: Ska
+soul:
+  name: Soul
+symphonic_rock:
+  name: Symphonic Rock
+synthpop:
+  name: Synthpop
+tango:
+  name: Tango
+techno:
+  name: Techno
+techno-industrial:
+  name: Techno-Industrial
+thrash_metal:
+  name: Thrash Metal
+trance:
+  name: Trance
+tribal:
+  name: Tribal
+trip-hop:
+  name: Trip-hop
+world_music:
+  name: World Music

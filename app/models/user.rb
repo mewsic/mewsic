@@ -37,6 +37,8 @@ class User < ActiveRecord::Base
   has_many_friends
   
   has_many :songs
+  has_many :answers
+  has_many :replies
   
   # TODO 
   # aggiungere le seguenti relazioni:

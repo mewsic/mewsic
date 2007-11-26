@@ -181,6 +181,7 @@ class UserTest < Test::Unit::TestCase
   
   def test_find_friendliest
     # WARNING: This test heavily depends on the fixtures. Change the fixtures and it might not run
+    User.find(:all).each {|u| u.update_friends_count}
     assert_equal users(:quentin), User.find_friendliest(:limit => 1).first
   end
         

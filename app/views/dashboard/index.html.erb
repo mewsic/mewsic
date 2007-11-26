@@ -14,7 +14,7 @@
   </div>
   <div class="box-list one-col clear-block">
     <div class="people-list clear-block">
-      <h1>PEOPLE</h1>
+      <h1><%= link_to "PEOPLE", users_path %></h1>
       <div class="top-box clear-block">
   	    <div class="bottom-box clear-block">
           <%= render :partial => 'shared/person', :collection => @people, :locals => {:color => "scarlet"} %>
@@ -34,7 +34,7 @@
   </div>
   <div class="box-list three-col clear-block">
     <div class="music-list clear-block">
-      <h1>MUSIC</h1>
+      <h1><%= link_to "MUSIC", music_path %></h1>
       <div class="top-box clear-block">
   	    <div class="bottom-box clear-block">
           <%= render :partial => 'music', :collection => [1,2,3] %>
@@ -54,10 +54,10 @@
   </div>
   <div class="box-list one-col clear-block">
     <div class="answer-list clear-block">
-      <h1>ANSWER</h1>
+      <h1><%= link_to "ANSWER", answers_path %></h1>
   	  <div class="top-box clear-block">
   		  <div class="bottom-box clear-block">
-  		    <%= render :partial => 'answer', :collection => [1,2] %>
+  		    <%= render :partial => 'answer', :collection => @answers %>
   		  </div>
   	  </div>
     </div>
