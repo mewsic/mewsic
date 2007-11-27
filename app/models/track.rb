@@ -13,6 +13,8 @@
 class Track < ActiveRecord::Base
   has_many :songs, :through => :mixes
   has_many :mixes
+  
+  belongs_to :genre
   belongs_to :parent_song, :class_name => 'Song', :include => :user, :foreign_key => 'song_id'
   
   # FIXME: Per motivi di performance dovremmo tirare dentro anche gli users e la parent_song

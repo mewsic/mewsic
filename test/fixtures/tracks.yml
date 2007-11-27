@@ -14,14 +14,18 @@
 bass_for_let_it_be:
   title: Basso
   parent_song: let_it_be
+  genre: electronic
 guitar_for_let_it_be:
   title: Chitarra
   parent_song: let_it_be
+  genre: salsa
 voice_for_let_it_be:
   title: Voce
   parent_song: let_it_be
+  genre: classic
 voice_for_radio_ga_ga:
   title: Voce
   parent_song: radio_ga_ga
+  genre: folk
     
   

@@ -26,10 +26,10 @@ ActiveRecord::Schema.define(:version => 8) do
   end
 
   create_table "genres", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string "name"
   end
+
+  add_index "genres", ["name"], :name => "index_genres_on_name"
 
   create_table "mixes", :force => true do |t|
     t.integer  "song_id"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(:version => 8) do
   create_table "tracks", :force => true do |t|
     t.string   "title"
     t.integer  "song_id"
+    t.integer  "genre_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

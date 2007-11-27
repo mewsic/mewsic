@@ -1,10 +1,11 @@
 ActionController::Routing::Routes.draw do |map|
 
+  map.resources :answers, :has_many => [ :replies ]
+  map.resources :genres
   map.resources :users
   map.resources :sessions
   map.resources :songs
   map.resources :tracks
-  map.resources :answers, :has_many => [ :replies ]
   
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   
