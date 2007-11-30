@@ -28,4 +28,34 @@ module ApplicationHelper
     '<div id="path"><a href="#">Home</a> : people (todo breadcrumb)</div>'
   end
   
+  def tags_for_cloud(klass, group, attribute, css_classes)
+    weighted_list = klass.count :include => group, :group => group, :order => "#{group.to_s.pluralize}.#{attribute} ASC"
+    
+    counts = weighted_list.transpose.last.sort
+    min = counts.first
+    max = counts.last
+        
+    divisor = ((max - min) / css_classes.size) + 1
+    
+    weighted_list.each do |t|
+      yield t[0], css_classes[(t[1] - min) / divisor]
+    end
+  end
+
+  def render_tag_cloud(klass, group, attribute, other_options = {})
+    options = {:with_paragraphs => false, :limit => nil}.merge(other_options)
+    
+    counter = 0
+    result = ""
+    
+    tags_for_cloud(klass, group, attribute, %w(cloud1 cloud2 cloud3 cloud4 cloud5)) do |obj, css_class|
+      anchor = link_to obj[attribute], {:controller => "#{group.to_s.pluralize}", :action => 'show', :id => obj}, {:class => css_class} 
+      result += options[:with_paragraphs] ? "<p>#{anchor}</p>" : anchor
+      counter +=1
+      return result if options[:limit] && counter >= options[:limit]
+    end
+    
+    result
+  end
+  
 end

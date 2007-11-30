@@ -35,18 +35,8 @@
 			<div class="top-box clear-block">
 				<div class="bottom-box clear-block">
 				  <div class="elements clear-block">
-						<p><a href="#" style="font-size:100%">Lirica </a></p>
-						<p><a href="#" style="font-size:200%">Elettronica </a></p>
-						<p><a href="#" style="font-size:80%">Chemical </a></p>
-						<p><a href="#" style="font-size:70%">Rock </a></p>
-						<p><a href="#" style="font-size:130%">Country </a></p>
-						<p><a href="#" style="font-size:150%">Bit </a></p>
-						<p><a href="#" style="font-size:60%">Jazz </a></p>
-						<p><a href="#" style="font-size:120%">Pop </a></p>
-						<p><a href="#" style="font-size:100%">Dance </a></p>
-						<p><a href="#" style="font-size:200%">Progressive </a></p>
-						<p><a href="#" style="font-size:80%">Etnic </a></p>
-						<p><a href="#" style="font-size:100%">Classic </a></p>
+				    <%= render_tag_cloud Song, :genre, :name, {:limit => 12, :with_paragraphs => true} %>
+            
 				  <p class="centered"><img src="/images/banner_mband_small.gif" alt="" width="110" height="101" /></p>
 				  </div>
 				 </div>

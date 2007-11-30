@@ -903,3 +903,25 @@ head:first-child+body .special-button input{
 * html .special-button input{
 	padding-top: 0.40em; 
 }
+
+/* tag cloud */
+
+a.cloud1 {
+	font-size: 110%;
+}
+
+a.cloud2 {
+	font-size: 130%;
+}
+
+a.cloud3 {
+	font-size: 150%;
+}
+
+a.cloud4 {
+	font-size: 170%;
+}
+
+a.cloud5 {
+	font-size: 190%;
+}

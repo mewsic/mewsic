@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(:version => 8) do
     t.string   "title"
     t.string   "original_author"
     t.integer  "user_id"
+    t.integer  "genre_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

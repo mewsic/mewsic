@@ -12,10 +12,12 @@
 #
 
 class Song < ActiveRecord::Base
-  belongs_to :user
   has_many :tracks, :through => :mixes
   has_many :mixes
   has_many :children_tracks, :class_name => 'Track'
+
+  belongs_to :genre
+  belongs_to :user
   
   # TODO: STUB fino ai criteri di best
   def self.find_best(options = {})

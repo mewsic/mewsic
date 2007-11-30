@@ -15,17 +15,21 @@ let_it_be:
   title: Let It Be
   user: aaron
   original_author: Beatles
+  genre: country
 radio_ga_ga:
   title: Radio Ga Ga
   user: aaron
   original_author: Queen
+  genre: rap
 i_want_to_break_free:
   title: I Want to Break Free
   user: quentin
   original_author: Queen
+  genre: rock
 <% 1000.times do |i| %>
 song_<%= i + 4 %>:
   title: <%= %w( Love Honesty Roma Sex Radio Let It Be Radio Want I Live Forever My Way Bohemian Rhapsody ).sort_by {rand}[rand(17), rand(17)].join(" ") %>
   user: <%= "user_#{rand(497) + 3}" %>
-  original_author: %w(Queen Beatles Elvis Vasco R.E.M.)[rand(5)]
+  original_author: <%= %w(Queen Beatles Elvis Vasco R.E.M.)[rand(5)] %>
+  genre: reggae
 <% end %>
