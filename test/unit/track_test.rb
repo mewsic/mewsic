@@ -11,4 +11,7 @@ class TrackTest < ActiveSupport::TestCase
     assert_equal Song.find_by_title("Radio Ga Ga"), Track.find(:all).last.parent_song
   end
   
+  def test_should_act_as_rated
+    assert_acts_as_rated('Track')
+  end
 end

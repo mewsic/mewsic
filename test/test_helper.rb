@@ -37,4 +37,12 @@ class Test::Unit::TestCase
   def deny(assertion)
     assert !assertion
   end
+  
+  def assert_acts_as_rated(klass)
+    rated_object = klass.constantize.find :first
+    deny rated_object.rated?
+    rated_object.rate(4, users(:quentin))
+    assert rated_object.reload.rated?
+    assert_equal 4.0, rated_object.rating_average
+  end
 end

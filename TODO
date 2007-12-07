@@ -1,2 +1,35 @@
 TODO aggiungere un pò di index e rimuovere i timestamps dalle migration dove non sono graditi
 TODO provare a includere in automatico le associazioni quando carichiamo alcuni modelli (come faccio già per user)
+
+Collaudo myousica del 30/11
+
+Home:
+  - GENERALE
+    - my account non va
+    - search non va
+    - mbox in alto non va
+    - video su condivisone tracce non va
+    - manca la grafica registrazione
+    - manca password dimenticata
+    - breacrumb non va
+    - crea una mband non va (cosa deve fare?)
+    - non funziona il play
+  - PEOPLE
+    - cliccando non porta alla user page
+    - mancano i veri avatar delle persone
+  - BANDS & DJ
+    - cliccando non porta alla user page
+    - fixare le tre song
+  - MUSIC
+    - non va niente
+  - COLLABORATION
+    - non va niente
+  - ANSWER
+    - cliccando sull'utente che deve fare?
+    - cliccando sul numero di replies non mostra l'answer page
+  - footer non va
+  - MLAB
+    - enter sfasato
+    - non scrolla
+    - non funziona l'aggiunta su mlab
+    

@@ -1,5 +1,5 @@
 class GenresController < ApplicationController
-  def index
+  def index      
     @genres = Genre.find_paginated(params[:page])
     
     render :layout => false

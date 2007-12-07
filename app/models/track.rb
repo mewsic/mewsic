@@ -1,13 +1,17 @@
 # == Schema Information
-# Schema version: 5
+# Schema version: 9
 #
 # Table name: tracks
 #
-#  id         :integer(11)   not null, primary key
-#  title      :string(255)   
-#  song_id    :integer(11)   
-#  created_at :datetime      
-#  updated_at :datetime      
+#  id           :integer(11)   not null, primary key
+#  title        :string(255)   
+#  song_id      :integer(11)   
+#  genre_id     :integer(11)   
+#  created_at   :datetime      
+#  updated_at   :datetime      
+#  rating_count :integer(11)   
+#  rating_total :decimal(10, 2 
+#  rating_avg   :decimal(10, 2 
 #
 
 class Track < ActiveRecord::Base
@@ -16,6 +20,8 @@ class Track < ActiveRecord::Base
   
   belongs_to :genre
   belongs_to :parent_song, :class_name => 'Song', :include => :user, :foreign_key => 'song_id'
+  
+  acts_as_rated :rating_range => 0..5  
   
   # FIXME: Per motivi di performance dovremmo tirare dentro anche gli users e la parent_song
   def self.find_most_used(options = {})

@@ -184,6 +184,19 @@ class UserTest < Test::Unit::TestCase
     User.find(:all).each {|u| u.update_friends_count}
     assert_equal users(:quentin), User.find_friendliest(:limit => 1).first
   end
+  
+  def test_act_as_rated_should_be_rated
+    assert_acts_as_rated('User')
+  end
+  
+  def test_act_as_rated_should_rate
+    Song.find(:all, :limit => 5).each do |song|
+      song.rate(3, users(:quentin))
+    end
+    
+    assert_equal 5, User.find_by_login('quentin').given_ratings.size
+  end
+  
         
   protected
     def create_user(options = {})

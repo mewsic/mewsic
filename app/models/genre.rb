@@ -1,3 +1,12 @@
+# == Schema Information
+# Schema version: 9
+#
+# Table name: genres
+#
+#  id   :integer(11)   not null, primary key
+#  name :string(255)   
+#
+
 class Genre < ActiveRecord::Base
   has_many :tracks
   

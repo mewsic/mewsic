@@ -8,4 +8,8 @@ class SongTest < ActiveSupport::TestCase
   def test_association_with_composing_tracks
     assert_equal 4, songs(:let_it_be).tracks.size
   end
+  
+  def test_should_act_as_rated
+    assert_acts_as_rated('Song')
+  end
 end

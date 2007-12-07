@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 5
+# Schema version: 9
 #
 # Table name: friendships
 #

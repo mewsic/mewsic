@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 8) do
+ActiveRecord::Schema.define(:version => 9) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
@@ -38,6 +38,16 @@ ActiveRecord::Schema.define(:version => 8) do
     t.datetime "updated_at"
   end
 
+  create_table "ratings", :force => true do |t|
+    t.integer "rater_id"
+    t.integer "rated_id"
+    t.string  "rated_type"
+    t.decimal "rating",     :precision => 10, :scale => 2
+  end
+
+  add_index "ratings", ["rater_id"], :name => "index_ratings_on_rater_id"
+  add_index "ratings", ["rated_type", "rated_id"], :name => "index_ratings_on_rated_type_and_rated_id"
+
   create_table "replies", :force => true do |t|
     t.integer  "answer_id"
     t.integer  "user_id"
@@ -53,6 +63,9 @@ ActiveRecord::Schema.define(:version => 8) do
     t.integer  "genre_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "rating_count"
+    t.decimal  "rating_total",    :precision => 10, :scale => 2
+    t.decimal  "rating_avg",      :precision => 10, :scale => 2
   end
 
   create_table "tracks", :force => true do |t|
@@ -61,6 +74,9 @@ ActiveRecord::Schema.define(:version => 8) do
     t.integer  "genre_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "rating_count"
+    t.decimal  "rating_total", :precision => 10, :scale => 2
+    t.decimal  "rating_avg",   :precision => 10, :scale => 2
   end
 
   create_table "users", :force => true do |t|
@@ -77,6 +93,9 @@ ActiveRecord::Schema.define(:version => 8) do
     t.integer  "friends_count"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "rating_count"
+    t.decimal  "rating_total",                            :precision => 10, :scale => 2
+    t.decimal  "rating_avg",                              :precision => 10, :scale => 2
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

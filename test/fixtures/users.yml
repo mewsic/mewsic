@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 5
+# Schema version: 9
 #
 # Table name: users
 #
@@ -17,6 +17,9 @@
 #  friends_count             :integer(11)   
 #  created_at                :datetime      
 #  updated_at                :datetime      
+#  rating_count              :integer(11)   
+#  rating_total              :decimal(10, 2 
+#  rating_avg                :decimal(10, 2 
 #
 
 quentin:

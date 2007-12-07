@@ -1,3 +1,12 @@
+# == Schema Information
+# Schema version: 9
+#
+# Table name: genres
+#
+#  id   :integer(11)   not null, primary key
+#  name :string(255)   
+#
+
 acid_jazz:
   name: Acid Jazz
 acid_punk:

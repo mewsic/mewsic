@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 5
+# Schema version: 9
 #
 # Table name: songs
 #
@@ -7,8 +7,12 @@
 #  title           :string(255)   
 #  original_author :string(255)   
 #  user_id         :integer(11)   
+#  genre_id        :integer(11)   
 #  created_at      :datetime      
 #  updated_at      :datetime      
+#  rating_count    :integer(11)   
+#  rating_total    :decimal(10, 2 
+#  rating_avg      :decimal(10, 2 
 #
 
 class Song < ActiveRecord::Base
@@ -18,6 +22,8 @@ class Song < ActiveRecord::Base
 
   belongs_to :genre
   belongs_to :user
+  
+  acts_as_rated :rating_range => 0..5
   
   # TODO: STUB fino ai criteri di best
   def self.find_best(options = {})
