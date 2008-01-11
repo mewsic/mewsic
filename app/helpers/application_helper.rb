@@ -4,7 +4,7 @@ module ApplicationHelper
   # Use to build a star rating
   def stars(n, color = 'green')
     result = ""
-    n.times { result << "<img src=\"/images/star_#{color}.png\" alt=\"\" width=\"10\" height=\"9\" />"}
+    n.to_i.times { result << "<img src=\"/images/star_#{color}.png\" alt=\"\" width=\"10\" height=\"9\" />"}
     result
   end
   
