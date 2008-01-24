@@ -1,16 +1,100 @@
-<%= error_messages_for :user %>
-<% form_for :user, :url => users_path do |f| -%>
-<p><label for="login">Login</label><br/>
-<%= f.text_field :login %></p>
+<div class="whiteblock-shadow clear-block">
+  <%= breadcrumb %>
+	<p class="alert">Alert!</p>
+  <div class="box-list two-col clear-block">
+		<div class="register clear-block">
+		  <h1>Profile Information</h1>
+			<p>
+				<label>* Nickname</label>
+				<input name="" type="text" />
+			</p>
+			<p>
+				<label>Email</label>
+				<input name="" type="text" />
+			</p>
+			<p>
+				<label>Password</label>
+				<input name="" type="text" />
+			</p>
+			<p>
+				<label>Password confirmation</label>
+				<input name="" type="text" /><img src="/images/alert_ico.gif" alt="" />
+			</p>
+		</div>	  
+	</div>
+		  
+	<div class="box-list full-page clear-float">
+		<div class="register clear-block">
+		  <textarea cols="" rows="5"></textarea>
+			<p class="centered">
+			  <input name="" type="radio" value="" class="check-box" />
+			  <label>Accept</label>
+			  <input name="" type="radio" value="" class="check-box" />
+			  <label>Refuse</label>
+			</p>
+		</div>
+	</div>	  
 
-<p><label for="email">Email</label><br/>
-<%= f.text_field :email %></p>
+  <div class="box-list two-col clear-block">
+		<div class="register clear-block">
+		  <h1>Personal Information</h1>
+			<p>
+				<label>Name</label>
+				<input name="" type="text" />
+			</p>
+			<p>
+				<label>Surname</label>
+				<input name="" type="text" />
+			</p>
+			<p>
+				<label>Gender</label>
+				<input name="" type="text" />
+			</p>
+		  <p>
+  		  <label>Age</label>
+				<input name="" type="text" />
+			</p>
 
-<p><label for="password">Password</label><br/>
-<%= f.password_field :password %></p>
+			<p>
+				<label>Country</label>
+				<select name="select">
+				  <option>Select country</option>
+		    </select>
+			</p>
+			<p>
+  			<label>City</label>
+				<input name="" type="text" />
+			</p>												
+		</div>	  
+	</div>
+	
+	<div class="box-list one-col border-left clear-block">
+		<div class="register clear-block">
+			<h1>Other Information</h1>
+			<p>
+			  <label>About Me</label>
+				<textarea cols="" rows="10"></textarea>
+			</p>
+		  <p>
+				<label>Favorite Genres / Favorite Artists</label>
+				<textarea cols="" rows="10"></textarea>
+			</p>
+		</div>	  
+	</div>	
+	
+	<div class="box-list full-page clear-float">
+		<div class="register clear-block">
+			<textarea cols="" rows="5"></textarea>
+			<p class="centered">
+			  <input name="" type="radio" value="" class="check-box" />
+			  <label>Accept</label>
+			  <input name="" type="radio" value="" class="check-box" />
+			  <label>Refuse</label>
+			</p>
+		</div>
+	</div>		
 
-<p><label for="password_confirmation">Confirm Password</label><br/>
-<%= f.password_field :password_confirmation %></p>
-
-<p><%= submit_tag 'Sign up' %></p>
-<% end -%>
+	<p class="centered clear-float">
+		<input name="sign" type="image" src="/images/sign_button.gif" alt="sign" width="43" height="35" />
+	</p>	
+</div>
