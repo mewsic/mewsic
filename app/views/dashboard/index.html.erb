@@ -24,7 +24,7 @@
   </div>
   <div class="box-list two-col clear-block">
     <div id="bands-dj" class="bands-dj-list clear-block">
-      <h1>BANDS &amp; DJ</h1>
+      <h1>BANDS &amp; DEEJAYS</h1>
       <div class="top-box clear-block">
   	    <div class="bottom-box clear-block">
   	      <%= render :partial => 'shared/band', :collection => @people[0,2]  %>
@@ -44,7 +44,7 @@
   </div>
   <div class="box-list two-col clear-block">
     <div class="collaboration-list clear-block">
-      <h1>COLLABORATION</h1>
+      <h1>IDEAS</h1>
       <div class="top-box clear-block">
   	    <div class="bottom-box clear-block">
           <%= render :partial => 'collaboration', :collection => [1,2] %>		
@@ -54,7 +54,7 @@
   </div>
   <div class="box-list one-col clear-block">
     <div class="answer-list clear-block">
-      <h1><%= link_to "ANSWER", answers_path %></h1>
+      <h1><%= link_to "ANSWERS", answers_path %></h1>
   	  <div class="top-box clear-block">
   		  <div class="bottom-box clear-block">
   		    <%= render :partial => 'answer', :collection => @answers %>
