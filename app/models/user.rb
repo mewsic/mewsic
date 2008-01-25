@@ -148,6 +148,10 @@ class User < ActiveRecord::Base
     @friends_count ||= (attributes[:friends_count] || update_friends_count)
   end
   
+  def breadcrumb
+    login
+  end
+  
   protected
     # before filter 
     def encrypt_password

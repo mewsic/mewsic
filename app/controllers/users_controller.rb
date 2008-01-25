@@ -23,4 +23,12 @@ class UsersController < ApplicationController
     render :action => 'new'
   end
   
+  def show
+    @user = User.find(params[:id])
+  end
+  
+  protected
+  def breadcrumb
+    "People"
+  end
 end

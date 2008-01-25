@@ -12,8 +12,8 @@ module ApplicationHelper
     controller.controller_name == "dashboard" ? "home" : ""
   end
   
-  def check_active(controller_name)
-    controller.controller_name == controller_name ? "active" : ""
+  def check_active(*controller_name)
+    controller_name.include?(controller.controller_name) ? "active" : ""
   end
   
   def clickable_logo
@@ -24,10 +24,23 @@ module ApplicationHelper
     end
   end
   
-  def breadcrumb
-    '<div id="path"><a href="#">Home</a> : people (todo breadcrumb)</div>'
+  def breadcrumb(model_crumb = nil)
+    default_breadcrumb = '<div id="path"><a href="/">Home</a>'
+    unless controller.controller_name == 'dashboard'
+      default_breadcrumb += ' : ' + link_to(controller.send(:breadcrumb).capitalize, send("#{controller.controller_name}_path"))
+      default_breadcrumb += ' : ' + link_to(model_crumb.breadcrumb, send("#{controller.controller_name.singularize}_path", [model_crumb.id])) if model_crumb
+    end    
+    default_breadcrumb + '</div>'
   end
   
+  def breadcrumb_trail(c)
+    content_for(:hol) { c }
+  end
+  
+  def holy
+    yield :hol
+  end
+    
   def tags_for_cloud(klass, group, attribute, css_classes)
     weighted_list = klass.count :include => group, :group => group, :order => "#{group.to_s.pluralize}.#{attribute} ASC"
     

@@ -10,4 +10,8 @@ class ApplicationController < ActionController::Base
   
   include AuthenticatedSystem
   
+  protected
+  def breadcrumb
+    controller_name
+  end
 end
