@@ -32,15 +32,7 @@ module ApplicationHelper
     end    
     default_breadcrumb + '</div>'
   end
-  
-  def breadcrumb_trail(c)
-    content_for(:hol) { c }
-  end
-  
-  def holy
-    yield :hol
-  end
-    
+      
   def tags_for_cloud(klass, group, attribute, css_classes)
     weighted_list = klass.count :include => group, :group => group, :order => "#{group.to_s.pluralize}.#{attribute} ASC"
     
