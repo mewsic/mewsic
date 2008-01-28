@@ -1,0 +1,12 @@
+# == Schema Information
+# Schema version: 9
+#
+# Table name: ratings
+#
+#  id         :integer(11)   not null, primary key
+#  rater_id   :integer(11)   
+#  rated_id   :integer(11)   
+#  rated_type :string(255)   
+#  rating     :decimal(10, 2 
+#
+

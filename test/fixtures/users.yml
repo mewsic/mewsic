@@ -9,12 +9,16 @@
 #  remember_token            :string(255)   
 #  country                   :string(255)   
 #  city                      :string(255)   
+#  first_name                :string(255)   
+#  last_name                 :string(255)   
+#  gender                    :string(255)   
 #  crypted_password          :string(40)    
 #  salt                      :string(40)    
 #  motto                     :text          
 #  tastes                    :text          
 #  remember_token_expires_at :datetime      
 #  friends_count             :integer(11)   
+#  age                       :integer(11)   
 #  created_at                :datetime      
 #  updated_at                :datetime      
 #  rating_count              :integer(11)   

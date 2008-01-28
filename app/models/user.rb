@@ -9,18 +9,21 @@
 #  remember_token            :string(255)   
 #  country                   :string(255)   
 #  city                      :string(255)   
+#  first_name                :string(255)   
+#  last_name                 :string(255)   
+#  gender                    :string(255)   
 #  crypted_password          :string(40)    
 #  salt                      :string(40)    
 #  motto                     :text          
 #  tastes                    :text          
 #  remember_token_expires_at :datetime      
 #  friends_count             :integer(11)   
+#  age                       :integer(11)   
 #  created_at                :datetime      
 #  updated_at                :datetime      
 #  rating_count              :integer(11)   
 #  rating_total              :decimal(10, 2 
 #  rating_avg                :decimal(10, 2 
-#
 
 require 'digest/sha1'
 class User < ActiveRecord::Base
@@ -36,7 +39,7 @@ class User < ActiveRecord::Base
   validates_length_of       :email,    :within => 3..100
   validates_uniqueness_of   :login, :email, :case_sensitive => false
   validates_acceptance_of :terms_of_service, :on => :create, :allow_nil => false
-#  validates_acceptance_of :eula, :message => "must be abided"
+  validates_acceptance_of :eula, :on => :create, :allow_nil => false, :message => "must be abided"
   before_save :encrypt_password
   
   has_many_friends
@@ -59,7 +62,8 @@ class User < ActiveRecord::Base
       
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :login, :email, :password, :password_confirmation, :terms_of_service
+  attr_accessible :login, :email, :password, :password_confirmation, :terms_of_service, :eula,
+    :first_name, :last_name, :gender, :motto, :tastes, :country, :city
   
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(login, password)

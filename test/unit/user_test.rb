@@ -48,6 +48,13 @@ class UserTest < Test::Unit::TestCase
     end
   end
 
+  def test_should_validate_acceptance_of_eula
+    assert_no_difference 'User.count' do
+      u = create_user(:eula  => nil)
+      assert u.errors.on(:eula)
+    end
+  end
+
   def test_should_reset_password
     users(:quentin).update_attributes(:password => 'new password', :password_confirmation => 'new password')
     assert_equal users(:quentin), User.authenticate('quentin', 'new password')
@@ -207,6 +214,6 @@ class UserTest < Test::Unit::TestCase
         
   protected
     def create_user(options = {})
-      User.create({ :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire', :terms_of_service => "1" }.merge(options))
+      User.create({ :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire', :terms_of_service => "1", :eula => "1" }.merge(options))
     end
 end

@@ -85,12 +85,16 @@ ActiveRecord::Schema.define(:version => 9) do
     t.string   "remember_token"
     t.string   "country"
     t.string   "city"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "gender"
     t.string   "crypted_password",          :limit => 40
     t.string   "salt",                      :limit => 40
     t.text     "motto"
     t.text     "tastes"
     t.datetime "remember_token_expires_at"
     t.integer  "friends_count"
+    t.integer  "age"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "rating_count"
