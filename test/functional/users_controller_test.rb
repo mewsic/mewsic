@@ -58,6 +58,7 @@ class UsersControllerTest < Test::Unit::TestCase
   
   def test_index
     get :index
+    assert_response :success
     
     assert assigns(:coolest)
     assert_equal 9, assigns(:coolest).size
@@ -76,6 +77,12 @@ class UsersControllerTest < Test::Unit::TestCase
     
     assert assigns(:newest)
     assert_equal 3, assigns(:newest).size
+  end
+  
+  def test_new
+    get :new
+    assert_response :success
+    assert assigns(:user)
   end
   
   protected

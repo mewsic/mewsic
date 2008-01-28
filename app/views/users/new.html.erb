@@ -1,36 +1,41 @@
 <div class="whiteblock-shadow clear-block">
   <%= breadcrumb %>
-	<p class="alert">Alert!</p>
-  <div class="box-list two-col clear-block">
+	<div class="alert">
+	  <%= error_messages_for 'user' %>
+	</div>
+	
+	<% form_for @user do |f| %>
+	<div class="box-list two-col clear-block">
+    
 		<div class="register clear-block">
 		  <h1>Profile Information</h1>
 			<p>
-				<label>* Nickname</label>
-				<input name="" type="text" />
+				<label for="user_login">* Nickname</label>
+				<%= f.text_field :login %>
 			</p>
 			<p>
-				<label>Email</label>
-				<input name="" type="text" />
+				<label for="user_email">Email</label>
+				<%= f.text_field :email %>
 			</p>
 			<p>
-				<label>Password</label>
-				<input name="" type="text" />
+				<label for="user_password">Password</label>
+				<%= f.text_field :password %>
 			</p>
 			<p>
 				<label>Password confirmation</label>
-				<input name="" type="text" /><img src="/images/alert_ico.gif" alt="" />
+				<%= f.text_field :password_confirmation %><img src="/images/alert_ico.gif" alt="" />
 			</p>
 		</div>	  
 	</div>
 		  
 	<div class="box-list full-page clear-float">
 		<div class="register clear-block">
-		  <textarea cols="" rows="5"></textarea>
+		  <%= text_area_tag :terms_of_service_description, nil, :rows => 5, :disabled => true %>
 			<p class="centered">
-			  <input name="" type="radio" value="" class="check-box" />
-			  <label>Accept</label>
-			  <input name="" type="radio" value="" class="check-box" />
-			  <label>Refuse</label>
+			  <%= f.radio_button :terms_of_service, "1", :class => "check-box", :checked => true %>
+			  <label for="user_terms_of_service_1">Accept</label>
+			  <%= f.radio_button :terms_of_service, "0", :class => "check-box" %>
+			  <label for="user_terms_of_service_0">Refuse</label>
 			</p>
 		</div>
 	</div>	  
@@ -97,4 +102,6 @@
 	<p class="centered clear-float">
 		<input name="sign" type="image" src="/images/sign_button.gif" alt="sign" width="43" height="35" />
 	</p>	
+  
+	<% end %>
 </div>

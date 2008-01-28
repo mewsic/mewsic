@@ -35,6 +35,8 @@ class User < ActiveRecord::Base
   validates_length_of       :login,    :within => 3..40
   validates_length_of       :email,    :within => 3..100
   validates_uniqueness_of   :login, :email, :case_sensitive => false
+  validates_acceptance_of :terms_of_service, :on => :create, :allow_nil => false
+#  validates_acceptance_of :eula, :message => "must be abided"
   before_save :encrypt_password
   
   has_many_friends
@@ -57,7 +59,7 @@ class User < ActiveRecord::Base
       
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :login, :email, :password, :password_confirmation
+  attr_accessible :login, :email, :password, :password_confirmation, :terms_of_service
   
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(login, password)
@@ -148,7 +150,7 @@ class User < ActiveRecord::Base
     @friends_count ||= (attributes[:friends_count] || update_friends_count)
   end
   
-  def breadcrumb
+  def to_breadcrumb
     login
   end
   

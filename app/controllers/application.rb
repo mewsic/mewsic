@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   include AuthenticatedSystem
   
   protected
-  def breadcrumb
+  def to_breadcrumb
     controller_name
   end
 end

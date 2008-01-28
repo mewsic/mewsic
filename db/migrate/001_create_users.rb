@@ -7,6 +7,7 @@ class CreateUsers < ActiveRecord::Migration
       t.text :motto, :tastes
       t.datetime :remember_token_expires_at
       t.integer :friends_count, :default  => nil
+      
       t.timestamps      
       
     end

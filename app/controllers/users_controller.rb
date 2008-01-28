@@ -11,6 +11,7 @@ class UsersController < ApplicationController
 
   # render new.rhtml
   def new
+    @user = User.new
   end
 
   def create
@@ -28,7 +29,7 @@ class UsersController < ApplicationController
   end
   
   protected
-  def breadcrumb
+  def to_breadcrumb
     "People"
   end
 end

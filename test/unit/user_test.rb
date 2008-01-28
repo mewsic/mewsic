@@ -40,6 +40,13 @@ class UserTest < Test::Unit::TestCase
       assert u.errors.on(:email)
     end
   end
+  
+  def test_should_validate_acceptance_of_terms_of_service
+    assert_no_difference 'User.count' do
+      u = create_user(:terms_of_service  => nil)
+      assert u.errors.on(:terms_of_service)
+    end
+  end
 
   def test_should_reset_password
     users(:quentin).update_attributes(:password => 'new password', :password_confirmation => 'new password')
@@ -200,6 +207,6 @@ class UserTest < Test::Unit::TestCase
         
   protected
     def create_user(options = {})
-      User.create({ :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire' }.merge(options))
+      User.create({ :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire', :terms_of_service => "1" }.merge(options))
     end
 end
