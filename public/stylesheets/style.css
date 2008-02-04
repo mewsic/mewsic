@@ -1586,3 +1586,7 @@ a.cloud4 {
 a.cloud5 {
 	font-size: 190%;
 }
+
+.fieldWithErrors input {
+	background: #ffe4e4;
+}
