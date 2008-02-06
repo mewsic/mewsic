@@ -1,6 +1,6 @@
 <div class="whiteblock-shadow clear-block">
   <%= breadcrumb %>
-	
+	<%= signup_error_message %>
 	<% form_for @user do |f| %>
 	<div class="box-list two-col clear-block signup">
     
@@ -50,7 +50,7 @@
 			</p>
 			<p>
 				<label for="user_gender">Gender</label>
-				<%= select_tag :user_gender, options_for_select([["Choose your gender...", nil], ["Male", "male"], ["Female", "female"], ["Other", "other"]]) %>
+				<%= f.select :gender, [["Choose your gender...", nil], ["Male", "male"], ["Female", "female"], ["Other", "other"]] %>
 			</p>
 		  <p>
   		  <label for="user_age">Age</label>
@@ -59,7 +59,7 @@
 
 			<p>
 				<label for="user_country">Country</label>
-				<%= select_tag :user_country, '<option value="" selected="selected">Choose your country...</option>' + country_options_for_select %>
+				<%= f.country_select(:country, ["Choose your country..."]) %>
 			</p>
 			<p>
   			<label for="user_city">City</label>

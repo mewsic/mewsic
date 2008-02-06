@@ -18,8 +18,7 @@
     <div id="content-body" class="page-width clear-block">
       <div id="rightcol">
         <%= render :partial => 'shared/instructions_banner' %>
-        <%= render :partial => 'shared/login_box' unless logged_in? %>
-        <%= render :partial => 'shared/mlab' %>
+        <%= render_sidebar %>
       </div>
       <%= yield %>
     </div>

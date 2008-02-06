@@ -65,5 +65,17 @@ module ApplicationHelper
   
   def javascript(*files)
     content_for(:head) { javascript_include_tag(*files) }
-  end  
+  end    
+  
+  def render_sidebar   
+    content = ''
+    if params[:controller] == 'users' && (params[:action] == 'new' || params[:action] == 'create')
+      content << render(:partial => 'shared/share_myousica')
+    else
+      content << render(:partial => 'shared/login_box') unless logged_in?
+      content << render(:partial => 'shared/mlab')
+    end
+    content
+  end
+    
 end
