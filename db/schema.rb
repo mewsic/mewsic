@@ -88,6 +88,16 @@ ActiveRecord::Schema.define(:version => 9) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "gender"
+    t.string   "nationality"
+    t.string   "phone"
+    t.string   "msn"
+    t.string   "skype"
+    t.string   "blog"
+    t.string   "myspace"
+    t.string   "facebook"
+    t.string   "other_gallery"
+    t.boolean  "msn_public",                                                             :default => false
+    t.boolean  "skype_public",                                                           :default => false
     t.string   "crypted_password",          :limit => 40
     t.string   "salt",                      :limit => 40
     t.text     "motto"

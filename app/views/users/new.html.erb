@@ -31,7 +31,7 @@
 			<p class="centered">
 			  <%= f.radio_button :terms_of_service, "1", :class => "check-box", :checked => true %>
 			  <label for="user_terms_of_service_1">Accept</label>
-			  <input <%= (params[:user] && params[:user][:terms_of_service] == '0') ? 'checked="checked"' : '' %> class="check-box" id="user_terms_of_service_0" name="user[terms_of_service]" type="radio" value="0" />
+			  <%= radio_button_for_user :terms_of_service, 0, :class => 'check-box' %>
 			  <label for="user_terms_of_service_0">Reject</label>
 			</p>
 		</div>
@@ -87,9 +87,9 @@
 		  <%= text_area_tag :eula, nil, :rows => 5, :disabled => true %>
 			<p class="centered">
 			  <%= f.radio_button :eula, "1", :class => "check-box", :checked => true %>
-			  <label for="eula_1">Accept</label>
-			  <%= f.radio_button :eula, "0", :class => "check-box" %>
-			  <label for="eula_0">Reject</label>
+			  <label for="user_eula_1">Accept</label>
+			  <%= radio_button_for_user :eula, 0, :class => 'check-box' %>
+			  <label for="user_eula_0">Reject</label>
 			</p>
 		</div>
 	</div>		
