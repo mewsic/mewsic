@@ -1,8 +1,5 @@
 <div class="whiteblock-shadow clear-block">
   <%= breadcrumb %>
-	<div class="alert">
-	  <%= error_messages_for 'user' %>
-	</div>
 	
 	<% form_for @user do |f| %>
 	<div class="box-list two-col clear-block">
@@ -19,11 +16,11 @@
 			</p>
 			<p>
 				<label for="user_password">Password</label>
-				<%= f.text_field :password %>
+				<%= f.password_field :password %>
 			</p>
 			<p>
 				<label for="user_password_confirmation">Password confirmation</label>
-				<%= f.text_field :password_confirmation %>
+				<%= f.password_field :password_confirmation %>
 			</p>
 		</div>	  
 	</div>
@@ -34,7 +31,7 @@
 			<p class="centered">
 			  <%= f.radio_button :terms_of_service, "1", :class => "check-box", :checked => true %>
 			  <label for="user_terms_of_service_1">Accept</label>
-			  <%= f.radio_button :terms_of_service, "0", :class => "check-box" %>
+			  <input <%= (params[:user] && params[:user][:terms_of_service]) == '0' ? 'checked="checked"' : '' %> class="check-box" id="user_terms_of_service_0" name="user[terms_of_service]" type="radio" value="0" />
 			  <label for="user_terms_of_service_0">Reject</label>
 			</p>
 		</div>
