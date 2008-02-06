@@ -20,7 +20,7 @@ class UsersControllerTest < Test::Unit::TestCase
   def test_should_allow_signup
     assert_difference 'User.count' do
       create_user
-      assert_response :redirect
+      assert_response :success
     end
   end
 
@@ -83,6 +83,17 @@ class UsersControllerTest < Test::Unit::TestCase
     get :new
     assert_response :success
     assert assigns(:user)
+  end
+  
+  def test_should_activate_the_first_time
+    assert_nil User.find(users(:aaron).id).activated_at
+    get :activate, :activation_code => users(:aaron).activation_code
+    assert_response :success
+    assert_nil User.find(users(:aaron).id).activation_code
+    assert_not_nil User.find(users(:aaron).id).activated_at
+    
+    get :activate, :activation_code => users(:aaron).activation_code
+    assert_response :redirect
   end
   
   protected

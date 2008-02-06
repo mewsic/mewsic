@@ -6,11 +6,12 @@ class UserTest < Test::Unit::TestCase
   include AuthenticatedTestHelper
   fixtures :all
 
-  def test_should_create_user
+  def test_should_create_user_and_send_mail
     assert_difference 'User.count' do
       user = create_user
       assert !user.new_record?, "#{user.errors.full_messages.to_sentence}"
     end
+    assert_equal 1, ActionMailer::Base.deliveries.size
   end
 
   def test_should_require_login

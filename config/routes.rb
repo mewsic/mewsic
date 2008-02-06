@@ -7,6 +7,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :songs
   map.resources :tracks
   
+  map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate'
+  
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   
   map.multitrack '/multitrack', :controller => 'multitrack', :action => 'index'

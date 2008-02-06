@@ -46,6 +46,7 @@ Rails::Initializer.run do |config|
 
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector
+  config.active_record.observers = :user_observer
 
   # Make Active Record use UTC-base instead of local time
   # config.active_record.default_timezone = :utc
@@ -60,3 +61,4 @@ ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
   "<span class=\"fieldWithErrors\">#{html_tag}</span><span class=\"error\"><img src=\"/images/alert_ico.gif\" alt="" /> #{[instance.error_message].flatten.first}</span>"
 #  %{<div class="error-with-field">#{html} <small class="error">&bull; #{[instance.error_message].flatten.first}</small></div>}  
 end
+

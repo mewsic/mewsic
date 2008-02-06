@@ -18,14 +18,22 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     @user.save!
     self.current_user = @user
-    redirect_back_or_default('/')
-    flash[:notice] = "Thanks for signing up!"
+    # redirect_back_or_default('/')
   rescue ActiveRecord::RecordInvalid
     render :action => 'new'
   end
   
   def show
     @user = User.find(params[:id])
+  end
+  
+  def activate
+    self.current_user = params[:activation_code].blank? ? :false : User.find_by_activation_code(params[:activation_code])
+    if logged_in? && !current_user.active?
+      current_user.activate
+    else
+      redirect_to '/'
+    end
   end
   
   protected
