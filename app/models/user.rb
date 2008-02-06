@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
   validates_length_of       :password, :within => 4..40, :if => :password_required?
   validates_confirmation_of :password,                   :if => :password_required?
   validates_length_of       :login,    :within => 3..40
-  validates_length_of       :email,    :within => 3..100
+  validates_format_of       :email,    :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :on => :create
   validates_uniqueness_of   :login, :email, :case_sensitive => false
   validates_acceptance_of :terms_of_service, :on => :create, :allow_nil => false
   validates_acceptance_of :eula, :on => :create, :allow_nil => false, :message => "must be abided"
@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
   attr_accessible :login, :email, :password, :password_confirmation, :terms_of_service, :eula,
-    :first_name, :last_name, :gender, :motto, :tastes, :country, :city
+    :first_name, :last_name, :gender, :motto, :tastes, :country, :city, :age
   
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(login, password)

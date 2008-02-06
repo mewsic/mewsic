@@ -41,6 +41,13 @@ class UserTest < Test::Unit::TestCase
     end
   end
   
+  def test_should_validate_email_format
+    assert_no_difference 'User.count' do
+      u = create_user(:email => "example.com")
+      assert u.errors.on(:email)
+    end
+  end
+  
   def test_should_validate_acceptance_of_terms_of_service
     assert_no_difference 'User.count' do
       u = create_user(:terms_of_service  => nil)
