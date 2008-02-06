@@ -325,6 +325,11 @@ tr.odd{
 .two-col{
 	width:400px;
 }
+
+.two-col.signup{
+	width:450px;
+}
+
 .three-col{
 	width:708px;
 }
