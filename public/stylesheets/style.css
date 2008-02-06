@@ -1590,3 +1590,7 @@ a.cloud5 {
 .fieldWithErrors input {
 	background: #ffe4e4;
 }
+
+.error {
+  color: red;
+}
