@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(:version => 9) do
 
   create_table "tracks", :force => true do |t|
     t.string   "title"
+    t.string   "instrument"
     t.integer  "song_id"
     t.integer  "genre_id"
     t.datetime "created_at"

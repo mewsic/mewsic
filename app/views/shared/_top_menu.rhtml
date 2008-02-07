@@ -2,14 +2,11 @@
   <ul class="list-menu">
     <% if logged_in? %>
     <li>You're logged as <strong><%= current_user.login %></strong>:</li>
+    <li><%= link_to "My page", current_user %></li>
     <li><%= link_to "Logout", logout_path %></li>
     <% else %>
     <li><%= link_to "Sign Up", new_user_path %></li>
     <% end %>
-    <!--
-      TODO My Account dove punta? boh :)
-    -->
-    <li><a href="#">My Page</a></li>
     <!--
       TODO Help dove punta? boh :)
     -->

@@ -10,4 +10,14 @@ module UsersHelper
     %|<p class="alert">There were errors during the signup process, please check the fields.</p>| unless @user.errors.empty?
   end
   
+  def gender_icon
+    icons = {:male => 'M', :female => 'F', :other => 'O'}
+    %|<img alt="" src="/images/gender_ico_#{icons[@user.gender.to_sym]}.gif"/>| unless @user.gender.blank?
+  end
+  
+  def track_icon(track, color = nil)
+    icon_color = "_#{color.to_s}" unless color.nil?
+    %|<img width="29" height="29" alt="#{track.instrument}" src="/images/instrument_#{track.instrument}#{icon_color}.png"/>|
+  end
+  
 end

@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   
   def index
+    # FIXME: bisogna recuperare solo gli utenti attivati
     @coolest = User.find_coolest :limit => 9
     @best_myousicians = User.find_best_myousicians :limit  => 3
     @prolific = User.find_prolific :limit => 3
@@ -24,13 +25,16 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = User.find(params[:id])
+    @user = User.find(params[:id], :conditions => ["activated_at IS NOT NULL", nil], :include => { :songs => [:tracks, :genre] })
+  rescue ActiveRecord::RecordNotFound
+    redirect_to '/'
   end
   
   def activate
     self.current_user = params[:activation_code].blank? ? :false : User.find_by_activation_code(params[:activation_code])
     if logged_in? && !current_user.active?
       current_user.activate
+      redirect_to user_path(self.current_user)
     else
       redirect_to '/'
     end

@@ -19,17 +19,21 @@ bass_for_let_it_be:
   title: Basso
   parent_song: let_it_be
   genre: electronic
+  instrument: bass
 guitar_for_let_it_be:
   title: Chitarra
   parent_song: let_it_be
   genre: salsa
+  instrument: guitar
 voice_for_let_it_be:
   title: Voce
   parent_song: let_it_be
   genre: classic
+  instrument: microphone
 voice_for_radio_ga_ga:
   title: Voce
   parent_song: radio_ga_ga
   genre: folk
+  instrument: microphone
     
   

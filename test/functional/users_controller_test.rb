@@ -88,12 +88,27 @@ class UsersControllerTest < Test::Unit::TestCase
   def test_should_activate_the_first_time
     assert_nil User.find(users(:aaron).id).activated_at
     get :activate, :activation_code => users(:aaron).activation_code
-    assert_response :success
+    assert_redirected_to :controller => 'users', :action => 'show', :id => users(:aaron).id
     assert_nil User.find(users(:aaron).id).activation_code
     assert_not_nil User.find(users(:aaron).id).activated_at
     
     get :activate, :activation_code => users(:aaron).activation_code
     assert_response :redirect
+  end
+  
+  def test_should_redirect_if_user_not_found
+    get :show, :id => 9999999999999
+    assert_response :redirect
+  end
+  
+  def test_should_redirect_if_user_not_activated_yet
+    get :show, :id => users(:aaron).id
+    assert_response :redirect
+  end
+  
+  def test_should_show_activated_user
+    get :show, :id => users(:quentin).id
+    assert_response :success
   end
   
   protected

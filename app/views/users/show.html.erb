@@ -1,1 +1,329 @@
-<%= breadcrumb @user %>
+<div class="whiteblock-shadow clear-block">
+      <div id="path"><%= breadcrumb @user %></div>
+	  
+		<div class="mypage-label clear-block">
+		  <div class="type-label"><img width="41" height="56" alt="" src="/images/user_page_label.gif"/></div>
+		</div>
+						  
+	  <div class="user-profile clear-block">
+		  <div class="user-photo">
+			<img width="150" height="150" alt="" src="/photo/photo_user_big.jpg"/>
+		  </div>
+		  <div class="user-resume">
+			<p class="star"><img width="10" height="9" alt="" src="/images/star_blue.png"/><img width="10" height="9" alt="" src="/images/star_blue.png"/><img width="10" height="9" alt="" src="/images/star_blue.png"/><img width="10" height="9" alt="" src="/images/star_blue.png"/><img width="10" height="9" alt="" src="/images/star_blue.png"/></p>
+				<div class="float-right align-right">
+				<p class="blue-text">Gender</p>
+				<p><%= gender_icon %></p>
+				</div>
+				
+				<p class="blue-text">User name</p>
+				<h1 class="black-text"><%= @user.login %></h1>
+				<div class="grey-divisor"><hr/></div>
+				<p class="blue-text">Nazione</p>
+				<h2 class="black-text"><%= @user.country %></h2>
+				<div class="grey-divisor"><hr/></div>
+				<p class="blue-text">Città</p>
+				<h2 class="black-text"><%= @user.city %></h2>
+		  </div>
+		  <div class="user-box-option">
+		     <div>
+            </div>
+            <div>
+              <p class="thumb"><img width="29" height="29" alt="" src="/images/ico_ammira.gif"/></p>
+              <p class="name cyan-text"><strong>Ammira</strong></p>
+            </div>
+		    <div>
+              <p class="thumb"><img width="29" height="29" alt="" src="/images/ico_messaggio.gif"/></p>
+		      <p class="name cyan-text"><strong>Invia un messaggio </strong></p>
+	        </div>
+		    <div>
+              <p class="thumb"><img width="29" height="29" alt="" src="/images/ico_invita.gif"/></p>
+		      <p class="name cyan-text"><strong>Invita alla tua MBand </strong></p>
+	        </div>
+	    </div>
+	  </div>
+
+	<div class="user-id clear-float">
+	
+		<div style="position: relative;" class="float-right">
+			<div class="adding-link">
+				<a href="#"><img class="float-left" alt="" src="/images/icone_link_photo.gif"/></a>
+				<p><a href="#">Photo</a></p>
+		  </div>
+			<div class="adding-link">
+				<a href="#"><img width="16" height="19" class="float-left" alt="" src="/images/icone_link_blog.gif"/></a>
+				<p><a href="#">Blog</a></p>
+		  </div>			
+			<div class="adding-link">
+				<a href="#"><img width="16" height="19" class="float-left" alt="" src="/images/icone_link_myspace.gif"/></a>
+				<p><a href="#">MySpace</a></p>
+		  </div>			
+			<div class="adding-link">
+				<a href="#"><img width="17" height="19" class="float-left" alt="" src="/images/icone_link_skype.gif"/></a>
+				<p><a href="#">Skype</a></p>
+		  </div>
+			<div class="adding-link">
+				<a href="#"><img width="21" height="19" class="float-left" alt="" src="/images/icone_link_MSN.gif"/></a>
+				<p><a href="#">MSN</a></p>
+		  </div>			
+		</div>
+	
+	  <p>myousica ID: <%= @user.id %></p>
+	 </div>
+	 
+	 
+	  <div class="user-details clear-block">
+		  <div class="user-motto">
+		  <p class="blue-text"><strong>Motto</strong></p>
+		  <p class="grey-text"><%= @user.motto %></p>
+		  </div>
+		  <div class="user-gusti">
+		  <p class="blue-text"><strong>Gusti musicali</strong></p>
+		  <p class="grey-text"><%= @user.tastes %></p>
+		  </div>
+
+	  </div>	  
+	  
+<div style="width: 720px; float: none;" class="bottom-shadow"/>
+
+		<div class="box-list one-col clear-block clear-float">
+
+			<div class="simple-list cyan-box clear-block">
+			<h2>Suonati da<br/>
+			  "Miss Master Kazz!"</h2>
+				<div class="top-box clear-block">
+					<div class="bottom-box clear-block">
+						<div class="elements clear-block">
+							<% for song in @user.songs do -%>
+							  <div class="small-box">
+  								<p class="thumb"><img width="29" height="29" alt="" src="/images/instrument_drum.png"/></p>
+  								<p class="grey-text name"><em>Voce</em></p>
+  							</div>							  						
+							<% end -%>
+						</div>
+				  </div>
+					<p class="next"><a href="#"><strong>Next</strong></a></p>
+				</div>
+				
+			</div>	
+
+			<div class="simple-list white-box clear-block">
+			<h2 class="mband-label">MBand a cui pappartiene<br/>
+			 "Miss Master Kazz!"</h2>
+				<div class="top-box clear-block">
+					<div class="bottom-box clear-block">
+						<div class="elements clear-block">
+							<div>
+								<p class="thumb"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></p>
+								<p class="grey-text name"><em>Voce</em></p>
+								<p class="name"><a href="#">nome user</a></p>
+							</div>
+							<div>
+								<p class="thumb"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></p>
+								<p class="grey-text name"><em>Voce</em></p>
+								<p class="name"><a href="#">nome user</a></p>
+							</div>
+							<div>
+								<p class="thumb"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></p>
+								<p class="grey-text name"><em>Voce</em></p>
+								<p class="name"><a href="#">nome user</a></p>
+							</div>
+						</div>
+						
+				  </div>
+					<p class="next"/>
+				</div>
+			</div>	
+
+			<div class="simple-list clear-block">
+			<h1>FRIENDS <span class="no-bold">(35)</span></h1>
+			<div class="top-box clear-block">
+				<div class="bottom-box clear-block">
+				  <div class="elements clear-block">
+				  
+				   <div class="horizontal-scroll-box">
+				  	<p class="button"><a href="#"><img width="12" height="39" alt="" src="/images/arrow_grey_left.gif"/></a></p>
+				  <div class="horizontal-scroll">
+						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
+						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
+						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
+						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
+						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
+						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
+						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
+						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
+						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
+						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
+						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
+						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>					</div>
+				  	<p class="button"><a href="#"><img width="12" height="39" alt="" src="/images/arrow_grey_right.gif"/></a></p>
+					</div>
+					
+				  </div>
+			  </div>
+			</div>
+		</div>
+		
+		<div class="simple-list clear-block">
+			<h1>AMMIRATORI <span class="no-bold">(135)</span></h1>
+			<div class="top-box clear-block">
+				<div class="bottom-box clear-block">
+				  <div class="elements clear-block">
+
+				   <div class="horizontal-scroll-box">
+				  	<p class="button"><a href="#"><img width="12" height="39" alt="" src="/images/arrow_grey_left.gif"/></a></p>
+				  <div class="horizontal-scroll">
+						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
+						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
+						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
+						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
+						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
+						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
+						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
+						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
+						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
+						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
+						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
+						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>					</div>
+				  	<p class="button"><a href="#"><img width="12" height="39" alt="" src="/images/arrow_grey_right.gif"/></a></p>
+					</div>
+
+				  </div>
+			  </div>
+			</div>
+		</div>
+
+		<div class="simple-list clear-block">
+			<h1>ANSWER</h1>
+				<div class="top-box clear-block">
+					<div class="bottom-box clear-block">
+						<div class="elements clear-block">
+							<p class="thumb"><a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a></p>
+								<p class="name"><a href="#">Pinco Pallino</a></p>
+								<p class="abstract">Non riesco a sputare più in alto di tre metri, come funziona quest'affare?</p>
+								<p class="answer-number">15 risposte </p>
+						</div>
+						
+						<div class="elements clear-block">
+							<p class="thumb"><a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a></p>
+								<p class="name"><a href="#">Pinco Pallino</a></p>
+								<p class="abstract">Non riesco a sputare più in alto di tre metri, come funziona quest'affare?</p>
+								<p class="answer-number">15 risposte </p>
+						</div>
+		
+				  </div>
+				</div>
+		  </div>
+
+	</div>
+
+
+
+	<div class="box-list two-col clear-block">
+	
+		<div class="tit-classification-songs clear-block">
+		<h1>SONGS</h1>
+			<div class="top-box clear-block">
+				<div class="bottom-box clear-block">
+          <% for song in @user.songs do -%>
+            <div class="elements clear-block"> 
+  						<table width="95%" cellspacing="0" cellpadding="5" border="0">
+                <tbody><tr class="odd">
+                            <td>
+  						  	<span class="tracks-number"><span><%= song.tracks.count %></span></span>
+  						  	<div class="float-left">
+  								  <% for track in song.tracks do -%>
+                        <%= track_icon(track, :grey) %>
+                    <% end -%>
+  							</div>
+  						  </td>
+                            <td align="right">
+  						  	<p class="star"><img width="10" height="9" alt="" src="/images/star_green.png"/><img width="10" height="9" alt="" src="/images/star_green.png"/><img width="10" height="9" alt="" src="/images/star_green.png"/><img width="10" height="9" alt="" src="/images/star_green.png"/><img width="10" height="9" alt="" src="/images/star_green.png"/></p>
+                            	<p><strong><%= song.genre.name %></strong></p></td>
+                          </tr>
+                          <tr class="odd">
+                            <td>
+  						  	<p><em><%= song.title %></em></p>
+                              <p class="title"><a href="#"><%= song.title %></a></p>
+  						  </td>
+                            <td align="right" style="vertical-align: bottom;">
+  							  <span class="button">
+  							    <%= link_to(image_tag('button_mlab.png'), user_path(song.user)) %>
+  							    <a href="#"><img width="23" height="15" alt="" src="/images/button_play_green.png"/></a></span>						  </td>
+                          </tr>
+  					  </tbody></table>
+  					</div>
+          <% end -%>
+          <p class="next"><a href="#"><strong>Next</strong></a></p>
+			  </div>
+			</div>	
+		</div>
+		
+		<div class="tit-classification-tracks clear-block">
+		<h1>TRACKS</h1>
+			<div class="top-box clear-block">
+				<div class="bottom-box clear-block">
+				
+					<div class="elements clear-block">
+	    <table width="95%" cellspacing="0" cellpadding="0" border="0">
+						  <tbody>
+						    <% @user.songs.each do |song| -%>
+						      <% song.tracks.each_with_index do |track, index| -%>
+                    <tr class="<%= %w[even odd][index % 2] %>">
+        							<td>
+        							  <p class="thumb"><%= track_icon(track) %></p>
+        								<p class="name grey-text"><%= track.title %></p>
+        								<p class="title"><a href="#"><%= track.title %></a></p>
+        							</td>
+        							<td class="star">
+        							  <p><span class="star"><img width="10" height="9" alt="" src="/images/star_green.png"/><img width="10" height="9" alt="" src="/images/star_green.png"/><img width="10" height="9" alt="" src="/images/star_green.png"/><img width="10" height="9" alt="" src="/images/star_green.png"/><img width="10" height="9" alt="" src="/images/star_green.png"/></span></p>
+        								<p>
+        								  <%= link_to(image_tag('button_mlab.png'), user_path(track.songs.first.user)) %>
+        								  <a href="#"><img width="23" height="15" alt="" src="/images/button_play_green.png"/></a></p>
+        							</td>
+      						  </tr>
+						      <% end -%>
+						    <% end -%>
+						  </tbody>
+            </table>					  
+					</div>
+					
+					<p class="next"><a href="#"><strong>Next</strong></a></p>
+			  </div>
+			</div>	
+		</div>
+			
+		<div class="gallery clear-block">
+			<h1>GALLERY</h1>
+			<div class="top-box clear-block">
+			  <div class="bottom-box clear-block">
+			    <div class="horizontal-scroll-box">
+                  <p class="button"><a href="#"><img width="7" height="9" alt="" src="/images/arrow_simple_left.png"/></a></p>
+			      <!--
+			        <div class="horizontal-scroll">
+                    <div class="gallery-photo-thumb">
+                      <div><a href="#"><img width="60" height="40" alt="" src="/photo/photo_thumb_gallery.jpg"/></a></div>
+                    </div>
+			        <div class="gallery-photo-thumb">
+                      <div><a href="#"><img width="60" height="40" alt="" src="/photo/photo_thumb_gallery.jpg"/></a></div>
+		            </div>
+			        <div class="gallery-photo-thumb">
+                      <div><a href="#"><img width="60" height="40" alt="" src="/photo/photo_thumb_gallery.jpg"/></a></div>
+		            </div>
+			        <div class="gallery-photo-thumb">
+                      <div><a href="#"><img width="60" height="40" alt="" src="/photo/photo_thumb_gallery.jpg"/></a></div>
+		            </div>
+			        <div class="gallery-photo-thumb">
+                      <div><a href="#"><img width="60" height="40" alt="" src="/photo/photo_thumb_gallery.jpg"/></a></div>
+		            </div>
+		          </div>
+	          -->
+			      <p class="button"><a href="#"><img width="7" height="9" alt="" src="/images/arrow_simple_right.png"/></a></p>
+		        </div>
+			  </div>
+			</div>
+		</div>	
+		
+	  </div>
+    </div>        
+
