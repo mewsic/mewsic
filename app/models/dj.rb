@@ -1,0 +1,2 @@
+class Dj < User
+end

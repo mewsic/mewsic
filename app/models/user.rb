@@ -176,6 +176,12 @@ class User < ActiveRecord::Base
     login
   end
   
+  def instruments
+    Track.find_by_sql(["select DISTINCT T.instrument from users U, tracks T, songs S WHERE T.song_id = S.id AND S.user_id = U.id AND U.id = ?", self.id]).collect do |track|
+      track.instrument
+    end
+  end
+  
   protected
     # before filter 
     def encrypt_password      

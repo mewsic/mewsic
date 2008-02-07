@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(:version => 9) do
     t.string   "gender"
     t.string   "crypted_password",          :limit => 40
     t.string   "salt",                      :limit => 40
+    t.string   "type"
     t.text     "motto"
     t.text     "tastes"
     t.datetime "remember_token_expires_at"

@@ -2,6 +2,7 @@
       <div id="path"><%= breadcrumb @user %></div>
 	  
 		<div class="mypage-label clear-block">
+		  <%= render :partial => "switch_type" if current_user_page %>
 		  <div class="type-label"><img width="41" height="56" alt="" src="/images/user_page_label.gif"/></div>
 		</div>
 						  
@@ -25,22 +26,11 @@
 				<p class="blue-text">Città</p>
 				<h2 class="black-text"><%= @user.city %></h2>
 		  </div>
-		  <div class="user-box-option">
-		     <div>
-            </div>
-            <div>
-              <p class="thumb"><img width="29" height="29" alt="" src="/images/ico_ammira.gif"/></p>
-              <p class="name cyan-text"><strong>Ammira</strong></p>
-            </div>
-		    <div>
-              <p class="thumb"><img width="29" height="29" alt="" src="/images/ico_messaggio.gif"/></p>
-		      <p class="name cyan-text"><strong>Invia un messaggio </strong></p>
-	        </div>
-		    <div>
-              <p class="thumb"><img width="29" height="29" alt="" src="/images/ico_invita.gif"/></p>
-		      <p class="name cyan-text"><strong>Invita alla tua MBand </strong></p>
-	        </div>
-	    </div>
+		  <% if current_user_page -%>
+		    <%= render :partial => 'box_mail' %>
+		  <% else -%>
+		    <%= render :partial => 'box_option' %>
+		  <% end -%>
 	  </div>
 
 	<div class="user-id clear-float">
@@ -86,27 +76,8 @@
 	  
 <div style="width: 720px; float: none;" class="bottom-shadow"/>
 
-		<div class="box-list one-col clear-block clear-float">
-
-			<div class="simple-list cyan-box clear-block">
-			<h2>Suonati da<br/>
-			  "Miss Master Kazz!"</h2>
-				<div class="top-box clear-block">
-					<div class="bottom-box clear-block">
-						<div class="elements clear-block">
-							<% for song in @user.songs do -%>
-							  <div class="small-box">
-  								<p class="thumb"><img width="29" height="29" alt="" src="/images/instrument_drum.png"/></p>
-  								<p class="grey-text name"><em>Voce</em></p>
-  							</div>							  						
-							<% end -%>
-						</div>
-				  </div>
-					<p class="next"><a href="#"><strong>Next</strong></a></p>
-				</div>
-				
-			</div>	
-
+		<div class="box-list one-col clear-block clear-float">			
+      <%= render :partial => 'box_instruments' %>
 			<div class="simple-list white-box clear-block">
 			<h2 class="mband-label">MBand a cui pappartiene<br/>
 			 "Miss Master Kazz!"</h2>
@@ -135,33 +106,8 @@
 				</div>
 			</div>	
 
-			<div class="simple-list clear-block">
-			<h1>FRIENDS <span class="no-bold">(35)</span></h1>
-			<div class="top-box clear-block">
-				<div class="bottom-box clear-block">
-				  <div class="elements clear-block">
-				  
-				   <div class="horizontal-scroll-box">
-				  	<p class="button"><a href="#"><img width="12" height="39" alt="" src="/images/arrow_grey_left.gif"/></a></p>
-				  <div class="horizontal-scroll">
-						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
-						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
-						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
-						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
-						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
-						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
-						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
-						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
-						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
-						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
-						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
-						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>					</div>
-				  	<p class="button"><a href="#"><img width="12" height="39" alt="" src="/images/arrow_grey_right.gif"/></a></p>
-					</div>
-					
-				  </div>
-			  </div>
-			</div>
+			<%= render :partial => 'box_friends'%>
+			
 		</div>
 		
 		<div class="simple-list clear-block">
@@ -323,7 +269,7 @@
 			  </div>
 			</div>
 		</div>	
-		
+		<%= render :partial => 'box_share' if current_user_page%>
 	  </div>
     </div>        
 

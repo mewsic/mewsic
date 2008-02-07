@@ -218,7 +218,23 @@ class UserTest < Test::Unit::TestCase
     
     assert_equal 5, User.find_by_login('quentin').given_ratings.size
   end
-  
+        
+  def test_should_set_user_type
+    u = Dj.create({ :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire', :terms_of_service => "1", :eula => "1" })
+    assert_equal 'Dj', u[:type]
+  end
+        
+  def test_should_retrieve_distinct_instrument
+    u = create_user
+    s = u.songs.create(:title => 'My song')
+    assert_difference 'Track.count', 4 do
+      Mix.create(:track => Track.create(:instrument => 'guitar', :parent_song => s), :song => s)
+      Mix.create(:track => Track.create(:instrument => 'guitar', :parent_song => s), :song => s)
+      Mix.create(:track => Track.create(:instrument => 'bass', :parent_song => s), :song => s)
+      Mix.create(:track => Track.create(:instrument => 'bass', :parent_song => s), :song => s)
+    end
+    assert_equal %w[bass guitar], u.instruments.sort
+  end
         
   protected
     def create_user(options = {})

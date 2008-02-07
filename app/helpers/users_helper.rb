@@ -19,5 +19,12 @@ module UsersHelper
     icon_color = "_#{color.to_s}" unless color.nil?
     %|<img width="29" height="29" alt="#{track.instrument}" src="/images/instrument_#{track.instrument}#{icon_color}.png"/>|
   end
+   
+  def current_user_page
+    current_user && current_user == @user
+  end
   
+  def instrument_icon(instrument)
+    %|<img width="29" height="29" alt="" src="/images/instrument_#{instrument}.png"/>|
+  end
 end
