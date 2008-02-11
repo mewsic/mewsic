@@ -1,0 +1,6 @@
+<div class="elements clear-block">
+	<p class="thumb"><a href="<%= user_path answer.user %>"><img src="/avatars/photo_30X30.jpg" alt="<%= answer.user.login %>" width="29" height="29" /></a></p>
+	<p class="name align-right"><a href="<%= user_path answer.user %>"><%= h answer.user.login %></a></p>
+	<p class="abstract"><%= h answer.body %></p>
+	<p class="abstract align-right"><%= h answer.replies.size %> risposte </p>
+</div>
