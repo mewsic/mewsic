@@ -1,42 +1,43 @@
-<div class="whiteblock-shadow clear-block">
-      <div id="path"><%= breadcrumb @user %></div>
-	  
-		<div class="mypage-label clear-block">
-		  <%= render :partial => "switch_type" if current_user_page %>
-		  <div class="type-label"><img width="41" height="56" alt="" src="/images/user_page_label.gif"/></div>
-		</div>
-						  
-	  <div class="user-profile clear-block">
-		  <div class="user-photo">
-			<img width="150" height="150" alt="" src="/photo/photo_user_big.jpg"/>
-		  </div>
-		  <div class="user-resume">
-			<p class="star"><img width="10" height="9" alt="" src="/images/star_blue.png"/><img width="10" height="9" alt="" src="/images/star_blue.png"/><img width="10" height="9" alt="" src="/images/star_blue.png"/><img width="10" height="9" alt="" src="/images/star_blue.png"/><img width="10" height="9" alt="" src="/images/star_blue.png"/></p>
-				<div class="float-right align-right">
-				<p class="blue-text">Gender</p>
-				<p><%= gender_icon %></p>
-				</div>
-				
-				<p class="blue-text">User name</p>
-				<h1 class="black-text"><%= @user.login %></h1>
-				<div class="grey-divisor"><hr/></div>
-				<p class="blue-text">Nazione</p>
-				<h2 class="black-text"><%= @user.country %></h2>
-				<div class="grey-divisor"><hr/></div>
-				<p class="blue-text">Città</p>
-				<h2 class="black-text"><%= @user.city %></h2>
-		  </div>
-		  <% if current_user_page -%>
-		    <%= render :partial => 'box_mail' %>
-		  <% else -%>
-		    <%= render :partial => 'box_option' %>
-		  <% end -%>
-	  </div>
+<% javascript 'user/edit' if current_user_page %>
+<input id="user_id" name="user_id" type="hidden" value="<%= @user.id %>" />
+<input id="authenticity_token" name="authenticity_token" type="hidden" value="<%= @user.id %>" />
 
-	<div class="user-id clear-float">
-	
-		<div style="position: relative;" class="float-right">
-			<div class="adding-link">
+<div class="whiteblock-shadow clear-block">
+  <%= breadcrumb @user %>
+	  
+	<div class="mypage-label clear-block">
+	  <%= render :partial => "switch_type" if current_user_page %>
+	  <div class="type-label"><img width="41" height="56" alt="" src="/images/user_page_label.gif"/></div>
+	</div>					  
+  <div class="user-profile clear-block">
+    <div class="user-photo">
+      <img width="150" height="150" alt="" src="/photo/photo_user_big.jpg"/>
+	  </div>
+    <div class="user-resume">
+      <p class="star"><img width="10" height="9" alt="" src="/images/star_blue.png"/><img width="10" height="9" alt="" src="/images/star_blue.png"/><img width="10" height="9" alt="" src="/images/star_blue.png"/><img width="10" height="9" alt="" src="/images/star_blue.png"/><img width="10" height="9" alt="" src="/images/star_blue.png"/></p>
+      <div class="float-right align-right">
+        <p class="blue-text">Gender</p>
+        <p><%= gender_icon %></p>
+      </div>			
+      <p class="blue-text">User name</p>
+      <h1 class="black-text"><%= @user.login %></h1>
+      <div class="grey-divisor"><hr/></div>
+      <p class="blue-text">Nazione</p>
+      <h2 class="black-text" id="field_country"><%= @user.country %></h2>
+      <div class="grey-divisor"><hr/></div>
+      <p class="blue-text">Città</p>
+      <h2 class="black-text" id="field_city"><%= @user.city %></h2>
+    </div>
+	  <% if current_user_page -%>
+	    <%= render :partial => 'box_mail' %>
+	  <% else -%>
+	    <%= render :partial => 'box_option' %>
+	  <% end -%>
+  </div>
+
+	<div class="user-id clear-float">	
+    <div style="position: relative;" class="float-right">
+      <div class="adding-link">
 				<a href="#"><img class="float-left" alt="" src="/images/icone_link_photo.gif"/></a>
 				<p><a href="#">Photo</a></p>
 		  </div>
@@ -55,60 +56,53 @@
 			<div class="adding-link">
 				<a href="#"><img width="21" height="19" class="float-left" alt="" src="/images/icone_link_MSN.gif"/></a>
 				<p><a href="#">MSN</a></p>
-		  </div>			
-		</div>
-	
-	  <p>myousica ID: <%= @user.id %></p>
-	 </div>
+      </div>			
+    </div>
+    <p>myousica ID: <%= @user.id %></p>
+  </div>
 	 
 	 
-	  <div class="user-details clear-block">
-		  <div class="user-motto">
-		  <p class="blue-text"><strong>Motto</strong></p>
-		  <p class="grey-text"><%= @user.motto %></p>
-		  </div>
-		  <div class="user-gusti">
-		  <p class="blue-text"><strong>Gusti musicali</strong></p>
-		  <p class="grey-text"><%= @user.tastes %></p>
-		  </div>
-
-	  </div>	  
+  <div class="user-details clear-block">
+    <div class="user-motto">
+      <p class="blue-text"><strong>Motto</strong></p>
+      <p class="grey-text"><%= @user.motto %></p>
+    </div>
+    <div class="user-gusti">
+      <p class="blue-text"><strong>Gusti musicali</strong></p>
+      <p class="grey-text"><%= @user.tastes %></p>
+    </div>
+  </div>    
 	  
-<div style="width: 720px; float: none;" class="bottom-shadow"/>
-
-		<div class="box-list one-col clear-block clear-float">			
-      <%= render :partial => 'box_instruments' %>
-			<div class="simple-list white-box clear-block">
-			<h2 class="mband-label">MBand a cui pappartiene<br/>
-			 "Miss Master Kazz!"</h2>
-				<div class="top-box clear-block">
-					<div class="bottom-box clear-block">
-						<div class="elements clear-block">
-							<div>
-								<p class="thumb"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></p>
-								<p class="grey-text name"><em>Voce</em></p>
-								<p class="name"><a href="#">nome user</a></p>
-							</div>
-							<div>
-								<p class="thumb"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></p>
-								<p class="grey-text name"><em>Voce</em></p>
-								<p class="name"><a href="#">nome user</a></p>
-							</div>
-							<div>
-								<p class="thumb"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></p>
-								<p class="grey-text name"><em>Voce</em></p>
-								<p class="name"><a href="#">nome user</a></p>
-							</div>
+  <div style="width: 720px; float: none;" class="bottom-shadow" />
+  <div class="box-list one-col clear-block clear-float">			
+    <%= render :partial => 'box_instruments' %>
+    <div class="simple-list white-box clear-block">
+      <h2 class="mband-label">MBand a cui pappartiene<br/>"Miss Master Kazz!"</h2>
+      <div class="top-box clear-block">
+        <div class="bottom-box clear-block">
+          <div class="elements clear-block">
+            <div>
+              <p class="thumb"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></p>
+							<p class="grey-text name"><em>Voce</em></p>
+							<p class="name"><a href="#">nome user</a></p>
 						</div>
-						
-				  </div>
-					<p class="next"/>
-				</div>
-			</div>	
-
-			<%= render :partial => 'box_friends'%>
-			
-		</div>
+						<div>
+							<p class="thumb"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></p>
+							<p class="grey-text name"><em>Voce</em></p>
+							<p class="name"><a href="#">nome user</a></p>
+						</div>
+						<div>
+							<p class="thumb"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></p>
+							<p class="grey-text name"><em>Voce</em></p>
+							<p class="name"><a href="#">nome user</a></p>
+						</div>
+          </div>						
+        </div>
+        <p class="next" />
+      </div>
+    </div>
+    <%= render :partial => 'box_friends'%>		
+	</div>
 		
 		<div class="simple-list clear-block">
 			<h1>AMMIRATORI <span class="no-bold">(135)</span></h1>

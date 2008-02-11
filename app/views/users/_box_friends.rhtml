@@ -1,17 +1,17 @@
 <div class="simple-list clear-block">
   <h1>FRIENDS <span class="no-bold">(35)</span></h1>
   <div class="top-box clear-block">
-  	<div class="bottom-box clear-block">
-  	  <div class="elements clear-block">	  
-  	    <div class="horizontal-scroll-box">
-  	  	  <p class="button"><a href="#"><img width="12" height="39" alt="" src="/images/arrow_grey_left.gif"/></a></p>
-    	    <div class="horizontal-scroll">
-      			<% @user.friends.each do |friend| -%>
-      			  <%= link_to(image_tag('/photo/photo_30X30.jpg'), friend) %>
-      			<% end -%>
+    <div class="bottom-box clear-block">
+      <div class="elements clear-block">	  
+        <div class="horizontal-scroll-box">
+          <p class="button"><a href="#"><img width="12" height="39" alt="" src="/images/arrow_grey_left.gif"/></a></p>
+          <div class="horizontal-scroll">
+            <% @user.friends.each do |friend| -%>
+              <%= link_to(image_tag('/photo/photo_30X30.jpg'), friend) %>
+            <% end -%>
           </div>
           <p class="button"><a href="#"><img width="12" height="39" alt="" src="/images/arrow_grey_right.gif"/></a></p>
         </div>		
       </div>
     </div>
-  </div>
+</div>

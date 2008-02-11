@@ -110,6 +110,37 @@ class UsersControllerTest < Test::Unit::TestCase
     get :show, :id => users(:quentin).id
     assert_response :success
   end
+     
+  def test_update_should_redirect_unless_logged_in
+    post :update, :id => users(:aaron).id
+    assert_response :redirect
+  end
+  
+  def test_update_should_redirect_if_logged_in_but_different_user
+    login_as :user_4
+    post :update, :id => users(:aaron).id
+    assert_response :redirect
+  end
+  
+  def test_update_should_not_redirect_if_logged_in_and_current_user_page
+    login_as :aaron
+    post :update, :id => users(:aaron).id
+    assert_response :success
+  end
+  
+  def test_should_update_one_attribute
+    login_as :aaron
+    post :update, :id => users(:aaron).id, :user => { :city => 'Milan' }
+    assert_response :success
+    assert_equal 'Milan', @response.body
+    
+    post :update, :id => users(:aaron).id, :user => { :country => 'Italy' }
+    assert_response :success
+    assert_equal 'Italy', @response.body
+    
+    # post :update, :id => users(:aaron).id, :user => { :non_existing_field => 'Test' }
+    # assert_response :success
+  end
   
   protected
     def create_user(options = {})
