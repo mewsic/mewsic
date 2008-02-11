@@ -1,8 +1,9 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class AnswerTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  def test_truth
-    assert true
+ 
+  def test_find_newest
+    assert_equal 3, Answer.find_newest(:limit => 3).size
   end
+  
 end

@@ -2,7 +2,7 @@ class CreateTracks < ActiveRecord::Migration
   def self.up
     create_table :tracks do |t|
       t.string :title, :instrument
-      t.integer :song_id, :genre_id
+      t.integer :song_id
       t.timestamps
     end
   end

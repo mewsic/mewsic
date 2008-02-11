@@ -13,4 +13,9 @@
 class Answer < ActiveRecord::Base
   has_many :replies
   belongs_to :user
+  
+  def self.find_newest(options = {})
+    options.merge({:order => 'created_at desc'})
+    self.find(:all, options)
+  end
 end

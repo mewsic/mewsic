@@ -1,8 +1,9 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class GenreTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  def test_truth
-    assert true
+  
+  def test_find_paginated
+    assert_equal 5, Genre.find_paginated(1).size
   end
+  
 end

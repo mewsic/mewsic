@@ -29,4 +29,9 @@ class Song < ActiveRecord::Base
   def self.find_best(options = {})
     self.find(:all, options)
   end
+  
+  def self.find_newest(options = {})
+    options.merge({:order => 'created_at desc'})
+    self.find(:all, options)
+  end
 end

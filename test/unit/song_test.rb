@@ -12,4 +12,9 @@ class SongTest < ActiveSupport::TestCase
   def test_should_act_as_rated
     assert_acts_as_rated('Song')
   end
+  
+  def test_find_newest
+    assert_equal 3, Song.find_newest(:limit => 3).size
+  end
+  
 end

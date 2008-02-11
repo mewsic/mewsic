@@ -14,4 +14,10 @@ class TrackTest < ActiveSupport::TestCase
   def test_should_act_as_rated
     assert_acts_as_rated('Track')
   end
+  
+  def test_should_not_have_genre
+    t = Track.find_by_title("Basso")
+    assert !t.respond_to?(:genre)
+  end
+  
 end

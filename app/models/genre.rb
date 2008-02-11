@@ -8,9 +8,9 @@
 #
 
 class Genre < ActiveRecord::Base
-  has_many :tracks
+  has_many :songs
   
   def self.find_paginated(page)
-    paginate :per_page => 5, :order => "name ASC", :include => :tracks, :page => page
+    paginate :per_page => 5, :order => "name ASC", :include => [{:songs => :user}], :page => page
   end
 end

@@ -7,7 +7,6 @@
 #  title        :string(255)   
 #  instrument   :string(255)   
 #  song_id      :integer(11)   
-#  genre_id     :integer(11)   
 #  created_at   :datetime      
 #  updated_at   :datetime      
 #  rating_count :integer(11)   
@@ -19,7 +18,6 @@ class Track < ActiveRecord::Base
   has_many :songs, :through => :mixes
   has_many :mixes
   
-  belongs_to :genre
   belongs_to :parent_song, :class_name => 'Song', :include => :user, :foreign_key => 'song_id'
   
   acts_as_rated :rating_range => 0..5  
@@ -28,4 +26,5 @@ class Track < ActiveRecord::Base
   def self.find_most_used(options = {})
     Mix.count options.merge({:include => :track, :group => :track, :order => 'count_all DESC'}) 
   end
+  
 end
