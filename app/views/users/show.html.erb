@@ -1,4 +1,6 @@
+<% javascript 'user/show' if current_user_page %>
 <% javascript 'user/edit' if current_user_page %>
+
 <input id="user_id" name="user_id" type="hidden" value="<%= @user.id %>" />
 <input id="authenticity_token" name="authenticity_token" type="hidden" value="<%= @user.id %>" />
 
@@ -23,10 +25,10 @@
       <h1 class="black-text"><%= @user.login %></h1>
       <div class="grey-divisor"><hr/></div>
       <p class="blue-text">Nazione</p>
-      <h2 class="black-text" id="field_country"><%= @user.country %></h2>
+      <h2 class="black-text" id="user_country"><%= @user.country %></h2>
       <div class="grey-divisor"><hr/></div>
       <p class="blue-text">Città</p>
-      <h2 class="black-text" id="field_city"><%= @user.city %></h2>
+      <h2 class="black-text" id="user_city"><%= @user.city %></h2>
     </div>
 	  <% if current_user_page -%>
 	    <%= render :partial => 'box_mail' %>
@@ -38,24 +40,19 @@
 	<div class="user-id clear-float">	
     <div style="position: relative;" class="float-right">
       <div class="adding-link">
-				<a href="#"><img class="float-left" alt="" src="/images/icone_link_photo.gif"/></a>
-				<p><a href="#">Photo</a></p>
+				<%= user_photo_link %>
 		  </div>
 			<div class="adding-link">
-				<a href="#"><img width="16" height="19" class="float-left" alt="" src="/images/icone_link_blog.gif"/></a>
-				<p><a href="#">Blog</a></p>
+				<%= user_blog_link %>
 		  </div>			
 			<div class="adding-link">
-				<a href="#"><img width="16" height="19" class="float-left" alt="" src="/images/icone_link_myspace.gif"/></a>
-				<p><a href="#">MySpace</a></p>
+				<%= user_myspace_link %>
 		  </div>			
 			<div class="adding-link">
-				<a href="#"><img width="17" height="19" class="float-left" alt="" src="/images/icone_link_skype.gif"/></a>
-				<p><a href="#">Skype</a></p>
+				<%= user_skype_link %>
 		  </div>
 			<div class="adding-link">
-				<a href="#"><img width="21" height="19" class="float-left" alt="" src="/images/icone_link_MSN.gif"/></a>
-				<p><a href="#">MSN</a></p>
+				<%= user_msn_link %>
       </div>			
     </div>
     <p>myousica ID: <%= @user.id %></p>
@@ -65,11 +62,11 @@
   <div class="user-details clear-block">
     <div class="user-motto">
       <p class="blue-text"><strong>Motto</strong></p>
-      <p class="grey-text"><%= @user.motto %></p>
+      <p class="grey-text" id="user_motto"><%= @user.motto %></p>
     </div>
     <div class="user-gusti">
       <p class="blue-text"><strong>Gusti musicali</strong></p>
-      <p class="grey-text"><%= @user.tastes %></p>
+      <p class="grey-text" id="user_tastes"><%= @user.tastes %></p>
     </div>
   </div>    
 	  
@@ -104,34 +101,7 @@
     <%= render :partial => 'box_friends'%>		
 	</div>
 		
-		<div class="simple-list clear-block">
-			<h1>AMMIRATORI <span class="no-bold">(135)</span></h1>
-			<div class="top-box clear-block">
-				<div class="bottom-box clear-block">
-				  <div class="elements clear-block">
-
-				   <div class="horizontal-scroll-box">
-				  	<p class="button"><a href="#"><img width="12" height="39" alt="" src="/images/arrow_grey_left.gif"/></a></p>
-				  <div class="horizontal-scroll">
-						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
-						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
-						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
-						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
-						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
-						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
-						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
-						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
-						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
-						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
-						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>
-						<a href="#"><img width="29" height="29" alt="Pinco Pallino" src="/photo/photo_30X30.jpg"/></a>					</div>
-				  	<p class="button"><a href="#"><img width="12" height="39" alt="" src="/images/arrow_grey_right.gif"/></a></p>
-					</div>
-
-				  </div>
-			  </div>
-			</div>
-		</div>
+		<%= render :partial => 'box_admirers'%>		
 
 		<div class="simple-list clear-block">
 			<h1>ANSWER</h1>

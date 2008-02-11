@@ -130,11 +130,11 @@ class UsersControllerTest < Test::Unit::TestCase
   
   def test_should_update_one_attribute
     login_as :aaron
-    post :update, :id => users(:aaron).id, :user => { :city => 'Milan' }
+    xhr :post, :update, :id => users(:aaron).id, :user => { :city => 'Milan' }
     assert_response :success
     assert_equal 'Milan', @response.body
     
-    post :update, :id => users(:aaron).id, :user => { :country => 'Italy' }
+    xhr :post, :update, :id => users(:aaron).id, :user => { :country => 'Italy' }
     assert_response :success
     assert_equal 'Italy', @response.body
     

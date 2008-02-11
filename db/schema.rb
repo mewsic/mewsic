@@ -90,6 +90,13 @@ ActiveRecord::Schema.define(:version => 9) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "gender"
+    t.string   "photos_url"
+    t.string   "blog_url"
+    t.string   "myspace_url"
+    t.string   "skype"
+    t.string   "msn"
+    t.boolean  "msn_public",                                                             :default => false
+    t.boolean  "skype_public",                                                           :default => false
     t.string   "crypted_password",          :limit => 40
     t.string   "salt",                      :limit => 40
     t.string   "type"
