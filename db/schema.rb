@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 9) do
+ActiveRecord::Schema.define(:version => 10) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
@@ -25,6 +25,25 @@ ActiveRecord::Schema.define(:version => 9) do
     t.datetime "accepted_at"
   end
 
+  create_table "galleries", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "gallery_items", :force => true do |t|
+    t.integer  "gallery_id"
+    t.integer  "size"
+    t.string   "content_type"
+    t.string   "filename"
+    t.integer  "height"
+    t.integer  "width"
+    t.integer  "parent_id"
+    t.string   "thumbnail"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "genres", :force => true do |t|
     t.string "name"
   end
@@ -34,6 +53,19 @@ ActiveRecord::Schema.define(:version => 9) do
   create_table "mixes", :force => true do |t|
     t.integer  "song_id"
     t.integer  "track_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pictures", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "size"
+    t.string   "content_type"
+    t.string   "filename"
+    t.string   "string"
+    t.integer  "height"
+    t.integer  "width"
+    t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -72,7 +104,6 @@ ActiveRecord::Schema.define(:version => 9) do
     t.string   "title"
     t.string   "instrument"
     t.integer  "song_id"
-    t.integer  "genre_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "rating_count"

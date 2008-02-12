@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 9
+# Schema version: 10
 #
 # Table name: tracks
 #
@@ -7,7 +7,6 @@
 #  title        :string(255)   
 #  instrument   :string(255)   
 #  song_id      :integer(11)   
-#  genre_id     :integer(11)   
 #  created_at   :datetime      
 #  updated_at   :datetime      
 #  rating_count :integer(11)   

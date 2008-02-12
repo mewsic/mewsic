@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 9
+# Schema version: 10
 #
 # Table name: users
 #
@@ -52,13 +52,14 @@ class User < ActiveRecord::Base
   validates_acceptance_of :terms_of_service, :on => :create, :allow_nil => false
   validates_acceptance_of :eula, :on => :create, :allow_nil => false, :message => "must be abided"
   before_save :encrypt_password
-  before_create :make_activation_code
+  before_create :make_activation_code  
   
   has_many_friends
   
   has_many :songs
   has_many :answers
   has_many :replies
+  has_many :pictures
   
   acts_as_rated :rating_range => 0..5
   
@@ -70,7 +71,6 @@ class User < ActiveRecord::Base
   # * tracce
   # * annunci
   # * ammiratori
-  # * gallery
       
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
@@ -193,7 +193,7 @@ class User < ActiveRecord::Base
       track.instrument
     end
   end
-  
+    
   protected
     # before filter 
     def encrypt_password      
@@ -208,5 +208,6 @@ class User < ActiveRecord::Base
     
     def make_activation_code
       self.activation_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
-    end
+    end    
+    
 end

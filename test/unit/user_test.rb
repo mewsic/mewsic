@@ -235,7 +235,11 @@ class UserTest < Test::Unit::TestCase
     end
     assert_equal %w[bass guitar], u.instruments.sort
   end
-        
+  
+  def test_quentin_should_has_pictures
+    assert_equal 2, users(:quentin).pictures.size
+  end
+  
   protected
     def create_user(options = {})
       User.create({ :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire', :terms_of_service => "1", :eula => "1" }.merge(options))

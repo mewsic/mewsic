@@ -2,7 +2,9 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :answers, :has_many => [ :replies ]
   map.resources :genres
-  map.resources :users
+  map.resources :users do |user|
+     user.resources :pictures
+  end
   map.resources :sessions
   map.resources :songs
   map.resources :tracks
