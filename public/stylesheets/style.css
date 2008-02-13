@@ -296,6 +296,7 @@ h2, h2 a{
 .box-list h1{
 	margin-bottom:20px;
 }
+
 .box-list table{
 	clear:both;
 }
@@ -310,6 +311,20 @@ tr.even{
 tr.odd{
 	background-color:#fff;
 }
+
+.nav-song h1, .nav-song .tit-sezion-tab{
+	margin-bottom:0px;
+}
+
+.nav-song .tit-sezion-tab{
+	height:18px;	
+}
+
+tr.nav-song td{
+	padding:0px;
+}
+
+
 .full-page{
 	width:708px;
 }

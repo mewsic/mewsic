@@ -3,8 +3,24 @@ require File.dirname(__FILE__) + '/../test_helper'
 class GenresControllerTest < ActionController::TestCase
   tests GenresController
 
-  # Replace this with your real tests.
-  def test_truth
-    assert true
+  def test_index_should_response_success
+    get :index
+    assert_response :success
   end
+  
+  def test_show
+    get :show, :id => 337050706
+
+    assert assigns(:genre)
+    
+    assert assigns(:most_listned_songs)
+    assert_equal 3, assigns(:most_listned_songs).size
+    
+    assert assigns(:prolific_users)
+    assert_equal 3, assigns(:prolific_users).size
+    
+    assert assigns(:songs)
+    assert_equal 20, assigns(:songs).size
+  end
+  
 end

@@ -1,0 +1,18 @@
+<tr class="<%= %w[even odd][song_counter % 2] %>">	    	
+	<td>
+  		<p class="float-left">
+  			<a href="<%= user_path song.user %>">
+  				<img src="/avatars/photo_30X30.jpg" alt="<%= song.user.login %>" class="float-left" height="29" width="29">
+			</a>
+			<span class="tracks-number"><span><%= song.tracks.size %></span></span>
+		</p>
+      		<p class="name grey-text">
+      			<a href="<%= user_path song.user %>"><%= h song.user.login %></a>
+			</p>
+    	<p class="title"><a href="<%= song_path song %>"><%= h truncate(song.title, 38) %></a></p>
+	</td>
+  	<td class="star">
+  		<p><%= stars(song.rating_avg) %></p>
+      	<p><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
+	</td>
+</tr>

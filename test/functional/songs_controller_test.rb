@@ -4,8 +4,8 @@ class SongsControllerTest < ActionController::TestCase
   tests SongsController
 
   # Replace this with your real tests.
-  def test_index_should_redirect_to_music_controller
+  def test_index_should_response_success
     get :index
-    assert_redirected_to :controller  => 'music', :action => 'index'
+    assert_response :success
   end
 end

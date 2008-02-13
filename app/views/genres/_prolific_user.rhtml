@@ -1,0 +1,6 @@
+<div class="elements clear-block">
+	<p class="thumb"><a href="<%= user_path prolific_user %>"><img src="/avatars/photo_42X42.jpg" alt="<%= prolific_user.login %>" width="42" height="42" /></a></p>
+	<p class="name"><a href="<%= user_path prolific_user %>"><%= h prolific_user.login %></a></p>
+	<p class="country"><%= h prolific_user.city %>, <%= h prolific_user.country %></p>
+	<p class="cyan-text float-right"><strong><%= pluralize(prolific_user.count, 'song') %></strong></p>
+</div>

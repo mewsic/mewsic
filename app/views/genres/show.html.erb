@@ -1,0 +1,62 @@
+<div class="whiteblock-shadow clear-block">
+  <%= breadcrumb %>
+
+	<div class="box-list one-col clear-block">
+		<div class="simple-list section-tags clear-block">
+			<div class="top-box clear-block">
+				<div class="bottom-box clear-block">
+				  <div class="elements clear-block">
+			        <%= render_tag_cloud Song, :genre, :name, {:limit => 12, :with_paragraphs => true} %>
+				  </div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="simple-list clear-block">
+			<h1>BRANI <%= h @genre.name.upcase %> PIU' ASCOLTATI</h1>
+			<div class="top-box clear-block">
+				<div class="bottom-box clear-block">
+			  		<%= render :partial => 'most_listened_song', :collection => @most_listned_songs %>
+				</div>
+			</div>
+		</div>	
+		
+		<div class="simple-list clear-block">
+			<h1>CON PIU' BRANI <%= h @genre.name.upcase %> </h1>
+			<div class="top-box clear-block">
+				<div class="bottom-box clear-block">
+			  		<%= render :partial => 'prolific_user', :collection => @prolific_users %>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+
+
+	<div class="box-list two-col clear-block">
+	
+		<div class="elenco-genere clear-block">
+		<h1><%= h @genre.name.upcase %></h1>
+			<div class="top-box clear-block">
+				<div class="bottom-box clear-block">
+				    <div class="elements clear-block"></div>
+					<div class="elements clear-block"></div>
+					<div class="elements clear-block">
+					  <table border="0" cellpadding="0" cellspacing="0" width="95%">
+					  <tbody id="songs">
+					  	  <%= render :partial => 'songs'%>
+                      </tbody>
+					  </table>
+					</div>
+			  </div>
+			</div>	
+		</div>
+		
+	  </div>			
+			
+			
+    </div>
+  </div>
+
+
+

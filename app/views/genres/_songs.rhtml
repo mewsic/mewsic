@@ -1,0 +1,25 @@
+<tr class="nav-song">
+<td colspan="2">
+	<div class="tit-sezion-tab clear-block">
+	<div class="float-right">
+		<p class="button float-left">
+		  <% if @songs.previous_page %>
+		    <%= link_to_remote image_tag('arrow_simple_left.png', :width => 7, :height => 9), :update => "songs", :url => songs_path({:page => @songs.previous_page, :id => params[:id]}), :method => :get %>
+		  <% else %>
+		    <%= image_tag('arrow_simple_left.png', :width => 7, :height => 9) %>
+		  <% end %>
+		</p>
+ 		<h1 class="">More Songs</h1>
+		<p class="button float-left">
+		  <% if @songs.next_page %>
+		    <%= link_to_remote image_tag('arrow_simple_right.png', :width => 7, :height => 9), :update => "songs", :url =>  songs_path({:page => @songs.next_page, :id => params[:id]}), :method => :get %>
+		  <% else %>
+		    <%= image_tag('arrow_simple_right.png', :width => 7, :height => 9) %>
+		  <% end %>
+		</p>
+	</div>
+	</div>
+</td>
+</tr>
+
+<%= render :partial => 'genres/song', :collection => @songs %>

@@ -15,25 +15,51 @@
 #  rating_avg      :decimal(10, 2 
 #
 
+<% 
+  def shuffle(array)
+    size = array.size
+    r = [rand(size),rand(size)]
+    array[ r.min, (r.max + 1) ].join(" ")
+  end
+%>
+
 let_it_be:
   title: Let It Be
   user: aaron
   original_author: Beatles
   genre: country
+  listened_times: 2230
 radio_ga_ga:
   title: Radio Ga Ga
   user: aaron
   original_author: Queen
   genre: rap
+  listened_times: 1290
 i_want_to_break_free:
   title: I Want to Break Free
   user: quentin
   original_author: Queen
   genre: rock
+  listened_times: 1210
+red_red_wine:
+  title: Red Red Wine
+  user: quentin
+  original_author: Bob Marley
+  genre: reggae
+  listened_times: 1120
 <% 1000.times do |i| %>
 song_<%= i + 4 %>:
-  title: <%= %w( Love Honesty Roma Sex Radio Let It Be Radio Want I Live Forever My Way Bohemian Rhapsody ).sort_by {rand}[rand(17), rand(17)].join(" ") %>
+  title: <%= shuffle(%w( Love Honesty Roma Sex Radio Let It Be Radio Want I Live Forever My Way Bohemian Rhapsody )) %>
   user: <%= "user_#{rand(497) + 3}" %>
   original_author: <%= %w(Queen Beatles Elvis Vasco R.E.M.)[rand(5)] %>
   genre: reggae
+  listened_times: <%= rand(1000) %>
+<% end %>
+<% 100.times do |i| %>
+song_aaron_<%= i + 4 %>:
+  title: <%= shuffle(%w( Love Honesty Roma Sex Radio Let It Be Radio Want I Live Forever My Way Bohemian Rhapsody )) %>
+  user: aaron
+  original_author: <%= %w(Queen Beatles Elvis Vasco R.E.M.)[rand(5)] %>
+  genre: reggae
+  listened_times: <%= rand(1000) %>
 <% end %>
