@@ -14,7 +14,11 @@ class SongTest < ActiveSupport::TestCase
   end
   
   def test_find_newest
-    assert_equal 3, Song.find_newest(:limit => 3).size
+    last_song = songs(:space_cowboy)
+    songs = Song.find_newest :limit => 3
+    
+    assert_equal 3, songs.size
+    assert_equal last_song, songs.first
   end
   
 end

@@ -1,5 +1,6 @@
 <% track = most_used_track.first %>
 <% song_count = most_used_track.last %>
+<%= debug(track.parent_song.user.instruments) %>
 
 <div class="rounded-white-top">
 	<div class="rounded-white-bottom">
@@ -12,8 +13,8 @@
 		  <p><%= track.parent_song.original_author %></p>
 		  
 		  <p class="button float-right"><a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_orange.png" alt="" width="23" height="15" /></a></p>
-		  
-		  <p class="float-left">used <%= song_count %> times</p>
+
+		  <p class="float-left">used <%= pluralize(song_count, 'time') %></p>
 		  <p class="star"><%= stars(track.parent_song.rating_avg) %></p>
 		</div>
 	</div>

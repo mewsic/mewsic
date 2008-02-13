@@ -15,7 +15,7 @@ class Answer < ActiveRecord::Base
   belongs_to :user
   
   def self.find_newest(options = {})
-    options.merge({:order => 'created_at desc'})
+    options.merge!({:order => 'answers.created_at desc'})
     self.find(:all, options)
   end
 end

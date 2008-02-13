@@ -47,6 +47,13 @@ red_red_wine:
   original_author: Bob Marley
   genre: reggae
   listened_times: 1120
+space_cowboy:
+  title: Space Cowboy
+  user: aaron
+  original_author: Jamiroquai
+  genre: acid_jazz
+  listened_times: 1001
+  created_at: <%= 1.week.from_now.to_s(:db) %>
 <% 1000.times do |i| %>
 song_<%= i + 4 %>:
   title: <%= shuffle(%w( Love Honesty Roma Sex Radio Let It Be Radio Want I Live Forever My Way Bohemian Rhapsody )) %>
