@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+drum:
+  description: Drum
+  icon: instrument_drum.png
+
+guitar:
+  description: Guitar
+  icon: instrument_guitar.png
+
+microphone:
+  description: Microphone
+  icon: instrument_microphone.png
+  
+sax:
+  description: Sax
+  icon: instrument_sax.png

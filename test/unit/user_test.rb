@@ -227,13 +227,14 @@ class UserTest < Test::Unit::TestCase
   def test_should_retrieve_distinct_instrument
     u = create_user
     s = u.songs.create(:title => 'My song')
+    i = create_instrument
     assert_difference 'Track.count', 4 do
-      Mix.create(:track => Track.create(:instrument => 'guitar', :parent_song => s), :song => s)
-      Mix.create(:track => Track.create(:instrument => 'guitar', :parent_song => s), :song => s)
-      Mix.create(:track => Track.create(:instrument => 'bass', :parent_song => s), :song => s)
-      Mix.create(:track => Track.create(:instrument => 'bass', :parent_song => s), :song => s)
+      Mix.create(:track => Track.create(:instrument => i.first, :parent_song => s), :song => s)
+      Mix.create(:track => Track.create(:instrument => i.first, :parent_song => s), :song => s)
+      Mix.create(:track => Track.create(:instrument => i.last, :parent_song => s), :song => s)
+      Mix.create(:track => Track.create(:instrument => i.last, :parent_song => s), :song => s)
     end
-    assert_equal %w[bass guitar], u.instruments.sort
+    assert_equal %w[Guitar Sax], u.instruments.sort
   end
   
   def test_quentin_should_has_pictures
@@ -241,7 +242,15 @@ class UserTest < Test::Unit::TestCase
   end
   
   protected
+  
     def create_user(options = {})
       User.create({ :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire', :terms_of_service => "1", :eula => "1" }.merge(options))
     end
+    
+    def create_instrument
+      instrument_1 = instruments(:guitar)
+      instrument_2 = instruments(:sax)
+      return [instrument_1, instrument_2]
+    end
+  
 end

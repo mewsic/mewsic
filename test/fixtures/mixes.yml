@@ -13,7 +13,7 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 one:
   song: let_it_be
-  track: bass_for_let_it_be
+  track: sax_for_let_it_be
 two:
   song: let_it_be
   track: guitar_for_let_it_be

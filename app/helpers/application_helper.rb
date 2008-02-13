@@ -77,5 +77,5 @@ module ApplicationHelper
     end
     content
   end
-    
+  
 end

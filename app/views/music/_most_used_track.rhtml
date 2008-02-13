@@ -8,7 +8,7 @@
 				<p class="thumb"><a href="<%= user_path track.parent_song.user %>"><img src="/avatars/photo_30X30.jpg" alt="<%= user_path track.parent_song.user %>" width="29" height="29" /></a></p>
 				<p class="name"><%= link_to track.parent_song.user.login, user_path(track.parent_song.user) %></p>
 			</div>
-		  <p class="title"><span class="thumb"><img src="/images/instrument_drum.png" alt="" width="29" height="29" /></span><%= link_to track.title, track_path(most_used_track) %></p>
+		  <p class="title"><span class="thumb"><img src="/images/<%=track.instrument.icon%>" alt="" width="29" height="29" /></span><%= link_to track.title, track_path(most_used_track) %></p>
 		  <p><%= track.parent_song.original_author %></p>
 		  
 		  <p class="button float-right"><a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_orange.png" alt="" width="23" height="15" /></a></p>

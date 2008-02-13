@@ -19,12 +19,13 @@ class Track < ActiveRecord::Base
   has_many :mixes
   
   belongs_to :parent_song, :class_name => 'Song', :include => :user, :foreign_key => 'song_id'
+  belongs_to :instrument
   
   acts_as_rated :rating_range => 0..5  
   
   # FIXME: Per motivi di performance dovremmo tirare dentro anche gli users e la parent_song
   def self.find_most_used(options = {})
-    Mix.count options.merge({:include => :track, :group => :track, :order => 'count_all DESC'}) 
+    Mix.count options.merge({:include => [{:track => :instrument}], :group => :track, :order => 'count_all DESC'}) 
   end
   
 end

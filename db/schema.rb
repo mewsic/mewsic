@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 10) do
+ActiveRecord::Schema.define(:version => 11) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
@@ -30,6 +30,13 @@ ActiveRecord::Schema.define(:version => 10) do
   end
 
   add_index "genres", ["name"], :name => "index_genres_on_name"
+
+  create_table "instruments", :force => true do |t|
+    t.string   "description"
+    t.string   "icon"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "mixes", :force => true do |t|
     t.integer  "song_id"
@@ -84,13 +91,13 @@ ActiveRecord::Schema.define(:version => 10) do
 
   create_table "tracks", :force => true do |t|
     t.string   "title"
-    t.string   "instrument"
     t.integer  "song_id"
+    t.integer  "instrument_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "rating_count"
-    t.decimal  "rating_total", :precision => 10, :scale => 2
-    t.decimal  "rating_avg",   :precision => 10, :scale => 2
+    t.decimal  "rating_total",  :precision => 10, :scale => 2
+    t.decimal  "rating_avg",    :precision => 10, :scale => 2
   end
 
   create_table "users", :force => true do |t|

@@ -15,10 +15,10 @@
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-bass_for_let_it_be:
-  title: Basso
+sax_for_let_it_be:
+  title: Sassofono
   parent_song: let_it_be
-  instrument: bass
+  instrument: sax
 guitar_for_let_it_be:
   title: Chitarra
   parent_song: let_it_be

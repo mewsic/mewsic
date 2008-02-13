@@ -189,8 +189,8 @@ class User < ActiveRecord::Base
   end
   
   def instruments
-    Track.find_by_sql(["select DISTINCT T.instrument from users U, tracks T, songs S WHERE T.song_id = S.id AND S.user_id = U.id AND U.id = ?", self.id]).collect do |track|
-      track.instrument
+    Track.find_by_sql(["select DISTINCT I.description from instruments I, users U, tracks T, songs S WHERE T.instrument_id = I.id AND T.song_id = S.id AND S.user_id = U.id AND U.id = ?", self.id]).collect do |track|
+      track.description
     end
   end
     
