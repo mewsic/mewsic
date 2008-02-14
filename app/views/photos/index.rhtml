@@ -1,0 +1,6 @@
+<% form_for :photo, :url => {:action => :create}, :html => {:multipart => true} do |f| %>
+  <%= f.file_field :uploaded_data  %><br />
+  <%= submit_tag 'Upload >>' %>
+<% end %>        
+
+<%= @user.photos[0].inspect %>

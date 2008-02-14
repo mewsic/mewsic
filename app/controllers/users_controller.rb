@@ -30,7 +30,10 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = User.find(params[:id], :conditions => ["activated_at IS NOT NULL", nil], :include => [{:songs => [:tracks, :genre]}])
+    @user = User.find(params[:id], :conditions => ["activated_at IS NOT NULL", nil])
+    # non uso :include => [{:songs => [:tracks, :genre]}] xkè non devo recuperare tutte le tracce
+    @songs  = @user.songs.find(:all, :order => 'title ASC', :limit => 3)
+    @tracks = Track.find(:all, :limit => 10, :order => "tracks.title ASC", :include => [{:songs => :user}], :conditions => ["users.id = ?", @user.id])
   rescue ActiveRecord::RecordNotFound
     redirect_to '/'
   end

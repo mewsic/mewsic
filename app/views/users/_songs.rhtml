@@ -1,0 +1,40 @@
+<div class="tit-classification-songs clear-block">
+  <h1>SONGS</h1>
+  <div class="top-box clear-block">
+    <div class="bottom-box clear-block">		
+      <% @songs.each do |song| -%>
+        <div class="elements clear-block"> 
+          <table width="95%" border="0" cellpadding="5" cellspacing="0">
+            <tr class="odd">
+              <td>
+                <span class="tracks-number"><span><%= song.tracks.count %></span></span>
+                <div class="float-left">
+                  <% song.tracks.each do |track| -%>
+                    <img src="/images/instrument_drum_grey.png" alt="drum" width="29" height="29" />
+                  <% end -%>
+                </div>
+              </td>
+              <td align="right">
+                <p class="star"><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /></p>
+                <p><strong><%= link_to song.genre.name, genre_path(song.genre) %></strong></p>
+              </td>
+            </tr>
+            <tr class="odd">
+              <td>
+                <p><em><%= song.user.login %></em></p>
+                <p class="title"><a href="#"><%= song.title %></a></p>
+              </td>
+              <td align="right" style="vertical-align:bottom">
+                <span class="button">
+                  <%= user_icon_link(song.user) %>
+                  <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a>
+                </span>						  
+              </td>
+            </tr>
+          </table>
+        </div>
+      <% end -%>
+      <p class="next"><a href="#"><strong>Next</strong></a></p>
+    </div>
+  </div>	
+</div>

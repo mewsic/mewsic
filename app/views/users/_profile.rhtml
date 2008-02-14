@@ -1,0 +1,72 @@
+<%= hidden_field_tag 'user_id', @user.id if current_user_page? %>
+
+<div class="mypage-label clear-block">
+  <%= render :partial => 'switch_type' if current_user_page? %>
+  <div class="type-label">
+    <img src="/images/user_page_label.gif" alt="" width="41" height="56" />
+  </div>
+</div>
+
+<div class="user-profile clear-block">
+  <div class="user-photo">
+    <img src="/photo/photo_user_big.jpg" alt="" width="150" height="150" />
+  </div>
+  <div class="user-resume">
+    <p class="star">
+      <img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" />
+    </p>
+    <div class="float-right align-right">
+      <p class="blue-text">Gender</p>
+      <p>
+        <%= gender_icon %>
+      </p>
+    </div>
+    <p class="blue-text">User name</p>
+    <h1 class="black-text" id="user_id"><%= @user.login %></h1>
+    <div class="grey-divisor"><hr /></div>
+    <p class="blue-text">Nazione <%= user_edit_button(:country) %></p>
+    <h2 class="black-text" id="user_country"><%= @user.country %></h2>
+    <div class="grey-divisor"><hr /></div>
+    <p class="blue-text">Città <%= user_edit_button(:city) %></p>
+    <h2 class="black-text" id="user_city"><%= @user.city %></h2>
+  </div>
+  
+  <% if current_user_page? -%>
+    <%= render :partial => 'users/my/mail' if logged_in? %>
+  <% elsif logged_in? -%>
+    <%= render :partial => 'communicate' if logged_in? %>
+  <% end -%>  
+  
+</div>
+
+<div class="user-id clear-float">
+  <div class="float-right" style="position:relative;">
+    <div class="adding-link">
+      <%= user_photo_link %>
+    </div>
+    <div class="adding-link">
+      <%= user_blog_link %>
+    </div>			
+    <div class="adding-link">
+      <%= user_myspace_link %>
+    </div>			
+    <div class="adding-link">
+      <%= user_skype_link %>
+    </div>			
+    <div class="adding-link">
+      <%= user_msn_link %>
+    </div>			
+  </div>
+  <p>myousica ID: <%= @user.id %></p>
+</div>
+
+<div class="user-details clear-block">
+  <div class="user-motto">
+    <p class="blue-text"><strong>Motto</strong> <%= user_edit_button(:motto) %></p>
+    <p class="grey-text" id="user_motto"><%= @user.motto %></p>
+  </div>
+  <div class="user-gusti">
+    <p class="blue-text"><strong>Gusti musicali</strong> <%= user_edit_button(:tastes) %></p>
+    <p class="grey-text" id="user_tastes"><%= @user.tastes %></p>
+  </div>
+</div>

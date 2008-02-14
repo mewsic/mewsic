@@ -6,7 +6,7 @@
         <div class="horizontal-scroll-box" id="admirers-scroller">
           <p class="button"><a href="#" class="trigger left"><img width="12" height="39" alt="" src="/images/arrow_grey_left.gif"/></a></p>
 		      <div class="horizontal-scroll">
-    				<div style="width: <%=  (@user.friends.size * 38) / 2 %>px; left: 0;">
+    				<div style="width: <%=  @user.friends.size * 38 %>px; left: 0;">
               <% @user.pending_friends.each do |friend| -%>
                 <%= link_to(image_tag('/photo/photo_30X30.jpg'), friend) %>
               <% end -%>

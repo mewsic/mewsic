@@ -25,6 +25,25 @@ ActiveRecord::Schema.define(:version => 11) do
     t.datetime "accepted_at"
   end
 
+  create_table "galleries", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "gallery_items", :force => true do |t|
+    t.integer  "gallery_id"
+    t.integer  "size"
+    t.string   "content_type"
+    t.string   "filename"
+    t.integer  "height"
+    t.integer  "width"
+    t.integer  "parent_id"
+    t.string   "thumbnail"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "genres", :force => true do |t|
     t.string "name"
   end
@@ -47,6 +66,7 @@ ActiveRecord::Schema.define(:version => 11) do
 
   create_table "pictures", :force => true do |t|
     t.integer  "user_id"
+    t.string   "type"
     t.integer  "size"
     t.string   "content_type"
     t.string   "filename"

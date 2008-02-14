@@ -25,16 +25,19 @@
 #   column: value
 
 
-first_pictures_for_quentin:
+first_photo_for_quentin:
   user: quentin
+  type: Photo
   filename: quentin_1.jpg
   content_type: images/jpeg
-second_pictures_for_quentin:
+second_photo_for_quentin:
   user: quentin
+  type: Photo
   filename: quentin_2.jpg
   content_type: images/jpeg
-first_pictures_for_users_1:
+first_photo_for_users_1:
   user: user_1
+  type: Photo
   filename: quentin_2.jpg
   content_type: images/jpeg
   

@@ -574,7 +574,7 @@ tr.nav-song td{
 .horizontal-scroll-box .button{
 	float:left;
 	width:auto;
-	padding-top:10px;
+ /*padding-top:10px;*/
 	margin:0px 5px 0px;
 }
 .one-col .horizontal-scroll-box{
