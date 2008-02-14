@@ -1,27 +1,29 @@
-<div class="tit-classification-tracks clear-block">
-  <h1>TRACKS</h1>
-  <div class="top-box clear-block">
-    <div class="bottom-box clear-block">		
-	    <div class="elements clear-block">
-        <table width="95%" border="0" cellpadding="0" cellspacing="0">
-		      <% @tracks.each_with_index do |track, index| -%>          
-		        <tr class="<%= %w[even odd][index % 2] %>">
-  			      <td>
-  			        <p class="thumb">
-  			          <%= image_tag track.instrument.icon %>
-                </p>
-  				      <p class="name grey-text"><%= track.parent_song.user.login %></p>
-  				      <p class="title"><a href="#"><%= track.title %></a></p>
-  			      </td>
-  			      <td class="star">
-  			        <p><span class="star"><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /><img src="/images/star_green.png" alt="" width="10" height="9" /></span></p>
-  				      <p><a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-  			      </td>
-  		      </tr>
-		      <% end -%>
-        </table>					  			  
-      </div>			
-	    <p class="next"><a href="#"><strong>Next</strong></a></p>
-    </div>
-  </div>	
-</div>
+<h1>TRACKS</h1>
+<div class="top-box clear-block">
+  <div class="bottom-box clear-block">		
+	<div class="elements clear-block">
+      <table width="95%" border="0" cellpadding="0" cellspacing="0">
+        <%= render :partial => 'users/track', :collection => @tracks %>
+	  </table>					  			  
+    </div>		
+    
+	
+  <p class="next">
+  	  <span class = nav-bottom>
+		  <% if @tracks.previous_page %>
+		    <%= link_to_remote image_tag('arrow_simple_left.png', :width => 7, :height => 9) + ' <strong>Prev</strong> ' , :update => "tracks", :url => tracks_path({:page => @tracks.previous_page, :id => params[:id]}), :method => :get %>
+		  <% else %>
+		    <%= image_tag('arrow_simple_left.png', :width => 7, :height => 9)  + ' <strong>Prev</strong> ' %>
+		  <% end %>
+	  </span>
+	  
+	  <span class = nav-bottom>
+		  <% if @tracks.next_page %>
+		    <%= link_to_remote ' <strong>Next</strong> ' + image_tag('arrow_simple_right.png', :width => 7, :height => 9), :update => "tracks", :url =>  tracks_path({:page => @tracks.next_page, :id => params[:id]}), :method => :get %>
+		  <% else %>
+		    <%= ' <strong>Next</strong> ' + image_tag('arrow_simple_right.png', :width => 7, :height => 9)%>
+		  <% end %>
+	  </span>
+  </p>
+  </div>
+</div>	

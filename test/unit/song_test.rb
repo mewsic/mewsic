@@ -20,5 +20,14 @@ class SongTest < ActiveSupport::TestCase
     assert_equal 3, songs.size
     assert_equal last_song, songs.first
   end
-  
+
+  def test_paginated_by_genre
+    songs = Song.find_paginated_by_genre(1, genres(:reggae).id)
+    assert_equal 20, songs.size
+  end 
+
+  def test_paginated_by_user
+    songs = Song.find_paginated_by_user(1, users(:aaron).id)
+    assert_equal 3, songs.size
+  end 
 end

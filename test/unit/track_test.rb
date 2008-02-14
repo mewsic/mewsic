@@ -24,4 +24,9 @@ class TrackTest < ActiveSupport::TestCase
     assert !t.respond_to?(:genre)
   end
   
+  def test_paginated_by_user
+    songs = Track.find_paginated_by_user(1, users(:aaron).id)
+    assert songs.size < 8
+  end 
+  
 end

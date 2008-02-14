@@ -180,11 +180,14 @@ html>body #search p span{
 }
 .next{
 	text-align:right;
-	padding:3px 20px 3px 0px;
+	padding:3px 8px 3px 0px;
 	color:#014D70;
 }
 .next a{
 	color:#014D70;
+}
+.next .nav-bottom{
+	padding: 0px 5px;
 }
 .edit-command{
 	font-size:11px;

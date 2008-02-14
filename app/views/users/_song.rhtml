@@ -1,0 +1,30 @@
+<div class="elements clear-block"> 
+  <table width="95%" border="0" cellpadding="5" cellspacing="0">
+    <tr class="odd">
+      <td>
+        <span class="tracks-number"><span><%= song.tracks.count %></span></span>
+        <div class="float-left">
+          <% song.tracks.each do |track| -%>
+            <img src="/images/<%= track.instrument.icon%>" alt="<%= track.instrument.description%>" width="29" height="29" />
+          <% end -%>
+        </div>
+      </td>
+      <td align="right">
+        <p class="star"><%= stars(song.rating_avg) %></p>
+        <p><strong><%= link_to song.genre.name, genre_path(song.genre) %></strong></p>
+      </td>
+    </tr>
+    <tr class="odd">
+      <td>
+        <p><em><%= song.user.login %></em></p>
+        <p class="title"><a href="#"><%= song.title %></a></p>
+      </td>
+      <td align="right" style="vertical-align:bottom">
+        <span class="button">
+          <%= user_icon_link(song.user) %>
+          <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a>
+        </span>						  
+      </td>
+    </tr>
+  </table>
+</div>

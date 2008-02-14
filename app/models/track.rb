@@ -28,4 +28,12 @@ class Track < ActiveRecord::Base
     Mix.count options.merge({:include => [{:track => :instrument}], :group => :track, :order => 'count_all DESC'}) 
   end
   
+  def self.find_paginated_by_user(page, user_id)
+    paginate :per_page => 7,
+             :conditions => ["songs.user_id = ?", user_id],
+             :include => [{:songs => :user}], 
+             :order => "tracks.title ASC",
+             :page => page
+  end
+  
 end

@@ -2,7 +2,7 @@
 
 <div class="whiteblock-shadow clear-block">
 
-  <div id="path"><a href="#">Home</a> : <a href="#">people</a>: Miss Master Kazz!</div> 
+  <div id="path"><a href="#">Home</a> : <a href="#">people</a>: <%= h @user.login %></div> 
   
   <%= render :partial => 'profile' %>
   
@@ -17,8 +17,12 @@
   </div>
   
   <div class="box-list two-col clear-block">
-    <%= render :partial => 'songs' %>
-    <%= render :partial => 'tracks' %>  
+  	<div class="tit-classification-songs clear-block" id="songs">
+      <%= render :partial => 'songs' %>
+	</div>
+	<div class="tit-classification-tracks clear-block" id="tracks">
+      <%= render :partial => 'tracks' %>  
+	</div>
     <%= render :partial => 'gallery' %> 
     <%= render :partial => 'users/my/share' %> 
   </div>
