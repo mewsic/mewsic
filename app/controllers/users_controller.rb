@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = User.find(params[:id], :conditions => "activated_at IS NOT NULL", :include => :avatar)
+    @user = User.find(params[:id], :conditions => "activated_at IS NOT NULL", :include => :avatars)
     # non uso :include => [{:songs => [:tracks, :genre]}] xkè non devo recuperare tutte le tracce
     @songs = Song.find_paginated_by_user(1, @user.id)
     @tracks = Track.find_paginated_by_user(1, @user.id)

@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
   has_many :replies
   has_many :photos
 
-  has_one :avatar
+  has_many :avatars
   
   acts_as_rated :rating_range => 0..5
   

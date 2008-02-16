@@ -12,7 +12,7 @@ class AvatarsController < ApplicationController
   
   def create 
     if params[:avatar] && params[:avatar][:uploaded_data].respond_to?(:size) && params[:avatar][:uploaded_data].size > 0
-      if @user.avatar.create(params[:avatar])
+      if @user.avatars << Avatar.create(params[:avatar])
         redirect_to new_user_avatar_path(params[:user_id], :coming_fron => 'create')
       end
     else
@@ -22,7 +22,7 @@ class AvatarsController < ApplicationController
   end
 
   def destroy
-    @user.avatar.destroy and redirect_to(user_avatars_path(@user))
+    @user.avatars.find(params[:id]).destroy and redirect_to(user_avatars_path(@user))
   rescue ActiveRecord::RecordNotFound
     redirect_to '/'
   end

@@ -82,7 +82,7 @@ module ApplicationHelper
     link_to("click to change", 
             new_user_avatar_path(user), 
             :onclick => "return popitup('#{new_user_avatar_path(user)}')") + "<br />" +
-    image_tag(user.avatar.nil? ? '/photo/photo_user_big.jpg' : user.avatar.public_filename(:medium), :height => 150, :width => 150)
+    image_tag(user.avatars.empty? ? '/photo/photo_user_big.jpg' : user.avatars.last.public_filename(:medium), :height => 150, :width => 150)
   end
   
 end
