@@ -78,17 +78,11 @@ module ApplicationHelper
     content
   end
   
-  def my_avatar_icon
-    url = '/photo/photo_user_big.jpg'
-    filename = 'default avatar'
-    unless @avatar.nil?
-      url = @avatar.public_filename(:medium)   
-      filename = @avatar.filename
-    end
-    content =  %|<a href="#{user_avatars_path(@user)}" onclick="return popitup(\'#{user_avatars_path(@user)}\')">|
-    content << %|<img width="150" height="150" src="#{url}" alt="#{filename}">|
-    content << %|</a>|
-    content
+  def my_avatar_icon(user)
+    link_to("click here to change your avatar", 
+            new_user_avatar_path(user), 
+            :onclick => "return popitup('#{new_user_avatar_path(user)}')") +
+    image_tag(user.avatar.nil? ? '/photo/photo_user_big.jpg' : user.avatar.public_filename(:medium), :height => 150, :width => 150)
   end
   
 end

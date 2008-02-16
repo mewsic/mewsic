@@ -164,12 +164,7 @@ class UsersControllerTest < Test::Unit::TestCase
     assert assigns(:gallery)
     assert_equal 2, assigns(:gallery).size
   end
-  
-  def test_show_should_have_avatar_assigned
-    call_and_test_show
-    assert assigns(:avatar)
-  end
-  
+    
   protected
     def create_user(options = {})
       post :create, :user => { :login => 'quire', :email => 'quire@example.com',

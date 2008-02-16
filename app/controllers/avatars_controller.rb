@@ -4,20 +4,20 @@ class AvatarsController < ApplicationController
   before_filter :find_user
   before_filter :check_current_user
   
-  def index
+  def new
     @avatar = Avatar.new
-    @avatar = @user.avatar   if params[:coming_from] == 'create'
+    @avatar = @user.avatar if params[:coming_from] == 'create'
     render :layout => false
   end
   
   def create 
     if params[:avatar] && params[:avatar][:uploaded_data].respond_to?(:size) && params[:avatar][:uploaded_data].size > 0
       if @user.avatar.create(params[:avatar])
-        redirect_to :action => 'index', :user_id => params[:user_id], :coming_from => 'create'
+        redirect_to new_user_avatar_path(params[:user_id], :coming_fron => 'create')
       end
     else
       flash[:error] = 'Problems uploading your avatar.'
-      redirect_to user_avatars_path(@user)
+      redirect_to new_user_avatar_path(@user)
     end
   end
 

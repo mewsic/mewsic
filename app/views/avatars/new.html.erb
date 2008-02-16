@@ -7,7 +7,7 @@
 	<div>The new image has been loaded successfully</div>
 	<script language="javascript" type="text/javascript">
 	<!--
-	var content = '<%= my_avatar_icon.gsub(/[']/, '\\\\\'') %>';
+	var content = '<%= my_avatar_icon(@user).gsub(/[']/, '\\\\\'') %>';
 	opener.window.$('user-avatar').update(content);
 	self.close();
 	// -->
