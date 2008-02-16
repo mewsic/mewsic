@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(:version => 11) do
     t.string   "content_type"
     t.string   "filename"
     t.string   "string"
+    t.string   "thumbnail"
     t.integer  "height"
     t.integer  "width"
     t.integer  "parent_id"

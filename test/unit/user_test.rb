@@ -194,7 +194,7 @@ class UserTest < Test::Unit::TestCase
   end
   
   def test_find_prolific
-    top_ten_users = Song.count(:include => :user, :order => "count_all desc", :group => :user_id).map {|s| s.first}[0,10]
+    top_ten_users = Song.count(:include => :user, :order => "count_all desc", :group => :user_id, :conditions => 'users.activated_at is not null').map {|s| s.first}[0,10]
     prolific_users = User.find_prolific(:limit => 10)
     
     assert_equal top_ten_users.first, prolific_users.first.id
@@ -241,7 +241,22 @@ class UserTest < Test::Unit::TestCase
     assert_equal 2, users(:quentin).photos.size
   end
   
+  def test_find_coolest_should_not_return_inactive_users
+    check_finder_for_inactive(:find_coolest)
+  end
+  
+  def test_finders
+    [:find_coolest].each do |f|
+      check_finder_for_inactive(f)
+    end
+  end
+  
   protected
+    
+    def check_finder_for_inactive(finder)
+      results = User.send(finder, {}).select {|u| u.activated_at.nil? } 
+      assert (results.size == 0), results.inspect
+    end
   
     def create_user(options = {})
       User.create({ :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire', :terms_of_service => "1", :eula => "1" }.merge(options))

@@ -147,32 +147,32 @@ class User < ActiveRecord::Base
   
   # TODO: è solo uno stub fino a quando decidiamo le caratteristiche dei coolest.
   def self.find_coolest(options)
-    self.find(:all, options)
+    self.find(:all, options.merge({:conditions => "activated_at IS NOT NULL"}))
   end
   
   # TODO: stub sino a quando abbiamo i voti
   def self.find_best_myousicians(options)
-    self.find(:all, options)
+    self.find(:all, options.merge({:conditions => "activated_at IS NOT NULL"}))
   end
   
   def self.find_prolific(options = {})
-    qry = "SELECT users.*, songs.title, count(songs.id) AS songs_count FROM users LEFT JOIN songs ON users.id = songs.user_id GROUP BY users.id ORDER BY songs_count DESC"
+    qry = "SELECT users.*, songs.title, count(songs.id) AS songs_count FROM users LEFT JOIN songs ON users.id = songs.user_id WHERE users.activated_at IS NOT NULL GROUP BY users.id ORDER BY songs_count DESC"
     qry += " LIMIT #{options[:limit]}" if options.has_key?(:limit)
     User.find_by_sql(qry)
   end
   
   def self.find_friendliest(options)
     # FIXME: This should be fixed to it loads the associated objects in a single query.
-    self.find :all, options.merge({:order => 'friends_count DESC'})
+    self.find :all, options.merge({:order => 'friends_count DESC', :conditions => 'activated_at IS NOT NULL'})
   end
   
   # TODO: stub sino a quando abbiamo le band
   def self.find_most_banded(options)
-    self.find(:all, options)
+    self.find(:all, options.merge(:conditions => 'activated_at IS NOT NULL'))
   end
   
   def self.find_newest(options)
-    self.find(:all, options.merge({:order => 'created_at DESC'}))
+    self.find(:all, options.merge({:order => 'created_at DESC', :conditions => 'activated_at IS NOT NULL'}))
   end
   
   # ATTENZIONE: METODO MOLTO COSTOSO
