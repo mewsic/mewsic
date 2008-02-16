@@ -90,4 +90,5 @@ module ApplicationHelper
     content << %|</a>|
     content
   end
+  
 end

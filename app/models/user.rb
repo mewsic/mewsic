@@ -59,7 +59,7 @@ class User < ActiveRecord::Base
   has_many :songs
   has_many :answers
   has_many :replies
-  has_many :avatars
+  has_one :avatar
   has_many :photos
   
   acts_as_rated :rating_range => 0..5

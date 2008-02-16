@@ -246,7 +246,8 @@ class UserTest < Test::Unit::TestCase
   end
   
   def test_finders
-    [:find_coolest].each do |f|
+    finder_list = [:find_coolest, :find_best_myousicians, :find_prolific, :find_friendliest, :find_most_banded, :find_newest]
+    finder_list.each do |f|
       check_finder_for_inactive(f)
     end
   end

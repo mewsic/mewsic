@@ -35,7 +35,7 @@ class UsersController < ApplicationController
     @songs = Song.find_paginated_by_user(1, @user.id)
     @tracks = Track.find_paginated_by_user(1, @user.id)
     @gallery = @user.photos.find :all,  :order => "created_at DESC"
-    @avatar = @user.avatars.find :first, :order => "created_at DESC"
+    @avatar = @user.avatar
   rescue ActiveRecord::RecordNotFound
     redirect_to '/'
   end
