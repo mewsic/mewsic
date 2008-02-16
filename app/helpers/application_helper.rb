@@ -78,4 +78,16 @@ module ApplicationHelper
     content
   end
   
+  def my_avatar_icon
+    url = '/photo/photo_user_big.jpg'
+    filename = 'default avatar'
+    unless @avatar.nil?
+      url = @avatar.public_filename(:medium)   
+      filename = @avatar.filename
+    end
+    content =  %|<a href="#{user_avatars_path(@user)}" onclick="return popitup(\'#{user_avatars_path(@user)}\')">|
+    content << %|<img width="150" height="150" src="#{url}" alt="#{filename}">|
+    content << %|</a>|
+    content
+  end
 end

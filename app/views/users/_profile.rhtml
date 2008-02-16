@@ -8,12 +8,12 @@
 </div>
 
 <div class="user-profile clear-block">
-  <div class="user-photo">
-    <img src="/photo/photo_user_big.jpg" alt="" width="150" height="150" />
+  <div class="user-photo" id="user-avatar">
+    <%= my_avatar_icon %>
   </div>
   <div class="user-resume">
     <p class="star">
-      <img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" />
+       <%= stars(@user.rating_avg) %>
     </p>
     <div class="float-right align-right">
       <p class="blue-text">Gender</p>

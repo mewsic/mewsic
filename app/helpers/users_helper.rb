@@ -29,7 +29,7 @@ module UsersHelper
     unless @user.photos_url.blank?
       content << %|<a href="#{@user.photos_url}"><img class="float-left" alt="" src="/images/icone_link_photo.gif"/></a><p><a href="#{@user.photos_url}">Photo</a></p>|
     end
-    content
+    return content
   end
   
   def user_blog_link

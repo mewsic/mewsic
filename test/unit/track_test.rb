@@ -8,7 +8,7 @@ class TrackTest < ActiveSupport::TestCase
   end
   
   def test_association_with_parent
-    assert_equal Song.find_by_title("Radio Ga Ga"), Track.find(:all).last.parent_song
+    assert_equal songs(:radio_ga_ga), tracks(:voice_for_radio_ga_ga).parent_song
   end
   
   def test_should_act_as_rated

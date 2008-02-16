@@ -31,5 +31,21 @@ voice_for_radio_ga_ga:
   title: Voce
   parent_song: radio_ga_ga
   instrument: microphone
-    
-  
+guitar_for_closer:
+  title: Chitarra
+  parent_song: closer
+  instrument: guitar
+sax_for_closer:
+  title: Sassofono
+  parent_song: closer
+  instrument: sax
+drum_for_closer:
+  title: Batteria
+  parent_song: closer
+  instrument: drum
+<% 10.times do |i| %>
+voice_for_closer_<%= i + 4 %>:
+  title: Voice
+  parent_song: closer
+  instrument: microphone
+<% end %>

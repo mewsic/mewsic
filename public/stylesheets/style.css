@@ -1078,12 +1078,12 @@ h2.dj-label{
 .gallery .horizontal-scroll-box{
 	position:relative;
 	padding-top:10px;
-	height:60px;
+	height:80px;
 	overflow:hidden;
 }
 .gallery .horizontal-scroll{
 	width:340px;
-	height:65px;
+	height:80px;
 	overflow:hidden;
 }
 .gallery-photo-thumb{

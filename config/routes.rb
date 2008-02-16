@@ -5,6 +5,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users do |user|
     user.resources :friendships
     user.resources :photos
+    user.resources :avatars
   end
   map.resources :sessions
   map.resources :songs

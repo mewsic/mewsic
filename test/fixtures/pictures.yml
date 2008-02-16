@@ -40,4 +40,8 @@ first_photo_for_users_1:
   type: Photo
   filename: quentin_2.jpg
   content_type: images/jpeg
-  
+first_avatar_for_quentin:
+  user: quentin
+  type: Avatar
+  filename: quentin_2.jpg
+  content_type: images/jpeg

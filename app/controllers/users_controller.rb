@@ -34,6 +34,8 @@ class UsersController < ApplicationController
     # non uso :include => [{:songs => [:tracks, :genre]}] xkè non devo recuperare tutte le tracce
     @songs = Song.find_paginated_by_user(1, @user.id)
     @tracks = Track.find_paginated_by_user(1, @user.id)
+    @gallery = @user.photos.find :all,  :order => "created_at DESC"
+    @avatar = @user.avatars.find :first, :order => "created_at DESC"
   rescue ActiveRecord::RecordNotFound
     redirect_to '/'
   end

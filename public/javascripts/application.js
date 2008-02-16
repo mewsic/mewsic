@@ -60,5 +60,10 @@ document.observe('dom:loaded', function(event) {
 	if ( $('most-mbands-scroller') != null ) {
 		new PictureSlider('most-mbands-scroller');
 	}
-
 });
+
+function popitup(url) {
+	newwindow=window.open(url,'load_image', 'height=100, width=300');
+	if (window.focus) {newwindow.focus()}
+	return false;
+}

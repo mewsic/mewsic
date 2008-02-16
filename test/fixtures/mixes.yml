@@ -26,5 +26,17 @@ four:
 five:
   song: radio_ga_ga
   track: voice_for_radio_ga_ga
-  
-  
+mixes_1:
+  song: closer
+  track: guitar_for_closer
+mixes_2:
+  song: closer
+  track: sax_for_closer
+mixes_3:
+  song: closer
+  track: drum_for_closer
+<% 10.times do |i| %>
+mixes_<%= i + 4 %>:
+  song: closer
+  track: voice_for_closer_<%= i + 4 %>
+<% end %>

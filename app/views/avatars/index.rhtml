@@ -1,0 +1,15 @@
+<% form_for :avatar, :url => {:action => :create}, :html => {:multipart => true} do |f| %>
+  <%= f.file_field :uploaded_data  %><br />
+  <%= submit_tag 'Upload >>' %>
+<% end %>
+
+<% if (params[:coming_from] == 'create') -%>
+	<div>The new image has been loaded successfully</div>
+	<script language="javascript" type="text/javascript">
+	<!--
+	var content = '<%= my_avatar_icon.gsub(/[']/, '\\\\\'') %>';
+	opener.window.$('user-avatar').update(content);
+	self.close();
+	// -->
+	</script>
+<% end -%>

@@ -84,7 +84,7 @@ class UsersControllerTest < Test::Unit::TestCase
     assert_response :success
     assert assigns(:user)
   end
-  
+
   def test_should_activate_the_first_time
     assert_nil User.find(users(:aaron).id).activated_at
     get :activate, :activation_code => users(:aaron).activation_code
@@ -141,10 +141,43 @@ class UsersControllerTest < Test::Unit::TestCase
     # post :update, :id => users(:aaron).id, :user => { :non_existing_field => 'Test' }
     # assert_response :success
   end
+
+  def test_show_should_have_user_assigned
+    call_and_test_show
+    assert assigns(:user)
+  end
+  
+  def test_show_should_have_songs_assigned
+    call_and_test_show
+    assert assigns(:songs)
+    assert_equal 3, assigns(:songs).size
+  end
+  
+  def test_show_should_have_tracks_assigned
+    call_and_test_show
+    assert assigns(:songs)
+    assert_equal 7, assigns(:tracks).size
+  end
+
+  def test_show_should_have_tracks_assigned
+    call_and_test_show
+    assert assigns(:gallery)
+    assert_equal 2, assigns(:gallery).size
+  end
+  
+  def test_show_should_have_avatar_assigned
+    call_and_test_show
+    assert assigns(:avatar)
+  end
   
   protected
     def create_user(options = {})
       post :create, :user => { :login => 'quire', :email => 'quire@example.com',
         :password => 'quire', :password_confirmation => 'quire', :terms_of_service => '1', :eula => '1' }.merge(options)
+    end
+    
+    def call_and_test_show
+      get :show, :id => users(:quentin).id
+      assert_response :success
     end
 end

@@ -4,7 +4,7 @@ class CreatePictures < ActiveRecord::Migration
       t.belongs_to :user
       t.string :type
       t.integer :size
-      t.string :content_type, :filename, :string
+      t.string :content_type, :filename, :string, :thumbnail
       t.integer :height, :width, :parent_id
       
       t.timestamps

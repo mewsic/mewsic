@@ -54,6 +54,24 @@ space_cowboy:
   genre: acid_jazz
   listened_times: 1001
   created_at: <%= 1.week.from_now.to_s(:db) %>
+autumn_leaves:
+  title: Autumn Leaves
+  user: quentin
+  original_author: Miles Davis
+  genre: blues
+  listened_times: 290
+closer:
+  title: Closer
+  user: quentin
+  original_author: Travis
+  genre: blues
+  listened_times: 390
+white_christmas:
+  title: White Cristmas
+  user: quentin
+  original_author: Louis Armstrong
+  genre: blues
+  listened_times: 420
 <% 1000.times do |i| %>
 song_<%= i + 4 %>:
   title: <%= shuffle(%w( Love Honesty Roma Sex Radio Let It Be Radio Want I Live Forever My Way Bohemian Rhapsody )) %>
