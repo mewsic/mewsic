@@ -85,4 +85,7 @@ module ApplicationHelper
     image_tag(user.avatars.empty? ? '/photo/photo_user_big.jpg' : user.avatars.last.public_filename(:medium), :height => 150, :width => 150)
   end
   
+  def avatar_image(user, size)
+    image_tag(user.avatar.nil? ? "/photo/photo_user_#{size}.jpg" : user.avatar.public_filename(size))
+  end
 end

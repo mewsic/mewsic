@@ -1,9 +1,5 @@
 <div class="elements clear-block">
-  <p><%= answer.user.avatar.public_filename%></p>	
-  <p><%= answer.user.avatar.public_filename(:icon)%></p>	
-  <p><%= answer.user.avatar.public_filename(:small)%></p>	
-  <p><%= answer.user.avatar.public_filename(:medium)%></p>	  
-  <p class="thumb"><a href="<%= user_path(answer.user) %>"><img src="<%= answer.user.avatar(:icon) %>" alt="<%= answer.user.login %>" width="29" height="29" /></a></p>
+  <p class="thumb"><a href="<%= user_path(answer.user) %>"><%= avatar_image(answer.user, :icon) %></a></p>
   <div class="text-elements">
 	  <p class="name"><%= link_to answer.user.login, user_path(answer.user) %></p>
 	  <p class="abstract"><%= answer.body %></p>
