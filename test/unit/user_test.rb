@@ -255,7 +255,7 @@ class UserTest < Test::Unit::TestCase
     
     def check_finder_for_inactive(finder)
       results = User.send(finder, {}).select {|u| u.activated_at.nil? } 
-      assert (results.size == 0), results.inspect
+      assert (results.size == 0), finder
     end
   
     def create_user(options = {})
