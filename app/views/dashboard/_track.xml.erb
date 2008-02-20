@@ -1,0 +1,13 @@
+<track>
+  <user><%= track.parent_song.user.login %></user>       
+  <author><%= track.parent_song.original_author %></author>     
+  <title><%= track.title %></title>     
+  <instrument><%= track.instrument %></instrument>  
+  <genre><%= track.parent_song.genre.name %></genre>     
+  <bpm><%= track.bpm %></bpm>        
+  <tone><%= track.parent_song.tone %></tone>       
+  <description><%= track.description %></description>
+  <rating><%= track.rating_avg %></rating>     
+  <id><%= track.id %></id>         
+  <filename><%= track.filename %></filename>
+</track>

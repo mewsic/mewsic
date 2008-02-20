@@ -13,8 +13,8 @@ class GenresControllerTest < ActionController::TestCase
 
     assert assigns(:genre)
     
-    assert assigns(:most_listned_songs)
-    assert_equal 3, assigns(:most_listned_songs).size
+    assert assigns(:most_listened_songs)
+    assert_equal 3, assigns(:most_listened_songs).size
     
     assert assigns(:prolific_users)
     assert_equal 3, assigns(:prolific_users).size

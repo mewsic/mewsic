@@ -5,4 +5,8 @@ class DashboardController < ApplicationController
     @answers = Answer.find :all, :order => 'answers.created_at DESC', :limit => 2, :include => [:replies, {:user => :avatars}], :conditions => ["users.activated_at IS NOT NULL"]
   end
   
+  def mylist
+    # TODO: qui dobbiamo prendere le song nella mylist, 100 a caso.
+    @songs = Song.find :all, :limit => 100
+  end
 end

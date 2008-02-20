@@ -201,10 +201,9 @@ class UserTest < Test::Unit::TestCase
     assert_equal top_ten_users.last, prolific_users.last.id
   end
   
-  def test_find_friendliest
-    # WARNING: This test heavily depends on the fixtures. Change the fixtures and it might not run
+  def test_find_friendliest_should_return_the_friendliest_person
     User.find(:all).each {|u| u.update_friends_count}
-    assert_equal users(:quentin), User.find_friendliest(:limit => 1).first
+    assert_equal Friendship.count(:conditions => 'accepted_at is not null', :group => :user_id).first.last, User.find_friendliest(:limit => 1).first.friends.size
   end
   
   def test_act_as_rated_should_be_rated

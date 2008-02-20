@@ -1,13 +1,18 @@
 # == Schema Information
-# Schema version: 10
+# Schema version: 11
 #
 # Table name: songs
 #
 #  id              :integer(11)   not null, primary key
 #  title           :string(255)   
 #  original_author :string(255)   
+#  description     :string(255)   
+#  tone            :string(255)   
+#  filename        :string(255)   
 #  user_id         :integer(11)   
 #  genre_id        :integer(11)   
+#  listened_times  :integer(11)   
+#  bpm             :integer(11)   
 #  created_at      :datetime      
 #  updated_at      :datetime      
 #  rating_count    :integer(11)   
@@ -50,5 +55,10 @@ class Song < ActiveRecord::Base
              :order => "songs.title ASC",
              :include => [:user, :tracks], 
              :page => page
+  end
+  
+  # STUB: sino all'implementazione degli strumenti
+  def instruments
+    ['sassofono', 'batteria', 'anoleso']
   end
 end

@@ -81,9 +81,13 @@ ActiveRecord::Schema.define(:version => 11) do
   create_table "songs", :force => true do |t|
     t.string   "title"
     t.string   "original_author"
+    t.string   "description"
+    t.string   "tone"
+    t.string   "filename"
     t.integer  "user_id"
     t.integer  "genre_id"
     t.integer  "listened_times"
+    t.integer  "bpm"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "rating_count"
@@ -93,8 +97,11 @@ ActiveRecord::Schema.define(:version => 11) do
 
   create_table "tracks", :force => true do |t|
     t.string   "title"
+    t.string   "filename"
+    t.string   "description"
     t.integer  "song_id"
     t.integer  "instrument_id"
+    t.integer  "bpm"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "rating_count"

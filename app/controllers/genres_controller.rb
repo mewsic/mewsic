@@ -6,7 +6,7 @@ class GenresController < ApplicationController
   
   def show
     @genre = Genre.find(params[:id])
-    @most_listned_songs = @genre.find_most_listened :limit => 3, :include => :user
+    @most_listened_songs = @genre.find_most_listened :limit => 3, :include => :user
     @prolific_users = @genre.find_most_prolific_users :limit => 3
     @songs = Song.find_paginated_by_genre(1, @genre.id)
   end

@@ -1,17 +1,20 @@
 # == Schema Information
-# Schema version: 10
+# Schema version: 11
 #
 # Table name: tracks
 #
-#  id           :integer(11)   not null, primary key
-#  title        :string(255)   
-#  instrument   :string(255)   
-#  song_id      :integer(11)   
-#  created_at   :datetime      
-#  updated_at   :datetime      
-#  rating_count :integer(11)   
-#  rating_total :decimal(10, 2 
-#  rating_avg   :decimal(10, 2 
+#  id            :integer(11)   not null, primary key
+#  title         :string(255)   
+#  filename      :string(255)   
+#  description   :string(255)   
+#  song_id       :integer(11)   
+#  instrument_id :integer(11)   
+#  bpm           :integer(11)   
+#  created_at    :datetime      
+#  updated_at    :datetime      
+#  rating_count  :integer(11)   
+#  rating_total  :decimal(10, 2 
+#  rating_avg    :decimal(10, 2 
 #
 
 class Track < ActiveRecord::Base

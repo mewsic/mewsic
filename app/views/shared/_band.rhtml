@@ -1,6 +1,6 @@
 <div class="elements clear-block"> 
   <p class="thumb">
-    <a href="<%= user_path band %>"><img src="/avatars/photo_42X42.jpg" alt="Band" width="42" height="42" /></a>
+    <a href="<%= user_path band %>"><%= avatar_image(band, :small) %></a>
   </p>
   <!--
     FIXME this link should point to band_path as soon as we implement it

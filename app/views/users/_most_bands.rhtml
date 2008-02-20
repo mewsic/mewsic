@@ -2,7 +2,7 @@
   <div class="elements clear-block">
   	<p class="text-blue float-right"><strong>TODO: numero di M-band</strong></p>
 		<p class="thumb">
-		  <a href="<%= user_path(most_bands) %>"><img src="/avatars/photo_42X42.jpg" alt="Band" width="42" height="42" /></a>
+		  <a href="<%= user_path(most_bands) %>"><%= avatar_image(most_bands, :small) %></a>
 		</p>
     <p class="name"><a href="<%= user_path(most_bands) %>"><%= h most_bands.login %></a></p>
 		<p class="country"><%= h most_bands.compiled_location %></p>
@@ -13,7 +13,7 @@
 	  </p>
 	  <div class="horizontal-scroll">
 	    <div style="width: <%=  12 * 35 %>px; left: 0">
-	      <%= render :partial => 'friend_icon', :collection => [1,2,3,4,5,6,7,8,9,10,11,12] %>
+	      <%= render :partial => 'friend_icon', :collection => User.find(:all, :conditions => 'activated_at IS NOT NULL', :limit => 10) %>
 	    </div>
 		</div>
 	  <p class="button">

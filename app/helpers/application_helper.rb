@@ -88,6 +88,6 @@ module ApplicationHelper
   end
   
   def avatar_image(user, size)
-    image_tag(user.avatar.nil? ? "/photo/photo_user_#{size}.jpg" : user.avatar.public_filename(size))
+    image_tag(user.avatar.nil? ? "/avatars/photo_user_#{size}.jpg" : user.avatar.public_filename(size))
   end
 end

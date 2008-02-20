@@ -6,13 +6,13 @@ class UsersController < ApplicationController
   protect_from_forgery :except => :update
   
   def index
-    # FIXME: bisogna recuperare solo gli utenti attivati
     @coolest = User.find_coolest :limit => 9
     @best_myousicians = User.find_best_myousicians :limit  => 3
     @prolific = User.find_prolific :limit => 3
     @friendliest = User.find_friendliest :limit => 1
     @most_bands = User.find_most_banded :limit => 1
     @newest = User.find_newest :limit => 3
+    @most_instruments = User.find :all, :limit => 1
   end
 
   # render new.rhtml
