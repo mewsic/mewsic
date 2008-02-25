@@ -30,20 +30,25 @@
 first_photo_for_quentin:
   user: quentin
   type: Photo
-  filename: quentin_1.jpg
+  filename: files/photo_user_test.jpg
   content_type: images/jpeg
 second_photo_for_quentin:
   user: quentin
   type: Photo
-  filename: quentin_2.jpg
+  filename: files/photo_user_test.jpg
   content_type: images/jpeg
 first_photo_for_users_1:
   user: user_1
   type: Photo
-  filename: quentin_2.jpg
+  filename: files/photo_user_test.jpg
   content_type: images/jpeg
 first_avatar_for_quentin:
   user: quentin
   type: Avatar
-  filename: quentin_2.jpg
+  filename: files/photo_user_test.jpg
+  content_type: images/jpeg
+first_avatar_for_aaron:
+  user: aaron
+  type: Avatar
+  filename: files/photo_user_test.jpg
   content_type: images/jpeg

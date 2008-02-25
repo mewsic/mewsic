@@ -13,7 +13,7 @@
 		</div>
 		
 		<div class="simple-list clear-block">
-			<h1>BRANI <%= h @genre.name.upcase %> PIU' ASCOLTATI</h1>
+			<h1>MOST LISTENED <%= h @genre.name.upcase %> SONGS</h1>
 			<div class="top-box clear-block">
 				<div class="bottom-box clear-block">
 			  		<%= render :partial => 'most_listened_song', :collection => @most_listened_songs %>
@@ -22,7 +22,7 @@
 		</div>	
 		
 		<div class="simple-list clear-block">
-			<h1>CON PIU' BRANI <%= h @genre.name.upcase %> </h1>
+			<h1>HAVING MORE <%= h @genre.name.upcase %> </h1>
 			<div class="top-box clear-block">
 				<div class="bottom-box clear-block">
 			  		<%= render :partial => 'prolific_user', :collection => @prolific_users %>
@@ -45,7 +45,7 @@
 					  <table border="0" cellpadding="0" cellspacing="0" width="95%">
 					  <tbody id="songs">
 					  	  <%= render :partial => 'songs'%>
-            </tbody>
+    			      </tbody>
 					  </table>
 					</div>
 			  </div>
@@ -60,3 +60,4 @@
 
 
 
+	

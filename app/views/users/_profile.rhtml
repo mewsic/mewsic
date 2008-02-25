@@ -9,7 +9,7 @@
 
 <div class="user-profile clear-block">
   <div class="user-photo" id="user-avatar">
-    <%= my_avatar_icon(@user) %>
+    <%= my_avatar_image(@user, :big) %>
   </div>
   <div class="user-resume">
     <p class="star">
@@ -21,13 +21,13 @@
         <%= gender_icon %>
       </p>
     </div>
-    <p class="blue-text">User name</p>
+    <p class="blue-text">User name </p>
     <h1 class="black-text" id="user_id"><%= @user.login %></h1>
     <div class="grey-divisor"><hr /></div>
-    <p class="blue-text">Nazione <%= user_edit_button(:country) %></p>
+    <p class="blue-text">Country <%= user_edit_button(:country) %></p>
     <h2 class="black-text" id="user_country"><%= @user.country %></h2>
     <div class="grey-divisor"><hr /></div>
-    <p class="blue-text">Città <%= user_edit_button(:city) %></p>
+    <p class="blue-text">City <%= user_edit_button(:city) %></p>
     <h2 class="black-text" id="user_city"><%= @user.city %></h2>
   </div>
   
@@ -66,7 +66,7 @@
     <p class="grey-text" id="user_motto"><%= @user.motto %></p>
   </div>
   <div class="user-gusti">
-    <p class="blue-text"><strong>Gusti musicali</strong> <%= user_edit_button(:tastes) %></p>
+    <p class="blue-text"><strong>Musical tastes</strong> <%= user_edit_button(:tastes) %></p>
     <p class="grey-text" id="user_tastes"><%= @user.tastes %></p>
   </div>
 </div>

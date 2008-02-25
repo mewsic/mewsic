@@ -78,12 +78,12 @@ module ApplicationHelper
     content
   end
   
-  def my_avatar_icon(user)
+  def my_avatar_image(user, size)
     link_to("click to change", 
             new_user_avatar_path(user), 
             :onclick => "return popitup('#{new_user_avatar_path(user)}')") + 
             "<br />" + 
-            avatar_image(user, :medium)
+            avatar_image(user, :big)
 
   end
   
