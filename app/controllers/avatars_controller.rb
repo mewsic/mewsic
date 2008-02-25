@@ -6,25 +6,19 @@ class AvatarsController < ApplicationController
   
   def new
     @avatar = Avatar.new
-    @avatar = @user.avatar if params[:coming_from] == 'create'
+    @user = User.find(params[:user_id])
     render :layout => false
   end
   
-  def create 
+  def create
     if params[:avatar] && params[:avatar][:uploaded_data].respond_to?(:size) && params[:avatar][:uploaded_data].size > 0
       if @user.avatars << Avatar.create(params[:avatar])
-        redirect_to new_user_avatar_path(params[:user_id], :coming_fron => 'create')
+        redirect_to new_user_avatar_path(params[:user_id], :coming_from => 'create')
       end
     else
       flash[:error] = 'Problems uploading your avatar.'
       redirect_to new_user_avatar_path(@user)
     end
-  end
-
-  def destroy
-    @user.avatars.find(params[:id]).destroy and redirect_to(user_avatars_path(@user))
-  rescue ActiveRecord::RecordNotFound
-    redirect_to '/'
   end
 
 private

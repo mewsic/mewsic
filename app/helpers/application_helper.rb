@@ -4,7 +4,8 @@ module ApplicationHelper
   # Use to build a star rating
   def stars(n, color = 'green')
     result = ""
-    n.to_i.times { result << "<img src=\"/images/star_#{color}.png\" alt=\"\" width=\"10\" height=\"9\" />"}
+    n.to_f.round.times { result << "<img src=\"/images/star_#{color}.png\" alt=\"\" width=\"10\" height=\"9\" />"}
+    (5 - n.to_f.round).times { result << "<img src=\"/images/star_gray.png\" alt=\"\" width=\"10\" height=\"9\" />"}
     result
   end
   
@@ -79,15 +80,12 @@ module ApplicationHelper
   end
   
   def my_avatar_image(user, size)
-    link_to("click to change", 
-            new_user_avatar_path(user), 
+    link_to("click to change", new_user_avatar_path(user), 
             :onclick => "return popitup('#{new_user_avatar_path(user)}')") + 
-            "<br />" + 
-            avatar_image(user, :big)
-
+            "<br />" + avatar_image(user, :big)
   end
   
   def avatar_image(user, size)
-    image_tag(user.avatar.nil? ? "/avatars/photo_user_#{size}.jpg" : user.avatar.public_filename(size))
+    image_tag(user.avatar.nil? ? "/images/avatars/photo_user_#{size}.jpg" : user.avatar.public_filename(size))
   end
 end
