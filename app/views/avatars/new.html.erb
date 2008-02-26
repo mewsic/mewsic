@@ -6,8 +6,10 @@
 <% if (params[:coming_from] == 'create') -%>
 	<div>The new image has been loaded successfully</div>
 	<script language="javascript" type="text/javascript">
-	<!-- var content = '<%= my_avatar_image(@user, :big).gsub(/[']/, '\\\\\'') %>';
-	     opener.window.$('user-avatar').update(content);
-	     self.close(); // -->
+	<!-- 
+	  var content = '<%= my_avatar_image(@user, :big).gsub(/[']/, '\\\\\'') %>';
+	  opener.window.$('user-avatar').update(content);
+	  self.close(); 
+	// -->
 	</script>
 <% end -%>

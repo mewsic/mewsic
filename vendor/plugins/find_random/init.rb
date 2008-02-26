@@ -16,8 +16,12 @@ ActiveRecord::Base.class_eval do
   def self.find_random(options)
     raise "Cannot use :order in find :random" if options.has_key? :order
 
+    conditions = options.delete(:conditions)
     limit = options.delete(:limit)
-    qry = "select id from #{table_name} order by "
+    
+    qry = "select id from #{table_name}"
+    qry += " where #{conditions}" if conditions
+    qry += " order by "
     
     if connection.class.to_s == "ActiveRecord::ConnectionAdapters::SQLite3Adapter"
       qry += 'random()'

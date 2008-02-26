@@ -6,7 +6,9 @@
 <% if (params[:coming_from] == 'create') -%>
 	<div>The new image has been loaded successfully</div>
 	<script language="javascript" type="text/javascript">
-	<!-- var new_photo = '<%= render :partial => "users/photo", :locals => {:photo => @last_photo} %>';
-	     opener.window.$('gallery-photo-list').childElements()[0].insert({before: new_photo}); // -->
+	<!-- 
+	  var new_photo = '<%= render :partial => "users/photo", :locals => {:photo => @last_photo} %>';
+	  opener.window.$('gallery-photo-list').childElements()[0].insert({before: new_photo}); 
+	// -->
 	</script>
 <% end -%>

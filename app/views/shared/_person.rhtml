@@ -1,6 +1,6 @@
 <div class="elements clear-block"> 
   <p class="star">
-    <%= stars(5, color) %>
+    <%= stars(person.rating_avg, color) %>
   </p>
   <p class="thumb">
     <%= link_to avatar_image(person, :medium), user_path(person) %>

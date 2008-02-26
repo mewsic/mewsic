@@ -28,27 +28,20 @@
 
 
 first_photo_for_quentin:
+  id: 688631946
   user: quentin
   type: Photo
-  filename: files/photo_user_test.jpg
+  filename: image_msn.jpg
   content_type: images/jpeg
 second_photo_for_quentin:
+  id: 688631952
   user: quentin
   type: Photo
-  filename: files/photo_user_test.jpg
-  content_type: images/jpeg
+  filename: morto.png
+  content_type: images/png
 first_photo_for_users_1:
+  id: 688631949
   user: user_1
   type: Photo
-  filename: files/photo_user_test.jpg
-  content_type: images/jpeg
-first_avatar_for_quentin:
-  user: quentin
-  type: Avatar
-  filename: files/photo_user_test.jpg
-  content_type: images/jpeg
-first_avatar_for_aaron:
-  user: aaron
-  type: Avatar
-  filename: files/photo_user_test.jpg
+  filename: zucca.jpg
   content_type: images/jpeg

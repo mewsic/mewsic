@@ -8,7 +8,7 @@
 		      <div class="horizontal-scroll">
     				<div style="width: <%=  @user.friends.size * 38 %>px; left: 0;">
               <% @user.pending_friends.each do |friend| -%>
-                <%= link_to(image_tag('/photo/photo_30X30.jpg'), friend) %>
+                <%= link_to(avatar_image(friend, :icon), friend) %>
               <% end -%>
             </div>
           </div>
