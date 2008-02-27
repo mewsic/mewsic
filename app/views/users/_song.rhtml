@@ -3,9 +3,10 @@
     <div class="tracks" style="display: none;">
       <div class="mlab_song_track">
         <ul class="info">
-          <li class="id"><%= track.id %></li>
-          <li class="author_login"><%= track.parent_song.user.login %></li>
+          <li class="id"><%= track.id %></li>          
           <li class="title"><%= track.title %></li>
+          <li class="author_login"><%= track.parent_song.user.login %></li>
+          <li class="author_id"><%= track.parent_song.user.id %></li>
         </ul>
       </div>
     </div>

@@ -41,6 +41,7 @@ var MlabTrack = Class.create({
   setup: function() {    
     this.id           = this.element.down('ul.info li.id').innerHTML;
     this.title        = this.element.down('ul.info li.title').innerHTML;
+    this.author_id    = this.element.down('ul.info li.author_id').innerHTML;    
     this.author_login = this.element.down('ul.info li.author_login').innerHTML;    
   },
     
@@ -64,7 +65,7 @@ var MlabSlider = Class.create(PictureSlider, {
   
   template: '<div id="mlab_element_#{id}" class="elements #{even_odd} clear-block" style="height: 50px;">' +
   	        '  <div class="float-left">' +
-            '    <p class="name"><a href="#">#{author_login}</a></p>' +
+            '    <p class="name"><a href="/users/#{author_id}">#{author_login}</a></p>' +
             '    <p class="abstract">#{title}</p>' +
           	'  </div>' +
           	'  <div class="float-left align-right">' +
