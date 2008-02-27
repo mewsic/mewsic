@@ -1,11 +1,9 @@
 <div class="elements clear-block">
 	<p class="thumb">
-	  <a href="<%= user_path(person_short) %>">
-	    <%= avatar_image(person_short, :small) %>
-	  </a>
+	  <%= link_to avatar_image(person_short, :small), person_short %>
 	</p>
 	<p class="name">
-	  <a href="<%= user_path(person_short) %>"><%= h person_short.login %></a>
+	  <%= link_to person_short.login, person_short %>
 	</p>
 	<p class="country">
 	  <%= h person_short.compiled_location %>

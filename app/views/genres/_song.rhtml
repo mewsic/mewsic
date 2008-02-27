@@ -1,15 +1,17 @@
 <tr class="<%= %w(even odd)[song_counter % 2] %>">	    	
 	<td>
   		<p class="float-left">
-  			<a href="<%= user_path song.user %>">
-  			  <%= avatar_image song.user, :icon %>
-			  </a>
-			<span class="tracks-number"><span><%= song.tracks.size %></span></span>
+  			<%= link_to (avatar_image song.user, :icon), song.user %>
+			<span class="tracks-number">
+			  	<span><%= song.tracks.size %></span>
+			</span>
 		</p>
       		<p class="name grey-text">
-      			<a href="<%= user_path song.user %>"><%= h song.user.login %></a>
+      			<%= link_to song.user.login, song.user %>
 			</p>
-    	<p class="title"><a href="<%= song_path song %>"><%= h truncate(song.title, 38) %></a></p>
+    	<p class="title">
+    		<%= link_to truncate(song.title, 38), song %>
+		</p>
 	</td>
   	<td class="star">
   		<p><%= stars(song.rating_avg) %></p>

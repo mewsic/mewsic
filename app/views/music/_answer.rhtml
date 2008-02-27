@@ -1,10 +1,9 @@
 <div class="elements clear-block">
 	<p class="thumb">
-	  <a href="<%= user_path answer.user %>">
-	    <%= avatar_image answer.user, :icon %>
-	  </a>
+	  <%= link_to (avatar_image answer.user, :icon), answer.user %>
 	</p>
-	<p class="name align-right"><a href="<%= user_path answer.user %>"><%= h answer.user.login %></a></p>
+	<p class="name align-right">
+		<%= link_to answer.user.login, answer.user %></a></p>
 	<p class="abstract"><%= h truncate(answer.body, 150) %></p>
-	<p class="abstract align-right"><%= h pluralize(answer.replies.size, 'reply')%></p>
+	<p class="abstract align-right"><%= pluralize(answer.replies.size, 'reply')%></p>
 </div>

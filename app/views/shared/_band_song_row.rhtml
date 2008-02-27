@@ -1,7 +1,10 @@
 <tr class="<%= band_song_row_counter.even? ? "even" : "odd" %>">
-  <td>Pinco Pallino, <em>titolo titolo titolo</em></td>
+  <td>
+  	<%=h band_song_row.original_author %> 
+	<em><%= link_to truncate(band_song_row.title, 33), band_song_row %></em>
+  </td>
   <td class="star">
-    <%= stars(5) %>
+    <%= stars(band_song_row.rating_avg) %>
   </td>
   <td class="button">
     <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> 

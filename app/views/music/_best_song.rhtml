@@ -4,12 +4,10 @@
 			<div class="green-bg">
 				<span class="tracks-number"><span><%= best_song.tracks.size %></span></span> 
 				<p class="thumb">
-				  <a href="<%= user_path best_song.user %>">
-				    <%= avatar_image(best_song.user, :icon) %>
-				  </a>
+				  <%= link_to avatar_image(best_song.user, :icon), best_song.user %>
 				</p>
 				<p class="name align-right">
-				  <a href="<%= user_path best_song.user %>"><%= h best_song.user.login %></a>
+				  <%= link_to best_song.user.login, best_song.user %></a>
 				</p>
 			</div>
   		<p class="star"><%= stars(best_song.rating_avg) %></p>
@@ -18,7 +16,7 @@
   		  <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a>
   		  <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a>
   		</p>
-  		<p><%= h best_song.original_author %></p>
+  		<p><%=h best_song.original_author %></p>
 	  </div>
 	</div>
 </div>

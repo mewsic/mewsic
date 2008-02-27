@@ -15,12 +15,13 @@ ActiveRecord::Base.class_eval do
   protected
   def self.find_random(options)
     raise "Cannot use :order in find :random" if options.has_key? :order
+    exist = self.columns.find{|column| column.name == 'activated_at'}
 
     conditions = options.delete(:conditions)
     limit = options.delete(:limit)
     
     qry = "select id from #{table_name}"
-    qry += " where #{conditions}" if conditions
+    qry += " where #{conditions}"   if (exist and conditions)
     qry += " order by "
     
     if connection.class.to_s == "ActiveRecord::ConnectionAdapters::SQLite3Adapter"

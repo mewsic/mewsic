@@ -6,7 +6,7 @@
 	 	  	  <% genre.songs.each_with_index do |song, index| -%>
 			  	<% if (index < 3) -%>
 			  	<tr class="<%= %w[even odd][index % 2] %>">
-					<td><%= h song.user.login %>,<em> <%= link_to(song.title, song_path(song)) %></em></td>
+					<td><%= h song.user.login %>, <em><%= link_to(song.title, song_path(song)) %></em></td>
 					<td class="star"><%= stars(song.rating_avg) %></td>
 					<td class="button"><a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></td>
 			  	</tr>

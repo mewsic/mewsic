@@ -1,25 +1,31 @@
 <div class="bottom-box clear-block">
-  <div class="elements clear-block">
-		<p class="text-blue float-right"><strong><%= most_friends.friends_count %> friends</strong></p>
-	  <p class="thumb">
-	    <a href="<%= user_path most_friends %>"><%= avatar_image(most_friends, :small) %></a>
-	  </p>
-	  <p class="name"><a href="<%= user_path most_friends %>"><%= h most_friends.login %></a></p>
-	  <p class="country"><%= h most_friends.compiled_location %></p>
-  </div>
+  	<div class="elements clear-block">
+		<p class="text-blue float-right">
+			<strong><%= pluralize most_friends.friends_count, 'friend' %></strong>
+		</p>
+	  	<p class="thumb">
+	    	<%= link_to avatar_image(most_friends, :small), most_friends %></a>
+	  	</p>
+	  	<p class="name">
+	  		<%= link_to most_friends.login ,most_friends %>
+		</p>
+	  	<p class="country">
+	  		<%= h most_friends.compiled_location %>
+		</p>
+  	</div>
   
-  <div class="horizontal-scroll-box" id="most-friends-scroller">
-    <p class="button">
-      <a href="#" onclick="return false" class="trigger left"><img src="/images/arrow_simple_left.png" alt="" width="7" height="9" /></a>
-    </p>
-	  <div class="horizontal-scroll">
-	    <div style="width: <%=  most_friends.friends_count * 35 %>px; left: 0">
-	      <%= render :partial => 'friend_icon', :collection => most_friends.friends %>
-	    </div>
-	  </div>
+  	<div class="horizontal-scroll-box" id="most-friends-scroller">
+  		<p class="button">
+      		<a href="#" onclick="return false" class="trigger left"><img src="/images/arrow_simple_left.png" alt="" width="7" height="9" /></a>
+    	</p>
+	  	<div class="horizontal-scroll">
+	    	<div style="width: <%=  most_friends.friends_count * 35 %>px; left: 0">
+	      		<%= render :partial => 'friend_icon', :collection => most_friends.friends %>
+	    	</div>
+	  	</div>
     
-    <p class="button">
-      <a href="#" onclick="return false" class="trigger right"><img src="/images/arrow_simple_right.png" alt="" width="7" height="9" /></a>
-    </p>
-  </div>				  	
+    	<p class="button">
+      		<a href="#" onclick="return false" class="trigger right"><img src="/images/arrow_simple_right.png" alt="" width="7" height="9" /></a>
+    	</p>
+  	</div>				  	
 </div>

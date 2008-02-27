@@ -13,19 +13,21 @@
         <span class="tracks-number"><span><%= song.tracks.size %></span></span>
         <div class="float-left">
           <% song.tracks.each do |track| -%>
-            <img src="/images/<%= track.instrument.icon%>" alt="<%= track.instrument.description%>" width="29" height="29" />
+            <% image_tag track.instrument.icon, :alt => 'track.instrument.description' %>
           <% end -%>
         </div>
       </td>
       <td align="right">
         <p class="star"><%= stars(song.rating_avg) %></p>
-        <p><strong><%= link_to song.genre.name, genre_path(song.genre) %></strong></p>
+        <p><strong><%= link_to song.genre.name, song.genre %></strong></p>
       </td>
     </tr>
     <tr class="odd">
       <td>
         <p><em><%= song.user.login %></em></p>
-        <p class="title"><a href="#"><%= song.title %></a></p>
+        <p class="title">
+        	<%= link_to song.title, song %></a>
+		</p>
       </td>
       <td align="right" style="vertical-align:bottom">
         <p>

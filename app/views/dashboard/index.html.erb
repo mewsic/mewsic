@@ -27,7 +27,7 @@
       <h1>BANDS &amp; DEEJAYS</h1>
       <div class="top-box clear-block">
   	    <div class="bottom-box clear-block">
-  	      <%= render :partial => 'shared/band', :collection => @people[0,2]  %>
+  	      <%= render :partial => 'shared/band', :collection => @songs[0,2] %>
   	    </div>
       </div>	
     </div>
@@ -37,7 +37,7 @@
       <h1><%= link_to "MUSIC", music_path %></h1>
       <div class="top-box clear-block">
   	    <div class="bottom-box clear-block">
-          <%= render :partial => 'music', :collection => [1,2,3] %>
+          <%= render :partial => 'music', :collection => @songs[0,3] %>
   	    </div>
       </div>
     </div>

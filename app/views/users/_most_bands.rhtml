@@ -1,23 +1,29 @@
 <div class="bottom-box clear-block">
-  <div class="elements clear-block">
-  	<p class="text-blue float-right"><strong>TODO: numero di M-band</strong></p>
-		<p class="thumb">
-		  <a href="<%= user_path(most_bands) %>"><%= avatar_image(most_bands, :small) %></a>
+  	<div class="elements clear-block">
+  		<p class="text-blue float-right">
+  			<strong>TODO: numero di M-band</strong>
 		</p>
-    <p class="name"><a href="<%= user_path(most_bands) %>"><%= h most_bands.login %></a></p>
-		<p class="country"><%= h most_bands.compiled_location %></p>
-  </div>
+		<p class="thumb">
+		  	<%= link_to avatar_image(most_bands, :small), most_bands %>
+		</p>
+    	<p class="name">
+    		<%= link_to most_bands.login, most_bands %>
+		</p>
+		<p class="country">
+			<%= h most_bands.compiled_location %>
+		</p>
+  	</div>
 	<div class="horizontal-scroll-box" id="most-mbands-scroller">
-	  <p class="button">
-	    <a href="#" class="trigger left"><img src="/images/arrow_simple_left.png" alt="" width="7" height="9" /></a>
-	  </p>
-	  <div class="horizontal-scroll">
-	    <div style="width: <%=  12 * 35 %>px; left: 0">
-	      <%= render :partial => 'friend_icon', :collection => User.find(:all, :conditions => 'activated_at IS NOT NULL', :limit => 10) %>
-	    </div>
+	  	<p class="button">
+	    	<a href="#" class="trigger left"><img src="/images/arrow_simple_left.png" alt="" width="7" height="9" /></a>
+	  	</p>
+	  	<div class="horizontal-scroll">
+	    	<div style="width: <%=  12 * 35 %>px; left: 0">
+	      		<%= render :partial => 'friend_icon', :collection => User.find(:all, :conditions => 'activated_at IS NOT NULL', :limit => 10) %>
+	    	</div>
 		</div>
-	  <p class="button">
-	    <a href="#" class="trigger right"><img src="/images/arrow_simple_right.png" alt="" width="7" height="9" /></a>
-	  </p>
-	</div>				  	
+	  	<p class="button">
+	    	<a href="#" class="trigger right"><img src="/images/arrow_simple_right.png" alt="" width="7" height="9" /></a>
+	  	</p>
+		</div>				  	
 </div>

@@ -7,8 +7,8 @@
           <p class="button"><a href="#" class="trigger back"><img width="12" height="39" alt="" src="/images/arrow_grey_left.gif"/></a></p>
 		      <div class="horizontal-scroll">
 		      <div class="scroll" style="width: <%=  @admirers.size * 37 %>px; left: 0;">
-              <% @admirers.each do |admirers| -%>
-                <%= link_to(avatar_image(admirers, :icon), admirers) %>
+              <% @admirers.each do |admirer| -%>
+                <%= link_to avatar_image(admirer, :icon), admirer %>
               <% end -%>
             </div>
           </div>

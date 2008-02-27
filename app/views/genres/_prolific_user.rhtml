@@ -1,10 +1,8 @@
 <div class="elements clear-block">
 	<p class="thumb">
-	  <a href="<%= user_path prolific_user %>">
-	    <%= avatar_image prolific_user, :small %>
-	  </a>
+	  <%= link_to (avatar_image prolific_user, :small), prolific_user %>
 	</p>
-	<p class="name"><a href="<%= user_path prolific_user %>"><%= h prolific_user.login %></a></p>
-	<p class="country"><%= h prolific_user.city %>, <%= h prolific_user.country %></p>
+	<p class="name"><%= link_to prolific_user.login, prolific_user %></a></p>
+	<p class="country"><%= h prolific_user.compiled_location %></p>
 	<p class="cyan-text float-right"><strong><%= pluralize(prolific_user.count, 'song') %></strong></p>
 </div>

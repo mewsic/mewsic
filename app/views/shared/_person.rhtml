@@ -3,8 +3,8 @@
     <%= stars(person.rating_avg, color) %>
   </p>
   <p class="thumb">
-    <%= link_to avatar_image(person, :medium), user_path(person) %>
+    <%= link_to avatar_image(person, :medium), person %>
   </p>
-  <p class="name"><a href="<%= user_path person %>"><%= person.login %></a></p>
+  <p class="name"><%= link_to person.login, person %></p>
   <p class="country"><%= h person.compiled_location%></p>
 </div>

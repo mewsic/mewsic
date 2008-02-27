@@ -7,7 +7,9 @@
       <%= image_tag track.instrument.icon %>
     </p>
     <p class="name grey-text"><%= track.parent_song.user.login %></p>
-    <p class="title"><a href="#"><%= track.title %></a></p>
+    <p class="title">
+    	<a href="#"><%= track.title %></a>
+	</p>
   </td>
   <td class="star">
     <p><span class="star"><%= stars(track.rating_avg) %></span></p>

@@ -82,6 +82,7 @@ song_<%= i + 4 %>:
   title: <%= shuffle(%w( Love Honesty Roma Sex Radio Let It Be Radio Want I Live Forever My Way Bohemian Rhapsody )) %>
   user: <%= "user_#{rand(497) + 3}" %>
   original_author: <%= %w(Queen Beatles Elvis Vasco R.E.M.)[rand(5)] %>
+  description: This is one of the most famous songs made in the '80th
   genre: reggae
   listened_times: <%= rand(1000) %>
 <% end %>
