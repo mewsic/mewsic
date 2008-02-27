@@ -22,7 +22,7 @@ var MlabSong = Class.create({
     this.slider.slideToStart({
       afterFinish: function() {
         this.tracks.each(function(track) {
-          new Effect.Highlight('mlab_element_' + track.id);          
+          // Effect.Appear('mlab_element_' + track.id, { duration: 0.2 });
         });
       }.bind(this)
     });
@@ -54,7 +54,7 @@ var MlabTrack = Class.create({
     this.slider.addTrack(this);
     this.slider.slideToStart({
       afterFinish: function() {
-        new Effect.Highlight('mlab_element_' + this.id);
+        // new Effect.Appear('mlab_element_' + this.id, { duration: 0.2 });
       }.bind(this)
     });
   }
@@ -78,16 +78,25 @@ var MlabSlider = Class.create(PictureSlider, {
 
   
   initialize: function($super, element, options) {
-    $super(element, options);
+    $super(element, options);    
+    MlabSlider.instances.set(this.element.id, this);
     this.windowSize = this.options.windowSize;
     this.setupMlab();
-  },
+  },    
   
   setupMlab: function() {
-    this.container = this.element.down('div.container');
+    this.container = this.element.down('div.container');    
+    this.initTracks();
+    this.initSongs();
+  },
+  
+  initTracks: function() {
     $$('div.mlab_track').each(function(element) {
       new MlabTrack(element, this).initTrackButton();
     }.bind(this));
+  },
+  
+  initSongs: function() {
     $$('div.mlab_song').each(function(element) {
       new MlabSong(element, this);
     }.bind(this));
@@ -131,7 +140,7 @@ var MlabSlider = Class.create(PictureSlider, {
     var track = MlabSlider.tracks.get(id);
     if(track) {
       var element = $('mlab_element_' + id);
-      element.siblings().each(function(sibling) {
+      element.nextSiblings().each(function(sibling) {
         var class_to_remove = sibling.hasClassName('even') ? 'even' : 'odd';
         var class_to_add    = (class_to_remove == 'even') ? 'odd' : 'even';
         sibling.removeClassName(class_to_remove);
@@ -145,8 +154,12 @@ var MlabSlider = Class.create(PictureSlider, {
   
 });
 
-MlabSlider.tracks = $H();
 
+MlabSlider.tracks = $H();
+MlabSlider.instances = $H();
+MlabSlider.getInstance = function(element) {
+  return MlabSlider.instances.get(element);
+},
 MlabSlider.removeTrack = function(id) {
   var track = MlabSlider.tracks.get(id);
   if(track) {

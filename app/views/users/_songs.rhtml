@@ -7,7 +7,12 @@
   <p class="next">
   	  <span class = nav-bottom>
 		  <% if @songs.previous_page %>
-		    <%= link_to_remote image_tag('arrow_simple_left.png', :width => 7, :height => 9) + ' <strong>Prev</strong> ' , :update => "songs", :url => songs_path({:page => @songs.previous_page, :user_id => params[:id]}), :method => :get %>
+		    <%= link_to_remote image_tag('arrow_simple_left.png', :width => 7, :height => 9) + ' <strong>Prev</strong> ' ,
+              :update => "songs",
+              :url => songs_path({:page => @songs.previous_page, :user_id => params[:id]}),
+              :method => :get,
+              :complete => "var mlabSlider = MlabSlider.getInstance('mlab-scroller'); mlabSlider.initSongs();"
+         %>
 		  <% else %>
 		    <%= image_tag('arrow_simple_left.png', :width => 7, :height => 9)  + ' <strong>Prev</strong> ' %>
 		  <% end %>
@@ -15,7 +20,12 @@
 	  
 	  <span class = nav-bottom>
 		  <% if @songs.next_page %>
-		    <%= link_to_remote ' <strong>Next</strong> ' + image_tag('arrow_simple_right.png', :width => 7, :height => 9), :update => "songs", :url =>  songs_path({:page => @songs.next_page, :user_id => params[:id]}), :method => :get %>
+		    <%= link_to_remote ' <strong>Next</strong> ' + image_tag('arrow_simple_right.png', :width => 7, :height => 9),
+		          :update => "songs",
+		          :url =>  songs_path({:page => @songs.next_page, :user_id => params[:id]}),
+		          :method => :get,
+		          :complete => "var mlabSlider = MlabSlider.getInstance('mlab-scroller'); mlabSlider.initSongs();"
+         %>
 		  <% else %>
 		    <%= ' <strong>Next</strong> ' + image_tag('arrow_simple_right.png', :width => 7, :height => 9)%>
 		  <% end %>
