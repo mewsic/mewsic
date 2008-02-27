@@ -1,4 +1,16 @@
-<div class="elements clear-block"> 
+<div class="elements clear-block mlab_song"> 
+  <% song.tracks.each do |track| -%>
+    <div class="tracks" style="display: none;">
+      <div class="mlab_song_track">
+        <ul class="info">
+          <li class="id"><%= track.id %></li>
+          <li class="author_login"><%= track.parent_song.user.login %></li>
+          <li class="title"><%= track.title %></li>
+        </ul>
+      </div>
+    </div>
+  <% end -%>
+  
   <table width="95%" border="0" cellpadding="5" cellspacing="0">
     <tr class="odd">
       <td>
@@ -20,10 +32,12 @@
         <p class="title"><a href="#"><%= song.title %></a></p>
       </td>
       <td align="right" style="vertical-align:bottom">
-        <span class="button">
-          <%= user_icon_link(song.user) %>
+        <p>
+          <a href="#" class="button mlab add_track">
+            <img src="/images/button_mlab.png" alt="" width="23" height="15" />
+          </a>
           <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a>
-        </span>						  
+        </p>
       </td>
     </tr>
   </table>

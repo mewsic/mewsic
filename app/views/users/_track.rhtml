@@ -1,5 +1,12 @@
-<tr class="<%= %w[even odd][track_counter % 2] %>">
+<tr class="<%= %w[even odd][track_counter % 2] %> mlab_track" id="track_<%= track.id %>">
   <td>
+    <div class="mlab_track" style="display: none;">
+      <ul class="info">
+        <li class="id"><%= track.id %></li>
+        <li class="author_login"><%= track.parent_song.user.login %></li>
+        <li class="title"><%= track.title %></li>
+      </ul>
+    </div>    
     <p class="thumb">
       <%= image_tag track.instrument.icon %>
     </p>
@@ -8,6 +15,11 @@
   </td>
   <td class="star">
     <p><span class="star"><%= stars(track.rating_avg) %></span></p>
-    <p><a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
+    <p>
+      <a href="#" class="button mlab add_track">
+        <img src="/images/button_mlab.png" alt="" width="23" height="15" />
+      </a>
+      <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a>
+    </p>
   </td>
 </tr>

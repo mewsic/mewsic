@@ -8,13 +8,13 @@
   <div class="top-box clear-block">
     <div class="bottom-box clear-block">
       <div class="horizontal-scroll-box" id="gallery-scroller">
-        <p class="button"><a href="#" class="trigger left"><img src="/images/arrow_simple_left.png" alt="" width="7" height="9" /></a></p>
+        <p class="button"><a href="#" class="trigger back"><img src="/images/arrow_simple_left.png" alt="" width="7" height="9" /></a></p>
         <div class="horizontal-scroll">
-          <div style="width: <%= 20 * 53 %>px; left: 0;" id="gallery-photo-list">
-		    <%= render :partial => 'photo', :collection => @gallery %>
-		  </div>
+          <div class="scroll" style="width: <%= 20 * 53 %>px; left: 0;" id="gallery-photo-list">
+		        <%= render :partial => 'photo', :collection => @gallery %>
+		      </div>
         </div>
-        <p class="button"><a href="#" class="trigger right"><img src="/images/arrow_simple_right.png" alt="" width="7" height="9" /></a></p>
+        <p class="button"><a href="#" class="trigger forward"><img src="/images/arrow_simple_right.png" alt="" width="7" height="9" /></a></p>
       </div>
     </div>
   </div>

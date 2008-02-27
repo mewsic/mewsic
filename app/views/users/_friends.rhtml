@@ -4,15 +4,15 @@
 	  <div class="bottom-box clear-block">
 	    <div class="elements clear-block">	  
 	      <div class="horizontal-scroll-box" id="friends-scroller">
-	  	    <p class="button"><a href="#" class="trigger left"><img width="12" height="39" alt="" src="/images/arrow_grey_left.gif"/></a></p>
+	  	    <p class="button"><a href="#" class="trigger back"><img width="12" height="39" alt="" src="/images/arrow_grey_left.gif"/></a></p>
 	        <div class="horizontal-scroll">
-			      <div style="width: <%= @user.friends.size * 40 %>px; left: 0;">
+			      <div class="scroll" style="width: <%= @user.friends.size * 40 %>px; left: 0;">
               <% @user.friends.each do |friend| -%>
                 <%= link_to(avatar_image(friend, :icon), friend) %>
               <% end -%>
             </div>
           </div>
-	  	    <p class="button"><a href="#" class="trigger right"><img width="12" height="39" alt="" src="/images/arrow_grey_right.gif"/></a></p>
+	  	    <p class="button"><a href="#" class="trigger forward"><img width="12" height="39" alt="" src="/images/arrow_grey_right.gif"/></a></p>
 		    </div>		
 	    </div>
     </div>

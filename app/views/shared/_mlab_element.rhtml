@@ -1,7 +1,7 @@
-<div class="elements <%= mlab_element_counter.even? ? "even" : "odd" %> clear-block">
+<div class="elements <%= mlab_element_counter.even? ? "even" : "odd" %> clear-block" style="height: 50px">
 	<div class="float-left">
-		<p class="name"><a href="#">Pinco Pallino</a></p>
-		<p class="abstract"><%= truncate("Saltellando qua e la tellan Saltellando qua e la" * (rand(5) +1), 80) %></p>
+		<p class="name"><a href="#"><%= mlab_element %>Pinco Pallino</a></p>
+		<p class="abstract"><%= truncate("#{mlab_element} Saltellando qua e la tellan Saltellando qua e la" * (rand(5) +1), 20) %></p>
 	</div>
 	<div class="float-left align-right">
 		<p class="button">

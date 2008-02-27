@@ -9,7 +9,7 @@
     
 	
   <p class="next">
-  	  <span class = nav-bottom>
+  	  <span class="nav-bottom">
 		  <% if @tracks.previous_page %>
 		    <%= link_to_remote image_tag('arrow_simple_left.png', :width => 7, :height => 9) + ' <strong>Prev</strong> ' , :update => "tracks", :url => tracks_path({:page => @tracks.previous_page, :id => params[:id]}), :method => :get %>
 		  <% else %>
@@ -17,7 +17,7 @@
 		  <% end %>
 	  </span>
 	  
-	  <span class = nav-bottom>
+	  <span class="nav-bottom">
 		  <% if @tracks.next_page %>
 		    <%= link_to_remote ' <strong>Next</strong> ' + image_tag('arrow_simple_right.png', :width => 7, :height => 9), :update => "tracks", :url =>  tracks_path({:page => @tracks.next_page, :id => params[:id]}), :method => :get %>
 		  <% else %>
