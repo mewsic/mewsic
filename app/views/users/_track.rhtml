@@ -1,12 +1,7 @@
 <tr class="<%= %w[even odd][track_counter % 2] %> mlab_track" id="track_<%= track.id %>">
   <td>
-    <div class="mlab_track" style="display: none;">
-      <ul class="info">
-        <li class="id"><%= track.id %></li>        
-        <li class="title"><%= track.title %></li>
-        <li class="author_login"><%= track.parent_song.user.login %></li>
-        <li class="author_id"><%= track.parent_song.user.id %></li>
-      </ul>
+    <div class="mlab_track" style="display: none">
+      <%= render :partial => 'shared/mlab_track_info', :object => track %>
     </div>    
     <p class="thumb">
       <%= image_tag track.instrument.icon %>
