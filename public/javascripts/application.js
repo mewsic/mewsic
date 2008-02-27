@@ -23,7 +23,8 @@ document.observe('dom:loaded', function(event) {
 	  new MlabSlider('mlab-scroller',  {
       axis: 'vertical',
       windowSize: 5,
-      size: 300
+      size: 300,
+      toggleTriggers: true
     });
 	}
 });

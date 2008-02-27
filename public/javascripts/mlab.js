@@ -19,7 +19,13 @@ var MlabSong = Class.create({
     this.tracks.each(function(track) {
       this.slider.addTrack(track);
     }.bind(this));
-    this.slider.slideToStart();
+    this.slider.slideToStart({
+      afterFinish: function() {
+        this.tracks.each(function(track) {
+          new Effect.Highlight('mlab_element_' + track.id);          
+        });
+      }.bind(this)
+    });
   }
   
 });
@@ -33,6 +39,7 @@ var MlabTrack = Class.create({
   },
   
   setup: function() {    
+    this.id           = this.element.down('ul.info li.id').innerHTML;
     this.title        = this.element.down('ul.info li.title').innerHTML;
     this.author_login = this.element.down('ul.info li.author_login').innerHTML;    
   },
@@ -44,16 +51,18 @@ var MlabTrack = Class.create({
   onAddTrack: function(event) {
     event.stop();
     this.slider.addTrack(this);
-    this.slider.slideToStart();
+    this.slider.slideToStart({
+      afterFinish: function() {
+        new Effect.Highlight('mlab_element_' + this.id);
+      }.bind(this)
+    });
   }
   
 });
 
-var MlabSlider = Class.create(PictureSlider, {  
+var MlabSlider = Class.create(PictureSlider, {      
   
-  tracks: new Array(),
-  
-  template: '<div class="elements #{even_odd} %> clear-block" style="height: 50px">' +
+  template: '<div id="mlab_element_#{id}" class="elements #{even_odd} clear-block" style="height: 50px;">' +
   	        '  <div class="float-left">' +
             '    <p class="name"><a href="#">#{author_login}</a></p>' +
             '    <p class="abstract">#{title}</p>' +
@@ -61,6 +70,7 @@ var MlabSlider = Class.create(PictureSlider, {
           	'  <div class="float-left align-right">' +
           	'	  <p class="button">' +
           	'	    <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a>' +
+          	'	    <a href="#" onclick="MlabSlider.removeTrack(#{id}); return false;">remove</a>' +
           	'	  </p>' +
           	'  </div>' +
             '</div>',
@@ -83,33 +93,62 @@ var MlabSlider = Class.create(PictureSlider, {
   },
   
   addTrack: function(track) {
-    track.even_odd = ['even', 'odd'][this.tracks.length % 2];
+    if(MlabSlider.tracks.get(track.id)) return;    
+    var first_element = this.scrolling_div.down();
+    var _class = (first_element && first_element.hasClassName('even')) ? 'odd' : 'even';    
+    track.even_odd = _class;
     var tpl = new Template(this.template);
     var content = tpl.evaluate(track);
     this.scrolling_div.insert({
       top: content
     });
-    this.tracks.push(track);    
-    this.update();    
+    MlabSlider.tracks.set(track.id, track);            
+    this.update();
   },
   
-  update: function() {
+  update: function($super) {
     this.updateContainer();
     this.updateScrollingDiv();
+    this.toggleTriggers();
   },
   
   updateContainer: function() {    
-    if(this.tracks.length <= this.windowSize) {
+    if(MlabSlider.tracks.keys().length <= this.windowSize) {
       this.container.setStyle({
-        height: (this.tracks.length * 60) + 'px'
+        height: (MlabSlider.tracks.keys().length * 60) + 'px'
       });
     }
   },
   
   updateScrollingDiv: function() {
     this.scrolling_div.setStyle({
-      height: (this.tracks.length * 60) + 'px'
+      height: (MlabSlider.tracks.keys().length * 60) + 'px'
     });
-  }    
+  },
+  
+  removeTrack: function(id) {
+    var track = MlabSlider.tracks.get(id);
+    if(track) {
+      var element = $('mlab_element_' + id);
+      element.siblings().each(function(sibling) {
+        var class_to_remove = sibling.hasClassName('even') ? 'even' : 'odd';
+        var class_to_add    = (class_to_remove == 'even') ? 'odd' : 'even';
+        sibling.removeClassName(class_to_remove);
+        sibling.addClassName(class_to_add);
+      });
+      $('mlab_element_' + id).remove();
+      MlabSlider.tracks.unset(id);
+      this.update();
+    }
+  }   
   
 });
+
+MlabSlider.tracks = $H();
+
+MlabSlider.removeTrack = function(id) {
+  var track = MlabSlider.tracks.get(id);
+  if(track) {
+    track.slider.removeTrack(id);
+  }
+}
