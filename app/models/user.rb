@@ -198,6 +198,24 @@ class User < ActiveRecord::Base
     avatars.find(:all, :order => 'created_at DESC').first
   end
   
+  def find_related_answers
+    Answer.find :all, :select => 'DISTINCT',
+                      :include => ['replies', 'user'], 
+                      :conditions => ['replies.user_id = ? OR answers.user_id = ?', self.id, self.id],
+                      :limit => 4
+  end
+
+  def find_friends
+    self.friends_for_me.find(:all, :include => :avatars) +
+    self.friends_by_me.find(:all, :include => :avatars)
+  end
+
+  def find_admirers
+    self.pending_friends_for_me.find(:all, :include => :avatars) +
+    self.pending_friends_by_me.find(:all, :include => :avatars)
+  end
+  
+  
   protected
     # before filter 
     def encrypt_password      

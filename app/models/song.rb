@@ -53,7 +53,7 @@ class Song < ActiveRecord::Base
     paginate :per_page => 3, 
              :conditions => ["user_id = ?", user_id], 
              :order => "songs.title ASC",
-             :include => [:user, :tracks], 
+             :include => [:user, {:tracks => :instrument}], 
              :page => page
   end
   

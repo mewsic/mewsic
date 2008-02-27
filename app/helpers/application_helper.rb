@@ -80,12 +80,15 @@ module ApplicationHelper
   end
   
   def my_avatar_image(user, size)
-    link_to("click to change", new_user_avatar_path(user), 
-            :onclick => "return popitup('#{new_user_avatar_path(user)}')") + 
-            "<br />" + avatar_image(user, :big)
+    content = ''
+    if current_user_page?
+      content << link_to("click to change", new_user_avatar_path(user), 
+                :onclick => "return popitup('#{new_user_avatar_path(user)}')")
+    end
+    content << "<br />" + avatar_image(user, :big)
   end
   
   def avatar_image(user, size)
-    image_tag(user.avatar.nil? ? "/images/avatars/photo_user_#{size}.jpg" : user.avatar.public_filename(size))
+    image_tag(user.avatars.last.nil? ? "/images/avatars/photo_user_#{size}.jpg" : user.avatars.last.public_filename(size))
   end
 end

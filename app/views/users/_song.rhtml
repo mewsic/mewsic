@@ -14,7 +14,7 @@
   <table width="95%" border="0" cellpadding="5" cellspacing="0">
     <tr class="odd">
       <td>
-        <span class="tracks-number"><span><%= song.tracks.count %></span></span>
+        <span class="tracks-number"><span><%= song.tracks.size %></span></span>
         <div class="float-left">
           <% song.tracks.each do |track| -%>
             <img src="/images/<%= track.instrument.icon%>" alt="<%= track.instrument.description%>" width="29" height="29" />

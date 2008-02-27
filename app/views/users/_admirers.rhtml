@@ -1,14 +1,14 @@
 <div class="simple-list clear-block">
-  <h1>ADMIRERS <span class="no-bold">(<%= @user.pending_friends.size %>)</span></h1>
+  <h1>ADMIRERS <span class="no-bold">(<%= @admirers.size %>)</span></h1>
   <div class="top-box clear-block">
     <div class="bottom-box clear-block">
       <div class="elements clear-block">
         <div class="horizontal-scroll-box" id="admirers-scroller">
           <p class="button"><a href="#" class="trigger back"><img width="12" height="39" alt="" src="/images/arrow_grey_left.gif"/></a></p>
 		      <div class="horizontal-scroll">
-    				<div class="scroll" style="width: <%=  @user.pending_friends.size * 37 %>px; left: 0;">
-              <% @user.pending_friends.each do |friend| -%>
-                <%= link_to(avatar_image(friend, :icon), friend) %>
+		      <div class="scroll" style="width: <%=  @admirers.size * 37 %>px; left: 0;">
+              <% @admirers.each do |admirers| -%>
+                <%= link_to(avatar_image(admirers, :icon), admirers) %>
               <% end -%>
             </div>
           </div>

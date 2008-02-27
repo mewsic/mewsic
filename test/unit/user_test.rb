@@ -222,7 +222,7 @@ class UserTest < Test::Unit::TestCase
     u = Dj.create({ :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire', :terms_of_service => "1", :eula => "1" })
     assert_equal 'Dj', u[:type]
   end
-        
+  
   def test_should_retrieve_distinct_instrument
     u = create_user
     s = u.songs.create(:title => 'My song')
@@ -233,7 +233,7 @@ class UserTest < Test::Unit::TestCase
       Mix.create(:track => Track.create(:instrument => i.last, :parent_song => s), :song => s)
       Mix.create(:track => Track.create(:instrument => i.last, :parent_song => s), :song => s)
     end
-    assert_equal %w[Guitar Sax], u.instruments.collect{|i| i.description }.sort
+    assert_equal %w[Guitar Sax], u.instruments.collect{|j| j.description }.sort
   end
   
   def test_quentin_should_has_photos
@@ -242,6 +242,33 @@ class UserTest < Test::Unit::TestCase
   
   def test_find_coolest_should_not_return_inactive_users
     check_finder_for_inactive(:find_coolest)
+  end
+
+  def test_find_friends_should_be_equal_to_friends_method
+    user = users(:quentin)
+    assert_equal user.friends.size, user.find_friends.size
+  end
+  
+  def test_quentin_should_have_friends
+    assert_equal users(:quentin).find_friends.size, 50
+  end
+  
+  def test_find_admirers_should_be_equal_to_pending_friends_method
+    user = users(:quentin)
+    assert_equal user.pending_friends.size, user.find_admirers.size
+  end
+  
+  def test_quentin_should_have_admirers
+    assert_equal users(:quentin).find_admirers.size, 50
+  end
+
+  def test_quentin_should_retieve_answers_from_replies
+    answers = users(:quentin).find_related_answers
+    assert answers.include?(replies(:girls_reply).answer)
+  end
+
+  def test_quentin_should_not_have_duplicated_answers
+    assert_equal users(:quentin).find_related_answers.size, 2
   end
   
   def test_finders
@@ -257,7 +284,7 @@ class UserTest < Test::Unit::TestCase
       results = User.send(finder, {}).select {|u| u.activated_at.nil? } 
       assert (results.size == 0), finder
     end
-  
+    
     def create_user(options = {})
       User.create({ :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire', :terms_of_service => "1", :eula => "1" }.merge(options))
     end
@@ -267,5 +294,5 @@ class UserTest < Test::Unit::TestCase
       instrument_2 = instruments(:sax)
       return [instrument_1, instrument_2]
     end
-  
+    
 end

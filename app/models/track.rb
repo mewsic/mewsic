@@ -34,7 +34,7 @@ class Track < ActiveRecord::Base
   def self.find_paginated_by_user(page, user_id)
     paginate :per_page => 7,
              :conditions => ["songs.user_id = ?", user_id],
-             :include => [{:songs => :user}], 
+             :include => [:instrument, {:parent_song => :user}], 
              :order => "tracks.title ASC",
              :page => page
   end
