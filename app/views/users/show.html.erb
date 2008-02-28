@@ -2,7 +2,7 @@
 
 <div class="whiteblock-shadow clear-block">
 
-  <div id="path"><a href="#">Home</a> : <a href="#">people</a>: <%= h @user.login %></div> 
+  <%= breadcrumb @user %>
   
   <%= render :partial => 'profile' %>
   

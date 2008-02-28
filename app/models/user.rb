@@ -193,9 +193,10 @@ class User < ActiveRecord::Base
   end
   
   def instruments
-    Instrument.find_by_sql(["select DISTINCT I.description, I.icon from instruments I, users U, tracks T, songs S WHERE T.instrument_id = I.id AND T.song_id = S.id AND S.user_id = U.id AND U.id = ?", self.id])
+    Instrument.find(:all, :include => [:tracks => [:parent_song => [:user]]], :conditions => ['user_id = ?', self.id])
+    #Instrument.find_by_sql(["select DISTINCT I.description, I.icon from instruments I, users U, tracks T, songs S WHERE T.instrument_id = I.id AND T.song_id = S.id AND S.user_id = U.id AND U.id = ?", self.id])
   end
-      
+  
   def avatar
     avatars.find(:all, :order => 'created_at DESC').first
   end
@@ -217,6 +218,10 @@ class User < ActiveRecord::Base
     self.pending_friends_by_me.find(:all, :include => :avatars)
   end
   
+  # FIXME: da rendere più efficiente
+  def self.find_with_more_instruments
+    User.find Instrument.count('description', :include => [:tracks => [:parent_song => [:user]]], :group => 'user_id', :distinct => true, :order => 'count_description DESC').first.first
+  end
   
   protected
     # before filter 

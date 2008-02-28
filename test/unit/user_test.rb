@@ -271,6 +271,11 @@ class UserTest < Test::Unit::TestCase
     assert_equal users(:quentin).find_related_answers.size, 2
   end
   
+  def test_should_return_user_with_more_instruments
+    assert (users(:quentin).instruments.size > users(:aaron).instruments.size)
+    assert_equal users(:quentin), User.find_with_more_instruments
+  end
+  
   def test_finders
     finder_list = [:find_coolest, :find_prolific, :find_friendliest, :find_most_banded, :find_newest]
     finder_list.each do |f|
