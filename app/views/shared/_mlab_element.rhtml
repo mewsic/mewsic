@@ -1,11 +1,12 @@
-<div class="elements <%= mlab_element_counter.even? ? "even" : "odd" %> clear-block" style="height: 50px">
-	<div class="float-left">
-		<p class="name"><a href="#"><%= mlab_element %>Pinco Pallino</a></p>
-		<p class="abstract"><%= truncate("#{mlab_element} Saltellando qua e la tellan Saltellando qua e la" * (rand(5) +1), 20) %></p>
-	</div>
-	<div class="float-left align-right">
-		<p class="button">
-		  <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a>
-		</p>
-	</div>
+<div id="mlab_element_<%= mlab_element.id %>" class="elements clear-block <%= cycle('even', 'odd') %>" style="height: 50px;">
+  <div class="float-left">
+    <p class="name"><%= link_to(mlab_element.parent_song.user.login, user_path(mlab_element.parent_song.user)) %></p>
+    <p class="abstract"><%= mlab_element.title %></p>
+  </div>
+  <div class="float-left align-right">
+    <p class="button">
+      <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a>
+      <a href="#" onclick="MlabSlider.removeTrack(<%= mlab_element.id %>); return false;">remove</a>
+    </p>
+  </div>
 </div>

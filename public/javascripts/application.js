@@ -20,13 +20,15 @@ document.observe('dom:loaded', function(event) {
 	}
 	
 	if ($('mlab-scroller') != null ) {
-	  new MlabSlider('mlab-scroller',  {
+	  var mlab_slider = new MlabSlider('mlab-scroller',  {
       axis: 'vertical',
       windowSize: 5,
       size: 300,
       toggleTriggers: true
     });
-	}
+    mlab_slider.loadCurrentTracks();
+	}			
+			
 });
 
 function popitup(url) {

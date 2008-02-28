@@ -10,7 +10,20 @@ class ApplicationController < ActionController::Base
   
   include AuthenticatedSystem
   
+  before_filter :load_mlab_tracks
+  
   protected
+  
+  def load_mlab_tracks
+    track_ids = cookies[:mlab_tracks].to_s.split('|')
+    @mlab_tracks = if !track_ids.empty? && logged_in?
+      Track.find(:all, :conditions => ["id IN (#{Array.new(track_ids.size).fill('?').join(',')})", *track_ids])
+    else
+      cookies[:mlab_tracks] = ''
+      []
+    end
+  end
+  
   def to_breadcrumb
     controller_name
   end

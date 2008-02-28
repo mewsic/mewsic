@@ -100,21 +100,7 @@ var MlabSlider = Class.create(PictureSlider, {
     $$('div.mlab_song').each(function(element) {
       new MlabSong(element, this);
     }.bind(this));
-  },
-  
-  addTrack: function(track) {
-    if(MlabSlider.tracks.get(track.id)) return;    
-    var first_element = this.scrolling_div.down();
-    var _class = (first_element && first_element.hasClassName('even')) ? 'odd' : 'even';    
-    track.even_odd = _class;
-    var tpl = new Template(this.template);
-    var content = tpl.evaluate(track);
-    this.scrolling_div.insert({
-      top: content
-    });
-    MlabSlider.tracks.set(track.id, track);            
-    this.update();
-  },
+  },    
   
   update: function($super) {
     this.updateContainer();
@@ -136,6 +122,21 @@ var MlabSlider = Class.create(PictureSlider, {
     });
   },
   
+  addTrack: function(track) {
+    if(MlabSlider.tracks.get(track.id)) return;    
+    var first_element = this.scrolling_div.down();
+    var _class = (first_element && first_element.hasClassName('even')) ? 'odd' : 'even';    
+    track.even_odd = _class;
+    var tpl = new Template(this.template);
+    var content = tpl.evaluate(track);
+    this.scrolling_div.insert({
+      top: content
+    });
+    MlabSlider.tracks.set(track.id, track);
+    this.addTrackToCookie(track.id);
+    this.update();
+  },
+  
   removeTrack: function(id) {
     var track = MlabSlider.tracks.get(id);
     if(track) {
@@ -148,18 +149,57 @@ var MlabSlider = Class.create(PictureSlider, {
       });
       $('mlab_element_' + id).remove();
       MlabSlider.tracks.unset(id);
+      this.removeTrackFromCookie(track.id);
       this.update();
     }
-  }   
+  },
+  
+  readCookie: function() {
+    var matches = document.cookie.match(/mlab_tracks=([^;]+)/);
+    var values  = matches ? matches[1].split('|') : new Array();
+		return values;
+  },
+
+	addTrackToCookie: function(track_id) {
+	  var track_ids = this.readCookie();
+	  track_ids.push(track_id);
+    this.setCookie(track_ids);
+	},
+	
+	removeTrackFromCookie: function(track_id) {
+	  var track_ids = this.readCookie();
+	  var index = track_ids.indexOf(track_id);
+	  if(index > -1) {	    
+      track_ids.splice(index, 1);
+	    this.setCookie(track_ids);
+	  }    
+	},
+	
+	loadCurrentTracks: function() {
+    this.scrolling_div.select('div.elements').each(function(element) {
+      var m = element.id.match(/^mlab_element_([0-9]+)/);
+      var id = m[1];
+      MlabSlider.tracks.set(id, {
+        id:     id,
+        slider: this
+      });
+    }.bind(this));
+	},
+	
+	setCookie: function(track_ids) {
+	  document.cookie = "mlab_tracks=" + track_ids.join('|') + "; path=/";
+	}
   
 });
 
 
 MlabSlider.tracks = $H();
 MlabSlider.instances = $H();
+
 MlabSlider.getInstance = function(element) {
   return MlabSlider.instances.get(element);
-},
+}
+
 MlabSlider.removeTrack = function(id) {
   var track = MlabSlider.tracks.get(id);
   if(track) {
