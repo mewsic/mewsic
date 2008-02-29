@@ -24,6 +24,8 @@ class Song < ActiveRecord::Base
   has_many :tracks, :through => :mixes
   has_many :mixes
   has_many :children_tracks, :class_name => 'Track'
+  has_many :mlabs, :as => :mixable
+
 
   belongs_to :genre
   belongs_to :user

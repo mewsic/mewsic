@@ -1,0 +1,53 @@
+<mlab>
+  <songs>
+    <% @songs.each do |song| -%>    
+      <song>
+        <user><%= song.user.login %></user>       
+        <author><%= song.original_author %></author>     
+        <title><%= song.title %></title>     
+        <instruments><%= song.instruments.size %></instruments>  
+        <genre><%= song.genre.id %></genre>     
+        <bpm></bpm>        
+        <tone></tone>       
+        <description></description>
+        <rating></rating>     
+        <id><%= song.id %></id>         
+        <filename></filename>   
+          <tracks>
+            <% song.tracks.each do |track| -%>
+              <track>
+                <user><%= track.parent_song.user.login %></user>       
+                <author><%= track.parent_song.original_author %></author>     
+                <title><%= track.title %></title>     
+                <instrument><%= track.instrument.description %></instrument>  
+                <genre><%= track.parent_song.genre.name %></genre>     
+                <bpm></bpm>        
+                <tone></tone>       
+                <description></description>
+                <rating></rating>     
+                <id><%= track.id %></id>         
+                <filename></filename>
+              </track>
+            <% end -%>
+          </tracks>
+      </song>
+    <% end -%>
+  </songs>
+  <tracks>
+    <% @tracks.each do |track| -%>
+      <track>
+        <user><%= track.parent_song.user.login %></user>       
+        <author><%= track.parent_song.original_author %></author>     
+        <title><%= track.title %></title>     
+        <instrument><%= track.instrument.description %></instrument>  
+        <genre><%= track.parent_song.genre.name %></genre>     
+        <bpm></bpm>        
+        <tone></tone>       
+        <description></description>
+        <rating></rating>     
+        <id><%= track.id %></id>         
+        <filename></filename>
+      </track>
+    <% end -%>
+  </tracks>
+</mlab>

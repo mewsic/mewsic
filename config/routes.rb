@@ -6,10 +6,11 @@ ActionController::Routing::Routes.draw do |map|
     user.resources :friendships
     user.resources :photos
     user.resources :avatars
+    user.resources :mlabs
   end
   map.resources :sessions
   map.resources :songs
-  map.resources :tracks
+  map.resources :tracks 
   
   map.mysqlist '/mylist', :controller => 'dashboard', :action => 'mylist', :format => 'xml'
   

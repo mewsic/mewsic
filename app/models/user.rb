@@ -63,6 +63,16 @@ class User < ActiveRecord::Base
 
   has_many :avatars
   
+  has_many :mlab_items,
+    :class_name => 'Mlab'
+  has_many :mlab_tracks, 
+    :class_name => 'Mlab',
+    :conditions => "mlabs.mixable_type = 'Track'"    
+  has_many :mlab_songs, 
+    :class_name => 'Mlab',
+    :conditions => "mlabs.mixable_type = 'Song'"
+    
+  
   acts_as_rated :rating_range => 0..5
   
   # TODO 

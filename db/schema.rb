@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 11) do
+ActiveRecord::Schema.define(:version => 12) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
@@ -23,25 +23,6 @@ ActiveRecord::Schema.define(:version => 11) do
     t.integer  "friend_id",   :null => false
     t.datetime "created_at"
     t.datetime "accepted_at"
-  end
-
-  create_table "galleries", :force => true do |t|
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "gallery_items", :force => true do |t|
-    t.integer  "gallery_id"
-    t.integer  "size"
-    t.string   "content_type"
-    t.string   "filename"
-    t.integer  "height"
-    t.integer  "width"
-    t.integer  "parent_id"
-    t.string   "thumbnail"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "genres", :force => true do |t|
@@ -60,6 +41,14 @@ ActiveRecord::Schema.define(:version => 11) do
   create_table "mixes", :force => true do |t|
     t.integer  "song_id"
     t.integer  "track_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "mlabs", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "mixable_id"
+    t.string   "mixable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

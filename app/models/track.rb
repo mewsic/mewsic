@@ -20,11 +20,12 @@
 class Track < ActiveRecord::Base
   has_many :songs, :through => :mixes
   has_many :mixes
+  has_many :mlabs, :as => :mixable
   
   belongs_to :parent_song, :class_name => 'Song', :include => :user, :foreign_key => 'song_id'
   belongs_to :instrument
   
-  acts_as_rated :rating_range => 0..5  
+  acts_as_rated :rating_range => 0..5 
   
   # FIXME: Per motivi di performance dovremmo tirare dentro anche gli users e la parent_song
   def self.find_most_used(options = {})
