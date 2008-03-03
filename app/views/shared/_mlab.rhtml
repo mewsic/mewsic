@@ -1,11 +1,11 @@
-<div id="mlab-box" class="clear-block">
+<div id="mlab-box" class="clear-block">  
 	<p class="mlab-enter"><a href="#">Enter</a></p>
 	<div class="mlab-container clear-block">
 	  <div id="mlab-scroller">
+	    <div id="<%= current_user.id %>" class="user-id"></div>
       <p><a href="#" onclick="return false" class="trigger back"> <img src="/images/mlab_scroll_button_top.png" alt="" width="204" height="22" class="" /></a></p>
-      <div class="container" style="height: <%= (@mlab_tracks.size <= 5) ? @mlab_tracks.size * 60 : 5 * 60 %>px; overflow: hidden; margin-bottom: 5px">
-        <div id="mlab-scroll" class="scroll" style="height: <%= @mlab_tracks.size * 60 %>px; padding: 0">          
-          <%= render :partial => 'shared/mlab_element', :collection  => @mlab_tracks %>
+      <div class="container" style="height: 0px; overflow: hidden; margin-bottom: 5px">
+        <div id="mlab-scroll" class="scroll" style="height: 0px; padding: 0">          
         </div>                     
       </div>    
       <p><a href="#" class="trigger forward"><img src="/images/mlab_scroll_button_down.png" alt="" width="204" height="25" class="" /></a></p>

@@ -1,0 +1,4 @@
+page << %| 
+  var mlabSlider = MlabSlider.getInstance();
+  var item = new MlabItem('#{@mixable.class.name.downcase}', #{@mixable_attributes.to_json}, mlabSlider)
+|

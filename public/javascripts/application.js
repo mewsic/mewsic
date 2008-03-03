@@ -25,8 +25,7 @@ document.observe('dom:loaded', function(event) {
       windowSize: 5,
       size: 300,
       toggleTriggers: true
-    });
-    mlab_slider.loadCurrentTracks();
+    });    
 	}			
 			
 });

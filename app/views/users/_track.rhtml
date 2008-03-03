@@ -14,9 +14,7 @@
   <td class="star">
     <p><span class="star"><%= stars(track.rating_avg) %></span></p>
     <p>
-      <a href="#" class="button mlab add_track">
-        <img src="/images/button_mlab.png" alt="" width="23" height="15" />
-      </a>
+      <%= track_mlab_button(track) %>
       <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a>
     </p>
   </td>

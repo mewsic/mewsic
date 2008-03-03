@@ -1,208 +1,185 @@
-var MlabSong = Class.create({
+var MlabItem = Class.create({
 
-  initialize: function(element, slider) {
-    this.element  = $(element);
-    this.slider   = slider;              
-    this.tracks = new Array();
-    this.setup();
-  },
-  
-  setup: function() {
-    this.element.down('a.button.mlab.add_track').observe('click', this.onAddSong.bind(this));
-    this.element.select('div.tracks div.mlab_song_track').each(function(element) {
-      this.tracks.push(new MlabTrack(element, this.slider));
-    }.bind(this));
-  },
-  
-  onAddSong: function(event) {
-    event.stop();
-    this.tracks.each(function(track) {
-      this.slider.addTrack(track);
-    }.bind(this));
-    this.slider.slideToStart({
-      afterFinish: function() {
-        this.tracks.each(function(track) {
-          // Effect.Appear('mlab_element_' + track.id, { duration: 0.2 });
-        });
-      }.bind(this)
-    });
-  }
-  
-});
-
-var MlabTrack = Class.create({
-
-  initialize: function(element, slider) {
-    this.element  = $(element);
-    this.slider   = slider;
-    this.setup();
-  },
-  
-  setup: function() {    
-    this.id           = this.element.down('ul.info li.id').innerHTML;
-    this.title        = this.element.down('ul.info li.title').innerHTML;
-    this.author_id    = this.element.down('ul.info li.author_id').innerHTML;    
-    this.author_login = this.element.down('ul.info li.author_login').innerHTML;    
-  },
-    
-  initTrackButton: function() {
-    this.element.up().up().down('a.button.mlab.add_track').observe('click', this.onAddTrack.bind(this));
-  },
-  
-  onAddTrack: function(event) {
-    event.stop();
-    this.slider.addTrack(this);
-    this.slider.slideToStart({
-      afterFinish: function() {
-        // new Effect.Appear('mlab_element_' + this.id, { duration: 0.2 });
-      }.bind(this)
-    });
-  }
+  initialize: function(type, attributes, slider) {
+    this.type = type;
+    this.attributes = attributes; 
+    this.slider = slider;
+    this.slider.addItem(this);
+  }    
   
 });
 
 var MlabSlider = Class.create(PictureSlider, {      
   
-  template: '<div id="mlab_element_#{id}" class="elements #{even_odd} clear-block" style="height: 50px;">' +
+  template: '<div id="mlab_element_#{attributes.mlab_id}" class="elements #{even_odd} clear-block" style="height: 50px;">' +
   	        '  <div class="float-left">' +
-            '    <p class="name"><a href="/users/#{author_id}">#{author_login}</a></p>' +
-            '    <p class="abstract">#{title}</p>' +
+            '    <p class="name">#{type} by <a href="/users/#{attributes.author.id}">#{attributes.author.login}</a></p>' +
+            '    <p class="abstract">#{attributes.title}</p>' +
           	'  </div>' +
           	'  <div class="float-left align-right">' +
           	'	  <p class="button">' +
           	'	    <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a>' +
-          	'	    <a href="#" onclick="MlabSlider.removeTrack(#{id}); return false;">remove</a>' +
+          	'	    <a href="#" class="button mlab remove" onclick="MlabSlider.destroyItem(\'#{type}\', #{attributes.id}); return false;"><img src="/images/button_mlab.png" /></a>' +
           	'	  </p>' +
           	'  </div>' +
-            '</div>',
-
+            '</div>',  
   
   initialize: function($super, element, options) {
     $super(element, options);    
-    MlabSlider.instances.set(this.element.id, this);
+    MlabSlider.instance = this;
     this.windowSize = this.options.windowSize;
+    this.user_id = this.element.down('div.user-id').id;
+    this.loadElements();    
+    this.initTrackButtons();
+    this.initSongButtons();
     this.setupMlab();
   },    
   
+  loadElements: function() {
+    new Ajax.Request('/users/' + this.user_id + '/mlabs.js', {
+      method: 'GET',
+      onComplete: this.parseLoadedItems.bind(this)
+    });
+  },
+  
+  parseLoadedItems: function(response) {
+    var elements = response.responseText.evalJSON();
+    elements.each(function(attributes) {          
+      var type = attributes.song_id ? 'track' : 'song';
+      var item = new MlabItem(type, attributes, this);      
+    }.bind(this))
+  },
+  
   setupMlab: function() {
-    this.container = this.element.down('div.container');    
-    this.initTracks();
-    this.initSongs();
-  },
-  
-  initTracks: function() {
-    $$('div.mlab_track').each(function(element) {
-      new MlabTrack(element, this).initTrackButton();
-    }.bind(this));
-  },
-  
-  initSongs: function() {
-    $$('div.mlab_song').each(function(element) {
-      new MlabSong(element, this);
-    }.bind(this));
+    this.container = this.element.down('div.container');
   },    
   
-  update: function($super) {
+  update: function($super) {     
     this.updateContainer();
     this.updateScrollingDiv();
     this.toggleTriggers();
   },
   
   updateContainer: function() {    
-    if(MlabSlider.tracks.keys().length <= this.windowSize) {
+    if(MlabSlider.items.keys().length <= this.windowSize) {
       this.container.setStyle({
-        height: (MlabSlider.tracks.keys().length * 60) + 'px'
+        height: (MlabSlider.items.keys().length * 60) + 'px'
       });
     }
   },
   
   updateScrollingDiv: function() {
     this.scrolling_div.setStyle({
-      height: (MlabSlider.tracks.keys().length * 60) + 'px'
+      height: (MlabSlider.items.keys().length * 60) + 'px'
     });
   },
   
-  addTrack: function(track) {
-    if(MlabSlider.tracks.get(track.id)) return;    
+  addItem: function(item) {    
     var first_element = this.scrolling_div.down();
     var _class = (first_element && first_element.hasClassName('even')) ? 'odd' : 'even';    
-    track.even_odd = _class;
+    item.even_odd = _class;    
     var tpl = new Template(this.template);
-    var content = tpl.evaluate(track);
+    var content = tpl.evaluate(item);    
     this.scrolling_div.insert({
       top: content
     });
-    MlabSlider.tracks.set(track.id, track);
-    this.addTrackToCookie(track.id);
+    MlabSlider.items.set(item.type + '_' + item.attributes.id, item);    
     this.update();
   },
-  
-  removeTrack: function(id) {
-    var track = MlabSlider.tracks.get(id);
-    if(track) {
-      var element = $('mlab_element_' + id);
+
+  removeItem: function(type, id) {
+    var item = MlabSlider.items.get(type + '_' + id);
+    if(item) {
+      var element = $('mlab_element_' + item.attributes.mlab_id);      
       element.nextSiblings().each(function(sibling) {
         var class_to_remove = sibling.hasClassName('even') ? 'even' : 'odd';
         var class_to_add    = (class_to_remove == 'even') ? 'odd' : 'even';
         sibling.removeClassName(class_to_remove);
         sibling.addClassName(class_to_add);
-      });
-      $('mlab_element_' + id).remove();
-      MlabSlider.tracks.unset(id);
-      this.removeTrackFromCookie(track.id);
+      });      
+      new Effect.Puff(element, {duration: 0.5});
+      MlabSlider.items.unset(type + '_' + id);
       this.update();
     }
   },
   
-  readCookie: function() {
-    var matches = document.cookie.match(/mlab_tracks=([^;]+)/);
-    var values  = matches ? matches[1].split('|') : new Array();
-		return values;
+  destroyItem: function(item) { 
+    var element = $('mlab_element_' + item.attributes.mlab_id);
+    var img = element.down('a.button.mlab.remove img');    
+    new Ajax.Request('/users/' + this.user_id + '/mlabs/' + item.attributes.mlab_id + '.js', {
+      method: 'DELETE',
+      onLoading: function() {
+        img.src = "/images/spinner.gif";
+      }
+    });
   },
-
-	addTrackToCookie: function(track_id) {
-	  var track_ids = this.readCookie();
-	  track_ids.push(track_id);
-    this.setCookie(track_ids);
-	},
-	
-	removeTrackFromCookie: function(track_id) {
-	  var track_ids = this.readCookie();
-	  var index = track_ids.indexOf(track_id);
-	  if(index > -1) {	    
-      track_ids.splice(index, 1);
-	    this.setCookie(track_ids);
-	  }    
-	},
-	
-	loadCurrentTracks: function() {
-    this.scrolling_div.select('div.elements').each(function(element) {
-      var m = element.id.match(/^mlab_element_([0-9]+)/);
-      var id = m[1];
-      MlabSlider.tracks.set(id, {
-        id:     id,
-        slider: this
-      });
-    }.bind(this));
-	},
-	
-	setCookie: function(track_ids) {
-	  document.cookie = "mlab_tracks=" + track_ids.join('|') + "; path=/";
-	}
+  
+  initTrackButtons: function() {
+    $$('a.button.mlab.track.add').invoke('observe', 'click', this.onAddTrack.bind(this));
+  },    
+  
+  initSongButtons: function() {
+    $$('a.button.mlab.song.add').invoke('observe', 'click', this.onAddSong.bind(this));
+  },
+  
+  onAddTrack: function(event) {
+    event.stop(); 
+    var element = event.element();
+    var track_id = element.id;
+    if(MlabSlider.items.get('track_' + track_id)) return;
+    element.src = "/images/spinner.gif";    
+    new Ajax.Request('/users/' + this.user_id + '/mlabs.js', {
+      method: 'POST',
+      evalJS: true,
+      parameters: {
+        type: 'track',
+        track_id: track_id
+      },
+      onComplete: function() {
+        element.src = '/images/button_mlab.png';
+      }
+    });
+  },
+  
+  onAddSong: function(event) {
+    event.stop();
+    var element = event.element();
+    var song_id = element.id;
+    if(MlabSlider.items.get('song_' + song_id)) return;
+    element.src = "/images/spinner.gif";    
+    new Ajax.Request('/users/' + this.user_id + '/mlabs.js', {
+      method: 'POST',
+      evalJS: true,
+      parameters: {
+        type: 'song',
+        song_id: song_id
+      },
+      onComplete: function() {
+        element.src = '/images/button_mlab.png';
+      }
+    });
+  }  
   
 });
 
 
-MlabSlider.tracks = $H();
-MlabSlider.instances = $H();
+MlabSlider.items    = $H();
+MlabSlider.instance = null;
 
 MlabSlider.getInstance = function(element) {
-  return MlabSlider.instances.get(element);
+  return MlabSlider.instance;
 }
 
-MlabSlider.removeTrack = function(id) {
-  var track = MlabSlider.tracks.get(id);
-  if(track) {
-    track.slider.removeTrack(id);
+MlabSlider.destroyItem = function(type, id) {
+  var item = MlabSlider.items.get(type + '_' + id);
+  if(item) {
+    item.slider.destroyItem(item);
+  }
+}
+
+MlabSlider.removeItem = function(type, id) {  
+  var item = MlabSlider.items.get(type + '_' + id);
+  if(item) {
+    item.slider.removeItem(type, id);
   }
 }

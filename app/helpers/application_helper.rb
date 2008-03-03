@@ -74,7 +74,7 @@ module ApplicationHelper
       content << render(:partial => 'shared/share_myousica')
     else
       content << render(:partial => 'shared/login_box') unless logged_in?
-      content << render(:partial => 'shared/mlab')
+      content << render(:partial => 'shared/mlab') if logged_in?
     end
     content
   end

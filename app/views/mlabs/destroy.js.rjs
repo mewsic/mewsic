@@ -1,0 +1,3 @@
+page << %|
+  MlabSlider.removeItem('#{@mixable.class.name.downcase}', '#{@mixable.id}')
+|

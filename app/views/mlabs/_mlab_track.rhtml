@@ -1,0 +1,12 @@
+<div id="mlab_element_<%= mlab_track.id %>" class="elements clear-block <%= cycle('even', 'odd') %>" style="height: 50px;">
+  <div class="float-left">
+    <p class="name">TRACK: <%= link_to(mlab_track.parent_song.user.login, user_path(mlab_track.parent_song.user)) %></p>
+    <p class="abstract"><%= mlab_track.title %></p>
+  </div>
+  <div class="float-left align-right">
+    <p class="button">
+      <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a>
+      <a href="#" onclick="MlabSlider.removeTrack(<%= mlab_track.id %>); return false;">remove</a>
+    </p>
+  </div>
+</div>
