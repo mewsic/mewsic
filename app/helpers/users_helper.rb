@@ -66,10 +66,6 @@ module UsersHelper
   
   def user_edit_button(field)
     %|<a href="#" class="edit" id="edit_button_user_#{field.to_s}">[edit]</a>| if current_user_page?
-  end
-  
-  def user_icon_link(user)
-    link_to(image_tag('button_mlab.png'), user_path(user))
-  end
+  end    
   
 end

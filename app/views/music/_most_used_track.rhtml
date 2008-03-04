@@ -6,7 +6,7 @@
 		<div class="elements clear-block">
 			<div class="orange-bg">
 				<p class="thumb">
-				  	<%= link_to (avatar_image track.parent_song.user, :icon), track.parent_song.user %>">
+				  	<%= link_to (avatar_image track.parent_song.user, :icon), track.parent_song.user %>
 				</p>
 				<p class="name">
 				  	<%= link_to track.parent_song.user.login, track.parent_song.user %>
@@ -20,7 +20,8 @@
 		  	</p>
 		  	<p><%= track.parent_song.original_author %></p>
 		    <p class="button float-right">
-		    	<a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_orange.png" alt="" width="23" height="15" /></a>
+          <%= mlab_button(track) %>
+		    	<a href="#"><img src="/images/button_play_orange.png" alt="" width="23" height="15" /></a>
 			</p>
 			<p class="float-left">used <%= pluralize(song_count, 'time') %></p>
 		  	<p class="star"><%= stars(track.parent_song.rating_avg) %></p>

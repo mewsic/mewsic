@@ -111,7 +111,12 @@ var MlabSlider = Class.create(PictureSlider, {
         sibling.removeClassName(class_to_remove);
         sibling.addClassName(class_to_add);
       });      
-      new Effect.Puff(element, {duration: 0.5});
+      new Effect.Puff(element, {
+        duration: 0.5,
+        afterFinish: function() {
+          element.remove();
+        }
+      });
       MlabSlider.items.unset(type + '_' + id);
       this.update();
     }
@@ -146,8 +151,8 @@ var MlabSlider = Class.create(PictureSlider, {
   
   handleItemAddition: function(event, itemType) {
     event.stop(); 
-    var element = event.element();
-    var item_id = element.id;
+    var element = event.element();    
+    var item_id = element.id.match(/^(\d+)_/)[1];
     if(MlabSlider.items.get(itemType + '_' + item_id)) return;
     element.src = "/images/spinner.gif";    
     new Ajax.Request('/users/' + this.user_id + '/mlabs.js', {

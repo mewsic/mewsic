@@ -9,7 +9,7 @@
 		<div class="float-right">
 			<p class="star"><%= stars(most_listened_song.rating_avg) %></p>
 			<p class="button">
-			  <%= song_mlab_button(most_listened_song) %>
+			  <%= mlab_button(most_listened_song) %>
 			  <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
 		</div>
 	<p class="title"><%= link_to most_listened_song.title, song_path(most_listened_song) %></p>

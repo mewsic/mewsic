@@ -1,4 +1,9 @@
-page << %| 
+if @mixable
+  page << %| 
   var mlabSlider = MlabSlider.getInstance();
-  var item = new MlabItem('#{@mixable.class.name.downcase}', #{@mixable.to_json(:methods => [:user, :mlab])}, mlabSlider)
-| if @mixable
+  mlabSlider.slideToStart();
+  new MlabItem('#{@mixable.class.name.downcase}', #{@mixable.to_json(:methods => [:user, :mlab])}, mlabSlider)
+| 
+else
+  page.alert 'There was an error. Please refresh the page.'
+end

@@ -4,7 +4,12 @@
 	<div class="float-right">
 		<p class="button float-left">
 		  <% if @songs.previous_page %>
-		    <%= link_to_remote image_tag('arrow_simple_left.png', :width => 7, :height => 9), :update => "songs", :url => songs_path({:page => @songs.previous_page, :genre_id => params[:id]}), :method => :get %>
+		    <%= link_to_remote image_tag('arrow_simple_left.png', :width => 7, :height => 9),
+		          :update => "songs",
+		          :url => songs_path({:page => @songs.previous_page, :genre_id => params[:id]}),
+		          :method => :get,
+		          :complete => "var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initSongButtons(); }"
+         %>
 		  <% else %>
 		    <%= image_tag('arrow_simple_left.png', :width => 7, :height => 9) %>
 		  <% end %>
@@ -12,7 +17,12 @@
  		<h1 class="">More Songs</h1>
 		<p class="button float-left">
 		  <% if @songs.next_page %>
-		    <%= link_to_remote image_tag('arrow_simple_right.png', :width => 7, :height => 9), :update => "songs", :url =>  songs_path({:page => @songs.next_page, :genre_id => params[:id]}), :method => :get %>
+		    <%= link_to_remote image_tag('arrow_simple_right.png', :width => 7, :height => 9),
+		          :update => "songs",
+		          :url =>  songs_path({:page => @songs.next_page, :genre_id => params[:id]}),
+		          :method => :get,
+		          :complete => "var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initSongButtons(); }"
+        %>
 		  <% else %>
 		    <%= image_tag('arrow_simple_right.png', :width => 7, :height => 9) %>
 		  <% end %>
