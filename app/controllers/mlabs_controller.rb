@@ -25,6 +25,7 @@ class MlabsController < ApplicationController
     @items = @tracks + @songs
     respond_to do |format|
       format.js { render :json => @items }
+      format.xml
     end
     
   end

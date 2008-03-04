@@ -204,7 +204,6 @@ class User < ActiveRecord::Base
   
   def instruments
     Instrument.find(:all, :include => [:tracks => [:parent_song => [:user]]], :conditions => ['user_id = ?', self.id])
-    #Instrument.find_by_sql(["select DISTINCT I.description, I.icon from instruments I, users U, tracks T, songs S WHERE T.instrument_id = I.id AND T.song_id = S.id AND S.user_id = U.id AND U.id = ?", self.id])
   end
   
   def avatar

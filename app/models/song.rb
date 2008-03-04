@@ -59,6 +59,10 @@ class Song < ActiveRecord::Base
              :page => page
   end
   
+  def author
+    @author ||= user.login
+  end
+  
   # STUB: sino all'implementazione degli strumenti
   def instruments
     ['sassofono', 'batteria', 'anoleso']

@@ -40,4 +40,8 @@ class Track < ActiveRecord::Base
              :page => page
   end
   
+  def author
+    @author ||= parent_song.author
+  end
+  
 end

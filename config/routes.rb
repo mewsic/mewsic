@@ -11,9 +11,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :sessions
   map.resources :songs
   map.resources :tracks 
-  
-  map.mysqlist '/mylist', :controller => 'dashboard', :action => 'mylist', :format => 'xml'
-  
+    
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate'
   
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
