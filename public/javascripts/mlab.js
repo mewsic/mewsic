@@ -42,7 +42,12 @@ var MlabSlider = Class.create(PictureSlider, {
     this.initTrackButtons();
     this.initSongButtons();
     this.setupMlab();
-  },    
+  }, 
+  
+  toggleTriggers: function() {
+    this.isBackSlidable()    ? this.back_trigger.down('img').setOpacity(1.0)     : this.back_trigger.down('img').setOpacity(0.2);
+    this.isForwardSlidable() ? this.forward_trigger.down('img').setOpacity(1.0)  : this.forward_trigger.down('img').setOpacity(0.2);
+	},   
   
   loadElements: function() {
     new Ajax.Request('/users/' + this.user_id + '/mlabs.js', {
