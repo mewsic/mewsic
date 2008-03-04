@@ -1,0 +1,8 @@
+<results>
+  <track_pages><%= @tracks.page_count %></track_pages>
+  <track_page><%= @tracks.current_page %></track_page>
+  <song_pages><%= @songs.page_count %></song_pages>
+  <song_page><%= @songs.current_page %></song_page>
+  <%= render :partial => 'shared/songs' %>
+  <%= render :partial => 'shared/tracks' %>
+</results>

@@ -11,6 +11,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :sessions
   map.resources :songs
   map.resources :tracks 
+  
+  map.resources :search
     
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate'
   
