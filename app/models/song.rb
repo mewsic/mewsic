@@ -21,6 +21,9 @@
 #
 
 class Song < ActiveRecord::Base
+  
+  attr_accessor :mlab
+  
   has_many :tracks, :through => :mixes
   has_many :mixes
   has_many :children_tracks, :class_name => 'Track'
@@ -58,11 +61,7 @@ class Song < ActiveRecord::Base
              :include => [:user, {:tracks => :instrument}], 
              :page => page
   end
-  
-  def author
-    @author ||= user.login
-  end
-  
+    
   # STUB: sino all'implementazione degli strumenti
   def instruments
     ['sassofono', 'batteria', 'anoleso']

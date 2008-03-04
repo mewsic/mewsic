@@ -1,11 +1,20 @@
 var MlabItem = Class.create({
 
-  initialize: function(type, attributes, slider) {
-    this.type = type;
+  initialize: function(type, attributes, slider) {   
+    this.type = type;    
     this.attributes = attributes; 
+    this.attributes.mlab_id = this.extractMlabId();
     this.slider = slider;
     this.slider.addItem(this);
-  }    
+  },
+  
+  extractMlabId: function() {
+    if(this.attributes.mlabs) {
+      return this.attributes.mlabs[0].id;
+    } else {
+      return this.attributes.mlab.id;
+    }
+  }
   
 });
 
@@ -13,7 +22,7 @@ var MlabSlider = Class.create(PictureSlider, {
   
   template: '<div id="mlab_element_#{attributes.mlab_id}" class="elements #{even_odd} clear-block" style="height: 50px;">' +
   	        '  <div class="float-left">' +
-            '    <p class="name">#{type} by <a href="/users/#{attributes.author.id}">#{attributes.author.login}</a></p>' +
+            '    <p class="name">#{type} by <a href="/users/#{attributes.user.id}">#{attributes.user.login}</a></p>' +
             '    <p class="abstract">#{attributes.title}</p>' +
           	'  </div>' +
           	'  <div class="float-left align-right">' +
@@ -123,42 +132,31 @@ var MlabSlider = Class.create(PictureSlider, {
   },
   
   onAddTrack: function(event) {
-    event.stop(); 
-    var element = event.element();
-    var track_id = element.id;
-    if(MlabSlider.items.get('track_' + track_id)) return;
-    element.src = "/images/spinner.gif";    
-    new Ajax.Request('/users/' + this.user_id + '/mlabs.js', {
-      method: 'POST',
-      evalJS: true,
-      parameters: {
-        type: 'track',
-        track_id: track_id
-      },
-      onComplete: function() {
-        element.src = '/images/button_mlab.png';
-      }
-    });
+    this.handleItemAddition(event, 'track');
   },
   
   onAddSong: function(event) {
-    event.stop();
+    this.handleItemAddition(event, 'song');
+  },
+  
+  handleItemAddition: function(event, itemType) {
+    event.stop(); 
     var element = event.element();
-    var song_id = element.id;
-    if(MlabSlider.items.get('song_' + song_id)) return;
+    var item_id = element.id;
+    if(MlabSlider.items.get(itemType + '_' + item_id)) return;
     element.src = "/images/spinner.gif";    
     new Ajax.Request('/users/' + this.user_id + '/mlabs.js', {
       method: 'POST',
       evalJS: true,
       parameters: {
-        type: 'song',
-        song_id: song_id
+        type: itemType,
+        item_id: item_id
       },
       onComplete: function() {
         element.src = '/images/button_mlab.png';
       }
     });
-  }  
+  }
   
 });
 

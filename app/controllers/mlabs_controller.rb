@@ -10,47 +10,31 @@ class MlabsController < ApplicationController
   def index
     @songs = Song.find(:all, :include => [:mlabs, :user], :conditions => ["mlabs.user_id = ?", params[:user_id]])
     @tracks = Track.find(:all, :include => :mlabs, :conditions => ["mlabs.user_id = ?", params[:user_id]])    
-    @songs = @songs.collect do |s|
-      attributes = s.attributes
-      attributes[:author] = {:login => s.user.login, :id => s.user.id}
-      attributes[:mlab_id] = s.mlabs.first.id
-      attributes
-    end    
-    @tracks = @tracks.collect do |t|
-      attributes = t.attributes
-      attributes[:author] = {:login => t.parent_song.user.login, :id => t.parent_song.user.id}
-      attributes[:mlab_id] = t.mlabs.first.id
-      attributes
-    end
     @items = @tracks + @songs
     respond_to do |format|
-      format.js { render :json => @items }
-      format.xml
+      format.js { render :json => @items.to_json(:methods => :user, :include => :mlabs) }
+      format.xml      
     end
     
   end
   
   def create
-    @mixable, @mixable_attributes = case params[:type] 
+    @mixable = case params[:type] 
       when 'track'        
-        track = Track.find(params[:track_id])
-        attributes = track.attributes
-        attributes[:author] = {:login => track.parent_song.user.login, :id => track.parent_song.user.id}
-        [track, attributes]
+        Track.find(params[:item_id])
       when 'song'
-        song = Song.find(params[:song_id])
-        attributes = song.attributes
-        attributes[:author] = {:login => song.user.login, :id => song.user.id}        
-        [song, attributes]
+        Song.find(params[:item_id])
     end    
     @mlab = Mlab.create(:user => current_user, :mixable => @mixable)
-    @mixable_attributes[:mlab_id] = @mlab.id
+    @mixable.mlab = @mlab
+  rescue ActiveRecord::RecordNotFound
   end    
   
   def destroy
     @mlab     = Mlab.find(params[:id])
     @mixable  = @mlab.mixable
     @mlab.destroy    
+  rescue ActiveRecord::RecordNotFound
   end
 
 private

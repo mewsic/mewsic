@@ -18,6 +18,9 @@
 #
 
 class Track < ActiveRecord::Base
+  
+  attr_accessor :mlab
+  
   has_many :songs, :through => :mixes
   has_many :mixes
   has_many :mlabs, :as => :mixable
@@ -40,8 +43,8 @@ class Track < ActiveRecord::Base
              :page => page
   end
   
-  def author
-    @author ||= parent_song.author
-  end
+  def user
+    @user ||= parent_song.user
+  end    
   
 end
