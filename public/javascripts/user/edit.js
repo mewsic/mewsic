@@ -32,7 +32,11 @@ var AjaxFormGenerator = Class.create({
   setup: function() {
     var self = this;
     this.forms.each(function(name) {
-      $('form_' + name).observe('submit', function(event) {
+	  var form = $('form_' + name);
+      this.hideButton(form);
+	  form.compareValue = this.getCompareValue(form);
+	  this.observeFieldsChanges(form);
+      form.observe('submit', function(event) {
         event.stop();
         new Ajax.Request(self.options.url + self.user_id, {
           parameters: Form.serialize(this),
@@ -51,10 +55,36 @@ var AjaxFormGenerator = Class.create({
                 e.show();
               }.bind(this));
             }
+			form.select('input[type="submit"]').invoke('hide');
+			form.compareValue = form.select('input.ready-for-edit').invoke('getValue').join(',');
           }.bind(this)
         });        
       });
     }.bind(this));
+  },
+  
+  hideButton: function(form) {
+  	form.select('input[type="submit"]').invoke('hide');
+  },
+  
+  getCompareValue: function(form) {
+	return form.select('input.ready-for-edit').invoke('getValue').join(',');
+  },
+  
+  observeFieldsChanges: function(form){
+  	fields = form.select('input.ready-for-edit');
+  	fields.each(function(field){
+  		new Field.Observer(field, 0.2, function(){
+  			parentForm = field.up('form');
+  			//compare = getCompareValue(parentForm);
+  			if (parentForm.compareValue != this.getCompareValue(parentForm)) {
+  				parentForm.select('input[type="submit"]').invoke('show');
+  			}
+  			else {
+  				parentForm.select('input[type="submit"]').invoke('hide');
+  			}
+  		}.bind(this));
+  	}.bind(this));
   }
   
 });
@@ -92,5 +122,4 @@ document.observe('dom:loaded', function() {
   );  
   
   initGenderSwitcher();
-    
 });

@@ -1,9 +1,9 @@
-<div class="user-sharing clear-block">
+<div id="my-user-share" class="user-sharing clear-block">
 	<% form_for @user, :html => {:id => 'form_photos_url'} do |f| -%>
 	  <p>
   		<label>Share your photo</label>
   		<span id="loading_user_photos_url" style="display:none;" class="loading">Saving...</span>
-  		<%= f.text_field :photos_url, :class => 'hide-on-load' %>
+  		<%= f.text_field :photos_url, :class => 'hide-on-load ready-for-edit' %>
   		<input type="submit" class="button hide-on-load" value="OK"/>
   	  </p>
   <% end -%>
@@ -11,7 +11,7 @@
 	  <p>
   		<label>Share your blog</label>
   		<span id="loading_user_blog_url" style="display:none;" class="loading">Saving...</span>
-  		<%= f.text_field :blog_url, :class => 'hide-on-load' %>
+  		<%= f.text_field :blog_url, :class => 'hide-on-load ready-for-edit' %>
   		<input type="submit" class="button hide-on-load" value="OK"/>
   	</p>
   <% end -%>
@@ -19,7 +19,7 @@
 	  <p>
   		<label>MySpace page</label>
   		<span id="loading_user_myspace_url" style="display:none;" class="loading">Saving...</span>
-  		<%= f.text_field :myspace_url, :class => 'hide-on-load' %>
+  		<%= f.text_field :myspace_url, :class => 'hide-on-load ready-for-edit' %>
   		<input type="submit" class="button hide-on-load" value="OK"/>
   	</p>
   <% end -%>
@@ -27,8 +27,8 @@
 	  <p>
   		<label>Skype</label>
   		<span id="loading_user_skype" style="display:none;" class="loading">Saving...</span>
-  		<%= f.text_field :skype, :class => 'hide-on-load input-small' %>
-  		<%= f.check_box :skype_public, :class => 'hide-on-load input check-box' %>  		
+  		<%= f.text_field :skype, :class => 'hide-on-load input-small ready-for-edit' %>
+  		<%= f.check_box :skype_public, :class => 'hide-on-load input check-box ready-for-edit' %>  		
   		<span class="hide-on-load">public</span>
   		<input type="submit" class="button hide-on-load" value="OK"/>
   	</p>
@@ -37,8 +37,8 @@
 	  <p>
   		<label>MSN</label>
   		<span id="loading_user_msn" style="display:none;" class="loading">Saving...</span>
-  		<%= f.text_field :msn, :class => 'hide-on-load input-small' %>
-  		<%= f.check_box :msn_public, :class => 'hide-on-load input check-box' %>
+  		<%= f.text_field :msn, :class => 'hide-on-load input-small ready-for-edit' %>
+  		<%= f.check_box :msn_public, :class => 'hide-on-load input check-box ready-for-edit' %>
   		<span class="hide-on-load">public</span>
   		<input type="submit" class="button hide-on-load" value="OK"/>
   	</p>
