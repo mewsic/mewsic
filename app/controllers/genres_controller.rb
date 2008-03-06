@@ -1,10 +1,13 @@
 class GenresController < ApplicationController
-  def index      
-    @genres = Genre.find_paginated(params[:page])
-    
+  def index              
     respond_to do |format|
-      format.html { render :layout => false }
-      format.xml
+      format.html do
+        @genres = Genre.find_paginated(params[:page])        
+        render :layout => false
+      end
+      format.xml do
+        @genres = Genre.find(:all, params[:page])
+      end
     end    
   end
   
