@@ -45,6 +45,6 @@ class Track < ActiveRecord::Base
   
   def user
     @user ||= parent_song.user
-  end    
+  end
   
 end

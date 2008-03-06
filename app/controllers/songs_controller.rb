@@ -10,4 +10,13 @@ class SongsController < ApplicationController
     end
     render :layout => false
   end
+  
+  def show
+    @song = Song.find(params[:id])
+    @show_siblings = params.include?(:siblings)
+    respond_to do |format|
+      format.xml
+    end
+  end
+  
 end

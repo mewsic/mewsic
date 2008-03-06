@@ -10,5 +10,13 @@
   <rating></rating>     
   <id><%= song.id %></id>         
   <filename></filename>   
-  <%= render :partial => 'shared/tracks' %>    
+  <% if @show_siblings; @show_siblings = false; -%>
+    <siblings type="direct">
+      <%= render :partial => 'shared/song', :collection => song.direct_siblings %>
+    </siblings>
+    <siblings type="indirect">
+      <%= render :partial => 'shared/song', :collection => song.indirect_siblings %>
+    </siblings>
+  <% end -%>
+  <%= render :partial => 'shared/tracks', :object => song.tracks %>    
 </song>

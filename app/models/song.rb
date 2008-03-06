@@ -66,4 +66,15 @@ class Song < ActiveRecord::Base
   def instruments
     ['sassofono', 'batteria', 'anoleso']
   end
+  
+  # STUB
+  def direct_siblings
+    Song.find(:all, :limit => 2, :conditions => ["songs.id != ?", self.id])
+  end
+  
+  # STUB
+  def indirect_siblings
+    Song.find(:all, :limit => 2, :conditions => ["songs.id != ?", self.id])
+  end
+  
 end
