@@ -2,7 +2,12 @@
 	<div class="float-right">
 		<p class="button float-left">
 		  <% if @genres.previous_page %>
-		    <%= link_to_remote image_tag('arrow_simple_left.png', :width => 7, :height => 9), :update => "genres", :url => genres_path(:page => @genres.previous_page), :method => :get %>
+		    <%= link_to_remote image_tag('arrow_simple_left.png', :width => 7, :height => 9),
+		          :update => "genres",
+		          :url => genres_path(:page => @genres.previous_page),
+              :method => :get,
+              :complete => "var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initSongButtons(); }"
+         %>
 		  <% else %>
 		    <%= image_tag('arrow_simple_left.png', :width => 7, :height => 9) %>
 		  <% end %>
@@ -10,7 +15,12 @@
 		<h1>More Genres</h1>
 		<p class="button float-left">
 		  <% if @genres.next_page %>
-		    <%= link_to_remote image_tag('arrow_simple_right.png', :width => 7, :height => 9), :update => "genres", :url =>  genres_path(:page => @genres.next_page), :method => :get %>
+		    <%= link_to_remote image_tag('arrow_simple_right.png', :width => 7, :height => 9),
+		          :update => "genres",
+		          :url =>  genres_path(:page => @genres.next_page),
+		          :method => :get,
+		          :complete => "var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initSongButtons(); }"
+		    %>
 		  <% else %>
 		    <%= image_tag('arrow_simple_right.png', :width => 7, :height => 9) %>
 		  <% end %>

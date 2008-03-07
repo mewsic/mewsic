@@ -10,7 +10,10 @@
 	</p> 
 	<div class="float-right"> 
 		<p class="star"><%= stars(newest_song.rating_avg) %></p> 
-		<p class="button"><a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
+		<p class="button">
+		  <%= mlab_button(newest_song) %>
+		  <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a>
+    </p>
 	</div>
 	<p class="title"><%= link_to newest_song.title, newest_song %></p>
 	<p class="abstract"><%= h newest_song.original_author %></p>
