@@ -35,6 +35,7 @@ var MlabSlider = Class.create(PictureSlider, {
   
   initialize: function($super, element, options) {
     $super(element, options);    
+    this.scroll_clip = this.element.down('div#scroll-clip');
     MlabSlider.instance = this;
     this.windowSize = this.options.windowSize;
     this.user_id = this.element.down('div.user-id').id;
@@ -69,23 +70,23 @@ var MlabSlider = Class.create(PictureSlider, {
   },    
   
   update: function($super) {     
-    this.updateContainer();
     this.updateScrollingDiv();
+    this.updateScrollClip();
     this.toggleTriggers();
-  },
-  
-  updateContainer: function() {    
-    if(MlabSlider.items.keys().length <= this.windowSize) {
-      this.container.setStyle({
-        height: (MlabSlider.items.keys().length * 60) + 'px'
-      });
-    }
-  },
+  },    
   
   updateScrollingDiv: function() {
     this.scrolling_div.setStyle({
       height: (MlabSlider.items.keys().length * 60) + 'px'
     });
+  },
+  
+  updateScrollClip: function() {
+    if(MlabSlider.items.keys().length <= this.windowSize) {
+      this.scroll_clip.setStyle({
+        height: (MlabSlider.items.keys().length * 60) + 'px'
+      });
+    }
   },
   
   addItem: function(item) {    

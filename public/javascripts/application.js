@@ -19,6 +19,7 @@ document.observe('dom:loaded', function(event) {
 		// new PictureSlider('most-mbands-scroller',  { size: 225 });
 	}
 	
+
 	if ($('mlab-scroller') != null ) {
 	  var mlab_slider = new MlabSlider('mlab-scroller',  {
       axis: 'vertical',
@@ -26,7 +27,8 @@ document.observe('dom:loaded', function(event) {
       size: 300,
       toggleTriggers: true
     });    
-	}			
+	}
+	
 			
 });
 

@@ -1352,6 +1352,8 @@ html>body .register p{
 }
 #mlab-scroll .name, #mlab-scroll .abstract{
 	width: 130px;
+	height: 22px;
+	overflow: hidden;
 }
 #mlab-scroll .elements{
 	padding:5px;
