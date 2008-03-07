@@ -12,8 +12,9 @@ class SongsController < ApplicationController
   end
   
   def show
-    @song = Song.find(params[:id])
-    @show_siblings = params.include?(:siblings)
+    @song = Song.find(params[:id], :include => [{ :mixes => { :track => [:instrument, :parent_song] } }, :genre])
+    @show_siblings  = params.include?(:siblings)
+    @show_edit_info = params.include?(:edit) && params[:edit] == 'true'
     respond_to do |format|
       format.xml
     end

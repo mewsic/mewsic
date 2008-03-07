@@ -1,0 +1,24 @@
+<track>
+  <user><%= mix.track.parent_song.user.login %></user>       
+  <author><%= mix.track.parent_song.original_author %></author>     
+  <title><%= mix.track.title %></title>     
+  <instrument><%= mix.track.instrument.description %></instrument>  
+  <genre><%= mix.track.parent_song.genre.name %></genre>     
+  <bpm></bpm>        
+  <tone></tone>       
+  <description></description>
+  <rating></rating>     
+  <id><%= mix.track.id %></id>         
+  <filename></filename>
+  <volume><%= mix.volume %></volume>
+  <loop><%= mix.loop %></loop>
+  <balance><%= mix.balance %></balance>
+  <time_shift><%= mix.time_shift %></time_shift>
+  <% if @show_siblings; @show_siblings = false -%>
+    <siblings type="direct">
+      <song>
+        <%= render :partial => 'shared/song', :collection => mix.track.songs %>
+      </song>
+    </siblings>
+  <% end -%>
+</track>

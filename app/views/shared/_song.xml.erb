@@ -18,5 +18,13 @@
       <%= render :partial => 'shared/song', :collection => song.indirect_siblings %>
     </siblings>
   <% end -%>
-  <%= render :partial => 'shared/tracks', :object => song.tracks %>    
+  <% if @show_edit_info -%>
+    <%= render :partial => 'shared/mixes', :object => song.mixes %>    
+  <% else -%>
+    <tracks>
+      <% song.mixes.each do |mix| -%>
+        <%= render :partial => 'shared/track', :object => mix.track %>    
+      <% end -%>
+    </tracks>    
+  <% end -%>
 </song>

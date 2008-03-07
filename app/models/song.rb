@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 11
+# Schema version: 12
 #
 # Table name: songs
 #
@@ -69,12 +69,12 @@ class Song < ActiveRecord::Base
   
   # STUB
   def direct_siblings
-    Song.find(:all, :limit => 2, :conditions => ["songs.id != ?", self.id])
+    Song.find(:all, :include => :tracks, :limit => 2, :conditions => ["songs.id != ?", self.id])
   end
   
   # STUB
   def indirect_siblings
-    Song.find(:all, :limit => 2, :conditions => ["songs.id != ?", self.id])
+    Song.find(:all, :include => :tracks, :limit => 2, :conditions => ["songs.id != ?", self.id])
   end
   
 end

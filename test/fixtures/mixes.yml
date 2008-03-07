@@ -1,11 +1,15 @@
 # == Schema Information
-# Schema version: 11
+# Schema version: 12
 #
 # Table name: mixes
 #
 #  id         :integer(11)   not null, primary key
 #  song_id    :integer(11)   
 #  track_id   :integer(11)   
+#  volume     :integer(11)   
+#  loop       :integer(11)   
+#  balance    :integer(11)   
+#  time_shift :integer(11)   
 #  created_at :datetime      
 #  updated_at :datetime      
 #
@@ -14,29 +18,65 @@
 one:
   song: let_it_be
   track: sax_for_let_it_be
+  volume: 80
+  loop: 1
+  balance: 0
+  time_shift: 0
 two:
   song: let_it_be
   track: guitar_for_let_it_be
+  volume: 80
+  loop: 1
+  balance: 0
+  time_shift: 0
 three:
   song: let_it_be
   track: voice_for_let_it_be
+  volume: 80
+  loop: 1
+  balance: 0
+  time_shift: 0
 four:
   song: let_it_be
   track: voice_for_radio_ga_ga
+  volume: 80
+  loop: 1
+  balance: 0
+  time_shift: 0
 five:
   song: radio_ga_ga
   track: voice_for_radio_ga_ga
+  volume: 80
+  loop: 1
+  balance: 0
+  time_shift: 0
 mixes_1:
   song: closer
   track: guitar_for_closer
+  volume: 80
+  loop: 1
+  balance: 0
+  time_shift: 0
 mixes_2:
   song: closer
   track: sax_for_closer
+  volume: 80
+  loop: 1
+  balance: 0
+  time_shift: 0
 mixes_3:
   song: closer
   track: drum_for_closer
+  volume: 80
+  loop: 1
+  balance: 0
+  time_shift: 0
 <% 10.times do |i| %>
 mixes_<%= i + 4 %>:
   song: closer
   track: voice_for_closer_<%= i + 4 %>
+  volume: 80
+  loop: 1
+  balance: 0
+  time_shift: 0
 <% end %>

@@ -41,6 +41,10 @@ ActiveRecord::Schema.define(:version => 12) do
   create_table "mixes", :force => true do |t|
     t.integer  "song_id"
     t.integer  "track_id"
+    t.integer  "volume"
+    t.integer  "loop"
+    t.integer  "balance"
+    t.integer  "time_shift"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
