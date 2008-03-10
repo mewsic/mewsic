@@ -6,11 +6,13 @@ class TracksController < ApplicationController
   end
   
   def show
-    @track = Track.find(params[:id])
+    @track = Track.find(params[:id], :include => [:instrument, :parent_song] )
     @show_siblings = params.include?(:siblings)
     respond_to do |format|
       format.xml
     end
+  rescue ActiveRecord::RecordNotFound
+    redirect_to '/'
   end
   
 end

@@ -18,6 +18,8 @@ class SongsController < ApplicationController
     respond_to do |format|
       format.xml
     end
+  rescue ActiveRecord::RecordNotFound
+    redirect_to '/'
   end
   
 end
