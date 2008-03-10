@@ -1,5 +1,5 @@
 var PictureSlider = Class.create({	
-  initialize: function(element) {
+  initialize: function(element) {    
 	  this.element = $(element);
 		this.options = Object.extend({
 		  axis: 'horizontal'
@@ -12,7 +12,7 @@ var PictureSlider = Class.create({
 	setup: function() {
 	  this.step             = this.options.size;
     this.back_trigger     = this.element.down('.trigger.back');
-		this.forward_trigger  = this.element.down('.trigger.forward');				
+		this.forward_trigger  = this.element.down('.trigger.forward');						
 		Event.observe(this.back_trigger,    'click', this.slideBack.bind(this));
 		Event.observe(this.forward_trigger, 'click', this.slideForward.bind(this));		 
     if(this.options.toggleTriggers) this.toggleTriggers();
@@ -56,9 +56,9 @@ var PictureSlider = Class.create({
     this.slide(-(this.getPosition()), options);
   },
   
-	slide: function(pixel, options) {
+	slide: function(pixel, options) {    
 		if(!this.working) {
-			this.working = true;
+			this.working = true; 
 			new Effect.Move(this.scrolling_div, {
 				x: (this.options.axis == 'horizontal' ? pixel : 0),
 				y: (this.options.axis == 'vertical'   ? pixel : 0),

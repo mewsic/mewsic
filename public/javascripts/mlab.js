@@ -69,7 +69,7 @@ var MlabSlider = Class.create(PictureSlider, {
     this.container = this.element.down('div.container');
   },    
   
-  update: function($super) {     
+  update: function($super) {         
     this.updateScrollingDiv();
     this.updateScrollClip();
     this.toggleTriggers();
