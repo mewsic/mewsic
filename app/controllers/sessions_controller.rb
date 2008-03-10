@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
     else
       flash[:login_error] = :true
     end
-    redirect_back_or_default('/')
+    redirect_back_or_default(user_url(self.current_user))
   end
 
   def destroy

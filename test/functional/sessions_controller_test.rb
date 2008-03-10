@@ -42,6 +42,11 @@ class SessionsControllerTest < Test::Unit::TestCase
     post :create, :login => 'quentin', :password => 'test', :remember_me => "1"
     assert_not_nil @response.cookies["auth_token"]
   end
+  
+  def test_should_redirect_to_my_page
+    post :create, :login => 'quentin', :password => 'test'
+    assert_redirected_to user_url(users(:quentin)) 
+  end
 
   def test_should_not_remember_me
     post :create, :login => 'quentin', :password => 'test', :remember_me => "0"
