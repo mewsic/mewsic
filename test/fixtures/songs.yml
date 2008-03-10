@@ -27,10 +27,10 @@
     array[ r.min, (r.max + 1) ].join(" ")
   end 
   
-  def random_genre_id
-    g = Genre.find(:random, :limit => 1).first
-    g.id
-  end
+# def random_genre_id
+#   g = Genre.find(:random, :limit => 1).first
+#   g.id
+# end                
 %>
 
 let_it_be:
@@ -88,7 +88,7 @@ song_<%= i + 4 %>:
   user: <%= "user_#{rand(497) + 3}" %>
   original_author: <%= %w(Queen Beatles Elvis Vasco R.E.M.)[rand(5)] %>
   description: This is one of the most famous songs made in the '80th
-  genre_id: <%= random_genre_id %>
+  genre: reggae 
   listened_times: <%= rand(1000) %>
 <% end %>
 <% 100.times do |i| %>

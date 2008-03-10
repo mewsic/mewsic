@@ -23,4 +23,5 @@ class GenresControllerTest < ActionController::TestCase
     assert_equal 20, assigns(:songs).size
   end
   
+  
 end
