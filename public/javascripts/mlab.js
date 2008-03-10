@@ -134,16 +134,16 @@ var MlabSlider = Class.create(PictureSlider, {
     });
   },
   
-  initTrackButtons: function() {
-    $$('a.button.mlab.track.add').each(function(element) {
-      element.observe('click', this.onAddTrack.bind(this));
-    }.bind(this));
+  initTrackButtons: function(only_dynamic) {
+    var selector = 'a.button.mlab.track.add';
+    if(only_dynamic) selector += '.dynamic';
+    $$(selector).invoke('observe', 'click', this.onAddTrack.bind(this));
   },    
   
-  initSongButtons: function() {
-    $$('a.button.mlab.song.add').each(function(element) {
-      element.observe('click', this.onAddSong.bind(this));
-    }.bind(this));
+  initSongButtons: function(only_dynamic) {
+    var selector = 'a.button.mlab.song.add';
+    if(only_dynamic) selector += '.dynamic';
+    $$(selector).invoke('observe', 'click', this.onAddSong.bind(this));
   },
   
   onAddTrack: function(event) {

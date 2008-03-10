@@ -28,8 +28,7 @@ document.observe('dom:loaded', function(event) {
       toggleTriggers: true
     });    
 	}
-	
-			
+ 
 });
 
 function popitup(url) {

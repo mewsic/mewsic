@@ -8,7 +8,7 @@
 		          :update => "songs",
 		          :url => songs_path({:page => @songs.previous_page, :genre_id => params[:id]}),
 		          :method => :get,
-		          :complete => "var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initSongButtons(); }"
+		          :complete => "var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initSongButtons(true); }"
          %>
 		  <% else %>
 		    <%= image_tag('arrow_simple_left.png', :width => 7, :height => 9) %>
@@ -21,7 +21,7 @@
 		          :update => "songs",
 		          :url =>  songs_path({:page => @songs.next_page, :genre_id => params[:id]}),
 		          :method => :get,
-		          :complete => "var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initSongButtons(); }"
+		          :complete => "var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initSongButtons(true); }"
         %>
 		  <% else %>
 		    <%= image_tag('arrow_simple_right.png', :width => 7, :height => 9) %>

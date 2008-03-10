@@ -6,7 +6,7 @@
 		          :update => "genres",
 		          :url => genres_path(:page => @genres.previous_page),
               :method => :get,
-              :complete => "var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initSongButtons(); }"
+              :complete => "var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initSongButtons(true); }"
          %>
 		  <% else %>
 		    <%= image_tag('arrow_simple_left.png', :width => 7, :height => 9) %>
@@ -19,7 +19,7 @@
 		          :update => "genres",
 		          :url =>  genres_path(:page => @genres.next_page),
 		          :method => :get,
-		          :complete => "var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initSongButtons(); }"
+		          :complete => "var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initSongButtons(true); }"
 		    %>
 		  <% else %>
 		    <%= image_tag('arrow_simple_right.png', :width => 7, :height => 9) %>

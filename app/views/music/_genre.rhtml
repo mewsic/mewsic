@@ -9,7 +9,7 @@
 					<td><%= h song.user.login %>, <em><%= link_to(song.title, song_path(song)) %></em></td>
 					<td class="star"><%= stars(song.rating_avg) %></td>
 					<td class="button">
-					  <%= mlab_button(song) %>
+					  <%= mlab_button(song, :dynamic => true) %>
 					  <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></td>
 			  	</tr>
 				<% end -%>	
