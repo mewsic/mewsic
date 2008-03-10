@@ -135,11 +135,15 @@ var MlabSlider = Class.create(PictureSlider, {
   },
   
   initTrackButtons: function() {
-    $$('a.button.mlab.track.add').invoke('observe', 'click', this.onAddTrack.bind(this));
+    $$('a.button.mlab.track.add').each(function(element) {
+      element.observe('click', this.onAddTrack.bind(this));
+    }.bind(this));
   },    
   
   initSongButtons: function() {
-    $$('a.button.mlab.song.add').invoke('observe', 'click', this.onAddSong.bind(this));
+    $$('a.button.mlab.song.add').each(function(element) {
+      element.observe('click', this.onAddSong.bind(this));
+    }.bind(this));
   },
   
   onAddTrack: function(event) {

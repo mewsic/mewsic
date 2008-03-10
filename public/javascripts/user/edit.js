@@ -12,6 +12,7 @@ var InPlaceEditorGenerator = Class.create({
       new Ajax.InPlaceEditor(this.options.model + '_' + name, this.options.url + this.user_id, {
         externalControl: 'edit_button_' + this.options.model + '_' + name,
         ajaxOptions: { method: 'PUT' },
+        highlightcolor: '#ffffff',
         paramName: this.options.model + '[' + name + ']'
       });
     }.bind(this));
