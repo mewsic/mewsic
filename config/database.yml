@@ -5,6 +5,5 @@ development:
 
 test:
   adapter: sqlite3
-  database: ":memory:"
-  verbosity: silent
+  database: db/test.sqlite3
   
