@@ -96,14 +96,20 @@ class UsersControllerTest < Test::Unit::TestCase
     assert_response :redirect
   end
   
-  def test_should_redirect_if_user_not_found
-    get :show, :id => 9999999999999
-    assert_response :redirect
+  def test_should_raise_exception_if_user_not_found
+    begin
+      get :show, :id => 9999999999999
+    rescue Exception => e
+      assert e.kind_of?(ActiveRecord::RecordNotFound)
+    end
   end
   
-  def test_should_redirect_if_user_not_activated_yet
-    get :show, :id => users(:aaron).id
-    assert_response :redirect
+  def test_should_raise_exception_user_not_activated_yet
+    begin
+      get :show, :id => users(:aaron).id
+    rescue Exception => e
+      assert e.kind_of?(ActiveRecord::RecordNotFound)
+    end
   end
   
   def test_should_show_activated_user

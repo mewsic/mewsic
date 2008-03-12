@@ -38,9 +38,7 @@ class UsersController < ApplicationController
     @songs = Song.find_paginated_by_user(1, @user.id)
     @tracks = Track.find_paginated_by_user(1, @user.id)
     @gallery = @user.photos.find :all,  :order => "created_at DESC"
-    @answers = @user.find_related_answers
-  rescue ActiveRecord::RecordNotFound
-    redirect_to '/'
+    @answers = @user.find_related_answers  
   end
   
   def activate
@@ -62,8 +60,7 @@ class UsersController < ApplicationController
       end
       render :layout => false
     else      
-    end
-  rescue ActiveRecord::RecordNotFound
+    end  
   end
   
   protected

@@ -10,9 +10,7 @@ class TracksController < ApplicationController
     @show_siblings = params.include?(:siblings)
     respond_to do |format|
       format.xml
-    end
-  rescue ActiveRecord::RecordNotFound
-    redirect_to '/'
+    end  
   end
   
 end

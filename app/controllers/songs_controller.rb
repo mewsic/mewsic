@@ -17,9 +17,7 @@ class SongsController < ApplicationController
     @show_edit_info = params.include?(:edit) && params[:edit] == 'true'
     respond_to do |format|
       format.xml
-    end
-  rescue ActiveRecord::RecordNotFound
-    redirect_to '/'
+    end  
   end
   
 end

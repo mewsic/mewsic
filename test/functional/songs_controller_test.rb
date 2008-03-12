@@ -14,8 +14,11 @@ class SongsControllerTest < ActionController::TestCase
   end
   
   def test_show_should_redirect_unless_song
-    get :show, :id => 0
-    assert_response :redirect
+    begin
+      get :show, :id => 0
+    rescue Exception => e
+      assert e.kind_of?(ActiveRecord::RecordNotFound)
+    end
   end
   
 end

@@ -27,5 +27,12 @@ class GenresControllerTest < ActionController::TestCase
     #     assert_equal 20, assigns(:songs).size
   end
   
+  def test_should_raise_excpetion_if_genre_not_found
+    begin
+      get :show, :id => 0
+    rescue Exception => e
+      assert e.kind_of?(ActiveRecord::RecordNotFound)
+    end
+  end
   
 end

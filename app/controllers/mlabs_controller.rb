@@ -37,8 +37,7 @@ class MlabsController < ApplicationController
   def destroy
     @mlab     = Mlab.find(params[:id])
     @mixable  = @mlab.mixable
-    @mlab.destroy    
-  rescue ActiveRecord::RecordNotFound
+    @mlab.destroy      
   end
 
 private

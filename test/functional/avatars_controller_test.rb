@@ -56,16 +56,20 @@ class AvatarsControllerTest < ActionController::TestCase
     end
   end  
 
-  def test_should_create
+  def test_should_create_and_destroy_previous
     login_as :quentin
-    quentin_avatars_count = users(:quentin).avatars.count
-    assert_difference 'Avatar.count' do 
-      post :create, :user_id => users(:quentin),
-        :avatar => {
-          :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/files/test.jpg'), 'image/jpeg')
-        }
+    assert_difference 'Avatar.count', 2 do 
+      post :create, :user_id => users(:quentin), :avatar => {
+        :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/files/test.jpg'), 'image/jpeg')
+      }
+      post :create, :user_id => users(:quentin), :avatar => {
+        :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/files/test.jpg'), 'image/jpeg')
+      }
+      post :create, :user_id => users(:user_10), :avatar => {
+        :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/files/test.jpg'), 'image/jpeg')
+      }      
     end
-    assert_equal quentin_avatars_count + 1, users(:quentin).avatars.count
+    assert_equal 1, users(:quentin).avatars.count
   end
   
   def test_should_not_create_if_not_current_user

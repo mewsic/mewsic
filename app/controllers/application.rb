@@ -8,11 +8,12 @@ class ApplicationController < ActionController::Base
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery # :secret => '02cedf3882e78b5a99c0bec5cc75c3fc'
   
-  include AuthenticatedSystem    
-  
+  include AuthenticatedSystem
+    
   protected    
   
   def to_breadcrumb
     controller_name
-  end
+  end    
+    
 end

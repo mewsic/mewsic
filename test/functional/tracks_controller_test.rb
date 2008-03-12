@@ -12,9 +12,12 @@ class TracksControllerTest < ActionController::TestCase
     assert_response :success
   end
   
-  def test_show_should_redirect_unless_track
-    get :show, :id => 0
-    assert_response :redirect
+  def test_show_should_raise_exception_unless_track
+    begin
+      get :show, :id => 0
+    rescue Exception => e
+      assert e.kind_of?(ActiveRecord::RecordNotFound)
+    end
   end
   
 end

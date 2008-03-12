@@ -5,9 +5,7 @@ class FriendshipsController < ApplicationController
   def create
     @friend = User.find(params[:friend_id])
     current_user.request_friendship_with(@friend)
-    redirect_to user_path(@friend)    
-  rescue ActiveRecord::RecordNotFound
-    redirect_to '/'
+    redirect_to user_path(@friend)  
   end
   
 end

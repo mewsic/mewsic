@@ -12,6 +12,7 @@ class AvatarsController < ApplicationController
   
   def create
     if params[:avatar] && params[:avatar][:uploaded_data].respond_to?(:size) && params[:avatar][:uploaded_data].size > 0
+      @user.avatars.each{|a| a.destroy}
       if @user.avatars << Avatar.create(params[:avatar])
         redirect_to new_user_avatar_path(params[:user_id], :coming_from => 'create')
       end
@@ -24,9 +25,7 @@ class AvatarsController < ApplicationController
 private
 
   def find_user
-    @user = User.find(params[:user_id], :conditions => ["activated_at IS NOT NULL"])
-  rescue ActiveRecord::RecordNotFound
-    redirect_to '/'    
+    @user = User.find(params[:user_id], :conditions => ["activated_at IS NOT NULL"])  
   end  
   
   def check_current_user

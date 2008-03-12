@@ -22,17 +22,13 @@ class PhotosController < ApplicationController
   end
 
   def destroy
-    @user.photos.find(params[:id]).destroy and redirect_to(user_photos_path(@user))
-  rescue ActiveRecord::RecordNotFound
-    redirect_to '/'
+    @user.photos.find(params[:id]).destroy and redirect_to(user_photos_path(@user)) 
   end
 
 private
 
   def find_user
-    @user = User.find(params[:user_id], :conditions => ["activated_at IS NOT NULL"])
-  rescue ActiveRecord::RecordNotFound
-    redirect_to '/'    
+    @user = User.find(params[:user_id], :conditions => ["activated_at IS NOT NULL"])  
   end  
   
   def check_current_user

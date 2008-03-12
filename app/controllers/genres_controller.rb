@@ -1,4 +1,5 @@
-class GenresController < ApplicationController
+class GenresController < ApplicationController  
+  
   def index              
     respond_to do |format|
       format.html do

@@ -71,9 +71,11 @@ class PhotosControllerTest < ActionController::TestCase
   def test_should_not_destroy_if_photo_not_owned_by_current_user
     login_as :quentin
     assert_no_difference 'Photo.count' do
-      post :destroy, :user_id => users(:quentin), :id => pictures(:first_photo_for_users_1)
-      assert_not_nil assigns["user"]
-      assert_response :redirect
+      begin
+        post :destroy, :user_id => users(:quentin), :id => pictures(:first_photo_for_users_1)
+      rescue Exception => e
+        assert e.kind_of?(ActiveRecord::RecordNotFound)
+      end
     end
   end
   
