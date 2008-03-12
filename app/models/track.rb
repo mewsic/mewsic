@@ -21,7 +21,7 @@ class Track < ActiveRecord::Base
   
   attr_accessor :mlab
   
-  has_many :songs, :through => :mixes
+  has_many :songs, :through => :mixes, :order => 'songs.created_at DESC'
   has_many :mixes
   has_many :mlabs, :as => :mixable
   

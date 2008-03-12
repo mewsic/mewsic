@@ -51,4 +51,5 @@ voice_for_closer_<%= i + 4 %>:
   title: Voice
   parent_song: closer
   instrument: microphone
+  created_at: <%= (rand(30)).days.ago.to_s :db %>
 <% end %>

@@ -3,7 +3,7 @@ class GenresController < ApplicationController
   def index              
     respond_to do |format|
       format.html do
-        @genres = Genre.find_paginated(params[:page])        
+        @genres = Genre.find_paginated(params[:page])
         render :layout => false
       end
       format.xml do

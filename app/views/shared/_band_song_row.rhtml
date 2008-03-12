@@ -1,5 +1,5 @@
 <tr class="<%= band_song_row_counter.even? ? "even" : "odd" %>">
-  <td>
+  <td><%= band_song_row.created_at %>
   	<%=h band_song_row.original_author %> 
 	<em><%= link_to truncate(band_song_row.title, 33), band_song_row %></em>
   </td>

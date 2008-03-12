@@ -3,16 +3,14 @@
 	<div class="bottom-box clear-block">
 	  <div class="elements clear-block">
 			<table width="100%" border="0" cellpadding="0" cellspacing="0">
-	 	  	  <% genre.songs.each_with_index do |song, index| -%>
-			  	<% if (index < 3) -%>
+	 	  	  <% genre.last_songs(3).each_with_index do |song, index| -%>
 			  	<tr class="<%= %w[even odd][index % 2] %>">
 					<td><%= h song.user.login %>, <em><%= link_to(song.title, song_path(song)) %></em></td>
 					<td class="star"><%= stars(song.rating_avg) %></td>
 					<td class="button">
 					  <%= mlab_button(song, :dynamic => true) %>
 					  <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></td>
-			  	</tr>
-				<% end -%>	
+			  	</tr>				  
 			  <% end -%>
 		  </table>
 	  </div>	

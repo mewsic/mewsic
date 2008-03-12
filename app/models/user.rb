@@ -56,7 +56,7 @@ class User < ActiveRecord::Base
   
   has_many_friends
   
-  has_many :songs
+  has_many :songs, :order => 'songs.created_at DESC'
   has_many :answers
   has_many :replies
   has_many :photos
