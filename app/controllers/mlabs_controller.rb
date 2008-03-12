@@ -21,13 +21,17 @@ class MlabsController < ApplicationController
   def create
     @mixable = case params[:type] 
       when 'track'        
-        Track.find(params[:item_id])
+        Track.find_by_id(params[:item_id])
       when 'song'
-        Song.find(params[:item_id])
+        Song.find_by_id(params[:item_id])
     end    
     @mlab = Mlab.create(:user => current_user, :mixable => @mixable)
-    @mixable.mlab = @mlab
-  rescue ActiveRecord::RecordNotFound
+    @mixable.mlab = @mlab if @mlab.valid?
+    
+    respond_to do |format|
+      format.js
+      format.xml
+    end
   end    
   
   def destroy

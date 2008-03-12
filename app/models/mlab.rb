@@ -16,4 +16,6 @@ class Mlab < ActiveRecord::Base
   belongs_to :user
   belongs_to :mixable, :polymorphic => true
   
+  validates_presence_of :mixable
+  
 end

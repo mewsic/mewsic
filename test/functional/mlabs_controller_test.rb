@@ -28,6 +28,20 @@ class MlabsControllerTest < ActionController::TestCase
     assert_response :success
   end
   
+  def test_should_create
+    login_as :quentin
+    assert_difference 'Mlab.count', 2 do
+      post :create, :user_id => users(:quentin).id, :type => 'track', :item_id => tracks(:sax_for_let_it_be).id, :format => 'xml'         
+      post :create, :user_id => users(:quentin).id, :type => 'song',  :item_id => songs(:let_it_be).id, :format => 'xml'   
+    end
+  end
+  
+  def test_should_not_create
+    login_as :quentin
+    assert_difference 'Mlab.count', 0 do
+      post :create, :user_id => users(:quentin).id, :type => 'track', :item_id => 0, :format => 'xml'
+    end
+  end  
   
   def test_should_destroy
     login_as :quentin
