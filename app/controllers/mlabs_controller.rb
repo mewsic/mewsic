@@ -1,6 +1,4 @@
-class MlabsController < ApplicationController 
-  
-  #protect_from_forgery :except => [:destroy, :create]
+class MlabsController < ApplicationController  
   
   layout false
   

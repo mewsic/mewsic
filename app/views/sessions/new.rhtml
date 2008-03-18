@@ -1,3 +1,7 @@
+<% if flash[:login_error] %>
+  <p style="color: red">Il nome utente e la password non corrispondono.</p>
+<% end %>
+
 <% form_tag sessions_path do -%>
 <p><label for="login">Login</label><br/>
 <%= text_field_tag 'login' %></p>
@@ -9,6 +13,6 @@
 <p><label for="remember_me">Remember me:</label>
 <%= check_box_tag 'remember_me' %></p>
 -->
-
+<%= hidden_field_tag 'login_page' %>
 <p><%= submit_tag 'Log in' %></p>
 <% end -%>

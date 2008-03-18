@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
   end
 
   def create
+    redirect_url = params[:login_page] ? '/login' : '/'
     self.current_user = User.authenticate(params[:login], params[:password])
     if logged_in?
       if params[:remember_me] == "1"
@@ -12,10 +13,11 @@ class SessionsController < ApplicationController
         cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
       end
       flash[:notice] = "Logged in successfully"
+      redirect_url = current_user
     else
       flash[:login_error] = :true
     end
-    redirect_back_or_default(user_url(self.current_user))
+    redirect_back_or_default(redirect_url)
   end
 
   def destroy

@@ -14,6 +14,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :tracks 
   
   map.resources :search
+  map.connect 'login', :controller => 'sessions', :action => 'new'
     
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate'
   
