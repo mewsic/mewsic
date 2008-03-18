@@ -63,6 +63,44 @@ class UsersController < ApplicationController
     end  
   end
   
+  def forgot_password
+    return unless request.post?
+    if @user = User.find_by_email(params[:email])
+      flash[:notice] = "A password reset link has been sent to your email address" 
+      @user.forgot_password
+      @user.save
+      redirect_to new_session_url
+    else
+      flash[:notice] = "Could not find a user with that email address" 
+    end
+  end
+
+  def reset_password
+    @user = User.find_by_password_reset_code(params[:id])
+    raise if @user.nil?
+    return if @user unless params[:password]
+      if (params[:password] == params[:password_confirmation])
+        self.current_user = @user #for the next two lines to work
+        current_user.password_confirmation = params[:password_confirmation]
+        current_user.password = params[:password]                
+        if current_user.valid? && !params[:password].blank?
+          current_user.reset_password
+          current_user.save
+          flash[:notice] = "Password reset"          
+          redirect_to new_session_path
+        else
+          flash[:notice] = "Password not reset"
+         end        
+      else
+        flash[:notice] = "Password mismatch"         
+      end        
+  rescue
+      logger.error "Invalid Reset Code entered" 
+      flash[:notice] = "Sorry - That is an invalid password reset code. Please check your code and try again. (Perhaps your email client inserted a carriage return?" 
+      redirect_to new_session_path
+  end
+    
+    
   protected
   
   def check_if_current_user_page

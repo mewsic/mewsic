@@ -90,12 +90,32 @@ class User < ActiveRecord::Base
     :first_name, :last_name, :gender, :motto, :tastes, :country, :city, :age,
     :photos_url, :blog_url, :myspace_url, :skype, :msn, :skype_public, :msn_public
   
+  def forgot_password
+    @forgotten_password = true
+    self.make_password_reset_code
+  end
+
+  def reset_password
+    # First update the password_reset_code before setting the 
+    # reset_password flag to avoid duplicate email notifications.
+    update_attribute(:password_reset_code, nil)
+    @reset_password = true
+  end
+
+  def recently_reset_password?
+    @reset_password
+  end
+
+  def recently_forgot_password?
+    @forgotten_password
+  end
+
   def activate
     @activated = true
     self.activated_at = Time.now.utc
     self.activation_code = nil
     save(false)
-  end
+  end    
 
   def active?
     # the existence of an activation code means they have not activated yet
@@ -248,4 +268,7 @@ class User < ActiveRecord::Base
       self.activation_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
     end    
     
+    def make_password_reset_code
+      self.password_reset_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
+    end
 end

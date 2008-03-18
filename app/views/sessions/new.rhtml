@@ -1,5 +1,9 @@
 <% if flash[:login_error] %>
   <p style="color: red">Il nome utente e la password non corrispondono.</p>
+<% end %>                  
+
+<% if flash[:notice] %>
+  <p style="color: green"><%= flash[:notice] %></p>
 <% end %>
 
 <% form_tag sessions_path do -%>

@@ -3,17 +3,21 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :answers, :has_many => [ :replies ]
   map.resources :genres
   map.resources :instruments
-  map.resources :users do |user|
+  map.resources :users do |user|    
     user.resources :friendships
     user.resources :photos
     user.resources :avatars
     user.resources :mlabs
   end
+  map.forgot_password '/forgot_password', :controller => 'users', :action => 'forgot_password'
+  map.forgot_password '/reset_password/:id',  :controller => 'users', :action => 'reset_password'
+    
   map.resources :sessions
   map.resources :songs
   map.resources :tracks 
   
   map.resources :search
+  
   map.connect 'login', :controller => 'sessions', :action => 'new'
     
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate'

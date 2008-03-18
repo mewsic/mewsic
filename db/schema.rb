@@ -140,6 +140,7 @@ ActiveRecord::Schema.define(:version => 12) do
     t.boolean  "skype_public",                                                           :default => false
     t.string   "crypted_password",          :limit => 40
     t.string   "salt",                      :limit => 40
+    t.string   "string",                    :limit => 40
     t.string   "type"
     t.text     "motto"
     t.text     "tastes"
@@ -147,6 +148,7 @@ ActiveRecord::Schema.define(:version => 12) do
     t.datetime "activated_at"
     t.integer  "friends_count"
     t.integer  "age"
+    t.string   "password_reset_code"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "rating_count"

@@ -15,6 +15,9 @@ class UsersControllerTest < Test::Unit::TestCase
     @controller = UsersController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
+    ActionMailer::Base.delivery_method = :test
+    ActionMailer::Base.perform_deliveries = true
+    ActionMailer::Base.deliveries = []
   end
 
   def test_should_allow_signup
@@ -170,7 +173,47 @@ class UsersControllerTest < Test::Unit::TestCase
     assert assigns(:gallery)
     assert_equal 2, assigns(:gallery).size
   end
-    
+  
+  def test_should_show_forgot_password
+    get :forgot_password
+    assert_response :success
+    assert_nil flash[:notice]
+  end
+  
+  def test_should_not_send_email_if_user_email_not_found
+    post :forgot_password, :email => 'no-existing-email-no-no@test.com'
+    assert_response :success
+    assert flash[:notice]    
+    assert_equal 0, ActionMailer::Base.deliveries.size    
+  end
+  
+  def test_should_send_email_if_user_found
+    post :forgot_password, :email => users(:quentin).email
+    assert_response :redirect
+    assert flash[:notice]
+    assert_equal 1, ActionMailer::Base.deliveries.size
+    assert_not_nil users(:quentin).reload.password_reset_code
+  end
+  
+  def test_should_redirect_if_code_not_found
+    #users(:quentin).update_attribute(:password_reset_code, 'pippo')
+    post :reset_password, :id => 'pippo'
+    assert_response :redirect
+    assert flash[:notice]
+    assert_equal 0, ActionMailer::Base.deliveries.size      
+  end
+  
+  def test_should_reset_password
+    assert_nil User.authenticate('quentin', 'pippo')
+    users(:quentin).update_attribute(:password_reset_code, 'pippo')
+    post :reset_password, :id => 'pippo', :password => 'pippo', :password_confirmation => 'pippo'
+    assert_response :redirect
+    assert flash[:notice]
+    #assert_equal 1, ActionMailer::Base.deliveries.size      
+    assert_nil users(:quentin).reload.password_reset_code
+    assert User.authenticate('quentin', 'pippo')
+  end
+  
   protected
     def create_user(options = {})
       post :create, :user => { :login => 'quire', :email => 'quire@example.com',
