@@ -1,3 +1,5 @@
+require 'rexml/document'
+
 require File.dirname(__FILE__) + '/../test_helper'
 
 class MlabsControllerTest < ActionController::TestCase
@@ -32,7 +34,7 @@ class MlabsControllerTest < ActionController::TestCase
     login_as :quentin
     assert_difference 'Mlab.count', 2 do
       post :create, :user_id => users(:quentin).id, :type => 'track', :item_id => tracks(:sax_for_let_it_be).id, :format => 'xml'         
-      post :create, :user_id => users(:quentin).id, :type => 'song',  :item_id => songs(:let_it_be).id, :format => 'xml'   
+      post :create, :user_id => users(:quentin).id, :type => 'song',  :item_id => songs(:let_it_be).id, :format => 'xml'
     end
   end
   
@@ -49,5 +51,13 @@ class MlabsControllerTest < ActionController::TestCase
       post :destroy, :format => 'js', :user_id => users(:quentin).id, :id => users(:quentin).mlab_items.first.id
     end    
   end
+  
+  def test_new_should_send_authenticity_token
+    login_as :quentin
+    get :new, :user_id => users(:quentin).id, :format => 'xml'
+    assert_response :success
+    xml = REXML::Document.new(@response.body)
+    assert_equal 1, REXML::XPath.match(xml, "/response/authenticity_token").size    
+  end    
   
 end

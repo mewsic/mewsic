@@ -16,6 +16,12 @@ class MlabsController < ApplicationController
     
   end
   
+  def new
+    respond_to do |format|
+      format.xml { render :text => "<response><authenticity_token>#{form_authenticity_token if protect_against_forgery?}</authenticity_token></response>" }
+    end
+  end
+  
   def create
     @mixable = case params[:type] 
       when 'track'        
