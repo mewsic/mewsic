@@ -3,6 +3,7 @@
 	<div class="mlab-container clear-block">
 	  <div id="mlab-scroller">
 	    <div id="<%= current_user.id %>" class="user-id"></div>
+        <div id="<%= form_authenticity_token if protect_against_forgery? %>" class="auth-token"></div>
       <p><a href="#" onclick="return false" class="trigger back"> <img src="/images/mlab_scroll_button_top.png" alt="" width="204" height="22" class="" /></a></p>
       <div id="scroll-clip" style="margin-bottom: 5px; height:0px"><!-- div aggiunta per problema scroll -->
         <div class="container" style="position:absolute; clip:rect(0px 204px 300px 0px)">

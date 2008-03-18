@@ -39,6 +39,7 @@ var MlabSlider = Class.create(PictureSlider, {
     MlabSlider.instance = this;
     this.windowSize = this.options.windowSize;
     this.user_id = this.element.down('div.user-id').id;
+    this.authenticity_token = this.element.down('div.auth-token').id;
     this.loadElements();    
     this.initTrackButtons();
     this.initSongButtons();
@@ -128,6 +129,9 @@ var MlabSlider = Class.create(PictureSlider, {
     var img = element.down('a.button.mlab.remove img');    
     new Ajax.Request('/users/' + this.user_id + '/mlabs/' + item.attributes.mlab_id + '.js', {
       method: 'DELETE',
+      parameters: {
+        authenticity_token: encodeURIComponent(this.authenticity_token)
+      },
       onLoading: function() {
         img.src = "/images/spinner.gif";
       }
@@ -165,7 +169,8 @@ var MlabSlider = Class.create(PictureSlider, {
       evalJS: true,
       parameters: {
         type: itemType,
-        item_id: item_id
+        item_id: item_id,
+        authenticity_token: encodeURIComponent(this.authenticity_token)        
       },
       onComplete: function() {
         element.src = '/images/button_mlab.png';
