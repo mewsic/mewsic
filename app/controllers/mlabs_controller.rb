@@ -2,8 +2,9 @@ class MlabsController < ApplicationController
   
   layout false
   
-  before_filter :login_required
-  before_filter :check_user_identity
+  # FIXME: dopo la fase di test, decommentare le seguanti linee x autenticare l'utente
+  #before_filter :login_required
+  #before_filter :check_user_identity
 
   def index
     @songs = Song.find(:all, :include => [:mlabs, :user], :conditions => ["mlabs.user_id = ?", params[:user_id]])
@@ -29,7 +30,7 @@ class MlabsController < ApplicationController
       when 'song'
         Song.find_by_id(params[:item_id])
     end    
-    @mlab = Mlab.create(:user => current_user, :mixable => @mixable)
+    @mlab = Mlab.create(:user => @user, :mixable => @mixable)
     @mixable.mlab = @mlab if @mlab.valid?
     
     respond_to do |format|
