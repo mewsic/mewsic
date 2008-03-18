@@ -11,7 +11,7 @@
   <id><%= song.id %></id>         
   <filename></filename>
   <% if @show_siblings_count; @show_siblings_count = false; -%>
-    <siblings_count><%= song.siblings_count %></siblings_count>
+    <siblings><%= song.siblings_count %></siblings>
   <% end -%>
   <% if @show_siblings; @show_siblings = false; -%>
     <siblings type="direct">
