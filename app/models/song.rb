@@ -77,4 +77,8 @@ class Song < ActiveRecord::Base
     Song.find(:all, :include => :tracks, :limit => 2, :conditions => ["songs.id != ?", self.id])
   end
   
+  def siblings_count
+    120
+  end
+  
 end

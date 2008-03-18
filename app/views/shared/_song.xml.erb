@@ -9,7 +9,10 @@
   <description></description>
   <rating></rating>     
   <id><%= song.id %></id>         
-  <filename></filename>   
+  <filename></filename>
+  <% if @show_siblings_count; @show_siblings_count = false; -%>
+    <siblings_count><%= song.siblings_count %></siblings_count>
+  <% end -%>
   <% if @show_siblings; @show_siblings = false; -%>
     <siblings type="direct">
       <%= render :partial => 'shared/song', :collection => song.direct_siblings %>
