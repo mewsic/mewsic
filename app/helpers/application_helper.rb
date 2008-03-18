@@ -35,14 +35,15 @@ module ApplicationHelper
   end
       
   def tags_for_cloud(klass, group, attribute, css_classes)
-    # FIXME: la tag cloud deve prendere i tag con più canzoni e non i primi in ordine alfabetico
-    weighted_list = klass.count :include => group, :group => group, :order => "#{group.to_s.pluralize}.#{attribute} ASC", :limit => 20
+    weighted_list = klass.count :include => group, :group => group, :order => "#{group.to_s.pluralize}.#{attribute} ASC", :order => 'count_all DESC', :limit => 40
     
     counts = weighted_list.transpose.last.sort
     min = counts.first
     max = counts.last
         
     divisor = ((max - min) / css_classes.size) + 1
+
+    weighted_list = weighted_list.sort{|a, b| a[0].name <=> b[0].name }
     
     weighted_list.each do |t|
       yield t[0], css_classes[(t[1] - min) / divisor]
