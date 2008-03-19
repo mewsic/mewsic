@@ -24,7 +24,10 @@
       <div class="whiteblock-shadow clear-block">
         <div id="messages">
           <% flash.each do |name, message| -%>
-            <div class="<%= name %>"><%= message %></div>
+            <div class="<%= name %>">
+              <%= message %>
+              <div class="close"></div>
+            </div>
           <% end -%>
         </div>
         <%= breadcrumb %>

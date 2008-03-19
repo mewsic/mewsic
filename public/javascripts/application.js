@@ -28,6 +28,11 @@ document.observe('dom:loaded', function(event) {
       toggleTriggers: true
     });    
 	}
+	
+	if ($('messages') != null ) {	  	  
+	  $('messages').select('div.close').invoke('observe', 'click', function(event) { event.element().up().fade({duration: 0.3}); });
+	}
+	
  
 });
 
