@@ -71,7 +71,7 @@ class UsersController < ApplicationController
       @user.save
       redirect_to new_session_url
     else
-      flash[:notice] = "Could not find a user with that email address" 
+      flash.now[:error] = "Could not find a user with that email address" 
     end
   end
 
@@ -89,10 +89,10 @@ class UsersController < ApplicationController
           flash[:notice] = "Password reset"          
           redirect_to new_session_path
         else
-          flash[:notice] = "Password not reset"
+          flash.now[:notice] = "Password not reset"
          end        
       else
-        flash[:notice] = "Password mismatch"         
+        flash.now[:notice] = "Password mismatch"         
       end        
   rescue
       logger.error "Invalid Reset Code entered" 

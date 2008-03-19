@@ -1628,3 +1628,27 @@ a.cloud5 {
 form {
   margin: 0;
 }
+
+/* messages */
+div#messages div.alert, div#messages div.error, div#messages div.notice {
+  padding: 5px;
+  margin: 5px;
+  border: 2px solid;
+}
+
+div#messages div.alert  {
+   font-size: 0.8em;
+   font-weight:bold;
+   margin:0;
+   padding:5px;
+}
+div#messages div.error  {
+   color:#fff; 
+   background: #F00;
+   border-color: #c00;
+}
+div#messages div.notice {
+  color:#060;
+  background:#e2f9e3;
+  border-color: #060;
+}

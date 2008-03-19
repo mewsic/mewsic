@@ -22,6 +22,12 @@
       </div>      
       <%= yield :top %>            
       <div class="whiteblock-shadow clear-block">
+        <div id="messages">
+          <% flash.each do |name, message| -%>
+            <div class="<%= name %>"><%= message %></div>
+          <% end -%>
+        </div>
+        <%= breadcrumb %>
         <%= yield %>
       </div>
     </div>
