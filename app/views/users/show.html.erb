@@ -1,7 +1,4 @@
-<% javascript('user/edit') if current_user_page? %>
-<% javascript('user/show') %>
 
-<div class="whiteblock-shadow clear-block">
 
   <%= breadcrumb @user %>
   
@@ -28,4 +25,6 @@
     <%= render :partial => 'users/my/share' %> 
   </div>
 
-</div>
+
+<% javascript('user/edit') if current_user_page? %>
+<% javascript('user/show') %>

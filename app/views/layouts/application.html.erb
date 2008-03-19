@@ -19,8 +19,11 @@
       <div id="rightcol">
         <%= render :partial => 'shared/instructions_banner' %>
         <%= render_sidebar %>
+      </div>      
+      <%= yield :top %>            
+      <div class="whiteblock-shadow clear-block">
+        <%= yield %>
       </div>
-      <%= yield %>
     </div>
     <div class="bg-bottom-body"></div>
   </div>
