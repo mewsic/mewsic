@@ -70,8 +70,7 @@ class User < ActiveRecord::Base
     :conditions => "mlabs.mixable_type = 'Track'"    
   has_many :mlab_songs, 
     :class_name => 'Mlab',
-    :conditions => "mlabs.mixable_type = 'Song'"
-    
+    :conditions => "mlabs.mixable_type = 'Song'" 
   
   acts_as_rated :rating_range => 0..5
   

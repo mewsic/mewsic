@@ -1,3 +1,10 @@
+// When object is available, do function fn.
+function when(obj, fn) {
+  if (Object.isString(obj)) obj = /^[\w-]+$/.test(obj) ? $(obj) : $(document.body).down(obj);
+  if (Object.isArray(obj) && !obj.length) return;
+  if (obj) fn(obj);
+}
+
 document.observe('dom:loaded', function(event) {
 
 	// Login Behavior
@@ -29,10 +36,9 @@ document.observe('dom:loaded', function(event) {
     });    
 	}
 	
-	if ($('messages') != null ) {	  	  
-	  $('messages').select('div.close').invoke('observe', 'click', function(event) { event.element().up().fade({duration: 0.3}); });
-	}
-	
+	when('messages', function(e) {
+	  e.select('div.close').invoke('observe', 'click', function(event) { event.element().up().fade({duration: 0.3}); });
+	});		
  
 });
 

@@ -183,7 +183,7 @@ class UsersControllerTest < Test::Unit::TestCase
   def test_should_not_send_email_if_user_email_not_found
     post :forgot_password, :email => 'no-existing-email-no-no@test.com'
     assert_response :success
-    assert flash[:notice]    
+    assert_tag :tag => 'div', :attributes => { :class => 'error' }
     assert_equal 0, ActionMailer::Base.deliveries.size    
   end
   
