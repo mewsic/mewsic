@@ -13,5 +13,5 @@
 message_from_user_10_to_user_11:
   sender: user_10
   recipient: user_11
-  subject: Hello <%= i %> from quentin
+  subject: Hello from user_11
   body: Hello User10, how are you?
