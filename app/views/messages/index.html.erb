@@ -1,0 +1,23 @@
+<div>
+  <table border="0" cellspacing="5" cellpadding="5" style="width: 100%">
+    <tr>
+      <th><%= (params[:action] == 'sent') ? 'TO' : 'FROM' %></th>
+      <th>Subject</th>
+      <th>Date</th>
+      <th>&nbsp;</th>
+    </tr>
+    <% @messages.each do |message| %>
+      <tr id="message_<%= message.id %>">
+        <% if params[:action] == 'sent' -%>
+          <td><%= message.recipient ? message.recipient.login : 'Unknown'  %></td>
+        <% else -%>
+          <td><%= message.sender ? message.sender.login : 'Unknown'  %></td>
+        <% end -%>
+        <td><%= link_to truncate(message.subject), user_message_path(@user, message), :class => 'ajax'  %></td>
+        <td><%= message.created_at.strftime("%m/%d/%y") %></td>
+        <td><%= link_to 'X', user_message_path(@user, message), :class => 'destroy' %></td>
+      </tr>
+    <% end -%>
+  </table>
+  <%= will_paginate @messages %>
+</div>

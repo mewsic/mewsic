@@ -39,13 +39,13 @@ ActiveRecord::Schema.define(:version => 13) do
   end
 
   create_table "messages", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "type"
-    t.string   "from"
-    t.string   "to"
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.boolean  "sender_deleted",    :default => false
+    t.boolean  "recipient_deleted", :default => false
     t.string   "subject"
     t.text     "body"
-    t.datetime "opened_at"
+    t.datetime "read_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

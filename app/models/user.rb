@@ -74,6 +74,8 @@ class User < ActiveRecord::Base
   
   acts_as_rated :rating_range => 0..5
   
+  has_private_messages
+  
   # TODO 
   # aggiungere le seguenti relazioni:
   # 

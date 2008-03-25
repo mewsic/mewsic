@@ -1,0 +1,4 @@
+when($('message_<%= params[:id] %>'), function(e) {
+  e.fade();
+  $('user-mail').down('div.popup div.container div.pagination').update('<%= escape_javascript(will_paginate(@messages)) %>');
+})
