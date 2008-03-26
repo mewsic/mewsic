@@ -46,13 +46,19 @@ var MailBox = Class.create({
   onDestroyMessage: function(event) {
     event.stop();
     if(confirm('Are you sure?')) {
-      new Ajax.Request(event.element().getAttribute('href'), {
+      this.loadPage(event.element().getAttribute('href'), {
         method: 'delete',
         parameters: {
-          authenticity_token: encodeURIComponent(this.authenticity_token)
-        },      
+          authenticity_token: encodeURIComponent(this.authenticity_token),
+          page: this.currentPage()
+        }
       });
     }
+  },
+  
+  currentPage: function() {
+    var e = this.element.down('div.pagination span.current');
+    return e ? e.innerHTML : 1;    
   },
   
   onClickPage: function(event) {
@@ -61,11 +67,12 @@ var MailBox = Class.create({
   },
   
   loadPage: function(url) {
-    new Ajax.Updater(this.container, url, {
+    var options = Object.extend({
       method: 'get',
       evalScripts: true,
-      onComplete: this.initPaginationLinks.bind(this) 
-    });
+      onComplete: this.initPaginationLinks.bind(this),
+    }, arguments[1] || {});
+    new Ajax.Updater(this.container, url, options);
   }
   
 });

@@ -4,7 +4,7 @@ class MlabsController < ApplicationController
   
   # FIXME: dopo la fase di test, decommentare le seguanti linee x autenticare l'utente
   # before_filter :login_required
-  #   before_filter :check_user_identity
+  # before_filter :check_user_identity
 
   def index
     @songs = Song.find(:all, :include => [:mlabs, :user], :conditions => ["mlabs.user_id = ?", params[:user_id]])
