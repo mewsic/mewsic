@@ -2,7 +2,6 @@ html, body{
 	margin:0px;
 	padding:0px;
 	height:100%;
-
 }
 body{
 	font-family:Arial, Verdana, Helvetica, sans-serif;
@@ -17,7 +16,7 @@ table td{
 	vertical-align:top;
 }
 a { 
-	position: relative;
+	/*position:relative;*/
 	text-decoration: none;
 }
 a:hover{
@@ -63,16 +62,16 @@ html[xmlns] .clear-block {
 /* header */
 #header{
 	background-color:#fff;
-	padding-top: 6px;
+	padding-top:6px;
 }
 #logo{
 	margin-left:1px;
 }
 #top-menu{
-	font-size: 11px;
+	font-size:11px;
 	text-align:right;
 	padding-top:3px;
-	margin-right: 6px;
+	margin-right:6px;
 }
 #top-menu a{
 	color:#000;
@@ -181,6 +180,7 @@ html>body #search p span{
 }
 .next{
 	text-align:right;
+	/*padding:3px 20px 3px 0px;*/
 	padding:3px 8px 3px 0px;
 	color:#014D70;
 }
@@ -202,11 +202,11 @@ html>body #search p span{
 }
 /* parte centrale */
 #path{
-	padding-top: 5px;
-	margin: 0 20px 10px;
+	padding-top:5px;
+	margin: 0px 20px 10px;
 	color:#b6b6b6;
 }
-.mypage #path {
+.mypage #path{
 	float:left;
 }
 #path a{
@@ -223,11 +223,10 @@ h1, h1 a{
 	color:#004D71;
 	margin-bottom:10px;
 }
-
 h2, h2 a{
 	font-size:15px;
-	font-weight:bold;	
-	color:#004D71;
+	font-weight:bold;
+	color:#004D71;;
 	margin-bottom:10px;
 }
 .bg-body{
@@ -265,13 +264,15 @@ h2, h2 a{
 #content-body p{
 	padding-bottom:5px;
 }
+#content-body li{
+	padding-bottom:5px;
+}
 .whiteblock-shadow{
 	float:left;
 	padding:0px 6px 30px;
 	width: 732px;
 	background: url(/images/BG_whiteblock_shadow.png) repeat-y top left;
 }
-
 .bottom-shadow{
 	float:left;
 	width: 732px;
@@ -291,7 +292,7 @@ h2, h2 a{
 	padding:0px 6px;
 	height:6px;
 	background: url(/images/BG_whiteblock_shadow_bottom_reverse.png) no-repeat bottom left;
- }
+}
 .box-list {
 	padding-left: 20px;
 	float:left;
@@ -300,7 +301,6 @@ h2, h2 a{
 .box-list h1{
 	margin-bottom:20px;
 }
-
 .box-list table{
 	clear:both;
 }
@@ -315,40 +315,42 @@ tr.even{
 tr.odd{
 	background-color:#fff;
 }
-
 .nav-song h1, .nav-song .tit-sezion-tab{
 	margin-bottom:0px;
 }
-
 .nav-song .tit-sezion-tab{
 	height:18px;	
 }
-
 tr.nav-song td{
 	padding:0px;
 }
-
-
 .full-page{
 	width:708px;
 }
 .one-col{
 	width:275px;
 }
+.one-col-big{
+	width:340px;
+}
 .semi-one-col{
-	width:225px;
+	width:220px;
+}
+.semi-one-col-small{
+	width:205px;
 }
 .small-col{
-	width:170px;
+	width:175px;
 }
 .two-col{
 	width:400px;
 }
-
+.two-col-big{
+	width:455px;
+}
 .two-col.signup{
 	width:600px;
 }
-
 .three-col{
 	width:708px;
 }
@@ -371,7 +373,6 @@ tr.nav-song td{
 	color:#009DC2;
 	font-size:35px;
 }
-
 .pre-lancio-form{
 	width:832px;
 	margin:10px 0px 20px;
@@ -418,7 +419,6 @@ tr.nav-song td{
 .form-orange label{
 	color:#AB946D;
 }
-
 /* box */
 .thumb{
 	float:left;
@@ -444,6 +444,12 @@ tr.nav-song td{
 	line-height:12px;
 	height:25px;
 	margin-bottom:0px !important;
+}
+.label-title{
+	padding-right:15px;
+	float:left;
+	margin-top:-5px;
+	position:relative;
 }
 /* bands */
 .bands-dj-list .thumb img{
@@ -570,7 +576,6 @@ tr.nav-song td{
 	height: 29px;
 	overflow:hidden;
 }
-
 .horizontal-scroll img{
 	float:left;
 	margin:0px 3px;
@@ -666,6 +671,14 @@ h2.dj-label{
 	margin:2px 0px 2px 0px;
 	background-color:#F2F6F8;
 }
+/* cyan box small */
+.cyan-box-small{
+	background-color:#F2FAFC;
+}
+.cyan-box-small .element{
+	clear:both;
+	padding:5px 10px;
+}
 /* green  box */
 .green-box .top-box{
 	background:#EFF7EC;
@@ -757,7 +770,6 @@ h2.dj-label{
 .orange-box .name{
 	padding-top:8px;
 }
-
 /* rounded box cyan */
 .rounded-cyan-top{
 	background:url(/images/BG_box_rounded_cyan_top.png) no-repeat top left;
@@ -808,6 +820,16 @@ h2.dj-label{
 	margin-left:20px;
 	margin-right:0px;
 }
+/* rounded box cyan bordered */ 
+
+.rounded-cyan-border .top-box{
+	background:url(/images/rounded_cyan_border_top.gif) no-repeat top left;
+	padding-top:10px;
+}
+.rounded-cyan-border .bottom-box{
+	background:url(/images/rounded_cyan_border_bottom.gif) no-repeat bottom left;
+	padding:5px 10px 20px;
+}
 
 /* rounded box lightblue */
 .rounded-lightblue-top{
@@ -823,6 +845,16 @@ h2.dj-label{
 	text-align:center;
 	background:#EEF4F8;
 	color:#386781;
+}
+/* box azzurro */
+.azzurro-box .top-box{
+	background-color:#F3F8FA;
+	padding:25px 15px;
+}
+/* box grigio */
+.grey-box .top-box{
+	background-color:#F9F9F9;
+	padding:25px 15px;
 }
 
 
@@ -1403,6 +1435,9 @@ html>body .register p{
 	font-size: 11px;
 	border: 2px solid red;
 }
+.log-in-page h1{
+	padding:5px 20px 20px;
+}
 .white-box-right-top{
 	background:url(/images/white_box_right_top.png) no-repeat top left;
 	height:9px;
@@ -1435,6 +1470,26 @@ html>body .register p{
 .white-box-right-body label{
 	padding:0px 5px;
 }
+.music-info{
+	font-size:11px;
+	color:#0296C2;
+}
+.music-info a{
+	color:#0296C2;
+}
+.bordered{
+	border-top:1px solid #EDEDED;
+	border-bottom:1px solid #EDEDED;
+	margin:5px 0px;
+}
+.bordered span{
+	display:inline-block;
+	width:80px;
+	margin-right:10px;
+}
+html>body .bordered span{
+	display:table-cell;
+}
 p.sign-in{
 	color:#0296C2;
 	font-weight:normal;
@@ -1455,6 +1510,7 @@ p.sign-in .button{
 	float:right;
 	padding:5px 5px 0px 0px;
 }
+
 /* footer */
 #footer{
 	text-align:center;
@@ -1484,6 +1540,7 @@ p.sign-in .button{
 .clear-float{
 	clear:both;
 }
+
 .margin-top-bottom{
 	margin: 20px 0px;
 }
@@ -1528,6 +1585,13 @@ p.sign-in .button{
 .grey-text a{
 	color:#61656A;
 }
+.orange-text{
+	color:#ECAF48;
+}
+.orange-text a{
+	color:#ECAF48;
+}
+
 .alert{
 	color:#c03;
 	font-size:14px;
@@ -1574,6 +1638,11 @@ head:first-child+body .special-button{
 	width:220px;
 	margin-left: -225px;
 }
+.special-button input.special_button_small{
+	font-size:13px;
+	width:90px;
+	margin-left: -93px;
+}
 .special-button input/* */{
 	/*margin-left: -8.2em;*/
 }
@@ -1590,6 +1659,14 @@ head:first-child+body .special-button input{
 }
 * html .special-button input{
 	padding-top: 0.40em; 
+}
+:root .special-button input.special_button_small{
+	/*margin-left: -6.8em !important;*/
+	padding-top: 0.15em !important; 
+	position: absolute !important;
+}
+* html .special-button input.special_button_small{
+	padding-top: 0.10em; 
 }
 
 /* tag cloud */
