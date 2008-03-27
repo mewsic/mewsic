@@ -13,7 +13,7 @@
         <% else -%>
           <td><%= message.sender ? message.sender.login : 'Unknown'  %></td>
         <% end -%>
-        <td><%= link_to truncate(message.subject), user_message_path(@user, message), :class => 'ajax'  %></td>
+        <td><%= link_to_message(@user, message)  %></td>
         <td><%= message.created_at.strftime("%m/%d/%y") %></td>
         <td><%= link_to 'X', user_message_path(@user, message), :class => 'destroy' %></td>
       </tr>
@@ -21,3 +21,7 @@
   </table>
   <%= will_paginate @messages %>
 </div>
+<script type="text/javascript" charset="utf-8">
+  MailBox.instance.updateUnreadCount(<%= @user.unread_message_count %>)
+  MailBox.instance.updateReceivedCount(<%= @user.received_messages.count %>)
+</script>

@@ -7,11 +7,19 @@ var MailBox = Class.create({
     this.setup();
   },
   
-  setup: function() {
+  setup: function() {     
     this.popup = this.element.down('div.popup');
     this.container = this.popup.down('div.container');
     this.element.select('a.button.popup').invoke('observe', 'click', this.handleOpenPopup.bind(this));
     this.popup.down('a.button.close').observe('click', this.handleClosePopup.bind(this));    
+  },
+  
+  updateReceivedCount: function(count) {
+    this.element.down('.received.count').update(count);
+  },
+  
+  updateUnreadCount: function(count) {
+    this.element.down('.unread.count').update(count);
   },
   
   handleClosePopup: function(event) {
@@ -82,4 +90,3 @@ var MailBox = Class.create({
 MailBox.init = function() { MailBox.instance = new MailBox(); }
 
 document.observe('dom:loaded', MailBox.init);
-

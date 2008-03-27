@@ -12,9 +12,9 @@
   <filename></filename>
   <% if @show_siblings; @show_siblings = false -%>
     <siblings type="direct">
-      <song>
+      <songs>
         <%= render :partial => 'shared/song', :collection => track.songs %>
-      </song>
+      </songs>
     </siblings>
   <% end -%>
 </track>

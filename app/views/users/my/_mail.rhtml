@@ -5,8 +5,8 @@
   <table width="100%" cellspacing="0" cellpadding="0" border="0">
     <tbody>
       <tr>
-        <td style="padding-left: 30px;"><a href="#">Received</a></td>
-        <td style="width: 40px;"><%= @user.sent_messages.count + @user.received_messages.count %></td>
+        <td style="padding-left: 30px;"><a href="#">Unread</a></td>
+        <td style="width: 40px;" class="unread count"><%= @user.unread_message_count %></td>
       </tr>
       <tr>
         <td style="padding-left: 30px;">
@@ -22,7 +22,7 @@
         <td style="padding-left: 30px;">
           <a href="<%= user_messages_path(@user) %>" class="button popup">Inbox</a>
         </td>
-        <td style="width: 40px;"><%= @user.unread_message_count %></td>
+        <td style="width: 40px;" class="received count"><%= @user.received_messages.count %></td>
       </tr>
       <tr>
         <td style="padding-left: 30px;"><strong>
