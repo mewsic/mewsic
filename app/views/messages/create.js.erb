@@ -1,0 +1,9 @@
+<% if @sent -%>
+  alert('Message has been sent correctly');
+  MailBox.instance.closePopup();
+<% else -%>
+  alert('<%=escape_javascript "Error sending message to '#{params[:message][:to]}'" %>');
+  var b = $('new_message_send_button');
+  b.disabled = false;
+  b.value = b.getAttribute('originalvalue');
+<% end -%>

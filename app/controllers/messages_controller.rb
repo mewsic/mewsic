@@ -37,10 +37,26 @@ class MessagesController < ApplicationController
     end
   end
 
-  def new
+  def new  
+    @message = Message.new(params[:message])
+    if original_message = Message.read(params[:reply], @user)
+      @message.to = original_message.sender.login
+      @message.subject = "RE: #{original_message.subject}"
+      @message.body = original_message.body.collect{|line| ">#{line}"}.unshift("\n\n\n")
+    end
+  rescue ActiveRecord::RecordNotFound
   end
 
   def create
+    @message = Message.new(params[:message])
+    @message.sender = @user    
+    @message.recipient = User.find_by_login(params[:message][:to])
+        
+    respond_to do |format|
+      format.js do
+        @sent = @message.save
+      end
+    end
   end
   
   def destroy

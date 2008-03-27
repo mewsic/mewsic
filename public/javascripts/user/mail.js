@@ -10,31 +10,33 @@ var MailBox = Class.create({
   setup: function() {
     this.popup = this.element.down('div.popup');
     this.container = this.popup.down('div.container');
-    this.popup.down('a.button.close').observe('click', this.onClosePopup.bind(this));
-    this.element.down('a.button.list.received').observe('click', this.onOpenListReceived.bind(this));
-    this.element.down('a.button.list.sent').observe('click', this.onOpenListSent.bind(this));
+    this.element.select('a.button.popup').invoke('observe', 'click', this.handleOpenPopup.bind(this));
+    this.popup.down('a.button.close').observe('click', this.handleClosePopup.bind(this));    
   },
   
-  onClosePopup: function(event) {
-    event.stop();
+  handleClosePopup: function(event) {
+    event.stop();      
+    this.closePopup();    
+  },
+  
+  closePopup: function() {
+    this.deselectAllLinks();
     this.popup.hide();
     this.container.update('').hide();
   },
   
-  onOpenListReceived: function(event) {
+  handleOpenPopup: function(event) {
     event.stop();
+    this.deselectAllLinks();
     event.element().up().addClassName('active');
     event.element().up().up().addClassName('active');
     this.popup.show();
     this.container.show();
-    this.loadPage('/users/' + this.user_id + '/messages/');    
-  },
+    this.loadPage(event.element().getAttribute('href'));
+  },    
   
-  onOpenListSent: function(event) {
-    event.stop();
-    this.popup.show();
-    this.container.show();
-    this.loadPage('/users/' + this.user_id + '/messages/sent/');    
+  deselectAllLinks: function() {
+    this.element.select('.active').invoke('removeClassName', 'active');
   },
   
   initPaginationLinks: function() {

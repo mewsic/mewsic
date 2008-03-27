@@ -1,2 +1,10 @@
 <h1>Messages#new</h1>
-<p>Find me in app/views/messages/new.html.erb</p>
+<% remote_form_for :message, :url => user_messages_path, 
+  :loading => "var b = $('new_message_send_button');b.setAttribute('originalvalue', b.value);b.setAttribute('value', 'sending');b.disabled=true;b.value='Sending...';return false;" do |f| -%>
+  TO: <%= f.text_field :to %><br />
+  Subject: <%= f.text_field :subject %><br />
+  Message<br />
+  <%= f.text_area :body, :rows => 10 %><br />
+  <%= submit_tag 'Send', :id => 'new_message_send_button' %> or
+  <%= link_to 'Back to Inbox', user_messages_path(@user), :class => 'ajax' %>
+<% end -%>

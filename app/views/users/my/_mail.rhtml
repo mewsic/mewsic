@@ -10,7 +10,7 @@
       </tr>
       <tr>
         <td style="padding-left: 30px;">
-          <a href="#" class="button list sent">Sent mail</a>
+          <a href="<%= sent_user_messages_path(@user) %>" class="button popup">Sent mail</a>
         </td>
         <td style="width: 40px;"><%= @user.sent_messages.count %></td>
       </tr>
@@ -20,12 +20,14 @@
       </tr>
       <tr>
         <td style="padding-left: 30px;">
-          <a href="#" class="button list received">Inbox</a>
+          <a href="<%= user_messages_path(@user) %>" class="button popup">Inbox</a>
         </td>
         <td style="width: 40px;"><%= @user.unread_message_count %></td>
       </tr>
       <tr>
-        <td style="padding-left: 30px;"><strong><a href="#">New message</a></strong></td>
+        <td style="padding-left: 30px;"><strong>
+          <a href="<%= new_user_message_path(@user) %>" class="button popup">New message</a></strong>
+        </td>
         <td style="width: 40px;"> </td>
       </tr>				  
     </tbody>
