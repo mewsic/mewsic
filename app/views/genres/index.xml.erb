@@ -3,11 +3,7 @@
   <% @genres.each do |genre| -%>
     <genre>
       <id><%= genre.id %></id>
-      <name>
-        <![CDATA[
-          <%= genre.name %>
-        ]]>
-      </name>
+      <name><![CDATA[<%= genre.name %>]]></name>
     </genre>
   <% end -%>
 </genres>
