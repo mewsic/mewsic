@@ -56,11 +56,15 @@ end
 
 # =============================================================================
 # Any custom after tasks can go here.
-# after "deploy:symlink_configs", "myousica_custom"
-# task :myousica_custom, :roles => :app, :except => {:no_release => true, :no_symlink => true} do
-#   run <<-CMD
-#   CMD
-# end
+after "deploy:setup", "setup_photos"
+task :setup_photos, :roles => [:app, :web], :except  => {:no_release => true, :no_symlink => true} do
+  run "cd #{shared_path}; mkdir photos"
+end
+
+after "deploy:symlink_configs", "symlink_photos"
+task :symlink_photos, :roles => [:app, :web], :except => {:no_release => true, :no_symlink => true} do
+  run "cd #{current_path}/public/images; rm -rf photos; ln -s #{shared_path}/photos ."
+end
 # =============================================================================
 
 # Don't change unless you know what you are doing!
