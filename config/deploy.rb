@@ -56,14 +56,32 @@ end
 
 # =============================================================================
 # Any custom after tasks can go here.
-after "deploy:setup", "setup_photos"
+after "deploy:setup", "setup_myousica_folders"
+task :setup_myousica_folders, :roles => [:app, :web], :except  => {:no_release => true, :no_symlink => true} do
+  setup_photos
+  setup_avatars
+end
+
+task :setup_avatars, :roles => [:app, :web], :except  => {:no_release => true, :no_symlink => true} do
+  run "cd #{shared_path}; mkdir avatars"
+end
+
 task :setup_photos, :roles => [:app, :web], :except  => {:no_release => true, :no_symlink => true} do
   run "cd #{shared_path}; mkdir photos"
 end
 
-after "deploy:symlink_configs", "symlink_photos"
+after "deploy:symlink_configs", "myousica_symlinks"
+task :myousica_symlinks, :roles => [:app, :web], :except => {:no_release => true, :no_symlink => true} do
+  symlink_photos
+  symlink_avatars
+end
+
 task :symlink_photos, :roles => [:app, :web], :except => {:no_release => true, :no_symlink => true} do
   run "cd #{current_path}/public/images; rm -rf photos; ln -s #{shared_path}/photos ."
+end
+
+task :symlink_avatars, :roles => [:app, :web], :except => {:no_release => true, :no_symlink => true} do
+  run "cd #{current_path}/public; rm -rf avatars; ln -s #{shared_path}/avatars ."
 end
 # =============================================================================
 
