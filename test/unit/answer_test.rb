@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 class AnswerTest < ActiveSupport::TestCase
  
   def test_find_newest
-    last_answer = answers(:aaron_asks_about_girls)
+    last_answer = answers(:user_10_asks_about_girls)
     recent_answers = Answer.find_newest :limit => 3
     
     assert_equal 3, recent_answers.size

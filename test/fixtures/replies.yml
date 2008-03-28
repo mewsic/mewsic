@@ -13,8 +13,8 @@
 
 first_reply:
   user: quentin
-  answer: quentin_asks_about_magic
+  answer: user_10_asks_about_magic
 girls_reply:
   user: quentin
-  answer: aaron_asks_about_girls
+  answer: user_10_asks_about_girls
   

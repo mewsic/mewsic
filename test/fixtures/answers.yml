@@ -15,17 +15,17 @@ quentin_asks_about_magic:
   user: quentin
   body: Come si gioca a Magic The Gathering
   
-aaron_asks_about_soccer:
-  user: aaron
+user_10_asks_about_soccer:
+  user: user_10
   body: What is your favorite soccer team?
   
-aaron_asks_about_girls:
-  user: aaron
+user_10_asks_about_girls:
+  user: user_10
   body: What is your favorite kind of girl?
   created_at: <%= 1.week.from_now.to_s(:db) %>
   
 <% 100.times do |i| %>
 answer_<%= i + 3 %>:
-  user: aaron
+  user: user_10
   body: Nel mezzo del cammin di nostra vita mi ritrovai nel culo una matita. Ahi, che dolor! Era una carioca a dodici color.
 <% end %>
