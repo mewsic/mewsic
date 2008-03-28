@@ -1,6 +1,6 @@
 <tr class="<%= band_song_row_counter.even? ? "even" : "odd" %>">
   <td>  	
-    <a href="<%= song_path(band_song_row) %>"><%= band_song_row.original_author %> &dash; <em><%= truncate(band_song_row.title, 30) %></em></a>
+    <a href="<%= song_path(band_song_row) %>"><%= band_song_row.original_author %> - <em><%= truncate(band_song_row.title, 30) %></em></a>
   </td>
   <td class="star">
     <%= stars(band_song_row.rating_avg) %>
