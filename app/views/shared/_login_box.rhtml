@@ -2,15 +2,30 @@
   <p>Il nome utente e la password non corrispondono.</p>
 </div>
 <div id="log-in" class="clear-block">
-  <% form_tag sessions_path do -%>
-  <div class="log-in-input">
-	  <p><%= text_field_tag 'login', 'username' %></p>
-	  <p><%= password_field_tag 'password', 'password' %></p>
-	  <p><input id="login_submit" name="log-in" type="image" src="/images/login_button.png" class="input-button" onclick="$(this).up('form').submit()"/></p>
+  <div id="login-box">
+    <div class="log-in-input">
+      <% form_tag sessions_path do -%>    
+    	  <p><%= text_field_tag 'login', 'username' %></p>
+    	  <p><%= password_field_tag 'password', 'password' %></p>
+    	  <p><input id="login_submit" name="log-in" type="image" src="/images/login_button.png" class="input-button" onclick="$(this).up('form').submit()"/></p>    
+      <% end -%>
+    </div>
+    <div class="log-in-link">
+  	  <p><%= link_to "Sign Up", new_user_path %></p>
+  	  <p><a href="/forgot_password" onclick="$('login-box').hide();$('forgot-box').show();return false;">Forgot Password</a></p>
+    </div>
   </div>
-  <div class="log-in-link">
-	  <p><%= link_to "Sign Up", new_user_path %></p>
-	  <p><a href="/forgot_password">Forgot Password</a></p>
-  </div>
-  <%- end -%>
+       
+  <div id="forgot-box" style="display: none;">
+    <div class="log-in-input">
+      <% form_remote_tag :url => forgot_password_url do -%>    
+    	  <p>Your email address</p>
+    	  <p><%= text_field_tag 'email' %></p>
+    	  <p><input type="submit" value="Send" class="input-button"/></p>    
+      <% end -%>
+    </div>
+    <div class="log-in-link">
+  	  <p><a href="#" onclick="$('forgot-box').hide(); $('login-box').show();return false;">Login</a></p>
+    </div>
+  </div>  
 </div>

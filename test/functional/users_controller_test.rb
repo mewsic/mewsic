@@ -174,23 +174,25 @@ class UsersControllerTest < Test::Unit::TestCase
     assert_equal 2, assigns(:gallery).size
   end
   
-  def test_should_show_forgot_password
+  def test_should_redirect_unless_xhr
     get :forgot_password
+    assert_response :redirect
+  end
+  
+  def test_should_show_forgot_password
+    xhr :get, :forgot_password
     assert_response :success
-    assert_nil flash[:notice]
   end
   
   def test_should_not_send_email_if_user_email_not_found
-    post :forgot_password, :email => 'no-existing-email-no-no@test.com'
+    xhr :post, :forgot_password, :email => 'no-existing-email-no-no@test.com'
     assert_response :success
-    assert_tag :tag => 'div', :attributes => { :class => 'error' }
     assert_equal 0, ActionMailer::Base.deliveries.size    
   end
   
   def test_should_send_email_if_user_found
-    post :forgot_password, :email => users(:quentin).email
-    assert_response :redirect
-    assert flash[:notice]
+    xhr :post, :forgot_password, :email => users(:quentin).email
+    assert_response :success
     assert_equal 1, ActionMailer::Base.deliveries.size
     assert_not_nil users(:quentin).reload.password_reset_code
   end
@@ -207,7 +209,7 @@ class UsersControllerTest < Test::Unit::TestCase
     assert_nil User.authenticate('quentin', 'pippo')
     users(:quentin).update_attribute(:password_reset_code, 'pippo')
     post :reset_password, :id => 'pippo', :password => 'pippo', :password_confirmation => 'pippo'
-    assert_response :redirect
+    assert_redirected_to user_path(users(:quentin))
     assert flash[:notice]
     #assert_equal 1, ActionMailer::Base.deliveries.size      
     assert_nil users(:quentin).reload.password_reset_code

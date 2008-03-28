@@ -1,3 +1,47 @@
+var Message = {
+  
+  template: '<div class="#{type}">#{message}<div class="close"/></div>',
+  
+  show: function(message, type, close_previous) {
+    if(close_previous) Message.closeAll();
+    var tpl = new Template(Message.template); 
+    var content = tpl.evaluate({message: message, type: type});
+    $('messages').insert(content);
+    Message.initCloseLinks();
+  },
+  
+  initCloseLinks: function() {
+    var e = $('messages');
+    if(e) { 
+      e.select('div.close').invoke('observe', 'click', Message.handleClose);
+    }
+  },
+  
+  closeAll: function() {
+    var e = $('messages');
+    if(e) {
+      e.select('div').invoke('hide');
+    }
+  },
+  
+  handleClose: function(event) {
+    event.element().up().fade({ duration: 0.3 });
+  },
+  
+  error: function(message, close_previous) {
+    Message.show(message, 'error', close_previous);
+  },
+  
+  notice: function(message, close_previous) {
+    Message.show(message, 'notice', close_previous);
+  },
+  
+  init: function() {
+    Message.initCloseLinks();    
+  }
+  
+};
+
 // When object is available, do function fn.
 function when(obj, fn) {
   if (Object.isString(obj)) obj = /^[\w-]+$/.test(obj) ? $(obj) : $(document.body).down(obj);
@@ -6,7 +50,6 @@ function when(obj, fn) {
 }
 
 document.observe('dom:loaded', function(event) {
-
 	// Login Behavior
 	if ( $('log-in') != null ) {
 		$('log-in').down('input', 1).focus();
@@ -35,10 +78,8 @@ document.observe('dom:loaded', function(event) {
       toggleTriggers: true
     });    
 	}
-	
-	when('messages', function(e) {
-	  e.select('div.close').invoke('observe', 'click', function(event) { event.element().up().fade({duration: 0.3}); });
-	});		
+		 
+  Message.init();
  
 });
 

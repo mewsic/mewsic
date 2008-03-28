@@ -63,15 +63,18 @@ class UsersController < ApplicationController
     end  
   end
   
-  def forgot_password
-    return unless request.post?
-    if @user = User.find_by_email(params[:email])
-      flash[:notice] = "A password reset link has been sent to your email address" 
+  def forgot_password    
+    if !params[:email].blank? && @user = User.find_by_email(params[:email])
+      flash.now[:notice] = "A password reset link has been sent to your email address" 
       @user.forgot_password
-      @user.save
-      redirect_to new_session_url
+      @user.save                 
     else
       flash.now[:error] = "Could not find a user with that email address" 
+    end
+    
+    respond_to do |format|      
+      format.html { redirect_to '/' }
+      format.js            
     end
   end
 
@@ -87,9 +90,9 @@ class UsersController < ApplicationController
           current_user.reset_password
           current_user.save
           flash[:notice] = "Password reset"          
-          redirect_to new_session_path
+          redirect_to user_path(current_user)
         else
-          flash.now[:notice] = "Password not reset"
+          flash.now[:notice] = "Password too short"
          end        
       else
         flash.now[:notice] = "Password mismatch"         
@@ -97,7 +100,7 @@ class UsersController < ApplicationController
   rescue
       logger.error "Invalid Reset Code entered" 
       flash[:notice] = "Sorry - That is an invalid password reset code. Please check your code and try again. (Perhaps your email client inserted a carriage return?" 
-      redirect_to new_session_path
+      redirect_to '/'
   end
     
     
