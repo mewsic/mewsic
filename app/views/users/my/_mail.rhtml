@@ -1,3 +1,5 @@
+<% javascript('user/edit', 'user/mail') %>
+
 <div id="user-mail" class="user-mail" style="position: relative;">
   <div id="mailbox_<%= @user.id %>" class="user-id" style="display: none;"></div>
   <div id="mailbox_<%= form_authenticity_token if protect_against_forgery? %>" class="auth-token"></div>

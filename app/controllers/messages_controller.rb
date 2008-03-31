@@ -19,7 +19,7 @@ class MessagesController < ApplicationController
     end
   end
 
-  def sent
+  def sent       
     @messages = @user.sent_messages.paginate(:page => params[:page], :per_page => 10)
     render :action => 'index'
   end
@@ -39,10 +39,12 @@ class MessagesController < ApplicationController
 
   def new  
     @message = Message.new(params[:message])
-    if original_message = Message.read(params[:reply], @user)
+    if params[:reply] && original_message = Message.read(params[:reply], @user)
       @message.to = original_message.sender.login
       @message.subject = "RE: #{original_message.subject}"
       @message.body = original_message.body.collect{|line| ">#{line}"}.unshift("\n\n\n")
+    elsif params[:to]
+      @message.to = params[:to]
     end
   rescue ActiveRecord::RecordNotFound
   end

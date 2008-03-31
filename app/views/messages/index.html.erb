@@ -8,12 +8,8 @@
     </tr>
     <% @messages.each do |message| %>
       <tr id="message_<%= message.id %>">
-        <% if params[:action] == 'sent' -%>
-          <td><%= message.recipient ? message.recipient.login : 'Unknown'  %></td>
-        <% else -%>
-          <td><%= message.sender ? message.sender.login : 'Unknown'  %></td>
-        <% end -%>
-        <td><%= link_to_message(@user, message)  %></td>
+        <td><%= link_to_message_by_user(@user, message)  %></td>
+        <td><%= link_to_message_by_body(@user, message)  %></td>
         <td><%= message.created_at.strftime("%m/%d/%y") %></td>
         <td><%= link_to 'X', user_message_path(@user, message), :class => 'destroy' %></td>
       </tr>
