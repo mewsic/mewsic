@@ -31,7 +31,7 @@ module ApplicationHelper
       default_breadcrumb += ' : ' + link_to(controller.send(:to_breadcrumb).capitalize, send("#{controller.controller_name}_path"))
       default_breadcrumb += ' : ' + link_to(model_crumb.to_breadcrumb, send("#{controller.controller_name.singularize}_path", [model_crumb.id])) if model_crumb
     end    
-    default_breadcrumb + '</div>'
+    default_breadcrumb += '</div>'
     content_for :breadcrumb, default_breadcrumb
   end
   
