@@ -30,6 +30,11 @@ class Track < ActiveRecord::Base
   
   acts_as_rated :rating_range => 0..5 
   
+  def self.find_orphans(options = {})
+    options.merge!({:order => 'tracks.song_id IS NULL'})
+    self.find(:all, options)
+  end
+  
   # FIXME: Per motivi di performance dovremmo tirare dentro anche gli users e la parent_song
   def self.find_most_used(options = {})
     Mix.count options.merge({:include => [{:track => :instrument}], :group => :track, :order => 'count_all DESC'}) 
