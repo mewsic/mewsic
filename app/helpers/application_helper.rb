@@ -32,6 +32,12 @@ module ApplicationHelper
       default_breadcrumb += ' : ' + link_to(model_crumb.to_breadcrumb, send("#{controller.controller_name.singularize}_path", [model_crumb.id])) if model_crumb
     end    
     default_breadcrumb + '</div>'
+    content_for :breadcrumb, default_breadcrumb
+  end
+  
+  def render_breadcrumb
+    breadcrumb unless @content_for_breadcrumb
+    @content_for_breadcrumb
   end
       
   def tags_for_cloud(klass, group, attribute, css_classes)
