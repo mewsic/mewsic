@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
       flash[:notice] = "Logged in successfully"
       redirect_url = current_user
     else
-      flash[:login_error] = :true
+      flash[:error] = "Not logged"
     end
     redirect_back_or_default(redirect_url)
   end

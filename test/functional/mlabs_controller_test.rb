@@ -48,7 +48,7 @@ class MlabsControllerTest < ActionController::TestCase
   def test_should_destroy
     login_as :quentin
     assert_difference 'Mlab.count', -1 do
-      post :destroy, :format => 'js', :user_id => users(:quentin).id, :id => users(:quentin).mlab_items.first.id
+      post :destroy, :format => 'js', :user_id => users(:quentin).id, :id => users(:quentin).mlabs.first.id
     end    
   end
   

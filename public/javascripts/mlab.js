@@ -160,7 +160,7 @@ var MlabSlider = Class.create(PictureSlider, {
   
   handleItemAddition: function(event, itemType) {
     event.stop(); 
-    var element = event.element();    
+    var element = event.element();
     var item_id = element.id.match(/^(\d+)_/)[1];
     if(MlabSlider.items.get(itemType + '_' + item_id)) return;
     element.src = "/images/spinner.gif";    

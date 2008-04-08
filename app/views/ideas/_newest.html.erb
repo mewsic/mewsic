@@ -1,0 +1,11 @@
+<div class="box-list one-col-big clear-block">
+  <div class="simple-list grey-box">
+    <h1>NEWEST</h1>
+    <div class="top-box clear-block">
+      <div class="bottom-box clear-block">
+        <%= render :partial => 'tracks_block', :locals => {:tracks => @newest} %>
+      </div>
+    </div>
+    <p class="abstract align-right"><a href="#">Next</a></p>			
+  </div>
+</div>

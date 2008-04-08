@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 12
+# Schema version: 13
 #
 # Table name: tracks
 #
@@ -7,6 +7,7 @@
 #  title         :string(255)   
 #  filename      :string(255)   
 #  description   :string(255)   
+#  tonality      :string(255)   default("C")
 #  song_id       :integer(11)   
 #  instrument_id :integer(11)   
 #  bpm           :integer(11)   
@@ -31,7 +32,7 @@ class Track < ActiveRecord::Base
   acts_as_rated :rating_range => 0..5 
   
   def self.find_orphans(options = {})
-    options.merge!({:order => 'tracks.song_id IS NULL'})
+    options.merge!({ :include => :mixes, :conditions => 'mixes.track_id is null' })
     self.find(:all, options)
   end
   
@@ -48,8 +49,23 @@ class Track < ActiveRecord::Base
              :page => page
   end
   
+  def length
+    hours,   remainig = self.seconds.divmod(3600)
+    minutes, remainig = remainig.divmod(60)
+    seconds = remainig    
+    "#{zerofill(hours, 2)}:#{zerofill(minutes, 2)}:#{zerofill(seconds, 2)}"
+  end
+  
   def user
     @user ||= parent_song.user
+  end
+
+private
+  
+  def zerofill(number, length)
+    string = number.to_s
+    (length - string.size).times{ string = "0#{string}"}
+    string
   end
   
 end

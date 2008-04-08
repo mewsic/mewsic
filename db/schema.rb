@@ -123,8 +123,10 @@ ActiveRecord::Schema.define(:version => 13) do
     t.string   "title"
     t.string   "filename"
     t.string   "description"
+    t.string   "tonality",                                     :default => "C"
     t.integer  "song_id"
     t.integer  "instrument_id"
+    t.integer  "seconds",                                      :default => 0
     t.integer  "bpm"
     t.datetime "created_at"
     t.datetime "updated_at"

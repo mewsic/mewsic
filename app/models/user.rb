@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 12
+# Schema version: 13
 #
 # Table name: users
 #
@@ -22,6 +22,7 @@
 #  skype_public              :boolean(1)    
 #  crypted_password          :string(40)    
 #  salt                      :string(40)    
+#  string                    :string(40)    
 #  type                      :string(255)   
 #  motto                     :text          
 #  tastes                    :text          
@@ -29,6 +30,7 @@
 #  activated_at              :datetime      
 #  friends_count             :integer(11)   
 #  age                       :integer(11)   
+#  password_reset_code       :string(255)   
 #  created_at                :datetime      
 #  updated_at                :datetime      
 #  rating_count              :integer(11)   
@@ -63,8 +65,7 @@ class User < ActiveRecord::Base
 
   has_many :avatars
   
-  has_many :mlab_items,
-    :class_name => 'Mlab'
+  has_many :mlabs
   has_many :mlab_tracks, 
     :class_name => 'Mlab',
     :conditions => "mlabs.mixable_type = 'Track'"    

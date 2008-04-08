@@ -3,6 +3,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :answers, :has_many => [ :replies ]
   map.resources :genres
   map.resources :instruments
+  map.resources :ideas
   map.resources :users do |user|    
     user.resources :friendships
     user.resources :photos
@@ -25,7 +26,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   
-  map.multitrack '/multitrack', :controller => 'multitrack', :action => 'index'
+  map.multitrack '/users/:user_id/multitrack', :controller => 'multitrack', :action => 'index'
   
   map.music '/music', :controller => 'music', :action => 'index'
 

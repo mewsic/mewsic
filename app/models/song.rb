@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 12
+# Schema version: 13
 #
 # Table name: songs
 #
@@ -79,6 +79,14 @@ class Song < ActiveRecord::Base
   
   def siblings_count
     120
+  end 
+  
+  def update_children_tracks_count
+    self.children_tracks_count = self.children_tracks.count(true)
+    save
+    if self.children_tracks.count == 1
+      puts "#{self.reload.children_tracks_count.inspect} => #{self.title}"
+    end
   end
   
 end

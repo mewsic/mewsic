@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 12
+# Schema version: 13
 #
 # Table name: songs
 #
@@ -82,6 +82,13 @@ white_christmas:
   original_author: Louis Armstrong
   genre: blues
   listened_times: 420
+quentin_single_track_song:
+  title: SingleTrackSong
+  user: quentin
+  original_author: Louis Armstrong
+  genre: blues
+  listened_times: 420
+  
 <% 1000.times do |i| %>
 song_<%= i + 4 %>:
   title: <%= shuffle(%w( Love Honesty Roma Sex Radio Let It Be Radio Want I Live Forever My Way Bohemian Rhapsody )) %>

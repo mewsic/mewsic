@@ -13,4 +13,14 @@ class TracksController < ApplicationController
     end  
   end
   
+  def create    
+    @track = Track.create(params[:track])
+    
+    respond_to do |format|
+      format.xml do
+        render :xml => @track
+      end 
+    end
+  end  
+  
 end

@@ -1,0 +1,30 @@
+<%- tracks.each do |track| -%>	  
+<div class="elements clear-block">
+  <p class="thumb">
+    <%= image_tag track.instrument.icon %>
+    <a href="<%= user_path(track.parent_song.user) %>"><%= avatar_image track.parent_song.user, :icon %></a>
+  </p>
+  <p class="name align-right"><%= link_to track.parent_song.user.login, user_path(track.parent_song.user) %></p>
+  <p class="title align-right"><%= track.title %></p>
+  <p class="abstract">
+    <%= track.description %>
+  </p>
+  <div class="music-info">
+    <p class="bordered">
+      <span>bpm: <strong><%= track.bpm %></strong></span>
+      <span>tonality: <strong><%= track.tonality %></strong></span>
+      <span>length: <strong><%= track.length %> </strong></span>
+    </p>
+    <p class="float-right">
+      <span class="star">
+        <%= stars 2, :orange %>
+      </span>
+      <%= mlab_button track %>
+      <a href="#"><img width="23" height="15" alt="" src="/images/button_play_green.png"/></a></p>
+    <p class="float-left">
+      <a href="#"><img width="22" height="14" class="float-left" alt="" src="/images/genere_ico.png"/></a>
+      <%= link_to track.parent_song.genre.name, genre_path(track.parent_song.genre) %>
+      </p>
+  </div>
+</div>
+<%- end -%>

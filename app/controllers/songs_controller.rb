@@ -1,4 +1,7 @@
 class SongsController < ApplicationController
+  
+  before_filter :login_required
+  
   def index
     if params.has_key?("genre_id")
       @songs = Song.find_paginated_by_genre(params[:page], params[:genre_id])
@@ -20,4 +23,21 @@ class SongsController < ApplicationController
     end  
   end
   
+  def update
+    @song = current_user.songs.find(params[:id])
+    song_params   = params[:song]    
+    tracks_params = song_params.delete(:tracks) if song_params[:tracks]
+    @song.update_attributes(song_params)
+
+    tracks_params.each do |track_params|
+      Mix.create(track_params.merge(:song => @song))
+    end
+    
+    respond_to do |format|
+      format.xml do
+        render :xml => @song
+      end
+    end
+  end
+
 end

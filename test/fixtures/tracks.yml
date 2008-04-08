@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 12
+# Schema version: 13
 #
 # Table name: tracks
 #
@@ -7,8 +7,9 @@
 #  title         :string(255)   
 #  filename      :string(255)   
 #  description   :string(255)   
+#  tonality      :string(255)   default("C")
 #  song_id       :integer(11)   
-#  instrument_id :integer(11)   
+#  instrument_id :integer(11)
 #  bpm           :integer(11)   
 #  created_at    :datetime      
 #  updated_at    :datetime      
@@ -53,3 +54,18 @@ voice_for_closer_<%= i + 4 %>:
   instrument: microphone
   created_at: <%= (rand(30)).days.ago.to_s :db %>
 <% end %>
+drum_for_single_track_song:
+  title: Drum for single track song
+  parent_song: quentin_single_track_song
+  instrument: drum  
+  seconds: 205
+guitar_for_single_track_song:
+  title: Guitar for single track song
+  parent_song: quentin_single_track_song
+  instrument: guitar
+  seconds: 205
+voice_for_single_track_song:
+  title: Voice for single track song
+  parent_song: quentin_single_track_song
+  instrument: microphone
+  seconds: 205
