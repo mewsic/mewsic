@@ -1,7 +1,7 @@
 class UsersController < ApplicationController    
   
   before_filter :login_required, :only => :update
-  before_filter :check_if_current_user_page, :only => :update
+  before_filter :check_if_current_user_page, :only => [:update, :switch_to]
   
   protect_from_forgery :except => :update
   
@@ -102,7 +102,15 @@ class UsersController < ApplicationController
       flash[:notice] = "Sorry - That is an invalid password reset code. Please check your code and try again. (Perhaps your email client inserted a carriage return?" 
       redirect_to '/'
   end
-    
+  
+  def switch_type
+    @user = User.find(params[:id])
+    type = %W(user dj band).include?(params[:type]) ? params[:type].capitalize : 'User'
+    @user.update_attribute(:type, type)
+    respond_to do |format|
+      format.html { redirect_to user_url(@user) }
+    end
+  end  
     
   protected
   

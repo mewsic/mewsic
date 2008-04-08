@@ -216,6 +216,22 @@ class UsersControllerTest < Test::Unit::TestCase
     assert User.authenticate('quentin', 'pippo')
   end
   
+  def test_should_switch_type_to_dj
+    assert_difference 'Dj.count' do
+      login_as :quentin
+      post :switch_type, :id => users(:quentin).id, :type => 'dj'
+      assert_equal "Dj", users(:quentin).reload.type
+    end
+  end
+  
+  def test_should_switch_type_to_band
+    assert_difference 'Band.count' do
+      login_as :quentin
+      post :switch_type, :id => users(:quentin).id, :type => 'band'
+      assert_equal "Band", users(:quentin).reload.type
+    end
+  end
+  
   protected
     def create_user(options = {})
       post :create, :user => { :login => 'quire', :email => 'quire@example.com',

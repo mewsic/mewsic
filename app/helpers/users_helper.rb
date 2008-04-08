@@ -67,5 +67,16 @@ module UsersHelper
   def user_edit_button(field)
     %|<a href="#" class="edit" id="edit_button_user_#{field.to_s}">[edit]</a>| if current_user_page?
   end    
+   
+  def switch_type_images
+    content = ""
+    %w[user band dj].each do |type|	 
+      image_name = "change_#{type}_"
+      user_type = @user.type.nil? ? 'user' : @user.type.downcase
+      image_name += (user_type == type ? 'active' : 'inactive' )
+      content << link_to(image_tag("#{image_name}.gif"), switch_type_user_path(@user, :type => type), :method => 'put')
+    end
+    content
+  end
   
 end

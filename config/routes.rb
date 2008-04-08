@@ -4,7 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :genres
   map.resources :instruments
   map.resources :ideas
-  map.resources :users do |user|    
+  map.resources :users, :member => {:switch_type => :put} do |user|    
     user.resources :friendships
     user.resources :photos
     user.resources :avatars
