@@ -1,0 +1,20 @@
+<div class="simple-list cyan-box clear-block">
+<h2>Componenti di <br/> <%= @user.login %></h2>
+  <div class="top-box clear-block">
+    <div class="bottom-box clear-block">
+			<div class="elements clear-block">
+				<%- @user.members.each do |member| -%>				
+  				<div>
+  					<p class="thumb">
+  					  <%= image_tag member.instrument.icon %>
+  					  <img width="29" height="29" alt="Pinco Pallino" src="/images/avatars/avatar_icon.gif"/>
+            </p>
+  					<p class="grey-text name"><em><%= member.instrument.description %></em></p>
+  					<p class="name"><a href="#"><%= member.name %></a></p>
+  				</div>
+				<%- end -%>
+			</div>
+			<%= render :partial => 'users/my/band_member_form' if current_user_page? %>			
+    </div>
+  </div>	
+</div>

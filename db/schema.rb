@@ -9,11 +9,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 13) do
+ActiveRecord::Schema.define(:version => 14) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
     t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "band_members", :force => true do |t|
+    t.string   "name"
+    t.integer  "instrument_id"
+    t.integer  "band_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -112,6 +120,7 @@ ActiveRecord::Schema.define(:version => 13) do
     t.integer  "genre_id"
     t.integer  "listened_times"
     t.integer  "bpm"
+    t.boolean  "published",                                      :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "rating_count"

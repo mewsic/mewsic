@@ -3,7 +3,7 @@
 <div class="mypage-label clear-block">
   <%= render :partial => 'switch_type' if current_user_page? %>
   <div class="type-label">
-    <img src="/images/user_page_label.gif" alt="" width="41" height="56" />
+    <%= page_label_for(@user) %>
   </div>
 </div>
 
@@ -16,10 +16,10 @@
        <%= stars(@user.rating_avg) %>
     </p>
     <div class="float-right align-right">
-      <p class="blue-text">Gender</p>
-      <p>
-        <%= gender_icon %>
-      </p>
+      <%- unless @user.type == 'Band' -%>
+        <p class="blue-text">Gender</p>
+        <p><%= gender_icon_for(@user) %></p>
+      <%- end -%>
     </div>
     <p class="blue-text">User name </p>
     <h1 class="black-text" id="user_id"><%= @user.login %></h1>

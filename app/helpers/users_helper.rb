@@ -14,9 +14,9 @@ module UsersHelper
     %|<p class="alert">There were errors during the signup process, please check the fields.</p>| unless @user.errors.empty?
   end
   
-  def gender_icon
+  def gender_icon_for(user)
     icons = {:male => 'M', :female => 'F', :other => 'O'}
-    %|<img alt="#{@user.gender.to_s}" id="user_gender" class="#{icons[@user.gender.to_sym]}" src="/images/gender_ico_#{icons[@user.gender.to_sym]}.gif"/>| unless @user.gender.blank?
+    %|<img alt="#{user.gender.to_s}" id="user_gender" class="#{icons[user.gender.to_sym]}" src="/images/gender_ico_#{icons[user.gender.to_sym]}.gif"/>| unless @user.gender.blank?
   end
   
   def track_icon(track, color = nil)
@@ -68,15 +68,20 @@ module UsersHelper
     %|<a href="#" class="edit" id="edit_button_user_#{field.to_s}">[edit]</a>| if current_user_page?
   end    
    
-  def switch_type_images
+  def switch_type_images_for(user)
     content = ""
     %w[user band dj].each do |type|	 
       image_name = "change_#{type}_"
-      user_type = @user.type.nil? ? 'user' : @user.type.downcase
+      user_type = user.type.nil? ? 'user' : user.type.downcase
       image_name += (user_type == type ? 'active' : 'inactive' )
-      content << link_to(image_tag("#{image_name}.gif"), switch_type_user_path(@user, :type => type), :method => 'put')
+      content << link_to(image_tag("#{image_name}.gif"), switch_type_user_path(user, :type => type), :method => 'put')
     end
     content
+  end
+  
+  def page_label_for(user)
+    user_type = user.type.nil? ? 'user' : user.type.downcase
+    %|<img src="/images/#{user_type}_page_label.gif" alt="" width="41" height="56" />|
   end
   
 end

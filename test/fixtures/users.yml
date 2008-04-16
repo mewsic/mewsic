@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 13
+# Schema version: 14
 #
 # Table name: users
 #
@@ -78,3 +78,23 @@ aaron:
   city: <%= ['Rome', 'Geneve', 'Seattle', 'Milan', 'Bari', 'Modugno', 'Tokyo', 'Beijing'][rand(8)] %>
   motto: <%= %w( un in insieme a caso di parole tra cui prenderne un paio per fare il motto random della persona random ).sort_by {rand}.join(" ") %>
 <% end %>
+
+mikaband:
+  type: Band
+  login: mikaband
+  email: mikaband@example.com
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  activation_code: 8f24789ae988411ccf33ab0c30fe9106fab32e9b
+  activated_at: <%= 5.days.ago.to_s :db %>
+  gender: male
+  photos_url: http://my.photos.url
+  blog_url: http://my.blog.url
+  myspace_url: http://my.space.url
+  skype: skype_account
+  skype_public: <%= true %>
+  msn: msn_account
+  msn_public: <%= true %>
+  country: Italy
+  city: Milano
+  motto: Arma Virumque Cano Troiae qui primus ab oris

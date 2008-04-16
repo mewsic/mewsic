@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
         cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
       end
       flash[:notice] = "Logged in successfully"
-      redirect_url = current_user
+      redirect_url = user_url(current_user)
     else
       flash[:error] = "Not logged"
     end

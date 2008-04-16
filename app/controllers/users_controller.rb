@@ -110,6 +110,11 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to user_url(@user) }
     end
+  end
+  
+  def request_config
+    @user = User.find(params[:user_id])
+    render :layout => false
   end  
     
   protected

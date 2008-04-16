@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 13
+# Schema version: 14
 #
 # Table name: songs
 #
@@ -35,6 +35,10 @@ class Song < ActiveRecord::Base
   
   acts_as_rated :rating_range => 0..5
   
+  def self.find_published(options = {})
+    self.find(:all, :conditions => ["songs.published = ?", true])
+  end      
+  
   # TODO: STUB fino ai criteri di best
   def self.find_best(options = {})
     self.find(:all, options)
@@ -42,12 +46,13 @@ class Song < ActiveRecord::Base
   
   def self.find_newest(options = {})
     options.merge!({:order => 'songs.created_at DESC'})
+    options[:conditions] = ["songs.published = ?", true]
     self.find(:all, options)
   end
   
   def self.find_paginated_by_genre(page, genre_id)
     paginate :per_page => 20, 
-             :conditions => ["genre_id = ?", genre_id], 
+             :conditions => ["songs.published = ? AND genre_id = ?", true, genre_id], 
              :order => "songs.title ASC",
              :include => [:user, {:tracks => :instrument}], 
              :page => page
@@ -56,7 +61,7 @@ class Song < ActiveRecord::Base
   # TODO: Unire i due metodi in uno unico 
   def self.find_paginated_by_user(page, user_id)
     paginate :per_page => 3, 
-             :conditions => ["user_id = ?", user_id], 
+             :conditions => ["songs.published = ? AND user_id = ?", true, user_id], 
              :order => "songs.title ASC",
              :include => [:user, {:tracks => :instrument}], 
              :page => page
@@ -69,12 +74,12 @@ class Song < ActiveRecord::Base
   
   # STUB
   def direct_siblings
-    Song.find(:all, :include => :tracks, :limit => 2, :conditions => ["songs.id != ?", self.id])
+    Song.find(:all, :include => :tracks, :limit => 2, :conditions => ["songs.published = ? AND songs.id != ?", true, self.id])
   end
   
   # STUB
   def indirect_siblings
-    Song.find(:all, :include => :tracks, :limit => 2, :conditions => ["songs.id != ?", self.id])
+    Song.find(:all, :include => :tracks, :limit => 2, :conditions => ["songs.published = ? AND songs.id != ?", true, self.id])
   end
   
   def siblings_count

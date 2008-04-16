@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 13
+# Schema version: 14
 #
 # Table name: users
 #
@@ -39,4 +39,7 @@
 #
 
 class Band < User
+
+  has_many :members, :class_name => 'BandMember', :foreign_key => :band_id
+  
 end

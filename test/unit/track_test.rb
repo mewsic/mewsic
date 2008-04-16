@@ -27,24 +27,6 @@ class TrackTest < ActiveSupport::TestCase
   def test_paginated_by_user
     songs = Track.find_paginated_by_user(1, users(:aaron).id)
     assert songs.size < 8
-  end 
-  
-  def test_find_orphans
-    update_children_track_count
-    t = Track.find_orphans(:limit => 1)
-    t = Song.find_by_title('SingleTrackSong').reload.children_tracks.count
-    puts t.inspect
-    #assert_equal t.parent_song.children_tracks.count, t.parent_song.children_track_count
-  end
-
-private
-
-  def update_children_track_count   
-    Song.find(:all).each do |song|
-      song.children_tracks_count = song.children_tracks.count
-      song.save
-      song.reload.children_tracks.count if song.reload.children_tracks_count == 1
-    end
   end
   
 end

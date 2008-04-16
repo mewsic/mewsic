@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 13
+# Schema version: 14
 #
 # Table name: genres
 #
@@ -8,7 +8,14 @@
 #
 
 class Genre < ActiveRecord::Base
-  has_many :songs, :order => 'songs.created_at DESC'
+  
+  has_many :songs,
+           :order => 'songs.created_at DESC'
+           
+  has_many :published_songs,
+           :class_name => 'Song', 
+           :conditions => ["songs.published = ?", true],
+           :order => 'songs.created_at DESC'
   
   def self.find_paginated(page)
     paginate :per_page => 5, :order => "name ASC", :include => [{:songs => :user}], :page => page
@@ -16,7 +23,7 @@ class Genre < ActiveRecord::Base
   
   def find_most_listened(options = {})
     options.merge!({:order => 'songs.listened_times DESC'})
-    self.songs.find :all, options
+    self.published_songs.find :all, options
   end
   
   def find_most_prolific_users(options = {})
@@ -26,7 +33,7 @@ class Genre < ActiveRecord::Base
   end
   
   def last_songs(limit = 3)
-    self.songs.find(:all, :limit => limit, :order => 'created_at DESC')
+    self.published_songs.find(:all, :limit => limit, :order => 'created_at DESC')
   end
   
 end

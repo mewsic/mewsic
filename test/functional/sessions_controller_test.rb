@@ -28,7 +28,7 @@ class SessionsControllerTest < Test::Unit::TestCase
     post :create, :login => 'quentin', :password => 'bad password'
     assert_nil session[:user]
     assert_response :redirect
-    assert flash[:login_error]
+    assert flash[:error]
   end
 
   def test_should_logout

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 13
+# Schema version: 14
 #
 # Table name: users
 #
@@ -41,7 +41,7 @@
 require 'digest/sha1'
 class User < ActiveRecord::Base
   # Virtual attribute for the unencrypted password
-  attr_accessor :password
+  attr_accessor :password                    
 
   validates_presence_of     :login, :email
   validates_presence_of     :password,                   :if => :password_required?
@@ -58,7 +58,8 @@ class User < ActiveRecord::Base
   
   has_many_friends
   
-  has_many :songs, :order => 'songs.created_at DESC'
+  has_many :songs,            :order => 'songs.created_at DESC'
+  has_many :published_songs,  :conditions => ["songs.published = ?", true], :order => 'songs.created_at DESC'
   has_many :answers
   has_many :replies
   has_many :photos
@@ -91,6 +92,10 @@ class User < ActiveRecord::Base
   attr_accessible :login, :email, :password, :password_confirmation, :terms_of_service, :eula,
     :first_name, :last_name, :gender, :motto, :tastes, :country, :city, :age,
     :photos_url, :blog_url, :myspace_url, :skype, :msn, :skype_public, :msn_public
+  
+  def band?
+    self.type == 'Band'
+  end
   
   def forgot_password
     @forgotten_password = true

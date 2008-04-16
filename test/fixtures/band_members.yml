@@ -1,0 +1,23 @@
+# == Schema Information
+# Schema version: 14
+#
+# Table name: band_members
+#
+#  id            :integer(11)   not null, primary key
+#  name          :string(255)   
+#  instrument_id :integer(11)   
+#  band_id       :integer(11)   
+#  created_at    :datetime      
+#  updated_at    :datetime      
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+andrea:
+  name: Andrea
+  instrument: guitar
+  band: mikaband     
+giovanni:
+  name: Giovanni
+  instrument: drum
+  band: mikaband

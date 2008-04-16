@@ -1,6 +1,6 @@
 class SongsController < ApplicationController
   
-  before_filter :login_required
+  before_filter :login_required, :only => :update
   
   def index
     if params.has_key?("genre_id")
@@ -21,6 +21,11 @@ class SongsController < ApplicationController
     respond_to do |format|
       format.xml
     end  
+  end
+  
+  def edit
+    # FIXME
+    render :text => ''
   end
   
   def update

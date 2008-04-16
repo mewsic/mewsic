@@ -7,8 +7,9 @@
   <div class="bottom-shadow" style="width: 720px; float:none;"></div>
 
   <div class="box-list one-col clear-block clear-float">
-    <%= render :partial => 'played' %>	
-    <%= render :partial => 'mbands' %>	
+    <%= render :partial => 'played' unless @user.band? %>
+    <%= render :partial => 'band_members' if @user.band? %>	
+    <%= render :partial => 'mbands' %>	    
     <%= render :partial => 'friends' %>
     <%= render :partial => 'admirers' %>  
     <%= render :partial => 'answers' %>    

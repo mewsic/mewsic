@@ -1,5 +1,5 @@
 <div id="my-user-share" class="user-sharing clear-block">
-	<% form_for @user, :html => {:id => 'form_photos_url'} do |f| -%>
+	<% form_for @user, :url => user_path(@user), :html => {:id => 'form_photos_url'} do |f| -%>
 	  <p>
   		<label>Share your photo</label>
   		<span id="loading_user_photos_url" style="display:none;" class="loading">Saving...</span>
@@ -7,7 +7,7 @@
   		<input type="submit" class="button hide-on-load" value="OK"/>
   	  </p>
   <% end -%>
-	<% form_for @user, :html => {:id => 'form_blog_url'} do |f| -%>
+	<% form_for @user, :url => user_path(@user), :html => {:id => 'form_blog_url'} do |f| -%>
 	  <p>
   		<label>Share your blog</label>
   		<span id="loading_user_blog_url" style="display:none;" class="loading">Saving...</span>
@@ -15,7 +15,7 @@
   		<input type="submit" class="button hide-on-load" value="OK"/>
   	</p>
   <% end -%>
-  <% form_for @user, :html => {:id => 'form_myspace_url'} do |f| -%>
+  <% form_for @user, :url => user_path(@user), :html => {:id => 'form_myspace_url'} do |f| -%>
 	  <p>
   		<label>MySpace page</label>
   		<span id="loading_user_myspace_url" style="display:none;" class="loading">Saving...</span>
@@ -23,7 +23,7 @@
   		<input type="submit" class="button hide-on-load" value="OK"/>
   	</p>
   <% end -%>
-	<% form_for @user, :html => {:id => 'form_skype'} do |f| -%>
+	<% form_for @user, :url => user_path(@user), :html => {:id => 'form_skype'} do |f| -%>
 	  <p>
   		<label>Skype</label>
   		<span id="loading_user_skype" style="display:none;" class="loading">Saving...</span>
@@ -33,7 +33,7 @@
   		<input type="submit" class="button hide-on-load" value="OK"/>
   	</p>
   <% end -%>
-  <% form_for @user, :html => {:id => 'form_msn'} do |f| -%>
+  <% form_for @user, :url => user_path(@user), :html => {:id => 'form_msn'} do |f| -%>
 	  <p>
   		<label>MSN</label>
   		<span id="loading_user_msn" style="display:none;" class="loading">Saving...</span>

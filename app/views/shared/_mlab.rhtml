@@ -1,5 +1,7 @@
 <div id="mlab-box" class="clear-block">  
-	<p class="mlab-enter"><a href="#">Enter</a></p>
+	<p class="mlab-enter">
+	  <%= link_to('Enter', multitrack_path(current_user)) %>
+	</p>
 	<div class="mlab-container clear-block">
 	  <div id="mlab-scroller">
 	    <div id="<%= current_user.id %>" class="user-id"></div>

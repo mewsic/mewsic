@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 13
+# Schema version: 14
 #
 # Table name: tracks
 #
@@ -10,6 +10,7 @@
 #  tonality      :string(255)   default("C")
 #  song_id       :integer(11)   
 #  instrument_id :integer(11)   
+#  seconds       :integer(11)   default(0)
 #  bpm           :integer(11)   
 #  created_at    :datetime      
 #  updated_at    :datetime      

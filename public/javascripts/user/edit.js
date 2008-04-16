@@ -93,16 +93,19 @@ var AjaxFormGenerator = Class.create({
 function initGenderSwitcher() {
   var genders       = ['M', 'F', 'O'];
   var gender_names  = ['male', 'female', 'other'];
-  $('user_gender').observe('click', function() {
-    var index = (genders.indexOf(this.className) + 1) % 3;
-    var new_gender = genders[index];
-    this.src = '/images/gender_ico_' + new_gender + '.gif'
-    this.className = new_gender;
-    new Ajax.Request('/users/' + $('user_id').value, {
-      method: 'PUT',
-      parameters: 'user[gender]=' + gender_names[index]
+  
+  when('user_gender', function(element) {
+    element.observe('click', function() {
+      var index = (genders.indexOf(this.className) + 1) % 3;
+      var new_gender = genders[index];
+      this.src = '/images/gender_ico_' + new_gender + '.gif'
+      this.className = new_gender;
+      new Ajax.Request('/users/' + $('user_id').value, {
+        method: 'PUT',
+        parameters: 'user[gender]=' + gender_names[index]
+      });
     });
-  });  
+  });
 }
 
 document.observe('dom:loaded', function() {

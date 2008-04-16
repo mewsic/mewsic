@@ -5,6 +5,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :instruments
   map.resources :ideas
   map.resources :users, :member => {:switch_type => :put} do |user|    
+    user.resources :members, :controller => 'band_members'
     user.resources :friendships
     user.resources :photos
     user.resources :avatars
@@ -26,7 +27,8 @@ ActionController::Routing::Routes.draw do |map|
   
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   
-  map.multitrack '/users/:user_id/multitrack', :controller => 'multitrack', :action => 'index'
+  map.multitrack        '/users/:user_id/multitrack',     :controller => 'multitrack', :action => 'index'
+  map.multitrack_config '/users/:user_id/request.config', :controller => 'users', :action => 'request_config'
   
   map.music '/music', :controller => 'music', :action => 'index'
 
