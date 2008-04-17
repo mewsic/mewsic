@@ -41,7 +41,9 @@ module ApplicationHelper
   end
       
   def tags_for_cloud(klass, group, attribute, css_classes)
-    weighted_list = klass.count :include => group, :group => group, :order => "#{group.to_s.pluralize}.#{attribute} ASC", :order => 'count_all DESC', :limit => 40
+    options = { :include => group, :group => group, :order => "#{group.to_s.pluralize}.#{attribute} ASC", :order => 'count_all DESC', :limit => 40 }
+    options[:conditions] = ["songs.published = ?", true] if klass == Song
+    weighted_list = klass.count(options)
     
     counts = weighted_list.transpose.last.sort
     min = counts.first

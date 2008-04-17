@@ -24,7 +24,6 @@ class SongsController < ApplicationController
   end
   
   def edit
-    # FIXME
     render :text => ''
   end
   

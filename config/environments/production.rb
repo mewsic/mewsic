@@ -20,3 +20,7 @@ config.action_mailer.delivery_method = :sendmail
 
 # Attachments on EY
 ENV['INLINEDIR'] = "/tmp/#{$$}"
+
+APPLICATION = {
+  :url => 'http://e4e1475b.myousica.com'
+}
