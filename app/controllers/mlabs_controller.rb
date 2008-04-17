@@ -6,11 +6,11 @@ class MlabsController < ApplicationController
   before_filter :login_required
   before_filter :check_user_identity
 
-  def index
+  def index    
     @songs = Song.find(:all, :include => [:mlabs, :user], :conditions => ["mlabs.user_id = ?", params[:user_id]])
     @tracks = Track.find(:all, :include => :mlabs, :conditions => ["mlabs.user_id = ?", params[:user_id]])    
     @items = @tracks + @songs
-    respond_to do |format|
+    respond_to do |format|      
       format.js { render :json => @items.to_json(:methods => :user, :include => :mlabs) }
       format.xml      
     end

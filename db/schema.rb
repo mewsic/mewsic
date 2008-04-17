@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(:version => 14) do
     t.integer  "track_id"
     t.integer  "volume"
     t.integer  "loop"
-    t.integer  "balance"
+    t.float    "balance",    :default => 0.0
     t.integer  "time_shift"
     t.datetime "created_at"
     t.datetime "updated_at"
