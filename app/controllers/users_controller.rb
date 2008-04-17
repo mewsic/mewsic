@@ -114,7 +114,9 @@ class UsersController < ApplicationController
   
   def request_config
     @user = User.find(params[:user_id])
-    render :layout => false
+    respond_to do |format|
+      format.xml
+    end
   end  
     
   protected
