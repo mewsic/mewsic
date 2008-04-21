@@ -10,7 +10,7 @@
 <div class="user-profile clear-block">
   <div class="user-photo" id="user-avatar">
     <%- if current_user_page? -%>
-    <a href="#" onclick="Popup.open('<%= new_user_avatar_path(@user) %>', {height: 150}); return false;"><%= avatar_image(@user, :big, :avatar) %></a>
+    <a href="#" onclick="Popup.open('<%= new_user_avatar_path(@user) %>', {height: 140}); return false;"><%= avatar_image(@user, :big, :avatar) %></a>
     <%- else -%>
       <%= avatar_image(@user, :big, :avatar) %>
     <%- end -%>

@@ -11,6 +11,7 @@ var InPlaceEditorGenerator = Class.create({
     this.fields.each(function(name) {
       new Ajax.InPlaceEditor(this.options.model + '_' + name, this.options.url + this.user_id, {
         externalControl: 'edit_button_' + this.options.model + '_' + name,
+        externalControlOnly: true,
         ajaxOptions: { method: 'PUT' },
         highlightcolor: '#ffffff',
         paramName: this.options.model + '[' + name + ']'
