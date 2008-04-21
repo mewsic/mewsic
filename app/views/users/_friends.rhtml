@@ -7,7 +7,7 @@
         <div class="container" style="height: 30px;position:absolute; clip:rect(0px 204px 30px 0px)">
           <div class="scroll" style="padding: 0pt; <%= @friends.size * 40 %>px; left: 0px;">
             <% @friends.each do |friend| -%>
-              <%= link_to(avatar_image(friend, :icon), friend) %>
+              <%= link_to(avatar_image(friend, :icon), user_path(friend)) %>
             <% end -%>
           </div>
         </div>

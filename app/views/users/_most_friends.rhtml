@@ -4,10 +4,10 @@
 			<strong><%= pluralize most_friends.friends_count, 'friend' %></strong>
 		</p>
 	  	<p class="thumb">
-	    	<%= link_to avatar_image(most_friends, :small), most_friends %></a>
+	    	<%= link_to avatar_image(most_friends, :small), user_path(most_friends) %></a>
 	  	</p>
 	  	<p class="name">
-	  		<%= link_to most_friends.login ,most_friends %>
+	  		<%= link_to most_friends.login, user_path(most_friends) %>
 		</p>
 	  	<p class="country">
 	  		<%= h most_friends.compiled_location %>
