@@ -8,4 +8,10 @@ class FriendshipsController < ApplicationController
     redirect_to user_path(@friend)  
   end
   
+  def destroy
+    @friendship = Friendship.find(params[:id])
+    @friendship.destroy
+    redirect_to user_path(@friendship.friendshipped_for_me)
+  end
+  
 end
