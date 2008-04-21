@@ -1934,3 +1934,7 @@ div#messages div.notice {
 .azzurro-boxes h3 a{
 	color:#009DC2;
 }
+
+img#user_gender {
+  cursor: pointer;
+}
