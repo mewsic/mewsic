@@ -4,7 +4,7 @@ class PhotosController < ApplicationController
   before_filter :find_user
   before_filter :check_current_user
   
-  def index
+  def new
     @photo = Photo.new
     @last_photo = @user.photos.last   if params[:coming_from] == 'create'
     render :layout => false
@@ -12,13 +12,15 @@ class PhotosController < ApplicationController
   
   def create 
     if params[:photo] && params[:photo][:uploaded_data].respond_to?(:size) && params[:photo][:uploaded_data].size > 0
-      if @user.photos.create(params[:photo])
-        redirect_to :action => 'index', :user_id => params[:user_id], :coming_from => 'create'
+      @photo = Photo.new(params[:photo].merge(:user_id => current_user.id))
+      if @photo.save
+        @saved = true
+        flash.now[:notice] = 'Picture uploaded correctly'
       end
     else
-      flash[:error] = 'Problems uploading your photo.'
-      redirect_to user_photos_path(@user)
+      flash.now[:error] = 'Problems uploading your photo.'
     end
+    render :action => 'new', :layout => false
   end
 
   def destroy

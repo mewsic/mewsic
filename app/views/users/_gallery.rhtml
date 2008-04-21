@@ -1,7 +1,6 @@
 <div class="gallery clear-block">
   <p class="edit-command">
-  <a href="<%= user_photos_path(@user) %>" 
-     onclick="return popitup('<%= user_photos_path(@user) %>')">Import images</a>
+  <a href="<%= user_photos_path(@user) %>" onclick="Popup.open('<%= new_user_photo_path(@user) %>', {height: 150}); return false;">Import images</a>
   </p>
   <h1>GALLERY</h1>
   
