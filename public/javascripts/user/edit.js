@@ -106,24 +106,10 @@ function initGenderSwitcher() {
       });
     });
   });
-}
+} 
 
 document.observe('dom:loaded', function() {
-  new InPlaceEditorGenerator(
-    $w('city country motto tastes'),
-    {
-      url: '/users/',
-      model: 'user'
-    }
-  );
-  
-  new AjaxFormGenerator(
-    $w('photos_url blog_url myspace_url skype msn'),
-    {
-      url: '/users/',
-      model: 'user'
-    }
-  );  
-  
+  new InPlaceEditorGenerator( $w('city country motto tastes'), { url: '/users/', model: 'user' } );  
+  new AjaxFormGenerator( $w('photos_url blog_url myspace_url skype msn'), { url: '/users/', model: 'user' } );    
   initGenderSwitcher();
 });

@@ -13,6 +13,7 @@
 #  genre_id        :integer(11)   
 #  listened_times  :integer(11)   
 #  bpm             :integer(11)   
+#  published       :boolean(1)    default(TRUE)
 #  created_at      :datetime      
 #  updated_at      :datetime      
 #  rating_count    :integer(11)   

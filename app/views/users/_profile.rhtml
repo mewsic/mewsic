@@ -9,7 +9,7 @@
 
 <div class="user-profile clear-block">
   <div class="user-photo" id="user-avatar">
-    <%= my_avatar_image(@user, :big) %>
+    <a href="#" onclick="Popup.open('<%= new_user_avatar_path(@user) %>', {height: 100}); return false;"><%= avatar_image(@user, :big, :avatar) %></a>
   </div>
   <div class="user-resume">
     <p class="star">

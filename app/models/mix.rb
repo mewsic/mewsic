@@ -8,7 +8,7 @@
 #  track_id   :integer(11)   
 #  volume     :integer(11)   
 #  loop       :integer(11)   
-#  balance    :integer(11)   
+#  balance    :float         default(0.0)
 #  time_shift :integer(11)   
 #  created_at :datetime      
 #  updated_at :datetime      

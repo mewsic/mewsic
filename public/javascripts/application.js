@@ -82,9 +82,23 @@ document.observe('dom:loaded', function(event) {
   Message.init();
  
 });
-
-function popitup(url) {
-	newwindow=window.open(url,'load_image', 'height=100, width=300');
+    
+var Popup = {
+  open: function(url) {
+    var options = Object.extend({
+      name: 'popup',
+      width: 500,
+      height: 500,
+      resizable: 'yes',
+      scrollbars: 'yes'
+    }, arguments[1] || {});
+    var left = window.innerWidth / 2 - options.width / 2;
+    var top  = window.innerHeight / 2 - options.height / 2;
+    window.open(url, options.name, 'left=' + left + ',top=' + top + ',width=' + options.width + ',height=' + options.height + ',resizable=' + options.resizable + ',scrollbars=' + options.scrollbars);    
+  }
+};
+function pop(url) {
+	newwindow = window.open(url,'popup', 'height=100, width=300');
 	if (window.focus) {newwindow.focus()}
 	return false;
 }

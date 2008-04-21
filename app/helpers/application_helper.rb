@@ -87,16 +87,7 @@ module ApplicationHelper
       content << render(:partial => 'shared/mlab') if logged_in?
     end
     content
-  end
-  
-  def my_avatar_image(user, size)
-    content = ''
-    if current_user_page?
-      content << link_to("click to change", new_user_avatar_path(user), 
-                :onclick => "return popitup('#{new_user_avatar_path(user)}')")
-    end
-    content << "<br />" + avatar_image(user, :big)
-  end
+  end    
   
   def avatar_image(user, size, css_class = '')
     image_tag((user.avatars.last.nil? ? "/images/avatars/avatar_#{size}.gif" : user.avatars.last.public_filename(size)), :class => css_class)

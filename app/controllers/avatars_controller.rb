@@ -10,16 +10,18 @@ class AvatarsController < ApplicationController
     render :layout => false
   end
   
-  def create
+  def create    
     if params[:avatar] && params[:avatar][:uploaded_data].respond_to?(:size) && params[:avatar][:uploaded_data].size > 0
       @user.avatars.each{|a| a.destroy}
-      if @user.avatars << Avatar.create(params[:avatar])
-        redirect_to new_user_avatar_path(params[:user_id], :coming_from => 'create')
+      @avatar = Avatar.new(params[:avatar].merge({:user_id => current_user.id}))      
+      if @avatar.save
+        @saved = true
+        flash.now[:notice] = 'Image uploaded correctly'
       end
     else
-      flash[:error] = 'Problems uploading your avatar.'
-      redirect_to new_user_avatar_path(@user)
+      flash.now[:error] = 'Error uploading your image'
     end
+    render :action => 'new', :layout => false
   end
 
 private

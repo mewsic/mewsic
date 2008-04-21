@@ -2,14 +2,12 @@
   <%= f.file_field :uploaded_data  %><br />
   <%= submit_tag 'Upload >>' %>
 <% end %>
-
-<% if (params[:coming_from] == 'create') -%>
-	<div>The new image has been loaded successfully</div>
-	<script language="javascript" type="text/javascript">
-	<!-- 
-	  var content = '<%= my_avatar_image(@user, :big).gsub(/[']/, '\\\\\'') %>';
-	  opener.window.$('user-avatar').update(content);
-	  self.close(); 
-	// -->
-	</script>
-<% end -%>
+<%- if @saved -%>
+  <script type="text/javascript" charset="utf-8">
+    var image = window.opener.document.getElementById('user-avatar').down('.avatar');
+    image.src = '<%= @avatar.public_filename(:big) %>';
+  </script>  
+<%- end -%>
+<%- flash.each do |type, message| -%>
+  <div class="<%= type %>"><%= message %></div>
+<%- end -%>
