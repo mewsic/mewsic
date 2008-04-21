@@ -1,13 +1,52 @@
-<% form_for :avatar, :url => {:action => :create}, :html => {:multipart => true} do |f| %>
-  <%= f.file_field :uploaded_data  %><br />
-  <%= submit_tag 'Upload >>' %>
-<% end %>
-<%- if @saved -%>
-  <script type="text/javascript" charset="utf-8">
-    var image = window.opener.document.getElementById('user-avatar').down('.avatar');
-    image.src = '<%= @avatar.public_filename(:big) %>';
-  </script>  
-<%- end -%>
-<%- flash.each do |type, message| -%>
-  <div class="<%= type %>"><%= message %></div>
-<%- end -%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Myousica</title>
+	<style type="text/css" media="screen">
+	  body {
+	    margin: 10px;
+	    background: #F3F3F4;	    
+	  }
+	  #content {
+	    padding: 15px;
+	    background: #FFF;
+	    height: 100%;
+	  }
+	  #content h1 {
+	    margin: 0;
+	    font-size: 14px;
+	  }
+	  #content .message {	   
+	    margin-top: 5px;
+	    font-size: 13px;
+	  } 
+	  #form-area {
+	    margin-top: 10px;
+	  }
+	</style>
+</head>
+<body>
+  <div id="container">
+    <div id="content">
+      <h1>Upload your avatar</h1>
+      <%- if @saved -%>
+        <script type="text/javascript" charset="utf-8">
+          var image = window.opener.document.getElementById('user-avatar').down('.avatar');
+          image.src = '<%= @avatar.public_filename(:big) %>';
+        </script>  
+      <%- end -%>
+      <%- flash.each do |type, message| -%>
+        <div class="message <%= type %>"><%= message %></div>
+      <%- end -%>            
+      <div id="form-area">
+        <% form_for :avatar, :url => {:action => :create}, :html => {:multipart => true} do |f| %>
+          <%= f.file_field :uploaded_data  %><br />
+          <%= submit_tag 'Upload >>' %>
+        <% end %>        
+      </div>
+    </div>
+  </div>
+</body>
+</html>
