@@ -23,6 +23,11 @@ class MessagesController < ApplicationController
     @messages = @user.sent_messages.paginate(:page => params[:page], :per_page => 10)
     render :action => 'index'
   end
+  
+  def unread       
+    @messages = @user.received_messages.paginate(:conditions => ["read_at IS NULL"], :page => params[:page], :per_page => 10)
+    render :action => 'index'                                   
+  end
 
   def show
     @message = Message.read(params[:id], @user)

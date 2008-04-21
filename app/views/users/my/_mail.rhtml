@@ -7,8 +7,16 @@
   <table width="100%" cellspacing="0" cellpadding="0" border="0">
     <tbody>
       <tr>
-        <td style="padding-left: 30px;"><a href="#">Unread</a></td>
+        <td style="padding-left: 30px;">
+          <a href="<%= unread_user_messages_path(@user) %>" class="button popup">Unread</a>
+        </td>
         <td style="width: 40px;" class="unread count"><%= @user.unread_message_count %></td>
+      </tr>
+      <tr>
+        <td style="padding-left: 30px;">
+          <a href="<%= user_messages_path(@user) %>" class="button popup">All messages</a>
+        </td>
+        <td style="width: 40px;" class="received count"><%= @user.received_messages.count %></td>
       </tr>
       <tr>
         <td style="padding-left: 30px;">
@@ -19,13 +27,7 @@
       <tr>
         <td style="padding-left: 30px;"><a href="#">Contacts</a></td>
         <td style="width: 40px;">20</td>
-      </tr>
-      <tr>
-        <td style="padding-left: 30px;">
-          <a href="<%= user_messages_path(@user) %>" class="button popup">Inbox</a>
-        </td>
-        <td style="width: 40px;" class="received count"><%= @user.received_messages.count %></td>
-      </tr>
+      </tr>      
       <tr>
         <td style="padding-left: 30px;"><strong>
           <a href="<%= new_user_message_path(@user) %>" class="button popup">New message</a></strong>

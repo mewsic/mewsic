@@ -10,7 +10,7 @@ ActionController::Routing::Routes.draw do |map|
     user.resources :photos
     user.resources :avatars
     user.resources :mlabs
-    user.resources :messages, :collection => { :delete_selected => :post, :sent => :get }
+    user.resources :messages, :collection => { :delete_selected => :post, :sent => :get, :unread => :get }
   end
   map.forgot_password '/forgot_password', :controller => 'users', :action => 'forgot_password'
   map.reset_password '/reset_password/:id',  :controller => 'users', :action => 'reset_password'
