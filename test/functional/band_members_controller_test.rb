@@ -6,13 +6,55 @@ class BandMembersControllerTest < ActionController::TestCase
 
   fixtures :users
 
-  def test_create_band_member
-    # assert_routing "/users/#{users(:mikaband).id}/band_members",
-    #   :controller => 'band_members', :action => 'index', :user_id => users(:mikaband).id.to_s
-    # assert_difference 'BandMember.count' do
-    #   post user_band_member_path, :user_id => users(:mikaband), :member => { :name => 'ivan' }
-    # end
-    #get user_members_path, :user_id => users(:mikaband), :member => { :name => 'ivan' }
+  def test_should_show_band_members
+    get :index, :user_id => users(:mikaband).id
+    assert_response :success
+  end
+  
+  def test_should_redirect_unless_band
+    get :index, :user_id => users(:quentin).id
+    assert_response :redirect
+  end
+  
+  def test_should_show_band_members
+    get :index, :user_id => users(:mikaband).id
+  end
+  
+  def test_should_not_create_unless_logged_in    
+    assert_no_difference 'BandMember.count' do
+      post :create, :user_id => users(:mikaband), :band_member => { :name => 'ivan' }
+      assert_response :redirect
+    end
+  end
+  
+  def test_should_not_create_if_not_band_owner
+    login_as :quentin
+    assert_no_difference 'BandMember.count' do
+      post :create, :user_id => users(:mikaband), :band_member => { :name => 'ivan' }
+      assert_response :redirect
+    end
+  end
+  
+  def test_should_create
+    login_as :mikaband
+    assert_difference 'BandMember.count' do
+      post :create, :user_id => users(:mikaband), :band_member => { :name => 'ivan' }
+      assert_response :success
+    end
+  end
+  
+  def test_should_update
+    login_as :mikaband
+    post :update, :user_id => users(:mikaband), :id => band_members(:andrea), :band_member => { :name => 'Andrea 2' }
+    assert_equal 'Andrea 2', band_members(:andrea).reload.name
+  end
+  
+  def test_should_destroy
+    login_as :mikaband
+    assert_difference 'BandMember.count', -1 do
+      post :destroy, :user_id => users(:mikaband), :id => band_members(:andrea)
+      assert_response :success
+    end
   end
   
 end

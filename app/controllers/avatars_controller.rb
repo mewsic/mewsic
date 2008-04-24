@@ -13,7 +13,7 @@ class AvatarsController < ApplicationController
   def create    
     if params[:avatar] && params[:avatar][:uploaded_data].respond_to?(:size) && params[:avatar][:uploaded_data].size > 0
       @user.avatars.each{|a| a.destroy}
-      @avatar = Avatar.new(params[:avatar].merge({:user_id => current_user.id}))      
+      @avatar = Avatar.new(params[:avatar].merge({:pictureable => current_user}))      
       if @avatar.save
         @saved = true
         flash.now[:notice] = 'Image uploaded correctly'

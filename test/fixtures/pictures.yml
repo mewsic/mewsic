@@ -28,20 +28,20 @@
 
 
 first_photo_for_quentin:
-  id: 688631946
-  user: quentin
+  pictureable: quentin
+  pictureable_type: User
   type: Photo
   filename: image_msn.jpg
   content_type: images/jpeg
 second_photo_for_quentin:
-  id: 688631952
-  user: quentin
+  pictureable: quentin 
+  pictureable_type: User
   type: Photo
   filename: morto.png
   content_type: images/png
 first_photo_for_users_1:
-  id: 688631949
-  user: user_1
+  pictureable: user_1
+  pictureable_type: User
   type: Photo
   filename: zucca.jpg
   content_type: images/jpeg

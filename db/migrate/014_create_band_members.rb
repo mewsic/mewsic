@@ -3,7 +3,7 @@ class CreateBandMembers < ActiveRecord::Migration
     create_table :band_members do |t|
       t.string  :name
       t.integer :instrument_id
-      t.integer :band_id
+      t.integer :user_id
 
       t.timestamps
     end

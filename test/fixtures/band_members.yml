@@ -16,8 +16,8 @@
 andrea:
   name: Andrea
   instrument: guitar
-  band: mikaband     
+  user: mikaband     
 giovanni:
   name: Giovanni
   instrument: drum
-  band: mikaband
+  user: mikaband

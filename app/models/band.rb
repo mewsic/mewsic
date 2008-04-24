@@ -40,6 +40,6 @@
 
 class Band < User
 
-  has_many :members, :class_name => 'BandMember', :foreign_key => :band_id
+  #has_many :members, :class_name => 'BandMember', :foreign_key => :band_id
   
 end

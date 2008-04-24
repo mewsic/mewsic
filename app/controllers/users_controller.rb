@@ -24,6 +24,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     @user.save!
+    flash[:notice] = "Thanks for signing up. You will receive a mail with your activation link."
+    redirect_to root_url
     # self.current_user = @user
     # redirect_back_or_default('/')
   rescue ActiveRecord::RecordInvalid

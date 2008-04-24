@@ -58,13 +58,16 @@ class User < ActiveRecord::Base
   
   has_many_friends
   
+  # If type == 'Band'
+  has_many :members, :class_name => 'BandMember'
+  
   has_many :songs,            :order => 'songs.created_at DESC'
   has_many :published_songs,  :conditions => ["songs.published = ?", true], :order => 'songs.created_at DESC'
   has_many :answers
   has_many :replies
-  has_many :photos
+  has_many :photos, :as => :pictureable
 
-  has_many :avatars
+  has_many :avatars, :as => :pictureable
   
   has_many :mlabs
   has_many :mlab_tracks, 

@@ -1,11 +1,18 @@
 <div>
-  <form id="new_band_member_form"> 
+  <%- remote_form_for(:band_member, 
+        :method => 'post',
+        :update => 'band-members',
+        :position => :bottom,
+        :html => { :id => 'add-band-member-form' },
+        :loading => "var b=$('add-band-save-button');b.value='Saving...';b.disabled=true;",
+        :url => user_members_path(:user_id => @user.id)) do |f| -%>
     <p>
       <label>Name:</label>
-      <input type="text" name="name" /><br />
+      <%= f.text_field :name %><br />
     </p>
     <p>
-      <input type="submit" value="Save &gt;&gt;">
+      <%= submit_tag 'Save', :id => 'add-band-save-button' %>
     </p>
-  </form>
+  <%- end -%>
 </div>
+

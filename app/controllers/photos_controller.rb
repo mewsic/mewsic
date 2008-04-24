@@ -12,7 +12,7 @@ class PhotosController < ApplicationController
   
   def create 
     if params[:photo] && params[:photo][:uploaded_data].respond_to?(:size) && params[:photo][:uploaded_data].size > 0
-      @photo = Photo.new(params[:photo].merge(:user_id => current_user.id))
+      @photo = Photo.new(params[:photo].merge(:pictureable => current_user))
       if @photo.save
         @saved = true
         flash.now[:notice] = 'Picture uploaded correctly'

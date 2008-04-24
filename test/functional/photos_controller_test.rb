@@ -30,7 +30,7 @@ class PhotosControllerTest < ActionController::TestCase
   
   def test_index_should_success_if_logged
     login_as :quentin
-    get :index, :user_id => users(:quentin).id
+    get :new, :user_id => users(:quentin).id
     assert_response :success
   end
   

@@ -12,12 +12,15 @@
 #
 
 class BandMember < ActiveRecord::Base
-  belongs_to :band
-  belongs_to :instrument
+  belongs_to  :user
+  belongs_to  :instrument
+  has_many    :avatars, :as => :pictureable
   
   before_save :set_default_instrument
   
   attr_accessible :name, :instrument
+
+  validates_presence_of :name
   
 protected
 

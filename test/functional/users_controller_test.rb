@@ -23,7 +23,7 @@ class UsersControllerTest < Test::Unit::TestCase
   def test_should_allow_signup
     assert_difference 'User.count' do
       create_user
-      assert_response :success
+      assert_response :redirect
     end
   end
 
@@ -154,25 +154,15 @@ class UsersControllerTest < Test::Unit::TestCase
   def test_show_should_have_user_assigned
     call_and_test_show
     assert assigns(:user)
-  end
-  
-  def test_show_should_have_songs_assigned
-    call_and_test_show
-    assert assigns(:songs)
-    assert_equal 3, assigns(:songs).size
-  end
+  end    
   
   def test_show_should_have_tracks_assigned
     call_and_test_show
     assert assigns(:songs)
-    assert_equal 7, assigns(:tracks).size
-  end
-
-  def test_show_should_have_tracks_assigned
-    call_and_test_show
     assert assigns(:gallery)
-    assert_equal 2, assigns(:gallery).size
-  end
+    assert_equal 3, assigns(:songs).size
+    assert_equal 7, assigns(:tracks).size
+  end  
   
   def test_should_redirect_unless_xhr
     get :forgot_password
