@@ -1,0 +1,16 @@
+<%- if @saved -%>
+  <%= render(:partial => 'users/band_member', :object => @member) %>
+  <script type="text/javascript" charset="utf-8">
+  $('add-band-member-form').down('input[type="text"]').value = '';
+  var b = $('add-band-save-button');
+  b.value = 'Save';
+  b.disabled = false;
+  </script>    
+<%- else -%>
+<script type="text/javascript" charset="utf-8">
+  alert('You must specify the name');
+  var b = $('add-band-save-button');
+  b.value = 'Save';
+  b.disabled = false;
+</script>
+<%- end -%>
