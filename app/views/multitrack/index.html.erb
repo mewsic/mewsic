@@ -1,52 +1,13 @@
+<div id="flashcontent"></div>
 
-  
-  <script language="javascript">
-  	if (AC_FL_RunContent == 0) {
-  		alert("This page requires AC_RunActiveContent.js.");
-  	} else {
-  		AC_FL_RunContent(
-  			'codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0',
-  			'width', '997',
-  			'height', '670',
-  			'src', '/multitrack/SUX_Player_Core',
-  			'quality', 'high',
-  			'pluginspage', 'http://www.macromedia.com/go/getflashplayer',
-  			'align', 'middle',
-  			'play', 'true',
-  			'loop', 'true',
-  			'scale', 'showall',
-  			'wmode', 'window',
-  			'devicefont', 'false',
-  			'id', 'SUX_Player_Core',
-  			'bgcolor', '#ffffff',
-  			'name', 'SUX_Player_Core',
-  			'menu', 'true',
-  			'allowFullScreen', 'false',
-  			'allowScriptAccess','sameDomain',
-  			'movie', '/multitrack/SUX_Player_Core',
-  			'salign', ''
-  			); //end AC code
-  	}
-  </script>
-  
-  <noscript>
-  	<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" width="978" height="800" id="SUX_Player_Core" align="middle">
-  	<param name="allowScriptAccess" value="sameDomain" />
-  	<param name="allowFullScreen" value="false" />
-  	<param name="movie" value="SUX_Player_Core.swf" />
-  	<param name="quality" value="high" />
-  	<param name="bgcolor" value="#ffffff" />	
-  	<param name="FlashVars" value="userid=1&songid=1024" />
-  	<embed src="SUX_Player_Core.swf" quality="high" 
-  		bgcolor="#ffffff" 
-  		width="978" 
-  		height="800" 
-  		name="SUX_Player_Core" 
-  		align="middle" 
-  		FlashVars="userid=<%= @user.id %>&songid=<%= @song.id %>"
-  		allowScriptAccess="sameDomain" 
-  		allowFullScreen="false" 
-  		type="application/x-shockwave-flash" 
-  		pluginspage="http://www.macromedia.com/go/getflashplayer" />
-  	</object>
-  </noscript>
+<script type="text/javascript">
+	// <![CDATA[
+	
+	var so = new SWFObject("/multitrack/SUX_Player_Core.swf", "SUX_Player_Core", "978", "800", "9", "#FFFFFF");
+	so.addVariable("userid", <%= @user.id %>); 
+	so.addVariable("songid", <%= @user.id %>); 
+	so.write("flashcontent");
+
+	// ]]>
+</script>
+
