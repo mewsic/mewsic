@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    redirect_url = params[:login_page] ? '/login' : '/'
+    redirect_url = '/'
     self.current_user = User.authenticate(params[:login], params[:password])
     if logged_in?
       if params[:remember_me] == "1"
