@@ -13,12 +13,12 @@ class FriendshipsControllerTest < ActionController::TestCase
     
   def test_should
     login_as :user_10   
-    
+    message_count = users(:user_11).received_messages.count
     assert_difference 'Friendship.count' do
       post :create, :user_id => users(:quentin), :friend_id => users(:user_11).id
       assert_response :redirect
-    end                
-                         
+    end
+    assert_equal message_count + 1, users(:user_11).received_messages.count
   end
   
 end

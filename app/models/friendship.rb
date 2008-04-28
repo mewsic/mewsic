@@ -7,7 +7,7 @@
 #  user_id     :integer(11)   not null
 #  friend_id   :integer(11)   not null
 #  created_at  :datetime      
-#  accepted_at :datetime      
+#  accepted_at :datetime
 #
 
 class Friendship < ActiveRecord::Base
@@ -19,6 +19,23 @@ class Friendship < ActiveRecord::Base
 
   after_save :fix_friends_count
   after_destroy :fix_friends_count
+  
+  def self.create_or_accept(user, friend)
+    friendship = Friendship.find_by_user_id_and_friend_id(friend.id, user.id)
+    if friendship
+      friendship.update_attribute(:accepted_at, Time.now)
+    else
+      user.request_friendship_with(friend)
+    end
+  end
+  
+  def destroy_or_unaccept(user)
+    if self.friendshipped_by_me == user
+      self.destroy
+    else
+      self.update_attribute(:accepted_at, nil)
+    end
+  end
     
   protected  
   def fix_friends_count

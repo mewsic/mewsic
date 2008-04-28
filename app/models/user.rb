@@ -96,6 +96,10 @@ class User < ActiveRecord::Base
     :first_name, :last_name, :gender, :motto, :tastes, :country, :city, :age,
     :photos_url, :blog_url, :myspace_url, :skype, :msn, :skype_public, :msn_public
   
+  def is_admirer_of?(user)
+    Friendship.find(:first, :conditions => ["(user_id = ? AND friend_id = ?) OR (user_id = ? AND friend_id = ? AND accepted_at IS NOT NULL)", self.id, user.id, user.id, self.id])
+  end
+  
   def band?
     self.type == 'Band'
   end
@@ -245,7 +249,7 @@ class User < ActiveRecord::Base
                       :include => ['replies', 'user'], 
                       :conditions => ['replies.user_id = ? OR answers.user_id = ?', self.id, self.id],
                       :limit => 4
-  end
+  end 
 
   def find_friends
     self.friends_for_me.find(:all, :include => :avatars) +

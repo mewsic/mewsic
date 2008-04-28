@@ -1,6 +1,6 @@
 <strong><%= @message.subject %></strong>
 <p>
-  <%= @message.body.gsub("\n", "<br />") %>
+  <%= sanitize_message @message %>
 </p>
 <%= link_to 'Reply', new_user_message_path(@user, :reply => @message.id ), :class => 'ajax' %> |
 <%= link_to 'Back to Inbox', user_messages_path(@user, :page => params[:page]), :class => 'ajax' %>

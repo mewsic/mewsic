@@ -13,5 +13,10 @@ module MessagesHelper
     string = "<strong>#{string}</strong>" unless message.read?
     string
   end
+  
+  def sanitize_message(message)
+    message.body.gsub("\n", "<br />")
+    white_list message.body    
+  end
 
 end
