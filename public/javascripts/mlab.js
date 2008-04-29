@@ -42,7 +42,8 @@ var MlabSlider = Class.create(PictureSlider, {
     this.authenticity_token = this.element.down('div.auth-token').id;
     this.loadElements();    
     this.initTrackButtons();
-    this.initSongButtons();
+    this.initSongButtons(); 
+    this.loadingItems = new Array();
     this.setupMlab();
   }, 
   
@@ -99,7 +100,9 @@ var MlabSlider = Class.create(PictureSlider, {
     this.scrolling_div.insert({
       top: content
     });
-    MlabSlider.items.set(item.type + '_' + item.attributes.id, item);    
+    MlabSlider.items.set(item.type + '_' + item.attributes.id, item);        
+    var item_key = item.type + '_' + item.attributes.id;
+    if(this.loadingItems.include(item_key)) this.loadingItems.splice(this.loadingItems.indexOf(item_key), 1);
     this.update();
   },
 
@@ -141,29 +144,36 @@ var MlabSlider = Class.create(PictureSlider, {
   initTrackButtons: function(only_dynamic) {
     var selector = 'a.button.mlab.track.add';
     if(only_dynamic) selector += '.dynamic';
-    $$(selector).invoke('observe', 'click', this.onAddTrack.bind(this));
+    $$(selector).each(function(link) {
+      link.observe('click', this.onAddTrack.bindAsEventListener(this, link));
+    }.bind(this));
   },    
   
   initSongButtons: function(only_dynamic) {
     var selector = 'a.button.mlab.song.add';
     if(only_dynamic) selector += '.dynamic';
-    $$(selector).invoke('observe', 'click', this.onAddSong.bind(this));
+    $$(selector).each(function(link) {
+      link.observe('click', this.onAddSong.bindAsEventListener(this, link));
+    }.bind(this));
   },
   
-  onAddTrack: function(event) {
-    this.handleItemAddition(event, 'track');
+  onAddTrack: function(event, link) {    
+    this.handleItemAddition(event, link, 'track');
   },
   
-  onAddSong: function(event) {
-    this.handleItemAddition(event, 'song');
+  onAddSong: function(event, link) {    
+    this.handleItemAddition(event, link, 'song');
   },
   
-  handleItemAddition: function(event, itemType) {
+  handleItemAddition: function(event, link, itemType) {    
     event.stop(); 
-    var element = event.element();
-    var item_id = element.id.match(/^(\d+)_/)[1];
-    if(MlabSlider.items.get(itemType + '_' + item_id)) return;
-    element.src = "/images/spinner.gif";    
+    var image = link.down('img');
+    var item_id = image.id.match(/^(\d+)_/)[1];
+    var item_key = itemType + '_' + item_id;    
+    if(MlabSlider.items.get(item_key)) return;
+    if(this.loadingItems.include(item_key)) return;
+    this.loadingItems.push(item_key);
+    image.src = "/images/spinner.gif";    
     new Ajax.Request('/users/' + this.user_id + '/mlabs.js', {
       method: 'POST',
       evalJS: true,
@@ -173,7 +183,7 @@ var MlabSlider = Class.create(PictureSlider, {
         authenticity_token: encodeURIComponent(this.authenticity_token)        
       },
       onComplete: function() {
-        element.src = '/images/button_mlab.png';
+        image.src = '/images/button_mlab.png';
       }
     });
   }

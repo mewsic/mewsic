@@ -257,8 +257,9 @@ class User < ActiveRecord::Base
   end
 
   def find_admirers
-    self.pending_friends_for_me.find(:all, :include => :avatars) +
-    self.pending_friends_by_me.find(:all, :include => :avatars)
+    # FIXME: credo che gli ammiratori debbano essere solo quello che mi ammirano.
+    self.pending_friends_for_me.find(:all, :include => :avatars) #+
+    #self.pending_friends_by_me.find(:all, :include => :avatars)
   end
   
   # FIXME: da rendere più efficiente
