@@ -3,7 +3,7 @@ var InPlaceEditorGenerator = Class.create({
   initialize: function(fields, options) {
     this.fields = fields;
     this.options = options;
-    this.user_id = $(this.options.model + '_id').value;
+    this.user_id = $('user-id').value;
     this.setup();
   },
   
@@ -108,6 +108,22 @@ function initGenderSwitcher() {
     });
   });
 } 
+
+var BandMembers = {
+  destroy: function(user_id, member_id) {
+    if(!confirm('Are you sure?')) return;
+    new Ajax.Request('/users/' + user_id + '/members/' + member_id + '.js', {
+      method: 'DELETE',
+      parameters: {
+        authenticity_token: encodeURIComponent($('authenticity-token').value)
+      }
+    });
+  },
+  
+  remove: function(id) {
+    Effect.Puff('band_member_' + id);
+  }
+}
 
 document.observe('dom:loaded', function() {
   new InPlaceEditorGenerator( $w('city country motto tastes'), { url: '/users/', model: 'user' } );  

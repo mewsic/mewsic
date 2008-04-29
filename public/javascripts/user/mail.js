@@ -2,8 +2,8 @@ var MailBox = Class.create({
   
   initialize: function() {
     this.element = $('user-mail');
-    this.user_id = this.element.down('div.user-id').getAttribute('id').match(/^mailbox_(\d+)/)[1];
-    this.authenticity_token = this.element.down('div.auth-token').getAttribute('id').match(/^mailbox_(\w+)/)[1];
+    this.user_id = $('user-id').value;
+    this.authenticity_token = $('authenticity-token').value;
     this.setup();
   },
   

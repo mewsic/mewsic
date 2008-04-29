@@ -1,0 +1,5 @@
+if @destroyed
+  page.call 'BandMembers.remove', @member.id
+else
+  page.alert 'Problem removing member. Reload the page and retry.'
+end

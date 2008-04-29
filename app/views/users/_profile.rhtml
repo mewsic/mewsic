@@ -1,4 +1,6 @@
-<%= hidden_field_tag 'user_id', @user.id if current_user_page? %>
+<%= hidden_field_tag 'user-id', @user.id  %>
+<%= hidden_field_tag 'current-user-id', current_user.id if logged_in?  %>
+<%= hidden_field_tag 'authenticity-token', form_authenticity_token if protect_against_forgery? %>
 
 <div class="mypage-label clear-block">
   <%= render :partial => 'switch_type' if current_user_page? %>

@@ -29,14 +29,13 @@ class BandMembersController < ApplicationController
   end
 
   def destroy
-    @member = BandMember.find(params[:id])
+    @member = @user.members.find(params[:id])
     @destroyed = @member.destroy
-
+   
     respond_to do |format|
       format.js
     end
   rescue ActiveRecord::RecordNotFound
-    respond_to '/'
   end  
 
 protected

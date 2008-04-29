@@ -1938,3 +1938,14 @@ div#messages div.notice {
 img#user_gender {
   cursor: pointer;
 }
+
+/* band member */
+.band_member {
+  position: relative;
+}
+
+.band_member .remove {
+  position: absolute;
+  top: 5px; 
+  right: 5px;
+}
