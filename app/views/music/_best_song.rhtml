@@ -4,10 +4,10 @@
 			<div class="green-bg">
 				<span class="tracks-number"><span><%= best_song.tracks.size %></span></span> 
 				<p class="thumb">
-				  <%= link_to avatar_image(best_song.user, :icon), best_song.user %>
+				  <%= link_to avatar_image(best_song.user, :icon), user_path(best_song.user) %>
 				</p>
 				<p class="name align-right">
-				  <%= link_to best_song.user.login, best_song.user %></a>
+				  <%= link_to best_song.user.login, user_path(best_song.user) %></a>
 				</p>
 			</div>
   		<p class="star"><%= stars(best_song.rating_avg) %></p>

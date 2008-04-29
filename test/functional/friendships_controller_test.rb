@@ -11,14 +11,14 @@ class FriendshipsControllerTest < ActionController::TestCase
     assert_routing "/users/#{users(:quentin).id}/friendships", options
   end
     
-  def test_should
-    login_as :user_10   
-    message_count = users(:user_11).received_messages.count
+  def test_should_create_friendship
+    login_as :quentin   
+    message_count = users(:mikaband).received_messages.count
     assert_difference 'Friendship.count' do
-      post :create, :user_id => users(:quentin), :friend_id => users(:user_11).id
+      post :create, :user_id => users(:quentin), :friend_id => users(:mikaband).id
       assert_response :redirect
     end
-    assert_equal message_count + 1, users(:user_11).received_messages.count
+    assert_equal message_count + 1, users(:mikaband).received_messages.count
   end
   
 end

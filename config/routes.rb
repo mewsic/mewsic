@@ -1,6 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
 
-  map.resources :answers, :has_many => [ :replies ]
+  map.resources :answers do |answers|
+    answers.resources :replies
+  end
+  
   map.resources :genres
   map.resources :instruments
   map.resources :ideas

@@ -1,9 +1,9 @@
 <div class="elements clear-block">
 	<p class="thumb">
-	  	<%= link_to (avatar_image newest_song.user, :icon), newest_song.user %>
+	  	<%= link_to (avatar_image newest_song.user, :icon), user_path(newest_song.user) %>
 	</p>
 	<p class="name align-right">
-		<%= link_to newest_song.user.login ,newest_song.user %>
+		<%= link_to newest_song.user.login, user_path(newest_song.user) %>
 	</p>
 	<p class="country align-right">
 		<%= h newest_song.user.compiled_location %>

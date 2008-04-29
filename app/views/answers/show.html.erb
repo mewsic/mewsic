@@ -1,0 +1,16 @@
+<h1>Answers#show</h1>
+<p><%=h @answer.body %></p>
+   
+<h2>Risposte</h2>
+<%- @answer.replies.each do |reply| -%>
+<div>
+  <p><%= reply.body %></p>
+  <p><%= link_to reply.user.login, user_path(reply.user) %></p>
+</div>
+<%- end -%>
+     
+<h2>Rispondi</h2>
+<%- form_for(:reply, :url => answer_replies_path(@answer)) do |f| -%>
+  <%= f.text_area :body %><br />
+  <%= submit_tag 'Save' %>
+<%- end -%>

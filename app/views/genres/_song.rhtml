@@ -1,12 +1,12 @@
 <tr class="<%= %w(even odd)[song_counter % 2] %>">	    	
 	<td>
   		<p class="float-left">
-  			<%= link_to (avatar_image song.user, :icon, 'float-left'), song.user %>
+  			<%= link_to (avatar_image song.user, :icon, 'float-left'), user_path(song.user) %>
 			<span class="tracks-number">
 			  	<span><%= song.tracks.size %></span>
 			</span>
       		<p class="name grey-text">
-      			<%= link_to song.user.login, song.user %>
+      			<%= link_to song.user.login, user_path(song.user) %>
 			</p>
 		</p>
     	<p class="title">

@@ -11,8 +11,12 @@
 #
 
 class Answer < ActiveRecord::Base
-  has_many :replies
+  has_many :replies, :order => 'created_at DESC'
   belongs_to :user
+  
+  attr_accessible :body
+  
+  validates_presence_of :body
   
   def self.find_newest(options = {})
     options.merge!({:order => 'answers.created_at desc'})

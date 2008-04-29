@@ -14,4 +14,9 @@
 class Reply < ActiveRecord::Base
   belongs_to :answer
   belongs_to :user
+  
+  attr_accessible :body
+  
+  validates_presence_of :body
+  
 end

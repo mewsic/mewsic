@@ -6,10 +6,10 @@
 		<div class="elements clear-block">
 			<div class="orange-bg">
 				<p class="thumb">
-				  	<%= link_to (avatar_image track.parent_song.user, :icon), track.parent_song.user %>
+				  	<%= link_to (avatar_image track.parent_song.user, :icon), user_path(track.parent_song.user) %>
 				</p>
 				<p class="name">
-				  	<%= link_to track.parent_song.user.login, track.parent_song.user %>
+				  	<%= link_to track.parent_song.user.login, user_path(track.parent_song.user) %>
 				</p>
 			</div>
 		  	<p class="title">

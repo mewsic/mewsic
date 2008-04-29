@@ -1,0 +1,13 @@
+<h1>Answers#index</h1>
+<h1>Chiedi</h1>
+<%- form_for :answer, :url => answers_path do |f| -%>
+  <%= f.text_area :body %><br />
+  <%= submit_tag 'Save' %>
+<%- end -%>
+
+<%- @answers.each do |answer| -%>
+<div>
+  <p><%= link_to truncate(answer.body), answer_path(answer) %></p>
+  <p><%= link_to answer.user.login, user_path(answer.user) %></p>
+</div>
+<%- end -%>
