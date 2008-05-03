@@ -19,8 +19,8 @@
       <span class="star">
         <%= stars 2, :orange %>
       </span>
-      <%= mlab_button track %>
-      <a href="#"><img width="23" height="15" alt="" src="/images/button_play_green.png"/></a></p>
+      <%= mlab_button(track) %>
+      <%= play_button(track) %>
     <p class="float-left">
       <a href="#"><img width="22" height="14" class="float-left" alt="" src="/images/genere_ico.png"/></a>
       <%= link_to track.parent_song.genre.name, genre_path(track.parent_song.genre) %>

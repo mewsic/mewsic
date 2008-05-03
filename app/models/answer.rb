@@ -22,4 +22,9 @@ class Answer < ActiveRecord::Base
     options.merge!({:order => 'answers.created_at desc'})
     self.find(:all, options)
   end
+  
+  def update_replies_count
+    update_attribute(:replies_count, replies.count)
+    replies.size
+  end
 end

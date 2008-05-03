@@ -17,7 +17,7 @@
   		<p><%= stars(song.rating_avg) %></p>
       	<p>
       	  <%= mlab_button(song, :dynamic => true) %>
-      	  <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a>
+      	  <%= play_button(song) %>
         </p>
 	</td>
 </tr>

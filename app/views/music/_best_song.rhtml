@@ -14,7 +14,7 @@
   		<p class="title"><%= link_to best_song.title, song_path(best_song) %></p>
   		<p class="button float-right">
   		  <%= mlab_button(best_song) %>
-  		  <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a>
+  		  <%= play_button(best_song) %>
   		</p>
   		<p><%=h best_song.original_author %></p>
 	  </div>

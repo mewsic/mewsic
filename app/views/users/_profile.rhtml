@@ -1,7 +1,3 @@
-<%= hidden_field_tag 'user-id', @user.id  %>
-<%= hidden_field_tag 'current-user-id', current_user.id if logged_in?  %>
-<%= hidden_field_tag 'authenticity-token', form_authenticity_token if protect_against_forgery? %>
-
 <% javascript('user/edit') if current_user_page? %>
 <% javascript('user/mail') if logged_in? %>
 

@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(:version => 14) do
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
     t.text     "body"
+    t.integer  "replies_count", :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

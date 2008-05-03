@@ -3,11 +3,13 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>Myousica - play and share</title>
-  <%= stylesheet_link_tag "style", "iepngfix" %>  
-  <%= javascript_include_tag 'prototype', 'effects', 'controls', 'picture_slider', 'mlab', 'application' %>
+  <%= stylesheet_link_tag "style", "iepngfix", "lightwindow" %>  
+  <%= javascript_include_tag 'prototype', 'effects', 'controls', 'picture_slider', 'mlab', 'lightwindow', 'audio-player', 'application' %>
   <%= yield :head %>
 </head>
 <body class="<%= body_class %>">
+  <%= hidden_field_tag 'current-user-id', current_user.id if logged_in?  %>
+  <%= hidden_field_tag 'authenticity-token', form_authenticity_token if protect_against_forgery? %>  
   <div id="header" class="page-width clear-block">
     <%= render :partial => 'shared/top_menu' %>
     <div id="logo" class="float-left"><%= clickable_logo %></div>

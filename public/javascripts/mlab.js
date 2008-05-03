@@ -38,7 +38,7 @@ var MlabSlider = Class.create(PictureSlider, {
     this.scroll_clip = this.element.down('div#scroll-clip');
     MlabSlider.instance = this;
     this.windowSize = this.options.windowSize;
-    this.user_id = $('user-id').value;
+    this.user_id = $('current-user-id').value;
     this.authenticity_token = $('authenticity-token').value;
     this.loadElements();    
     this.initTrackButtons();

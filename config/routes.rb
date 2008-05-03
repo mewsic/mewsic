@@ -19,8 +19,8 @@ ActionController::Routing::Routes.draw do |map|
   map.reset_password '/reset_password/:id',  :controller => 'users', :action => 'reset_password'
     
   map.resources :sessions
-  map.resources :songs
-  map.resources :tracks 
+  map.resources :songs, :has_one => :player
+  map.resources :tracks, :has_one => :player 
   
   map.resources :search
   

@@ -7,7 +7,10 @@
 
 <%- @answers.each do |answer| -%>
 <div>
-  <p><%= link_to truncate(answer.body), answer_path(answer) %></p>
-  <p><%= link_to answer.user.login, user_path(answer.user) %></p>
+  <p>
+    <%= link_to truncate(answer.body), answer_path(answer) %> -
+    <%= link_to answer.user.login, user_path(answer.user) %>
+    ( <%= link_to(pluralize(answer.replies_count, "reply"), answer_path(answer)) %> )
+  </p>
 </div>
 <%- end -%>

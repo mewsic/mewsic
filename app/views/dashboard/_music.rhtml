@@ -12,7 +12,7 @@
     <p class="abstract"><%=h truncate(music.description, 33) %></p>    
     <p class="button float-right">
       <%= mlab_button(music) %>
-      <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a>
+      <%= play_button(music) %>
     </p>    
     <p class="float-left">played <%= pluralize(music.listened_times, 'time') %></p>
   </div>

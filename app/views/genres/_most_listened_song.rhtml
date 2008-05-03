@@ -10,7 +10,7 @@
 			<p class="star"><%= stars(most_listened_song.rating_avg) %></p>
 			<p class="button">
 			  <%= mlab_button(most_listened_song) %>
-			  <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
+			  <%= play_button(most_listened_song) %>
 		</div>
 	<p class="title">	
 	  <%= link_to truncate(most_listened_song.title, 30), most_listened_song %>

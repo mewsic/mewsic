@@ -12,7 +12,7 @@
 		<p class="star"><%= stars(newest_song.rating_avg) %></p> 
 		<p class="button">
 		  <%= mlab_button(newest_song) %>
-		  <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a>
+		  <%= play_button(newest_song) %>
     </p>
 	</div>
 	<p class="title"><%= link_to newest_song.title, newest_song %></p>

@@ -2,5 +2,5 @@
 	<p class="thumb"><%= link_to avatar_image(answer.user, :icon), user_path(answer.user) %></p>
 	<p class="name"><%= link_to answer.user.login, user_path(answer.user) %></p>
 	<p class="abstract"><%= answer.body %></p>
-	<p class="answer-number"><%= pluralize(answer.replies.size, 'replay') %></p>
+	<p class="answer-number"><%= pluralize(answer.replies_count, 'replay') %></p>
 </div>

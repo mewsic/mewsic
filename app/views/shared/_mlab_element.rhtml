@@ -5,7 +5,7 @@
   </div>
   <div class="float-left align-right">
     <p class="button">
-      <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a>
+      <%= play_button(mlab_element) %>
       <a href="#" onclick="MlabSlider.removeTrack(<%= mlab_element.id %>); return false;">remove</a>
     </p>
   </div>
