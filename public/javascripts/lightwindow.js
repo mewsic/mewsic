@@ -238,6 +238,12 @@ lightwindow.prototype = {
 			showGalleryCount : true
 		}, options || {});
 		this.duration = ((11-this.options.resizeSpeed)*0.15);
+		this.links = new Array();
+		Ajax.Responders.register({
+      onComplete: function() {
+        this._setupLinks.bind(this).delay(0.01);
+      }.bind(this)
+    });
 		this._setupLinks();
 		this._getScroll();
 		this._getPageDimensions();
@@ -432,7 +438,9 @@ lightwindow.prototype = {
 	_setupLinks : function() {
 		var links = $$('.'+this.options.classNames.standard);
 		links.each(function(link) {
-			this._processLink(link);
+			if(!this.links.include(link)) {
+			  this._processLink(link);
+		  }
 		}.bind(this));	
 	},
 	//
@@ -1910,7 +1918,7 @@ lightwindow.prototype = {
 
 /*-----------------------------------------------------------------------------------------------*/
 
-Event.observe(window, 'load', lightwindowInit, false);
+document.observe('dom:loaded', lightwindowInit, false);
 
 //
 //	Set up all of our links
