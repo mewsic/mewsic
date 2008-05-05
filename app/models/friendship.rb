@@ -7,7 +7,7 @@
 #  user_id     :integer(11)   not null
 #  friend_id   :integer(11)   not null
 #  created_at  :datetime      
-#  accepted_at :datetime
+#  accepted_at :datetime      
 #
 
 class Friendship < ActiveRecord::Base

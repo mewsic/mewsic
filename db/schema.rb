@@ -120,8 +120,8 @@ ActiveRecord::Schema.define(:version => 14) do
     t.string   "filename"
     t.integer  "user_id"
     t.integer  "genre_id"
-    t.integer  "listened_times"
     t.integer  "bpm"
+    t.integer  "listened_times",                                 :default => 0
     t.boolean  "published",                                      :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -134,16 +134,17 @@ ActiveRecord::Schema.define(:version => 14) do
     t.string   "title"
     t.string   "filename"
     t.string   "description"
-    t.string   "tonality",                                     :default => "C"
+    t.string   "tonality",                                      :default => "C"
     t.integer  "song_id"
     t.integer  "instrument_id"
-    t.integer  "seconds",                                      :default => 0
+    t.integer  "listened_times",                                :default => 0
+    t.integer  "seconds",                                       :default => 0
     t.integer  "bpm"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "rating_count"
-    t.decimal  "rating_total",  :precision => 10, :scale => 2
-    t.decimal  "rating_avg",    :precision => 10, :scale => 2
+    t.decimal  "rating_total",   :precision => 10, :scale => 2
+    t.decimal  "rating_avg",     :precision => 10, :scale => 2
   end
 
   create_table "users", :force => true do |t|

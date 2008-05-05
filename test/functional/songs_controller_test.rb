@@ -1,6 +1,10 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class SongsControllerTest < ActionController::TestCase
+  
+  include AuthenticatedTestHelper
+  fixtures :all
+  
   tests SongsController
 
   def test_index_should_response_success
@@ -21,4 +25,9 @@ class SongsControllerTest < ActionController::TestCase
     end
   end
   
+  def test_should_rate
+    login_as :quentin
+    song = songs(:let_it_be)
+    post :rate, :id => song.id, :rate => 2
+  end
 end

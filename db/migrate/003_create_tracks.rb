@@ -7,6 +7,7 @@ class CreateTracks < ActiveRecord::Migration
       t.string  :tonality, :default => 'C'
       t.integer :song_id
       t.integer :instrument_id
+      t.integer :listened_times, :default => 0
       t.integer :seconds, :default => 0
       t.integer :bpm
       t.timestamps

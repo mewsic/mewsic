@@ -11,8 +11,8 @@
 #  filename        :string(255)   
 #  user_id         :integer(11)   
 #  genre_id        :integer(11)   
-#  listened_times  :integer(11)   
 #  bpm             :integer(11)   
+#  listened_times  :integer(11)   default(0)
 #  published       :boolean(1)    default(TRUE)
 #  created_at      :datetime      
 #  updated_at      :datetime      

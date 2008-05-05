@@ -1,8 +1,8 @@
 <config>
 	<host><%= APPLICATION[:url] %></host>
-	<fms>rtmp://10.1.2.75:3000/</fms>
+	<fms>rtmp://localhost:3000/</fms>
 	<url_request>
-		<mylist><%= user_mlabs_path(@user) %></mylist>
+		<mylist>/users/{:id}/mlabs</mylist>
 		<search>/search/</search>
 		<song>/songs/{:id}</song>
 		<track>/tracks/{:id}</track>

@@ -1,6 +1,6 @@
 class SongsController < ApplicationController
   
-  before_filter :login_required, :only => :update
+  before_filter :login_required, :only => [:update, :rate]
   
   def index
     if params.has_key?("genre_id")
@@ -42,6 +42,12 @@ class SongsController < ApplicationController
         render :xml => @song
       end
     end
+  end
+  
+  def rate    
+    @song = Song.find(params[:id])
+    @song.rate(params[:rate].to_i, current_user)
+    render :layout => false, :text => "#{@song.rating_count} votes"
   end
 
 end

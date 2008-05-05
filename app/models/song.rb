@@ -11,8 +11,8 @@
 #  filename        :string(255)   
 #  user_id         :integer(11)   
 #  genre_id        :integer(11)   
-#  listened_times  :integer(11)   
 #  bpm             :integer(11)   
+#  listened_times  :integer(11)   default(0)
 #  published       :boolean(1)    default(TRUE)
 #  created_at      :datetime      
 #  updated_at      :datetime      
@@ -93,6 +93,10 @@ class Song < ActiveRecord::Base
     if self.children_tracks.count == 1
       puts "#{self.reload.children_tracks_count.inspect} => #{self.title}"
     end
+  end
+  
+  def increment_listened_times
+    update_attribute(:listened_times, listened_times + 1)
   end
   
 end

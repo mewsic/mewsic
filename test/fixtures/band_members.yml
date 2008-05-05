@@ -6,7 +6,7 @@
 #  id            :integer(11)   not null, primary key
 #  name          :string(255)   
 #  instrument_id :integer(11)   
-#  band_id       :integer(11)   
+#  user_id       :integer(11)   
 #  created_at    :datetime      
 #  updated_at    :datetime      
 #

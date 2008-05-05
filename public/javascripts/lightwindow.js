@@ -439,6 +439,7 @@ lightwindow.prototype = {
 		var links = $$('.'+this.options.classNames.standard);
 		links.each(function(link) {
 			if(!this.links.include(link)) {
+			  this.links.push(link);
 			  this._processLink(link);
 		  }
 		}.bind(this));	

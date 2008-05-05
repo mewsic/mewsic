@@ -23,4 +23,10 @@ class TracksController < ApplicationController
     end
   end  
   
+  def rate    
+    @track = Track.find(params[:id])
+    @track.rate(params[:rate].to_i, current_user)
+    render :layout => false, :text => "#{@track.rating_count} votes"
+  end
+  
 end

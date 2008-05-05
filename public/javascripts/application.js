@@ -78,6 +78,22 @@ document.observe('dom:loaded', function(event) {
       toggleTriggers: true
     });    
 	}
+	
+	var authenticity_token = $('authenticity-token').value;
+	new Rating('song_rating', {
+    hideLabelOnMouseOut: true,
+    ajaxUrl: '/songs/#{id}/rate/',
+    ajaxMethod: 'PUT',
+    afterRatinglabelText: 'saving...',
+    ajaxParameters: 'authenticity_token=' + encodeURIComponent(authenticity_token) + '&rate=#{rate}'
+	});
+	new Rating('track_rating', {
+	  hideLabelOnMouseOut: true,
+    ajaxUrl: '/tracks/#{id}/rate/',
+    ajaxMethod: 'PUT',
+    afterRatinglabelText: 'saving...',    
+    ajaxParameters: 'authenticity_token=' + encodeURIComponent(authenticity_token) + '&rate=#{rate}'
+	});
 		 
   Message.init();
  

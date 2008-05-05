@@ -21,7 +21,7 @@
 		  	<p><%= track.parent_song.original_author %></p>
 		    <p class="button float-right">
           <%= mlab_button(track) %>
-		    	<a href="#"><img src="/images/button_play_orange.png" alt="" width="23" height="15" /></a>
+		    	<%= play_button(track, :color => :orange) %>
 			</p>
 			<p class="float-left">used <%= pluralize(song_count, 'time') %></p>
 		  	<p class="star"><%= stars(track.parent_song.rating_avg) %></p>

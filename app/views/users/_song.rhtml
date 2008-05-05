@@ -18,7 +18,7 @@
         </div>
       </td>
       <td align="right">
-        <p class="star"><%= stars(song.rating_avg) %></p>
+        <%= rating(song) %>
         <p><strong><%= link_to song.genre.name, song.genre %></strong></p>
       </td>
     </tr>

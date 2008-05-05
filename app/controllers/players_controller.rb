@@ -4,7 +4,8 @@ class PlayersController < ApplicationController
   
   before_filter :find_playable
 
-  def show    
+  def show
+    @playable.increment_listened_times    
   end
   
 private

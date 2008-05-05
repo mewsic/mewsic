@@ -3,20 +3,21 @@
 #
 # Table name: tracks
 #
-#  id            :integer(11)   not null, primary key
-#  title         :string(255)   
-#  filename      :string(255)   
-#  description   :string(255)   
-#  tonality      :string(255)   default("C")
-#  song_id       :integer(11)   
-#  instrument_id :integer(11)   
-#  seconds       :integer(11)   default(0)
-#  bpm           :integer(11)   
-#  created_at    :datetime      
-#  updated_at    :datetime      
-#  rating_count  :integer(11)   
-#  rating_total  :decimal(10, 2 
-#  rating_avg    :decimal(10, 2 
+#  id             :integer(11)   not null, primary key
+#  title          :string(255)   
+#  filename       :string(255)   
+#  description    :string(255)   
+#  tonality       :string(255)   default("C")
+#  song_id        :integer(11)   
+#  instrument_id  :integer(11)   
+#  listened_times :integer(11)   default(0)
+#  seconds        :integer(11)   default(0)
+#  bpm            :integer(11)   
+#  created_at     :datetime      
+#  updated_at     :datetime      
+#  rating_count   :integer(11)   
+#  rating_total   :decimal(10, 2 
+#  rating_avg     :decimal(10, 2 
 #
 
 class Track < ActiveRecord::Base
@@ -60,7 +61,11 @@ class Track < ActiveRecord::Base
   def user
     @user ||= parent_song.user
   end
-
+  
+  def increment_listened_times
+    update_attribute(:listened_times, listened_times + 1)
+  end
+  
 private
   
   def zerofill(number, length)

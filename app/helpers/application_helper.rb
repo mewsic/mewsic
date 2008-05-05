@@ -7,6 +7,20 @@ module ApplicationHelper
     n.to_f.round.times { result << "<img src=\"/images/star_#{color}.png\" alt=\"\" width=\"10\" height=\"9\" />"}
     (5 - n.to_f.round).times { result << "<img src=\"/images/star_gray.png\" alt=\"\" width=\"10\" height=\"9\" />"}
     result
+    # result = '<div class="rating" id="ciao">'
+    # 5.times do |i|
+    #   result << "<div class=\"star#{i < 2 ? ' selected' : ''}\"></div>"
+    # end
+    # result << '<div style="clear:both"></div></div>'
+  end
+  
+  def rating(rateable)
+    type_class = rateable.class.name.downcase
+    result = %|<div class="rating #{type_class}_rating" id="#{type_class}_#{rateable.id}"><div class="stars">|
+    5.times do |i|
+      result << "<div class=\"star#{i < rateable.rating_avg.to_i ? ' on' : ''}\"></div>"
+    end
+    result << %|</div><div class="clearer"></div></div>|
   end
   
   def body_class

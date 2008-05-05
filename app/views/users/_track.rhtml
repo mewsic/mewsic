@@ -12,7 +12,8 @@
 	</p>
   </td>
   <td class="star">
-    <p><span class="star"><%= stars(track.rating_avg) %></span></p>
+    
+    <%= rating(track) %>
     <p>
       <%= mlab_button(track, :dynamic => true) %>
       <%= play_button(track) %>
