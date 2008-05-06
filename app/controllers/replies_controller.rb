@@ -6,7 +6,7 @@ class RepliesController < ApplicationController
     @answer = Answer.find(params[:answer_id])
     @reply = Reply.new(params[:reply])
     @reply.answer = @answer
-    @reply.user = User.find_by_login('quentin')
+    @reply.user = current_user
     if @reply.save
       flash[:notice] = 'Reply has been save correctly.'
       redirect_to answer_url(@answer)

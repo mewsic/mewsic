@@ -6,7 +6,7 @@
 	 	  	  <% genre.last_songs(3).each_with_index do |song, index| -%>
 			  	<tr class="<%= %w[even odd][index % 2] %>">
 					<td><%= h song.user.login %><em> - <%= link_to(truncate(song.title, 30), song_path(song)) %></em></td>
-					<td class="star"><%= stars(song.rating_avg) %></td>
+					<td class="star"><%= rating(song) %></td>
 					<td class="button">
 					  <%= mlab_button(song, :dynamic => true) %>
 					  <%= play_button(song) %>

@@ -6,7 +6,7 @@
     <p class="name align-right">
 	  <%= link_to music.user.login, music.user %>
 	</p>
-    <p class="star"><%= stars(music.rating_avg) %></p>
+    <%= rating(music) %>
     <p class="title"><%= link_to truncate(music.title, 33), music %></p>
     <p><%=h music.original_author %></p>
     <p class="abstract"><%=h truncate(music.description, 33) %></p>    

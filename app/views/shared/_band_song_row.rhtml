@@ -3,7 +3,7 @@
     <a href="<%= song_path(band_song_row) %>"><%= band_song_row.original_author %> - <em><%= truncate(band_song_row.title, 30) %></em></a>
   </td>
   <td class="star">
-    <%= stars(band_song_row.rating_avg) %>
+    <%= rating(band_song_row) %>
   </td>
   <td class="button">
     <%= mlab_button(band_song_row) %>

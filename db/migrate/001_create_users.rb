@@ -1,7 +1,8 @@
 class CreateUsers < ActiveRecord::Migration
   def self.up
     create_table "users", :force => true do |t|
-      t.string :login, :email, :remember_token, :activation_code, :country, :city, :first_name, :last_name, :gender
+      t.string :login, :email, :remember_token, :activation_code, :country, :city, :first_name, :last_name
+      t.string :gender, :default => 'male'
       t.string :photos_url, :blog_url, :myspace_url, :skype, :msn
       t.boolean :msn_public, :default => false
       t.boolean :skype_public, :default => false

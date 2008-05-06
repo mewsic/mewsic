@@ -17,8 +17,10 @@ module ApplicationHelper
   def rating(rateable)
     type_class = rateable.class.name.downcase
     result = %|<div class="rating #{type_class}_rating" id="#{type_class}_#{rateable.id}"><div class="stars">|
-    5.times do |i|
-      result << "<div class=\"star#{i < rateable.rating_avg.to_i ? ' on' : ''}\"></div>"
+    1.upto(5) do |i| 
+      on_class    = rateable.rating_avg.to_f >= i ? ' on' : ''
+      half_class  = rateable.rating_avg.to_f < i && rateable.rating_avg.to_f > (i -1) ? ' half' : ''
+      result << "<div class=\"star#{on_class}#{half_class}\"></div>"
     end
     result << %|</div><div class="clearer"></div></div>|
   end

@@ -156,7 +156,7 @@ ActiveRecord::Schema.define(:version => 14) do
     t.string   "city"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "gender"
+    t.string   "gender",                                                                 :default => "male"
     t.string   "photos_url"
     t.string   "blog_url"
     t.string   "myspace_url"

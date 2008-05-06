@@ -9,7 +9,7 @@
 		<%= h newest_song.user.compiled_location %>
 	</p> 
 	<div class="float-right"> 
-		<p class="star"><%= stars(newest_song.rating_avg) %></p> 
+		<%= rating(newest_song) %>
 		<p class="button">
 		  <%= mlab_button(newest_song) %>
 		  <%= play_button(newest_song) %>

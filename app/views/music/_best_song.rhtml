@@ -10,7 +10,7 @@
 				  <%= link_to best_song.user.login, user_path(best_song.user) %></a>
 				</p>
 			</div>
-  		<p class="star"><%= stars(best_song.rating_avg) %></p>
+  		<div class="best-songs"><%= rating(best_song) %></div>
   		<p class="title"><%= link_to best_song.title, song_path(best_song) %></p>
   		<p class="button float-right">
   		  <%= mlab_button(best_song) %>

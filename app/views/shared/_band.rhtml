@@ -1,6 +1,6 @@
 <div class="elements clear-block"> 
   	<p class="thumb">
-    	<%= link_to (avatar_image band.user, :small) ,band.user %>
+    	<%= link_to (avatar_image band.user, :small), user_path(band.user) %>
   	</p>
   	<!--
     	FIXME this link should point to band_path as soon as we implement it

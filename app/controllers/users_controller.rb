@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     @best_myousicians = User.find_best_myousicians :limit  => 3
     @prolific = User.find_prolific :limit => 3
     @friendliest = User.find_friendliest :limit => 1
-    @most_bands = User.find_most_banded :limit => 1
+    @most_bands = [] #User.find_most_banded :limit => 1
     @newest = User.find_newest :limit => 3
     @most_instruments = User.find_with_more_instruments
   end

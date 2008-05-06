@@ -1956,15 +1956,18 @@ img#user_gender {
 /* rating */
 
 .rating {
-  width: 130px;
+  width: 70px;
   position: relative;
 }
 
 .rating .stars {
   width: 70px;
   height: 9px;
-  margin-bottom: 5px;
-  float: left;
+} 
+
+.most-used-tracks .rating .stars,
+.best-songs .rating .stars {
+  float: none;
 }
 
 .rating .label {
@@ -1982,22 +1985,38 @@ img#user_gender {
   clear: right;
 }
 
-.rating .stars {
-  float: right;
-  margin-left: 5px;
+.rating {  
+  background: transparent url('/images/stars.png') repeat-x left top;
+  margin-bottom: 5px;
+  height: 9px;
 }
-
 .rating .stars .star {
   width: 14px;
   height: 9px;
   cursor: pointer;
-  background: transparent url('/images/stars.png') no-repeat 0 0;
+  background: transparent url('/images/stars.png') no-repeat left top ;
   float: left;
-}	  
+}
+
+.rating .stars .star.half {
+  width: 7px;
+  margin-right: 7px;
+  background-position: 0 -9px;
+}	
+  
 .rating .stars .star.on {
   background-position: 0 -9px;
 }
 
 .rating.selected .stars .star.on {
   background-position: 0 -18px;
+}
+
+.rating.selected .stars .star.half {
+  width: 14px;
+  margin-right: 0;
+}
+
+.music-list .star {
+  clear: none;
 }

@@ -16,9 +16,7 @@
       <span>length: <strong><%= track.length %> </strong></span>
     </p>
     <p class="float-right">
-      <span class="star">
-        <%= stars 2, :orange %>
-      </span>
+      <%= rating(track) %>
       <%= mlab_button(track) %>
       <%= play_button(track) %>
     <p class="float-left">

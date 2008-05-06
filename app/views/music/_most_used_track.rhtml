@@ -24,7 +24,7 @@
 		    	<%= play_button(track, :color => :orange) %>
 			</p>
 			<p class="float-left">used <%= pluralize(song_count, 'time') %></p>
-		  	<p class="star"><%= stars(track.parent_song.rating_avg) %></p>
+		  <div class="most-used-tracks"><%= rating(track) %></div>
 		</div>
 	</div>
 </div>

@@ -47,14 +47,14 @@
 	  <div class="box-rounded-gray clear-block">
 		  <h1>MOST FRIENDS</h1>
 		  <div class="top-box clear-block">
-        <%= render :partial => 'most_friends', :object => @friendliest.first %>
+        <%= render :partial => 'most_friends', :collection => @friendliest %>
 			</div>
 		</div>
 	
 	  <div class="box-rounded-gray clear-block">
 		  <h1>MOST M-BANDS</h1>
 		  <div class="top-box clear-block">
-        <%= render :partial => 'most_bands', :object => @most_bands.first %>
+        <%= render :partial => 'most_bands', :collection => @most_bands %>
 		  </div>
 	  </div>
 	
