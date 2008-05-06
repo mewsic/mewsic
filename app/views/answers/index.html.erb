@@ -1,16 +1,124 @@
-<h1>Answers#index</h1>
-<h1>Chiedi</h1>
-<%- form_for :answer, :url => answers_path do |f| -%>
-  <%= f.text_area :body %><br />
-  <%= submit_tag 'Save' %>
-<%- end -%>
-
-<%- @answers.each do |answer| -%>
-<div>
-  <p>
-    <%= link_to truncate(answer.body), answer_path(answer) %> -
-    <%= link_to answer.user.login, user_path(answer.user) %>
-    ( <%= link_to(pluralize(answer.replies_count, "reply"), answer_path(answer)) %> )
-  </p>
+<div class="box-list semi-one-col clear-block">
+  
+  <div class="simple-list semi-one-col clear-block azzurro-boxes">
+    <h1>ANSWER</h1>
+    <div class="top-box clear-block">
+      <div class="bottom-box clear-block">
+        <div class="float-right" style="padding-right:60px;"><img src="/images/interrogativo.gif" alt="" width="50" height="53" style="position:absolute; margin-top:-40px;" /></div>
+        <div class="elements clear-block" style="padding:15px 20px;">
+          <%- form_for :answer, :url => answers_path do |f| -%>
+            <p><%= f.text_area :body, :style => "width:99%; height:90px; border-bottom: 1px solid #D9D9D9;" %></p>
+            <div class="special-button float-right">
+              <img src="/images/special_button_cyan.png" alt="" width="90" height="24">
+              <%= submit_tag 'Send', :class => 'special_button_small' %>
+            </div>
+          <%- end -%>          
+        </div>
+      </div>
+    </div>
+  </div>
+	  
 </div>
-<%- end -%>
+	
+<div class="box-list two-col-big clear-block">
+  <div class="simple-list grey-box clear-block">
+    <h1>REPLY</h1>
+    <div class="top-box clear-block">
+		
+      <div class="bottom-box clear-block">
+        <div class="float-right" style="padding-right:50px;"><img src="/images/esclamativo.gif" alt="" width="50" height="53" style="position:absolute; margin-top:-60px;" /></div>
+        
+        <%- @answers.each do |answer| -%>
+          <div class="clear-block" style="margin-bottom:15px; border-bottom:1px solid #D9D9D9;">
+            <p class="float-left">
+              <%= link_to avatar_image(answer.user, :icon), user_path(answer.user) %>
+            </p>
+            <div style="margin:0px 10px 10px 40px;">
+              <h2 class="clearly-cyan-text"><%= link_to h(answer.body), answer_path(answer) %></h2>
+              <p class="grey-text">Answer by <%= link_to answer.user.login, user_path(answer.user) %></p>
+              <p class="grey-text"><%= link_to pluralize(answer.replies.count, 'reply'), answer_path(answer) %> - <%= time_ago_in_words answer.created_at %> </p>
+            </div>
+          </div>
+        <%- end -%>
+        
+        				
+				<p class="abstract align-right"><a href="#">Vedi altre domande aperte</a></p>								
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="search-question clear-block">
+  <img src="/images/lente_search.gif" alt="" width="27" height="27" class="float-left" />
+  <h2 class="float-left">CERCA DOMANDA</h2>
+  <p class="float-left"><input name="" type="text" style="border:1px solid #D3D3D3; width:310px; height:20px; margin:0px 10px;"/></p>
+  <div class="float-left">			
+    <div class="special-button">
+      <img src="/images/special_button_cyan.png" alt="" width="90" height="24">	
+      <input type="submit" name="OK" value="Ricerca" class="special_button_small" />
+    </div>	
+  </div>
+</div>
+
+<div class="box-list two-col-big clear-block">
+
+  <div class="select-tab clear-block">
+    <div class="active">
+	    <h1>QUESTION NICE</h1>
+    </div>
+    <div>
+	    <h1><a href="#">NEWEST QUESTIONS</a></h1>
+    </div>
+  </div>
+  
+  <div class="box-list clear-block">
+		<div class="top-box clear-block">
+			<div class="bottom-box clear-block">
+        
+        <%- @nice_answers.each do |answer| -%>
+          <div class="elements clear-block" style="margin-bottom:15px; border-bottom:1px solid #D9D9D9;">
+            <p class="float-left">
+              <%= link_to avatar_image(answer.user, :icon), user_path(answer.user) %>     
+            </p>
+            <div class="clear-block" style="margin:0px 0px 0px 40px;">
+              <h2 class="clearly-cyan-text"><%= link_to h(answer.body), answer_path(answer) %></h2>
+  						<p class="star float-right"><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_gray.png" alt="" width="10" height="9" /></p>
+  						<p class="grey-text float-left">Answer by <%= link_to answer.user.login, user_path(answer.user) %><br /> 
+  					    <%= link_to pluralize(answer.replies.count, 'reply'), answer_path(answer) %> - <%= time_ago_in_words(answer.created_at) %>
+              </p>					
+            </div>					
+  					<p class="clear-float"></p>					
+  					<%- answer.replies.find(:all, :limit => 1).each do |reply| -%>
+              <p class="float-left">
+                <%= link_to avatar_image(reply.user, :icon), user_path(reply.user) %>  
+              </p>
+              <div class="clear-block" style="margin:0px 0px 10px 40px;">
+  						  <p><strong><%=h reply.body %></strong></p>
+  						  <p class="star float-right"><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_gray.png" alt="" width="10" height="9" /></p>
+  						  <p class="grey-text float-left">Reply by <%= link_to reply.user.login, user_path(reply.user) %>  - <%= time_ago_in_words(reply.created_at) %> </p>					
+  					  </div>											
+  				 <%- end -%>
+  				</div>
+        <%- end -%>
+											 																						
+			</div>
+		</div>
+	  </div>	  
+	</div>
+	
+	<div class="box-list semi-one-col clear-block azzurro-boxes">
+	<h2>TOP CONTRIBUTOR </h2>
+	<div class="top-box clear-block">
+		<div class="bottom-box clear-block">
+		  
+		<%- @top_contributors.each do |user| -%>
+  		<div class="elements clear-block">
+  			<p class="thumb"><%= link_to avatar_image(user, :icon), user_path(user) %></p>
+  			<p class="name"><%= link_to user.login, user_path(user) %></p>
+  			<p class="cyan-text float-right"><strong>99 tracs</strong></p>
+  	  </div>
+		<%- end -%>
+		  
+		</div>
+	</div>
+</div>
