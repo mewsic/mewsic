@@ -20,5 +20,6 @@ config.action_mailer.delivery_method = :test
 
 APPLICATION = {
   :url => 'http://localhost:3000',
-  :email => 'no-reply@myousica.com'
+  :email => 'no-reply@myousica.com',
+  :audio_url => 'rtmp://localhost:3000/audio/'
 }

@@ -1,6 +1,6 @@
 <config>
 	<host><%= APPLICATION[:url] %></host>
-	<fms>rtmp://localhost:3000/audio/</fms>
+	<fms><%= APPLICATION[:audio_url] %></fms>
 	<url_request>
 		<mylist>/users/{:id}/mlabs</mylist>
 		<search>/search/</search>
