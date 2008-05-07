@@ -18,9 +18,5 @@ class ApplicationController < ActionController::Base
   def to_breadcrumb
     controller_name
   end    
-   
-  def local_request?
-    false    
-  end
     
 end

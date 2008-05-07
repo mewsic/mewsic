@@ -22,5 +22,6 @@ config.action_mailer.delivery_method = :sendmail
 ENV['INLINEDIR'] = "/tmp/#{$$}"
 
 APPLICATION = {
-  :url => 'http://e4e1475b.myousica.com'
+  :url => 'http://e4e1475b.myousica.com',
+  :email => 'no-reply@myousica.com'
 }

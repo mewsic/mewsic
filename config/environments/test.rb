@@ -19,5 +19,6 @@ config.action_controller.allow_forgery_protection    = false
 config.action_mailer.delivery_method = :test
 
 APPLICATION = {
-  :url => 'http://localhost:3000'
+  :url => 'http://localhost:3000',
+  :email => 'no-reply@myousica.com'
 }
