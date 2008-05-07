@@ -85,7 +85,7 @@ task :symlink_avatars, :roles => [:app, :web], :except => {:no_release => true, 
   run "cd #{current_path}/public; rm -rf avatars; ln -s #{shared_path}/avatars ."
 end
 
-task :symlink_avatars, :roles => [:app, :web], :except => {:no_release => true, :no_symlink => true} do
+task :symlink_audio, :roles => [:app, :web], :except => {:no_release => true, :no_symlink => true} do
   run "cd #{current_path}/public; rm -rf audio; ln -s #{shared_path}/audio ."
 end
 # =============================================================================
