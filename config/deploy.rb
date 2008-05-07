@@ -78,15 +78,15 @@ task :myousica_symlinks, :roles => [:app, :web], :except => {:no_release => true
 end
 
 task :symlink_photos, :roles => [:app, :web], :except => {:no_release => true, :no_symlink => true} do
-  run "cd #{current_path}/public/images; rm -rf photos; ln -s #{shared_path}/photos ."
+  run "cd #{current_release}/public/images; rm -rf photos; ln -s #{shared_path}/photos ."
 end
 
 task :symlink_avatars, :roles => [:app, :web], :except => {:no_release => true, :no_symlink => true} do
-  run "cd #{current_path}/public; rm -rf avatars; ln -s #{shared_path}/avatars ."
+  run "cd #{current_release}/public; rm -rf avatars; ln -s #{shared_path}/avatars ."
 end
 
 task :symlink_audio, :roles => [:app, :web], :except => {:no_release => true, :no_symlink => true} do
-  run "cd #{current_path}/public; rm -rf audio; ln -s #{shared_path}/audio ."
+  run "cd #{current_release}/public; rm -rf audio; ln -s #{shared_path}/audio ."
 end
 # =============================================================================
 

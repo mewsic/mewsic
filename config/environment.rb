@@ -61,3 +61,7 @@ ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
   "<span class=\"fieldWithErrors\">#{html_tag}</span><span class=\"error\"><img src=\"/images/alert_ico.gif\" alt="" /> #{[instance.error_message].flatten.first}</span>"
 #  %{<div class="error-with-field">#{html} <small class="error">&bull; #{[instance.error_message].flatten.first}</small></div>}  
 end
+
+ExceptionNotifier.exception_recipients = %w(franz.andrea@gmail.com)
+ExceptionNotifier.sender_address = %("Myousica Application Error" <error@myousica.com>)
+ExceptionNotifier.email_prefix = "[MYOUSICA ERROR] "
