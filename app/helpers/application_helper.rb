@@ -106,6 +106,6 @@ module ApplicationHelper
   end    
   
   def avatar_image(model, size, css_class = '')
-    image_tag((model.avatars.last.nil? ? "/avatars/avatar_#{size}.gif" : model.avatars.last.public_filename(size)), :class => css_class)
+    image_tag((model.avatars.last.nil? ? "/images/default_avatars/avatar_#{size}.gif" : model.avatars.last.public_filename(size)), :class => css_class)
   end
 end
