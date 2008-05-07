@@ -1,7 +1,7 @@
 <div class="elements clear-block">
   <div class="border-angle-top clear-block">
     <p class="thumb">
-      <%= link_to avatar_image(music.user, :icon), music.user %>
+      <%= link_to avatar_image(music.user, :icon), user_path(music.user) %>
     </p>
     <p class="name align-right">
 	  <%= link_to music.user.login, music.user %>
