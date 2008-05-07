@@ -44,7 +44,6 @@ class UsersController < ApplicationController
   end
   
   def activate
-    render(:text => 'ciao') and return
     self.current_user = params[:activation_code].blank? ? :false : User.find_by_activation_code(params[:activation_code])
     if logged_in? && !current_user.active?
       current_user.activate
