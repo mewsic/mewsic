@@ -33,6 +33,7 @@ class UsersController < ApplicationController
   end
   
   def show
+    raise 'ciao'
     @user = User.find(params[:id], :conditions => "users.activated_at IS NOT NULL", :include => :avatars)
     @friends = @user.find_friends
     @admirers = @user.find_admirers

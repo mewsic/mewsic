@@ -121,6 +121,7 @@ ActiveRecord::Schema.define(:version => 14) do
     t.integer  "user_id"
     t.integer  "genre_id"
     t.integer  "bpm"
+    t.integer  "seconds",                                        :default => 0
     t.integer  "listened_times",                                 :default => 0
     t.boolean  "published",                                      :default => true
     t.datetime "created_at"

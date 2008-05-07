@@ -74,6 +74,7 @@ after "deploy:symlink_configs", "myousica_symlinks"
 task :myousica_symlinks, :roles => [:app, :web], :except => {:no_release => true, :no_symlink => true} do
   symlink_photos
   symlink_avatars
+  symlink_audio
 end
 
 task :symlink_photos, :roles => [:app, :web], :except => {:no_release => true, :no_symlink => true} do
@@ -82,6 +83,10 @@ end
 
 task :symlink_avatars, :roles => [:app, :web], :except => {:no_release => true, :no_symlink => true} do
   run "cd #{current_path}/public; rm -rf avatars; ln -s #{shared_path}/avatars ."
+end
+
+task :symlink_avatars, :roles => [:app, :web], :except => {:no_release => true, :no_symlink => true} do
+  run "cd #{current_path}/public; rm -rf audio; ln -s #{shared_path}/audio ."
 end
 # =============================================================================
 

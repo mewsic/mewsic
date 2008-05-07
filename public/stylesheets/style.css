@@ -322,6 +322,7 @@ h2, h2 a{
 	text-decoration: none;
 }
 
+
 tr.even{
 	background-color:#EDEDED;
 }
@@ -346,6 +347,10 @@ tr.nav-song td{
 .one-col-big{
 	width:340px;
 }
+.special-arrow-box{
+	width:340px;
+	padding-right:20px;
+}
 .semi-one-col{
 	width:220px;
 }
@@ -369,9 +374,6 @@ tr.nav-song td{
 }
 .three-col-nospace{
 	width:732px;
-}    
-td.star {
-  text-align: right;
 }
 .star{
 	width:70px;
@@ -737,6 +739,35 @@ h2.dj-label{
 	display:block;
 	float:left;
 	margin:0px 8px 0px 2px;
+	text-align:center;
+	color:#fff;
+	font-weight:bold;
+	font-size:12px;
+}
+.tracks-number-orange{
+	background:url(/images/tracks_number_BG_orange.png) no-repeat top left;
+	height:29px;
+	width:29px;
+	display:block;
+	/*float:left;
+	margin:8px 10px 0px;*/
+	margin: auto auto;
+	margin-top:7px;
+	margin-bottom:5px;
+	text-align:center;
+	color:#fff;
+	font-weight:bold;
+	font-size:12px;
+}
+.tracks-number-grey{
+	background:url(/images/tracks_number_BG_grey.png) no-repeat top left;
+	height:29px;
+	width:29px;
+	display:block;
+	float:left;
+	margin: auto auto;
+	margin-top:7px;
+	margin-bottom:5px;
 	text-align:center;
 	color:#fff;
 	font-weight:bold;
@@ -1527,6 +1558,7 @@ html>body .register p{
 .music-info{
 	font-size:11px;
 	color:#0296C2;
+	clear:both;
 }
 .music-info a{
 	color:#0296C2;
@@ -1942,15 +1974,83 @@ img#user_gender {
   cursor: pointer;
 }
 
-/* band member */
-.band_member {
-  position: relative;
+/* added 05 2008 */
+.song-spec .top-box{
+	background:url(/images/rounded_grey_bottom.gif) no-repeat bottom left;
 }
-
-.band_member .remove {
-  position: absolute;
-  top: 5px; 
-  right: 5px;
+.song-spec .top-box .track-tab{
+	position:absolute; margin-top:-40px;
+	background:url(/images/rounded_grey_label_top.gif) no-repeat top left;
+	width:56px;
+}
+.song-spec .bottom-box{
+	background:url(/images/rounded_grey_top.gif) no-repeat top left;
+	padding:10px 10px 0px;
+}
+.song-stat{
+	background:#F6F6F6 url(..8/graphic_image/rounded_grey_boxbottom.gif) no-repeat bottom left;
+	padding:15px;
+}
+/* special arrow */
+.box-grigio-stondato .top-box{
+	background:#E5E5E5 url(/images/BG_box_grigio_stondato_top.gif) no-repeat top left;
+}
+.box-grigio-stondato .bottom-box{
+	background: url(/images/BG_box_grigio_stondato_bottom.gif) no-repeat bottom left;
+	padding:10px;
+	height:550px;
+	overflow:hidden;
+}
+.box-grigio-stondato-vuoto .top-box{
+	background: url(/images/BG_box_grigio_stondato_vuoto_bottom.gif) no-repeat bottom left;
+}
+.box-grigio-stondato-vuoto .bottom-box{
+	background: url(/images/BG_box_grigio_stondato_vuoto_top.gif) no-repeat top left;
+	padding:10px;
+	height:550px;
+	overflow:hidden;
+}
+.box-grigio-stondato .top-box .elements{
+	background-color:#fff;
+	padding:5px 5px 0px !important;
+}
+.special-list .top-box{
+	border-top: 1px solid #EAEAEA;
+	border-bottom: 1px solid #EAEAEA;
+	padding-top:2px;
+}
+.special-list .tracks-number-orange{
+	float:left;
+	margin: auto auto;
+	margin-top:7px;
+	margin-bottom:5px;
+}
+.special-arrow-active{
+	position:absolute;
+	margin-top:10px;
+	width:36px;
+	height:22px;
+	background:url(/images/arrow_grey_special.gif) no-repeat top right;
+}
+.special-box{
+	padding:4px 4px 0px;
+	/*border:2px solid #fff;*/
+	margin-bottom:0px;
+}
+.special-box.active{
+	border:2px solid #D3D3D3;
+}
+.special-arrow{
+	position:absolute;
+	margin-top:10px;
+	width:36px;
+	height:22px;
+}
+.special-box.active .special-arrow{
+	background:url(/images/arrow_grey_special.gif) no-repeat top right;
+}
+.grey-bg{
+	background-color:#F6F6F6;
 }
 
 /* rating */
@@ -1958,6 +2058,7 @@ img#user_gender {
 .rating {
   width: 70px;
   position: relative;
+  height: 9px;
 }
 
 .rating .stars {
@@ -1988,7 +2089,6 @@ img#user_gender {
 .rating {  
   background: transparent url('/images/stars.png') repeat-x left top;
   margin-bottom: 5px;
-  height: 9px;
 }
 .rating .stars .star {
   width: 14px;

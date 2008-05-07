@@ -99,4 +99,18 @@ class Song < ActiveRecord::Base
     update_attribute(:listened_times, listened_times + 1)
   end
   
+  def length
+    hours,   remainig = self.seconds.divmod(3600)
+    minutes, remainig = remainig.divmod(60)
+    seconds = remainig    
+    "#{zerofill(hours, 2)}:#{zerofill(minutes, 2)}:#{zerofill(seconds, 2)}"
+  end
+
+private
+
+  def zerofill(number, length)
+    string = number.to_s
+    (length - string.size).times{ string = "0#{string}"}
+    string
+  end  
 end

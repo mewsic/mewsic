@@ -3,6 +3,7 @@ class CreateSongs < ActiveRecord::Migration
     create_table :songs do |t|
       t.string  :title, :original_author, :description, :tone, :filename
       t.integer :user_id, :genre_id, :bpm
+      t.integer :seconds, :default => 0
       t.integer :listened_times, :default => 0
       t.boolean :published, :default => true
       t.timestamps

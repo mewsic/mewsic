@@ -28,7 +28,7 @@
       <div class="bottom-box clear-block">
         <div class="float-right" style="padding-right:50px;"><img src="/images/esclamativo.gif" alt="" width="50" height="53" style="position:absolute; margin-top:-60px;" /></div>
         
-        <%- @answers.each do |answer| -%>
+        <%- @open_answers.each do |answer| -%>
           <div class="clear-block" style="margin-bottom:15px; border-bottom:1px solid #D9D9D9;">
             <p class="float-left">
               <%= link_to avatar_image(answer.user, :icon), user_path(answer.user) %>
@@ -64,17 +64,16 @@
 
   <div class="select-tab clear-block">
     <div class="active">
-	    <h1>QUESTION NICE</h1>
+	    <h1><a href="#" onclick="$('newest-answers-container').hide(); $('nice-answers-container').show(); return false;">QUESTION NICE</a></h1>
     </div>
     <div>
-	    <h1><a href="#">NEWEST QUESTIONS</a></h1>
+	    <h1><a href="#" onclick="$('nice-answers-container').hide(); $('newest-answers-container').show(); return false;">NEWEST QUESTIONS</a></h1>
     </div>
   </div>
   
-  <div class="box-list clear-block">
+  <div class="box-list clear-block" id="nice-answers-container">
 		<div class="top-box clear-block">
-			<div class="bottom-box clear-block">
-        
+			<div class="bottom-box clear-block">        
         <%- @nice_answers.each do |answer| -%>
           <div class="elements clear-block" style="margin-bottom:15px; border-bottom:1px solid #D9D9D9;">
             <p class="float-left">
@@ -99,12 +98,44 @@
   					  </div>											
   				 <%- end -%>
   				</div>
-        <%- end -%>
-											 																						
-			</div>
-		</div>
-	  </div>	  
-	</div>
+        <%- end -%>											 																						
+      </div>
+    </div>
+  </div>
+  
+  <div class="box-list clear-block" id="newest-answers-container">
+		<div class="top-box clear-block">
+			<div class="bottom-box clear-block">        
+        <%- @nice_answers.each do |answer| -%>
+          <div class="elements clear-block" style="margin-bottom:15px; border-bottom:1px solid #D9D9D9;">
+            <p class="float-left">
+              <%= link_to avatar_image(answer.user, :icon), user_path(answer.user) %>     
+            </p>
+            <div class="clear-block" style="margin:0px 0px 0px 40px;">
+              <h2 class="clearly-cyan-text"><%= link_to h(answer.body), answer_path(answer) %></h2>
+  						<p class="star float-right"><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_gray.png" alt="" width="10" height="9" /></p>
+  						<p class="grey-text float-left">Answer by <%= link_to answer.user.login, user_path(answer.user) %><br /> 
+  					    <%= link_to pluralize(answer.replies.count, 'reply'), answer_path(answer) %> - <%= time_ago_in_words(answer.created_at) %>
+              </p>					
+            </div>					
+  					<p class="clear-float"></p>					
+  					<%- answer.replies.find(:all, :limit => 1).each do |reply| -%>
+              <p class="float-left">
+                <%= link_to avatar_image(reply.user, :icon), user_path(reply.user) %>  
+              </p>
+              <div class="clear-block" style="margin:0px 0px 10px 40px;">
+  						  <p><strong><%=h reply.body %></strong></p>
+  						  <p class="star float-right"><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_gray.png" alt="" width="10" height="9" /></p>
+  						  <p class="grey-text float-left">Reply by <%= link_to reply.user.login, user_path(reply.user) %>  - <%= time_ago_in_words(reply.created_at) %> </p>					
+  					  </div>											
+  				 <%- end -%>
+  				</div>
+        <%- end -%>											 																						
+      </div>
+    </div>
+  </div>	  
+  
+</div>		
 	
 	<div class="box-list semi-one-col clear-block azzurro-boxes">
 	<h2>TOP CONTRIBUTOR </h2>

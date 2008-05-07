@@ -9,11 +9,15 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # :secret => '02cedf3882e78b5a99c0bec5cc75c3fc'
   
   include AuthenticatedSystem
-    
+      
   protected    
   
   def to_breadcrumb
     controller_name
   end    
+   
+  def local_request?
+    false    
+  end
     
 end
