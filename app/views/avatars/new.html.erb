@@ -43,7 +43,7 @@
       <div id="form-area">
         <% form_for :avatar, :url => {:action => :create}, :html => {:multipart => true} do |f| %>
           <%= f.file_field :uploaded_data  %><br />
-          <%= submit_tag 'Upload >>' %>
+          <%= submit_tag 'Upload', :disable_with => 'Uploading...' %>
         <% end %>        
       </div>
     </div>
