@@ -3,7 +3,7 @@ var InPlaceEditorGenerator = Class.create({
   initialize: function(fields, options) {
     this.fields = fields;
     this.options = options;
-    this.user_id = $('user-id').value;
+    this.user_id = $('current-user-id').value;
     this.setup();
   },
   
@@ -27,7 +27,7 @@ var AjaxFormGenerator = Class.create({
     this.options = Object.extend({
       hideOnLoad: 'hide-on-load'
     }, options);
-    this.user_id = $('user_id').value;
+    this.user_id = $('current-user-id').value;
     this.setup();
   },
   
