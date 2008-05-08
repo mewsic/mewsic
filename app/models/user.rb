@@ -249,12 +249,7 @@ class User < ActiveRecord::Base
                       :include => ['replies', 'user'], 
                       :conditions => ['replies.user_id = ? OR answers.user_id = ?', self.id, self.id],
                       :limit => 4
-  end 
-
-  def find_friends
-    self.friends_for_me.find(:all, :include => :avatars) +
-    self.friends_by_me.find(:all, :include => :avatars)
-  end
+  end   
 
   def find_admirers
     # FIXME: credo che gli ammiratori debbano essere solo quello che mi ammirano.

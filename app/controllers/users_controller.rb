@@ -34,12 +34,9 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id], :conditions => "users.activated_at IS NOT NULL", :include => :avatars)
-    @friends = @user.find_friends
-    @admirers = @user.find_admirers
     # non uso :include => [{:songs => [:tracks, :genre]}] xkè non devo recuperare tutte le tracce
     @songs = Song.find_paginated_by_user(1, @user.id)
-    @tracks = Track.find_paginated_by_user(1, @user.id)
-    @gallery = @user.photos.find :all,  :order => "created_at DESC"
+    @tracks = Track.find_paginated_by_user(1, @user.id)    
     @answers = @user.find_related_answers  
   end
   

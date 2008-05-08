@@ -587,12 +587,12 @@ tr.nav-song td{
 }
 .horizontal-scroll-box{
 	clear:both;
-	text-align:center;
+	/*text-align:center;*/
 	padding-left:15px;
 }
 .horizontal-scroll{
 	width:315px;
-	text-align:center;
+	/*text-align:center;*/
 	float:left;
 	height: 29px;
 	overflow:hidden;

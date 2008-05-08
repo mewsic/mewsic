@@ -1,20 +1,19 @@
-<div class="simple-list clear-block">
-  <h1>ADMIRERS <span class="no-bold">(<%= @admirers.size %>)</span></h1>
-  <div class="top-box clear-block">
-    <div class="bottom-box clear-block">
-      <div class="elements clear-block">
-        <div class="horizontal-scroll-box" id="admirers-scroller">
-          <p class="button"><a href="#" class="trigger back"><img width="12" height="39" alt="" src="/images/arrow_grey_left.gif"/></a></p>
-		      <div class="horizontal-scroll">
-		      <div class="scroll" style="width: <%=  @admirers.size * 37 %>px; left: 0;">
-              <% @admirers.each do |admirer| -%>
-                <%= link_to avatar_image(admirer, :icon), user_path(admirer) %>
-              <% end -%>
-            </div>
+<div id="admirers-box" class="clear-block">  
+  <h1>ADMIRERS <span class="no-bold">(<%= @user.friends_for_me.size %>)</span></h1>
+  <div class="admirers-container clear-block">
+    <div id="admirers-scroller" class="horizontal-scroll-box" style="width: 275px; overflow: hidden;">
+      <p class="button" style="width: 10px; float: left;"><a href="#" class="trigger back"><img src="/images/arrow_grey_left.gif"/></a></p>
+      <div id="scroll-clip" class="horizontal-scroll" style="height:30px; margin-bottom: 5px; width:225px;">
+        <!-- div aggiunta per problema scroll -->
+        <div class="container" style="height: 30px;position:absolute; clip:rect(0px 225px 30px 0px)">
+          <div class="scroll" style="padding: 0pt; 0px; left: 0px;">
+            <% @user.friends_for_me.each do |friend| -%>
+            <%= link_to(avatar_image(friend, :icon), user_path(friend)) %>
+            <% end -%>
           </div>
-          <p class="button"><a href="#" class="trigger forward"><img width="12" height="39" alt="" src="/images/arrow_grey_right.gif"/></a></p>
         </div>
-      </div>
+      </div><!-- chiusura div aggiunta per problema scroll -->
+      <p class="button"><a href="#" class="trigger forward"><img src="/images/arrow_grey_right.gif"/></a></p>
     </div>
-	</div>
+  </div>
 </div>
