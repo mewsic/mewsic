@@ -23,5 +23,23 @@ class FriendshipTest < Test::Unit::TestCase
       users(:quentin).delete_friendship_with(users(:user_20))
     end
   end
+  
+  def test_should_create_or_accept
+    Friendship.delete_all
+    q = users(:quentin)
+    u = users(:user_11)
+    assert_difference 'Friendship.count' do
+      Friendship.create_or_accept(u, q)
+    end    
+    assert_equal 0, q.reload.friends.count
+    assert_equal 0, q.reload.pending_friends_by_me.count
+    assert_equal 1, q.reload.pending_friends_for_me.count
+    assert_no_difference 'Friendship.count' do
+      Friendship.create_or_accept(q, u)
+    end
+    assert_equal 1, q.reload.friends.count
+    assert_equal 0, q.reload.pending_friends_by_me.count
+    assert_equal 0, q.reload.pending_friends_for_me.count
+  end
 
 end
