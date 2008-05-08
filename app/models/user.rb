@@ -210,7 +210,7 @@ class User < ActiveRecord::Base
   
   def self.find_friendliest(options)
     # FIXME: This should be fixed to it loads the associated objects in a single query.
-    self.find :all, options.merge({:order => 'friends_count DESC', :conditions => 'users.activated_at IS NOT NULL'})
+    self.find(:all, options.merge({:order => 'friends_count DESC', :conditions => 'users.activated_at IS NOT NULL'}))
   end
   
   # TODO: stub sino a quando abbiamo le band

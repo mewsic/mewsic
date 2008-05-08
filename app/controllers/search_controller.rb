@@ -6,6 +6,7 @@ class SearchController < ApplicationController
     @songs  = Song.paginate(:page => params[:song_page], :per_page => 4)
     @tracks = Track.paginate(:page => params[:track_page], :per_page => 4)
     respond_to do |format|
+      format.html
       format.xml
     end
   end

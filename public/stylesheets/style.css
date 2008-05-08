@@ -2059,6 +2059,8 @@ img#user_gender {
   width: 70px;
   position: relative;
   height: 9px;
+  background: transparent url('/images/stars.png') repeat-x left top;
+  margin-bottom: 5px;
 }
 
 .rating .stars {
@@ -2086,10 +2088,6 @@ img#user_gender {
   clear: right;
 }
 
-.rating {  
-  background: transparent url('/images/stars.png') repeat-x left top;
-  margin-bottom: 5px;
-}
 .rating .stars .star {
   width: 14px;
   height: 9px;
