@@ -78,7 +78,7 @@ task :myousica_symlinks, :roles => [:app, :web], :except => {:no_release => true
 end
 
 task :symlink_photos, :roles => [:app, :web], :except => {:no_release => true, :no_symlink => true} do
-  run "cd #{current_release}/public/images; rm -rf photos; ln -s #{shared_path}/photos ."
+  run "cd #{current_release}/public; rm -rf photos; ln -s #{shared_path}/photos ."
 end
 
 task :symlink_avatars, :roles => [:app, :web], :except => {:no_release => true, :no_symlink => true} do
