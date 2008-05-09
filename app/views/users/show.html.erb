@@ -23,7 +23,7 @@
       <%= render :partial => 'tracks' %>  
 	</div>
     <%= render :partial => 'gallery' %> 
-    <%= render :partial => 'users/my/share' %> 
+    <%= render :partial => 'users/my/share' if current_user_page? %> 
   </div>
 
 <% javascript('user/show') %>
