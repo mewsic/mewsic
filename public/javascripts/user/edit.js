@@ -54,7 +54,7 @@ var AjaxFormGenerator = Class.create({
             $('loading_' + self.options.model + '_' + name).hide();
             if(self.options.hideOnLoad) {
               this.select('.' + self.options.hideOnLoad).each(function(e) {
-                e.value = r.responseText;
+                if(['user_photos_url', 'user_blog_url', 'user_myspace_url'].include(e.id)) e.value = r.responseText;
                 e.show();
               }.bind(this));
             }
