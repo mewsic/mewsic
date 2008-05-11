@@ -1,7 +1,7 @@
 <div id="top-menu">
   <ul class="list-menu">
     <% if logged_in? %>
-    <li>You're logged as <strong><%= current_user.login %></strong>:</li>
+    <li>Hello <strong><%= current_user.login %></strong>!</li>
     <li><%= link_to "My page", user_path(current_user) %></li>
     <li><%= link_to "Logout", logout_path %></li>
     <% else %>
