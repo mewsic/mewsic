@@ -96,6 +96,8 @@ class User < ActiveRecord::Base
     :first_name, :last_name, :gender, :motto, :tastes, :country, :city, :age,
     :photos_url, :blog_url, :myspace_url, :skype, :msn, :skype_public, :msn_public    
   
+  before_save :check_links
+  
   def is_admirer_of?(user)
     Friendship.find(:first, :conditions => ["(user_id = ? AND friend_id = ?) OR (user_id = ? AND friend_id = ? AND accepted_at IS NOT NULL)", self.id, user.id, user.id, self.id])
   end
@@ -280,5 +282,13 @@ class User < ActiveRecord::Base
     
     def make_password_reset_code
       self.password_reset_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
+    end
+    
+    def check_links
+      %w[photos_url blog_url myspace_url].each do |attr|
+        unless self.send(attr).blank?
+          self.send("#{attr}=", "http://#{self.send(attr)}") unless self.send(attr) =~ /^http:\/\//
+        end
+      end
     end
 end

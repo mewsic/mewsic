@@ -50,10 +50,11 @@ var AjaxFormGenerator = Class.create({
             }
             $('loading_' + self.options.model + '_' + name).show();
           }.bind(this),
-          onSuccess: function() {
+          onComplete: function(r) {
             $('loading_' + self.options.model + '_' + name).hide();
             if(self.options.hideOnLoad) {
               this.select('.' + self.options.hideOnLoad).each(function(e) {
+                e.value = r.responseText;
                 e.show();
               }.bind(this));
             }

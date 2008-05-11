@@ -283,6 +283,18 @@ class UserTest < Test::Unit::TestCase
     end
   end
   
+  def test_should_add_http_to_non_blank_links
+    q = users(:quentin)
+    q.photos_url = "google.com"
+    q.myspace_url = "http://myspace.com"
+    q.blog_url = ""
+    q.save        
+    
+    assert_equal "http://google.com", q.reload.photos_url
+    assert_equal "http://myspace.com", q.reload.myspace_url
+    assert q.reload.blog_url.blank?
+  end
+  
   protected
     
     def check_finder_for_inactive(finder)
