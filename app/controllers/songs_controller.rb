@@ -1,6 +1,7 @@
 class SongsController < ApplicationController
   
   before_filter :login_required, :only => [:update, :rate]
+  protect_from_forgery :except => [:update]
   
   def index
     if params.has_key?("genre_id")
