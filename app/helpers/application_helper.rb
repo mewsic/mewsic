@@ -16,6 +16,7 @@ module ApplicationHelper
   
   def rating(rateable)
     type_class = rateable.class.name.downcase
+    type_class = 'user' if %w[dj band].include?(type_class)
     result = %|<div class="rating #{type_class}_rating" id="#{type_class}_#{rateable.id}"><div class="stars">|
     1.upto(5) do |i| 
       on_class    = rateable.rating_avg.to_f >= i ? ' on' : ''
