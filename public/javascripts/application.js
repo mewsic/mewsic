@@ -85,28 +85,30 @@ document.observe('dom:loaded', function(event) {
       hideLabelOnMouseOut: true,
       ajaxUrl: '/songs/#{id}/rate/',
       ajaxMethod: 'PUT',
-      afterRatinglabelText: 'saving...',
       ajaxParameters: 'authenticity_token=' + encodeURIComponent(authenticity_token) + '&rate=#{rate}'
   	});
   	new Rating('track_rating', {
   	  hideLabelOnMouseOut: true,
       ajaxUrl: '/tracks/#{id}/rate/',
       ajaxMethod: 'PUT',
-      afterRatinglabelText: 'saving...',    
       ajaxParameters: 'authenticity_token=' + encodeURIComponent(authenticity_token) + '&rate=#{rate}'
   	});
   	new Rating('answer_rating', {
   	  hideLabelOnMouseOut: true,
       ajaxUrl: '/answers/#{id}/rate/',
       ajaxMethod: 'PUT',
-      afterRatinglabelText: 'saving...',    
       ajaxParameters: 'authenticity_token=' + encodeURIComponent(authenticity_token) + '&rate=#{rate}'
   	});
   	new Rating('reply_rating', {
   	  hideLabelOnMouseOut: true,
       ajaxUrl: '/replies/#{id}/rate/',
       ajaxMethod: 'PUT',
-      afterRatinglabelText: 'saving...',    
+      ajaxParameters: 'authenticity_token=' + encodeURIComponent(authenticity_token) + '&rate=#{rate}'
+  	});
+  	new Rating('user_rating', {
+  	  hideLabelOnMouseOut: true,
+      ajaxUrl: '/users/#{id}/rate/',
+      ajaxMethod: 'PUT',
       ajaxParameters: 'authenticity_token=' + encodeURIComponent(authenticity_token) + '&rate=#{rate}'
   	});
 	}	

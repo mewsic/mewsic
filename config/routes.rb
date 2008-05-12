@@ -9,7 +9,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :instruments
   map.resources :ideas
   map.resources :bands_and_deejays
-  map.resources :users, :member => {:switch_type => :put} do |user|    
+  map.resources :users, :member => {:switch_type => :put, :rate => :put} do |user|    
     user.resources :members, :controller => 'band_members'
     user.resources :friendships
     user.resources :photos

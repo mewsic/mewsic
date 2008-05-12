@@ -35,9 +35,7 @@
 								</div>								
 							</div>
 							<div class="float-left">
-								<p class="star">
-                  <%= rating(@answer) %>
-                </p>
+              <%= rating(@answer) %>
 								<p class="grey-text"><%= time_ago_in_words(@answer.created_at) %></p>					
 							</div>
 							<div id="reply-form-container" style="clear:both;display: none">
@@ -89,9 +87,7 @@
 				    <div class="elements clear-block">
   					<h3><%= link_to h(answer.body), answer_path(answer) %></h3>
   					<p class="grey-text float-right"><%= link_to pluralize(answer.replies.count, 'reply'), answer_path(answer) %></p>
-  					<p class="star float-left">
-              <%= rating(answer) %>
-            </p>
+  					  <%= rating(answer) %>
   				  </div>
 				  <%- end -%>	  
 				</div>

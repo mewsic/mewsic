@@ -3,8 +3,8 @@ class AnswersController < ApplicationController
   before_filter :login_required, :only => :create
   
   def index
-    @open_answers = Answer.find(:all, :include => {:user => :avatars}, :limit => 10, :order => 'answers.created_at DESC')
-    @nice_answers = Answer.find(:all, :include => {:user => :avatars}, :limit => 10, :order => 'answers.created_at DESC')
+    @open_answers = Answer.find(:all, :conditions => "replies_count = 0", :include => {:user => :avatars}, :limit => 10, :order => 'answers.created_at DESC')
+    @nice_answers = Answer.find(:all, :conditions => "replies_count > 0", :include => {:user => :avatars}, :limit => 10, :order => 'answers.created_at DESC')
     @newest_answers = Answer.find(:all, :include => {:user => :avatars}, :limit => 10, :order => 'answers.created_at DESC')
     @top_contributors = User.find(:all, :conditions => ["1"], :include => [:replies, :avatars], :limit => 10)
   end

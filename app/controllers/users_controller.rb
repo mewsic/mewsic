@@ -117,7 +117,13 @@ class UsersController < ApplicationController
       format.xml
     end
   end  
-    
+  
+  def rate    
+    @user = User.find(params[:id])
+    @user.rate(params[:rate].to_i, current_user)
+    render :layout => false, :text => "#{@user.rating_count} votes"
+  end
+  
   protected
   
   def check_if_current_user_page

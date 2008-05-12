@@ -7,7 +7,7 @@
 	<p class="name align-right"><%= link_to most_listened_song.user.login, most_listened_song.user %></a></p>
 	<p class="country align-right"><%= h most_listened_song.user.city %>, <%= h most_listened_song.user.country %></p>
 		<div class="float-right">
-			<p class="star"><%= stars(most_listened_song.rating_avg) %></p>
+			<p class="star"><%= rating(most_listened_song) %></p>
 			<p class="button">
 			  <%= mlab_button(most_listened_song) %>
 			  <%= play_button(most_listened_song) %>

@@ -63,11 +63,11 @@
 <div class="box-list two-col-big clear-block">
 
   <div class="select-tab clear-block">
-    <div class="active">
-	    <h1><a href="#" onclick="$('newest-answers-container').hide(); $('nice-answers-container').show(); return false;">QUESTION NICE</a></h1>
+    <div class="active" id="newest-answers-container-title">
+	    <h1><a href="#" onclick="$('nice-answers-container-title').removeClassName('active');$('newest-answers-container-title').addClassName('active');$('newest-answers-container').hide(); $('nice-answers-container').show(); return false;">QUESTION NICE</a></h1>
     </div>
-    <div>
-	    <h1><a href="#" onclick="$('nice-answers-container').hide(); $('newest-answers-container').show(); return false;">NEWEST QUESTIONS</a></h1>
+    <div id="nice-answers-container-title">
+	    <h1><a href="#" onclick="$('newest-answers-container-title').removeClassName('active');$('nice-answers-container-title').addClassName('active');$('nice-answers-container').hide(); $('newest-answers-container').show(); return false;">NEWEST QUESTIONS</a></h1>
     </div>
   </div>
   
@@ -107,7 +107,7 @@
     </div>
   </div>
   
-  <div class="box-list clear-block" id="newest-answers-container">
+  <div class="box-list clear-block" id="newest-answers-container" style="display: none;">
 		<div class="top-box clear-block">
 			<div class="bottom-box clear-block">        
         <%- @nice_answers.each do |answer| -%>
@@ -154,7 +154,7 @@
   		<div class="elements clear-block">
   			<p class="thumb"><%= link_to avatar_image(user, :icon), user_path(user) %></p>
   			<p class="name"><%= link_to user.login, user_path(user) %></p>
-  			<p class="cyan-text float-right"><strong>99 tracs</strong></p>
+  			<p class="cyan-text float-right"><strong><%= pluralize(user.answers.count, 'answer') %></strong></p>
   	  </div>
 		<%- end -%>
 		  
