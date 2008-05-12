@@ -16,7 +16,7 @@
 		    	<span class="thumb">
 		      		<%= image_tag track.instrument.icon %>
 		    	</span>
-		    	<%= link_to track.title, track_path(most_used_track) %>
+		    	<%= track.title %>
 		  	</p>
 		  	<p><%= track.parent_song.original_author %></p>
 		    <p class="button float-right">

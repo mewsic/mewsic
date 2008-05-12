@@ -2096,7 +2096,7 @@ img#user_gender {
   float: left;
 }
 
-.rating .stars .star.half {
+.rating .stars .star.on.half {
   width: 7px;
   margin-right: 7px;
   background-position: 0 -9px;

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 14
+# Schema version: 15
 #
 # Table name: answers
 #
@@ -9,6 +9,9 @@
 #  replies_count :integer(11)   default(0)
 #  created_at    :datetime      
 #  updated_at    :datetime      
+#  rating_count  :integer(11)   
+#  rating_total  :decimal(10, 2 
+#  rating_avg    :decimal(10, 2 
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

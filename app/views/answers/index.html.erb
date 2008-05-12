@@ -81,7 +81,9 @@
             </p>
             <div class="clear-block" style="margin:0px 0px 0px 40px;">
               <h2 class="clearly-cyan-text"><%= link_to h(answer.body), answer_path(answer) %></h2>
-  						<p class="star float-right"><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_gray.png" alt="" width="10" height="9" /></p>
+  						<p class="star float-right">
+  						  <%= rating(answer) %>
+              </p>
   						<p class="grey-text float-left">Answer by <%= link_to answer.user.login, user_path(answer.user) %><br /> 
   					    <%= link_to pluralize(answer.replies.count, 'reply'), answer_path(answer) %> - <%= time_ago_in_words(answer.created_at) %>
               </p>					
@@ -93,7 +95,9 @@
               </p>
               <div class="clear-block" style="margin:0px 0px 10px 40px;">
   						  <p><strong><%=h reply.body %></strong></p>
-  						  <p class="star float-right"><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_gray.png" alt="" width="10" height="9" /></p>
+  						  <p class="star float-right">
+                  <%= rating(reply) %>
+                </p>
   						  <p class="grey-text float-left">Reply by <%= link_to reply.user.login, user_path(reply.user) %>  - <%= time_ago_in_words(reply.created_at) %> </p>					
   					  </div>											
   				 <%- end -%>
@@ -113,7 +117,9 @@
             </p>
             <div class="clear-block" style="margin:0px 0px 0px 40px;">
               <h2 class="clearly-cyan-text"><%= link_to h(answer.body), answer_path(answer) %></h2>
-  						<p class="star float-right"><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_gray.png" alt="" width="10" height="9" /></p>
+  						<p class="star float-right">
+  						  <%= rating(answer) %>
+              </p>
   						<p class="grey-text float-left">Answer by <%= link_to answer.user.login, user_path(answer.user) %><br /> 
   					    <%= link_to pluralize(answer.replies.count, 'reply'), answer_path(answer) %> - <%= time_ago_in_words(answer.created_at) %>
               </p>					
@@ -125,7 +131,9 @@
               </p>
               <div class="clear-block" style="margin:0px 0px 10px 40px;">
   						  <p><strong><%=h reply.body %></strong></p>
-  						  <p class="star float-right"><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_gray.png" alt="" width="10" height="9" /></p>
+  						  <p class="star float-right">
+                  <%= rating(reply) %>
+                </p>
   						  <p class="grey-text float-left">Reply by <%= link_to reply.user.login, user_path(reply.user) %>  - <%= time_ago_in_words(reply.created_at) %> </p>					
   					  </div>											
   				 <%- end -%>

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 14
+# Schema version: 15
 #
 # Table name: songs
 #
@@ -12,6 +12,7 @@
 #  user_id         :integer(11)   
 #  genre_id        :integer(11)   
 #  bpm             :integer(11)   
+#  seconds         :integer(11)   default(0)
 #  listened_times  :integer(11)   default(0)
 #  published       :boolean(1)    default(TRUE)
 #  created_at      :datetime      

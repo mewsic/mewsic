@@ -95,6 +95,20 @@ document.observe('dom:loaded', function(event) {
       afterRatinglabelText: 'saving...',    
       ajaxParameters: 'authenticity_token=' + encodeURIComponent(authenticity_token) + '&rate=#{rate}'
   	});
+  	new Rating('answer_rating', {
+  	  hideLabelOnMouseOut: true,
+      ajaxUrl: '/answers/#{id}/rate/',
+      ajaxMethod: 'PUT',
+      afterRatinglabelText: 'saving...',    
+      ajaxParameters: 'authenticity_token=' + encodeURIComponent(authenticity_token) + '&rate=#{rate}'
+  	});
+  	new Rating('reply_rating', {
+  	  hideLabelOnMouseOut: true,
+      ajaxUrl: '/replies/#{id}/rate/',
+      ajaxMethod: 'PUT',
+      afterRatinglabelText: 'saving...',    
+      ajaxParameters: 'authenticity_token=' + encodeURIComponent(authenticity_token) + '&rate=#{rate}'
+  	});
 	}	
 		 
   Message.init();

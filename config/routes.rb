@@ -1,8 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
-
-  map.resources :answers do |answers|
+  
+  map.resources :answers, :member => { :rate => :put } do |answers|
     answers.resources :replies
-  end
+  end  
+  map.connect 'replies/:id/rate', :controller => 'replies', :action => 'rate'
   
   map.resources :genres
   map.resources :instruments

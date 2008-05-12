@@ -19,7 +19,7 @@ module ApplicationHelper
     result = %|<div class="rating #{type_class}_rating" id="#{type_class}_#{rateable.id}"><div class="stars">|
     1.upto(5) do |i| 
       on_class    = rateable.rating_avg.to_f >= i ? ' on' : ''
-      half_class  = rateable.rating_avg.to_f < i && rateable.rating_avg.to_f > (i -1) ? ' half' : ''
+      half_class  = rateable.rating_avg.to_f < i && rateable.rating_avg.to_f > (i -1) ? ' on half' : ''
       result << "<div class=\"star#{on_class}#{half_class}\"></div>"
     end
     result << %|</div><div class="clearer"></div></div>|

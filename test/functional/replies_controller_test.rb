@@ -38,4 +38,20 @@ class RepliesControllerTest < ActionController::TestCase
     assert_equal replies_count + 1, answer.replies.count
   end
   
+  def test_should_rate
+    login_as :quentin
+    a = Answer.create(:body => 'question', :user => users(:quentin))
+    r = a.replies.create(:body => 'answer', :user => users(:quentin))
+    puts 'ciao'
+    post :rate, :id => r.id, :rate => 5
+    assert 5, r.reload.rating_total
+    assert 5, r.reload.rating_avg
+    assert 1, r.reload.rating_count
+    puts 'ciao 2'
+    post :rate, :id => r.id, :rate => 3
+    assert 3, r.reload.rating_total
+    assert 3, r.reload.rating_avg
+    assert 1, r.reload.rating_count
+  end
+  
 end

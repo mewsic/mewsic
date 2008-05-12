@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 14
+# Schema version: 15
 #
 # Table name: users
 #
@@ -12,7 +12,7 @@
 #  city                      :string(255)   
 #  first_name                :string(255)   
 #  last_name                 :string(255)   
-#  gender                    :string(255)   
+#  gender                    :string(255)   default("male")
 #  photos_url                :string(255)   
 #  blog_url                  :string(255)   
 #  myspace_url               :string(255)   

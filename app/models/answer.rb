@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 14
+# Schema version: 15
 #
 # Table name: answers
 #
@@ -9,11 +9,16 @@
 #  replies_count :integer(11)   default(0)
 #  created_at    :datetime      
 #  updated_at    :datetime      
+#  rating_count  :integer(11)   
+#  rating_total  :decimal(10, 2 
+#  rating_avg    :decimal(10, 2 
 #
 
 class Answer < ActiveRecord::Base
   has_many :replies, :order => 'created_at DESC'
   belongs_to :user
+  
+  acts_as_rated :rating_range => 0..5 
   
   attr_accessible :body
   

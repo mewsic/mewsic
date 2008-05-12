@@ -26,4 +26,11 @@ class AnswersController < ApplicationController
       render :action => 'index'
     end
   end
+  
+  def rate    
+    @answer = Answer.find(params[:id])
+    @answer.rate(params[:rate].to_i, current_user)
+    render :layout => false, :text => "#{@answer.rating_count} votes"
+  end
+    
 end

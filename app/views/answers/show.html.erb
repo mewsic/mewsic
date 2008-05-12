@@ -35,7 +35,9 @@
 								</div>								
 							</div>
 							<div class="float-left">
-								<p class="star"><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_gray.png" alt="" width="10" height="9" /></p>
+								<p class="star">
+                  <%= rating(@answer) %>
+                </p>
 								<p class="grey-text"><%= time_ago_in_words(@answer.created_at) %></p>					
 							</div>
 							<div id="reply-form-container" style="clear:both;display: none">
@@ -64,7 +66,9 @@
   							<p><strong><%= reply.body %></strong></p>
   							<div class="float-left">
   								<p class="grey-text">
-  								<span class="star"><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_gray.png" alt="" width="10" height="9" /></span>
+  								<div class="star">
+  								  <%= rating(reply) %>
+                  </div>
   								<span ><%= time_ago_in_words(reply.created_at) %></span> <span><a href="#">Segnala irregolarit&agrave;</a></span>
   								</p>
   							</div>
@@ -85,7 +89,9 @@
 				    <div class="elements clear-block">
   					<h3><%= link_to h(answer.body), answer_path(answer) %></h3>
   					<p class="grey-text float-right"><%= link_to pluralize(answer.replies.count, 'reply'), answer_path(answer) %></p>
-  					<p class="star float-left"><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_gray.png" alt="" width="10" height="9" /></p>
+  					<p class="star float-left">
+              <%= rating(answer) %>
+            </p>
   				  </div>
 				  <%- end -%>	  
 				</div>
@@ -106,7 +112,9 @@
               <p class="float-left"><%= link_to avatar_image(answer.user, :icon), user_path(answer.user) %></p>
               <div style="margin:0px 20px 20px 40px;">
   							<h2 class="clearly-cyan-text"><%= link_to h(answer.body), answer_path(answer) %></h2>
-  							<p class="star float-right"><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_blue.png" alt="" width="10" height="9" /><img src="/images/star_gray.png" alt="" width="10" height="9" /></p>
+  							<p class="star float-right">
+  							  <%= rating(answer) %>
+                </p>
   							<p class="grey-text float-left">
   							  Answer by  <%= link_to(answer.user.login, user_path(answer.user)) %> - <%= link_to(pluralize(answer.replies.count, 'reply'), answer_path(answer)) %> - <%= time_ago_in_words(answer.created_at) %>
                 </p>
