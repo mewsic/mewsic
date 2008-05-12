@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   protect_from_forgery :except => :update
   
   def index
-    @coolest = User.find_coolest :limit => 9
+    @coolest = User.find_coolest
     # TODO: al momento find_best_myousicians tira fuori le canzoni per non avere persone senza canzoni
     @best_myousicians = User.find_best_myousicians :limit  => 3
     @prolific = User.find_prolific :limit => 3

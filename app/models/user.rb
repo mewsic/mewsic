@@ -192,9 +192,12 @@ class User < ActiveRecord::Base
     (result = [city, country].compact.join(", ")).blank? ? "Unknown" : result
   end
   
-  # TODO: Ã¨ solo uno stub fino a quando decidiamo le caratteristiche dei coolest.
-  def self.find_coolest(options)
-    self.find(:all, options.merge({:conditions => "activated_at IS NOT NULL"}))
+  def self.find_coolest(options = {})
+    self.find(:all, options.merge({:conditions => ["activated_at IS NOT NULL AND type IS NULL OR type = 'User'"], :order => 'rating_avg DESC', :limit => 9})) 
+  end
+  
+  def self.find_coolest_band_or_deejays(options = {})
+    self.find(:all, options.merge({:conditions => ["activated_at IS NOT NULL AND type = 'Band' or type = 'Dj'"], :order => 'rating_avg DESC', :limit => 9})) 
   end
   
   # TODO: stub sino a quando abbiamo i voti
@@ -205,10 +208,16 @@ class User < ActiveRecord::Base
   end
   
   def self.find_prolific(options = {})
-    qry = "SELECT users.*, songs.title, count(songs.id) AS songs_count FROM users LEFT JOIN songs ON users.id = songs.user_id WHERE users.activated_at IS NOT NULL GROUP BY users.id ORDER BY songs_count DESC"
+    qry = "SELECT users.*, songs.title, count(songs.id) AS songs_count FROM users LEFT JOIN songs ON users.id = songs.user_id WHERE (users.type = 'User' OR users.type IS NULL) AND users.activated_at IS NOT NULL AND songs.published = ? GROUP BY users.id ORDER BY songs_count DESC"
     qry += " LIMIT #{options[:limit]}" if options.has_key?(:limit)
-    User.find_by_sql(qry)
+    User.find_by_sql([qry, true])
   end
+  
+  def self.find_prolific_band_or_deejays(options = {})
+    qry = "SELECT users.*, songs.title, count(songs.id) AS songs_count FROM users LEFT JOIN songs ON users.id = songs.user_id WHERE (users.type = 'Band' OR users.type = 'Dj') AND users.activated_at IS NOT NULL AND songs.published = ? GROUP BY users.id ORDER BY songs_count DESC"
+    qry += " LIMIT #{options[:limit]}" if options.has_key?(:limit)
+    User.find_by_sql([qry, true])
+  end  
   
   def self.find_friendliest(options)
     # FIXME: This should be fixed to it loads the associated objects in a single query.
@@ -261,7 +270,13 @@ class User < ActiveRecord::Base
   
   # FIXME: da rendere più efficiente
   def self.find_with_more_instruments
-    User.find Instrument.count('description', :include => [:tracks => [:parent_song => [:user]]], :group => 'user_id', :distinct => true, :order => 'count_description DESC').first.first
+    result = Instrument.count('description', :conditions => "users.type IS NULL OR users.type = 'User'", :include => [:tracks => [:parent_song => [:user]]], :group => 'user_id', :distinct => true, :order => 'count_description DESC')
+    return result.first.is_a?(Array) ? User.find(result.first.first) : nil
+  end
+ 
+  def self.find_band_or_deejay_with_more_instruments
+    result = Instrument.count('description', :conditions => "users.type = 'Band' OR users.type = 'Dj'", :include => [:tracks => [:parent_song => [:user]]], :group => 'user_id', :distinct => true, :order => 'count_description DESC')
+    return result.first.is_a?(Array) ? User.find(result.first.first) : nil
   end
   
   protected
