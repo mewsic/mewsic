@@ -1823,7 +1823,7 @@ div#messages div.alert, div#messages div.error, div#messages div.notice {
 div#messages div.close {
   width: 20px;
   height: 20px;
-  background: black;
+  background: transparent url('/images/button_delete.gif') no-repeat center;
   position: absolute;
   top: 50%;
   margin-top: -10px;
@@ -1842,9 +1842,9 @@ div#messages div.error  {
    border-color: #c00;
 }
 div#messages div.notice {
-  color:#060;
-  background:#e2f9e3;
-  border-color: #060;
+  color:#1771A0;
+  background:#F2CA6E;
+  border-color: #E0A758;
 }
 /* search question */
 .search-question{
