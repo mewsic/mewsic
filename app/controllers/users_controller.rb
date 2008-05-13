@@ -59,7 +59,8 @@ class UsersController < ApplicationController
         render(:text => @user.send(params[:user].keys.first)) and return
       end
       render :layout => false
-    else      
+    else
+      render :text => @user.errors.full_messages.join("\n"), :status => 400 if request.xhr?
     end  
   end
   

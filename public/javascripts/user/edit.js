@@ -14,7 +14,10 @@ var InPlaceEditorGenerator = Class.create({
         externalControlOnly: true,
         ajaxOptions: { method: 'PUT' },
         highlightcolor: '#ffffff',
-        paramName: this.options.model + '[' + name + ']'
+        paramName: this.options.model + '[' + name + ']',
+        onFailure: function(editor, r) {
+          alert(r.responseText);
+        } 
       });
     }.bind(this));
   }  

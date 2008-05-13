@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 15) do
+ActiveRecord::Schema.define(:version => 16) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
@@ -104,8 +104,8 @@ ActiveRecord::Schema.define(:version => 15) do
     t.decimal "rating",     :precision => 10, :scale => 2
   end
 
-  add_index "ratings", ["rater_id"], :name => "index_ratings_on_rater_id"
   add_index "ratings", ["rated_type", "rated_id"], :name => "index_ratings_on_rated_type_and_rated_id"
+  add_index "ratings", ["rater_id"], :name => "index_ratings_on_rater_id"
 
   create_table "replies", :force => true do |t|
     t.integer  "answer_id"
@@ -159,18 +159,18 @@ ActiveRecord::Schema.define(:version => 15) do
     t.string   "email"
     t.string   "remember_token"
     t.string   "activation_code"
-    t.string   "country"
-    t.string   "city"
+    t.string   "country",                   :limit => 45
+    t.string   "city",                      :limit => 40
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "gender",                                                                 :default => "male"
+    t.string   "gender",                                  :default => "male"
     t.string   "photos_url"
     t.string   "blog_url"
     t.string   "myspace_url"
     t.string   "skype"
     t.string   "msn"
-    t.boolean  "msn_public",                                                             :default => false
-    t.boolean  "skype_public",                                                           :default => false
+    t.boolean  "msn_public",                              :default => false
+    t.boolean  "skype_public",                            :default => false
     t.string   "crypted_password",          :limit => 40
     t.string   "salt",                      :limit => 40
     t.string   "string",                    :limit => 40
@@ -185,8 +185,8 @@ ActiveRecord::Schema.define(:version => 15) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "rating_count"
-    t.decimal  "rating_total",                            :precision => 10, :scale => 2
-    t.decimal  "rating_avg",                              :precision => 10, :scale => 2
+    t.decimal  "rating_total"
+    t.decimal  "rating_avg"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

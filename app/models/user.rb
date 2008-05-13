@@ -8,8 +8,8 @@
 #  email                     :string(255)   
 #  remember_token            :string(255)   
 #  activation_code           :string(255)   
-#  country                   :string(255)   
-#  city                      :string(255)   
+#  country                   :string(45)   
+#  city                      :string(40)   
 #  first_name                :string(255)   
 #  last_name                 :string(255)   
 #  gender                    :string(255)   default("male")
@@ -49,6 +49,8 @@ class User < ActiveRecord::Base
   validates_length_of       :password, :within => 4..40, :if => :password_required?
   validates_confirmation_of :password,                   :if => :password_required?
   validates_length_of       :login,    :within => 3..40
+  validates_length_of       :city,     :maximum => 40, :allow_nil => true, :allow_blank => true
+  validates_length_of       :country,  :maximum => 45, :allow_nil => true, :allow_blank => true
   validates_format_of       :email,    :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :on => :create
   validates_uniqueness_of   :login, :email, :case_sensitive => false
   validates_acceptance_of :terms_of_service, :on => :create, :allow_nil => false

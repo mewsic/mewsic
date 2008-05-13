@@ -162,6 +162,16 @@ class UsersControllerTest < Test::Unit::TestCase
     # assert_response :success
   end
 
+  def test_should_return_400_status_if_validation_fails
+    login_as :aaron
+
+    xhr :post, :update, :id => users(:aaron).id, :user => { :city => ("A" * 400) }
+    assert_response 400
+
+    xhr :post, :update, :id => users(:aaron).id, :user => { :country => ("A" * 400) }
+    assert_response 400
+  end
+
   def test_show_should_have_user_assigned
     call_and_test_show
     assert assigns(:user)
