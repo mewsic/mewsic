@@ -31,13 +31,13 @@ class FriendshipTest < Test::Unit::TestCase
     assert_difference 'Friendship.count' do
       Friendship.create_or_accept(u, q)
     end    
-    assert_equal 0, q.reload.friends.count
+    assert_equal 0, q.reload.friends.size
     assert_equal 0, q.reload.pending_friends_by_me.count
     assert_equal 1, q.reload.pending_friends_for_me.count
     assert_no_difference 'Friendship.count' do
       Friendship.create_or_accept(q, u)
     end
-    assert_equal 1, q.reload.friends.count
+    assert_equal 1, q.reload.friends.size
     assert_equal 0, q.reload.pending_friends_by_me.count
     assert_equal 0, q.reload.pending_friends_for_me.count
   end

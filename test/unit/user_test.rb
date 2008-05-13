@@ -242,17 +242,8 @@ class UserTest < Test::Unit::TestCase
   
   def test_find_coolest_should_not_return_inactive_users
     check_finder_for_inactive(:find_coolest)
-  end
-
-  def test_find_friends_should_be_equal_to_friends_method
-    user = users(:quentin)
-    assert_equal user.friends.size, user.find_friends.size
-  end
-  
-  def test_quentin_should_have_friends
-    assert_equal users(:quentin).find_friends.size, 50
-  end
-  
+  end  
+    
   def test_find_admirers_should_be_equal_to_pending_friends_method
     user = users(:quentin)
     assert_equal user.pending_friends.size, user.find_admirers.size

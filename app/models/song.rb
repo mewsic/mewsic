@@ -26,7 +26,7 @@ class Song < ActiveRecord::Base
   
   attr_accessor :mlab
   
-  has_many :tracks, :through => :mixes, :order => 'created_at DESC'
+  has_many :tracks, :through => :mixes, :order => 'tracks.created_at DESC'
   has_many :mixes
   has_many :children_tracks, :class_name => 'Track'
   has_many :mlabs, :as => :mixable
@@ -106,7 +106,11 @@ class Song < ActiveRecord::Base
     seconds = remainig    
     "#{zerofill(hours, 2)}:#{zerofill(minutes, 2)}:#{zerofill(seconds, 2)}"
   end
-
+  
+  def to_breadcrumb
+    self.title
+  end    
+  
 private
 
   def zerofill(number, length)

@@ -51,5 +51,9 @@ class SongsController < ApplicationController
     @song.rate(params[:rate].to_i, current_user)
     render :layout => false, :text => "#{@song.rating_count} votes"
   end
+  
+  def to_breadcrumb_link
+    ['Music', music_path]
+  end
 
 end

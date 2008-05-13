@@ -79,7 +79,7 @@ document.observe('dom:loaded', function(event) {
     });    
 	}
 	
-	if($('current-user-id')) {
+	if($('current-user-id')) {	  
 	  var authenticity_token = $('authenticity-token').value;
   	new Rating('song_rating', {
       hideLabelOnMouseOut: true,

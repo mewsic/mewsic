@@ -23,5 +23,5 @@ class Avatar < Picture
   has_attachment :storage => :file_system,
     :path_prefix => 'public/avatars',
     :content_type => 'image/jpeg' ,
-    :thumbnails => { :icon => '30x30', :small => '42x42', :medium => '60x60', :big => '150x150'}
+    :thumbnails => { :icon => '30x30', :small => '42x42', :medium => '58x58', :big => '150x150'}
 end

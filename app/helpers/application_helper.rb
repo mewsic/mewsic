@@ -45,7 +45,12 @@ module ApplicationHelper
   def breadcrumb(model_crumb = nil)
     default_breadcrumb = '<div id="path"><a href="/">Home</a>'
     unless controller.controller_name == 'dashboard'
-      default_breadcrumb += ' : ' + link_to(controller.send(:to_breadcrumb).capitalize, send("#{controller.controller_name}_path"))
+      if controller.respond_to?(:to_breadcrumb_link)
+        text, path = controller.to_breadcrumb_link
+        default_breadcrumb += ' : ' + link_to(text, path)
+      else
+        default_breadcrumb += ' : ' + link_to(controller.send(:to_breadcrumb).capitalize, send("#{controller.controller_name}_path"))
+      end      
       default_breadcrumb += ' : ' + link_to(model_crumb.to_breadcrumb, send("#{controller.controller_name.singularize}_path", [model_crumb.id])) if model_crumb
     end    
     default_breadcrumb += '</div>'
