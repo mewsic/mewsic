@@ -12,8 +12,18 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # :secret => '02cedf3882e78b5a99c0bec5cc75c3fc'
   
   include AuthenticatedSystem
-      
+  
+  before_filter :check_user_inbox
+  
   protected    
+  
+  def check_user_inbox
+    if logged_in?
+      if current_user.unread_message_count > 0
+        flash.now[:notice] = "You have <a href=\"#{user_path(current_user)}\">#{current_user.unread_message_count} unread messages</a>."
+      end      
+    end
+  end
   
   def to_breadcrumb
     controller_name
