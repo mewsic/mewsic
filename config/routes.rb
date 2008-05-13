@@ -38,6 +38,8 @@ ActionController::Routing::Routes.draw do |map|
   
   map.music '/music', :controller => 'music', :action => 'index'
 
+  map.connect '/countries', :controller => 'users', :action => 'countries'
+
   #   map.resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }
   #   map.resources :products, :has_many => [ :comments, :sales ], :has_one => :seller
   #   map.namespace :admin do |admin|

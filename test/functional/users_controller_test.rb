@@ -88,6 +88,17 @@ class UsersControllerTest < Test::Unit::TestCase
     assert assigns(:user)
   end
 
+  def test_countries
+    xhr :get, :countries
+    assert_response :success
+
+    assert_equal 'application/json', @response.content_type
+
+    countries_json = ActionView::Helpers::FormOptionsHelper::COUNTRIES.to_json
+    assert_equal countries_json, @response.body
+  end
+    
+
   def test_should_activate_the_first_time
     assert_nil User.find(users(:aaron).id).activated_at
     get :activate, :activation_code => users(:aaron).activation_code

@@ -20,6 +20,30 @@ var InPlaceEditorGenerator = Class.create({
   }  
 });
 
+var InPlaceSelectGenerator = Class.create({
+  
+  initialize: function(fields, options) {
+    this.fields = fields;
+    this.options = options;
+    this.user_id = $('current-user-id').value;
+    this.setup();
+  },
+  
+  setup: function() {  
+    this.fields.each(function(name) {
+      new Ajax.InPlaceSelect(this.options.model + '_' + name, this.options.url + this.user_id, {
+        lazyLoading: true,
+        values_url: this.options.values_url,
+        externalControl: 'edit_button_' + this.options.model + '_' + name,
+        externalControlOnly: true,
+        ajaxOptions: { method: 'PUT' },
+        highlightcolor: '#ffffff',
+        paramName: this.options.model + '[' + name + ']'
+      });
+    }.bind(this));
+  }  
+});
+
 var AjaxFormGenerator = Class.create({
   
   initialize: function(forms, options) {
@@ -127,7 +151,8 @@ var BandMembers = {
 }
 
 document.observe('dom:loaded', function() {
-  new InPlaceEditorGenerator( $w('city country motto tastes'), { url: '/users/', model: 'user' } );  
-  new AjaxFormGenerator( $w('photos_url blog_url myspace_url skype msn'), { url: '/users/', model: 'user' } );    
+  new InPlaceEditorGenerator( $w('city motto tastes'), { url: '/users/', model: 'user' } );  
+  new InPlaceSelectGenerator( $w('country'), { url: '/users/', model: 'user', values_url: '/countries' } );
+  new AjaxFormGenerator( $w('photos_url blog_url myspace_url skype msn'), { url: '/users/', model: 'user' } );
   initGenderSwitcher();
 });

@@ -124,6 +124,10 @@ class UsersController < ApplicationController
     @user.rate(params[:rate].to_i, current_user)
     render :layout => false, :text => "#{@user.rating_count} votes"
   end
+
+  def countries
+    render :json => ActionView::Helpers::FormOptionsHelper::COUNTRIES
+  end
   
   protected
   
