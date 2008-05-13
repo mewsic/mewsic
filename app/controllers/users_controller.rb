@@ -44,6 +44,7 @@ class UsersController < ApplicationController
     self.current_user = params[:activation_code].blank? ? :false : User.find_by_activation_code(params[:activation_code])
     if logged_in? && !current_user.active?
       current_user.activate
+      flash[:notice] = "Welcome aboard, #{self.current_user.login}!"
       redirect_to user_path(self.current_user)
     else
       redirect_to '/'
