@@ -45,7 +45,7 @@ class MlabsController < ApplicationController
   def destroy
     @mlab     = Mlab.find(params[:id])
     @mixable  = @mlab.mixable
-    @mlab.destroy      
+    @mlab.destroy
   end
 
 private
