@@ -5,6 +5,5 @@
   <p class="thumb">
     <%= link_to avatar_image(person, :medium), user_path(person) %>
   </p>
-  <p class="name"><%= link_to person.login, user_path(person) %></p>
-  <p class="country"><%= h person.compiled_location%></p>
+  <p class="name"><%= link_to truncate(person.login, 10), user_path(person) %></p>
 </div>
