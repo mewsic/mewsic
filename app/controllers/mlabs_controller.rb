@@ -7,8 +7,9 @@ class MlabsController < ApplicationController
 
   def index
     @songs = Song.find(:all, :include => [:mlabs, :user], :conditions => ["mlabs.user_id = ?", params[:user_id]])
-    @tracks = Track.find(:all, :include => :mlabs, :conditions => ["mlabs.user_id = ?", params[:user_id]])    
+    @tracks = Track.find(:all, :include => :mlabs, :conditions => ["mlabs.user_id = ?", params[:user_id]])
     @items = @tracks + @songs
+    @show_mlab_id = true
     respond_to do |format|            
       format.xml do
         headers["Content-Type"] = "text/xml;"

@@ -13,6 +13,9 @@
   <% if @show_siblings_count; @show_siblings_count = false; -%>
     <siblings><%= song.siblings_count %></siblings>
   <% end -%>
+  <%- if @show_mlab_id -%>
+    <mlab_id><%= song.mlabs.first.id if song.mlabs.count > 0 %></mlab_id>
+  <%- end -%>
   <% if @show_siblings; @show_siblings = false; -%>
     <siblings type="direct">
       <%= render :partial => 'shared/song', :collection => song.direct_siblings %>

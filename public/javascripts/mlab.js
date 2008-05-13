@@ -1,6 +1,6 @@
 var MlabItem = Class.create({
 
-  initialize: function(type, attributes, slider) {   
+  initialize: function(type, attributes, slider) {
     this.type = type;    
     this.attributes = attributes; 
     this.attributes.mlab_id = this.extractMlabId();

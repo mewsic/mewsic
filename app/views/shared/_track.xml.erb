@@ -10,6 +10,9 @@
   <rating></rating>     
   <id><%= track.id %></id>         
   <filename><%= track.filename %></filename>
+  <%- if @show_mlab_id -%>
+    <mlab_id><%= track.mlabs.first.id if track.mlabs.count > 0 %></mlab_id>
+  <%- end -%>
   <% if @show_siblings; @show_siblings = false -%>
     <siblings type="direct">
       <songs>
