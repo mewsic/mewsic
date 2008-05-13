@@ -3,8 +3,10 @@
   <div>
     <p class="thumb"><img src="/images/ico_ammira.gif" alt="" width="29" height="29" /></p>
     <p class="name cyan-text">
-      <%- if current_user.is_admirer_of?(@user) -%>
+      <%- if current_user.is_friends_with?(@user) -%>
         <strong><%= link_to 'Unfriend', user_friendship_path(current_user, current_user.friendship(@user)), :method => 'delete' %></strong>
+      <%- elsif current_user.is_pending_friends_by_me_with?(@user) -%>
+        <strong><%= link_to 'Unadmire', user_friendship_path(current_user, current_user.friendship(@user)), :method => 'delete' %></strong>
       <%- else -%>
         <strong><%= link_to 'Admire', user_friendships_path(current_user, :friend_id => @user.id), :method => 'post' %></strong>
       <%- end -%>

@@ -98,10 +98,10 @@ class User < ActiveRecord::Base
   
   before_save :check_links
   
-  def is_admirer_of?(user)
-    Friendship.find(:first, :conditions => ["(user_id = ? AND friend_id = ?) OR (user_id = ? AND friend_id = ? AND accepted_at IS NOT NULL)", self.id, user.id, user.id, self.id])
+  def is_pending_friends_by_me_with?(user)    
+    Friendship.find(:first, :conditions => ["user_id = ? AND friend_id = ? AND accepted_at IS NULL", self.id, user.id])
   end
-  
+    
   def band?
     self.type == 'Band'
   end
