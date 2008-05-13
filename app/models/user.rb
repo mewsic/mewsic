@@ -51,12 +51,26 @@ class User < ActiveRecord::Base
   validates_length_of       :login,    :within => 3..40
   validates_length_of       :city,     :maximum => 25, :allow_nil => true, :allow_blank => true
   validates_length_of       :country,  :maximum => 45, :allow_nil => true, :allow_blank => true
+
   validates_format_of       :email,    :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :on => :create
+  validates_format_of       :msn,      :with => /^(([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,}))?$/ix
+  validates_format_of       :skype,    :with => /^([\w\._-]+)?$/ix
+  validates_format_of       :photos_url, :blog_url, :myspace_url,
+                                       :with => /^(((http|https):\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?)?$/ix
+
   validates_uniqueness_of   :login, :email, :case_sensitive => false
   validates_acceptance_of :terms_of_service, :on => :create, :allow_nil => false
   validates_acceptance_of :eula, :on => :create, :allow_nil => false, :message => "must be abided"
   before_save :encrypt_password
   before_create :make_activation_code  
+
+  # all string fields are filtered with strip_tags,
+  # except the ones in ":except". fields in ":sanitize"
+  # are run through sanitize, that uses the white-list
+  # sanitizer configured in environment.rb 
+  #
+  xss_terminate :except => [:email, :msn, :gender, :photos_url, :blog_url, :myspace_url],
+                :sanitize => [:motto, :tastes]
   
   has_many_friends
   

@@ -15,6 +15,8 @@ var InPlaceEditorGenerator = Class.create({
         ajaxOptions: { method: 'PUT' },
         highlightcolor: '#ffffff',
         paramName: this.options.model + '[' + name + ']',
+        cols: this.options.cols || 0,
+        rows: this.options.rows || 1,
         onFailure: function(editor, r) {
           alert(r.responseText);
         } 
@@ -77,16 +79,27 @@ var AjaxFormGenerator = Class.create({
             }
             $('loading_' + self.options.model + '_' + name).show();
           }.bind(this),
-          onComplete: function(r) {
+          onSuccess: function(r) {
             $('loading_' + self.options.model + '_' + name).hide();
+
             if(self.options.hideOnLoad) {
               this.select('.' + self.options.hideOnLoad).each(function(e) {
-                if(['user_photos_url', 'user_blog_url', 'user_myspace_url'].include(e.id)) e.value = r.responseText;
+                if($w('user_photos_url user_blog_url user_myspace_url').include(e.id))
+                {
+                    e.value = r.responseText;
+                }
                 e.show();
               }.bind(this));
             }
 			form.select('input[type="submit"]').invoke('hide');
 			form.compareValue = form.select('input.ready-for-edit').invoke('getValue').join(',');
+          }.bind(this),
+          onFailure: function(r) {
+            $('loading_' + self.options.model + '_' + name).hide();
+            this.select('.' + self.options.hideOnLoad).each(function(e) {
+              e.show();
+            });
+            alert(r.responseText);
           }.bind(this)
         });        
       });
@@ -154,7 +167,8 @@ var BandMembers = {
 }
 
 document.observe('dom:loaded', function() {
-  new InPlaceEditorGenerator( $w('city motto tastes'), { url: '/users/', model: 'user' } );  
+  new InPlaceEditorGenerator( $w('city tastes'), { url: '/users/', model: 'user' } );  
+  new InPlaceEditorGenerator( $w('motto'), { url: '/users/', model: 'user', rows: 2 } );  
   new InPlaceSelectGenerator( $w('country'), { url: '/users/', model: 'user', values_url: '/countries' } );
   new AjaxFormGenerator( $w('photos_url blog_url myspace_url skype msn'), { url: '/users/', model: 'user' } );
   initGenderSwitcher();

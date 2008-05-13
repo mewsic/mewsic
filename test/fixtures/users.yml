@@ -51,7 +51,7 @@ quentin:
   myspace_url: http://my.space.url
   skype: skype_account
   skype_public: <%= true %>
-  msn: msn_account
+  msn: quentin@example.org
   msn_public: <%= true %>
   country: Italy
   city: Bari
@@ -91,9 +91,9 @@ mikaband:
   photos_url: http://my.photos.url
   blog_url: http://my.blog.url
   myspace_url: http://my.space.url
-  skype: skype_account
+  skype: mikaband.skype
   skype_public: <%= true %>
-  msn: msn_account
+  msn: mikaband@example.org
   msn_public: <%= true %>
   country: Italy
   city: Milano
