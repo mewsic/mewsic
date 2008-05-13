@@ -1079,6 +1079,11 @@ h2.dj-label{
 	margin-left:23px;
 
 }
+
+.user_country-inplaceselect, .user_city-inplaceeditor{
+        width: 200px;
+}
+
 /* page label */
 
 .mband-page-label{

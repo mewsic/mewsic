@@ -96,6 +96,7 @@ Ajax.InPlaceSelect = Class.create({
       okText: "ok",
       cancelText: "cancel",
       paramName: 'selected',
+      htmlOptions: {},
       highlightcolor: "#FFFF99",
       highlightendcolor: "#FFFFFF",
       onComplete: function(transport, element) {
@@ -113,6 +114,7 @@ Ajax.InPlaceSelect = Class.create({
       cancelLink: true
     }, options || {} );
 
+    this.options.htmlOptions = Object.extend({class: element + '-inplaceselect'}, this.options.htmlOptions);
     this.originalBackground = Element.getStyle(this.element, 'background-color');
     if (!this.originalBackground) {
       this.originalBackground = "transparent";
@@ -217,12 +219,12 @@ Ajax.InPlaceSelect = Class.create({
   createControls: function() {
     var options = new Array();
     for (var i=0;i<this.options.values.length;i++)
-		options[i] = Builder.node('option', {value:this.options.values[i]}, this.options.labels[i]);
+      options[i] = Builder.node('option', {value:this.options.values[i]}, this.options.labels[i]);
 
     if (this.options.multiSelect) {
-      this.menu = Builder.node('select', {name: this.options.paramName, multiple:'multiple'}, options);
+      this.menu = Builder.node('select', Object.extend({multiple:'multiple'}, this.options.htmlOptions), options);
     } else {
-      this.menu = Builder.node('select', options);
+      this.menu = Builder.node('select', this.options.htmlOptions, options);
     }
   
     if (this.options.onChange) {
@@ -255,7 +257,8 @@ Ajax.InPlaceSelect = Class.create({
     if (this.options.cancelLink) {
      this.cancelButton = Builder.node('a', this.options.cancelText);
      this.cancelButton.onclick = this.onCancel.bind(this);
-     this.cancelButton.className = 'editor_cancel';
+     this.cancelButton.className = 'editor_cancel_link';
+     this.cancelButton.href = '#'
     }
   },
   onCancel: function() {
