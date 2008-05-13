@@ -114,7 +114,8 @@ Ajax.InPlaceSelect = Class.create({
       cancelLink: true
     }, options || {} );
 
-    this.options.htmlOptions = Object.extend({class: element + '-inplaceselect'}, this.options.htmlOptions);
+    defaultClass = element + '-inplaceselect';
+    this.options.htmlOptions = Object.extend({'class': defaultClass}, this.options.htmlOptions);
     this.originalBackground = Element.getStyle(this.element, 'background-color');
     if (!this.originalBackground) {
       this.originalBackground = "transparent";
