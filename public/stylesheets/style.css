@@ -1828,7 +1828,7 @@ div#messages div.alert, div#messages div.error, div#messages div.notice {
 div#messages div.close {
   width: 20px;
   height: 20px;
-  background: transparent url('/images/button_delete.gif') no-repeat center;
+  background: transparent url('/images/button_flash_close.png') no-repeat center;
   position: absolute;
   top: 50%;
   margin-top: -10px;
@@ -1841,15 +1841,15 @@ div#messages div.alert  {
    margin:0;
    padding:5px;
 }
-div#messages div.error  {
+/*div#messages div.error  {
    color:#fff; 
    background: #F00;
    border-color: #c00;
-}
-div#messages div.notice {
-  color:#1771A0;
-  background:#F2CA6E;
-  border-color: #E0A758;
+}*/
+div#messages div.notice, div#messages div.error {
+  color:#754C24;
+  background:#FFFFB1;
+  border-color: #FFF281;
 }
 /* search question */
 .search-question{
