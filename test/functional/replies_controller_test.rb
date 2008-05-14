@@ -40,8 +40,13 @@ class RepliesControllerTest < ActionController::TestCase
   
   def test_should_rate
     login_as :quentin
-    a = Answer.create(:body => 'question', :user => users(:quentin))
-    r = a.replies.create(:body => 'answer', :user => users(:quentin))
+    a = Answer.new(:body => 'question')
+    a.user = users(:quentin)
+    a.save
+    r = Reply.new(:body => 'answer')
+    r.answer = a
+    r.user = users(:quentin)    
+    r.save
 
     post :rate, :id => r.id, :rate => 5
     assert 5, r.reload.rating_total
@@ -52,6 +57,15 @@ class RepliesControllerTest < ActionController::TestCase
     assert 3, r.reload.rating_total
     assert 3, r.reload.rating_avg
     assert 1, r.reload.rating_count
+  end
+  
+  def test_should_send_message_after_reply
+    login_as :user_10
+    message_count = users(:quentin).unread_message_count
+    assert_difference 'Reply.count' do
+      post :create, :answer_id => answers(:quentin_asks_about_magic).id, :reply => {:body => 'hello!'}
+      assert_equal message_count + 1, users(:quentin).reload.unread_message_count
+    end
   end
   
 end

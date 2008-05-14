@@ -1,6 +1,6 @@
 class RepliesController < ApplicationController
   
-  before_filter :login_required, :only => :create
+  before_filter :login_required
   
   def create
     @answer = Answer.find(params[:answer_id])
