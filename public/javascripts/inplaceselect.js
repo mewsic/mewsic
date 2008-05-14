@@ -367,7 +367,7 @@ Ajax.InPlaceSelect = Class.create({
     this.editing = false;
     this.saving = false;
     this.oldInnerHTML = null;
-  },
+  }
 });
 
 Object.extend(Ajax.InPlaceSelect.prototype, {

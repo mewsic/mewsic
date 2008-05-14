@@ -80,7 +80,7 @@ var MailBox = Class.create({
     var options = Object.extend({
       method: 'get',
       evalScripts: true,
-      onComplete: this.initPaginationLinks.bind(this),
+      onComplete: this.initPaginationLinks.bind(this)
     }, arguments[1] || {});
     new Ajax.Updater(this.container, url, options);
   }
