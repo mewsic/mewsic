@@ -350,11 +350,13 @@ Ajax.InPlaceSelect = Class.create({
     }
     Element.removeClassName(this.element, this.options.hoverClassName)
     if (this.saving) return;
+    /*
     this.effect = new Effect.Highlight(this.element, {
       startcolor: this.options.highlightcolor,
       endcolor: this.options.highlightendcolor,
       restorecolor: this.originalBackground
     });
+    */
   },
   leaveEditMode:function(transport) {
     Element.removeClassName(this.element, this.options.savingClassName);

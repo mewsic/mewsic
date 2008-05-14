@@ -13,13 +13,15 @@ var InPlaceEditorGenerator = Class.create({
         externalControl: 'edit_button_' + this.options.model + '_' + name,
         externalControlOnly: true,
         ajaxOptions: { method: 'PUT' },
-        highlightcolor: '#ffffff',
         paramName: this.options.model + '[' + name + ']',
         cols: this.options.cols || 0,
         rows: this.options.rows || 1,
         onFailure: function(editor, r) {
           alert(r.responseText);
-        } 
+        },
+        onComplete: Prototype.emptyFunction,
+        onEnterHover: Prototype.emptyFunction,
+        onLeaveHover: Prototype.emptyFunction
       });
     }.bind(this));
   }  
@@ -42,8 +44,8 @@ var InPlaceSelectGenerator = Class.create({
         externalControl: 'edit_button_' + this.options.model + '_' + name,
         externalControlOnly: true,
         ajaxOptions: { method: 'PUT' },
-        highlightcolor: '#ffffff',
-        paramName: this.options.model + '[' + name + ']'
+        paramName: this.options.model + '[' + name + ']',
+        onComplete: Prototype.emptyFunction
       });
     }.bind(this));
   }  
@@ -167,8 +169,8 @@ var BandMembers = {
 }
 
 document.observe('dom:loaded', function() {
-  new InPlaceEditorGenerator( $w('city tastes'), { url: '/users/', model: 'user' } );  
-  new InPlaceEditorGenerator( $w('motto'), { url: '/users/', model: 'user', rows: 2 } );  
+  new InPlaceEditorGenerator( $w('city'), { url: '/users/', model: 'user' } );  
+  new InPlaceEditorGenerator( $w('motto tastes'), { url: '/users/', model: 'user', rows: 4 } );  
   new InPlaceSelectGenerator( $w('country'), { url: '/users/', model: 'user', values_url: '/countries' } );
   new AjaxFormGenerator( $w('photos_url blog_url myspace_url skype msn'), { url: '/users/', model: 'user' } );
   initGenderSwitcher();
