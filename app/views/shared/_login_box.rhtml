@@ -5,8 +5,8 @@
   <div id="login-box">
     <div class="log-in-input">
       <% form_tag sessions_path do -%>    
-    	  <p><%= text_field_tag 'login', 'username' %></p>
-    	  <p><%= password_field_tag 'password', 'password' %></p>
+          <p><%= text_field_tag 'login', 'username', :onfocus => 'if(this.value=="username")this.value=""' %></p>
+    	  <p><%= password_field_tag 'password', 'password', :onfocus => 'if(this.value=="password")this.value=""' %></p>
     	  <p><input id="login_submit" name="log-in" type="image" src="/images/login_button.png" class="input-button" onclick="$(this).up('form').submit()"/></p>    
       <% end -%>
     </div>
