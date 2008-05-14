@@ -976,7 +976,7 @@ h2.dj-label{
 	background:url(/images/BG_tab_noactive_left.gif) no-repeat top left;
 	float:left;
 	padding-left: 15px;
-	margin:0px 10px;
+	margin:0;
 }
 .select-tab h1{
 	float:left;
