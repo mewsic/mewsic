@@ -25,7 +25,20 @@ var Message = {
   },
   
   handleClose: function(event) {
+    if(event.element().up().hasClassName('inbox')) {
+      Message.saveInboxMessageCookie();
+    }
     event.element().up().fade({ duration: 0.3 });
+  },
+  
+  readInboxMessageCookie: function() {
+    var matches = document.cookie.match(/inbox_message_read=(.+?)/);
+    var value = matches ? matches[1] : 0;
+    return value;
+  },
+  
+  saveInboxMessageCookie: function() {
+    document.cookie = "inbox_message_read=1; path=/";
   },
   
   error: function(message, close_previous) {
@@ -37,7 +50,11 @@ var Message = {
   },
   
   init: function() {
-    Message.initCloseLinks();    
+    Message.initCloseLinks();
+    if(Message.readInboxMessageCookie()) {
+      var inbox_message = $('messages').down('.inbox'); 
+      if(inbox_message) inbox_message.hide();
+    }    
   }
   
 };

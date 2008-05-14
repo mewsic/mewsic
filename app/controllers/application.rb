@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   def check_user_inbox
     if logged_in?
       if current_user.unread_message_count > 0
-        flash.now[:notice] = "You have <a href=\"#{user_path(current_user)}\">#{current_user.unread_message_count} unread messages</a>."
+        flash.now[:inbox] = "You have <a href=\"#{user_path(current_user)}\">#{current_user.unread_message_count} unread messages</a>."
       end      
     end
   end
