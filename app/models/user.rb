@@ -46,9 +46,9 @@ class User < ActiveRecord::Base
   validates_presence_of     :login, :email
   validates_presence_of     :password,                   :if => :password_required?
   validates_presence_of     :password_confirmation,      :if => :password_required?
-  validates_length_of       :password, :within => 4..40, :if => :password_required?
+  validates_length_of       :password, :within => 4..20, :if => :password_required?
   validates_confirmation_of :password,                   :if => :password_required?
-  validates_length_of       :login,    :within => 3..40
+  validates_length_of       :login,    :within => 3..20
   validates_length_of       :city,     :maximum => 25, :allow_nil => true, :allow_blank => true
   validates_length_of       :country,  :maximum => 45, :allow_nil => true, :allow_blank => true
 
