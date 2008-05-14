@@ -66,16 +66,14 @@ var LoginEase = {
 
 document.observe('dom:loaded', function(event) {
 	// Login Behavior
-	/*if ( $('log-in') != null ) {
-		$('log-in').down('input', 1).focus();
-	} else {*/
-		$('search').down('input').focus();
-	//}
+	if ( $('log-in') != null ) {
+      Event.observe( $('login'), 'focus', LoginEase.activate.bindAsEventListener(this, 'username') );
+      Event.observe( $('password'), 'focus', LoginEase.activate.bindAsEventListener(this, 'password') );
+      Event.observe( $('login'), 'blur', LoginEase.deactivate.bindAsEventListener(this, 'username') );
+      Event.observe( $('password'), 'blur', LoginEase.deactivate.bindAsEventListener(this, 'password') );
+	}
 
-    Event.observe( $('login'), 'focus', LoginEase.activate.bindAsEventListener(this, 'username') );
-    Event.observe( $('password'), 'focus', LoginEase.activate.bindAsEventListener(this, 'password') );
-    Event.observe( $('login'), 'blur', LoginEase.deactivate.bindAsEventListener(this, 'username') );
-    Event.observe( $('password'), 'blur', LoginEase.deactivate.bindAsEventListener(this, 'password') );
+    $('search').down('input').focus();
 
 	if ( $('log-in-errors') != null && $('log-in-errors').visible() ) {
 		$('log-in').down('input', 2).clear().focus();
