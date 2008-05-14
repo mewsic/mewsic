@@ -74,14 +74,14 @@ module UsersHelper
       image_name = "change_#{type}_"
       user_type = user.type.nil? ? 'user' : user.type.downcase
       image_name += (user_type == type ? 'active' : 'inactive' )
-      content << link_to(image_tag("#{image_name}.gif"), switch_type_user_path(user, :type => type), :method => 'put')
+      content << link_to(image_tag("#{image_name}.png"), switch_type_user_path(user, :type => type), :method => 'put')
     end
     content
   end
   
   def page_label_for(user)
     user_type = user.type.nil? ? 'user' : user.type.downcase
-    %|<img src="/images/#{user_type}_page_label.gif" alt="" width="41" height="56" />|
+    %|<img src="/images/#{user_type}_page_label.png" alt="" width="41" height="56" />|
   end
   
 end
