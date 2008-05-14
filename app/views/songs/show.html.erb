@@ -8,13 +8,13 @@
 	  <div class="top-box clear-block">
       <div class="float-right" style="padding-right:56px;">
         <div class="track-tab">
-          <span class="tracks-number-orange"><span><%= @song.tracks.count %></span></span>
+          <span class="tracks-number"><span><%= @song.tracks.count %></span></span>
         </div>
       </div>
 		  <div class="bottom-box clear-block">
 		    <div class="clear-block">	
           <p class="music-info float-right align-right">
-            <span>Runtime:<br /><strong><%= @song.length %></strong></span>
+            <span>runtime:<br /><strong><%= @song.length %></strong></span>
           </p>
           <p class="thumb"><%= link_to avatar_image(@song.user, :icon), user_path(@song.user) %></p>			
   			  <p class="name"><%= link_to @song.user.login, user_path(@song.user) %></p>
@@ -31,29 +31,29 @@
               <%= mlab_button(@song) %>
               <%= play_button(@song) %>
             </p>
-			      <p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" /> Genere</a></p>
+			      <p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
           </div>
         </div>		  
       </div>	  
     </div>
 	  <div class="music-info song-stat">
-      <p><strong>Statistiche</strong></p>
+      <p><strong>Stats</strong></p>
       <table width="100%" border="0" cellpadding="0" cellspacing="5" style="border-top:1px solid #E6E6E6;">
         <tr>
-          <td width="40%">Ascoltato</td>
+          <td width="40%">Play count</td>
           <td width="30%"><%= @song.listened_times %></td>
-          <td width="20%">Votato</td>
+          <td width="20%">Rated</td>
           <td width="10%" class="align-right"><%= @song.rating_count %></td>
         </tr>
   			<tr>
-  				<td width="40%">Modificato</td>
+  				<td width="40%">Edited</td>
   				<td width="30%">15</td>
-  				<td width="20%">Creato</td>
+  				<td width="20%">Created</td>
   				<td width="10%" class="align-right"><%= @song.created_at.strftime("%m/%d/%y") %></td>
   			</tr>
   		</table>
     </div>			
-    <p class="abstract align-right"><a href="#">Segnala irregolarit&agrave; </a></p>
+    <p class="abstract align-right"><a href="#">Report abuse</a></p>
   </div>
   <div>
     <h1>Other songs by <%= link_to @song.user.login, user_path(@song.user) %><span class="no-bold">(<%= @song.user.songs.count %>)</span></h1>
@@ -85,7 +85,7 @@
   			  <p class="name align-right"><%= link_to track.parent_song.user.login, user_path(track.parent_song.user) %></p>
   			  <p class="title align-right"><%= track.title %></p>
   			  <div class="music-info">
-  			    <p class="bordered"><span>bpm: <strong><%= track.bpm %></strong></span> <span>tonality: <strong><%= track.tonality %></strong></span> <span>runtime: <strong><%= track.length %> </strong></span></p>
+  			    <p class="bordered"><span>bpm: <strong><%= track.bpm %></strong></span> <span>key: <strong><%= track.tonality %></strong></span> <span>runtime: <strong><%= track.length %> </strong></span></p>
   			    <p class="float-right">
   			      <span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span>
   			      <%= mlab_button(track) %>
@@ -103,7 +103,7 @@
 </div>
 
 <div class="bottom-shadow clear-float" style="width: 720px; float:none;"></div>
-	<h1 style="padding-left:20px;">Altre titolo pezzo <span class="no-bold">(20)</span></h1>
+	<h1 style="padding-left:20px;">Other versions<span class="no-bold">(20)</span></h1>
 
 <div class="box-list special-arrow-box special-list clear-block">
   <div class="simple-list">
@@ -123,7 +123,7 @@
 			<p class="title"><a href="#">titolo pezzo </a></p>
 			<div class="music-info">
 			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" /> Genere</a></p>
+			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
 			</div>
 			
 		  </div>
@@ -139,7 +139,7 @@
 			<p class="title"><a href="#">titolo pezzo </a></p>
 			<div class="music-info">
 			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" /> Genere</a></p>
+			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
 			</div>
 			
 		  </div>				  
@@ -155,7 +155,7 @@
 			<p class="title"><a href="#">titolo pezzo </a></p>
 			<div class="music-info">
 			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" /> Genere</a></p>
+			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
 			</div>
 			
 		  </div>
@@ -172,7 +172,7 @@
 			<p class="title"><a href="#">titolo pezzo </a></p>
 			<div class="music-info">
 			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" /> Genere</a></p>
+			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
 			</div>
 			
 		  </div>				  
@@ -188,7 +188,7 @@
 			<p class="title"><a href="#">titolo pezzo </a></p>
 			<div class="music-info">
 			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" /> Genere</a></p>
+			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
 			</div>
 			
 		  </div>
@@ -204,7 +204,7 @@
 			<p class="title"><a href="#">titolo pezzo </a></p>
 			<div class="music-info">
 			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" /> Genere</a></p>
+			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
 			</div>
 			
 		  </div>
@@ -220,7 +220,7 @@
 			<p class="title"><a href="#">titolo pezzo </a></p>
 			<div class="music-info">
 			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" /> Genere</a></p>
+			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
 			</div>
 			
 		  </div>
@@ -237,7 +237,7 @@
 			<p class="title"><a href="#">titolo pezzo </a></p>
 			<div class="music-info">
 			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" /> Genere</a></p>
+			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
 			</div>
 			
 		  </div>
@@ -261,9 +261,9 @@
 			<p class="name align-right"><a href="#">Pinco Pallino</a></p>
 			<p class="title align-right"><a href="#">titolo titolo titolo</a></p>
 			<div class="music-info">
-			<p class="bordered"><span>bpn: <strong>180</strong></span> <span>tonalit‡: <strong>Do</strong></span> <span>durata: <strong>00:15:36 </strong></span></p>
+			<p class="bordered"><span>bpm: <strong>180</strong></span> <span>key: <strong>Do</strong></span> <span>runtime: <strong>00:15:36 </strong></span></p>
 			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" /> Genere</a></p>
+			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
 			</div>
 		  </div>
 		  
@@ -272,9 +272,9 @@
 			<p class="name align-right"><a href="#">Pinco Pallino</a></p>
 			<p class="title align-right"><a href="#">titolo titolo titolo</a></p>
 			<div class="music-info">
-			<p class="bordered"><span>bpn: <strong>180</strong></span> <span>tonalit‡: <strong>Do</strong></span> <span>durata: <strong>00:15:36 </strong></span></p>
+			<p class="bordered"><span>bpm: <strong>180</strong></span> <span>key: <strong>Do</strong></span> <span>runtime: <strong>00:15:36 </strong></span></p>
 			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" /> Genere</a></p>
+			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
 			</div>
 		  </div>
 		  
@@ -283,9 +283,9 @@
 			<p class="name align-right"><a href="#">Pinco Pallino</a></p>
 			<p class="title align-right"><a href="#">titolo titolo titolo</a></p>
 			<div class="music-info">
-			<p class="bordered"><span>bpn: <strong>180</strong></span> <span>tonalit‡: <strong>Do</strong></span> <span>durata: <strong>00:15:36 </strong></span></p>
+			<p class="bordered"><span>bpm: <strong>180</strong></span> <span>key: <strong>Do</strong></span> <span>runtime: <strong>00:15:36 </strong></span></p>
 			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" /> Genere</a></p>
+			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
 			</div>
 		  </div>	
 		  
@@ -295,9 +295,9 @@
 			<p class="name align-right"><a href="#">Pinco Pallino</a></p>
 			<p class="title align-right"><a href="#">titolo titolo titolo</a></p>
 			<div class="music-info">
-			<p class="bordered"><span>bpn: <strong>180</strong></span> <span>tonalit‡: <strong>Do</strong></span> <span>durata: <strong>00:15:36 </strong></span></p>
+			<p class="bordered"><span>bpm: <strong>180</strong></span> <span>key: <strong>Do</strong></span> <span>runtime: <strong>00:15:36 </strong></span></p>
 			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" /> Genere</a></p>
+			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
 			</div>
 		  </div>
 		  
@@ -307,9 +307,9 @@
 			<p class="name align-right"><a href="#">Pinco Pallino</a></p>
 			<p class="title align-right"><a href="#">titolo titolo titolo</a></p>
 			<div class="music-info">
-			<p class="bordered"><span>bpn: <strong>180</strong></span> <span>tonalit‡: <strong>Do</strong></span> <span>durata: <strong>00:15:36 </strong></span></p>
+			<p class="bordered"><span>bpm: <strong>180</strong></span> <span>key: <strong>Do</strong></span> <span>runtime: <strong>00:15:36 </strong></span></p>
 			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" /> Genere</a></p>
+			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
 			</div>
 		  </div>
 		  
@@ -346,7 +346,7 @@
 			<p class="title"><a href="#">titolo pezzo </a></p>
 			<div class="music-info">
 			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" /> Genere</a></p>
+			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
 			</div>
 			
 		  </div>
@@ -362,7 +362,7 @@
 			<p class="title"><a href="#">titolo pezzo </a></p>
 			<div class="music-info">
 			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" /> Genere</a></p>
+			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
 			</div>
 			
 		  </div>				  
@@ -378,7 +378,7 @@
 			<p class="title"><a href="#">titolo pezzo </a></p>
 			<div class="music-info">
 			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" /> Genere</a></p>
+			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
 			</div>
 			
 		  </div>
@@ -395,7 +395,7 @@
 			<p class="title"><a href="#">titolo pezzo </a></p>
 			<div class="music-info">
 			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" /> Genere</a></p>
+			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
 			</div>
 			
 		  </div>				  
@@ -411,7 +411,7 @@
 			<p class="title"><a href="#">titolo pezzo </a></p>
 			<div class="music-info">
 			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" /> Genere</a></p>
+			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
 			</div>
 			
 		  </div>
@@ -427,7 +427,7 @@
 			<p class="title"><a href="#">titolo pezzo </a></p>
 			<div class="music-info">
 			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" /> Genere</a></p>
+			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
 			</div>
 			
 		  </div>
@@ -443,7 +443,7 @@
 			<p class="title"><a href="#">titolo pezzo </a></p>
 			<div class="music-info">
 			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" /> Genere</a></p>
+			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
 			</div>
 			
 		  </div>
@@ -460,7 +460,7 @@
 			<p class="title"><a href="#">titolo pezzo </a></p>
 			<div class="music-info">
 			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" /> Genere</a></p>
+			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
 			</div>
 			
 		  </div>
@@ -484,8 +484,7 @@
 	    <p>&nbsp;</p>
 	    <p>&nbsp;</p>
 	    <p>&nbsp;</p>
-	    <p class="grey-text" style="text-align:center; padding:30px;"><strong>Seleziona una song qui a lato<br /> 
-        per vedere le sue tracce </strong></p>
+	    <p class="grey-text" style="text-align:center; padding:30px;"><strong>select a song to see its tracks</strong></p>
 	  </div>
 	</div>
 </div>
