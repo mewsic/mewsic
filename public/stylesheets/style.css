@@ -1467,7 +1467,7 @@ html>body .register p{
 	display:block;
 	color:#0099CC;
 	padding-right:15px;
-	margin-top:18px;
+	margin-top:0;
 	padding-top:18px;
 }
 #mlab-scroll{
@@ -1539,6 +1539,7 @@ html>body .register p{
 .white-box-right-body{
 	background:#fff;
 	padding:0px 10px 10px;
+        height: 233px;
 }
 .white-box-right-body h2{
 	color:#0296C2;
