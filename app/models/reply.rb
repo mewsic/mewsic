@@ -16,7 +16,7 @@
 
 class Reply < ActiveRecord::Base
   belongs_to :answer, :counter_cache => true
-  belongs_to :user
+  belongs_to :user, :counter_cache => true
   
   acts_as_rated :rating_range => 0..5 
   
