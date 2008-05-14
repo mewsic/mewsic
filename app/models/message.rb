@@ -24,6 +24,11 @@ class Message < ActiveRecord::Base
   attr_accessor :to
   
   validate :recipient_must_exist
+
+  # XXX body should be sanitized too, e.g by using textile
+  # to format messages. XSS could occur in private messages
+  # otherwise :(. -vjt
+  xss_terminate :except => [:body], :sanitize => [:subject]
   
 private
 
