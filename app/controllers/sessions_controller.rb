@@ -12,10 +12,10 @@ class SessionsController < ApplicationController
         self.current_user.remember_me
         cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
       end
-      flash[:notice] = "Logged in successfully"
+      flash[:notice] = "Welcome back, #{self.current_user.login}!"
       redirect_url = user_url(current_user)
     else
-      flash[:error] = "Not logged"
+      flash[:error] = "User not found or wrong password.."
     end
     redirect_back_or_default(redirect_url)
   end
@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
     self.current_user.forget_me if logged_in?
     cookies.delete :auth_token
     reset_session
-    flash[:notice] = "You have been logged out."
+    flash[:notice] = "You have been logged out"
     redirect_back_or_default('/')
   end
 end
