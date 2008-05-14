@@ -51,6 +51,8 @@ class User < ActiveRecord::Base
   validates_length_of       :login,    :within => 3..20
   validates_length_of       :city,     :maximum => 25, :allow_nil => true, :allow_blank => true
   validates_length_of       :country,  :maximum => 45, :allow_nil => true, :allow_blank => true
+  validates_length_of       :motto,    :maximum => 250, :allow_nil => true, :allow_blank => true
+  validates_length_of       :tastes,   :maximum => 250, :allow_nil => true, :allow_blank => true
 
   validates_format_of       :email,    :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :on => :create
   validates_format_of       :msn,      :with => /^(([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,}))?$/ix
