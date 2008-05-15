@@ -1,21 +1,59 @@
-<h1>What is Myousica ?</h1>
+<div id="help_content">
+  <h1>What is Myousica ?</h1>
 
-<p>Myousica is the first worldwide open music community !</p>
+  <p>Myousica is the first worldwide open music community !</p>
 
-<p>Join the community and be a Myousician.</p>
+  <p>Join the community and be a Myousician.</p>
 
-<p>You can:</p>
+  <p>You can:</p>
 
-<ul>
-  <li>Listen to unreleased versions of your favourite song</li>
-  <li>Record your own tracks, singing and playing live through our multitrack, in your office or your rehearsal room !</li>
-  <li>Edit and Mix tracks from other Myousicians</li>
-  <li>Create your M-Band and jam with musicians and amateurs worldwide.</li>
-</ul>
-<h2>Need help ?</h2>
+  <ul>
+    <li>Listen to unreleased versions of your favourite song</li>
+    <li>Record your own tracks, singing and playing live through our multitrack, in your office or your rehearsal room !</li>
+    <li>Edit and Mix tracks from other Myousicians</li>
+    <li>Create your M-Band and jam with musicians and amateurs worldwide.</li>
+  </ul>
+  <h2>Need help ?</h2>
 
-<h2>Is it your first time in Myousica ?</h2>
+  <h2>Is it your first time in Myousica ?</h2>
+  You're a Myousician and want to find out all features of the site or in the multitrack?
+  Ask other users and read the Answers to their questions!
+</div>
 
-You're a Myousician and want to find out all features of the site or in the multitrack ?
+<div id="help_sidebar">
+  <div id="help_topics">
+    <h2>Help topics</h2>
+    <p>
+    <%= link_to 'bla bla bla bla', :url => '#' %><br/>
+    <%= link_to 'bla bla bla bla', :url => '#' %><br/>
+    <%= link_to 'bla bla bla bla', :url => '#' %><br/>
+    <%= link_to 'bla bla bla bla', :url => '#' %><br/>
+    <%= link_to 'bla bla bla bla', :url => '#' %><br/>
+    <%= link_to 'bla bla bla bla', :url => '#' %><br/>
+    <%= link_to 'bla bla bla bla', :url => '#' %>
+    </p>
+  </div>
+  <div id="help_question">
+    <div class="simple-list semi-one-col clear-block azzurro-boxes">
+      <h1>ASK A QUESTION</h1>
+      <div class="top-box clear-block">
+        <div class="bottom-box clear-block">
+          <div class="float-right" style="padding-right:60px;">
+            <img src="/images/interrogativo.gif" alt="" width="50" height="53" style="position:absolute; margin-top:-40px;" /></div>
+          <div class="elements clear-block" style="padding:15px 20px;">
+            <%- form_for :help, :url => '#' do |f| -%>
+            <p><%= f.text_area :body, :style => "width:99%; height:90px; border-bottom: 1px solid #D9D9D9;" %></p>
+            <div class="special-button float-right">
+              <img src="/images/special_button_cyan.png" alt="" width="90" height="24">
+              <%= submit_tag 'Send', :class => 'special_button_small' %>
+            </div>
+            <%- end -%>          
+          </div>
+        </div>
+      </div>
+    </div>
 
-Ask other users and read the Answers to their questions !
+  </div>
+</div>
+</div>
+
