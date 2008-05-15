@@ -1,4 +1,4 @@
-<div id="help_content">
+<div id="help-content">
   <h1>What is Myousica ?</h1>
 
   <p>Myousica is the first worldwide open music community !</p>
@@ -16,26 +16,34 @@
   <h2>Need help ?</h2>
 
   <h2>Is it your first time in Myousica ?</h2>
+  <p>
   You're a Myousician and want to find out all features of the site or in the multitrack?
-  Ask other users and read the Answers to their questions!
+  <%= link_to 'Ask', answers_path %> other users and read the <%= link_to 'Answers', answers_path %>
+  to their questions!
+  </p>
 </div>
 
-<div id="help_sidebar">
-  <div id="help_topics">
-    <h2>Help topics</h2>
-    <p>
-    <%= link_to 'bla bla bla bla', :url => '#' %><br/>
-    <%= link_to 'bla bla bla bla', :url => '#' %><br/>
-    <%= link_to 'bla bla bla bla', :url => '#' %><br/>
-    <%= link_to 'bla bla bla bla', :url => '#' %><br/>
-    <%= link_to 'bla bla bla bla', :url => '#' %><br/>
-    <%= link_to 'bla bla bla bla', :url => '#' %><br/>
-    <%= link_to 'bla bla bla bla', :url => '#' %>
-    </p>
+<div id="help-sidebar">
+  <div id="help-box">
+    <div class="help-box-top"></div>
+    <div class="help-box-sides">
+      <h1>Help topics</h1>
+      <ul class="help-topics">
+        <li><%= link_to 'Own investigations of the Firefox 2.0' '#' %></li>
+        <li><%= link_to 'What appears in the Things Tagged whitespa', '#' %></li>
+        <li><%= link_to 'After one line has been read from each input', '#' %></li>
+        <li><%= link_to 'Same goes for my comments, each new', '#' %></li>
+        <li><%= link_to 'Delete the initial segment of the pattern space', '#' %></li>
+        <li><%= link_to 'Only inside double quotes are they actually new', '#' %></li>
+        <li><%= link_to 'Tag Cloud Top Posts Advertise Contact', '#' %></li>
+      </ul>
+    </div>
+    <div class="help-box-bottom"></div>
   </div>
+
   <div id="help_question">
-    <div class="simple-list semi-one-col clear-block azzurro-boxes">
-      <h1>ASK A QUESTION</h1>
+    <div class="simple-list clear-block azzurro-boxes">
+      <h1>Ask a question</h1>
       <div class="top-box clear-block">
         <div class="bottom-box clear-block">
           <div class="float-right" style="padding-right:60px;">

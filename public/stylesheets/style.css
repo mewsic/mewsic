@@ -1741,6 +1741,7 @@ head:first-child+body .special-button{
 	margin-left: -225px;
 }
 .special-button input.special_button_small{
+        position:relative;
 	font-size:13px;
 	width:90px;
 	margin-left: -93px;
@@ -2214,16 +2215,79 @@ img#user_gender {
 }
 
 /* help page */
-#help_content {
-  width: 450px;
+#help-content {
+  width: 410px;
   height: 600px;
   float: left;
-  padding: 10px 0px 10px 20px;
+  padding: 10px 30px 10px 20px;
 }
 
-#help_sidebar {
+#help-content h1, #help-sidebar h1 {
+  font-size: 20px;
+}
+
+#help-content h2 {
+  font-size: 16px;
+}
+
+#help-content p, #help-content ul li {
+  color: #61656A;
+  padding-left: 3px;
+  padding-top: 5px;
+  font-size: 110%;
+}
+
+.help-topics {
+  font-size: 110%;
+  font-weight: bold;
+  padding-left:4px;
+  padding-right:0;
+  margin-left:10px;
+  margin-right:20px;
+  color: #61656A;
+}
+
+.help-topics li a:hover {
+  color: #009DC2;
+}
+
+#help-content p a,
+.help-topics li a {
+  color: #009DC2;
+  padding-bottom: 2px;
+}
+
+#help-sidebar {
   width: 250px;
   height: 600px;
   float: left;
   padding: 10px 0px 20px 10px;
 }
+
+div.help-box {
+  position: relative;
+}
+
+div.help-box-top {
+  padding-top: 5px;
+  position: relative;
+  width: 247px;
+  height: 9px;
+  background: url('/images/help-box-top.gif') no-repeat bottom;
+}
+
+div.help-box-sides {
+  position: relative;
+  width: 247px;
+  background: url('/images/help-box-sides.gif') repeat-y;
+  padding: 10px 12px;
+}
+
+div.help-box-bottom {
+  position: relative;
+  width: 247px;
+  height: 9px;
+  background: url('/images/help-box-bottom.gif') no-repeat top;
+  padding-bottom: 35px;
+}
+
