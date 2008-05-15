@@ -26,10 +26,9 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :search
   
-  map.connect 'login', :controller => 'sessions', :action => 'new'
-    
+  map.signup '/signup', :controller => 'users', :action => 'new'
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate'
-  
+  map.login '/login', :controller => 'sessions', :action => 'new'
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   
   map.multitrack        '/users/:user_id/multitrack',     :controller => 'multitrack', :action => 'index'
