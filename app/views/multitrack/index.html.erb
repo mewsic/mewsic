@@ -5,7 +5,8 @@
 	
 	var so = new SWFObject("/multitrack/SUX_Player_Core.swf", "SUX_Player_Core", "978", "800", "9", "#FFFFFF");
 	so.addVariable("userid", <%= @user.id %>); 
-	so.addVariable("songid", <%= @user.id %>); 
+	so.addVariable("songid", <%= @song.id %>); 
+	so.addVariable("authenticity_token", '<%= form_authenticity_token if protect_against_forgery? %>'); 
 	so.write("flashcontent");
 
 	// ]]>
