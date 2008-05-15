@@ -243,8 +243,9 @@ h2, h2 a{
 	height:165px;
 }
 .tags a{
+        clear:both;
 	color:#034263;
-	margin-right:10px;
+	padding-right:10px;
 }
 .bg-top-body{
 	height:58px;
@@ -375,12 +376,6 @@ tr.nav-song td{
 .three-col-nospace{
 	width:732px;
 }
-.star{
-	width:70px;
-}
-.star img{
-	margin:0px 2px;
-}
 .button{
 	width:60px;
 }
@@ -457,8 +452,8 @@ tr.nav-song td{
 	text-align:center;
 	width:75px;
 	float:left;
-	margin-left: 10px;
-	margin-bottom:15px;
+	padding:0px 5px 15px 5px;
+        margin:auto;
 }
 .people-list p.name, .people-list p.country{
 	overflow:hidden;
@@ -474,8 +469,10 @@ tr.nav-song td{
 }
 /* bands */
 .bands-dj-list .thumb img{
-	padding:3px;
+	/*padding:3px;
 	background:#90CB81;
+        removed border -vjt
+         */
 }
 .bands-dj-list .elements{
 	border-bottom: 1px solid #D9D9D9;
@@ -582,8 +579,11 @@ tr.nav-song td{
 	overflow:hidden;
 }
 .box-rounded-gray .thumb img{
+        /* 
 	background-color:#ccc;
 	padding:3px;
+        removed border -vjt
+        */
 }
 .horizontal-scroll-box{
 	clear:both;
@@ -1783,23 +1783,28 @@ head:first-child+body .special-button input{
 /* tag cloud */
 
 a.cloud1 {
-	font-size: 110%;
+	font-size: 1em;
+        line-height: 13px;
 }
 
 a.cloud2 {
-	font-size: 130%;
+	font-size: 1.3em;
+        line-height: 16px;
 }
 
 a.cloud3 {
-	font-size: 150%;
+	font-size: 1.6em;
+        line-height: 21px;
 }
 
 a.cloud4 {
-	font-size: 170%;
+	font-size: 1.9em;
+        line-height: 24px;
 }
 
 a.cloud5 {
-	font-size: 190%;
+	font-size: 2.2em;
+        line-height: 28px;
 }
 
 .fieldWithErrors input {
@@ -2060,17 +2065,30 @@ img#user_gender {
 }
 
 /* rating */
+.rating_container{
+	width:55px;
+        height:14px;
+        margin:4px auto;
+}
+.star{
+        width:55px;
+        margin-bottom: 2px;
+}
+/*.star img{
+        margin:0px 2px;
+}*/
 
 .rating {
-  width: 70px;
+  width: 55px;
   position: relative;
   height: 9px;
   background: transparent url('/images/stars.png') repeat-x left top;
-  margin-bottom: 5px;
+  margin-top: 3px;
+  margin-bottom: 3px;
 }
 
 .rating .stars {
-  width: 70px;
+  width: 55px;
   height: 9px;
 } 
 
@@ -2095,7 +2113,7 @@ img#user_gender {
 }
 
 .rating .stars .star {
-  width: 14px;
+  width: 11px;
   height: 9px;
   cursor: pointer;
   background: transparent url('/images/stars.png') no-repeat left top ;
@@ -2103,8 +2121,8 @@ img#user_gender {
 }
 
 .rating .stars .star.on.half {
-  width: 7px;
-  margin-right: 7px;
+  width: 6px;
+  margin-right: 5px;
   background-position: 0 -9px;
 }	
   
@@ -2117,10 +2135,35 @@ img#user_gender {
 }
 
 .rating.selected .stars .star.half {
-  width: 14px;
+  width: 11px;
   margin-right: 0;
 }
 
 .music-list .star {
   clear: none;
+}
+
+/* User, song and track rating */
+.user_rating {
+  background: transparent url('/images/user_stars.png') repeat-x left top;
+}
+
+.user_rating .stars .star {
+  background: transparent url('/images/user_stars.png') no-repeat left top;
+}
+
+.song_rating {
+  background: transparent url('/images/song_stars.png') repeat-x left top;
+}
+
+.song_rating .stars .star {
+  background: transparent url('/images/song_stars.png') no-repeat left top;
+}
+
+.track_rating {
+  background: transparent url('/images/track_stars.png') repeat-x left top;
+}
+
+.track_rating .stars .star {
+  background: transparent url('/images/track_stars.png') no-repeat left top;
 }
