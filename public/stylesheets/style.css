@@ -1475,7 +1475,7 @@ div.login {
   width: 80px;
   height: 24px;
 }
-.login input {
+.login input.text {
   border:1px solid #BFD2DB;
   width:250px;
   float:left;

@@ -2,17 +2,17 @@
 <div class="login">
   <h1>Log in to myousica</h1>
   <p><label for="login">Login</label>
-  <%= text_field_tag 'login' %></p>
+  <%= text_field_tag 'login', '', :class => 'text' %></p>
 
   <p><label for="password">Password</label>
-  <%= password_field_tag 'password' %></p>
+  <%= password_field_tag 'password', '', :class => 'text' %></p>
 
   <p><label for="remember_me">Remember me</label>
   <%= check_box_tag 'remember_me', 1, false, :class => 'check-box' %></p>
 
   <%= hidden_field_tag 'login_page' %>
 
-  <p style="padding-left: 100px;"><%= submit_tag 'Log in', :class => 'button' %> <a href="/forgot_password">Forgot Password</a></p>
+  <p style="padding-left: 100px;"><%= image_submit_tag '/images/button_log_in.png' %></p>
   <% end -%>
 </div>
 <h2>
