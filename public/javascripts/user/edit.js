@@ -45,7 +45,9 @@ var InPlaceSelectGenerator = Class.create({
         externalControlOnly: true,
         ajaxOptions: { method: 'PUT' },
         paramName: this.options.model + '[' + name + ']',
-        onComplete: Prototype.emptyFunction
+        onComplete: Prototype.emptyFunction,
+        highlightcolor: '#ffffff',
+        highlightendcolor: '#ffffff'
       });
     }.bind(this));
   }  

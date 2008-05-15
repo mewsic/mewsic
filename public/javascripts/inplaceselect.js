@@ -99,6 +99,7 @@ Ajax.InPlaceSelect = Class.create({
       htmlOptions: {},
       highlightcolor: "#FFFF99",
       highlightendcolor: "#FFFFFF",
+      hoverClassName: null,
       onComplete: function(transport, element) {
         new Effect.Highlight(element, {startcolor: this.options.highlightcolor});
       },
@@ -342,7 +343,8 @@ Ajax.InPlaceSelect = Class.create({
     if (this.saving) return;
     this.element.style.backgroundColor = this.options.highlightcolor;
     if (this.effect) { this.effect.cancel(); }
-    Element.addClassName(this.element, this.options.hoverClassName)
+    if (this.options.hoverClassName)
+      Element.addClassName(this.element, this.options.hoverClassName)
   },
   leaveHover: function() {
     if (this.options.backgroundColor) {
