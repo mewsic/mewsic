@@ -235,17 +235,19 @@ h2, h2 a{
 .banner-instr-home{
 	padding:0px 6px 25px;
 }
-.tags{
-	clear:both;
+.tags_container{
+	/*clear:both;*/
 	float:left;
 	padding:0px 20px;
+}
+.tags {
 	width:490px;
 	height:165px;
 }
+        
 .tags a{
-        clear:both;
-	color:#034263;
-	padding-right:10px;
+	color:#006F9F;
+	/*padding-right:10px;*/
 }
 .bg-top-body{
 	height:58px;
@@ -911,7 +913,7 @@ h2.dj-label{
 /* section tags */
 .section-tags{
 	float:right;
-	padding:30px 20px 0px 20px;
+	padding:0px 20px 10px 20px;
 	text-align:right;
 }
 .section-tags .elements{
@@ -920,12 +922,12 @@ h2.dj-label{
 	border:none;
 }
 .section-tags .elements a{
-	font-weight:bold;
+	font-weight:normal;
 	color:#006F9F;
 }
 .one-col .section-tags{
 	float:none;
-	padding:30px 20px 0px 20px;
+	padding:0px 20px 10px 20px;
 	text-align:left;
 }
 /* section tab */
@@ -1783,28 +1785,25 @@ head:first-child+body .special-button input{
 /* tag cloud */
 
 a.cloud1 {
-	font-size: 1em;
-        line-height: 13px;
-}
-
-a.cloud2 {
-	font-size: 1.3em;
+	font-size: 100%;
         line-height: 16px;
 }
 
-a.cloud3 {
-	font-size: 1.6em;
+a.cloud2 {
+	font-size: 140%;
         line-height: 21px;
 }
 
+a.cloud3 {
+	font-size: 170%;
+}
+
 a.cloud4 {
-	font-size: 1.9em;
-        line-height: 24px;
+	font-size: 190%;
 }
 
 a.cloud5 {
-	font-size: 2.2em;
-        line-height: 28px;
+	font-size: 210%;
 }
 
 .fieldWithErrors input {
