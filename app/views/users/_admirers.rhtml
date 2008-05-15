@@ -1,6 +1,6 @@
 <div id="admirers-box" class="clear-block">  
   <h1>ADMIRERS <span class="no-bold">(<%= @user.pending_friends_for_me.size %>)</span></h1>
-  <div class="admirers-container clear-block">
+  <div class="admirers-container <%= @user.friends.size.zero? ? 'invisible' : 'clear-block' %>">
     <div id="admirers-scroller" class="horizontal-scroll-box" style="width: 275px; overflow: hidden;">
       <p class="button" style="width: 10px; float: left;"><a href="#" class="trigger back"><img src="/images/arrow_grey_left.gif"/></a></p>
       <div id="scroll-clip" class="horizontal-scroll" style="height:30px; margin-bottom: 5px; width:225px;">
