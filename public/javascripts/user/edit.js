@@ -144,7 +144,7 @@ function initGenderSwitcher() {
       var new_gender = genders[index];
       this.src = '/images/gender_ico_' + new_gender + '.png'
       this.className = new_gender;
-      new Ajax.Request('/users/' + $('user_id').value, {
+      new Ajax.Request('/users/' + $('user-id').value, {
         method: 'PUT',
         parameters: 'user[gender]=' + gender_names[index]
       });
