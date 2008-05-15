@@ -142,7 +142,7 @@ function initGenderSwitcher() {
     element.observe('click', function() {
       var index = (genders.indexOf(this.className) + 1) % 3;
       var new_gender = genders[index];
-      this.src = '/images/gender_ico_' + new_gender + '.gif'
+      this.src = '/images/gender_ico_' + new_gender + '.png'
       this.className = new_gender;
       new Ajax.Request('/users/' + $('user_id').value, {
         method: 'PUT',
