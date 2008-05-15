@@ -1083,6 +1083,10 @@ h2.dj-label{
         width: 200px;
 }
 
+#friend-box, #admirers-box {
+        padding-bottom: 15px;
+}
+
 /* page label */
 
 .mband-page-label{
