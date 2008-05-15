@@ -46,20 +46,25 @@ class User < ActiveRecord::Base
   validates_presence_of     :login, :email
   validates_presence_of     :password,                   :if => :password_required?
   validates_presence_of     :password_confirmation,      :if => :password_required?
-  validates_length_of       :password, :within => 4..20, :if => :password_required?
   validates_confirmation_of :password,                   :if => :password_required?
-  validates_length_of       :login,    :within => 3..20
-  validates_length_of       :city,     :maximum => 25, :allow_nil => true, :allow_blank => true
-  validates_length_of       :country,  :maximum => 45, :allow_nil => true, :allow_blank => true
-  validates_length_of       :motto,    :maximum => 250, :allow_nil => true, :allow_blank => true
-  validates_length_of       :tastes,   :maximum => 250, :allow_nil => true, :allow_blank => true
+  validates_length_of       :password, :within => 4..20, :if => :password_required?,
+                                       :too_short => 'too short! minimum %d chars',
+                                       :too_long => 'too long! maximum %d chars'
+  validates_length_of       :login,    :within => 3..20,
+                                       :too_short => 'too short! minimum %d chars',
+                                       :too_long => 'too long! maximum %d chars'
+  validates_length_of       :city,     :maximum => 25,  :allow_nil => true, :allow_blank => true, :message => 'too long! max %d chars'
+  validates_length_of       :country,  :maximum => 45,  :allow_nil => true, :allow_blank => true, :message => 'too long! max %d chars!'
+  validates_length_of       :motto,    :maximum => 250, :allow_nil => true, :allow_blank => true, :message => 'too long.. sorry! max %d chars'
+  validates_length_of       :tastes,   :maximum => 250, :allow_nil => true, :allow_blank => true, :message => 'too long.. sorry! max %d chars'
 
-  validates_format_of       :email,    :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :on => :create
-  validates_format_of       :login,    :with => /^[^\s]+$/, :if => Proc.new{|u| !u.login.blank?}
-  validates_format_of       :msn,      :with => /^(([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,}))?$/ix
-  validates_format_of       :skype,    :with => /^([\w\._-]+)?$/ix
+  validates_format_of       :email,    :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :on => :create, :message => 'invalid e-mail'
+  validates_format_of       :login,    :with => /^[^\s]+$/, :if => Proc.new{|u| !u.login.blank?}, :message => 'spaces aren\'t allowed'
+  validates_format_of       :msn,      :with => /^(([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,}))?$/ix, :message => 'invalid MSN address'
+  validates_format_of       :skype,    :with => /^([\w\._-]+)?$/ix, :message => 'invalid skype name'
   validates_format_of       :photos_url, :blog_url, :myspace_url,
-                                       :with => /^(((http|https):\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?)?$/ix
+                                       :with => /^(((http|https):\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?)?$/ix, 
+                                       :message => 'invalid internet address'
 
   validates_uniqueness_of   :login, :email, :case_sensitive => false
   validates_acceptance_of :terms_of_service, :on => :create, :allow_nil => false

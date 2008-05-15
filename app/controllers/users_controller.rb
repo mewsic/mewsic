@@ -60,7 +60,7 @@ class UsersController < ApplicationController
       end
       render :layout => false
     else
-      render :text => @user.errors.full_messages.join("\n"), :status => 400 if request.xhr?
+      render :text => @user.errors.map(&:last).join("\n"), :status => 400 if request.xhr?
     end  
   end
   
