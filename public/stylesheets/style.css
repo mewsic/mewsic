@@ -1448,6 +1448,45 @@ html>body .register p{
 	width:115px;
 	height:25px;
 }
+
+/* login */
+div.login {
+  font-size: 11px;
+  color: #014D70;
+  padding-left: 20px;
+  margin-bottom: 150px;
+}
+
+.login input.check-box {
+  float: left;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  padding: 0;
+}
+.login input.button {
+  float: left;
+  width: 80px;
+  height: 24px;
+}
+.login input {
+  border:1px solid #BFD2DB;
+  width:250px;
+  float:left;
+}
+.login label {
+  float: left;
+  margin-right: 5px;
+  text-align: right;
+  width: 100px;
+  padding-top: 4px;
+}
+html>body .login p {
+  height: auto;
+  min-height: 20px;
+  margin-bottom: 5px;
+}
+
 /* right col */
 #rightcol{
 	float:right;
