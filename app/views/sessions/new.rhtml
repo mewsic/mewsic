@@ -1,6 +1,6 @@
 <% form_tag sessions_path do -%>
 <div class="login">
-  <h1> Log in to myousica</h1>
+  <h1>Log in to myousica</h1>
   <p><label for="login">Login</label>
   <%= text_field_tag 'login' %></p>
 
@@ -14,4 +14,8 @@
 
   <p style="padding-left: 100px;"><%= submit_tag 'Log in', :class => 'button' %> <a href="/forgot_password">Forgot Password</a></p>
   <% end -%>
+</div>
+<h2>
+<div id="help-sidebar">
+  <%= render :partial => 'help/help_topics' %>
 </div>

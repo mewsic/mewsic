@@ -1455,6 +1455,12 @@ div.login {
   color: #014D70;
   padding-left: 20px;
   margin-bottom: 150px;
+  float: left;
+  width: 440px;
+}
+
+.login h1 {
+  font-size: 20px;
 }
 
 .login input.check-box {
@@ -2276,11 +2282,10 @@ img#user_gender {
   color: #61656A;
   padding-left: 3px;
   padding-top: 5px;
-  font-size: 110%;
+  font-size: 14px;
 }
 
 .help-topics {
-  font-size: 110%;
   font-weight: bold;
   padding-left:4px;
   padding-right:0;
@@ -2293,10 +2298,15 @@ img#user_gender {
   color: #009DC2;
 }
 
+#help-content p,
+.help-topics li {
+  font-size:14px;
+  padding-bottom: 2px;
+}
+
 #help-content p a,
 .help-topics li a {
   color: #009DC2;
-  padding-bottom: 2px;
 }
 
 #help-sidebar {
