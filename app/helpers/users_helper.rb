@@ -16,7 +16,7 @@ module UsersHelper
   
   def gender_icon_for(user)
     icons = {:male => 'M', :female => 'F', :other => 'O'}
-    %|<img alt="#{user.gender.to_s}" id="user_gender" class="#{icons[user.gender.to_sym]}" src="/images/gender_ico_#{icons[user.gender.to_sym]}.gif"/>| unless @user.gender.blank?
+    %|<img alt="#{user.gender.to_s}" id="user_gender" class="#{icons[user.gender.to_sym]}" src="/images/gender_ico_#{icons[user.gender.to_sym]}.png"/>| unless @user.gender.blank?
   end
   
   def track_icon(track, color = nil)
