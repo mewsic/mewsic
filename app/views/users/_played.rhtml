@@ -2,7 +2,7 @@
   <h2><%= pluralize @user.instruments.size, 'instrument' %> played</h2>
 	<div class="top-box clear-block">
 		<div class="bottom-box clear-block">
-			<div class="elements clear-block">
+			<div class="played-instruments elements clear-block">
 				<% @user.instruments.each do |instrument| -%>
 				  <div class="small-box">
 						<p class="thumb">
