@@ -2180,3 +2180,18 @@ img#user_gender {
 .track_rating .stars .star {
   background: transparent url('/images/track_stars.png') no-repeat left top;
 }
+
+/* help page */
+#help_content {
+  width: 450px;
+  height: 600px;
+  float: left;
+  padding: 10px 0px 10px 20px;
+}
+
+#help_sidebar {
+  width: 250px;
+  height: 600px;
+  float: left;
+  padding: 10px 0px 20px 10px;
+}
