@@ -218,12 +218,12 @@ class UsersControllerTest < Test::Unit::TestCase
   def test_should_reset_password
     assert_nil User.authenticate('quentin', 'pippo')
     users(:quentin).update_attribute(:password_reset_code, 'pippo')
-    post :reset_password, :id => 'pippo', :password => 'pippo', :password_confirmation => 'pippo'
+    post :reset_password, :id => 'pippo', :password => 'pippozzz', :password_confirmation => 'pippozzz'
     assert_redirected_to user_path(users(:quentin))
     assert flash[:notice]
     #assert_equal 1, ActionMailer::Base.deliveries.size      
     assert_nil users(:quentin).reload.password_reset_code
-    assert User.authenticate('quentin', 'pippo')
+    assert User.authenticate('quentin', 'pippozzz')
   end
   
   def test_should_switch_type_to_dj
