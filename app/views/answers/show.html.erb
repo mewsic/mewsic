@@ -37,7 +37,7 @@
 							</div>
 							<div class="float-right">
 								<div class="special-button">
-								  <div style="text-align: center; font-weight: bold;line-height: 24px; width: 220px; height: 24px;background: url('/images/special_button_cyan_big.png') no-repeat center"><a href="#" style="color: #FFF; font-size:13px" onclick="Effect.BlindDown('reply-form-container');return false;">Rispondi alla domanda<a></div>
+								  <div style="text-align: center; font-weight: bold;line-height: 24px; width: 220px; height: 24px;background: url('/images/special_button_cyan_big.png') no-repeat center"><a href="#" style="color: #FFF; font-size:13px" onclick="<%= logged_in? ? "Effect.BlindDown('reply-form-container')" : "Message.notice('You need to be logged in to reply.');" %>;return false;">Rispondi alla domanda<a></div>
 								</div>								
 							</div>
 							<div class="float-left">
@@ -89,7 +89,7 @@
       <h2>Other question by <%= @answer.user.login %></h2>
 			<div class="top-box clear-block">
 				<div class="bottom-box clear-block">
-				  <%- @answer.user.answers.find(:all, :limit => 10).each do |answer| -%>
+				  <%- @other_answers_by_author.each do |answer| -%>
 				    <div class="elements clear-block">
   					<h3><%= link_to h(answer.body), answer_path(answer) %></h3>
   					<p class="grey-text float-right"><%= link_to pluralize(answer.replies.count, 'reply'), answer_path(answer) %></p>

@@ -11,6 +11,7 @@ class AnswersController < ApplicationController
 
   def show
     @answer = Answer.find(params[:id], :include => :replies)
+    @other_answers_by_author = @answer.user.answers.find(:all, :conditions => ['answers.id != ?', @answer.id], :limit => 10)
     @similar_answers = Answer.find(:all, :include => {:user => :avatars}, :limit => 10, :order => 'answers.created_at DESC')
   end
 
