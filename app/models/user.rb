@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
   validates_presence_of     :password,                   :if => :password_required?
   validates_presence_of     :password_confirmation,      :if => :password_required?
   validates_confirmation_of :password,                   :if => :password_required?
-  validates_length_of       :password, :within => 4..20, :if => :password_required?,
+  validates_length_of       :password, :within => 6..20, :if => :password_required?,
                                        :too_short => 'too short! minimum %d chars',
                                        :too_long => 'too long! maximum %d chars'
   validates_length_of       :login,    :within => 3..20,
