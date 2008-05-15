@@ -1,6 +1,6 @@
 class AnswersController < ApplicationController  
   
-  before_filter :login_required, :only => :create
+  before_filter :login_required, :only => [:create, :update]
   
   def index
     @open_answers = Answer.find(:all, :conditions => "answers.replies_count = 0", :include => {:user => :avatars}, :limit => 10, :order => 'answers.created_at DESC')
@@ -25,6 +25,25 @@ class AnswersController < ApplicationController
       index
       render :action => 'index'
     end
+  end
+  
+  def update
+    @answer = Answer.find(params[:id])
+    if @answer.user == current_user
+      if @answer.created_at > 10.minutes.ago
+        if @answer.update_attributes(params[:answer])
+          flash[:notice] = "Answer has been updated correctly"
+        else
+          flash[:error] = "The body field is required"
+        end
+      else
+        flash[:alert] = "You can no longer modify this answer"
+      end
+    else
+      flash[:alert] = "You need to be the answer owner to update an answer"      
+    end
+    
+    redirect_to answer_url(@answer)
   end
   
   def rate    

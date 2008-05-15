@@ -24,6 +24,31 @@ class AnswersControllerTest < ActionController::TestCase
     end
   end
   
+  def test_owner_should_update
+    login_as :quentin
+    post :update, :id => answers(:quentin_asks_about_magic).id, :answer => {:body => 'Hello world'}
+    assert_not_nil flash[:notice]
+    assert_response :redirect    
+    assert_equal 'Hello world', answers(:quentin_asks_about_magic).reload.body
+  end
+  
+  def test_owner_should_not_update_if_not_answer_owner
+    login_as :user_11
+    post :update, :id => answers(:quentin_asks_about_magic).id, :answer => {:body => 'Hello world'}
+    assert_not_nil flash[:alert]
+    assert_response :redirect    
+    assert_equal 'Come si gioca a Magic The Gathering', answers(:quentin_asks_about_magic).reload.body
+  end
+  
+  def test_owner_should_not_update_if_older_than_10_minutes
+    answers(:quentin_asks_about_magic).update_attribute(:created_at, 20.minutes.ago)
+    login_as :quentin
+    post :update, :id => answers(:quentin_asks_about_magic).id, :answer => {:body => 'Hello world'}
+    assert_not_nil flash[:alert]
+    assert_response :redirect    
+    assert_equal 'Come si gioca a Magic The Gathering', answers(:quentin_asks_about_magic).reload.body
+  end    
+  
   def test_should_create
     login_as :quentin
     quentin_answers_count = users(:quentin).answers.count

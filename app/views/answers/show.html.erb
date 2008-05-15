@@ -18,7 +18,7 @@
     <div class="clear-block">
       <div class="titoletti-question clear-block">
 				<p class="float-right"><a href="#">Segnala irregolarit&agrave;</a></p>
-				<h2 class="float-left">Domanda aperta</h2>
+				<h2 class="float-left">Open Answer</h2>
 			</div>
       <div class="top-box clear-block clear-float">
 				<div class="bottom-box clear-block">
@@ -28,7 +28,13 @@
 							<p class="name"><%= link_to @answer.user.login, user_path(@answer.user) %></p>
 						</div>
 						<div class="testi-question">
-							<h1><%= @answer.body %></h1>							
+							<h1><%= @answer.body %><%= ' <span style="font-size: 70%"><a href="#" onclick="Effect.BlindDown(\'edit-container\');return false;">[edit]</a></span>' if current_user == @answer.user && @answer.created_at > 10.minutes.ago %></h1>							
+							<div id="edit-container" style="clear:both;display: none">
+							  <%- form_for(@answer) do |f| -%>
+                  <%= f.text_area :body, :value => @answer.body %><br />
+                  <%= submit_tag 'Save', :disable_with => 'Saving...' %>
+                <%- end -%>                  
+							</div>
 							<div class="float-right">
 								<div class="special-button">
 								  <div style="text-align: center; font-weight: bold;line-height: 24px; width: 220px; height: 24px;background: url('/images/special_button_cyan_big.png') no-repeat center"><a href="#" style="color: #FFF; font-size:13px" onclick="Effect.BlindDown('reply-form-container');return false;">Rispondi alla domanda<a></div>
