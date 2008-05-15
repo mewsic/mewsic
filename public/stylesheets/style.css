@@ -439,6 +439,9 @@ tr.nav-song td{
 	float:left;
 	margin-right:20px;
 }
+.played-instruments .small-box .thumb {
+        margin-right:10px;
+}
 /* people */
 .people-list .top-box{
 	margin-left: 5px;
