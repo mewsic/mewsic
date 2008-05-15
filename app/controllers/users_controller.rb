@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   
   before_filter :login_required, :only => :update
   before_filter :check_if_current_user_page, :only => [:update, :switch_to]
+  before_filter :check_if_already_logged_in, :only => [:new]
   
   protect_from_forgery :except => :update
   
@@ -134,6 +135,10 @@ class UsersController < ApplicationController
   
   def check_if_current_user_page
     redirect_to('/') and return unless current_user.id == params[:id].to_i
+  end
+
+  def check_if_already_logged_in
+    redirect_to(user_url(current_user)) if logged_in?
   end
   
   def to_breadcrumb

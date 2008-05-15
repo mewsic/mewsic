@@ -226,6 +226,12 @@ class UsersControllerTest < Test::Unit::TestCase
     assert User.authenticate('quentin', 'pippozzz')
   end
   
+  def test_signup_should_redirect_to_user_page_if_already_logged_in
+    login_as :quentin
+    get :new
+    assert_redirected_to user_path(users(:quentin))
+  end
+
   def test_should_switch_type_to_dj
     assert_difference 'Dj.count' do
       login_as :quentin
