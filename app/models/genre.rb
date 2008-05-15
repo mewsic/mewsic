@@ -18,7 +18,8 @@ class Genre < ActiveRecord::Base
            :order => 'songs.created_at DESC'
   
   def self.find_paginated(page)
-    paginate :per_page => 5, :order => "name ASC", :include => [{:songs => :user}], :page => page
+    paginate :per_page => 5, :order => "name ASC", :include => [{:songs => :user}], :page => page,
+      :conditions => 'songs.title IS NOT NULL'
   end
   
   def find_most_listened(options = {})
