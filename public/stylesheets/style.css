@@ -1465,6 +1465,7 @@ html>body .register p{
 	text-align:right;
 	font-weight:bold;
 	color:#0099CC;
+        padding:0 !important;
 }
 .mlab-enter a{
 	display:block;
@@ -2164,7 +2165,27 @@ img#user_gender {
   right: 5px;
   width: 23px;
   height: 15px;
-  background: transparent url('/images/button_delete.gif') no-repeat center;
+  background: transparent url('/images/mlab_trash.png') no-repeat center;
+}
+
+#mlab-scroller .trigger.back {
+  background: transparent url(/images/mlab_scroll_button_top.png) no-repeat center;
+  width:203px;
+  height:21px;
+  cursor:pointer;
+}
+
+#mlab-scroller .trigger.forward {
+  background: transparent url('/images/mlab_scroll_button_down.png') no-repeat center;
+  width:203px;
+  height:22px;
+  cursor:pointer;
+}
+
+#mlab-scroller .mylist {
+  background: transparent url('/images/linguetta_mlab_bottom.png') no-repeat center;
+  width:203px;
+  height:26px;
 }
 
 /* User, song and track rating */

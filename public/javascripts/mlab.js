@@ -48,8 +48,8 @@ var MlabSlider = Class.create(PictureSlider, {
   }, 
   
   toggleTriggers: function() {
-    this.isBackSlidable()    ? this.back_trigger.down('img').setOpacity(1.0)     : this.back_trigger.down('img').setOpacity(0.2);
-    this.isForwardSlidable() ? this.forward_trigger.down('img').setOpacity(1.0)  : this.forward_trigger.down('img').setOpacity(0.2);
+    this.isBackSlidable()    ? this.back_trigger.setOpacity(1.0)     : this.back_trigger.setOpacity(0.35);
+    this.isForwardSlidable() ? this.forward_trigger.setOpacity(1.0)  : this.forward_trigger.setOpacity(0.35);
 	},   
   
   loadElements: function() {
