@@ -453,6 +453,7 @@ tr.nav-song td{
 .people-list .elements{
 	text-align:center;
 	width:75px;
+        height: 120px;
 	float:left;
 	padding:0px 5px 15px 5px;
         margin:auto;
