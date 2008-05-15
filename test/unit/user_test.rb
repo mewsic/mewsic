@@ -20,6 +20,13 @@ class UserTest < Test::Unit::TestCase
       assert u.errors.on(:login)
     end
   end
+  
+  def test_should_validate_login_format
+    assert_no_difference 'User.count' do
+      u = create_user(:login => "login with space")
+      assert u.errors.on(:login)
+    end
+  end
 
   def test_should_require_password
     assert_no_difference 'User.count' do

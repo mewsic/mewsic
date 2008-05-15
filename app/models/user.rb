@@ -55,6 +55,7 @@ class User < ActiveRecord::Base
   validates_length_of       :tastes,   :maximum => 250, :allow_nil => true, :allow_blank => true
 
   validates_format_of       :email,    :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :on => :create
+  validates_format_of       :login,    :with => /^[^\s]+$/, :if => Proc.new{|u| !u.login.blank?}
   validates_format_of       :msn,      :with => /^(([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,}))?$/ix
   validates_format_of       :skype,    :with => /^([\w\._-]+)?$/ix
   validates_format_of       :photos_url, :blog_url, :myspace_url,

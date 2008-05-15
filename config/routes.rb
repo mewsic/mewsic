@@ -46,6 +46,8 @@ ActionController::Routing::Routes.draw do |map|
   #     # Directs /admin/products/* to Admin::ProductsController (app/controllers/admin/products_controller.rb)
   #     admin.resources :products
   #   end
+  
+  map.help 'help', :controller => 'help', :action => 'index'
 
   map.root :controller => "dashboard"
   
