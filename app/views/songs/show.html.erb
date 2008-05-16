@@ -121,8 +121,10 @@
   			  <div class="float-right" style="padding-right:10px;">
   			    <div class="special-arrow"></div>
   			  </div>
-    		  <p class="float-right" style="position:relative;"><span class="tracks-number-grey"><span>5</span></span></p>
-    			<p class="thumb"><img src="photo/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></p>
+    		  <p class="float-right" style="position:relative;"><span class="tracks-number-grey"><span><%= song.tracks.count %></span></span></p>
+    			<p class="thumb">
+    			  <%= link_to avatar_image(song.user, :icon), user_path(song.user) %>
+          </p>
     			<p class="name"><%= link_to song.user.login, user_path(song.user) %></p>
     			<p class="title"><%= song.id %> <%= link_to song.title, song_path(song.title) %></p>
     			<div class="music-info">
