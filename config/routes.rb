@@ -1,6 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   
   map.resources :mbands, :member => {:rate => :put} do |mband|    
+    mband.resources :avatars
   end
 
   

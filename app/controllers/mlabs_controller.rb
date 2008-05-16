@@ -2,7 +2,7 @@ class MlabsController < ApplicationController
   
   layout false
   
-  before_filter :login_required
+  before_filter :login_required, :except => :new
   before_filter :check_user_identity
 
   def index

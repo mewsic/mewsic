@@ -44,7 +44,7 @@ class AvatarsControllerTest < ActionController::TestCase
   def test_create_should_redirect_unless_current_user_avatars
     login_as :user_10
     post :create, :user_id => users(:quentin)
-    assert_not_nil assigns["user"]
+    assert_not_nil assigns["pictureable"]
     assert_nil assigns["avatars"]
     assert_response :redirect
   end
