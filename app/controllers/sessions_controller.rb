@@ -1,7 +1,8 @@
 # This controller handles the login/logout function of the site.  
 class SessionsController < ApplicationController
 
-  def new    
+  def new   
+    @help_pages = HelpPage.find(:all, :order => 'position ASC') 
     redirect_to(user_url(current_user)) if logged_in?
   end
 

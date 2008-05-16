@@ -3,13 +3,9 @@
     <div class="help-box-sides">
       <h1>Help topics</h1>
       <ul class="help-topics">
-        <li><%= link_to 'Own investigations of the Firefox 2.0' '#' %></li>
-        <li><%= link_to 'What appears in the Things Tagged whitespa', '#' %></li>
-        <li><%= link_to 'After one line has been read from each input', '#' %></li>
-        <li><%= link_to 'Same goes for my comments, each new', '#' %></li>
-        <li><%= link_to 'Delete the initial segment of the pattern space', '#' %></li>
-        <li><%= link_to 'Only inside double quotes are they actually new', '#' %></li>
-        <li><%= link_to 'Tag Cloud Top Posts Advertise Contact', '#' %></li>
+        <%- @help_pages.each do |page| -%>
+          <li><%= link_to page.title, :controller => 'help', :action => 'show', :id => page %></li>
+        <%- end -%>                                     
       </ul>
     </div>
     <div class="help-box-bottom"></div>

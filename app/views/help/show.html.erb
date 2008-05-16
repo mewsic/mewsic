@@ -1,0 +1,31 @@
+<div id="help-content">
+  <h1><%= @page.title %></h1>
+  <p>
+    <%= @page.body %>
+  </p>
+</div>
+<div id="help-sidebar">
+  <%= render :partial => 'help_topics' %>
+
+  <div id="help_question">
+    <div class="simple-list clear-block azzurro-boxes">
+      <h1>Ask a question</h1>
+      <div class="top-box clear-block">
+        <div class="bottom-box clear-block">
+          <div class="float-right" style="padding-right:60px;">
+            <img src="/images/interrogativo.gif" alt="" width="50" height="53" style="position:absolute; margin-top:-40px;" /></div>
+          <div class="elements clear-block" style="padding:15px 20px;">
+            <%- form_for :help, :url => '#' do |f| -%>
+            <p><%= f.text_area :body, :style => "width:99%; height:90px; border-bottom: 1px solid #D9D9D9;" %></p>
+            <div class="special-button float-right">
+              <img src="/images/special_button_cyan.png" alt="" width="90" height="24">
+              <%= submit_tag 'Send', :class => 'special_button_small' %>
+            </div>
+            <%- end -%>          
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
