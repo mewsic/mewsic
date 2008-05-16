@@ -1,0 +1,62 @@
+<% javascript('mband/edit') if current_user_page? %>
+<% javascript('mband/mail') if logged_in? %>
+
+<div class="mypage-label clear-block">
+  <%= render :partial => 'switch_type' if current_user_page? %>
+  <div class="type-label">
+    <img width="41" height="56" alt="" src="/images/mband_page_label.gif"/>
+  </div>
+</div>
+
+<div class="user-profile clear-block">
+  <div class="user-photo" id="user-avatar">
+    <%- if current_user_page? -%>
+    <a href="#" onclick="Popup.open('<%= new_user_avatar_path(@user) %>', {height: 140}); return false;"><%= avatar_image(@mband, :big, :class => :avatar) %></a>
+    <%- else -%>
+      <%= avatar_image(@mband, :big, :class => :avatar) %>
+    <%- end -%>
+  </div>
+  <div class="user-resume">
+    <p class="star">
+       <%= rating(@mband) %>
+    </p>
+    <div class="float-right align-right">
+    </div>
+    <p class="blue-text">Mband name </p>
+    <h1 class="black-text" id="user_id"><%= @mband.name %></h1>
+    <div class="grey-divisor"><hr /></div>    
+  </div>
+  
+  <% if current_user_page? -%>
+    <%= render :partial => 'users/my/mail' if logged_in? %>
+  <% elsif logged_in? -%>
+    <%= render :partial => 'communicate' if logged_in? %>
+  <% end -%>  
+  
+</div>
+
+<div class="user-id clear-float">
+  <div class="float-right">		
+    <div class="adding-link">
+      <%= mband_myspace_link %>
+    </div>			
+    <div class="adding-link">
+      <%= mband_blog_link %>
+    </div>			
+    <div class="adding-link">
+      <%= mband_photo_link %>
+    </div>
+  </div>
+  <p>myousica ID: <%= @mband.id %></p>
+</div>
+
+<div class="user-details clear-block">
+  <div class="user-motto">
+    <p class="blue-text"><strong>I AM</strong> <%= user_edit_button(:motto) %></p>
+    <p class="grey-text" id="user_motto"><%= @mband.motto %></p>
+  </div>
+  <div class="user-gusti">
+    <p class="blue-text"><strong>INFLUENCES</strong> <%= user_edit_button(:tastes) %></p>
+    <p class="grey-text" id="user_tastes"><%= @mband.tastes %></p>
+  </div>
+</div>
