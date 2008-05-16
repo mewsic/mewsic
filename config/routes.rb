@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :mbands
+
   
   map.resources :answers, :member => { :rate => :put } do |answers|
     answers.resources :replies
