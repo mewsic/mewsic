@@ -1,4 +1,7 @@
 class MbandsController < ApplicationController
+  
+  before_filter :login_required :except => [:index, :show]
+  
   # GET /mbands
   # GET /mbands.xml
   def index

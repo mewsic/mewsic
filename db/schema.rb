@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 19) do
+ActiveRecord::Schema.define(:version => 20) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
@@ -54,6 +54,19 @@ ActiveRecord::Schema.define(:version => 19) do
   create_table "instruments", :force => true do |t|
     t.string   "description"
     t.string   "icon"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "mbands", :force => true do |t|
+    t.string   "name"
+    t.string   "photos_url"
+    t.string   "blog_url"
+    t.string   "myspace_url"
+    t.text     "motto"
+    t.text     "tastes"
+    t.integer  "friends_count"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
