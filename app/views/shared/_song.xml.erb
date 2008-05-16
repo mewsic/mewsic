@@ -9,7 +9,7 @@
   <description></description>
   <rating></rating>     
   <id><%= song.id %></id>         
-  <filename></filename>
+  <filename><%= song.filename %></filename>
   <% if @show_siblings_count; @show_siblings_count = false; -%>
     <siblings><%= song.siblings_count %></siblings>
   <% end -%>
