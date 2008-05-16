@@ -56,8 +56,8 @@ class User < ActiveRecord::Base
                                        :too_long => 'too long! maximum %d chars'
   validates_length_of       :city,     :maximum => 25,  :allow_nil => true, :allow_blank => true, :message => 'too long! max %d chars'
   validates_length_of       :country,  :maximum => 45,  :allow_nil => true, :allow_blank => true, :message => 'too long! max %d chars!'
-  validates_length_of       :motto,    :maximum => 250, :allow_nil => true, :allow_blank => true, :message => 'too long.. sorry! max %d chars'
-  validates_length_of       :tastes,   :maximum => 250, :allow_nil => true, :allow_blank => true, :message => 'too long.. sorry! max %d chars'
+  validates_length_of       :motto,    :maximum => 500, :allow_nil => true, :allow_blank => true, :message => 'too long.. sorry! max %d chars'
+  validates_length_of       :tastes,   :maximum => 500, :allow_nil => true, :allow_blank => true, :message => 'too long.. sorry! max %d chars'
 
   validates_format_of       :email,    :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :on => :create, :message => 'invalid e-mail'
   validates_format_of       :login,    :with => /^[^\s]+$/, :if => Proc.new{|u| !u.login.blank?}, :message => 'spaces aren\'t allowed'
