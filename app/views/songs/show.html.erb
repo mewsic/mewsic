@@ -58,10 +58,12 @@
   <div>
     <h1>Other songs by <%= link_to @song.user.login, user_path(@song.user) %><span class="no-bold">(<%= @song.user.songs.count %>)</span></h1>
     <table width="100%" border="0" cellpadding="0" cellspacing="0">
-      <%- @song.user.songs.each_with_index do |song, index| -%>
+      <%- @other_songs.each_with_index do |song, index| -%>
         <tr class="<%= %[even odd][index % 2] %>">
-          <td><span class="cyan-text"><%= song.genre ? song.genre.name : ''  %> </span> <%= song.user.login %>,<em> <%= song.title %> </em></td>
-          <td class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></td>
+          <td><span class="cyan-text"><%= song.genre ? song.genre.name : ''  %> </span> <%= song.user.login %>,<em> <%= truncate(song.title, 10) %> </em></td>
+          <td class="star">
+            <%= rating(song) %>
+          </td>
           <td class="button">
             <%= mlab_button(song) %>
             <%= play_button(song) %>
@@ -87,7 +89,9 @@
   			  <div class="music-info">
   			    <p class="bordered"><span>bpm: <strong><%= track.bpm %></strong></span> <span>key: <strong><%= track.tonality %></strong></span> <span>runtime: <strong><%= track.length %> </strong></span></p>
   			    <p class="float-right">
-  			      <span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span>
+  			      <span class="star">
+  			        <%= rating(track) %>
+              </span>
   			      <%= mlab_button(track) %>
   			      <%= play_button(track) %>
             </p>
@@ -111,138 +115,27 @@
 	<div class="top-box clear-block">
 	
 	  <div class="bottom-box clear-block">
-
-		  <div class="special-box clear-block grey-bg">
-		  
-			<div class="float-right" style="padding-right:10px;"><div class="special-arrow"></div>
-			</div>
-			
-		  <p class="float-right" style="position:relative;"><span class="tracks-number-grey"><span>5</span></span></p>
-			<p class="thumb"><img src="photo/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></p>
-			<p class="name"><a href="#">Pinco Pallino</a></p>
-			<p class="title"><a href="#">titolo pezzo </a></p>
-			<div class="music-info">
-			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
-			</div>
-			
-		  </div>
-		  
-		  <div class="special-box clear-block active">
-		  
-			<div class="float-right" style="padding-right:10px;"><div class="special-arrow"></div>
-			</div>
-			
-		  <p class="float-right"><span class="tracks-number-orange"><span>5</span></span></p>
-			<p class="thumb"><img src="photo/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></p>
-			<p class="name"><a href="#">Pinco Pallino</a></p>
-			<p class="title"><a href="#">titolo pezzo </a></p>
-			<div class="music-info">
-			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
-			</div>
-			
-		  </div>				  
-		  
-		  <div class="special-box clear-block grey-bg">
-		  
-			<div class="float-right" style="padding-right:10px;"><div class="special-arrow"></div>
-			</div>
-			
-		  <p class="float-right"><span class="tracks-number-grey"><span>5</span></span></p>
-			<p class="thumb"><img src="photo/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></p>
-			<p class="name"><a href="#">Pinco Pallino</a></p>
-			<p class="title"><a href="#">titolo pezzo </a></p>
-			<div class="music-info">
-			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
-			</div>
-			
-		  </div>
-		  
-		  
-		  <div class="special-box clear-block">
-		  
-			<div class="float-right" style="padding-right:10px;"><div class="special-arrow"></div>
-			</div>
-			
-		  <p class="float-right"><span class="tracks-number-grey"><span>5</span></span></p>
-			<p class="thumb"><img src="photo/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></p>
-			<p class="name"><a href="#">Pinco Pallino</a></p>
-			<p class="title"><a href="#">titolo pezzo </a></p>
-			<div class="music-info">
-			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
-			</div>
-			
-		  </div>				  
-		  
-		  <div class="special-box clear-block grey-bg">
-		  
-			<div class="float-right" style="padding-right:10px;"><div class="special-arrow"></div>
-			</div>
-			
-		  <p class="float-right"><span class="tracks-number-grey"><span>5</span></span></p>
-			<p class="thumb"><img src="photo/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></p>
-			<p class="name"><a href="#">Pinco Pallino</a></p>
-			<p class="title"><a href="#">titolo pezzo </a></p>
-			<div class="music-info">
-			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
-			</div>
-			
-		  </div>
-		  
-		  <div class="special-box clear-block">
-		  
-			<div class="float-right" style="padding-right:10px;"><div class="special-arrow"></div>
-			</div>
-			
-		  <p class="float-right"><span class="tracks-number-grey"><span>5</span></span></p>
-			<p class="thumb"><img src="photo/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></p>
-			<p class="name"><a href="#">Pinco Pallino</a></p>
-			<p class="title"><a href="#">titolo pezzo </a></p>
-			<div class="music-info">
-			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
-			</div>
-			
-		  </div>
-
-		  <div class="special-box clear-block grey-bg">
-		  
-			<div class="float-right" style="padding-right:10px;"><div class="special-arrow"></div>
-			</div>
-			
-		  <p class="float-right"><span class="tracks-number-grey"><span>5</span></span></p>
-			<p class="thumb"><img src="photo/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></p>
-			<p class="name"><a href="#">Pinco Pallino</a></p>
-			<p class="title"><a href="#">titolo pezzo </a></p>
-			<div class="music-info">
-			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
-			</div>
-			
-		  </div>
-		  
-		  
-		  <div class="special-box clear-block">
-		  
-			<div class="float-right" style="padding-right:10px;"><div class="special-arrow"></div>
-			</div>
-			
-		  <p class="float-right"><span class="tracks-number-grey"><span>5</span></span></p>
-			<p class="thumb"><img src="photo/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></p>
-			<p class="name"><a href="#">Pinco Pallino</a></p>
-			<p class="title"><a href="#">titolo pezzo </a></p>
-			<div class="music-info">
-			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
-			</div>
-			
-		  </div>
-		  
-		  
+      
+      <%- @direct_siblings.each_with_index do |song, index| -%>
+        <div class="special-box clear-block<%= ['' ' grey-bg'][index % 2] %>">
+  			  <div class="float-right" style="padding-right:10px;">
+  			    <div class="special-arrow"></div>
+  			  </div>
+    		  <p class="float-right" style="position:relative;"><span class="tracks-number-grey"><span>5</span></span></p>
+    			<p class="thumb"><img src="photo/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></p>
+    			<p class="name"><%= link_to song.user.login, user_path(song.user) %></p>
+    			<p class="title"><%= song.id %> <%= link_to song.title, song_path(song.title) %></p>
+    			<div class="music-info">
+    			  <p class="float-right">
+    			    <span class="star"><%= rating(song) %></span>
+    			    <%= mlab_button(song) %>
+    			    <%= play_button(song) %>
+            </p>
+    			  <p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
+  			  </div>
+  		  </div>
+      <%- end -%>
+      
 	  </div>
 	  
 	</div>

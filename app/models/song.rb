@@ -26,8 +26,8 @@ class Song < ActiveRecord::Base
   
   attr_accessor :mlab
   
-  has_many :tracks, :through => :mixes, :order => 'tracks.created_at DESC'
   has_many :mixes
+  has_many :tracks, :through => :mixes, :order => 'tracks.created_at DESC'  
   has_many :children_tracks, :class_name => 'Track'
   has_many :mlabs, :as => :mixable
 
@@ -80,11 +80,10 @@ class Song < ActiveRecord::Base
   # STUB: sino all'implementazione degli strumenti
   def instruments
     ['sassofono', 'batteria', 'anoleso']
-  end
+  end    
   
-  # STUB
-  def direct_siblings
-    Song.find(:all, :include => :tracks, :limit => 2, :conditions => ["songs.published = ? AND songs.id != ?", true, self.id])
+  def direct_siblings(limit = 5)
+    Song.find(:all, :include => [{:mixes => :track}], :conditions => ["mixes.track_id IN (?)", self.tracks.collect{|t| t.id}], :limit => limit)
   end
   
   # STUB

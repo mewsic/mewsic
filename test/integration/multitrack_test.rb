@@ -42,16 +42,21 @@ class MultitrackTest < ActionController::IntegrationTest
       
       # Multitrack: salvo la canzone
       assert_equal 0, @song.tracks.count
-      post formatted_song_path(@song, 'xml'), :_method => 'put',
+      #post formatted_song_path(@song, 'xml'), :_method => 'put',
+      post "/songs/#{@song.id}/mix",
         :song => {
           :title => 'My Song title',
-          :tracks => [
-            { :track_id => @new_track.id },
-            { :track_id => @new_track.id }
+          #:tracks => [
+          :track => [
+            # { :track_id => @new_track.id },
+            # { :track_id => @new_track.id }
+            { :id => @new_track.id },
+            { :id => @new_track.id }
           ]
         }        
-      assert_equal 2, @song.tracks.count
-      assert_equal 'My Song title', @song.reload.title
+      assert_equal 2, @song.mixes.count
+      assert_equal 2, @song.reload.tracks.count
+      #assert_equal 'My Song title', @song.reload.title
                         
     end # end session
   end    
