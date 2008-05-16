@@ -1,0 +1,13 @@
+<div class="gallery clear-block">
+  <h1>GALLERY</h1>
+  
+  <div class="top-box clear-block">
+    <div class="bottom-box clear-block">
+      <div class="horizontal-scroll-box" id="gallery">
+        <div id="gallery-photo-list">
+            <%= render :partial => 'photo', :collection => @mband.photos %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

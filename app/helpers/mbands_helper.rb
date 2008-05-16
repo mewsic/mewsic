@@ -1,5 +1,9 @@
 module MbandsHelper
   
+  def current_user_mband_page?
+    logged_in? && @mband.members.include?(current_user)
+  end
+  
   def mband_photo_link
     content = ''
     unless @mband.photos_url.blank?

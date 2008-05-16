@@ -1,0 +1,45 @@
+<h1>TRACKS</h1>
+<div class="top-box clear-block">
+  <div class="bottom-box clear-block">		
+	<div class="elements clear-block">
+      <table width="95%" border="0" cellpadding="0" cellspacing="0" class="mlab_tracks">
+        <%= render :partial => 'users/track', :collection => @tracks %>
+	  </table>					  			  
+    </div>		
+    
+	
+  <p class="next">
+  	  <span class="nav-bottom">
+		  <% if @tracks.previous_page %>
+		    <%= link_to_remote image_tag('arrow_simple_left.png', :width => 7, :height => 9) + ' <strong>Prev</strong> ' ,
+		          :update => "tracks",
+		          :url => tracks_path({:page => @tracks.previous_page, :id => params[:id]}),
+		          :method => :get,
+		          :complete => "var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initTrackButtons(true); }"
+        %>
+		  <% else %>
+		    <%= image_tag('arrow_simple_left.png', :width => 7, :height => 9)  + ' <strong>Prev</strong> ' %>
+		  <% end %>
+	  </span>
+	  
+	  <span class="nav-bottom">
+		  <% if @tracks.next_page %>
+		    <%= link_to_remote ' <strong>Next</strong> ' + image_tag('arrow_simple_right.png', :width => 7, :height => 9),
+		          :update => "tracks",
+		          :url =>  tracks_path({:page => @tracks.next_page,
+		          :id => params[:id]}),
+		          :method => :get,
+		          :complete => "var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initTrackButtons(true);} "
+         %>
+		  <% else %>
+		    <%= ' <strong>Next</strong> ' + image_tag('arrow_simple_right.png', :width => 7, :height => 9)%>
+		  <% end %>
+	  </span>
+  </p>
+
+  <% if @tracks.size.zero? %>
+    <p class="centered grey-text"><em><%= link_to 'import', multitrack_path(current_user) %> your tracks and enjoy!</em></p>
+  <% end %>
+
+  </div>
+</div>	

@@ -20,7 +20,11 @@ class Mband < ActiveRecord::Base
   
   acts_as_rated :rating_range => 0..5
   
-  has_many :avatars, :as => :pictureable  
+  has_many :avatars, :as => :pictureable
+  has_many :photos, :as => :pictureable
+  has_many :mband_memberships
+  has_many :members, :through => :mband_memberships, :class_name => 'User', :source => :user, :conditions => "accepted_at IS NOT NULL"
+  
   belongs_to :leader, :class_name => 'User', :foreign_key => 'user_id'
   
   attr_accessible :name

@@ -17,7 +17,8 @@ class MbandsController < ApplicationController
   # GET /mbands/1.xml
   def show
     @mband = Mband.find(params[:id])
-
+    @songs = Song.find_paginated_by_mband(1, @mband)
+    @tracks = Track.find_paginated_by_user(1, current_user)
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @mband }
@@ -47,7 +48,7 @@ class MbandsController < ApplicationController
     @mband.leader = current_user
     respond_to do |format|
       if @mband.save
-        MbandMembership.create(:mband => @mband, :user => @user, :accepted_at => Time.now)
+        MbandMembership.create(:mband => @mband, :user => current_user, :accepted_at => Time.now)
         flash[:notice] = 'Mband was successfully created.'
         format.html { redirect_to(@mband) }
         format.xml  { render :xml => @mband, :status => :created, :location => @mband }

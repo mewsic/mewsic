@@ -68,6 +68,14 @@ class Song < ActiveRecord::Base
              :include => [:user, {:tracks => :instrument}], 
              :page => page
   end
+  
+  def self.find_paginated_by_mband(page, mband)
+    paginate :per_page => 3, 
+             :conditions => ["songs.published = ? AND users.id IN (?)", true, mband.members.collect{|m| m.id}.join(',')], 
+             :order => "songs.title ASC",
+             :include => [:user, {:tracks => :instrument}], 
+             :page => page
+  end
     
   # STUB: sino all'implementazione degli strumenti
   def instruments
