@@ -1,6 +1,6 @@
 class MbandsController < ApplicationController
   
-  before_filter :login_required :except => [:index, :show]
+  before_filter :login_required,  :except => [:index, :show]
   
   # GET /mbands
   # GET /mbands.xml
@@ -44,9 +44,10 @@ class MbandsController < ApplicationController
   # POST /mbands.xml
   def create
     @mband = Mband.new(params[:mband])
-
+    @mband.leader = current_user
     respond_to do |format|
       if @mband.save
+        MbandMembership.create(:mband => @mband, :user => @user, :accepted_at => Time.now)
         flash[:notice] = 'Mband was successfully created.'
         format.html { redirect_to(@mband) }
         format.xml  { render :xml => @mband, :status => :created, :location => @mband }
@@ -84,5 +85,11 @@ class MbandsController < ApplicationController
       format.html { redirect_to(mbands_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  def rate    
+    @mband = Mband.find(params[:id])
+    @mband.rate(params[:rate].to_i, current_user)
+    render :layout => false, :text => "#{@mband.rating_count} votes"
   end
 end

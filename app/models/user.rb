@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 15
+# Schema version: 21
 #
 # Table name: users
 #
@@ -8,8 +8,8 @@
 #  email                     :string(255)   
 #  remember_token            :string(255)   
 #  activation_code           :string(255)   
-#  country                   :string(45)   
-#  city                      :string(40)   
+#  country                   :string(45)    
+#  city                      :string(40)    
 #  first_name                :string(255)   
 #  last_name                 :string(255)   
 #  gender                    :string(255)   default("male")
@@ -36,6 +36,7 @@
 #  rating_count              :integer(11)   
 #  rating_total              :decimal(10, 2 
 #  rating_avg                :decimal(10, 2 
+#  replies_count             :integer(11)   
 #
 
 require 'digest/sha1'

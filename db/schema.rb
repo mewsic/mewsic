@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 21) do
+ActiveRecord::Schema.define(:version => 22) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(:version => 21) do
     t.datetime "updated_at"
   end
 
-  create_table "mband_member_ships", :force => true do |t|
+  create_table "mband_memberships", :force => true do |t|
     t.integer  "mband_id"
     t.integer  "user_id"
     t.string   "membership_token"
@@ -78,6 +78,9 @@ ActiveRecord::Schema.define(:version => 21) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "rating_count"
+    t.decimal  "rating_total",  :precision => 10, :scale => 2
+    t.decimal  "rating_avg",    :precision => 10, :scale => 2
   end
 
   create_table "messages", :force => true do |t|

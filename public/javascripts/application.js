@@ -147,6 +147,12 @@ document.observe('dom:loaded', function(event) {
       ajaxMethod: 'PUT',
       ajaxParameters: 'authenticity_token=' + encodeURIComponent(authenticity_token) + '&rate=#{rate}'
   	});
+  	new Rating('mband_rating', {
+      hideLabelOnMouseOut: true,
+      ajaxUrl: '/mbands/#{id}/rate/',
+      ajaxMethod: 'PUT',
+      ajaxParameters: 'authenticity_token=' + encodeURIComponent(authenticity_token) + '&rate=#{rate}'
+  	});
 	}	
 		 
   Message.init();

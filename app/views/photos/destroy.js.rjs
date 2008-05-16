@@ -1,0 +1,1 @@
+page.call 'Effect.Puff', "gallery-photo-thumb-#{@photo.id}"
