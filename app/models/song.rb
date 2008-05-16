@@ -83,7 +83,7 @@ class Song < ActiveRecord::Base
   end    
   
   def direct_siblings(limit = 5)
-    Song.find(:all, :include => [{:mixes => :track}], :conditions => ["mixes.track_id IN (?)", self.tracks.collect{|t| t.id}], :limit => limit)
+    Song.find(:all, :include => [{:mixes => :track}], :conditions => ["songs.id != ? AND mixes.track_id IN (?)", self.id, self.tracks.collect{|t| t.id}], :limit => limit)
   end
   
   # STUB
