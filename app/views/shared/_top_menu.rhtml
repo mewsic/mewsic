@@ -2,7 +2,7 @@
   <ul class="list-menu">
     <% if logged_in? %>
     <li>Hello <strong><%= current_user.login %></strong>!</li>
-    <li><strong><%= link_to("inbox (#{current_user.unread_message_count})", user_path(current_user)) %></strong></li>
+    <li><%= user_inbox_link %></li>
     <li><%= link_to "My page", user_path(current_user) %></li>
     <li><%= link_to "Logout", logout_path %></li>
     <% else %>

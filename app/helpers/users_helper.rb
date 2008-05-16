@@ -84,4 +84,9 @@ module UsersHelper
     %|<img src="/images/#{user_type}_page_label.png" alt="" width="41" height="56" />|
   end
   
+  def user_inbox_link
+    content = link_to("inbox (#{current_user.unread_message_count})", user_path(current_user));
+    content = "<strong>#{content}</strong>" if current_user.unread_message_count > 0
+    content
+  end
 end

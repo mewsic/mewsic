@@ -33,7 +33,6 @@ class SongsController < ApplicationController
     puts params.inspect
     @song = current_user.songs.find(params[:id])
     @song.update_attributes(params[:song])
-    puts @song.reload.inspect
     render :text => ''
   end
   
@@ -44,6 +43,7 @@ class SongsController < ApplicationController
     tracks_params = song_params.delete(:track) if song_params[:track]
     tracks_params = [tracks_params] unless tracks_params.is_a?(Array)
     @song.update_attributes(song_params.merge(:published => true, :genre => Genre.find(:first)))    
+    @song.mixes.clear
     tracks_params.each do |track_params|
       Mix.create(track_params.merge(:song => @song))
     end
