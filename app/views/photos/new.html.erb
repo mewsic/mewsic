@@ -37,6 +37,8 @@
           container.insert({
             top: '<%= escape_javascript(render(:partial => 'users/photo', :object => @photo)) %>'
           });
+          window.opener.myLightWindow._setupLinks()
+          var gallery = window.opener.Gallery.instance.setup();
         </script>  
       <%- end -%>
       <%- flash.each do |type, message|; next if type == :inbox -%>

@@ -1,7 +1,8 @@
-<div class="gallery-photo-thumb">
-  <div>
-    <a href="photo.public_filename(:large)" class="lightwindow">
-      <%= image_tag(photo.public_filename(:small), :alt => photo.filename) %>
+<div class="gallery-photo-thumb" id="gallery-photo-thumb-<%= photo.id %>">
+  <div style="position: relative;">
+    <a href="<%= photo.public_filename(:large) %>" class="lightwindow image">
+      <%= image_tag(photo.public_filename(:small), :alt => photo.filename) %>      
     </a>    
+    <%= link_to_remote image_tag('/images/button_delete.gif'), :url => user_photo_path(@user, photo), :method => 'delete', :html => { :class => 'button delete', :style => "border: none;display: none; position: absolute; top: 0; right: 0px;" }, :confirm => 'Are you sure you want to delete this image?' %>
   </div>
 </div>

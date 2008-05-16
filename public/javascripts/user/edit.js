@@ -163,17 +163,50 @@ var BandMembers = {
         authenticity_token: encodeURIComponent($('authenticity-token').value)
       }
     });
-  },
-  
+  },  
   remove: function(id) {
     Effect.Puff('band_member_' + id);
   }
 }
+
+var GalleryItem = Class.create({
+  initialize: function(element) {
+    this.element = $(element);
+    this.setup();
+  },
+  setup: function() {
+    this.element.observe('mouseover', this.handleMouseOver.bind(this));
+    this.element.observe('mouseout', this.handleMouseOut.bind(this));
+  },
+  handleMouseOver: function() {
+    this.element.down('a.button.delete').show();
+  },
+  handleMouseOut: function() {
+    this.element.down('a.button.delete').hide();
+  }
+});
+
+var Gallery = Class.create({
+  initialize: function(element) {
+    this.element = $(element);
+    this.elements = new Array();
+    this.setup();
+  },
+  setup: function() {
+    this.element.select('.gallery-photo-thumb').each(function(element) {
+      if(!this.elements.include(element)) {
+        new GalleryItem(element);
+        this.elements.push(element);
+      }      
+    }.bind(this));
+  }
+});
 
 document.observe('dom:loaded', function() {
   new InPlaceEditorGenerator( $w('city'), { url: '/users/', model: 'user' } );  
   new InPlaceEditorGenerator( $w('motto tastes'), { url: '/users/', model: 'user', rows: 4 } );  
   new InPlaceSelectGenerator( $w('country'), { url: '/users/', model: 'user', values_url: '/countries' } );
   new AjaxFormGenerator( $w('photos_url blog_url myspace_url skype msn'), { url: '/users/', model: 'user' } );
+  Gallery.instance = new Gallery('gallery');
   initGenderSwitcher();
 });

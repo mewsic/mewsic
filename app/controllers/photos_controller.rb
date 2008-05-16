@@ -30,7 +30,13 @@ class PhotosController < ApplicationController
   end
 
   def destroy
-    @user.photos.find(params[:id]).destroy and redirect_to(user_photos_path(@user)) 
+    @photo = @user.photos.find(params[:id])
+    @photo.destroy
+    
+    respond_to do |format|
+      format.html { redirect_to(user_photos_path(@user)) }
+      format.js
+    end
   end
 
 private
