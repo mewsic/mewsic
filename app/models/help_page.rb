@@ -12,6 +12,7 @@
 #
 
 class HelpPage < ActiveRecord::Base
+  xss_terminate :except => [:title, :body]
   
   acts_as_list
   

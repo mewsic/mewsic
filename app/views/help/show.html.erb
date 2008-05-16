@@ -1,14 +1,14 @@
 <div id="help-content">
   <h1><%= @page.title %></h1>
-  <p>
+  <div>
     <%= @page.body %>
-  </p>
+  </div>
 </div>
 <div id="help-sidebar">
   <%= render :partial => 'help_topics' %>
 
   <div id="help-question">
-    <div class="simple-list clear-block azzurro-boxes">
+    <div class="simple-list clear-block azzurro-boxes send-question">
       <h1>Ask a question</h1>
       <div class="top-box clear-block">
         <div class="bottom-box clear-block">

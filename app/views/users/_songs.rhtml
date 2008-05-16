@@ -31,6 +31,10 @@
 		  <% end %>
 	  </span>
   </p>
+
+  <% if @songs.size.zero? %>
+    <p class="centered grey-text"><em><%= link_to 'create', music_path %> your songs and enjoy!</em></p>
+  <% end %>
   
 </div>
 </div>	
