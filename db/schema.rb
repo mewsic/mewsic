@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 17) do
+ActiveRecord::Schema.define(:version => 19) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
@@ -42,6 +42,14 @@ ActiveRecord::Schema.define(:version => 17) do
   end
 
   add_index "genres", ["name"], :name => "index_genres_on_name"
+
+  create_table "help_pages", :force => true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "instruments", :force => true do |t|
     t.string   "description"
