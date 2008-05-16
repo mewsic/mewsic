@@ -7,6 +7,7 @@ class MultitrackController < ApplicationController
   
   def index    
     @song = @user.songs.create(:published => false)
+    @genres = Genre.find(:all)
   end
 
 private

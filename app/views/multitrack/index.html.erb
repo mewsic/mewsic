@@ -1,3 +1,24 @@
+<div style="background: #FFF">
+  <%- form_for @song, :html => { :id => 'song-form' } do |f| -%>
+    <p>Title: <%= f.text_field :title, :value => 'Untitled Song' %></p>
+    <p>Genre: <%= f.select :genre_id, @genres.collect{|g| [g.name, g.id]}  %></p>
+    <p>Original author: <%= f.text_field :original_author %></p>
+  <%- end -%>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+  document.observe('dom:loaded', function() { 
+    function save_song() {
+      new Ajax.Request('<%= song_path(@song) %>', {
+        method: 'put',
+        parameters: Form.serialize('song-form')
+      });
+    }        
+    save_song
+    new PeriodicalExecuter(save_song, 5);
+  });
+</script>
+
 <div id="flashcontent"></div>
 
 <script type="text/javascript">

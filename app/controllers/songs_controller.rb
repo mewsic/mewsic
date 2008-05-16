@@ -30,11 +30,20 @@ class SongsController < ApplicationController
   end
   
   def update
+    puts params.inspect
     @song = current_user.songs.find(params[:id])
-    song_params   = params[:song]    
-    tracks_params = song_params.delete(:tracks) if song_params[:tracks]
-    @song.update_attributes(song_params)
-
+    @song.update_attributes(params[:song])
+    puts @song.reload.inspect
+    render :text => ''
+  end
+  
+  def mix
+    @song = current_user.songs.find(params[:id])
+    song_params   = params[:song]        
+    #tracks_params = song_params.delete(:tracks) if song_params[:tracks]
+    tracks_params = song_params.delete(:track) if song_params[:track]
+    tracks_params = [tracks_params] unless tracks_params.is_a?(Array)
+    @song.update_attributes(song_params.merge(:published => true, :genre => Genre.find(:first)))    
     tracks_params.each do |track_params|
       Mix.create(track_params.merge(:song => @song))
     end
@@ -50,7 +59,7 @@ class SongsController < ApplicationController
     @song = Song.find(params[:id])
     @song.rate(params[:rate].to_i, current_user)
     render :layout => false, :text => "#{@song.rating_count} votes"
-  end
+  end       
   
   def to_breadcrumb_link
     ['Music', music_path]

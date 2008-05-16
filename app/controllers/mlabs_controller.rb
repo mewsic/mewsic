@@ -47,7 +47,7 @@ class MlabsController < ApplicationController
     @mlab     = Mlab.find(params[:id])
     @mixable  = @mlab.mixable
     @mlab.destroy
-  end
+  end    
 
 private
 

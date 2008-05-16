@@ -27,6 +27,8 @@ ActionController::Routing::Routes.draw do |map|
     
   map.resources :sessions
   map.resources :songs, :has_one => :player, :member => { :rate => :put }
+  map.connect 'songs/:id/mix', :controller => 'songs', :action => 'mix'
+  
   map.resources :tracks, :has_one => :player, :member => { :rate => :put }
   
   map.resources :search
