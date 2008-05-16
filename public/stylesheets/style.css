@@ -148,7 +148,7 @@ html>body #search p span{
 }
 #search p.search-input input{
 	width:173px;
-	border: 1px solid #28548B;
+	border: 1px solid #BFD2DB;
 	font-size:10px;
 	float:left;
 	margin:5px 3px;
@@ -2270,6 +2270,15 @@ img#user_gender {
   padding-left: 3px;
   padding-top: 5px;
   font-size: 14px;
+}
+#help-question label {
+  color: #61656A;
+  padding-bottom: 3px;
+}
+
+#help-question input.text, #help-question textarea {
+  border: 1px solid #BFD2DB;
+  width: 99%;
 }
 
 .help-topics {
