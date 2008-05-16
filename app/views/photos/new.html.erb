@@ -39,7 +39,7 @@
           });
         </script>  
       <%- end -%>
-      <%- flash.each do |type, message| -%>
+      <%- flash.each do |type, message|; next if type == :inbox -%>
         <div class="message <%= type %>"><%= message %></div>
       <%- end -%>            
       <div id="form-area">

@@ -10,14 +10,16 @@ class HelpController < ApplicationController
   end
   
   def send_mail   
-    if params[:help] && !params[:help][:body].blank?
+    redirect_to :action => 'index' and return unless request.post?
+    if params[:help] && !params[:help][:body].blank? && params[:help][:email] =~ /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
       mail = MyousicaMailer.create_help(params[:help][:body])
       MyousicaMailer.deliver(mail)
-      flash[:notice] = "Mail has been sent correctly."
+      flash[:notice] = "Your question has been sent to the help desk, you will receive a reply as soon as possible."
+      params[:id] ? redirect_to(:action => 'show', :id => params[:id]) : redirect_to(:action => 'index')
     else
-      flash[:error] = "The question is required."
-    end
-    redirect_to :action => 'index'
+      flash[:error] = "Question is required and email address must be valid."
+      params[:id] ? (show and render(:action => 'show')) : render(:action => 'index')
+    end        
   end
 
 private

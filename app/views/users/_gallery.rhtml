@@ -9,13 +9,9 @@
   <div class="top-box clear-block">
     <div class="bottom-box clear-block">
       <div class="horizontal-scroll-box" id="gallery-scroller">
-        <p class="button"><a href="#" class="trigger back"><img src="/images/arrow_simple_left.png" alt="" width="7" height="9" /></a></p>
-        <div class="horizontal-scroll">
-          <div class="scroll" style="width: <%= 20 * 53 %>px; left: 0;" id="gallery-photo-list">
+        <div>
             <%= render :partial => 'photo', :collection => @user.photos %>
-		      </div>
         </div>
-        <p class="button"><a href="#" class="trigger forward"><img src="/images/arrow_simple_right.png" alt="" width="7" height="9" /></a></p>
       </div>
     </div>
   </div>

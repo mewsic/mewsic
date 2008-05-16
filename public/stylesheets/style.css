@@ -1204,7 +1204,7 @@ h2.dj-label{
 .gallery .horizontal-scroll-box{
 	position:relative;
 	padding-top:10px;
-	height:80px;
+	/*height:80px;*/
 	overflow:hidden;
 }
 .gallery .horizontal-scroll{
@@ -1215,7 +1215,7 @@ h2.dj-label{
 .gallery-photo-thumb{
 	float:left;
 	width: 68px;
-	height: 50px;
+	/*height: 50px;*/
 	position: relative;
 	margin:0px 4px 5px;
 }
@@ -1236,8 +1236,8 @@ h2.dj-label{
 	margin: auto auto;
 } 
 html>body .gallery-photo-thumb{
-	position: static;
-	display:table;
+	/*position: static;
+	display:table;*/
 }
 html>body .gallery-photo-thumb >div{
 	display:table-cell;
