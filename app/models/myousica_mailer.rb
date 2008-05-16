@@ -1,9 +1,9 @@
 class MyousicaMailer < ActionMailer::Base
 
   def help(body, sent_at = Time.now)
-    @subject    = 'MyousicaMailer#help'
+    @subject    = 'Myousica Help Question'
     @body       = body
-    @recipients = 'franz.andrea@gmail.com'
+    @recipients = 'help@myousica.com'
     @from       = 'help@myousica.com'
     @sent_on    = sent_at
     @headers    = {}
