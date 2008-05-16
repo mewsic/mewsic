@@ -37,7 +37,7 @@
 	  </span>
   </p>
 
-  <% if @tracks.size.zero? %>
+  <% if current_user_page? && @tracks.size.zero? %>
     <p class="centered grey-text"><em><%= link_to 'import', multitrack_path(current_user) %> your tracks and enjoy!</em></p>
   <% end %>
 
