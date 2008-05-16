@@ -1,0 +1,7 @@
+<%- form_for :help, :url => {:action => 'send_mail' } do |f| -%>
+  <p><%= f.text_area :body, :style => "width:99%; height:90px; border-bottom: 1px solid #D9D9D9;" %></p>
+  <%= submit_tag 'Send', :class => '_special_button_small' %>
+  <div class="special-button float-right">
+    <img src="/images/special_button_cyan.png" alt="" width="90" height="24">    
+  </div>
+<%- end -%>

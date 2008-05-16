@@ -46,8 +46,9 @@ ActionController::Routing::Routes.draw do |map|
   #     admin.resources :products
   #   end
   
-  map.help 'help', :controller => 'help'
-  map.connect 'help/:id', :controller => 'help', :action => 'show'
+  map.help 'help', :controller => 'help', :action => 'index'
+  map.connect 'help/send', :controller => 'help', :action => 'send_mail'
+  map.connect 'help/:id', :controller => 'help', :action => 'show'  
 
   map.root :controller => "dashboard"
   
