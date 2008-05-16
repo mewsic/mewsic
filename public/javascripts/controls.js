@@ -551,6 +551,8 @@ Ajax.InPlaceEditor = Class.create({
     fld.className = 'editor_field';
     if (this.options.submitOnBlur)
       fld.onblur = this._boundSubmitHandler;
+    if (this.options.onEditFieldCustomization)
+      this.options.onEditFieldCustomization(this, fld);
     this._controls.editor = fld;
     if (this.options.loadTextURL)
       this.loadExternalText();
@@ -916,6 +918,7 @@ Object.extend(Ajax.InPlaceEditor, {
     onFailure: function(transport, ipe) {
       alert('Error communication with the server: ' + transport.responseText.stripTags());
     },
+    onEditFieldCustomization: null, // Takes the IPE and its generated edit field.
     onFormCustomization: null, // Takes the IPE and its generated form, after editor, before controls.
     onLeaveEditMode: null,
     onLeaveHover: function(ipe) {

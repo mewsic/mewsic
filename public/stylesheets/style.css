@@ -1052,6 +1052,13 @@ h2.dj-label{
 .user-details .user-motto{
 	border-right: 2px solid #fff;
 }
+
+.user-motto textarea,
+.user-gusti textarea {
+  border: 1px solid #BFD2DB;
+  width: 99%;
+}
+
 .user-details .user-gusti{
 	margin-left:-2px;
 	border-left: 2px solid #fff;

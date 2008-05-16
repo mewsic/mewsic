@@ -21,10 +21,23 @@ var InPlaceEditorGenerator = Class.create({
         },
         onComplete: Prototype.emptyFunction,
         onEnterHover: Prototype.emptyFunction,
-        onLeaveHover: Prototype.emptyFunction
+        onLeaveHover: Prototype.emptyFunction,
+        onEditFieldCustomization: function(editor, fld) {
+          if (this.options.maxLength && fld.tagName == 'INPUT')
+            fld.maxLength = this.options.maxLength;
+        }.bind(this),
+
+        callback: function(form) {
+          var input = form.getElements().first()
+          if (input.value.length > this.options.maxLength) { 
+            input.value = input.value.truncate(this.options.maxLength, '');
+            alert ('too long...sorry! max ' + this.options.maxLength + ' chars');
+          }
+          return Form.serialize(form);
+        }.bind(this)
       });
     }.bind(this));
-  }  
+  },
 });
 
 var InPlaceSelectGenerator = Class.create({
@@ -203,8 +216,8 @@ var Gallery = Class.create({
 });
 
 document.observe('dom:loaded', function() {
-  new InPlaceEditorGenerator( $w('city'), { url: '/users/', model: 'user' } );  
-  new InPlaceEditorGenerator( $w('motto tastes'), { url: '/users/', model: 'user', rows: 4 } );  
+  new InPlaceEditorGenerator( $w('city'), { url: '/users/', model: 'user', maxLength: 20 } );  
+  new InPlaceEditorGenerator( $w('motto tastes'), { url: '/users/', model: 'user', rows: 4, maxLength: 250 } );  
   new InPlaceSelectGenerator( $w('country'), { url: '/users/', model: 'user', values_url: '/countries' } );
   new AjaxFormGenerator( $w('photos_url blog_url myspace_url skype msn'), { url: '/users/', model: 'user' } );
   Gallery.instance = new Gallery('gallery');
