@@ -56,19 +56,19 @@ class UserTest < Test::Unit::TestCase
     end
   end
   
-  def test_should_validate_acceptance_of_terms_of_service
-    assert_no_difference 'User.count' do
-      u = create_user(:terms_of_service  => nil)
-      assert u.errors.on(:terms_of_service)
-    end
-  end
+  #def test_should_validate_acceptance_of_terms_of_service
+  #  assert_no_difference 'User.count' do
+  #    u = create_user(:terms_of_service  => nil)
+  #    assert u.errors.on(:terms_of_service)
+  #  end
+  #end
 
-  def test_should_validate_acceptance_of_eula
-    assert_no_difference 'User.count' do
-      u = create_user(:eula  => nil)
-      assert u.errors.on(:eula)
-    end
-  end
+  #def test_should_validate_acceptance_of_eula
+  #  assert_no_difference 'User.count' do
+  #    u = create_user(:eula  => nil)
+  #    assert u.errors.on(:eula)
+  #  end
+  #end
 
   def test_should_reset_password
     users(:quentin).update_attributes(:password => 'new password', :password_confirmation => 'new password')
@@ -226,7 +226,7 @@ class UserTest < Test::Unit::TestCase
   end
         
   def test_should_set_user_type
-    u = Dj.create({ :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire', :terms_of_service => "1", :eula => "1" })
+    u = Dj.create({ :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire'}) #, :terms_of_service => "1", :eula => "1" })
     assert_equal 'Dj', u[:type]
   end
   
@@ -301,7 +301,7 @@ class UserTest < Test::Unit::TestCase
     end
     
     def create_user(options = {})
-      User.create({ :login => 'quire', :email => 'quire@example.com', :password => 'quirezzz', :password_confirmation => 'quirezzz', :terms_of_service => "1", :eula => "1" }.merge(options))
+      User.create({ :login => 'quire', :email => 'quire@example.com', :password => 'quirezzz', :password_confirmation => 'quirezzz', :country => 'Italy'}.merge(options)) #, :terms_of_service => "1", :eula => "1" }.merge(options))
     end
     
     def create_instrument

@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
   # Virtual attribute for the unencrypted password
   attr_accessor :password                    
 
-  validates_presence_of     :login, :email
+  validates_presence_of     :login, :email, :country
   validates_presence_of     :password,                   :if => :password_required?
   validates_presence_of     :password_confirmation,      :if => :password_required?
   validates_confirmation_of :password,                   :if => :password_required?
@@ -67,8 +67,8 @@ class User < ActiveRecord::Base
                                        :message => 'invalid internet address'
 
   validates_uniqueness_of   :login, :email, :case_sensitive => false
-  validates_acceptance_of :terms_of_service, :on => :create, :allow_nil => false
-  validates_acceptance_of :eula, :on => :create, :allow_nil => false, :message => "must be abided"
+  #validates_acceptance_of :terms_of_service, :on => :create, :allow_nil => false
+  #validates_acceptance_of :eula, :on => :create, :allow_nil => false, :message => "must be abided"
   before_save :encrypt_password
   before_create :make_activation_code  
 

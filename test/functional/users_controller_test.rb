@@ -251,7 +251,7 @@ class UsersControllerTest < Test::Unit::TestCase
   protected
     def create_user(options = {})
       post :create, :user => { :login => 'quire', :email => 'quire@example.com',
-        :password => 'quirezzz', :password_confirmation => 'quirezzz', :terms_of_service => '1', :eula => '1' }.merge(options)
+        :password => 'quirezzz', :password_confirmation => 'quirezzz', :country => 'Italy'}.merge(options) # , :terms_of_service => '1', :eula => '1' }.merge(options)
     end
     
     def call_and_test_show

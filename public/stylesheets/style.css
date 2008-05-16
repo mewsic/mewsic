@@ -366,9 +366,6 @@ tr.nav-song td{
 .two-col-big{
 	width:455px;
 }
-.two-col.signup{
-	width:600px;
-}
 .three-col{
 	width:708px;
 }
@@ -1360,94 +1357,84 @@ html>body .gallery-photo-thumb >.edit-command{
 	color:#0296C2;
 }
 /* register */
-.border-left{
-	border-left:1px solid #EBF1F4;
+#register-box {
+        width: 700px;
+	font-size:13px;
 }
+
+#register-box h1 {
+        padding: 15px 0 15px 30px;
+        font-size: 20px;
+}
+
+#register-box p {
+        color: #71757A;
+        font-size:12px;
+}
+
+#register-box p.alert {
+        padding: 0 0 15px 30px;;
+        font-size: 14px;
+        color:#c03;
+}
+#register-box p.tos {
+        padding-left: 30px;
+        font-size:11px;
+}
+
+#register-box p a, #register-box p a:hover {
+        color: #009DC2;
+}
+
+#register-box p.signin-button {
+        margin-top: 20px;
+}
+
 .register{
-	font-size:11px;
-	color:#014D70;
 	margin-bottom:20px;
+        width:320px;
+        height:270px;
+        float:left;
+        padding-left:30px;
 }
 .register p{
-	height:20px;
-	margin-bottom:5px;
+	margin-bottom:10px;
 }
+.register span.required{
+        font-size:14px;
+        margin-left:4px;
+        font-weight:bold;
+        line-height:11px;
+}
+
 html>body .register p{
 	height:auto;
-	min-height:20px;
+	min-height:35px;
 }
 .register .selected{
 	font-weight:bold;
 	height:20px;
 	margin-bottom:5px;
 }
+.register span.error {
+        left:5px;
+        position:relative;
+}
 .register .selected img{
 	float:left;
 	margin-right:5px;
-	margin-bottom:5px;
 }
-.two-col .register label{
+.register label{
 	float:left;
-	text-align:right;
-	margin-right:5px;
-	width:100px;
+	text-align:left;
+	color:#014D70;
 }
-.one-col .register label{
-	padding-bottom:5px;
-	display:block;
-}
-.register span{
-}
-.register input{
-	float:left;
+.register input, .register select{
 	border:1px solid #DEE8EC;
-	margin-right:5px;
+	margin-top:5px;
+        width:290px;
 }
-.register textarea{
-	border:1px solid #BFD2DB;
-}
-.register select{
-	border:1px solid #BFD2DB;
-}
-.full-page .register input, .full-page .register textarea{
-	/*float:left;*/
-	width:680px;
-	border:1px solid #BFD2DB;
-}
-.centered .check-box{
-	float:none;
-}
-.two-col .register input{
-	width:250px;
-}
-.two-col .register select{
-	width:250px;
-}
-.one-col .register select, .one-col .register textarea{
-	width:250px;
-	margin-left:5px;
-}
-.two-col .register input.input-small{
-	width:160px;
-}
-.register input.check-box{
-	width:auto;
-	border:none;
-}
-.register input.button{
-	float:left;
-	width:auto;
-}
-.register ul, .register li {
-	margin:0px;
-	padding:0px;
-	list-style-type:none;
-}
-.register li {
-	float:left;
-	width:115px;
-	height:25px;
-}
+
 
 /* login */
 div.login {
