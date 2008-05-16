@@ -1949,6 +1949,17 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 .testo-risposta{
 	font-size:14px;
 }
+
+.send-question label {
+  color: #61656A;
+  padding-bottom: 3px;
+}
+
+.send-question input.text, .send-question textarea {
+  border: 1px solid #BFD2DB;
+  width: 99%;
+}
+
 .menu-categorie{
 	padding:10px;
 	background-color:#f8f8f8;
@@ -2270,15 +2281,6 @@ img#user_gender {
   padding-left: 3px;
   padding-top: 5px;
   font-size: 14px;
-}
-#help-question label {
-  color: #61656A;
-  padding-bottom: 3px;
-}
-
-#help-question input.text, #help-question textarea {
-  border: 1px solid #BFD2DB;
-  width: 99%;
 }
 
 .help-topics {

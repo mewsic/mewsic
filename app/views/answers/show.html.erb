@@ -2,11 +2,8 @@
   <img src="/images/lente_search.gif" alt="" width="27" height="27" class="float-left" />
   <h2 class="float-left">SEARCH ANSWER</h2>
   <p class="float-left"><input name="" type="text" style="border:1px solid #D3D3D3; width:310px; height:20px; margin:0px 10px;"/></p>
-  <div class="float-left">			
-    <div class="special-button">
-      <img src="/images/special_button_cyan.png" alt="" width="90" height="24">	
-      <input type="submit" name="OK" value="Ricerca" class="special_button_small" />
-    </div>	
+  <div class="float-left">
+    <%= image_submit_tag '/images/button_find.png' %>
   </div>
 </div>
 
@@ -37,7 +34,7 @@
 							</div>
 							<div class="float-right">
 								<div class="special-button">
-								  <div style="text-align: center; font-weight: bold;line-height: 24px; width: 220px; height: 24px;background: url('/images/special_button_cyan_big.png') no-repeat center"><a href="#" style="color: #FFF; font-size:13px" onclick="<%= logged_in? ? "Effect.BlindDown('reply-form-container')" : "Message.notice('You need to be logged in to reply.');" %>;return false;">Rispondi alla domanda<a></div>
+								  <div style="text-align: center; font-weight: bold;line-height: 24px; width: 220px; height: 24px;background: url('/images/special_button_cyan_big.png') no-repeat center"><a href="#" style="color: #FFF; font-size:13px" onclick="<%= logged_in? ? "Effect.BlindDown('reply-form-container')" : "Message.notice('You need to be logged in to reply.');" %>;return false;">Reply to this question<a></div>
 								</div>								
 							</div>
 							<div class="float-left">

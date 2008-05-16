@@ -1,17 +1,14 @@
 <div class="box-list semi-one-col clear-block">
   
-  <div class="simple-list semi-one-col clear-block azzurro-boxes">
+  <div class="simple-list semi-one-col clear-block azzurro-boxes send-question">
     <h1>MY QUESTION</h1>
     <div class="top-box clear-block">
       <div class="bottom-box clear-block">
         <div class="float-right" style="padding-right:60px;"><img src="/images/interrogativo.gif" alt="" width="50" height="53" style="position:absolute; margin-top:-40px;" /></div>
         <div class="elements clear-block" style="padding:15px 20px;">
           <%- form_for :answer, :url => answers_path do |f| -%>
-            <p><%= f.text_area :body, :style => "width:99%; height:90px; border-bottom: 1px solid #D9D9D9;" %></p>
-            <div class="special-button float-right">
-              <img src="/images/special_button_cyan.png" alt="" width="90" height="24">
-              <%= submit_tag 'Send', :class => 'special_button_small' %>
-            </div>
+            <p><%= f.text_area :body, :rows => 10 %></p>
+            <%= image_submit_tag '/images/button_send.png' %>
           <%- end -%>          
         </div>
       </div>
@@ -53,10 +50,7 @@
   <h2 class="float-left">FIND QUESTION</h2>
   <p class="float-left"><input name="" type="text" style="border:1px solid #D3D3D3; width:310px; height:20px; margin:0px 10px;"/></p>
   <div class="float-left">			
-    <div class="special-button">
-      <img src="/images/special_button_cyan.png" alt="" width="90" height="24">	
-      <input type="submit" name="OK" value="FIND" class="special_button_small" />
-    </div>	
+    <%= image_submit_tag '/images/button_find.png' %>
   </div>
 </div>
 
