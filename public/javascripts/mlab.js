@@ -116,8 +116,8 @@ var MlabSlider = Class.create(PictureSlider, {
         sibling.removeClassName(class_to_remove);
         sibling.addClassName(class_to_add);
       });      
-      new Effect.Puff(element, {
-        duration: 0.5,
+      new Effect.Fade(element, {
+        duration: 0.7,
         afterFinish: function() {
           element.remove();
         }

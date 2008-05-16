@@ -165,7 +165,7 @@ var BandMembers = {
     });
   },  
   remove: function(id) {
-    Effect.Puff('band_member_' + id);
+    Effect.Fade('band_member_' + id);
   }
 }
 
