@@ -1142,7 +1142,7 @@ h2.dj-label{
 	text-indent:-500em;
 	font-size:1px;
 	margin-bottom:0px;
-	background: url(/images/BG_tab_title_songs.png) no-repeat top right;
+	background: url(/images/BG_tab_title_songs.png) no-repeat bottom left;
 	padding-top:24px;
 }
 .tit-classification-songs .top-box{
@@ -1201,7 +1201,7 @@ table.mlab_tracks {
 	text-indent:-500em;
 	font-size:1px;
 	margin-bottom:0px;
-	background: url(/images/BG_tab_title_tracks.png) no-repeat top right;
+	background: url(/images/BG_tab_title_tracks.png) no-repeat bottom left;
 	padding-top:24px;
 }
 .tit-classification-tracks .top-box{
