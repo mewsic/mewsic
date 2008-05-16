@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   
   include AuthenticatedSystem
   
-  before_filter :check_user_inbox
+  #before_filter :check_user_inbox
   
   protected    
   
