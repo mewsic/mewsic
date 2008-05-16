@@ -1,5 +1,7 @@
 <div class="gallery-photo-thumb">
   <div>
-    <a href=""><%= image_tag(photo.public_filename(:small), :alt => photo.filename), photo.public_filename(:large), :class => 'lightwindow' %></a>    
+    <a href="photo.public_filename(:large)" class="lightwindow">
+      <%= image_tag(photo.public_filename(:small), :alt => photo.filename) %>
+    </a>    
   </div>
 </div>
