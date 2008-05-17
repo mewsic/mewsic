@@ -2058,9 +2058,9 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 	color:#009DC2;
 }
 
-img#user_gender {
+/*img#user_gender {
   cursor: pointer;
-}
+}*/
 
 /* added 05 2008 */
 .song-spec .top-box{
