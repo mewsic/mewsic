@@ -1223,6 +1223,9 @@ table.mlab_tracks {
 	padding:10px;
 	margin:0px;
 }
+.gallery p#no-images-notice{
+        padding:20px 0px 0px 0px;
+}
 .gallery .elements{
 	margin:10px 20px 10px;
 	background:url(/images/BG_box_gallery_internal.jpg) repeat-x top left;
@@ -1233,7 +1236,6 @@ table.mlab_tracks {
 .gallery .horizontal-scroll-box{
 	position:relative;
 	padding:0px 10px 14px;
-	/*height:80px;*/
 	overflow:hidden;
 }
 .gallery .horizontal-scroll{

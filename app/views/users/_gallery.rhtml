@@ -10,7 +10,9 @@
     <div class="bottom-box clear-block">
       <div class="horizontal-scroll-box" id="gallery">
         <div id="gallery-photo-list">
-            <%= render :partial => 'photo', :collection => @user.photos %>
+          <%= render :partial => 'photo', :collection => @user.photos %>
+          <p id="no-images-notice" style="<%= 'display:none;' if @user.photos.size > 0 %>" class="centered grey-text">
+            <em>you have no images in your gallery!</em></p>
         </div>
       </div>
     </div>

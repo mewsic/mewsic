@@ -31,16 +31,25 @@
 <body>
   <div id="container">
     <div id="content">
-      <h1>Upload a picture</h1>      
+      <h1>Upload a picture</h1>
+      <script type="text/javascript">
+        alert(window.opener);
+      </script>
       <%- if @saved -%>
         <script type="text/javascript" charset="utf-8">
+          $(window.opener.document.getElementById('no-images-notice')).hide();
+
           var container = window.opener.document.getElementById('gallery-photo-list');
           $(container).insert({
             bottom: '<%= escape_javascript(render(:partial => 'users/photo', :object => @photo)) %>'
           });
-          new Effect.Shake(window.opener.$('gallery-photo-thumb-<%= @photo.id %>'), {distance:8});
-          window.opener.myLightWindow._setupLinks()
+
+          new Effect.Shake(window.opener.$('gallery-photo-thumb-<%= @photo.id %>'), {distance:4,duration:0.4});
           var gallery = window.opener.Gallery.instance.setup();
+
+          if (window.opener.myLightWindow)
+            window.opener.myLightWindow._setupLinks()
+
         </script>  
       <%- end -%>
       <%- flash.each do |type, message|; next if type == :inbox -%>

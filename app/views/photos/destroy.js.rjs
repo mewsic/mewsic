@@ -1,1 +1,2 @@
-page.call 'Effect.Fade', "gallery-photo-thumb-#{@photo.id}"
+page.call 'Effect.Fade', "gallery-photo-thumb-#{@photo.id}", :duration => 0.3
+page.call 'Effect.Appear', 'no-images-notice' if @user.photos.size.zero?
