@@ -81,6 +81,10 @@ class User < ActiveRecord::Base
   xss_terminate :except => [:email, :msn, :gender, :photos_url, :blog_url, :myspace_url],
                 :sanitize => [:motto, :tastes]
   
+  has_many :mband_memberships
+  has_many :mbands, :through => :mband_memberships, :class_name => 'Mband', :source => :mband, :conditions => "accepted_at IS NOT NULL"
+  
+  
   has_many_friends
   
   # If type == 'Band'

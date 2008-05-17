@@ -72,7 +72,7 @@ class Song < ActiveRecord::Base
   def self.find_paginated_by_mband(page, mband)
     paginate :per_page => 3, 
              :conditions => ["songs.published = ? AND users.id IN (?)", true, mband.members.collect{|m| m.id}.join(',')], 
-             :order => "updated_at DESC",
+             :order => "songs.updated_at DESC",
              :include => [:user, {:tracks => :instrument}], 
              :page => page
   end

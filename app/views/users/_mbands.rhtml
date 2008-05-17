@@ -1,25 +1,23 @@
+<%- if @user.mbands.count > 0 -%>
 <div class="simple-list white-box clear-block">
   <h2 class="mband-label">"Miss Master Kazz!"'s<br/>MBands</h2>
   <div class="top-box clear-block">
     <div class="bottom-box clear-block">
       <div class="elements clear-block">
-        <div>
-          <p class="thumb"><img src="photo/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></p>
-          <p class="grey-text name"><em>Voce</em></p>
-          <p class="name"><a href="#">nome user</a></p>
-        </div>
-        <div>
-          <p class="thumb"><img src="photo/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></p>
-          <p class="grey-text name"><em>Voce</em></p>
-          <p class="name"><a href="#">nome user</a></p>
-        </div>
-        <div>
-				  <p class="thumb"><img src="photo/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></p>
-				  <p class="grey-text name"><em>Voce</em></p>
-				  <p class="name"><a href="#">nome user</a></p>
-			  </div>
+        <%- @user.mbands.each do |mband| -%>        
+          <div>
+            <p class="thumb">
+              <%= avatar_image(mband, :icon) %>
+            </p>
+            <p class="grey-text name"><em>Voce</em></p>
+            <p class="name">
+              <%= link_to mband.name, mband_path(mband) %>
+            </p>
+          </div>
+        <%- end -%>
 		  </div>				
     </div>
     <p class="next"></p>
   </div>
 </div>
+<%- end -%>
