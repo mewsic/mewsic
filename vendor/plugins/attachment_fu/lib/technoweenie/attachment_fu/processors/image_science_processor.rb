@@ -46,7 +46,7 @@ module Technoweenie # :nodoc:
             size = size.first if size.is_a?(Array) && size.length == 1
             if size.is_a?(Fixnum) || (size.is_a?(Array) && size.first.is_a?(Fixnum))
               if size.is_a?(Fixnum)
-                img.thumbnail(size, &grab_dimensions)
+                img.cropped_thumbnail(size, &grab_dimensions)
               else
                 img.resize(size[0], size[1], &grab_dimensions)
               end

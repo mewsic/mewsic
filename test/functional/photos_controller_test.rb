@@ -122,6 +122,34 @@ class PhotosControllerTest < ActionController::TestCase
     end
   end    
 
+  def test_should_crop_and_resize_photo
+    quentin_photos_count = users(:quentin).photos.count
+
+    login_as :quentin
+    assert_difference 'Photo.count', 2 do
+      post :create, :user_id => users(:quentin),
+        :photo => {
+          :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/files/test.jpg'), 'image/jpeg')
+        }
+      post :create, :user_id => users(:quentin),
+        :photo => {
+          :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/files/photo_user_test.jpg'), 'image/jpeg')
+        }
+    end
+    assert_equal quentin_photos_count + 2, users(:quentin).photos.count
+
+    users(:quentin).photos.each do |photo|
+      Avatar.attachment_options[:thumbnails].each do |key, size|
+        next unless size.is_a? Fixnum # Check only fixed-size images
+
+        ImageScience.with_image(photo.full_filename(key)) do |img|
+          assert_equal img.width, img.height
+          assert_equal img.width, size
+        end
+      end
+    end
+  end
+
 private
 
   def uploaded_file(path, content_type = "image/jpeg", filename = nil)

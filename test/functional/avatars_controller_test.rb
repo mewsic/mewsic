@@ -1,4 +1,5 @@
 require File.dirname(__FILE__) + '/../test_helper'
+require 'image_science'
 
 class Avatar < Picture
   belongs_to :user
@@ -91,6 +92,24 @@ class AvatarsControllerTest < ActionController::TestCase
         }
     end
   end    
+
+  def test_should_crop_and_resize_avatar
+    login_as :quentin
+    post :create, :user_id => users(:quentin),
+      :avatars => {
+        :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/files/test.jpg'), 'image/jpeg')
+      }
+
+    avatar = users(:quentin).avatars.first
+    Avatar.attachment_options[:thumbnails].each do |key, size|
+      next unless size.is_a? Fixnum # Check only fixed-size images
+
+      ImageScience.with_image(avatar.full_filename(key)) do |img|
+        assert_equal img.width, img.height
+        assert_equal img.width, size
+      end
+    end
+  end
 
 private
 
