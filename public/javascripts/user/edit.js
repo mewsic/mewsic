@@ -182,58 +182,10 @@ var BandMembers = {
   }
 }
 
-var GalleryItem = Class.create({
-  initialize: function(element) {
-    this.element = $(element);
-    this.setup();
-  },
-  setup: function() {
-    this.element.observe('mouseover', this.handleMouseOver.bind(this));
-    this.element.observe('mouseout', this.handleMouseOut.bind(this));
-    this.element.down('.button.delete').observe('mouseover', this.handleDeleteMouseOver.bind(this));
-    this.element.down('.button.delete').observe('mouseout', this.handleDeleteMouseOut.bind(this));
-  },
-  handleMouseOver: function() {
-    this.element.down('a.image').addClassName('active');
-    this.element.down('.button.delete').show();
-    this.element.down('.button.view').show();
-  },
-  handleMouseOut: function() {
-    this.element.down('a.image').removeClassName('active');
-    this.element.down('.button.delete').hide();
-    this.element.down('.button.view').hide();
-  },
-  handleDeleteMouseOver: function() {
-    this.element.down('.button.delete').addClassName('active');
-    this.element.down('.button.view').addClassName('inactive');
-  },
-  handleDeleteMouseOut: function() {
-    this.element.down('.button.delete').removeClassName('active');
-    this.element.down('.button.view').removeClassName('inactive');
-  }
-});
-
-var Gallery = Class.create({
-  initialize: function(element) {
-    this.element = $(element);
-    this.elements = new Array();
-    this.setup();
-  },
-  setup: function() {
-    this.element.select('.gallery-photo-thumb').each(function(element) {
-      if(!this.elements.include(element)) {
-        new GalleryItem(element);
-        this.elements.push(element);
-      }      
-    }.bind(this));
-  }
-});
-
 document.observe('dom:loaded', function() {
   new InPlaceEditorGenerator( $w('city'), { url: '/users/', model: 'user', maxLength: 20 } );  
   new InPlaceEditorGenerator( $w('motto tastes'), { url: '/users/', model: 'user', rows: 6, maxLength: 1000} );  
   new InPlaceSelectGenerator( $w('country'), { url: '/users/', model: 'user', values_url: '/countries' } );
   new AjaxFormGenerator( $w('photos_url blog_url myspace_url skype msn'), { url: '/users/', model: 'user' } );
-  Gallery.instance = new Gallery('gallery');
   // initGenderSwitcher();
 });

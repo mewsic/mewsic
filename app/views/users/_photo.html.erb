@@ -3,6 +3,8 @@
     <a href="<%= photo.public_filename(:large) %>" rel="user[<%= @user.login %>]" class="lightwindow image">
       <%= image_tag(photo.public_filename(:small), :alt => photo.filename) %>
     <span class="button view" style="display:none"></span></a>    
-    <%= link_to_remote '', :url => user_photo_path(@user, photo), :method => 'delete', :html => { :class => 'button delete', :style => 'display:none'  }, :confirm => 'Are you sure you want to delete this image?' %>
+    <% if current_user_page? %>
+      <%= link_to_remote '', :url => user_photo_path(@user, photo), :method => 'delete', :html => { :class => 'button delete', :style => 'display:none'  }, :confirm => 'Are you sure you want to delete this image?' %>
+    <% end %>
   </div>
 </div>
