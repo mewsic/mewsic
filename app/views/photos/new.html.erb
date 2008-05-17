@@ -26,6 +26,7 @@
 	    margin-top: 10px;
 	  }
 	</style>
+        <%= javascript :prototype, :effects %>
 </head>
 <body>
   <div id="container">
@@ -34,9 +35,10 @@
       <%- if @saved -%>
         <script type="text/javascript" charset="utf-8">
           var container = window.opener.document.getElementById('gallery-photo-list');
-          container.insert({
+          $(container).insert({
             bottom: '<%= escape_javascript(render(:partial => 'users/photo', :object => @photo)) %>'
           });
+          new Effect.Shake(window.opener.$('gallery-photo-thumb-<%= @photo.id %>'), {distance:8});
           window.opener.myLightWindow._setupLinks()
           var gallery = window.opener.Gallery.instance.setup();
         </script>  
