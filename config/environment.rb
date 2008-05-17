@@ -66,6 +66,10 @@ ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
 #  %{<div class="error-with-field">#{html} <small class="error">&bull; #{[instance.error_message].flatten.first}</small></div>}  
 end
 
+# Nasty hack, see: http://www.ruby-forum.com/topic/129186#576193
+#
+TMail::HeaderField::FNAME_TO_CLASS.delete 'content-id'
+
 ExceptionNotifier.exception_recipients = %w(franz.andrea@gmail.com)
 ExceptionNotifier.sender_address = %("Myousica Application Error" <error@myousica.com>)
 ExceptionNotifier.email_prefix = "[MYOUSICA ERROR] "
