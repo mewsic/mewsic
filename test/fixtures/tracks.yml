@@ -71,3 +71,8 @@ voice_for_single_track_song:
   parent_song: quentin_single_track_song
   instrument: microphone
   seconds: 205
+drum_for_gravity_blast_beat:
+  title: Drum for gravity blast beat
+  parent_song: gravity_blast_beat
+  instrument: microphone
+  seconds: 205

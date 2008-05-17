@@ -80,3 +80,18 @@ mixes_<%= i + 4 %>:
   balance: 0
   time_shift: 0
 <% end %>
+gravity_blast_beat_remix_drum:
+  song: gravity_blast_beat_remix
+  track: drum_for_gravity_blast_beat
+  volume: 80
+  loop: 1
+  balance: 0
+  time_shift: 0
+gravity_blast_beat_jungle_remix_drum:
+  song: gravity_blast_beat_jungle_remix
+  track: drum_for_gravity_blast_beat
+  volume: 80
+  loop: 1
+  balance: 0
+  time_shift: 0
+  

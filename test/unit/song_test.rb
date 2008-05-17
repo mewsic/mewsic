@@ -30,4 +30,13 @@ class SongTest < ActiveSupport::TestCase
     songs = Song.find_paginated_by_user(1, users(:aaron).id)
     assert_equal 3, songs.size
   end 
+  
+  def test_direct_siblings
+    song = songs(:gravity_blast_beat_jungle_remix)
+    #assert_equal 2, song.direct_siblings.size
+    track = tracks(:drum_for_gravity_blast_beat)
+    #puts track.mixes.count
+    puts song.direct_siblings.size
+  end
+  
 end

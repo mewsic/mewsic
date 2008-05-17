@@ -90,6 +90,25 @@ quentin_single_track_song:
   original_author: Louis Armstrong
   genre: blues
   listened_times: 420
+
+gravity_blast_beat:
+  title: GravityBlastBeat
+  user: quentin
+  original_author: Gino il fantino
+  genre: metal
+  listened_times: 0
+gravity_blast_beat_remix:
+  title: GravityBlastBeat Remix
+  user: quentin
+  original_author: Gino il fantino
+  genre: metal
+  listened_times: 0
+gravity_blast_beat_jungle_remix:
+  title: GravityBlastBeat Jungle Remix
+  user: quentin
+  original_author: Gino il fantino
+  genre: metal
+  listened_times: 0
   
 <% 1000.times do |i| %>
 song_<%= i + 4 %>:
