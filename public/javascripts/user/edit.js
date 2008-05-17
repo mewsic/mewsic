@@ -37,7 +37,7 @@ var InPlaceEditorGenerator = Class.create({
         }.bind(this)
       });
     }.bind(this));
-  },
+  }
 });
 
 var InPlaceSelectGenerator = Class.create({
@@ -190,12 +190,26 @@ var GalleryItem = Class.create({
   setup: function() {
     this.element.observe('mouseover', this.handleMouseOver.bind(this));
     this.element.observe('mouseout', this.handleMouseOut.bind(this));
+    this.element.down('.button.delete').observe('mouseover', this.handleDeleteMouseOver.bind(this));
+    this.element.down('.button.delete').observe('mouseout', this.handleDeleteMouseOut.bind(this));
   },
   handleMouseOver: function() {
-    this.element.down('a.button.delete').show();
+    this.element.down('a.image').addClassName('active');
+    this.element.down('.button.delete').show();
+    this.element.down('.button.view').show();
   },
   handleMouseOut: function() {
-    this.element.down('a.button.delete').hide();
+    this.element.down('a.image').removeClassName('active');
+    this.element.down('.button.delete').hide();
+    this.element.down('.button.view').hide();
+  },
+  handleDeleteMouseOver: function() {
+    this.element.down('.button.delete').addClassName('active');
+    this.element.down('.button.view').addClassName('inactive');
+  },
+  handleDeleteMouseOut: function() {
+    this.element.down('.button.delete').removeClassName('active');
+    this.element.down('.button.view').removeClassName('inactive');
   }
 });
 

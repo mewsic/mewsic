@@ -1214,10 +1214,10 @@ table.mlab_tracks {
 /* gallery */
 .gallery {
 	background:url(/images/BG_box_gallery.gif) no-repeat top left;
-	margin-bottom:20px;
+	margin-bottom:40px;
 }
 .gallery .bottom-box{
-	background:url(/images/BG_box_gallery_bottom.png) no-repeat bottom left;
+	background: #ededed url(/images/BG_box_gallery_bottom.png) no-repeat bottom left;
 }
 .gallery h1{
 	padding:10px;
@@ -1232,7 +1232,7 @@ table.mlab_tracks {
 }
 .gallery .horizontal-scroll-box{
 	position:relative;
-	padding-top:10px;
+	padding:0px 10px 14px;
 	/*height:80px;*/
 	overflow:hidden;
 }
@@ -1244,13 +1244,44 @@ table.mlab_tracks {
 .gallery-photo-thumb{
 	float:left;
 	width: 68px;
-	/*height: 50px;*/
+	height: 88px;
 	position: relative;
-	margin:0px 4px 5px;
+	margin:0px 4px;
 }
+
+.gallery-photo-thumb .button {
+        margin:0;
+}
+
+.gallery-photo-thumb .button.delete {
+        border:none;
+        width:31px;
+        height:21px;
+        top:68px;
+        left:37px;
+        position:absolute;
+        background: url(/images/icon_trash_deselected.png) no-repeat;
+}
+
+.gallery-photo-thumb .button.delete.active {
+        background: url(/images/icon_trash_selected.png) no-repeat;
+}
+
+.gallery-photo-thumb .button.view {
+        border:none;
+        width:38px;
+        height:21px;
+        top:64px;
+        left:-4px;
+        position:absolute;
+        background: url(/images/icon_view_selected.png) no-repeat;
+}
+.gallery-photo-thumb .button.view.inactive {
+        background: url(/images/icon_view_deselected.png) no-repeat;
+}
+
 .gallery-photo-thumb div{
 	position: absolute;
-	top: 50%;
 	left: 0;
 	text-align:center;
 }
@@ -1258,11 +1289,11 @@ table.mlab_tracks {
 	float:none !important;
 }
 .gallery-photo-thumb a{
-	padding:5px;
+	padding:4px;
 	display:block;
 	position: relative;
-	top: -50%;
 	margin: auto auto;
+        height:60px;
 } 
 html>body .gallery-photo-thumb{
 	/*position: static;
@@ -1279,9 +1310,10 @@ html>body .gallery-photo-thumb >div{
 *+html>body .gallery-photo-thumb[class] div{  
 	position: absolute;
 }
-.gallery-photo-thumb a:hover, .gallery-photo-thumb .active a{
-	border:2px solid #878789;
-	padding:3px;
+.gallery-photo-thumb a.active {
+	border:4px solid #88DAEE;
+	padding:0;
+        margin:0;
 } 
 .gallery-photo-big{
 	float:left;
