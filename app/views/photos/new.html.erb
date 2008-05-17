@@ -35,7 +35,7 @@
         <script type="text/javascript" charset="utf-8">
           var container = window.opener.document.getElementById('gallery-photo-list');
           container.insert({
-            top: '<%= escape_javascript(render(:partial => 'users/photo', :object => @photo)) %>'
+            bottom: '<%= escape_javascript(render(:partial => 'users/photo', :object => @photo)) %>'
           });
           window.opener.myLightWindow._setupLinks()
           var gallery = window.opener.Gallery.instance.setup();
@@ -44,12 +44,14 @@
       <%- flash.each do |type, message|; next if type == :inbox -%>
         <div class="message <%= type %>"><%= message %></div>
       <%- end -%>            
+      <%- unless @no_upload -%>
       <div id="form-area">
         <% form_for :photo, :url => {:action => :create}, :html => {:multipart => true} do |f| %>
           <%= f.file_field :uploaded_data  %><br />
           <%= submit_tag 'Upload', :disable_with => 'Uploading...' %>
         <% end %>        
       </div>
+      <%- end -%>
     </div>
   </div>
 </body>

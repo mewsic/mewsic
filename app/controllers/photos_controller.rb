@@ -3,18 +3,16 @@ class PhotosController < ApplicationController
   before_filter :login_required
   before_filter :find_user
   before_filter :check_current_user
+  before_filter :check_photo_count, :only => [:new, :create]
   
   def new
     @photo = Photo.new
-    flash[:alert] = "Sorry, you can upload up to 10 images. Remove one you have already uploaded to have had one more." if @user.photos.count > 9
     @last_photo = @user.photos.last   if params[:coming_from] == 'create'
     render :layout => false
   end
   
   def create 
-    if @user.photos.count > 9
-      flash[:alert] = "Sorry, you can upload up to 10 images. Remove one you have already uploaded to have had one more." 
-    else
+    unless @no_upload
       if params[:photo] && params[:photo][:uploaded_data].respond_to?(:size) && params[:photo][:uploaded_data].size > 0
         @photo = Photo.new(params[:photo])
         @photo.pictureable = current_user
@@ -48,6 +46,13 @@ private
   def check_current_user
     unless current_user == @user
       redirect_to '/' and return
+    end
+  end
+
+  def check_photo_count
+    if @user.photos.count > 9
+      flash.now[:alert] = "Sorry, you can upload up to 10 images. Remove one you have already uploaded to add more."
+      @no_upload = true
     end
   end
   
