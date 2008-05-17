@@ -4,7 +4,7 @@
 	    <%= avatar_image most_listened_song.user, :icon %>
 	  </a>
 	</p>
-	<p class="name align-right"><%= link_to most_listened_song.user.login, most_listened_song.user %></a></p>
+	<p class="name align-right"><%= link_to most_listened_song.user.login, user_path(most_listened_song.user) %></a></p>
 	<p class="country align-right"><%= h most_listened_song.user.city %>, <%= h most_listened_song.user.country %></p>
 		<div class="float-right">
 			<p class="star"><%= rating(most_listened_song) %></p>
