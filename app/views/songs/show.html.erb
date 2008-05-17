@@ -147,13 +147,13 @@
       </div>
 </div>
 
-<%- @direct_siblings.each_with_index do |song, index| -%>
-<div class="float-left one-col-big clear-block" style="display:none;" id="direct-sibling-tracks-container-<%= song.id %>">
+
+<div class="float-left one-col-big clear-block">
 <div class="simple-list box-grigio-stondato">
 	<div class="top-box clear-block">
-		<div class="bottom-box clear-block">
+	  <%- @direct_siblings.each_with_index do |song, index| -%>
+		<div class="bottom-box clear-block" style="display:none;" id="direct-sibling-tracks-container-<%= song.id %>">
 		
-		  
 		    <%- song.tracks.each do |track| -%>
 		      <div class="elements clear-block">
     			<p class="thumb">
@@ -180,11 +180,12 @@
     		  </div>		  		  		  
         <%- end -%>      			
 	  </div>
+	  <%- end -%>
 	</div>
 			<p class="abstract align-right"><a href="#">Next</a></p>	
   </div>
 </div>
-<%- end -%>
+
 
 
 <div class="bottom-shadow clear-float" style="width: 720px; float:none;"></div>
