@@ -1,1 +1,1 @@
-page.call 'Effect.Puff', "gallery-photo-thumb-#{@photo.id}"
+page.call 'Effect.Fade', "gallery-photo-thumb-#{@photo.id}"
