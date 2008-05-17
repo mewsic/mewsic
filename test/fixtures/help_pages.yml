@@ -14,11 +14,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  title: MyString
-  body: MyText
+  title: Help page one
+  body: Help help prot sux
   position: 1
 
 two:
-  title: MyString
-  body: MyText
-  position: 1
+  title: Another help page
+  body: To get help, you should ask yourself
+  position: 2
