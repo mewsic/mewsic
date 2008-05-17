@@ -1,7 +1,7 @@
-<%- form_for :help, :url => {:action => 'send_mail', :id => params[:id] } do |f| -%>
-  <p><label for="email">Your e-mail</label>
-  <%= f.text_field :email, :value => params[:help] && params[:help][:email] ? params[:help][:email] : '', :class => 'text' %></p>
-  <p><label for="body">Your message</label>
-  <%= f.text_area :body, :value => params[:help] && params[:help][:body] ? params[:help][:body] : '', :rows => 10 %></p>
+<%- form_for :help, @request, :url => {:action => 'send_mail', :id => params[:id] } do |f| -%>
+  <p><label for="help_email">Your e-mail</label>
+  <%= f.text_field :email, :class => 'text' %></p>
+  <p><label for="help_body">Your message</label>
+  <%= f.text_area :body, :rows => 10 %></p>
   <%= image_submit_tag '/images/button_send.png' %>
 <%- end -%>

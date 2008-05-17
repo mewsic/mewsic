@@ -1907,7 +1907,7 @@ a.cloud5 {
 	font-size: 210%;
 }
 
-.fieldWithErrors input {
+.fieldWithErrors input, .fieldWithErrors textarea {
 	background: #ffe4e4;
 }
 
