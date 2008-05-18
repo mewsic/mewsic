@@ -2110,7 +2110,7 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 	padding:10px 10px 0px;
 }
 .song-stat{
-	background:#F6F6F6 url(..8/graphic_image/rounded_grey_boxbottom.gif) no-repeat bottom left;
+	background:#F6F6F6 url(/images/rounded_grey_boxbottom.gif) no-repeat bottom left;
 	padding:15px;
 }
 /* special arrow */
