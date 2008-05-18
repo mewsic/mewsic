@@ -30,14 +30,12 @@ class HelpControllerTest < ActionController::TestCase
     post :send_mail, :help => { :email => '', :body => '' }
 
     assert_response :success
-    assert flash[:error]
     assert assigns(:request).errors.on(:email)
     assert assigns(:request).errors.on(:body)
 
     post :send_mail, :help => { :email => 'invalid email', :body => 'aaaaa' }
 
     assert_response :success
-    assert flash[:error]
     assert assigns(:request).errors.on(:email)
   end
 
