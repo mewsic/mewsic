@@ -4,11 +4,12 @@ module MlabsHelper
     @@mlab_item_index ||= 0
     @@mlab_item_index += 1
     options = {:dynamic => false}.merge(options)
-    %|
-    <a href="#" onclick="return false;" class="button mlab #{mixable.class.name.downcase} add#{options[:dynamic] == true ? ' dynamic' : ''}">
-      <img src="/images/button_mlab.png" alt="" id="#{mixable.id}_#{Time.now.to_i}_#{@@mlab_item_index}"/>
-    </a>
-    |
+    html_class = 'button mlab add ' << mixable.class.name.downcase
+    html_class += ' dynamic' if options[:dynamic]
+    html_class += ' c' if logged_in?
+
+    image_tag 'button_mlab.png', :class => html_class,
+      :id => "#{mixable.id}_#{Time.now.to_i}_#{@@mlab_item_index}"
   end
   
 end

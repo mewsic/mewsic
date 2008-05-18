@@ -21,7 +21,8 @@ module ApplicationHelper
     1.upto(5) do |i| 
       on_class    = rateable.rating_avg.to_f >= i ? ' on' : ''
       half_class  = rateable.rating_avg.to_f < i && rateable.rating_avg.to_f > (i -1) ? ' on half' : ''
-      result << "<div class=\"star#{on_class}#{half_class}\"></div>"
+      click_class = logged_in? ? ' c' : ''
+      result << "<div class=\"star#{on_class}#{half_class}#{click_class}\"></div>"
     end
     result << %|</div><div class="clearer"></div></div>|
   end

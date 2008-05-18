@@ -142,32 +142,35 @@ var MlabSlider = Class.create(PictureSlider, {
   },
   
   initTrackButtons: function(only_dynamic) {
-    var selector = 'a.button.mlab.track.add';
+    var selector = '.button.mlab.track.add';
     if(only_dynamic) selector += '.dynamic';
-    $$(selector).each(function(link) {
-      link.observe('click', this.onAddTrack.bindAsEventListener(this, link));
+    $$(selector).each(function(element) {
+      element.observe('click', this.onAddTrack.bindAsEventListener(this, element));
     }.bind(this));
   },    
   
   initSongButtons: function(only_dynamic) {
-    var selector = 'a.button.mlab.song.add';
+    var selector = '.button.mlab.song.add';
     if(only_dynamic) selector += '.dynamic';
-    $$(selector).each(function(link) {
-      link.observe('click', this.onAddSong.bindAsEventListener(this, link));
+    $$(selector).each(function(element) {
+      element.observe('click', this.onAddSong.bindAsEventListener(this, element));
     }.bind(this));
   },
   
-  onAddTrack: function(event, link) {    
-    this.handleItemAddition(event, link, 'track');
+  onAddTrack: function(event, element) {    
+    this.handleItemAddition(event, element, 'track');
   },
   
-  onAddSong: function(event, link) {    
-    this.handleItemAddition(event, link, 'song');
+  onAddSong: function(event, element) {    
+    this.handleItemAddition(event, element, 'song');
   },
   
-  handleItemAddition: function(event, link, itemType) {    
+  handleItemAddition: function(event, element, itemType) {    
     event.stop(); 
-    var image = link.down('img');
+    if (element.tagName != 'IMG')
+      return false;
+
+    var image = element;
     var item_id = image.id.match(/^(\d+)_/)[1];
     var item_key = itemType + '_' + item_id;    
     if(MlabSlider.items.get(item_key)) return;

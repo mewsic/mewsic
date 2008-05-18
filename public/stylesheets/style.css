@@ -28,6 +28,9 @@ img{
 .invisible{
 	display: none
 }
+.c {
+        cursor: pointer;
+}
 hr{
 	display: none;
 }
@@ -199,6 +202,11 @@ html>body #search p span{
 }
 .edit-command a{
 	color:#0296C2;
+}
+
+.button .mlab {
+        width: 23px;
+        height: 15px;
 }
 /* parte centrale */
 #path{
@@ -2219,7 +2227,6 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 .rating .stars .star {
   width: 11px;
   height: 9px;
-  cursor: pointer;
   background: transparent url('/images/stars.png') no-repeat left top ;
   float: left;
 }
