@@ -116,7 +116,7 @@
 	
 	  <div class="bottom-box clear-block">
       
-      <%- @direct_siblings.each_with_index do |song, index| -%>
+      <%- @direct_siblings.each_with_index do |mix, index| song = mix.song -%>
         <div onmouseover="$('direct-sibling-tracks-container-<%= song.id %>').show()"
           onmouseout="$('direct-sibling-tracks-container-<%= song.id %>').hide()"
           class="special-box clear-block<%= ['' ' grey-bg'][index % 2] %>">
@@ -151,7 +151,7 @@
 <div class="float-left one-col-big clear-block">
 <div class="simple-list box-grigio-stondato">
 	<div class="top-box clear-block">
-	  <%- @direct_siblings.each_with_index do |song, index| -%>
+	  <%- @direct_siblings.each_with_index do |mix, index| song = mix.song -%>
 		<div class="bottom-box clear-block" style="display:none;" id="direct-sibling-tracks-container-<%= song.id %>">
 		
 		    <%- song.tracks.each do |track| -%>
@@ -206,7 +206,7 @@
 			</div>
 			
 		  <p class="float-right" style="position:relative;"><span class="tracks-number-grey"><span>5</span></span></p>
-			<p class="thumb"><img src="photo/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></p>
+			<p class="thumb"><img src="/images/default_avatars/avatar_icon.gif" alt="Pinco Pallino" width="29" height="29" /></p>
 			<p class="name"><a href="#">Pinco Pallino</a></p>
 			<p class="title"><a href="#">titolo pezzo </a></p>
 			<div class="music-info">
@@ -222,7 +222,7 @@
 			</div>
 			
 		  <p class="float-right"><span class="tracks-number-orange"><span>5</span></span></p>
-			<p class="thumb"><img src="photo/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></p>
+			<p class="thumb"><img src="/images/default_avatars/avatar_icon.gif" alt="Pinco Pallino" width="29" height="29" /></p>
 			<p class="name"><a href="#">Pinco Pallino</a></p>
 			<p class="title"><a href="#">titolo pezzo </a></p>
 			<div class="music-info">
@@ -238,7 +238,7 @@
 			</div>
 			
 		  <p class="float-right"><span class="tracks-number-grey"><span>5</span></span></p>
-			<p class="thumb"><img src="photo/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></p>
+			<p class="thumb"><img src="/images/default_avatars/avatar_icon.gif" alt="Pinco Pallino" width="29" height="29" /></p>
 			<p class="name"><a href="#">Pinco Pallino</a></p>
 			<p class="title"><a href="#">titolo pezzo </a></p>
 			<div class="music-info">
@@ -255,7 +255,7 @@
 			</div>
 			
 		  <p class="float-right"><span class="tracks-number-grey"><span>5</span></span></p>
-			<p class="thumb"><img src="photo/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></p>
+			<p class="thumb"><img src="/images/default_avatars/avatar_icon.gif" alt="Pinco Pallino" width="29" height="29" /></p>
 			<p class="name"><a href="#">Pinco Pallino</a></p>
 			<p class="title"><a href="#">titolo pezzo </a></p>
 			<div class="music-info">
@@ -271,7 +271,7 @@
 			</div>
 			
 		  <p class="float-right"><span class="tracks-number-grey"><span>5</span></span></p>
-			<p class="thumb"><img src="photo/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></p>
+			<p class="thumb"><img src="/images/default_avatars/avatar_icon.gif" alt="Pinco Pallino" width="29" height="29" /></p>
 			<p class="name"><a href="#">Pinco Pallino</a></p>
 			<p class="title"><a href="#">titolo pezzo </a></p>
 			<div class="music-info">
@@ -287,7 +287,7 @@
 			</div>
 			
 		  <p class="float-right"><span class="tracks-number-grey"><span>5</span></span></p>
-			<p class="thumb"><img src="photo/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></p>
+			<p class="thumb"><img src="/images/default_avatars/avatar_icon.gif" alt="Pinco Pallino" width="29" height="29" /></p>
 			<p class="name"><a href="#">Pinco Pallino</a></p>
 			<p class="title"><a href="#">titolo pezzo </a></p>
 			<div class="music-info">
@@ -303,7 +303,7 @@
 			</div>
 			
 		  <p class="float-right"><span class="tracks-number-grey"><span>5</span></span></p>
-			<p class="thumb"><img src="photo/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></p>
+			<p class="thumb"><img src="/images/default_avatars/avatar_icon.gif" alt="Pinco Pallino" width="29" height="29" /></p>
 			<p class="name"><a href="#">Pinco Pallino</a></p>
 			<p class="title"><a href="#">titolo pezzo </a></p>
 			<div class="music-info">
@@ -320,7 +320,7 @@
 			</div>
 			
 		  <p class="float-right"><span class="tracks-number-grey"><span>5</span></span></p>
-			<p class="thumb"><img src="photo/photo_30X30.jpg" alt="Pinco Pallino" width="29" height="29" /></p>
+			<p class="thumb"><img src="/images/default_avatars/avatar_icon.gif" alt="Pinco Pallino" width="29" height="29" /></p>
 			<p class="name"><a href="#">Pinco Pallino</a></p>
 			<p class="title"><a href="#">titolo pezzo </a></p>
 			<div class="music-info">
