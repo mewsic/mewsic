@@ -204,9 +204,9 @@ html>body #search p span{
 	color:#0296C2;
 }
 
-.button .mlab {
-        width: 23px;
-        height: 15px;
+.button.mlab, .button.mlab.dynamic {
+  width: 23px;
+  height: 15px;
 }
 /* parte centrale */
 #path{
@@ -918,7 +918,7 @@ h2.dj-label{
 /* section tags */
 .section-tags{
 	float:right;
-	padding:0px 20px 10px 20px;
+	padding:0px 20px 10px 0px;
 	text-align:right;
 }
 .section-tags .elements{

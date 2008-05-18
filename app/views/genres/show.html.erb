@@ -2,11 +2,12 @@
   
 
 	<div class="box-list one-col clear-block">
-		<div class="simple-list section-tags clear-block">
-			<div class="top-box clear-block">
+		<div class="simple-list clear-block">
+			<h1>TOP GENRES</H1>
+			<div class="top-box section-tags clear-block">
 				<div class="bottom-box clear-block">
 				  <div class="elements clear-block">
-			        <%= render_tag_cloud Song, :genre, :name, {:limit => 24} %>
+						<%= render_tag_cloud Song, :genre, :name, :limit => 30 %>
 				  </div>
 				</div>
 			</div>
