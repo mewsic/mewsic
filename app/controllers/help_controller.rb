@@ -18,7 +18,7 @@ class HelpController < ApplicationController
       flash[:notice] = "Thanks for contacting us! Your question has been sent to our help desk, you'll receive a reply in few hours."
       params[:id] ? redirect_to(:action => 'show', :id => params[:id]) : redirect_to(:action => 'index')
     else
-      flash[:error] = "Your help request could not be sent. Please correct the errors and try again!"
+      flash.now[:error] = "Your help request could not be sent. Please correct the errors and try again!"
       params[:id] ? (show and render(:action => 'show')) : render(:action => 'index')
     end        
   end
