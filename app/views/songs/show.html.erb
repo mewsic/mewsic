@@ -27,7 +27,9 @@
           </p>
           <div class="music-info">
             <p class="float-right">
-              <span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> 
+              <span class="star">
+                <%= rating(@song) %>
+              </span> 
               <%= mlab_button(@song) %>
               <%= play_button(@song) %>
             </p>

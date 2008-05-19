@@ -98,10 +98,7 @@ class Song < ActiveRecord::Base
   
   def update_children_tracks_count
     self.children_tracks_count = self.children_tracks.count(true)
-    save
-    if self.children_tracks.count == 1
-      puts "#{self.reload.children_tracks_count.inspect} => #{self.title}"
-    end
+    save    
   end
   
   def increment_listened_times

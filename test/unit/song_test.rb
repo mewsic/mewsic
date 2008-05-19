@@ -36,7 +36,6 @@ class SongTest < ActiveSupport::TestCase
     #assert_equal 2, song.direct_siblings.size
     track = tracks(:drum_for_gravity_blast_beat)
     #puts track.mixes.count
-    puts song.direct_siblings.size
   end
   
 end
