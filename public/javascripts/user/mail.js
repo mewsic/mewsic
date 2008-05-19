@@ -50,13 +50,15 @@ var MailBox = Class.create({
   initPaginationLinks: function() {
     this.popup.select('div.pagination a').invoke('observe', 'click', this.onClickPage.bind(this));
     this.popup.select('a.ajax').invoke('observe', 'click', this.onClickPage.bind(this));
-    this.popup.select('a.destroy').invoke('observe', 'click', this.onDestroyMessage.bind(this));
+    this.popup.select('a.destroy').each(function(link) {
+      link.observe('click', this.onDestroyMessage.bindAsEventListener(this, link));
+    }.bind(this));        
   },
   
-  onDestroyMessage: function(event) {
+  onDestroyMessage: function(event, link) {     
     event.stop();
-    if(confirm('Are you sure?')) {
-      this.loadPage(event.element().getAttribute('href'), {
+    if(confirm('Are you sure?')) {      
+      this.loadPage(link.getAttribute('href'), {
         method: 'delete',
         parameters: {
           authenticity_token: encodeURIComponent(this.authenticity_token),

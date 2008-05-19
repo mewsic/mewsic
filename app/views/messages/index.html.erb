@@ -1,21 +1,14 @@
 <div>
-  <table border="0" cellspacing="5" cellpadding="5" style="width: 100%">
-    <tr>
-      <th><%= (params[:action] == 'sent') ? 'TO' : 'FROM' %></th>
+  <table cellspacing="0" cellpadding="6" border="0" style="width: 100%;">
+    <tr id="heading">
+      <th width="220"><%= (params[:action] == 'sent') ? 'TO' : 'FROM' %></th>
       <th>Subject</th>
-      <th>Date</th>
-      <th>&nbsp;</th>
+      <th width="60">Date</th>
+      <th width="5"> </th>
     </tr>
-    <% @messages.each do |message| %>
-      <tr id="message_<%= message.id %>">
-        <td><%= link_to_message_by_user(@user, message)  %></td>
-        <td><%= link_to_message_by_body(@user, message)  %></td>
-        <td><%= message.created_at.strftime("%m/%d/%y") %></td>
-        <td><%= link_to 'X', user_message_path(@user, message), :class => 'destroy' %></td>
-      </tr>
-    <% end -%>
+    <%= render :partial => 'message', :collection => @messages %>    
   </table>
-  <%= will_paginate @messages %>
+  <%= will_paginate @messages, :prev_label => "&lt;", :next_label => "&gt;" %>
 </div>
 <script type="text/javascript" charset="utf-8">
   MailBox.instance.updateUnreadCount(<%= @user.unread_message_count %>)
