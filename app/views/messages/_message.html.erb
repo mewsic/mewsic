@@ -1,0 +1,6 @@
+<tr id="message_<%= message.id %>" class="<%= cycle('odd', 'even') %>" >
+  <td><%= link_to_message_by_user(@user, message)  %></td>
+  <td><%= link_to_message_by_body(@user, message)  %></td>
+  <td><%= message.created_at.strftime("%m/%d/%y") %></td>
+  <td><%= link_to image_tag('inbox_trash.png'), user_message_path(@user, message), :class => 'destroy' %></td>
+</tr>

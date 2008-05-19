@@ -1,10 +1,16 @@
-<h1>Messages#new</h1>
-<% remote_form_for :message, :url => user_messages_path, 
-  :loading => "var b = $('new_message_send_button');b.setAttribute('originalvalue', b.value);b.setAttribute('value', 'sending');b.disabled=true;b.value='Sending...';return false;" do |f| -%>
-  TO: <%= f.text_field :to %><br />
-  Subject: <%= f.text_field :subject %><br />
-  Message<br />
-  <%= f.text_area :body, :rows => 10 %><br />
-  <%= submit_tag 'Send', :id => 'new_message_send_button' %> or
-  <%= link_to 'Back to Inbox', user_messages_path(@user), :class => 'ajax' %>
-<% end -%>
+<div id="new-message">
+  <h1>Messages#new</h1>
+  <% remote_form_for :message, :url => user_messages_path, 
+    :loading => "var b = $('new_message_send_button');b.setAttribute('originalvalue', b.value);b.setAttribute('value', 'sending');b.disabled=true;b.value='Sending...';return false;" do |f| -%>
+
+    <span class="label">To:</span> <%= f.text_field :to %>
+    <span class="label">Subject:</span> <%= f.text_field :subject %><br/>
+  	<div id="hr"> </div>
+    <div id="message_label"><span class="label">Message:</span></div>
+    <%= f.text_area :body, :cols => 75, :rows => 18 %>
+
+    <div id="send_button">
+      <%= image_submit_tag 'new_message_button_send.png', :id => 'new_message_send_button' %>
+    </div>    
+  <% end -%>
+</div>

@@ -2481,3 +2481,42 @@ div.popup {
 }
 
 /******************** END INBOX ********************/
+
+/******************** NEW MESSAGE ********************/
+
+#message_body {
+	border: none;
+	width: 90%;
+}
+
+#message_to, #message_subject {
+	border: 1px solid #85BAD1;
+	margin-right: 10px;
+}
+
+#hr {
+	width: 98%;
+	height: 1px;
+	margin: 10px;
+	background-color: #B3B3B3;
+}
+
+#new-message .label {
+	font-weight: bold;
+	color: #00496B;
+	margin-right: 2px;
+}
+
+#send_button {
+	float: right;
+	margin-right: 10px;
+	margin-top: 10px;
+}
+
+#message_label {
+	width: 60px;
+	height: 180px;
+	float: left;
+}
+
+/******************** END NEW MESSAGE ********************/
