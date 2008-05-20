@@ -150,6 +150,16 @@ class PhotosControllerTest < ActionController::TestCase
     end
   end
 
+  def test_should_validate_content_type
+    login_as :quentin
+    assert_no_difference 'Photo.count' do 
+      post :create, :user_id => users(:quentin),
+        :photo => {
+          :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/mlabs.yml'), 'text/yaml')
+        }
+    end
+  end
+
 private
 
   def uploaded_file(path, content_type = "image/jpeg", filename = nil)

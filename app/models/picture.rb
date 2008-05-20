@@ -21,4 +21,5 @@
 
 class Picture < ActiveRecord::Base
   belongs_to :pictureable, :polymorphic => true
+  validates_inclusion_of :content_type, :in => %w(image/jpeg image/png image/gif)
 end

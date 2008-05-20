@@ -9,16 +9,24 @@ class AvatarsController < ApplicationController
   end
   
   def create    
-    if params[:avatar] && params[:avatar][:uploaded_data].respond_to?(:size) && params[:avatar][:uploaded_data].size > 0
-      @pictureable.avatars.each{|a| a.destroy}
-      @avatar = Avatar.new(params[:avatar].merge({:pictureable => @pictureable}))      
-      if @avatar.save
-        @saved = true
-        flash.now[:notice] = 'Image uploaded correctly'
-      end
-    else
-      flash.now[:error] = 'Error uploading your image'
+    unless params[:avatar] && params[:avatar][:uploaded_data].respond_to?(:size) && params[:avatar][:uploaded_data].size > 0
+      raise ArgumentError # XXX
     end
+
+    @avatar = Avatar.new(params[:avatar].merge({:pictureable => @pictureable}))
+    if @avatar.valid?
+      @pictureable.avatars.each{|a| a.destroy}
+    end
+
+    @avatar.save!
+
+    @saved = true
+    flash.now[:notice] = 'Image uploaded correctly'
+
+  rescue ArgumentError, ActiveRecord::RecordInvalid
+    flash.now[:error] = 'Error uploading your avatar. Only PNG, GIF and JPEG image types are allowed!'
+
+  ensure
     render :action => 'new', :layout => false
   end
 

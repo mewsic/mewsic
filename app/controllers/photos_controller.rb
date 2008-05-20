@@ -12,18 +12,22 @@ class PhotosController < ApplicationController
   end
   
   def create 
-    unless @no_upload
-      if params[:photo] && params[:photo][:uploaded_data].respond_to?(:size) && params[:photo][:uploaded_data].size > 0
-        @photo = Photo.new(params[:photo])
-        @photo.pictureable = current_user
-        if @photo.save
-          @saved = true
-          flash.now[:notice] = 'Picture uploaded correctly'
-        end
-      else
-        flash.now[:error] = 'Problems uploading your photo.'
-      end
-    end    
+    return if @no_upload
+
+    unless params[:photo] && params[:photo][:uploaded_data].respond_to?(:size) && params[:photo][:uploaded_data].size > 0
+      raise ArgumentError # XXX
+    end
+
+    @photo = Photo.new(params[:photo])
+    @photo.pictureable = current_user
+    @photo.save!
+    @saved = true
+    flash.now[:notice] = 'Picture uploaded correctly'
+
+  rescue ArgumentError, ActiveRecord::RecordInvalid
+    flash.now[:error] = 'Error uploading your photo. Only PNG, GIF and JPEG image types are allowed!'
+
+  ensure
     render :action => 'new', :layout => false
   end
 

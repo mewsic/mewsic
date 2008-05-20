@@ -87,7 +87,7 @@ class AvatarsControllerTest < ActionController::TestCase
   def test_should_not_create_unless_logged_in
     assert_no_difference 'Avatar.count' do 
       post :create, :user_id => users(:quentin),
-        :avatars => {
+        :avatar => {
           :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/files/test.jpg'), 'image/jpeg')
         }
     end
@@ -96,7 +96,7 @@ class AvatarsControllerTest < ActionController::TestCase
   def test_should_crop_and_resize_avatar
     login_as :quentin
     post :create, :user_id => users(:quentin),
-      :avatars => {
+      :avatar => {
         :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/files/test.jpg'), 'image/jpeg')
       }
 
@@ -109,6 +109,41 @@ class AvatarsControllerTest < ActionController::TestCase
         assert_equal img.width, size
       end
     end
+  end
+
+	def test_should_validate_content_type
+    login_as :quentin
+    assert_no_difference 'Avatar.count' do 
+      post :create, :user_id => users(:quentin),
+        :avatar => {
+          :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/mlabs.yml'), 'text/yaml')
+        }
+    end
+
+    assert_equal 0, users(:quentin).avatars.count
+	end
+
+	def test_should_keep_current_avatar_in_case_of_failure
+    login_as :quentin
+    assert_difference 'Avatar.count' do 
+      post :create, :user_id => users(:quentin),
+        :avatar => {
+          :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/files/test.jpg'), 'image/jpeg')
+        }
+    end
+
+    assert_response :success
+    assert_equal 1, users(:quentin).avatars.count
+
+    assert_no_difference 'Avatar.count' do 
+      post :create, :user_id => users(:quentin),
+        :avatar => {
+          :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/mlabs.yml'), 'text/yaml')
+        }
+    end
+
+    assert_response :success
+    assert_equal 1, users(:quentin).avatars.count
   end
 
 private
