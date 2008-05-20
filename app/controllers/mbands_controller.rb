@@ -1,6 +1,10 @@
 class MbandsController < ApplicationController
   
   before_filter :login_required,  :except => [:index, :show]
+  before_filter :find_mband, :except => [:index, :new, :create]
+  before_filter :mband_membership_required,  :only => [:update, :destroy]
+
+  protect_from_forgery :except => :update
   
   # GET /mbands
   # GET /mbands.xml
@@ -16,7 +20,6 @@ class MbandsController < ApplicationController
   # GET /mbands/1
   # GET /mbands/1.xml
   def show
-    @mband = Mband.find(params[:id])
     @songs = Song.find_paginated_by_mband(1, @mband)
     @tracks = Track.find_paginated_by_user(1, current_user)
     respond_to do |format|
@@ -38,7 +41,6 @@ class MbandsController < ApplicationController
 
   # GET /mbands/1/edit
   def edit
-    @mband = Mband.find(params[:id])
   end
 
   # POST /mbands
@@ -60,26 +62,23 @@ class MbandsController < ApplicationController
   end
 
   # PUT /mbands/1
-  # PUT /mbands/1.xml
+  # PUT /mbands/1.xml  
+  
   def update
-    @mband = Mband.find(params[:id])
-
-    respond_to do |format|
-      if @mband.update_attributes(params[:mband])
-        flash[:notice] = 'Mband was successfully updated.'
-        format.html { redirect_to(@mband) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @mband.errors, :status => :unprocessable_entity }
+    # FIXME: cambiare l'output a seconda del formato richiesto e se ci sono errori.
+    if @mband.update_attributes(params[:mband])
+      if params[:mband] && params[:mband].keys.size <= 2
+        render(:text => @mband.send(params[:mband].keys.first)) and return
       end
-    end
+      render :layout => false
+    else
+      render :text => @mband.errors.map(&:last).join("\n"), :status => 400 if request.xhr?
+    end  
   end
 
   # DELETE /mbands/1
   # DELETE /mbands/1.xml
   def destroy
-    @mband = Mband.find(params[:id])
     @mband.destroy
 
     respond_to do |format|
@@ -89,8 +88,18 @@ class MbandsController < ApplicationController
   end
   
   def rate    
-    @mband = Mband.find(params[:id])
     @mband.rate(params[:rate].to_i, current_user)
     render :layout => false, :text => "#{@mband.rating_count} votes"
   end
+
+private
+  
+  def find_mband
+    @mband = Mband.find(params[:id])
+  end
+  
+  def mband_membership_required
+    redirect_to '/' unless @mband.members.include?(current_user)
+  end
+
 end

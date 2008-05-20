@@ -29,7 +29,7 @@ module MbandsHelper
   end
   
   def mband_edit_button(field)
-    %|<a href="#" class="edit" id="edit_button_user_#{field.to_s}">[edit]</a>| if current_user_page?
+    %|<a href="#" class="edit" id="edit_button_mband_#{field.to_s}">[edit]</a>| if current_user_mband_page?
   end      
   
 end

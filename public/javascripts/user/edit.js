@@ -3,13 +3,14 @@ var InPlaceEditorGenerator = Class.create({
   initialize: function(fields, options) {
     this.fields = fields;
     this.options = options;
-    this.user_id = $('current-user-id').value;
+    this.current_user_id = $('current-user-id').value;
+    this.model_id = $(options.model + '-id').value;
     this.setup();
   },
   
   setup: function() {  
     this.fields.each(function(name) {
-      new Ajax.InPlaceEditor(this.options.model + '_' + name, this.options.url + this.user_id, {
+      new Ajax.InPlaceEditor(this.options.model + '_' + name, this.options.url + this.model_id, {
         externalControl: 'edit_button_' + this.options.model + '_' + name,
         externalControlOnly: true,
         ajaxOptions: { method: 'PUT' },
@@ -183,9 +184,16 @@ var BandMembers = {
 }
 
 document.observe('dom:loaded', function() {
-  new InPlaceEditorGenerator( $w('city'), { url: '/users/', model: 'user', maxLength: 20 } );  
-  new InPlaceEditorGenerator( $w('motto tastes'), { url: '/users/', model: 'user', rows: 6, maxLength: 1000} );  
-  new InPlaceSelectGenerator( $w('country'), { url: '/users/', model: 'user', values_url: '/countries' } );
-  new AjaxFormGenerator( $w('photos_url blog_url myspace_url skype msn'), { url: '/users/', model: 'user' } );
+  var user_id_field   = $('user-id');
+  var mband_id_field  = $('mband-id');
+  if(user_id_field) {
+    new InPlaceEditorGenerator( $w('city'), { url: '/users/', model: 'user', maxLength: 20 } );  
+    new InPlaceEditorGenerator( $w('motto tastes'), { url: '/users/', model: 'user', rows: 6, maxLength: 1000} );  
+    new InPlaceSelectGenerator( $w('country'), { url: '/users/', model: 'user', values_url: '/countries' } );
+    new AjaxFormGenerator( $w('photos_url blog_url myspace_url skype msn'), { url: '/users/', model: 'user' } );
+  } else if(mband_id_field) {
+    new InPlaceEditorGenerator( $w('motto tastes'), { url: '/mbands/', model: 'mband', rows: 6, maxLength: 1000} );  
+    //new AjaxFormGenerator( $w('photos_url blog_url myspace_url'), { url: '/mbands/', model: 'mband' } );    
+  } 
   // initGenderSwitcher();
 });

@@ -27,7 +27,7 @@ class Mband < ActiveRecord::Base
   
   belongs_to :leader, :class_name => 'User', :foreign_key => 'user_id'
   
-  attr_accessible :name
+  attr_accessible :name, :motto, :tastes, :photos_url, :blog_url, :myspace_url
   
   validates_presence_of :name
   

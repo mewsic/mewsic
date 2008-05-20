@@ -82,13 +82,29 @@ var MailBox = Class.create({
     var options = Object.extend({
       method: 'get',
       evalScripts: true,
-      onComplete: this.initPaginationLinks.bind(this)
+      onLoading: this.handlePageLoading.bind(this),
+      onComplete: this.handlePageLoaded.bind(this)
     }, arguments[1] || {});
     new Ajax.Updater(this.container, url, options);
-  }
+  },
+  
+  handlePageLoading: function() {
+    $('popup-spinner').show();
+  },
+  
+  handlePageLoaded: function() {
+    this.initPaginationLinks();
+    $('popup-spinner').hide();    
+  },
   
 });
 
-MailBox.init = function() { MailBox.instance = new MailBox(); }
+MailBox.init = function() { 
+  var user_id_field   = $('user-id');
+  var mband_id_field  = $('mband-id');
+  if(user_id_field) {
+    MailBox.instance = new MailBox();
+  }
+}
 
 document.observe('dom:loaded', MailBox.init);

@@ -6,7 +6,13 @@
       <th width="60">Date</th>
       <th width="5"> </th>
     </tr>
-    <%= render :partial => 'message', :collection => @messages %>    
+    <%- if @messages.size > 0 -%>
+      <%= render :partial => 'message', :collection => @messages %>    
+    <%- else -%>
+      <tr>
+        <td colspan="4">0 new messages</td>
+      </tr>
+    <%- end -%>
   </table>
   <%= will_paginate @messages, :prev_label => "&lt;", :next_label => "&gt;" %>
 </div>
