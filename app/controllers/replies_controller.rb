@@ -8,10 +8,10 @@ class RepliesController < ApplicationController
     @reply.answer = @answer
     @reply.user = current_user
     if @reply.save
-      flash[:notice] = 'Reply has been save correctly.'
+      flash[:notice] = 'Reply has been saved correctly'
       redirect_to answer_url(@answer)
     else
-      flash[:error] = 'The body field is required.'
+      flash[:error] = 'The body field is required!'
       redirect_to answer_url(@answer)
     end
   end
