@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 23) do
+ActiveRecord::Schema.define(:version => 24) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
@@ -196,7 +196,7 @@ ActiveRecord::Schema.define(:version => 23) do
     t.string   "city",                      :limit => 40
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "gender",                                                                 :default => "male"
+    t.string   "gender",                    :limit => 20
     t.string   "photos_url"
     t.string   "blog_url"
     t.string   "myspace_url"

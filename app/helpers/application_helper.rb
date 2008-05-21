@@ -114,4 +114,9 @@ module ApplicationHelper
   def avatar_image(model, size, options = {})
     image_tag((model.avatars.last.nil? ? "/images/default_avatars/avatar_#{size}.gif" : model.avatars.last.public_filename(size)), options)
   end
+  
+  def user_type_image(model, size, options = {})
+    image_tag((model.avatars.last.nil? ? "/images/default_avatars/avatar_#{size}.gif" : model.avatars.last.public_filename(size)), options)
+  end
+  
 end
