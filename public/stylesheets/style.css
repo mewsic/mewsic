@@ -2731,3 +2731,72 @@ div.popup {
 	padding-bottom: 15px;
 }
 /***************** END MBAND INVITE *****************/
+
+/******************** SEARCH ********************/
+
+#search_head_title {
+	padding-bottom: 5px;
+}
+
+.search_title {
+	color:#004D71;
+	font-size:16px;
+	margin-bottom:12px;
+	padding-left: 15px;
+}
+
+.search_blue_text {
+	color: #1A71A0;
+	font-size: 12px;
+	margin-bottom: 0px;
+	margin-top: 6px;
+	float: left;
+	padding-right: 8px;
+}
+
+.search_sky_text {
+	color: #0095C1;
+	font-size: 12px;
+	margin-bottom: 0px;
+	margin-top: 6px;
+	float: left;
+	padding-right: 8px;
+}
+
+.search_gray_text {
+	color: #646567;
+	font-size: 12px;
+	margin-bottom: 0px;
+	margin-top: 6px;
+	float: left;
+	padding-right: 8px;
+}
+
+.search_black_text {
+	color: #000000;
+	font-size: 12px;	
+	margin-bottom: 0px;
+	margin-top: 6px;
+	float: left;
+	padding-right: 15px;	
+}
+
+#search_row {
+	border-bottom: 1px solid #D9D9D9;
+	padding-left: 8px;
+	overflow: hidden;
+	margin: auto;
+	margin-bottom: 5px;
+	height: 33px;
+}
+
+#search_icon_container {
+	width: 38px;
+	float: left;
+}
+
+#search_small_icon_container {
+	width: 20px;
+	float: left;
+	margin-top: 5px;
+}

@@ -6,12 +6,12 @@
 				<%- @mband.members.each do |user| -%>
 				  <div id="mband_members_<%= user.id %>">
   					<p class="edit-command">
-  					  <%- if current_user.is_leader_of?(@mband) && !user.is_leader_of?(@mband) && user != @mband.leader -%>
+  					  <%- if logged_in? && current_user.is_leader_of?(@mband) && !user.is_leader_of?(@mband) && user != @mband.leader -%>
   					    <%= link_to 'set as leader', set_leader_mband_path(@mband, :user_id => user.id), :method => 'put'
                  %>
               <%- end -%>
               <br />
-              <%- if current_user.is_leader_of?(@mband) -%>
+              <%- if logged_in? && current_user.is_leader_of?(@mband) -%>
   					    <%= link_to_remote 'remove',
   					          :url => mband_membership_path(@mband.band_membership_with(user)), :method => 'delete', 
   					          :confirm => "Are you sure", :loading => "Effect.Puff('mband_members_#{user.id}')"
