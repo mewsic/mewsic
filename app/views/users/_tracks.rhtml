@@ -39,10 +39,9 @@
 		  <% end %>
 	  </span>
   </p>
-
-  <% if current_user_page? && @tracks.size.zero? %>
-    <p class="centered grey-text"><em><%= link_to 'import', multitrack_path(current_user) %> your tracks and enjoy!</em></p>
-  <% end %>
-
+  <%= empty_collection_message @tracks,
+        :current_user => "#{link_to 'import', multitrack_path(current_user)} your tracks and enjoy!",
+        :any_user     => "#{@user.login} hasn't uploaded any track yet"
+	-%>
   </div>
 </div>	

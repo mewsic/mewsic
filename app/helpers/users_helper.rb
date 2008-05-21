@@ -89,4 +89,12 @@ module UsersHelper
     content = "<strong>#{content}</strong>" if current_user.unread_message_count > 0
     content
   end
+
+  def empty_collection_message(collection, options = {})
+    return unless collection.size.zero?
+    options.assert_valid_keys(:current_user, :any_user)
+    message = current_user_page? ? options[:current_user] : options[:any_user] 
+
+    %[<p class="centered grey-text"><em>#{message}</em></p>] if message
+  end
 end

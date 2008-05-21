@@ -3,6 +3,9 @@
   <div class="top-box clear-block">
     <div class="bottom-box clear-block">
       <%= render :partial => 'answer', :collection => @answers %>	
+      <%= empty_collection_message @answers,
+            :current_user => "You have no question.<br/>#{link_to 'Do you want to ask something?', answers_path}",
+            :any_user     => "#{@user.login} has no question" -%>
 	</div>
   </div>
 </div>

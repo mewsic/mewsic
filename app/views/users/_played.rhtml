@@ -13,6 +13,9 @@
 				<% end -%>
 			</div>
 	  </div>
-		<p class="next"><a href="#"><strong>Next</strong></a></p>
+	  <%= empty_collection_message @user.instruments,
+	        :current_user => "Do you play any instrument?<br/>#{link_to 'Upload some track!', multitrack_path(current_user)}",
+	        :any_user     => "#{@user.login} doesn't play any instruments" -%>
+	  <p class="next"><a href="#"><strong>Next</strong></a></p>
 	</div>
 </div>
