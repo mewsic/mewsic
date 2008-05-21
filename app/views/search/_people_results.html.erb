@@ -1,0 +1,24 @@
+<div id="people-results">
+  <p class="search_title">People <strong>(<%= @users.total_entries %>)</strong></p>
+  <%- @users.each do |user| -%>
+    <div id="search_row">
+    	<div style="float:left">
+    		<div id="search_icon_container"><img src="/images/change_user_active.png" /></div>
+    		<div id="search_icon_container">
+    		  <%= link_to avatar_image(user, :icon), user_path(user) %> %>
+        </div>
+    		<p class="search_black_text"><strong><%= link_to user.login, user_path(user) %></strong></p>
+    		<p class="search_gray_text"><%= user.country %>, <%= user.city %></p>
+    	</div>
+    	<div style="float:right">
+    		<p class="search_gray_text">Uploads:</p>
+    		<div id="search_small_icon_container"><img src="images/icon_song.png" /></div>
+    		<p class="search_gray_text">Songs ()</p>
+    		<div id="search_small_icon_container"><img src="images/icon_track.png" /></div>
+    		<p class="search_gray_text">Tracks ()</p>
+    	</div>
+    </div>
+  <%- end -%>  
+  <%= will_paginate @users, :class => 'pagination people', :params => { :type => :people }, :prev_label => "&lt;", :next_label => "&gt;" %>
+  <img src="/images/spinner.gif" id="people-results-spinner" style="display:none"/>
+</div>
