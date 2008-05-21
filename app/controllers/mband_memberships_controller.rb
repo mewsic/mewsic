@@ -7,8 +7,7 @@ class MbandMembershipsController < ApplicationController
     redirect_to '/' unless @mband.members.include?(current_user)    
     @user = User.find(params[:user_id])    
     unless MbandMembership.find(:first, :conditions => ["user_id = ? AND mband_id = ?", @user.id, @mband.id])
-      m = MbandMembership.create(:user => @user, :mband => @mband)
-      puts m.errors.inspect
+      MbandMembership.create(:user => @user, :mband => @mband)
     end
     
     redirect_to mband_url(@mband)
