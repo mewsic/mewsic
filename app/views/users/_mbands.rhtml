@@ -1,13 +1,13 @@
 <%- if @user.mbands.count > 0 -%>
 <div class="simple-list white-box clear-block">
-  <h2 class="mband-label">"<%= @user.login %>"'s<br/>MBands</h2>
+  <h2 class="mband-label"><%= @user.login %>'s<br/>MBands</h2>
   <div class="top-box clear-block">
     <div class="bottom-box clear-block">
       <div class="elements clear-block">
         <%- @user.mbands.each do |mband| -%>        
           <div>
             <p class="thumb">
-              <%= avatar_image(mband, :icon) %>
+              <%= link_to avatar_image(mband, :icon), mband_path(mband) %>
             </p>
             <p class="grey-text name"><em>Voce</em></p>
             <p class="name">
