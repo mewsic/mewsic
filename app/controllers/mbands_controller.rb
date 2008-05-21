@@ -4,18 +4,7 @@ class MbandsController < ApplicationController
   before_filter :find_mband, :except => [:index, :new, :create]
   before_filter :mband_membership_required,  :only => [:update, :destroy, :set_leader]
 
-  protect_from_forgery :except => :update
-  
-  # GET /mbands
-  # GET /mbands.xml
-  def index
-    @mbands = Mband.find(:all)
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @mbands }
-    end
-  end
+  protect_from_forgery :except => :update   
 
   # GET /mbands/1
   # GET /mbands/1.xml
