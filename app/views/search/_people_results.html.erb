@@ -3,18 +3,24 @@
   <%- @users.each do |user| -%>
     <div id="search_row">
     	<div style="float:left">
-    		<div id="search_icon_container"><img src="/images/change_user_active.png" /></div>
+    		<div id="search_icon_container">    		  
+    		  <img src="/images/<%= user.type.nil? ? 'user' : user.class.name.downcase %>_type.png" />
+        </div>
     		<div id="search_icon_container">
-    		  <%= link_to avatar_image(user, :icon), user_path(user) %> %>
+    		  <%= link_to avatar_image(user, :icon), user_path(user) %>
         </div>
     		<p class="search_black_text"><strong><%= link_to user.login, user_path(user) %></strong></p>
     		<p class="search_gray_text"><%= user.country %>, <%= user.city %></p>
     	</div>
     	<div style="float:right">
     		<p class="search_gray_text">Uploads:</p>
-    		<div id="search_small_icon_container"><img src="images/icon_song.png" /></div>
+    		<div id="search_small_icon_container">
+    		  <img src="/images/icon_song.png" />
+        </div>
     		<p class="search_gray_text">Songs ()</p>
-    		<div id="search_small_icon_container"><img src="images/icon_track.png" /></div>
+    		<div id="search_small_icon_container">
+    		  <img src="/images/icon_track.png" />
+        </div>
     		<p class="search_gray_text">Tracks ()</p>
     	</div>
     </div>
