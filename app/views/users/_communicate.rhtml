@@ -28,4 +28,46 @@
     <a href="#" class="button close">CLOSE</a>  
     <div class="container" style="display:none;"></div>
   </div>
+  
+  <div id="mband_invite_container">
+    <%- form_for(:mband_memberships, :url => mband_memberships_path, :method => 'post') do |f| -%>
+    <%= hidden_field_tag "user_id", @user.id %>
+  	<div id="mband_invite_top">
+  		<div id="mband_title">
+  			Invite %nick<br />in your MBand
+  		</div>
+  		<div id="mband_logo"> </div>
+
+  	</div>
+  		<div id="mband_invite_core">
+  			<div id="mband_select">
+  				<%= select_tag :mband_id, options_for_select(current_user.mbands.collect{|m| [m.name, m.id]}.unshift(['New Mband', ''])) %>
+  			</div>
+
+  			<div id="mband_add_new">
+  				<span id="band_over_input_text">
+  					<strong>New Mband name </strong>
+  					<%= text_field_tag :mband_name %>
+  				</span>
+
+  			</div>		
+  			<div id="band_buttons_bottom">
+  				<span id="band_alert">
+  					Alert!!!
+  				</span>
+  				<div id="band_buttons">
+  						<div id="band_form_buttons">
+  							<img src="/images/band_button_cancel.png" />							
+  							<%= image_submit_tag 'band_button_ok.png' %>
+  						</div>
+  				</div>
+  			</div>	
+  		</div>
+  	<div id="mband_invite_bottom">
+
+  	</div>
+  	<%- end -%>
+  </div>
+  
+    
 </div>

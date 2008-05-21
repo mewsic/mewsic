@@ -31,6 +31,10 @@ class Mband < ActiveRecord::Base
   
   validates_presence_of :name
   
+  def band_membership_with(user)
+    self.mband_memberships.find(:first, :conditions => ["user_id = ?", user.id])
+  end
+  
   def to_breadcrumb
     self.name
   end

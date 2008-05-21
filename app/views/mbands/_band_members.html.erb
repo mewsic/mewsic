@@ -4,8 +4,20 @@
 		<div class="bottom-box clear-block">
 			<div class="elements clear-block">
 				<%- @mband.members.each do |user| -%>
-				  <div>
-  					<p class="edit-command"><a href="#">Change leader</a><br/><a href="#">Delete</a></p>
+				  <div id="mband_members_<%= user.id %>">
+  					<p class="edit-command">
+  					  <%- if current_user.is_leader_of?(@mband) && !user.is_leader_of?(@mband) && user != @mband.leader -%>
+  					    <%= link_to 'set as leader', set_leader_mband_path(@mband, :user_id => user.id), :method => 'put'
+                 %>
+              <%- end -%>
+              <br />
+              <%- if current_user.is_leader_of?(@mband) -%>
+  					    <%= link_to_remote 'remove',
+  					          :url => mband_membership_path(@mband.band_membership_with(user)), :method => 'delete', 
+  					          :confirm => "Are you sure", :loading => "Effect.Puff('mband_members_#{user.id}')"
+                 %>
+              <%- end -%>
+            </p>
   					<p class="thumb">
   					  <img width="29" height="29" alt="" src="/images/instrument_drum.png"/>
               <%= link_to avatar_image(user, :icon), user_path(user) %>

@@ -308,6 +308,10 @@ class User < ActiveRecord::Base
     return result.first.is_a?(Array) ? User.find(result.first.first) : nil
   end
   
+  def is_leader_of?(mband)
+    mband.leader == self
+  end
+  
   protected
     # before filter 
     def encrypt_password      

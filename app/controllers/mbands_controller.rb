@@ -2,7 +2,7 @@ class MbandsController < ApplicationController
   
   before_filter :login_required,  :except => [:index, :show]
   before_filter :find_mband, :except => [:index, :new, :create]
-  before_filter :mband_membership_required,  :only => [:update, :destroy]
+  before_filter :mband_membership_required,  :only => [:update, :destroy, :set_leader]
 
   protect_from_forgery :except => :update
   
@@ -28,21 +28,6 @@ class MbandsController < ApplicationController
     end
   end
 
-  # GET /mbands/new
-  # GET /mbands/new.xml
-  def new
-    @mband = Mband.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @mband }
-    end
-  end
-
-  # GET /mbands/1/edit
-  def edit
-  end
-
   # POST /mbands
   # POST /mbands.xml
   def create
@@ -50,7 +35,8 @@ class MbandsController < ApplicationController
     @mband.leader = current_user
     respond_to do |format|
       if @mband.save
-        MbandMembership.create(:mband => @mband, :user => current_user, :accepted_at => Time.now)
+        membership = MbandMembership.create(:mband => @mband, :user => current_user)
+        membership.update_attribute(:accepted_at, Time.now)
         flash[:notice] = 'Mband was successfully created.'
         format.html { redirect_to(@mband) }
         format.xml  { render :xml => @mband, :status => :created, :location => @mband }
@@ -90,6 +76,15 @@ class MbandsController < ApplicationController
   def rate    
     @mband.rate(params[:rate].to_i, current_user)
     render :layout => false, :text => "#{@mband.rating_count} votes"
+  end
+  
+  def set_leader    
+    @user = User.find(params[:user_id])
+    @mband = Mband.find(params[:id])
+    redirect_to '/' and return unless current_user.is_leader_of?(@mband).inspect
+    @mband.leader = @user
+    @mband.save    
+    redirect_to mband_url(@mband)
   end
 
 private

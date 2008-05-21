@@ -23,3 +23,7 @@
 #
 # two:
 #   column: value
+
+quentin_mband:
+  name: The Quentin's mband
+  leader: quentin

@@ -3,15 +3,11 @@
     <span class="label">Subject:</span> <%= @message.subject %><br/>
     <div id="message_label"><span class="label">Message:</span></div>
     <div class="message body"><%= sanitize_message @message %></div>
+    <%= link_to 'Reply', new_user_message_path(@user, :reply => @message.id ), :class => 'ajax' %> |
+    <%= link_to 'Back to Inbox', user_messages_path(@user, :page => params[:page]), :class => 'ajax' %>
+    
 </div>
 
-
-<strong><%= @message.subject %></strong>
-<p>
-  <%= sanitize_message @message %>
-</p>
-<%= link_to 'Reply', new_user_message_path(@user, :reply => @message.id ), :class => 'ajax' %> |
-<%= link_to 'Back to Inbox', user_messages_path(@user, :page => params[:page]), :class => 'ajax' %>
 <script type="text/javascript" charset="utf-8">
   MailBox.instance.updateUnreadCount(<%= @user.unread_message_count %>)
 </script>

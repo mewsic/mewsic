@@ -14,12 +14,7 @@
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  mband_id: 1
-  user_id: 1
-  accepted_at: 2008-05-16 14:43:30
-
-two:
-  mband_id: 1
-  user_id: 1
-  accepted_at: 2008-05-16 14:43:30
+quentin_for_quentin_mband:
+  mband: quentin_mband
+  user: quentin
+  accepted_at: <%= 5.days.ago.to_s :db %>

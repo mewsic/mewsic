@@ -18,10 +18,17 @@ class MbandMembership < ActiveRecord::Base
   belongs_to :mband
   belongs_to :user
   
+  attr_protected :accepted_at
+  after_create :set_leader
+  
 private
 
   def create_membership_token
     self.membership_token = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
+  end
+  
+  def set_leader
+    self.mband.update_attribute(:user_id, self.user_id) if self.mband.mband_memberships.count == 1
   end
   
 end

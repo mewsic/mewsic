@@ -2667,3 +2667,67 @@ div.popup {
 	float: right;
 }
 /******************** END NEW BAND MEMBER ********************/
+
+
+/***************** MBAND INVITE *****************/
+
+#mband_invite_container {
+	width: 291px;
+	height: auto; 
+	background: #FFF;
+	position: absolute;
+	top: 0;
+	right: 120px;
+}
+
+#mband_invite_top {
+	width: 291px;
+	height: 63px;
+	background: transparent url('/images/mband_invite_top.png') no-repeat top;	
+}
+
+#mband_invite_bottom {
+	width: 291px;
+	height: 34px;
+	background: transparent url('/images/mband_invite_bottom.png') no-repeat bottom;
+}
+
+#mband_invite_core {
+	background: transparent url('/images/mband_invite_core_bg.png') repeat-y top;
+	padding-top: 3px;
+}
+
+#mband_title {
+	float: left;
+	padding: 21px 0px 0px 29px;
+	color: #004D70;
+	font-size: 14px;
+	font-weight: bold;	
+}
+
+#mband_logo {
+	float: right;
+	background: transparent url('/images/mband_corner_logo.png') no-repeat bottom;
+	width: 63px;
+	height: 37px;
+	padding-right: 35px;
+	padding-top: 12px;
+}
+
+#mband_select {
+	margin-left: 21px;
+	padding: 8px;
+	border-bottom: 1px solid #85BAD1;
+	width: 232px;
+}
+
+#mband_add_new {
+	width: 237px;
+	border-bottom: 1px solid #85BAD1;
+	margin-left: 24px;
+	margin-top: 7px;	
+	color: #00496B;
+	padding: 5px;
+	padding-bottom: 15px;
+}
+/***************** END MBAND INVITE *****************/

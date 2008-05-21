@@ -1,8 +1,13 @@
 ActionController::Routing::Routes.draw do |map|
   
-  map.resources :mbands, :member => {:rate => :put} do |mband|    
+  map.resources :mbands, :member => {:rate => :put, :set_leader => :put} do |mband|    
     mband.resources :avatars
-  end
+  end  
+  
+  map.connect 'mband_memberships/accept/:token', :controller => 'mband_memberships', :action => 'accept'
+  map.resources :mband_memberships
+  
+  
 
   
   map.resources :answers, :member => { :rate => :put } do |answers|
