@@ -27,6 +27,6 @@ document.observe('dom:loaded', function() {
   new Pagination({
     container: 'people-results',
     spinner: 'people-results-spinner',
-    selector: 'div.pagination.people'
+    selector: 'div.pagination.people a'
   });
 });
