@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     # non uso :include => [{:songs => [:tracks, :genre]}] xkè non devo recuperare tutte le tracce
     @songs = Song.find_paginated_by_user(1, @user.id)
     @tracks = Track.find_paginated_by_user(1, @user.id)    
-    @answers = @user.answers.find(:all, :limit => 10, :order => 'created_at DESC')  
+    @answers = @user.answers.find(:all, :limit => 6, :order => 'created_at DESC')  
   end
   
   def activate
