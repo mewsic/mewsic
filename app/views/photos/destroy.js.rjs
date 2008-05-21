@@ -1,2 +1,5 @@
-page.call 'Effect.Fade', "gallery-photo-thumb-#{@photo.id}", :duration => 0.3
-page.call 'Effect.Appear', 'no-images-notice' if @user.photos.size.zero?
+thumb = "gallery-photo-thumb-#{@photo.id}"
+
+page << "myLightWindow._removeLink($('#{thumb}').down('a.lightwindow'));"
+page.remove(thumb)
+page.visual_effect(:appear, 'no-images-notice') if @user.photos.size.zero?

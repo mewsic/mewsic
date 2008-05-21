@@ -444,6 +444,25 @@ lightwindow.prototype = {
 		  }
 		}.bind(this));	
 	},
+  _removeLink : function(removed) {
+    // remove it from the links array
+    this.links = this.links.reject(function(link) {
+      if (link == removed.href)
+			  return true;
+		});
+
+		// remove it from the gallery links array
+		if (gallery = this._getGalleryInfo(removed.rel)) {
+			klass = gallery[0];
+			name = gallery[1];
+			if (this.galleries[klass] && this.galleries[klass][name]) {
+				this.galleries[klass][name] = this.galleries[klass][name].reject(function(link) {
+					if (link == removed.href)
+						return true;
+				});
+			}
+		}
+	},
 	//
 	//  Process a Link
 	//
@@ -1926,5 +1945,5 @@ document.observe('dom:loaded', lightwindowInit, false);
 //
 var myLightWindow = null;
 function lightwindowInit() {
-	myLightWindow = new lightwindow();
+	myLightWindow = new lightwindow({hideGalleryTab: true});
 }
