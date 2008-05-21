@@ -1,12 +1,14 @@
-<div class="tit-sezion-tab clear-block">
+<div class="tit-sezion-tab clear-block" style="position: relative;">
+  <img src="/images/spinner.gif" id="genre_spinner" style="display: none; position: absolute; right: 13px; top: 4px;"/>
 	<div class="float-right">
-		<p class="button float-left">
+		<p class="button float-left">		  
 		  <% if @genres.previous_page %>
 		    <%= link_to_remote image_tag('arrow_simple_left.png', :width => 7, :height => 9),
 		          :update => "genres",
 		          :url => genres_path(:page => @genres.previous_page),
-              :method => :get,
-              :complete => "var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initSongButtons(true); }"
+              :method => :get,  
+              :loading => "$('genre_spinner').show();",
+              :complete => "$('genre_spinner').hide();var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initSongButtons(true); }"
          %>
 		  <% else %>
 		    <%= image_tag('arrow_simple_left.png', :width => 7, :height => 9) %>
@@ -19,12 +21,13 @@
 		          :update => "genres",
 		          :url =>  genres_path(:page => @genres.next_page),
 		          :method => :get,
-		          :complete => "var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initSongButtons(true); }"
+		          :loading => "$('genre_spinner').show();",
+		          :complete => "$('genre_spinner').hide();var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initSongButtons(true); }"
 		    %>
 		  <% else %>
 		    <%= image_tag('arrow_simple_right.png', :width => 7, :height => 9) %>
 		  <% end %>
-		</p>
+		</p> 		
 	</div>
 </div>
 
