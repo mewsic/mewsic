@@ -22,14 +22,14 @@
   </div>
   <div>
     <p class="thumb"><img src="/images/ico_invita.gif" alt="" width="29" height="29" /></p>
-    <p class="name cyan-text"><strong>Invite to your MBand</strong></p>
+    <p class="name cyan-text"><strong><a href="#" onclick="$('mband_invite_container').toggle()">Invite to your MBand</a></strong></p>
   </div>
   <div class="popup" style="display: none;background: #FFF; border: 5px solid grey; width: 700px; height: 350px; position: absolute; top: 155px; right: 0; z-index: 9999;">
     <a href="#" class="button close">CLOSE</a>  
     <div class="container" style="display:none;"></div>
   </div>
   
-  <div id="mband_invite_container">
+  <div id="mband_invite_container" style="display: none;">
     <%- form_for(:mband_memberships, :url => mband_memberships_path, :method => 'post') do |f| -%>
     <%= hidden_field_tag "user_id", @user.id %>
   	<div id="mband_invite_top">
@@ -57,7 +57,7 @@
   				</span>
   				<div id="band_buttons">
   						<div id="band_form_buttons">
-  							<img src="/images/band_button_cancel.png" />							
+  							<a href="#" onclick="$('mband_invite_container').toggle()"><img src="/images/band_button_cancel.png" /></a>
   							<%= image_submit_tag 'band_button_ok.png' %>
   						</div>
   				</div>
