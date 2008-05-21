@@ -3,15 +3,15 @@ class AnswersController < ApplicationController
   before_filter :login_required, :only => [:create, :update]
   
   def index
-    @open_answers = Answer.find(:all, :conditions => "answers.replies_count = 0", :include => {:user => :avatars}, :limit => 10, :order => 'answers.created_at DESC')
-    @top_answers = Answer.find(:all, :include => {:user => :avatars}, :limit => 10, :order => 'answers.replies_count DESC')
-    @newest_answers = Answer.find(:all, :include => {:user => :avatars}, :limit => 10, :order => 'answers.created_at DESC')
+    @open_answers = Answer.find(:all, :conditions => "answers.replies_count = 0", :include => {:user => :avatars}, :limit => 4, :order => 'answers.created_at DESC')
+    @top_answers = Answer.find(:all, :include => {:user => :avatars}, :limit => 8, :order => 'answers.replies_count DESC')
+    @newest_answers = Answer.find(:all, :include => {:user => :avatars}, :limit => 8, :order => 'answers.created_at DESC')
     @top_contributors = User.find(:all, :include => [:avatars], :limit => 10, :order => 'users.replies_count DESC')
   end
 
   def show
     @answer = Answer.find(params[:id], :include => :replies)
-    @other_answers_by_author = @answer.user.answers.find(:all, :conditions => ['answers.id != ?', @answer.id], :limit => 10)
+    @other_answers_by_author = @answer.user.answers.find(:all, :conditions => ['answers.id != ?', @answer.id], :limit => 6)
     @similar_answers = Answer.find(:all, :include => {:user => :avatars}, :limit => 10, :order => 'answers.created_at DESC')
   end
 
