@@ -39,9 +39,9 @@ class Song < ActiveRecord::Base
   
   def self.search_paginated(q, options)
     options = {:per_page => 6, :page => 1}.merge(options)
-    paginate(:per_page => options[:per_page], :page => options[:page], :conditions => [
-      "songs.title LIKE ? OR songs.original_author LIKE ? OR songs.description LIKE  ?",
-      *(Array.new(3).fill("%#{q}%"))
+    paginate(:per_page => options[:per_page], :page => options[:page], :include => [:genre, {:user => :avatars}], :conditions => [
+      "songs.title LIKE ? OR songs.original_author LIKE ? OR songs.description LIKE  ? OR genres.name LIKE ?",
+      *(Array.new(4).fill("%#{q}%"))
     ])
   end
   

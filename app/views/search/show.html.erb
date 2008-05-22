@@ -1,10 +1,45 @@
 <% javascript 'search' %>
 <div id="search_head_title">
-	<p class="search_title"><strong>"<%= params[:id] %>"</strong> search results <strong>(<%= @users.total_entries %>)</strong></p>
+	<p class="search_title"><strong>"<%= params[:id] %>"</strong> search result
+    <strong>(<%= @users.total_entries + @songs.total_entries + @tracks.total_entries %>)</strong>
+  </p>
 </div>
 
-<%= render :partial => 'people_results' %>
+<div id="user-results">
+  <%= render :partial => 'user_results' %>
+</div>
 
 <div style="clear:both"> </div>
 
-<%= render :partial => 'songs_results' %>
+<!-- TABMENU -->
+<div id="search_tabmenu_container">
+	<p class="search_tabmenu_title">Music:</p>
+	<div class="tab active" id="songs-tab">
+	  <div id="search_tabmenu" class="sx"> </div>
+  	<div id="search_tabmenu" class="rp">
+  		<p class="search_green_text"><a href="#" onclick="$('tracks-tab').removeClassName('active');$('songs-tab').addClassName('active');$('track-results').hide();$('song-results').show(); return false;">Songs&nbsp;</a></p>
+  		<p class="search_tabmenu_title"><strong>(<%= @songs.total_entries %>)</strong></p>			
+  	</div>
+  	<div id="search_tabmenu" class="dx"> </div>
+	</div>
+  <div class="tab" id="tracks-tab">
+    <div id="search_tabmenu" class="inactive sx"> </div>
+  	<div id="search_tabmenu" class="inactive rp">
+  		<p class="search_orange_text"><a href="#" onclick="$('songs-tab').removeClassName('active');$('tracks-tab').addClassName('active');$('song-results').hide();$('track-results').show(); return false;">Tracks&nbsp;</a></p>
+  		<p class="search_tabmenu_title"><strong>(<%= @tracks.total_entries %>)</strong></p>			
+  	</div>
+  	<div id="search_tabmenu" class="inactive dx"> </div>
+  </div>
+	
+</div>
+<!-- END TABMENU -->
+
+<div style="clear:both"> </div>
+
+<div id="song-results">
+  <%= render :partial => 'song_results' %>
+</div>
+
+<div id="track-results" style="display: none;">
+  <%= render :partial => 'track_results' %>
+</div>
