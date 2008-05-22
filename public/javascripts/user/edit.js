@@ -168,6 +168,25 @@ function initGenderSwitcher() {
   });
 } 
 
+function initPersonalDetailsBlock() {
+	when('my-user-share-more-link', function(element) {
+		element.observe('click', function() {
+			switch(element.innerHTML) {
+			  case 'show':
+					new Effect.BlindDown('my-user-share');
+					element.innerHTML = 'hide';
+					break;
+				case 'hide':
+					new Effect.BlindUp('my-user-share');
+					element.innerHTML = 'show';
+					break;
+				default:
+					break;
+			}
+		});
+	});
+}
+
 var BandMembers = {
   destroy: function(user_id, member_id) {
     if(!confirm('Are you sure?')) return;
@@ -196,4 +215,5 @@ document.observe('dom:loaded', function() {
     //new AjaxFormGenerator( $w('photos_url blog_url myspace_url'), { url: '/mbands/', model: 'mband' } );    
   } 
   // initGenderSwitcher();
+	initPersonalDetailsBlock();
 });
