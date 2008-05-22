@@ -1,4 +1,4 @@
-<div id="people-results">
+<div id="user-results">
   <p class="search_title">People <strong>(<%= @users.total_entries %>)</strong></p>
   <%- @users.each do |user| -%>
     <div id="search_row">
@@ -9,8 +9,8 @@
     		<div id="search_icon_container">
     		  <%= link_to avatar_image(user, :icon), user_path(user) %>
         </div>
-    		<p class="search_black_text"><strong><%= link_to user.login, user_path(user) %></strong></p>
-    		<p class="search_gray_text"><%= user.country %>, <%= user.city %></p>
+    		<p class="search_black_text"><%= highlight_search user.login %></p>
+    		<p class="search_gray_text"><%= highlight_search user.country %>, <%= highlight_search user.city %></p>
     	</div>
     	<div style="float:right">
     		<p class="search_gray_text">Uploads:</p>
@@ -25,6 +25,6 @@
     	</div>
     </div>
   <%- end -%>  
-  <%= will_paginate @users, :class => 'pagination people', :params => { :type => :people }, :prev_label => "&lt;", :next_label => "&gt;" %>
-  <img src="/images/spinner.gif" id="people-results-spinner" style="display:none"/>
+  <%= will_paginate @users, :class => 'pagination user', :params => { :type => :user }, :prev_label => "&lt;", :next_label => "&gt;" %>
+  <img src="/images/spinner.gif" id="user-results-spinner" style="display:none"/>
 </div>

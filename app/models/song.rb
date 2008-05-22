@@ -37,6 +37,14 @@ class Song < ActiveRecord::Base
   
   acts_as_rated :rating_range => 0..5
   
+  def self.search_paginated(q, options)
+    options = {:per_page => 6, :page => 1}.merge(options)
+    paginate(:per_page => options[:per_page], :page => options[:page], :conditions => [
+      "songs.title LIKE ? OR songs.original_author LIKE ? OR songs.description LIKE  ?",
+      *(Array.new(3).fill("%#{q}%"))
+    ])
+  end
+  
   def self.find_published(options = {})
     self.find(:all, :conditions => ["songs.published = ?", true])
   end      

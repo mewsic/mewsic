@@ -24,9 +24,12 @@ var Pagination = Class.create({
 });
 
 document.observe('dom:loaded', function() {
-  new Pagination({
-    container: 'people-results',
-    spinner: 'people-results-spinner',
-    selector: 'div.pagination.people a'
+  $w("user song").each(function(name) {
+    new Pagination({
+      container: name + '-results',
+      spinner: name + '-results-spinner',
+      selector: 'div.pagination.' + name + ' a'
+    });
   });
+  
 });

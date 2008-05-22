@@ -126,6 +126,14 @@ class User < ActiveRecord::Base
     :photos_url, :blog_url, :myspace_url, :skype, :msn, :skype_public, :msn_public    
   
   before_save :check_links
+                      
+  def self.search_paginated(q, options)
+    options = {:per_page => 6, :page => 1}.merge(options)
+    paginate(:per_page => options[:per_page], :page => options[:page], :conditions => [
+      "users.login LIKE ? OR users.country LIKE ? OR users.city LIKE  ?",
+      *(Array.new(3).fill("%#{q}%"))
+    ])
+  end
   
   def is_pending_friends_by_me_with?(user)    
     Friendship.find(:first, :conditions => ["user_id = ? AND friend_id = ? AND accepted_at IS NULL", self.id, user.id])
