@@ -17,9 +17,7 @@
     <%- end -%>
   </div>
   <div class="user-resume">
-    <p class="star">
-       <%= rating(@user) %>
-    </p>
+		<%= rating(@user) %>
     <div class="float-right align-right">
       <%- unless @user.type == 'Band' -%>
         <p class="blue-text">Gender</p>
