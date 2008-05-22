@@ -70,6 +70,9 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :login, :email, :case_sensitive => false
   #validates_acceptance_of :terms_of_service, :on => :create, :allow_nil => false
   #validates_acceptance_of :eula, :on => :create, :allow_nil => false, :message => "must be abided"
+
+  validates_inclusion_of    :gender, :in => %w(male female other)
+
   before_save :encrypt_password
   before_create :make_activation_code  
 
