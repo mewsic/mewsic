@@ -36,5 +36,9 @@ class Genre < ActiveRecord::Base
   def last_songs(limit = 3)
     self.published_songs.find(:all, :limit => limit, :order => 'created_at DESC')
   end
-  
+
+  def to_breadcrumb
+    name
+  end
+
 end

@@ -73,6 +73,8 @@ class SongsController < ApplicationController
     render :layout => false, :text => "#{@song.rating_count} votes"
   end       
   
+protected
+
   def to_breadcrumb_link
     ['Music', music_path]
   end

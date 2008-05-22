@@ -26,7 +26,7 @@ class MbandsController < ApplicationController
       if @mband.save
         membership = MbandMembership.create(:mband => @mband, :user => current_user)
         membership.update_attribute(:accepted_at, Time.now)
-        flash[:notice] = 'Mband was successfully created.'
+        flash[:notice] = 'M-band created successfully'
         format.html { redirect_to(@mband) }
         format.xml  { render :xml => @mband, :status => :created, :location => @mband }
       else
@@ -74,6 +74,12 @@ class MbandsController < ApplicationController
     @mband.leader = @user
     @mband.save    
     redirect_to mband_url(@mband)
+  end
+
+protected
+
+  def to_breadcrumb_link
+    ["Bands & deejays", bands_and_deejays_path]
   end
 
 private

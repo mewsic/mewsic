@@ -22,6 +22,12 @@ class GenresController < ApplicationController
       format.html
     end
   end
+
+protected
+
+  def to_breadcrumb_link
+    ['Genres', music_path]
+  end
   
 end
 

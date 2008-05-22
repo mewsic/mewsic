@@ -301,7 +301,7 @@ class UserTest < Test::Unit::TestCase
     end
     
     def create_user(options = {})
-      User.create({ :login => 'quire', :email => 'quire@example.com', :password => 'quirezzz', :password_confirmation => 'quirezzz', :country => 'Italy'}.merge(options)) #, :terms_of_service => "1", :eula => "1" }.merge(options))
+      User.create({ :login => 'quire', :gender => 'male', :email => 'quire@example.com', :password => 'quirezzz', :password_confirmation => 'quirezzz', :country => 'Italy'}.merge(options)) #, :terms_of_service => "1", :eula => "1" }.merge(options))
     end
     
     def create_instrument

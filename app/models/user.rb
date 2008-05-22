@@ -145,7 +145,7 @@ class User < ActiveRecord::Base
   def band?
     self.type == 'Band'
   end
-  
+
   def forgot_password
     @forgotten_password = true
     self.make_password_reset_code

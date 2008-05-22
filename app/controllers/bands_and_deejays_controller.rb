@@ -10,4 +10,8 @@ class BandsAndDeejaysController < ApplicationController
     @newest = User.find(:all, :conditions => ["type = ? OR type = ?", 'Band', 'Dj'], :limit => 3, :order => 'created_at DESC')
     @most_instruments = User.find_band_or_deejay_with_more_instruments
   end
+
+  def to_breadcrumb
+    'bands &amp; deejays'
+  end
 end

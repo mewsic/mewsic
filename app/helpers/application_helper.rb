@@ -47,7 +47,7 @@ module ApplicationHelper
     default_breadcrumb = '<div id="path"><a href="/">Home</a>'
     unless controller.controller_name == 'dashboard'
       if controller.respond_to?(:to_breadcrumb_link)
-        text, path = controller.to_breadcrumb_link
+        text, path = controller.send(:to_breadcrumb_link)
         default_breadcrumb += ' : ' + link_to(text, path)
       else
         default_breadcrumb += ' : ' + link_to(controller.send(:to_breadcrumb).capitalize, send("#{controller.controller_name}_path"))
