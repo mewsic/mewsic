@@ -1,6 +1,6 @@
 <% javascript 'search' %>
 <div id="search_head_title">
-	<p class="search_title"><strong>"<%= params[:id] %>"</strong> search result
+	<p class="search_title"><strong>"<%= @q %>"</strong> search result
     <strong>(<%= @users.total_entries + @songs.total_entries + @tracks.total_entries %>)</strong>
   </p>
 </div>
