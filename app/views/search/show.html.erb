@@ -4,7 +4,8 @@
     <strong>(<%= @users.total_entries + @songs.total_entries + @tracks.total_entries %>)</strong>
   </p>
 </div>
-
+      
+<p class="search_title">People <strong>(<%= @users.total_entries %>)</strong></p>
 <div id="user-results">
   <%= render :partial => 'user_results' %>
 </div>
@@ -42,4 +43,11 @@
 
 <div id="track-results" style="display: none;">
   <%= render :partial => 'track_results' %>
+</div>
+
+<div style="clear:both"> </div>
+
+<p class="search_title">Ideas <strong>(<%= @ideas.total_entries %>)</strong></p>
+<div id="idea-results">
+  <%= render :partial => 'idea_results' %>
 </div>

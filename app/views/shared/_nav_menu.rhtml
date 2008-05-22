@@ -18,7 +18,7 @@
         <%- form_tag new_search_path, :method => 'get' do -%>
           <p><span>search</span></p>
           <p class="search-input">          
-            <%= text_field_tag :q %>
+            <%= text_field_tag :q, @q || '' %>
             <input name="search" type="image" src="/images/search_button.gif" alt="search" class="input-button" />          
           </p>
         <%- end -%>
