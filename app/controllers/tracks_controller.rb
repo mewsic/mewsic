@@ -2,6 +2,7 @@ class TracksController < ApplicationController
   
   def index
     @tracks = Track.find_paginated_by_user(params[:page], params[:id])
+    @user = User.find(params[:id])
     render :layout => false
   end
   

@@ -9,6 +9,7 @@ class SongsController < ApplicationController
       params[:id] = params[:genre_id]
     end
     if params.has_key?("user_id")
+      @user = User.find(params[:user_id])
       @songs = Song.find_paginated_by_user(params[:page], params[:user_id])
       params[:id] = params[:user_id]
     end
