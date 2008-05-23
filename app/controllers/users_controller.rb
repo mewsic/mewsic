@@ -39,6 +39,10 @@ class UsersController < ApplicationController
     @songs = Song.find_paginated_by_user(1, @user.id)
     @tracks = Track.find_paginated_by_user(1, @user.id)    
     @answers = @user.answers.find(:all, :limit => 6, :order => 'created_at DESC')  
+
+  rescue ActiveRecord::RecordNotFound
+    flash[:error] = 'User not found..'
+    redirect_to '/'
   end
   
   def activate
