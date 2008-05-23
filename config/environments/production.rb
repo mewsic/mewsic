@@ -30,5 +30,6 @@ ENV['INLINEDIR'] = "/tmp/#{$$}"
 APPLICATION = {
   :url => 'http://e4e1475b.myousica.com',
   :email => 'no-reply@myousica.com',
-  :audio_url => 'rtmp://e4e1475b.myousica.com/audio/'
+  :fms_url => 'rtmp://fms.myousica.com/',
+  :media_url => 'upload.myousica.com/'
 }

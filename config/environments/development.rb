@@ -19,5 +19,6 @@ config.action_mailer.delivery_method = :sendmail
 APPLICATION = {
   :url => 'http://localhost:3000',
   :email => 'no-reply@myousica.com',
-  :audio_url => 'rtmp://localhost:3000/audio/'
+  :fms_url => 'rtmp://localhost:3000/',
+  :media_url => 'rtmp://localhost:3000/'
 }
