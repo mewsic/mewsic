@@ -22,5 +22,5 @@ APPLICATION = {
   :url => 'http://localhost:3000',
   :email => 'no-reply@myousica.com',
   :fms_url => 'rtmp://localhost:3000/',
-  :media_url => 'localhost:3000/'
+  :media_url => 'http://localhost:3000/'
 }
