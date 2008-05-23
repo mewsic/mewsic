@@ -30,6 +30,11 @@ class SongsController < ApplicationController
     end  
   end
   
+  def direct_sibling_tracks
+    @song = Song.find(params[:id], :include => [:user, { :mixes => { :track => [:instrument, :parent_song] } }, :genre])        
+    render :layout => false
+  end
+  
   def edit
     render :text => ''
   end
@@ -65,7 +70,7 @@ class SongsController < ApplicationController
         render :xml => @song
       end
     end
-  end
+  end    
   
   def rate    
     @song = Song.find(params[:id])

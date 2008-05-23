@@ -119,13 +119,27 @@
 	  <div class="bottom-box clear-block">
       
       <%- @direct_siblings.each_with_index do |mix, index| song = mix.song -%>
-        <div onmouseover="$('direct-sibling-tracks-container-<%= song.id %>').show()"
-          onmouseout="$('direct-sibling-tracks-container-<%= song.id %>').hide()"
-          class="special-box clear-block<%= ['' ' grey-bg'][index % 2] %>">
+        <div class="special-box clear-block<%= ['' ' grey-bg'][index % 2] %>">
   			  <div class="float-right" style="padding-right:10px;">
   			    <div class="special-arrow"></div>
   			  </div>
-    		  <p class="float-right" style="position:relative;"><span class="tracks-number-grey"><span><%= song.tracks.count %></span></span></p>
+    		  <p class="float-right" style="position:relative;">
+    		    <span class="tracks-number-grey">
+    		      <a href="#" onclick="new Ajax.Updater('direct-siblings', '<%= direct_sibling_tracks_song_path(song) %>', {
+    		        method: 'GET',
+    		        onLoading: function() {
+    		          $('direct-siblings').hide();
+    		          $('direct-siblings-loading').show();
+    		        },
+    		        onComplete: function() {
+    		          $('direct-siblings-loading').hide();
+    		          $('direct-siblings').show();    		          
+    		        }
+    		      });return false;" style="color: #FFF; display: block; text-decoration: none;height: 100%;">
+    		        <%= song.tracks.count %>
+    		      </a>
+            </span>
+          </p>
     			<p class="thumb">
     			  <%= link_to avatar_image(song.user, :icon), user_path(song.user) %>
           </p>
@@ -153,36 +167,8 @@
 <div class="float-left one-col-big clear-block">
 <div class="simple-list box-grigio-stondato">
 	<div class="top-box clear-block">
-	  <%- @direct_siblings.each_with_index do |mix, index| song = mix.song -%>
-		<div class="bottom-box clear-block" style="display:none;" id="direct-sibling-tracks-container-<%= song.id %>">
-		
-		    <%- song.tracks.each do |track| -%>
-		      <div class="elements clear-block">
-    			<p class="thumb">
-    			  <%= image_tag(track.instrument.icon) %>
-    			  <%= link_to avatar_image(song.user, :icon), user_path(song.user) %>
-          </p>
-    			<p class="name align-right">
-    			  <%= link_to song.user.login, user_path(song.user) %>
-          </p>
-    			<p class="title align-right">
-    			  <%= link_to song.title, song_path(song_path) %>
-          </p>
-    			<div class="music-info">
-    			<p class="bordered"><span>bpm: <strong><%= track.bpm %></strong></span> <span>key: <strong><%= track.tonality %></strong></span> <span>runtime: <strong><%= track.length %> </strong></span></p>
-    			<p class="float-right">
-    			  <span class="star">
-    			    <%= rating(track) %>
-            </span>
-    			  <%= mlab_button(track) %>
-    			  <%= play_button(track) %>
-          </p>
-    			<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
-    			</div>
-    		  </div>		  		  		  
-        <%- end -%>      			
-	  </div>
-	  <%- end -%>
+	  <img src="/images/spinner.gif" id="direct-siblings-loading" style="display: none" />
+	  <div id="direct-siblings"></div>
 	</div>
 			<p class="abstract align-right"><a href="#">Next</a></p>	
   </div>

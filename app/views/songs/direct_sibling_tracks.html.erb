@@ -1,0 +1,27 @@
+<div class="bottom-box clear-block" id="direct-sibling-tracks-container-<%= @song.id %>">
+  <%- @song.tracks.each do |track| -%>
+    <div class="elements clear-block">
+		<p class="thumb">
+		  <%= image_tag(track.instrument.icon) %>
+		  <%= link_to avatar_image(@song.user, :icon), user_path(@song.user) %>
+    </p>
+		<p class="name align-right">
+		  <%= link_to @song.user.login, user_path(@song.user) %>
+    </p>
+		<p class="title align-right">
+		  <%= link_to @song.title, song_path(@song_path) %>
+    </p>
+		<div class="music-info">
+		<p class="bordered"><span>bpm: <strong><%= track.bpm %></strong></span> <span>key: <strong><%= track.tonality %></strong></span> <span>runtime: <strong><%= track.length %> </strong></span></p>
+		<p class="float-right">
+		  <span class="star">
+		    <%= rating(track) %>
+      </span>
+		  <%= mlab_button(track) %>
+		  <%= play_button(track) %>
+    </p>
+		<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
+		</div>
+	  </div>		  		  		  
+  <%- end -%>      			
+</div>
