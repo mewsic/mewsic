@@ -8,14 +8,36 @@
   </div>
 </div>
 
+<% javascript('user/avatar') if current_user_page? %>
 <div class="user-profile clear-block">
-  <div class="user-photo" id="user-avatar">
-    <%- if current_user_page? -%>
-    <a href="#" onclick="Popup.open('<%= new_user_avatar_path(@user) %>', {height: 140}); return false;"><%= avatar_image(@user, :big, :class => :avatar) %></a>
-    <%- else -%>
-      <%= avatar_image(@user, :big, :class => :avatar) %>
-    <%- end -%>
-  </div>
+	<div id="user-avatar">
+		<div id="user-avatar-container">
+			<%= avatar_image(@user, :big, :id => 'user-avatar-image') %>
+		</div>
+
+		<% if current_user_page? %>
+		<div id="change-avatar"> </div>
+		<div id="change-avatar-upload">
+			<div style="float: right;" id="change-avatar-close">
+				<%= image_tag 'change_avatar_icon_close.png' %>
+			</div>
+			<div id="change-avatar-interact">
+				<div id="change-avatar-button">
+						<% change_avatar_form(@user) do |f| %>
+							<%= f.file_field :uploaded_data, :id => 'change-avatar-file-input' %>
+							<%= f.hidden_iframe %>
+						<% end %>
+				</div>
+				<div id="change-avatar-status">	</div>
+				<div id="change-avatar-alert">
+					Error! Please upload again.
+				</div>
+			</div>
+		</div>
+		<div class="clear-float"> </div>
+	<% end %>
+	</div>
+
   <div class="user-resume">
 		<%= rating(@user) %>
     <div class="float-right align-right">

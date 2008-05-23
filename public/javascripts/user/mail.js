@@ -99,12 +99,11 @@ var MailBox = Class.create({
   
 });
 
-MailBox.init = function() { 
+document.observe('dom:loaded', function() {
   var user_id_field   = $('user-id');
   var mband_id_field  = $('mband-id');
   if(user_id_field) {
     MailBox.instance = new MailBox();
   }
-}
+});
 
-document.observe('dom:loaded', MailBox.init);

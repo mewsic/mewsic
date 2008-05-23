@@ -1014,11 +1014,6 @@ h2.dj-label{
 	/*padding-top: 27px;*/
 	margin-bottom:30px;
 }
-.user-photo{
-	float:left;
-	margin-right:20px;
-	/*margin-top: 27px;*/
-}
 .user-resume{
 	float:left;
 	width:320px;
@@ -1506,6 +1501,111 @@ html>body .register p{
         width:290px;
 }
 
+/******************** CHANGE AVATAR ********************/
+
+#user-avatar {
+	width: 170px;
+	height: 160px;
+	float: left;
+}
+
+#user-avatar-container {
+	padding: 5px;
+	background: transparent;
+	width: 150px;
+	height: 150px;
+	float:left;
+	margin-right: 20px;
+}
+#user-avatar-container.active {
+	cursor: pointer;
+	background: #97D1E9;
+}
+
+#change-avatar {
+	width: 94px;
+	height: 18px;
+	left:0px;
+	/*top:160px;*/
+	position:relative;
+	z-index:101;
+	float:left;
+}
+#change-avatar.active {
+	cursor: pointer;
+	background: transparent url(/images/change_avatar_button.png) no-repeat top;
+}
+
+#change-avatar-upload {
+	width: 150px;
+	padding: 5px;
+	padding-top: 0px;
+	height: 67px;
+	background: #97D1E9 url(/images/change_avatar_upload_bg.png) no-repeat bottom;
+	top:-18px;
+	left:0px;
+	position:relative;
+	float:left;
+}
+
+#change-avatar-interact {
+	padding-top: 8px;
+	position:relative;
+	top: -130px;
+}
+
+#change-avatar-close {
+	position:relative;
+	top: 0px;
+	cursor: pointer;
+}
+
+#change-avatar-button {
+	background: transparent url(/images/change_avatar_button_browse.png) no-repeat right bottom;
+	float: left;
+	height: 34px;
+	width: 115px;
+	position: relative;
+	top: 140px;
+}
+
+#change-avatar-file-input {
+	opacity: 0.01;
+	filter: alpha(opacity=0.01);
+	position: absolute;
+	top: 13px;
+	right: 13px;
+}
+
+#change-avatar-status {
+	float: right;
+	width: 18px;
+	height: 18px;
+	position: relative;
+	top: 155px;
+}
+#change-avatar-status.ok {
+	background: transparent url(/images/change_avatar_icon_ok.png) no-repeat top right;
+}
+#change-avatar-status.error {
+	background: transparent url(/images/change_avatar_icon_error.png) no-repeat top right;
+}
+#change-avatar-status.loading {
+	background: transparent url(/images/change_avatar_spinner.gif) no-repeat top right;
+}
+
+#change-avatar-alert {
+	color: #BD0926;
+	width: 150px;
+	float: left;
+	font-size: 11px;
+	padding-left: 4px;
+	padding-top: 4px;
+	display: none;
+}
+#change-avatar-alert.active {
+	display:inline;
+}
 
 /* login */
 div.login {

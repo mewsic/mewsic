@@ -3,31 +3,44 @@ class AvatarsController < ApplicationController
   before_filter :login_required
   before_filter :find_pictureable
   before_filter :check_current_user
-  
-  def new
-    render :layout => false
-  end
-  
-  def create    
+
+  def update
     unless params[:avatar] && params[:avatar][:uploaded_data].respond_to?(:size) && params[:avatar][:uploaded_data].size > 0
-      raise ArgumentError # XXX
+      render :nothing => true and return
     end
 
     @avatar = Avatar.new(params[:avatar].merge({:pictureable => @pictureable}))
-    if @avatar.valid?
-      @pictureable.avatars.each{|a| a.destroy}
+    respond_to do |format|
+      if @avatar.valid?
+        @pictureable.avatars.each(&:destroy)
+        @avatar.save!
+
+        format.html { redirect_to user_url(current_user) }
+        format.js do
+          responds_to_parent do
+            render :update do |page|
+              page['user-avatar-image'].src = @avatar.public_filename(:big)
+              page << %[UserAvatar.instance.uploadCompleted();]
+            end
+          end
+        end
+      else
+        format.html do
+          flash[:error] = @avatar.errors.full_messages.join("\n")
+          redirect_to user_url(current_user) 
+        end
+
+        format.js do
+          responds_to_parent do
+            render :update do |page|
+              # TODO: These messages should go into a tooltip, once they're implemented
+              #page['change-avatar-alert'].innerHTML = @avatar.errors.full_messages.join(",")
+              page << %[UserAvatar.instance.uploadFailed();]
+            end
+          end
+        end
+      end
     end
-
-    @avatar.save!
-
-    @saved = true
-    flash.now[:notice] = 'Image uploaded correctly'
-
-  rescue ArgumentError, ActiveRecord::RecordInvalid
-    flash.now[:error] = 'Error uploading your avatar. Only PNG, GIF and JPEG image types are allowed!'
-
-  ensure
-    render :action => 'new', :layout => false
   end
 
 private
@@ -39,7 +52,7 @@ private
       @pictureable = Mband.find(params[:mband_id])  
     end
   end  
-  
+
   def check_current_user
     if params[:user_id]
       redirect_to '/' and return unless current_user == @pictureable
@@ -47,5 +60,5 @@ private
       redirect_to '/' and return unless @pictureable.members.include?(current_user)
     end                
   end
-  
+
 end
