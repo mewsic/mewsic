@@ -1938,12 +1938,9 @@ lightwindow.prototype = {
 
 /*-----------------------------------------------------------------------------------------------*/
 
-document.observe('dom:loaded', lightwindowInit, false);
-
-//
-//	Set up all of our links
-//
-var myLightWindow = null;
-function lightwindowInit() {
-	myLightWindow = new lightwindow({hideGalleryTab: true});
-}
+document.observe('dom:loaded', function() {
+	//
+	//	Set up all of our links
+	//
+	var myLightWindow = new lightwindow({hideGalleryTab: true});
+});
