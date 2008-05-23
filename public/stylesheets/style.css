@@ -751,7 +751,7 @@ h2.dj-label{
 	font-weight:bold;
 	font-size:12px;
 }
-.tracks-number-orange{
+.tracks-number-orange, .tracks-number.orange{
 	background:url(/images/tracks_number_BG_orange.png) no-repeat top left;
 	height:29px;
 	width:29px;
@@ -766,7 +766,7 @@ h2.dj-label{
 	font-weight:bold;
 	font-size:12px;
 }
-.tracks-number-grey{
+.tracks-number-grey, .tracks-number.grey{
 	background:url(/images/tracks_number_BG_grey.png) no-repeat top left;
 	height:29px;
 	width:29px;

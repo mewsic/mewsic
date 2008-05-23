@@ -116,20 +116,22 @@
 
 	<div class="top-box clear-block">
 	
-	  <div class="bottom-box clear-block">
+	  <div class="bottom-box clear-block" id="siblings">
       
       <%- @direct_siblings.each_with_index do |mix, index| song = mix.song -%>
-        <div class="special-box clear-block<%= ['' ' grey-bg'][index % 2] %>">
+        <div id="sibling-<%= song.id %>" class="sibling special-box clear-block<%= ['' ' grey-bg'][index % 2] %>">
   			  <div class="float-right" style="padding-right:10px;">
   			    <div class="special-arrow"></div>
   			  </div>
     		  <p class="float-right" style="position:relative;">
-    		    <span class="tracks-number-grey">
+    		    <span class="tracks-number grey" id="track-number-<%= song.id %>">
     		      <a href="#" onclick="new Ajax.Updater('direct-siblings', '<%= direct_sibling_tracks_song_path(song) %>', {
     		        method: 'GET',
     		        onLoading: function() {
     		          $('direct-siblings').hide();
     		          $('direct-siblings-loading').show();
+    		          $('siblings').select('.sibling').invoke('removeClassName', 'active');
+    		          $('sibling-<%= song.id %>').addClassName('active');
     		        },
     		        onComplete: function() {
     		          $('direct-siblings-loading').hide();
@@ -167,7 +169,7 @@
 <div class="float-left one-col-big clear-block">
 <div class="simple-list box-grigio-stondato">
 	<div class="top-box clear-block">
-	  <img src="/images/spinner.gif" id="direct-siblings-loading" style="display: none" />
+	  <div id="direct-siblings-loading" style="display: none; height:200px" ><img src="/images/spinner.gif" /></div>
 	  <div id="direct-siblings"></div>
 	</div>
 			<p class="abstract align-right"><a href="#">Next</a></p>	
