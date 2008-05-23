@@ -17,6 +17,9 @@ class MbandMembership < ActiveRecord::Base
   before_create :create_membership_token
   belongs_to :mband
   belongs_to :user
+
+  validates_presence_of :mband_id, :user_id
+  validates_associated :mband, :user
   
   attr_protected :accepted_at
   after_create :set_leader
