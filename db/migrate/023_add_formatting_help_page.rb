@@ -7,6 +7,6 @@ class AddFormattingHelpPage < ActiveRecord::Migration
   end
 
   def self.down
-    HelpPage.find_by_title('Formatting help').destroy
+    HelpPage.find_by_title('Formatting help').destroy rescue nil
   end
 end
