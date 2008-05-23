@@ -2795,6 +2795,7 @@ div.popup {
 #mband_invite_core {
 	background: transparent url('/images/mband_invite_core_bg.png') repeat-y top;
 	padding-top: 3px;
+	height: 166px;
 }
 
 #mband_title {
@@ -2812,6 +2813,7 @@ div.popup {
 	height: 37px;
 	padding-right: 35px;
 	padding-top: 12px;
+	clear: none;
 }
 
 #mband_select {
