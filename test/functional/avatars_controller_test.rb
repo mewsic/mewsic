@@ -20,85 +20,106 @@ class AvatarsControllerTest < ActionController::TestCase
   end
   
   def test_should_route_user_avatars
-    options = {:controller => 'avatars', :action => 'new', :user_id => users(:quentin).id.to_s }
-    assert_routing "/users/#{users(:quentin).id}/avatars/new", options
+    user_id = users(:quentin).id
+    options = {:controller => 'avatars', :action => 'update',
+               :format => 'js', :user_id => user_id.to_s}
+    path = "/users/#{user_id}/avatar.js"
+
+    assert_generates path, options
+    assert_recognizes options, { :path => path, :method => 'put' }
   end
   
-  def test_new_should_redirect_unless_logged
-    get :new, :user_id => users(:quentin).id
-    assert_response :redirect
+  def test_update_should_redirect_unless_logged
+    put :update, :user_id => users(:quentin).id, :format => 'js'
+    assert_response 406
   end
   
-  def test_new_should_success_if_logged
+  def test_update_should_success_if_logged
     login_as :quentin
-    get :new, :user_id => users(:quentin).id
+    put :update, :user_id => users(:quentin).id, :format => 'js',
+      :avatar => {
+        :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/files/test.jpg'), 'image/jpeg')
+      }
     assert_response :success
   end
   
   def test_should_redirect_if_user_not_found_or_not_activated
-    get :new, :user_id => users(:aaron)
+    put :update, :user_id => users(:aaron), :format => 'js'
+    assert_response 406
+    put :update, :user_id => users(:aaron), :format => 'html'
     assert_response :redirect
-    get :new, :user_id => 99999999
+
+    put :update, :user_id => 99999999, :format => 'js'
+    assert_response 406
+    put :update, :user_id => 99999999, :format => 'html'
     assert_response :redirect
   end    
   
-  def test_create_should_redirect_unless_current_user_avatars
+  def test_update_should_redirect_unless_current_user_avatars
     login_as :user_10
-    post :create, :user_id => users(:quentin)
+    put :update, :user_id => users(:quentin), :format => 'js'
     assert_not_nil assigns["pictureable"]
     assert_nil assigns["avatars"]
+    assert_response :redirect
+
+    put :update, :user_id => users(:quentin), :format => 'html'
     assert_response :redirect
   end
   
   def test_should_not_create_if_file_is_blank
     login_as :quentin
     assert_no_difference 'Avatar.count' do 
-      post :create, :user_id => users(:quentin), :avatar  => {}
+      put :update, :user_id => users(:quentin), :avatar  => {}, :format => 'js'
     end
+    assert_response :redirect
   end  
 
   def test_should_create_and_destroy_previous        
     login_as :quentin
     assert_difference 'Avatar.count' do             
-      post :create, :user_id => users(:quentin), :avatar => {
+      put :update, :user_id => users(:quentin), :avatar => {
         :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/files/test.jpg'), 'image/jpeg')
-      }
-      post :create, :user_id => users(:quentin), :avatar => {
+      }, :format => 'js'
+      put :update, :user_id => users(:quentin), :avatar => {
         :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/files/test.jpg'), 'image/jpeg')
-      }      
+      }, :format => 'js'
     end
     assert_equal 1, users(:quentin).avatars.count
+    assert_response :success
   end
   
   def test_should_not_create_if_not_current_user
     login_as :user_3
     quentin_avatars_count = users(:quentin).avatars.count
     user_3_avatars_count = users(:user_3).avatars.count
-    assert_no_difference 'Photo.count' do 
-      post :create, :user_id => users(:quentin),
+    assert_no_difference 'Avatar.count' do 
+      put :update, :user_id => users(:quentin),
         :avatar => {
           :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/files/test.jpg'), 'image/jpeg')
-        }
+        }, :format => 'js'
     end
+    assert_response :redirect
     assert_equal quentin_avatars_count, users(:quentin).avatars.count
     assert_equal user_3_avatars_count, users(:user_3).avatars.count
   end
   
   def test_should_not_create_unless_logged_in
     assert_no_difference 'Avatar.count' do 
-      post :create, :user_id => users(:quentin),
+      put :update, :user_id => users(:quentin),
         :avatar => {
           :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/files/test.jpg'), 'image/jpeg')
-        }
+        }, :format => 'js'
     end
+    assert_response 406
   end    
 
   def test_should_crop_and_resize_avatar
     login_as :quentin
-    post :create, :user_id => users(:quentin),
+    put :update, :user_id => users(:quentin),
       :avatar => {
         :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/files/test.jpg'), 'image/jpeg')
-      }
+      }, :format => 'js'
+    assert_response :success
 
     avatar = users(:quentin).avatars.first
     Avatar.attachment_options[:thumbnails].each do |key, size|
@@ -114,11 +135,12 @@ class AvatarsControllerTest < ActionController::TestCase
 	def test_should_validate_content_type
     login_as :quentin
     assert_no_difference 'Avatar.count' do 
-      post :create, :user_id => users(:quentin),
+      put :update, :user_id => users(:quentin),
         :avatar => {
           :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/mlabs.yml'), 'text/yaml')
-        }
+        }, :format => 'js'
     end
+    assert_response :success
 
     assert_equal 0, users(:quentin).avatars.count
 	end
@@ -126,20 +148,20 @@ class AvatarsControllerTest < ActionController::TestCase
 	def test_should_keep_current_avatar_in_case_of_failure
     login_as :quentin
     assert_difference 'Avatar.count' do 
-      post :create, :user_id => users(:quentin),
+      put :update, :user_id => users(:quentin),
         :avatar => {
           :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/files/test.jpg'), 'image/jpeg')
-        }
+        }, :format => 'js'
     end
 
     assert_response :success
     assert_equal 1, users(:quentin).avatars.count
 
     assert_no_difference 'Avatar.count' do 
-      post :create, :user_id => users(:quentin),
+      put :update, :user_id => users(:quentin),
         :avatar => {
           :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/mlabs.yml'), 'text/yaml')
-        }
+        }, :format => 'js'
     end
 
     assert_response :success
@@ -159,6 +181,5 @@ private
     end
     return t
   end
-
 
 end
