@@ -90,6 +90,9 @@ class SongsController < ApplicationController
     #    root /data/myousica/shared/audio;
     #    internal;
     #  }
+    response.headers['Content-Disposition'] = 'attachment'
+    response.headers['Content-Type'] = 'audio/mpeg'
+    response.headers['Cache-Control'] = 'private'
     response.headers['X-Accel-Redirect'] = @song.filename
     render :nothing => true
 
