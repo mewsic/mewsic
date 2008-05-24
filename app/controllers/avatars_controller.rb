@@ -6,7 +6,7 @@ class AvatarsController < ApplicationController
 
   def update
     unless params[:avatar] && params[:avatar][:uploaded_data].respond_to?(:size) && params[:avatar][:uploaded_data].size > 0
-      render :nothing => true and return
+      redirect_to '/' and return
     end
 
     @avatar = Avatar.new(params[:avatar].merge({:pictureable => @pictureable}))
