@@ -99,7 +99,7 @@ module UsersHelper
   end
 
   def change_avatar_form(user, &block)
-    form_for(:avatar, :url => formatted_user_avatar_path(user, :format => 'js'),
+    form_for(:avatar, :url => formatted_user_avatar_path(user, 'js'),
              :builder => AvatarFormBuilder,
              :html => { :id => 'change-avatar-form', :multipart => true,
                         :target => 'change-avatar-iframe', :method => 'put' }, &block)

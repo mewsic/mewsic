@@ -20,10 +20,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :ideas
   map.resources :bands_and_deejays
   map.resources :users, :member => {:switch_type => :put, :rate => :put} do |user|    
+    user.resource :avatar
     user.resources :members, :controller => 'band_members'
     user.resources :friendships
     user.resources :photos
-    user.resources :avatars
     user.resources :mlabs
     user.resources :messages, :collection => { :delete_selected => :post, :sent => :get, :unread => :get }
   end
@@ -31,7 +31,7 @@ ActionController::Routing::Routes.draw do |map|
   map.reset_password '/reset_password/:id',  :controller => 'users', :action => 'reset_password'
     
   map.resources :sessions
-  map.resources :songs, :has_one => :player, :member => { :rate => :put , :direct_sibling_tracks => :get}
+  map.resources :songs, :has_one => :player, :member => { :rate => :put , :direct_sibling_tracks => :get, :download => :get }
   
   map.connect 'songs/:id/mix', :controller => 'songs', :action => 'mix'
   

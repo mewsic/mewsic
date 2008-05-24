@@ -77,6 +77,26 @@ class SongsController < ApplicationController
     @song.rate(params[:rate].to_i, current_user)
     render :layout => false, :text => "#{@song.rating_count} votes"
   end       
+
+  def download
+    @song = Song.find(params[:id])
+    if @song.filename.blank?
+      flash[:error] = 'File not found'
+      redirect_to song_path(@song) and return
+    end
+
+    # Requires the following nginx configuration:
+    #  location /audio {
+    #    root /data/myousica/shared/audio;
+    #    internal;
+    #  }
+    response.headers['X-Accel-Redirect'] = @song.filename
+    render :nothing => true
+
+  rescue ActiveRecord::RecordNotFound
+    flash[:error] = 'Song not found'
+    redirect_to music_path
+  end
   
 protected
 
