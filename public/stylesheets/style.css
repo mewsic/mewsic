@@ -2209,7 +2209,10 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 	background:url(/images/rounded_grey_bottom.gif) no-repeat bottom left;
 }
 .song-spec .top-box .track-tab{
-	position:absolute; margin-top:-40px;
+	position:absolute;
+	margin-top:-34px;
+	padding-left: 10px;
+	padding-top: 6px;
 	background:url(/images/rounded_grey_label_top.gif) no-repeat top left;
 	width:56px;
 }
