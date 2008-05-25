@@ -102,6 +102,8 @@ module ApplicationHelper
   
   def render_sidebar   
     content = ''
+    return content if params[:controller] == 'sessions'
+
     if params[:controller] == 'users' && (params[:action] == 'new' || params[:action] == 'create')
       content << render(:partial => 'shared/share_myousica')
     else
