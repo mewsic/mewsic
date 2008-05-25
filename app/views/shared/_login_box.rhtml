@@ -5,9 +5,9 @@
   <div id="login-box">
     <div class="log-in-input">
       <% form_tag sessions_path do -%>    
-          <p><%= text_field_tag 'login', 'username' %></p>
-    	  <p><%= password_field_tag 'password', 'password' %></p>
-    	  <p><input id="login_submit" name="log-in" type="image" src="/images/login_button.png" class="input-button" onclick="$(this).up('form').submit()"/></p>    
+        <p><%= text_field_tag 'login', 'username' %></p>
+        <p><%= password_field_tag 'password', 'password' %></p>
+        <p><input id="login_submit" name="log-in" type="image" src="/images/login_button.png" class="input-button" onclick="$(this).up('form').submit()"/></p>    
       <% end -%>
     </div>
     <div class="log-in-link">
@@ -18,10 +18,10 @@
        
   <div id="forgot-box" style="display: none;">
     <div class="log-in-input">
-      <% form_remote_tag :url => forgot_password_url do -%>    
+      <% form_remote_tag :url => forgot_password_url, :complete => %[$('forgot-box').hide();$('login-box').show()] do -%>
     	  <p>Your email address</p>
     	  <p><%= text_field_tag 'email' %></p>
-    	  <p><input type="submit" value="Send" class="input-button"/></p>    
+        <p><%= submit_tag 'Send', :class => 'input-button', :disable_with => 'Sending...' %></p>    
       <% end -%>
     </div>
     <div class="log-in-link">
