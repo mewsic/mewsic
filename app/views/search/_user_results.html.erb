@@ -13,5 +13,8 @@
 	</div>
 </div>  
 <%- end -%>
+<div style="float: right; width: 25px; height: 16px;">
+  <img src="/images/spinner.gif" id="user-results-spinner" style="display: none;"/>
+</div>
 <%= will_paginate @users, :class => 'pagination user', :params => { :type => :user }, :prev_label => "&lt;", :next_label => "&gt;" %>
-<img src="/images/spinner.gif" id="user-results-spinner" style="display:none"/>
+
