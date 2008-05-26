@@ -3013,3 +3013,55 @@ div.popup {
 	padding-right: 4px;
 }
 /******************** END SEARCH ********************/
+
+/******************** LOGIN BOX ********************/ 
+#login {
+	width: 217px;
+}
+
+#login-box-top {
+	background: transparent url('/images/login-box-top.png') no-repeat top;
+	height: 13px;
+}
+
+#login-box-bottom {
+	background: transparent url('/images/login-box-bottom.png') no-repeat top;
+	height: 13px;
+}
+
+#login-box-core, #login-box-forgot {
+	background: transparent url('/images/login-box-rp.png') repeat-y top;
+	padding: 0px 16px 0px 16px;	
+	overflow: hidden;
+}
+
+.login-box-title {
+	color: #0296C2;
+	font-size: 16px;
+	font-weight: bold;
+	margin: 0;
+	padding-bottom: 8px;
+}
+
+#login-box-remember {
+	float: left;
+	padding-top: 4px;
+}
+
+#login-box-submit {
+	float: right;
+}
+
+.login-box-input {
+	border: 1px solid #BFD2DB;
+	margin-bottom: 4px;
+	width: 182px;
+}
+
+.login-box-helplinks {
+	margin: 4px;
+	float: right;
+	text-align: right;
+	padding-bottom: 10px;
+}
+/******************** END LOGIN BOX ********************/ 
