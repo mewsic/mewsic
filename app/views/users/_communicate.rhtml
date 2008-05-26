@@ -1,6 +1,6 @@
 <div id="user-mail" class="user-box-option" style="position: relative;">
   <div></div>
-  <div>
+  <div class="action">
     <p class="thumb"><img src="/images/ico_ammira.gif" alt="" width="29" height="29" /></p>
     <p class="name cyan-text">
       <%- if current_user.is_friends_with?(@user) -%>
@@ -12,7 +12,7 @@
       <%- end -%>
     </p>
   </div>
-  <div>
+  <div class="action">
     <p class="thumb"><img src="/images/ico_messaggio.gif" alt="" width="29" height="29" /></p>
     <p class="name cyan-text">
       <strong>
@@ -20,12 +20,13 @@
       </strong>
     </p>
   </div>
-  <div>
+  <div class="action">
     <p class="thumb"><img src="/images/ico_invita.gif" alt="" width="29" height="29" /></p>
     <p class="name cyan-text"><strong><a href="#" onclick="$('mband_invite_container').toggle(); return false;">Invite to your MBand</a></strong></p>
   </div>
-  <div class="popup" style="display: none;background: #FFF; border: 5px solid grey; width: 700px; height: 350px; position: absolute; top: 155px; right: 0; z-index: 9999;">
-    <a href="#" class="button close">CLOSE</a>  
+  <div class="popup" style="display: none; width: 690px; position: absolute; top: 155px; right: 0pt; z-index: 9999;">
+    <a href="#" class="button close"><img src="/images/search_box_icon_close.png" /></a>  
+    <img id="popup-spinner" src="/images/spinner.gif" style="position:absolute; top: 10px; right: 10px;">
     <div class="container" style="display:none;"></div>
   </div>
   

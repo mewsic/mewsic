@@ -2,7 +2,6 @@ var MailBox = Class.create({
   
   initialize: function() {
     this.element = $('user-mail');
-    this.user_id = $('user-id').value;
     this.authenticity_token = $('authenticity-token').value;
     this.setup();
   },
@@ -100,10 +99,6 @@ var MailBox = Class.create({
 });
 
 document.observe('dom:loaded', function() {
-  var user_id_field   = $('user-id');
-  var mband_id_field  = $('mband-id');
-  if(user_id_field) {
-    MailBox.instance = new MailBox();
-  }
+  MailBox.instance = new MailBox();
 });
 

@@ -1070,7 +1070,7 @@ h2.dj-label{
 	float:right;
 	width:180px;
 }
-.user-box-option div{
+.user-box-option div.action{
 	clear:both;
 	height:30px;
 }
@@ -2544,6 +2544,7 @@ div.help-box-bottom {
 div.popup {
 	padding: 10px;
 	background: #EDEEEE url('/images/inbox_top_bg.gif') top repeat-x;
+	height: auto;
 }
 
 

@@ -1,11 +1,10 @@
-<div id="new-message">
+<div id="new-message" style="height: auto">
     <span class="label">From:</span> <%= @message.sender.login %>
     <span class="label">Subject:</span> <%= @message.subject %><br/>
-    <div id="message_label"><span class="label">Message:</span></div>
+    <div id="message_label" style="float: left"><span class="label">Message:</span></div>
     <div class="message body"><%= sanitize_message @message %></div>
     <%= link_to 'Reply', new_user_message_path(@user, :reply => @message.id ), :class => 'ajax' %> |
-    <%= link_to 'Back to Inbox', user_messages_path(@user, :page => params[:page]), :class => 'ajax' %>
-    
+    <%= link_to 'Back to Inbox', user_messages_path(@user, :page => params[:page]), :class => 'ajax' %>    
 </div>
 
 <script type="text/javascript" charset="utf-8">
