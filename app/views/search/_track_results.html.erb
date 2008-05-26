@@ -16,4 +16,6 @@
 </div>
 <%- end -%>
 <%= will_paginate @tracks, :class => 'pagination track', :params => { :type => :track }, :prev_label => "&lt;", :next_label => "&gt;" %>
-<img src="/images/spinner.gif" id="track-results-spinner" style="display:none"/>
+<div style="text-align: right;">
+  <img src="/images/spinner.gif" id="track-results-spinner" style="display:none"/>
+</div>
