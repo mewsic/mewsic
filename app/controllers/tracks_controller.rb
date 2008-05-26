@@ -30,4 +30,27 @@ class TracksController < ApplicationController
     render :layout => false, :text => "#{@track.rating_count} votes"
   end
   
+  def download
+    @track = Track.find(params[:id])
+    if @track.filename.blank?
+      flash[:error] = 'File not found'
+      redirect_to music_path
+    end
+
+    # Requires the following nginx configuration:
+    #  location /audio {
+    #    root /data/myousica/shared/audio;
+    #    internal;
+    #  }
+    response.headers['Content-Disposition'] = %[attachment; filename="#{@track.description}"]
+    response.headers['Content-Type'] = 'audio/mpeg'
+    response.headers['Cache-Control'] = 'private'
+    response.headers['X-Accel-Redirect'] = @track.filename
+    render :nothing => true
+
+  rescue ActiveRecord::RecordNotFound
+    flash[:error] = 'Track not found'
+    redirect_to music_path
+  end
+  
 end

@@ -20,7 +20,9 @@
 		  <%= mlab_button(track) %>
 		  <%= play_button(track) %>
     </p>
-		<p class="float-left"><a href="#"><img src="/images/genere_ico.png" alt="" width="22" height="14" class="float-left" />Genre</a></p>
+		<p class="float-left">
+		  <%= download_button(track) %>
+      <%= link_to 'Download', download_song_url(track) %>
 		</div>
 	  </div>		  		  		  
   <%- end -%>      			

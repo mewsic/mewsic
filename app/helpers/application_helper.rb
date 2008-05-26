@@ -121,4 +121,8 @@ module ApplicationHelper
     image_tag((model.avatars.last.nil? ? "/images/default_avatars/avatar_#{size}.gif" : model.avatars.last.public_filename(size)), options)
   end
   
+  def download_button(item)    
+    link_to image_tag('icon_download.png'), send("download_#{item.class.name.downcase}_url", item)
+  end
+  
 end

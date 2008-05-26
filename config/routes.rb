@@ -35,7 +35,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.connect 'songs/:id/mix', :controller => 'songs', :action => 'mix'
   
-  map.resources :tracks, :has_one => :player, :member => { :rate => :put }
+  map.resources :tracks, :has_one => :player, :member => { :rate => :put, :download => :get }
   
   map.resources :search
   
