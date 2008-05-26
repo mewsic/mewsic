@@ -1,27 +1,31 @@
-<%- @ideas.each do |track| -%>
-<div id="search_row">
-	<div style="float:left">
-		<div id="search_icon_container">
-			<%= play_button(track) %>
-			<%= mlab_button(track) %>
-		</div>
-		<div id="search_icon_container">
-		  <%= link_to(avatar_image(track.parent_song.user, :icon), user_path(track.parent_song.user)) %>
-    </div>
-		<p class="search_black_text"><%= highlight_search track.title %></p>
-	</div>
-	<div style="float:right">
-		<p class="search_blue_text"><%= highlight_search track.parent_song.genre.name %></p>
-		<p class="search_sky_text"><%= track.bpm %></p>				
-		<p class="search_sky_text"><%= track.tonality %></p>								
-		<p class="search_sky_text"><%= track.length %></p>				
-		<div style="float:left;padding-top:6px;">
-		  <%= rating(track) %>
-    </div>
-	</div>
-</div>
+<%- if @ideas.size > 0 -%>
+  <%- @ideas.each do |track| -%>
+  <div id="search_row">
+  	<div style="float:left">
+  		<div id="search_icon_container">
+  			<%= play_button(track) %>
+  			<%= mlab_button(track) %>
+  		</div>
+  		<div id="search_icon_container">
+  		  <%= link_to(avatar_image(track.parent_song.user, :icon), user_path(track.parent_song.user)) %>
+      </div>
+  		<p class="search_black_text"><%= highlight_search track.title %></p>
+  	</div>
+  	<div style="float:right">
+  		<p class="search_blue_text"><%= highlight_search track.parent_song.genre.name %></p>
+  		<p class="search_sky_text"><%= track.bpm %></p>				
+  		<p class="search_sky_text"><%= track.tonality %></p>								
+  		<p class="search_sky_text"><%= track.length %></p>				
+  		<div style="float:left;padding-top:6px;">
+  		  <%= rating(track) %>
+      </div>
+  	</div>
+  </div>
+  <%- end -%>
+  <%= will_paginate @ideas, :class => 'pagination idea', :params => { :type => :idea }, :prev_label => "&lt;", :next_label => "&gt;" %>
+  <div style="text-align: right;">
+    <img src="/images/spinner.gif" id="idea-results-spinner" style="display:none"/>
+  </div>
+<%- else -%>
+  <p style="margin-left: 15px">No ideas found. Create it with our <%= link_to 'Multitrack', logged_in? ? "#{user_path(current_user)}/multitrack" : '/login' %>!</p>
 <%- end -%>
-<%= will_paginate @ideas, :class => 'pagination idea', :params => { :type => :idea }, :prev_label => "&lt;", :next_label => "&gt;" %>
-<div style="text-align: right;">
-  <img src="/images/spinner.gif" id="idea-results-spinner" style="display:none"/>
-</div>

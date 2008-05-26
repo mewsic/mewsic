@@ -1,22 +1,26 @@
-<%- @songs.each do |song| -%>
-<div id="search_row">
-	<div style="float:left">
-		<div id="search_icon_container">
-			<%= play_button(song) %>
-			<%= mlab_button(song) %>
-		</div>
-		<div id="search_icon_container"><%= link_to avatar_image(song.user, :icon), user_path(song.user) %></div>
-		<p class="search_black_text"><%= highlight_search song.title %></p>
-	</div>
-	<div style="float:right">
-		<p class="search_blue_text"><%= highlight_search song.genre.name %></p>
-		<p class="search_small_orange_text">Tracks</p><p class="search_gray_text">(<%= song.tracks.count %>)</p>
-		<p class="search_sky_text"><%= song.length %></p>				
-		<div style="float:left;padding-top:6px;"><%= rating(song) %></div>
-	</div>
-</div>
+<%- if @songs.size > 0 -%>
+  <%- @songs.each do |song| -%>
+  <div id="search_row">
+  	<div style="float:left">
+  		<div id="search_icon_container">
+  			<%= play_button(song) %>
+  			<%= mlab_button(song) %>
+  		</div>
+  		<div id="search_icon_container"><%= link_to avatar_image(song.user, :icon), user_path(song.user) %></div>
+  		<p class="search_black_text"><%= highlight_search song.title %></p>
+  	</div>
+  	<div style="float:right">
+  		<p class="search_blue_text"><%= highlight_search song.genre.name %></p>
+  		<p class="search_small_orange_text">Tracks</p><p class="search_gray_text">(<%= song.tracks.count %>)</p>
+  		<p class="search_sky_text"><%= song.length %></p>				
+  		<div style="float:left;padding-top:6px;"><%= rating(song) %></div>
+  	</div>
+  </div>
+  <%- end -%>
+  <%= will_paginate @songs, :class => 'pagination song', :params => { :type => :song }, :prev_label => "&lt;", :next_label => "&gt;" %>
+  <div style="text-align: right;">
+    <img src="/images/spinner.gif" id="song-results-spinner" style="display:none"/>
+  </div>
+<%- else -%>
+  <p style="margin-left: 15px">No songs found. Create it with our <%= link_to 'Multitrack', logged_in? ? "#{user_path(current_user)}/multitrack" : '/login' %>!</p>
 <%- end -%>
-<%= will_paginate @songs, :class => 'pagination song', :params => { :type => :song }, :prev_label => "&lt;", :next_label => "&gt;" %>
-<div style="text-align: right;">
-  <img src="/images/spinner.gif" id="song-results-spinner" style="display:none"/>
-</div>
