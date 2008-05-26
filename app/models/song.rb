@@ -97,7 +97,8 @@ class Song < ActiveRecord::Base
   
   # STUB
   def indirect_siblings
-    Song.find(:all, :include => :tracks, :limit => 2, :conditions => ["songs.published = ? AND songs.id != ?", true, self.id])
+    #Song.find(:all, :include => :tracks, :limit => 2, :conditions => ["songs.published = ? AND songs.id != ?", true, self.id])
+    Mix.find_by_sql("select distinct x.original_author, x.title, t.song_id from mixes s inner join mixes t on s.track_id = t.track_id inner join songs x on t.song_id = x.id where s.song_id = #{self.id}") 
   end
   
   def siblings_count

@@ -19,6 +19,7 @@ class SongsController < ApplicationController
   def show
     @song = Song.find(params[:id], :include => [:user, { :mixes => { :track => [:instrument, :parent_song] } }, :genre])        
     @direct_siblings = @song.direct_siblings
+    @indirect_siblings = @song.direct_siblings
     respond_to do |format|
       format.html do
         @other_songs = Song.find(:all, :conditions => ["songs.id != ?", params[:id]], :limit => 5, :include => [:user, { :mixes => { :track => [:instrument, :parent_song] } }, :genre])        
@@ -31,6 +32,11 @@ class SongsController < ApplicationController
   end
   
   def direct_sibling_tracks
+    @song = Song.find(params[:id], :include => [:user, { :mixes => { :track => [:instrument, :parent_song] } }, :genre])        
+    render :layout => false
+  end
+  
+  def indirect_sibling_tracks
     @song = Song.find(params[:id], :include => [:user, { :mixes => { :track => [:instrument, :parent_song] } }, :genre])        
     render :layout => false
   end

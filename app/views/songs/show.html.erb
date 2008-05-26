@@ -112,33 +112,29 @@
 </div>
 
 <div class="bottom-shadow clear-float" style="width: 720px; float:none;"></div>
-	<h1 style="padding-left:20px;">Other versions<span class="no-bold">(20)</span></h1>
-
+<h1 style="padding-left:20px;">Other versions<span class="no-bold">(20)</span></h1>
 <div class="box-list special-arrow-box special-list clear-block">
   <div class="simple-list">
-
-	<div class="top-box clear-block">
-	
-	  <div class="bottom-box clear-block" id="siblings">
-      
+    <div class="top-box clear-block">
+      <div class="bottom-box clear-block" id="direct-siblings">
       <%- @direct_siblings.each_with_index do |mix, index| song = mix.song -%>
-        <div id="sibling-<%= song.id %>" class="sibling special-box clear-block<%= ['' ' grey-bg'][index % 2] %>">
-  			  <div class="float-right" style="padding-right:10px;">
+        <div id="direct-sibling-<%= song.id %>" class="sibling special-box clear-block<%= ['' ' grey-bg'][index % 2] %>">
+          <div class="float-right" style="padding-right:10px;">
   			    <div class="special-arrow"></div>
   			  </div>
-    		  <p class="float-right" style="position:relative;">
+          <p class="float-right" style="position:relative;">
     		    <span class="tracks-number grey" id="track-number-<%= song.id %>">
-    		      <a href="#" onclick="new Ajax.Updater('direct-siblings', '<%= direct_sibling_tracks_song_path(song) %>', {
+    		      <a href="#" onclick="new Ajax.Updater('direct-sibling-tracks', '<%= direct_sibling_tracks_song_path(song) %>', {
     		        method: 'GET',
     		        onLoading: function() {
-    		          $('direct-siblings').hide();
-    		          $('direct-siblings-loading').show();
-    		          $('siblings').select('.sibling').invoke('removeClassName', 'active');
-    		          $('sibling-<%= song.id %>').addClassName('active');
+    		          $('direct-sibling-tracks').hide();
+    		          $('direct-sibling-tracks-loading').show();
+    		          $('direct-siblings').select('.sibling').invoke('removeClassName', 'active');
+    		          $('direct-sibling-<%= song.id %>').addClassName('active');
     		        },
     		        onComplete: function() {
-    		          $('direct-siblings-loading').hide();
-    		          $('direct-siblings').show();    		          
+    		          $('direct-sibling-tracks-loading').hide();
+    		          $('direct-sibling-tracks').show();    		          
     		        }
     		      });return false;" style="color: #FFF; display: block; text-decoration: none;height: 100%;">
     		        <%= song.tracks.count %>
@@ -157,201 +153,117 @@
     			    <%= play_button(song) %>
             </p>
     			  <p class="float-left">
-						  <%= link_to image_tag('icon_download.png'), download_song_url(song) %>
+						  <%= link_to image_tag('/images/icon_download.png'), download_song_url(song) %>
 							<%= link_to 'Download', download_song_url(song) %>
 						</p>
   			  </div>
   		  </div>
       <%- end -%>
       
-	  </div>
-	  
-	</div>
-	
-      </div>
+    </div>
+  </div>
+</div>
 </div>
 
 
 <div class="float-left one-col-big clear-block">
-<div class="simple-list box-grigio-stondato">
-	<div class="top-box clear-block">
-	  <div id="direct-siblings-loading" style="display: none; height:200px" ><img src="/images/spinner.gif" /></div>
-	  <div id="direct-siblings"></div>
-	</div>
-			<p class="abstract align-right"><a href="#">Next</a></p>	
+  <div class="simple-list box-grigio-stondato">
+    <div class="top-box clear-block">
+      <div id="direct-sibling-tracks-loading" style="display: none; height:200px" ><img src="/images/spinner.gif" /></div>
+	    <div id="direct-sibling-tracks">
+	      <p>&nbsp;</p>
+  	    <p>&nbsp;</p>
+  	    <p>&nbsp;</p>
+  	    <p>&nbsp;</p>
+  	    <p>&nbsp;</p>
+  	    <p>&nbsp;</p>
+  	    <p class="grey-text" style="text-align:center; padding:30px;"><strong>select a song to see its tracks</strong></p>  	    
+	    </div>
+	  </div>
+    <p class="abstract align-right"><a href="#">Next</a></p>	
   </div>
 </div>
 
 
 
 <div class="bottom-shadow clear-float" style="width: 720px; float:none;"></div>
-
-
-	<h1 style="padding-left:20px;">Remote <span class="no-bold">(52)</span></h1>
+<h1 style="padding-left:20px;">Remote <span class="no-bold">(52)</span></h1>
 
 <div class="box-list special-arrow-box special-list clear-block">
   <div class="simple-list">
+    <div class="top-box clear-block">
+      <div class="bottom-box clear-block">
 
-	<div class="top-box clear-block">
-	
-	  <div class="bottom-box clear-block">
+		    <div class="bottom-box clear-block" id="indirect-siblings">
 
-		  <div class="special-box clear-block grey-bg">
-		  
-			<div class="float-right" style="padding-right:10px;"><div class="special-arrow"></div>
-			</div>
-			
-		  <p class="float-right" style="position:relative;"><span class="tracks-number-grey"><span>5</span></span></p>
-			<p class="thumb"><img src="/images/default_avatars/avatar_icon.gif" alt="Pinco Pallino" width="29" height="29" /></p>
-			<p class="name"><a href="#">Pinco Pallino</a></p>
-			<p class="title"><a href="#">titolo pezzo </a></p>
-			<div class="music-info">
-			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/icon_download.png" alt="" width="22" height="14" class="float-left" />Download</a></p>
-			</div>
-			
-		  </div>
-		  
-		  <div class="special-box clear-block">
-		  
-			<div class="float-right" style="padding-right:10px;"><div class="special-arrow"></div>
-			</div>
-			
-		  <p class="float-right"><span class="tracks-number-orange"><span>5</span></span></p>
-			<p class="thumb"><img src="/images/default_avatars/avatar_icon.gif" alt="Pinco Pallino" width="29" height="29" /></p>
-			<p class="name"><a href="#">Pinco Pallino</a></p>
-			<p class="title"><a href="#">titolo pezzo </a></p>
-			<div class="music-info">
-			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/icon_download.png" alt="" width="22" height="14" class="float-left" />Download</a></p>
-			</div>
-			
-		  </div>				  
-		  
-		  <div class="special-box clear-block grey-bg">
-		  
-			<div class="float-right" style="padding-right:10px;"><div class="special-arrow"></div>
-			</div>
-			
-		  <p class="float-right"><span class="tracks-number-grey"><span>5</span></span></p>
-			<p class="thumb"><img src="/images/default_avatars/avatar_icon.gif" alt="Pinco Pallino" width="29" height="29" /></p>
-			<p class="name"><a href="#">Pinco Pallino</a></p>
-			<p class="title"><a href="#">titolo pezzo </a></p>
-			<div class="music-info">
-			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/icon_download.png" alt="" width="22" height="14" class="float-left" />Download</a></p>
-			</div>
-			
-		  </div>
-		  
-		  
-		  <div class="special-box clear-block">
-		  
-			<div class="float-right" style="padding-right:10px;"><div class="special-arrow"></div>
-			</div>
-			
-		  <p class="float-right"><span class="tracks-number-grey"><span>5</span></span></p>
-			<p class="thumb"><img src="/images/default_avatars/avatar_icon.gif" alt="Pinco Pallino" width="29" height="29" /></p>
-			<p class="name"><a href="#">Pinco Pallino</a></p>
-			<p class="title"><a href="#">titolo pezzo </a></p>
-			<div class="music-info">
-			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/icon_download.png" alt="" width="22" height="14" class="float-left" />Download</a></p>
-			</div>
-			
-		  </div>				  
-		  
-		  <div class="special-box clear-block grey-bg">
-		  
-			<div class="float-right" style="padding-right:10px;"><div class="special-arrow"></div>
-			</div>
-			
-		  <p class="float-right"><span class="tracks-number-grey"><span>5</span></span></p>
-			<p class="thumb"><img src="/images/default_avatars/avatar_icon.gif" alt="Pinco Pallino" width="29" height="29" /></p>
-			<p class="name"><a href="#">Pinco Pallino</a></p>
-			<p class="title"><a href="#">titolo pezzo </a></p>
-			<div class="music-info">
-			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/icon_download.png" alt="" width="22" height="14" class="float-left" />Download</a></p>
-			</div>
-			
-		  </div>
-		  
-		  <div class="special-box clear-block">
-		  
-			<div class="float-right" style="padding-right:10px;"><div class="special-arrow"></div>
-			</div>
-			
-		  <p class="float-right"><span class="tracks-number-grey"><span>5</span></span></p>
-			<p class="thumb"><img src="/images/default_avatars/avatar_icon.gif" alt="Pinco Pallino" width="29" height="29" /></p>
-			<p class="name"><a href="#">Pinco Pallino</a></p>
-			<p class="title"><a href="#">titolo pezzo </a></p>
-			<div class="music-info">
-			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/icon_download.png" alt="" width="22" height="14" class="float-left" />Download</a></p>
-			</div>
-			
-		  </div>
+          <%- @indirect_siblings.each_with_index do |mix, index| song = mix.song -%>
+            <div id="indirect-sibling-<%= song.id %>" class="sibling special-box clear-block<%= ['' ' grey-bg'][index % 2] %>">
+      			  <div class="float-right" style="padding-right:10px;">
+      			    <div class="special-arrow"></div>
+      			  </div>
+        		  <p class="float-right" style="position:relative;">
+        		    <span class="tracks-number grey" id="track-number-<%= song.id %>">
+        		      <a href="#" onclick="new Ajax.Updater('indirect-sibling-tracks', '<%= indirect_sibling_tracks_song_path(song) %>', {
+        		        method: 'GET',
+        		        onLoading: function() {
+        		          $('indirect-sibling-tracks').hide();
+        		          $('indirect-sibling-tracks-loading').show();
+        		          $('indirect-siblings').select('.sibling').invoke('removeClassName', 'active');
+        		          $('indirect-sibling-<%= song.id %>').addClassName('active');
+        		        },
+        		        onComplete: function() {
+        		          $('indirect-sibling-tracks-loading').hide();
+        		          $('indirect-sibling-tracks').show();    		          
+        		        }
+        		      });return false;" style="color: #FFF; display: block; text-decoration: none;height: 100%;">
+        		        <%= song.tracks.count %>
+        		      </a>
+                </span>
+              </p>
+        			<p class="thumb">
+        			  <%= link_to avatar_image(song.user, :icon), user_path(song.user) %>
+              </p>
+        			<p class="name"><%= link_to song.user.login, user_path(song.user) %></p>
+        			<p class="title"><%= song.id %> <%= link_to song.title, song_path(song.title) %></p>
+        			<div class="music-info">
+        			  <p class="float-right">
+        			    <span class="star"><%= rating(song) %></span>
+        			    <%= mlab_button(song) %>
+        			    <%= play_button(song) %>
+                </p>
+        			  <p class="float-left">
+    						  <%= link_to image_tag('/images/icon_download.png'), download_song_url(song) %>
+    							<%= link_to 'Download', download_song_url(song) %>
+    						</p>
+      			  </div>
+      		  </div>
+          <%- end -%>
 
-		  <div class="special-box clear-block grey-bg">
+    	  </div>		  		  		  
 		  
-			<div class="float-right" style="padding-right:10px;"><div class="special-arrow"></div>
-			</div>
-			
-		  <p class="float-right"><span class="tracks-number-grey"><span>5</span></span></p>
-			<p class="thumb"><img src="/images/default_avatars/avatar_icon.gif" alt="Pinco Pallino" width="29" height="29" /></p>
-			<p class="name"><a href="#">Pinco Pallino</a></p>
-			<p class="title"><a href="#">titolo pezzo </a></p>
-			<div class="music-info">
-			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/icon_download.png" alt="" width="22" height="14" class="float-left" />Download</a></p>
-			</div>
-			
-		  </div>
-		  
-		  
-		  <div class="special-box clear-block">
-		  
-			<div class="float-right" style="padding-right:10px;"><div class="special-arrow"></div>
-			</div>
-			
-		  <p class="float-right"><span class="tracks-number-grey"><span>5</span></span></p>
-			<p class="thumb"><img src="/images/default_avatars/avatar_icon.gif" alt="Pinco Pallino" width="29" height="29" /></p>
-			<p class="name"><a href="#">Pinco Pallino</a></p>
-			<p class="title"><a href="#">titolo pezzo </a></p>
-			<div class="music-info">
-			<p class="float-right"><span class="star"><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /><img src="/images/star_orange.png" alt="" width="10" height="9" /></span> <a href="#"><img src="/images/button_mlab.png" alt="" width="23" height="15" /></a> <a href="#"><img src="/images/button_play_green.png" alt="" width="23" height="15" /></a></p>
-			<p class="float-left"><a href="#"><img src="/images/icon_download.png" alt="" width="22" height="14" class="float-left" />Download</a></p>
-			</div>
-			
-		  </div>
-		  
-		  
+	    </div>	  
 	  </div>
-	  
-	</div>
-	
-      </div>
+  </div>
 </div>
 
 
 <div class="float-left one-col-big clear-block">
-<div class="simple-list box-grigio-stondato-vuoto">
-	<div class="top-box clear-block">
-	  <div class="bottom-box clear-block">
-	    <p>&nbsp;</p>
-	    <p>&nbsp;</p>
-	    <p>&nbsp;</p>
-	    <p>&nbsp;</p>
-	    <p>&nbsp;</p>
-	    <p>&nbsp;</p>
-	    <p class="grey-text" style="text-align:center; padding:30px;"><strong>select a song to see its tracks</strong></p>
+  <div class="simple-list box-grigio-stondato">
+    <div class="top-box clear-block">
+      <div id="indirect-sibling-tracks-loading" style="display: none; height:200px" ><img src="/images/spinner.gif" /></div>
+	    <div id="indirect-sibling-tracks">
+	      <p>&nbsp;</p>
+  	    <p>&nbsp;</p>
+  	    <p>&nbsp;</p>
+  	    <p>&nbsp;</p>
+  	    <p>&nbsp;</p>
+  	    <p>&nbsp;</p>
+  	    <p class="grey-text" style="text-align:center; padding:30px;"><strong>select a song to see its tracks</strong></p>
+	    </div>
 	  </div>
-	</div>
+    <p class="abstract align-right"><a href="#">Next</a></p>	
+  </div>
 </div>
-</div>
-
-
 
 
 

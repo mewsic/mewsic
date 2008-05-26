@@ -31,7 +31,7 @@ ActionController::Routing::Routes.draw do |map|
   map.reset_password '/reset_password/:id',  :controller => 'users', :action => 'reset_password'
     
   map.resources :sessions
-  map.resources :songs, :has_one => :player, :member => { :rate => :put , :direct_sibling_tracks => :get, :download => :get }
+  map.resources :songs, :has_one => :player, :member => { :rate => :put , :direct_sibling_tracks => :get, :indirect_sibling_tracks => :get, :download => :get }
   
   map.connect 'songs/:id/mix', :controller => 'songs', :action => 'mix'
   
