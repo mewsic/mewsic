@@ -10,7 +10,7 @@ ActionController::Routing::Routes.draw do |map|
   
 
   
-  map.resources :answers, :member => { :rate => :put } do |answers|
+  map.resources :answers, :member => { :rate => :put }, :collection => { :search => :get } do |answers|
     answers.resources :replies
   end  
   map.connect 'replies/:id/rate', :controller => 'replies', :action => 'rate'

@@ -46,12 +46,16 @@
 </div>
 
 <div class="search-question clear-block">
+  <%- form_tag search_answers_path, :method => :get do -%>
   <img src="/images/lente_search.gif" alt="" width="27" height="27" class="float-left" />
   <h2 class="float-left">FIND QUESTION</h2>
-  <p class="float-left"><input name="" type="text" style="border:1px solid #D3D3D3; width:310px; height:20px; margin:0px 10px;"/></p>
+  <p class="float-left">
+    <input name="q" type="text" style="border:1px solid #D3D3D3; width:310px; height:20px; margin:0px 10px;"/>
+    </p>
   <div class="float-left">			
-    <%= image_submit_tag '/images/button_find.png' %>
+    <input type="image" src="/images/button_find.png"/>
   </div>
+  <%- end -%>
 </div>
 
 <div class="box-list two-col-big clear-block">

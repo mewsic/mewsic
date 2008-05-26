@@ -47,6 +47,12 @@ class AnswersController < ApplicationController
     redirect_to answer_url(@answer)
   end
   
+  def search
+    redirect_to answers_url and return if params[:q].blank?
+    @q = CGI::unescape(params[:q])    
+    @answers = Answer.paginate(:all, :per_page => 5, :page => params[:page], :conditions => ["answers.body LIKE ?", "%#{@q}%"], :include => {:user => :avatars}, :order => 'answers.created_at DESC')
+  end
+  
   def rate    
     @answer = Answer.find(params[:id])
     @answer.rate(params[:rate].to_i, current_user)

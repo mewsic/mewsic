@@ -1,0 +1,43 @@
+<div class="search-question clear-block">
+  <%- form_tag search_answers_path, :method => :get do -%>
+  <img src="/images/lente_search.gif" alt="" width="27" height="27" class="float-left" />
+  <h2 class="float-left">SEARCH ANSWER</h2>
+  <p class="float-left"><input name="q" type="text" value="<%= @q %>" style="border:1px solid #D3D3D3; width:310px; height:20px; margin:0px 10px;"/></p>
+  <div class="float-left">
+    <input type="image" src="/images/button_find.png"/>
+  </div>
+  <%- end -%>
+</div>
+
+<div class="box-list two-col-big clear-block">
+  <div id="search_head_title">
+  	<p class="search_title"><strong>"<%= @q %>"</strong> search result
+      <strong>(<%= @answers.total_entries %>)</strong>
+    </p>
+  </div>
+  <div class="box-list clear-block" id="top-answers-container">
+		<div class="top-box clear-block">
+			<div class="bottom-box clear-block">        
+        <%- @answers.each do |answer| -%>
+          <div class="elements clear-block" style="margin-bottom:15px; border-bottom:1px solid #D9D9D9;">
+            <p class="float-left">
+              <%= link_to avatar_image(answer.user, :icon), user_path(answer.user) %>     
+            </p>
+            <div class="clear-block" style="margin:0px 0px 0px 40px;">
+              <h2 class="clearly-cyan-text"><%= link_to h(answer.body), answer_path(answer) %></h2>
+  						  <%= rating(answer) %>
+  						<p class="grey-text float-left">
+  						  Question by <%= link_to answer.user.login, user_path(answer.user) %> | 
+  					    <%= link_to pluralize(answer.replies_count, 'reply'), answer_path(answer) %> - <%= time_ago_in_words(answer.created_at) %>
+              </p>					
+            </div>					
+  					<p class="clear-float"></p>					  					
+  				</div>
+        <%- end -%>											 																						
+      </div>
+    </div>
+  </div>     
+  
+  <%= will_paginate @answers %>
+  
+</div>			
