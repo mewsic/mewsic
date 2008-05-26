@@ -2,8 +2,10 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class TracksControllerTest < ActionController::TestCase
 
+  fixtures :all
+
   def test_index_should_response_success
-    get :index
+    get :index, :id => users(:quentin).id
     assert_response :success
   end
   

@@ -1,6 +1,6 @@
 class MbandMembershipObserver < ActiveRecord::Observer
-  def after_create(membership)
-    return if membership.mband.leader == membership.user
+  def after_create(membership)    
+    return if membership.mband.leader == membership.user || !membership.accepted_at.nil?
     #FIXME: fix link generation
     subject = "New mband invitation (#{membership.mband.name})"
     body    = %|

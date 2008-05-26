@@ -35,8 +35,9 @@ private
   def find_mband    
     if params[:mband_id].blank? || params[:mband_id] == '0'                  
       @mband = Mband.create(:name => params[:mband_name])      
-      membership = MbandMembership.create(:mband => @mband, :user => current_user)
-      membership.update_attribute(:accepted_at, Time.now)      
+      membership = MbandMembership.new(:mband => @mband, :user => current_user)
+      membership.accepted_at = Time.now
+      membership.save
     else
       @mband = current_user.mbands.find(params[:mband_id])
     end    

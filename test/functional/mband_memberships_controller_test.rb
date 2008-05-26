@@ -26,7 +26,7 @@ class MbandMembershipsControllerTest < ActionController::TestCase
     login_as :quentin
     assert_difference 'Mband.count' do      
       assert_difference 'MbandMembership.count', 2 do
-        post :create, :mband_id => 0, :mband_name => 'new mband', :user_id => users(:user_11).id
+        post :create, :mband_name => 'new mband', :user_id => users(:user_11).id
       end
     end
   end
