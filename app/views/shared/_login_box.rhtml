@@ -18,9 +18,11 @@
 		<%- end -%>
 	</div>
 	<div id="login-box-forgot" style="display: none;">
-		<% form_remote_tag :url => forgot_password_url, :complete => %[$('forgot-box').hide();$('login-box').show()] do -%>
-  		<p class="login-box-title">Your email address</p>
-      <p><%= text_field_tag 'email' %></p> 
+		<% form_remote_tag :url => forgot_password_url, :complete => %[$('login-box-forgot').hide();$('login-box-core').show()] do -%>
+  		<p class="login-box-title">Forgot password?</p>
+      <p>
+        <input type="text" name="email" class="login-box-email" value="Your email address" onBlur="if(this.value=='')this.value='Your email address';" onFocus="if(this.value=='Your email address')this.value = '';">
+      </p> 
   		<p class="login-box-helplinks">
   			<a href="#" onclick="$('login-box-forgot').hide(); $('login-box-core').show();">Login</a><br />
   		</p>		
