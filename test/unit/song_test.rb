@@ -22,12 +22,12 @@ class SongTest < ActiveSupport::TestCase
   end
 
   def test_paginated_by_genre
-    songs = Song.find_paginated_by_genre(1, genres(:reggae).id)
+    songs = Song.find_paginated_by_genre(1, genres(:reggae))
     assert_equal (genres(:reggae).songs.size > 20 ? 20 : genres(:reggae).songs.size), songs.size
   end 
 
   def test_paginated_by_user
-    songs = Song.find_paginated_by_user(1, users(:aaron).id)
+    songs = Song.find_paginated_by_user(1, users(:aaron))
     assert_equal 3, songs.size
   end 
   
