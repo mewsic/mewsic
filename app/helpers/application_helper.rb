@@ -124,5 +124,19 @@ module ApplicationHelper
   def download_button(item)    
     link_to image_tag('icon_download.png'), send("download_#{item.class.name.downcase}_url", item)
   end
-  
+
+  def change_avatar_form(model, &block)
+    formatted_path = "formatted_%s_avatar_path" % model.class.name.underscore
+    form_for(:avatar, :url => send(formatted_path, model, 'js'),
+             :builder => AvatarFormBuilder,
+             :html => { :id => 'change-avatar-form', :multipart => true,
+                        :target => 'change-avatar-iframe', :method => 'put' }, &block)
+  end
+end
+
+class AvatarFormBuilder < ActionView::Helpers::FormBuilder
+  def hidden_iframe
+    %[<iframe name="change-avatar-iframe" id="change-avatar-iframe" src="about:blank"
+          style="position:absolute;left:-100px;width:0px;height:0px;border:0px"></iframe>]
+  end
 end

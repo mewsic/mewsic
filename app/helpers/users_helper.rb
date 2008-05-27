@@ -97,18 +97,5 @@ module UsersHelper
 
     %[<p class="centered grey-text"><em>#{message}</em></p>] if message
   end
-
-  def change_avatar_form(user, &block)
-    form_for(:avatar, :url => formatted_user_avatar_path(user, 'js'),
-             :builder => AvatarFormBuilder,
-             :html => { :id => 'change-avatar-form', :multipart => true,
-                        :target => 'change-avatar-iframe', :method => 'put' }, &block)
-  end
 end
 
-class AvatarFormBuilder < ActionView::Helpers::FormBuilder
-  def hidden_iframe
-    %[<iframe name="change-avatar-iframe" id="change-avatar-iframe" src="about:blank"
-          style="position:absolute;left:-100px;width:0px;height:0px;border:0px"></iframe>]
-  end
-end
