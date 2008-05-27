@@ -10,7 +10,7 @@
 		  <% if @songs.previous_page %>
 		    <%= link_to_remote image_tag('arrow_simple_left.png', :width => 7, :height => 9) + ' <strong>Prev</strong> ' ,
               :update => "songs",
-              :url => songs_path({:page => @songs.previous_page, :user_id => params[:id]}),
+              :url => user_songs_path(@user, :page => @songs.previous_page),
               :method => :get,
               :loading => "$('song_spinner').show();",
               :complete => "$('song_spinner').hide();var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initSongButtons(true); }"
@@ -24,7 +24,7 @@
 		  <% if @songs.next_page %>
 		    <%= link_to_remote ' <strong>Next</strong> ' + image_tag('arrow_simple_right.png', :width => 7, :height => 9),
 		          :update => "songs",
-		          :url =>  songs_path({:page => @songs.next_page, :user_id => params[:id]}),
+		          :url =>  user_songs_path(@user, :page => @songs.next_page),
 		          :method => :get,
 		          :loading => "$('song_spinner').show();",
 		          :complete => "$('song_spinner').hide();var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initSongButtons(true); }"

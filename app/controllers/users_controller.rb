@@ -36,7 +36,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id], :conditions => "users.activated_at IS NOT NULL", :include => [:avatars, :mbands])
     # non uso :include => [{:songs => [:tracks, :genre]}] xkè non devo recuperare tutte le tracce
-    @songs = Song.find_paginated_by_user(1, @user.id)
+    @songs = Song.find_paginated_by_user(1, @user)
     @tracks = Track.find_paginated_by_user(1, @user)    
     @answers = @user.answers.find(:all, :limit => 6, :order => 'created_at DESC')  
 

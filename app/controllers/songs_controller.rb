@@ -5,13 +5,14 @@ class SongsController < ApplicationController
   
   def index
     if params.has_key?("genre_id")
-      @songs = Song.find_paginated_by_genre(params[:page], params[:genre_id])
-      params[:id] = params[:genre_id]
-    end
-    if params.has_key?("user_id")
+      @genre = Genre.find(params[:genre_id])
+      @songs = Song.find_paginated_by_genre(params[:page], @genre)
+    elsif params.has_key?("user_id")
       @user = User.find(params[:user_id])
-      @songs = Song.find_paginated_by_user(params[:page], params[:user_id])
-      params[:id] = params[:user_id]
+      @songs = Song.find_paginated_by_user(params[:page], @user)
+    elsif params.has_key?("mband_id")
+      @mband = Mband.find(params[:mband_id])
+      @songs = Song.find_paginated_by_mband(params[:page], @mband)
     end
     render :layout => false
   end

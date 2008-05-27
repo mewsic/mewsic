@@ -2,12 +2,14 @@
 <td colspan="2">
 	<div class="tit-sezion-tab clear-block">
 	<div class="float-right">
+	  <img src="/images/spinner.gif" id="genre_spinner" style="float: left;display: none"/>
 		<p class="button float-left">
 		  <% if @songs.previous_page %>
 		    <%= link_to_remote image_tag('arrow_simple_left.png', :width => 7, :height => 9),
-		          :update => "songs",
-		          :url => songs_path({:page => @songs.previous_page, :genre_id => params[:id]}),
+		          :url => genre_songs_path(@genre, :page => @songs.previous_page),
+		          :update => "songs",		          
 		          :method => :get,
+		          :loading => "$('genre_spinner').show()",
 		          :complete => "var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initSongButtons(true); }"
          %>
 		  <% else %>
@@ -18,15 +20,16 @@
 		<p class="button float-left">
 		  <% if @songs.next_page %>
 		    <%= link_to_remote image_tag('arrow_simple_right.png', :width => 7, :height => 9),
-		          :update => "songs",
-		          :url =>  songs_path({:page => @songs.next_page, :genre_id => params[:id]}),
+		          :url =>  genre_songs_path(@genre, :page => @songs.next_page),
+		          :update => "songs",		          
 		          :method => :get,
+		          :loading => "$('genre_spinner').show()",
 		          :complete => "var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initSongButtons(true); }"
         %>
 		  <% else %>
 		    <%= image_tag('arrow_simple_right.png', :width => 7, :height => 9) %>
-		  <% end %>
-		</p>
+		  <% end %>		  
+		</p>				
 	</div>
 	</div>
 </td>

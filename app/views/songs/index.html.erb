@@ -1,2 +1,7 @@
-<%= render :partial => 'genres/songs' if !params[:genre_id].nil? %>
-<%= render :partial => 'users/songs'  if !params[:user_id].nil? %>
+<%- if @genre -%>
+  <%= render :partial => 'genres/songs' %>
+<%- elsif @user -%>
+  <%= render :partial => 'users/songs' %>
+<%- elsif @mband -%>
+  <%= render :partial => 'mbands/songs' %>
+<%- end -%>

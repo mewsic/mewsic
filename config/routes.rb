@@ -2,6 +2,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :mbands, :member => {:rate => :put, :set_leader => :put} do |mband|    
     mband.resources :avatars
+    mband.resources :songs
     mband.resources :tracks
   end  
   
@@ -16,11 +17,15 @@ ActionController::Routing::Routes.draw do |map|
   end  
   map.connect 'replies/:id/rate', :controller => 'replies', :action => 'rate'
   
-  map.resources :genres
+  map.resources :genres do |genre|
+    genre.resources :songs
+  end
+  
   map.resources :instruments
   map.resources :ideas
   map.resources :bands_and_deejays
   map.resources :users, :member => {:switch_type => :put, :rate => :put} do |user|    
+    user.resources :songs
     user.resources :tracks
     user.resource :avatar
     user.resources :members, :controller => 'band_members'
