@@ -135,7 +135,14 @@ class UsersController < ApplicationController
     render :json => ActionView::Helpers::FormOptionsHelper::COUNTRIES
   end
   
-  protected
+  def auto_complete_for_message_to
+    q = params[:message][:to] if params[:message]
+    return :inline => '' if q.blank?
+    @users = User.find(:all, :order => "login ASC", :conditions => ["login LIKE ?", "%#{q}%"])
+    render :inline => "<%= content_tag(:ul, @users.map { |u| content_tag(:li, h(u.login)) }) %>"
+  end
+  
+protected
   
   def check_if_current_user_page
     redirect_to('/') and return unless current_user.id == params[:id].to_i

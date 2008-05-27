@@ -3,6 +3,13 @@
     :loading => "var b = $('new_message_send_button');b.setAttribute('originalvalue', b.value);b.setAttribute('value', 'sending');b.disabled=true;b.value='Sending...';return false;" do |f| -%>
 
     <span class="label">To:</span> <%= f.text_field :to %>
+    <div id="to_results" class="auto_complete"></div>
+    <script type="text/javascript" charset="utf-8">
+      new Ajax.Autocompleter('message_to', 'to_results', '<%= auto_complete_for_message_to_users_path %>', {
+        method: 'get',
+        minChars: 2
+      });
+    </script>
     <span class="label">Subject:</span> <%= f.text_field :subject %><br/>
   	<div id="hr"> </div>
     <div id="message_label"><span class="label">Message:</span></div>

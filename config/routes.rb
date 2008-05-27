@@ -9,9 +9,6 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'mband_memberships/accept/:token', :controller => 'mband_memberships', :action => 'accept'
   map.resources :mband_memberships
   
-  
-
-  
   map.resources :answers, :member => { :rate => :put }, :collection => { :search => :get } do |answers|
     answers.resources :replies
   end  
@@ -24,7 +21,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :instruments
   map.resources :ideas
   map.resources :bands_and_deejays
-  map.resources :users, :member => {:switch_type => :put, :rate => :put} do |user|    
+  map.resources :users, :collection => { :auto_complete_for_message_to => :get }, :member => {:switch_type => :put, :rate => :put} do |user|    
     user.resources :songs
     user.resources :tracks
     user.resource :avatar

@@ -74,7 +74,7 @@ class MessagesController < ApplicationController
         redirect_to :action => (@message.sender == @user ? 'sent' : 'index'), :page => params[:page]
       end
     end
-  end
+  end          
     
 private
   

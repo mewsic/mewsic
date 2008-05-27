@@ -1,5 +1,6 @@
 class ReplyObserver < ActiveRecord::Observer
   def after_create(reply)
+    return if reply.user == reply.answer.user
     #FIXME: fix link generation
     subject = "New reply from #{reply.user.login}"
     body    = %|
