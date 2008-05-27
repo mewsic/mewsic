@@ -23,7 +23,9 @@ class TracksController < ApplicationController
   end
   
   def create    
-    @track = Track.create(params[:track])
+    # HACK because the SWF sends wrong parameters
+    attributes = params[:track] || params.reject { |k,v| [:action,:controller].include? k }
+    @track = Track.create(attributes)
     
     respond_to do |format|
       format.xml do
