@@ -168,7 +168,7 @@
       			  <%= link_to avatar_image(song.user, :icon), user_path(song.user) %>
             </p>
       			<p class="name"><%= link_to song.user.login, user_path(song.user) %></p>
-      			<p class="title"><%= song.id %> <%= link_to song.title, song_path(song.title) %></p>
+      			<p class="title"><%= song.id %> <%= link_to song.title, song_path(song) %></p>
       			<div class="music-info">
       			  <p class="float-right">
       			    <span class="star"><%= rating(song) %></span>
@@ -245,7 +245,7 @@
           			  <%= link_to avatar_image(song.user, :icon), user_path(song.user) %>
                 </p>
           			<p class="name"><%= link_to song.user.login, user_path(song.user) %></p>
-          			<p class="title"><%= song.id %> <%= link_to song.title, song_path(song.title) %></p>
+          			<p class="title"><%= song.id %> <%= link_to song.title, song_path(song) %></p>
           			<div class="music-info">
           			  <p class="float-right">
           			    <span class="star"><%= rating(song) %></span>
