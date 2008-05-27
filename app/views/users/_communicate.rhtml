@@ -20,53 +20,18 @@
       </strong>
     </p>
   </div>
+  <%- if current_user.class.name != 'Band' && @user.class.name != 'Band' -%>
   <div class="action">
-    <p class="thumb"><img src="/images/ico_invita.gif" alt="" width="29" height="29" /></p>
-    <p class="name cyan-text"><strong><a href="#" onclick="$('mband_invite_container').toggle(); return false;">Invite to your MBand</a></strong></p>
+    <p class="thumb"><img src="/images/ico_invita.gif" alt="" width="29" height="29" /></p>    
+    <p class="name cyan-text"><strong><a href="#" onclick="$('mband_invite_container').toggle(); return false;">Invite to your MBand</a></strong></p>    
   </div>
+  <%- end -%>
   <div class="popup" style="display: none; width: 690px; position: absolute; top: 155px; right: 0pt; z-index: 9999;">
     <a href="#" class="button close"><img src="/images/search_box_icon_close.png" /></a>  
     <img id="popup-spinner" src="/images/spinner.gif" style="position:absolute; top: 10px; right: 10px;">
     <div class="container" style="display:none;"></div>
   </div>
-  
-  <div id="mband_invite_container" style="display: none;">
-    <%- form_for(:mband_memberships, :url => mband_memberships_path, :method => 'post') do |f| -%>
-    <%= hidden_field_tag "user_id", @user.id %>
-  	<div id="mband_invite_top">
-  		<div id="mband_title">
-  			Invite <%= @user.login %><br />in your MBand
-  		</div>
-  		<div id="mband_logo"> </div>
-
-  	</div>
-  		<div id="mband_invite_core">
-  			<div id="mband_select" style="display: <%= current_user.mbands.count > 0 ? 'block' : 'none' %>;">
-  				<%= select_tag :mband_id, options_for_select(current_user.mbands.collect{|m| [m.name, m.id]}.unshift(['New Mband', ''])), :onchange => "var v=this.options[this.selectedIndex].value;v.strip() == '' ? $('mband_add_new').show() : $('mband_add_new').hide()" %>
-  			</div>
-
-  			<div id="mband_add_new">
-  				<span id="band_over_input_text">
-  					<strong>New Mband name </strong>
-  					<%= text_field_tag :mband_name %>
-  				</span>
-
-  			</div>		
-  			<div id="band_buttons_bottom">
-  				<span id="band_alert">&nbsp;</span>
-  				<div id="band_buttons">
-  						<div id="band_form_buttons">
-  							<a href="#" onclick="$('mband_invite_container').toggle(); return false;"><img src="/images/band_button_cancel.png" /></a>
-  							<%= image_submit_tag 'band_button_ok.png', :onclick => "if($('mband_name').value.strip() == ''){ $('band_alert').update('The name field is required');return false;} " %>
-  						</div>
-  				</div>
-  			</div>	
-  		</div>
-  	<div id="mband_invite_bottom">
-
-  	</div>
-  	<%- end -%>
-  </div>
+  <%= render :partial => 'mband_invitation' if current_user.class.name != 'Band' && @user.class.name != 'Band' %>
   
     
 </div>
