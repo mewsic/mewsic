@@ -30,7 +30,7 @@
     <div class="container" style="display:none;"></div>
   </div>
   
-  <div id="mband_invite_container" style="display: none;">
+  <div id="mband_invite_container" style="">
     <%- form_for(:mband_memberships, :url => mband_memberships_path, :method => 'post') do |f| -%>
     <%= hidden_field_tag "user_id", @user.id %>
   	<div id="mband_invite_top">
@@ -53,13 +53,11 @@
 
   			</div>		
   			<div id="band_buttons_bottom">
-  				<span id="band_alert">
-  					Alert!!!
-  				</span>
+  				<span id="band_alert">&nbsp;</span>
   				<div id="band_buttons">
   						<div id="band_form_buttons">
   							<a href="#" onclick="$('mband_invite_container').toggle(); return false;"><img src="/images/band_button_cancel.png" /></a>
-  							<%= image_submit_tag 'band_button_ok.png' %>
+  							<%= image_submit_tag 'band_button_ok.png', :onclick => "if($('mband_name').value.strip() == ''){ $('band_alert').update('The name field is required');return false;} " %>
   						</div>
   				</div>
   			</div>	
