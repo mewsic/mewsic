@@ -10,6 +10,7 @@ class MbandMembershipsController < ApplicationController
       MbandMembership.create(:user => @user, :mband => @mband)
     end
     
+    flash[:notice] = "User #{@user.login} has been invited to the #{@mband.name} mband"
     redirect_to mband_url(@mband)
   end
 

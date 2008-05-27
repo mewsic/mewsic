@@ -43,6 +43,9 @@
     <p class="blue-text">Mband name </p>
     <h1 class="black-text" id="user_id"><%= @mband.name %></h1>
     <div class="grey-divisor"><hr /></div>    
+    <p class="blue-text"><%= pluralize mband_countries.size, 'Country' %></p>
+    <h2 class="black-text" id="user_country"><%= mband_countries.join(', ') %></h2>
+    <div class="grey-divisor"><hr /></div>
   </div>  
   <%= render :partial => 'communicate' if logged_in? %>  
 </div>

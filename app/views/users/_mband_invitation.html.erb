@@ -25,7 +25,7 @@
 				<div id="band_buttons">
 						<div id="band_form_buttons">
 							<a href="#" onclick="$('mband_invite_container').toggle(); return false;"><img src="/images/band_button_cancel.png" /></a>
-							<%= image_submit_tag 'band_button_ok.png', :onclick => "if($('mband_name').value.strip() == ''){ $('band_alert').update('The name field is required');return false;} " %>
+							<%= image_submit_tag 'band_button_ok.png', :onclick => "if($('mband-id').value.strip() == '' && $('mband_name').value.strip() == ''){ $('band_alert').update('Mband name is required!');return false;} " %>
 						</div>
 				</div>
 			</div>	

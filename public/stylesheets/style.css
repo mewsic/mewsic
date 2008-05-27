@@ -1056,8 +1056,8 @@ h2.dj-label{
 	border-right: 2px solid #fff;
 }
 
-.user-motto textarea,
-.user-gusti textarea {
+.user-motto textarea, .mband-motto textarea,
+.user-gusti textarea, .mband-gusti textarea {
   border: 1px solid #BFD2DB;
   width: 99%;
 }
