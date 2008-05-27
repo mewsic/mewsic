@@ -1,1 +1,5 @@
-<%= render :partial => 'users/tracks'%>
+<%- if @user -%>
+  <%= render :partial => 'users/tracks'%>
+<%- elsif @mband -%>
+  <%= render :partial => 'mbands/tracks'%>
+<%- end -%>

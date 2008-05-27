@@ -2,6 +2,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :mbands, :member => {:rate => :put, :set_leader => :put} do |mband|    
     mband.resources :avatars
+    mband.resources :tracks
   end  
   
   map.connect 'mband_memberships/accept/:token', :controller => 'mband_memberships', :action => 'accept'
@@ -20,6 +21,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :ideas
   map.resources :bands_and_deejays
   map.resources :users, :member => {:switch_type => :put, :rate => :put} do |user|    
+    user.resources :tracks
     user.resource :avatar
     user.resources :members, :controller => 'band_members'
     user.resources :friendships

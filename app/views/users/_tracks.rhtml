@@ -14,7 +14,7 @@
 		  <% if @tracks.previous_page %>
 		    <%= link_to_remote image_tag('arrow_simple_left.png', :width => 7, :height => 9) + ' <strong>Prev</strong> ' ,
 		          :update => "tracks",
-		          :url => tracks_path({:page => @tracks.previous_page, :id => params[:id]}),
+		          :url => user_tracks_path(@user, { :page => @tracks.previous_page }),
 		          :method => :get,
 		          :loading => "$('track_spinner').show();",
 		          :complete => "$('track_spinner').hide();var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initTrackButtons(true); }"
@@ -28,8 +28,7 @@
 		  <% if @tracks.next_page %>
 		    <%= link_to_remote ' <strong>Next</strong> ' + image_tag('arrow_simple_right.png', :width => 7, :height => 9),
 		          :update => "tracks",
-		          :url =>  tracks_path({:page => @tracks.next_page,
-		          :id => params[:id]}),
+		          :url =>  user_tracks_path(@user,{ :page => @tracks.next_page }),
 		          :method => :get,
 		          :loading => "$('track_spinner').show();",
 		          :complete => "$('track_spinner').hide();var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initTrackButtons(true);} "

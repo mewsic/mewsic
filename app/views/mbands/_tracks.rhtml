@@ -9,13 +9,15 @@
     
 	
   <p class="next">
+      <img src="/images/spinner.gif" id="track_spinner" style="display:none;"/>
   	  <span class="nav-bottom">
 		  <% if @tracks.previous_page %>
 		    <%= link_to_remote image_tag('arrow_simple_left.png', :width => 7, :height => 9) + ' <strong>Prev</strong> ' ,
 		          :update => "tracks",
-		          :url => tracks_path({:page => @tracks.previous_page, :id => params[:id]}),
+		          :url => mband_tracks_path(@mband, { :page => @tracks.previous_page }),
 		          :method => :get,
-		          :complete => "var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initTrackButtons(true); }"
+		          :loading => "$('track_spinner').show();",
+		          :complete => "$('track_spinner').hide();var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initTrackButtons(true); }"
         %>
 		  <% else %>
 		    <%= image_tag('arrow_simple_left.png', :width => 7, :height => 9)  + ' <strong>Prev</strong> ' %>
@@ -26,20 +28,19 @@
 		  <% if @tracks.next_page %>
 		    <%= link_to_remote ' <strong>Next</strong> ' + image_tag('arrow_simple_right.png', :width => 7, :height => 9),
 		          :update => "tracks",
-		          :url =>  tracks_path({:page => @tracks.next_page,
-		          :id => params[:id]}),
+		          :url =>  mband_tracks_path(@mband,{ :page => @tracks.next_page }),
 		          :method => :get,
-		          :complete => "var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initTrackButtons(true);} "
+		          :loading => "$('track_spinner').show();",
+		          :complete => "$('track_spinner').hide();var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initTrackButtons(true);} "
          %>
 		  <% else %>
 		    <%= ' <strong>Next</strong> ' + image_tag('arrow_simple_right.png', :width => 7, :height => 9)%>
 		  <% end %>
 	  </span>
   </p>
-
-  <% if @tracks.size.zero? %>
-    <p class="centered grey-text"><em><%= link_to 'import', multitrack_path(current_user) %> your tracks and enjoy!</em></p>
-  <% end %>
-
+  <%= empty_collection_message @tracks,
+        :current_user => "#{link_to 'import', multitrack_path(current_user)} your tracks and enjoy!",
+        :any_user     => "#{@mband.name} hasn't uploaded any track yet"
+	-%>
   </div>
 </div>	

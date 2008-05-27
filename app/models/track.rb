@@ -60,9 +60,9 @@ class Track < ActiveRecord::Base
     res.find_all{|t,c| [t,c] if t}
   end
   
-  def self.find_paginated_by_user(page, user_id)
+  def self.find_paginated_by_user(page, user)
     paginate :per_page => 7,
-             :conditions => ["songs.user_id = ?", user_id],
+             :conditions => ["songs.user_id = ?", user.id],
              :include => [:instrument, {:parent_song => :user}], 
              :order => "tracks.title ASC",
              :page => page

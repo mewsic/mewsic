@@ -1,8 +1,14 @@
 class TracksController < ApplicationController
   
   def index
-    @tracks = Track.find_paginated_by_user(params[:page], params[:id])
-    @user = User.find(params[:id])
+    if params.include?(:user_id) 
+      @user = User.find(params[:user_id])
+      @tracks = Track.find_paginated_by_user(params[:page], @user)
+    elsif params.include?(:mband_id)
+      @mband = Mband.find(params[:mband_id])
+      @tracks = Track.find_paginated_by_mband(params[:page], @mband)
+    end
+      
     render :layout => false
   end
   

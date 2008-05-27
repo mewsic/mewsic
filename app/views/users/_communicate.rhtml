@@ -30,7 +30,7 @@
     <div class="container" style="display:none;"></div>
   </div>
   
-  <div id="mband_invite_container" style="">
+  <div id="mband_invite_container" style="display: none;">
     <%- form_for(:mband_memberships, :url => mband_memberships_path, :method => 'post') do |f| -%>
     <%= hidden_field_tag "user_id", @user.id %>
   	<div id="mband_invite_top">
