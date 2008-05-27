@@ -126,7 +126,8 @@ module ApplicationHelper
   end
 
   def change_avatar_form(model, &block)
-    formatted_path = "formatted_%s_avatar_path" % model.class.name.underscore
+    klass = model.kind_of?(User) ? User : model.class
+    formatted_path = "formatted_%s_avatar_path" % klass.name.underscore
     form_for(:avatar, :url => send(formatted_path, model, 'js'),
              :builder => AvatarFormBuilder,
              :html => { :id => 'change-avatar-form', :multipart => true,
