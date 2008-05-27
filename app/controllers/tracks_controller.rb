@@ -24,7 +24,13 @@ class TracksController < ApplicationController
   
   def create    
     # HACK because the SWF sends wrong parameters
-    attributes = params[:track] || params.reject { |k,v| [:action,:controller].include? k }
+    attributes = params[:track]
+    if attributes.nil?
+      attributes = params.reject { |k,v| [:action,:controller].include? k }
+      attributes[:instrument] = Instrument.find attributes[:instrument]
+      attributes[:genre] = Genre.find attributes[:genre]
+    end
+
     @track = Track.create(attributes)
     
     respond_to do |format|
