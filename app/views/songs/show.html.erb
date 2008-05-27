@@ -146,13 +146,14 @@
     			  </div>
             <p class="float-right" style="position:relative;">
               <img src="/images/spinner.gif" id="direct-sibling-tracks-loading-<%= song.id %>" style="display: none;float: left; margin: 7px 5px"/>
-      		    <span class="tracks-number grey" id="track-number-<%= song.id %>">                
+      		    <span class="tracks-number" id="track-number-<%= song.id %>">                
       		      <a href="#" onclick="new Ajax.Updater('direct-sibling-tracks', '<%= direct_sibling_tracks_song_path(song) %>', {
       		        method: 'GET',
       		        onLoading: function() {
       		          $('direct-sibling-tracks').hide();
       		          $('direct-sibling-tracks-loading-<%= song.id %>').show();
-      		          $('direct-siblings').select('.sibling').invoke('removeClassName', 'active');    		          
+      		          $('direct-siblings').select('.sibling').invoke('removeClassName', 'active');
+      		          $('direct-siblings').select('.tracks-number').invoke('removeClassName', 'orange');
       		        },
       		        onComplete: function() {
       		          $('direct-sibling-<%= song.id %>').addClassName('active');

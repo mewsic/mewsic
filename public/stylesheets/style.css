@@ -2271,7 +2271,7 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 	margin-bottom:0px;
 }
 .special-box.active{
-	border:2px solid #D3D3D3;
+	/*border:2px solid #D3D3D3;*/
 }
 .special-arrow{
 	position:absolute;
@@ -3219,3 +3219,11 @@ div.popup {
 }
 
 /******************** END SIBLINGS TABS ********************/ 
+
+#direct-siblings .tracks-number, #indirect-siblings .tracks-number {
+  background-image: url(/images/tracks_number_BG_grey.png);
+}
+
+#direct-siblings .active .tracks-number, #indirect-siblings .active .tracks-number {
+  background-image: url(/images/tracks_number_BG_orange.png);
+}
