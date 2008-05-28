@@ -1,5 +1,6 @@
 <% javascript('user/edit') if current_user_page? %>
 <% javascript('user/mail') if logged_in? %>
+<% javascript('user/im') %>
 
 <div class="mypage-label clear-block">
   <%= render :partial => 'switch_type' if current_user_page? %>
@@ -64,6 +65,8 @@
   
 </div>
 
+<div id="user-links">
+
 <div class="user-id clear-float">
   <div class="float-right">
     <div class="adding-link">
@@ -83,6 +86,13 @@
     </div>
   </div>
   <p>myousica ID: <%= @user.id %></p>
+</div>
+<div class="popup" style="display: none; width: 200px; height: 80px; position: absolute; top: 165px; right: 250px; z-index: 9999;">
+	<a href="#" class="button close"><img src="/images/search_box_icon_close.png" /></a>  
+	<img class="popup-spinner" src="/images/spinner.gif" style="position:absolute; top: 10px; right: 10px;">
+	<div class="container" style="display:none;"></div>
+</div>
+
 </div>
 
 <div class="user-details clear-block">

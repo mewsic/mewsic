@@ -141,6 +141,12 @@ class UsersController < ApplicationController
     @users = User.find(:all, :order => "login ASC", :conditions => ["login LIKE ?", "%#{q}%"])
     render :inline => "<%= content_tag(:ul, @users.map { |u| content_tag(:li, h(u.login)) }) %>"
   end
+
+  def im_contact
+    @user = User.find(params[:id])
+    redirect_to root_url and return unless request.xhr?
+    render :partial => 'users/im'
+  end
   
 protected
   

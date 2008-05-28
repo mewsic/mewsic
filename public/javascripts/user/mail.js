@@ -94,7 +94,7 @@ var MailBox = Class.create({
   handlePageLoaded: function() {
     this.initPaginationLinks();
     $('popup-spinner').hide();    
-  },
+  }
   
 });
 
