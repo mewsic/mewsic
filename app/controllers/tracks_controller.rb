@@ -26,9 +26,9 @@ class TracksController < ApplicationController
     # HACK because the SWF sends wrong parameters
     attributes = params[:track]
     if attributes.nil?
-      attributes = params.reject { |k,v| %w(action controller).include? k }
+      attributes = params.reject { |k,v| %w(action controller).include?(k) || v == 'undefined' }
       attributes[:instrument] = Instrument.find attributes[:instrument]
-      attributes[:genre] = Genre.find attributes[:genre]
+      attributes[:genre] = Genre.find attributes[:genre] if attributes[:genre]
       attributes[:filename] = '/audio/' << attributes[:filename]
     end
 
