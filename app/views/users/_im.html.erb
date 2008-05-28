@@ -1,10 +1,12 @@
 <h2>IM CONTACTS</h2>
 <% if !@user.msn.blank? && @user.msn_public? %>
-  <p class="grey-text"><%= image_tag 'icone_link_MSN.gif' %>
-	  <%= @user.msn %></p>
+	<p class="grey-text"><%= link_to(image_tag('icone_link_MSN.gif'), '#', :rel => @user.msn, :class => 'msn-link') %>
+		<%= @user.msn %>
+	</p>
 <% end %>
 
 <% if !@user.skype.blank? && @user.skype_public? %>
-  <p class="grey-text"><%= image_tag 'icone_link_skype.gif' %>
-	  <%= @user.skype %></p>
+	<p class="grey-text"><%= link_to(image_tag('icone_link_skype.gif'), "callto://#{@user.skype}") %>
+		<%= @user.skype %>
+	</p>
 <% end %>
