@@ -55,6 +55,19 @@ class MessagesControllerTest < ActionController::TestCase
     assert_equal user_10_received_count + 1,  users(:user_10).received_messages.count
   end
   
+  def test_should_create_message_for_multiple_recipients
+    login_as :quentin
+    quentin_sent_count = users(:quentin).sent_messages.count
+    user_10_received_count = users(:user_10).received_messages.count
+    user_11_received_count = users(:user_11).received_messages.count
+    assert_difference 'Message.count', 2 do
+      post :create, :user_id => users(:quentin), :message => { :subject => 'Hello', :body => 'hello world!', :to => "#{users(:user_10).login}, #{users(:user_11).login}" }
+    end
+    assert_equal quentin_sent_count + 2,      users(:quentin).sent_messages.count
+    assert_equal user_10_received_count + 1,  users(:user_10).received_messages.count
+    assert_equal user_11_received_count + 1,  users(:user_11).received_messages.count
+  end
+  
   def test_should_not_create_message
     login_as :quentin
     assert_no_difference 'Message.count' do

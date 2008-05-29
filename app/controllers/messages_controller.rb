@@ -55,14 +55,19 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @message = Message.new(params[:message])
-    @message.sender = @user    
-    @message.recipient = User.find_by_login(params[:message][:to])
+    @bad_recipients = []
+    params[:message][:to].split(',').each do |login|
+      login.strip!
+      @message = Message.new(params[:message])
+      @message.sender = @user
+      @message.recipient = User.find_by_login(login)
+      unless @message.save
+        @bad_recipients << login
+      end
+    end    
         
     respond_to do |format|
-      format.js do
-        @sent = @message.save
-      end
+      format.js
     end
   end
   

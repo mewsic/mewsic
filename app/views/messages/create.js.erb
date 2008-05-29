@@ -1,7 +1,7 @@
-<% if @sent -%> 
+<% if @bad_recipients.empty? -%> 
   MailBox.instance.loadPage('<%= user_messages_path(@user) %>');
 <% else -%>
-  alert('<%=escape_javascript "Error sending message to '#{params[:message][:to]}'" %>');
+  alert('<%=escape_javascript "Error sending message to #{@bad_recipients.collect{|login| "'#{login}'"}.join(',')}" %>');
   var b = $('new_message_send_button');
   b.disabled = false;
   b.value = b.getAttribute('originalvalue');
