@@ -28,8 +28,9 @@ var MailBox = Class.create({
   
   closePopup: function() {
     this.deselectAllLinks();
-    this.popup.hide();
-    this.container.update('').hide();
+    new Effect.Fade(this.popup, {
+      duration: 0.3,
+      afterFinish: function() { this.container.update(''); }.bind(this) });
   },
   
   handleOpenPopup: function(event) {
@@ -42,8 +43,7 @@ var MailBox = Class.create({
   },
   
   openPopup: function() {
-    this.popup.show();
-    this.container.show();
+    new Effect.Appear(this.popup, {duration: 0.3});
   },
   
   deselectAllLinks: function() {
