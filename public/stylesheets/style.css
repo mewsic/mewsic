@@ -1958,7 +1958,18 @@ p.sign-in .button{
 	text-align:center;
 	padding: 50px 0px 20px;
 	background:#fff;
+	color:#61656A;
 }
+
+#footer a{
+	color:#28548B;
+	text-decoration: none;
+}
+
+#footer a:hover {
+	text-decoration: underline;
+}
+
 /* generici correttori */
 .no-bold{
 	font-weight:normal;
