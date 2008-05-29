@@ -46,7 +46,18 @@ class MlabsController < ApplicationController
   def destroy
     @mlab     = Mlab.find(params[:id])
     @mixable  = @mlab.mixable
-    @mlab.destroy
+    if @mlab.destroy
+      respond_to do |format|            
+        format.xml { headers["Content-Type"] = "text/xml;"; head :ok }
+        format.js { render :json => @items.to_json(:methods => :user, :include => :mlabs) }
+      end
+    else
+      respond_to do |format|            
+        format.xml { headers["Content-Type"] = "text/xml;"; head :bad_request }
+        format.js { render :json => @items.to_json(:methods => :user, :include => :mlabs) }
+      end
+    end
+    
   end    
 
 private
