@@ -36,10 +36,11 @@ module ApplicationHelper
   end
   
   def clickable_logo
+    logo = image_tag "logo_myousica.gif", :title => 'myousica logo'
     if controller.controller_name == "dashboard"
-      image_tag "logo_myousica.gif"
+      logo
     else
-      link_to image_tag("logo_myousica.gif"), root_path
+      link_to logo, root_path
     end
   end
   

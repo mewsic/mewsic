@@ -70,6 +70,13 @@ html[xmlns] .clear-block {
 #logo{
 	margin-left:1px;
 }
+#beta {
+	width: 0px;
+	position: relative;
+	top: -2px;
+	left: -155px;
+	float: left;
+}
 #top-menu{
 	font-size:11px;
 	text-align:right;

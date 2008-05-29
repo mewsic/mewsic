@@ -14,7 +14,8 @@
   <%= hidden_field_tag 'authenticity-token', form_authenticity_token if protect_against_forgery? %>  
   <div id="header" class="page-width clear-block">
     <%= render :partial => 'shared/top_menu' %>
-    <div id="logo" class="float-left"><%= clickable_logo %></div>
+		<div id="logo" class="float-left"><%= clickable_logo %></div>
+		<div id="beta"><%= image_tag 'beta.png', :title => 'beta!' %></div>
     <%= render :partial => 'shared/nav_menu' %>
   </div>
   <div class="bg-body">
