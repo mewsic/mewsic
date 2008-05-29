@@ -6,6 +6,10 @@
       <div class="elements clear-block">
         <%- @user.mbands.each do |mband| -%>        
           <div>
+            <%- if mband.members.count > 1 -%>
+              <%- to_string = mband.members.collect{|u| u != @user ? u.login : ''}.join(', ') -%>
+              <a href="#" onclick="new Effect.ScrollTo('user-mail');MailBox.instance.openPopup();MailBox.instance.loadPage('<%= new_user_message_path(@user, :to => to_string) %>');return false;">Write</a>
+            <%- end -%>
             <p class="thumb">
               <%= link_to avatar_image(mband, :icon), mband_path(mband) %>
             </p>

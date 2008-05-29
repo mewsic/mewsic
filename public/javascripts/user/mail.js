@@ -37,10 +37,14 @@ var MailBox = Class.create({
     this.deselectAllLinks();
     event.element().up().addClassName('active');
     event.element().up().up().addClassName('active');
+    this.openPopup();
+    this.loadPage(event.element().getAttribute('href'));
+  },
+  
+  openPopup: function() {
     this.popup.show();
     this.container.show();
-    this.loadPage(event.element().getAttribute('href'));
-  },    
+  },
   
   deselectAllLinks: function() {
     this.element.select('.active').invoke('removeClassName', 'active');
