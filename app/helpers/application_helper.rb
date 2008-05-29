@@ -67,7 +67,7 @@ module ApplicationHelper
   def tags_for_cloud(klass, group, attribute, css_classes, limit = nil)
     limit ||= 40
     options = { :include => group, :group => group, :order => "#{group.to_s.pluralize}.#{attribute} ASC", :order => 'count_all DESC', :limit => limit }
-    options[:conditions] = ["songs.published = ?", true] if klass == Song
+    options[:conditions] = ["songs.published = ? AND songs.genre_id IS NOT NULL", true] if klass == Song
     weighted_list = klass.count(options)
     
     counts = weighted_list.transpose.last.sort
