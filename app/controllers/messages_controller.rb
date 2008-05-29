@@ -56,16 +56,18 @@ class MessagesController < ApplicationController
 
   def create
     @bad_recipients = []
-    params[:message][:to].split(',').each do |login|
-      login.strip!
+    @good_recipients = []
+    params[:message][:to].split(',').map!(&:strip).uniq.each do |login|
       @message = Message.new(params[:message])
       @message.sender = @user
       @message.recipient = User.find_by_login(login)
-      unless @message.save
+      if @message.save
+        @good_recipients << login
+      else
         @bad_recipients << login
       end
-    end    
-        
+    end
+
     respond_to do |format|
       format.js
     end

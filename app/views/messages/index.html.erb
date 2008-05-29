@@ -16,7 +16,4 @@
   </table>
   <%= will_paginate @messages, :prev_label => "&lt;", :next_label => "&gt;" %>
 </div>
-<script type="text/javascript" charset="utf-8">
-  MailBox.instance.updateUnreadCount(<%= @user.unread_message_count %>)
-  MailBox.instance.updateReceivedCount(<%= @user.received_messages.count %>)
-</script>
+<%= javascript_tag update_messages_count_javascript_for(@user) %>

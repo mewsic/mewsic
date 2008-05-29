@@ -24,6 +24,7 @@ class Message < ActiveRecord::Base
   attr_accessor :to
   
   validate :recipient_must_exist
+  validate :recipient_must_be_different_than_sender
 
   # XXX body should be sanitized too, e.g by using textile
   # to format messages. XSS could occur in private messages
@@ -38,5 +39,11 @@ private
     end
   end
     
+
+  def recipient_must_be_different_than_sender
+    if self.recipient == self.sender
+      errors.add_to_base("sender and recipient must be different")
+    end
+  end
   
 end

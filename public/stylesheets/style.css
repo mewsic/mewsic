@@ -1128,6 +1128,10 @@ h2.dj-label{
 	right: 10px;
 }
 
+.user-mail div.popup .button.close {
+	line-height: 25px;
+}
+
 .user-details{
 	clear:both;
 	margin: 0px 20px;
@@ -1210,6 +1214,7 @@ h2.dj-label{
 #user-links .popup .button.close {
 	width: 15px;
 	float: left;
+	line-height: 23px;
 }
 
 .user_country-inplaceselect, .user_city-inplaceeditor{

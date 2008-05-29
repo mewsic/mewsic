@@ -19,4 +19,9 @@ module MessagesHelper
     white_list message.body    
   end
 
+  def update_messages_count_javascript_for(user)
+    %(MailBox.instance.updateUnreadCount(#{user.unread_message_count});
+      MailBox.instance.updateReceivedCount(#{user.received_messages.count});)
+  end
+
 end
