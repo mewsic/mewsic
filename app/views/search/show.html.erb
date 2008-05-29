@@ -22,8 +22,9 @@
 
 <!-- TABMENU -->
 
-<div id="search_tabmenu_container">
 <% if @songs || @tracks %>
+
+<div id="search_tabmenu_container">
 	<p class="search_tabmenu_title">Music:</p>
 	<% if @songs %>
 	<div class="tab <%= 'active' if @songs %>" id="songs-tab">
@@ -45,8 +46,9 @@
   	<div id="search_tabmenu" class="inactive dx"> </div>
   </div>	
 	<% end %>
-<% end %>
 </div>
+
+<% end %>
 
 <!-- END TABMENU -->
 

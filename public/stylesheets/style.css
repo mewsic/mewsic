@@ -3059,6 +3059,11 @@ div.popup {
 	padding: 0 12px;
 }
 
+/* "user not found" messages */
+#search_results p.grey-text {
+	padding-bottom: 20px;
+}
+
 .search_title {
 	color:#004D71;
 	font-size:16px;
