@@ -91,6 +91,14 @@ var SearchBoxBehaviour = Class.create({
     this.advanced_box = element.down('.advanced-box');
     this.collapsed_box.down('.trigger').observe('click', this.showAdvancedBox.bind(this));
     this.advanced_box.down('.trigger').observe('click', this.showCollapsedBox.bind(this));
+
+    this.links = this.advanced_box.select('a');
+    this.boxes = this.advanced_box.select('input');
+    $R(0, this.links.size(), true).each(function(i) {
+      this.links[i].observe('click', function(box) {
+        box.checked = !box.checked
+      }.bind(this, this.boxes[i]))
+    }.bind(this));
   },
     
   showAdvancedBox: function(event) {

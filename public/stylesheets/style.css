@@ -214,6 +214,11 @@ html>body #search p span{
 	padding: 4px 6px 0px 2px;
 }
 
+#search p.advanced-box .checkboxes span a {
+	padding:0;
+	margin:0;
+}
+
 /* elementi comuni */
 .name, .name a{
 	font-weight:bold;
