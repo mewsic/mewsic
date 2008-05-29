@@ -147,7 +147,7 @@ html>body #search p span{
 	background-image:none;
 	background-color:#67C0DA;	
 	float:left;
-	height:35px;
+	height:23px;
 }
 #search p.search-input input{
 	width:173px;
@@ -156,6 +156,58 @@ html>body #search p span{
 	float:left;
 	margin:5px 3px;
 }
+
+#search p.collapsed-box {
+	margin: 0;
+	background: none;
+	width: 201px;
+	height: 20px;
+	padding: 5px;
+	background: url(/images/search_box_collapsed_bg.png) no-repeat top;
+}
+#search p.collapsed-box a {
+	color: #0296C2;
+	font-size: 11px;
+	text-decoration: underline;
+	padding: 0;
+}
+
+#search p.advanced-box {
+	width: 201px;
+	height: 26px;
+	padding: 3px 5px 0;
+	background: url(/images/search_box_bg.png) no-repeat top;
+}
+
+#search p.advanced-box span {
+	padding: 0;
+	font-size: 11px;
+	background: none;
+}
+
+#search p.advanced-box .trigger {
+	background: transparent url(/images/search_box_icon_close.png) no-repeat top;
+	width: 12px;
+	height: 12px;
+	float: right;
+	margin-top: 4px;
+	cursor: pointer;
+}
+
+#search p.advanced-box .checkboxes {
+	color: #1771A0;
+	padding-top: 2px;
+}
+
+#search p.advanced-box .checkboxes input {
+	float: left;
+}
+
+#search p.advanced-box .checkboxes span {
+	float: left;
+	padding: 4px 6px 0px 2px;
+}
+
 /* elementi comuni */
 .name, .name a{
 	font-weight:bold;
@@ -1715,7 +1767,7 @@ html>body .login p {
 /* right col */
 #rightcol{
 	float:right;
-	margin: 13px 6px 0px;
+	margin: 16px 6px 0px;
 	width:214px;
 }
 .banner-right-col, #log-in, #mlab-box{

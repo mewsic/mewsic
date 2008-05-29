@@ -81,6 +81,39 @@ var LoginEase = {
   }
 }
 
+var SearchBoxBehaviour = Class.create({
+  initialize: function(element) {
+    element = $(element);
+    if (!element)
+      return;
+
+    this.collapsed_box = element.down('.collapsed-box');
+    this.advanced_box = element.down('.advanced-box');
+    this.collapsed_box.down('.trigger').observe('click', this.showAdvancedBox.bind(this));
+    this.advanced_box.down('.trigger').observe('click', this.showCollapsedBox.bind(this));
+  },
+    
+  showAdvancedBox: function(event) {
+    event.stop();
+    new Effect.Fade(this.collapsed_box, {
+      duration: 0.3,
+      afterFinish: function() {
+        new Effect.Appear(this.advanced_box, {duration: 0.3})
+      }.bind(this)
+    });
+  },
+
+  showCollapsedBox: function(event) {
+    event.stop();
+    new Effect.Fade(this.advanced_box, {
+      duration: 0.3,
+      afterFinish: function() {
+        new Effect.Appear(this.collapsed_box, {duration: 0.3})
+      }.bind(this)
+    });
+  }
+});
+
 document.observe('dom:loaded', function(event) {
 	// Login Behavior
 	if ( $('log-in') != null ) {
@@ -156,9 +189,11 @@ document.observe('dom:loaded', function(event) {
 	}	
 		 
   Message.init();
+
+  new SearchBoxBehaviour('search');
  
 });
-    
+
 var Popup = {
   open: function(url) {
     var options = Object.extend({
