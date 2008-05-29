@@ -1,7 +1,7 @@
 class SongsController < ApplicationController
   
   before_filter :login_required, :only => [:update, :rate]
-  protect_from_forgery :except => [:mix]
+  protect_from_forgery :except => [:mix, :update]
   
   def index
     if params.has_key?("genre_id")
@@ -49,7 +49,15 @@ class SongsController < ApplicationController
   def update
     @song = current_user.songs.find(params[:id])
     @song.update_attributes(params[:song])
-    render :text => ''
+    if params[:song].size == 1 && @song.respond_to?(params[:song].keys.first)
+      if params[:song].keys.first == 'genre_id'
+        render :text => @song.genre ? @song.genre.name : ''
+      else
+        render :text => @song.send(params[:song].keys.first)
+      end
+    else
+      render :text => ''
+    end
   end
   
   def mix

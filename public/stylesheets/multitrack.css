@@ -1,0 +1,132 @@
+/********************* MLAB NEW PROJECT *********************/
+
+#mlab_new_block_top {
+	width: 973px;
+	height: 300px;
+}
+
+#mlab_new_block_bottom {
+	width: 927px;
+	height: 192px;
+}
+
+#mlab_new_icons_container {
+	width: 74px;
+	float: left;
+	padding-right: 22px;
+
+}
+
+.mlab_icon_mlab {
+	padding-bottom: 10px;
+}
+
+.mlab_user_avatar {
+	padding-left: 2px;
+}
+
+.mlab_username  {
+	color: #00496B;
+	font-weight: bold;
+}
+
+#mlab_details_container {
+	float: left;
+	width: 875px;
+	height: 175px;
+}
+
+#mlab_details_container_bottom {
+	float: left;
+	width: 927px;
+	height: 175px;
+}
+
+
+#mlab_detail_row_last, #mlab_detail_row_bottom_last {
+	float: left;	
+	padding-left: 15px;	
+	width: 827px;
+}
+
+#mlab_detail_row_bottom_last {
+	width: 927px;
+}
+
+#mlab_detail_row {
+	border-bottom: 2px solid #EFEDD5;
+	float: left;
+	padding-left: 15px;
+	width: 827px;
+}
+
+#mlab_detail_row_bottom {
+	border-bottom: 2px solid #C2DCE8;
+	float: left;
+	padding-left: 15px;	
+	width: 927px;
+}
+
+.mlab_title_big {
+	color: #000000;
+	font-size: 21px;
+	font-weight: bold;
+	margin-bottom: 5px;
+	margin-top: 3px;
+}
+
+.mlab_label {
+	color: #808080;
+	margin-top: 5px;
+	margin-bottom: 0px;
+}
+
+.mlab_label a {
+	color: #98D1E5;
+	font-weight: bold;
+	margin-top: 5px;
+	margin-bottom: 0px;
+}
+
+.mlab_small_text {
+	font-size: 11px;
+	margin-bottom: 5px;
+	margin-top: 3px;
+}
+
+.mlab_genre_text {
+	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 5px;
+	margin-top: 3px;
+}
+
+.mlab_note_text {
+	font-size: 11px;
+	width: 575px;
+	margin-bottom: 5px;
+	margin-top: 3px;
+}
+
+#mlab_labels_right {
+	float: right;
+	text-align: left;
+	width: 216px;
+}
+
+#mlab_labels_right_bottom {
+	float: right;
+	text-align: left;
+	width: 216px;
+}
+
+
+#mlab_2nd_column_right {
+	float: right;
+	width: 100px;
+}
+
+#mlab_2nd_column_left {
+	float: left;
+	width: 350px;
+}
