@@ -9,6 +9,8 @@ var Pagination = Class.create({
   },  
 
   initLinks: function() {
+    if (!$(this.options.container))
+      return;
     $(this.options.container).select(this.options.selector).invoke('observe', 'click', this.linkHandler.bind(this));
   },  
 

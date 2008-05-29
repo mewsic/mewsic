@@ -27,9 +27,9 @@
           <p class="advanced-box" style="display:none">
             <span class="trigger"> </span>
             <span class="checkboxes">
-              <input type="checkbox"><span><a href="#">People</a></span>
-              <input type="checkbox"><span><a href="#">Music</a></span>
-              <input type="checkbox"><span><a href="#">Ideas</a></span>
+              <%= check_box_tag 'type[]', 'user'  %><span><a href="#">People</a></span>
+              <%= check_box_tag 'type[]', 'music' %><span><a href="#">Music</a></span>
+              <%= check_box_tag 'type[]', 'idea'  %><span><a href="#">Ideas</a></span>
             </span>
             </p>
           </div>

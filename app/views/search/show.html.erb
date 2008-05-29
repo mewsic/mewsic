@@ -1,52 +1,70 @@
 <% javascript 'search' %>
 <div id="search_head_title">
 	<p class="search_title"><strong>"<%= @q %>"</strong> search result
-    <strong>(<%= @users.total_entries + @songs.total_entries + @tracks.total_entries %>)</strong>
+    <strong>(<%= @entries[:users] + @entries[:songs] + @entries[:tracks] + @entries[:ideas] %>)</strong>
   </p>
 </div>
-      
-<p class="search_title">People <strong>(<%= @users.total_entries %>)</strong></p>
+
+<% if @users %>
+
+<p class="search_title">People <strong>(<%= @entries[:users] %>)</strong></p>
+
 <div id="user-results">
   <%= render :partial => 'user_results' %>
 </div>
 
+<% end %>
+
 <div style="clear:both"> </div>
 
 <!-- TABMENU -->
+
 <div id="search_tabmenu_container">
+<% if @songs || @tracks %>
 	<p class="search_tabmenu_title">Music:</p>
-	<div class="tab active" id="songs-tab">
+	<% if @songs %>
+	<div class="tab <%= 'active' if @songs %>" id="songs-tab">
 	  <div id="search_tabmenu" class="sx"> </div>
   	<div id="search_tabmenu" class="rp">
   		<p class="search_green_text"><a href="#" onclick="$('tracks-tab').removeClassName('active');$('songs-tab').addClassName('active');$('track-results').hide();$('song-results').show(); return false;">Songs&nbsp;</a></p>
-  		<p class="search_tabmenu_title"><strong>(<%= @songs.total_entries %>)</strong></p>			
+  		<p class="search_tabmenu_title"><strong>(<%= @entries[:songs] %>)</strong></p>			
   	</div>
   	<div id="search_tabmenu" class="dx"> </div>
 	</div>
-  <div class="tab" id="tracks-tab">
+	<% end %>
+	<% if @tracks %>
+  <div class="tab <%= 'active' if !@songs %>" id="tracks-tab">
     <div id="search_tabmenu" class="inactive sx"> </div>
   	<div id="search_tabmenu" class="inactive rp">
   		<p class="search_orange_text"><a href="#" onclick="$('songs-tab').removeClassName('active');$('tracks-tab').addClassName('active');$('song-results').hide();$('track-results').show(); return false;">Tracks&nbsp;</a></p>
-  		<p class="search_tabmenu_title"><strong>(<%= @tracks.total_entries %>)</strong></p>			
+  		<p class="search_tabmenu_title"><strong>(<%= @entries[:tracks] %>)</strong></p>			
   	</div>
   	<div id="search_tabmenu" class="inactive dx"> </div>
   </div>	
+	<% end %>
+<% end %>
 </div>
+
 <!-- END TABMENU -->
 
 <div style="clear:both"> </div>
 
 <div id="song-results">
-  <%= render :partial => 'song_results' %>
+  <%= render :partial => 'song_results' if @songs %>
 </div>
 
-<div id="track-results" style="display: none;">
-  <%= render :partial => 'track_results' %>
+<div id="track-results" style="<%= 'display: none;' if @songs %>">
+  <%= render :partial => 'track_results' if @tracks %>
 </div>
 
 <div style="clear:both"> </div>
 
-<p class="search_title">Ideas <strong>(<%= @ideas.total_entries %>)</strong></p>
+<% if @ideas %>
+
+<p class="search_title">Ideas <strong>(<%= @entries[:ideas] %>)</strong></p>
+
 <div id="idea-results">
-  <%= render :partial => 'idea_results' %>
+  <%= render :partial => 'idea_results' if @ideas %>
 </div>
+
+<% end %>

@@ -95,7 +95,8 @@ var SearchBoxBehaviour = Class.create({
     this.links = this.advanced_box.select('a');
     this.boxes = this.advanced_box.select('input');
     $R(0, this.links.size(), true).each(function(i) {
-      this.links[i].observe('click', function(box) {
+      this.links[i].observe('click', function(box, event) {
+        event.stop();
         box.checked = !box.checked
       }.bind(this, this.boxes[i]))
     }.bind(this));
