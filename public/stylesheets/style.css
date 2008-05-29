@@ -125,17 +125,17 @@ ul.list-menu{
 }
 #search{
 	position:absolute;
-	color:#006F9F;
+	color:#FFFFFF;
 }
 #search p{
 	float:left;
 	display:block;
-	background:#F3F3F4 url(/images/search_angle_left.gif) no-repeat top left;
+	background:#67C0DA url(/images/search_angle_left.png) no-repeat top left;
 }
 #search p span{
 	display:block;
 	padding:10px 14px 14px;
-	background:url(/images/search_angle_right.gif) no-repeat top right;
+	background:url(/images/search_angle_right.png) no-repeat top right;
 }
 html>body #search p span{
 	padding:10px 14px 16px;
@@ -145,13 +145,13 @@ html>body #search p span{
 	padding:10px 5px;
 	clear:both;
 	background-image:none;
-	background-color:#F3F3F4;	
+	background-color:#67C0DA;	
 	float:left;
 	height:58px;
 }
 #search p.search-input input{
 	width:173px;
-	border: 1px solid #BFD2DB;
+	border: none;
 	font-size:10px;
 	float:left;
 	margin:5px 3px;
