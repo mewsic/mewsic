@@ -11,9 +11,6 @@ class GenresController < ApplicationController
       end
       format.js do
         @genres = Genre.find(:all).collect{|g| params.include?(:ids) ? g.id : g.name}
-        #render :json => @genres
-        #headers["Content-Type:"]  = "application/json"
-        #headers["Content-Type"] = "text/xml;"
         headers["Content-Type"] = "application/json;"
         render :text => @genres.to_json
       end
