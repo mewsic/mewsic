@@ -143,7 +143,7 @@ var MlabSlider = Class.create(PictureSlider, {
         img.src = "/images/spinner.gif";
       },
       onSuccess: this._removeItem.bind(this, item),
-      onFailure: function() { alert("There was an error. Please refresh the page."); }
+      onFailure: function() { window.location.reload(); }.bind(this)
     });
   },
   
