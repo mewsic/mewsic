@@ -7,10 +7,10 @@
   			<%= mlab_button(song) %>
   		</div>
   		<div id="search_icon_container"><%= link_to avatar_image(song.user, :icon), user_path(song.user) %></div>
-  		<p class="search_black_text"><%= highlight_search song.title %></p>
+  		<p class="search_black_text"><%= link_to highlight_search(song.title), song_path(song) %></p>
   	</div>
   	<div style="float:right">
-  		<p class="search_blue_text"><%= highlight_search song.genre.name %></p>
+  		<p class="search_blue_text"><%= link_to highlight_search(song.genre.name), genre_path(song.genre) %></p>
   		<p class="search_small_orange_text">Tracks</p><p class="search_gray_text">(<%= song.tracks.count %>)</p>
   		<p class="search_sky_text"><%= song.length %></p>				
   		<div style="float:left;padding-top:6px;"><%= rating(song) %></div>
@@ -22,5 +22,5 @@
     <img src="/images/spinner.gif" id="song-results-spinner" style="display:none"/>
   </div>
 <%- else -%>
-  <p style="margin-left: 15px">No songs found. Create it with our <%= link_to 'Multitrack', logged_in? ? "#{user_path(current_user)}/multitrack" : '/login' %>!</p>
+  <p style="margin-left: 15px" class="grey-text">No songs found. Create'em with our <%= link_to 'multitrack', logged_in? ? "#{user_path(current_user)}/multitrack" : '/login' %>!</p>
 <%- end -%>

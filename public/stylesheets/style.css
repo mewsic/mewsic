@@ -3055,28 +3055,39 @@ div.popup {
 
 /******************** TEXT FORMATTING ********************/
 
+#search_results {
+	padding: 0 12px;
+}
+
 .search_title {
 	color:#004D71;
 	font-size:16px;
-	margin-bottom:8px;
-	padding-left: 15px
+	margin-top: 12px;
+	margin-bottom: 6px;
+	padding-left: 8px
 }
 
 .search_tabmenu_title {
 	color:#004D71;
 	font-size:16px;
-	padding: 10px 0px 0px 15px;
+	padding: 10px 4px 0px 8px;
 	float: left;
 	margin: 0;
 }
 
 .search_blue_text {
-	color: #1A71A0;
-	font-size: 12px;
 	margin-bottom: 0px;
 	margin-top: 6px;
 	float: left;
 	padding-right: 8px;
+	color: #1A71A0;
+	font-size: 12px;
+}
+
+.search_blue_text a {
+	color: #1A71A0;
+	font-size: 12px;
+	text-decoration: none;
 }
 
 .search_sky_text {
@@ -3098,12 +3109,18 @@ div.popup {
 }
 
 .search_black_text {
-	color: #000000;
-	font-size: 12px;	
 	margin-bottom: 0px;
 	margin-top: 6px;
 	float: left;
 	padding-right: 15px;	
+	color: #000000;
+	font-size: 12px;	
+}
+
+.search_black_text a {
+	color: #000000;
+	font-size: 12px;	
+	text-decoration: none;
 }
 
 .search_green_text {

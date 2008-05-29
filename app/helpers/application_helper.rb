@@ -53,7 +53,7 @@ module ApplicationHelper
       else
         default_breadcrumb += ' : ' + link_to(controller.send(:to_breadcrumb).capitalize, send("#{controller.controller_name}_path"))
       end      
-      default_breadcrumb += ' : ' + model_crumb.to_breadcrumb if model_crumb
+      default_breadcrumb += ' : ' + h(model_crumb.to_breadcrumb) if model_crumb
     end    
     default_breadcrumb += '</div>'
     content_for :breadcrumb, default_breadcrumb
@@ -118,8 +118,8 @@ module ApplicationHelper
     image_tag((model.avatars.last.nil? ? "/images/default_avatars/avatar_#{size}.gif" : model.avatars.last.public_filename(size)), options)
   end
   
-  def user_type_image(model, size, options = {})
-    image_tag((model.avatars.last.nil? ? "/images/default_avatars/avatar_#{size}.gif" : model.avatars.last.public_filename(size)), options)
+  def user_type_image(model, options = {})
+    image_tag("#{model.class.name.downcase}_type.png", options)
   end
   
   def download_button(item)    

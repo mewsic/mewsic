@@ -1,4 +1,8 @@
 class SearchController < ApplicationController
+
+  def index
+    redirect_to '/'
+  end
   
   def new
     redirect_to '/' and return if params[:q].strip.blank?
@@ -9,6 +13,8 @@ class SearchController < ApplicationController
 
   def show
     @q = CGI::unescape(params[:id])
+    def @q.to_breadcrumb; self; end
+
     @show_siblings_count = true
 
     @users, @songs, @tracks, @ideas = search(@q, params[:type] || [])
@@ -20,15 +26,15 @@ class SearchController < ApplicationController
     respond_to do |format|
       format.html do
         if request.xhr?
-          if %w[user song track idea].include? types.first
-            render(:partial => "#{types.first}_results", :layout => false) and return
+          if %w[user song track idea].include? params[:type]
+            render(:partial => "#{params[:type]}_results", :layout => false) and return
           end
         end
       end
       format.xml
     end
   end
-
+  
 private
 
   def search(q, types = [])
@@ -39,5 +45,5 @@ private
       (types.empty? || types.include?('idea')) ? Track.search_paginated_ideas(q, :per_page => 6, :page => params[:page]) : nil
     ]
   end
-  
+
 end
