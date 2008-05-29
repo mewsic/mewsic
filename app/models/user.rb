@@ -132,10 +132,12 @@ class User < ActiveRecord::Base
                       
   def self.search_paginated(q, options)
     options = {:per_page => 6, :page => 1}.merge(options)
-    paginate(:per_page => options[:per_page], :include => :avatars, :page => options[:page], :conditions => [
-      "users.login LIKE ? OR users.country LIKE ? OR users.city LIKE  ?",
-      *(Array.new(3).fill("%#{q}%"))
-    ])
+    with_scope :find => {:conditions => 'activated_at IS NOT NULL'} do # TODO: DRY this common SELECT condition
+      paginate(:per_page => options[:per_page], :include => :avatars, :page => options[:page], :conditions => [
+        "users.login LIKE ? OR users.country LIKE ? OR users.city LIKE  ?",
+        *(Array.new(3).fill("%#{q}%"))
+      ])
+    end
   end
   
   def is_pending_friends_by_me_with?(user)    
