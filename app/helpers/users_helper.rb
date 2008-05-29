@@ -14,9 +14,20 @@ module UsersHelper
     %|<p class="alert">There were errors during the signup process, please check the fields.</p>| unless @user.errors.empty?
   end
   
+  def gender_icon_path(gender)
+    'gender_ico_' << {:male => 'M', :female => 'F', :other => 'O'}[gender.to_sym] << '.png'
+  end
+
   def gender_icon_for(user)
-    icons = {:male => 'M', :female => 'F', :other => 'O'}
-    %|<img alt="#{user.gender.to_s}" id="user_gender" class="#{icons[user.gender.to_sym]}" src="/images/gender_ico_#{icons[user.gender.to_sym]}.png"/>| unless @user.gender.blank?
+    image_tag gender_icon_path(user.gender), :alt => user.gender, :id => 'user_gender' unless user.gender.blank?
+  end
+
+  def gender_switcher_for(user)
+    return unless user.gender.blank? and current_user_page?
+
+    link_to('[set]', '#', :id => 'change-gender-trigger') <<
+      %|<div id="change-gender">| << %w(male female other).map { |gender|
+        image_tag gender_icon_path(gender), :alt => gender, :title => gender }.join << '</div>'
   end
   
   def track_icon(track, color = nil)

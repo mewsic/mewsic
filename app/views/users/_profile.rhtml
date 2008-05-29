@@ -44,7 +44,7 @@
     <div class="float-right align-right">
       <%- unless @user.type == 'Band' -%>
         <p class="blue-text">Gender</p>
-        <p><%= gender_icon_for(@user) %></p>
+        <p class="blue-text"><%= gender_icon_for(@user) || gender_switcher_for(@user) %></p>
       <%- end -%>
     </div>
     <p class="blue-text">User name </p>

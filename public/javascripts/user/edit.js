@@ -150,41 +150,83 @@ var AjaxFormGenerator = Class.create({
   
 });
 
-function initGenderSwitcher() {
-  var genders       = ['M', 'F', 'O'];
-  var gender_names  = ['male', 'female', 'other'];
-  
-  when('user_gender', function(element) {
-    element.observe('click', function() {
-      var index = (genders.indexOf(this.className) + 1) % 3;
-      var new_gender = genders[index];
-      this.src = '/images/gender_ico_' + new_gender + '.png'
-      this.className = new_gender;
-      new Ajax.Request('/users/' + $('user-id').value, {
-        method: 'PUT',
-        parameters: 'user[gender]=' + gender_names[index]
-      });
+var GenderSwitcher = Class.create({
+  initialize: function(element) {
+    this.genders = {male: 'M', female: 'F', other: 'O'};
+
+    this.element = $(element);
+    if (!this.element)
+      return;
+
+    this.element.style.display = 'none';
+
+    this.trigger = $((element.id||element) + '-trigger');
+    this.trigger.observe('click', this.showGenders.bind(this));
+    this.element.select('img').invoke('observe', 'click', this.setGender.bind(this));
+  },
+
+  showGenders: function(event) {
+    event.stop();
+    this.trigger.hide();
+    new Effect.Appear(this.element, {duration: 0.3});
+  },
+
+  setGender: function(event) {
+    event.stop();
+    var element = event.element();
+    var gender = element.getAttribute('alt');
+    if (!this.genders[gender])
+      return;
+
+    new Ajax.Request('/users/' + $('user-id').value, {
+      method: 'PUT',
+      parameters: 'user[gender]=' + gender,
+      onComplete: this.onSetGenderSuccess.bind(this),
+      onFailure: this.onSetGenderFailure.bind(this)
     });
-  });
-} 
+  },
+
+  onSetGenderSuccess: function(response) {
+    var gender = response.responseText;
+    if (!this.genders[gender]) {
+      onSetGenderFailure();
+      return;
+    }
+
+    new Effect.Fade(this.element, {
+      duration: 0.4,
+      afterFinish: function(gender) {
+        this.trigger.up().insert({
+          top: new Element('img', { src: '/images/gender_ico_' + gender + '.png' })
+        });
+        this.trigger.remove();
+        this.element.remove();
+      }.bind(this, this.genders[gender])
+    });
+  },
+
+  onSetGenderFailure: function() {
+    alert('error. please try again'); // should not happen, lazy solution for now.
+  }
+});
 
 function initPersonalDetailsBlock() {
-	when('my-user-share-more-link', function(element) {
-		element.observe('click', function() {
-			switch(element.innerHTML) {
-			  case 'show':
-					new Effect.BlindDown('my-user-share');
-					element.innerHTML = 'hide';
-					break;
-				case 'hide':
-					new Effect.BlindUp('my-user-share');
-					element.innerHTML = 'show';
-					break;
-				default:
-					break;
-			}
-		});
-	});
+  when('my-user-share-more-link', function(element) {
+    element.observe('click', function() {
+      switch(element.innerHTML) {
+        case 'show':
+          new Effect.BlindDown('my-user-share');
+          element.innerHTML = 'hide';
+          break;
+        case 'hide':
+          new Effect.BlindUp('my-user-share');
+          element.innerHTML = 'show';
+          break;
+        default:
+          break;
+      }
+    });
+  });
 }
 
 var BandMembers = {
@@ -210,10 +252,11 @@ document.observe('dom:loaded', function() {
     new InPlaceEditorGenerator( $w('motto tastes'), { url: '/users/', model: 'user', rows: 6, maxLength: 1000} );  
     new InPlaceSelectGenerator( $w('country'), { url: '/users/', model: 'user', values_url: '/countries' } );
     new AjaxFormGenerator( $w('photos_url blog_url myspace_url skype msn'), { url: '/users/', model: 'user' } );
+		new GenderSwitcher('change-gender');
   } else if(mband_id_field) {
     new InPlaceEditorGenerator( $w('motto tastes'), { url: '/mbands/', model: 'mband', rows: 6, maxLength: 1000} );  
     //new AjaxFormGenerator( $w('photos_url blog_url myspace_url'), { url: '/mbands/', model: 'mband' } );    
   } 
-  // initGenderSwitcher();
+
 	initPersonalDetailsBlock();
 });

@@ -1621,6 +1621,19 @@ html>body .register p{
 	display:inline;
 }
 
+/* CHANGE GENDER */
+#change-gender {
+	height:16px;
+	width: 48px;
+	padding: 1px;
+	border: 1px solid #BFD2DB;
+}
+
+#change-gender img {
+	cursor:pointer;
+}
+
+
 /* login */
 div.login {
   font-size: 11px;
