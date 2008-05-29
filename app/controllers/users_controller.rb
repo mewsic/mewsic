@@ -143,9 +143,18 @@ class UsersController < ApplicationController
   end
 
   def im_contact
-    @user = User.find(params[:id])
     redirect_to root_url and return unless request.xhr?
+    raise ActiveRecord::RecordNotFound unless %w(skype msn).include?(params[:type])
+
+    user = User.find(params[:id])
+    @im = params[:type]
+    @handle = user[@im]
+
+    raise ActiveRecord::RecordNotFound if @handle.blank? || !user.send("#{@im}_public?")
     render :partial => 'users/im'
+
+  rescue ActiveRecord::RecordNotFound
+    render :nothing => true, :status => :not_found
   end
   
 protected

@@ -62,7 +62,7 @@ module UsersHelper
   def user_skype_link
     content = ''
     if !@user.skype.blank? && @user.skype_public?
-      content << %|<a class="button popup" href="#{im_contact_user_path(@user)}"><img width="17" height="19" class="float-left" alt="" src="/images/icone_link_skype.gif"/></a><p><a class="button popup" href="#{im_contact_user_path(@user)}">Skype</a></p>|
+      content << %|<a class="button popup" href="#{im_contact_user_path(@user, :type => 'skype')}"><img width="17" height="19" class="float-left" alt="" src="/images/icone_link_skype.gif"/></a><p><a class="button popup" href="#{im_contact_user_path(@user, :type => 'skype')}">Skype</a></p>|
     end
     content    
   end
@@ -70,7 +70,7 @@ module UsersHelper
   def user_msn_link
     content = ''
     if !@user.msn.blank? && @user.msn_public?
-      content << %|<a class="button popup" href="#{im_contact_user_path(@user)}"><img width="21" height="19" class="float-left" alt="" src="/images/icone_link_MSN.gif"/></a><p><a class="button popup" href="#{im_contact_user_path(@user)}">MSN</a></p>|
+      content << %|<a class="button popup" href="#{im_contact_user_path(@user, :type => 'msn')}"><img width="21" height="19" class="float-left" alt="" src="/images/icone_link_MSN.gif"/></a><p><a class="button popup" href="#{im_contact_user_path(@user, :type => 'msn')}">MSN</a></p>|
     end
     content    
   end

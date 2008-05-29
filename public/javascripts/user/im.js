@@ -1,8 +1,8 @@
 var IMBox = Class.create({
 
-  initialize: function() {
-    this.element = $('user-links');
-    this.authenticity_token = $('authenticity-token').value;
+	initialize: function() {
+		this.element = $('user-links');
+		this.authenticity_token = $('authenticity-token').value;
 		this.popup = this.element.down('div.popup');
 		this.container = this.element.down('div.container');
 		this.spinner = this.element.down('img.popup-spinner');
@@ -16,7 +16,7 @@ var IMBox = Class.create({
 
 		element = event.element();
 		if (element.tagName == 'IMG')
-		  element = element.up('a.button.popup');
+			element = element.up('a.button.popup');
 
 		this.loadPage(element.getAttribute('href'));
 	},
@@ -43,13 +43,13 @@ var IMBox = Class.create({
 	},
 
 	handlePageLoaded: function() {
-		MSNProxy.instance.setupLinks();
+		IMProxy.instance.setupLinks();
 		this.spinner.hide();
 	}
 });
 
-var MSNProxy = Class.create({
-  initialize: function() {
+var IMProxy = Class.create({
+	initialize: function() {
 		this.app = new Element('object', {height:0,width:0});
 
 		try {
@@ -64,28 +64,33 @@ var MSNProxy = Class.create({
 
 	setupLinks: function() {
 		$$('a.msn-link').invoke('observe', 'click', this.onMSNClick.bind(this));
+		$$('a.skype-link').each(function(e) { e.href = "callto://" + e.innerHTML; });
 	},
 
 	onMSNClick: function(event) {
 		event.stop();
 
-		if (!this.msn_present)
-			return;
-
-		if (this.app.MyStatus == 1) {
-			alert("You have to log in to MSN for this to work!");
-			return;
-		}
-
 		var element = event.element();
 		if (element.tagName == 'IMG')
 			element = element.up('a.msn-link');
+		var handle = element.innerHTML;
 
-		this.app.addContact(0, element.getAttribute('rel'));
+		if (!this.msn_present) {
+			Message.notice("Please copy & paste <em>" + handle + "</em> into your MSN client");
+			return;
+		}
+
+		if (this.app.MyStatus == 1) {
+			Message.notice("You have to log in to MSN for this to work!");
+			return;
+		}
+
+
+		this.app.addContact(0, handle);
 	}
 });
 
 document.observe('dom:loaded', function() {
 	IMBox.instance = new IMBox();
-	MSNProxy.instance = new MSNProxy();
+	IMProxy.instance = new IMProxy();
 });

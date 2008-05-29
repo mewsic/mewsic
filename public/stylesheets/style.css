@@ -1113,7 +1113,7 @@ h2.dj-label{
 }
 
 .user-mail div.popup {
-	width: 690px;
+	width: 670px;
 	position: absolute;
 	top: 155px;
 	right: 0px;
@@ -1187,10 +1187,10 @@ h2.dj-label{
 
 #user-links div.popup {
 	width: 200px;
-	height: 80px;
+	height: 50px;
 	position: absolute;
-	top: 165px;
-	right: 250px;
+	top: 185px;
+	right: 270px;
 	z-index: 200;
 	border-bottom: 2px solid #BFD2DB;
 	border-right: 2px solid #BFD2DB;

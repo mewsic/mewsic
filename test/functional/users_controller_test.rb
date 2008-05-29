@@ -86,18 +86,7 @@ class UsersControllerTest < Test::Unit::TestCase
     get :new
     assert_response :success
     assert assigns(:user)
-  end
-
-  def test_countries
-    xhr :get, :countries
-    assert_response :success
-
-    assert_equal 'application/json', @response.content_type
-
-    countries_json = ActionView::Helpers::FormOptionsHelper::COUNTRIES.to_json
-    assert_equal countries_json, @response.body
-  end
-    
+  end 
 
   def test_should_activate_the_first_time
     assert_nil User.find(users(:aaron).id).activated_at
@@ -243,7 +232,45 @@ class UsersControllerTest < Test::Unit::TestCase
       assert_equal "Band", users(:quentin).reload.type
     end
   end
-  
+
+  def test_countries
+    xhr :get, :countries
+    assert_response :success
+
+    assert_equal 'application/json', @response.content_type
+
+    countries_json = ActionView::Helpers::FormOptionsHelper::COUNTRIES.to_json
+    assert_equal countries_json, @response.body
+  end
+
+  def test_should_fetch_im_contact
+    xhr :get, :im_contact, :id => users(:quentin).id, :type => 'msn'
+    assert_response :success
+    assert_select 'a.msn-link', 'quentin@example.org'
+
+    xhr :get, :im_contact, :id => users(:quentin).id, :type => 'skype'
+    assert_response :success
+    assert_select 'a.skype-link', 'skype_account'
+
+    xhr :get, :im_contact, :id => users(:aaron).id, :type => 'msn'
+    assert_response :not_found
+
+    xhr :get, :im_contact, :id => users(:user_40).id, :type => 'skype'
+    assert_response :not_found
+
+    xhr :get, :im_contact, :id => 9999999999
+    assert_response :not_found
+
+    xhr :get, :im_contact, :id => users(:quentin).id, :type => 'antani'
+    assert_response :not_found
+
+    get :im_contact, :id => users(:user_40).id, :type => 'msn'
+    assert_response :redirect
+
+    get :im_contact, :id => users(:user_40).id
+    assert_response :redirect
+  end
+
   protected
     def create_user(options = {})
       post :create, :user => { :login => 'quire', :email => 'quire@example.com',

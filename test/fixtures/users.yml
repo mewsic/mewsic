@@ -67,6 +67,7 @@ aaron:
   country: Italy
   city: Bari
   motto: Nel mezzo del cammin di nostra vita mi ritrovai nel culo una matita. Ahi, che dolor! Era una carioca a dodici color.
+  msn: aaron@example.org
 
 <% for i in 3..500 %>user_<%= i %>:
   login: user<%= i %>
