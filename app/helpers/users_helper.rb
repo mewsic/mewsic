@@ -38,7 +38,7 @@ module UsersHelper
   def user_photo_link
     content = ''
     unless @user.photos_url.blank?
-      content << %|<a href="#{@user.photos_url}"><img class="float-left" alt="" src="/images/icone_link_photo.gif"/></a><p><a href="#{@user.photos_url}">Photo</a></p>|
+      content << %|<a href="#{@user.photos_url}" target="_new"><img class="float-left" alt="" src="/images/icone_link_photo.gif"/></a><p><a href="#{@user.photos_url}" target="_new">Photo</a></p>|
     end
     return content
   end
@@ -46,7 +46,7 @@ module UsersHelper
   def user_blog_link
     content = ''
     unless @user.blog_url.blank?
-      content << %|<a href="#{@user.blog_url}"><img width="16" height="19" class="float-left" alt="" src="/images/icone_link_blog.gif"/></a><p><a href="#{@user.blog_url}">Blog</a></p>|
+      content << %|<a href="#{@user.blog_url}" target="_new"><img width="16" height="19" class="float-left" alt="" src="/images/icone_link_blog.gif"/></a><p><a href="#{@user.blog_url}" target="_new">Blog</a></p>|
     end
     content
   end
