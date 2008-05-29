@@ -395,9 +395,13 @@ h2, h2 a{
 	vertical-align:top;
 }
 
-.box-list table td a:link, .box-list table td a:visited, .box-list table td a:hover, .box-list table td a:active {
+.box-list table td a:link, .box-list table td a:visited, .box-list table td a:active {
 	color: #000;
-	text-decoration: none;
+	/*text-decoration: none;*/
+}
+
+.box-list table td a:hover {
+	color: #28548B;
 }
 
 
