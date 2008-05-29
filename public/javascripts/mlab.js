@@ -109,22 +109,26 @@ var MlabSlider = Class.create(PictureSlider, {
   removeItem: function(type, id) {
     var item = MlabSlider.items.get(type + '_' + id);
     if(item) {
-      var element = $('mlab_element_' + item.attributes.mlab_id);      
-      element.nextSiblings().each(function(sibling) {
-        var class_to_remove = sibling.hasClassName('even') ? 'even' : 'odd';
-        var class_to_add    = (class_to_remove == 'even') ? 'odd' : 'even';
-        sibling.removeClassName(class_to_remove);
-        sibling.addClassName(class_to_add);
-      });      
-      new Effect.Fade(element, {
-        duration: 0.7,
-        afterFinish: function() {
-          element.remove();
-        }
-      });
-      MlabSlider.items.unset(type + '_' + id);
-      this.update();
+      this._removeItem(item);
     }
+  },
+  _removeItem: function(item) {
+    var element = $('mlab_element_' + item.attributes.mlab_id);      
+    element.nextSiblings().each(function(sibling) {
+      var class_to_remove = sibling.hasClassName('even') ? 'even' : 'odd';
+      var class_to_add    = (class_to_remove == 'even') ? 'odd' : 'even';
+      sibling.removeClassName(class_to_remove);
+      sibling.addClassName(class_to_add);
+    });      
+
+    new Effect.Fade(element, {
+      duration: 0.7,
+      afterFinish: function(item) {
+        element.remove();
+        MlabSlider.items.unset(item.type + '_' + item.attributes.id);
+        this.update();
+      }.bind(this, item)
+    });
   },
   
   destroyItem: function(item) { 
@@ -137,7 +141,9 @@ var MlabSlider = Class.create(PictureSlider, {
       },
       onLoading: function() {
         img.src = "/images/spinner.gif";
-      }
+      },
+      onSuccess: this._removeItem.bind(this, item),
+      onFailure: function() { alert("There was an error. Please refresh the page."); }
     });
   },
   
