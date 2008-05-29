@@ -4,13 +4,14 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>Myousica - play and share</title>
   <%= stylesheet_link_tag "style", "iepngfix", "multitrack" %>     
-  <%= javascript_include_tag 'swfobject', 'prototype', 'builder', 'inplaceselect', 'effects', 'controls' %> 
+  <%= javascript_include_tag *%w[swfobject prototype builder inplaceselect effects controls application] %> 
   <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon"/>
 </head>
 <body class="<%= body_class %>">
   <div id="header" class="page-width clear-block">
     <%= render :partial => 'shared/top_menu' %>
     <div id="logo" class="float-left"><%= clickable_logo %></div>
+    <div id="beta"><%= image_tag 'beta.png', :title => 'beta!' %></div>
     <%= render :partial => 'shared/nav_menu' %>
   </div>
   <div class="bg-body">
@@ -20,6 +21,6 @@
     </div>
     <div class="bg-bottom-body"></div>
   </div>
-  <div id="footer" class="page-width"> footer </div>
+  <%= render :partial => 'shared/footer' %>
 </body>
 </html>

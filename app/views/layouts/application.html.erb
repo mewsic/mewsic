@@ -14,8 +14,8 @@
   <%= hidden_field_tag 'authenticity-token', form_authenticity_token if protect_against_forgery? %>  
   <div id="header" class="page-width clear-block">
     <%= render :partial => 'shared/top_menu' %>
-		<div id="logo" class="float-left"><%= clickable_logo %></div>
-		<div id="beta"><%= image_tag 'beta.png', :title => 'beta!' %></div>
+    <div id="logo" class="float-left"><%= clickable_logo %></div>
+    <div id="beta"><%= image_tag 'beta.png', :title => 'beta!' %></div>
     <%= render :partial => 'shared/nav_menu' %>
   </div>
   <div class="bg-body">
@@ -41,6 +41,6 @@
     </div>
     <div class="bg-bottom-body"></div>
   </div>
-  <div id="footer" class="page-width">&copy; 2008 Myousica. <%= link_to 'Terms of service', '#' %> | <%= link_to 'Help', help_path %> | <%= link_to 'Contacts', '#' %> | <%= link_to 'Share!', '#' %> </div>
+  <%= render :partial => 'shared/footer' %>
 </body>
 </html>
