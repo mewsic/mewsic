@@ -148,6 +148,7 @@ html>body #search p span{
 	background-color:#67C0DA;	
 	float:left;
 	height:23px;
+	width:204px;
 }
 #search p.search-input input{
 	width:173px;
@@ -159,24 +160,28 @@ html>body #search p span{
 
 #search p.collapsed-box {
 	margin: 0;
+	padding: 0;
 	background: none;
-	width: 201px;
-	height: 20px;
-	padding: 5px;
+	width: 214px;
+	height: 22px;
 	background: url(/images/search_box_collapsed_bg.png) no-repeat top;
+	display:block;
+	clear:both;
+	float:left;
 }
 #search p.collapsed-box a {
 	color: #0296C2;
 	font-size: 11px;
 	text-decoration: underline;
-	padding: 0;
+	padding: 3px 0 0 5px;
 }
 
 #search p.advanced-box {
-	width: 201px;
-	height: 26px;
-	padding: 3px 5px 0;
+	width: 214px;
+	height: 31px;
 	background: url(/images/search_box_bg.png) no-repeat top;
+	clear:both;
+	float:left;
 }
 
 #search p.advanced-box span {
@@ -190,13 +195,14 @@ html>body #search p span{
 	width: 12px;
 	height: 12px;
 	float: right;
-	margin-top: 4px;
+	margin: 6px 5px 0 0;
 	cursor: pointer;
 }
 
 #search p.advanced-box .checkboxes {
 	color: #1771A0;
-	padding-top: 2px;
+	padding-top: 5px;
+	padding-left: 5px;
 }
 
 #search p.advanced-box .checkboxes input {
