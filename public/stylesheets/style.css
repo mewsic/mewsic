@@ -2744,8 +2744,12 @@ div.popup {
 /******************** NEW MESSAGE ********************/
 
 #message_body {
-	border: none;
-	width: 90%;
+	border: 1px solid #BFD2DB;
+	background: #fff;
+	width: 595px;
+	height: 215px;
+	float:left;
+	padding:4px;
 }
 
 #message_to, #message_subject {
@@ -2766,7 +2770,7 @@ div.popup {
 	margin-right: 2px;
 }
 
-#send_button {
+#new-message .send_button {
 	float: right;
 	margin-right: 10px;
 	margin-top: 10px;

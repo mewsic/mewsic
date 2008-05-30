@@ -15,8 +15,7 @@ module MessagesHelper
   end
   
   def sanitize_message(message)
-    message.body.gsub("\n", "<br />")
-    white_list message.body    
+    white_list message.body.gsub("\n", "<br />")    
   end
 
   def update_messages_count_javascript_for(user)
