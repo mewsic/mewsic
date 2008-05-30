@@ -333,6 +333,12 @@ class User < ActiveRecord::Base
   def is_leader_of?(mband)
     mband.leader == self
   end
+
+  def profile_completeness
+    profile = %w(first_name last_name photos_url myspace_url blog_url skype skype_public msn msn_public)
+    complete = profile.select { |attr| !self[attr].blank? }
+    (complete.size.to_f / profile.size.to_f * 100.0).round 2
+  end
   
   protected
     # before filter 

@@ -104,22 +104,14 @@ var SearchBoxBehaviour = Class.create({
     
   showAdvancedBox: function(event) {
     event.stop();
-    new Effect.Fade(this.collapsed_box, {
-      duration: 0.3,
-      afterFinish: function() {
-        new Effect.Appear(this.advanced_box, {duration: 0.3})
-      }.bind(this)
-    });
+    new Effect.Fade(this.collapsed_box, {duration: 0.3});
+    new Effect.Appear(this.advanced_box, {duration: 0.3, queue: 'end'});
   },
 
   showCollapsedBox: function(event) {
     event.stop();
-    new Effect.Fade(this.advanced_box, {
-      duration: 0.3,
-      afterFinish: function() {
-        new Effect.Appear(this.collapsed_box, {duration: 0.3})
-      }.bind(this)
-    });
+    new Effect.Fade(this.advanced_box, {duration: 0.3});
+    new Effect.Appear(this.collapsed_box, {duration: 0.3, queue: 'end'});
   }
 });
 

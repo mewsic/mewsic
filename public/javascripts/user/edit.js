@@ -81,10 +81,10 @@ var AjaxFormGenerator = Class.create({
   setup: function() {
     var self = this;
     this.forms.each(function(name) {
-	  var form = $('form_' + name);
-      this.hideButton(form);
-	  form.compareValue = this.getCompareValue(form);
-	  this.observeFieldsChanges(form);
+    var form = $('form_' + name);
+    this.hideButton(form);
+    form.compareValue = this.getCompareValue(form);
+    this.observeFieldsChanges(form);
       form.observe('submit', function(event) {
         event.stop();
         new Ajax.Request(self.options.url + self.user_id, {
@@ -109,8 +109,8 @@ var AjaxFormGenerator = Class.create({
                 e.show();
               }.bind(this));
             }
-			form.select('input[type="submit"]').invoke('hide');
-			form.compareValue = form.select('input.ready-for-edit').invoke('getValue').join(',');
+      form.select('input[type="submit"]').invoke('hide');
+      form.compareValue = form.select('input.ready-for-edit').invoke('getValue').join(',');
           }.bind(this),
           onFailure: function(r) {
             $('loading_' + self.options.model + '_' + name).hide();
@@ -125,27 +125,27 @@ var AjaxFormGenerator = Class.create({
   },
   
   hideButton: function(form) {
-  	form.select('input[type="submit"]').invoke('hide');
+    form.select('input[type="submit"]').invoke('hide');
   },
   
   getCompareValue: function(form) {
-	return form.select('input.ready-for-edit').invoke('getValue').join(',');
+    return form.select('input.ready-for-edit').invoke('getValue').join(',');
   },
   
   observeFieldsChanges: function(form){
-  	fields = form.select('input.ready-for-edit');
-  	fields.each(function(field){
-  		new Field.Observer(field, 0.2, function(){
-  			parentForm = field.up('form');
-  			//compare = getCompareValue(parentForm);
-  			if (parentForm.compareValue != this.getCompareValue(parentForm)) {
-  				parentForm.select('input[type="submit"]').invoke('show');
-  			}
-  			else {
-  				parentForm.select('input[type="submit"]').invoke('hide');
-  			}
-  		}.bind(this));
-  	}.bind(this));
+    fields = form.select('input.ready-for-edit');
+    fields.each(function(field){
+      new Field.Observer(field, 0.2, function(){
+        parentForm = field.up('form');
+        //compare = getCompareValue(parentForm);
+        if (parentForm.compareValue != this.getCompareValue(parentForm)) {
+          parentForm.select('input[type="submit"]').invoke('show');
+        }
+        else {
+          parentForm.select('input[type="submit"]').invoke('hide');
+        }
+      }.bind(this));
+    }.bind(this));
   }
   
 });
@@ -210,24 +210,53 @@ var GenderSwitcher = Class.create({
   }
 });
 
-function initPersonalDetailsBlock() {
-  when('my-user-share-more-link', function(element) {
-    element.observe('click', function() {
-      switch(element.innerHTML) {
-        case 'show':
-          new Effect.BlindDown('my-user-share');
-          element.innerHTML = 'hide';
-          break;
-        case 'hide':
-          new Effect.BlindUp('my-user-share');
-          element.innerHTML = 'show';
-          break;
-        default:
-          break;
-      }
-    });
-  });
-}
+var Profile = Class.create({
+  initialize: function () {
+    this.link = $('my-user-share-more-link');
+    if (!this.link)
+      return;
+
+    this.blurb = $('my-user-share-fill-in');
+    this.fields = $('my-user-share');
+
+    this.setup();
+  },
+
+  setup: function () {
+    this.link.observe('click', this.handleClick.bind(this));
+  },
+
+  handleClick: function(event) {
+    event.stop();
+
+    if (!this.editing)
+      this.showEditPane();
+    else
+      this.saveChanges();
+  },
+
+  showEditPane: function() {
+    this.editing = true;
+    this.link.innerHTML = 'save';
+    new Effect.BlindUp(this.blurb, {duration: 0.3});
+    new Effect.BlindDown(this.fields, {duration: 0.3, queue: 'end'});
+  },
+
+  saveChanges: function() {
+    if (this.saving)
+      return;
+
+    if (!confirm('Done editing?'))
+      return;
+
+    this.saving = true;
+    this.link.innerHTML = 'reloading...';
+    new Effect.BlindUp(this.fields, {duration: 0.3});
+
+    var fn = function() { window.location.reload(); }
+    fn.delay(0.4);
+  }
+});
 
 var BandMembers = {
   destroy: function(user_id, member_id) {
@@ -250,13 +279,17 @@ document.observe('dom:loaded', function() {
   if(user_id_field) {
     new InPlaceEditorGenerator( $w('city'), { url: '/users/', model: 'user', maxLength: 20 } );  
     new InPlaceEditorGenerator( $w('motto tastes'), { url: '/users/', model: 'user', rows: 6, maxLength: 1000} );  
+
     new InPlaceSelectGenerator( $w('country'), { url: '/users/', model: 'user', values_url: '/countries' } );
+
     new AjaxFormGenerator( $w('first_name last_name photos_url blog_url myspace_url skype msn'), { url: '/users/', model: 'user' } );
-		new GenderSwitcher('change-gender');
+
+    new GenderSwitcher('change-gender');
+
+    new Profile();
+
   } else if(mband_id_field) {
     new InPlaceEditorGenerator( $w('motto tastes'), { url: '/mbands/', model: 'mband', rows: 6, maxLength: 1000} );  
     //new AjaxFormGenerator( $w('photos_url blog_url myspace_url'), { url: '/mbands/', model: 'mband' } );    
   } 
-
-	initPersonalDetailsBlock();
 });

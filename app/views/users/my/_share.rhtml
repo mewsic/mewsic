@@ -2,9 +2,10 @@
 	<h1>PERSONAL DETAILS</h1>
 </div>
 <p class="float-left grey-text" style="padding-left:10px">
-	<%= link_to_function('show', nil, :id => 'my-user-share-more-link') %>
+	<%= link_to 'edit', '#', :id => 'my-user-share-more-link' %>
 </p>
 <div class="clear-float"></div>
+<div id="my-user-share-fill-in" class="grey-text">Your profile is <%= @user.profile_completeness %>% complete.</div>
 <div id="my-user-share" class="user-sharing clear-block" style="display:none">
 	<% form_for @user, :url => user_path(@user), :html => {:id => 'form_first_name'} do |f| -%>
 	  <p>

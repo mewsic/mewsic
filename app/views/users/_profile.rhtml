@@ -11,7 +11,7 @@
 
 <% javascript('user/avatar') if current_user_page? %>
 <div class="user-profile clear-block">
-	<div class="mypage-name grey-text"><strong><%= user_full_name(@user) %><strong></div>
+	<div class="mypage-name grey-text"><%= user_full_name(@user) %></div>
 	<div id="user-avatar">
 		<div id="user-avatar-container">
 			<%= avatar_image(@user, :big, :id => 'user-avatar-image') %>

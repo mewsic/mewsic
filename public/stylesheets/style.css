@@ -1245,6 +1245,7 @@ h2.dj-label{
 	margin-left:5px;
 	width:150px;
 	border-bottom: 1px solid #eee;
+	font-weight: bold;
 }
 .mypage-label{
 	float:right;
