@@ -35,7 +35,7 @@
             </p>
 			      <p class="float-left">
 			        <%= download_button(@song) %>
-              <%= link_to @song.genre.name, genre_path(@song.genre) if song.genre %>
+              <%= link_to @song.genre.name, genre_path(@song.genre) if @song.genre %>
 						</p>
           </div>
         </div>		  
