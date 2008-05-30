@@ -35,7 +35,7 @@
             </p>
 			      <p class="float-left">
 			        <%= download_button(@song) %>
-              <%= link_to @song.genre.name, genre_path(@song.genre) %>
+              <%= link_to @song.genre.name, genre_path(@song.genre) if song.genre %>
 						</p>
           </div>
         </div>		  
@@ -100,7 +100,7 @@
   			      <%= mlab_button(track) %>
   			      <%= play_button(track) %>
             </p>
-  			    <p class="float-left"><%= link_to track.parent_song.genre.name, genre_path(track.parent_song.genre.name) %></p>
+  			    <p class="float-left"><%= link_to track.parent_song.genre.name, genre_path(track.parent_song.genre.name) if track.parent_song.genre %></p>
   			  </div>
   		  </div>
 		  <%- end -%>
@@ -178,7 +178,7 @@
               </p>
       			  <p class="float-left">
                 <%= download_button(song) %>
-                <%= link_to song.genre.name, genre_path(song.genre) %>
+                <%= link_to song.genre.name, genre_path(song.genre) if song.genre %>
   						</p>
     			  </div>
     		  </div>
@@ -255,7 +255,7 @@
                   </p>
           			  <p class="float-left">
       						  <%= download_button(song) %>
-                    <%= link_to song.genre.name, genre_path(song.genre) %>
+                    <%= link_to song.genre.name, genre_path(song.genre) if song.genre %>
       						</p>
         			  </div>
         		  </div>

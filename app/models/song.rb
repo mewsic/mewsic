@@ -41,8 +41,8 @@ class Song < ActiveRecord::Base
     options = {:per_page => 6, :page => 1}.merge(options)
     with_scope :find => {:conditions => ['songs.published = ?', true]} do # TODO: DRY this common SELECT condition
       paginate(:per_page => options[:per_page], :page => options[:page], :include => [:genre, {:user => :avatars}], :conditions => [
-        "songs.title LIKE ? OR songs.original_author LIKE ? OR songs.description LIKE  ? OR genres.name LIKE ?",
-        *(Array.new(4).fill("%#{q}%"))
+        "songs.published = ? AND songs.title LIKE ? OR songs.original_author LIKE ? OR songs.description LIKE  ? OR genres.name LIKE ?",
+        *(Array.new(4).fill("%#{q}%")).unshift(true)
       ])
     end
   end
