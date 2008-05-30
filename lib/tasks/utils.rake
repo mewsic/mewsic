@@ -16,8 +16,8 @@ namespace :myousica do
     
     desc "Setto un mp3 come default x tutte le song e track"
     task :dragonforce => :environment do
-      Track.update_all("filename = 'dragonforce.mp3'")
-      Song.update_all("filename = 'dragonforce.mp3'")
+      Track.update_all("filename = 'audio/dragonforce.mp3'")
+      Song.update_all("filename = 'audio/dragonforce.mp3'")
     end
     
   end  
