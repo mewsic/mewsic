@@ -2,15 +2,17 @@
 	<p class="thumb">
 	  	<%= link_to (avatar_image newest_song.user, :icon), user_path(newest_song.user) %>
 	</p>
-	<p class="name align-right">
-		<%= link_to newest_song.user.login, user_path(newest_song.user) %>
-	</p>
-	<p class="country align-right">
-		<%= h newest_song.user.compiled_location %>
-	</p> 
+	<div style="padding-right:6px">
+		<p class="name align-right">
+			<%= link_to newest_song.user.login, user_path(newest_song.user) %>
+		</p>
+		<p class="country align-right">
+			<%= h newest_song.user.compiled_location %>
+		</p> 
+	</div>
 	<div class="float-right"> 
 		<%= rating(newest_song) %>
-		<p class="button">
+		<p class="button align-center">
 		  <%= mlab_button(newest_song) %>
 		  <%= play_button(newest_song) %>
     </p>
