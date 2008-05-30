@@ -4,11 +4,13 @@
   <div class="top-box clear-block">
     <div class="bottom-box clear-block">
       <div class="elements clear-block">
-        <%- @user.mbands.each do |mband| -%>        
+        <%- @user.mbands.each do |mband| -%>
           <div>
-            <%- if mband.members.count > 1 -%>
-              <%- to_string = mband.members.find_all{|u| u != @user}.collect{|u| u.login }.join(', ') -%>
-              <a href="#" onclick="new Effect.ScrollTo('user-mail');MailBox.instance.openPopup();MailBox.instance.loadPage('<%= new_user_message_path(@user, :to => to_string) %>');return false;">Write</a>
+            <%- if logged_in? && mband.members.count > 1 -%>
+              <%- to_string = mband.members.find_all{|u| u != current_user}.collect{|u| u.login }.join(', ') -%>
+              <p class="edit-command">
+                <a href="#" onclick="new Effect.ScrollTo($('user-mail').down('.popup'));MailBox.instance.openPopup();MailBox.instance.loadPage('<%= new_user_message_path(current_user, :to => to_string) %>');return false;">write</a>
+              </p>
             <%- end -%>
             <p class="thumb">
               <%= link_to avatar_image(mband, :icon), mband_path(mband) %>
@@ -19,7 +21,7 @@
             </p>
           </div>
         <%- end -%>
-		  </div>				
+      </div>
     </div>
     <%#= empty_collection_message @user.mbands,
           :current_user => "You have no members in your mband. Why don't you add some?",

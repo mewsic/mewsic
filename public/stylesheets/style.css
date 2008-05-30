@@ -1121,9 +1121,6 @@ h2.dj-label{
 	position: absolute;
 	top: 155px;
 	right: 0px;
-	z-index: 200;
-	border-bottom: 2px solid #BFD2DB;
-	border-right: 2px solid #BFD2DB;
 }
 
 .user-mail img.popup-spinner {
@@ -1195,9 +1192,6 @@ h2.dj-label{
 	position: absolute;
 	top: 185px;
 	right: 270px;
-	z-index: 200;
-	border-bottom: 2px solid #BFD2DB;
-	border-right: 2px solid #BFD2DB;
 }
 
 #user-links img.popup-spinner {
@@ -2703,6 +2697,9 @@ div.popup {
 	padding: 10px;
 	background: #EDEEEE url('/images/inbox_top_bg.gif') top repeat-x;
 	height: auto;
+	z-index: 200;
+	border-bottom: 2px solid #BFD2DB;
+	border-right: 2px solid #BFD2DB;
 }
 
 
