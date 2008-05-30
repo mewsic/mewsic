@@ -70,7 +70,7 @@ var LoginBox = Class.create({
 });
 
 document.observe('dom:loaded', function() {
-  if ($('login')) {
+  if ($$('div#login').size() > 0) {
     LoginBox.instance = new LoginBox('login');
   }
 });
