@@ -5,7 +5,11 @@ class SearchController < ApplicationController
   end
   
   def new
-    redirect_to '/' and return if params[:q].strip.blank?
+    if params[:q].strip.blank?
+      flash[:error] = 'You did not enter a search string' 
+      redirect_to '/'
+      return
+    end
 
     type = params[:type] && params[:type].join(' ')
     redirect_to(:action => :show, :id => CGI::escape(params[:q]), :type => type)
