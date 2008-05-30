@@ -23,6 +23,8 @@ class Message < ActiveRecord::Base
   # uncomment it if using it or you can remove it if not
   attr_accessor :to
   
+  validates_presence_of :body
+
   validate :recipient_must_exist
   validate :recipient_must_be_different_than_sender
 
