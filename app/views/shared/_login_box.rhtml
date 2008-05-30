@@ -2,11 +2,11 @@
 	<div id="login-box-top"> </div>
 	<div id="login-box-core">
 		<%- form_tag sessions_path do -%>  
-  		<p class="login-box-title">Account Login</p>			
-  			  <input type="text" name="login" class="login-box-input" value="username" onBlur="if(this.value=='')this.value='username';" onFocus="if(this.value=='username')this.value = '';">
-  			  <input type="password" name="password" class="login-box-input" value="password" onBlur="if(this.value=='')this.value='password';" onFocus="if(this.value=='password')this.value = '';">	      
+  		<p class="login-box-title">Account Login</p>
+  			<input type="text" name="login" class="login-box-input username" value="username" />
+  			<input type="password" name="password" class="login-box-input password" value="password" />
   		<p class="login-box-helplinks">
-  			<a href="#" onclick="$('login-box-core').hide(); $('login-box-forgot').show();return false;">Forgot password?</a><br />
+  			<a href="#" class="forgot">Forgot password?</a><br />
         <%= link_to 'Sign up', new_user_path %>
   		</p>		
   		<div id="login-box-remember">
@@ -18,15 +18,16 @@
 		<%- end -%>
 	</div>
 	<div id="login-box-forgot" style="display: none;">
-		<% form_remote_tag :url => forgot_password_url, :complete => %[$('login-box-forgot').hide();$('login-box-core').show()] do -%>
+		<% form_tag forgot_password_path, :id => 'forgot-box' do -%>
   		<p class="login-box-title">Forgot password?</p>
       <p>
-        <input type="text" name="email" class="login-box-email" value="Your email address" onBlur="if(this.value=='')this.value='Your email address';" onFocus="if(this.value=='Your email address')this.value = '';">
+        <input type="text" name="email" class="login-box-email email" value="Your email address" />
       </p> 
   		<p class="login-box-helplinks">
-  			<a href="#" onclick="$('login-box-forgot').hide(); $('login-box-core').show();return false;">Cancel</a><br />
+  			<a href="#" class="cancel">Cancel</a><br />
   		</p>		
   		<div style="clear: both;"></div>
+			<%= image_tag 'spinner.gif', :id => 'forgot-box-spinner', :style => 'display:none; float: left' %>
   		<div id="login-box-submit">
   			<input type="image" src="/images/button_send.png" />
   		</div>
