@@ -6,7 +6,7 @@
   			  <input type="text" name="login" class="login-box-input" value="username" onBlur="if(this.value=='')this.value='username';" onFocus="if(this.value=='username')this.value = '';">
   			  <input type="password" name="password" class="login-box-input" value="password" onBlur="if(this.value=='')this.value='password';" onFocus="if(this.value=='password')this.value = '';">	      
   		<p class="login-box-helplinks">
-  			<a href="#" onclick="$('login-box-core').hide(); $('login-box-forgot').show();">Forgot password?</a><br />
+  			<a href="#" onclick="$('login-box-core').hide(); $('login-box-forgot').show();return false;">Forgot password?</a><br />
         <%= link_to 'Sign up', new_user_path %>
   		</p>		
   		<div id="login-box-remember">
@@ -24,7 +24,7 @@
         <input type="text" name="email" class="login-box-email" value="Your email address" onBlur="if(this.value=='')this.value='Your email address';" onFocus="if(this.value=='Your email address')this.value = '';">
       </p> 
   		<p class="login-box-helplinks">
-  			<a href="#" onclick="$('login-box-forgot').hide(); $('login-box-core').show();">Cancel</a><br />
+  			<a href="#" onclick="$('login-box-forgot').hide(); $('login-box-core').show();return false;">Cancel</a><br />
   		</p>		
   		<div style="clear: both;"></div>
   		<div id="login-box-submit">
