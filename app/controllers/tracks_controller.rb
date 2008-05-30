@@ -1,6 +1,6 @@
 class TracksController < ApplicationController
   
-  protect_from_forgery :except => [:create]
+  protect_from_forgery :except => [:create]    
   
   def index
     if params.include?(:user_id) 

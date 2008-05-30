@@ -23,6 +23,7 @@
 class Track < ActiveRecord::Base
   
   attr_accessor :mlab
+  attr_accessor :tone
   
   has_many :songs, :through => :mixes, :order => 'songs.created_at DESC'
   has_many :mixes
@@ -32,6 +33,8 @@ class Track < ActiveRecord::Base
   belongs_to :instrument
   
   acts_as_rated :rating_range => 0..5 
+  
+  before_save :set_tonality_from_tone  
   
   def self.search_paginated(q, options)
     options = {:per_page => 6, :page => 1}.merge(options)
@@ -92,6 +95,10 @@ class Track < ActiveRecord::Base
   end
   
 private
+  
+  def set_tonality_from_tone
+    self.tonality = self.tone unless self.tone.blank?
+  end
   
   def zerofill(number, length)
     string = number.to_s
