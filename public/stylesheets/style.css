@@ -3245,6 +3245,14 @@ div.hr {
 	text-align: right;
 	padding-bottom: 10px;
 }
+
+.login-box-helplinks a {
+	color: #0296C2;
+	text-decoration: none;
+}
+.login-box-helplinks a:hover {
+	text-decoration: underline;
+}
 /******************** END LOGIN BOX ********************/ 
                                                           
 /******************** SIBLINGS TABS ********************/ 
