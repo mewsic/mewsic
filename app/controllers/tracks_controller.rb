@@ -50,7 +50,7 @@ class TracksController < ApplicationController
     @track = Track.find(params[:id])
     if @track.filename.blank?
       flash[:error] = 'File not found'
-      redirect_to music_path
+      redirect_to :back and return
     end
 
     # Requires the following nginx configuration:

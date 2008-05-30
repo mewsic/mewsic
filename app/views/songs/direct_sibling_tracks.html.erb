@@ -21,9 +21,9 @@
 		  <%= play_button(track) %>
     </p>
 		<p class="float-left">
-		  <%= download_button(track) %>
-      <%= link_to 'Download', download_song_url(track) %>
+			<%= download_button(track) %>
+			<%= link_to track.parent_song.genre.name, genre_path(track.parent_song.genre) %>
 		</div>
-	  </div>		  		  		  
-  <%- end -%>      			
+	  </div>
+  <%- end -%>
 </div>
