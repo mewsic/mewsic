@@ -1240,6 +1240,12 @@ h2.dj-label{
 .band-page-label{
 	background:url(/images/band_page_label.gif) no-repeat top right;
 }
+.mypage-name{
+	padding-bottom:2px;
+	margin-left:5px;
+	width:150px;
+	border-bottom: 1px solid #eee;
+}
 .mypage-label{
 	float:right;
 	padding:10px 10px 0px;

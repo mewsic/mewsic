@@ -251,7 +251,7 @@ document.observe('dom:loaded', function() {
     new InPlaceEditorGenerator( $w('city'), { url: '/users/', model: 'user', maxLength: 20 } );  
     new InPlaceEditorGenerator( $w('motto tastes'), { url: '/users/', model: 'user', rows: 6, maxLength: 1000} );  
     new InPlaceSelectGenerator( $w('country'), { url: '/users/', model: 'user', values_url: '/countries' } );
-    new AjaxFormGenerator( $w('photos_url blog_url myspace_url skype msn'), { url: '/users/', model: 'user' } );
+    new AjaxFormGenerator( $w('first_name last_name photos_url blog_url myspace_url skype msn'), { url: '/users/', model: 'user' } );
 		new GenderSwitcher('change-gender');
   } else if(mband_id_field) {
     new InPlaceEditorGenerator( $w('motto tastes'), { url: '/mbands/', model: 'mband', rows: 6, maxLength: 1000} );  

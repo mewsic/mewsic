@@ -29,7 +29,7 @@ module UsersHelper
       %|<div id="change-gender">| << %w(male female other).map { |gender|
         image_tag gender_icon_path(gender), :alt => gender, :title => gender }.join << '</div>'
   end
-  
+
   def track_icon(track, color = nil)
     icon_color = "_#{color.to_s}" unless color.nil?
     %|<img width="29" height="29" alt="#{track.instrument}" src="/images/instrument_#{track.instrument}#{icon_color}.png"/>|
@@ -73,6 +73,10 @@ module UsersHelper
       content << %|<a class="button popup" href="#{im_contact_user_path(@user, :type => 'msn')}"><img width="21" height="19" class="float-left" alt="" src="/images/icone_link_MSN.gif"/></a><p><a class="button popup" href="#{im_contact_user_path(@user, :type => 'msn')}">MSN</a></p>|
     end
     content    
+  end
+
+  def user_full_name(user)
+    "%s %s" % [user.first_name, user.last_name]
   end
 
   def user_edit_button(field)
