@@ -1,8 +1,6 @@
 var LoginBox = Class.create({
-  initialize: function() {
-    this.element = $('login');
-    if(!this.element)
-      return;
+  initialize: function(element) {
+    this.element = $(element);
 
     this.username = this.element.down('input.username');
     this.password = this.element.down('input.password');
@@ -72,5 +70,7 @@ var LoginBox = Class.create({
 });
 
 document.observe('dom:loaded', function() {
-  LoginBox.instance = new LoginBox();
+  if ($('login')) {
+    LoginBox.instance = new LoginBox('login');
+  }
 });
