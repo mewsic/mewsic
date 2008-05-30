@@ -66,21 +66,6 @@ function when(obj, fn) {
   if (obj) fn(obj);
 }
 
-var LoginEase = {
-  activate: function(e) {
-    var element = Event.element(e);
-    var defvalue = $A(arguments)[1];
-    if (element.value == defvalue)
-      element.value = '';
-  },
-  deactivate: function(e) {
-    var element = Event.element(e);
-    var defvalue = $A(arguments)[1];
-    if (element.value == '')
-      element.value = defvalue;
-  }
-}
-
 var SearchBoxBehaviour = Class.create({
   initialize: function(element) {
     element = $(element);
@@ -116,16 +101,8 @@ var SearchBoxBehaviour = Class.create({
 });
 
 document.observe('dom:loaded', function(event) {
-	// Login Behavior
-	if ( $('log-in') != null ) {
-      Event.observe( $('login'), 'focus', LoginEase.activate.bindAsEventListener(this, 'username') );
-      Event.observe( $('password'), 'focus', LoginEase.activate.bindAsEventListener(this, 'password') );
-      Event.observe( $('login'), 'blur', LoginEase.deactivate.bindAsEventListener(this, 'username') );
-      Event.observe( $('password'), 'blur', LoginEase.deactivate.bindAsEventListener(this, 'password') );
-	}
-
-    // $('search').down('input').focus();
-    $('logo').focus();
+  // $('search').down('input').focus();
+  $('logo').focus();
 
 	if ( $('log-in-errors') != null && $('log-in-errors').visible() ) {
 		$('log-in').down('input', 2).clear().focus();
