@@ -6,14 +6,25 @@ class SearchController < ApplicationController
   
   def new
     redirect_to '/' if params[:q].blank?
-    if params[:q].strip.blank?
-      flash[:error] = 'You did not enter a search string' 
-      redirect_to '/'
-      return
-    end
 
-    type = params[:type] && params[:type].join(' ')
-    redirect_to(:action => :show, :id => CGI::escape(params[:q]), :type => type)
+    respond_to do |format|
+      format.html do        
+        if params[:q].strip.blank?
+          flash[:error] = 'You did not enter a search string' 
+          redirect_to '/'
+          return
+        end
+
+        type = params[:type] && params[:type].join(' ')
+        redirect_to(:action => :show, :id => CGI::escape(params[:q]), :type => type) and return
+      end
+      
+     format.xml do
+       @songs = Song.search_paginated(params[:q], :per_page => 6, :page => params[:page])
+       @tracks = Track.search_paginated(params[:q], :per_page => 6, :page => params[:page])
+       render :action => 'show'
+     end
+    end
   end
 
   def show
