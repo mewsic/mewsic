@@ -237,7 +237,7 @@ var Profile = Class.create({
 
   showEditPane: function() {
     this.editing = true;
-    this.link.innerHTML = 'save';
+    this.link.innerHTML = 'done';
     new Effect.BlindUp(this.blurb, {duration: 0.3});
     new Effect.BlindDown(this.fields, {duration: 0.3, queue: 'end'});
   },
