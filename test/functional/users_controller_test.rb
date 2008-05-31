@@ -220,7 +220,8 @@ class UsersControllerTest < Test::Unit::TestCase
   def test_should_switch_type_to_dj
     assert_difference 'Dj.count' do
       login_as :quentin
-      post :switch_type, :id => users(:quentin).id, :type => 'dj'
+      xhr :put, :switch_type, :id => users(:quentin).id, :type => 'dj'
+      assert_response :success
       assert_equal "Dj", users(:quentin).reload.type
     end
   end
@@ -228,9 +229,35 @@ class UsersControllerTest < Test::Unit::TestCase
   def test_should_switch_type_to_band
     assert_difference 'Band.count' do
       login_as :quentin
-      post :switch_type, :id => users(:quentin).id, :type => 'band'
+      xhr :put, :switch_type, :id => users(:quentin).id, :type => 'band'
+      assert_response :success
       assert_equal "Band", users(:quentin).reload.type
     end
+  end
+
+  def test_should_show_type_switcher
+    assert_no_difference 'Band.count' do
+      login_as :quentin
+      xhr :get, :switch_type, :id => users(:quentin).id, :type => 'band'
+      assert_response :success
+      assert_equal "User", users(:quentin).reload.type
+    end
+  end
+
+  def test_should_not_switch_type
+    login_as :quentin
+    xhr :put, :switch_type, :id => users(:quentin).id, :type => 'antani'
+    assert_response :bad_request
+    assert_equal "User", users(:quentin).reload.type
+
+    xhr :put, :switch_type, :id => users(:quentin).id, :type => 'user'
+    assert_response :bad_request
+    assert_equal "User", users(:quentin).reload.type
+
+    xhr :put, :switch_type, :id => users(:john).id, :type => 'dj'
+    assert_equal "User", users(:john).type
+    assert_response :redirect
+    assert_redirected_to root_path
   end
 
   def test_countries

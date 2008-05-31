@@ -1,0 +1,17 @@
+<div id="switch-success" class="user-switch" style="display:none">
+	<div class="clear-block clear-float">
+		<p class="centered">
+			Congrats! You are now a <%= @type.upcase %>.
+		</p>
+		<p class="centered">
+			<%= image_tag "#{@type.downcase}_page_label.png" %>
+		</p>
+		<p class="centered grey-text">Reloading...</p>
+	</div>
+</div>
+<script type="text/javascript">
+	new Effect.Appear('switch-success',{duration:0.4});
+	var fn = function() { myLightWindow.deactivate();
+		window.location.href = window.location.href; 	}
+	fn.bind(this).delay(1.5);
+</script>

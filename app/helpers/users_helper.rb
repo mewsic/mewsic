@@ -85,11 +85,16 @@ module UsersHelper
    
   def switch_type_images_for(user)
     content = ""
-    %w[user band dj].each do |type|	 
-      image_name = "change_#{type}_"
-      user_type = user.type.nil? ? 'user' : user.type.downcase
-      image_name += (user_type == type ? 'active' : 'inactive' )
-      content << link_to(image_tag("#{image_name}.png"), switch_type_user_path(user, :type => type), :method => 'put')
+    %w[user band dj].each do |to|
+      from = user.type.nil? ? 'user' : user.type.downcase
+      icon = image_tag("change_#{to}_#{from == to ? 'active' : 'inactive'}.png")
+      if from == to
+        content << icon
+      else
+        content <<
+          link_to(icon, formatted_switch_type_user_path(user, 'html', :type => to),
+            :class => 'lightwindow', :id => "user-switch-#{to}", :title => 'Change user type')
+      end
     end
     content
   end

@@ -40,6 +40,7 @@
 #
 
 quentin:
+  type: User
   login: quentin
   email: quentin@example.com
   salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
@@ -68,6 +69,18 @@ aaron:
   city: Bari
   motto: Nel mezzo del cammin di nostra vita mi ritrovai nel culo una matita. Ahi, che dolor! Era una carioca a dodici color.
   msn: aaron@example.org
+john:
+  type: User
+  login: john
+  email: john@example.com
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  activation_code: 8f24789ae988411ccf33ab0c30fe9106fab32e9b
+  activated_at: <%= 3.days.ago.to_s :db %>
+  gender: male
+  country: Italy
+  city: Bari
+  motto: in girum imus nocte et consumimur igni
 
 <% for i in 3..500 %>user_<%= i %>:
   login: user<%= i %>

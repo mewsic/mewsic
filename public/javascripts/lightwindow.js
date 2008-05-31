@@ -1379,7 +1379,7 @@ lightwindow.prototype = {
 			}
 			content = content.substring(content.indexOf('#')+1);
 			
-			new Insertion.Top($('lightwindow_contents'), $(content).innerHTML);
+      $('lightwindow_contents').insert($(content).innerHTML, {position: 'top'});
 			
 			this.resizeTo.height = $('lightwindow_contents').scrollHeight+(this.options.contentOffset.height);
 			this.resizeTo.width = $('lightwindow_contents').scrollWidth+(this.options.contentOffset.width);
@@ -1938,9 +1938,10 @@ lightwindow.prototype = {
 
 /*-----------------------------------------------------------------------------------------------*/
 
+var myLightWindow = null;
 document.observe('dom:loaded', function() {
 	//
 	//	Set up all of our links
 	//
-	var myLightWindow = new lightwindow({hideGalleryTab: true});
+	myLightWindow = new lightwindow({hideGalleryTab: true});
 });

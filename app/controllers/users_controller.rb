@@ -1,7 +1,7 @@
 class UsersController < ApplicationController    
   
   before_filter :login_required, :only => :update
-  before_filter :check_if_current_user_page, :only => [:update, :switch_to]
+  before_filter :check_if_current_user_page, :only => [:update, :switch_type]
   before_filter :check_if_already_logged_in, :only => [:new]
   
   protect_from_forgery :except => :update
@@ -110,11 +110,24 @@ class UsersController < ApplicationController
   end
   
   def switch_type
+    redirect_to '/' and return unless request.xhr?
+
     @user = User.find(params[:id])
-    type = %W(user dj band).include?(params[:type]) ? params[:type].capitalize : 'User'
-    @user.update_attribute(:type, type)
+    @type = %W(user dj band).include?(params[:type]) && params[:type].capitalize
+
+    if !@type || @user.class.name == @type
+      render :partial => 'users/switch/failure', :status => :bad_request and return
+    end
+
+    render :nothing => true, :status => :bad_request if request.post? || request.delete?
+
     respond_to do |format|
-      format.html { redirect_to user_url(@user) }
+      if request.put? && @user.update_attribute(:type, @type)
+        format.html { render :partial => "users/switch/success" }
+      else
+        flash.now[:error] = @user.errors.full_messages.join unless @user.valid?
+        format.html { render :partial => "users/switch/#{@user.class.name.downcase}_to_#{@type.downcase}", :layout => 'users/switch/layout' }
+      end
     end
   end
   

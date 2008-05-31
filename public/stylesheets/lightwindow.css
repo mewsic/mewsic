@@ -41,8 +41,8 @@
 		overflow: hidden;
 		z-index: 0;
 		position: relative;
-		border: 10px solid #ffffff;
-		background-color: #ffffff;
+		border: 10px solid #f3f3f4;
+		background-color: #f3f3f4;
 	}		
 
 #lightwindow_loading {
@@ -368,9 +368,43 @@
 	Theme styling stuff
 -----------------------------------------------------------------------------------------------*/	
 
-#lightwindow p {
-	color: #000000;
-	padding-right: 10px;
+#lightwindow p, #lightwindow label {
+	line-height: 14px;
 }
 
+#lightwindow a {
+	color: #09F;
+}
 
+#lightwindow .user-switch {
+	color: #31353A;
+}
+
+#lightwindow .user-switch #switch-spinner {
+	background: transparent url(/images/spinner.gif) no-repeat bottom right;
+	width: 0px;
+	height: 0px;
+	float: left;
+}
+
+#lightwindow .user-switch input.text {
+	border:1px solid #BFD2DB;
+}
+
+#lightwindow .user-switch p {
+	line-height: 20px;
+	padding: 10px 2px 4px;
+	font-size:14px;
+}
+
+#lightwindow .user-switch ul {
+	padding-left: 25px;
+	margin: 2px;
+}
+
+#lightwindow .user-switch ul li {
+	color: #61656A;
+	line-height: 16px;
+	padding-bottom: 4px;
+	font-size:13px;
+}
