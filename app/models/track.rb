@@ -53,7 +53,7 @@ class Track < ActiveRecord::Base
   end
   
   def self.find_orphans(options = {})
-    options.merge!({ :include => :mixes, :conditions => 'mixes.track_id is null' })
+    options.merge!({:include => [:mixes, :parent_song], :conditions => 'mixes.track_id is null AND tracks.song_id IS NOT NULL' })
     self.find(:all, options)
   end
   
