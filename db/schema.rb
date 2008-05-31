@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 24) do
+ActiveRecord::Schema.define(:version => 25) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
@@ -221,6 +221,7 @@ ActiveRecord::Schema.define(:version => 24) do
     t.decimal  "rating_total",                            :precision => 10, :scale => 2
     t.decimal  "rating_avg",                              :precision => 10, :scale => 2
     t.integer  "replies_count"
+    t.string   "nickname",                  :limit => 20
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

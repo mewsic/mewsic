@@ -3,9 +3,8 @@ class FriendshipObserver < ActiveRecord::Observer
     #FIXME: fix link generation
     subject = "New friend request from #{friendship.friendshipped_by_me.login}"
     body    = %|
-    Your new admirer is #{friendship.friendshipped_by_me.login}. To become friend you need to
-    <a href="#{APPLICATION[:url]}/users/#{(friendship.friendshipped_by_me.id)}">go to his profile and admire him</a>
-    
+    <p>Your new admirer is #{friendship.friendshipped_by_me.login}.</p><p>To become friends you need to
+    <a href="#{APPLICATION[:url]}/users/#{(friendship.friendshipped_by_me.id)}">go to his profile and admire him</a></p>
     |
     @message = Message.new(:subject => subject, :body => body)
     @message.sender = friendship.friendshipped_by_me
@@ -17,7 +16,7 @@ class FriendshipObserver < ActiveRecord::Observer
     #FIXME: fix link generation
     subject = "Unfriend from #{friendship.friendshipped_by_me.login}"
     body    = %|
-    <a href="#{APPLICATION[:url]}/users/#{(friendship.friendshipped_by_me.id)}">#{friendship.friendshipped_by_me.login}</a> has removed you from his friends.            
+    <p><a href="#{APPLICATION[:url]}/users/#{(friendship.friendshipped_by_me.id)}">#{friendship.friendshipped_by_me.login}</a> has removed you from his friends.</p>
     |
     @message = Message.new(:subject => subject, :body => body)
     @message.sender = friendship.friendshipped_by_me

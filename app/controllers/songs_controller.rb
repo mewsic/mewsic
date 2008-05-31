@@ -23,7 +23,7 @@ class SongsController < ApplicationController
     @indirect_siblings = @song.direct_siblings
     respond_to do |format|
       format.html do
-        @other_songs = Song.find(:all, :conditions => ["songs.user_id = ?", @song.user], :order => 'RAND()', :limit => 8, :include => [:user, { :mixes => { :track => [:instrument, :parent_song] } }, :genre])        
+        @other_songs = Song.find(:all, :conditions => ["songs.user_id = ?", @song.user], :order => 'songs.listened_times', :limit => 8, :include => [:user, { :mixes => { :track => [:instrument, :parent_song] } }, :genre])        
       end
       format.xml do
         @show_siblings  = params.include?(:siblings)

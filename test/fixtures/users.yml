@@ -58,6 +58,7 @@ quentin:
   country: Italy
   city: Bari
   motto: Arma Virumque Cano Troiae qui primus ab oris
+  nickname: quentin
 aaron:
   login: aaron
   email: aaron@example.com

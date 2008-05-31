@@ -10,7 +10,7 @@
 			<%= hidden_field_tag 'type', @type.downcase %>
 			<p style="text-align: center">
 				<label for="nickname">enter your new <em><%= @type.upcase %></em> nick name</label><br/>
-				<%= text_field_tag 'nickname', params[:nickname] || @user.login, :class => 'text' %>
+				<%= text_field_tag 'nickname', @user.nickname || @user.login, :class => 'text', :maxlength => 20 %>
 			</p>
 			<div id="switch-spinner" style="display:none">
 				<%= image_tag 'spinner.gif' %>

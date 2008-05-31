@@ -129,6 +129,7 @@ class User < ActiveRecord::Base
     :photos_url, :blog_url, :myspace_url, :skype, :msn, :skype_public, :msn_public    
   
   before_save :check_links
+  before_save :check_nickname
                       
   def self.search_paginated(q, options)
     options = {:per_page => 6, :page => 1}.merge(options)
@@ -366,5 +367,9 @@ class User < ActiveRecord::Base
           self.send("#{attr}=", "http://#{self.send(attr)}") unless self.send(attr) =~ /^http:\/\//
         end
       end
+    end
+
+    def check_nickname
+      self.nickname = self.login if self.nickname.blank?
     end
 end

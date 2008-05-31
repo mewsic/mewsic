@@ -122,11 +122,17 @@ class UsersController < ApplicationController
     render :nothing => true, :status => :bad_request if request.post? || request.delete?
 
     respond_to do |format|
-      if request.put? && @user.update_attribute(:type, @type)
-        format.html { render :partial => "users/switch/success" }
+      switch_partial = {:partial => "users/switch/#{@user.class.name.downcase}_to_#{@type.downcase}", :layout => 'users/switch/layout'}
+      if request.put?
+        @user.nickname = params[:nickname]
+        if @user.update_attribute(:type, @type)
+          format.html { render :partial => "users/switch/success" }
+        else
+          flash.now[:error] = @user.errors.full_messages.join
+          format.html { render switch_partial }
+        end
       else
-        flash.now[:error] = @user.errors.full_messages.join unless @user.valid?
-        format.html { render :partial => "users/switch/#{@user.class.name.downcase}_to_#{@type.downcase}", :layout => 'users/switch/layout' }
+        format.html { render switch_partial }
       end
     end
   end

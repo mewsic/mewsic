@@ -49,7 +49,7 @@
       <%- end -%>
     </div>
     <p class="blue-text">User name </p>
-    <h1 class="black-text" id="user_id"><%= @user.login %></h1>
+    <h1 class="black-text" id="user_id"><%= @user.nickname %></h1>
     <div class="grey-divisor"><hr /></div>
     <p class="blue-text">Country <%= user_edit_button(:country) %></p>
     <h2 class="black-text" id="user_country"><%= @user.country %></h2>
@@ -86,7 +86,7 @@
       <%= user_photo_link %>
     </div>
   </div>
-  <p>myousica ID: <%= @user.id %></p>
+  <p>myousica ID: <%= @user.id %> / <%= @user.login %></p>
 </div>
 <div class="popup" style="display:none;">
 	<a href="#" class="button close"><img src="/images/search_box_icon_close.png" /></a>  
