@@ -10,7 +10,7 @@
   		<p class="search_black_text"><%= link_to highlight_search(song.title), song_path(song) %></p>
   	</div>
   	<div style="float:right">
-  		<p class="search_blue_text"><%= link_to highlight_search(song.genre.name), genre_path(song.genre) %></p>
+  		<p class="search_blue_text"><%= link_to(highlight_search(song.genre.name), genre_path(song.genre)) if song.genre %></p>
   		<p class="search_small_orange_text">Tracks</p><p class="search_gray_text">(<%= song.tracks.count %>)</p>
   		<p class="search_sky_text"><%= song.length %></p>				
   		<div style="float:left;padding-top:6px;"><%= rating(song) %></div>

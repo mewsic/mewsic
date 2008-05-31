@@ -3,7 +3,7 @@
   <author><%= track.parent_song.original_author %></author>     
   <title><%= track.title %></title>     
   <instrument><%= track.instrument.id %></instrument>  
-  <genre><%= track.parent_song.genre.name %></genre>     
+  <genre><%= track.parent_song.genre.name if track.parent_song.genre %></genre>     
   <bpm></bpm>        
   <tone></tone>       
   <description></description>

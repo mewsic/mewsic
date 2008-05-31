@@ -19,7 +19,7 @@
       </td>
       <td align="right">
         <%= rating(song) %>
-        <p><strong><%= link_to song.genre.name, song.genre %></strong></p>
+        <p><strong><%= link_to(song.genre.name, song.genre) if song.genre %></strong></p>
       </td>
     </tr>
     <tr class="odd">
