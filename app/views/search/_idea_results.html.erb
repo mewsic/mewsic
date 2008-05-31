@@ -12,7 +12,7 @@
   		<p class="search_black_text"><%= highlight_search track.title %></p>
   	</div>
   	<div style="float:right">
-  		<p class="search_blue_text"><%= link_to(highlight_search(track.parent_song.genre.name), genre_path(track.parent_song.genre.name)) if track.genre %></p>
+  		<p class="search_blue_text"><%= link_to(highlight_search(track.parent_song.genre.name), genre_path(track.parent_song.genre.name)) if track.parent_song.genre %></p>
   		<p class="search_sky_text"><%= track.bpm %></p>				
   		<p class="search_sky_text"><%= track.tonality %></p>								
   		<p class="search_sky_text"><%= track.length %></p>				
