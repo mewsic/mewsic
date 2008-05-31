@@ -61,11 +61,11 @@
     <p class="abstract align-right"><a href="#">Report abuse</a></p>
   </div>
   <div>
-    <h1>Other songs by <%= link_to @song.user.login, user_path(@song.user) %><span class="no-bold">(<%= @song.user.songs.count %>)</span></h1>
+    <h1>Other songs by <%= link_to @song.user.login, user_path(@song.user) %> <span class="no-bold">(<%= @song.user.songs.count %>)</span></h1>
     <table width="100%" border="0" cellpadding="0" cellspacing="0">
       <%- @other_songs.each_with_index do |song, index| -%>
         <tr class="<%= %[even odd][index % 2] %>">
-          <td><span class="cyan-text"><%= song.genre ? song.genre.name : ''  %> </span> <%= song.user.login %>,<em> <%= truncate(song.title, 10) %> </em></td>
+          <td><span class="cyan-text"><%= song.genre ? song.genre.name : ''  %> </span>	<em> <%= link_to truncate(song.title, 20), song_path(song) %> </em></td>
           <td class="star">
             <%= rating(song) %>
           </td>
@@ -76,7 +76,7 @@
         </tr>
       <%- end -%>
     </table>
-    <p class="abstract align-right"><a href="#">Next</a></p>	
+    <!-- <p class="abstract align-right"><a href="#">Next</a></p>	 -->
   </div>  
 </div>
 
@@ -169,7 +169,7 @@
       			  <%= link_to avatar_image(song.user, :icon), user_path(song.user) %>
             </p>
       			<p class="name"><%= link_to song.user.login, user_path(song.user) %></p>
-      			<p class="title"><%= song.id %> <%= link_to song.title, song_path(song) %></p>
+      			<p class="title"><%= link_to song.title, song_path(song) %></p>
       			<div class="music-info">
       			  <p class="float-right">
       			    <span class="star"><%= rating(song) %></span>
@@ -246,7 +246,7 @@
           			  <%= link_to avatar_image(song.user, :icon), user_path(song.user) %>
                 </p>
           			<p class="name"><%= link_to song.user.login, user_path(song.user) %></p>
-          			<p class="title"><%= song.id %> <%= link_to song.title, song_path(song) %></p>
+          			<p class="title"><%= link_to song.title, song_path(song) %></p>
           			<div class="music-info">
           			  <p class="float-right">
           			    <span class="star"><%= rating(song) %></span>
