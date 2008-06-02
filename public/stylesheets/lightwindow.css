@@ -41,8 +41,10 @@
 		overflow: hidden;
 		z-index: 0;
 		position: relative;
-		border: 10px solid #f3f3f4;
-		background-color: #f3f3f4;
+		/*border: 10px solid #f3f3f4;
+		background-color: #f3f3f4;*/
+		border: 10px solid #ffffff;
+		background-color: #ffffff;
 	}		
 
 #lightwindow_loading {
