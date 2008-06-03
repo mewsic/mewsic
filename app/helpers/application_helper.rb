@@ -89,7 +89,7 @@ module ApplicationHelper
     result = ""
     
     tags_for_cloud(klass, group, attribute, %w(cloud1 cloud2 cloud3 cloud4 cloud5), options[:limit]) do |obj, css_class|
-      anchor = link_to obj[attribute], {:controller => "#{group.to_s.pluralize}", :action => 'show', :id => obj}, {:class => css_class} 
+      anchor = link_to obj[attribute], {:controller => "#{group.to_s.pluralize}", :action => 'show', :id => obj.to_param}, {:class => css_class} 
       result += options[:with_paragraphs] ? "<p>#{anchor}</p>" : anchor
       result += "&nbsp;\n"
     end
