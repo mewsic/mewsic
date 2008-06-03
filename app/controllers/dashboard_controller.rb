@@ -13,9 +13,15 @@ class DashboardController < ApplicationController
 
 private 
 
-  def find_splash_songs
-    @splash_tracks  = Track.find(:all, :limit => 4)   
-    @splash_songs   = Song.find(:all, :limit => 4)   
+  def find_splash_songs    
+    @random_siblings = Song.find_random_direct_siblings(1)
+    if @random_siblings.size > 0
+      @splash_song = @random_siblings[0].song
+      @splash_songs = @splash_song.direct_siblings(3).collect{|mix| mix.song}.unshift(@splash_song)
+      @splash_tracks = @splash_song.tracks.find(:all, :limit => 4)
+    else
+      @splash_songs, @splash_tracks = [], []
+    end    
   end
   
 end

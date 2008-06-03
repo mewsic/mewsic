@@ -92,15 +92,20 @@ class Song < ActiveRecord::Base
     ['sassofono', 'batteria', 'anoleso']
   end    
   
-  def direct_siblings(limit = 5)
-    #Song.find(:all, :include => [{:mixes => :track}], :conditions => ["songs.id != ? AND mixes.track_id IN (?)", self.id, self.tracks.collect{|t| t.id}], :limit => limit)
-    Mix.find_by_sql("select distinct x.original_author, x.title, t.song_id from mixes s inner join mixes t on s.track_id = t.track_id inner join songs x on t.song_id = x.id where s.song_id = #{self.id}") 
+  def self.find_random_direct_siblings(limit = 5)
+    Mix.find_by_sql([
+      "select distinct x.original_author, x.title, t.song_id from mixes s inner join mixes t on s.track_id = t.track_id inner join songs x on t.song_id = x.id       
+      ORDER BY RAND() LIMIT #{limit}"]) 
   end
   
-  # STUB
-  def indirect_siblings
+  def direct_siblings(limit = 5)
+    #Song.find(:all, :include => [{:mixes => :track}], :conditions => ["songs.id != ? AND mixes.track_id IN (?)", self.id, self.tracks.collect{|t| t.id}], :limit => limit)
+    Mix.find_by_sql("select distinct x.original_author, x.title, t.song_id from mixes s inner join mixes t on s.track_id = t.track_id inner join songs x on t.song_id = x.id where s.song_id = #{self.id} LIMIT #{limit}") 
+  end
+  
+  def indirect_siblings(limit = 5)
     #Song.find(:all, :include => :tracks, :limit => 2, :conditions => ["songs.published = ? AND songs.id != ?", true, self.id])
-    Mix.find_by_sql("select distinct x.original_author, x.title, t.song_id from mixes s inner join mixes t on s.track_id = t.track_id inner join songs x on t.song_id = x.id where s.song_id = #{self.id}") 
+    Mix.find_by_sql("select distinct x.original_author, x.title, t.song_id from mixes s inner join mixes t on s.track_id = t.track_id inner join songs x on t.song_id = x.id where s.song_id = #{self.id} LIMIT #{limit}") 
   end
   
   def siblings_count
