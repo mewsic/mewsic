@@ -290,6 +290,7 @@ document.observe('dom:loaded', function() {
 
   } else if(mband_id_field) {
     new InPlaceEditorGenerator( $w('motto tastes'), { url: '/mbands/', model: 'mband', rows: 6, maxLength: 1000} );  
-    //new AjaxFormGenerator( $w('photos_url blog_url myspace_url'), { url: '/mbands/', model: 'mband' } );    
+    new Profile();
+    new AjaxFormGenerator( $w('photos_url blog_url myspace_url'), { url: '/mbands/', model: 'mband' } );    
   } 
 });

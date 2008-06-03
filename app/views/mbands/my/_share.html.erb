@@ -1,0 +1,34 @@
+<div class="clear-block float-left">
+	<h1>PERSONAL DETAILS <%= mband_path(@mband) %></h1>
+</div>
+<p class="float-left grey-text" style="padding-left:10px">
+	<%= link_to 'edit', '#', :id => 'my-user-share-more-link' %>
+</p>
+<div class="clear-float"></div>
+<div id="my-user-share-fill-in" class="grey-text">Your profile is <strong><%= @mband.profile_completeness.round %>%</strong> complete.</div>
+<div id="my-user-share" class="user-sharing clear-block" style="display:none">
+	<% form_for @mband, :url => mband_path(@mband), :html => {:id => 'form_photos_url'} do |f| -%>
+	  <p>
+  		<label>Share your photo</label>
+  		<span id="loading_user_photos_url" style="display:none;" class="loading">Saving...</span>
+  		<%= text_field :mband, :photos_url, :class => 'hide-on-load ready-for-edit' %>
+  		<input type="submit" class="button hide-on-load" value="OK"/>
+  	  </p>
+  <% end -%>
+	<% form_for @mband, :url => mband_path(@mband), :html => {:id => 'form_blog_url'} do |f| -%>
+	  <p>
+  		<label>Share your blog</label>
+  		<span id="loading_user_blog_url" style="display:none;" class="loading">Saving...</span>
+  		<%= text_field :mband, :blog_url, :class => 'hide-on-load ready-for-edit' %>
+  		<input type="submit" class="button hide-on-load" value="OK"/>
+  	</p>
+  <% end -%>
+  <% form_for @mband, :url => mband_path(@mband), :html => {:id => 'form_myspace_url'} do |f| -%>
+	  <p>
+  		<label>MySpace page</label>
+  		<span id="loading_user_myspace_url" style="display:none;" class="loading">Saving...</span>
+  		<%= text_field :mband, :myspace_url, :class => 'hide-on-load ready-for-edit' %>
+  		<input type="submit" class="button hide-on-load" value="OK"/>
+  	</p>
+  <% end -%>
+</div>

@@ -18,7 +18,7 @@
       <%= render :partial => 'tracks' %>  
 	  </div>
     <%= render :partial => 'gallery' %> 
-    <%= render :partial => 'users/my/share' if current_user_page? %> 
+    <%= render :partial => 'mbands/my/share' if current_user_mband_page? %> 
   </div>
 
 <% javascript('user/gallery') %>

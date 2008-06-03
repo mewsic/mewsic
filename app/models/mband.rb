@@ -47,5 +47,11 @@ class Mband < ActiveRecord::Base
     find_method = param.to_s =~ /^\d+$/ ? :find : :find_by_name
     send(find_method, param, options) or raise ActiveRecord::RecordNotFound
   end
+
+  def profile_completeness
+    profile = %w(photos_url myspace_url blog_url)
+    complete = profile.select { |attr| !self[attr].blank? }
+    (complete.size.to_f / profile.size.to_f * 100.0).round 2
+  end
   
 end
