@@ -46,7 +46,7 @@
 				<%- @splash_songs.each_with_index do |song, index| -%>
 				  <div class="splash <%= %w[odd even][index % 2] %>">
 				    <span class="tracks-number"><span><%= song.tracks.count %></span></span>
-            <div class="title"><%=h truncate(song.title, 15) %></div>
+            <div class="title"><%= link_to h(truncate(song.title, 15)), song_path(song) %></div>
             <div class="buttons">
               <%= mlab_button(song, :dynamic => true) %>
               <%= play_button(song) %>
