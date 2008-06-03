@@ -1,8 +1,4 @@
-<% content_for(:top) do -%>
-  <div class="banner-instr-home">
-    <img src="/images/banner_instruction_home.png" alt="" width="732" height="189" />
-  </div>
-<% end %>
+<%- content_for(:top, render(:partial => 'splash')) -%>  
   <!--
     TODO Inserire un metodo per il calcolo del path
   -->

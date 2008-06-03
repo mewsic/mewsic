@@ -3440,3 +3440,116 @@ div.auto_complete ul strong.highlight {
   padding:0;
 }
 /***** end messages autocomplete *****/
+
+/******************** HOME SPLASH ********************/
+
+
+#splash_container {
+	width: 732px;
+	height: 189px;
+}
+
+#splash_box_sx {
+	background: transparent url('/images/splash_box_sx.png') no-repeat bottom;
+	width: 9px;
+	height: 189px;
+	float: left;
+}
+
+#splash_box_dx {
+	background: transparent url('/images/splash_box_dx.png') no-repeat bottom;
+	width: 9px;
+	height: 189px;
+	float: right;
+}
+
+#splash_box_core {
+	background: transparent url('/images/splash_box_rp.png') repeat-x bottom;
+	width: 714px;
+	height: 189px;
+	float: left;
+}
+
+#splash_elements_container {
+	width: 218px;
+	height: 176px;
+	float: left;
+	padding-left: 2px;
+}
+
+#splash_box_elements {
+	width: 206px;
+	height: 138px;
+	background: #F4F8FB;
+	float: left;
+	padding: 6px;
+}
+
+#splash_odd {
+	background: #FFFFFF;
+	padding: 3px;
+	height: 29px;
+}
+
+#splash_even {
+	background: #E9F4F9;
+	padding: 3px;	
+	height: 29px;
+}
+
+#splash_elements_container_mlab {
+	width: 201px;
+	height: 176px;
+	float: left;
+}
+
+#splash_box_elements_mlab {
+	width: 201px;
+	height: 150px;
+	background: #F4F8FB url('/images/splash_mlab_banner.png') no-repeat center;
+	float: left;
+}
+
+#splash_box_elements_mlab a {
+	color: #4DC4EA;
+	font-weight: bold;
+	text-decoration: underline;
+} 
+
+
+#splash_tag_tracks {
+	background: transparent url('/images/splash_tag_tracks.png') no-repeat top;
+	width: 71px;
+	height: 27px;
+	margin-left: 9px;
+}
+
+#splash_tag_mlab {
+	background: transparent url('/images/splash_tag_mlab.png') no-repeat top;
+	width: 71px;
+	height: 27px;
+	margin-left: 9px;
+}
+
+#splash_tag_songs {
+	background: transparent url('/images/splash_tag_songs.png') no-repeat top;
+	width: 71px;
+	height: 27px;
+	margin-left: 9px;
+}
+
+#splash_divider_plus {
+	background: transparent url('/images/splash_icon_plus.png') no-repeat bottom;
+	width: 36px;
+	height: 111px;
+	float: left;
+	overflow: hidden;
+}
+
+#splash_divider_equal {
+	background: transparent url('/images/splash_icon_equal.png') no-repeat bottom;
+	width: 36px;
+	height: 111px;
+	float: left;
+	overflow: hidden;
+}
