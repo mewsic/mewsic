@@ -11,7 +11,7 @@
                  %>
               <%- end -%>
               <br />
-              <%- if logged_in? && current_user.is_leader_of?(@mband) -%>
+              <%- if logged_in? && current_user.is_leader_of?(@mband) && current_user != user -%>
   					    <%= link_to_remote 'remove',
   					          :url => mband_membership_path(@mband.band_membership_with(user)), :method => 'delete', 
   					          :confirm => "Are you sure", :loading => "Effect.Puff('mband_members_#{user.id}')"

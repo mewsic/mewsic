@@ -38,7 +38,11 @@
 
           var container = window.opener.document.getElementById('gallery-photo-list');
           $(container).insert({
-            bottom: '<%= escape_javascript(render(:partial => 'users/photo', :object => @photo)) %>'
+            <%- if @pictureable.class.name == 'User' -%>
+              bottom: '<%= escape_javascript(render(:partial => 'users/photo', :object => @photo)) %>'
+            <%- else -%>
+              bottom: '<%= escape_javascript(render(:partial => 'mbands/photo', :object => @photo)) %>'
+            <%- end -%>
           });
 
           new Effect.Shake(window.opener.$('gallery-photo-thumb-<%= @photo.id %>'), {distance:4,duration:0.4});

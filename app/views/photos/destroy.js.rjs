@@ -2,4 +2,8 @@ thumb = "gallery-photo-thumb-#{@photo.id}"
 
 page << "myLightWindow._removeLink($('#{thumb}').down('a.lightwindow'));"
 page.remove(thumb)
-page.visual_effect(:appear, 'no-images-notice') if @user.photos.size.zero?
+if params[:mband_id]
+  page.visual_effect(:appear, 'no-images-notice') if @mband.photos.size.zero?
+else 
+  page.visual_effect(:appear, 'no-images-notice') if @user.photos.size.zero?
+end

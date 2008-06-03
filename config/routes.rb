@@ -2,6 +2,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :mbands, :member => {:rate => :put, :set_leader => :put} do |mband|    
     mband.resource :avatar
+    mband.resources :photos
     mband.resources :songs
     mband.resources :tracks
   end  

@@ -1,11 +1,18 @@
 <div class="gallery clear-block">
+  <%- if current_user_mband_page? -%>
+  <p class="edit-command">
+  <a href="<%= mband_photos_path(@mband) %>" onclick="Popup.open('<%= new_mband_photo_path(@mband) %>', {height: 150}); return false;">upload pics</a>
+  </p>
+  <%- end -%>
   <h1>GALLERY</h1>
   
   <div class="top-box clear-block">
     <div class="bottom-box clear-block">
       <div class="horizontal-scroll-box" id="gallery">
         <div id="gallery-photo-list">
-            <%= render :partial => 'photo', :collection => @mband.photos %>
+          <%= render :partial => 'photo', :collection => @mband.photos %>
+          <p id="no-images-notice" style="<%= 'display:none;' if @mband.photos.size > 0 %>" class="centered grey-text">
+            <em><%= current_user_mband_page? ? 'you have' : "#{@mband.name} has" %> no images in the gallery!</em></p>
         </div>
       </div>
     </div>

@@ -1,0 +1,10 @@
+<div class="gallery-photo-thumb" id="gallery-photo-thumb-<%= photo.id %>">
+  <div style="position: relative;">
+    <a href="<%= photo.public_filename(:large) %>" rel="mband[Gallery]" class="lightwindow image">
+      <%= image_tag(photo.public_filename(:small), :alt => photo.filename) %>
+    <span class="button view" style="display:none"></span></a>    
+    <% if current_user_mband_page? %>
+      <%= link_to_remote '', :url => mband_photo_path(@mband, photo), :method => 'delete', :html => { :class => 'button delete', :style => 'display:none'  }, :confirm => 'Are you sure you want to delete this image?' %>
+    <% end %>
+  </div>
+</div>
