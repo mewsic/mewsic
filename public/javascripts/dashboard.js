@@ -5,6 +5,9 @@ var Splash = {
       method: 'get',
       onComplete: function(r) {
         $('splash_container').update(r.responseText);
+        var mlabSlider = MlabSlider.getInstance();        
+        mlabSlider.initTrackButtons(true);
+        //mlabSlider.initSongButtons(true);
       }
     });
   }
@@ -12,5 +15,5 @@ var Splash = {
 };
 
 document.observe('dom:loaded', function() {
-  new PeriodicalExecuter(Splash.update, 5);
+  new PeriodicalExecuter(Splash.update, 2);
 });

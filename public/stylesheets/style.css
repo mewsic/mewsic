@@ -3444,6 +3444,10 @@ div.auto_complete ul strong.highlight {
 /******************** HOME SPLASH ********************/
 
 
+#splash {
+  height: 200px;
+}
+
 #splash_container {
 	width: 732px;
 	height: 189px;

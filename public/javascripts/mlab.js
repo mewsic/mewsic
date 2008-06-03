@@ -150,7 +150,7 @@ var MlabSlider = Class.create(PictureSlider, {
   initTrackButtons: function(only_dynamic) {
     var selector = '.button.mlab.track.add';
     if(only_dynamic) selector += '.dynamic';
-    $$(selector).each(function(element) {
+    $$(selector).each(function(element) {      
       element.observe('click', this.onAddTrack.bindAsEventListener(this, element));
     }.bind(this));
   },    
