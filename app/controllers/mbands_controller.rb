@@ -86,6 +86,10 @@ private
   
   def find_mband
     @mband = Mband.find_from_param(params[:id])
+
+  rescue ActiveRecord::RecordNotFound
+    flash[:error] = 'M-band not found..'
+    redirect_to '/'
   end
   
   def mband_membership_required

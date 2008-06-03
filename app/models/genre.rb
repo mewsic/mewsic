@@ -38,7 +38,19 @@ class Genre < ActiveRecord::Base
   end
 
   def to_breadcrumb
-    name
+    self.name
+  end
+
+  def to_param
+    URI.encode(self.name.downcase.gsub(' ', '+'))
+  end
+
+  # XXX DRY THESE METHODS! present in models/{user,genre,mband}.rb
+  def self.find_from_param(param, options = {})
+    param = param.id if param.kind_of? ActiveRecord::Base
+    find_method = param.to_s =~ /^\d+$/ ? :find : :find_by_name
+    param = URI.decode(param.gsub('+', ' ')) if find_method == :find_by_name
+    send(find_method, param, options) or raise ActiveRecord::RecordNotFound
   end
 
 end

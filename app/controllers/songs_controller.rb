@@ -5,7 +5,7 @@ class SongsController < ApplicationController
   
   def index
     if params.has_key?("genre_id")
-      @genre = Genre.find(params[:genre_id])
+      @genre = Genre.find_from_param(params[:genre_id])
       @songs = Song.find_paginated_by_genre(params[:page], @genre)
     elsif params.has_key?("user_id")
       @user = User.find_from_param(params[:user_id])

@@ -18,7 +18,7 @@ class GenresController < ApplicationController
   end
   
   def show
-    @genre = Genre.find(params[:id])
+    @genre = Genre.find_from_param(params[:id])
     @most_listened_songs = @genre.find_most_listened :limit => 3, :include => :user
     @prolific_users = @genre.find_most_prolific_users :limit => 3
     @songs = Song.find_paginated_by_genre(1, @genre)
@@ -26,6 +26,10 @@ class GenresController < ApplicationController
     respond_to do |format|
       format.html
     end
+
+  rescue ActiveRecord::RecordNotFound
+    flash[:error] = 'Genre not found..'
+    redirect_to '/'
   end
 
 protected
