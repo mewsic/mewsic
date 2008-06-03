@@ -7,19 +7,16 @@
 					<div id="splash_tag_tracks"> </div>
 					<div id="splash_box_elements">
 						<!-- dynamic -->
-						<div id="splash_odd">
-              
-						</div>
-						<div id="splash_even">
-
-						</div>
-						<div id="splash_odd">
-
-						</div>
-						<div id="splash_even">
-
-						</div>
-
+						<%- @splash_tracks.each_with_index do |track, index| -%>
+						  <div class="splash <%= %w[odd even][index % 2] %>">
+                <%= image_tag(track.instrument.icon, :class => "instrument") %>
+                <div class="user"><%= track.parent_song.user.login if (track.parent_song && track.parent_song.user ) %></div>
+                <div class="buttons">
+                  <%= mlab_button(track) %>
+                  <%= play_button(track) %>
+                </div>
+  						</div>
+						<%- end -%>												
 						<!-- end dynamic -->								
 					</div>
 				</div>
@@ -42,19 +39,16 @@
 					<div id="splash_box_elements">
 
 						<!-- dynamic -->
-						<div id="splash_odd">
-
-						</div>
-						<div id="splash_even">
-
-						</div>
-						<div id="splash_odd">
-
-						</div>
-
-						<div id="splash_even">
-
-						</div>
+						<%- @splash_songs.each_with_index do |song, index| -%>
+						  <div class="splash <%= %w[odd even][index % 2] %>">
+						    <span class="tracks-number"><span><%= song.tracks.count %></span></span>
+                <div class="user"><%= song.user.login if song.user %></div>
+                <div class="buttons">
+                  <%= mlab_button(song) %>
+                  <%= play_button(song) %>
+                </div>
+  						</div>
+						<%- end -%>
 						<!-- end dynamic -->												
 					</div>
 				</div>

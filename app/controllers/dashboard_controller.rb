@@ -1,5 +1,7 @@
 class DashboardController < ApplicationController
   
+  before_filter :find_splash_songs
+  
   def index
     @people = User.find :random, :limit => 6, :include => [:avatars, :songs], :conditions => ["activated_at IS NOT NULL"]
     @answers = Answer.find :all, :order => 'answers.created_at DESC', :limit => 2, :include => [{:user => :avatars}], :conditions => ["users.activated_at IS NOT NULL"]
@@ -8,8 +10,12 @@ class DashboardController < ApplicationController
     @ideas = Track.find_orphans(:limit => 2)
   end
   
-  def mylist
-    # TODO: qui dobbiamo prendere le song nella mylist, 100 a caso.
-    @songs = Song.find :all, :limit => 100
+
+private 
+
+  def find_splash_songs
+    @splash_tracks  = Track.find(:all, :limit => 4)   
+    @splash_songs   = Song.find(:all, :limit => 4)   
   end
+  
 end
