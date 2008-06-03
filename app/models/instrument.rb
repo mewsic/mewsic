@@ -12,13 +12,4 @@
 
 class Instrument < ActiveRecord::Base
   has_many :tracks
-  
-  before_save :set_default_icon
-
-private
-
-  def set_default_icon
-    self.icon = 'instrument_drum.png'
-  end
-  
 end

@@ -1,13 +1,20 @@
 development:
   adapter: mysql
   database: myousica_development
-  socket: /tmp/mysql.sock
+  socket: /opt/local/var/run/mysql5/mysqld.sock
+  username: myousica
+  password: adelao
 
 test:
-  adapter: sqlite3
-  database: db/test.sqlite3
+  adapter: mysql
+  database: myousica_test
+  socket: /opt/local/var/run/mysql5/mysqld.sock
+  username: myousica
+  password: adelao
 
 production:
   adapter: mysql
-  database: myousica_development
-  socket: /tmp/mysql.sock
+  database: myousica_production
+  socket: /opt/local/var/run/mysql5/mysqld.sock
+  username: myousica
+  password: adelao
