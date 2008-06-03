@@ -50,7 +50,7 @@ private
       @pictureable = User.find_from_param(params[:user_id])
       @user = @pictureable
     elsif params[:mband_id]
-      @pictureable = Mband.find(params[:mband_id])  
+      @pictureable = Mband.find_from_param(params[:mband_id])  
       @mband = @pictureable
     end
   end  
