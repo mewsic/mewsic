@@ -201,11 +201,10 @@ class UserTest < Test::Unit::TestCase
   end
   
   def test_find_prolific
-    top_ten_users = Song.count(:include => :user, :order => "count_all desc", :group => :user_id, :conditions => 'users.activated_at is not null').map {|s| s.first}[0,10]
-    prolific_users = User.find_prolific(:limit => 10)
+    top_ten_users = Song.count(:include => :user, :order => "count_all desc, users.id desc", :group => :user_id, :conditions => "songs.published = 1 and users.activated_at is not null and (users.type = 'User' OR users.type is null)").to_a[0..10]
+    prolific_users = User.find_prolific.map{|u|[u.id, u.songs_count.to_i]}.sort{|b,a| a[1] == b[1] ? a[0] <=> b[0] : a[1] <=> b[1]}[0..10]
     
-    assert_equal top_ten_users.first, prolific_users.first.id
-    assert_equal top_ten_users.last, prolific_users.last.id
+    assert_equal top_ten_users, prolific_users
   end
   
   def test_find_friendliest_should_return_the_friendliest_person

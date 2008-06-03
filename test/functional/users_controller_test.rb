@@ -58,6 +58,24 @@ class UsersControllerTest < Test::Unit::TestCase
       assert_response :success
     end
   end
+
+  def test_should_validate_login_on_signup
+    assert_no_difference 'User.count' do
+      create_user(:login => 'antani$')
+      assert assigns(:user).errors.on(:login)
+      assert_response :success
+    end
+    assert_no_difference 'User.count' do
+      create_user(:login => 'antani ')
+      assert assigns(:user).errors.on(:login)
+      assert_response :success
+    end
+    assert_no_difference 'User.count' do
+      create_user(:login => 'aa')
+      assert assigns(:user).errors.on(:login)
+      assert_response :success
+    end
+  end
   
   def test_index
     get :index

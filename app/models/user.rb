@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
   validates_length_of       :tastes,   :maximum => 1000, :allow_nil => true, :allow_blank => true, :message => 'too long.. sorry! max %d chars'
 
   validates_format_of       :email,    :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :on => :create, :message => 'invalid e-mail'
-  validates_format_of       :login,    :with => /^[^\s]+$/, :if => Proc.new{|u| !u.login.blank?}, :message => 'spaces aren\'t allowed'
+  validates_format_of       :login,    :with => /^\w+$/, :if => Proc.new{|u| !u.login.blank?}, :message => 'only letters, numbers and underscore allowed!'
   validates_format_of       :msn,      :with => /^(([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,}))?$/ix, :message => 'invalid MSN address'
   validates_format_of       :skype,    :with => /^([\w\._-]+)?$/ix, :message => 'invalid skype name'
   validates_format_of       :photos_url, :blog_url, :myspace_url,
@@ -236,7 +236,7 @@ class User < ActiveRecord::Base
   end
 
   def to_param
-    self.login
+    self.login.downcase
   end
 
   def self.from_param(param)
