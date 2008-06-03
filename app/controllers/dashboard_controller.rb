@@ -10,6 +10,10 @@ class DashboardController < ApplicationController
     @ideas = Track.find_orphans(:limit => 2)
   end
   
+  def splash
+    redirect_to '/' and return unless request.xhr?
+    render :partial => 'splash'
+  end
 
 private 
 

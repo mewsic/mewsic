@@ -68,5 +68,6 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'help/:id', :controller => 'help', :action => 'show'  
 
   map.root :controller => "dashboard"
+  map.connect 'splash', :controller => 'dashboard', :action => 'splash'
   
 end

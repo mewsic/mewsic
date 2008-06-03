@@ -1,4 +1,9 @@
-<%- content_for(:top, render(:partial => 'splash')) -%>  
+<%- javascript('dashboard') -%>
+<%- content_for(:top ) do -%>  
+  <div id="splash_container" class="banner-instr-home">
+    <%= render(:partial => 'splash') %>
+  </div>  
+<%- end -%>
   <!--
     TODO Inserire un metodo per il calcolo del path
   -->
