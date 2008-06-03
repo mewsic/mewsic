@@ -12,4 +12,16 @@
 
 class Instrument < ActiveRecord::Base
   has_many :tracks
+
+  validates_presence_of :description, :icon
+  validates_uniqueness_of :description, :case_sensitive => false
+
+  before_save :set_default_icon
+
+  private
+
+    def set_default_icon
+      self.icon ||= "instruments/#{x.description.downcase.gsub(/\s/, '_')}.png"
+    end
+
 end
