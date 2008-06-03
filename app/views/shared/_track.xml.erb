@@ -1,6 +1,6 @@
 <track>
-  <user><%= track.parent_song.user.login %></user>       
-  <author><%= track.parent_song.original_author %></author>     
+  <user><%= track.parent_song.user.login if track.parent_song && track.parent_song.user %></user>       
+  <author><%= track.parent_song.original_author if track.parent_song %></author>     
   <title><%= track.title %></title>     
   <instrument><%= track.instrument.id %></instrument>  
   <genre><%= track.parent_song.genre.name if track.parent_song.genre %></genre>     

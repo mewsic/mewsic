@@ -6,7 +6,7 @@
   			<%= play_button(track) %>
   			<%= mlab_button(track) %>
   		</div>
-  		<div id="search_icon_container"><%= link_to avatar_image(track.parent_song.user, :icon), user_path(track.parent_song.user) %></div>
+  		<div id="search_icon_container"><%= link_to(avatar_image(track.parent_song.user, :icon), user_path(track.parent_song.user)) if track.parent_song && track.parent_song.user %></div>
   		<p class="search_black_text"><%= highlight_search track.title %>, <%= highlight_search track.description %></p>
   	</div>
   	<div style="float:right">

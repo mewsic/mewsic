@@ -6,7 +6,7 @@
     <p class="thumb">
       <%= image_tag track.instrument.icon %>
     </p>
-    <p class="name grey-text"><%= track.parent_song.user.login %></p>
+    <p class="name grey-text"><%= track.parent_song.user.login if track.parent_song && track.parent_song.user %></p>
     <p class="title">
     	<a href="#"><%= track.title %></a>
 	</p>

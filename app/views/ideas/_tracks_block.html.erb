@@ -2,9 +2,11 @@
 <div class="elements clear-block">
   <p class="thumb">
     <%= image_tag track.instrument.icon %>
-    <a href="<%= user_path(track.parent_song.user) %>"><%= avatar_image track.parent_song.user, :icon %></a>
+    <%- if track.parent_song && track.parent_song.user -%>
+      <a href="<%= user_path(track.parent_song.user) %>"><%= avatar_image track.parent_song.user, :icon %></a>
+    <%- end -%>
   </p>
-  <p class="name align-right"><%= link_to track.parent_song.user.login, user_path(track.parent_song.user) %></p>
+  <p class="name align-right"><%= link_to(track.parent_song.user.login, user_path(track.parent_song.user)) if track.parent_song && track.parent_song.user %></p>
   <p class="title align-right"><%= track.title %></p>
   <p class="abstract">
     <%= track.description %>
@@ -21,7 +23,7 @@
       <%= play_button(track) %>
     <p class="float-left">
       <%= download_button(track) %>
-      <%= link_to track.parent_song.genre.name, genre_path(track.parent_song.genre) %>
+      <%= link_to(track.parent_song.genre.name, genre_path(track.parent_song.genre)) if track.parent_song && track.parent_song.genre %>
       </p>
   </div>
 </div>

@@ -1,11 +1,11 @@
 <track>
-  <user><%= track.parent_song.user.login %></user>       
-  <author><%= track.parent_song.original_author %></author>     
+  <user><%= track.parent_song.user.login if track.parent_song && track.parent_song.user %></user>       
+  <author><%= track.parent_song.original_author if track.parent_song %></author>     
   <title><%= track.title %></title>     
   <instrument><%= track.instrument.id %></instrument>  
-  <genre><%= track.parent_song.genre.name %></genre>     
+  <genre><%= track.parent_song.genre.name if track.parent_song && track.parent_song.genre %></genre>     
   <bpm><%= track.bpm %></bpm>        
-  <tone><%= track.parent_song.tone %></tone>       
+  <tone><%= track.parent_song.tone if track.parent_song %></tone>       
   <description><%= track.description %></description>
   <rating><%= track.rating_avg %></rating>     
   <id><%= track.id %></id>         

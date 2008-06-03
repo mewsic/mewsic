@@ -22,7 +22,7 @@
     </p>
 		<p class="float-left">
 			<%= download_button(track) %>
-			<%= link_to(track.parent_song.genre.name, genre_path(track.parent_song.genre)) if track.parent_song.genre %>
+			<%= link_to(track.parent_song.genre.name, genre_path(track.parent_song.genre)) if track.parent_song && track.parent_song.genre %>
 		</div>
 	  </div>
   <%- end -%>
