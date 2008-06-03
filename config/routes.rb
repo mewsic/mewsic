@@ -22,7 +22,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :instruments
   map.resources :ideas
   map.resources :bands_and_deejays
-  map.resources :users, :collection => { :auto_complete_for_message_to => :get }, :member => {:switch_type => :any, :rate => :put, :im_contact => :get} do |user|    
+  map.resources :users, :collection => {:auto_complete_for_message_to => :get}, :member => {:switch_type => :any, :rate => :put, :im_contact => :get} do |user|    
     user.resources :songs
     user.resources :tracks
     user.resource :avatar

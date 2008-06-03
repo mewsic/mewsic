@@ -3,6 +3,8 @@ class GenresController < ApplicationController
   def index              
     respond_to do |format|
       format.html do
+        redirect_to '/' and return unless request.xhr?
+
         @genres = Genre.find_paginated(params[:page])
         render :layout => false
       end
