@@ -5,7 +5,7 @@ class MbandMembershipsController < ApplicationController
 
   def create        
     redirect_to '/' unless @mband.members.include?(current_user)    
-    @user = User.find(params[:user_id])    
+    @user = User.find_from_param(params[:user_id])    
     unless MbandMembership.find(:first, :conditions => ["user_id = ? AND mband_id = ?", @user.id, @mband.id])
       MbandMembership.create(:user => @user, :mband => @mband)
     end
@@ -40,7 +40,7 @@ private
       membership.accepted_at = Time.now
       membership.save
     else
-      @mband = current_user.mbands.find(params[:mband_id])
+      @mband = current_user.mbands.find_from_param(params[:mband_id])
     end    
   end    
   

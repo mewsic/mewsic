@@ -38,5 +38,14 @@ class Mband < ActiveRecord::Base
   def to_breadcrumb
     self.name
   end
+
+  def to_param
+    self.name
+  end
+
+  def self.find_from_param(param, options = {})
+    find_method = param.to_s =~ /^\d+$/ ? :find : :find_by_name
+    send(find_method, param, options) or raise ActiveRecord::RecordNotFound
+  end
   
 end

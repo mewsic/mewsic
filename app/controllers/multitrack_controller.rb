@@ -13,7 +13,7 @@ class MultitrackController < ApplicationController
 private
 
   def find_user
-    @user = User.find(params[:user_id])
+    @user = User.find_from_param(params[:user_id])
   end
   
   def check_user_identity

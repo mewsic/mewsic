@@ -68,8 +68,8 @@ class MbandsController < ApplicationController
   end
   
   def set_leader    
-    @user = User.find(params[:user_id])
-    @mband = Mband.find(params[:id])
+    @user = User.find_from_param(params[:user_id])
+    @mband = Mband.find_from_param(params[:id])
     redirect_to '/' and return unless current_user.is_leader_of?(@mband).inspect
     @mband.leader = @user
     @mband.save    
@@ -85,7 +85,7 @@ protected
 private
   
   def find_mband
-    @mband = Mband.find(params[:id])
+    @mband = Mband.find_from_param(params[:id])
   end
   
   def mband_membership_required

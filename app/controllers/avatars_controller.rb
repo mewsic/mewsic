@@ -47,9 +47,9 @@ private
 
   def find_pictureable
     if params[:user_id]
-      @pictureable = User.find(params[:user_id], :conditions => ["activated_at IS NOT NULL"])  
+      @pictureable = User.find_from_param(params[:user_id])
     elsif params[:mband_id]
-      @pictureable = Mband.find(params[:mband_id])  
+      @pictureable = Mband.find_from_param(params[:mband_id])  
     end
   end  
 

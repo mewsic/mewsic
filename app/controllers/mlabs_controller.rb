@@ -6,8 +6,8 @@ class MlabsController < ApplicationController
   before_filter :check_user_identity
 
   def index
-    @songs = Song.find(:all, :include => [:mlabs, :user], :conditions => ["mlabs.user_id = ?", params[:user_id]])
-    @tracks = Track.find(:all, :include => :mlabs, :conditions => ["mlabs.user_id = ?", params[:user_id]])
+    @songs = Song.find(:all, :include => [:mlabs, :user], :conditions => ["mlabs.user_id = ?", User.from_param(params[:user_id])])
+    @tracks = Track.find(:all, :include => :mlabs, :conditions => ["mlabs.user_id = ?", User.from_param(params[:user_id])])
     @items = @tracks + @songs
     @show_mlab_id = true
     respond_to do |format|            
@@ -32,7 +32,7 @@ class MlabsController < ApplicationController
       when 'song'
         Song.find_by_id(params[:item_id])
     end
-    @user = User.find(params[:user_id])    
+    @user = User.find_from_param(params[:user_id])    
     @mlab = Mlab.create(:user => @user, :mixable => @mixable)
     @mixable.mlab = @mlab if @mlab.valid?
     
@@ -64,7 +64,7 @@ private
 
   # TODO: esportare questo metodo in una libreria in modo tale da usarlo in altri controller  
   def check_user_identity
-    redirect_to('/') and return unless current_user.id == params[:user_id].to_i
+    redirect_to('/') and return unless current_user.id == User.from_param(params[:user_id])
   end
 
 end

@@ -4,10 +4,10 @@ class TracksController < ApplicationController
   
   def index
     if params.include?(:user_id) 
-      @user = User.find(params[:user_id])
+      @user = User.find_from_param(params[:user_id])
       @tracks = Track.find_paginated_by_user(params[:page], @user)
     elsif params.include?(:mband_id)
-      @mband = Mband.find(params[:mband_id])
+      @mband = Mband.find_from_param(params[:mband_id])
       @tracks = Track.find_paginated_by_mband(params[:page], @mband)
     end
       

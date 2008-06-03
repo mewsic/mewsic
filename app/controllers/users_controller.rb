@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = User.find(params[:id], :conditions => "users.activated_at IS NOT NULL", :include => [:avatars, :mbands])
+    @user = User.find_from_param(params[:id], :include => [:avatars, :mbands])
     # non uso :include => [{:songs => [:tracks, :genre]}] xkè non devo recuperare tutte le tracce
     @songs = Song.find_paginated_by_user(1, @user)
     @tracks = Track.find_paginated_by_user(1, @user)    
@@ -57,16 +57,19 @@ class UsersController < ApplicationController
   end
   
   def update
-    @user = User.find(params[:id])
+    @user = User.find_from_param(params[:id])
     # FIXME: cambiare l'output a seconda del formato richiesto e se ci sono errori.
     if @user.update_attributes(params[:user])
       if params[:user] && params[:user].keys.size <= 2
         render(:text => @user.send(params[:user].keys.first)) and return
       end
-      render :layout => false
+      render :nothing => true
     else
-      render :text => @user.errors.map(&:last).join("\n"), :status => 400 if request.xhr?
+      render :text => @user.errors.map(&:last).join("\n"), :status => :bad_request
     end  
+
+  rescue NoMethodError # non existing field
+    render :nothing => true, :status => :bad_request
   end
   
   def forgot_password    
@@ -112,7 +115,7 @@ class UsersController < ApplicationController
   def switch_type
     redirect_to '/' and return unless request.xhr?
 
-    @user = User.find(params[:id])
+    @user = User.find_from_param(params[:id])
     @type = %W(user dj band).include?(params[:type]) && params[:type].capitalize
 
     if !@type || @user.class.name == @type
@@ -138,14 +141,14 @@ class UsersController < ApplicationController
   end
   
   def request_config
-    @user = User.find(params[:user_id])
+    @user = User.find_from_param(params[:user_id])
     respond_to do |format|
       format.xml
     end
   end  
   
   def rate    
-    @user = User.find(params[:id])
+    @user = User.find_from_param(params[:id])
     @user.rate(params[:rate].to_i, current_user)
     render :layout => false, :text => "#{@user.rating_count} votes"
   end
@@ -165,7 +168,7 @@ class UsersController < ApplicationController
     redirect_to root_url and return unless request.xhr?
     raise ActiveRecord::RecordNotFound unless %w(skype msn).include?(params[:type])
 
-    user = User.find(params[:id])
+    user = User.find_from_param(params[:id])
     @im = params[:type]
     @handle = user[@im]
 
@@ -179,7 +182,7 @@ class UsersController < ApplicationController
 protected
   
   def check_if_current_user_page
-    redirect_to('/') and return unless current_user.id == params[:id].to_i
+    redirect_to('/') and return unless current_user.id == User.from_param(params[:id])
   end
 
   def check_if_already_logged_in

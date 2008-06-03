@@ -21,7 +21,7 @@ class FriendshipsController < ApplicationController
 private
 
   def find_user
-    @user = User.find(params[:user_id])
+    @user = User.find_from_param(params[:user_id])
   rescue ActiveRecord::RecordNotFound
     redirect_to '/'  
   end

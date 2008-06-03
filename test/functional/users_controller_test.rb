@@ -91,7 +91,7 @@ class UsersControllerTest < Test::Unit::TestCase
   def test_should_activate_the_first_time
     assert_nil User.find(users(:aaron).id).activated_at
     get :activate, :activation_code => users(:aaron).activation_code
-    assert_redirected_to :controller => 'users', :action => 'show', :id => users(:aaron).id
+    assert_redirected_to :controller => 'users', :action => 'show', :id => users(:aaron).to_param
     assert_nil User.find(users(:aaron).id).activation_code
     assert_not_nil User.find(users(:aaron).id).activated_at
     
@@ -128,32 +128,35 @@ class UsersControllerTest < Test::Unit::TestCase
   end
   
   def test_update_should_not_redirect_if_logged_in_and_current_user_page
-    login_as :aaron
-    post :update, :id => users(:aaron).id
+    login_as :quentin
+    post :update, :id => users(:quentin).id
     assert_response :success
   end
   
   def test_should_update_one_attribute
-    login_as :aaron
-    xhr :post, :update, :id => users(:aaron).id, :user => { :city => 'Milan' }
+    login_as :quentin
+
+    xhr :post, :update, :id => users(:quentin).id, :user => { :city => 'Milan' }
     assert_response :success
     assert_equal 'Milan', @response.body
+    assert_equal 'Milan', users(:quentin).reload.city
     
-    xhr :post, :update, :id => users(:aaron).id, :user => { :country => 'Italy' }
+    xhr :post, :update, :id => users(:quentin).id, :user => { :country => 'Italy' }
     assert_response :success
     assert_equal 'Italy', @response.body
+    assert_equal 'Italy', users(:quentin).reload.country
     
-    # post :update, :id => users(:aaron).id, :user => { :non_existing_field => 'Test' }
-    # assert_response :success
+    #post :update, :id => users(:quentin).id, :user => { :non_existing_field => 'Test' }
+    #assert_response 400
   end
 
   def test_should_return_400_status_if_validation_fails
-    login_as :aaron
+    login_as :quentin
 
-    xhr :post, :update, :id => users(:aaron).id, :user => { :city => ("A" * 400) }
+    xhr :post, :update, :id => users(:quentin), :user => { :city => ("A" * 400) }
     assert_response 400
 
-    xhr :post, :update, :id => users(:aaron).id, :user => { :country => ("A" * 400) }
+    xhr :post, :update, :id => users(:quentin), :user => { :country => ("A" * 400) }
     assert_response 400
   end
 

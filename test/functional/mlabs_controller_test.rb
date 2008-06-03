@@ -24,7 +24,7 @@ class MlabsControllerTest < ActionController::TestCase
     assert_response :redirect
   end
   
-  def test_should_success_if_logged_in_as_quetin
+  def test_should_success_if_logged_in_as_quentin
     login_as :quentin
     get :index, :user_id => users(:quentin).id
     assert_response :success

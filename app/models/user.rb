@@ -235,14 +235,21 @@ class User < ActiveRecord::Base
     (result = [city, country].compact.join(", ")).blank? ? "Unknown" : result
   end
 
-  #def to_param
-  #  login
-  #end
+  def to_param
+    self.login
+  end
 
-  #def self.find_from_param(param, options = {})
-  #  find_method = param.to_s =~ /^\d+$/ ? :find : :find_by_login
-  #  send(find_method, id_or_login, options.merge(:conditions => "users.activated_at IS NOT NULL")) or raise ActiveRecord::RecordNotFound
-  #end
+  def self.from_param(param)
+    return param.id if param.kind_of? ActiveRecord::Base
+    return param.to_i if param.to_s =~ /^\d+$/ 
+    (User.find_by_login(param) or raise ActiveRecord::RecordNotFound).id
+  end
+
+  def self.find_from_param(param, options = {})
+    param = param.id if param.kind_of? ActiveRecord::Base
+    find_method = param.to_s =~ /^\d+$/ ? :find : :find_by_login
+    send(find_method, param, options.merge(:conditions => "users.activated_at IS NOT NULL")) or raise ActiveRecord::RecordNotFound
+  end
   
   def self.find_coolest(options = {})
     self.find(:all, options.merge({:conditions => ["activated_at IS NOT NULL AND type IS NULL OR type = 'User'"], :order => 'rating_avg DESC', :limit => 9})) 

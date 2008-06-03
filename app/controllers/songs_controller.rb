@@ -8,10 +8,10 @@ class SongsController < ApplicationController
       @genre = Genre.find(params[:genre_id])
       @songs = Song.find_paginated_by_genre(params[:page], @genre)
     elsif params.has_key?("user_id")
-      @user = User.find(params[:user_id])
+      @user = User.find_from_param(params[:user_id])
       @songs = Song.find_paginated_by_user(params[:page], @user)
     elsif params.has_key?("mband_id")
-      @mband = Mband.find(params[:mband_id])
+      @mband = Mband.find_from_param(params[:mband_id])
       @songs = Song.find_paginated_by_mband(params[:page], @mband)
     end
     render :layout => false
@@ -23,7 +23,7 @@ class SongsController < ApplicationController
     @indirect_siblings = @song.direct_siblings
     respond_to do |format|
       format.html do
-        @other_songs = Song.find(:all, :conditions => ["songs.user_id = ?", @song.user], :order => 'songs.listened_times', :limit => 8, :include => [:user, { :mixes => { :track => [:instrument, :parent_song] } }, :genre])        
+        @other_songs = Song.find(:all, :conditions => ["songs.user_id = ? AND songs.published = ?", @song.user, true], :order => 'songs.listened_times', :limit => 8, :include => [:user, { :mixes => { :track => [:instrument, :parent_song] } }, :genre])        
       end
       format.xml do
         @show_siblings  = params.include?(:siblings)

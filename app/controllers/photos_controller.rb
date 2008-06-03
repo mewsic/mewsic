@@ -44,7 +44,7 @@ class PhotosController < ApplicationController
 private
 
   def find_user
-    @user = User.find(params[:user_id], :conditions => ["activated_at IS NOT NULL"])  
+    @user = User.find_from_param(params[:user_id])
   end  
   
   def check_current_user
