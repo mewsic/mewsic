@@ -1,7 +1,7 @@
 class InstrumentsController < ApplicationController
 
   def index
-    @instruments = Instrument.find(:all)
+    @instruments = Instrument.find(:all, :order => 'description')
     
     respond_to do |format|
       format.xml
