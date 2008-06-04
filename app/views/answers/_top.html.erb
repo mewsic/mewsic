@@ -30,32 +30,9 @@
   </div>
   
   <div class="next" style="text-align: right;">
-    <img src="/images/spinner.gif" id="answers_spinner" style="display: none;"/>
+    <img src="/images/spinner.gif" id="top-answers-spinner" style="float: left; display: none;"/>
 
-    <span class="nav-bottom">
-    <% if answers.previous_page %>
-      <%= link_to_remote image_tag('arrow_simple_left.png', :width => 7, :height => 9) + ' <strong>Prev</strong> ',
-            :url =>  top_answers_path(:page => answers.previous_page),
-            :update => "top-answers-container",		          
-            :method => :get,
-            :loading => "$('answers_spinner').show()"
-      %>
-    <% else %>
-      <%= image_tag('arrow_simple_left.png', :width => 7, :height => 9)  + ' <strong>Prev</strong> '%>
-    <% end %>
-    </span>
-    <span class="nav-bottom">
-    <% if answers.next_page %>
-      <%= link_to_remote ' <strong>Next</strong> ' + image_tag('arrow_simple_right.png', :width => 7, :height => 9),
-            :url =>  top_answers_path(:page => answers.next_page),
-            :update => "top-answers-container",		          
-            :method => :get,
-            :loading => "$('answers_spinner').show()"
-      %>
-    <% else %>
-      <%= ' <strong>Next</strong> ' + image_tag('arrow_simple_right.png', :width => 7, :height => 9) %>
-    <% end %>
-    </span>
+    <%= will_paginate answers, :params => { :controller => 'answers', :action => 'top'}, :class => 'pagination top', :prev_label => "&lt;", :next_label => "&gt;" %>
   </div>
   
 </div>

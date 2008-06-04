@@ -1,3 +1,30 @@
+var Pagination = Class.create({ 
+
+  initialize: function() {
+    this.options = Object.extend({
+      container: 'container',
+      selector: 'div.pagination a',
+    }, arguments[0] || {});
+    this.initLinks();
+  },  
+
+  initLinks: function() {
+    if (!$(this.options.container))
+      return;
+    $(this.options.container).select(this.options.selector).invoke('observe', 'click', this.linkHandler.bind(this));
+  },  
+
+  linkHandler: function(event) {
+    event.stop(); 
+    new Ajax.Updater(this.options.container, event.element().getAttribute('href'), {
+      method: 'get',
+      onLoading: function(event){ if(this.options.spinner) $(this.options.spinner).show(); }.bind(this),
+      onComplete: this.initLinks.bind(this)
+    });
+  }
+
+});
+
 var Message = {
   
   template: '<div class="#{type}">#{message}<div class="close"/></div>',
