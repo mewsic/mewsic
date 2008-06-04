@@ -17,8 +17,18 @@ class AnswersController < ApplicationController
 
   def show
     @answer = Answer.find(params[:id], :include => :replies)
-    @other_answers_by_author = @answer.user.answers.find(:all, :conditions => ['answers.id != ?', @answer.id], :limit => 6)
+    @other_answers_by_author = @answer.user.answers.paginate(:per_page => 6, :page => 1, :conditions => ['answers.id != ?', @answer.id])
     @similar_answers = Answer.find(:all, :include => {:user => :avatars}, :limit => 10, :order => 'answers.created_at DESC')
+  end
+  
+  def siblings
+    @answer = Answer.find(params[:id])
+    @other_answers_by_author = @answer.user.answers.paginate(:per_page => 6, :page => params[:page], :conditions => ['answers.id != ?', @answer.id])
+    if request.xhr?
+      render :partial => 'other_answers_by_author', :locals => { :other_answers_by_author => @other_answers_by_author, :user => @answer.user }
+    else
+      redirect_to answer_url(@answer)
+    end
   end
   
   def open
