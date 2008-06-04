@@ -2522,11 +2522,11 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
   height: 15px;  
 }
 
-#mlab-scroller .even a.button.mlab.play {
+#mlab-scroller .song a.button.mlab.play {
   background: transparent url('/images/button_play_green.png') no-repeat center;
 }
 
-#mlab-scroller .odd a.button.mlab.play {
+#mlab-scroller .track a.button.mlab.play {
   background: transparent url('/images/button_play_orange.png') no-repeat center;
 }
 
