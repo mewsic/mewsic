@@ -1,0 +1,61 @@
+<div class="top-box clear-block">
+	<div class="bottom-box clear-block">        
+    <%- answers.each do |answer| -%>
+      <div class="elements clear-block" style="margin-bottom:15px; border-bottom:1px solid #D9D9D9;">
+        <p class="float-left">
+          <%= link_to avatar_image(answer.user, :icon), user_path(answer.user) %>     
+        </p>
+        <div class="clear-block" style="margin:0px 0px 0px 40px;">
+          <h2 class="clearly-cyan-text"><%= link_to h(answer.body), answer_path(answer) %></h2>
+					  <%= rating(answer) %>
+					<p class="grey-text float-left">Question by <%= link_to answer.user.login, user_path(answer.user) %><br /> 
+				    <%= link_to pluralize(answer.replies_count, 'reply'), answer_path(answer) %> - <%= time_ago_in_words(answer.created_at) %>
+          </p>					
+        </div>					
+				<p class="clear-float"></p>					
+				<%- answer.replies.find(:all, :limit => 1).each do |reply| -%>
+          <p class="float-left">
+            <%= link_to avatar_image(reply.user, :icon), user_path(reply.user) %>  
+          </p>
+          <div class="clear-block" style="margin:0px 0px 10px 40px;">
+					  <p><strong><%=h reply.body %></strong></p>
+					  <p class="star float-right">
+              <%= rating(reply) %>
+            </p>
+					  <p class="grey-text float-left">Reply by <%= link_to reply.user.login, user_path(reply.user) %>  - <%= time_ago_in_words(reply.created_at) %> </p>					
+				  </div>											
+			 <%- end -%>
+			</div>
+    <%- end -%>											 																						
+  </div>
+  
+  <div class="next" style="text-align: right;">
+    <img src="/images/spinner.gif" id="answers_spinner" style="display: none;"/>
+
+    <span class="nav-bottom">
+    <% if answers.previous_page %>
+      <%= link_to_remote image_tag('arrow_simple_left.png', :width => 7, :height => 9) + ' <strong>Prev</strong> ',
+            :url =>  top_answers_path(:page => answers.previous_page),
+            :update => "top-answers-container",		          
+            :method => :get,
+            :loading => "$('answers_spinner').show()"
+      %>
+    <% else %>
+      <%= image_tag('arrow_simple_left.png', :width => 7, :height => 9)  + ' <strong>Prev</strong> '%>
+    <% end %>
+    </span>
+    <span class="nav-bottom">
+    <% if answers.next_page %>
+      <%= link_to_remote ' <strong>Next</strong> ' + image_tag('arrow_simple_right.png', :width => 7, :height => 9),
+            :url =>  top_answers_path(:page => answers.next_page),
+            :update => "top-answers-container",		          
+            :method => :get,
+            :loading => "$('answers_spinner').show()"
+      %>
+    <% else %>
+      <%= ' <strong>Next</strong> ' + image_tag('arrow_simple_right.png', :width => 7, :height => 9) %>
+    <% end %>
+    </span>
+  </div>
+  
+</div>

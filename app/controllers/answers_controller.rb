@@ -8,10 +8,28 @@ class AnswersController < ApplicationController
       @answers = @user.answers.paginate(:page => params[:page], :per_page => 6, :order => 'created_at DESC')  
       render :partial => '/users/answers'
     else
-      @open_answers = Answer.find(:all, :conditions => "answers.replies_count = 0", :include => {:user => :avatars}, :limit => 4, :order => 'answers.created_at DESC')
-      @top_answers = Answer.find(:all, :include => {:user => :avatars}, :limit => 8, :order => 'answers.replies_count DESC')
-      @newest_answers = Answer.find(:all, :include => {:user => :avatars}, :limit => 8, :order => 'answers.created_at DESC')
+      @open_answers = Answer.paginate(:per_page => 4, :page => 1, :conditions => "answers.replies_count = 0", :include => {:user => :avatars}, :order => 'answers.created_at DESC')
+      @top_answers = Answer.paginate(:per_page => 8, :page => 1, :include => {:user => :avatars}, :order => 'answers.replies_count DESC')
+      @newest_answers = Answer.paginate(:per_page => 8, :page => 1, :include => {:user => :avatars}, :order => 'answers.created_at DESC')
       @top_contributors = User.find(:all, :include => [:avatars], :limit => 10, :order => 'users.replies_count DESC')
+    end
+  end
+  
+  def top
+    @top_answers = Answer.paginate(:per_page => 8, :page => params[:page], :include => {:user => :avatars}, :order => 'answers.replies_count DESC')
+    if request.xhr?
+      render :partial => 'top', :locals => { :answers => @top_answers }
+    else
+      redirect_to answers_url
+    end
+  end
+  
+  def newest
+    @newest_answers = Answer.paginate(:per_page => 8, :page => params[:page], :include => {:user => :avatars}, :order => 'answers.created_at DESC')
+    if request.xhr?
+      render :partial => 'newest', :locals => { :answers => @newest_answers }
+    else
+      redirect_to answers_url
     end
   end
 
