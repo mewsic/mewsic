@@ -154,7 +154,6 @@ var GenderSwitcher = Class.create({
   initialize: function(element) {
     this.genders = {male: 'M', female: 'F', other: 'O'};
     this.element = $(element);
-    alert(this.element)
     if (!this.element)
       return;
 
