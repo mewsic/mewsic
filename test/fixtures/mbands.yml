@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 21
+# Schema version: 26
 #
 # Table name: mbands
 #
@@ -14,6 +14,9 @@
 #  user_id       :integer(11)   
 #  created_at    :datetime      
 #  updated_at    :datetime      
+#  rating_count  :integer(11)   
+#  rating_total  :decimal(10, 2 
+#  rating_avg    :decimal(10, 2 
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

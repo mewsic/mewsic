@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 21
+# Schema version: 26
 #
 # Table name: users
 #
@@ -12,7 +12,7 @@
 #  city                      :string(40)    
 #  first_name                :string(255)   
 #  last_name                 :string(255)   
-#  gender                    :string(255)   default("male")
+#  gender                    :string(20)    
 #  photos_url                :string(255)   
 #  blog_url                  :string(255)   
 #  myspace_url               :string(255)   
@@ -36,7 +36,8 @@
 #  rating_count              :integer(11)   
 #  rating_total              :decimal(10, 2 
 #  rating_avg                :decimal(10, 2 
-#  replies_count             :integer(11)   
+#  replies_count             :integer(11)   default(0)
+#  nickname                  :string(20)    
 #
 
 class Dj < User

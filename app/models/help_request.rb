@@ -1,3 +1,12 @@
+# == Schema Information
+# Schema version: 26
+#
+# Table name: help_requests
+#
+#  email :string        
+#  body  :text          
+#
+
 class HelpRequest < ActiveRecord::Base
   has_no_table
 

@@ -62,10 +62,14 @@ class RepliesControllerTest < ActionController::TestCase
   def test_should_send_message_after_reply
     login_as :user_10
     message_count = users(:quentin).unread_message_count
+    replies_count_cache = users(:user_10).replies_count
     assert_difference 'Reply.count' do
       post :create, :answer_id => answers(:quentin_asks_about_magic).id, :reply => {:body => 'hello!'}
       assert_equal message_count + 1, users(:quentin).reload.unread_message_count
     end
+    
+    assert_equal replies_count_cache + 1, users(:user_10).reload.replies_count
+    
   end
   
 end

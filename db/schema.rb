@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 25) do
+ActiveRecord::Schema.define(:version => 26) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
@@ -220,7 +220,7 @@ ActiveRecord::Schema.define(:version => 25) do
     t.integer  "rating_count"
     t.decimal  "rating_total",                            :precision => 10, :scale => 2
     t.decimal  "rating_avg",                              :precision => 10, :scale => 2
-    t.integer  "replies_count"
+    t.integer  "replies_count",                                                          :default => 0
     t.string   "nickname",                  :limit => 20
   end
 
