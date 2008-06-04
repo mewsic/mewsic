@@ -5,14 +5,11 @@ class SearchController < ApplicationController
   end
   
   def new
-    redirect_to '/' if params[:q].blank?
-
     respond_to do |format|
       format.html do        
         if params[:q].strip.blank?
           flash[:error] = 'You did not enter a search string' 
-          redirect_to '/'
-          return
+          redirect_to '/' and return
         end
 
         type = params[:type] && params[:type].join(' ')
