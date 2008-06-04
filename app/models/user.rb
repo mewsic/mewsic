@@ -329,7 +329,7 @@ class User < ActiveRecord::Base
   
   # FIXME: da rendere più efficiente
   def self.find_with_more_instruments
-    result = Instrument.count('description', :conditions => "users.type IS NULL OR users.type = 'User'", :include => [:tracks => [:parent_song => [:user]]], :group => 'user_id', :distinct => true, :order => 'count_description DESC')
+    result = Instrument.count('description', :conditions => "tracks.id IS NOT NULL AND (users.type IS NULL OR users.type = 'User')", :include => [:tracks => [:parent_song => [:user]]], :group => 'user_id', :distinct => true, :order => 'count_description DESC')
     return result.first.is_a?(Array) ? User.find(result.first.first) : nil
   end
  
