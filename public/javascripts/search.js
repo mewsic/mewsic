@@ -32,6 +32,5 @@ document.observe('dom:loaded', function() {
       spinner: name + '-results-spinner',
       selector: 'div.pagination.' + name + ' a'
     });
-  });
-  
+  });  
 });
