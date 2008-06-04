@@ -10,7 +10,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'mband_memberships/accept/:token', :controller => 'mband_memberships', :action => 'accept'
   map.resources :mband_memberships
   
-  map.resources :answers, :member => { :rate => :put }, :collection => { :search => :get } do |answers|
+  map.resources :answers, :member => { :rate => :put }, :collection => { :open => :get, :search => :get } do |answers|
     answers.resources :replies
   end  
   map.connect 'replies/:id/rate', :controller => 'replies', :action => 'rate'

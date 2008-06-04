@@ -20,6 +20,10 @@ class AnswersController < ApplicationController
     @other_answers_by_author = @answer.user.answers.find(:all, :conditions => ['answers.id != ?', @answer.id], :limit => 6)
     @similar_answers = Answer.find(:all, :include => {:user => :avatars}, :limit => 10, :order => 'answers.created_at DESC')
   end
+  
+  def open
+    @answers = Answer.paginate(:page => params[:page], :per_page => 10, :conditions => "answers.replies_count = 0", :include => {:user => :avatars}, :order => 'answers.created_at DESC')
+  end
 
   def create
     @answer = Answer.new(params[:answer])
