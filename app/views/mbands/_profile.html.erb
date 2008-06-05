@@ -16,19 +16,19 @@
 
 		<% if current_user_mband_page? %>
 		<div id="change-avatar"> </div>
-		<div id="change-avatar-upload">
+		<div id="change-avatar-upload" style="display:none">
 			<div style="float: right;" id="change-avatar-close">
 				<%= image_tag 'change_avatar_icon_close.png' %>
 			</div>
 			<div id="change-avatar-interact">
 				<div id="change-avatar-button">
-						<% change_avatar_form(@mband) do |f| %>
-							<%= f.file_field :uploaded_data, :id => 'change-avatar-file-input' %>
-							<%= f.hidden_iframe %>
-						<% end %>
+					<% ajax_upload_form(@mband, :name => :avatar, :id => 'change-avatar', :method =>'put') do |f| %>
+						<%= f.file_field :uploaded_data, :id => 'change-avatar-file-input' %>
+						<%= f.hidden_iframe 'change-avatar' %>
+					<% end %>
 				</div>
 				<div id="change-avatar-status">	</div>
-				<div id="change-avatar-alert">
+				<div id="change-avatar-alert" style="display:none">
 					Error! Please upload again.
 				</div>
 			</div>

@@ -239,7 +239,7 @@ class UserTest < Test::Unit::TestCase
       Mix.create(:track => Track.create(:instrument => i.last, :parent_song => s), :song => s)
       Mix.create(:track => Track.create(:instrument => i.last, :parent_song => s), :song => s)
     end
-    assert_equal %w[Guitar Sax], u.instruments.collect{|j| j.description }.sort
+    assert_equal %w[Guitar Saxophone], u.instruments.collect{|j| j.description }.sort
   end
   
   def test_quentin_should_has_photos
@@ -305,7 +305,7 @@ class UserTest < Test::Unit::TestCase
     
     def create_instrument
       instrument_1 = instruments(:guitar)
-      instrument_2 = instruments(:sax)
+      instrument_2 = instruments(:saxophone)
       return [instrument_1, instrument_2]
     end
     

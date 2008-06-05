@@ -24,7 +24,7 @@
 sax_for_let_it_be:
   title: Sassofono
   parent_song: let_it_be
-  instrument: sax
+  instrument: saxophone
 guitar_for_let_it_be:
   title: Chitarra
   parent_song: let_it_be
@@ -44,11 +44,11 @@ guitar_for_closer:
 sax_for_closer:
   title: Sassofono
   parent_song: closer
-  instrument: sax
+  instrument: saxophone
 drum_for_closer:
   title: Batteria
   parent_song: closer
-  instrument: drum
+  instrument: drums
 <% 10.times do |i| %>
 voice_for_closer_<%= i + 4 %>:
   title: Voice
@@ -57,9 +57,9 @@ voice_for_closer_<%= i + 4 %>:
   created_at: <%= (rand(30)).days.ago.to_s :db %>
 <% end %>
 drum_for_single_track_song:
-  title: Drum for single track song
+  title: Drums for single track song
   parent_song: quentin_single_track_song
-  instrument: drum  
+  instrument: drums
   seconds: 205
 guitar_for_single_track_song:
   title: Guitar for single track song
@@ -72,7 +72,7 @@ voice_for_single_track_song:
   instrument: microphone
   seconds: 205
 drum_for_gravity_blast_beat:
-  title: Drum for gravity blast beat
+  title: Drums for gravity blast beat
   parent_song: gravity_blast_beat
-  instrument: microphone
+  instrument: drums
   seconds: 205

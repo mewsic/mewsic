@@ -16,7 +16,6 @@ var UserAvatar = Class.create({
 		this.close_link.observe('click', this.hideUploadForm.bind(this));
 
 		this.upload_section = this.element.down('#change-avatar-upload')
-		this.upload_section.style.display = 'none';
 
 		this.form = this.element.down('#change-avatar-form');
 		this.status = this.element.down('#change-avatar-status');
@@ -44,25 +43,24 @@ var UserAvatar = Class.create({
   },
   hideUploadForm: function() {
     new Effect.Fade(this.upload_section, {duration: 0.5});
-		this.alert.removeClassName('active');
+		this.alert.hide();
 		this.status.className = ''
   },
   uploadNewAvatar: function() {
-    this.alert.removeClassName('active');
-		this.status.addClassName('loading');
+    this.alert.hide();
+		this.status.className = 'loading';
 		this.form.submit();
+    this.file_input.value = '';
 	},
   uploadCompleted: function() {
-    this.status.removeClassName('loading');
-		this.status.addClassName('ok');
+		this.status.className = 'ok';
 
 		this.hideUploadForm.bind(this).delay(1.0);
 		this.handleMouseOut.bind(this, true).delay(1.4);
   },
   uploadFailed: function() {
-    this.status.removeClassName('loading');
-		this.status.addClassName('error');
-		this.alert.addClassName('active');
+		this.status.className = 'error';
+		this.alert.show();
 	}
 });
 

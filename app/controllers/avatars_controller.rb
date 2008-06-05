@@ -5,8 +5,8 @@ class AvatarsController < ApplicationController
   before_filter :check_current_user
 
   def update
-    unless params[:avatar] && params[:avatar][:uploaded_data].respond_to?(:size) && params[:avatar][:uploaded_data].size > 0
-      redirect_to '/' and return
+    unless valid_file_upload?(:avatar)
+      render :nothing => true, :status => :bad_request and return
     end
 
     @avatar = Avatar.new(params[:avatar].merge({:pictureable => @pictureable}))

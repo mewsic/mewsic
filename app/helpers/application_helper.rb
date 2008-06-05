@@ -126,19 +126,21 @@ module ApplicationHelper
     link_to image_tag('icon_download.png'), send("download_#{item.class.name.downcase}_url", item)
   end
 
-  def change_avatar_form(model, &block)
+  def ajax_upload_form(model, options, &block)
     klass = model.kind_of?(User) ? User : model.class
-    formatted_path = "formatted_%s_avatar_path" % klass.name.underscore
-    form_for(:avatar, :url => send(formatted_path, model, 'js'),
-             :builder => AvatarFormBuilder,
-             :html => { :id => 'change-avatar-form', :multipart => true,
-                        :target => 'change-avatar-iframe', :method => 'put' }, &block)
+    formatted_path = "formatted_%s_%s_path" % [klass.name.underscore, options[:name]]
+    form_for(options[:name], :url => send(formatted_path, model, 'js'),
+      :builder => AjaxUploadFormBuilder, :html => {
+        :id => "#{options[:id]}-form", :multipart => true,
+        :target => "#{options[:id]}-iframe", :method => options[:method] || 'post'
+    }, &block)
   end
+
 end
 
-class AvatarFormBuilder < ActionView::Helpers::FormBuilder
-  def hidden_iframe
-    %[<iframe name="change-avatar-iframe" id="change-avatar-iframe" src="about:blank"
+class AjaxUploadFormBuilder < ActionView::Helpers::FormBuilder
+  def hidden_iframe(name) # XXX this name is useless remove it
+    %[<iframe name="#{name}-iframe" id="#{name}-iframe" src="about:blank"
           style="position:absolute;left:-100px;width:0px;height:0px;border:0px"></iframe>]
   end
 end

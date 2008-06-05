@@ -1694,7 +1694,7 @@ html>body .register p{
 	height: 34px;
 	width: 115px;
 	position: relative;
-	top: 140px;
+	top: 135px;
 }
 
 #change-avatar-file-input {
@@ -1710,7 +1710,7 @@ html>body .register p{
 	width: 18px;
 	height: 18px;
 	position: relative;
-	top: 155px;
+	top: 150px;
 }
 #change-avatar-status.ok {
 	background: transparent url(/images/change_avatar_icon_ok.png) no-repeat top right;
@@ -1729,13 +1729,106 @@ html>body .register p{
 	font-size: 11px;
 	padding-left: 4px;
 	padding-top: 4px;
-	display: none;
-}
-#change-avatar-alert.active {
-	display:inline;
+	position: relative;
+	top: 135px;
 }
 
-/* CHANGE GENDER */
+/******************** GALLERY UPLOAD ********************/
+
+#gallery-upload {
+	height: 22px;
+	width: 150px;
+	float: right;
+	margin-right: 4px;
+}
+
+#gallery-upload-trigger {
+	width: 81px;
+	height: 22px;
+	float: right;
+	margin: 8px 8px 0px 0px;
+	background: transparent url(/images/gallery_upload_button.png) no-repeat top;
+	cursor: pointer;
+	z-index: 101;
+	position: relative;
+	top:0px;
+	right:0px;
+}
+
+#gallery-upload-open {
+	width: 150px;
+	padding: 5px;
+	padding-top: 0px;
+	height: 67px;
+	background: #97D1E9 url(/images/change_avatar_upload_bg.png) no-repeat bottom;
+	float: right;
+	position: relative;
+	top: -20px;
+	right: 10px;
+	z-index: 99;
+}
+
+#gallery-upload-close {
+	cursor: pointer;
+}
+
+#gallery-upload-interact {
+	position: relative;
+	right: 10px;
+	top: 28px;
+}
+
+#gallery-upload-button {
+	background: transparent url(/images/change_avatar_button_browse.png) no-repeat right bottom;
+	float: left;
+	padding: 0;
+	height: 22px;
+	width: 111px;
+}
+
+#gallery-upload-status {
+	float: right;
+	width: 18px;
+	height: 18px;
+	margin-top: 2px;
+}
+
+#gallery-upload-status.loading {
+	background: transparent url(/images/change_avatar_spinner.gif) no-repeat top right;
+}
+#gallery-upload-status.ok {
+	background: transparent url(/images/change_avatar_icon_ok.png) no-repeat top right;
+}
+#gallery-upload-status.error {
+	background: transparent url(/images/change_avatar_icon_error.png) no-repeat top right;
+}
+
+#gallery-upload-alert {
+	color: #BD0926;
+	width: 150px;
+	float: left;
+	font-size: 11px;
+	padding-left: 10px;
+	margin-top: 4px;
+}
+
+#gallery-upload-alert.limit-reached {
+	margin: 0;
+	position: relative;
+	top: -24px;
+}
+
+#gallery-upload-file-input {
+	position: absolute;
+	top: 0px;
+	right: 30px;
+	z-index: 103;
+	opacity: 0.01;
+	filter: alpha(opacity=0.01);
+}
+
+/******************** CHANGE GENDER ********************/
+
 #change-gender {
 	height:16px;
 	width: 48px;

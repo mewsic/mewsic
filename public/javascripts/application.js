@@ -3,7 +3,7 @@ var Pagination = Class.create({
   initialize: function() {
     this.options = Object.extend({
       container: 'container',
-      selector: 'div.pagination a',
+      selector: 'div.pagination a'
     }, arguments[0] || {});
     this.initLinks();
   },  

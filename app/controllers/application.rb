@@ -29,4 +29,7 @@ class ApplicationController < ActionController::Base
     controller_name
   end    
     
+  def valid_file_upload?(name)
+    params[name] && params[name][:uploaded_data].respond_to?(:size) && params[name][:uploaded_data].size > 0
+  end
 end

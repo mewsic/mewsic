@@ -23,23 +23,10 @@ class PhotosControllerTest < ActionController::TestCase
     assert_routing "/users/#{users(:quentin).id}/photos", options
   end
   
-  def test_index_should_redirect_unless_logged
-    get :index, :user_id => users(:quentin).id
+  def test_create_should_redirect
+    get :create, :user_id => users(:quentin).id
     assert_response :redirect
   end
-  
-  def test_index_should_success_if_logged
-    login_as :quentin
-    get :new, :user_id => users(:quentin).id
-    assert_response :success
-  end
-  
-  def test_should_redirect_if_user_not_found_or_not_activated
-    get :index, :user_id => users(:aaron)
-    assert_response :redirect
-    get :index, :user_id => 99999999
-    assert_response :redirect
-  end    
   
   def test_create_should_redirect_unless_current_user_photos
     login_as :user_10
@@ -82,8 +69,7 @@ class PhotosControllerTest < ActionController::TestCase
   def test_should_not_create_if_file_is_blank
     login_as :quentin
     assert_no_difference 'Photo.count' do 
-      post :create, :user_id => users(:quentin),
-        :photo => {}
+      post :create, :user_id => users(:quentin), :format => 'js', :photos => {}
     end
   end  
 
@@ -91,10 +77,9 @@ class PhotosControllerTest < ActionController::TestCase
     login_as :quentin
     quentin_photos_count = users(:quentin).photos.count
     assert_difference 'Photo.count' do 
-      post :create, :user_id => users(:quentin),
-        :photo => {
-          :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/files/test.jpg'), 'image/jpeg')
-        }
+      post :create, :user_id => users(:quentin), :format => 'js', :photos => {
+        :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/files/test.jpg'), 'image/jpeg')
+      }
     end
     assert_equal quentin_photos_count + 1, users(:quentin).photos.count
   end
@@ -104,10 +89,9 @@ class PhotosControllerTest < ActionController::TestCase
     quentin_photos_count = users(:quentin).photos.count
     user_3_photos_count = users(:user_3).photos.count
     assert_no_difference 'Photo.count' do 
-      post :create, :user_id => users(:quentin),
-        :photo => {
-          :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/files/test.jpg'), 'image/jpeg')
-        }
+      post :create, :user_id => users(:quentin), :format => 'js', :photos => {
+        :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/files/test.jpg'), 'image/jpeg')
+      }
     end
     assert_equal quentin_photos_count, users(:quentin).photos.count
     assert_equal user_3_photos_count, users(:user_3).photos.count
@@ -115,10 +99,9 @@ class PhotosControllerTest < ActionController::TestCase
   
   def test_should_not_create_unless_logged_in
     assert_no_difference 'Photo.count' do 
-      post :create, :user_id => users(:quentin),
-        :photo => {
-          :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/files/test.jpg'), 'image/jpeg')
-        }
+      post :create, :user_id => users(:quentin), :format => 'js', :photos => {
+        :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/files/test.jpg'), 'image/jpeg')
+      }
     end
   end    
 
@@ -127,14 +110,12 @@ class PhotosControllerTest < ActionController::TestCase
 
     login_as :quentin
     assert_difference 'Photo.count', 2 do
-      post :create, :user_id => users(:quentin),
-        :photo => {
-          :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/files/test.jpg'), 'image/jpeg')
-        }
-      post :create, :user_id => users(:quentin),
-        :photo => {
-          :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/files/photo_user_test.jpg'), 'image/jpeg')
-        }
+      post :create, :user_id => users(:quentin), :format => 'js', :photos => {
+        :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/files/test.jpg'), 'image/jpeg')
+      }
+      post :create, :user_id => users(:quentin), :format => 'js', :photos => {
+        :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/files/photo_user_test.jpg'), 'image/jpeg')
+      }
     end
     assert_equal quentin_photos_count + 2, users(:quentin).photos.count
 
@@ -153,10 +134,9 @@ class PhotosControllerTest < ActionController::TestCase
   def test_should_validate_content_type
     login_as :quentin
     assert_no_difference 'Photo.count' do 
-      post :create, :user_id => users(:quentin),
-        :photo => {
-          :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/mlabs.yml'), 'text/yaml')
-        }
+      post :create, :user_id => users(:quentin), :format => 'js', :photos => {
+        :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/mlabs.yml'), 'text/yaml')
+      }
     end
   end
 

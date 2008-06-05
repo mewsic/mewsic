@@ -3,32 +3,41 @@ class PhotosController < ApplicationController
   before_filter :login_required
   before_filter :find_pictureable
   before_filter :check_current_user
-  before_filter :check_photo_count, :only => [:new, :create]
+  before_filter :check_photo_count, :only => :create
   
-  def new
-    @photo = Photo.new
-    @last_photo = @pictureable.photos.last if params[:coming_from] == 'create'
-    render :layout => false
+  def index
+    redirect_to '/'
   end
-  
-  def create 
-    return if @no_upload
 
-    unless params[:photo] && params[:photo][:uploaded_data].respond_to?(:size) && params[:photo][:uploaded_data].size > 0
-      raise ArgumentError # XXX
+  def create 
+    unless valid_file_upload?(:photos)
+      render :nothing => true, :status => :bad_request and return
     end
 
-    @photo = Photo.new(params[:photo])
-    @photo.pictureable = @pictureable
-    @photo.save!
-    @saved = true
-    flash.now[:notice] = 'Picture uploaded correctly'
+    respond_to do |format|
+      if @upload_limit
+        format.js do
+          responds_to_parent do
+            render(:update) { |page| page << %[GalleryUpload.instance.uploadLimitReached(#@upload_limit)] }
+          end
+        end
+      else
+        @photo = Photo.new(params[:photos])
+        @photo.pictureable = @pictureable
 
-  rescue ArgumentError, ActiveRecord::RecordInvalid
-    flash.now[:error] = 'Error uploading your photo. Only PNG, GIF and JPEG image types are allowed!'
-
-  ensure
-    render :action => 'new', :layout => false
+        if @photo.save
+          format.js do
+            responds_to_parent { render }
+          end
+        else
+          format.js do
+            responds_to_parent do
+              render(:update) { |page| page << %[GalleryUpload.instance.uploadFailed()] }
+            end
+          end
+        end
+      end
+    end
   end
 
   def destroy 
@@ -61,13 +70,11 @@ private
     elsif params[:mband_id]
       redirect_to '/' and return unless @pictureable.members.include?(current_user)
     end
-    
   end
 
   def check_photo_count
     if @pictureable.photos.count > 9
-      flash.now[:alert] = "Sorry, you can upload up to 10 images. Remove one you have already uploaded to add more."
-      @no_upload = true
+      @upload_limit = 10
     end
   end
   

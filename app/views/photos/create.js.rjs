@@ -1,0 +1,7 @@
+page['no-images-notice'].hide
+
+thumb = render :partial => (@pictureable.is_a?(User) ? 'users' : 'mbands') << '/photo.html.erb', :object => @photo
+page['gallery-photo-list'].insert :bottom => thumb
+page << 'Gallery.instance.setup();'
+page << 'if (myLightWindow) myLightWindow._setupLinks();'
+page << 'GalleryUpload.instance.uploadCompleted();'

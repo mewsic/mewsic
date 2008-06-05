@@ -71,7 +71,7 @@ class AvatarsControllerTest < ActionController::TestCase
     assert_no_difference 'Avatar.count' do 
       put :update, :user_id => users(:quentin), :avatar  => {}, :format => 'js'
     end
-    assert_response :redirect
+    assert_response :bad_request
   end  
 
   def test_should_create_and_destroy_previous        
