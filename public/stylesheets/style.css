@@ -1763,25 +1763,25 @@ html>body .register p{
 
 #gallery-upload-open {
 	background: transparent url(/images/change_avatar_upload_top_bg.png) no-repeat top;
-	width: 160px;
+	width: 161px;
 	padding: 7px 0px 0px;
 	height: 67px;
 	float: right;
 	position: relative;
-	top: -23px;
-	right: 10px;
+	top: -27px;
+	right: 8px;
 	z-index: 99;
 }
 
 #gallery-upload-bottom {
 	background: transparent url(/images/change_avatar_upload_bg.png) no-repeat bottom;
 	height: 72px;
-	width: 160px;
+	width: 161px;
 }
 
 #gallery-upload-bg {
 	background-color: #97D1E9;
-	width:150px;
+	width:151px;
 	height: 65px;
 	padding: 0px 5px;
 }
