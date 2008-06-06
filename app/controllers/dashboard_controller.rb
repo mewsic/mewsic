@@ -6,7 +6,7 @@ class DashboardController < ApplicationController
     @people = User.find :all, :limit => 6, :include => [:avatars, :songs], :conditions => ["users.type = 'User' AND users.activated_at IS NOT NULL AND pictures.id IS NOT NULL"], :order => 'RAND()'
     @answers = Answer.find :all, :order => 'answers.created_at DESC', :limit => 2, :include => [{:user => :avatars}], :conditions => ["users.activated_at IS NOT NULL"]
     # TODO: Qui dovrei trovare degli utenti e non delle canzoni, ma così evitiamo di avere utenti con canzoni vuote
-    @songs = Song.find :random, :limit => 3, :include => [{:user => [:avatars, :songs]}], :conditions => ['published = ?', true]
+    @songs = Song.find :all, :limit => 3, :include => [{:user => [:avatars, :songs]}], :conditions => ['songs.published = ?', true], :order => 'RAND()'
     @ideas = Track.find_orphans(:limit => 2)
   end
   
