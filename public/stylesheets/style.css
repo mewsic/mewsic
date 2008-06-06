@@ -3673,7 +3673,7 @@ div.auto_complete ul strong.highlight {
 }
 
 #splash_divider_plus {
-	background: transparent url('/images/splash_icon_plus.png') no-repeat bottom;
+	background: transparent url('/images/splash_arrows.png') no-repeat bottom;
 	width: 36px;
 	height: 111px;
 	float: left;
@@ -3681,7 +3681,7 @@ div.auto_complete ul strong.highlight {
 }
 
 #splash_divider_equal {
-	background: transparent url('/images/splash_icon_equal.png') no-repeat bottom;
+	background: transparent url('/images/splash_arrows.png') no-repeat bottom;
 	width: 36px;
 	height: 111px;
 	float: left;
