@@ -3,19 +3,23 @@
 		<div id="gallery-upload" class="clear-block">
 			<div id="gallery-upload-trigger"> </div>
 			<div id="gallery-upload-open" style="display:none">
-				<div style="float: left;padding-top: 4px;" id="gallery-upload-close">
-					<%= image_tag 'change_avatar_icon_close.png' %>
-				</div>
-				<div id="gallery-upload-interact">
-					<div id="gallery-upload-button">
-						<% ajax_upload_form(@mband, :name => :photos, :id => 'gallery-upload') do |f| %>
-							<%= f.file_field :uploaded_data, :id => 'gallery-upload-file-input' %>
-							<%= f.hidden_iframe 'gallery-upload' %>
-						<% end %>
-					</div>
-					<div id="gallery-upload-status"> </div>
-					<div id="gallery-upload-alert" style="display:none">
-						Error! Please upload again.
+				<div id="gallery-upload-bottom">
+					<div id="gallery-upload-bg">
+						<div style="float: left;" id="gallery-upload-close">
+							<%= image_tag 'change_avatar_icon_close.png' %>
+						</div>
+						<div id="gallery-upload-interact">
+							<div id="gallery-upload-button">
+								<% ajax_upload_form(@mband, :name => :photos, :id => 'gallery-upload') do |f| %>
+									<%= f.file_field :uploaded_data, :id => 'gallery-upload-file-input' %>
+									<%= f.hidden_iframe 'gallery-upload' %>
+								<% end %>
+							</div>
+							<div id="gallery-upload-status"> </div>
+							<div id="gallery-upload-alert" style="display:none">
+								Error! Please upload again.
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -1665,15 +1665,21 @@ html>body .register p{
 }
 
 #change-avatar-upload {
-	width: 150px;
-	padding: 5px;
-	padding-top: 0px;
+	background: transparent url(/images/change_avatar_upload_bg.png) no-repeat bottom;
+	padding: 0px 0px 5px;
+	width: 160px;
 	height: 67px;
-	background: #97D1E9 url(/images/change_avatar_upload_bg.png) no-repeat bottom;
-	top:-18px;
-	left:0px;
-	position:relative;
-	float:left;
+	top: -18px;
+	left: 0px;
+	position: relative;
+	float: left;
+}
+
+#change-avatar-bg {
+	background-color: #97D1E9;
+	height: 65px;
+	padding: 0px 5px;
+	width: 150px;
 }
 
 #change-avatar-interact {
@@ -1756,16 +1762,28 @@ html>body .register p{
 }
 
 #gallery-upload-open {
-	width: 150px;
-	padding: 5px;
-	padding-top: 0px;
+	background: transparent url(/images/change_avatar_upload_top_bg.png) no-repeat top;
+	width: 160px;
+	padding: 7px 0px 0px;
 	height: 67px;
-	background: #97D1E9 url(/images/change_avatar_upload_bg.png) no-repeat bottom;
 	float: right;
 	position: relative;
-	top: -20px;
+	top: -23px;
 	right: 10px;
 	z-index: 99;
+}
+
+#gallery-upload-bottom {
+	background: transparent url(/images/change_avatar_upload_bg.png) no-repeat bottom;
+	height: 72px;
+	width: 160px;
+}
+
+#gallery-upload-bg {
+	background-color: #97D1E9;
+	width:150px;
+	height: 65px;
+	padding: 0px 5px;
 }
 
 #gallery-upload-close {
