@@ -4,7 +4,7 @@
       <%= render :partial => 'shared/mlab_track_info', :object => track %>
     </div>    
     <p class="thumb">
-      <%= image_tag track.instrument.icon %>
+      <%= track_instrument_icon(track) %>
     </p>
     <p class="name grey-text"><%= track.parent_song.user.login if track.parent_song && track.parent_song.user %></p>
     <p class="title">

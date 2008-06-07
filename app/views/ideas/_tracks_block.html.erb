@@ -1,7 +1,7 @@
 <%- tracks.each do |track| -%>	  
 <div class="elements clear-block">
   <p class="thumb">
-    <%= image_tag track.instrument.icon %>
+    <%= track_instrument_icon(track) %>
     <%- if track.parent_song && track.parent_song.user -%>
       <a href="<%= user_path(track.parent_song.user) %>"><%= avatar_image track.parent_song.user, :icon %></a>
     <%- end -%>

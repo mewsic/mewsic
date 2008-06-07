@@ -19,7 +19,7 @@
 		</p>
 		<div class="horizontal-scroll">
 			<% most_instruments.instruments.each do |instrument| -%>
-			    <%= image_tag instrument.icon, :alt => instrument.description, :size =>'29x29' %>
+			    <%= instrument_icon instrument %>
 			<% end %>
 		</div>
 		<p class="button">

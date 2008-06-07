@@ -7,11 +7,12 @@
 			<input type="text" class="input_band_name">
 		</div>
 	</div>
+	<!-- FIXME FIXME FIXME -->
 		<div id="band_core">
 		  <%- @user.members.each_with_index do |member, i| -%>
 		    <div id="band_member_<%= %w[odd even][i % 2] %>">
   				<div id="band_member_details">
-  					<img src="/images/instrument_drum.png" />
+						<img src="/images/instrument_drum.png" />
   					<img src="/images/avatar_icon.gif" />
   					<%= member.name %>
   				</div>

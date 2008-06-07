@@ -7,7 +7,7 @@
 				<!-- dynamic -->
 				<%- @splash_tracks.each_with_index do |track, index| -%>
 				  <div class="splash <%= %w[odd even][index % 2] %>">
-            <%= image_tag(track.instrument.icon, :class => "instrument") %>
+            <%= track_instrument_icon(track, :class => "instrument") %>
             <div class="title"><%=h truncate(track.title, 15) %></div>
             <div class="buttons">
               <%= mlab_button(track, :dynamic => true) %>

@@ -6,7 +6,7 @@
 				<% @user.instruments.each do |instrument| -%>
 				  <div class="small-box">
 						<p class="thumb">
-						  <%= image_tag instrument.icon %>
+						  <%= instrument_icon instrument %>
 						</p>
 						<p class="grey-text name"><em><%= instrument.description %></em></p>
 					</div>							  						

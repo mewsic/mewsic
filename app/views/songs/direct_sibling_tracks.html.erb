@@ -2,7 +2,7 @@
   <%- @song.tracks.each do |track| -%>
     <div class="elements clear-block">
 		<p class="thumb">
-		  <%= image_tag(track.instrument.icon) %>
+		  <%= track_instrument_icon(track) %>
 		  <%= link_to avatar_image(@song.user, :icon), user_path(@song.user) %>
     </p>
 		<p class="name align-right">

@@ -13,7 +13,7 @@
         <span class="tracks-number"><span><%= song.tracks.size %></span></span>
         <div class="float-left">
           <% song.tracks.each do |track| -%>
-            <% image_tag track.instrument.icon, :alt => 'track.instrument.description' %>
+            <% track_instrument_icon track %>
           <% end -%>
         </div>
       </td>
