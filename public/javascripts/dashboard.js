@@ -4,10 +4,24 @@ var Splash = {
     new Ajax.Request('/splash', {
       method: 'get',
       onComplete: function(r) {
-        $('splash_container').update(r.responseText);
+        var splash = $('splash_container');
+        $$('.splash .instrument').each(function(element) {
+          Tips.remove(element);
+        });
+
+        splash.update(r.responseText);
+
         var mlabSlider = MlabSlider.getInstance();        
-        mlabSlider.initTrackButtons(true);
-        //mlabSlider.initSongButtons(true);
+        if (mlabSlider) {
+          mlabSlider.initTrackButtons(true);
+          //mlabSlider.initSongButtons(true);
+        }
+        
+        splash.descendants().select(function(element) { 
+          return element.className == 'instrument';
+        }).each(function(element) {
+          new Tip(element, element.getAttribute('rel'));
+        });
       }
     });
   }

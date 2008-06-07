@@ -196,7 +196,10 @@ document.observe('dom:loaded', function(event) {
   Message.init();
 
   new SearchBoxBehaviour('search');
- 
+
+  $$('.instrument').each(function(element) {
+    new Tip(element, element.getAttribute('rel'));
+  });
 });
 
 var Popup = {

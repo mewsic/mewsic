@@ -30,12 +30,12 @@ module UsersHelper
         image_tag gender_icon_path(gender), :alt => gender, :title => gender }.join << '</div>'
   end
 
-  def track_instrument_icon(track, options = {})
-    instrument_icon track.instrument, options
+  def track_instrument_icon(track)
+    instrument_icon track.instrument
   end     
 
-  def instrument_icon(instrument, options = {})
-    image_tag instrument.icon, {:alt => instrument.description, :title => instrument.description, :size => '29x29'}.merge(options)
+  def instrument_icon(instrument)
+    image_tag instrument.icon, :class => 'instrument', :alt => instrument.description, :rel => instrument.description, :size => '29x29'
   end
   
   def user_photo_link
