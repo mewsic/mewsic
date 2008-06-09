@@ -50,7 +50,7 @@
         <p class="blue-text"><%= gender_icon_for(@user) || gender_switcher_for(@user) %></p>
       <%- end -%>
     </div>
-    <p class="blue-text">User name </p>
+		<p class="blue-text"><%= @user.class.name %> name</p>
     <h1 class="black-text" id="user_id"><%= @user.nickname %></h1>
     <div class="grey-divisor"><hr /></div>
     <p class="blue-text">Country <%= user_edit_button(:country) %></p>

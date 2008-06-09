@@ -1,75 +1,59 @@
-<div id="create_band_container">
-	<div id="band_block_top">
-		<div id="band_title">
+		<% @user.members.each_with_index do |member, i| %>
+			<div class="band_member <%= %w[odd even][i%2] %>">
+				<div class="band_member_details">
+					<%= instrument_icon member.instrument %>
+					<%= avatar_image member, :icon, :class => :avatar %>
+				</div>
+				<span class="band_member_name"><%= member.name %></span>
+				<span class="band_member_modify">
+					<a href="#">[edit]</a>
+				</span>
+			</div>
+		<% end %>
+		
+		<div id="band_member_add" style="display: none">
 			<span id="band_over_input_text">
-				Members of
+				Member name or <strong>Myousica ID:</strong>
 			</span>
-			<input type="text" class="input_band_name">
+			<input type="text" class="input_member_name">					
 		</div>
-	</div>
-	<!-- FIXME FIXME FIXME -->
-		<div id="band_core">
-		  <%- @user.members.each_with_index do |member, i| -%>
-		    <div id="band_member_<%= %w[odd even][i % 2] %>">
-  				<div id="band_member_details">
-						<img src="/images/instrument_drum.png" />
-  					<img src="/images/avatar_icon.gif" />
-  					<%= member.name %>
-  				</div>
-  				<span id="band_member_modify">
-  					<a href="#">Modify</a>
-  				</span>
-  			</div>
-		  <%- end -%>
-			<div id="band_member_add">
-				<span id="band_over_input_text">
-					Member name or <strong>Myousica ID:</strong>
-				</span>
-				<input type="text" class="input_member_name">					
-			</div>
 
-			<div id="band_instrument_select">
-				<span id="band_over_input_text">
-					Choose instrument:
-						<div id="band_instrument_selector">
-							<img src="/images/band_instrument_arrow_left.png" />
-							<img src="/images/instruments.png" />
-							<img src="/images/band_instrument_arrow_right.png" />														
-						</div>
-				</span>
-
-			</div>
-
-			<div id="band_upload_avatar">
-				<span id="band_over_input_text">
-					Upload avatar:
-				</span>
-					<div id="band_browse_avatar">
-						<img src="/images/band_button_browse.png" />
+		<div id="band_instrument_select" style="display: none">
+			<span id="band_over_input_text">
+				Choose instrument:
+					<div id="band_instrument_selector">
+						<%= image_tag 'band_instrument_arrow_left.png' %>
+						<%= image_tag 'instruments.png' %>
+						<%= image_tag 'band_instrument_arrow_right.png' %>
 					</div>
-			</div>
+			</span>
+		</div>
 
-			<div id="band_buttons_bottom">
-				<span id="band_alert">
-					Alert!!!
-				</span>
-				<div id="band_buttons">
-					<div id="band_form_add">
-						<img src="/images/band_button_add.png" />
-					</div>	
-						<div id="band_form_buttons">
-							<img src="/images/band_button_cancel.png" />							
-							<img src="/images/band_button_ok.png" />							
-						</div>
+		<div id="band_upload_avatar" style="display:none">
+			<span id="band_over_input_text">
+				Upload avatar:
+			</span>
+				<div id="band_browse_avatar">
+					<%= image_tag 'band_button_browse.png' %>
+				</div>
+		</div>
+
+		<div id="band_buttons_bottom">
+			<span id="band_alert" style="display: none">
+				Alert!!!
+			</span>
+			<div id="band_buttons">
+				<div id="band_form_add">
+					<%= image_tag 'band_button_add.png', :id => 'band_button_add' %>
+				</div>	
+				<div id="band_form_buttons">
+					<%= image_tag 'band_button_cancel.png', :id => 'band_button_cancel' %>
+					<%= image_tag 'band_button_ok.png', :id => 'band_button_ok' %>
 				</div>
 			</div>
-			
 		</div>
-	<div id="band_block_bottom">
 
-	</div>
-</div>
-
+<!--
 <div>
   <%- remote_form_for(:band_member, 
         :method => 'post',
@@ -87,4 +71,4 @@
     </p>
   <%- end -%>
 </div>
-
+-->

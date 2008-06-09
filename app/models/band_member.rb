@@ -16,16 +16,8 @@ class BandMember < ActiveRecord::Base
   belongs_to  :instrument
   has_many    :avatars, :as => :pictureable
   
-  before_save :set_default_instrument
-  
   attr_accessible :name, :instrument
 
-  validates_presence_of :name
-  
-protected
-
-  def set_default_instrument
-    self.instrument = Instrument.find_by_description('Guitar') if self.instrument.nil?
-  end
-  
+  validates_presence_of :name, :instrument_id, :user_id
+  validates_associated :instrument, :user
 end

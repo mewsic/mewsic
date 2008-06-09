@@ -19,17 +19,17 @@ a {
 	/*position:relative;*/
 	text-decoration: none;
 }
-a:hover{
+a:hover {
 	text-decoration: underline;
 }
 img{
 	border: none;
 }
-.invisible{
+.invisible {
 	display: none
 }
 .c {
-        cursor: pointer;
+  cursor: pointer;
 }
 hr{
 	display: none;
@@ -2897,72 +2897,92 @@ div.hr {
 
 /******************** NEW BAND MEMBER ********************/
 
-#create_band_container {
-	width: 291px;
+#band-members-box {
+	width: 260px;
+	padding-bottom: 15px;
 }
 
 #band_block_top {
-	width: 291px;
-	height: 63px;
-	background: transparent url('/images/band_block_top.png') no-repeat top;	
+	width: 260px;
+	height: 30px;
+	background: transparent url(/images/band_block_top.png) no-repeat top;	
 }
 
 #band_block_bottom {
-	width: 291px;
-	height: 34px;
-	background: transparent url('/images/band_block_bottom.png') no-repeat bottom;
+	width: 260px;
+	height: 16px;
+	background: transparent url(/images/band_block_bottom.png) no-repeat bottom;
 }
 
 #band_core {
-	background: transparent url('/images/band_core_bg.png') repeat-y top;
+	background: transparent url(/images/band_core_bg.png) repeat-y top;
 	padding-top: 3px;
+	width: 260px;
 }
 
 
 #band_title {
-	padding: 21px 0px 0px 29px;
+	padding: 11px 0px 0px 11px;
 	color: #004D70;
 	font-size: 14px;
 	font-weight: bold;
 }
 
-.input_band_name, .input_member_name {
+.input_member_name {
 	width: 235px;
 	border: 1px solid #85BAD1;
 	margin-top: 4px;
 }
 
-#band_member_odd {
+.band_member {
+	margin-left: 2px;
+	width: 256px;
+	height: 38px;
+	border-top: 1px solid #BFD2DB;	
+}
+
+.band_member .odd {
 	background: #FFFFFF;
-	margin-left: 19px;
-	width: 256px;
-	height: 38px;
-	border-bottom: 1px solid #BFD2DB;
-	border-top: 1px solid #BFD2DB;	
 }
 
-#band_member_even {
+.band_member .even {
 	background: #CCCCCC;
-	margin-left: 19px;
-	width: 256px;
-	height: 38px;
-	border-bottom: 1px solid #BFD2DB;
-	border-top: 1px solid #BFD2DB;	
-	
 }
 
-#band_member_details {
-	width: 200px;
+.band_member_details {
+	width: 60px;
 	height: 30px;
 	float: left;
 	padding: 4px;
 	margin-left: 4px;
 }
 
-#band_member_modify {
+.band_member_name {
+	float: left;
+	margin-left: 7px;
+	margin-top: 13px;
+}
+
+.band_member_modify {
 	float: right;
 	margin-right: 7px;
-	margin-top: 22px;
+	margin-top: 13px;
+}
+
+#band_edit_link {
+	float: right;
+	margin-right: 12px;
+	margin-top: 12px;
+}
+
+#band_edit_spinner {
+	float: right;
+	margin-top: 12px;
+	margin-right: 12px;
+}
+
+#band_edit_link a {
+	color: #009DC2;
 }
 
 #band_member_modify a {
@@ -2973,7 +2993,7 @@ div.hr {
 #band_member_add {
 	width: 237px;
 	border-bottom: 1px solid #85BAD1;
-	margin-left: 24px;
+	margin-left: 6px;
 	color: #00496B;
 	padding: 5px;
 	margin-top: 23px;
@@ -2982,7 +3002,7 @@ div.hr {
 #band_instrument_select {
 	width: 237px;
 	border-bottom: 1px solid #85BAD1;
-	margin-left: 24px;
+	margin-left: 6px;
 	color: #00496B;
 	padding: 5px;
 	margin-top: 4px;
@@ -2991,7 +3011,7 @@ div.hr {
 #band_upload_avatar {
 	width: 237px;
 	border-bottom: 1px solid #85BAD1;
-	margin-left: 24px;
+	margin-left: 6px;
 	color: #00496B;
 	padding: 5px;
 	margin-top: 4px;
@@ -3021,7 +3041,7 @@ div.hr {
 
 #band_buttons_bottom {
 	width: 237px;
-	margin-left: 24px;
+	margin-left: 6px;
 	color: #00496B;
 	padding: 5px;
 	margin-top: 4px;
@@ -3040,6 +3060,11 @@ div.hr {
 #band_form_buttons {
 	float: right;
 }
+
+#band_button_add, #band_button_cancel, #band_button_ok {
+	cursor: pointer;
+}
+
 /******************** END NEW BAND MEMBER ********************/
 
 

@@ -6,6 +6,14 @@ class BandMembersController < ApplicationController
   before_filter :login_required
   before_filter :check_if_current_user_page
   before_filter :check_if_band  
+
+  def index
+    if params[:edit]
+      render :partial => 'users/my/band_member_form'
+    else
+      render :partial => 'users/band_member', :collection => @user.members
+    end
+  end
   
   def create
     @member = BandMember.new(params[:band_member])    

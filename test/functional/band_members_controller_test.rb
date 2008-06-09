@@ -4,7 +4,7 @@ class BandMembersControllerTest < ActionController::TestCase
 
   include AuthenticatedTestHelper
 
-  fixtures :users
+  fixtures :users, :instruments
 
   def test_should_show_band_members
     get :index, :user_id => users(:mikaband).id
@@ -22,7 +22,7 @@ class BandMembersControllerTest < ActionController::TestCase
   
   def test_should_not_create_unless_logged_in    
     assert_no_difference 'BandMember.count' do
-      post :create, :user_id => users(:mikaband), :band_member => { :name => 'ivan' }
+      post :create, :user_id => users(:mikaband), :band_member => { :name => 'ivan', :instrument => instruments(:guitar) }
       assert_response :redirect
     end
   end
@@ -38,7 +38,7 @@ class BandMembersControllerTest < ActionController::TestCase
   def test_should_create
     login_as :mikaband
     assert_difference 'BandMember.count' do
-      post :create, :user_id => users(:mikaband), :band_member => { :name => 'ivan' }
+      post :create, :user_id => users(:mikaband), :band_member => { :name => 'ivan', :instrument => instruments(:guitar) }
       assert_response :success
     end
   end
