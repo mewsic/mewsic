@@ -75,6 +75,7 @@ task :myousica_symlinks, :roles => [:app, :web], :except => {:no_release => true
   symlink_photos
   symlink_avatars
   symlink_audio
+  symlink_multitrack
 end
 
 task :symlink_photos, :roles => [:app, :web], :except => {:no_release => true, :no_symlink => true} do
@@ -88,6 +89,11 @@ end
 task :symlink_audio, :roles => [:app, :web], :except => {:no_release => true, :no_symlink => true} do
   run "cd #{current_release}/public; rm -rf audio; ln -s #{shared_path}/audio ."
 end
+
+task :symlink_multitrack, :roles => [:app, :web], :except => {:no_release => true, :no_symlink => true} do
+  run "cd #{current_release}/public/multitrack; mkdir beta; cd beta; ln -s #{shared_path}/multitrack/* ."
+end
+
 # =============================================================================
 
 # Don't change unless you know what you are doing!

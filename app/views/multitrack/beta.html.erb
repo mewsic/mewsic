@@ -87,7 +87,7 @@
 <script type="text/javascript">
 	// <![CDATA[
 	
-	var so = new SWFObject("/multitrack/SUX_Player_Core_BETA.swf", "SUX_Player_Core", "978", "800", "9", "#F3F3F4");
+	var so = new SWFObject("/multitrack/beta/SUX_Player_Core_BETA.swf", "SUX_Player_Core", "978", "800", "9", "#F3F3F4");
 	so.addVariable("userid", <%= @user.id %>); 
 	so.addVariable("songid", <%= @song.id %>); 
 	so.addVariable("authenticity_token", '<%= form_authenticity_token if protect_against_forgery? %>'); 
