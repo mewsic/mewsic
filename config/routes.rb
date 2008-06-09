@@ -53,6 +53,8 @@ ActionController::Routing::Routes.draw do |map|
   map.multitrack        '/users/:user_id/multitrack',     :controller => 'multitrack', :action => 'index'
   map.multitrack_config '/users/:user_id/request.config', :controller => 'users', :action => 'request_config'
   map.multitrack_config '/users/:user_id/multitrack/request.config', :controller => 'users', :action => 'request_config'
+
+  map.multitrack_beta   '/users/:user_id/multitrack/beta', :controller => 'multitrack', :action => 'beta'
   
   map.music '/music', :controller => 'music', :action => 'index'
 

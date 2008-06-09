@@ -10,6 +10,10 @@ class MultitrackController < ApplicationController
     @genres = Genre.find(:all)
   end
 
+  def beta
+    index
+  end
+
 private
 
   def find_user
