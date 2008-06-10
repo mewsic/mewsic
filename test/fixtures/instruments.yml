@@ -6,6 +6,7 @@
 #  id          :integer(11)   not null, primary key
 #  description :string(255)   
 #  icon        :string(255)   
+#  category_id :integer(11)
 #  created_at  :datetime      
 #  updated_at  :datetime      
 #
@@ -15,15 +16,19 @@
 drums:
   description: Drums
   icon: instruments/drums.png
+  category: membranophones
 
 guitar:
   description: Guitar
   icon: instruments/guitar.png
+  category: chordophones
 
 microphone:
   description: Voice
   icon: instruments/voice.png
+  category: petophones
   
 saxophone:
   description: Saxophone
   icon: instruments/saxophone.png
+  category: idiophones

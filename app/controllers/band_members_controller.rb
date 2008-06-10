@@ -8,11 +8,12 @@ class BandMembersController < ApplicationController
   before_filter :check_if_band  
 
   def index
-    if params[:edit]
-      render :partial => 'users/my/band_member_form'
-    else
-      render :partial => 'users/band_member', :collection => @user.members
-    end
+    render :partial => 'users/band_member', :collection => @user.members
+  end
+
+  def new
+    @member = BandMember.new
+    render :partial => 'users/my/band_member_form'
   end
   
   def create

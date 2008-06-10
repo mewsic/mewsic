@@ -1,12 +1,13 @@
-		<% @user.members.each_with_index do |member, i| %>
-			<div class="band_member <%= %w[odd even][i%2] %>">
+		<% @user.members.each do |member| %>
+			<div class="band_member" id="band_member_<%= member.id %>">
 				<div class="band_member_details">
-					<%= instrument_icon member.instrument %>
+					<%= instrument_icon member.instrument, :id => "band_member_instrument_#{member.instrument.id}" %>
 					<%= avatar_image member, :icon, :class => :avatar %>
 				</div>
 				<span class="band_member_name"><%= member.name %></span>
 				<span class="band_member_modify">
-					<a href="#">[edit]</a>
+					<a class="edit" href="#">[edit]</a>
+					<a class="delete" href="#">[del]</a>
 				</span>
 			</div>
 		<% end %>
@@ -22,9 +23,7 @@
 			<span id="band_over_input_text">
 				Choose instrument:
 					<div id="band_instrument_selector">
-						<%= image_tag 'band_instrument_arrow_left.png' %>
-						<%= image_tag 'instruments.png' %>
-						<%= image_tag 'band_instrument_arrow_right.png' %>
+						<%= instruments_select @member %>
 					</div>
 			</span>
 		</div>
@@ -46,7 +45,7 @@
 				<div id="band_form_add">
 					<%= image_tag 'band_button_add.png', :id => 'band_button_add' %>
 				</div>	
-				<div id="band_form_buttons">
+				<div id="band_form_buttons" style="display:none">
 					<%= image_tag 'band_button_cancel.png', :id => 'band_button_cancel' %>
 					<%= image_tag 'band_button_ok.png', :id => 'band_button_ok' %>
 				</div>

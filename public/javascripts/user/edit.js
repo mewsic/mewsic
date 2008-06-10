@@ -236,7 +236,7 @@ var Profile = Class.create({
 
   showEditPane: function() {
     this.editing = true;
-    this.link.innerHTML = 'done';
+    this.link.innerHTML = '[done]';
     new Effect.BlindUp(this.blurb, {duration: 0.3});
     new Effect.BlindDown(this.fields, {duration: 0.3, queue: 'end'});
   },
@@ -257,120 +257,22 @@ var Profile = Class.create({
   }
 });
 
-var BandMembers = Class.create({
-  initialize: function(element, user_id) {
-    this.element = $(element);
-    if (!this.element)
-      return;
-
-    this.user_id = user_id;
-
-    this.spinner = this.element.down('#band_edit_spinner');
-
-    this.core_box = this.element.down('#band_core');
-    this.edit_box = this.element.down('#band_edit_link');
-    this.edit_box.down('a').observe('click', this.loadBandForm.bind(this));
-  },
-
-  loadBandForm: function(event) {
-    event.stop();
-
-    this.edit_box.hide();
-    this.spinner.show();
-
-    new Effect.BlindUp(this.core_box, {duration: 0.3, queue: 'end'});
-    new Ajax.Request('/users/' + this.user_id + '/members?edit=true', {
-      method: 'GET',
-      onComplete: this.showBandForm.bind(this)
-    });
-  },
-
-  showBandForm: function(r) {
-    this.core_box.update(r.responseText);
-    this.spinner.hide();
-    new Effect.BlindDown(this.core_box, {duration: 0.3, queue: 'end'});
-
-    this.member_name_box = this.element.down('#band_member_add');
-    this.instrument_box = this.element.down('#band_instrument_select');
-    this.avatar_box = this.element.down('#band_upload_avatar');
-
-    this.add_button = this.element.down('#band_button_add');
-    this.b_addMember = this.addMember.bind(this);
-    this.add_button.observe('click', this.b_addMember);
-
-    this.ok_button = this.element.down('#band_button_ok');
-
-    this.cancel_button = this.element.down('#band_button_cancel');
-    this.b_unloadBandForm = this.unloadBandForm.bind(this);
-    this.cancel_button.observe('click', this.b_unloadBandForm);
-  },
-
-  unloadBandForm: function(event) {
-    this.spinner.show();
-
-    new Effect.BlindUp(this.core_box, {duration: 0.3, queue: 'end'});
-    new Ajax.Request('/users/' + this.user_id + '/members', {
-      method: 'GET',
-      onComplete: this.showBandMembers.bind(this)
-    });
-  },
-
-  showBandMembers: function(r) {
-    this.core_box.update(r.responseText);
-
-    this.spinner.hide();
-    this.edit_box.show();
-    new Effect.BlindDown(this.core_box, {duration: 0.3, queue: 'end'});
-
-    this.cancel_button.stopObserving('click', this.b_unloadBandForm);
-    this.add_button.stopObserving('click', this.b_addMember);
-
-    this.b_unloadBandForm = this.b_addMember = null;
-    this.add_button = this.ok_button = this.cancel_button = null;
-    this.member_name_box = this.instrument_box = this.avatar_box = null;
-  },
-
-  addMember: function(event) {
-    new Effect.BlindDown(this.member_name_box, {duration: 0.3});
-    new Effect.BlindDown(this.instrument_box, {duration: 0.3});
-    //new Effect.BlindDown(this.avatar_box, {duration: 0.3});
-  },
-
-  destroy: function(user_id, member_id) {
-    if(!confirm('Are you sure?')) return;
-    new Ajax.Request('/users/' + user_id + '/members/' + member_id + '.js', {
-      method: 'DELETE',
-      parameters: {
-        authenticity_token: encodeURIComponent($('authenticity-token').value)
-      }
-    });
-  },  
-
-  remove: function(id) {
-    Effect.Fade('band_member_' + id);
-  }
-});
 
 document.observe('dom:loaded', function() {
   var user_id_field   = $('user-id');
   var mband_id_field  = $('mband-id');
-  if(user_id_field) {
+
+  if (user_id_field) {
     new InPlaceEditorGenerator( $w('city'), { url: '/users/', model: 'user', maxLength: 20 } );  
     new InPlaceEditorGenerator( $w('motto tastes'), { url: '/users/', model: 'user', rows: 6, maxLength: 1000} );  
-
     new InPlaceSelectGenerator( $w('country'), { url: '/users/', model: 'user', values_url: '/countries' } );
-
     new AjaxFormGenerator( $w('first_name last_name photos_url blog_url myspace_url skype msn'), { url: '/users/', model: 'user' } );
-
     new GenderSwitcher('change-gender');
-
     new Profile();
 
-    new BandMembers('band-members-box', user_id_field.value);
-
-  } else if(mband_id_field) {
+  } else if (mband_id_field) {
     new InPlaceEditorGenerator( $w('motto tastes'), { url: '/mbands/', model: 'mband', rows: 6, maxLength: 1000} );  
-    new Profile();
     new AjaxFormGenerator( $w('photos_url blog_url myspace_url'), { url: '/mbands/', model: 'mband' } );    
+    new Profile();
   } 
 });

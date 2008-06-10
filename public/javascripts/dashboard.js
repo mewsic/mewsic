@@ -17,9 +17,7 @@ var Splash = {
           //mlabSlider.initSongButtons(true);
         }
         
-        splash.descendants().select(function(element) { 
-          return element.className == 'instrument';
-        }).each(function(element) {
+        splash.descendants().select('.instrument').each(function(element) {
           new Tip(element, element.getAttribute('rel'));
         });
       }

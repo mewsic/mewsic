@@ -2939,14 +2939,7 @@ div.hr {
 	width: 256px;
 	height: 38px;
 	border-top: 1px solid #BFD2DB;	
-}
-
-.band_member .odd {
-	background: #FFFFFF;
-}
-
-.band_member .even {
-	background: #CCCCCC;
+	background-color: #FFFFFF;
 }
 
 .band_member_details {
@@ -3002,10 +2995,79 @@ div.hr {
 #band_instrument_select {
 	width: 237px;
 	border-bottom: 1px solid #85BAD1;
-	margin-left: 6px;
 	color: #00496B;
 	padding: 5px;
 	margin-top: 4px;
+	margin-left: 6px;
+}
+
+#band_instrument_selector {
+	padding-top: 5px;
+	width: 217px;
+	height: 20px;
+}
+
+#band_instrument_selector select {
+	width: 235px;
+	border: 1px solid #85BAD1;
+}
+
+#instrument_layer {
+	height: 20px;
+	position: relative;
+	top: -20px;
+	width: 235px;
+}
+
+#instrument_list {
+	background:#FFFFFF none repeat scroll 0%;
+	border:1px solid #85BAD1;
+	height:200px;
+	width:233px;
+	overflow:auto;
+	position:relative;
+	left:0px;
+	top:-21px;
+	z-index: 200;
+}
+
+#instrument_list .instrument_group {
+	border-bottom: 1px solid #85BAD1;
+	clear: both;
+}
+
+#instrument_list .instrument_group .label {
+	font-size: 13px;
+	font-weight: bold;
+	font-style: italic;
+}
+
+#instrument_list .instrument_group .instrument {
+	height: 34px;
+	padding-bottom: 2px;
+}
+
+#instrument_list .instrument_group .instrument a {
+	display: block;
+	padding: 3px;
+	background-color: #fff;
+	height: 32px;
+	width: 211px;
+}
+
+#instrument_list .instrument_group .instrument a:hover {
+	background-color: #ccc;
+}
+
+#instrument_list .instrument_group .instrument .icon {
+	display: block;
+	float: left;
+}
+
+#instrument_list .instrument_group .instrument .name {
+	display: block;
+	float: left;
+	margin: 8px 0px 0px 4px;
 }
 
 #band_upload_avatar {
@@ -3023,12 +3085,6 @@ div.hr {
 	height: 24px;
 }
 
-
-#band_instrument_selector {
-	width: 217px;
-	padding-top: 5px;
-	margin-left: 8px;
-}
 
 #band_over_input_text {
 	padding-bottom: 5px;

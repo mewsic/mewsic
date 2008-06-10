@@ -5,6 +5,8 @@ class UsersController < ApplicationController
   before_filter :check_if_already_logged_in, :only => [:new]
   
   protect_from_forgery :except => :update
+
+  helper :band_members
   
   def index
     @coolest = User.find_coolest
