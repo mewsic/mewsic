@@ -4,11 +4,11 @@ module BandMembersHelper
   end
 
   def instrument_groups_tags(player, selected = nil)
-    InstrumentCategory.find(:all).map { |category| instrument_group_option_tags(category, player.instrument.id) }.join("\n")
+    InstrumentCategory.find(:all, :order => :description).map { |category| instrument_group_option_tags(category, player.instrument.id) }.join("\n")
   end
 
   def instrument_group_option_tags(category, selected = nil)
-    %(<optgroup label="#{category.description}">#{instrument_option_tags(category.instruments, selected)}</optgroup>)
+    %(<optgroup label="#{category.description}">#{instrument_option_tags(category.instruments.find(:all, :order => :description), selected)}</optgroup>)
   end
 
   def instrument_option_tags(instruments, selected = nil)
