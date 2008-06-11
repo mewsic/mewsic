@@ -16,7 +16,7 @@ class BandMember < ActiveRecord::Base
   belongs_to  :instrument
   has_many    :avatars, :as => :pictureable
   
-  attr_accessible :name, :instrument
+  attr_accessible :name, :instrument_id
 
   validates_presence_of :name, :instrument_id, :user_id
   validates_associated :instrument, :user

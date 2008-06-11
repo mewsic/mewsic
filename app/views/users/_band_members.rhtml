@@ -1,14 +1,17 @@
 <div id="band-members-box">
 	<div id="band_block_top">
-		<div id="band_edit_link">
-			<a href='#'>[edit]</a>
-		</div>
+		<% if current_user_page? %>
+			<div id="band_edit_link">
+				<a href='#'>[edit]</a>
+			</div>
+		<% end %>
 		<div id="band_edit_spinner" style="display:none">
 			<%= image_tag 'spinner.gif', :class => 'spinner' %>
 		</div>
 		<div id="band_title">
 			<span id="band_over_input_text">
-				<em><%= @user.nickname %></em>: <%= pluralize @user.members.size, 'member' %>
+				<em><%= @user.nickname %></em>:
+				<span id="band_members_count"><%= pluralize @user.members.size, 'member' %></span>
 			</span>
 		</div>
 	</div>

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 27) do
+ActiveRecord::Schema.define(:version => 28) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(:version => 27) do
   end
 
   create_table "band_members", :force => true do |t|
-    t.string   "name"
+    t.string   "name",          :limit => 20
     t.integer  "instrument_id"
     t.integer  "user_id"
     t.datetime "created_at"

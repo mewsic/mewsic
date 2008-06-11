@@ -50,7 +50,7 @@ var BandMembers = Class.create({
     this.edit_box.hide();
     this.spinner.show();
 
-    new Effect.BlindUp(this.core_box, {duration: 0.3, queue: 'end'});
+    this.core_box.blindUp({duration: 0.3, queue: 'end'});
     new Ajax.Request('/users/' + this.user_id + '/members/new', {
       method: 'GET',
       onComplete: this.showBandForm.bind(this)
@@ -59,7 +59,7 @@ var BandMembers = Class.create({
 
   showBandForm: function(r) {
     this.core_box.update(r.responseText);
-    new Effect.BlindDown(this.core_box, {duration: 0.3, queue: 'end'});
+    this.core_box.blindDown({duration: 0.3, queue: 'end'});
 
     this.member_name_box = this.element.down('#band_member_add');
     this.instrument_box = this.element.down('#band_instrument_select');
@@ -69,8 +69,15 @@ var BandMembers = Class.create({
     this.b_addMember = this.addMember.bind(this);
     this.add_button.observe('click', this.b_addMember);
 
+    this.form = this.element.down('#band_member_form');
+    this.alert = this.element.down('#band_alert');
+    this.members = this.element.down('#band_members');
+
     this.buttons = this.element.down('#band_form_buttons');
+
+    this.b_submitForm = this.submitForm.bind(this);
     this.ok_button = this.element.down('#band_button_ok');
+    this.ok_button.observe('click', this.b_submitForm);
 
     this.b_cancelAddMember = this.cancelAddMember.bind(this);
     this.cancel_button = this.element.down('#band_button_cancel');
@@ -86,18 +93,22 @@ var BandMembers = Class.create({
     this.edit_box.down('a').innerHTML = '[done]';
     this.edit_box.down('a').observe('click', this.b_unloadBandForm);
 
-    this.element.select('a.edit').each(this.enableMemberEditLink.bind(this));
+    this.members.select('a').each(this.enableMemberLinks.bind(this));
 
     this.spinner.hide();
     this.edit_box.show();
   },
 
-  enableMemberEditLink: function(link) {
+  enableMemberLinks: function(link) {
     var member_id = parseInt(link.up('.band_member').id.sub('^band_member_', ''));
     var member_name = link.up('.band_member').down('.band_member_name').innerHTML
     var instrument_id = parseInt(link.up('.band_member').down('.instrument').id.sub('^band_member_instrument_', ''));
 
-    link.observe('click', this.editMember.bind(this, member_name, member_id, instrument_id));
+    if (link.className == 'edit') {
+      link.observe('click', this.editMember.bind(this, member_name, member_id, instrument_id));
+    } else if (link.className == 'delete') {
+      link.observe('click', this.deleteMember.bind(this, member_id));
+    }
   },
 
   makeInstrumentsSelect: function() {
@@ -139,7 +150,7 @@ var BandMembers = Class.create({
 
   instrumentSelected: function(value, event) {
     event.stop();
-    new Effect.BlindUp(this.instrument_list, {duration: 0.3});
+    this.instrument_list.blindUp({duration: 0.3});
     this.instrument_select.value = value;
   },
 
@@ -149,7 +160,7 @@ var BandMembers = Class.create({
     this.edit_box.hide();
     this.spinner.show();
 
-    new Effect.BlindUp(this.core_box, {duration: 0.3, queue: 'end'});
+    this.core_box.blindUp({duration: 0.3, queue: 'end'});
     new Ajax.Request('/users/' + this.user_id + '/members', {
       method: 'GET',
       onComplete: this.showBandMembers.bind(this)
@@ -166,8 +177,9 @@ var BandMembers = Class.create({
     this.spinner.hide();
     this.edit_box.show();
 
-    new Effect.BlindDown(this.core_box, {duration: 0.3, queue: 'end'});
+    this.core_box.blindDown({duration: 0.3, queue: 'end'});
 
+    this.ok_button.stopObserving('click', this.b_submitForm);
     this.cancel_button.stopObserving('click', this.b_cancelAddMember);
     this.add_button.stopObserving('click', this.b_addMember);
 
@@ -177,24 +189,31 @@ var BandMembers = Class.create({
   },
 
   addMember: function(event) {
+    event.stop();
+
     this.add_button.hide();
     this.buttons.show();
 
-    new Effect.BlindDown(this.member_name_box, {duration: 0.3});
-    new Effect.BlindDown(this.instrument_box, {duration: 0.3});
-    //new Effect.BlindDown(this.avatar_box, {duration: 0.3});
+    this.form.action = '/users/' + this.user_id + '/members';
+    this.form._method = 'POST';
+    this.form.callback = this.memberAdded.bind(this);
+
+    this.member_name_box.blindDown({duration: 0.3});
+    this.instrument_box.blindDown({duration: 0.3});
+    //this.avatar_box.blindDown({duration: 0.3});
   },
 
   cancelAddMember: function(event) {
+    this.alert.hide();
     this.buttons.hide();
     this.add_button.show();
 
     this.member_name_input.value = '';
     this.instrument_select.value = '';
 
-    new Effect.BlindUp(this.member_name_box, {duration: 0.3});
-    new Effect.BlindUp(this.instrument_box, {duration: 0.3});
-    //new Effect.BlindUp(this.avatar_box, {duration: 0.3});
+    this.member_name_box.blindUp({duration: 0.3});
+    this.instrument_box.blindUp({duration: 0.3});
+    //this.avatar_box.blindUp({duration: 0.3});
   },
 
   editMember: function(member_name, member_id, instrument_id, event) {
@@ -203,26 +222,99 @@ var BandMembers = Class.create({
     this.add_button.hide();
     this.buttons.show();
 
+    this.form.action = '/users/' + this.user_id + '/members/' + member_id;
+    this.form._method = 'PUT';
+    this.form.callback = this.memberEdited.bind(this, member_id);
+
     this.member_name_input.value = member_name;
     this.instrument_select.value = instrument_id;
 
-    new Effect.BlindDown(this.member_name_box, {duration: 0.3});
-    new Effect.BlindDown(this.instrument_box, {duration: 0.3});
+    if (!this.member_name_box.visible() && !this.instrument_box.visible()) {
+      this.member_name_box.blindDown({duration: 0.3});
+      this.instrument_box.blindDown({duration: 0.3});
+    }
   },
 
-  destroy: function(user_id, member_id) {
-    if(!confirm('Are you sure?')) return;
-    new Ajax.Request('/users/' + user_id + '/members/' + member_id + '.js', {
+  deleteMember: function(member_id, event) {
+    event.stop();
+
+    if(!confirm('Are you sure?'))
+      return;
+
+    new Ajax.Request('/users/' + this.user_id + '/members/' + member_id, {
       method: 'DELETE',
+      asynchronous: true,
+      evalScripts: false,
       parameters: {
         authenticity_token: encodeURIComponent($('authenticity-token').value)
-      }
+      },
+      onSuccess: this.memberRemoved.bind(this, member_id),
+      onLoading: this.submitting.bind(this),
+      onFailure: function() { alert("Error while deleting band member. Please refresh the page and try again"); }
     });
   },  
 
-  remove: function(id) {
-    Effect.Fade('band_member_' + id);
-  }
+  submitForm: function(event) {
+    event.stop();
+
+    new Ajax.Request(this.form.action, {
+      method: this.form._method,
+      asynchronous: true,
+      evalScripts: false,
+      parameters: Form.serialize(this.form) + '&authenticity_token=' + encodeURIComponent($('authenticity-token').value),
+      onSuccess: this.form.callback,
+      onLoading: this.submitting.bind(this),
+      onFailure: this.submitFailed.bind(this)
+    });
+  },
+
+  submitting: function() {
+    this.alert.hide();
+    this.edit_box.hide();
+    this.spinner.show();
+  },
+
+  memberAdded: function(request) {
+    this.members.insert({bottom: request.responseText});
+    this.members.select('.band_member').last().select('a').each(this.enableMemberLinks.bind(this));
+
+    this.cancelAddMember();
+    this.updateMemberCount(1);
+    this.spinner.hide();
+    this.edit_box.show();
+  },
+
+  memberEdited: function(id, request) {
+    var element = this.members.down('#band_member_' + id);
+    element.replace(request.responseText);
+    element = this.element.down('#band_member_' + id);
+    element.highlight();
+    element.select('a').each(this.enableMemberLinks.bind(this));
+
+    this.cancelAddMember();
+    this.spinner.hide();
+    this.edit_box.show();
+  },
+
+  memberRemoved: function(id) {
+    var element = this.members.down('#band_member_' + id);
+    element.puff({afterFinish: element.remove.bind(this)});
+    this.updateMemberCount(-1);
+    this.spinner.hide();
+    this.edit_box.show();
+  },
+
+  submitFailed: function(request) {
+    this.edit_box.show();
+    this.spinner.hide();
+    this.alert.show();
+  },
+
+  updateMemberCount: function(delta) {
+    var e = $('band_members_count');
+    e.innerHTML = e.innerHTML.sub('^\\d+', parseInt(e.innerHTML) + delta);
+    e.highlight({startcolor: '#FFFFFF', endcolor: '#E1EAEE'})
+  },
 });
 
 document.observe('dom:loaded', function() {

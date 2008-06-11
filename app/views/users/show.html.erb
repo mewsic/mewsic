@@ -28,4 +28,4 @@
 
 <% javascript('user/show') %>
 <% javascript('user/gallery') %>
-<% javascript('user/band_members') if @user.band? %>
+<% javascript('user/band_members') if current_user_page? && @user.band? %>

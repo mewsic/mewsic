@@ -1,45 +1,37 @@
-		<% @user.members.each do |member| %>
-			<div class="band_member" id="band_member_<%= member.id %>">
-				<div class="band_member_details">
-					<%= instrument_icon member.instrument, :id => "band_member_instrument_#{member.instrument.id}" %>
-					<%= avatar_image member, :icon, :class => :avatar %>
-				</div>
-				<span class="band_member_name"><%= member.name %></span>
-				<span class="band_member_modify">
-					<a class="edit" href="#">[edit]</a>
-					<a class="delete" href="#">[del]</a>
-				</span>
-			</div>
-		<% end %>
-		
-		<div id="band_member_add" style="display: none">
-			<span id="band_over_input_text">
-				Member name or <strong>Myousica ID:</strong>
-			</span>
-			<input type="text" class="input_member_name">					
+		<div id="band_members">
+			<%= render :partial => 'users/my/band_member', :collection => @user.members %>
 		</div>
 
-		<div id="band_instrument_select" style="display: none">
-			<span id="band_over_input_text">
-				Choose instrument:
-					<div id="band_instrument_selector">
-						<%= instruments_select @member %>
-					</div>
-			</span>
-		</div>
+		<form id="band_member_form" onsubmit="return false;">
+			<div id="band_member_add" style="display: none">
+				<span id="band_over_input_text">
+					Member name or <strong>Myousica ID:</strong>
+				</span>
+				<input type="text" class="input_member_name" name="band_member[name]" maxlength="20">
+			</div>
+    
+			<div id="band_instrument_select" style="display: none">
+				<span id="band_over_input_text">
+					Choose instrument:
+						<div id="band_instrument_selector">
+							<%= instruments_select @member %>
+						</div>
+				</span>
+			</div>
+		</form>
 
 		<div id="band_upload_avatar" style="display:none">
 			<span id="band_over_input_text">
 				Upload avatar:
 			</span>
 				<div id="band_browse_avatar">
-					<%= image_tag 'band_button_browse.png' %>
+					<%= image_tag 'band_button_browse.png' %> <!-- FIXME -->
 				</div>
 		</div>
 
 		<div id="band_buttons_bottom">
 			<span id="band_alert" style="display: none">
-				Alert!!!
+				Please insert all fields!
 			</span>
 			<div id="band_buttons">
 				<div id="band_form_add">

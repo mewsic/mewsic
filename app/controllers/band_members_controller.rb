@@ -18,33 +18,33 @@ class BandMembersController < ApplicationController
   
   def create
     @member = BandMember.new(params[:band_member])    
-    @member.user_id = @user.id
-    @saved = @member.save
-    
-    respond_to do |format|
-      format.html
-    end
+    @member.user = @user
+    @member.save!
+
+    render :partial => 'users/my/band_member', :object => @member
+
+  rescue ActiveRecord::ActiveRecordError
+    render :nothing => true, :status => :bad_request
   end
 
   def update
     @member = BandMember.find(params[:id])
-    @saved = @member.update_attributes(params[:band_member])
+    @member.update_attributes!(params[:band_member])
 
-    respond_to do |format|
-      format.js
-    end
-  rescue ActiveRecord::RecordNotFound
-    respond_to '/'
+    render :partial => 'users/my/band_member', :object => @member
+
+  rescue ActiveRecord::ActiveRecordError
+    render :nothing => true, :status => :bad_request
   end
 
   def destroy
     @member = @user.members.find(params[:id])
-    @destroyed = @member.destroy
+    @member.destroy
+
+    render :nothing => true, :status => :ok
    
-    respond_to do |format|
-      format.js
-    end
-  rescue ActiveRecord::RecordNotFound
+  rescue ActiveRecord::ActiveRecordError
+    render :nothing => true, :status => :bad_request
   end  
 
 protected

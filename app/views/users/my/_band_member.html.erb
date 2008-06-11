@@ -1,0 +1,11 @@
+			<div class="band_member" id="band_member_<%= band_member.id %>">
+				<div class="band_member_details">
+					<%= instrument_icon band_member.instrument, :id => "band_member_instrument_#{band_member.instrument.id}" %>
+					<%= avatar_image band_member, :icon, :class => :avatar %>
+				</div>
+				<span class="band_member_name edit"><%= band_member.name %></span>
+				<span class="band_member_modify">
+					<a class="edit" href="#">[edit]</a>
+					<a class="delete" href="#">[del]</a>
+				</span>
+			</div>

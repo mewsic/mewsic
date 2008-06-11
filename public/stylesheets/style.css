@@ -2947,6 +2947,10 @@ div.hr {
 	background-color: #FFFFFF;
 }
 
+.band_member:hover {
+	background-color: #DFDFDF;
+}
+
 .band_member_details {
 	width: 60px;
 	height: 30px;
@@ -2959,6 +2963,12 @@ div.hr {
 	float: left;
 	margin-left: 7px;
 	margin-top: 13px;
+	overflow: hidden;
+	width: 170px;
+}
+
+.band_member_name.edit {
+	width: 115px;
 }
 
 .band_member_modify {
@@ -3098,6 +3108,7 @@ div.hr {
 #band_alert {
 	padding-bottom: 5px;
 	color: #BD0926;
+	float: left;
 }
 
 #band_buttons_bottom {

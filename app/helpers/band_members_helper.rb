@@ -1,10 +1,10 @@
 module BandMembersHelper
   def instruments_select(player, selected = nil)
-    %(<select id="player_instrument_id" name="player[instrument]"><option></option>#{instrument_groups_tags(player, selected)}</select>)
+    %(<select name="band_member[instrument_id]"><option value=""></option>#{instrument_groups_tags(player, selected)}</select>)
   end
 
   def instrument_groups_tags(player, selected = nil)
-    InstrumentCategory.find(:all, :order => :description).map { |category| instrument_group_option_tags(category, player.instrument.id) }.join("\n")
+    InstrumentCategory.find(:all, :order => :description).map { |category| instrument_group_option_tags(category, player.instrument_id) }.join("\n")
   end
 
   def instrument_group_option_tags(category, selected = nil)
