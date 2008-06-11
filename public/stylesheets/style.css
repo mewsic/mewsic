@@ -2651,6 +2651,11 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
   background: transparent url('/images/mlab_trash.png') no-repeat center;
 }
 
+#mlab-scroller a.button.mlab.remove.loading {
+  background-image: url('/images/spinner.gif');
+}
+
+
 #mlab-scroller .trigger.back {
   background: transparent url(/images/mlab_scroll_button_top.png) no-repeat center;
   width:203px;

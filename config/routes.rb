@@ -51,6 +51,7 @@ ActionController::Routing::Routes.draw do |map|
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   
   map.multitrack        '/users/:user_id/multitrack',     :controller => 'multitrack', :action => 'index'
+  map.song_multitrack   '/songs/:song_id/multitrack',     :controller => 'multitrack', :action => 'edit'
   map.multitrack_config '/users/:user_id/request.config', :controller => 'users', :action => 'request_config'
   map.multitrack_config '/users/:user_id/multitrack/request.config', :controller => 'users', :action => 'request_config'
 

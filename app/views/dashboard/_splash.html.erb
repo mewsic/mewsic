@@ -5,16 +5,18 @@
 			<div id="splash_tag_tracks"> </div>
 			<div id="splash_box_elements">
 				<!-- dynamic -->
-				<%- @splash_tracks.each_with_index do |track, index| -%>
-				  <div class="splash <%= %w[odd even][index % 2] %>">
-            <%= track_instrument_icon(track) %>
-            <div class="title"><%=h truncate(track.title, 15) %></div>
-            <div class="buttons">
-              <%= mlab_button(track, :dynamic => true) %>
-              <%= play_button(track) %>
-            </div>
-					</div>
-				<%- end -%>												
+				<div id="splash_tracks" <%= request.xhr? ? 'style="display: none;"' : '' %>>
+				  <%- @splash_tracks.each_with_index do |track, index| -%>
+  				  <div class="splash <%= %w[odd even][index % 2] %>">
+              <%= track_instrument_icon(track) %>
+              <div class="title"><%=h truncate(track.title, 15) %></div>
+              <div class="buttons">
+                <%= mlab_button(track, :dynamic => true) %>
+                <%= play_button(track) %>
+              </div>
+  					</div>
+  				<%- end -%>
+				</div>
 				<!-- end dynamic -->								
 			</div>
 		</div>
@@ -43,16 +45,18 @@
 			<div id="splash_box_elements">
 
 				<!-- dynamic -->
-				<%- @splash_songs.each_with_index do |song, index| -%>
-				  <div class="splash <%= %w[odd even][index % 2] %>">
-				    <span class="tracks-number"><span><%= song.tracks.count %></span></span>
-            <div class="title"><%= link_to h(truncate(song.title, 15)), song_path(song) %></div>
-            <div class="buttons">
-              <%= mlab_button(song, :dynamic => true) %>
-              <%= play_button(song) %>
-            </div>
-					</div>
-				<%- end -%>
+				<div id="splash_songs" <%= request.xhr? ? 'style="display: none;"' : '' %>>
+				  <%- @splash_songs.each_with_index do |song, index| -%>
+  				  <div class="splash <%= %w[odd even][index % 2] %>">
+  				    <span class="tracks-number"><span><%= song.tracks.count %></span></span>
+              <div class="title"><%= link_to h(truncate(song.title, 15)), song_path(song) %></div>
+              <div class="buttons">
+                <%= mlab_button(song, :dynamic => true) %>
+                <%= play_button(song) %>
+              </div>
+  					</div>
+  				<%- end -%>
+				</div>
 				<!-- end dynamic -->												
 			</div>
 		</div>

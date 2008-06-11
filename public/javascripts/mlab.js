@@ -114,6 +114,7 @@ var MlabSlider = Class.create(PictureSlider, {
   },
   _removeItem: function(item) {
     var element = $('mlab_element_' + item.attributes.mlab_id);      
+    element.down('.remove').addClassName('loading');
     element.nextSiblings().each(function(sibling) {
       var class_to_remove = sibling.hasClassName('even') ? 'even' : 'odd';
       var class_to_add    = (class_to_remove == 'even') ? 'odd' : 'even';
