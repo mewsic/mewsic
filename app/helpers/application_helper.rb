@@ -115,21 +115,24 @@ module ApplicationHelper
   end    
   
   def avatar_image(model, size, options = {})
-    image_tag((model.avatars.last.nil? ? "/images/default_avatars/avatar_#{size}.gif" : model.avatars.last.public_filename(size)), options)
+    path = model.avatars.last.nil? ? "default_avatars/avatar_#{size}.gif" : model.avatars.last.public_filename(size)
+    options = {:id => "avatar_#{model.avatars.last.id}"}.merge(options) unless model.avatars.last.nil?
+
+    image_tag path, options
   end
   
   def user_type_image(model, options = {})
     image_tag("#{model.class.name.downcase}_type.png", options)
   end
   
-  def download_button(item)    
+  def download_button(item)
     link_to image_tag('icon_download.png'), send("download_#{item.class.name.downcase}_url", item)
   end
 
   def ajax_upload_form(model, options, &block)
     klass = model.kind_of?(User) ? User : model.class
-    formatted_path = "formatted_%s_%s_path" % [klass.name.underscore, options[:name]]
-    form_for(options[:name], :url => send(formatted_path, model, 'js'),
+    url = options[:url] || send("formatted_%s_%s_path" % [klass.name.underscore, options[:name]], model, 'js')
+    form_for(options[:name], :url => url,
       :builder => AjaxUploadFormBuilder, :html => {
         :id => "#{options[:id]}-form", :multipart => true,
         :target => "#{options[:id]}-iframe", :method => options[:method] || 'post'
@@ -139,6 +142,10 @@ module ApplicationHelper
 end
 
 class AjaxUploadFormBuilder < ActionView::Helpers::FormBuilder
+  def ajax_file_field(name)
+    file_field name, :size => 1
+  end
+
   def hidden_iframe(name) # XXX this name is useless remove it
     %[<iframe name="#{name}-iframe" id="#{name}-iframe" src="about:blank"
           style="position:absolute;left:-100px;width:0px;height:0px;border:0px"></iframe>]

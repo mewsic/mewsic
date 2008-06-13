@@ -2931,12 +2931,15 @@ div.hr {
 	color: #004D70;
 	font-size: 14px;
 	font-weight: bold;
+	float: left;
 }
 
 .input_member_name {
 	width: 235px;
 	border: 1px solid #85BAD1;
-	margin-top: 4px;
+	/*margin-top: 4px;*/
+	margin:0;
+	padding:0;
 }
 
 .band_member {
@@ -2952,10 +2955,10 @@ div.hr {
 }
 
 .band_member_details {
-	width: 60px;
+	width: 62px;
 	height: 30px;
 	float: left;
-	padding: 4px;
+	padding: 4px 0px;
 	margin-left: 4px;
 }
 
@@ -2973,7 +2976,7 @@ div.hr {
 
 .band_member_modify {
 	float: right;
-	margin-right: 7px;
+	margin-right: 4px;
 	margin-top: 13px;
 }
 
@@ -2989,7 +2992,7 @@ div.hr {
 	margin-right: 12px;
 }
 
-#band_edit_link a {
+#band_edit_link a, .band_member a {
 	color: #009DC2;
 }
 
@@ -3004,7 +3007,7 @@ div.hr {
 	margin-left: 6px;
 	color: #00496B;
 	padding: 5px;
-	margin-top: 23px;
+	margin-top: 15px;
 }
 
 #band_instrument_select {
@@ -3028,10 +3031,13 @@ div.hr {
 }
 
 #instrument_layer {
-	height: 20px;
+	height: 22px;
 	position: relative;
-	top: -20px;
+	top: -21px;
 	width: 235px;
+	cursor: pointer;
+	font-family: monospace;
+	font-size: 20px;
 }
 
 #instrument_list {
@@ -3042,7 +3048,7 @@ div.hr {
 	overflow:auto;
 	position:relative;
 	left:0px;
-	top:-21px;
+	top:-25px;
 	z-index: 200;
 }
 
@@ -3092,23 +3098,42 @@ div.hr {
 	color: #00496B;
 	padding: 5px;
 	margin-top: 4px;
+	height: 50px;
 }
 
 #band_browse_avatar {
-	width: 233px;
-	padding-top: 5px;
-	height: 24px;
+	background: transparent url(/images/band_button_browse.png) no-repeat scroll center center;
+	width: 75px;
+	height: 30px;
+	float: left;
 }
 
+#band_browse_avatar input {
+	opacity: 0.01;
+	filter: alpha(opacity=0.01);
+	position: relative;
+	top: 5px;
+	right: 25px;
+}
 
-#band_over_input_text {
-	padding-bottom: 5px;
+#band_member_avatar_preview {
+	float: left;
+	height: 30px;
+	width: 30px;
+	margin-left: 4px;
+}
+
+.band_over_input_text {
+	clear: both;
+	display: block;
+	padding-bottom: 4px;
 }
 
 #band_alert {
-	padding-bottom: 5px;
+	padding-top: 5px;
 	color: #BD0926;
 	float: left;
+	width: 130px;
 }
 
 #band_buttons_bottom {
@@ -3117,6 +3142,7 @@ div.hr {
 	color: #00496B;
 	padding: 5px;
 	margin-top: 4px;
+	clear: both;
 }
 
 #band_buttons {

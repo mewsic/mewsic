@@ -7,6 +7,7 @@ var UserAvatar = Class.create({
     this.element.observe('mouseover', this.handleMouseOver.bind(this));
     this.element.observe('mouseout', this.handleMouseOut.bind(this, false));
 
+    this.image = this.element.down('#user-avatar-image');
 		this.container = this.element.down('#user-avatar-container');
 		this.change_avatar = this.element.down('#change-avatar');
 		this.container.observe('click', this.displayUploadForm.bind(this));
@@ -18,8 +19,8 @@ var UserAvatar = Class.create({
 		this.upload_section = this.element.down('#change-avatar-upload')
 
 		this.form = this.element.down('#change-avatar-form');
-		this.status = this.element.down('#change-avatar-status');
 		this.alert = this.element.down('#change-avatar-alert');
+		this.status = this.element.down('#change-avatar-status');
 
 		this.file_input = this.element.down('#change-avatar-file-input');
 		this.file_input.observe('change', this.uploadNewAvatar.bind(this));
@@ -52,8 +53,9 @@ var UserAvatar = Class.create({
 		this.form.submit();
     this.file_input.value = '';
 	},
-  uploadCompleted: function() {
+  uploadCompleted: function(path) {
 		this.status.className = 'ok';
+    this.image.src = path;
 
 		this.hideUploadForm.bind(this).delay(1.0);
 		this.handleMouseOut.bind(this, true).delay(1.4);

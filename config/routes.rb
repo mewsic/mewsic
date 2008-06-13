@@ -44,6 +44,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :tracks, :has_one => :player, :member => { :rate => :put, :download => :get }
   
   map.resources :search
+
+  map.resources :avatars
   
   map.signup '/signup', :controller => 'users', :action => 'new'
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate'

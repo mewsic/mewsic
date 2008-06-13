@@ -18,6 +18,9 @@ class BandMembersController < ApplicationController
   
   def create
     @member = BandMember.new(params[:band_member])    
+
+    load_name_and_avatar!
+
     @member.user = @user
     @member.save!
 
@@ -29,7 +32,11 @@ class BandMembersController < ApplicationController
 
   def update
     @member = BandMember.find(params[:id])
-    @member.update_attributes!(params[:band_member])
+    @member.update_attributes(params[:band_member])
+
+    load_name_and_avatar!
+
+    @member.save!
 
     render :partial => 'users/my/band_member', :object => @member
 
@@ -39,6 +46,7 @@ class BandMembersController < ApplicationController
 
   def destroy
     @member = @user.members.find(params[:id])
+    @member.avatars.each(&:destroy)
     @member.destroy
 
     render :nothing => true, :status => :ok
@@ -63,4 +71,19 @@ protected
     redirect_to('/') and return unless @user.read_attribute(:type) == 'Band'
   end
 
+private
+
+  def load_name_and_avatar!
+    if @member.name.strip =~ /^\d+$/ # this is a myousica ID, try to find an user..
+      user = User.find(@member.name)
+      @member.name = user.nickname
+      @member.avatars.each(&:destroy)
+      @member.avatars << user.avatar.clone_with_thumbnails if user.avatar
+    else # this is a bare member
+      unless params[:band_member_avatar_id].blank?
+        @member.avatars.each(&:destroy)
+        @member.avatars << Avatar.find(params[:band_member_avatar_id])
+      end
+    end
+  end
 end

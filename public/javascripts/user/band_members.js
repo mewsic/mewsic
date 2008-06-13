@@ -73,6 +73,11 @@ var BandMembers = Class.create({
     this.alert = this.element.down('#band_alert');
     this.members = this.element.down('#band_members');
 
+    this.avatar_form = this.element.down('#band_member_avatar-form');
+    this.avatar_file_input = this.element.down('#avatar_uploaded_data');
+    this.avatar_file_input.observe('change', this.uploadNewAvatar.bind(this));
+    this.avatar_preview = this.element.down('#band_member_avatar_preview').down('img');
+
     this.buttons = this.element.down('#band_form_buttons');
 
     this.b_submitForm = this.submitForm.bind(this);
@@ -83,9 +88,11 @@ var BandMembers = Class.create({
     this.cancel_button = this.element.down('#band_button_cancel');
     this.cancel_button.observe('click', this.b_cancelAddMember);
 
-    this.instrument_select = this.element.down('select');
+    this.b_watchMemberName = this.watchMemberName.bind(this);
     this.member_name_input = this.element.down('.input_member_name');
+    this.member_name_input.observe('keyup', this.b_watchMemberName);
 
+    this.instrument_select = this.element.down('select');
     this.makeInstrumentsSelect();
 
     this.b_unloadBandForm = this.unloadBandForm.bind(this);
@@ -94,6 +101,10 @@ var BandMembers = Class.create({
     this.edit_box.down('a').observe('click', this.b_unloadBandForm);
 
     this.members.select('a').each(this.enableMemberLinks.bind(this));
+
+    if (this.members.descendants().size() == 0) {
+      this.addMember(null);
+    }
 
     this.spinner.hide();
     this.edit_box.show();
@@ -112,7 +123,6 @@ var BandMembers = Class.create({
   },
 
   makeInstrumentsSelect: function() {
-
     if (this.instrument_list == null) { // build it once
       instrument_list = new Element('div', {id: 'instrument_list', style: 'display:none;'});
     
@@ -130,12 +140,18 @@ var BandMembers = Class.create({
 
       this.instrument_list = instrument_list;
       this.instrument_layer = new Element('div', {id: 'instrument_layer'});
+      if (Prototype.Browser.IE) {
+        // IE hack.. it reacts to onclick events only if the div actually
+        // contains some text..... there should be a better way .....
+        this.instrument_layer.setOpacity(0);
+        this.instrument_layer.innerHTML = 'MMMMMMMMMMMMMMMMMMMM';
+      }
     }
 
     this.instrument_select.up().insert({bottom: this.instrument_layer});
     this.instrument_select.up().insert({bottom: this.instrument_list});
 
-    this.instrument_layer.observe('click', this.showInstrumentsSelect.bind(this));
+    this.instrument_layer.observe('click', this.toggleInstrumentsSelect.bind(this));
     this.instrument_list.select('a').each(this.instrumentClick.bind(this));
   },
 
@@ -143,13 +159,69 @@ var BandMembers = Class.create({
     link.observe('click', this.instrumentSelected.bind(this, link.getAttribute('rel')));
   },
 
-  showInstrumentsSelect: function(event) {
+  watchMemberName: function(event) {
+    var value = event.element().value;
+
+    if (value.blank() || value.match(/^\d+/)) { // this is a myousica ID
+      //if (this.avatar_box.visible())
+        this.avatar_box.hide();//fade({duration: 0.3});
+    } else {
+      //if (!this.avatar_box.visible())
+        this.avatar_box.show();//appear({duration: 0.3});
+    }
+  },
+
+  destroyCurrentAvatar: function() {
+    if (this.avatar_id) {
+      // Destroy previous avatar
+      new Ajax.Request('/avatars/' + this.avatar_id, {
+        method: 'DELETE',
+        asynchronous: true,
+        evalScripts: false,
+        parameters: {
+          authenticity_token: encodeURIComponent($('authenticity-token').value)
+        }
+      });
+    }
+  },
+
+  uploadNewAvatar: function() {
+    this.edit_box.hide();
+    this.spinner.show();
+    this.avatar_form.submit();
+    this.avatar_file_input.value = '';
+  },
+
+  uploadCompleted: function(id, path) {
+    this.alert.hide();
+    this.destroyCurrentAvatar();
+    this.setAvatarID(id);
+    this.avatar_preview.src = path;
+    this.spinner.hide();
+    this.edit_box.show();
+  },
+
+  setAvatarID: function(id) {
+    this.avatar_id = id;
+    this.form.down('#band_member_avatar_id').value = id;
+  },
+
+  uploadFailed: function() {
+    this.alert.innerHTML = 'Upload failed, please try again';
+    this.alert.show();
+    this.spinner.hide();
+    this.edit_box.show();
+  },
+
+  toggleInstrumentsSelect: function(event) {
     event.stop();
+
     Effect.toggle(this.instrument_list, 'blind', {duration: 0.3});
   },
 
   instrumentSelected: function(value, event) {
     event.stop();
+
     this.instrument_list.blindUp({duration: 0.3});
     this.instrument_select.value = value;
   },
@@ -182,6 +254,7 @@ var BandMembers = Class.create({
     this.ok_button.stopObserving('click', this.b_submitForm);
     this.cancel_button.stopObserving('click', this.b_cancelAddMember);
     this.add_button.stopObserving('click', this.b_addMember);
+    this.input_member_name.stopObserving('keypress', this.b_watchMemberName);
 
     this.b_addMember = null;
     this.add_button = this.ok_button = this.cancel_button = null;
@@ -189,7 +262,8 @@ var BandMembers = Class.create({
   },
 
   addMember: function(event) {
-    event.stop();
+    if (event)
+      event.stop();
 
     this.add_button.hide();
     this.buttons.show();
@@ -198,12 +272,18 @@ var BandMembers = Class.create({
     this.form._method = 'POST';
     this.form.callback = this.memberAdded.bind(this);
 
-    this.member_name_box.blindDown({duration: 0.3});
-    this.instrument_box.blindDown({duration: 0.3});
-    //this.avatar_box.blindDown({duration: 0.3});
+    this.member_name_box.show();//appear({duration: 0.3});
+    this.instrument_box.show();//appear({duration: 0.3});
   },
 
   cancelAddMember: function(event) {
+    event.stop();
+
+    this.destroyCurrentAvatar();
+    this.closeEditPane();
+  },
+
+  closeEditPane: function(event) {
     this.alert.hide();
     this.buttons.hide();
     this.add_button.show();
@@ -211,9 +291,11 @@ var BandMembers = Class.create({
     this.member_name_input.value = '';
     this.instrument_select.value = '';
 
-    this.member_name_box.blindUp({duration: 0.3});
-    this.instrument_box.blindUp({duration: 0.3});
-    //this.avatar_box.blindUp({duration: 0.3});
+    this.member_name_box.hide();//fade({duration: 0.3});
+    this.instrument_box.hide();//fade({duration: 0.3});
+    //if (this.avatar_box.visible())
+      this.avatar_box.hide();//fade({duration: 0.3});
+    this.avatar_preview.src = '/images/default_avatars/avatar_icon.gif';
   },
 
   editMember: function(member_name, member_id, instrument_id, event) {
@@ -229,9 +311,28 @@ var BandMembers = Class.create({
     this.member_name_input.value = member_name;
     this.instrument_select.value = instrument_id;
 
-    if (!this.member_name_box.visible() && !this.instrument_box.visible()) {
-      this.member_name_box.blindDown({duration: 0.3});
-      this.instrument_box.blindDown({duration: 0.3});
+    //if (!this.member_name_box.visible() && !this.instrument_box.visible()) {
+      this.member_name_box.show();//appear({duration: 0.3});
+      this.instrument_box.show();//appear({duration: 0.3});
+    //}
+
+    // If this is not a myousica user...
+    if (this.member_name_input.value.match(/^\w[\w\s\d]*$/)) {
+      // ...and has got a current avatar...
+      var current_avatar = this.members.down('#band_member_'+member_id+' img.avatar');
+
+      // ..show it!
+      this.avatar_preview.src = current_avatar.src;
+
+      // and cache its id so if the user changes it it'll be destroyed
+      if (!current_avatar.id.blank()) {
+        this.avatar_id = current_avatar.id;
+      }
+
+      // finally make the avatar box appear, if it's not yet visible
+      //if (!this.avatar_box.visible()) {
+        this.avatar_box.show();//appear({duration: 0.3});
+      //}
     }
   },
 
@@ -248,7 +349,7 @@ var BandMembers = Class.create({
       parameters: {
         authenticity_token: encodeURIComponent($('authenticity-token').value)
       },
-      onSuccess: this.memberRemoved.bind(this, member_id),
+      onSuccess: this.memberDeleted.bind(this, member_id),
       onLoading: this.submitting.bind(this),
       onFailure: function() { alert("Error while deleting band member. Please refresh the page and try again"); }
     });
@@ -278,7 +379,8 @@ var BandMembers = Class.create({
     this.members.insert({bottom: request.responseText});
     this.members.select('.band_member').last().select('a').each(this.enableMemberLinks.bind(this));
 
-    this.cancelAddMember();
+    this.setAvatarID('');
+    this.closeEditPane();
     this.updateMemberCount(1);
     this.spinner.hide();
     this.edit_box.show();
@@ -291,15 +393,19 @@ var BandMembers = Class.create({
     element.highlight();
     element.select('a').each(this.enableMemberLinks.bind(this));
 
-    this.cancelAddMember();
+    this.setAvatarID(null);
+    this.closeEditPane();
     this.spinner.hide();
     this.edit_box.show();
   },
 
-  memberRemoved: function(id) {
+  memberDeleted: function(id) {
     var element = this.members.down('#band_member_' + id);
-    element.puff({afterFinish: element.remove.bind(this)});
+    element.fade({afterFinish: element.remove});
+
+    this.setAvatarID(null);
     this.updateMemberCount(-1);
+    this.closeEditPane();
     this.spinner.hide();
     this.edit_box.show();
   },
@@ -307,14 +413,24 @@ var BandMembers = Class.create({
   submitFailed: function(request) {
     this.edit_box.show();
     this.spinner.hide();
+    this.alert.innerHTML = 'Please insert all fields!';
     this.alert.show();
   },
 
   updateMemberCount: function(delta) {
     var e = $('band_members_count');
-    e.innerHTML = e.innerHTML.sub('^\\d+', parseInt(e.innerHTML) + delta);
-    e.highlight({startcolor: '#FFFFFF', endcolor: '#E1EAEE'})
+    var count = parseInt(e.innerHTML) + delta;
+
+    if (count == 1) { // poor man's pluralize() :)
+      e.innerHTML = '1 member';
+    } else {
+      e.innerHTML = count + ' members';
+    }
+
+    e.highlight({startcolor: '#FFFFFF', endcolor: '#E1EAEE'}); // XXX infer bg color from element
   },
+
+  __dummy__: function() {}
 });
 
 document.observe('dom:loaded', function() {

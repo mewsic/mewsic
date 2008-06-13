@@ -3,63 +3,50 @@
 		</div>
 
 		<form id="band_member_form" onsubmit="return false;">
+			<%= hidden_field_tag 'band_member_avatar_id' %>
 			<div id="band_member_add" style="display: none">
-				<span id="band_over_input_text">
+				<span class="band_over_input_text">
 					Member name or <strong>Myousica ID:</strong>
 				</span>
-				<input type="text" class="input_member_name" name="band_member[name]" maxlength="20">
+				<div>
+					<input type="text" class="input_member_name" name="band_member[name]" maxlength="20">
+				</div>
 			</div>
     
 			<div id="band_instrument_select" style="display: none">
-				<span id="band_over_input_text">
+				<span class="band_over_input_text">
 					Choose instrument:
-						<div id="band_instrument_selector">
-							<%= instruments_select @member %>
-						</div>
 				</span>
+				<div id="band_instrument_selector">
+					<%= instruments_select @member %>
+				</div>
 			</div>
 		</form>
 
 		<div id="band_upload_avatar" style="display:none">
-			<span id="band_over_input_text">
+			<span class="band_over_input_text">
 				Upload avatar:
 			</span>
-				<div id="band_browse_avatar">
-					<%= image_tag 'band_button_browse.png' %> <!-- FIXME -->
-				</div>
+			<div id="band_browse_avatar">
+				<% ajax_upload_form(@member, :name => :avatar, :url => formatted_avatars_path('js'), :id => 'band_member_avatar') do |f| %>
+					<%= f.ajax_file_field :uploaded_data %>
+					<%= f.hidden_iframe 'band_member_avatar' %>
+				<% end %>
+			</div>
+			<div id="band_member_avatar_preview"><%= image_tag 'default_avatars/avatar_icon.gif', :title => 'current avatar' %></div>
 		</div>
 
 		<div id="band_buttons_bottom">
-			<span id="band_alert" style="display: none">
+			<div id="band_alert" style="display: none">
 				Please insert all fields!
-			</span>
+			</div>
 			<div id="band_buttons">
 				<div id="band_form_add">
-					<%= image_tag 'band_button_add.png', :id => 'band_button_add' %>
+					<%= image_tag 'band_button_add.png', :id => 'band_button_add', :title => 'add a new member' %>
 				</div>	
 				<div id="band_form_buttons" style="display:none">
-					<%= image_tag 'band_button_cancel.png', :id => 'band_button_cancel' %>
-					<%= image_tag 'band_button_ok.png', :id => 'band_button_ok' %>
+					<%= image_tag 'band_button_cancel.png', :id => 'band_button_cancel', :title => 'cancel' %>
+					<%= image_tag 'band_button_ok.png', :id => 'band_button_ok', :title => 'OK' %>
 				</div>
 			</div>
 		</div>
-
-<!--
-<div>
-  <%- remote_form_for(:band_member, 
-        :method => 'post',
-        :update => 'band-members',
-        :position => :bottom,
-        :html => { :id => 'add-band-member-form' },
-        :loading => "var b=$('add-band-save-button');b.value='Saving...';b.disabled=true;",
-        :url => user_members_path(:user_id => @user.id)) do |f| -%>
-    <p>
-      <label>Name:</label>
-      <%= f.text_field :name %><br />
-    </p>
-    <p>
-      <%= submit_tag 'Save', :id => 'add-band-save-button' %>
-    </p>
-  <%- end -%>
-</div>
--->

@@ -356,6 +356,24 @@ module Technoweenie # :nodoc:
         self.class.with_image(temp_path, &block)
       end
 
+      # Shamelessly copy-pasted from http://danieloshea.com/articles/254-cloning-images
+      # and adjusted a bit
+      # -vjt
+      def clone_with_thumbnails
+        returning self.clone do |c|
+          self.thumbnails.each do |thumb|
+            n = thumb.clone
+            n.temp_path = thumb.create_temp_file
+            n.save_to_storage
+            c.thumbnails << n
+          end
+          c.temp_path = self.create_temp_file
+          c.save_to_storage
+          c.save!
+        end
+      end
+
+
       protected
         # Generates a unique filename for a Tempfile.
         def random_tempfile_filename
