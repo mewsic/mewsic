@@ -13,10 +13,10 @@ var Player = Class.create({
   
   initLinks: function() {
     $$('a.player').each(function(element) {
-//      if(!this.links.include(element)) {
-//        this.links.push(element);
-          element.observe('click', this.handleClick.bindAsEventListener(this, element));
-//      }      
+      if(!this.links.include(element)) {
+        this.links.push(element);
+        element.observe('click', this.handleClick.bindAsEventListener(this, element));
+      }      
     }.bind(this));
   },
   
@@ -32,12 +32,11 @@ var Player = Class.create({
       this.loadPage(url);
     } else {   
       this.open = true;
-      this.loadPage(url);
-      // Effect.BlindDown(this.container, {      
-      //   afterFinish: function() {
-      //     this.loadPage(url);
-      //   }.bind(this)
-      // });
+      Effect.BlindDown(this.container, {      
+        afterFinish: function() {
+          this.loadPage(url);
+        }.bind(this)
+      });
     }    
   },
   
