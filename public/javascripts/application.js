@@ -32,11 +32,12 @@ var Player = Class.create({
       this.loadPage(url);
     } else {   
       this.open = true;
-      Effect.BlindDown(this.container, {      
-        afterFinish: function() {
-          this.loadPage(url);
-        }.bind(this)
-      });
+      this.loadPage(url);
+      // Effect.BlindDown(this.container, {      
+      //   afterFinish: function() {
+      //     this.loadPage(url);
+      //   }.bind(this)
+      // });
     }    
   },
   

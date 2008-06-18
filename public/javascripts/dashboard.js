@@ -31,5 +31,5 @@ var Splash = {
 };
 
 document.observe('dom:loaded', function() {
-  new PeriodicalExecuter(Splash.update, 3);
+  new PeriodicalExecuter(Splash.update, 10);
 });
