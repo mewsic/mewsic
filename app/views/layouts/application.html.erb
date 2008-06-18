@@ -43,5 +43,11 @@
     <div class="bg-bottom-body"></div>
   </div>
   <%= render :partial => 'shared/footer' %>
+  <div id="player-container" style="display: none; position: fixed; bottom: 0; height: 100px; width: 100%; background: transparent url('/images/lightwindow/black-70.png');">
+    <a href="#" onclick="Player.instance.close();return false;">CLOSE</a>
+    <div class="content">
+      
+    </div>
+  </div>
 </body>
 </html>

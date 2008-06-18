@@ -21,9 +21,9 @@ var Splash = {
           mlabSlider.initTrackButtons(true);
           mlabSlider.initSongButtons(true);
         }        
-        splash.descendants().select('.instrument').each(function(element) {
-          new Tip(element, element.getAttribute('rel'));
-        });
+        // splash.descendants().select('.instrument').each(function(element) {
+        //   new Tip(element, element.getAttribute('rel'));
+        // });
       }
     });
   }
@@ -31,5 +31,5 @@ var Splash = {
 };
 
 document.observe('dom:loaded', function() {
-  new PeriodicalExecuter(Splash.update, 10);
+  new PeriodicalExecuter(Splash.update, 3);
 });

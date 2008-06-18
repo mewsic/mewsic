@@ -1,3 +1,67 @@
+var Player = Class.create({
+
+  initialize: function() {
+    this.container = $('player-container');
+    this.content = this.container.down('.content');
+    this.open = false;
+    this.links = new Array();
+    this.initLinks();
+    Ajax.Responders.register({
+      onComplete: this.initLinks.bind(this)      
+    });
+  },
+  
+  initLinks: function() {
+    $$('a.player').each(function(element) {
+//      if(!this.links.include(element)) {
+//        this.links.push(element);
+          element.observe('click', this.handleClick.bindAsEventListener(this, element));
+//      }      
+    }.bind(this));
+  },
+  
+  handleClick: function(event, link) {
+    event.stop();
+    var url = link.getAttribute('href');    
+    this.openContainer(url);
+  },
+  
+  openContainer: function(url) {
+    if(this.open) {
+      this.clearContent();
+      this.loadPage(url);
+    } else {   
+      this.open = true;
+      Effect.BlindDown(this.container, {      
+        afterFinish: function() {
+          this.loadPage(url);
+        }.bind(this)
+      });
+    }    
+  },
+  
+  close: function() {    
+    Effect.BlindUp(this.container);
+    this.open = false;
+    this.clearContent();
+  },
+  
+  clearContent: function() {
+    this.content.update('');
+  },
+  
+  loadPage: function(url) {
+    new Ajax.Updater(this.content, url, {
+      method: 'get'
+    });
+  }
+  
+});
+
+Player.init = function() {
+  Player.instance = new Player();
+}
+
 var Pagination = Class.create({ 
 
   initialize: function() {
@@ -129,6 +193,7 @@ var SearchBoxBehaviour = Class.create({
 
 document.observe('dom:loaded', function(event) {
   // $('search').down('input').focus();
+  Player.init();
   $('logo').focus();
 
 	if ( $('log-in-errors') != null && $('log-in-errors').visible() ) {
