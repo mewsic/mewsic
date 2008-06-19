@@ -22,6 +22,8 @@ class Answer < ActiveRecord::Base
   
   attr_accessible :body
   
+  has_many :abuses, :as => :abuseable
+  
   validates_presence_of :body
 
   after_create :set_last_activity_at

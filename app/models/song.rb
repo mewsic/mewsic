@@ -33,7 +33,9 @@ class Song < ActiveRecord::Base
 
 
   belongs_to :genre
-  belongs_to :user
+  belongs_to :user 
+  
+  has_many :abuses, :as => :abuseable
   
   acts_as_rated :rating_range => 0..5
   

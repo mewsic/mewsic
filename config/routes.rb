@@ -12,6 +12,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :answers, :member => { :rate => :put, :siblings => :get }, :collection => { :top => :get, :newest => :get, :open => :get, :search => :get } do |answers|
     answers.resources :replies
+    answers.resources :abuses
   end  
   map.connect 'replies/:id/rate', :controller => 'replies', :action => 'rate'
   
@@ -37,7 +38,12 @@ ActionController::Routing::Routes.draw do |map|
   map.reset_password '/reset_password/:id',  :controller => 'users', :action => 'reset_password'
     
   map.resources :sessions
-  map.resources :songs, :has_one => :player, :member => { :mix => :post, :rate => :put , :direct_sibling_tracks => :get, :indirect_sibling_tracks => :get, :download => :get }
+  map.resources :songs, :has_one => :player, 
+    :member => { :mix => :post, :rate => :put , :direct_sibling_tracks => :get, :indirect_sibling_tracks => :get, :download => :get } do |song|
+
+    song.resources :abuses
+    
+  end
   
   #map.connect 'songs/:id/mix', :controller => 'songs', :action => 'mix'
   
