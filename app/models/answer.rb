@@ -23,14 +23,27 @@ class Answer < ActiveRecord::Base
   attr_accessible :body
   
   validates_presence_of :body
+
+  after_create :set_last_activity_at
   
   def self.find_newest(options = {})
     options.merge!({:order => 'answers.created_at desc'})
     self.find(:all, options)
   end
   
+  def self.close_old_answers
+    update_all(["closed = ?", true], ["last_activity_at < ?", 1.month.ago])
+  end
+  
   def update_replies_count
     update_attribute(:replies_count, replies.count)
     replies.size
+  end  
+  
+private
+
+  def set_last_activity_at
+    update_attribute(:last_activity_at, self.created_at)
   end
+  
 end

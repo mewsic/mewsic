@@ -6,7 +6,6 @@
 #  id          :integer(11)   not null, primary key
 #  description :string(255)   
 #  icon        :string(255)   
-#  category_id :integer(11)
 #  created_at  :datetime      
 #  updated_at  :datetime      
 #

@@ -4,16 +4,21 @@ class RepliesController < ApplicationController
   
   def create
     @answer = Answer.find(params[:answer_id])
-    @reply = Reply.new(params[:reply])
-    @reply.answer = @answer
-    @reply.user = current_user
-    if @reply.save
-      flash[:notice] = 'Reply has been saved correctly'
-      redirect_to answer_url(@answer)
+    
+    if @answer.closed?
+      flash[:error] = 'The answer is closed'
     else
-      flash[:error] = 'The body field is required!'
-      redirect_to answer_url(@answer)
+      @reply = Reply.new(params[:reply])
+      @reply.answer = @answer
+      @reply.user = current_user
+      if @reply.save
+        flash[:notice] = 'Reply has been saved correctly'      
+      else
+        flash[:error] = 'The body field is required!'
+      end
     end
+    
+    redirect_to answer_url(@answer)
   end
   
   def rate    

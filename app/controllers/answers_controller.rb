@@ -8,7 +8,7 @@ class AnswersController < ApplicationController
       @answers = @user.answers.paginate(:page => params[:page], :per_page => 6, :order => 'created_at DESC')  
       render :partial => '/users/answers'
     else
-      @open_answers = Answer.paginate(:per_page => 4, :page => 1, :conditions => "answers.replies_count = 0", :include => {:user => :avatars}, :order => 'answers.created_at DESC')
+      @open_answers = Answer.paginate(:per_page => 4, :page => 1, :conditions => ["answers.closed = ?", false], :include => {:user => :avatars}, :order => 'answers.created_at DESC')
       @top_answers = Answer.paginate(:per_page => 6, :page => 1, :include => {:user => :avatars}, :order => 'answers.replies_count DESC')
       @newest_answers = Answer.paginate(:per_page => 6, :page => 1, :include => {:user => :avatars}, :order => 'answers.created_at DESC')
       @top_contributors = User.find(:all, :include => [:avatars], :limit => 10, :order => 'users.replies_count DESC')
@@ -50,7 +50,7 @@ class AnswersController < ApplicationController
   end
   
   def open
-    @answers = Answer.paginate(:page => params[:page], :per_page => 10, :conditions => "answers.replies_count = 0", :include => {:user => :avatars}, :order => 'answers.created_at DESC')
+    @answers = Answer.paginate(:page => params[:page], :per_page => 10, :conditions => ["answers.closed = ?", false], :include => {:user => :avatars}, :order => 'answers.created_at DESC')
   end
 
   def create

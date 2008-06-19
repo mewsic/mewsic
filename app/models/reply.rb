@@ -22,6 +22,14 @@ class Reply < ActiveRecord::Base
   
   attr_accessible :body
   
-  validates_presence_of :body
+  after_create :update_answer_last_activity_at
+  
+  validates_presence_of :body    
+
+private
+
+  def update_answer_last_activity_at
+    self.answer.update_attribute(:last_activity_at, self.created_at)
+  end
   
 end

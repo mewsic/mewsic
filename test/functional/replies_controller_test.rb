@@ -38,6 +38,20 @@ class RepliesControllerTest < ActionController::TestCase
     assert_equal replies_count + 1, answer.replies.count
   end
   
+  def test_should_not_create_if_answer_is_closed
+    login_as :quentin
+    answer = answers(:closed_answer)
+    replies_count = answer.replies.count
+    quentin_replies_count = users(:quentin).replies.count
+    assert_no_difference 'Reply.count' do
+      post :create, :answer_id => answer.id, :reply => { :body => 'yes' }
+      assert_response :redirect
+    end
+    assert_equal 'The answer is closed', flash[:error]
+    assert_equal quentin_replies_count, users(:quentin).replies.count
+    assert_equal replies_count, answer.replies.count
+  end
+  
   def test_should_rate
     login_as :quentin
     a = Answer.new(:body => 'question')

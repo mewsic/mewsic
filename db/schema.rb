@@ -9,17 +9,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 28) do
+ActiveRecord::Schema.define(:version => 30) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
     t.text     "body"
-    t.integer  "replies_count",                                :default => 0
+    t.integer  "replies_count",                                   :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "rating_count"
-    t.decimal  "rating_total",  :precision => 10, :scale => 2
-    t.decimal  "rating_avg",    :precision => 10, :scale => 2
+    t.decimal  "rating_total",     :precision => 10, :scale => 2
+    t.decimal  "rating_avg",       :precision => 10, :scale => 2
+    t.boolean  "closed",                                          :default => false, :null => false
+    t.datetime "last_activity_at"
   end
 
   create_table "band_members", :force => true do |t|

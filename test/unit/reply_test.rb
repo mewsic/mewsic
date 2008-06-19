@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class ReplyTest < ActiveSupport::TestCase
   
-  fixtures :users
+  fixtures :users, :answers
   
   def test_should_update_counter_cache
     a = Answer.new(:body => "What's your name")
@@ -13,6 +13,17 @@ class ReplyTest < ActiveSupport::TestCase
     r.user = users(:quentin)
     r.answer = a
     r.save
-    assert_equal 1, a.reload.replies_count    
+  end
+  
+  def test_should_update_answer_last_activity_at
+    a = answers(:still_open_answer)
+    assert_equal a.last_activity_at, a.created_at
+    r = Reply.new(:body => "My name is pippo!")
+    r.user = users(:quentin)
+    r.answer = a
+    assert_difference 'Reply.count' do            
+      r.save
+    end
+    assert_equal a.reload.last_activity_at, r.reload.created_at
   end
 end

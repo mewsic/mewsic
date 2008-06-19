@@ -26,7 +26,19 @@ user_10_asks_about_soccer:
 user_10_asks_about_girls:
   user: user_10
   body: What is your favorite kind of girl?
-  created_at: <%= 1.week.from_now.to_s(:db) %>
+  created_at: <%= 1.week.ago.to_s(:db) %>
+
+closed_answer:
+  user: user_10
+  body: What is your favorite kind of girl?
+  closed: <%= true %>
+  created_at: <%= 2.months.ago.to_s(:db) %>
+
+still_open_answer:
+  user: user_10
+  body: still open
+  created_at: <%= 2.months.ago.to_s(:db) %>
+  last_activity_at: <%= 2.months.ago.to_s(:db) %>
   
 <% 100.times do |i| %>
 answer_<%= i + 3 %>:
