@@ -129,3 +129,25 @@ song_aaron_<%= i + 4 %>:
   listened_times: <%= rand(1000) %>
   created_at: <%= (rand(30)).days.ago.to_s :db %>
 <% end %>
+
+billie_jean_by_michael_jackson:
+  title: Billie Jean
+  user: quentin
+  original_author: Michael Jackson
+  genre: pop
+  listened_times: 1000
+  
+billie_jean_by_giovanni:
+  title: Billie Jean by Giovanni
+  user: quentin
+  original_author: Michael Jackson
+  genre: pop
+  listened_times: 900
+  
+billie_jean_by_pilu:
+  title: Billie Jackson
+  user: quentin
+  original_author: Pilu Jackson
+  genre: pop
+  listened_times: 42
+  

@@ -76,3 +76,42 @@ drum_for_gravity_blast_beat:
   parent_song: gravity_blast_beat
   instrument: drums
   seconds: 205
+
+# Don't touch these fixtures. They're central to a test that has to run
+# or the cheerleader will die and the world won't be saved.
+# -- Mohinder Suresh
+voice_for_billie_jean_by_michael_jackson:
+  title: Voice for Billie Jean
+  parent_song: billie_jean_by_michael_jackson
+  instrument: microphone
+  seconds: 314
+  
+drums_for_billie_jean_by_michael_jackson:
+  title: Drums for Billie Jean
+  parent_song: billie_jean_by_michael_jackson
+  instrument: drums
+  seconds: 213
+  
+keyboards_for_billie_jean_by_michael_jackson:
+  title: Keyboards for Billie Jean
+  parent_song: billie_jean_by_michael_jackson
+  instrument: saxophone
+  seconds: 213
+
+guitar_for_billie_jean_by_michael_jackson:
+  title: Guitar for Billie Jean
+  parent_song: billie_jean_by_michael_jackson
+  instrument: guitar
+  seconds: 213
+  
+voice_for_billie_jean_by_giovanni:
+  title: Voice for Billie Jean by Giovanni
+  parent_song: billie_jean_by_giovanni
+  instrument: microphone
+  seconds: 314
+
+drums_for_billie_jean_by_pilu:
+  title: Drums for Billie Jean by Pilu
+  parent_song: billie_jean_by_pilu
+  instrument: drums
+  seconds: 213

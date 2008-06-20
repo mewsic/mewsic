@@ -292,6 +292,13 @@ class UserTest < Test::Unit::TestCase
     assert q.reload.blog_url.blank?
   end
   
+  def test_should_update_replies_count
+    u = User.find :first
+    u.replies_count = 111
+    u.save
+    assert_equal 111, u.reload.replies_count
+  end
+  
   protected
     
     def check_finder_for_inactive(finder)

@@ -94,4 +94,83 @@ gravity_blast_beat_jungle_remix_drum:
   loop: 1
   balance: 0
   time_shift: 0
-  
+
+bjbm_voice:
+  song: billie_jean_by_michael_jackson
+  track: voice_for_billie_jean_by_michael_jackson
+  volume: 80
+  loop: 1
+  balance: 0
+  time_shift: 0
+
+bjbm_drums:
+  song: billie_jean_by_michael_jackson
+  track: drums_for_billie_jean_by_michael_jackson
+  volume: 80
+  loop: 1
+  balance: 0
+  time_shift: 0
+
+bjbm_keyboards:
+  song: billie_jean_by_michael_jackson
+  track: keyboards_for_billie_jean_by_michael_jackson
+  volume: 80
+  loop: 1
+  balance: 0
+  time_shift: 0
+
+bjbm_guitar:
+  song: billie_jean_by_michael_jackson
+  track: guitar_for_billie_jean_by_michael_jackson
+  volume: 80
+  loop: 1
+  balance: 0
+  time_shift: 0
+
+bjbg_voice:
+  song: billie_jean_by_giovanni
+  track: voice_for_billie_jean_by_giovanni
+  volume: 80
+  loop: 1
+  balance: 0
+  time_shift: 0
+
+bjbg_drums:
+  song: billie_jean_by_giovanni
+  track: drums_for_billie_jean_by_michael_jackson
+  volume: 80
+  loop: 1
+  balance: 0
+  time_shift: 0
+
+bjbg_keyboards:
+  song: billie_jean_by_giovanni
+  track: keyboards_for_billie_jean_by_michael_jackson
+  volume: 80
+  loop: 1
+  balance: 0
+  time_shift: 0
+
+bjbg_guitar:
+  song: billie_jean_by_giovanni
+  track: guitar_for_billie_jean_by_michael_jackson
+  volume: 80
+  loop: 1
+  balance: 0
+  time_shift: 0
+
+bjbp_voice:
+  song: billie_jean_by_pilu
+  track: voice_for_billie_jean_by_giovanni
+  volume: 80
+  loop: 1
+  balance: 0
+  time_shift: 0
+
+bjbp_drums:
+  song: billie_jean_by_pilu
+  track: drums_for_billie_jean_by_pilu
+  volume: 80
+  loop: 1
+  balance: 0
+  time_shift: 0
