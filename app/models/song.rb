@@ -101,13 +101,16 @@ class Song < ActiveRecord::Base
   end
   
   def direct_siblings(limit = 5)
-    #Song.find(:all, :include => [{:mixes => :track}], :conditions => ["songs.id != ? AND mixes.track_id IN (?)", self.id, self.tracks.collect{|t| t.id}], :limit => limit)
     Mix.find_by_sql("select distinct x.original_author, x.title, t.song_id from mixes s inner join mixes t on s.track_id = t.track_id inner join songs x on t.song_id = x.id where s.song_id = #{self.id} LIMIT #{limit}") 
   end
   
   def indirect_siblings(limit = 5)
     #Song.find(:all, :include => :tracks, :limit => 2, :conditions => ["songs.published = ? AND songs.id != ?", true, self.id])
     Mix.find_by_sql("select distinct x.original_author, x.title, t.song_id from mixes s inner join mixes t on s.track_id = t.track_id inner join songs x on t.song_id = x.id where s.song_id = #{self.id} LIMIT #{limit}") 
+  end
+  
+  def is_a_direct_sibling_of?(song)
+    direct_siblings.collect {|s| s.song_id}.include?(song)
   end
   
   def siblings_count
