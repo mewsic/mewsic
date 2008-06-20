@@ -75,7 +75,8 @@ ExceptionNotifier.sender_address = %("Myousica Application Error" <error@myousic
 ExceptionNotifier.email_prefix = "[MYOUSICA ERROR] "
 
 
-SQL_RANDOM_FUNCTION = if ActiveRecord::Base.connection.class.to_s == "ActiveRecord::ConnectionAdapters::SQLite3Adapter"
+connection = ActiveRecord::Base.connection
+SQL_RANDOM_FUNCTION = if connection.class.to_s == "ActiveRecord::ConnectionAdapters::SQLite3Adapter"
   'random()'
 elsif connection.class.to_s == "ActiveRecord::ConnectionAdapters::MysqlAdapter"
   'rand()'

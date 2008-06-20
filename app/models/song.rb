@@ -110,7 +110,7 @@ class Song < ActiveRecord::Base
   end
   
   def is_a_direct_sibling_of?(song)
-    direct_siblings.collect {|s| s.song_id}.include?(song)
+    direct_siblings.collect {|s| s.song_id}.include?(song.id)
   end
   
   def siblings_count
