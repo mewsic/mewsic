@@ -94,10 +94,10 @@ class Song < ActiveRecord::Base
     ['sassofono', 'batteria', 'anoleso']
   end    
   
-  def self.find_random_direct_siblings(limit = 5)
+  def self.find_random_direct_siblings(limit = 5)    
     Mix.find_by_sql([
       "select distinct x.original_author, x.title, t.song_id from mixes s inner join mixes t on s.track_id = t.track_id inner join songs x on t.song_id = x.id       
-      ORDER BY RAND() LIMIT #{limit}"]) 
+      ORDER BY #{SQL_RANDOM_FUNCTION} LIMIT #{limit}"]) 
   end
   
   def direct_siblings(limit = 5)

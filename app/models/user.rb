@@ -263,7 +263,7 @@ class User < ActiveRecord::Base
   # TODO: stub sino a quando abbiamo i voti
   # Al momento si ritornano le canzoni per non avere utenti senza canzoni
   def self.find_best_myousicians(options)
-    Song.find :all, options.merge({:conditions => ["users.activated_at IS NOT NULL AND songs.published = ?", true], :order => 'RAND()', :limit => 3, :include => [{:user => [:avatars, :songs]}]})
+    Song.find :all, options.merge({:conditions => ["users.activated_at IS NOT NULL AND songs.published = ?", true], :order => SQL_RANDOM_FUNCTION, :limit => 3, :include => [{:user => [:avatars, :songs]}]})
     #self.find(:all, options.merge({:conditions => "activated_at IS NOT NULL"}))
   end
   

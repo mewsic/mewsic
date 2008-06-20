@@ -58,9 +58,9 @@ class Track < ActiveRecord::Base
   end
   
   def self.find_most_used(options = {})
-    res = Mix.count options.merge({:include => [{:track => [{:parent_song => :user}, :instrument]}], :conditions => ["songs.published = ?", true],  :group => :track, :order => 'count_all DESC'}) 
+    res = Mix.count options.merge({:include => [{:track => [{:parent_song => :user}, :instrument]}], :conditions => ["songs.published = ?", true],  :group => :track, :order => 'count_all DESC, tracks.id ASC'})
     # FIXME
-    res.find_all{|t,c| [t,c] if t}
+#    res.find_all{|t,c| [t,c] if t}
   end
   
   def self.find_paginated_by_user(page, user)

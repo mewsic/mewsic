@@ -73,3 +73,12 @@ TMail::HeaderField::FNAME_TO_CLASS.delete 'content-id'
 ExceptionNotifier.exception_recipients = %w(franz.andrea@gmail.com marcello.barnaba@gmail.com)
 ExceptionNotifier.sender_address = %("Myousica Application Error" <error@myousica.com>)
 ExceptionNotifier.email_prefix = "[MYOUSICA ERROR] "
+
+
+SQL_RANDOM_FUNCTION = if ActiveRecord::Base.connection.class.to_s == "ActiveRecord::ConnectionAdapters::SQLite3Adapter"
+  'random()'
+elsif connection.class.to_s == "ActiveRecord::ConnectionAdapters::MysqlAdapter"
+  'rand()'
+else
+  raise "Unsupported adapter for random extraction."
+end

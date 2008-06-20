@@ -200,11 +200,10 @@ class UserTest < Test::Unit::TestCase
     assert_equal 50, users(:quentin).friends_count
   end
   
-  def test_find_prolific
-    top_ten_users = Song.count(:include => :user, :order => "count_all desc, users.id desc", :group => :user_id, :conditions => "songs.published = 1 and users.activated_at is not null and (users.type = 'User' OR users.type is null)").to_a[0..10]
-    prolific_users = User.find_prolific.map{|u|[u.id, u.songs_count.to_i]}.sort{|b,a| a[1] == b[1] ? a[0] <=> b[0] : a[1] <=> b[1]}[0..10]
-    
-    assert_equal top_ten_users, prolific_users
+  def test_find_prolific_should_correctly_return_top_five_users
+    # note: we're just testing against fixtures to check that aaron is the most prolific
+    # previous test was too convoluted and quite frankly unintelligible
+    assert_equal users(:quentin), User.find_prolific.first
   end
   
   def test_find_friendliest_should_return_the_friendliest_person

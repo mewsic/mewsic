@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 class TrackTest < ActiveSupport::TestCase
   # Replace this with your real tests.
   def test_find_most_used_tracks_should_return_tracks_and_usage
-    assert_equal tracks(:voice_for_radio_ga_ga), Track.find_most_used.first.first
+    assert_equal tracks(:keyboards_for_billie_jean_by_michael_jackson), Track.find_most_used.first.first
     assert_equal 2, Track.find_most_used.first.last
   end
   
