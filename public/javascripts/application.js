@@ -157,7 +157,7 @@ function when(obj, fn) {
   if (obj) fn(obj);
 }
 
-var SearchBoxBehaviour = Class.create({
+var SearchBox = Class.create({
   initialize: function(element) {
     element = $(element);
     if (!element)
@@ -207,7 +207,6 @@ document.observe('dom:loaded', function(event) {
 	if ( $('most-mbands-scroller') != null ) {
 		// new PictureSlider('most-mbands-scroller',  { size: 225 });
 	}
-	
 
 	if ($('mlab-scroller') != null ) {
 	  var mlab_slider = new MlabSlider('mlab-scroller',  {
@@ -260,7 +259,7 @@ document.observe('dom:loaded', function(event) {
 		 
   Message.init();
 
-  new SearchBoxBehaviour('search');
+  new SearchBox('search');
 
   $$('.instrument').each(function(element) {
     new Tip(element, element.getAttribute('rel'));
