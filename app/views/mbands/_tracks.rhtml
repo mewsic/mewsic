@@ -19,7 +19,7 @@
 		          :loading => "$('track_spinner').show();",
 		          :complete => "$('track_spinner').hide();var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initTrackButtons(true); }"
         %>
-		  <% else %>
+		  <% elsif @tracks.next_page %>
 		    <%= image_tag('arrow_simple_left.png', :width => 7, :height => 9)  + ' <strong>Prev</strong> ' %>
 		  <% end %>
 	  </span>
@@ -33,7 +33,7 @@
 		          :loading => "$('track_spinner').show();",
 		          :complete => "$('track_spinner').hide();var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initTrackButtons(true);} "
          %>
-		  <% else %>
+		  <% elsif @tracks.previous_page %>
 		    <%= ' <strong>Next</strong> ' + image_tag('arrow_simple_right.png', :width => 7, :height => 9)%>
 		  <% end %>
 	  </span>

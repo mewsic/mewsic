@@ -1223,6 +1223,14 @@ h2.dj-label{
         padding-bottom: 15px;
 }
 
+#song_spinner, #track_spinner {
+	position:relative;
+	height:0px;
+	width:66px;
+	left:167px;
+	top:120px;
+}
+
 /* page label */
 
 .mband-page-label{

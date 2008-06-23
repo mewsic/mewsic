@@ -15,7 +15,7 @@
               :loading => "$('song_spinner').show();",
               :complete => "$('song_spinner').hide();var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initSongButtons(true); }"
          %>
-		  <% else %>
+		  <% elsif @songs.next_page %>
 		    <%= image_tag('arrow_simple_left.png', :width => 7, :height => 9)  + ' <strong>Prev</strong> ' %>
 		  <% end %>
 	  </span>
@@ -29,7 +29,7 @@
 		          :loading => "$('song_spinner').show();",
 		          :complete => "$('song_spinner').hide();var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initSongButtons(true); }"
          %>
-		  <% else %>
+		  <% elsif @songs.previous_page %>
 		    <%= ' <strong>Next</strong> ' + image_tag('arrow_simple_right.png', :width => 7, :height => 9)%>
 		  <% end %>
 	  </span>

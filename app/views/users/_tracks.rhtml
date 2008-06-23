@@ -1,5 +1,8 @@
 <h1>TRACKS</h1>
-<div class="top-box clear-block">
+<div id="track_spinner" style="display:none;">
+	<%= image_tag 'track-spinner-big.gif' %>
+</div>
+<div id="tracks_container" class="top-box clear-block">
   <div class="bottom-box clear-block">		
 	<div class="elements clear-block">
       <table width="95%" border="0" cellpadding="0" cellspacing="0" class="mlab_tracks">
@@ -9,17 +12,16 @@
     
 	
   <p class="next">
-      <img src="/images/spinner.gif" id="track_spinner" style="display:none;"/>
   	  <span class="nav-bottom">
 		  <% if @tracks.previous_page %>
 		    <%= link_to_remote image_tag('arrow_simple_left.png', :width => 7, :height => 9) + ' <strong>Prev</strong> ' ,
 		          :update => "tracks",
 		          :url => user_tracks_path(@user, { :page => @tracks.previous_page }),
 		          :method => :get,
-		          :loading => "$('track_spinner').show();",
-		          :complete => "$('track_spinner').hide();var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initTrackButtons(true); }"
+		          :loading => "$('tracks_container').setOpacity(0.3); $('track_spinner').show();",
+		          :complete => "$('track_spinner').hide();$('tracks_container').setOpacity(1.0); var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initTrackButtons(true); }"
         %>
-		  <% else %>
+		  <% elsif @tracks.next_page %>
 		    <%= image_tag('arrow_simple_left.png', :width => 7, :height => 9)  + ' <strong>Prev</strong> ' %>
 		  <% end %>
 	  </span>
@@ -30,10 +32,10 @@
 		          :update => "tracks",
 		          :url =>  user_tracks_path(@user,{ :page => @tracks.next_page }),
 		          :method => :get,
-		          :loading => "$('track_spinner').show();",
-		          :complete => "$('track_spinner').hide();var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initTrackButtons(true);} "
+		          :loading => "$('tracks_container').setOpacity(0.3); $('track_spinner').show();",
+		          :complete => "$('track_spinner').hide();$('tracks_container').setOpacity(1.0); var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initTrackButtons(true);} "
          %>
-		  <% else %>
+		  <% elsif @tracks.previous_page %>
 		    <%= ' <strong>Next</strong> ' + image_tag('arrow_simple_right.png', :width => 7, :height => 9)%>
 		  <% end %>
 	  </span>
