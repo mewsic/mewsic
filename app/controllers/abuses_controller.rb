@@ -15,9 +15,9 @@ class AbusesController < ApplicationController
     @abuse = Abuse.new(params[:abuse])
     @abuse.abuseable = @abuseable
     if @abuse.save
-      flash[:notice] = 'Thank you. Your message has been saved successfully.'
+      flash.now[:notice] = 'Thank you. Your message has been saved successfully.'
     else
-      flash[:error] = 'Error saving the message. Please try again.'
+      flash.now[:error] = 'Error saving the message. Please try again.'      
     end
   end
 

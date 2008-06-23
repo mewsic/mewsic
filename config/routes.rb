@@ -12,8 +12,8 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :answers, :member => { :rate => :put, :siblings => :get }, :collection => { :top => :get, :newest => :get, :open => :get, :search => :get } do |answers|
     answers.resources :replies
-    answers.resources :abuses
-  end  
+    answers.resources :abuses, :singular => 'abuse'
+  end
   map.connect 'replies/:id/rate', :controller => 'replies', :action => 'rate'
   
   map.resources :genres do |genre|
@@ -41,7 +41,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :songs, :has_one => :player, 
     :member => { :mix => :post, :rate => :put , :direct_sibling_tracks => :get, :indirect_sibling_tracks => :get, :download => :get } do |song|
 
-    song.resources :abuses
+    song.resources :abuses, :singular => 'abuse'
     
   end
   

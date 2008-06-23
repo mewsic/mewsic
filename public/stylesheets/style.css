@@ -3818,3 +3818,9 @@ div.auto_complete ul strong.highlight {
 	float: left;
 	overflow: hidden;
 }
+
+/* report abuse popup */
+
+.abuse.popup textarea {
+  width: 100%;
+}

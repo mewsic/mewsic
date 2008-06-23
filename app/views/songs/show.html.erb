@@ -58,7 +58,7 @@
   			</tr>
   		</table>
     </div>			
-    <p class="abstract align-right"><a href="#">Report abuse</a></p>
+    <p class="abstract align-right"><a href="<%= formatted_new_song_abuse_path(@song, 'html') %>" params="lightwindow_width=600,lightwindow_height=400" class="lightwindow" title="Report abuse">report abuse</a></p>
   </div>
   <div>
     <h1>Other songs by <%= link_to @song.user.login, user_path(@song.user) %> <span class="no-bold">(<%= @song.user.songs.count %>)</span></h1>

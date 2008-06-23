@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 31) do
+ActiveRecord::Schema.define(:version => 32) do
 
   create_table "abuses", :force => true do |t|
     t.integer  "item_id"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(:version => 31) do
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "topic"
   end
 
   create_table "answers", :force => true do |t|
