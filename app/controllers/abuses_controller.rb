@@ -2,11 +2,12 @@ class AbusesController < ApplicationController
   
   layout false
   
+  before_filter :login_required
   before_filter :find_abuseable
 
   def new
     unless request.xhr?
-      redirect_to_abuseable_page      
+      redirect_to_abuseable_page
       return
     end
   end
@@ -14,6 +15,7 @@ class AbusesController < ApplicationController
   def create
     @abuse = Abuse.new(params[:abuse])
     @abuse.abuseable = @abuseable
+    @abuse.user = current_user
     if @abuse.save
       flash.now[:notice] = 'Thank you. Your message has been saved successfully.'
     else

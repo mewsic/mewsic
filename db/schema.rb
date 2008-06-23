@@ -9,11 +9,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 32) do
+ActiveRecord::Schema.define(:version => 33) do
 
   create_table "abuses", :force => true do |t|
-    t.integer  "item_id"
-    t.string   "item_type"
+    t.integer  "abuseable_id"
+    t.string   "abuseable_type"
     t.integer  "user_id"
     t.text     "body"
     t.datetime "created_at"
