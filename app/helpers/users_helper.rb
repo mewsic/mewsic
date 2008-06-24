@@ -108,7 +108,7 @@ module UsersHelper
   end
   
   def user_inbox_link
-    content = link_to("inbox (#{current_user.unread_message_count})", user_path(current_user));
+    content = link_to("inbox (#{current_user.unread_message_count})", user_path(current_user) + '#inbox', :id => 'inbox-link');
     content = "<strong>#{content}</strong>" if current_user.unread_message_count > 0
     content
   end

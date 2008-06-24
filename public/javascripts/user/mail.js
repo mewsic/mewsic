@@ -98,11 +98,32 @@ var MailBox = Class.create({
   handlePageLoaded: function() {
     this.initPaginationLinks();
     $('popup-spinner').hide();    
+  },
+
+  handleInboxLink: function(event) {
+    if (event) event.stop();
+
+    this.deselectAllLinks();
+
+    var unread_link = this.element.down('.button.popup');
+    unread_link.up().addClassName('active');
+    unread_link.up().up().addClassName('active');
+
+    new Effect.ScrollTo(this.element, {duration: 0.4});
+
+    this.openPopup();
+    this.loadPage('/users/' + $('user-id').value + '/messages/unread');
   }
   
 });
 
 document.observe('dom:loaded', function() {
   MailBox.instance = new MailBox();
+
+  if (window.location.href.split(/#/)[1] == 'inbox') {
+    MailBox.instance.handleInboxLink();
+  }
+
+  $('inbox-link').observe('click', MailBox.instance.handleInboxLink.bind(MailBox.instance));
 });
 
