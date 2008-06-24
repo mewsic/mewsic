@@ -9,17 +9,33 @@
 
 	</div>
 		<div id="mband_invite_core">
-			<div id="mband_select" style="display: <%= current_user.mbands.count > 0 ? 'block' : 'none' %>;">
-				<%= select_tag :mband_id, options_for_select(current_user.mbands.collect{|m| [m.name, m.id]}.unshift(['New Mband', ''])), :onchange => "var v=this.options[this.selectedIndex].value;v.strip() == '' ? $('mband_add_new').show() : $('mband_add_new').hide()" %>
+			<div class="mband_add_block" style="display: <%= current_user.mbands.count > 0 ? 'block' : 'none' %>;">
+				<%= select_tag :mband_id, options_for_select(current_user.mbands.collect{|m| [m.name, m.id]}.unshift(['New Mband', ''])) %>
 			</div>
 
-			<div id="mband_add_new">
-				<span id="band_over_input_text">
-					<strong>New Mband name </strong>
+			<div id="mband_add_new" class="mband_add_block">
+				<span class="band_over_input_text">
+					<strong>New MBand name</strong>
 					<%= text_field_tag :mband_name %>
 				</span>
 
-			</div>		
+				<span class="band_over_input_text">
+					<strong>Your instrument</strong>
+				</span>
+				<div class="band_instrument_selector">
+					<%= instruments_select @new_membership, 'leader_instrument_id' %>
+				</div>
+			</div>
+
+			<div class="mband_add_block">
+				<span class="band_over_input_text">
+					<strong><%= @user.login %>'s instrument</strong>
+				</span>
+				<div class="band_instrument_selector">
+					<%= instruments_select @new_membership, 'instrument_id' %>
+				</div>
+			</div>
+
 			<div id="band_buttons_bottom">
 				<span id="band_alert">&nbsp;</span>
 				<div id="band_buttons">

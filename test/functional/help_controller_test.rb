@@ -9,6 +9,10 @@ class HelpControllerTest < ActionController::TestCase
     ActionMailer::Base.deliveries = []
   end
 
+  def teardown
+    ActionMailer::Base.deliveries = []
+  end
+
   def test_should_show_help_page
     get :index
     assert_response :success
@@ -30,13 +34,13 @@ class HelpControllerTest < ActionController::TestCase
     post :send_mail, :help => { :email => '', :body => '' }
 
     assert_response :success
-    assert assigns(:request).errors.on(:email)
-    assert assigns(:request).errors.on(:body)
+    assert assigns(:help_request).errors.on(:email)
+    assert assigns(:help_request).errors.on(:body)
 
     post :send_mail, :help => { :email => 'invalid email', :body => 'aaaaa' }
 
     assert_response :success
-    assert assigns(:request).errors.on(:email)
+    assert assigns(:help_request).errors.on(:email)
   end
 
   def test_should_send_help_request

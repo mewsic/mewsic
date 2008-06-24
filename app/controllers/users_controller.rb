@@ -36,11 +36,12 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = User.find_from_param(params[:id], :include => [:avatars, :mbands])
+    @user = User.find_from_param(params[:id], :include => [:avatars])
     # non uso :include => [{:songs => [:tracks, :genre]}] xkè non devo recuperare tutte le tracce
     @songs = Song.find_paginated_by_user(1, @user)
     @tracks = Track.find_paginated_by_user(1, @user)    
     @answers = @user.answers.paginate(:page => 1, :per_page => 6, :order => 'created_at DESC')  
+    @new_membership = MbandMembership.new
 
   rescue ActiveRecord::RecordNotFound
     flash[:error] = 'User not found..'

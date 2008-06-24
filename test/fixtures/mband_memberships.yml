@@ -17,4 +17,5 @@
 quentin_for_quentin_mband:
   mband: quentin_mband
   user: quentin
+  instrument: guitar
   accepted_at: <%= 5.days.ago.to_s :db %>

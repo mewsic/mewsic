@@ -4,7 +4,7 @@
   
   <%= render :partial => 'profile' %>
   
-  <div class="bottom-shadow" style="width: 720px; float:none;"></div>
+  <div class="bottom-shadow" style="width: 720px; float:none; margin-bottom: 30px;"></div>
 
   <div class="box-list one-col clear-block clear-float">
     <%= render :partial => 'played' unless @user.band? %>
@@ -28,4 +28,6 @@
 
 <% javascript('user/show') %>
 <% javascript('user/gallery') %>
+<% javascript('user/instruments') %>
 <% javascript('user/band_members') if current_user_page? && @user.band? %>
+<% javascript('user/mband_invite') if !@user.band? %>

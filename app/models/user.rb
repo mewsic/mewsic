@@ -86,11 +86,13 @@ class User < ActiveRecord::Base
                 :sanitize => [:motto, :tastes]
   
   has_many :mband_memberships
-  has_many :mbands, :through => :mband_memberships, :class_name => 'Mband', :source => :mband, :conditions => "accepted_at IS NOT NULL"
-  
-  
+  has_many :mbands, :through => :mband_memberships, :class_name => 'Mband', :source => :mband,
+    :conditions => 'mband_memberships.accepted_at IS NOT NULL', :order => 'mbands.members_count DESC'
+  has_many :pending_mband_invitations, :through => :mband_memberships, :class_name => 'Mband', :source => :mband,
+    :conditions => 'mband_memberships.accepted_at IS NULL', :order => 'mband_memberships.created_at DESC'
+
   has_many_friends
-  
+
   # If type == 'Band'
   has_many :members, :class_name => 'BandMember'
   

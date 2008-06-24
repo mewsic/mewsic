@@ -517,6 +517,7 @@ tr.nav-song td{
 .thumb{
 	float:left;
 	margin-right:20px;
+	padding-top:5px;
 }
 .played-instruments .small-box .thumb {
         margin-right:10px;
@@ -773,7 +774,12 @@ h2.dj-label{
 	margin:2px 0px 2px 0px;
 	background-color:#F2F6F8;
 }
+
+.white-box .element {
+	padding: 5px 10px;
+}
 /* cyan box small */
+
 .cyan-box-small{
 	background-color:#F2FAFC;
 }
@@ -3027,13 +3033,13 @@ div.hr {
 	margin-left: 6px;
 }
 
-#band_instrument_selector {
+.band_instrument_selector {
 	padding-top: 5px;
 	width: 217px;
 	height: 20px;
 }
 
-#band_instrument_selector select {
+.band_instrument_selector select {
 	width: 235px;
 	border: 1px solid #85BAD1;
 }
@@ -3154,9 +3160,9 @@ div.hr {
 }
 
 #band_buttons {
-	width: 233px;
-	padding-top: 5px;
-	height: 24px;
+	width: 250px;
+	padding: 0;
+	height: 25px;
 }
 
 #band_form_add {
@@ -3220,14 +3226,7 @@ div.hr {
 	clear: none;
 }
 
-#mband_select {
-	margin-left: 21px;
-	padding: 8px;
-	border-bottom: 1px solid #85BAD1;
-	width: 232px;
-}
-
-#mband_add_new {
+.mband_add_block {
 	width: 237px;
 	border-bottom: 1px solid #85BAD1;
 	margin-left: 24px;
@@ -3236,6 +3235,12 @@ div.hr {
 	padding: 5px;
 	padding-bottom: 15px;
 }
+
+.mband_add_block input, .mband_add_block select {
+	width: 235px;
+	border: 1px solid #85BAD1;
+}
+
 /***************** END MBAND INVITE *****************/
 
 /******************** SEARCH ********************/
@@ -3243,7 +3248,6 @@ div.hr {
 #search_head_title {
 	padding-bottom: 5px;
 }
-
 
 #search_row {
 	border-bottom: 1px solid #E6E6E6;

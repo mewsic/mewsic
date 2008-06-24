@@ -1,32 +1,3 @@
-var Templateable = Class.create({
-  toHTML: function() {
-    return new Template(this.template).evaluate(this);
-  }
-});
-
-var Instrument = Class.create(Templateable, {
-  template: '<p class="instrument"><a href="#" rel="#{value}"><img src="/images/#{icon}" class="icon" /><span class="name">#{name}</span></a></p>',
-
-  initialize: function(icon, name, value) {
-    this.icon = icon;
-    this.name = name;
-    this.value = value;
-  }
-});
-
-var InstrumentGroup = Class.create(Templateable, {
-  template: '<div class="instrument_group"><p class="label">#{label}</p>#{instruments}</div>',
-
-  initialize: function(label) {
-    this.label = label;
-    this.instruments = '';
-  },
-
-  addInstrument: function(instrument) {
-    this.instruments += instrument.toHTML();
-  }
-});
-
 var BandMembers = Class.create({
   initialize: function(element, user_id) {
     this.element = $(element);
@@ -92,8 +63,7 @@ var BandMembers = Class.create({
     this.member_name_input = this.element.down('.input_member_name');
     this.member_name_input.observe('keyup', this.b_watchMemberName);
 
-    this.instrument_select = this.element.down('select');
-    this.makeInstrumentsSelect();
+    this.instrument_select = new InstrumentsSelect(this.element.down('select'));
 
     this.b_unloadBandForm = this.unloadBandForm.bind(this);
     this.edit_box.down('a').stopObserving('click', this.b_loadBandForm);
@@ -120,43 +90,6 @@ var BandMembers = Class.create({
     } else if (link.className == 'delete') {
       link.observe('click', this.deleteMember.bind(this, member_id));
     }
-  },
-
-  makeInstrumentsSelect: function() {
-    if (this.instrument_list == null) { // build it once
-      instrument_list = new Element('div', {id: 'instrument_list', style: 'display:none;'});
-    
-      this.instrument_select.select('optgroup').each(function(group) {
-        var group_html = new InstrumentGroup(group.label);
-        group.descendants().each(function(option) {
-          var icon = option.getAttribute('rel');
-          var name = option.text;
-          var value = option.value;
-          group_html.addInstrument(new Instrument(icon, name, value));
-        });
-
-        instrument_list.insert({bottom: group_html.toHTML()});
-      });
-
-      this.instrument_list = instrument_list;
-      this.instrument_layer = new Element('div', {id: 'instrument_layer'});
-      if (Prototype.Browser.IE) {
-        // IE hack.. it reacts to onclick events only if the div actually
-        // contains some text..... there should be a better way .....
-        this.instrument_layer.setOpacity(0);
-        this.instrument_layer.innerHTML = 'MMMMMMMMMMMMMMMMMMMM';
-      }
-    }
-
-    this.instrument_select.up().insert({bottom: this.instrument_layer});
-    this.instrument_select.up().insert({bottom: this.instrument_list});
-
-    this.instrument_layer.observe('click', this.toggleInstrumentsSelect.bind(this));
-    this.instrument_list.select('a').each(this.instrumentClick.bind(this));
-  },
-
-  instrumentClick: function(link) {
-    link.observe('click', this.instrumentSelected.bind(this, link.getAttribute('rel')));
   },
 
   watchMemberName: function(event) {
@@ -211,19 +144,6 @@ var BandMembers = Class.create({
     this.alert.show();
     this.spinner.hide();
     this.edit_box.show();
-  },
-
-  toggleInstrumentsSelect: function(event) {
-    event.stop();
-
-    Effect.toggle(this.instrument_list, 'blind', {duration: 0.3});
-  },
-
-  instrumentSelected: function(value, event) {
-    event.stop();
-
-    this.instrument_list.blindUp({duration: 0.3});
-    this.instrument_select.value = value;
   },
 
   unloadBandForm: function(event) {
@@ -289,7 +209,7 @@ var BandMembers = Class.create({
     this.add_button.show();
 
     this.member_name_input.value = '';
-    this.instrument_select.value = '';
+    this.instrument_select.setValue('');
 
     this.member_name_box.hide();//fade({duration: 0.3});
     this.instrument_box.hide();//fade({duration: 0.3});
@@ -309,7 +229,7 @@ var BandMembers = Class.create({
     this.form.callback = this.memberEdited.bind(this, member_id);
 
     this.member_name_input.value = member_name;
-    this.instrument_select.value = instrument_id;
+    this.instrument_select.setValue(instrument_id);
 
     //if (!this.member_name_box.visible() && !this.instrument_box.visible()) {
       this.member_name_box.show();//appear({duration: 0.3});

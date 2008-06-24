@@ -1,6 +1,6 @@
 module BandMembersHelper
-  def instruments_select(player, selected = nil)
-    %(<select name="band_member[instrument_id]"><option value=""></option>#{instrument_groups_tags(player, selected)}</select>)
+  def instruments_select(player, name = nil, selected = nil)
+    %(<select name="#{name}" id="#{name.gsub(/[\[\]]/, '_').sub(/_$/,'')}"><option value=""></option>#{instrument_groups_tags(player, selected)}</select>)
   end
 
   def instrument_groups_tags(player, selected = nil)

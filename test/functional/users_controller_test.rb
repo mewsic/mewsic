@@ -20,6 +20,10 @@ class UsersControllerTest < Test::Unit::TestCase
     ActionMailer::Base.deliveries = []
   end
 
+  def teardown
+    ActionMailer::Base.deliveries = []
+  end
+
   def test_should_allow_signup
     assert_difference 'User.count' do
       create_user
@@ -227,7 +231,7 @@ class UsersControllerTest < Test::Unit::TestCase
     post :reset_password, :id => 'pippo', :password => 'pippozzz', :password_confirmation => 'pippozzz'
     assert_redirected_to user_path(users(:quentin))
     assert flash[:notice]
-    #assert_equal 1, ActionMailer::Base.deliveries.size      
+    assert_equal 1, ActionMailer::Base.deliveries.size      
     assert_nil users(:quentin).reload.password_reset_code
     assert User.authenticate('quentin', 'pippozzz')
   end

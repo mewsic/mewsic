@@ -25,8 +25,8 @@ class Mband < ActiveRecord::Base
   
   has_many :avatars, :as => :pictureable
   has_many :photos, :as => :pictureable
-  has_many :mband_memberships
-  has_many :members, :through => :mband_memberships, :class_name => 'User', :source => :user, :conditions => "accepted_at IS NOT NULL"
+  has_many :memberships, :class_name => 'MbandMembership'
+  has_many :members, :through => :memberships, :class_name => 'User', :source => :user, :conditions => "accepted_at IS NOT NULL"
   
   belongs_to :leader, :class_name => 'User', :foreign_key => 'user_id'
   
@@ -43,7 +43,15 @@ class Mband < ActiveRecord::Base
                 :sanitize => [:motto, :tastes]
   
   def band_membership_with(user)
-    self.mband_memberships.find(:first, :conditions => ["user_id = ?", user.id])
+    self.memberships.find(:first, :conditions => ["user_id = ?", user.id])
+  end
+
+  def accepted_memberships
+    self.memberships.find(:all, :conditions => 'accepted_at IS NOT NULL')
+  end
+
+  def pending_memberships
+    self.memberships.find(:all, :conditions => 'accepted_at IS NULL')
   end
   
   def to_breadcrumb

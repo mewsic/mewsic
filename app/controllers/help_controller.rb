@@ -13,8 +13,9 @@ class HelpController < ApplicationController
   def send_mail
     redirect_to :action => 'index' and return unless request.post?
 
-    if @request.valid?
-      MyousicaMailer.deliver_help_request(@request)
+    if @help_request.valid?
+      debugger
+      MyousicaMailer.deliver_help_request(@help_request)
       flash[:notice] = "Thanks for contacting us! Your question has been sent to our help desk, you'll receive a reply in few hours."
       params[:id] ? redirect_to(:action => 'show', :id => params[:id]) : redirect_to(:action => 'index')
     else
@@ -31,7 +32,7 @@ private
   end
 
   def create_help_request
-    @request = HelpRequest.new(params[:help])
+    @help_request = HelpRequest.new(params[:help])
   end
   
 end

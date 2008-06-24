@@ -17,8 +17,8 @@
 				<span class="band_over_input_text">
 					Choose instrument:
 				</span>
-				<div id="band_instrument_selector">
-					<%= instruments_select @member %>
+				<div class="band_instrument_selector">
+					<%= instruments_select @member, 'band_member[instrument_id]' %>
 				</div>
 			</div>
 		</form>

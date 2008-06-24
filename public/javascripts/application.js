@@ -163,6 +163,13 @@ var SearchBox = Class.create({
     if (!element)
       return;
 
+    this.form = element.down('form');
+    this.search_string = this.form.down('#q');
+    this.submit = this.form.down('.input-button');
+
+    this.submit.observe('click', this.onSubmit.bind(this));
+    this.form.observe('submit', this.onSubmit.bind(this));
+
     this.collapsed_box = element.down('.collapsed-box');
     this.advanced_box = element.down('.advanced-box');
     this.collapsed_box.down('.trigger').observe('click', this.showAdvancedBox.bind(this));
@@ -188,7 +195,18 @@ var SearchBox = Class.create({
     event.stop();
     new Effect.Fade(this.advanced_box, {duration: 0.3});
     new Effect.Appear(this.collapsed_box, {duration: 0.3, queue: 'end'});
-  }
+  },
+
+  onSubmit: function(event) {
+    event.stop();
+
+    if (this.search_string.value.blank()) {
+      alert('Please enter a search string');
+      return;
+    }
+
+    this.form.submit();
+  },
 });
 
 document.observe('dom:loaded', function(event) {

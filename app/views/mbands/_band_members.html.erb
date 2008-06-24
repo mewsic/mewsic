@@ -3,31 +3,12 @@
 	<div class="top-box clear-block">
 		<div class="bottom-box clear-block">
 			<div class="elements clear-block">
-				<%- @mband.members.each do |user| -%>
-				  <div id="mband_members_<%= user.id %>">
-  					<p class="edit-command">
-  					  <%- if logged_in? && current_user.is_leader_of?(@mband) && !user.is_leader_of?(@mband) && user != @mband.leader -%>
-  					    <%= link_to 'set as leader', set_leader_mband_path(@mband, :user_id => user.id), :method => 'put'
-                 %>
-              <%- end -%>
-              <br />
-              <%- if logged_in? && current_user.is_leader_of?(@mband) && current_user != user -%>
-  					    <%= link_to_remote 'remove',
-  					          :url => mband_membership_path(@mband.band_membership_with(user)), :method => 'delete', 
-  					          :confirm => "Are you sure", :loading => "Effect.Puff('mband_members_#{user.id}')"
-                 %>
-              <%- end -%>
-            </p>
-  					<p class="thumb">
-							<img width="29" height="29" alt="" src="/images/instrument_drum.png"/> <!-- FIXME -->
-              <%= link_to avatar_image(user, :icon), user_path(user) %>
-            </p>
-						<p class="grey-text name"><em>Voce</em></p> <!-- FIXME --> 
-  					<p class="name"><%= link_to user.login, user_path(user) %></p>
-  				</div>
+				<%= render :partial => 'membership', :collection => @mband.accepted_memberships %>
+				<%- if current_user_mband_page? && @mband.pending_memberships.size > 0 -%>
+					<p class="grey-text element">Pending members</p>
+					<%= render :partial => 'membership', :collection => @mband.pending_memberships %>
 				<%- end -%>
 			</div>			
 	  </div>
-		<p class="next"/>
 	</div>
 </div>

@@ -1,26 +1,14 @@
-<%- if @user.mbands.count > 0 -%>
+<%- if @user.mbands.count > 0 || (current_user_page? && @user.pending_mband_invitations.count > 0) -%>
 <div class="simple-list white-box clear-block">
   <h2 class="mband-label"><%= @user.login %>'s<br/>MBands</h2>
   <div class="top-box clear-block">
     <div class="bottom-box clear-block">
       <div class="elements clear-block">
-        <%- @user.mbands.each do |mband| -%>
-          <div>
-            <%- if logged_in? && mband.members.count > 1 -%>
-              <%- to_string = mband.members.find_all{|u| u != current_user}.collect{|u| u.login }.join(', ') -%>
-              <p class="edit-command">
-                <a href="#" onclick="new Effect.ScrollTo($('user-mail').down('.popup'));MailBox.instance.openPopup();MailBox.instance.loadPage('<%= new_user_message_path(current_user, :to => to_string) %>');return false;">write</a>
-              </p>
-            <%- end -%>
-            <p class="thumb">
-              <%= link_to avatar_image(mband, :icon), mband_path(mband) %>
-            </p>
-            <p class="grey-text name"><em>Voce</em></p>
-            <p class="name">
-              <%= link_to mband.name, mband_path(mband) %>
-            </p>
-          </div>
-        <%- end -%>
+				<%= render :partial => 'mband', :collection => @user.mbands %>
+				<%- if current_user_page? && @user.pending_mband_invitations.count > 0 -%>
+					<p class="grey-text element">Pending mband invitations</p>
+					<%= render :partial => 'mband', :collection => @user.pending_mband_invitations %>
+				<%- end -%>
       </div>
     </div>
     <%#= FIXME empty_collection_message @user.mbands,

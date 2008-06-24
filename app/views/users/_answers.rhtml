@@ -18,7 +18,7 @@
                 :method => :get,
                 :loading => "$('answers_spinner').show()"
           %>
-        <% else %>
+        <% elsif @answers.next_page %>
           <%= image_tag('arrow_simple_left.png', :width => 7, :height => 9)  + ' <strong>Prev</strong> '%>
         <% end %>
         </span>
@@ -30,7 +30,7 @@
                 :method => :get,
                 :loading => "$('answers_spinner').show()"
           %>
-        <% else %>
+        <% elsif @answers.previous_page %>
           <%= ' <strong>Next</strong> ' + image_tag('arrow_simple_right.png', :width => 7, :height => 9) %>
         <% end %>
         </span>

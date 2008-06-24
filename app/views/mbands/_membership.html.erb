@@ -1,0 +1,20 @@
+				  <div id="mband_members_<%= membership.user.id %>">
+  					<p class="edit-command">
+  					  <%- if logged_in? && !membership.accepted_at.nil? && current_user.is_leader_of?(@mband) && !membership.user.is_leader_of?(@mband) && membership.user != @mband.leader -%>
+								<%= link_to 'set as leader', set_leader_mband_path(@mband, :user_id => membership.user.id), :method => 'put' %><br/>
+              <%- end -%>
+              <%- if logged_in? && current_user.is_leader_of?(@mband) && current_user != membership.user -%>
+  					    <%= link_to_remote 'remove',
+  					          :url => mband_membership_path(@mband.band_membership_with(membership.user)), :method => 'delete', 
+  					          :confirm => "Are you sure", :loading => "Effect.Puff('mband_members_#{membership.user.id}')"
+                 %>
+              <%- end -%>
+            </p>
+  					<p class="thumb">
+							<%= instrument_icon(membership.instrument) %>
+              <%= link_to avatar_image(membership.user, :icon), user_path(membership.user) %>
+            </p>
+  					<p class="name"><%= link_to membership.user.login, user_path(membership.user) %></p>
+						<p class="grey-text name"><em><%= membership.user.country %></em></p>
+  				</div>
+

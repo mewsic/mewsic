@@ -6,6 +6,8 @@ class MbandsController < ApplicationController
 
   protect_from_forgery :except => :update   
 
+  helper :users
+
   # GET /mbands/1
   # GET /mbands/1.xml
   def show
