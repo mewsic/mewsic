@@ -3,21 +3,25 @@ class AbusesController < ApplicationController
   layout false
   
   before_filter :login_required
-  before_filter :find_abuseable
+  before_filter :find_abuseable  
 
   def new
     unless request.xhr?
       redirect_to_abuseable_page
       return
-    end
+    end    
   end
 
   def create
     @abuse = Abuse.new(params[:abuse])
     @abuse.abuseable = @abuseable
     @abuse.user = current_user
-    if @abuse.save
+    if @exists
+      render :action => 'new'      
+    elsif @abuse.save
       flash.now[:notice] = 'Thank you. Your message has been saved successfully.'
+      mail = AbuseMailer.create_notification(@abuseable)
+      AbuseMailer.deliver(mail)
     else
       flash.now[:error] = 'Error saving the message. Please try again.'      
     end
@@ -33,6 +37,7 @@ private
     else
       raise ActiveRecord::RecordNotFound
     end
+    @exists = Abuse.exists?(["abuseable_type = ? AND abuseable_id = ?", @abuseable.class.name, @abuseable.id])
   end
   
   def redirect_to_abuseable_page

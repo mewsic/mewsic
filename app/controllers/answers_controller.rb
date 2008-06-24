@@ -34,7 +34,8 @@ class AnswersController < ApplicationController
   end
 
   def show
-    @answer = Answer.find(params[:id], :include => :replies)
+    @answer = Answer.find(params[:id], :include => [:replies])
+    @has_abuse = Abuse.exists?(["abuseable_type = 'Answer' AND abuseable_id = ?", @answer.id])
     @other_answers_by_author = @answer.user.answers.paginate(:per_page => 6, :page => 1, :conditions => ['answers.id != ?', @answer.id])
     @similar_answers = Answer.find(:all, :include => {:user => :avatars}, :limit => 10, :order => 'answers.created_at DESC')
   end

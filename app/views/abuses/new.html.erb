@@ -1,17 +1,21 @@
 <div class="clear-block abuse popup" id="report-abuse-popup">
 	<div>
-	  <%- remote_form_for :abuse, :url => send("#{@abuseable.class.name.downcase}_abuses_path", @abuseable), :update => 'report-abuse-popup' do |f| -%>
-	    <p>
-	      <label for="abuse_topic">Topic</label><br />
-	      <%= f.select :topic, ["Copyright Violation", "Inappropriate Content"] %>
-	    </p>
-	    <p>
-	      <label for="abuse_body">Send us a description (Optional)</label><br />
-	      <%= f.text_area :body %>
-	    </p>
-	    <p>
-	     <%= image_submit_tag 'button_report_abuse.png' %>
-	    </p>
-	  <%- end -%>
+	  <%- if !@exists -%>
+  	  <%- remote_form_for :abuse, :url => send("#{@abuseable.class.name.downcase}_abuses_path", @abuseable), :update => 'report-abuse-popup' do |f| -%>
+  	    <p>
+  	      <label for="abuse_topic">Topic</label><br />
+  	      <%= f.select :topic, ["Copyright Violation", "Inappropriate Content"] %>
+  	    </p>
+  	    <p>
+  	      <label for="abuse_body">Send us a description (Optional)</label><br />
+  	      <%= f.text_area :body %>
+  	    </p>
+  	    <p>
+  	     <%= image_submit_tag 'button_report_abuse.png' %>
+  	    </p>
+  	  <%- end -%>
+  	<%- else -%>
+  	  <p>Notification already sent.</p>
+  	<% end -%>
   </div>
 </div>
