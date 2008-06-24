@@ -1,15 +1,15 @@
 <%- if @songs.size > 0 -%>
   <%- @songs.each do |song| -%>
-  <div id="search_row">
-  	<div style="float:left">
-  		<div id="search_icon_container">
+  <div class="search_row">
+		<div class="float-left">
+  		<div class="search_icon_container">
   			<%= play_button(song) %>
   			<%= mlab_button(song) %>
   		</div>
-  		<div id="search_icon_container"><%= link_to avatar_image(song.user, :icon), user_path(song.user) %></div>
+  		<div class="search_icon_container"><%= link_to avatar_image(song.user, :icon), user_path(song.user) %></div>
   		<p class="search_black_text"><%= link_to highlight_search(song.title), song_path(song) %></p>
   	</div>
-  	<div style="float:right">
+		<div class="float-right">
   		<p class="search_blue_text"><%= link_to(highlight_search(song.genre.name), genre_path(song.genre)) if song.genre %></p>
   		<p class="search_small_orange_text">Tracks</p><p class="search_gray_text">(<%= song.tracks.count %>)</p>
   		<p class="search_sky_text"><%= song.length %></p>				

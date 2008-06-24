@@ -4,14 +4,16 @@
 	    <%= avatar_image most_listened_song.user, :icon %>
 	  </a>
 	</p>
-	<p class="name align-right"><%= link_to most_listened_song.user.login, user_path(most_listened_song.user) %></a></p>
-	<p class="country align-right"><%= h most_listened_song.user.city %>, <%= h most_listened_song.user.country %></p>
-		<div class="float-right">
-			<p class="star"><%= rating(most_listened_song) %></p>
-			<p class="button">
-			  <%= mlab_button(most_listened_song) %>
-			  <%= play_button(most_listened_song) %>
-		</div>
+	<div style="padding: 0px 6px 4px 0px">
+		<p class="name align-right"><%= link_to most_listened_song.user.login, user_path(most_listened_song.user) %></a></p>
+		<p class="country align-right"><%= h most_listened_song.user.city %>, <%= h most_listened_song.user.country %></p>
+	</div>
+	<div class="float-right">
+		<%= rating(most_listened_song) %>
+		<p class="button">
+		  <%= mlab_button(most_listened_song) %>
+		  <%= play_button(most_listened_song) %>
+	</div>
 	<p class="title">	
 	  <%= link_to truncate(most_listened_song.title, 30), most_listened_song %>
   </p>

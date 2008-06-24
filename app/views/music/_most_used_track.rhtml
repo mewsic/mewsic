@@ -11,10 +11,10 @@
 				  	<%= link_to(track.parent_song.user.login, user_path(track.parent_song.user)) if track.parent_song.user %>
 				</p>
 			</div>
+		    <div class="thumb">
+					<%= track_instrument_icon(track) %>
+		    </div>
 		  	<p class="title">
-		    	<span class="thumb">
-		      		<%= track_instrument_icon(track) %>
-		    	</span>
 		    	<%= track.title %>
 		  	</p>
 		  	<p><%= track.parent_song.original_author if track.parent_song %></p>

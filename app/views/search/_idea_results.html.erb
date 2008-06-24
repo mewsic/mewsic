@@ -1,17 +1,17 @@
 <%- if @ideas.size > 0 -%>
   <%- @ideas.each do |track| -%>
-  <div id="search_row">
-  	<div style="float:left">
-  		<div id="search_icon_container">
+  <div class="search_row">
+		<div class="float-left">
+  		<div class="search_icon_container">
   			<%= play_button(track) %>
   			<%= mlab_button(track) %>
   		</div>
-  		<div id="search_icon_container">
+  		<div class="search_icon_container">
   		  <%= link_to(avatar_image(track.parent_song.user, :icon), user_path(track.parent_song.user)) if track.parent_song && track.parent_song.user %>
       </div>
   		<p class="search_black_text"><%= highlight_search track.title %></p>
   	</div>
-  	<div style="float:right">
+		<div class="float-right">
   		<p class="search_blue_text"><%= link_to(highlight_search(track.parent_song.genre.name), genre_path(track.parent_song.genre.name)) if track.parent_song && track.parent_song.genre %></p>
   		<p class="search_sky_text"><%= track.bpm %></p>				
   		<p class="search_sky_text"><%= track.tonality %></p>								

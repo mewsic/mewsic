@@ -247,6 +247,7 @@ html>body #search p span{
 .abstract{
 	font-style:italic;
 	color:#61656A;
+	margin-bottom: 7px;
 }
 .abstract a{
 	color:#61656A;
@@ -533,10 +534,10 @@ tr.nav-song td{
 .people-list .elements{
 	text-align:center;
 	width:75px;
-        height:120px;
+	height:120px;
 	float:left;
-	padding:0px 5px 15px 5px;
-        margin:auto;
+	padding:0px 5px 0px;
+	margin:auto;
 }
 .people-list p.name, .people-list p.country{
 	overflow:hidden;
@@ -644,7 +645,7 @@ tr.nav-song td{
 }
 .simple-list .elements{
 	border-bottom: 1px solid #D9D9D9;
-	padding-bottom:5px;
+/*	padding-bottom:5px;*/
 	margin-bottom:5px;
 }
 /* box_rounded_gray */
@@ -817,7 +818,8 @@ h2.dj-label{
 }
 .green-box .thumb{
 	float:right;
-	margin:2px 2px 0px 8px !important;
+	margin:0px 4px 0px 10px !important;
+	padding-top: 4px !important;
 }
 .tracks-number{
 	background:url(/images/tracks_number_BG.png) no-repeat top left;
@@ -825,7 +827,7 @@ h2.dj-label{
 	width:29px;
 	display:block;
 	float:left;
-	margin:0px 8px 0px 2px;
+	margin:3px 8px 0px 4px;
 	text-align:center;
 	color:#fff;
 	font-weight:bold;
@@ -862,11 +864,11 @@ h2.dj-label{
 }
 .green-box .green-bg{
 	background:#EFF7EC;
-	height:33px;
+	height:35px;
 	overflow:hidden;
 }
 .green-box .name{
-	padding-top:8px;
+	padding-top:10px;
 }
 /* orange  box */
 .orange-box .top-box{
@@ -898,14 +900,20 @@ h2.dj-label{
 }
 .orange-box .orange-bg{
 	background:#FDF3E5;
-	height:33px;
+	height:35px;
 	overflow:hidden;
 }
 .orange-box .thumb{
-	margin:2px 8px 0px 2px !important;
+	margin:2px 8px 0px 4px !important;
+	padding-top: 2px !important;
+}
+
+.orange-box .title {
+	padding-top: 4px !important;
+	padding-bottom: 0px !important;
 }
 .orange-box .name{
-	padding-top:8px;
+	padding-top:10px;
 }
 /* rounded box cyan */
 .rounded-cyan-top{
@@ -1319,10 +1327,10 @@ h2.dj-label{
 	margin-right:2px;
 }
 
-#songs p, #tracks p {
+/*#songs p, #tracks p {
   padding-bottom: 10px;
-}
-#songs p a, #tracks p a {
+}*/
+#songs p.title a, #tracks p.title a {
   text-decoration: underline;
   color: #009DC2;
 }
@@ -2144,7 +2152,7 @@ p.sign-in .button{
 	color:#1A73A4;
 }
 .cyan-text a{
-	color:#1A73A4;
+	color:#1A73A4 !important;
 }
 .clearly-cyan-text{
 	color:#009DC2;
@@ -3246,21 +3254,25 @@ div.hr {
 /******************** SEARCH ********************/
 
 #search_head_title {
-	padding-bottom: 5px;
+	margin: 0px 0px 15px 15px;
 }
 
-#search_row {
+.search_row {
 	border-bottom: 1px solid #E6E6E6;
 	padding-left: 8px;
 	overflow: hidden;
 	margin: auto;
-	margin-bottom: 5px;
-	height: 33px;
+	margin-bottom: 3px;
+	height: 35px;
 }
 
-#search_icon_container {
+.search_icon_container {
 	width: 38px;
 	float: left;
+}
+
+#user-results, #song-results, #track-results {
+	margin-bottom: 15px;
 }
 
 
@@ -3383,11 +3395,12 @@ div.hr {
 
 .search_black_text {
 	margin-bottom: 0px;
-	margin-top: 6px;
+	margin-top: 0px;
 	float: left;
 	padding-right: 15px;	
 	color: #000000;
 	font-size: 12px;	
+	width: 300px;
 }
 
 .search_black_text a {
@@ -3439,6 +3452,7 @@ div.hr {
 	float: left;
 	padding-right: 4px;
 }
+
 /******************** END SEARCH ********************/
 
 /******************** LOGIN BOX ********************/ 
@@ -3821,6 +3835,10 @@ div.auto_complete ul strong.highlight {
 	height: 111px;
 	float: left;
 	overflow: hidden;
+}
+
+.splash .tracks-number {
+	margin: 0px 8px 0px 4px !important;
 }
 
 /* report abuse popup */

@@ -19,9 +19,7 @@
           </p>
           <div class="clear-block" style="margin:0px 0px 10px 40px;">
 					  <p><strong><%=h reply.body %></strong></p>
-					  <p class="star float-right">
-              <%= rating(reply) %>
-            </p>
+						<%= rating(reply) %>
 					  <p class="grey-text float-left">Reply by <%= link_to reply.user.login, user_path(reply.user) %>  - <%= time_ago_in_words(reply.created_at) %> </p>					
 				  </div>											
 			 <%- end -%>

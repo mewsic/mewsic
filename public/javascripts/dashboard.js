@@ -37,5 +37,5 @@ var Splash = Class.create({
 });
 
 document.observe('dom:loaded', function() {
-  new Splash();
+  Splash.instance = new Splash();
 });
