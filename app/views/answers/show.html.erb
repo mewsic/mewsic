@@ -21,7 +21,7 @@
 				    <a href="<%= formatted_new_answer_abuse_path(@answer, 'html') %>" params="lightwindow_width=600,lightwindow_height=400" class="lightwindow" title="Report abuse">report abuse</a>
 				  <%- end -%>
         </p>
-				<h2 class="float-left">Open Answer</h2>
+				<h2 class="float-left"><%= @answer.closed? ? 'Closed' : 'Open' %>Answer</h2>
 			</div>
       <div class="top-box clear-block clear-float">
 				<div class="bottom-box clear-block">
