@@ -17,7 +17,7 @@
     <div class="clear-block">
       <div class="titoletti-question clear-block">
 				<p class="float-right">
-				  <%- if !@has_abuse -%>
+				  <%- if !@has_abuse && logged_in? -%>
 				    <a href="<%= formatted_new_answer_abuse_path(@answer, 'html') %>" params="lightwindow_width=600,lightwindow_height=400" class="lightwindow" title="Report abuse">report abuse</a>
 				  <%- end -%>
         </p>
