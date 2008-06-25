@@ -21,7 +21,7 @@
 				    <a href="<%= formatted_new_answer_abuse_path(@answer, 'html') %>" params="lightwindow_width=600,lightwindow_height=400" class="lightwindow" title="Report abuse">report abuse</a>
 				  <%- end -%>
         </p>
-				<h2 class="float-left"><%= @answer.closed? ? 'Closed' : 'Open' %>Answer</h2>
+				<h2 class="float-left"><%= @answer.closed? ? 'Closed' : 'Open' %> question</h2>
 			</div>
       <div class="top-box clear-block clear-float">
 				<div class="bottom-box clear-block">
@@ -38,11 +38,13 @@
                   <%= submit_tag 'Save', :disable_with => 'Saving...' %>
                 <%- end -%>                  
 							</div>
+							<% unless @answer.closed? %>
 							<div class="float-right">
 								<div class="special-button">
 								  <div style="text-align: center; font-weight: bold;line-height: 24px; width: 220px; height: 24px;background: url('/images/special_button_cyan_big.png') no-repeat center"><a href="#" style="color: #FFF; font-size:13px" onclick="<%= logged_in? ? "Effect.toggle('reply-form-container', 'slide')" : "Message.notice('You need to be logged in to reply.');" %>;return false;">Reply to this question<a></div>
 								</div>								
 							</div>
+							<% end %>
 							<div class="float-left">
               <%= rating(@answer) %>
 								<p class="grey-text"><%= time_ago_in_words(@answer.created_at) %></p>					
