@@ -1,8 +1,5 @@
 <tr class="<%= %w[even odd][track_counter % 2] %> mlab_track" id="track_<%= track.id %>">
-  <td>
-    <div class="mlab_track" style="display: none">
-      <%= render :partial => 'shared/mlab_track_info', :object => track %>
-    </div>    
+  <td>    
     <p class="thumb">
       <%= track_instrument_icon(track) %>
     </p>

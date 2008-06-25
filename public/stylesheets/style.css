@@ -1296,13 +1296,13 @@ h2.dj-label{
 	font-size:1px;
 	margin-bottom:0px;
 	background: url(/images/BG_tab_title_songs.png) no-repeat bottom left;
-	padding-top:24px;
+	padding-top:26px;
 }
 .tit-classification-songs .top-box{
 	background-color:#EEF3E7;
 }
 .tit-classification-songs .elements{
-	margin-bottom:2px;
+	margin-bottom:4px;
 }
 
 /* elenco generi */
@@ -1335,12 +1335,8 @@ h2.dj-label{
   color: #009DC2;
 }
 
-div.mlab_song {
-  padding-top: 4px;
-}
-
 table.mlab_tracks {
-  padding-top: 4px;
+
 }
 
 /* tracks */
@@ -1355,13 +1351,13 @@ table.mlab_tracks {
 	font-size:1px;
 	margin-bottom:0px;
 	background: url(/images/BG_tab_title_tracks.png) no-repeat bottom left;
-	padding-top:24px;
+	padding-top:26px;
 }
 .tit-classification-tracks .top-box{
 	background-color:#F8ECD9;
 }
 .tit-classification-tracks .elements{
-	margin-bottom:2px;
+	margin-bottom:4px;
 }
 
 /* gallery */
