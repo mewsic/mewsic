@@ -1,7 +1,7 @@
 <div class="tit-sezion-tab clear-block" style="position: relative;">
   <img src="/images/spinner.gif" id="genre_spinner" style="display: none; position: absolute; right: 13px; top: 4px;"/>
 	<div class="float-right">
-		<p class="button float-left">		  
+		<p class="button chars float-left">		  
 		  <%= genres_pagination %>
 		  <%= genres_pagination_previous_button %>
 		</p>
@@ -13,7 +13,9 @@
 </div>
 
 <div class="tab-title-list clear-block">
-  <%= render :partial => 'music/genre', :collection => @genres %>
+  <%- @genres.each do |genre| -%>
+    <%= render :partial => 'music/genre', :object => genre if genre.published_songs.count > 0 %>
+  <%- end -%>
   <%= empty_collection_message @genres,
         :current_user => "No genres",
         :any_user     => "No genres"

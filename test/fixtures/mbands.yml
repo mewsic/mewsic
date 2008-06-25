@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 26
+# Schema version: 35
 #
 # Table name: mbands
 #
@@ -17,6 +17,7 @@
 #  rating_count  :integer(11)   
 #  rating_total  :decimal(10, 2 
 #  rating_avg    :decimal(10, 2 
+#  members_count :integer(11)   default(0)
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

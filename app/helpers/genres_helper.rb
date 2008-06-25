@@ -2,7 +2,7 @@ module GenresHelper
   
   def genres_pagination
     content = ""
-    ('a'..'z').each do |c|
+    ('A'..'Z').each do |c|
       if c != current_genre_char
         content << " " << link_to_remote(c,
 	          :update => "genres",
@@ -18,7 +18,7 @@ module GenresHelper
   
   def genres_pagination_next_button
     content = ''
-    if current_genre_char < 'z'
+    if current_genre_char < 'Z'
       content << link_to_remote(image_tag('arrow_simple_right.png', :width => 7, :height => 9),
 	          :update => "genres",
 						:url =>  formatted_genres_path(:format => 'html', :c => next_genre_char), :method => :get, :loading => "$('genre_spinner').show();",
@@ -32,7 +32,7 @@ module GenresHelper
   
   def genres_pagination_previous_button
     content = ''
-    if current_genre_char > 'a'
+    if current_genre_char > 'Z'
       content << link_to_remote(image_tag('arrow_simple_left.png', :width => 7, :height => 9),
 	          :update => "genres",
 						:url =>  formatted_genres_path(:format => 'html', :c => previous_genre_char), :method => :get, :loading => "$('genre_spinner').show();",

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 26
+# Schema version: 35
 #
 # Table name: help_pages
 #

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 26
+# Schema version: 35
 #
 # Table name: instruments
 #
@@ -8,6 +8,7 @@
 #  icon        :string(255)   
 #  created_at  :datetime      
 #  updated_at  :datetime      
+#  category_id :integer(11)   
 #
 
 class Instrument < ActiveRecord::Base

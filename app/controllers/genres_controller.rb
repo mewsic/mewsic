@@ -4,7 +4,7 @@ class GenresController < ApplicationController
     respond_to do |format|
       format.html do
         redirect_to '/' and return unless request.xhr?        
-        @genre_char = params.include?(:c) && ('a'..'z').include?(params[:c]) ? params[:c] : 'a'
+        @genre_char = params.include?(:c) && ('A'..'Z').include?(params[:c]) ? params[:c] : 'Z'
         @genres = Genre.find(:all, :conditions => ["name LIKE ?", "#{@genre_char}%"])
         render :layout => false
       end

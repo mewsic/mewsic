@@ -3846,3 +3846,11 @@ div.auto_complete ul strong.highlight {
 .abuse.popup textarea {
   width: 100%;
 }
+
+.button.chars {
+  font-size: 9px;
+}
+
+.button.chars a { 
+  color: #1A73A4;
+}

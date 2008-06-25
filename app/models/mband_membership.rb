@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 26
+# Schema version: 35
 #
 # Table name: mband_memberships
 #
@@ -10,7 +10,7 @@
 #  accepted_at      :datetime      
 #  created_at       :datetime      
 #  updated_at       :datetime      
-#  instrument_id    :integer(11)
+#  instrument_id    :integer(11)   
 #
 
 class MbandMembership < ActiveRecord::Base

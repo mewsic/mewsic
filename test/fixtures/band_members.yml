@@ -1,10 +1,10 @@
 # == Schema Information
-# Schema version: 26
+# Schema version: 35
 #
 # Table name: band_members
 #
 #  id            :integer(11)   not null, primary key
-#  name          :string(255)   
+#  name          :string(20)    
 #  instrument_id :integer(11)   
 #  user_id       :integer(11)   
 #  created_at    :datetime      

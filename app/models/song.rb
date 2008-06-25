@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 26
+# Schema version: 35
 #
 # Table name: songs
 #
@@ -32,7 +32,7 @@ class Song < ActiveRecord::Base
   has_many :mlabs, :as => :mixable
 
 
-  belongs_to :genre
+  belongs_to :genre, :counter_cache => true
   belongs_to :user 
   
   has_many :abuses, :as => :abuseable
