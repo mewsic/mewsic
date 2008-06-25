@@ -97,16 +97,33 @@ class Song < ActiveRecord::Base
   def self.find_random_direct_siblings(limit = 5)    
     Mix.find_by_sql([
       "select distinct x.original_author, x.title, t.song_id from mixes s inner join mixes t on s.track_id = t.track_id inner join songs x on t.song_id = x.id       
-      ORDER BY #{SQL_RANDOM_FUNCTION} LIMIT #{limit}"]) 
+      where x.id != #{self.id} ORDER BY #{SQL_RANDOM_FUNCTION} LIMIT #{limit}"])
   end
   
   def direct_siblings(limit = 5)
-    Mix.find_by_sql("select distinct x.original_author, x.title, t.song_id from mixes s inner join mixes t on s.track_id = t.track_id inner join songs x on t.song_id = x.id where s.song_id = #{self.id} LIMIT #{limit}") 
+    Mix.find_by_sql("select distinct x.original_author, x.title, t.song_id from mixes s inner join mixes t on s.track_id = t.track_id inner join songs x on t.song_id = x.id where s.song_id = #{self.id} and x.id != #{self.id} LIMIT #{limit}")
   end
   
   def indirect_siblings(limit = 5)
     #Song.find(:all, :include => :tracks, :limit => 2, :conditions => ["songs.published = ? AND songs.id != ?", true, self.id])
-    Mix.find_by_sql("select distinct x.original_author, x.title, t.song_id from mixes s inner join mixes t on s.track_id = t.track_id inner join songs x on t.song_id = x.id where s.song_id = #{self.id} LIMIT #{limit}") 
+    #Mix.find_by_sql("select distinct x.original_author, x.title, t.song_id from mixes s inner join mixes t on s.track_id = t.track_id inner join songs x on t.song_id = x.id where s.song_id = #{self.id} and x.id != #{self.id}LIMIT #{limit}") 
+    sql = %|
+    select
+       distinct
+           x.original_author,
+           x.title,
+           s3.song_id
+       from
+           mixes s1, mixes s2, mixes s3, songs x
+       where
+           x.id != #{self.id} and
+           s1.song_id = #{self.id} and
+           s3.song_id = x.id and
+           s1.track_id = s2.track_id and
+           s2.track_id = s3.track_id
+       limit #{limit}
+    |
+    Mix.find_by_sql(sql)
   end
   
   def is_a_direct_sibling_of?(song)

@@ -131,7 +131,7 @@ song_aaron_<%= i + 4 %>:
 <% end %>
 
 billie_jean_by_michael_jackson:
-  title: Billie Jean
+  title: Billie Jean ORIGINAL
   user: quentin
   original_author: Michael Jackson
   genre: pop
@@ -145,7 +145,7 @@ billie_jean_by_giovanni:
   listened_times: 900
   
 billie_jean_by_pilu:
-  title: Billie Jackson
+  title: Billie Jackson by Pilu
   user: quentin
   original_author: Pilu Jackson
   genre: pop

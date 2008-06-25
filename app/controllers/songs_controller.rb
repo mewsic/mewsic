@@ -21,7 +21,7 @@ class SongsController < ApplicationController
     @song = Song.find(params[:id], :include => [:user, { :mixes => { :track => [:instrument, :parent_song] } }, :genre])        
     @has_abuse = Abuse.exists?(["abuseable_type = 'Song' AND abuseable_id = ?", @song.id])
     @direct_siblings = @song.direct_siblings
-    @indirect_siblings = @song.direct_siblings
+    @indirect_siblings = @song.indirect_siblings
     respond_to do |format|
       format.html do
         @other_songs = Song.find(:all, :conditions => ["songs.user_id = ? AND songs.published = ?", @song.user, true], :order => 'songs.listened_times', :limit => 8, :include => [:user, { :mixes => { :track => [:instrument, :parent_song] } }, :genre])        
