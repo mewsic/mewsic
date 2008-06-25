@@ -32,7 +32,7 @@ class Song < ActiveRecord::Base
   has_many :mlabs, :as => :mixable
 
 
-  belongs_to :genre, :counter_cache => true
+  belongs_to :genre
   belongs_to :user 
   
   has_many :abuses, :as => :abuseable
