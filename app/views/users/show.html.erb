@@ -1,4 +1,5 @@
 <%= hidden_field_tag 'user-id', @user.id  %>
+<%= hidden_field_tag 'current-user-page', 1 if current_user_page? %>
 
   <% breadcrumb @user %>
   

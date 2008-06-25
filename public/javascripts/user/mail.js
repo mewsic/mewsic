@@ -124,6 +124,8 @@ document.observe('dom:loaded', function() {
     MailBox.instance.handleInboxLink();
   }
 
-  $('inbox-link').observe('click', MailBox.instance.handleInboxLink.bind(MailBox.instance));
+  if ($('current-user-page')) {
+    $('inbox-link').observe('click', MailBox.instance.handleInboxLink.bind(MailBox.instance));
+  }
 });
 
