@@ -2,35 +2,20 @@
   <img src="/images/spinner.gif" id="genre_spinner" style="display: none; position: absolute; right: 13px; top: 4px;"/>
 	<div class="float-right">
 		<p class="button float-left">		  
-		  <% if @genres.previous_page %>
-		    <%= link_to_remote image_tag('arrow_simple_left.png', :width => 7, :height => 9),
-		          :update => "genres",
-							:url => formatted_genres_path(:page => @genres.previous_page, :format => 'html'),
-              :method => :get,  
-              :loading => "$('genre_spinner').show();",
-              :complete => "$('genre_spinner').hide();var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initSongButtons(true); }"
-         %>
-		  <% else %>
-		    <%= image_tag('arrow_simple_left.png', :width => 7, :height => 9) %>
-		  <% end %>
+		  <%= genres_pagination %>
+		  <%= genres_pagination_previous_button %>
 		</p>
 		<h1>More Genres</h1>
 		<p class="button float-left">
-		  <% if @genres.next_page %>
-		    <%= link_to_remote image_tag('arrow_simple_right.png', :width => 7, :height => 9),
-		          :update => "genres",
-							:url =>  formatted_genres_path(:page => @genres.next_page, :format => 'html'),
-		          :method => :get,
-		          :loading => "$('genre_spinner').show();",
-		          :complete => "$('genre_spinner').hide();var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initSongButtons(true); }"
-		    %>
-		  <% else %>
-		    <%= image_tag('arrow_simple_right.png', :width => 7, :height => 9) %>
-		  <% end %>
+		  <%= genres_pagination_next_button %>
 		</p> 		
 	</div>
 </div>
 
 <div class="tab-title-list clear-block">
   <%= render :partial => 'music/genre', :collection => @genres %>
+  <%= empty_collection_message @genres,
+        :current_user => "No genres",
+        :any_user     => "No genres"
+	-%>
 </div>
