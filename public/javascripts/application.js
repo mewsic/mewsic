@@ -270,3 +270,7 @@ function pop(url) {
 	if (window.focus) {newwindow.focus()}
 	return false;
 }
+
+function reload() {
+  window.location.href = window.location.href.sub(/#.*/, '');
+}

@@ -252,8 +252,7 @@ var Profile = Class.create({
     this.link.innerHTML = 'reloading...';
     new Effect.BlindUp(this.fields, {duration: 0.3});
 
-    var fn = function() { window.location.href = window.location.href; }
-    fn.delay(0.4);
+    reload.delay(0.4);
   }
 });
 

@@ -11,7 +11,6 @@
 </div>
 <script type="text/javascript">
 	new Effect.Appear('switch-success',{duration:0.4});
-	var fn = function() { myLightWindow.deactivate();
-		window.location.href = window.location.href; 	}
+	var fn = function() { myLightWindow.deactivate(); reload(); }
 	fn.bind(this).delay(1.5);
 </script>
