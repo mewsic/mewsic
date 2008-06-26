@@ -1307,11 +1307,11 @@ h2.dj-label{
 
 /* elenco generi */
 /* songs*/
-.elenco-genere {
+/*.elenco-genere {
 	margin-bottom:20px;
 	background-color:#EEF3E7;
 	padding:10px 0px;
-}
+}*/
 .elenco-genere table {
 	margin:auto auto;
 }
@@ -3862,10 +3862,16 @@ div.auto_complete ul strong.highlight {
   width: 100%;
 }
 
-.button.chars {
-  font-size: 9px;
+#genre-chars {
+  font-size: 13px;
+	padding-right: 8px;
+	padding-bottom: 8px;
+	margin-bottom: 12px;
+	border-bottom: 1px solid #D9D9D9;
+	text-align: right;
 }
 
-.button.chars a { 
+#genre-chars a { 
   color: #1A73A4;
+	margin: auto;
 }

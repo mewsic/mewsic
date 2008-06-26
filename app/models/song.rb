@@ -65,7 +65,7 @@ class Song < ActiveRecord::Base
   end
   
   def self.find_paginated_by_genre(page, genre)
-    paginate :per_page => 20, 
+    paginate :per_page => 15, 
              :conditions => ["songs.published = ? AND genre_id = ?", true, genre.id], 
              :order => "songs.title ASC",
              :include => [:user, {:tracks => :instrument}], 

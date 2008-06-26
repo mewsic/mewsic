@@ -2,12 +2,10 @@ module GenresHelper
   
   def genres_pagination
     content = ""
+
     ('A'..'Z').each do |c|
       if c != current_genre_char
-        content << " " << link_to_remote(c,
-	          :update => "genres",
-						:url => formatted_genres_path(:format => 'html', :c => c), :method => :get, :loading => "$('genre_spinner').show();",
-            :complete => "$('genre_spinner').hide();var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initSongButtons(true); }")
+        content << ' ' << link_to(c, {}, :rel => c)
       else
         content << " " << c
       end
@@ -17,35 +15,17 @@ module GenresHelper
   end
   
   def genres_pagination_next_button
-    content = ''
-    if current_genre_char < 'Z'
-      content << link_to_remote(image_tag('arrow_simple_right.png', :width => 7, :height => 9),
-	          :update => "genres",
-						:url =>  formatted_genres_path(:format => 'html', :c => next_genre_char), :method => :get, :loading => "$('genre_spinner').show();",
-	          :complete => "$('genre_spinner').hide();var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initSongButtons(true); }")
-    else
-      content << image_tag('arrow_simple_right.png', :width => 7, :height => 9)
-    end
-    
-    content
+    display = current_genre_char < 'Z' ? 'inline' : 'none'
+    link_to image_tag('arrow_simple_right.png', :size => '7x9'), {}, :rel => next_genre_char, :class => 'next-genre', :style => "display: #{display}"
   end
   
   def genres_pagination_previous_button
-    content = ''
-    if current_genre_char > 'Z'
-      content << link_to_remote(image_tag('arrow_simple_left.png', :width => 7, :height => 9),
-	          :update => "genres",
-						:url =>  formatted_genres_path(:format => 'html', :c => previous_genre_char), :method => :get, :loading => "$('genre_spinner').show();",
-	          :complete => "$('genre_spinner').hide();var mlabSlider = MlabSlider.getInstance(); if(mlabSlider) { mlabSlider.initSongButtons(true); }")
-    else
-      content << image_tag('arrow_simple_left.png', :width => 7, :height => 9)
-    end
-    
-    content
+    display = current_genre_char > 'A' ? 'inline' : 'none'
+    link_to image_tag('arrow_simple_left.png', :size => '7x9'), {}, :rel => previous_genre_char, :class => 'prev-genre', :style => "display: #{display}"
   end
   
   def current_genre_char
-    @genre_char ||= 'a'
+    @genre_char ||= 'A'
   end
   
   def next_genre_char    

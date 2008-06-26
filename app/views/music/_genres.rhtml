@@ -1,15 +1,21 @@
-<div class="tit-sezion-tab clear-block" style="position: relative;">
-  <img src="/images/spinner.gif" id="genre_spinner" style="display: none; position: absolute; right: 13px; top: 4px;"/>
-	<div class="float-right">
-		<p class="button chars float-left">		  
-		  <%= genres_pagination %>
-		  <%= genres_pagination_previous_button %>
-		</p>
-		<h1>More Genres</h1>
-		<p class="button float-left">
-		  <%= genres_pagination_next_button %>
-		</p> 		
+<div id="search_tabmenu_container">
+	<div class="tab active float-right">
+		<div id="search_tabmenu" class="sx"> </div>
+		<div id="search_tabmenu" class="rp">
+			<p id="genre-links" class="search_tabmenu_title">
+				<%= genres_pagination_previous_button %>
+				<span style="padding: 0px 4px">More Genres</span>
+		  	<%= genres_pagination_next_button %>
+			</p> 
+		</div>
+		<div id="search_tabmenu" class="dx"> </div>
 	</div>
+</div>
+<div class="float-left">
+	<img src="/images/spinner.gif" id="genre-spinner" style="display: none;"/>
+</div>
+<div id="genre-chars">
+	<%= genres_pagination %>
 </div>
 
 <div class="tab-title-list clear-block">
