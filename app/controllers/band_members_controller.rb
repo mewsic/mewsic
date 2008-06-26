@@ -19,7 +19,7 @@ class BandMembersController < ApplicationController
   def create
     @member = BandMember.new(params[:band_member])    
 
-    load_name_and_avatar!
+    copy_details_if_myousica_id!
 
     @member.user = @user
     @member.save!
@@ -34,7 +34,7 @@ class BandMembersController < ApplicationController
     @member = BandMember.find(params[:id])
     @member.update_attributes(params[:band_member])
 
-    load_name_and_avatar!
+    copy_details_if_myousica_id!
 
     @member.save!
 
@@ -73,10 +73,11 @@ protected
 
 private
 
-  def load_name_and_avatar!
+  def copy_details_if_myousica_id!
     if @member.name.strip =~ /^\d+$/ # this is a myousica ID, try to find an user..
       user = User.find(@member.name)
       @member.name = user.nickname
+      @member.country = user.country
       @member.avatars.each(&:destroy)
       @member.avatars << user.avatar.clone_with_thumbnails if user.avatar
     else # this is a bare member

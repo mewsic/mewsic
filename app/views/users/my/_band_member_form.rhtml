@@ -21,6 +21,16 @@
 					<%= instruments_select @member, 'band_member[instrument_id]' %>
 				</div>
 			</div>
+
+			<div id="band_country_container" style="display: none">
+				<span class="band_over_input_text">
+					Member country:
+				</span>
+				<div>
+					<%= country_select 'band_member', 'country', nil, :include_blank => true %>
+				</div>
+			</div>
+
 		</form>
 
 		<div id="band_upload_avatar" style="display:none">

@@ -9,6 +9,7 @@
 #  user_id       :integer(11)   
 #  created_at    :datetime      
 #  updated_at    :datetime      
+#  country       :string(45)
 #
 
 class BandMember < ActiveRecord::Base
@@ -16,7 +17,7 @@ class BandMember < ActiveRecord::Base
   belongs_to  :instrument
   has_many    :avatars, :as => :pictureable
   
-  attr_accessible :name, :instrument_id
+  attr_accessible :name, :country, :instrument_id
 
   validates_presence_of :name, :instrument_id, :user_id
   validates_associated :instrument, :user

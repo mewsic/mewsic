@@ -35,6 +35,7 @@ var BandMembers = Class.create({
     this.member_name_box = this.element.down('#band_member_add');
     this.instrument_box = this.element.down('#band_instrument_select');
     this.avatar_box = this.element.down('#band_upload_avatar');
+    this.country_box = this.element.down('#band_country_container');
 
     this.add_button = this.element.down('#band_button_add');
     this.b_addMember = this.addMember.bind(this);
@@ -63,6 +64,8 @@ var BandMembers = Class.create({
     this.member_name_input = this.element.down('.input_member_name');
     this.member_name_input.observe('keyup', this.b_watchMemberName);
 
+    this.member_country = this.element.down('#band_member_country');
+
     this.instrument_select = new InstrumentsSelect(this.element.down('select'));
 
     this.b_unloadBandForm = this.unloadBandForm.bind(this);
@@ -82,11 +85,12 @@ var BandMembers = Class.create({
 
   enableMemberLinks: function(link) {
     var member_id = parseInt(link.up('.band_member').id.sub('^band_member_', ''));
-    var member_name = link.up('.band_member').down('.band_member_name').innerHTML
+    var member_name = link.up('.band_member').down('.band_member_name').innerHTML;
+    var member_country = link.up('.band_member').down('.band_member_country').innerHTML;
     var instrument_id = parseInt(link.up('.band_member').down('.instrument').id.sub('^band_member_instrument_', ''));
 
     if (link.className == 'edit') {
-      link.observe('click', this.editMember.bind(this, member_name, member_id, instrument_id));
+      link.observe('click', this.editMember.bind(this, member_name, member_id, instrument_id, member_country));
     } else if (link.className == 'delete') {
       link.observe('click', this.deleteMember.bind(this, member_id));
     }
@@ -98,9 +102,11 @@ var BandMembers = Class.create({
     if (value.blank() || value.match(/^\d+/)) { // this is a myousica ID
       //if (this.avatar_box.visible())
         this.avatar_box.hide();//fade({duration: 0.3});
+        this.country_box.hide();
     } else {
       //if (!this.avatar_box.visible())
         this.avatar_box.show();//appear({duration: 0.3});
+        this.country_box.show();
     }
   },
 
@@ -178,7 +184,7 @@ var BandMembers = Class.create({
 
     this.b_addMember = null;
     this.add_button = this.ok_button = this.cancel_button = null;
-    this.member_name_box = this.instrument_box = this.avatar_box = null;
+    this.member_name_box = this.instrument_box = this.avatar_box = this.country_box = null;
   },
 
   addMember: function(event) {
@@ -213,12 +219,13 @@ var BandMembers = Class.create({
 
     this.member_name_box.hide();//fade({duration: 0.3});
     this.instrument_box.hide();//fade({duration: 0.3});
+    this.country_box.hide();
     //if (this.avatar_box.visible())
       this.avatar_box.hide();//fade({duration: 0.3});
     this.avatar_preview.src = '/images/default_avatars/avatar_icon.gif';
   },
 
-  editMember: function(member_name, member_id, instrument_id, event) {
+  editMember: function(member_name, member_id, instrument_id, member_country, event) {
     event.stop();
 
     this.add_button.hide();
@@ -229,6 +236,7 @@ var BandMembers = Class.create({
     this.form.callback = this.memberEdited.bind(this, member_id);
 
     this.member_name_input.value = member_name;
+    this.member_country.value = member_country;
     this.instrument_select.setValue(instrument_id);
 
     //if (!this.member_name_box.visible() && !this.instrument_box.visible()) {
@@ -237,7 +245,7 @@ var BandMembers = Class.create({
     //}
 
     // If this is not a myousica user...
-    if (this.member_name_input.value.match(/^\w[\w\s\d]*$/)) {
+    if (this.member_name_input.value.match(/^(\w[\w\s\d]*)$/)) {
       // ...and has got a current avatar...
       var current_avatar = this.members.down('#band_member_'+member_id+' img.avatar');
 
@@ -253,6 +261,11 @@ var BandMembers = Class.create({
       //if (!this.avatar_box.visible()) {
         this.avatar_box.show();//appear({duration: 0.3});
       //}
+
+      this.country_box.show();
+    } else {
+      this.avatar_box.hide();
+      this.country_box.hide();
     }
   },
 
