@@ -14,7 +14,9 @@ var Splash = Class.create({
   loading: function() {
     new Effect.Parallel([
       new Effect.Fade('splash_tracks', {sync: true}),
-      new Effect.Fade('splash_songs', {sync: true})
+      new Effect.Fade('splash_songs', {sync: true}),
+      new Effect.Appear('splash_tracks_spinner', {sync: true}),
+      new Effect.Appear('splash_songs_spinner', {sync: true})
       ], { duration: 0.5 }
     );
   },
@@ -24,7 +26,9 @@ var Splash = Class.create({
 
     new Effect.Parallel([
       new Effect.Appear('splash_tracks', {sync: true, queue: 'end'}),
-      new Effect.Appear('splash_songs', {sync: true, queue: 'end'})
+      new Effect.Appear('splash_songs', {sync: true, queue: 'end'}),
+      new Effect.Fade('splash_tracks_spinner', {sync: true, queue: 'end'}),
+      new Effect.Fade('splash_songs_spinner', {sync: true, queue: 'end'})
       ], { duration: 0.5 }
     );
         

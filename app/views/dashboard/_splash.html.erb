@@ -3,6 +3,7 @@
 
 		<div id="splash_elements_container">
 			<div id="splash_tag_tracks"> </div>
+			<div id="splash_tracks_spinner" style="display:none"><%= image_tag 'track-spinner-big.gif' %></div>
 			<div id="splash_box_elements">
 				<!-- dynamic -->
 				<div id="splash_tracks" <%= request.xhr? ? 'style="display: none;"' : '' %>>
@@ -42,6 +43,7 @@
 		
 		<div id="splash_elements_container">
 			<div id="splash_tag_songs"> </div>
+			<div id="splash_songs_spinner" style="display:none"><%= image_tag 'song-spinner-big.gif' %></div>
 			<div id="splash_box_elements">
 
 				<!-- dynamic -->
