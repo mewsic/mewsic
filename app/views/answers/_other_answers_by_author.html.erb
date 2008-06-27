@@ -12,35 +12,36 @@
 			  <%- end -%>	  
 			</div>
     </div>
-    
-    <div class="next" style="text-align: right;">
-      <img src="/images/spinner.gif" id="answers_spinner" style="display: none;"/>
+    <%- if other_answers_by_author.size > 0 %>
+      <div class="next" style="text-align: right;">
+        <img src="/images/spinner.gif" id="answers_spinner" style="display: none;"/>
 
-      <span class="nav-bottom">
-      <% if other_answers_by_author.previous_page %>
-        <%= link_to_remote image_tag('arrow_simple_left.png', :width => 7, :height => 9) + ' <strong>Prev</strong> ',
-              :url =>  siblings_answer_path(@answer, :page => other_answers_by_author.previous_page),
-              :update => "other_by_user",		          
-              :method => :get,
-              :loading => "$('answers_spinner').show()"
-        %>
-      <% else %>
-        <%= image_tag('arrow_simple_left.png', :width => 7, :height => 9)  + ' <strong>Prev</strong> '%>
-      <% end %>
-      </span>
-      <span class="nav-bottom">
-      <% if other_answers_by_author.next_page %>
-        <%= link_to_remote ' <strong>Next</strong> ' + image_tag('arrow_simple_right.png', :width => 7, :height => 9),
-              :url =>  siblings_answer_path(@answer, :page => other_answers_by_author.next_page),
-              :update => "other_by_user",		          
-              :method => :get,
-              :loading => "$('answers_spinner').show()"
-        %>
-      <% else %>
-        <%= ' <strong>Next</strong> ' + image_tag('arrow_simple_right.png', :width => 7, :height => 9) %>
-      <% end %>
-      </span>
-    </div>
+        <span class="nav-bottom">
+        <% if other_answers_by_author.previous_page %>
+          <%= link_to_remote image_tag('arrow_simple_left.png', :width => 7, :height => 9) + ' <strong>Prev</strong> ',
+                :url =>  siblings_answer_path(@answer, :page => other_answers_by_author.previous_page),
+                :update => "other_by_user",		          
+                :method => :get,
+                :loading => "$('answers_spinner').show()"
+          %>
+        <% else %>
+          <%= image_tag('arrow_simple_left.png', :width => 7, :height => 9)  + ' <strong>Prev</strong> '%>
+        <% end %>
+        </span>
+        <span class="nav-bottom">
+        <% if other_answers_by_author.next_page %>
+          <%= link_to_remote ' <strong>Next</strong> ' + image_tag('arrow_simple_right.png', :width => 7, :height => 9),
+                :url =>  siblings_answer_path(@answer, :page => other_answers_by_author.next_page),
+                :update => "other_by_user",		          
+                :method => :get,
+                :loading => "$('answers_spinner').show()"
+          %>
+        <% else %>
+          <%= ' <strong>Next</strong> ' + image_tag('arrow_simple_right.png', :width => 7, :height => 9) %>
+        <% end %>
+        </span>
+      </div>
+    <%- end -%>
     
   </div>  
 </div>
