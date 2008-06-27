@@ -5,22 +5,57 @@ var Pagination = Class.create({
       container: 'container',
       selector: 'div.pagination a'
     }, arguments[0] || {});
+
+    if (this.options.dynamic_spinner) {
+      this.options.loading = new Loading({
+        spinner: this.options.spinner, 
+        container: this.options.container
+      });
+    }
+
     this.initLinks();
-  },  
+  },
 
   initLinks: function() {
     if (!$(this.options.container))
       return;
+
     $(this.options.container).select(this.options.selector).invoke('observe', 'click', this.linkHandler.bind(this));
-  },  
+  },
 
   linkHandler: function(event) {
     event.stop(); 
+
     new Ajax.Updater(this.options.container, event.element().getAttribute('href'), {
-      method: 'get',
-      onLoading: function(event){ if(this.options.spinner) $(this.options.spinner).show(); }.bind(this),
-      onComplete: this.initLinks.bind(this)
+      method: 'GET',
+      onLoading: this.loading.bind(this),
+      onComplete: this.complete.bind(this)
     });
+  },
+
+  loading: function() {
+    if (this.options.loading) {
+      this.options.loading.show();
+    } else if (this.options.spinner) {
+      $(this.options.spinner).show();
+    }
+  },
+
+  complete: function() {
+    if (this.options.loading) {
+      this.options.loading.hide();
+    } else if (this.options.spinner) {
+      $(this.options.spinner).hide();
+    }
+
+    if (this.options.update_mlab && typeof(MlabSlider) != 'undefined') {
+      var mlabSlider = MlabSlider.getInstance();
+      if (mlabSlider) {
+        mlabSlider.initTrackButtons(true);
+      }
+    }
+
+    this.initLinks();
   }
 
 });
@@ -273,8 +308,4 @@ function pop(url) {
 
 function reload() {
   window.location.href = window.location.href.sub(/#.*/, '');
-}
-
-function integerToPixels(x) {
-  return String(parseInt(x)) + 'px';
 }

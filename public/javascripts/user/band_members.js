@@ -5,9 +5,7 @@ var BandMembers = Class.create({
       return;
 
     this.user_id = user_id;
-
-    this.spinner = this.element.down('#band_edit_spinner');
-    this.spinner_img = this.spinner.down('img');
+    this.loading = new Loading({spinner: 'band_edit_spinner', container: 'band_core'});
 
     this.core_box = this.element.down('#band_core');
     this.edit_box = this.element.down('#band_edit_link');
@@ -19,40 +17,21 @@ var BandMembers = Class.create({
   },
 
   showLoading: function() {
-    this.spinner.style.top = '-4000px';
-    this.spinner.show();
-
-    var members = this.core_box.getDimensions();
-    var spinner = this.spinner_img.getDimensions();
-
-    if (spinner.height > members.height) {
-      var height = members.height < 15 ? 15 : members.height;
-      spinner.height = spinner.width = height;
-      this.spinner_img.style.height = this.spinner_img.style.width = integerToPixels(height);
-    }
-
     this.edit_box.hide();
-    this.core_box.setOpacity(0.2);
-
-    this.spinner.style.top = integerToPixels((members.height - spinner.height) / 2);
-    this.spinner.style.left = integerToPixels((members.width - spinner.width) / 2);
+    this.loading.show();
   },
 
   hideLoading: function() {
-    this.spinner.style.top = this.spinner.style.left = integerToPixels(0);
-    this.spinner_img.style.width = this.spinner_img.style.height = null;
-    this.spinner.hide();
     this.edit_box.show();
-    this.core_box.setOpacity(1.0);
+    this.loading.hide();
   },
 
   loadBandForm: function(event) {
     event.stop();
 
-    this.showLoading();
-
     new Ajax.Request('/users/' + this.user_id + '/members/new', {
       method: 'GET',
+      onLoading: this.showLoading.bind(this),
       onComplete: this.showBandForm.bind(this)
     });
   },
@@ -184,10 +163,9 @@ var BandMembers = Class.create({
   unloadBandForm: function(event) {
     event.stop();
 
-    this.showLoading();
-
     new Ajax.Request('/users/' + this.user_id + '/members', {
       method: 'GET',
+      onLoading: this.showLoading.bind(this),
       onComplete: this.showBandMembers.bind(this)
     });
   },

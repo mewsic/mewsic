@@ -17,9 +17,15 @@
   </div>
   
   <div class="box-list two-col clear-block">
+		<div id="songs_spinner" style="display:none;">
+			<%= image_tag 'song-spinner-big.gif' %>
+		</div>
   	<div class="tit-classification-songs clear-block" id="songs">
       <%= render :partial => 'songs' %>
 	  </div>
+		<div id="tracks_spinner" style="display:none;">
+			<%= image_tag 'track-spinner-big.gif' %>
+		</div>
 	  <div class="tit-classification-tracks clear-block" id="tracks">
       <%= render :partial => 'tracks' %>  
 	  </div>
@@ -27,6 +33,7 @@
     <%= render :partial => 'users/my/share' if current_user_page? %> 
   </div>
 
+<% javascript('loading') %>
 <% javascript('user/show') %>
 <% javascript('user/gallery') %>
 <% javascript('user/instruments') %>
