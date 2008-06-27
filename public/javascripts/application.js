@@ -274,3 +274,7 @@ function pop(url) {
 function reload() {
   window.location.href = window.location.href.sub(/#.*/, '');
 }
+
+function integerToPixels(x) {
+  return String(parseInt(x)) + 'px';
+}

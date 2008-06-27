@@ -19,4 +19,12 @@ module BandMembersHelper
     selected = instrument.id == selected ? ' selected="selected"' : ''
     %(<option rel="#{instrument.icon}" value="#{instrument.id}"#{selected}>#{instrument.description}</option>)
   end
+
+  def member_name(member)
+    if member.linked_to_myousica_user?
+      link_to member.nickname, user_path(member.linked_user)
+    else
+      member.nickname
+    end
+  end
 end

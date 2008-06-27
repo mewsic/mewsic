@@ -2,21 +2,19 @@
 	<div id="band_block_top">
 		<% if current_user_page? %>
 			<div id="band_edit_link">
-				<a href='#'>[edit]</a>
+				<a href='#' class="edit_link">[edit]</a>
 			</div>
 		<% end %>
-		<div id="band_edit_spinner" style="display:none">
-			<%= image_tag 'spinner.gif', :class => 'spinner' %>
-		</div>
 		<div id="band_title">
-			<span id="band_over_input_text">
-				<em><%= @user.nickname %></em>:
-				<span id="band_members_count"><%= pluralize @user.members.size, 'member' %></span>
-			</span>
+			<span class="band_name"><%= @user.nickname %></span>
 		</div>
+	</div>
+	<div id="band_edit_spinner" style="display:none">
+		<%= image_tag 'user-spinner-big.gif' %>
 	</div>
 	<div id="band_core">
 		<%= render :partial => 'users/band_member', :collection => @user.members %>
+		<%= render :partial => 'users/no_band_members' %>
 	</div>
 	<div id="band_block_bottom"> </div>
 </div>

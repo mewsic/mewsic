@@ -2981,23 +2981,27 @@ div.hr {
 }
 
 .band_member_name {
+	font-weight: bold;
 	float: left;
 	margin-left: 7px;
 	margin-top: 3px;
-	overflow: hidden;
 	width: 170px;
-	font-weight: bold;
+	height: 15px;
+	display: block;
+	overflow: hidden;
 }
 
 .band_member_country {
-	float: left;
-	margin-left: 7px;
-	margin-top: 4px;
-	overflow: hidden;
-	width: 170px;
 	color: #61656A;
 	font-weight: bold;
 	font-style: italic;
+	float: left;
+	margin-left: 7px;
+	margin-top: 3px;
+	width: 170px;
+	height: 15px;
+	display: block;
+	overflow: hidden;
 }
 
 .band_member_name.edit, .band_member_country.edit {
@@ -3017,12 +3021,11 @@ div.hr {
 }
 
 #band_edit_spinner {
-	float: right;
-	margin-top: 12px;
-	margin-right: 12px;
+	position: relative;
+	height: 0px;
 }
 
-#band_edit_link a, .band_member a {
+#band-members-box a {
 	color: #009DC2;
 }
 
@@ -3157,6 +3160,15 @@ div.hr {
 	clear: both;
 	display: block;
 	padding-bottom: 4px;
+}
+
+.band_name {
+	clear: both;
+	display: block;
+	overflow: hidden;
+	width: 200px;
+	font-weight: bold;
+	font-style: italic;
 }
 
 #band_alert {

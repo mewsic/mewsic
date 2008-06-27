@@ -7,21 +7,50 @@ var BandMembers = Class.create({
     this.user_id = user_id;
 
     this.spinner = this.element.down('#band_edit_spinner');
+    this.spinner_img = this.spinner.down('img');
 
     this.core_box = this.element.down('#band_core');
     this.edit_box = this.element.down('#band_edit_link');
 
     this.b_loadBandForm = this.loadBandForm.bind(this);
-    this.edit_box.down('a').observe('click', this.b_loadBandForm);
+    this.element.select('a.edit_link').each(function(link) {
+      link.observe('click', this.b_loadBandForm);
+    }.bind(this));
+  },
+
+  showLoading: function() {
+    this.spinner.style.top = '-4000px';
+    this.spinner.show();
+
+    var members = this.core_box.getDimensions();
+    var spinner = this.spinner_img.getDimensions();
+
+    if (spinner.height > members.height) {
+      var height = members.height < 15 ? 15 : members.height;
+      spinner.height = spinner.width = height;
+      this.spinner_img.style.height = this.spinner_img.style.width = integerToPixels(height);
+    }
+
+    this.edit_box.hide();
+    this.core_box.setOpacity(0.2);
+
+    this.spinner.style.top = integerToPixels((members.height - spinner.height) / 2);
+    this.spinner.style.left = integerToPixels((members.width - spinner.width) / 2);
+  },
+
+  hideLoading: function() {
+    this.spinner.style.top = this.spinner.style.left = integerToPixels(0);
+    this.spinner_img.style.width = this.spinner_img.style.height = null;
+    this.spinner.hide();
+    this.edit_box.show();
+    this.core_box.setOpacity(1.0);
   },
 
   loadBandForm: function(event) {
     event.stop();
 
-    this.edit_box.hide();
-    this.spinner.show();
+    this.showLoading();
 
-    this.core_box.blindUp({duration: 0.3, queue: 'end'});
     new Ajax.Request('/users/' + this.user_id + '/members/new', {
       method: 'GET',
       onComplete: this.showBandForm.bind(this)
@@ -30,7 +59,6 @@ var BandMembers = Class.create({
 
   showBandForm: function(r) {
     this.core_box.update(r.responseText);
-    this.core_box.blindDown({duration: 0.3, queue: 'end'});
 
     this.member_name_box = this.element.down('#band_member_add');
     this.instrument_box = this.element.down('#band_instrument_select');
@@ -69,7 +97,10 @@ var BandMembers = Class.create({
     this.instrument_select = new InstrumentsSelect(this.element.down('select'));
 
     this.b_unloadBandForm = this.unloadBandForm.bind(this);
-    this.edit_box.down('a').stopObserving('click', this.b_loadBandForm);
+    this.element.select('a.edit_link').each(function(link) {
+      link.stopObserving('click', this.b_loadBandForm);
+    }.bind(this));
+
     this.edit_box.down('a').innerHTML = '[done]';
     this.edit_box.down('a').observe('click', this.b_unloadBandForm);
 
@@ -79,15 +110,17 @@ var BandMembers = Class.create({
       this.addMember(null);
     }
 
-    this.spinner.hide();
+    this.hideLoading();
     this.edit_box.show();
   },
 
   enableMemberLinks: function(link) {
-    var member_id = parseInt(link.up('.band_member').id.sub('^band_member_', ''));
-    var member_name = link.up('.band_member').down('.band_member_name').innerHTML;
-    var member_country = link.up('.band_member').down('.band_member_country').innerHTML;
-    var instrument_id = parseInt(link.up('.band_member').down('.instrument').id.sub('^band_member_instrument_', ''));
+    var member_id = parseInt(link.up('.band_member').id.sub(/^band_member_/, ''));
+    var instrument_id = parseInt(link.up('.band_member').down('.instrument').id.sub(/^band_member_instrument_/, ''));
+
+    var linked_id = link.up('.band_member').down('.link').value;
+    var member_name = linked_id ? parseInt(linked_id) : link.up('.band_member').down('.band_member_name').innerHTML;
+    var member_country = linked_id ? '' : link.up('.band_member').down('.band_member_country').innerHTML;
 
     if (link.className == 'edit') {
       link.observe('click', this.editMember.bind(this, member_name, member_id, instrument_id, member_country));
@@ -98,15 +131,14 @@ var BandMembers = Class.create({
 
   watchMemberName: function(event) {
     var value = event.element().value;
+    this.alert.hide();
 
     if (value.blank() || value.match(/^\d+/)) { // this is a myousica ID
-      //if (this.avatar_box.visible())
-        this.avatar_box.hide();//fade({duration: 0.3});
-        this.country_box.hide();
+      this.avatar_box.hide();
+      this.country_box.hide();
     } else {
-      //if (!this.avatar_box.visible())
-        this.avatar_box.show();//appear({duration: 0.3});
-        this.country_box.show();
+      this.avatar_box.show();
+      this.country_box.show();
     }
   },
 
@@ -125,8 +157,7 @@ var BandMembers = Class.create({
   },
 
   uploadNewAvatar: function() {
-    this.edit_box.hide();
-    this.spinner.show();
+    this.showLoading();
     this.avatar_form.submit();
     this.avatar_file_input.value = '';
   },
@@ -136,8 +167,7 @@ var BandMembers = Class.create({
     this.destroyCurrentAvatar();
     this.setAvatarID(id);
     this.avatar_preview.src = path;
-    this.spinner.hide();
-    this.edit_box.show();
+    this.hideLoading();
   },
 
   setAvatarID: function(id) {
@@ -148,17 +178,14 @@ var BandMembers = Class.create({
   uploadFailed: function() {
     this.alert.innerHTML = 'Upload failed, please try again';
     this.alert.show();
-    this.spinner.hide();
-    this.edit_box.show();
+    this.hideLoading();
   },
 
   unloadBandForm: function(event) {
     event.stop();
 
-    this.edit_box.hide();
-    this.spinner.show();
+    this.showLoading();
 
-    this.core_box.blindUp({duration: 0.3, queue: 'end'});
     new Ajax.Request('/users/' + this.user_id + '/members', {
       method: 'GET',
       onComplete: this.showBandMembers.bind(this)
@@ -170,12 +197,11 @@ var BandMembers = Class.create({
 
     this.edit_box.down('a').stopObserving('click', this.b_unloadBandForm);
     this.edit_box.down('a').innerHTML = '[edit]';
-    this.edit_box.down('a').observe('click', this.b_loadBandForm);
+    this.element.select('a.edit_link').each(function(link) {
+      link.observe('click', this.b_loadBandForm);
+    }.bind(this));
 
-    this.spinner.hide();
-    this.edit_box.show();
-
-    this.core_box.blindDown({duration: 0.3, queue: 'end'});
+    this.hideLoading();
 
     this.ok_button.stopObserving('click', this.b_submitForm);
     this.cancel_button.stopObserving('click', this.b_cancelAddMember);
@@ -198,8 +224,8 @@ var BandMembers = Class.create({
     this.form._method = 'POST';
     this.form.callback = this.memberAdded.bind(this);
 
-    this.member_name_box.show();//appear({duration: 0.3});
-    this.instrument_box.show();//appear({duration: 0.3});
+    this.member_name_box.show();
+    this.instrument_box.show();
   },
 
   cancelAddMember: function(event) {
@@ -217,11 +243,10 @@ var BandMembers = Class.create({
     this.member_name_input.value = '';
     this.instrument_select.setValue('');
 
-    this.member_name_box.hide();//fade({duration: 0.3});
-    this.instrument_box.hide();//fade({duration: 0.3});
+    this.member_name_box.hide();
+    this.instrument_box.hide();
     this.country_box.hide();
-    //if (this.avatar_box.visible())
-      this.avatar_box.hide();//fade({duration: 0.3});
+    this.avatar_box.hide();
     this.avatar_preview.src = '/images/default_avatars/avatar_icon.gif';
   },
 
@@ -239,14 +264,16 @@ var BandMembers = Class.create({
     this.member_country.value = member_country;
     this.instrument_select.setValue(instrument_id);
 
-    //if (!this.member_name_box.visible() && !this.instrument_box.visible()) {
-      this.member_name_box.show();//appear({duration: 0.3});
-      this.instrument_box.show();//appear({duration: 0.3});
-    //}
+    this.member_name_box.show();
+    this.instrument_box.show();
 
-    // If this is not a myousica user...
-    if (this.member_name_input.value.match(/^(\w[\w\s\d]*)$/)) {
-      // ...and has got a current avatar...
+    // If this is a myousica user, don't allow avatar & country editing
+    if (this.member_name_input.value.match(/^\d+$/)) {
+      this.avatar_box.hide();
+      this.country_box.hide();
+
+    } else {
+      // if it's not a myousica user, and has got a current avatar...
       var current_avatar = this.members.down('#band_member_'+member_id+' img.avatar');
 
       // ..show it!
@@ -257,15 +284,9 @@ var BandMembers = Class.create({
         this.avatar_id = current_avatar.id;
       }
 
-      // finally make the avatar box appear, if it's not yet visible
-      //if (!this.avatar_box.visible()) {
-        this.avatar_box.show();//appear({duration: 0.3});
-      //}
-
+      // finally make the avatar and country boxes appear
+      this.avatar_box.show();
       this.country_box.show();
-    } else {
-      this.avatar_box.hide();
-      this.country_box.hide();
     }
   },
 
@@ -304,8 +325,7 @@ var BandMembers = Class.create({
 
   submitting: function() {
     this.alert.hide();
-    this.edit_box.hide();
-    this.spinner.show();
+    this.showLoading();
   },
 
   memberAdded: function(request) {
@@ -314,9 +334,8 @@ var BandMembers = Class.create({
 
     this.setAvatarID('');
     this.closeEditPane();
-    this.updateMemberCount(1);
-    this.spinner.hide();
-    this.edit_box.show();
+    //this.updateMemberCount(1);
+    this.hideLoading();
   },
 
   memberEdited: function(id, request) {
@@ -328,25 +347,24 @@ var BandMembers = Class.create({
 
     this.setAvatarID(null);
     this.closeEditPane();
-    this.spinner.hide();
-    this.edit_box.show();
+    this.hideLoading();
   },
 
   memberDeleted: function(id) {
     var element = this.members.down('#band_member_' + id);
-    element.fade({afterFinish: element.remove});
+    //element.fade({afterFinish: element.remove});
+    element.remove();
 
     this.setAvatarID(null);
-    this.updateMemberCount(-1);
+    //this.updateMemberCount(-1);
     this.closeEditPane();
-    this.spinner.hide();
-    this.edit_box.show();
+    this.hideLoading();
   },
 
-  submitFailed: function(request) {
-    this.edit_box.show();
-    this.spinner.hide();
-    this.alert.innerHTML = 'Please insert all fields!';
+  submitFailed: function(r) {
+    this.hideLoading();
+
+    this.alert.innerHTML = r.responseText;
     this.alert.show();
   },
 

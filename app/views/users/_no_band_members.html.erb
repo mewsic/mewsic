@@ -1,0 +1,6 @@
+<%= empty_collection_message @user.members,
+      :current_user => %|You've got no members in your band.<br/>
+                         Click <a href="#" class="edit_link">[edit]</a> and add some!|,
+      :any_user =>     %|#{@user.nickname} still hasn't added any band member to the band.<br/>
+                         Check again in a few minutes!|
+-%>

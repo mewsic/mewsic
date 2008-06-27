@@ -7,6 +7,7 @@
 					<a class="edit" href="#">[edit]</a>
 					<a class="delete" href="#">[del]</a>
 				</span>
-				<span class="band_member_name edit"><%= band_member.name %></span>
+				<span class="band_member_name edit"><%= member_name(band_member) %></span>
 				<span class="band_member_country edit"><%= band_member.country %></span>
+				<%= hidden_field_tag 'linked_to', band_member.linked_user_id, :class => 'link' %>
 			</div>
