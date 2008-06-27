@@ -1941,7 +1941,7 @@ html>body .login p {
 	text-align:right;
 	font-weight:bold;
 	color:#0099CC;
-        padding:0 !important;
+  padding:0 !important;
 }
 .mlab-enter a{
 	display:block;
@@ -1957,6 +1957,9 @@ html>body .login p {
 	width: 130px;
 	height: 22px;
 	overflow: hidden;
+}
+#mlab-scroll .abstract{
+	margin-bottom: 0px !important;
 }
 #mlab-scroll .elements{
 	padding:5px;
