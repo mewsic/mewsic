@@ -1,13 +1,13 @@
 var Splash = Class.create({
   initialize: function() {
-    this.updater = new PeriodicalExecuter(this.update.bind(this), 10);
+    this.updater = new PeriodicalExecuter(this.request.bind(this), 10);
   },
   
-  update: function() {
+  request: function() {
     new Ajax.Request('/splash', {
       method: 'get',
       onLoading: this.loading,
-      onComplete: this.complete
+      onComplete: this.complete.bind(this)
     });
   },
 
@@ -22,13 +22,17 @@ var Splash = Class.create({
   },
 
   complete: function(r) {
+    this.refresh.delay(1.5, r);
+  },
+
+  refresh: function(r) {
     $('splash_container').update(r.responseText);
 
     new Effect.Parallel([
-      new Effect.Appear('splash_tracks', {sync: true, queue: 'end'}),
-      new Effect.Appear('splash_songs', {sync: true, queue: 'end'}),
-      new Effect.Fade('splash_tracks_spinner', {sync: true, queue: 'end'}),
-      new Effect.Fade('splash_songs_spinner', {sync: true, queue: 'end'})
+      new Effect.Fade('splash_tracks_spinner', {sync: true}),
+      new Effect.Fade('splash_songs_spinner', {sync: true}),
+      new Effect.Appear('splash_tracks', {sync: true}),
+      new Effect.Appear('splash_songs', {sync: true})
       ], { duration: 0.5 }
     );
         
