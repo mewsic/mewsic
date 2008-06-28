@@ -1,65 +1,3 @@
-var Pagination = Class.create({ 
-
-  initialize: function() {
-    this.options = Object.extend({
-      container: 'container',
-      selector: 'div.pagination a'
-    }, arguments[0] || {});
-
-    if (this.options.dynamic_spinner) {
-      this.options.loading = new Loading({
-        spinner: this.options.spinner, 
-        container: this.options.container
-      });
-    }
-
-    this.initLinks();
-  },
-
-  initLinks: function() {
-    if (!$(this.options.container))
-      return;
-
-    $(this.options.container).select(this.options.selector).invoke('observe', 'click', this.linkHandler.bind(this));
-  },
-
-  linkHandler: function(event) {
-    event.stop(); 
-
-    new Ajax.Updater(this.options.container, event.element().getAttribute('href'), {
-      method: 'GET',
-      onLoading: this.loading.bind(this),
-      onComplete: this.complete.bind(this)
-    });
-  },
-
-  loading: function() {
-    if (this.options.loading) {
-      this.options.loading.show();
-    } else if (this.options.spinner) {
-      $(this.options.spinner).show();
-    }
-  },
-
-  complete: function() {
-    if (this.options.loading) {
-      this.options.loading.hide();
-    } else if (this.options.spinner) {
-      $(this.options.spinner).hide();
-    }
-
-    if (this.options.update_mlab && typeof(MlabSlider) != 'undefined') {
-      var mlabSlider = MlabSlider.getInstance();
-      if (mlabSlider) {
-        mlabSlider.initTrackButtons(true);
-      }
-    }
-
-    this.initLinks();
-  }
-
-});
-
 var Message = {
   
   template: '<div class="#{type}">#{message}<div class="close"/></div>',
@@ -180,39 +118,6 @@ var SearchBox = Class.create({
   },
 });
 
-var Tooltips = Class.create({
-  initialize: function() {
-    $$('.instrument').each(function(element) {
-      this.addTip(element)
-    }.bind(this));
-
-    Ajax.Responders.register({
-      onComplete: this.responder.bindAsEventListener(this)
-    });
-  },
-
-  addTip: function(element) {
-    new Tip(element, element.getAttribute('rel'));
-  },
-
-  responder: function() {
-    var orphans = Tips.tips.select(function(t) {
-      return t.element.parentNode == null;
-    });
-
-    orphans.each(function(t) {
-      Tips.remove(t.element);
-    });
-
-    $$('.instrument').each(function(element) {
-      if (Tips.tips.find(function(t) { return t.element == element; }))
-        return;
-
-      this.addTip(element);
-    }.bind(this));
-  }
-});
-
 document.observe('dom:loaded', function(event) {
   // $('search').down('input').focus();
   $('logo').focus();
@@ -281,7 +186,6 @@ document.observe('dom:loaded', function(event) {
   Message.init();
 
   new SearchBox('search');
-  new Tooltips();
 
 });
 

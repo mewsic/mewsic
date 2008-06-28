@@ -73,16 +73,16 @@ class Track < ActiveRecord::Base
   
   def self.find_paginated_by_mband(page, mband)
     paginate :per_page => 7,
-             :conditions => ["songs.user_id IN (?)", mband.members.collect{|m| m.id}.join(',')],
+             :conditions => ["songs.user_id IN (?)", mband.members.map(&:id)],
              :include => [:instrument, {:parent_song => :user}], 
              :order => "tracks.title ASC",
              :page => page
   end
   
   def length
-    hours,   remainig = self.seconds.divmod(3600)
-    minutes, remainig = remainig.divmod(60)
-    seconds = remainig    
+    hours,   remainder = self.seconds.divmod(3600)
+    minutes, remainder = remainder.divmod(60)
+    seconds = remainder
     "#{zerofill(hours, 2)}:#{zerofill(minutes, 2)}:#{zerofill(seconds, 2)}"
   end
   

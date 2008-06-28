@@ -5,7 +5,10 @@ var BandMembers = Class.create({
       return;
 
     this.user_id = user_id;
-    this.loading = new Loading({spinner: 'band_edit_spinner', container: 'band_core'});
+    this.loading = new Loading({
+      spinner: 'band_edit_spinner',
+      container: 'band_core'
+    });
 
     this.core_box = this.element.down('#band_core');
     this.edit_box = this.element.down('#band_edit_link');

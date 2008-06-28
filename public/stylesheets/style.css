@@ -521,8 +521,17 @@ tr.nav-song td{
 	padding-top:5px;
 }
 .played-instruments .small-box .thumb {
-        margin-right:10px;
+	margin-right:10px;
 }
+.played-instruments .small-box .instrument-name {
+	overflow: hidden;
+	padding: 5px 0px;
+	width: 85px;
+	height: 30px;
+	font-weight: bold;
+	font-style: italic;
+}
+
 /* people */
 .people-list .top-box{
 	margin-left: 5px;
