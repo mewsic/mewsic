@@ -37,9 +37,11 @@ var Tooltips = Class.create({
       this.rehash(element, this.addInstrument);
     }.bind(this));
 
-    $$('img.button.mlab').each(function(element) {
-      this.rehash(element, this.addMlab);
-    }.bind(this));
+    if (!$('current-user-id')) {
+      $$('img.button.mlab').each(function(element) {
+        this.rehash(element, this.addMlab);
+      }.bind(this));
+    }
   },
 
   rehash: function(element, callback) {
