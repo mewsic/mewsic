@@ -62,15 +62,15 @@ Prototip.Styles = {
     closeButton: false,
     hideAfter: 1.0,
     border: 4,
-    borderColor: '#efbb5a',
+    borderColor: '#EBE4B4',
     showOn: 'mousemove',
     hideOn: 'mouseleave',
     images: 'styles/creamy/',
     radius: 4,
     delay: 0.06,
     stem: { position: 'bottomLeft', height: 10, width: 12 },
-    hook: { target: 'topRight', tip: 'bottomLeft' },
-    offset: { x: -10, y: 7 },
+    //hook: { tip: 'bottomLeft', mouse: true },
+    offset: { x: 6, y: -48 },
     width: 'auto'
   },
 

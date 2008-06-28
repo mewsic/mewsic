@@ -520,16 +520,23 @@ tr.nav-song td{
 	margin-right:20px;
 	padding-top:5px;
 }
+.played-instruments .small-box {
+	margin: 2px 1px 2px 2px !important;
+	padding: 2px !important;
+	width: 130px !important;
+}
 .played-instruments .small-box .thumb {
-	margin-right:10px;
+	margin-right:5px;
+	float: left;
 }
 .played-instruments .small-box .instrument-name {
 	overflow: hidden;
 	padding: 5px 0px;
-	width: 85px;
+	width: 90px;
 	height: 30px;
 	font-weight: bold;
 	font-style: italic;
+	float: left;
 }
 
 /* people */
@@ -871,6 +878,22 @@ h2.dj-label{
 	font-weight:bold;
 	font-size:12px;
 }
+
+.tracks-grey {
+	width: 260px;
+	height: 30px;
+	overflow: hidden;
+	margin-top: 3px;
+}
+
+.mlab_tracks td.track-name {
+	width: 300px;
+}
+
+.mlab_tracks p.title {
+	overflow: hidden;
+}
+
 .green-box .green-bg{
 	background:#EFF7EC;
 	height:35px;

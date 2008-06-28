@@ -3,9 +3,9 @@
     <tr class="odd">
       <td>
         <span class="tracks-number"><span><%= song.tracks.size %></span></span>
-        <div class="float-left">
+        <div class="float-left tracks-grey">
           <% song.tracks.each do |track| -%>
-            <% track_instrument_icon(track) %>
+						<%= track_instrument_icon(track, :grey => true) %>
           <% end -%>
         </div>
       </td>
