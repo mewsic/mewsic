@@ -22,25 +22,25 @@ var Splash = Class.create({
   },
 
   complete: function(r) {
-    this.refresh.delay(1.5, r);
-  },
-
-  refresh: function(r) {
     $('splash_container').update(r.responseText);
 
+    var mlabSlider = MlabSlider.getInstance();        
+    if (mlabSlider) {
+      mlabSlider.initTrackButtons(true);
+      mlabSlider.initSongButtons(true);
+    }
+
+    this.appear.delay(1.5, r);
+  },
+
+  appear: function(r) {
     new Effect.Parallel([
       new Effect.Fade('splash_tracks_spinner', {sync: true}),
       new Effect.Fade('splash_songs_spinner', {sync: true}),
       new Effect.Appear('splash_tracks', {sync: true}),
       new Effect.Appear('splash_songs', {sync: true})
       ], { duration: 0.5 }
-    );
-        
-    var mlabSlider = MlabSlider.getInstance();        
-    if (mlabSlider) {
-      mlabSlider.initTrackButtons(true);
-      mlabSlider.initSongButtons(true);
-    }
+    );      
   }
 });
 
