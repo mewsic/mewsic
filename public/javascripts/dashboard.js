@@ -30,10 +30,8 @@ var Splash = Class.create({
   },
 
   complete: function(r) {
-    this.appear.delay(1.5, r);
-  },
-
-  appear: function(r) {
+    //this.appear.delay(1.5, r);
+ 
     $('splash_container').update(r.responseText);
 
     var mlabSlider = MlabSlider.getInstance();        
@@ -42,6 +40,9 @@ var Splash = Class.create({
       mlabSlider.initSongButtons(true);
     }
 
+  },
+
+  appear: function(r) {
     /*
     new Effect.Parallel([
       new Effect.Fade('splash_tracks_spinner', {sync: true}),
