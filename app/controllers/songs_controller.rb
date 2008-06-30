@@ -26,9 +26,24 @@ class SongsController < ApplicationController
       format.html do
         @other_songs = Song.find(:all, :conditions => ["songs.user_id = ? AND songs.published = ?", @song.user, true], :order => 'songs.listened_times', :limit => 8, :include => [:user, { :mixes => { :track => [:instrument, :parent_song] } }, :genre])        
       end
+
       format.xml do
         @show_siblings  = params.include?(:siblings)
         @show_edit_info = params.include?(:edit) && params[:edit] == 'true'
+      end
+
+      format.png do
+        if @song.filename.blank?
+          flash[:error] = 'file not found'
+          redirect_to '/' and return
+        end
+
+        response.headers['Content-Disposition'] = 'inline'
+        response.headers['Content-Type'] = 'image/png'
+        response.headers['Cache-Control'] = 'private'
+        response.headers['X-Accel-Redirect'] = @song.filename.sub /\.mp3$/, '.png'
+
+        render :nothing => true
       end
     end  
   end
