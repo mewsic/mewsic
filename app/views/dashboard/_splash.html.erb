@@ -3,10 +3,9 @@
 
 		<div id="splash_elements_container">
 			<div id="splash_tag_tracks"> </div>
-			<div id="splash_tracks_spinner" style="<%= request.xhr? ? '' : 'display:none' %>"><%= image_tag 'track-spinner-big.gif' %></div>
 			<div id="splash_box_elements">
 				<!-- dynamic -->
-				<div id="splash_tracks" <%= request.xhr? ? 'style="display: none;"' : '' %>>
+				<div id="splash_tracks">
 				  <%- @splash_tracks.each_with_index do |track, index| -%>
   				  <div class="splash <%= %w[odd even][index % 2] %>">
               <%= track_instrument_icon(track) %>
@@ -20,9 +19,10 @@
 				</div>
 				<!-- end dynamic -->								
 			</div>
+			<div id="splash_tracks_spinner" style="display:none"><%= image_tag 'track-spinner-big.gif' %></div>
 		</div>
 		
-		<div id="splash_divider_plus"> </div>
+		<div id="splash_divider" class="pngfix"> </div>
 		
 		<div id="splash_elements_container_mlab">
 			<div id="splash_tag_mlab"> </div>
@@ -39,15 +39,14 @@
 			</div>
 		</div>
 
-		<div id="splash_divider_equal"> </div>
+		<div id="splash_divider" class="pngfix"> </div>
 		
 		<div id="splash_elements_container">
 			<div id="splash_tag_songs"> </div>
-			<div id="splash_songs_spinner" style="<%= request.xhr? ? '' : 'display:none' %>"><%= image_tag 'song-spinner-big.gif' %></div>
 			<div id="splash_box_elements">
 
 				<!-- dynamic -->
-				<div id="splash_songs" <%= request.xhr? ? 'style="display: none;"' : '' %>>
+				<div id="splash_songs">
 				  <%- @splash_songs.each_with_index do |song, index| -%>
   				  <div class="splash <%= %w[odd even][index % 2] %>">
   				    <span class="tracks-number"><span><%= song.tracks.count %></span></span>
@@ -61,6 +60,7 @@
 				</div>
 				<!-- end dynamic -->												
 			</div>
+			<div id="splash_songs_spinner" style="display:none"><%= image_tag 'song-spinner-big.gif' %></div>
 		</div>
 
 	</div>

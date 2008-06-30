@@ -115,7 +115,7 @@ var SearchBox = Class.create({
     }
 
     this.form.submit();
-  },
+  }
 });
 
 document.observe('dom:loaded', function(event) {

@@ -21,10 +21,10 @@
             <%= text_field_tag :q, @q || '' %>
             <input name="search" type="image" src="/images/search_button.png" alt="search" class="input-button" />          
           </p>
-          <p class="collapsed-box">
+          <p class="collapsed-box pngfix">
             <a class="trigger" href="#">Advanced Search</a>
           </p>
-          <p class="advanced-box" style="display:none">
+          <p class="advanced-box pngfix" style="display:none">
             <span class="trigger"> </span>
             <span class="checkboxes">
               <%= check_box_tag 'type[]', 'user'  %><span><a href="#">People</a></span>

@@ -30,7 +30,10 @@ input,
 .tit-classification-songs h1,
 .tit-classification-tracks h1,
 .white-box-right-bottom,
-.white-box-right-top
+.white-box-right-top,
+.mylist,
+.pngfix,
+.rating .stars .star,
 {
 behavior: url(/stylesheets/iepngfix.htc)
 }

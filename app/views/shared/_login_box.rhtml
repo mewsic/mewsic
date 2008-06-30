@@ -1,6 +1,6 @@
 <div id="login">
-	<div id="login-box-top"> </div>
-	<div id="login-box-core">
+	<div id="login-box-top" class="pngfix"> </div>
+	<div id="login-box-core" class="pngfix">
 		<%- form_tag sessions_path do -%>  
   		<p class="login-box-title">Account Login</p>
   			<input type="text" name="login" class="login-box-input username" value="username" />
@@ -17,7 +17,7 @@
   		</div>
 		<%- end -%>
 	</div>
-	<div id="login-box-forgot" style="display: none;">
+	<div id="login-box-forgot" class="pngfix" style="display: none;">
 		<% form_tag forgot_password_path, :id => 'forgot-box' do -%>
   		<p class="login-box-title">Forgot password?</p>
       <p>
@@ -33,5 +33,5 @@
   		</div>
 		<%- end -%>
 	</div>
-	<div id="login-box-bottom"> </div>
+	<div id="login-box-bottom" class="pngfix"> </div>
 </div>
