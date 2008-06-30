@@ -191,7 +191,7 @@ class User < ActiveRecord::Base
     
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(login, password)
-    u = find :first, :conditions => ['login = ? and activated_at IS NOT NULL', login] #find_by_login(login)
+    u = find :first, :conditions => ['login = ? and activated_at IS NOT NULL', login]
     u && u.authenticated?(password) ? u : nil
   end
 

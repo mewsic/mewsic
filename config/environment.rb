@@ -83,3 +83,6 @@ elsif connection.class.to_s == "ActiveRecord::ConnectionAdapters::MysqlAdapter"
 else
   raise "Unsupported adapter for random extraction."
 end
+
+# PNG respond_to
+Mime::Type.register 'image/png', :png

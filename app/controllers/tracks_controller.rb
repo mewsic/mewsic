@@ -19,6 +19,19 @@ class TracksController < ApplicationController
     @show_siblings = params.include?(:siblings)
     respond_to do |format|
       format.xml
+      format.png do
+        if @track.filename.blank?
+          flash[:error] = 'file not found'
+          redirect_to '/' and return
+        end
+
+        response.headers['Content-Disposition'] = 'inline'
+        response.headers['Content-Type'] = 'image/png'
+        response.headers['Cache-Control'] = 'private'
+        response.headers['X-Accel-Redirect'] = @track.filename.sub /\.mp3$/, '.png'
+
+        render :nothing => true
+      end
     end  
   end
   
