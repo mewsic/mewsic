@@ -887,7 +887,7 @@ h2.dj-label{
 }
 
 .tracks-grey {
-	width: 260px;
+	width: 225px;
 	height: 30px;
 	overflow: hidden;
 	margin-top: 3px;
@@ -897,8 +897,17 @@ h2.dj-label{
 	width: 300px;
 }
 
-.mlab_tracks p.title {
+.mlab_tracks p.title, .mlab_song p.title {
 	overflow: hidden;
+}
+
+.mlab_song td.song-info {
+	width: 280px;
+}
+
+.mlab_song td.song-action {
+	width: 100px;
+	vertical-align: middle;
 }
 
 .green-box .green-bg{

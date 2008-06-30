@@ -1,7 +1,7 @@
 <div class="elements clear-block mlab_song">   
   <table width="95%" border="0" cellpadding="5" cellspacing="0">
     <tr class="odd">
-      <td>
+      <td class="song-info">
         <span class="tracks-number"><span><%= song.tracks.size %></span></span>
         <div class="float-left tracks-grey">
           <% song.tracks.each do |track| -%>
@@ -9,19 +9,19 @@
           <% end -%>
         </div>
       </td>
-      <td align="right">
+			<td class="song-action" align="right">
         <%= rating(song) %>
         <p><strong><%= link_to(song.genre.name, song.genre) if song.genre %></strong></p>
       </td>
     </tr>
     <tr class="odd">
-      <td>
-        <p><em><%= song.user.login %></em></p>
+      <td class="song-info">
+        <p class="name"><%= song.user.login %></p>
         <p class="title">
         <%= link_to song.title, song %>
 		    </p>
       </td>
-      <td align="right" style="vertical-align:bottom">
+			<td class="song-action" align="right">
         <p>
           <%= mlab_button(song, :dynamic => true) %>
           <%= play_button(song) %>
