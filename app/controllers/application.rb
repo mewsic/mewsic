@@ -14,9 +14,14 @@ class ApplicationController < ActionController::Base
   include AuthenticatedSystem
   
   #before_filter :check_user_inbox
+  before_filter :update_last_user_activity
   
   protected    
   
+  def update_last_user_activity
+    current_user.update_attribute(:last_activity_at, Time.now) if logged_in? #&& !request.xhr?
+  end
+
   def check_user_inbox
     if logged_in?
       if current_user.unread_message_count > 0

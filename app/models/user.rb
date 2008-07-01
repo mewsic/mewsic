@@ -229,6 +229,7 @@ class User < ActiveRecord::Base
   end
 
   def forget_me
+    self.last_activity_at          = nil
     self.remember_token_expires_at = nil
     self.remember_token            = nil
     save(false)
@@ -349,6 +350,10 @@ class User < ActiveRecord::Base
     profile = %w(first_name last_name photos_url myspace_url blog_url skype skype_public msn msn_public)
     complete = profile.select { |attr| !self[attr].blank? }
     (complete.size.to_f / profile.size.to_f * 100.0).round 2
+  end
+
+  def online_now?
+    self.last_activity_at >= Time.now - 15.minutes if self.last_activity_at
   end
   
   protected

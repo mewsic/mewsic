@@ -238,14 +238,31 @@ html>body #search p span{
 	font-weight:bold;
 	color:#000;
 }
-.name a:hover{
+.name a:hover {
 	color:#28548B;
 }
+div.status {
+	float:left;
+	height:11px;
+	left:5px;
+	position:relative;
+	top:-70px;
+	width:11px;
+}
+
+div.online {
+	background: transparent url(/images/online.png) top left no-repeat;
+}
+
+div.offline {
+	background: transparent url(/images/offline.png) top left no-repeat;
+}
+
 .title, .title a{
 	font-weight:bold;
 	color:#000;
 }
-.title a:hover{
+.title a:hover {
 	color:#28548B;
 }
 .country{
@@ -563,10 +580,13 @@ tr.nav-song td{
 	margin:auto;
 }
 .people-list p.name, .people-list p.country{
-	overflow:hidden;
-	line-height:12px;
+	float:left;
 	height:25px;
-	margin-bottom:0px !important;
+	line-height:12px;
+	margin:0px !important;
+	overflow:hidden;
+	padding:2px 0px !important;
+	width:54px;
 }
 .label-title{
 	padding-right:15px;
