@@ -1,17 +1,9 @@
 var Splash = Class.create({
   initialize: function() {
-    this.updater = new PeriodicalExecuter(this.request.bind(this), 10);
+    this.updater = new PeriodicalExecuter(this.cycle.bind(this), 10);
   },
   
-  request: function() {
-    new Ajax.Request('/splash', {
-      method: 'get',
-      onLoading: this.loading,
-      onComplete: this.complete.bind(this)
-    });
-  },
-
-  loading: function() {
+  cycle: function() {
     new Effect.Parallel([
       new Effect.Fade('splash_tracks', {sync: true}),
       new Effect.Fade('splash_songs', {sync: true})
@@ -27,11 +19,18 @@ var Splash = Class.create({
     $('splash_tracks_spinner').appear({duration: 0.3});
     $('splash_songs_spinner').appear({duration: 0.3});
     */
+
+    this.request.bind(this).delay(1.7);
+  },
+
+  request: function() {
+    new Ajax.Request('/splash', {
+      method: 'get',
+      onComplete: this.complete.bind(this)
+    });
   },
 
   complete: function(r) {
-    //this.appear.delay(1.5, r);
- 
     $('splash_container').update(r.responseText);
 
     var mlabSlider = MlabSlider.getInstance();        
