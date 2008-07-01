@@ -22,7 +22,7 @@ class BandMembersControllerTest < ActionController::TestCase
   
   def test_should_not_create_unless_logged_in    
     assert_no_difference 'BandMember.count' do
-      post :create, :user_id => users(:mikaband), :band_member => { :name => 'ivan', :instrument_id => instruments(:guitar).id }
+      post :create, :user_id => users(:mikaband), :band_member => { :nickname => 'ivan', :instrument_id => instruments(:guitar).id }
       assert_response :redirect
     end
   end
@@ -30,7 +30,7 @@ class BandMembersControllerTest < ActionController::TestCase
   def test_should_not_create_if_not_band_owner
     login_as :quentin
     assert_no_difference 'BandMember.count' do
-      post :create, :user_id => users(:mikaband), :band_member => { :name => 'ivan' }
+      post :create, :user_id => users(:mikaband), :band_member => { :nickname => 'ivan' }
       assert_response :redirect
     end
   end
@@ -38,15 +38,15 @@ class BandMembersControllerTest < ActionController::TestCase
   def test_should_create
     login_as :mikaband
     assert_difference 'BandMember.count' do
-      post :create, :user_id => users(:mikaband), :band_member => { :name => 'ivan', :instrument_id => instruments(:guitar).id }
+      post :create, :user_id => users(:mikaband), :band_member => { :nickname => 'ivan', :instrument_id => instruments(:guitar).id }
       assert_response :success
     end
   end
   
   def test_should_update
     login_as :mikaband
-    post :update, :user_id => users(:mikaband), :id => band_members(:andrea), :band_member => { :name => 'Andrea 2' }
-    assert_equal 'Andrea 2', band_members(:andrea).reload.name
+    post :update, :user_id => users(:mikaband), :id => band_members(:andrea), :band_member => { :nickname => 'Andrea 2' }
+    assert_equal 'Andrea 2', band_members(:andrea).reload.nickname
   end
   
   def test_should_destroy

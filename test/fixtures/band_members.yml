@@ -14,10 +14,10 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 andrea:
-  name: Andrea
+  nickname: Andrea
   instrument: guitar
   user: mikaband     
 giovanni:
-  name: Giovanni
+  nickname: Giovanni
   instrument: drum
   user: mikaband
