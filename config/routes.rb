@@ -82,5 +82,6 @@ ActionController::Routing::Routes.draw do |map|
 
   map.root :controller => "dashboard"
   map.connect 'splash', :controller => 'dashboard', :action => 'splash'
+  map.connect 'noop', :controller => 'dashboard', :action => 'noop'
   
 end
