@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 38) do
+ActiveRecord::Schema.define(:version => 39) do
 
   create_table "abuses", :force => true do |t|
     t.integer  "abuseable_id"
@@ -217,8 +217,8 @@ ActiveRecord::Schema.define(:version => 38) do
     t.string   "activation_code"
     t.string   "country",                   :limit => 45
     t.string   "city",                      :limit => 40
-    t.string   "first_name"
-    t.string   "last_name"
+    t.string   "first_name",                :limit => 32
+    t.string   "last_name",                 :limit => 32
     t.string   "gender",                    :limit => 20
     t.string   "photos_url"
     t.string   "blog_url"

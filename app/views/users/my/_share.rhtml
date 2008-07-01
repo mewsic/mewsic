@@ -11,7 +11,7 @@
 	  <p>
   		<label>Your first name</label>
   		<span id="loading_user_first_name" style="display:none;" class="loading">Saving...</span>
-  		<%= text_field :user, :first_name, :class => 'hide-on-load ready-for-edit' %>
+			<%= text_field :user, :first_name, :class => 'hide-on-load ready-for-edit', :maxlength => 32 %>
   		<input type="submit" class="button hide-on-load" value="OK"/>
   	  </p>
   <% end -%>
@@ -19,7 +19,7 @@
 	  <p>
   		<label>Your last name</label>
   		<span id="loading_user_last_name" style="display:none;" class="loading">Saving...</span>
-  		<%= text_field :user, :last_name, :class => 'hide-on-load ready-for-edit' %>
+  		<%= text_field :user, :last_name, :class => 'hide-on-load ready-for-edit', :maxlength => 32 %>
   		<input type="submit" class="button hide-on-load" value="OK"/>
   	  </p>
   <% end -%>
