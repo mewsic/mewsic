@@ -43,7 +43,7 @@ module UsersHelper
   def user_photo_link
     content = ''
     unless @user.photos_url.blank?
-      content << %|<a href="#{@user.photos_url}" target="_new"><img class="float-left" alt="" src="/images/icone_link_photo.gif"/></a><p><a href="#{@user.photos_url}" target="_new">Photo</a></p>|
+      content << %|<a class="tip-link" rel="tip-photos" title="PHOTOS" href="#"><img class="float-left" alt="" src="/images/icone_link_photo.gif"/>Photos</a><div id="tip-photos" style="display:none"><a href="#{@user.photos_url}" target="_new">#{@user.nickname}'s photos</a></div>|
     end
     return content
   end
@@ -51,7 +51,7 @@ module UsersHelper
   def user_blog_link
     content = ''
     unless @user.blog_url.blank?
-      content << %|<a href="#{@user.blog_url}" target="_new"><img width="16" height="19" class="float-left" alt="" src="/images/icone_link_blog.gif"/></a><p><a href="#{@user.blog_url}" target="_new">Blog</a></p>|
+      content << %|<a class="tip-link" rel="tip-blog" title="BLOG" href="#"><img class="float-left" alt="" src="/images/icone_link_blog.gif"/>Blog</a><div id="tip-blog" style="display:none"><a href="#{@user.blog_url}" target="_new">#{@user.nickname}'s blog</a></div>|
     end
     content
   end
@@ -59,7 +59,7 @@ module UsersHelper
   def user_myspace_link
     content = ''
     unless @user.myspace_url.blank?
-      content << %|<a href="#{@user.myspace_url}"><img width="16" height="19" class="float-left" alt="" src="/images/icone_link_myspace.gif"/></a><p><a href="#{@user.myspace_url}">MySpace</a></p>|
+      content << %|<a class="tip-link" rel="tip-myspace" title="MYSPACE PAGE" href="#"><img class="float-left" alt="" src="/images/icone_link_myspace.gif"/>MySpace</a><div id="tip-myspace" style="display:none"><a href="#{@user.myspace_url}" target="_new">#{@user.nickname}'s myspace</a></div>|
     end
     content
   end
@@ -67,7 +67,7 @@ module UsersHelper
   def user_skype_link
     content = ''
     if !@user.skype.blank? && @user.skype_public?
-      content << %|<a class="button popup" href="#{im_contact_user_path(@user, :type => 'skype')}"><img width="17" height="19" class="float-left" alt="" src="/images/icone_link_skype.gif"/></a><p><a class="button popup" href="#{im_contact_user_path(@user, :type => 'skype')}">Skype</a></p>|
+      content << %|<a class="tip-link" rel="tip-skype" title="SKYPE CONTACT" href="#"><img class="float-left" alt="" src="/images/icone_link_skype.gif"/>Skype</a><div id="tip-skype" style="display:none"><a href="callto://#{@user.skype}">#{@user.skype}</a></div>|
     end
     content    
   end
@@ -75,7 +75,7 @@ module UsersHelper
   def user_msn_link
     content = ''
     if !@user.msn.blank? && @user.msn_public?
-      content << %|<a class="button popup" href="#{im_contact_user_path(@user, :type => 'msn')}"><img width="21" height="19" class="float-left" alt="" src="/images/icone_link_MSN.gif"/></a><p><a class="button popup" href="#{im_contact_user_path(@user, :type => 'msn')}">MSN</a></p>|
+      content << %|<a class="tip-link" rel="tip-msn" title="MSN CONTACT" href="#"><img class="float-left" alt="" src="/images/icone_link_MSN.gif"/>MSN</a><div id="tip-msn" style="display:none"><a href="#{@user.msn}" class="msn-link">#{@user.msn}</a></div>|
     end
     content    
   end

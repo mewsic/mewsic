@@ -70,28 +70,23 @@
 
 <div id="user-links">
 
-<div class="popup" style="display:none;">
-	<a href="#" class="button close"><img src="/images/search_box_icon_close.png" /></a>  
-	<img class="popup-spinner" src="/images/spinner.gif">
-	<div class="container"></div>
-</div>
 <div class="user-id clear-float">
   <div class="float-right">
     <div class="adding-link">
-      <%= user_msn_link %>
-    </div>			
+      <%= user_photo_link %>
+    </div>
     <div class="adding-link">
-      <%= user_skype_link %>
+      <%= user_blog_link %>
     </div>			
     <div class="adding-link">
       <%= user_myspace_link %>
     </div>			
     <div class="adding-link">
-      <%= user_blog_link %>
+      <%= user_skype_link %>
     </div>			
     <div class="adding-link">
-      <%= user_photo_link %>
-    </div>
+      <%= user_msn_link %>
+    </div>			
   </div>
   <p>myousica ID: <%= @user.id %> / <%= @user.login %></p>
 </div>

@@ -1,54 +1,19 @@
-var IMBox = Class.create({
+var UserLinks = Class.create({
 
 	initialize: function() {
 		this.element = $('user-links');
-		this.authenticity_token = $('authenticity-token').value;
-		this.popup = this.element.down('div.popup');
-		this.container = this.element.down('div.container');
-		this.spinner = this.element.down('img.popup-spinner');
-		this.element.select('a.button.popup').invoke('observe', 'click', this.handleOpenPopup.bind(this));
-		this.popup.down('a.button.close').observe('click', this.handleClosePopup.bind(this));
+		this.tooltip = this.element.down('div.container');
+    this.element.select('a.tip-link').each(function(link) {
+      var contents = $(link.getAttribute('rel'));
+      var title = link.title;
+      link.observe('click', function(event) { event.stop(); });
+      new Tip(link, contents, {style: 'user-link', title: title});
+    });
 	},
 
-	handleOpenPopup: function(event) {
-		event.stop();
-		new Effect.Appear(this.popup, {duration: 0.3});
-
-		element = event.element();
-		if (element.tagName == 'IMG')
-			element = element.up('a.button.popup');
-
-		this.loadPage(element.getAttribute('href'));
-	},
-
-	handleClosePopup: function(event) {
-		event.stop();
-		new Effect.Fade(this.popup, {
-			duration: 0.3,
-			afterFinish: function() { this.container.update(''); }.bind(this) });
-	},
-
-	loadPage: function(url) {
-		var options = Object.extend({
-			method: 'get',
-			evalScripts: true,
-			onLoading: this.handlePageLoading.bind(this),
-			onComplete: this.handlePageLoaded.bind(this)
-		}, arguments[1] || {});
-		new Ajax.Updater(this.container, url, options);
-	},
-
-	handlePageLoading: function() {
-		this.spinner.show();
-	},
-
-	handlePageLoaded: function() {
-		IMProxy.instance.setupLinks();
-		this.spinner.hide();
-	}
 });
 
-var IMProxy = Class.create({
+var MSNLink = Class.create({
 	initialize: function() {
 		this.app = new Element('object', {height:0,width:0});
 
@@ -60,20 +25,15 @@ var IMProxy = Class.create({
 		catch (e) {
 			this.msn_present = false;
 		}
-	},
 
-	setupLinks: function() {
 		$$('a.msn-link').invoke('observe', 'click', this.onMSNClick.bind(this));
-		$$('a.skype-link').each(function(e) { e.href = "callto://" + e.innerHTML; });
 	},
 
 	onMSNClick: function(event) {
 		event.stop();
 
 		var element = event.element();
-		if (element.tagName == 'IMG')
-			element = element.up('a.msn-link');
-		var handle = element.innerHTML;
+		var handle = element.href;
 
 		if (!this.msn_present) {
 			Message.notice("Please copy & paste <em>" + handle + "</em> into your MSN client");
@@ -91,6 +51,6 @@ var IMProxy = Class.create({
 });
 
 document.observe('dom:loaded', function() {
-	IMBox.instance = new IMBox();
-	IMProxy.instance = new IMProxy();
+	UserLinks.instance = new UserLinks();
+	MSNLink.instance = new MSNLink();
 });

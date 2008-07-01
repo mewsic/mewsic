@@ -167,21 +167,6 @@ class UsersController < ApplicationController
     render :inline => "<%= content_tag(:ul, @users.map { |u| content_tag(:li, h(u.login)) }) %>"
   end
 
-  def im_contact
-    redirect_to root_url and return unless request.xhr?
-    raise ActiveRecord::RecordNotFound unless %w(skype msn).include?(params[:type])
-
-    user = User.find_from_param(params[:id])
-    @im = params[:type]
-    @handle = user[@im]
-
-    raise ActiveRecord::RecordNotFound if @handle.blank? || !user.send("#{@im}_public?")
-    render :partial => 'users/im'
-
-  rescue ActiveRecord::RecordNotFound
-    render :nothing => true, :status => :not_found
-  end
-  
 protected
   
   def check_if_current_user_page
