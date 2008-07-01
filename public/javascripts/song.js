@@ -1,13 +1,17 @@
 var TrackSlider = Class.create({
-  initialize: function() {
-    this.tracks = $('song-tracks-container');
-    this.container = this.tracks.up();
+  initialize: function(element) {
+    this.elements = $(element);
+    this.container = this.elements.up();
 
-    this.prev = $('slide-prev');
-    this.next = $('slide-next');
+    var outer = this.elements.up('.slide-container');
 
-    this.prev.observe('click', this.slide.bind(this, 300));
-    this.next.observe('click', this.slide.bind(this, -300));
+    outer.select('.slide-prev').each(function(element) {
+      element.observe('click', this.slide.bind(this, 300));
+    }.bind(this));
+
+    outer.select('.slide-next').each(function(element) {
+      element.observe('click', this.slide.bind(this, -300));
+    }.bind(this));
   },
 
   slide: function(y, event) {
@@ -16,14 +20,14 @@ var TrackSlider = Class.create({
     if (this.sliding)
       return;
 
-    if (y > 0 && parseInt(this.tracks.style.top) >= 0)
+    if (y > 0 && parseInt(this.elements.style.top) >= 0)
       return;
 
-    if (y < 0 && -parseInt(this.tracks.style.top) > this.tracks.getHeight() - this.container.getHeight())
+    if (y < 0 && -parseInt(this.elements.style.top) > this.elements.getHeight() - this.container.getHeight())
       return;
 
     this.sliding = true;
-    new Effect.Move(this.tracks, {
+    new Effect.Move(this.elements, {
       x: 0, y: y, mode: 'relative', transition: Effect.Transitions.sinoidal,
       duration: 0.3, afterFinish: function() { this.sliding = false }.bind(this)
     });
@@ -32,5 +36,7 @@ var TrackSlider = Class.create({
 });
 
 document.observe('dom:loaded', function() {
-  TrackSlider.instance = new TrackSlider();
+  $w('song-tracks-container direct-sibling-tracks indirect-sibling-tracks').each(function(element) {
+    new TrackSlider(element);
+  });
 });

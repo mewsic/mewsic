@@ -85,36 +85,36 @@
   </div>  
 </div>
 
-<div class="float-left one-col-big clear-block">
-<div class="simple-list box-grigio-stondato">
-	<div class="top-box clear-block">
-		<div class="bottom-box clear-block">						  
-			<div id="song-tracks-container" style="top: 0px;">
-		  <%- @song.tracks.each do |track| -%>		  
-		    <div class="elements clear-block">
-  			  <p class="thumb">
-  			    <%= track_instrument_icon(track) %>
-  			    <%= link_to(avatar_image(track.parent_song.user, :icon), user_path(track.parent_song.user)) if track.parent_song && track.parent_song.user %>
-  			  <p class="name align-right"><%= link_to(track.parent_song.user.login, user_path(track.parent_song.user)) if track.parent_song && track.parent_song.user %></p>
-  			  <p class="title align-right"><%= track.title %></p>
-  			  <div class="music-info">
-  			    <p class="bordered"><span>bpm: <strong><%= track.bpm %></strong></span> <span>key: <strong><%= track.tonality %></strong></span> <span>runtime: <strong><%= track.length %> </strong></span></p>
-  			    <p class="float-right">
-  			      <span class="star">
-  			        <%= rating(track) %>
-              </span>
-  			      <%= mlab_button(track) %>
-  			      <%= play_button(track) %>
-            </p>
-  			    <p class="float-left"><%= link_to(track.parent_song.genre.name, genre_path(track.parent_song.genre.name)) if track.parent_song && track.parent_song.genre %></p>
-  			  </div>
-  		  </div>
-		  <%- end -%>
-			</div>
-	  </div>
-	</div>
+<div class="float-left one-col-big clear-block slide-container">
+	<div class="simple-list box-grigio-stondato">
+		<div class="top-box clear-block">
+			<div class="bottom-box clear-block">						  
+				<div id="song-tracks-container" style="top: 0px;">
+			  <%- @song.tracks.each do |track| -%>		  
+			    <div class="elements clear-block">
+    			  <p class="thumb">
+    			    <%= track_instrument_icon(track) %>
+    			    <%= link_to(avatar_image(track.parent_song.user, :icon), user_path(track.parent_song.user)) if track.parent_song && track.parent_song.user %>
+    			  <p class="name align-right"><%= link_to(track.parent_song.user.login, user_path(track.parent_song.user)) if track.parent_song && track.parent_song.user %></p>
+    			  <p class="title align-right"><%= track.title %></p>
+    			  <div class="music-info">
+    			    <p class="bordered"><span>bpm: <strong><%= track.bpm %></strong></span> <span>key: <strong><%= track.tonality %></strong></span> <span>runtime: <strong><%= track.length %> </strong></span></p>
+    			    <p class="float-right">
+    			      <span class="star">
+    			        <%= rating(track) %>
+                </span>
+    			      <%= mlab_button(track) %>
+    			      <%= play_button(track) %>
+              </p>
+    			    <p class="float-left"><%= link_to(track.parent_song.genre.name, genre_path(track.parent_song.genre.name)) if track.parent_song && track.parent_song.genre %></p>
+    			  </div>
+    		  </div>
+			  <%- end -%>
+				</div>
+		  </div>
+		</div>
   </div>
-	<p class="abstract align-right"><a id="slide-prev" href="#">Prev</a> | <a id="slide-next" href="#">Next</a></p>
+	<p class="abstract align-right"><a class="slide-prev" href="#">Prev</a> | <a class="slide-next" href="#">Next</a></p>
 </div>
 
 <!-- TABMENU -->
@@ -193,10 +193,10 @@
       </div>
     </div>
   </div>
-  </div>
+</div>
 
 
-  <div class="float-left one-col-big clear-block">
+  <div class="float-left one-col-big clear-block slide-container">
     <div class="simple-list box-grigio-stondato">
       <div class="top-box clear-block">        
 				<div class="bottom-box clear-block">        
@@ -206,6 +206,7 @@
 				</div>
 			</div>
     </div>
+    <p class="abstract align-right"><a class="slide-prev" href="#">Prev</a> | <a class="slide-next" href="#">Next</a></p>
   </div>
 </div>
 
@@ -269,7 +270,7 @@
     </div>
   </div>
 
-  <div class="float-left one-col-big clear-block">
+  <div class="float-left one-col-big clear-block slide-container">
     <div class="simple-list box-grigio-stondato">
       <div class="top-box clear-block">
 				<div class="bottom-box clear-block">
@@ -279,6 +280,7 @@
 				</div>
   	  </div>
     </div>
+    <p class="abstract align-right"><a class="slide-prev" href="#">Prev</a> | <a class="slide-next" href="#">Next</a></p>
   </div>
 
 </div>

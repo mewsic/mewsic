@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
   
-  before_filter :find_splash_songs
+  before_filter :find_splash_songs, :except => :noop
   
   def index
     @people = User.find :all, :limit => 6, :include => [:avatars, :songs], :conditions => ["users.type = 'User' AND users.activated_at IS NOT NULL AND pictures.id IS NOT NULL"], :order => SQL_RANDOM_FUNCTION
@@ -13,6 +13,10 @@ class DashboardController < ApplicationController
   def splash
     redirect_to '/' and return unless request.xhr?
     render :partial => 'splash'
+  end
+
+  def noop
+    render :nothing => true, :status => :success
   end
 
 private 
