@@ -91,7 +91,7 @@ task :symlink_audio, :roles => [:app, :web], :except => {:no_release => true, :n
 end
 
 task :symlink_multitrack, :roles => [:app, :web], :except => {:no_release => true, :no_symlink => true} do
-  run "cd #{current_release}/public/multitrack; rm -rf beta; ln -s #{shared_path}/multitrack beta"
+  run "cd #{current_release}/public rm -rf multitrack; ln -s #{shared_path}/multitrack ."
 end
 
 # =============================================================================
