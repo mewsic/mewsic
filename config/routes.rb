@@ -63,18 +63,9 @@ ActionController::Routing::Routes.draw do |map|
   map.multitrack_config '/users/:user_id/request.config', :controller => 'users', :action => 'request_config'
   map.multitrack_config '/users/:user_id/multitrack/request.config', :controller => 'users', :action => 'request_config'
 
-  map.multitrack_beta   '/users/:user_id/multitrack/beta', :controller => 'multitrack', :action => 'beta'
-  
   map.music '/music', :controller => 'music', :action => 'index'
 
   map.connect '/countries', :controller => 'users', :action => 'countries'
-
-  #   map.resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }
-  #   map.resources :products, :has_many => [ :comments, :sales ], :has_one => :seller
-  #   map.namespace :admin do |admin|
-  #     # Directs /admin/products/* to Admin::ProductsController (app/controllers/admin/products_controller.rb)
-  #     admin.resources :products
-  #   end
   
   map.help 'help', :controller => 'help', :action => 'index'
   map.connect 'help/send', :controller => 'help', :action => 'send_mail'
