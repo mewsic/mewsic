@@ -1,30 +1,51 @@
-<script type="text/javascript" charset="utf-8">
-  document.observe('dom:loaded', function() {
-    $w("title original_author description").each(function(name) {
-      new Ajax.InPlaceEditor('mlab_' + name, '<%= song_path(@song) %>', {
-        externalControl: 'mlab_' + name + '_edit_button',
-        externalControlOnly: true,
-        highlightcolor: 'transparent',
-        rows: name == 'description' ? 5 : 1,
-        highlightendcolor: 'transparent',
-        paramName: 'song[' + name + ']',      
-        ajaxOptions: { method: 'PUT' }
-      });                        
-    });    
-    new Ajax.InPlaceSelect('mlab_genre', '<%= song_path(@song) %>', {
-      lazyLoading: true,
-      values_url: '/genres?ids',
-      labels_url: '/genres',
-      externalControl: 'mlab_genre_edit_button',
-      externalControlOnly: true,
-      ajaxOptions: { method: 'PUT' },
-      paramName: 'song[genre_id]',
-      onComplete: Prototype.emptyFunction,
-      highlightcolor: 'transparent',
-      highlightendcolor: 'transparent'
-    });
-  });
-</script>
+<script type="text/javascript" charset="utf-8">// <![CDATA[
+
+	document.observe('dom:loaded', function() {
+		$w("title original_author description").each(function(name) {
+			new Ajax.InPlaceEditor('mlab_' + name, '<%= song_path(@song) %>', {
+				externalControl: 'mlab_' + name + '_edit_button',
+				externalControlOnly: true,
+				highlightcolor: 'transparent',
+				rows: name == 'description' ? 5 : 1,
+				highlightendcolor: 'transparent',
+				paramName: 'song[' + name + ']',			
+				ajaxOptions: { method: 'PUT' }
+			});												 
+		});		 
+		new Ajax.InPlaceSelect('mlab_genre', '<%= song_path(@song) %>', {
+			lazyLoading: true,
+			values_url: '/genres?ids',
+			labels_url: '/genres',
+			externalControl: 'mlab_genre_edit_button',
+			externalControlOnly: true,
+			ajaxOptions: { method: 'PUT' },
+			paramName: 'song[genre_id]',
+			onComplete: Prototype.emptyFunction,
+			highlightcolor: 'transparent',
+			highlightendcolor: 'transparent'
+		});
+	});
+	
+	function setFlashHeight( height ) {
+		$( 'flash' ).style.height = height.toString() + 'px';
+	}
+
+	function isLoggerAvailable() {
+		var isfb = false; try { isfb = console.log != undefined; } catch( e ) {}; return( isfb );
+	}
+
+	var flashvars = {
+		serverPath: '<%= APPLICATION[:url] %>',
+		settingsXMLPath: '<%= multitrack_config_path(@user) %>',
+		userID: <%= @user.id %>,
+		songID: <%= @song.id %>
+	};
+	var params = {};
+	var attributes = { id: 'multitrackObject', name: 'multitrackObject' };
+	swfobject.embedSWF( '/multitrack/Adelao_Myousica_Multitrack_Editor.swf', 'flashcontent', '978', '2000', '9.0.0', 'express-install.swf', flashvars, params, attributes );
+	swfmacmousewheel.registerObject( attributes.id );
+	
+// ]]></script>
 
 <div id="mlab_new_block_top">
 	<div id="mlab_new_icons_container">
@@ -83,16 +104,3 @@
 </div>
 
 <div id="flashcontent"></div>
-
-<script type="text/javascript">
-	// <![CDATA[
-	
-	var so = new SWFObject("/multitrack/SUX_Player_Core.swf", "SUX_Player_Core", "978", "800", "9", "#F3F3F4");
-	so.addVariable("userid", <%= @user.id %>); 
-	so.addVariable("songid", <%= @song.id %>); 
-	so.addVariable("authenticity_token", '<%= form_authenticity_token if protect_against_forgery? %>'); 
-	so.write("flashcontent");
-
-	// ]]>
-</script>
-
