@@ -26,18 +26,14 @@
   			      <%= track_instrument_icon(track) %>
   			    <%- end -%>			  
           </p>
-          <div class="music-info">
-            <p class="float-right">
-              <span class="star">
-                <%= rating(@song) %>
-              </span> 
-              <%= mlab_button(@song) %>
-              <%= play_button(@song) %>
-            </p>
-			      <p class="float-left">
-			        <%= download_button(@song) %>
-              <%= link_to(@song.genre.name, genre_path(@song.genre)) if @song.genre %>
-						</p>
+          <div class="music-info song-resume float-right">
+						<%= rating(@song) %>
+            <%= mlab_button(@song) %>
+            <%= play_button(@song) %>
+					</div>
+					<div class="float-left">
+			      <%= download_button(@song) %>
+            <%= link_to(@song.genre.name, genre_path(@song.genre)) if @song.genre %>
           </div>
         </div>		  
       </div>	  

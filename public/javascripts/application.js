@@ -143,45 +143,39 @@ document.observe('dom:loaded', function(event) {
     });    
 	}
 	
-	if($('current-user-id')) {	  
-	  var authenticity_token = $('authenticity-token').value;
-  	new Rating('song_rating', {
-      hideLabelOnMouseOut: true,
-      ajaxUrl: '/songs/#{id}/rate/',
-      ajaxMethod: 'PUT',
-      ajaxParameters: 'authenticity_token=' + encodeURIComponent(authenticity_token) + '&rate=#{rate}'
-  	});
-  	new Rating('track_rating', {
-  	  hideLabelOnMouseOut: true,
-      ajaxUrl: '/tracks/#{id}/rate/',
-      ajaxMethod: 'PUT',
-      ajaxParameters: 'authenticity_token=' + encodeURIComponent(authenticity_token) + '&rate=#{rate}'
-  	});
-  	new Rating('answer_rating', {
-  	  hideLabelOnMouseOut: true,
-      ajaxUrl: '/answers/#{id}/rate/',
-      ajaxMethod: 'PUT',
-      ajaxParameters: 'authenticity_token=' + encodeURIComponent(authenticity_token) + '&rate=#{rate}'
-  	});
-  	new Rating('reply_rating', {
-  	  hideLabelOnMouseOut: true,
-      ajaxUrl: '/replies/#{id}/rate/',
-      ajaxMethod: 'PUT',
-      ajaxParameters: 'authenticity_token=' + encodeURIComponent(authenticity_token) + '&rate=#{rate}'
-  	});
-  	new Rating('user_rating', {
-  	  hideLabelOnMouseOut: true,
-      ajaxUrl: '/users/#{id}/rate/',
-      ajaxMethod: 'PUT',
-      ajaxParameters: 'authenticity_token=' + encodeURIComponent(authenticity_token) + '&rate=#{rate}'
-  	});
-  	new Rating('mband_rating', {
-      hideLabelOnMouseOut: true,
-      ajaxUrl: '/mbands/#{id}/rate/',
-      ajaxMethod: 'PUT',
-      ajaxParameters: 'authenticity_token=' + encodeURIComponent(authenticity_token) + '&rate=#{rate}'
-  	});
-	}	
+  var logged_in = $('current-user-id') ? true : false;
+  var authenticity_token = logged_in ? $('authenticity-token').value : false;
+
+  $$('div.rating').each(function(element) {
+    var className = element.className.sub(/\s*rating\s*/, '');
+    var rating = parseFloat(element.getAttribute('rel'));
+    var image = 'myousica_small.png'
+
+    if (element.up('.user-resume') || element.up('.song-resume')) {
+      image = 'myousica_big.png';
+    }
+
+    new Starbox(element, rating, {
+      buttons: 5,
+      max: 5,
+      className: className,
+      identity: element.id,
+      locked: !logged_in,
+      overlay: image
+    });
+  });
+
+  if (logged_in) {
+    document.observe('starbox:rated', function(event) {
+      var rateable = event.memo.identity.split(/_/)[0];
+      var id = event.memo.identity.split(/_/)[1];
+      new Ajax.Request('/' + rateable + 's/' + id + '/rate/', {
+        method: 'PUT',
+        parameters: { authenticity_token: authenticity_token,
+                      rate: event.memo.rated }
+      });
+    });
+  }
 		 
   Message.init();
 

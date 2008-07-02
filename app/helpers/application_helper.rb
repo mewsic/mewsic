@@ -1,30 +1,11 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
   
-  # Use to build a star rating
-  def stars(n, color = 'green')
-    result = ""
-    n.to_f.round.times { result << "<img src=\"/images/star_#{color}.png\" alt=\"\" width=\"10\" height=\"9\" />"}
-    (5 - n.to_f.round).times { result << "<img src=\"/images/star_gray.png\" alt=\"\" width=\"10\" height=\"9\" />"}
-    result
-    # result = '<div class="rating" id="ciao">'
-    # 5.times do |i|
-    #   result << "<div class=\"star#{i < 2 ? ' selected' : ''}\"></div>"
-    # end
-    # result << '<div style="clear:both"></div></div>'
-  end
-  
-  def rating(rateable)
+  def rating(rateable, options = {})
     type_class = rateable.class.name.downcase
     type_class = 'user' if %w[dj band].include?(type_class)
-    result = %|<div class="rating #{type_class}_rating" id="#{type_class}_#{rateable.id}"><div class="stars">|
-    1.upto(5) do |i| 
-      on_class    = rateable.rating_avg.to_f >= i ? ' on' : ''
-      half_class  = rateable.rating_avg.to_f < i && rateable.rating_avg.to_f > (i -1) ? ' on half' : ''
-      click_class = logged_in? ? ' c' : ''
-      result << "<div class=\"star#{on_class}#{half_class}#{click_class}\"></div>"
-    end
-    result << %|</div><div class="clearer"></div></div>|
+
+    %[<div class="rating #{type_class}" id="#{type_class}_#{rateable.id}" rel="#{rateable.rating_avg.to_f}"></div><div class="clearer"></div>]
   end
   
   def body_class

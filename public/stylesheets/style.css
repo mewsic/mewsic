@@ -243,11 +243,11 @@ html>body #search p span{
 }
 div.status {
 	float:left;
-	height:11px;
-	left:5px;
+	height:15px;
+	left:2px;
 	position:relative;
-	top:-70px;
-	width:11px;
+	top:-73px;
+	width:15px;
 }
 
 div.online {
@@ -586,7 +586,7 @@ tr.nav-song td{
 	margin:0px !important;
 	overflow:hidden;
 	padding:2px 0px !important;
-	width:54px;
+	width:48px;
 }
 .label-title{
 	padding-right:15px;
@@ -2551,6 +2551,12 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
   cursor: pointer;
 }*/
 
+.song-resume {
+	width: 100px;
+	text-align: right;
+	margin-bottom: 6px;
+}
+
 /* added 05 2008 */
 .song-spec .top-box{
 	background:url(/images/rounded_grey_bottom.gif) no-repeat bottom left;
@@ -2635,73 +2641,24 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 
 /* rating */
 
-.rating_container {
-  width: 55px;
-  margin: 0 auto;
-}
-
 .rating {
-  width: 55px;
+  width: 62px;
+	margin: 4px auto;
   position: relative;
-  height: 9px;
-  background: transparent url('/images/stars.png') repeat-x left top;
-  margin-top: 3px;
-  margin-bottom: 4px;
+  height: 13px;
 }
 
-.rating .stars {
-  width: 55px;
-  height: 9px;
-} 
-
-.most-used-tracks .rating .stars,
-.best-songs .rating .stars {
-  float: none;
+.music-list .rating, .best-songs .rating, .most-used-tracks .rating {
+	float: left;
 }
 
-.rating .label {
-  position: absolute;
-  right: -95px;
-  top: 0;
-  background: #FFF;
-  padding: 5px;
-  width: 80px;
-  border: 2px solid left;
-  text-align: left;
+.user-resume .rating  {
+	float: left;
+	margin-left: -2px;
 }
 
-.rating .clearer {
-  clear: right;
-}
-
-.rating .stars .star {
-  width: 11px;
-  height: 9px;
-  background: transparent url('/images/stars.png') no-repeat left top ;
-  float: left;
-}
-
-.rating .stars .star.on.half {
-  width: 6px;
-  margin-right: 5px;
-  background-position: 0 -9px;
-}	
-  
-.rating .stars .star.on {
-  background-position: 0 -9px;
-}
-
-.rating.selected .stars .star.on {
-  background-position: 0 -18px;
-}
-
-.rating.selected .stars .star.half {
-  width: 11px;
-  margin-right: 0;
-}
-
-.music-list .star {
-  clear: none;
+.clearer {
+	clear: both;
 }
 
 #mlab-scroller .elements {
