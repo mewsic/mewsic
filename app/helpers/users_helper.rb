@@ -7,7 +7,7 @@ module UsersHelper
   end
    
   def current_user_page?
-    logged_in? && current_user == @user
+    logged_in? && (current_user == @user || current_user.is_admin?)
   end
   
   def signup_error_message

@@ -170,7 +170,7 @@ class UsersController < ApplicationController
 protected
   
   def check_if_current_user_page
-    redirect_to('/') and return unless current_user.id == User.from_param(params[:id])
+    redirect_to('/') and return unless current_user.id == User.from_param(params[:id]) || current_user.is_admin?
   end
 
   def check_if_already_logged_in

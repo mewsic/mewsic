@@ -75,7 +75,7 @@ protected
   end
   
   def check_if_current_user_page
-    redirect_to('/') and return unless @user.id == current_user.id
+    redirect_to('/') and return unless @user.id == current_user.id || current_user.is_admin?
   end
   
   def check_if_band

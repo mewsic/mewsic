@@ -27,7 +27,7 @@ private
   end
   
   def check_current_user
-    redirect_to '/' unless @user.id == current_user.id
+    redirect_to '/' unless @user.id == current_user.id || current_user.is_admin?
   end    
   
 end

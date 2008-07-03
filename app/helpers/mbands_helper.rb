@@ -1,7 +1,7 @@
 module MbandsHelper
   
   def current_user_mband_page?
-    logged_in? && @mband.members.include?(current_user)
+    logged_in? && (@mband.members.include?(current_user) || current_user.is_admin?)
   end
   
   def mband_photo_link
