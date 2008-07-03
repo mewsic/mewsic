@@ -252,11 +252,15 @@ div.status {
 }
 
 div.online {
-	background: transparent url(/images/online.png) top left no-repeat;
+	background: transparent url(/images/status_online.png) top left no-repeat;
 }
 
 div.offline {
-	background: transparent url(/images/offline.png) top left no-repeat;
+	background: transparent url(/images/status_offline.png) top left no-repeat;
+}
+
+div.recording {
+	background: transparent url(/images/status_recording.png) top left no-repeat;
 }
 
 .title, .title a{
