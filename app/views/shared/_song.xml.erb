@@ -4,10 +4,10 @@
   <title><%= song.title %></title>     
   <instruments><%= song.instruments.size %></instruments>  
   <genre><%= song.genre.id %></genre>     
-  <bpm></bpm>        
-  <tone></tone>       
-  <description></description>
-  <rating></rating>     
+	<bpm><%= song.bpm %></bpm>        
+	<tone><%= song.tone %></tone>       
+	<description><%= song.description %></description>
+	<rating><%= song.rating_avg.to_f %></rating>     
   <id><%= song.id %></id>         
   <filename><%= song.filename %></filename>
   <% if @show_siblings_count; @show_siblings_count = false; -%>

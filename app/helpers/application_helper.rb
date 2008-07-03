@@ -5,7 +5,12 @@ module ApplicationHelper
     type_class = rateable.class.name.downcase
     type_class = 'user' if %w[dj band].include?(type_class)
 
-    %[<div class="rating #{type_class}" id="#{type_class}_#{rateable.id}" rel="#{rateable.rating_avg.to_f}"></div><div class="clearer"></div>]
+    options = options.symbolize_keys
+    options[:class] = "rating #{type_class} #{options[:class]}"
+
+    tag_options = options.map { |k,v| %(#{k}="#{v}") }.join(' ')
+
+    %[<div id="#{type_class}_#{rateable.id}" rel="#{rateable.rating_avg.to_f}" #{tag_options}></div><div class="clearer"></div>]
   end
   
   def body_class

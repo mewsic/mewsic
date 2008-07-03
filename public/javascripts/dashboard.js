@@ -7,7 +7,7 @@ var Splash = Class.create({
     new Effect.Parallel([
       new Effect.Fade('splash_tracks', {sync: true}),
       new Effect.Fade('splash_songs', {sync: true})
-      ], { duration: 0.8 }
+      ], { duration: 0.4 }
     );
     
     $('splash_tracks_spinner').show();
@@ -20,7 +20,7 @@ var Splash = Class.create({
     $('splash_songs_spinner').appear({duration: 0.3});
     */
 
-    this.request.bind(this).delay(1.7);
+    this.request.bind(this).delay(1.5);
   },
 
   request: function() {
@@ -32,6 +32,9 @@ var Splash = Class.create({
 
   complete: function(r) {
     $('splash_container').update(r.responseText);
+
+    $('splash_tracks_spinner').hide();
+    $('splash_songs_spinner').hide();
 
     var mlabSlider = MlabSlider.getInstance();        
     if (mlabSlider) {

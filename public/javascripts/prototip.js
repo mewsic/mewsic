@@ -91,6 +91,20 @@ Prototip.Styles = {
     width: 'auto'
   },
 
+  'status': {
+    className: 'statustip',
+    closeButton: false,
+    hideAfter: false,
+    hideOn: 'mouseleave',
+    border: 0,
+    radius: 0,
+    showOn: 'mouseover',
+    delay: 0.03,
+    width: 'auto',
+    hook: { target: 'bottomRight', tip: 'topLeft' },
+    offset: { x: -9, y: -8 }
+  },
+
   'protoblue': {
     className: 'protoblue',
     border: 6,

@@ -14,10 +14,6 @@ class MultitrackController < ApplicationController
     render :action => 'index'
   end
 
-  def beta
-    index
-  end
-
 private
 
   def find_user_and_song

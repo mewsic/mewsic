@@ -5,6 +5,7 @@ var Tooltips = Class.create({
     if (!$('current-user-id')) {
       $$('div.rating').each(this.addRating);
       $$('img.button.mlab').each(this.addMlab);
+      $$('div.status').each(this.addStatus);
     }
 
     Ajax.Responders.register({
@@ -22,6 +23,15 @@ var Tooltips = Class.create({
 
   addMlab: function(element) {
     new Tip(element, "<a href=/login>Login</a> or <a href=/signup>sign up</a> to use the <a href=/help>Mlab</a>!", {style: 'login'});
+  },
+
+  addStatus: function(element) {
+    if (element.hasClassName('online')) {
+      content = "User is online now!";
+    } else {
+      content = "User is offline";
+    }
+    new Tip(element, content, {style: 'status'});
   },
 
   responder: function() {

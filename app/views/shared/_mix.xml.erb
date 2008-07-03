@@ -4,12 +4,12 @@
   <title><%= mix.track.title %></title>     
   <instrument><%= mix.track.instrument.id %></instrument>  
   <genre><%= mix.track.parent_song.genre.name if mix.track.parent_song.genre %></genre>     
-  <bpm></bpm>        
-  <tone></tone>       
-  <description></description>
-  <rating></rating>     
+	<bpm><%= mix.track.bpm %></bpm>        
+	<tone><%= mix.track.tone %></tone>       
+	<description><%= mix.track.description %></description>
+	<rating><%= mix.track.rating_avg.to_f %></rating>
   <id><%= mix.track.id %></id>         
-  <filename></filename>
+	<filename><%= mix.track.filename %></filename>
   <volume><%= mix.volume %></volume>
   <loop><%= mix.loop %></loop>
   <balance><%= mix.balance %></balance>

@@ -4,10 +4,10 @@
   <title><%= track.title %></title>     
   <instrument><%= track.instrument.id %></instrument>  
   <genre><%= track.parent_song.genre.name if track.parent_song.genre %></genre>     
-  <bpm></bpm>        
-  <tone></tone>       
-  <description></description>
-  <rating></rating>     
+	<bpm><%= track.bpm %></bpm>        
+	<tone><%= track.tone %></tone>       
+	<description><%= track.description %></description>
+	<rating><%= track.rating_avg.to_f %></rating>     
   <id><%= track.id %></id>         
   <filename><%= track.filename %></filename>
   <%- if @show_mlab_id -%>

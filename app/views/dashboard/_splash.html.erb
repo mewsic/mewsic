@@ -19,7 +19,6 @@
 				</div>
 				<!-- end dynamic -->								
 			</div>
-			<div id="splash_tracks_spinner" style="display:none"><%= image_tag 'track-spinner-big.gif' %></div>
 		</div>
 		
 		<div id="splash_divider" class="pngfix"> </div>
@@ -31,7 +30,7 @@
 
 				<div style="float:right;margin-top:120px;padding-right:28px;">
 				  <%- if logged_in? -%>
-				    <%= link_to 'Enter', multitrack_url(:user_id => current_user.id) %>
+				    <%= link_to 'Enter', multitrack_url(:user_id => current_user.to_param) %>
 				  <%- else -%>
 				    <%= link_to 'Enter', '/login' %>
 				  <%- end -%>
@@ -60,8 +59,9 @@
 				</div>
 				<!-- end dynamic -->												
 			</div>
-			<div id="splash_songs_spinner" style="display:none"><%= image_tag 'song-spinner-big.gif' %></div>
 		</div>
 
 	</div>
 <div id="splash_box_dx"> </div>
+<div id="splash_tracks_spinner" style="display:none"><%= image_tag 'track-spinner-big.gif' %></div>
+<div id="splash_songs_spinner" style="display:none"><%= image_tag 'song-spinner-big.gif' %></div>

@@ -64,11 +64,11 @@ module AuthenticatedSystem
       respond_to do |accepts|
         accepts.html do
           store_location
-          redirect_to :controller => '/sessions', :action => 'new'
+          redirect_to login_path
         end
         accepts.xml do
           headers["Status"]           = "Unauthorized"
-          headers["WWW-Authenticate"] = %(Basic realm="Web Password")
+          headers["WWW-Authenticate"] = %(Basic realm="myousica.com")
           render :text => "Could't authenticate you", :status => '401 Unauthorized'
         end
       end
@@ -85,8 +85,8 @@ module AuthenticatedSystem
     # Redirect to the URI stored by the most recent store_location call or
     # to the passed default.
     def redirect_back_or_default(default)
-      #session[:return_to] ? redirect_to(session[:return_to]) : redirect_to(default)
-      redirect_to(default)
+      session[:return_to] ? redirect_to(session[:return_to]) : redirect_to(default)
+      #redirect_to(default)
       session[:return_to] = nil
     end
     

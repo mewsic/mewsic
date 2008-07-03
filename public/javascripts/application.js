@@ -155,6 +155,10 @@ document.observe('dom:loaded', function(event) {
       image = 'myousica_big.png';
     }
 
+    if (element.hasClassName('grey-star')) {
+      image = 'grey_' + image;
+    }
+
     new Starbox(element, rating, {
       buttons: 5,
       max: 5,

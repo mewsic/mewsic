@@ -248,6 +248,7 @@ div.status {
 	position:relative;
 	top:-73px;
 	width:15px;
+	z-index: 6001;
 }
 
 div.online {
@@ -417,7 +418,7 @@ h2, h2 a{
 .box-list table td{
 	border-collapse:collapse;
 	padding:2px 5px;
-	vertical-align:top;
+	vertical-align:middle;
 }
 
 .box-list table td a:link, .box-list table td a:visited, .box-list table td a:active {
@@ -606,6 +607,11 @@ tr.nav-song td{
 	padding-bottom:5px;
 	margin-bottom:10px;
 }
+.bands-dj-list .elements td.song-title {
+	width: 240px;
+	overflow: hidden;
+}
+
 /* music */
 .music-list .thumb{
 	float:right;
@@ -2717,31 +2723,6 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
   height:26px;
 }
 
-/* User, song and track rating */
-.user_rating {
-  background: transparent url('/images/user_stars.png') repeat-x left top;
-}
-
-.user_rating .stars .star {
-  background: transparent url('/images/user_stars.png') no-repeat left top;
-}
-
-.song_rating {
-  background: transparent url('/images/song_stars.png') repeat-x left top;
-}
-
-.song_rating .stars .star {
-  background: transparent url('/images/song_stars.png') no-repeat left top;
-}
-
-.track_rating {
-  background: transparent url('/images/track_stars.png') repeat-x left top;
-}
-
-.track_rating .stars .star {
-  background: transparent url('/images/track_stars.png') no-repeat left top;
-}
-
 /* help page */
 #help-content {
   width: 410px;
@@ -3881,11 +3862,21 @@ div.auto_complete ul strong.highlight {
 	overflow: hidden;
 }
 
-#splash_tracks_spinner, #splash_songs_spinner {
-	position:relative;
-	top: -108px;
-	left: 70px;
+#splash_tracks_spinner {
+	position: absolute;
+	top: 65px;
+	left: 95px;
 	z-index: 100;
+	width: 66px;
+	height: 0px;
+}
+
+#splash_songs_spinner {
+	position: absolute;
+	top: 65px;
+	left: 590px;
+	z-index: 100;
+	width: 66px;
 	height: 0px;
 }
 
