@@ -41,12 +41,12 @@
 							<% unless @answer.closed? %>
 							<div class="float-right">
 								<div class="special-button">
-								  <div style="text-align: center; font-weight: bold;line-height: 24px; width: 220px; height: 24px;background: url('/images/special_button_cyan_big.png') no-repeat center"><a href="#" style="color: #FFF; font-size:13px" onclick="<%= logged_in? ? "Effect.toggle('reply-form-container', 'slide')" : "Message.notice('You need to be logged in to reply.');" %>;return false;">Reply to this question<a></div>
+								  <div style="text-align: center; font-weight: bold;line-height: 24px; width: 220px; height: 24px;background: url('/images/special_button_cyan_big.png') no-repeat center"><a href="#" style="color: #FFF; font-size:13px" onclick="<%= logged_in? ? "Effect.toggle('reply-form-container', 'slide')" : "Message.notice('You need to be logged in to reply.');" %>;return false;">Reply to this question</a></div>
 								</div>								
 							</div>
 							<% end %>
-							<div class="float-left">
-              <%= rating(@answer) %>
+							<div class="float-left answer-show">
+								<%= rating(@answer) %>
 								<p class="grey-text"><%= time_ago_in_words(@answer.created_at) %></p>					
 							</div>
 							<div id="reply-form-container" style="clear:both;display: none">
@@ -93,7 +93,7 @@
     <%= render :partial => 'other_answers_by_author', :locals => { :other_answers_by_author => @other_answers_by_author, :user => @answer.user } %>
   </div>  
   
-  <div class="simple-list three-col-nospace clear-block clear-float">
+  <div id="similar-questions" class="box-list three-col-nospace clear-block clear-float">
     <div class="select-tab clear-block">   
 			<div class="active">
 				<h1>SIMILAR QUESTIONS</h1>

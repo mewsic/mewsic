@@ -57,7 +57,7 @@ html[xmlns] .clear-block {
    clear: both;
    visibility: hidden;
 }
-/* contanier */
+/* container */
 .page-width{
 	width:986px;
 	margin: auto auto;
@@ -740,8 +740,8 @@ tr.nav-song td{
 .horizontal-scroll-box .button{
 	float:left;
 	width:auto;
- /*padding-top:10px;*/
-	margin:0px 5px 0px;
+	padding: 0px !important;
+	margin:7px 5px;
 }
 .one-col .horizontal-scroll-box{
 	padding-left:5px;
@@ -2131,8 +2131,8 @@ html>body .login p {
 	margin:5px 0px;
 }
 .bordered span{
-	display:inline-block;
-	width:80px;
+	/*display:inline-block;*/
+	width:100px;
 	margin-right:10px;
 }
 html>body .bordered span{
@@ -2184,10 +2184,10 @@ p.sign-in .button{
 	background:#fff;
 }
 .float-left{
-	float:left;
+	float:left !important;
 }
 .float-right{
-	float:right;
+	float:right !important;
 }
 .centered{
 	text-align:center;
@@ -2656,18 +2656,18 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 	margin: 4px auto;
   position: relative;
   height: 13px;
-}
-
-.music-list .rating, .best-songs .rating, .most-used-tracks .rating {
 	float: left;
 }
 
-.user-resume .rating  {
-	float: left;
+.people-list .rating {
+	float: none;
+}
+
+.user-resume .rating, .testi-question .rating {
 	margin-left: -2px;
 }
 
-.mlab_song .rating {
+.mlab_song .rating, #genres .rating {
 	float: right;
 }
 

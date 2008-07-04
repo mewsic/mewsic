@@ -65,6 +65,10 @@ var Pagination = Class.create({
       }
     }
 
+    if (this.options.onComplete) {
+      this.options.onComplete();
+    }
+
     this.initLinks();
   }
 

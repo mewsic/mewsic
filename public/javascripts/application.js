@@ -118,6 +118,48 @@ var SearchBox = Class.create({
   }
 });
 
+
+function setupStarboxes(selector) {
+  var logged_in = $('current-user-id') ? true : false;
+  var authenticity_token = logged_in ? $('authenticity-token').value : false;
+
+  $$(selector).each(function(element) {
+    var className = element.className.sub(/\s*rating\s*/, '');
+    var rating = parseFloat(element.getAttribute('rel'));
+    var image = 'myousica_small.png'
+
+    if (element.up('.user-resume') || element.up('.song-resume') || element.up('.answer-show')) {
+      image = 'myousica_big.png';
+    }
+
+    if (element.hasClassName('grey-star')) {
+      image = 'grey_' + image;
+    }
+
+    new Starbox(element, rating, {
+      buttons: 5,
+      max: 5,
+      className: className,
+      identity: element.id,
+      locked: !logged_in,
+      overlay: image
+    });
+  });
+
+  if (logged_in && !window.observing_starboxes) {
+    window.observing_starboxes = true;
+    document.observe('starbox:rated', function(event) {
+      var rateable = event.memo.identity.split(/_/)[0];
+      var id = event.memo.identity.split(/_/)[1];
+      new Ajax.Request('/' + rateable + 's/' + id + '/rate/', {
+        method: 'PUT',
+        parameters: { authenticity_token: authenticity_token,
+                      rate: event.memo.rated }
+      });
+    });
+  }
+}
+
 document.observe('dom:loaded', function(event) {
   // $('search').down('input').focus();
   $('logo').focus();
@@ -142,45 +184,8 @@ document.observe('dom:loaded', function(event) {
       toggleTriggers: true
     });    
 	}
-	
-  var logged_in = $('current-user-id') ? true : false;
-  var authenticity_token = logged_in ? $('authenticity-token').value : false;
-
-  $$('div.rating').each(function(element) {
-    var className = element.className.sub(/\s*rating\s*/, '');
-    var rating = parseFloat(element.getAttribute('rel'));
-    var image = 'myousica_small.png'
-
-    if (element.up('.user-resume') || element.up('.song-resume')) {
-      image = 'myousica_big.png';
-    }
-
-    if (element.hasClassName('grey-star')) {
-      image = 'grey_' + image;
-    }
-
-    new Starbox(element, rating, {
-      buttons: 5,
-      max: 5,
-      className: className,
-      identity: element.id,
-      locked: !logged_in,
-      overlay: image
-    });
-  });
-
-  if (logged_in) {
-    document.observe('starbox:rated', function(event) {
-      var rateable = event.memo.identity.split(/_/)[0];
-      var id = event.memo.identity.split(/_/)[1];
-      new Ajax.Request('/' + rateable + 's/' + id + '/rate/', {
-        method: 'PUT',
-        parameters: { authenticity_token: authenticity_token,
-                      rate: event.memo.rated }
-      });
-    });
-  }
-		 
+ 
+  setupStarboxes('div.rating');
   Message.init();
 
   new SearchBox('search');

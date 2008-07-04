@@ -12,6 +12,12 @@
 .starbox .ghost { background: #a1a1a1; }
 .starbox .indicator { clear: both; }
 
+.starbox .answer .colorbar, .starbox .reply .colorbar { background: #1e90ff; }
+.starbox .answer .hover .colorbar, .starbox .reply .hover .colorbar { background: #006ad1; }
+
+.starbox .user .colorbar { background: #1e90ff; }
+.starbox .user .hover .colorbar { background: #006ad1; }
+
 .starbox .track .colorbar { background: #efbb5a; }
 .starbox .track .hover .colorbar { background: #d26620; }
 
