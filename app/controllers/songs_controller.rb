@@ -19,7 +19,9 @@ class SongsController < ApplicationController
   
   def show
     @song = Song.find(params[:id], :include => [:user, { :mixes => { :track => [:instrument, :parent_song] } }, :genre])        
-    @has_abuse = Abuse.exists?(["abuseable_type = 'Song' AND abuseable_id = ?", @song.id])
+    if logged_in?
+      @has_abuse = Abuse.exists?(["abuseable_type = 'Song' AND abuseable_id = ? AND user_id = ?", @song.id, current_user.id])
+    end
     @direct_siblings = @song.direct_siblings
     @indirect_siblings = @song.indirect_siblings
     respond_to do |format|
