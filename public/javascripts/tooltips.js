@@ -5,8 +5,8 @@ var Tooltips = Class.create({
     if (!$('current-user-id')) {
       $$('div.rating').each(this.addRating);
       $$('img.button.mlab').each(this.addMlab);
-      $$('div.status').each(this.addStatus);
     }
+    $$('div.status').each(this.addStatus);
 
     Ajax.Responders.register({
       onComplete: this.responder.bindAsEventListener(this)

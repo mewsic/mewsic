@@ -85,6 +85,7 @@ john:
   motto: in girum imus nocte et consumimur igni
 
 <% for i in 3..500 %>user_<%= i %>:
+  type: User
   login: user<%= i %>
   email: user<%= i %>@medlar.it
   salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
