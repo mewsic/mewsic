@@ -3,7 +3,7 @@ class DashboardController < ApplicationController
   before_filter :find_splash_songs, :except => :noop
   
   def index
-    @people = User.find :all, :limit => 6, :include => [:avatars, :songs], :conditions => ["users.type = 'User' AND users.activated_at IS NOT NULL AND pictures.id IS NOT NULL"], :order => SQL_RANDOM_FUNCTION
+    @people = User.find :all, :limit => 9, :include => [:avatars, :songs], :conditions => ["users.type = 'User' AND users.activated_at IS NOT NULL AND pictures.id IS NOT NULL"], :order => SQL_RANDOM_FUNCTION
     @answers = Answer.find :all, :order => 'answers.created_at DESC', :limit => 2, :include => [{:user => :avatars}], :conditions => ["users.activated_at IS NOT NULL"]
     # TODO: Qui dovrei trovare degli utenti e non delle canzoni, ma così evitiamo di avere utenti con canzoni vuote
     @songs = Song.find :all, :limit => 3, :include => [{:user => [:avatars, :songs]}], :conditions => ['songs.published = ?', true], :order => SQL_RANDOM_FUNCTION
