@@ -10,7 +10,7 @@
   </td>
   <td class="star" align="right">
     
-    <%= rating(track) %>
+		<%= rating(track, :class => track_counter.even? ? 'grey-star' : '') %>
     <p>
       <%= mlab_button(track, :dynamic => true) %>
       <%= play_button(track) %>

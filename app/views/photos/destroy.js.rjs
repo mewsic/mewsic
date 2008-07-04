@@ -1,7 +1,6 @@
-thumb = "gallery-photo-thumb-#{@photo.id}"
+page.remove "gallery-photo-thumb-#{@photo.id}"
+page << "Lightview.updateViews();"
 
-page << "myLightWindow._removeLink($('#{thumb}').down('a.lightwindow'));"
-page.remove(thumb)
 if params[:mband_id]
   page.visual_effect(:appear, 'no-images-notice') if @mband.photos.size.zero?
 else 

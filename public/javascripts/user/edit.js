@@ -46,13 +46,13 @@ var InPlaceSelectGenerator = Class.create({
   initialize: function(fields, options) {
     this.fields = fields;
     this.options = options;
-    this.user_id = $('current-user-id').value;
+    this.model_id = $(options.model + '-id').value;
     this.setup();
   },
   
   setup: function() {  
     this.fields.each(function(name) {
-      new Ajax.InPlaceSelect(this.options.model + '_' + name, this.options.url + this.user_id, {
+      new Ajax.InPlaceSelect(this.options.model + '_' + name, this.options.url + this.model_id, {
         lazyLoading: true,
         values_url: this.options.values_url,
         externalControl: 'edit_button_' + this.options.model + '_' + name,
@@ -74,29 +74,28 @@ var AjaxFormGenerator = Class.create({
     this.options = Object.extend({
       hideOnLoad: 'hide-on-load'
     }, options);
-    this.user_id = $('current-user-id').value;
+    this.model_id = $(options.model + '-id').value;
     this.setup();
   },
   
   setup: function() {
     var self = this;
     this.forms.each(function(name) {
-    var form = $('form_' + name);
-    this.hideButton(form);
-    form.compareValue = this.getCompareValue(form);
-    this.observeFieldsChanges(form);
+      var form = $('form_' + name);
+      this.hideButton(form);
+      form.compareValue = this.getCompareValue(form);
+      this.observeFieldsChanges(form);
       form.observe('submit', function(event) {
         event.stop();
-        new Ajax.Request(self.options.url + self.user_id, {
+        new Ajax.Request(self.options.url + self.model_id, {
           parameters: Form.serialize(this),
           onLoading: function() {                        
             if(self.options.hideOnLoad) {
-              this.select('.' + self.options.hideOnLoad).each(function(e) {
-                e.hide();
-              }.bind(this));
+              this.select('.' + self.options.hideOnLoad).invoke('hide');
             }
             $('loading_' + self.options.model + '_' + name).show();
           }.bind(this),
+
           onSuccess: function(r) {
             $('loading_' + self.options.model + '_' + name).hide();
 
@@ -109,9 +108,11 @@ var AjaxFormGenerator = Class.create({
                 e.show();
               }.bind(this));
             }
-      form.select('input[type="submit"]').invoke('hide');
-      form.compareValue = form.select('input.ready-for-edit').invoke('getValue').join(',');
+
+            form.select('input[type="submit"]').invoke('hide');
+            form.compareValue = form.select('input.ready-for-edit').invoke('getValue').join(',');
           }.bind(this),
+
           onFailure: function(r) {
             $('loading_' + self.options.model + '_' + name).hide();
             this.select('.' + self.options.hideOnLoad).each(function(e) {
@@ -258,10 +259,7 @@ var Profile = Class.create({
 
 
 document.observe('dom:loaded', function() {
-  var user_id_field   = $('user-id');
-  var mband_id_field  = $('mband-id');
-
-  if (user_id_field) {
+  if ($('user-id')) {
     new InPlaceEditorGenerator( $w('city'), { url: '/users/', model: 'user', maxLength: 20 } );  
     new InPlaceEditorGenerator( $w('motto tastes'), { url: '/users/', model: 'user', rows: 6, maxLength: 1000} );  
     new InPlaceSelectGenerator( $w('country'), { url: '/users/', model: 'user', values_url: '/countries' } );
@@ -269,7 +267,7 @@ document.observe('dom:loaded', function() {
     new GenderSwitcher('change-gender');
     new Profile();
 
-  } else if (mband_id_field) {
+  } else if ($('mband-id')) {
     new InPlaceEditorGenerator( $w('motto tastes'), { url: '/mbands/', model: 'mband', rows: 6, maxLength: 1000} );  
     new AjaxFormGenerator( $w('photos_url blog_url myspace_url'), { url: '/mbands/', model: 'mband' } );    
     new Profile();

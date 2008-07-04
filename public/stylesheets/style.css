@@ -2667,6 +2667,10 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 	margin-left: -2px;
 }
 
+.mlab_song .rating {
+	float: right;
+}
+
 .clearer {
 	clear: both;
 }
@@ -3892,6 +3896,9 @@ div.auto_complete ul strong.highlight {
 
 .abuse.popup textarea {
   width: 100%;
+}
+.abuse.popup {
+	width: 580px;
 }
 
 #genre-chars {

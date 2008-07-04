@@ -66,9 +66,9 @@ private
   
   def check_current_user   
     if params[:user_id]
-      redirect_to '/' and return unless current_user == @user
+      redirect_to '/' and return unless (current_user == @user) || current_user.is_admin?
     elsif params[:mband_id]
-      redirect_to '/' and return unless @pictureable.members.include?(current_user)
+      redirect_to '/' and return unless @pictureable.members.include?(current_user) || current_user.is_admin?
     end
   end
 

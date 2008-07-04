@@ -99,7 +99,7 @@ private
   end
   
   def check_user_identity
-    redirect_to('/') and return unless current_user == @user
+    redirect_to('/') and return unless (current_user == @user) || current_user.is_admin?
   end
   
 end

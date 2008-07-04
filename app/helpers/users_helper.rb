@@ -98,7 +98,7 @@ module UsersHelper
       else
         content <<
           link_to(icon, formatted_switch_type_user_path(user, 'html', :type => to),
-            :class => 'lightwindow', :id => "user-switch-#{to}", :title => 'Change user type')
+            :class => 'lightview', :id => "user-switch-#{to}", :title => 'Change user type')
       end
     end
     content

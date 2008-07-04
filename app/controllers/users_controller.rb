@@ -116,8 +116,6 @@ class UsersController < ApplicationController
   end
   
   def switch_type
-    redirect_to '/' and return unless request.xhr?
-
     @user = User.find_from_param(params[:id])
     @type = %W(user dj band).include?(params[:type]) && params[:type].capitalize
 
@@ -125,7 +123,7 @@ class UsersController < ApplicationController
       render :partial => 'users/switch/failure', :status => :bad_request and return
     end
 
-    render :nothing => true, :status => :bad_request if request.post? || request.delete?
+    render :nothing => true, :status => :bad_request and return if request.post? || request.delete?
 
     respond_to do |format|
       switch_partial = {:partial => "users/switch/#{@user.class.name.downcase}_to_#{@type.downcase}", :layout => 'users/switch/layout'}
@@ -170,7 +168,7 @@ class UsersController < ApplicationController
 protected
   
   def check_if_current_user_page
-    redirect_to('/') and return unless current_user.id == User.from_param(params[:id]) || current_user.is_admin?
+    redirect_to('/') and return unless (current_user.id == User.from_param(params[:id])) || current_user.is_admin?
   end
 
   def check_if_already_logged_in

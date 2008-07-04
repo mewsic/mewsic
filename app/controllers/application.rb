@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   protected    
   
   def update_last_user_activity
-    current_user.update_attribute(:last_activity_at, Time.now) if logged_in? #&& !request.xhr?
+    current_user.update_attribute(:last_activity_at, Time.now) if logged_in? && !request.xhr?
   end
 
   def check_user_inbox

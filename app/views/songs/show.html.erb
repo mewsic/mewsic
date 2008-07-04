@@ -57,7 +57,7 @@
     </div>			
     <p class="abstract align-right">
       <%- if !@has_abuse && logged_in? -%>
-        <a href="<%= formatted_new_song_abuse_path(@song, 'html') %>" params="lightwindow_width=600,lightwindow_height=400" class="lightwindow" title="Report abuse">report abuse</a>
+				<a href="<%= formatted_new_song_abuse_path(@song, 'html') %>" title="Report abuse :: :: width: 600, height: 400, ajax: {method:'get'}" rel="ajax" class="lightview">report abuse</a>
       <%- end -%>
     </p>
   </div>

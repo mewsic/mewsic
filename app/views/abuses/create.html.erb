@@ -1,6 +1,6 @@
 <script type="text/javascript" charset="utf-8">
-  myLightWindow.deactivate();
+  Lightview.hide();
   <%- flash.each do |type, message| %>
-  Message.show('<%= escape_javascript(message) %>', '<%= escape_javascript(type.to_s) %>');  
+	  Message.show('<%= escape_javascript(message) %>', '<%= escape_javascript(type.to_s) %>');  
   <%- end -%>
 </script>
