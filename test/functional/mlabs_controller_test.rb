@@ -52,14 +52,6 @@ class MlabsControllerTest < ActionController::TestCase
     end    
   end
   
-  def test_new_should_send_authenticity_token
-    login_as :quentin
-    get :new, :user_id => users(:quentin).id, :format => 'xml'
-    assert_response :success
-    xml = REXML::Document.new(@response.body)
-    assert_equal 1, REXML::XPath.match(xml, "/response/authenticity_token").size    
-  end
-  
   def test_should_destroy_with_xml_format
     login_as :quentin
     assert_difference 'Mlab.count', -1 do

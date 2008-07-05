@@ -66,7 +66,7 @@
 				<p class="mlab_username"><%= current_user.login %></p>
 			<% else %>
 				<%= image_tag 'default_avatars/avatar_big.gif', :size => '70x70' %>
-				<p class="mlab_username">Guest [<%= link_to 'sign up', signup_path %>]</p>
+				<p class="mlab_username">Guest<br/>[<%= link_to 'sign up', signup_path %>]<br/>[<%= link_to 'log in', login_path %>]</p>
 			<% end %>
 		</div>
 	</div>

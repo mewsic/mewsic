@@ -28,6 +28,6 @@ class GenreTest < ActiveSupport::TestCase
   def test_genre_songs
     genre = Genre.find_by_name("Reggae")
     songs = Song.find_paginated_by_genre(1, genre)
-    assert_equal genre.songs.size > 20 ? 20 : genre.songs.size, songs.size
+    assert_equal genre.songs.size > 15 ? 15 : genre.songs.size, songs.size
   end  
 end
