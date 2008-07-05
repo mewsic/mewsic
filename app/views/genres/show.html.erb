@@ -16,7 +16,7 @@
 		<div class="simple-list clear-block">
 			<h1>MOST LISTENED <%= h @genre.name.upcase %> SONGS</h1>
 			<div class="top-box clear-block">
-				<div class="bottom-box clear-block">
+				<div class="bottom-box clear-block most-listened-list">
 			  		<%= render :partial => 'most_listened_song', :collection => @most_listened_songs %>
 				</div>
 			</div>

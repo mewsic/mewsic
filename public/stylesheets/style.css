@@ -616,6 +616,10 @@ tr.nav-song td{
 	overflow: hidden;
 }
 
+.bands-dj-list .elements p.name {
+	padding-top: 7px;
+}
+
 /* music */
 .music-list .thumb{
 	float:right;
@@ -641,6 +645,9 @@ tr.nav-song td{
 .music-list .abstract{
 	padding:5px;
 	background-color:#ECF1F3;
+}
+.newest-list .thumb, .most-listened-list .thumb {
+	padding-bottom:0px !important;
 }
 /* collaboration */
 .collaboration-list .thumb{
@@ -2652,7 +2659,7 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 /* rating */
 
 .rating {
-  width: 62px;
+  /*width: 62px;*/
 	margin: 4px auto;
   position: relative;
   height: 13px;
@@ -2667,8 +2674,12 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 	margin-left: -2px;
 }
 
-.mlab_song .rating, #genres .rating {
+.mlab_song .rating, #genres .rating, .song-resume .rating {
 	float: right;
+}
+
+.elements .rating {
+	width: 62px;
 }
 
 .clearer {
