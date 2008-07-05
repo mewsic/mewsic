@@ -153,7 +153,11 @@ class Song < ActiveRecord::Base
   def to_breadcrumb
     self.title
   end    
-  
+
+  def self.cleanup_unpublished
+    delete_all ['published = ? && created_at < ?', false, 1.week.ago]
+  end
+
 private
 
   def zerofill(number, length)
