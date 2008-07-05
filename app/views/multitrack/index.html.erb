@@ -48,7 +48,7 @@
 		settingsXMLPath: '<%= multitrack_config_path %>',
 		songID: <%= @song.id || 0 %>
 	};
-	var params = {};
+	var params = { wmode: 'transparent' };
 	var attributes = { name: 'multitrackObject' };
 	swfobject.embedSWF( '/multitrack/Adelao_Myousica_Multitrack_Editor.swf', 'flashcontent', '978', '100%', '9.0.0', 'express-install.swf', flashvars, params, attributes );
 	
