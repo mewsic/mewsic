@@ -3,5 +3,5 @@
 	<td><%= track.title %></td>
 	<td><%= track.instrument.description %></td>
 	<td><%= track.tonality %></td>
-	<td><%= track.parent_song.description %></td>
+	<td><%= track.parent_song.description if track.parent_song %></td>
 </tr>

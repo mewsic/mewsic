@@ -18,10 +18,10 @@
 	<dd><%= f.text_field :filename %></dd>
 
 	<dt>user</dt>
-	<dd><%= @song.user.login %></dd>
+	<dd><%= select :song, :user_id, User.find(:all, :select => 'login,id').map { |u| [u.login, u.id] } %></dd>
 
 	<dt>genre</dt>
-	<dd><%= @song.genre.name %></dd>
+	<dd><%= select :song, :genre_id, Genre.find(:all).map { |g| [g.name,g.id] } %></dd>
 
 	<dt>bpm</dt>
 	<dd><%= f.text_field :bpm %></dd>
@@ -45,7 +45,7 @@
 	<dd><%= @song.rating_avg.to_f %></dd>
 
 	<dt>tracks</dt>
-	<dd><%= @song.tracks.map { |track| link_to(track.title.blank? ? track.id : track.title, :url => admin_track_path(track), :class => 'edit-link') }.join('<br/>') %></dd>
+	<dd><p><%= @song.tracks.map { |track| link_to(track.title.blank? ? track.id : track.title, admin_track_path(track), :class => 'edit-link') }.join('<br/>') %></p></dd>
 
 </dl>
 <%= submit_tag 'submit' %>

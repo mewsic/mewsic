@@ -15,7 +15,7 @@
 	<dd><%= f.text_field :tonality %></dd>
 
 	<dt>instrument</dt>
-	<dd><%= @track.instrument.description %></dd>
+	<dd><%= select :track, :instrument_id, Instrument.find(:all).map { |i| [i.description, i.id] } %></dd>
 
 	<dt>filename</dt>
 	<dd><%= f.text_field :filename %></dd>
