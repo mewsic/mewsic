@@ -18,7 +18,7 @@ class MultitrackTest < ActionController::IntegrationTest
       
       # Istanzio il multitrack
       assert_difference 'Song.count' do
-        get "/users/#{@user.to_param}/multitrack"
+        get "/multitrack"
         assert_response :success
         @song = assigns(:song)
         assert_not_nil @song
