@@ -32,8 +32,12 @@ document.observe('dom:loaded', function() {
         link.observe('click', function(event) {
           event.stop();
 
-          if (event.element().up('tr')) {
-            $('editing').style.top = String(event.element().up('tr').offsetTop) + 'px';
+          var row = event.element().up('tr');
+          if (row) {
+            // we're in a table
+            $$('.admin_content_table tr.active').invoke('removeClassName', 'active');
+            row.addClassName('active');
+            $('editing').style.top = String(row.offsetTop) + 'px';
           }
 
           $('editing').update('');
@@ -43,7 +47,7 @@ document.observe('dom:loaded', function() {
               if (!$('editing').visible()) {
                 $('editing').appear({duration: 0.3});
               }
-              new Effect.ScrollTo('editing', {duration: 0.2});
+              //new Effect.ScrollTo('editing', {duration: 0.2});
             }
           });
         });

@@ -95,15 +95,15 @@ a {
 	border-bottom: 1px dotted #333;	
 }
 
-.admin_content_table tr:hover {
-	background: #F3F3F4;
+.admin_content_table tr:hover, .admin_content_table tr.active {
+	background: #D3D3D4;
 }
 
 #editing {
 	position: absolute;
 	left: 100px;
 	width: 608px;
-	min-height: 200px;
+	min-height: 408px;
 	z-index: 100;
 	border: 1px solid black;
 	background-color: #fff;

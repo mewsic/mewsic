@@ -1,5 +1,6 @@
 <tr>
-	<td><%= link_to track.title, admin_track_path(track), :class => 'edit-link' %></td>
+	<td><%= link_to track.id, admin_track_path(track), :class => 'edit-link' %></td>
+	<td><%= track.title %></td>
 	<td><%= track.instrument.description %></td>
 	<td><%= track.tonality %></td>
 	<td><%= track.parent_song.description %></td>
