@@ -4,8 +4,10 @@ class MultitrackController < ApplicationController
 
   def index    
     @song = Song.new :published => false
-    @song.user = current_user if logged_in?
-    @song.save!
+    if logged_in?
+      @song.user = current_user
+      @song.save!
+    end
   end
 
   def edit
