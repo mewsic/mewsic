@@ -27,7 +27,7 @@
 			});
 		} else {
 			$w('title original_author description genre').each(function(name) {
-				$('mlab_' + name).observe('click', function(event) {
+				$('mlab_' + name + '_edit_button').observe('click', function(event) {
 					event.stop();
 					alert('Log in or sign up to edit!');
 				});
