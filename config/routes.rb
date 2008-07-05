@@ -75,4 +75,12 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'splash', :controller => 'dashboard', :action => 'splash'
   map.connect 'noop', :controller => 'dashboard', :action => 'noop'
 
+  map.connect '/admin', :controller => 'admin/dashboard', :action => 'index'
+  map.namespace(:admin) do |admin|
+    admin.resources :songs
+    admin.resources :tracks
+    admin.resources :users
+    admin.resources :answers
+  end
+
 end

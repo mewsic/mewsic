@@ -1,0 +1,7 @@
+<tr>
+	<td><%= link_to song.title, admin_song_path(song), :class => 'edit-link' %></td>
+	<td><%= song.description %></td>
+	<td><%= song.genre.name if song.genre %></td>
+	<td><%= song.user.login %></td>
+</tr>
+

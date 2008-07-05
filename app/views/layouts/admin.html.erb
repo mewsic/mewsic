@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="it">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<title></title>
+	<%= stylesheet_link_tag 'admin' %>
+	<%= javascript_include_tag 'protoculous' %>
+	<%= yield :head %>
+</head>
+<body>
+<%= hidden_field_tag 'authenticity_token', form_authenticity_token if protect_against_forgery? %>  
+
+<div id="header">
+  <%= image_tag 'logo_myousica.gif' %>
+</div>
+
+<div id="spinner" style="display:none"><%= image_tag 'admin-spinner.gif' %></div>
+
+<div id="editing" style="display:none"></div>
+
+<div class="admin_main">
+	<h1>ALL ACTIVITY</h1>
+	<ul id="miniflex">
+		<li><a class="menu-link" href="/admin/songs">Songs</a></li>
+		<li><a class="menu-link" href="/admin/tracks">Tracks</a></li>
+		<li><a class="menu-link" href="/admin/users">Users</a></li>
+		<li><a class="menu-link" href="/admin/answers">Answers</a></li>
+	</ul>
+	<div id="admin_search_container">
+		<form id="admin_search">
+			<input type="text" class="admin_search_key">
+			<input type="submit" value="Search" class="admin_search_submit">
+		<form>
+	</div>
+	<div id="admin_content">
+		<%= yield %>
+	</div>
+</div>
+
+<div class="admin_latest">
+	<h1>LATEST CONTENT</h1>
+	<ul id="miniflex">
+		<li><a href="#">Songs</a></li>
+		<li><a href="#" class="active">Tracks</a></li>
+		<li><a href="#">Users</a></li>
+		<li><a href="#">Answers</a></li>
+	</ul>
+</div>
+
+
+</body>
+</html>

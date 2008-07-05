@@ -52,6 +52,10 @@ module AuthenticatedSystem
       authorized? || access_denied
     end
 
+    def admin_required
+      login_required && current_user.is_admin?
+    end
+
     # Redirect as appropriate when an access request fails.
     #
     # The default action is to redirect to the login screen.

@@ -1,0 +1,52 @@
+<a class="close-edit" href="#">close</a>
+<h2>editing song <%= @song.id %></h2>
+<% remote_form_for @song, :url => admin_song_url(@song), :update => 'editing' do |f| %>
+<dl>
+	<dt>title</dt>
+	<dd><%= f.text_field :title %></dd>
+
+	<dt>original author</dt>
+	<dd><%= f.text_field :original_author %></dd>
+
+	<dt>description</dt>
+	<dd><%= f.text_field :description %></dd>
+
+	<dt>tone</dt>
+	<dd><%= f.text_field :tone %></dd>
+
+	<dt>filename</dt>
+	<dd><%= f.text_field :filename %></dd>
+
+	<dt>user</dt>
+	<dd><%= @song.user.login %></dd>
+
+	<dt>genre</dt>
+	<dd><%= @song.genre.name %></dd>
+
+	<dt>bpm</dt>
+	<dd><%= f.text_field :bpm %></dd>
+
+	<dt>seconds</dt>
+	<dd><%= f.text_field :seconds %></dd>
+
+	<dt>listened times</dt>
+	<dd><%= @song.listened_times %></dd>
+
+	<dt>published</dt>
+	<dd><%= f.check_box :published %></dd>
+
+	<dt>created at</dt>
+	<dd><%= @song.created_at %></dd>
+
+	<dt>updated at</dt>
+	<dd><%= @song.updated_at %></dd>
+
+	<dt>rating</dt>
+	<dd><%= @song.rating_avg.to_f %></dd>
+
+	<dt>tracks</dt>
+	<dd><%= @song.tracks.map { |track| link_to(track.title.blank? ? track.id : track.title, :url => admin_track_path(track), :class => 'edit-link') }.join('<br/>') %></dd>
+
+</dl>
+<%= submit_tag 'submit' %>
+<% end %>
