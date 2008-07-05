@@ -14,5 +14,6 @@
 		<trackdelete>/tracks/delete/{:id}</trackdelete>
 		<trackupload>/tracks</trackupload>
 		<user>/user/{:id}.xml</user>
+		<authenticity_token><%= form_authenticity_token if protect_against_forgery? %></authenticity_token>
 	</url_request>
 </config>
