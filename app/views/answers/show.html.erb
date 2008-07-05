@@ -41,7 +41,7 @@
 							<% unless @answer.closed? %>
 							<div class="float-right">
 								<div class="special-button">
-								  <div style="text-align: center; font-weight: bold;line-height: 24px; width: 220px; height: 24px;background: url('/images/special_button_cyan_big.png') no-repeat center"><a href="#" style="color: #FFF; font-size:13px" onclick="<%= logged_in? ? "Effect.toggle('reply-form-container', 'slide')" : "Message.notice('You need to be logged in to reply.');" %>;return false;">Reply to this question</a></div>
+									<div style="text-align: center; font-weight: bold;line-height: 24px; width: 220px; height: 24px;background: url('/images/special_button_cyan_big.png') no-repeat center"><a href="<%= logged_in? ? '#' : '/login' %>" style="color: #FFF; font-size:13px" onclick="<%= %[Effect.toggle('reply-form-container', 'slide'); return false;] if logged_in? %>">Reply to this question</a></div>
 								</div>								
 							</div>
 							<% end %>
