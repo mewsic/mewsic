@@ -17,6 +17,15 @@
   <div class="bg-body">
     <div class="bg-top-body"></div>
     <div id="content-body" class="page-width clear-block">
+
+      <div id="messages" style="margin-top: 20px; margin-right: 10px">
+        <% flash.each do |name, message| -%>
+          <div class="<%= name %>">
+            <%= message %>
+            <div class="close"></div>
+          </div>
+        <% end -%>
+      </div>
       <%= yield %>
     </div>
     <div class="bg-bottom-body"></div>
