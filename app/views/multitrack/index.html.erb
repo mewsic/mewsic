@@ -1,38 +1,29 @@
 <script type="text/javascript" charset="utf-8">// <![CDATA[
 
 	document.observe('dom:loaded', function() {
-		if ($('current-user-id')) {
-			$w("title original_author description").each(function(name) {
-				new Ajax.InPlaceEditor('mlab_' + name, '<%= song_path(@song) %>', {
-					externalControl: 'mlab_' + name + '_edit_button',
-					externalControlOnly: true,
-					highlightcolor: 'transparent',
-					rows: name == 'description' ? 5 : 1,
-					highlightendcolor: 'transparent',
-					paramName: 'song[' + name + ']',			
-					ajaxOptions: { method: 'PUT' }
-				});												 
-			});		 
-			new Ajax.InPlaceSelect('mlab_genre', '<%= song_path(@song) %>', {
-				lazyLoading: true,
-				values_url: '/genres?ids',
-				labels_url: '/genres',
-				externalControl: 'mlab_genre_edit_button',
+		$w("title original_author description").each(function(name) {
+			new Ajax.InPlaceEditor('mlab_' + name, '<%= song_path(@song) %>', {
+				externalControl: 'mlab_' + name + '_edit_button',
 				externalControlOnly: true,
-				ajaxOptions: { method: 'PUT' },
-				paramName: 'song[genre_id]',
-				onComplete: Prototype.emptyFunction,
 				highlightcolor: 'transparent',
-				highlightendcolor: 'transparent'
-			});
-		} else {
-			$w('title original_author description genre').each(function(name) {
-				$('mlab_' + name + '_edit_button').observe('click', function(event) {
-					event.stop();
-					alert('Log in or sign up to edit!');
-				});
-			});
-		}
+				rows: name == 'description' ? 5 : 1,
+				highlightendcolor: 'transparent',
+				paramName: 'song[' + name + ']',			
+				ajaxOptions: { method: 'PUT' }
+			});												 
+		});		 
+		new Ajax.InPlaceSelect('mlab_genre', '<%= song_path(@song) %>', {
+			lazyLoading: true,
+			values_url: '/genres?ids',
+			labels_url: '/genres',
+			externalControl: 'mlab_genre_edit_button',
+			externalControlOnly: true,
+			ajaxOptions: { method: 'PUT' },
+			paramName: 'song[genre_id]',
+			onComplete: Prototype.emptyFunction,
+			highlightcolor: 'transparent',
+			highlightendcolor: 'transparent'
+		});
 	});
 	
 	function setFlashHeight( height ) {
@@ -45,13 +36,12 @@
 
 	var flashvars = {
 		serverPath: '<%= APPLICATION[:url] %>',
-		settingsXMLPath: '<%= multitrack_config_path %>',
-		songID: <%= @song.id || 0 %>
+		settingsXMLPath: '<%= multitrack_config_path(@user) %>',
+		songID: <%= @song.id %>
 	};
 	var params = {};
-	var attributes = { id: 'multitrackObject', name: 'multitrackObject' };
-	swfobject.embedSWF( '/multitrack/Adelao_Myousica_Multitrack_Editor.swf', 'flashcontent', '978', '2000', '9.0.0', 'express-install.swf', flashvars, params, attributes );
-	swfmacmousewheel.registerObject( attributes.id );
+	var attributes = { name: 'multitrackObject' };
+	swfobject.embedSWF( '/multitrack/Adelao_Myousica_Multitrack_Editor.swf', 'flashcontent', '978', '100%', '9.0.0', 'express-install.swf', flashvars, params, attributes );
 	
 // ]]></script>
 
@@ -61,13 +51,8 @@
 			<img src="/images/mlab_icon.png" />
 		</div>
 		<div class="mlab_user_avatar">
-			<% if logged_in? %>
-				<%= avatar_image current_user, :big, :width => 70, :height => 70 %>
-				<p class="mlab_username"><%= current_user.login %></p>
-			<% else %>
-				<%= image_tag 'default_avatars/avatar_big.gif', :size => '70x70' %>
-				<p class="mlab_username">Guest<br/>[<%= link_to 'sign up', signup_path %>]<br/>[<%= link_to 'log in', login_path %>]</p>
-			<% end %>
+				<%= avatar_image(@user, :big, :width => 70, :height => 70) %>
+				<p class="mlab_username"><%= @user.login %></p>
 		</div>
 	</div>
 	<div id="mlab_details_container">
