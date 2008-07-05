@@ -31,6 +31,9 @@ class Track < ActiveRecord::Base
   
   belongs_to :parent_song, :class_name => 'Song', :include => :user, :foreign_key => 'song_id'
   belongs_to :instrument
+
+  validates_presence_of :instrument_id
+  validates_associated :instrument
   
   acts_as_rated :rating_range => 0..5 
   
