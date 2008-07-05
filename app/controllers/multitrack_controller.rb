@@ -1,32 +1,28 @@
 class MultitrackController < ApplicationController  
   
-  before_filter :login_required
-  before_filter :find_user_and_song, :only => :index
-  before_filter :check_user_identity, :only => :index
-  
-  
+  before_filter :login_required, :only => :edit
+
   def index    
-    @song = @user.songs.create(:published => false)
-    @genres = Genre.find(:all)
+    @song = Song.new :published => false
+    @song.user = current_user if logged_in?
+    @song.save!
   end
-  
+
   def edit
-    render :action => 'index'
-  end
-
-private
-
-  def find_user_and_song
-    if params.include?(:user_id)
-      @user = User.find_from_param(params[:user_id])
-    elsif params.include?(:song_id)
-      @user = current_user
-      @song = current_user.songs.find(params[:song_id])      
+    @song = Song.find params[:song_id]
+    unless @song.user.id == current_user.id
+      raise ActiveRecord::RecordNotFound
     end
+
+    render :action => 'index'
+
+  rescue ActiveRecord::RecordNotFound
+    flash[:error] = 'Song not found..'
+    redirect_to '/' and return
   end
   
-  def check_user_identity
-    redirect_to '/' unless @user.id == current_user.id
+  def config
+    respond_to { |format| format.xml }
   end
-  
+
 end

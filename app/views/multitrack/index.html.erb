@@ -36,8 +36,7 @@
 
 	var flashvars = {
 		serverPath: '<%= APPLICATION[:url] %>',
-		settingsXMLPath: '<%= multitrack_config_path(@user) %>',
-		userID: <%= @user.id %>,
+		settingsXMLPath: '<%= multitrack_config_path %>',
 		songID: <%= @song.id %>
 	};
 	var params = {};
@@ -53,8 +52,13 @@
 			<img src="/images/mlab_icon.png" />
 		</div>
 		<div class="mlab_user_avatar">
-				<%= avatar_image(@user, :big, :width => 70, :height => 70) %>
-				<p class="mlab_username"><%= @user.login %></p>
+			<% if logged_in? %>
+				<%= avatar_image current_user, :big, :width => 70, :height => 70 %>
+				<p class="mlab_username"><%= current_user.login %></p>
+			<% else %>
+				<%= image_tag 'default_avatars/avatar_big.gif', :size => '70x70' %>
+				<p class="mlab_username">Guest [<%= link_to 'sign up', signup_path %>]</p>
+			<% end %>
 		</div>
 	</div>
 	<div id="mlab_details_container">

@@ -21,7 +21,7 @@
 		  </span>
 	  </p>
   	<%= empty_collection_message @tracks,
-	        :current_user => "#{link_to 'import', multitrack_path(current_user)} your tracks and enjoy!",
+	        :current_user => "#{link_to 'import', multitrack_path} your tracks and enjoy!",
   	      :any_user     => "#{@user.login} hasn't uploaded any track yet"
 		-%>
   </div>

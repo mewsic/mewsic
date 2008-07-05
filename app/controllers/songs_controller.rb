@@ -60,10 +60,6 @@ class SongsController < ApplicationController
     render :layout => false
   end
   
-  def edit
-    render :text => ''
-  end
-  
   def update
     @song = current_user.songs.find(params[:id])
     @song.update_attributes(params[:song])
@@ -74,7 +70,7 @@ class SongsController < ApplicationController
         render :text => @song.send(params[:song].keys.first)
       end
     else
-      render :text => ''
+      render :nothing => true
     end
   end
   

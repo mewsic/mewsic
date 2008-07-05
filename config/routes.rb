@@ -38,6 +38,7 @@ ActionController::Routing::Routes.draw do |map|
   map.reset_password '/reset_password/:id',  :controller => 'users', :action => 'reset_password'
     
   map.resources :sessions
+
   map.resources :songs, :has_one => :player, 
     :member => { :mix => :post, :rate => :put , :direct_sibling_tracks => :get, :indirect_sibling_tracks => :get, :download => :get } do |song|
 
@@ -58,12 +59,11 @@ ActionController::Routing::Routes.draw do |map|
   map.login '/login', :controller => 'sessions', :action => 'new'
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   
-  map.multitrack        '/users/:user_id/multitrack',     :controller => 'multitrack', :action => 'index'
-  map.song_multitrack   '/songs/:song_id/multitrack',     :controller => 'multitrack', :action => 'edit'
-  map.multitrack_config '/users/:user_id/request.config', :controller => 'users', :action => 'request_config'
-  map.multitrack_config '/users/:user_id/multitrack/request.config', :controller => 'users', :action => 'request_config'
-
   map.music '/music', :controller => 'music', :action => 'index'
+
+  map.multitrack        '/multitrack',          :controller => 'multitrack', :action => 'index'
+  map.multitrack_edit   '/multitrack/:song_id', :controller => 'multitrack', :action => 'edit'
+  map.multitrack_config '/request.config',      :controller => 'multitrack', :action => 'config'
 
   map.connect '/countries', :controller => 'users', :action => 'countries'
   
@@ -74,5 +74,5 @@ ActionController::Routing::Routes.draw do |map|
   map.root :controller => "dashboard"
   map.connect 'splash', :controller => 'dashboard', :action => 'splash'
   map.connect 'noop', :controller => 'dashboard', :action => 'noop'
-  
+
 end

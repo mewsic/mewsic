@@ -29,11 +29,7 @@
 				<div style="float:left;margin-top:120px;padding-left:28px;"><%= link_to 'Learn More', help_url %></div>
 
 				<div style="float:right;margin-top:120px;padding-right:28px;">
-				  <%- if logged_in? -%>
-				    <%= link_to 'Enter', multitrack_url(:user_id => current_user.to_param) %>
-				  <%- else -%>
-				    <%= link_to 'Enter', '/login' %>
-				  <%- end -%>
+					<%= link_to 'Enter', multitrack_url %>
 				</div>
 			</div>
 		</div>

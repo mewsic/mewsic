@@ -146,13 +146,6 @@ class UsersController < ApplicationController
     end
   end
   
-  def request_config
-    @user = User.find_from_param(params[:user_id])
-    respond_to do |format|
-      format.xml
-    end
-  end  
-  
   def rate    
     @user = User.find_from_param(params[:id])
     @user.rate(params[:rate].to_i, current_user)
