@@ -43,6 +43,11 @@ class UsersController < ApplicationController
     @answers = @user.answers.paginate(:page => 1, :per_page => 6, :order => 'created_at DESC')  
     @new_membership = MbandMembership.new
 
+    respond_to do |format|
+      format.xml
+      format.html
+    end
+
   rescue ActiveRecord::RecordNotFound
     flash[:error] = 'User not found..'
     redirect_to '/'
