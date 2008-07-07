@@ -16,8 +16,8 @@
 #  created_at     :datetime      
 #  updated_at     :datetime      
 #  rating_count   :integer(11)   
-#  rating_total   :decimal(10, 2 
-#  rating_avg     :decimal(10, 2 
+#  rating_total   :decimal(10, 2)
+#  rating_avg     :decimal(10, 2)
 #
 
 class Track < ActiveRecord::Base
@@ -26,7 +26,7 @@ class Track < ActiveRecord::Base
   attr_accessor :tone
   
   has_many :songs, :through => :mixes, :order => 'songs.created_at DESC'
-  has_many :mixes
+  has_many :mixes, :dependent => :destroy
   has_many :mlabs, :as => :mixable
   
   belongs_to :parent_song, :class_name => 'Song', :include => :user, :foreign_key => 'song_id'

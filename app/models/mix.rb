@@ -17,4 +17,7 @@
 class Mix < ActiveRecord::Base
   belongs_to :song
   belongs_to :track
+
+  validates_presence_of :song_id
+  validates_associated :song, :track
 end
