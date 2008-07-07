@@ -1,6 +1,7 @@
 <a class="close-edit" href="#">close</a>
-<h2>editing track #<%= @track.id %></h2>
-<% remote_form_for @track, :url => admin_track_url(@track), :update => 'editing', :complete => "$('editing').hide()" do |f| %>
+<h2>editing track <%= @track.id %></h2>
+<%= error_messages_for :track %>
+<% remote_form_for @track, :url => admin_track_url(@track), :update => 'editing' do |f| %>
 <dl>
 	<dt>title</dt>
 	<dd><%= f.text_field :title %></dd>
@@ -8,14 +9,17 @@
 	<dt>description</dt>
 	<dd><%= f.text_field :description %></dd>
 
-	<dt>song</dt>
-	<dd><%= link_to(@track.parent_song.title, admin_song_path(@track.parent_song), :class => 'edit-link') if @track.parent_song %></dd>
+	<dt>parent song</dt>
+	<dd><%= f.select :song_id, Song.find(:all, :select => 'id,title').map{|s| [s.title,s.id]} %></dd>
+
+	<dt>mixed songs</dt>
+	<dd><%= @track.songs.find(:all, :order => 'id').map { |song| link_to("#{song.id} #{song.title}", admin_song_path(song), :class => 'edit-link') }.join('<br/>') %></p></dd>
 
 	<dt>tone</dt>
 	<dd><%= f.text_field :tonality %></dd>
 
 	<dt>instrument</dt>
-	<dd><%= select :track, :instrument_id, Instrument.find(:all).map { |i| [i.description, i.id] } %></dd>
+	<dd><%= f.select :instrument_id, Instrument.find(:all).map { |i| [i.description, i.id] } %></dd>
 
 	<dt>filename</dt>
 	<dd><%= f.text_field :filename %></dd>
@@ -36,4 +40,8 @@
 	<dd><%= @track.rating_avg.to_f %></dd>
 </dl>
 <%= submit_tag 'submit' %>
+<% end %>
+
+<% remote_form_for @track, :url => admin_track_url(@track), :method => 'delete' do %>
+	<%= submit_tag 'delete' %>
 <% end %>

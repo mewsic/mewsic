@@ -3,6 +3,6 @@
 	<td><%= song.title %></td>
 	<td><%= song.description %></td>
 	<td><%= song.genre.name if song.genre %></td>
-	<td><%= song.user.login %></td>
+	<td><%= song.user.login if song.user %></td>
 </tr>
 

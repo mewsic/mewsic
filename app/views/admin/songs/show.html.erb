@@ -1,6 +1,7 @@
 <a class="close-edit" href="#">close</a>
 <h2>editing song <%= @song.id %></h2>
-<% remote_form_for @song, :url => admin_song_url(@song), :update => 'editing', :complete => "$('editing').hide()" do |f| %>
+<%= error_messages_for :song %>
+<% remote_form_for @song, :url => admin_song_url(@song), :update => 'editing' do |f| %>
 <dl>
 	<dt>title</dt>
 	<dd><%= f.text_field :title %></dd>
@@ -18,10 +19,10 @@
 	<dd><%= f.text_field :filename %></dd>
 
 	<dt>user</dt>
-	<dd><%= select :song, :user_id, User.find(:all, :select => 'login,id').map { |u| [u.login, u.id] } %></dd>
+	<dd><%= f.select :user_id, User.find(:all, :select => 'login,id').map {|u| [u.login,u.id]} %></dd>
 
 	<dt>genre</dt>
-	<dd><%= select :song, :genre_id, Genre.find(:all).map { |g| [g.name,g.id] } %></dd>
+	<dd><%= f.select :genre_id, Genre.find(:all).map { |g| [g.name,g.id] } %></dd>
 
 	<dt>bpm</dt>
 	<dd><%= f.text_field :bpm %></dd>
@@ -44,9 +45,16 @@
 	<dt>rating</dt>
 	<dd><%= @song.rating_avg.to_f %></dd>
 
-	<dt>tracks</dt>
-	<dd><p><%= @song.tracks.map { |track| link_to(track.title.blank? ? track.id : track.title, admin_track_path(track), :class => 'edit-link') }.join('<br/>') %></p></dd>
+	<dt>children tracks</dt>
+	<dd><p><%= @song.children_tracks.find(:all, :order => 'id').map { |track| link_to("#{track.id} #{track.title}", admin_track_path(track), :class => 'edit-link') }.join('<br/>') %></p></dd>
+
+	<dt>mixed tracks</dt>
+	<dd><p><%= @song.tracks.find(:all, :order => 'id').map { |track| link_to("#{track.id} #{track.title}", admin_track_path(track), :class => 'edit-link') }.join('<br/>') %></p></dd>
 
 </dl>
 <%= submit_tag 'submit' %>
+<% end %>
+
+<% remote_form_for @song, :url => admin_song_url(@song), :method => 'delete' do %>
+	<%= submit_tag 'delete' %>
 <% end %>
