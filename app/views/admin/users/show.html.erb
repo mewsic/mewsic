@@ -1,0 +1,65 @@
+<a class="close-edit" href="#">close</a>
+<h2>editing user <%= @user.id %></h2>
+<% remote_form_for @user, :url => admin_user_url(@user), :update => 'editing', :complete => "$('editing').hide()" do |f| %>
+<dl>
+	<dt>login</dt>
+	<dd><%= f.text_field :login %></dd>
+
+	<dt>nickname</dt>
+	<dd><%= f.text_field :nickname %></dd>
+
+	<dt>type</dt>
+	<dd><%= select :user, :type, %w(User Band Dj) %></dd>
+
+	<dt>city</dt>
+	<dd><%= f.text_field :city %></dd>
+
+	<dt>country</dt>
+	<dd><%= country_select :user, :country %></dd>
+
+	<dt>email</dt>
+	<dd><%= f.text_field :email %></dd>
+
+	<dt>first name</dt>
+	<dd><%= f.text_field :first_name %></dd>
+
+	<dt>last name</dt>
+	<dd><%= f.text_field :last_name %></dd>
+
+	<dt>gender</dt>
+	<dd><%= select :user, :gender, %w(male female other) %></dd>
+
+	<dt>"i am"</dt>
+	<dd><%= f.text_area :motto, :size => '30x4' %></dd>
+
+	<dt>"influences"</dt>
+	<dd><%= f.text_area :tastes, :size => '30x4' %></dd>
+
+	<dt>msn</dt>
+	<dd><%= f.text_field :msn %> public: <%= f.check_box :msn_public %></dd>
+
+	<dt>skype</dt>
+	<dd><%= f.text_field :skype %> public: <%= f.check_box :skype_public %></dd>
+
+	<dt>myspace</dt>
+	<dd><%= f.text_field :myspace_url %></dd>
+
+	<dt>photos</dt>
+	<dd><%= f.text_field :photos_url %></dd>
+
+	<dt>blog</dt>
+	<dd><%= f.text_field :blog_url %></dd>
+
+	<dt>created at</dt>
+	<dd><%= @user.created_at %></dd>
+
+	<dt>updated at</dt>
+	<dd><%= @user.updated_at %></dd>
+
+	<dt>rating</dt>
+	<dd><%= @user.rating_avg.to_f %></dd>
+
+</dl>
+<%= submit_tag 'submit' %>
+<% end %>
+
