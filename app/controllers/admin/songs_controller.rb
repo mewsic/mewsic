@@ -1,6 +1,6 @@
 class Admin::SongsController < Admin::AdminController
   def index
-    @songs = Song.find(:all, :conditions => ['published = ?', true], :order => 'title')
+    @songs = Song.find(:all, :conditions => ['published = ?', true], :order => 'id')
   end
   
   def show

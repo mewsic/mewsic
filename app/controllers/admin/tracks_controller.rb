@@ -1,6 +1,6 @@
 class Admin::TracksController < Admin::AdminController
   def index
-    @tracks = Track.find(:all, :order => 'title')
+    @tracks = Track.find(:all, :order => 'title', :order => 'id')
   end
 
   def show
