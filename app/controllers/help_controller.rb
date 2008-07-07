@@ -7,7 +7,7 @@ class HelpController < ApplicationController
   end
   
   def show
-    @page = HelpPage.find(params[:id])    
+    @page = HelpPage.find_from_param(params[:id])    
   end
   
   def send_mail

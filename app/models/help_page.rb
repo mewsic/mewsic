@@ -17,5 +17,17 @@ class HelpPage < ActiveRecord::Base
   acts_as_list
   
   validates_presence_of :title, :body
+
+  def to_param
+    title.downcase.gsub(/\s/, '-')
+  end
+
+  def self.find_from_param(param)
+    if param.to_i > 0
+      find(param)
+    else
+      find :first, :conditions => ['title = ?', param.gsub('-', ' ')]
+    end
+  end
   
 end
