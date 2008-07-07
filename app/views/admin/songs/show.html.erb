@@ -1,6 +1,6 @@
 <a class="close-edit" href="#">close</a>
 <h2>editing song <%= @song.id %></h2>
-<% remote_form_for @song, :url => admin_song_url(@song), :update => 'editing' do |f| %>
+<% remote_form_for @song, :url => admin_song_url(@song), :update => 'editing', :complete => "$('editing').hide()" do |f| %>
 <dl>
 	<dt>title</dt>
 	<dd><%= f.text_field :title %></dd>

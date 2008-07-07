@@ -1,6 +1,6 @@
 <a class="close-edit" href="#">close</a>
 <h2>editing track #<%= @track.id %></h2>
-<% remote_form_for @track, :url => admin_track_url(@track), :update => 'editing' do |f| %>
+<% remote_form_for @track, :url => admin_track_url(@track), :update => 'editing', :complete => "$('editing').hide()" do |f| %>
 <dl>
 	<dt>title</dt>
 	<dd><%= f.text_field :title %></dd>
