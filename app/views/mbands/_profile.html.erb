@@ -13,6 +13,7 @@
 		<div id="user-avatar-container">
 			<%= avatar_image(@mband, :big, :id => 'user-avatar-image') %>
 		</div>
+		<div class="pngfix status <%= @mband.members.all?(&:online_now?) ? 'online' : 'offline' %>"></div>
 
 		<% if current_user_mband_page? %>
 		<div id="change-avatar"> </div>

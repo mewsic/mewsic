@@ -246,21 +246,59 @@ div.status {
 	height:15px;
 	left:2px;
 	position:relative;
-	top:-73px;
+	top:-90px;
 	width:15px;
-	z-index: 6001;
+	z-index: 100;
 }
 
-div.online {
+div.status.online {
 	background: transparent url(/images/status_online.png) top left no-repeat;
 }
 
-div.offline {
+div.status.offline {
 	background: transparent url(/images/status_offline.png) top left no-repeat;
 }
 
-div.recording {
+div.status.recording {
 	background: transparent url(/images/status_recording.png) top left no-repeat;
+}
+
+div.user-profile div.status {
+	left: -2px;
+	top: -161px;
+}
+
+div#friends-scroller div.status,
+div#admirers-scroller div.status {
+	left: -5px;
+	top: -45px;
+}
+
+div#mband-members div.status {
+	margin:0 !important;
+	padding:0 !important;
+	background-color: transparent;
+	position: static;
+}
+
+div#friend-box div.button,
+div#admirers-box div.button {
+	width: 10px;
+	float: left;
+}
+
+div#friend-box div.scroll-clip,
+div#admirers-box div.scroll-clip {
+	overflow: hidden;
+	width: 235px;
+	margin: 0px 6px;
+	float: left;
+}
+
+div#newest-users div.status {
+	float: right;
+	top: -2px;
+	left: 28px;
 }
 
 .title, .title a{
@@ -546,7 +584,7 @@ tr.nav-song td{
 /* box */
 .thumb{
 	float:left;
-	margin-right:20px;
+	margin-right:15px;
 	padding-top:5px;
 }
 .played-instruments .small-box {
@@ -586,12 +624,12 @@ tr.nav-song td{
 }
 .people-list p.name, .people-list p.country{
 	float:left;
-	height:25px;
+	/*height:25px;*/
 	line-height:12px;
 	margin:0px !important;
 	overflow:hidden;
 	padding:2px 0px !important;
-	width:48px;
+	width:75px;
 }
 .label-title{
 	padding-right:15px;
@@ -758,11 +796,11 @@ tr.nav-song td{
 	height:66px;
 	overflow:hidden;
 }
-.one-col .horizontal-scroll img{
+/*.one-col .horizontal-scroll img{
 	margin:4px;
-}
+}*/
 .one-col .horizontal-scroll-box .button{
-	margin:0px 5px 0px 0px;
+	margin:1px 5px 0px 0px;
 }
 /* yellow box */
 .yellow-box h1{
@@ -1313,7 +1351,7 @@ h2.dj-label{
 }
 
 #friend-box, #admirers-box {
-        padding-bottom: 15px;
+	padding-bottom: 15px;
 }
 
 #songs_spinner, #tracks_spinner {
@@ -1748,7 +1786,7 @@ html>body .register p{
 #change-avatar {
 	width: 94px;
 	height: 18px;
-	left:0px;
+	left:-15px;
 	/*top:160px;*/
 	position:relative;
 	z-index:101;

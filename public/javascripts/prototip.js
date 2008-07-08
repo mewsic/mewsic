@@ -14,7 +14,7 @@ var Prototip = {
 var Tips = {
   options: {
     images: '../images/prototip/',      // image path, can be relative to this file or an absolute url
-    zIndex: 6000                        // raise if required
+    zIndex: 99                          // raise if required
   }
 };
 
@@ -102,7 +102,7 @@ Prototip.Styles = {
     delay: 0.03,
     width: 'auto',
     hook: { target: 'bottomRight', tip: 'topLeft' },
-    offset: { x: -9, y: -8 }
+    offset: { x: -9, y: -7 }
   },
 
   'protoblue': {

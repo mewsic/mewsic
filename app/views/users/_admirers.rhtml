@@ -1,19 +1,29 @@
 <div id="admirers-box" class="clear-block">  
   <h1>ADMIRERS <span class="no-bold">(<%= @user.pending_friends_for_me.size %>)</span></h1>
-  <div class="admirers-container <%= @user.pending_friends_for_me.size.zero? ? 'invisible' : 'clear-block' %>">
-    <div id="admirers-scroller" class="horizontal-scroll-box" style="width: 275px; overflow: hidden;">
-      <p class="button" style="width: 10px; float: left;"><a href="#" class="trigger back"><img src="/images/arrow_grey_left.gif"/></a></p>
-      <div id="scroll-clip" class="horizontal-scroll" style="height:30px; margin-bottom: 5px; width:225px;">
-        <!-- div aggiunta per problema scroll -->
-        <div class="container" style="height: 30px;position:absolute; clip:rect(0px 225px 30px 0px)">
-          <div class="scroll" style="padding: 0pt; 0px; left: 0px;">
-            <% @user.pending_friends_for_me.each do |friend| -%>
-            <%= link_to(avatar_image(friend, :icon), user_path(friend)) %>
-            <% end -%>
-          </div>
+  <div class="<%= @user.pending_friends_for_me.size.zero? ? 'invisible' : 'clear-block' %>">
+		<div class="slide-container">
+			<div class="button">
+				<a href="#" class="slide-prev"><img src="/images/arrow_grey_left.gif"/></a>
+			</div>
+			<!--[if IE]>
+			<div style="clip: rect(0px 235px 40px 0px); position: absolute; overflow:hidden;">
+			<![endif]-->
+			<div class="scroll-clip">
+        <div id="admirers-scroller" style="padding:0; left: 0px; width:<%= @user.pending_friends_for_me.size * 45 %>px;">
+					<% @user.pending_friends_for_me.each do |friend| -%>
+						<div class="float-left" style="width: 45px; height: 40px">
+							<%= link_to(avatar_image(friend, :small, :size => '40x40'), user_path(friend)) %>
+							<div class="status pngfix <%= friend.online_now? ? 'online' : 'offline' %>"></div>
+						</div>
+					<% end -%>
         </div>
-      </div><!-- chiusura div aggiunta per problema scroll -->
-      <p class="button"><a href="#" class="trigger forward"><img src="/images/arrow_grey_right.gif"/></a></p>
+      </div>
+			<!--[if IE]>
+			</div>
+			<![endif]-->
+			<div class="button">
+				<a href="#" class="slide-next"><img src="/images/arrow_grey_right.gif"/></a>
+			</div>
     </div>
   </div>
 </div>

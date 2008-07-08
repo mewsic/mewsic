@@ -44,8 +44,8 @@ class UsersController < ApplicationController
     @new_membership = MbandMembership.new
 
     respond_to do |format|
-      format.xml
       format.html
+      format.xml
     end
 
   rescue ActiveRecord::RecordNotFound

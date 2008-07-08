@@ -1,5 +1,5 @@
 <% breadcrumb @song %>
-<% javascript 'song' %>
+<% javascript 'simple-slider', 'song' %>
 <div class="box-list special-arrow-box song-spec clear-block">
   <div class="float-right" style="padding-right:16px;">
     <div class="special-arrow-active"></div>
@@ -96,9 +96,7 @@
     			  <div class="music-info">
     			    <p class="bordered"><span>bpm: <strong><%= track.bpm %></strong></span> <span>key: <strong><%= track.tonality %></strong></span> <span>runtime: <strong><%= track.length %> </strong></span></p>
     			    <p class="float-right">
-    			      <span class="star">
-    			        <%= rating(track) %>
-                </span>
+								<%= rating(track) %>
     			      <%= mlab_button(track) %>
     			      <%= play_button(track) %>
               </p>
@@ -174,7 +172,7 @@
       			<p class="title"><%= link_to song.title, song_path(song) %></p>
 						<div class="music-info">
       			  <p class="float-right">
-      			    <span class="star"><%= rating(song) %></span>
+      			    <%= rating(song) %>
       			    <%= mlab_button(song) %>
       			    <%= play_button(song) %>
               </p>

@@ -10,11 +10,11 @@
                  %>
               <%- end -%>
             </p>
-  					<p class="thumb">
+						<p class="thumb">
 							<%= instrument_icon(membership.instrument) %>
               <%= link_to avatar_image(membership.user, :icon), user_path(membership.user) %>
             </p>
+						<div class="status pngfix <%= membership.user.online_now? ? 'online' : 'offline' %>"></div>
   					<p class="name"><%= link_to membership.user.login, user_path(membership.user) %></p>
 						<p class="grey-text name"><em><%= membership.user.country %></em></p>
-  				</div>
-
+					</div>

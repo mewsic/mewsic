@@ -1,6 +1,7 @@
 document.observe('dom:loaded', function() {
-  new PictureSlider('friends-scroller',  { size: 225 });
-  new PictureSlider('admirers-scroller',  { size: 225 });  
+	new SimpleSlider('friends-scroller', {x: 210, y:0});
+  new SimpleSlider('admirers-scroller',  {x: 210, y:0});
+
 	$('path').addClassName('mypage');
 
   $w('tracks songs').each(function(name) {
