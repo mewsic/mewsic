@@ -75,7 +75,7 @@ class Song < ActiveRecord::Base
   # TODO: Unire i due metodi in uno unico 
   def self.find_paginated_by_user(page, user)
     paginate :per_page => 3, 
-             :conditions => ["songs.published = ? AND user_id = ?", true, user.id], 
+             :conditions => ["songs.published = ? AND songs.user_id = ?", true, user.id], 
              :order => "songs.title ASC",
              :include => [:user, {:tracks => :instrument}], 
              :page => page
