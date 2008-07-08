@@ -58,12 +58,12 @@ class Track < ActiveRecord::Base
     ])
   end
   
-  def find_most_collaborated(limit = 3)
-    Mix.self.find_by_sql(["
-       SELECT I.*, I.id, COUNT(T.id) AS ideas_count
-       FROM instruments I LEFT JOIN tracks T ON I.id = T.instrument_id LEFT JOIN songs S on S.id = T.song_id
-       WHERE S.published = ? AND T.idea = ? GROUP BY I.id ORDER BY ideas_count DESC LIMIT ?
-      ", true, true, limit])
+  def self.find_most_collaborated(limit = 3)
+    self.find_by_sql(["
+       SELECT T.*, COUNT(T.id) AS collaboration_count FROM tracks T, mixes M, songs S
+       WHERE T.id = M.track_id AND S.id = M.song_id AND S.published = ?
+       GROUP BY T.id ORDER BY collaboration_count DESC LIMIT ?
+      ", true, limit])
   end    
   
   def self.find_most_used(options = {})

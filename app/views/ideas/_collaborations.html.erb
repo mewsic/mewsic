@@ -47,11 +47,11 @@
 			<div class="top-box clear-block">
 				<div class="bottom-box clear-block">
 				  
-				  <%- @most_engaging.each do |song| -%>
+				  <%- @most_engaging.each do |track| -%>
   				  <div class="elements clear-block">
-  						<p class="thumb"><%= link_to avatar_image(song.user, :small) if song.user %></p>
-  						<p class="name"><%= link_to song.user.login, user_path(song.user) if song.user %></p>
-  						<p class="cyan-text float-right"><strong>99 collaboration </strong></p>
+  						<p class="thumb"><%= link_to avatar_image(track.user, :small) if track.user %></p>
+  						<p class="name"><%= track.title %></p>
+  						<p class="cyan-text float-right"><strong><%= pluralize track.collaboration_count, 'collaboration' %></strong></p>
   				  </div>
 				  <%- end -%>
 				</div>
