@@ -1,6 +1,6 @@
 <div id="mlab_element_<%= mlab_track.id %>" class="elements clear-block <%= cycle('even', 'odd') %>" style="height: 50px;">
   <div class="float-left">
-    <p class="name">TRACK: <%= link_to(mlab_track.parent_song.user.login, user_path(mlab_track.parent_song.user)) if mlab_track.parent_song && mlab_track.parent_song.user %></p>
+    <p class="name">TRACK: <%= link_to(mlab_track.user.nickname, user_path(mlab_track.user)) %></p>
     <p class="abstract"><%= mlab_track.title %></p>
   </div>
   <div class="float-left align-right">

@@ -2,11 +2,9 @@
 <div class="elements clear-block">
   <p class="thumb">
     <%= track_instrument_icon(track) %>
-    <%- if track.parent_song && track.parent_song.user -%>
-      <a href="<%= user_path(track.parent_song.user) %>"><%= avatar_image track.parent_song.user, :icon %></a>
-    <%- end -%>
+    <a href="<%= user_path(track.user) %>"><%= avatar_image track.user, :icon %></a>
   </p>
-  <p class="name align-right"><%= link_to(track.parent_song.user.login, user_path(track.parent_song.user)) if track.parent_song && track.parent_song.user %></p>
+  <p class="name align-right"><%= link_to(track.user.nickname, user_path(track.user)) %></p>
   <p class="title align-right"><%= track.title %></p>
   <p class="abstract">
     <%= track.description %>

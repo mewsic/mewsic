@@ -5,10 +5,10 @@
 		  <%= link_to avatar_image(@song.user, :icon), user_path(@song.user) %>
     </p>
 		<p class="name align-right">
-		  <%= link_to @song.user.login, user_path(@song.user) %>
+		  <%= link_to @song.user.nickname, user_path(@song.user) %>
     </p>
 		<p class="title align-right">
-		  <%= link_to @song.title, song_path(@song_path) %>
+		  <%= track.title %>
     </p>
 		<div class="music-info">
 		<p class="bordered"><span>bpm: <strong><%= track.bpm %></strong></span> <span>key: <strong><%= track.tonality %></strong></span> <span>runtime: <strong><%= track.length %> </strong></span></p>

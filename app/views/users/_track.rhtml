@@ -3,14 +3,14 @@
     <p class="thumb">
       <%= track_instrument_icon(track) %>
     </p>
-    <p class="name grey-text"><%= track.parent_song.user.login if track.parent_song && track.parent_song.user %></p>
+    <p class="name grey-text"><%= track.user.nickname %></p>
     <p class="title">
-    	<a href="#"><%= track.title %></a>
-	</p>
+      <a href="#"><%= track.title %></a>
+    </p>
   </td>
   <td class="star" align="right">
     
-		<%= rating(track, :class => track_counter.even? ? 'grey-star' : '') %>
+    <%= rating(track, :class => track_counter.even? ? 'grey-star' : '') %>
     <p>
       <%= mlab_button(track, :dynamic => true) %>
       <%= play_button(track) %>

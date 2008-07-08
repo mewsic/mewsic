@@ -20,4 +20,6 @@ class Mix < ActiveRecord::Base
 
   validates_presence_of :song_id
   validates_associated :song, :track
+
+  validates_uniqueness_of :track_id, :scope => :song_id
 end

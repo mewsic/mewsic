@@ -1,6 +1,6 @@
 <ul class="info">
   <li class="id"><%= mlab_track_info.id %></li>        
   <li class="title"><%= mlab_track_info.title %></li>
-  <li class="author_login"><%= mlab_track_info.parent_song.user.login if mlab_track_info.parent_song && mlab_track_info.parent_song.user %></li>
-  <li class="author_id"><%= mlab_track_info.parent_song.user.id if mlab_track_info.parent_song.user %></li>
+  <li class="author_login"><%= mlab_track_info.user.nickname %></li>
+  <li class="author_id"><%= mlab_track_info.user.id %></li>
 </ul>

@@ -35,8 +35,8 @@ class Track < ActiveRecord::Base
   belongs_to :instrument
   belongs_to :owner, :class_name => 'User', :foreign_key => 'user_id'
 
-  validates_presence_of :instrument_id, :song_id
-  validates_associated :instrument, :parent_song
+  validates_presence_of :instrument_id, :song_id, :user_id
+  validates_associated :instrument, :parent_song, :owner
   
   acts_as_rated :rating_range => 0..5 
   

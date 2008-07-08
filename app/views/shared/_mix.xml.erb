@@ -1,5 +1,5 @@
 <track>
-  <user><%= mix.track.parent_song.user.login if mix.track.parent_song && mix.track.parent_song.user %></user>       
+  <user><%= mix.track.user.login %></user>       
   <author><%= mix.track.parent_song.original_author if mix.track.parent_song %></author>     
   <title><%= mix.track.title %></title>     
   <instrument><%= mix.track.instrument.id %></instrument>  

@@ -10,8 +10,8 @@
         <tr class="even">
           <td>
             <span class="cyan-text"><%= track.parent_song.genre.name if track.parent_song && track.parent_song.genre %> </span>
-            <%= track.parent_song.user.login if track.parent_song && track.parent_song.user  %>
-            <em> <%= track.title %></em>
+            <%= track.user.nickname %>
+            <em><%= track.title %></em>
           </td>
           <td class="star">
             <%= rating(track) %>

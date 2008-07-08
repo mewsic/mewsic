@@ -18,7 +18,7 @@
             <span>runtime:<br /><strong><%= @song.length %></strong></span>
           </p>
           <p class="thumb"><%= link_to avatar_image(@song.user, :icon), user_path(@song.user) %></p>			
-  			  <p class="name"><%= link_to @song.user.login, user_path(@song.user) %></p>
+  			  <p class="name"><%= link_to @song.user.nickname, user_path(@song.user) %></p>
   			  <p class="title"><%= @song.title %></p>
   			  <p class="grey-text clear-float"><%= @song.description %></p>
   			  <p class="thumb">
@@ -62,7 +62,7 @@
     </p>
   </div>
   <div>
-    <h1>Other songs by <%= link_to @song.user.login, user_path(@song.user) %> <span class="no-bold">(<%= @song.user.songs.count %>)</span></h1>
+    <h1>Other songs by <%= link_to @song.user.nickname, user_path(@song.user) %> <span class="no-bold">(<%= @song.user.songs.count %>)</span></h1>
     <table width="100%" border="0" cellpadding="0" cellspacing="0">
       <%- @other_songs.each_with_index do |song, index| -%>
         <tr class="<%= %[even odd][index % 2] %>">
@@ -90,8 +90,8 @@
 			    <div class="elements clear-block">
     			  <p class="thumb">
     			    <%= track_instrument_icon(track) %>
-    			    <%= link_to(avatar_image(track.parent_song.user, :icon), user_path(track.parent_song.user)) if track.parent_song && track.parent_song.user %>
-    			  <p class="name align-right"><%= link_to(track.parent_song.user.login, user_path(track.parent_song.user)) if track.parent_song && track.parent_song.user %></p>
+    			    <%= link_to(avatar_image(track.user, :icon), user_path(track.user)) %>
+    			  <p class="name align-right"><%= link_to(track.user.nickname, user_path(track.user)) %></p>
     			  <p class="title align-right"><%= track.title %></p>
     			  <div class="music-info">
     			    <p class="bordered"><span>bpm: <strong><%= track.bpm %></strong></span> <span>key: <strong><%= track.tonality %></strong></span> <span>runtime: <strong><%= track.length %> </strong></span></p>
@@ -168,7 +168,7 @@
       			<p class="thumb">
       			  <%= link_to avatar_image(song.user, :icon), user_path(song.user) %>
             </p>
-      			<p class="name"><%= link_to song.user.login, user_path(song.user) %></p>
+      			<p class="name"><%= link_to song.user.nickname, user_path(song.user) %></p>
       			<p class="title"><%= link_to song.title, song_path(song) %></p>
 						<div class="music-info">
       			  <p class="float-right">
@@ -241,7 +241,7 @@
           			<p class="thumb">
           			  <%= link_to avatar_image(song.user, :icon), user_path(song.user) %>
                 </p>
-          			<p class="name"><%= link_to song.user.login, user_path(song.user) %></p>
+          			<p class="name"><%= link_to song.user.nickname, user_path(song.user) %></p>
           			<p class="title"><%= link_to song.title, song_path(song) %></p>
           			<div class="music-info">
           			  <p class="float-right">
