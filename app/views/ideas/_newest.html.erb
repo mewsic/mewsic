@@ -6,6 +6,13 @@
         <%= render :partial => 'tracks_block', :locals => {:tracks => @newest} %>
       </div>
     </div>
-    <p class="abstract align-right"><a href="#">Next</a></p>			
+    <p class="abstract align-right">
+      <% if @newest.previous_page %>
+				<%= link_to_remote 'Prev ', :update => 'newest-ideas', :method => :get, :url => newest_ideas_path(:npage => @newest.previous_page) %>
+		  <% end %>
+      <% if @newest.next_page %>
+				<%= link_to_remote 'Next' , :update => 'newest-ideas', :method => :get, :url => newest_ideas_path(:npage => @newest.next_page) %>
+		  <% end %>
+    </p>
   </div>
 </div>

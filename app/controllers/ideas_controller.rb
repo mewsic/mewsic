@@ -1,11 +1,38 @@
 class IdeasController < ApplicationController
 
+  before_filter :redirect_unless_xhr, :only => [:newest, :coolest]
+
   def index
-    @newest   = Track.find(:all, :conditions => ["tracks.idea = ?", true], :limit => 3, :order => "tracks.created_at DESC")
-    @coolest  = Track.find(:all, :conditions => ["tracks.idea = ?", true], :limit => 3, :order => "tracks.created_at DESC")
-    @top_rated  = Track.find(:all) #, :conditions => '1', :limit => 3)
+    @newest   = find_newest
+    @coolest  = find_coolest
+    @top_rated  = Track.find(:all, :conditions => ['idea = ?', true], :limit => 3, :order => 'tracks.rating_avg DESC')
     @most_engaging  = Track.find_most_collaborated(3)
     @ideas_instruments = Instrument.find_by_ideas_count
     @instruments = Instrument.find(:all)
   end
+  
+  def newest
+    @newest = find_newest
+    render :layout => false
+  end
+  
+  def coolest
+    @coolest = find_coolest
+    render :layout => false
+  end
+
+private
+  
+  def redirect_unless_xhr
+    redirect_to ideas_url unless request.xhr?
+  end
+  
+  def find_newest
+    Track.paginate(:per_page => 3, :page => params[:npage], :conditions => ["tracks.idea = ?", true], :limit => 3, :order => "tracks.created_at DESC")
+  end
+
+  def find_coolest
+    Track.paginate(:per_page => 3, :page => params[:cpage], :conditions => ["tracks.idea = ?", true], :limit => 3, :order => "tracks.created_at DESC")
+  end
+  
 end

@@ -19,21 +19,20 @@
 
 			<div class="top-box clear-block">
 				<div class="bottom-box clear-block">
-				  <%- @top_rated.each do |song| -%>
+				  <%- @top_rated.each do |track| -%>
 				    <div class="elements clear-block">
   					  <div class="clear-block">
-  						  <span class="tracks-number"><span><%= song.tracks.count %></span></span> 
   						  <div class="float-right">
   						    <p>
-                    <%= link_to avatar_image(song.user, :small) %>
+                    <%= link_to avatar_image(track.user, :small) %>
                   </p>
   						  </div>
   					  </div>
-  						<p class="abstract"><%= link_to song.title, song_path(song) %></p>
+  						<p class="abstract"><%= track.title %></p>
   						<p class="float-right">
-  						  <%= rating(song) %>
+  						  <%= rating(track) %>
               </p>
-  						<p class="float-left">listened <%= pluralize song.listened_times, 'time' %></p>
+  						<p class="float-left">listened <%= pluralize track.listened_times, 'time' %></p>
   				  </div>
 				  <%- end -%>
 				</div>

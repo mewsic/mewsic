@@ -21,7 +21,7 @@ ActionController::Routing::Routes.draw do |map|
   end
   
   map.resources :instruments
-  map.resources :ideas
+  map.resources :ideas, :collection => {:newest => :get, :coolest => :get}
   map.resources :bands_and_deejays
   map.resources :users, :collection => {:auto_complete_for_message_to => :get}, :member => {:switch_type => :any, :rate => :put} do |user|    
     user.resources :answers
