@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   
   def update_last_user_activity
     current_user.update_attribute(:last_activity_at, Time.now) if logged_in? && !request.xhr?
-    store_location unless logged_in? || controller_name == 'sessions'
+    #store_location unless logged_in? || controller_name == 'sessions'
   end
 
   def check_user_inbox

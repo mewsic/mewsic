@@ -71,7 +71,7 @@ class TracksController < ApplicationController
     #    root /data/myousica/shared/audio;
     #    internal;
     #  }
-    response.headers['Content-Disposition'] = %[attachment; filename="#{@track.description}"]
+    response.headers['Content-Disposition'] = %[attachment; filename="#{@track.title}"]
     response.headers['Content-Type'] = 'audio/mpeg'
     response.headers['Cache-Control'] = 'private'
     response.headers['X-Accel-Redirect'] = @track.filename
