@@ -29,4 +29,14 @@ class TrackTest < ActiveSupport::TestCase
     assert songs.size < 8
   end
   
+  def test_should_find_user
+    t = tracks(:drums_for_billie_jean_by_pilu)    
+    assert_equal t.parent_song.user, t.user
+    t.user = users(:mikaband)
+    t.save
+    assert_not_equal t.parent_song.user, t.user
+    assert_equal users(:mikaband), t.user
+    assert_equal users(:quentin), t.parent_song.user
+  end
+  
 end

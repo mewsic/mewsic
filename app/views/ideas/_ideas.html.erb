@@ -12,7 +12,7 @@
 					
 					<%- @ideas_instruments.each do |instrument|-%>											
   					<div class="elements clear-block"> 
-  				  		<p class="cyan-text float-right"><strong>65 amici</strong></p>
+  				  		<p class="cyan-text float-right"><strong><%= pluralize instrument.ideas_count, 'track' %></strong></p>
   						<p class="thumb">
   						  <%= image_tag(instrument.icon) %>
   						  <span class="cyan-text"><strong><%= instrument.description %></strong></span>
@@ -20,7 +20,7 @@
 						
   						<table width="100%" cellspacing="0" cellpadding="0" border="0">
                 <tbody>
-                  <%- instrument.tracks.find(:all, :limit => 5).each do |track| -%>
+                  <%- instrument.find_ideas.each do |track| -%>
                     <tr class="even">
                       <td>
                         <span class="cyan-text"><%= track.parent_song.genre.name if track.parent_song && track.parent_song.genre %> </span>

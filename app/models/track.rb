@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 41
+# Schema version: 43
 #
 # Table name: tracks
 #
@@ -16,8 +16,10 @@
 #  created_at     :datetime      
 #  updated_at     :datetime      
 #  rating_count   :integer(11)   
-#  rating_total   :decimal(10, 2)
-#  rating_avg     :decimal(10, 2)
+#  rating_total   :decimal(10, 2 
+#  rating_avg     :decimal(10, 2 
+#  idea           :boolean(1)    not null
+#  user_id        :integer(11)   
 #
 
 class Track < ActiveRecord::Base
@@ -31,6 +33,7 @@ class Track < ActiveRecord::Base
   
   belongs_to :parent_song, :class_name => 'Song', :include => :user, :foreign_key => 'song_id'
   belongs_to :instrument
+  belongs_to :owner, :class_name => 'User', :foreign_key => 'user_id'
 
   validates_presence_of :instrument_id, :song_id
   validates_associated :instrument, :parent_song
@@ -38,7 +41,7 @@ class Track < ActiveRecord::Base
   acts_as_rated :rating_range => 0..5 
   
   before_save :set_tonality_from_tone  
-  
+
   def self.search_paginated(q, options)
     options = {:per_page => 6, :page => 1}.merge(options)
     paginate(:per_page => options[:per_page], :page => options[:page], :include => [:mixes, :instrument, {:parent_song => {:user => :avatars}}], :conditions => [
@@ -55,10 +58,13 @@ class Track < ActiveRecord::Base
     ])
   end
   
-  # def self.find_orphans(options = {})
-  #     options.merge!({:include => [:mixes, :parent_song], :conditions => ["mixes.track_id is null AND tracks.song_id IS NOT NULL AND songs.published = ?", true] })
-  #     self.find(:all, options)
-  #   end
+  def find_most_collaborated(limit = 3)
+    Mix.self.find_by_sql(["
+       SELECT I.*, I.id, COUNT(T.id) AS ideas_count
+       FROM instruments I LEFT JOIN tracks T ON I.id = T.instrument_id LEFT JOIN songs S on S.id = T.song_id
+       WHERE S.published = ? AND T.idea = ? GROUP BY I.id ORDER BY ideas_count DESC LIMIT ?
+      ", true, true, limit])
+  end    
   
   def self.find_most_used(options = {})
     res = Mix.count options.merge({:include => [{:track => [{:parent_song => :user}, :instrument]}], :conditions => ["songs.published = ?", true],  :group => :track, :order => 'count_all DESC, tracks.id ASC'})
@@ -90,7 +96,11 @@ class Track < ActiveRecord::Base
   end
   
   def user
-    @user ||= parent_song.user
+    self.owner ? self.owner : parent_song.user
+  end
+  
+  def user=(u)
+    self.owner = u
   end
   
   def increment_listened_times

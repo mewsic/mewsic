@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 41
+# Schema version: 43
 #
 # Table name: tracks
 #
@@ -18,6 +18,8 @@
 #  rating_count   :integer(11)   
 #  rating_total   :decimal(10, 2 
 #  rating_avg     :decimal(10, 2 
+#  idea           :boolean(1)    not null
+#  user_id        :integer(11)   
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
@@ -126,7 +128,7 @@ drums_for_billie_jean_by_pilu:
 
 <% 100.times do |i| %>
 idea_track_<%= i %>:
-  title: Voice
+  title: Idea track <%= i %>
   parent_song: song_with_ideas
   instrument: <%= random_instrument %>
   idea: <%= true %>

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 42) do
+ActiveRecord::Schema.define(:version => 43) do
 
   create_table "abuses", :force => true do |t|
     t.integer  "abuseable_id"
@@ -209,6 +209,7 @@ ActiveRecord::Schema.define(:version => 42) do
     t.decimal  "rating_total",   :precision => 10, :scale => 2
     t.decimal  "rating_avg",     :precision => 10, :scale => 2
     t.boolean  "idea",                                          :default => false, :null => false
+    t.integer  "user_id"
   end
 
   create_table "users", :force => true do |t|
