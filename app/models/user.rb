@@ -313,7 +313,7 @@ class User < ActiveRecord::Base
   end
   
   def instruments
-    Instrument.find(:all, :include => [:tracks => [:parent_song => [:user]]], :conditions => ['user_id = ?', self.id])
+    Instrument.find(:all, :include => [:tracks => :owner], :conditions => ['user_id = ?', self.id])
   end
   
   def avatar
@@ -335,12 +335,12 @@ class User < ActiveRecord::Base
   
   # FIXME: da rendere più efficiente
   def self.find_with_more_instruments
-    result = Instrument.count('description', :conditions => "tracks.id IS NOT NULL AND users.id IS NOT NULL AND (users.type IS NULL OR users.type = 'User')", :include => [:tracks => [:parent_song => [:user]]], :group => 'user_id', :distinct => true, :order => 'count_description DESC')
+    result = Instrument.count('description', :conditions => "tracks.id IS NOT NULL AND users.id IS NOT NULL AND (users.type IS NULL OR users.type = 'User')", :include => [:tracks => :owner], :group => 'user_id', :distinct => true, :order => 'count_description DESC')
     return result.first.is_a?(Array) ? User.find(result.first.first) : nil
   end
  
   def self.find_band_or_deejay_with_more_instruments
-    result = Instrument.count('description', :conditions => "users.type = 'Band' OR users.type = 'Dj'", :include => [:tracks => [:parent_song => [:user]]], :group => 'user_id', :distinct => true, :order => 'count_description DESC')
+    result = Instrument.count('description', :conditions => "users.type = 'Band' OR users.type = 'Dj'", :include => [:tracks => :owner], :group => 'user_id', :distinct => true, :order => 'count_description DESC')
     return result.first.is_a?(Array) ? User.find(result.first.first) : nil
   end
   
