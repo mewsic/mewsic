@@ -1,7 +1,7 @@
 <tr>
-	<td><%= link_to track.id, admin_track_path(track), :class => 'edit-link' %></td>
+	<td><%= edit_link_to track.id, admin_track_path(track) %></td>
 	<td><%= track.title %></td>
 	<td><%= track.instrument.description %></td>
-	<td><%= track.tonality %></td>
-	<td><%= link_to track.parent_song.title, admin_song_path(track.parent_song), :class => 'edit-link' if track.parent_song %></td>
+	<td><%= edit_link_to track.user.login, admin_user_path(track.user) %></td>
+	<td><%= edit_link_to track.parent_song.title, admin_song_path(track.parent_song) if track.parent_song %></td>
 </tr>

@@ -34,4 +34,16 @@ class Admin::SongsController < Admin::AdminController
     Song.find(params[:id]).destroy
     render(:update) { |page| page.hide 'editing' }
   end
+
+  def mix
+    Mix.create! :song_id => params[:id], :track_id => params[:track_id]
+    @song = Song.find(params[:id])
+    render :action => 'show'
+  end
+
+  def unmix
+    Mix.find_by_track_id_and_song_id(params[:track_id], params[:id]).destroy
+    @song = Song.find(params[:id])
+    render :action => 'show'
+  end
 end

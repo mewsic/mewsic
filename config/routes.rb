@@ -77,7 +77,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.connect '/admin', :controller => 'admin/dashboard', :action => 'index'
   map.namespace(:admin) do |admin|
-    admin.resources :songs
+    admin.resources :songs, :member => { :mix => :put, :unmix => :put }
     admin.resources :tracks
     admin.resources :users
     admin.resources :answers

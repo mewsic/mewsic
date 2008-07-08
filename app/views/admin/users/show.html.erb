@@ -1,6 +1,6 @@
 <a class="close-edit" href="#">close</a>
 <h2>editing user <%= @user.id %></h2>
-<% remote_form_for @user, :url => admin_user_url(@user), :update => 'editing', :complete => "$('editing').hide()" do |f| %>
+<% edit_form_for @user, :url => admin_user_url(@user) do |f| %>
 <dl>
 	<dt>login</dt>
 	<dd><%= f.text_field :login %></dd>
@@ -62,4 +62,3 @@
 </dl>
 <%= submit_tag 'submit' %>
 <% end %>
-

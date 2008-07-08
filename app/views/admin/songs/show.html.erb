@@ -1,7 +1,7 @@
 <a class="close-edit" href="#">close</a>
 <h2>editing song <%= @song.id %></h2>
 <%= error_messages_for :song %>
-<% remote_form_for @song, :url => admin_song_url(@song), :update => 'editing' do |f| %>
+<% edit_form_for @song, :url => admin_song_url(@song) do |f| %>
 <dl>
 	<dt>title</dt>
 	<dd><%= f.text_field :title %></dd>
@@ -19,10 +19,10 @@
 	<dd><%= f.text_field :filename %></dd>
 
 	<dt>user</dt>
-	<dd><%= f.select :user_id, User.find(:all, :select => 'login,id').map {|u| [u.login,u.id]} %></dd>
+	<dd><%= f.select :user_id, User.find(:all, :select => 'login,id').map {|u| [u.login,u.id]}, :include_blank => true %></dd>
 
 	<dt>genre</dt>
-	<dd><%= f.select :genre_id, Genre.find(:all).map { |g| [g.name,g.id] } %></dd>
+	<dd><%= f.select :genre_id, Genre.find(:all).map { |g| [g.name,g.id] }, :include_blank => true %></dd>
 
 	<dt>bpm</dt>
 	<dd><%= f.text_field :bpm %></dd>
@@ -46,15 +46,25 @@
 	<dd><%= @song.rating_avg.to_f %></dd>
 
 	<dt>children tracks</dt>
-	<dd><p><%= @song.children_tracks.find(:all, :order => 'id').map { |track| link_to("#{track.id} #{track.title}", admin_track_path(track), :class => 'edit-link') }.join('<br/>') %></p></dd>
+	<dd><div style="float:left"><%= @song.children_tracks.find(:all, :order => 'id').map { |track| edit_link_to(track.title, admin_track_path(track)) }.join('<br/>') %></div><div style="clear:both"></div></dd>
 
 	<dt>mixed tracks</dt>
-	<dd><p><%= @song.tracks.find(:all, :order => 'id').map { |track| link_to("#{track.id} #{track.title}", admin_track_path(track), :class => 'edit-link') }.join('<br/>') %></p></dd>
+	<dd><div style="float:left"><%= @song.tracks.find(:all, :order => 'tracks.id', :include => :parent_song).map { |track|
+		edit_link_to("#{track.parent_song.title}: #{track.title}", admin_track_path(track)) + ' ' +
+		link_to_remote('[unmix]', :url => unmix_admin_song_path(@song, :track_id => track.id), :method => 'put', :update => 'editing')
+	}.join('<br/>') %></div><div style="clear:both"></div></dd>
 
 </dl>
 <%= submit_tag 'submit' %>
 <% end %>
 
-<% remote_form_for @song, :url => admin_song_url(@song), :method => 'delete' do %>
-	<%= submit_tag 'delete' %>
+<% edit_form_for @song, :url => admin_song_path(@song), :method => 'delete' do %>
+	<%= submit_tag 'delete', :onclick => 'if(!confirm("sure?!")) return false;' %>
+<% end %>
+
+<% unless @song.new_record? %>
+	<% edit_form_for @song, :url => mix_admin_song_path(@song) do %>
+		<%= select_tag 'track_id', options_for_select(Track.find(:all, :include => :parent_song, :order => 'songs.title, tracks.title').map{|t| ["#{t.parent_song.title}: #{t.title}",t.id]}) %>
+		<%= submit_tag 'mix track' %>
+	<% end %>
 <% end %>
