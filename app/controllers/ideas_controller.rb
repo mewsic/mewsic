@@ -1,6 +1,6 @@
 class IdeasController < ApplicationController
 
-  before_filter :redirect_unless_xhr, :only => [:newest, :coolest]
+  before_filter :redirect_unless_xhr, :only => [:newest, :coolest, :by_instrument]
 
   def index
     @newest   = find_newest
@@ -18,6 +18,12 @@ class IdeasController < ApplicationController
   
   def coolest
     @coolest = find_coolest
+    render :layout => false
+  end
+  
+  def by_instrument
+    @instrument = Instrument.find(params[:instrument_id])
+    @ideas = @instrument.ideas.paginate(:per_page => 10, :page => params[:ipage])
     render :layout => false
   end
 

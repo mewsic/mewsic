@@ -16,6 +16,7 @@ class Instrument < ActiveRecord::Base
   cattr_accessor :tracks_count
   
   has_many :tracks
+  has_many :ideas, :class_name => 'Track', :conditions => ["tracks.idea = ?", true]
   belongs_to :category, :class_name => 'InstrumentCategory'
 
   validates_presence_of :description

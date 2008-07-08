@@ -9,38 +9,38 @@
 		<div class="tab-title-list clear-block">
 		  <div class="top-box clear-block">
 				<div class="bottom-box clear-block">
-					
-					<%- @ideas_instruments.each do |instrument|-%>											
-  					<div class="elements clear-block"> 
-  				  		<p class="cyan-text float-right"><strong><%= pluralize instrument.ideas_count, 'track' %></strong></p>
-  						<p class="thumb">
-  						  <%= image_tag(instrument.icon) %>
-  						  <span class="cyan-text"><strong><%= instrument.description %></strong></span>
-              </p>
-						
-  						<table width="100%" cellspacing="0" cellpadding="0" border="0">
-                <tbody>
-                  <%- instrument.find_ideas.each do |track| -%>
-                    <tr class="even">
-                      <td>
-                        <span class="cyan-text"><%= track.parent_song.genre.name if track.parent_song && track.parent_song.genre %> </span>
-                        <%= track.parent_song.user.login if track.parent_song && track.parent_song.user  %>
-                        <em> <%= track.title %></em>
-                      </td>
-                      <td class="star">
-                        <%= rating(track) %>
-                      </td>
-                      <td class="button">
-                        <%= mlab_button(track) %>
-                        <%= play_button(track) %>
-                      </td>
-                    </tr>
-                  <%- end -%>
-                </tbody>
-              </table>
-  					</div>
-					<%- end -%>
-					
+					<div id="ideas-by-instruments">
+            <%- @ideas_instruments.each do |instrument|-%>											
+    					<div class="elements clear-block"> 
+    				  		<p class="cyan-text float-right"><strong><%= pluralize instrument.ideas_count, 'track' %></strong></p>
+    						<p class="thumb">
+    						  <%= image_tag(instrument.icon) %>
+    						  <span class="cyan-text"><strong><%= link_to_remote instrument.description, :update => 'ideas-by-instruments', :method => :get, :url => by_instrument_ideas_path(:instrument_id => instrument.id) %></strong></span>
+                </p>
+
+    						<table width="100%" cellspacing="0" cellpadding="0" border="0">
+                  <tbody>
+                    <%- instrument.find_ideas.each do |track| -%>
+                      <tr class="even">
+                        <td>
+                          <span class="cyan-text"><%= track.parent_song.genre.name if track.parent_song && track.parent_song.genre %> </span>
+                          <%= track.parent_song.user.login if track.parent_song && track.parent_song.user  %>
+                          <em> <%= track.title %></em>
+                        </td>
+                        <td class="star">
+                          <%= rating(track) %>
+                        </td>
+                        <td class="button">
+                          <%= mlab_button(track) %>
+                          <%= play_button(track) %>
+                        </td>
+                      </tr>
+                    <%- end -%>
+                  </tbody>
+                </table>
+    					</div>
+  					<%- end -%>
+					</div>					
 					<div class="elements clear-block"> 
 						<p class="orange-text"><strong>OTHERS</strong></p>
 						<p class="thumb">
