@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 35
+# Schema version: 41
 #
 # Table name: users
 #
@@ -10,8 +10,8 @@
 #  activation_code           :string(255)   
 #  country                   :string(45)    
 #  city                      :string(40)    
-#  first_name                :string(255)   
-#  last_name                 :string(255)   
+#  first_name                :string(32)    
+#  last_name                 :string(32)    
 #  gender                    :string(20)    
 #  photos_url                :string(255)   
 #  blog_url                  :string(255)   
@@ -38,6 +38,8 @@
 #  rating_avg                :decimal(10, 2 
 #  replies_count             :integer(11)   default(0)
 #  nickname                  :string(20)    
+#  last_activity_at          :datetime      
+#  is_admin                  :boolean(1)    
 #
 
 class Band < User

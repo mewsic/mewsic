@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 35
+# Schema version: 41
 #
 # Table name: tracks
 #
@@ -55,10 +55,10 @@ class Track < ActiveRecord::Base
     ])
   end
   
-  def self.find_orphans(options = {})
-    options.merge!({:include => [:mixes, :parent_song], :conditions => ["mixes.track_id is null AND tracks.song_id IS NOT NULL AND songs.published = ?", true] })
-    self.find(:all, options)
-  end
+  # def self.find_orphans(options = {})
+  #     options.merge!({:include => [:mixes, :parent_song], :conditions => ["mixes.track_id is null AND tracks.song_id IS NOT NULL AND songs.published = ?", true] })
+  #     self.find(:all, options)
+  #   end
   
   def self.find_most_used(options = {})
     res = Mix.count options.merge({:include => [{:track => [{:parent_song => :user}, :instrument]}], :conditions => ["songs.published = ?", true],  :group => :track, :order => 'count_all DESC, tracks.id ASC'})

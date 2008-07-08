@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 35
+# Schema version: 41
 #
 # Table name: tracks
 #
@@ -21,6 +21,14 @@
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+<% 
+  def random_instrument
+    instruments = %w(drums guitar microphone saxophone)
+    instruments[rand(instruments.size)]
+  end
+%>
+
 sax_for_let_it_be:
   title: Sassofono
   parent_song: let_it_be
@@ -115,3 +123,11 @@ drums_for_billie_jean_by_pilu:
   parent_song: billie_jean_by_pilu
   instrument: drums
   seconds: 213
+
+<% 100.times do |i| %>
+idea_track_<%= i %>:
+  title: Voice
+  parent_song: song_with_ideas
+  instrument: <%= random_instrument %>
+  idea: <%= true %>
+<% end %>

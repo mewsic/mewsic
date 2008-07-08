@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 35
+# Schema version: 41
 #
 # Table name: band_members
 #
@@ -9,8 +9,8 @@
 #  user_id        :integer(11)   
 #  created_at     :datetime      
 #  updated_at     :datetime      
-#  country        :string(45)
-#  linked_user_id :integer(11)
+#  country        :string(45)    
+#  linked_user_id :integer(11)   
 #
 
 class BandMember < ActiveRecord::Base

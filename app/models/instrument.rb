@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 35
+# Schema version: 41
 #
 # Table name: instruments
 #
@@ -12,6 +12,9 @@
 #
 
 class Instrument < ActiveRecord::Base
+  
+  cattr_accessor :tracks_count
+  
   has_many :tracks
   belongs_to :category, :class_name => 'InstrumentCategory'
 
@@ -22,7 +25,15 @@ class Instrument < ActiveRecord::Base
   validates_associated :category
 
   before_save :set_default_icon
-
+  
+  def self.find_by_ideas_count(limit = 5)   
+   self.find_by_sql(["
+    SELECT I.*, I.id, COUNT(T.id) AS tracks_count
+    FROM instruments I LEFT JOIN tracks T ON I.id = T.instrument_id LEFT JOIN songs S on S.id = T.song_id
+    WHERE S.published = ? GROUP BY I.id ORDER BY tracks_count DESC LIMIT ?
+   ", true, limit])         
+  end
+  
   private
 
     def set_default_icon

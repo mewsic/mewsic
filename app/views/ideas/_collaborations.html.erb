@@ -16,73 +16,47 @@
 		
 		<div class="simple-list clear-block">
 			<h1>TOP RATED COLLABORATIONS</h1>
-			<!--
+
 			<div class="top-box clear-block">
 				<div class="bottom-box clear-block">
-				  <div class="elements clear-block">
-					<div class="clear-block">
-						<span class="tracks-number"><span>5</span></span> 
-						<div class="float-right">
-						<p><img width="29" height="29" alt="Pinco Pallino" src="photo/photo_30X30.jpg"/> <img width="29" height="29" alt="Pinco Pallino" src="photo/photo_30X30.jpg"/> <img width="29" height="29" alt="Pinco Pallino" src="photo/photo_30X30.jpg"/></p>
-						</div>
-					</div>
-						<p class="abstract">titolo titolo titolo</p>
-						<p class="float-right"><span class="star"><img width="10" height="9" alt="" src="graphic_image/star_green.png"/><img width="10" height="9" alt="" src="graphic_image/star_green.png"/><img width="10" height="9" alt="" src="graphic_image/star_green.png"/><img width="10" height="9" alt="" src="graphic_image/star_green.png"/><img width="10" height="9" alt="" src="graphic_image/star_green.png"/></span> <a href="#"><img width="23" height="15" alt="" src="graphic_image/button_mlab.png"/></a> <a href="#"><img width="23" height="15" alt="" src="graphic_image/button_play_green.png"/></a></p>
-						<p class="float-left">listened</p>
-				  </div>
-				  
-				  <div class="elements clear-block">
-					<div class="clear-block">
-						<span class="tracks-number"><span>5</span></span> 
-						<div class="float-right">
-						<p><img width="29" height="29" alt="Pinco Pallino" src="photo/photo_30X30.jpg"/> <img width="29" height="29" alt="Pinco Pallino" src="photo/photo_30X30.jpg"/> <img width="29" height="29" alt="Pinco Pallino" src="photo/photo_30X30.jpg"/></p>
-						</div>
-					</div>
-						<p class="abstract">titolo titolo titolo</p>
-						<p class="float-right"><span class="star"><img width="10" height="9" alt="" src="graphic_image/star_green.png"/><img width="10" height="9" alt="" src="graphic_image/star_green.png"/><img width="10" height="9" alt="" src="graphic_image/star_green.png"/><img width="10" height="9" alt="" src="graphic_image/star_green.png"/><img width="10" height="9" alt="" src="graphic_image/star_green.png"/></span> <a href="#"><img width="23" height="15" alt="" src="graphic_image/button_mlab.png"/></a> <a href="#"><img width="23" height="15" alt="" src="graphic_image/button_play_green.png"/></a></p>
-						<p class="float-left">listened</p>
-				  </div>
-				  
-				  <div class="elements clear-block">
-					<div class="clear-block">
-						<span class="tracks-number"><span>5</span></span> 
-						<div class="float-right">
-						<p><img width="29" height="29" alt="Pinco Pallino" src="photo/photo_30X30.jpg"/> <img width="29" height="29" alt="Pinco Pallino" src="photo/photo_30X30.jpg"/> <img width="29" height="29" alt="Pinco Pallino" src="photo/photo_30X30.jpg"/></p>
-						</div>
-					</div>
-						<p class="abstract">titolo titolo titolo</p>
-						<p class="float-right"><span class="star"><img width="10" height="9" alt="" src="graphic_image/star_green.png"/><img width="10" height="9" alt="" src="graphic_image/star_green.png"/><img width="10" height="9" alt="" src="graphic_image/star_green.png"/><img width="10" height="9" alt="" src="graphic_image/star_green.png"/><img width="10" height="9" alt="" src="graphic_image/star_green.png"/></span> <a href="#"><img width="23" height="15" alt="" src="graphic_image/button_mlab.png"/></a> <a href="#"><img width="23" height="15" alt="" src="graphic_image/button_play_green.png"/></a></p>
-						<p class="float-left">listened</p>
-				  </div>
-				  			  
+				  <%- @top_rated.each do |song| -%>
+				    <div class="elements clear-block">
+  					  <div class="clear-block">
+  						  <span class="tracks-number"><span><%= song.tracks.count %></span></span> 
+  						  <div class="float-right">
+  						    <p>
+                    <%= link_to avatar_image(song.user, :small) %>
+                  </p>
+  						  </div>
+  					  </div>
+  						<p class="abstract"><%= link_to song.title, song_path(song) %></p>
+  						<p class="float-right">
+  						  <%= rating(song) %>
+              </p>
+  						<p class="float-left">listened <%= pluralize song.listened_times, 'time' %></p>
+  				  </div>
+				  <%- end -%>
 				</div>
 			</div>
-		-->
+
 		</div>
 		
 	<div class="simple-list clear-block">
 			<h1>MOST ENGAGING SONGS</h1>
-			<!--
+
 			<div class="top-box clear-block">
 				<div class="bottom-box clear-block">
-				  <div class="elements clear-block">
-						<p class="thumb"><a href="#"><img width="42" height="42" alt="Band" src="photo/photo_42X42.jpg"/></a></p>
-						<p class="name"><a href="#">Pinco Pallino</a></p>
-						<p class="cyan-text float-right"><strong>99 collaboration </strong></p>
-				  </div>
-				  <div class="elements clear-block">
-						<p class="thumb"><a href="#"><img width="42" height="42" alt="Band" src="photo/photo_42X42.jpg"/></a></p>
-						<p class="name"><a href="#">Pinco Pallino</a></p>
-						<p class="cyan-text float-right"><strong>99 collaboration</strong></p>
-				  </div>
-				  <div class="elements clear-block">
-						<p class="thumb"><a href="#"><img width="42" height="42" alt="Band" src="photo/photo_42X42.jpg"/></a></p>
-						<p class="name"><a href="#">Pinco Pallino</a></p>
-						<p class="cyan-text float-right"><strong>99 collaboration</strong></p>
-				  </div>				  
+				  
+				  <%- @most_engaging.each do |song| -%>
+  				  <div class="elements clear-block">
+  						<p class="thumb"><%= link_to avatar_image(song.user, :small) if song.user %></p>
+  						<p class="name"><%= link_to song.user.login, user_path(song.user) if song.user %></p>
+  						<p class="cyan-text float-right"><strong>99 collaboration </strong></p>
+  				  </div>
+				  <%- end -%>
 				</div>
 			</div> 
-		-->
+
 		</div>		
 		
 	</div>

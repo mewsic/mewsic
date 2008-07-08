@@ -7,7 +7,7 @@ class DashboardController < ApplicationController
     @answers = Answer.find :all, :order => 'answers.created_at DESC', :limit => 2, :include => [{:user => :avatars}], :conditions => ["users.activated_at IS NOT NULL"]
     # TODO: Qui dovrei trovare degli utenti e non delle canzoni, ma così evitiamo di avere utenti con canzoni vuote
     @songs = Song.find :all, :limit => 3, :include => [{:user => [:avatars, :songs]}], :conditions => ['songs.published = ?', true], :order => SQL_RANDOM_FUNCTION
-    @ideas = Track.find_orphans(:limit => 2)
+    @ideas = Track.find(:all, :conditions => ["tracks.idea = ?", true], :limit => 2)
   end
   
   def splash

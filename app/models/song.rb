@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 35
+# Schema version: 41
 #
 # Table name: songs
 #
@@ -128,6 +128,10 @@ class Song < ActiveRecord::Base
   
   def is_a_direct_sibling_of?(song)
     direct_siblings.collect {|s| s.song_id}.include?(song.id)
+  end
+  
+  def is_a_indirect_sibling_of?(song)
+    indirect_siblings.collect {|s| s.song_id}.include?(song.id)
   end
   
   def siblings_count

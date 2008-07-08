@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 35
+# Schema version: 41
 #
 # Table name: genres
 #
@@ -43,7 +43,7 @@ class Genre < ActiveRecord::Base
 
   def to_param
     URI.encode(self.name.downcase.gsub(' ', '+'))
-  end
+  end    
 
   # XXX DRY THESE METHODS! present in models/{user,genre,mband}.rb
   def self.find_from_param(param, options = {})

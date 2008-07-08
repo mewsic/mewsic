@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 35
+# Schema version: 41
 #
 # Table name: songs
 #
@@ -151,3 +151,10 @@ billie_jean_by_pilu:
   genre: pop
   listened_times: 42
   
+song_with_ideas:
+  title: Song with ideas
+  user: quentin
+  original_author: Boh
+  genre: <%= random_genre %>
+  listened_times: <%= rand(1000) %>
+  created_at: <%= (rand(30)).days.ago.to_s :db %>
