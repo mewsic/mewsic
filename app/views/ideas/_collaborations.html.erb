@@ -48,7 +48,7 @@
 				  
 				  <%- @most_engaging.each do |track| -%>
   				  <div class="elements clear-block">
-  						<p class="thumb"><%= link_to avatar_image(track.user, :small) if track.user %></p>
+  						<p class="thumb"><%= link_to avatar_image(track.user, :small), user_path(track.user) if track.user %></p>
   						<p class="name"><%= track.title %></p>
   						<p class="cyan-text float-right"><strong><%= pluralize track.collaboration_count, 'collaboration' %></strong></p>
   				  </div>
