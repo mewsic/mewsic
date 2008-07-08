@@ -119,11 +119,11 @@ var SearchBox = Class.create({
 });
 
 
-function setupStarboxes(selector) {
+function setupStarboxes(className) {
   var logged_in = $('current-user-id') ? true : false;
   var authenticity_token = logged_in ? $('authenticity-token').value : false;
 
-  $$(selector).each(function(element) {
+  $A(document.getElementsByClassName(className)).each(function(element) {
     var className = element.className.sub(/\s*rating\s*/, '');
     var rating = parseFloat(element.getAttribute('rel'));
     var image = 'myousica_small.png'
@@ -185,7 +185,7 @@ document.observe('dom:loaded', function(event) {
     });    
 	}
  
-  setupStarboxes('div.rating');
+  setupStarboxes('rating');
   Message.init();
 
   new SearchBox('search');

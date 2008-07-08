@@ -1,11 +1,11 @@
 <div class="elements clear-block">
 	<p class="country align-right"><%= h person_medium.compiled_location %></p>
 	<p class="thumb float-right">
-	 	<%= link_to avatar_image(person_medium, :small), user_path(person_medium) %></a>
+	 	<%= link_to avatar_image(person_medium, :small), user_path(person_medium) %>
 	</p>
 	<div class="pngfix status <%= person_medium.online_now? ? 'online' : 'offline' %>"></div>
 	<p class="name">
-		<%= link_to person_medium.login, user_path(person_medium) %></a>
+		<%= link_to person_medium.login, user_path(person_medium) %>
 	</p>
 	<p class="abstract"><%= h person_medium.motto %></p>
 </div>

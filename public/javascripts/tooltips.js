@@ -1,12 +1,12 @@
 var Tooltips = Class.create({
   initialize: function() {
-    $$('.instrument').each(this.addInstrument);
+    $A(document.getElementsByClassName('instrument')).each(this.addInstrument);
 
     if (!$('current-user-id')) {
-      $$('div.rating').each(this.addRating);
+      $A(document.getElementsByClassName('rating')).each(this.addRating);
       $$('img.button.mlab').each(this.addMlab);
     }
-    $$('div.status').each(this.addStatus);
+    $A(document.getElementsByClassName('status')).each(this.addStatus);
 
     Ajax.Responders.register({
       onComplete: this.responder.bindAsEventListener(this)
@@ -50,7 +50,7 @@ var Tooltips = Class.create({
       Tips.remove(t.element);
     });
 
-    $$('.instrument').each(function(element) {
+    $A(document.getElementsByClassName('instrument')).each(function(element) {
       this.rehash(element, this.addInstrument);
     }.bind(this));
 

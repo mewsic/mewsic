@@ -26,7 +26,7 @@ var Player = Class.create({
     }.bind(this));
 
     // add any new links
-    $$('a.player').each(function(link) {
+    $A(document.getElementsByClassName('player')).each(function(link) {
       if (this.links.get(link.href)) {
         return;
       }
