@@ -68,9 +68,9 @@
 		<%= submit_tag 'mix track' %>
 	<% end %>
 
-	<% form_for 'song', :url => "#{APPLICATION[:media_url]}/mix", :update => 'song-mix-container', :html => { :id => 'mix-song-form' } do %>
+	<% form_for 'song', :url => mp3_admin_song_path(@song), :html => { :id => 'mix-song-form' } do %>
 		<%= text_area_tag 'song', mix_xml(@song), :size => '73x10' %>
-		<div class="container" style="width: 400px; height: 100px; display: none"><%= image_tag 'spinner.gif' %></div>
 		<%= submit_tag 'mix mp3' %>
+		<div class="container" style="width: 400px; height: 100px; display: none"><%= image_tag 'spinner.gif' %></div>
 	<% end %>
 <% end %>

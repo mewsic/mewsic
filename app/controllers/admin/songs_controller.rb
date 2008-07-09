@@ -53,16 +53,15 @@ class Admin::SongsController < Admin::AdminController
   def mp3
     if params[:song]
       url = URI.parse("#{APPLICATION[:media_url]}/mix")
-      res = Net::HTTP.start(url.host, url.port) { |http| http.post(url.path, { 'song' => params[:song] }) }
+      res = Net::HTTP.post_form(url, {'song' => params[:song]})
     elsif params[:worker]
       url = URI.parse("#{APPLICATION[:media_url]}/mix/status/#{params[:worker]}")
       res = Net::HTTP.start(url.host, url.port) { |http| http.get(url.path) }
     else
-      raise ArgumentError, 'invalid request'
+      render :text => 'invalid request', :status => :bad_request and return
     end
 
-    debugger
-    raise ArgumentError, 'request error' unless res.is_a?(Net::HTTPSuccess)
+    render :text => res.body, :status => :bad_request and return unless res.is_a?(Net::HTTPSuccess)
 
     respond_to do |format|
       format.xml { render :text => res.body }

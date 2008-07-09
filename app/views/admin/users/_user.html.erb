@@ -3,6 +3,6 @@
 	<td><%= user.login %></td>
 	<td><%= user.nickname %></td>
 	<td><%= user.class.name %></td>
-	<td><%= Song.count :conditions => ['user_id = ?', user.id] %></td>
-	<td><%= Track.count :conditions => ['user_id = ?', user.id] %></td>
+	<td><%= Song.count :conditions => ['user_id = ? AND published = ?', user.id, true] %></td>
+	<td><%= Track.count :conditions => ['user_id = ? AND published = ?', user.id, true] %></td>
 </tr>
