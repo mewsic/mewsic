@@ -213,7 +213,7 @@
 
   		    <div class="bottom-box clear-block" id="indirect-siblings">
 
-            <%- @indirect_siblings.each_with_index do |mix, index| song = mix.song -%>
+            <%- @indirect_siblings.each_with_index do |song, index| -%>
               <div id="indirect-sibling-<%= song.id %>" class="sibling special-box clear-block<%= ['', ' grey-bg'][index % 2] %>">
         			  <div class="float-right" style="padding-right:10px;">
         			    <div class="special-arrow"></div>

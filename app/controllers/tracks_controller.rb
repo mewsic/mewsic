@@ -1,6 +1,8 @@
 class TracksController < ApplicationController
   
-  protect_from_forgery :except => [:create]    
+  before_filter :login_required, :only => [:create, :rate, :toggle_idea]
+  before_filter :check_track_owner, :only => [:toggle_idea]
+  protect_from_forgery :except => [:create]
   
   def index
     if params.include?(:user_id) 
@@ -80,6 +82,26 @@ class TracksController < ApplicationController
   rescue ActiveRecord::RecordNotFound
     flash[:error] = 'Track not found'
     redirect_to music_path
+  end    
+  
+  def toggle_idea
+    @track.idea = @track.idea? ? false : true
+    @track.save
+    
+    respond_to do |format|
+      format.html { redirect_to user_url(current_user) }
+      format.js
+    end        
+  end
+
+private
+  
+  def check_track_owner
+    @user = User.find_from_param(params[:user_id])            
+    @track = Track.find(params[:id])
+    if @user != current_user || @track.user != current_user
+      redirect_to new_session_path
+    end
   end
   
 end

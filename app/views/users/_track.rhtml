@@ -10,6 +10,9 @@
     
     <%= rating(track, :class => track_counter.even? ? 'grey-star' : '') %>
     <p>
+      <%- if current_user_page? -%>
+        <%= link_to_remote (track.idea? ? 'idea' : 'no idea'), :url => toggle_idea_user_track_path(current_user, track), :method => :put, :html => {:id => "toggle_idea_#{track.id}"} %>
+      <%- end  -%>
       <%= mlab_button(track, :dynamic => true) %>
       <%= play_button(track) %>
     </p>

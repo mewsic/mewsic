@@ -44,6 +44,10 @@ class SongTest < ActiveSupport::TestCase
     assert songs(:billie_jean_by_pilu).is_a_direct_sibling_of?(songs(:billie_jean_by_giovanni))
   end
   
+  def test_is_a_indirect_sibling_should_correctly_find_indirect_siblings
+    assert songs(:billie_jean_by_michael_jackson).is_a_indirect_sibling_of?(songs(:billie_jean_by_pilu))    
+  end
+  
   # def test_is_a_direct_sibling_should_correctly_find_direct_siblings
   #   assert songs(:billie_jean_by_michael_jackson).is_a_indirect_sibling_of?(songs(:billie_jean_by_pilu))
   # end
