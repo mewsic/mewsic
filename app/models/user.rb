@@ -297,6 +297,14 @@ class User < ActiveRecord::Base
   def self.find_newest(options)
     self.find(:all, options.merge({:order => 'created_at DESC', :conditions => 'activated_at IS NOT NULL'}))
   end
+
+  def self.find_online(options = {})
+    self.find(:all, options.merge(:conditions => ['last_activity_at IS NOT NULL AND last_activity_at > ?', 30.minutes.ago], :order => 'last_activity_at'))
+  end
+
+  def self.count_online(options = {})
+    self.count(options.merge(:conditions => ['last_activity_at IS NOT NULL AND last_activity_at > ?', 30.minutes.ago]))
+  end
   
   # ATTENZIONE: METODO MOLTO COSTOSO
   def update_friends_count
@@ -357,7 +365,7 @@ class User < ActiveRecord::Base
   def online_now?
     self.last_activity_at >= Time.now - 15.minutes if self.last_activity_at
   end
-  
+
   protected
     # before filter 
     def encrypt_password      
