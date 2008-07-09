@@ -1,3 +1,6 @@
+require 'net/http'
+require 'uri'
+
 class Admin::SongsController < Admin::AdminController
   def index
     @songs = Song.find(:all, :conditions => ['published = ?', true], :order => 'id')
@@ -46,4 +49,24 @@ class Admin::SongsController < Admin::AdminController
     @song = Song.find(params[:id])
     render :action => 'show'
   end
+
+  def mp3
+    if params[:song]
+      url = URI.parse("#{APPLICATION[:media_url]}/mix")
+      res = Net::HTTP.start(url.host, url.port) { |http| http.post(url.path, { 'song' => params[:song] }) }
+    elsif params[:worker]
+      url = URI.parse("#{APPLICATION[:media_url]}/mix/status/#{params[:worker]}")
+      res = Net::HTTP.start(url.host, url.port) { |http| http.get(url.path) }
+    else
+      raise ArgumentError, 'invalid request'
+    end
+
+    debugger
+    raise ArgumentError, 'request error' unless res.is_a?(Net::HTTPSuccess)
+
+    respond_to do |format|
+      format.xml { render :text => res.body }
+    end
+  end
+
 end

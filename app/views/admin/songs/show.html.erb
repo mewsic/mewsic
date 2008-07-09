@@ -67,4 +67,10 @@
 	<%= select_tag 'track_id', options_for_select(Track.find(:all, :include => [:parent_song, :instrument], :order => 'songs.title, instruments.description, tracks.title').map{|t| ["#{t.parent_song.title}: #{t.title} [#{t.instrument.description}]",t.id]}) %>
 		<%= submit_tag 'mix track' %>
 	<% end %>
+
+	<% form_for 'song', :url => "#{APPLICATION[:media_url]}/mix", :update => 'song-mix-container', :html => { :id => 'mix-song-form' } do %>
+		<%= text_area_tag 'song', mix_xml(@song), :size => '73x10' %>
+		<div class="container" style="width: 400px; height: 100px; display: none"><%= image_tag 'spinner.gif' %></div>
+		<%= submit_tag 'mix mp3' %>
+	<% end %>
 <% end %>
