@@ -5,7 +5,7 @@
   <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon"/>
   <title>Myousica - play and share</title>
   <%= stylesheet_link_tag *%w[style iepngfix lightview prototip starbox] %>  
-  <%= javascript_include_tag *%w[protoculous prototip starbox picture_slider lightview mlab audio-player inplaceselect player tooltips pagination application] %>
+  <%= javascript_include_tag *%w[protoculous prototip starbox picture_slider lightview mlab audio-player inplaceselect player swfobject tooltips pagination application] %>
   <%= javascript_include_tag 'login-box' unless logged_in? %>
   <%= yield :head %>
   <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon"/>
@@ -43,9 +43,9 @@
     <div class="bg-bottom-body"></div>
   </div>
   <%= render :partial => 'shared/footer' %>
-  <div id="player-container" style="display: none; z-index: 110; position: fixed; bottom: 0; height: 50px; width: 100%; background: transparent url('/images/lightwindow/black-70.png');">
-    <a style="position: absolute; top: 10px; right: 5px;" href="#" onclick="Player.instance.close();return false;"><img src="/images/button_flash_close.png" /></a>
-    <div class="content" style="margin-top: 13px; margin-left: 10px;"></div>
+  <div id="player-container" style="display: none; z-index: 110; position: fixed; bottom: 0; height: 60px; width: 100%; background: transparent url('/images/blue-80.png');">
+    <a style="position: absolute; top: 19px; right: 19px;" href="#" onclick="Player.instance.close();return false;"><img src="/images/button_flash_close.png" /></a>
+    <div class="content" style="margin-top: 5px; margin-left: 50px;"></div>
   </div>
 </body>
 </html>

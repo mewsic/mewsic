@@ -71,7 +71,7 @@ var Player = Class.create({
   
   loadPage: function(url) {
     new Ajax.Updater(this.content, url, {
-      method: 'get'
+      method: 'get', evalScripts: true
     });
   }
   
