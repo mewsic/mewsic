@@ -3,6 +3,6 @@
 	<td><%= song.title %></td>
 	<td><%= song.description %></td>
 	<td><%= song.genre.name if song.genre %></td>
-	<td><%= song.user.login if song.user %></td>
+	<td><%= edit_link_to song.user.login, admin_user_path(song.user) if song.user %></td>
 </tr>
 

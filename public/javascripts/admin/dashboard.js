@@ -25,7 +25,10 @@ document.observe('dom:loaded', function() {
       if (container.id == 'editing') {
         container.down('a.close-edit').observe('click', function(event) {
           event.stop();
-          $('editing').fade({duration: 0.3});
+          $('editing').fade({
+            duration: 0.3,
+            afterFinish: function() { $('editing').style.top = '140px';}
+          });
         });
       }
       container.select('a.edit-link').each(function(link) {

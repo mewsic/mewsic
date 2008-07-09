@@ -1,4 +1,7 @@
-<%= edit_link_to 'new track', new_admin_track_path %>
+<p>
+	<%= edit_link_to 'new track', new_admin_track_path %><br/>
+	Total <%= Track.count %> tracks
+</p>
 <table class="admin_content_table" cellspacing="0" cellpadding="5">
 	<tr>
 		<th>id</th>

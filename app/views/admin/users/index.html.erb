@@ -1,9 +1,12 @@
+<p>Total <%= User.count %> users</p>
 <table class="admin_content_table" cellspacing="0" cellpadding="5">
 	<tr>
 		<th>id</th>
 		<th>login</th>
 		<th>nickname</th>
-		<th>country</th>
+		<th>type</th>
+		<th>track #</th>
+		<th>song #</th>
 	</tr>
 	<%= render :partial => 'user', :collection => @users %>
 </table>

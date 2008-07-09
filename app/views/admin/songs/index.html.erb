@@ -1,4 +1,7 @@
-<%= edit_link_to 'new song', new_admin_song_path %>
+<p>
+	<%= edit_link_to 'new song', new_admin_song_path %><br/>
+	Total <%= Song.count %> songs
+</p>
 <table class="admin_content_table" cellspacing="0" cellpadding="5">
 	<tr>
 		<th>id</th>

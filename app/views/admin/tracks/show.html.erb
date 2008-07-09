@@ -25,7 +25,7 @@
 	<dd><%= f.select :instrument_id, Instrument.find(:all).map { |i| [i.description, i.id] }, :include_blank => true %></dd>
 
 	<dt>filename</dt>
-	<dd><%= f.text_field :filename, :disabled => true %></dd>
+	<dd><%= f.text_field :filename %></dd>
 
 	<dt>bpm</dt>
 	<dd><%= f.text_field :bpm %></dd>
@@ -45,12 +45,14 @@
 <%= submit_tag 'submit' %>
 <% end %>
 
-<% form_for 'track', :url => APPLICATION[:media_url], :html => { :id => 'track-upload-form', :multipart => true, :target => 'track-upload-iframe', :onsubmit => "$('track-upload-iframe').show()", :method => 'post' } do |f| %>
+<% form_for 'track', :url => "#{APPLICATION[:media_url]}/upload", :html => { :id => 'track-upload-form', :multipart => true, :target => 'track-upload-iframe', :onsubmit => "$('track-upload-iframe').show()", :method => 'post' } do |f| %>
 	upload: <%= file_field_tag :upload %>
 	<%= f.submit 'go' %><br/>
 	<iframe name="track-upload-iframe" id="track-upload-iframe" src="/spinner.html" style="width: 600px; height: 200px; display: none"></iframe>
 <% end %>
 
-<% edit_form_for @track, :url => admin_track_url(@track), :method => 'delete' do %>
-	<%= submit_tag 'delete', :confirm => 'sure?!' %>
+<% unless @track.new_record? %>
+	<% edit_form_for @track, :url => admin_track_url(@track), :method => 'delete' do %>
+		<%= submit_tag 'delete', :confirm => 'sure?!' %>
+	<% end %>
 <% end %>
