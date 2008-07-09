@@ -12,6 +12,7 @@ class RepliesController < ApplicationController
       @reply.answer = @answer
       @reply.user = current_user
       if @reply.save
+        @answer.update_replies_count
         flash[:notice] = 'Reply has been saved correctly'      
       else
         flash[:error] = 'The body field is required!'
