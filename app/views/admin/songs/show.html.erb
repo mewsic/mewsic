@@ -19,10 +19,10 @@
 	<dd><%= f.text_field :filename %></dd>
 
 	<dt>user</dt>
-	<dd><%= f.select :user_id, User.find(:all, :select => 'login,id').map {|u| [u.login,u.id]}, :include_blank => true %></dd>
+	<dd><%= f.select :user_id, User.find(:all, :select => 'login,id', :conditions => 'activated_at IS NOT NULL', :order => 'login').map {|u| [u.login,u.id]}, :include_blank => true %></dd>
 
 	<dt>genre</dt>
-	<dd><%= f.select :genre_id, Genre.find(:all).map { |g| [g.name,g.id] }, :include_blank => true %></dd>
+	<dd><%= f.select :genre_id, Genre.find(:all, :order => 'name').map { |g| [g.name,g.id] }, :include_blank => true %></dd>
 
 	<dt>bpm</dt>
 	<dd><%= f.text_field :bpm %></dd>
@@ -46,10 +46,10 @@
 	<dd><%= @song.rating_avg.to_f %></dd>
 
 	<dt>children tracks</dt>
-	<dd><div style="float:left"><%= @song.children_tracks.find(:all, :order => 'id', :include => :instrument).map { |track| edit_link_to("#{track.title} [#{track.instrument.description}]", admin_track_path(track)) }.join('<br/>') %></div><div style="clear:both"></div></dd>
+	<dd><div style="float:left"><%= @song.children_tracks.find(:all, :order => 'tracks.title, instruments.description', :include => :instrument).map { |track| edit_link_to("#{track.title} [#{track.instrument.description}]", admin_track_path(track)) }.join('<br/>') %></div><div style="clear:both"></div></dd>
 
 	<dt>mixed tracks</dt>
-	<dd><div style="float:left"><%= @song.tracks.find(:all, :order => 'tracks.id', :include => [:parent_song, :instrument]).map { |track|
+	<dd><div style="float:left"><%= @song.tracks.find(:all, :order => 'tracks.title, instruments.description', :include => [:parent_song, :instrument]).map { |track|
 		edit_link_to("#{track.parent_song.title}: #{track.title} [#{track.instrument.description}]", admin_track_path(track)) + ' ' +
 		link_to_remote('[unmix]', :url => unmix_admin_song_path(@song, :track_id => track.id), :method => 'put', :update => 'editing')
 	}.join('<br/>') %></div><div style="clear:both"></div></dd>

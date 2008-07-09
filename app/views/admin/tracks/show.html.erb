@@ -10,13 +10,13 @@
 	<dd><%= f.text_field :description %></dd>
 
 	<dt>user</dt>
-	<dd><%= f.select :user_id, User.find(:all, :select => 'id,login', :conditions => 'activated_at IS NOT NULL').map{|s| [s.login,s.id]}, :include_blank => true %></dd>
+	<dd><%= f.select :user_id, User.find(:all, :select => 'id,login', :conditions => 'activated_at IS NOT NULL', :order => 'login').map{|s| [s.login,s.id]}, :include_blank => true %></dd>
 
 	<dt>parent song</dt>
-	<dd><%= f.select :song_id, Song.find(:all, :select => 'id,title', :conditions => ['published = ?', true]).map{|s| [s.title,s.id]}, :include_blank => true %></dd>
+	<dd><%= f.select :song_id, Song.find(:all, :select => 'id,title', :conditions => ['published = ?', true], :order => 'title').map{|s| [s.title,s.id]}, :include_blank => true %></dd>
 
 	<dt>mixed songs</dt>
-	<dd><%= @track.songs.find(:all, :order => 'id').map { |song| edit_link_to("#{song.id} #{song.title}", admin_song_path(song)) }.join('<br/>') %></p></dd>
+	<dd><%= @track.songs.find(:all, :order => 'title').map { |song| edit_link_to("#{song.id} #{song.title}", admin_song_path(song)) }.join('<br/>') %></p></dd>
 
 	<dt>tone</dt>
 	<dd><%= f.text_field :tonality %></dd>
