@@ -27,7 +27,7 @@ var MlabSlider = Class.create(PictureSlider, {
           	'  </div>' +
           	'  <div class="float-left align-right">' +
           	'	  <p class="button">' +
-          	'	    <a class="button mlab play player" href="/#{type}s/#{attributes.id}/player.html" params="lightwindow_width=290,lightwindow_height=25,lightwindow_loading_animation=false"></a>' +
+          	'	    <a class="button mlab play player" href="/#{type}s/#{attributes.id}/player.html"></a>' +
           	'	    <a href="#" class="button mlab remove" onclick="MlabSlider.destroyItem(\'#{type}\', #{attributes.id}); return false;"></a>' +
           	'	  </p>' +
           	'  </div>' +

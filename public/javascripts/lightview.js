@@ -29,9 +29,9 @@ var Lightview = {
     imgNumberTemplate: 'Image #{position} of #{total}',    // Want a different language? change it here
     keyboard: { enabled: true },                           // Enabled the keyboard buttons
     overlay: {                                             // Overlay
-      background: '#000',                                  // Background color, Mac Firefox & Safari use overlay.png
+      background: '#34718d',                               // Background color, Mac Firefox & Safari use overlay.png
       close: true,                                         // Overlay click closes the view
-      opacity: 0.85,
+      opacity: 0.50,
       display: true
     },
     preloadHover: true,                                    // Preload images on mouseover
