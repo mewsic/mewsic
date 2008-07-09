@@ -45,7 +45,7 @@
 <%= submit_tag 'submit' %>
 <% end %>
 
-<% form_for 'track', :url => "#{APPLICATION[:media_url]}/upload", :html => { :id => 'track-upload-form', :multipart => true, :target => 'track-upload-iframe', :onsubmit => "$('track-upload-iframe').show()", :method => 'post' } do |f| %>
+<% form_for 'track', :url => "#{APPLICATION[:media_url]}upload", :html => { :id => 'track-upload-form', :multipart => true, :target => 'track-upload-iframe', :onsubmit => "$('track-upload-iframe').show()", :method => 'post' } do |f| %>
 	upload: <%= file_field_tag :upload %>
 	<%= f.submit 'go' %><br/>
 	<iframe name="track-upload-iframe" id="track-upload-iframe" src="/spinner.html" style="width: 600px; height: 200px; display: none"></iframe>
