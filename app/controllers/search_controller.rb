@@ -1,5 +1,7 @@
 class SearchController < ApplicationController
 
+  before_filter :check_valid_search_string, :except => :index
+
   def index
     redirect_to '/'
   end
@@ -7,11 +9,6 @@ class SearchController < ApplicationController
   def new
     respond_to do |format|
       format.html do        
-        if params[:q].strip.blank?
-          flash[:error] = 'You did not enter a search string' 
-          redirect_to '/' and return
-        end
-
         type = params[:type] && params[:type].join(' ')
         redirect_to(:action => :show, :id => CGI::escape(params[:q]), :type => type) and return
       end
@@ -47,16 +44,27 @@ class SearchController < ApplicationController
       format.xml
     end
   end
-  
-private
 
-  def search(q, types = [])
-    [
-      (types.empty? || types.include?('user')) ? User.search_paginated(q, :per_page => 6, :page => params[:page]) : nil,
-      (types.empty? || (types.include?('song') || types.include?('music'))) ? Song.search_paginated(q, :per_page => 6, :page => params[:page]) : nil,
-      (types.empty? || (types.include?('track') || types.include?('music'))) ? Track.search_paginated(q, :per_page => 6, :page => params[:page]) : nil,
-      (types.empty? || types.include?('idea')) ? Track.search_paginated_ideas(q, :per_page => 6, :page => params[:page]) : nil
-    ]
-  end
+  protected
+    def check_valid_search_string
+      query = params[:q] || params[:id] || ''
+      if query.strip.blank?
+        flash[:error] = 'You did not enter a search string' 
+        respond_to do |format|
+          format.html { redirect_to '/' and return }
+          format.xml { render :nothing => true, :status => :bad_request }
+        end
+      end
+    end
+  
+  private
+    def search(q, types = [])
+      [
+        (types.empty? || types.include?('user')) ? User.search_paginated(q, :per_page => 6, :page => params[:page]) : nil,
+        (types.empty? || (types.include?('song') || types.include?('music'))) ? Song.search_paginated(q, :per_page => 6, :page => params[:page]) : nil,
+        (types.empty? || (types.include?('track') || types.include?('music'))) ? Track.search_paginated(q, :per_page => 6, :page => params[:page]) : nil,
+        (types.empty? || types.include?('idea')) ? Track.search_paginated_ideas(q, :per_page => 6, :page => params[:page]) : nil
+      ]
+    end
 
 end
