@@ -76,6 +76,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'noop', :controller => 'dashboard', :action => 'noop'
 
   map.connect '/admin', :controller => 'admin/dashboard', :action => 'index'
+  map.upload_admin_track '/admin/tracks/upload', :controller => 'admin/tracks', :action => 'upload', :conditions => { :method => :post }
   map.namespace(:admin) do |admin|
     admin.resources :songs, :member => { :mix => :put, :unmix => :put, :mp3 => :post }
     admin.resources :tracks

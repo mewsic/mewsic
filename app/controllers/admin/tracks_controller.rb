@@ -1,3 +1,5 @@
+require 'multipart'
+
 class Admin::TracksController < Admin::AdminController
   def index
     @tracks = Track.find(:all, :order => 'title', :order => 'id')
@@ -37,5 +39,26 @@ class Admin::TracksController < Admin::AdminController
   def destroy
     Track.find(params[:id]).destroy
     render(:update) { |page| page.hide 'editing' }
+  end
+
+  def upload
+    url = URI.parse "#{APPLICATION[:media_url]}/upload"
+    if params[:upload] && params[:upload].respond_to?(:size) && params[:upload].size > 0
+      query, headers = Multipart::Post.prepare_query(:upload => params[:upload])
+      res = Net::HTTP.start(url.host, url.port) { |http| http.post(url.path, query, headers) }
+    elsif params[:worker]
+      url = URI.parse("#{APPLICATION[:media_url]}/upload/status/#{params[:worker]}")
+      res = Net::HTTP.start(url.host, url.port) { |http| http.get(url.path) }
+    else
+      render :text => 'invalid request', :status => :bad_request and return
+    end
+
+    render :text => res.body, :status => :bad_request and return unless res.is_a?(Net::HTTPSuccess)
+
+    responds_to_parent do
+      render :update do |page|
+        page << %[TrackUpload.instance.responder('#{escape_javascript(res.body)}')]
+      end
+    end
   end
 end

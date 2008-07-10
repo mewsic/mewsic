@@ -1,6 +1,6 @@
 module Admin::SongsHelper
   def mix_xml(song)
-    xm = Builder::XmlMarkup.new
+    xm = Builder::XmlMarkup.new(:indent => 2)
     xm.song {
       song.tracks.each { |track|
         xm.track :id => track.id,
