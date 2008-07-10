@@ -4,17 +4,28 @@ class SongsController < ApplicationController
   protect_from_forgery :except => [:mix, :update]
   
   def index
-    if params.has_key?("genre_id")
-      @genre = Genre.find_from_param(params[:genre_id])
-      @songs = Song.find_paginated_by_genre(params[:page], @genre)
-    elsif params.has_key?("user_id")
-      @user = User.find_from_param(params[:user_id])
-      @songs = Song.find_paginated_by_user(params[:page], @user)
-    elsif params.has_key?("mband_id")
-      @mband = Mband.find_from_param(params[:mband_id])
-      @songs = Song.find_paginated_by_mband(params[:page], @mband)
+    respond_to do |format|
+      format.html do
+        if params.has_key?("genre_id")
+          @genre = Genre.find_from_param(params[:genre_id])
+          @songs = Song.find_paginated_by_genre(params[:page], @genre)
+        elsif params.has_key?("user_id")
+          @user = User.find_from_param(params[:user_id])
+          @songs = Song.find_paginated_by_user(params[:page], @user)
+        elsif params.has_key?("mband_id")
+          @mband = Mband.find_from_param(params[:mband_id])
+          @songs = Song.find_paginated_by_mband(params[:page], @mband)
+        end
+
+        render :layout => false
+      end
+
+      format.xml do
+        render :text => 'login required', :status => :bad_request and return unless logged_in?
+
+        @songs = Song.find_all_by_user_id current_user.id
+      end
     end
-    render :layout => false
   end
   
   def show
