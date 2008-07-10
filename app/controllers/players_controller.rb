@@ -7,6 +7,7 @@ class PlayersController < ApplicationController
   def show
     @playable.increment_listened_times    
     @stream = @playable.filename
+    @length = @playable.seconds
     @image = send("formatted_#{@playable.class.name.underscore}_path", @playable, 'png')
   end
   
