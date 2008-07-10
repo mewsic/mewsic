@@ -76,22 +76,23 @@ class SongsController < ApplicationController
   
   def mix
     @song = current_user.songs.find(params[:id])
-    song_params   = params[:song]        
-    #tracks_params = song_params.delete(:tracks) if song_params[:tracks]
-    tracks_params = song_params.delete(:track) if song_params[:track]
-    tracks_params = [tracks_params] unless tracks_params.is_a?(Array)
+
+    tracks = params[:song].delete(:tracks) if params[:song][:tracks]
+    tracks = [tracks] unless tracks.is_a?(Array)
+
     @song.published = true
-    @song.save
+    @song.update_attributes!(params[:song])
+
     #@song.mixes.clear
-    tracks_params.each do |track_params|
+    tracks.each do |track|
       mix = Mix.new
       mix.song = @song
-      mix.track_id = track_params[:id]
-      mix.volume = track_params[:volume]
-      mix.loop = track_params[:loop]
-      mix.balance = track_params[:balance]
-      mix.time_shift = track_params[:time_shift]
-      mix.save
+      mix.track_id = track[:id]
+      mix.volume = track[:volume]
+      mix.loop = track[:loop]
+      mix.balance = track[:balance]
+      mix.time_shift = track[:time_shift]
+      mix.save!
     end
 
     respond_to do |format|

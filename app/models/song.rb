@@ -30,12 +30,16 @@ class Song < ActiveRecord::Base
   has_many :tracks, :through => :mixes, :order => 'tracks.created_at DESC'  
   has_many :children_tracks, :class_name => 'Track'
   has_many :mlabs, :as => :mixable
-
+  has_many :abuses, :as => :abuseable
 
   belongs_to :genre
   belongs_to :user 
   
-  has_many :abuses, :as => :abuseable
+  validates_presence_of :title, :tone, :seconds, :genre_id, :if => Proc.new(&:published)
+  validates_associated :genre, :if => Proc.new(&:published) 
+
+  validates_presence_of :user_id
+  validates_associated :user
   
   acts_as_rated :rating_range => 0..5
   

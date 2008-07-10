@@ -19,7 +19,7 @@
 #  rating_total   :decimal(10, 2 
 #  rating_avg     :decimal(10, 2 
 #  idea           :boolean(1)    not null
-#  user_id        :integer(11)   
+#  owner_id        :integer(11)   
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
@@ -35,57 +35,89 @@ sax_for_let_it_be:
   title: Sassofono
   parent_song: let_it_be
   instrument: saxophone
+  owner: quentin
+  seconds: <%= rand(100) + 90 %>
+  tonality: C
 guitar_for_let_it_be:
   title: Chitarra
   parent_song: let_it_be
   instrument: guitar
+  owner: quentin
+  seconds: <%= rand(100) + 90 %>
+  tonality: C
 voice_for_let_it_be:
   title: Voce
   parent_song: let_it_be
   instrument: microphone
+  owner: quentin
+  seconds: <%= rand(100) + 90 %>
+  tonality: C
 voice_for_radio_ga_ga:
   title: Voce
   parent_song: radio_ga_ga
   instrument: microphone
+  owner: quentin
+  seconds: <%= rand(100) + 90 %>
+  tonality: B
 guitar_for_closer:
   title: Chitarra
   parent_song: closer
   instrument: guitar
+  owner: quentin
+  seconds: <%= rand(100) + 90 %>
+  tonality: B
 sax_for_closer:
   title: Sassofono
   parent_song: closer
   instrument: saxophone
+  owner: quentin
+  seconds: <%= rand(100) + 90 %>
+  tonality: B
 drum_for_closer:
   title: Batteria
   parent_song: closer
   instrument: drums
+  owner: aaron
+  seconds: <%= rand(100) + 90 %>
+  tonality: B
 <% 10.times do |i| %>
 voice_for_closer_<%= i + 4 %>:
   title: Voice
   parent_song: closer
   instrument: microphone
+  seconds: <%= rand(100) + 90 %>
   created_at: <%= (rand(30)).days.ago.to_s :db %>
+  owner: <%= %w(quentin mikaband)[rand(4)] %>
+  tonality: D
 <% end %>
 drum_for_single_track_song:
   title: Drums for single track song
   parent_song: quentin_single_track_song
   instrument: drums
   seconds: 205
+  owner: aaron
+  tonality: D
 guitar_for_single_track_song:
   title: Guitar for single track song
   parent_song: quentin_single_track_song
   instrument: guitar
   seconds: 205
+  owner: john
+  tonality: D
 voice_for_single_track_song:
   title: Voice for single track song
   parent_song: quentin_single_track_song
   instrument: microphone
   seconds: 205
+  owner: quentin
+  tonality: D
 drum_for_gravity_blast_beat:
   title: Drums for gravity blast beat
   parent_song: gravity_blast_beat
   instrument: drums
   seconds: 205
+  owner: aaron
+  tonality: D
 
 # Don't touch these fixtures. They're central to a test that has to run
 # or the cheerleader will die and the world won't be saved.
@@ -95,41 +127,56 @@ voice_for_billie_jean_by_michael_jackson:
   parent_song: billie_jean_by_michael_jackson
   instrument: microphone
   seconds: 314
+  owner: quentin
+  tonality: E
   
 drums_for_billie_jean_by_michael_jackson:
   title: Drums for Billie Jean
   parent_song: billie_jean_by_michael_jackson
   instrument: drums
   seconds: 213
+  owner: aaron
+  tonality: E
   
 keyboards_for_billie_jean_by_michael_jackson:
   title: Keyboards for Billie Jean
   parent_song: billie_jean_by_michael_jackson
   instrument: saxophone
   seconds: 213
+  owner: quentin
+  tonality: E
 
 guitar_for_billie_jean_by_michael_jackson:
   title: Guitar for Billie Jean
   parent_song: billie_jean_by_michael_jackson
   instrument: guitar
   seconds: 213
+  owner: quentin
+  tonality: E
   
 voice_for_billie_jean_by_giovanni:
   title: Voice for Billie Jean by Giovanni
   parent_song: billie_jean_by_giovanni
   instrument: microphone
   seconds: 314
+  owner: quentin
+  tonality: E
 
 drums_for_billie_jean_by_pilu:
   title: Drums for Billie Jean by Pilu
   parent_song: billie_jean_by_pilu
   instrument: drums
   seconds: 213
+  owner: quentin
+  tonality: E
 
 <% 100.times do |i| %>
 idea_track_<%= i %>:
   title: Idea track <%= i %>
   parent_song: song_with_ideas
   instrument: <%= random_instrument %>
+  seconds: <%= rand(100) + 90 %>
   idea: <%= true %>
+  owner: <%= %w(quentin mikaband)[rand(4)] %>
+  tonality: <%= ('A'..'F').to_a[rand(6)] %>
 <% end %>

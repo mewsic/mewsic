@@ -46,6 +46,7 @@ class TracksController < ApplicationController
       attributes[:filename] = '/audio/' << attributes[:filename]
     end
 
+    attributes[:owner] = current_user
     @track = Track.create!(attributes)
     
     respond_to do |format|

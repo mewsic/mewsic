@@ -230,13 +230,13 @@ class UserTest < Test::Unit::TestCase
   
   def test_should_retrieve_distinct_instrument
     u = create_user
-    s = u.songs.create(:title => 'My song')
+    s = u.songs.create(:title => 'My song', :tone => 'C', :genre => genres(:blues))
     i = create_instrument
     assert_difference 'Track.count', 4 do
-      Mix.create(:track => Track.create(:instrument => i.first, :parent_song => s), :song => s)
-      Mix.create(:track => Track.create(:instrument => i.first, :parent_song => s), :song => s)
-      Mix.create(:track => Track.create(:instrument => i.last, :parent_song => s), :song => s)
-      Mix.create(:track => Track.create(:instrument => i.last, :parent_song => s), :song => s)
+      Mix.create(:track => Track.create(:title => 'sux sux 1', :instrument => i.first, :parent_song => s, :owner => u, :tonality => 'A', :seconds => 128), :song => s)
+      Mix.create(:track => Track.create(:title => 'sux sux 2', :instrument => i.first, :parent_song => s, :owner => u, :tonality => 'B', :seconds => 164), :song => s)
+      Mix.create(:track => Track.create(:title => 'sux sux 3', :instrument => i.last,  :parent_song => s, :owner => u, :tonality => 'C', :seconds => 190), :song => s)
+      Mix.create(:track => Track.create(:title => 'sux sux 4', :instrument => i.last,  :parent_song => s, :owner => u, :tonality => 'D', :seconds => 256), :song => s)
     end
     assert_equal %w[Guitar Saxophone], u.instruments.collect{|j| j.description }.sort
   end

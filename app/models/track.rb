@@ -31,11 +31,12 @@ class Track < ActiveRecord::Base
   has_many :mixes, :dependent => :destroy
   has_many :mlabs, :as => :mixable
   
-  belongs_to :parent_song, :class_name => 'Song', :include => :user, :foreign_key => 'song_id'
-  belongs_to :instrument
+  belongs_to :parent_song, :class_name => 'Song', :foreign_key => 'song_id'
   belongs_to :owner, :class_name => 'User', :foreign_key => 'user_id'
 
-  validates_presence_of :instrument_id, :song_id, :user_id
+  belongs_to :instrument
+
+  validates_presence_of :title, :tonality, :seconds, :instrument_id, :song_id, :user_id
   validates_associated :instrument, :parent_song, :owner
   
   acts_as_rated :rating_range => 0..5 

@@ -22,21 +22,28 @@ class MultitrackTest < ActionController::IntegrationTest
         assert_response :success
         @song = assigns(:song)
         assert_not_nil @song
+        assert !@song.new_record?
       end
       
-      # Multitrack: carico nuova traccia
-      assert_difference 'Track.count' do
-        post formatted_tracks_path('xml'), :track => { :song_id => @song.id, :title => 'sample track', :tone => 'C'}
-        @new_track = assigns(:track)
-        assert_equal 'sample track', @new_track.title
-        assert_equal @song.id, @new_track.song_id
+      # Multitrack: carico 2 nuove tracce
+      assert_difference 'Track.count', 2 do
+        post formatted_tracks_path('xml'), :track => { :song_id => @song.id, :title => 'sample track', :tone => 'C', :instrument_id => instruments(:guitar).id }
+        @track_1 = assigns(:track)
+        assert_equal 'sample track', @track_1.title
+        assert_equal @song.id, @track_1.song_id
         assert_equal 1, @song.children_tracks.count
+
+        post formatted_tracks_path('xml'), :track => { :song_id => @song.id, :title => 'sample track 2', :tone => 'D', :instrument_id => instruments(:guitar).id }
+        @track_2 = assigns(:track)
+        assert_equal 'sample track 2', @track_2.title
+        assert_equal @song.id, @track_2.song_id
+        assert_equal 2, @song.children_tracks.count
       end
       
       # Multitrack: aggiungo la nuova traccia a mylist
       assert_difference 'Mlab.count' do
         assert_equal 2, @user.mlabs.count
-        post formatted_user_mlabs_path(@user, 'xml'), :type => 'track', :item_id => @new_track.id
+        post formatted_user_mlabs_path(@user, 'xml'), :type => 'track', :item_id => @track_1.id
         assert_equal 3, @user.mlabs.reload.count
       end
       
@@ -46,12 +53,12 @@ class MultitrackTest < ActionController::IntegrationTest
       post "/songs/#{@song.id}/mix",
         :song => {
           :title => 'My Song title',
-          #:tracks => [
-          :track => [
-            # { :track_id => @new_track.id },
-            # { :track_id => @new_track.id }
-            { :id => @new_track.id },
-            { :id => @new_track.id }
+          :tone => 'D',
+          :seconds => 180,
+          :genre_id => genres(:pop).id,
+          :tracks => [
+            { :id => @track_1.id },
+            { :id => @track_2.id }
           ]
         }        
       assert_equal 2, @song.mixes.count
