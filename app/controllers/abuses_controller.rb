@@ -5,7 +5,7 @@ class AbusesController < ApplicationController
   before_filter :login_required
   before_filter :find_abuseable  
 
-  def new
+  def new    
     unless request.xhr?
       redirect_to_abuseable_page
       return
@@ -36,7 +36,7 @@ private
       Song.find(params[:song_id])
     else
       raise ActiveRecord::RecordNotFound
-    end
+    end 
     @exists = Abuse.exists?(["abuseable_type = ? AND abuseable_id = ?", @abuseable.class.name, @abuseable.id])
   end
   
