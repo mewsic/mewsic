@@ -21,6 +21,12 @@ class Genre < ActiveRecord::Base
     paginate :per_page => 5, :order => "name ASC", :include => [{:songs => :user}], :page => page,
       :conditions => ['songs.published = ?', true]
   end
+
+  def self.find_with_songs(what, options = {})
+    Genre.with_scope :find => {:include => :published_songs, :conditions => 'songs.id IS NOT NULL'} do
+      Genre.find what, options
+    end
+  end
   
   def find_most_listened(options = {})
     options.merge!({:order => 'songs.listened_times DESC'})

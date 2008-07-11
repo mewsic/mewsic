@@ -3801,7 +3801,7 @@ div.auto_complete ul strong.highlight {
 }
 
 #splash_learn_more_button.active {
-  background-color: #ecaf48;
+  background-color: #67C0DA;
 }
 
 #splash_learn_more_button a {
@@ -3989,8 +3989,21 @@ div.auto_complete ul strong.highlight {
 }
 
 #genre-chars a { 
-  color: #1A73A4;
+  color: #777;
 	margin: auto;
+}
+
+#genre-chars .empty {
+	color: #ddd;
+}
+
+#genre-chars .current {
+	color: #1A73A4;
+}
+
+.genre-pagination.arrow {
+	display: block;
+	float: left;
 }
 
 #flashcontent {

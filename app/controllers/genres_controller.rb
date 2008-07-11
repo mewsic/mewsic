@@ -5,7 +5,8 @@ class GenresController < ApplicationController
       format.html do
         redirect_to '/' and return unless request.xhr?        
         @genre_char = params.include?(:c) && ('A'..'Z').include?(params[:c]) ? params[:c] : 'Z'
-        @genres = Genre.find(:all, :conditions => ["name LIKE ?", "#{@genre_char}%"])
+        @genres = Genre.find_with_songs(:all, :conditions => ["name LIKE ?", "#{@genre_char}%"])
+        @genre_chars = Genre.find_with_songs(:all).map { |g| g.name.first.upcase }.uniq.sort
         render :layout => false
       end
       format.xml do
