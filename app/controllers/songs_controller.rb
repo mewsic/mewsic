@@ -23,7 +23,8 @@ class SongsController < ApplicationController
       format.xml do
         render :text => 'invalid request', :status => :bad_request and return unless params[:user_id]
 
-        @songs = User.find_from_param(params[:user_id], :include => :songs).songs
+        user = User.find_from_param params[:user_id], :include => :songs
+        @songs = user.songs.find_published
       end
     end
   end
