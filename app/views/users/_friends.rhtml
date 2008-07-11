@@ -5,9 +5,7 @@
 			<div class="button">
 				<a href="#" class="slide-prev"><img src="/images/arrow_grey_left.gif"/></a>
 			</div>
-			<!--[if IE]>
-			<div style="clip: rect(0px 235px 40px 0px); position: absolute; overflow:hidden;">
-			<![endif]-->
+			<!--[if IE]><div style="clip: rect(0px 235px 40px 0px); position: absolute; overflow:hidden;"><![endif]-->
 			<div class="scroll-clip">
 				<div id="friends-scroller" style="padding: 0; left: 0px; width:<%= @user.friends.size * 45 %>px;">
 					<% @user.friends.each do |friend| -%>
@@ -18,9 +16,7 @@
 					<% end -%>
 				</div>
 			</div>
-			<!--[if IE]>
-			</div>
-			<![endif]-->
+			<!--[if IE]></div><![endif]-->
 			<div class="button">
 				<a href="#" class="slide-next"><img src="/images/arrow_grey_right.gif"/></a>
 			</div>

@@ -281,18 +281,28 @@ div#mband-members div.status {
 	position: static;
 }
 
-div#friend-box div.button,
-div#admirers-box div.button {
+div.slide-container div.button {
 	width: 10px;
+	float: left;
+}
+
+div.slide-container div.scroll-clip {
+	overflow: hidden;
+	margin: 0px 6px;
 	float: left;
 }
 
 div#friend-box div.scroll-clip,
 div#admirers-box div.scroll-clip {
-	overflow: hidden;
 	width: 235px;
-	margin: 0px 6px;
-	float: left;
+}
+
+div.user-list-boxes div.scroll-clip {
+	width: 315px;
+}
+
+div.user-list-boxes div.slide-container {
+	padding-left: 15px;
 }
 
 div#newest-users div.status {

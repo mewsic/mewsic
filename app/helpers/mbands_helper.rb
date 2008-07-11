@@ -31,8 +31,4 @@ module MbandsHelper
   def mband_edit_button(field)
     %|<a href="#" class="edit" id="edit_button_mband_#{field.to_s}">[edit]</a>| if current_user_mband_page?
   end      
-  
-  def mband_countries
-    @mband.members.map(&:country)
-  end
 end

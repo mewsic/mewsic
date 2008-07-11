@@ -173,14 +173,6 @@ document.observe('dom:loaded', function(event) {
 		$('log-in').down('input', 2).clear().focus();
 	}
 	
-	if ( $('most-friends-scroller') != null ) {
-		// new PictureSlider('most-friends-scroller',  { size: 225 });
-	} 
-	
-	if ( $('most-mbands-scroller') != null ) {
-		// new PictureSlider('most-mbands-scroller',  { size: 225 });
-	}
-
 	if ($('mlab-scroller') != null ) {
 	  var mlab_slider = new MlabSlider('mlab-scroller',  {
       axis: 'vertical',
@@ -194,7 +186,6 @@ document.observe('dom:loaded', function(event) {
   Message.init();
 
   new SearchBox('search');
-
 });
 
 var Popup = {

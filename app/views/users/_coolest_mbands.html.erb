@@ -1,16 +1,14 @@
 <div class="bottom-box clear-block">
 	<div class="elements clear-block">
-		<p class="text-blue float-right">
-		<strong><%= pluralize(most_instruments.instruments.size, 'instrument') %></strong>
-		</p>
+		<p class="text-blue float-right"><strong><%= pluralize coolest_mbands.members.size, 'member' %></strong></p>
 		<p class="thumb">
-			<%= link_to avatar_image(most_instruments, :small), user_path(most_instruments) %>
+			<%= link_to avatar_image(coolest_mbands, :small), coolest_mbands %>
 		</p>
 		<p class="name">
-			<%= link_to most_instruments.login, user_path(most_instruments) %>
+			<%= link_to coolest_mbands.name, coolest_mbands %>
 		</p>
 		<p class="country">
-			<%= most_instruments.compiled_location %>
+			<%= h coolest_mbands.countries.join(', ') %>
 		</p>
 	</div>
 	<div class="slide-container">
@@ -19,10 +17,8 @@
 		</div>
 		<!--[if IE]><div style="clip: rect(0px 315px 30px 0px); position: absolute; overflow:hidden;"><![endif]-->
 		<div class="scroll-clip">
-			<div id="most-instruments-scroller" style="width: <%= most_instruments.instruments.size * 35 + 5 %>px; left: 0px;">
-				<% most_instruments.instruments.each do |instrument| -%>
-					<%= instrument_icon(instrument) %>
-				<% end %>
+			<div id="coolest-mband-scroller" style="width: <%= coolest_mbands.members.count * 35 + 5 %>px; left: 0px;">
+				<%= render :partial => 'friend_icon', :collection => coolest_mbands.members %>
 			</div>
 		</div>
 		<!--[if IE]></div><![endif]-->

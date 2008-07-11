@@ -41,7 +41,7 @@ private
   end
   
   def redirect_to_abuseable_page
-    redirect_to abuseable_url(abuseable)
+    redirect_to send("#{@abuseable.class.name.downcase}_url", @abuseable)
   end
   
 end

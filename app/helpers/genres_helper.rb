@@ -35,12 +35,12 @@ module GenresHelper
   end
   
   def next_genre_char
-    index = @genre_chars.index(current_genre_char) + 1
+    index = (@genre_chars.index(current_genre_char)||-1) + 1
     @genre_chars[index]
   end
   
   def previous_genre_char
-    index = @genre_chars.index(current_genre_char) - 1
+    index = (@genre_chars.index(current_genre_char)||1) - 1
     @genre_chars[index]
   end
   

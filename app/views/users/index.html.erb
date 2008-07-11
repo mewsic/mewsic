@@ -1,3 +1,4 @@
+<% javascript('simple-slider', 'users') %>
 	<div class="box-list one-col clear-block">
 	  <div class="people-list clear-block">
 		  <h1>COOLEST</h1>
@@ -11,7 +12,7 @@
   
   <div class="box-list two-col clear-block">
 	  <div class="bands-dj-list clear-block">
-	    <h1>BEST MYOUSICIANS </h1>
+	    <h1>BEST MYOUSICIANS</h1>
 		  <div class="top-box clear-block">
 			  <div class="bottom-box clear-block">
 			    <%= render :partial => 'shared/band', :collection => @best_myousicians %>
@@ -42,7 +43,7 @@
     
 	</div>
 
-  <div class="box-list two-col clear-block">
+  <div class="box-list two-col clear-block user-list-boxes">
 	  <div class="box-rounded-gray clear-block">
 		  <h1>MOST FRIENDS</h1>
 		  <div class="top-box clear-block">
@@ -50,17 +51,17 @@
 			</div>
 		</div>
 	
-	  <div class="box-rounded-gray clear-block">
-		  <h1>MOST M-BANDS</h1>
-		  <div class="top-box clear-block">
-        <%= render :partial => 'most_bands', :collection => @most_bands %>
-		  </div>
-	  </div>
-	
   	<div class="box-rounded-gray clear-block">
   		<h1>MOST INSTRUMENTS</h1>
   		<div class="top-box clear-block">
         <%= render :partial => 'most_instruments', :object => @most_instruments if @most_instruments %>
   		</div>
   	</div>
+	
+	  <div class="box-rounded-gray clear-block">
+		  <h1>COOLEST M-BAND</h1>
+		  <div class="top-box clear-block">
+        <%= render :partial => 'coolest_mbands', :collection => @coolest_mbands %>
+		  </div>
+	  </div>
   </div>

@@ -97,7 +97,7 @@ class UsersControllerTest < Test::Unit::TestCase
     assert assigns(:friendliest)
     #assert_equal 1, assigns(:friendliest).size
     
-    assert assigns(:most_bands)
+    assert assigns(:coolest_mbands)
     #assert_equal 1, assigns(:most_bands).size
     
     assert assigns(:newest)

@@ -70,10 +70,18 @@ class Mband < ActiveRecord::Base
     send(find_method, param, options) or raise ActiveRecord::RecordNotFound
   end
 
+  def self.find_coolest(options = {})
+    find :all, options.merge(:order => 'rating_avg DESC')
+  end
+
   def profile_completeness
     profile = %w(photos_url myspace_url blog_url)
     complete = profile.select { |attr| !self[attr].blank? }
     (complete.size.to_f / profile.size.to_f * 100.0).round 2
+  end
+
+  def countries
+    self.members.map(&:country).uniq
   end
   
   def rateable_by?(user)
