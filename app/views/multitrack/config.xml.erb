@@ -6,7 +6,7 @@
 	<authenticity_token><%= form_authenticity_token if protect_against_forgery? %></authenticity_token>
 	<url_request>
 		<mylist>/users/{:id}/mlabs</mylist>
-		<mysongs>/songs.xml</mysongs>
+		<mysongs>/users/{:id}/songs.xml</mysongs>
 		<search>/search/new.xml</search>
 		<song>/songs/{:id}.xml</song>
 		<song_mix>/songs/{:id}/mix.xml</song_mix>

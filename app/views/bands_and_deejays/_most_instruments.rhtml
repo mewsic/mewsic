@@ -14,16 +14,12 @@
 		</p>
     </div>
 	<div class="horizontal-scroll-box">
-		<p class="button">
-			<%= image_tag 'arrow_simple_left.png', :size => '7x9' %>
-		</p>
+		<p class="button"><%= image_tag 'slider_arrow_left.png' %></p>
 		<div class="horizontal-scroll">
 			<% most_instruments.instruments.each do |instrument| -%>
-			    <%= instrument_icon instrument %>
+				<%= instrument_icon instrument %>
 			<% end %>
 		</div>
-		<p class="button">
-			<%= image_tag 'arrow_simple_right.png', :size => '7x9' %>	
-		</p>
+		<p class="button"><%= image_tag 'slider_arrow_right.png' %></p>
 	</div>				  	
 </div>

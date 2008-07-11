@@ -1,7 +1,7 @@
 class UsersController < ApplicationController    
   
   before_filter :login_required, :only => :update
-  before_filter :check_if_current_user_page, :only => [:update, :switch_type]
+  before_filter :check_if_current_user_page, :only => [:update, :switch_type, :change_password]
   before_filter :check_if_already_logged_in, :only => [:new]
   
   protect_from_forgery :except => :update
@@ -118,6 +118,24 @@ class UsersController < ApplicationController
       logger.error "Invalid Reset Code entered" 
       flash[:notice] = "Sorry - That is an invalid password reset code. Please check your code and try again. (Perhaps your email client inserted a carriage return?" 
       redirect_to '/'
+  end
+
+  def change_password
+    user = params[:user]
+    if user[:password].blank? || user[:password_confirmation].blank?
+      flash[:error] = "you did not provide a new password"
+    else
+      current_user.password = user[:password]
+      current_user.password_confirmation = user[:password_confirmation]
+
+      if current_user.save
+        flash[:notice] = "your password has been changed!"
+      else
+        flash[:error] = current_user.errors.to_a.join(' ')
+      end
+    end
+
+    redirect_to user_url(current_user)
   end
   
   def switch_type

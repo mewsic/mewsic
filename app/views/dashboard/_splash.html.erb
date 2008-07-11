@@ -26,16 +26,17 @@
 		<div id="splash_elements_container_mlab">
 			<div id="splash_tag_mlab"> </div>
 			<div id="splash_box_elements_mlab">
-				<div style="float:left;margin-top:120px;padding-left:28px;"><%= link_to 'Learn More', help_url %></div>
-
-				<div style="float:right;margin-top:120px;padding-right:28px;">
-					<%= link_to 'Enter', multitrack_url %>
+				<div id="splash_learn_more_button" onmouseover="this.addClassName('active')" onmouseout="this.removeClassName('active')">
+					<%= link_to 'Learn More', help_path %>
+				</div>
+				<div class="splash_pappappero_slider">
+					<img src="/images/splash_mlab_banner.png" />
 				</div>
 			</div>
 		</div>
 
 		<div id="splash_divider" class="pngfix"> </div>
-		
+
 		<div id="splash_elements_container">
 			<div id="splash_tag_songs"> </div>
 			<div id="splash_box_elements">
@@ -44,7 +45,7 @@
 				<div id="splash_songs">
 				  <%- @splash_songs.each_with_index do |song, index| -%>
   				  <div class="splash <%= %w[odd even][index % 2] %>">
-  				    <span class="tracks-number"><span><%= song.tracks.count %></span></span>
+  				    <span class="tracks-number"><%= song.tracks.count %></span>
               <div class="title"><%= link_to h(truncate(song.title, 15)), song_path(song) %></div>
               <div class="buttons">
                 <%= mlab_button(song, :dynamic => true) %>
@@ -57,6 +58,9 @@
 			</div>
 		</div>
 
+		<div class="splash_motto">	
+			<h1 style="text-align: center">... myousica is coming ...</h1>
+		</div>
 	</div>
 <div id="splash_box_dx"> </div>
 <div id="splash_tracks_spinner" style="display:none"><%= image_tag 'track-spinner-big.gif' %></div>

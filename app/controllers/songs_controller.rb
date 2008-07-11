@@ -21,9 +21,9 @@ class SongsController < ApplicationController
       end
 
       format.xml do
-        render :text => 'login required', :status => :bad_request and return unless logged_in?
+        render :text => 'invalid request', :status => :bad_request and return unless params[:user_id]
 
-        @songs = Song.find_all_by_user_id current_user.id
+        @songs = User.find_from_param(params[:user_id], :include => :songs).songs
       end
     end
   end

@@ -68,4 +68,16 @@
   	</p>
   <% end -%>
 
+	<p>&nbsp;</p>
+	<p>You can change your password here.<br/>Leave the fields blank if you don't want to change it.</p>
+	<% form_for @user, :url => change_password_user_path(@user), :html => {:id => 'form_password', :method => 'put'} do %>
+	  <p>
+  		<label>New password</label>
+  		<%= password_field :user, :password, :class => 'input-small' %>
+  		<label>Confirm new password</label>
+  		<%= password_field :user, :password_confirmation, :class => 'input-small' %>
+			<input type="submit" class="button" value="OK"/>
+		</p>
+	<% end %>
+
 </div>

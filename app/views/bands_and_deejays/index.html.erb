@@ -35,7 +35,7 @@
   <div class="simple-list yellow-box clear-block">
     <h1>NEWEST</h1>
     <div class="top-box clear-block">
-	    <div class="bottom-box clear-block">
+	    <div class="bottom-box clear-block" id="newest-users">
         <%= render :partial => 'person_medium', :collection => @newest %>			
 	    </div>
     </div>
@@ -51,12 +51,14 @@
 		</div>
 	</div>
 
+	<!-- 
   <div class="box-rounded-gray clear-block">
 	  <h1>MOST M-BANDS</h1>
 	  <div class="top-box clear-block">
-      <%= render :partial => 'most_bands', :collection => @most_bands %>
+      <%#= render :partial => 'most_bands', :collection => @most_bands %>
 	  </div>
   </div>
+	-->
 
 	<div class="box-rounded-gray clear-block">
 		<h1>MOST INSTRUMENTS</h1>

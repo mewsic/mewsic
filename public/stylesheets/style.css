@@ -786,7 +786,7 @@ tr.nav-song td{
 	float:left;
 	width:auto;
 	padding: 0px !important;
-	margin:7px 5px;
+	margin:-1px 5px;
 }
 .one-col .horizontal-scroll-box{
 	padding-left:5px;
@@ -3793,43 +3793,80 @@ div.auto_complete ul strong.highlight {
   height: 200px;
 }
 
+#splash_learn_more_button {
+	margin-top: 109px;
+	margin-left: 115px;
+	border: 2px solid #FFFFFF;
+	position: absolute;
+}
+
+#splash_learn_more_button.active {
+  background-color: #ecaf48;
+}
+
+#splash_learn_more_button a {
+	font-weight: bold;
+	font-size: 12px;
+	padding: 4px 12px;
+	color: #FFFFFF;
+	display: block;
+}
+
+.splash_pappappero_slider {
+	text-align: center;
+	margin-top: 5px;
+}
+
+.splash_motto {
+	margin-top: 15px;
+	width: 714px;
+	height: 60px;
+	position: absolute;
+	top: 182px;	
+}
+
+.splash_motto h1 {
+	font-size: 16px;
+	font-weight: bold;
+	color: #006F9F;
+}
+
 #splash_container {
 	width: 732px;
-	height: 189px;
+	height: 252px;
 }
 
 #splash_box_sx {
 	background: transparent url('/images/splash_box_sx.png') no-repeat bottom;
 	width: 9px;
-	height: 189px;
+	height: 252px;
 	float: left;
 }
 
 #splash_box_dx {
 	background: transparent url('/images/splash_box_dx.png') no-repeat bottom;
 	width: 9px;
-	height: 189px;
+	height: 252px;
 	float: right;
 }
 
 #splash_box_core {
 	background: transparent url('/images/splash_box_rp.png') repeat-x bottom;
 	width: 714px;
-	height: 189px;
+	height: 252px;
 	float: left;
 }
 
 #splash_elements_container {
-	width: 218px;
+	width: 221px;
 	height: 176px;
 	float: left;
-	padding-left: 2px;
 }
 
 #splash_box_elements {
-	width: 206px;
+	width: 209px;
 	height: 138px;
-	background: #F4F8FB;
+	background: #FFFFFF;
 	float: left;
 	padding: 6px;
 	position: relative;
@@ -3867,24 +3904,17 @@ div.auto_complete ul strong.highlight {
 }
 
 #splash_elements_container_mlab {
-	width: 201px;
+	width: 227px;
 	height: 176px;
 	float: left;
 }
 
 #splash_box_elements_mlab {
-	width: 201px;
+	width: 227px;
 	height: 150px;
-	background: #F4F8FB url('/images/splash_mlab_banner.png') no-repeat center;
+	background: #FFFFFF;
 	float: left;
 }
-
-#splash_box_elements_mlab a {
-	color: #4DC4EA;
-	font-weight: bold;
-	text-decoration: underline;
-} 
-
 
 #splash_tag_tracks {
 	background: transparent url('/images/splash_tag_tracks.png') no-repeat top;
@@ -3911,10 +3941,9 @@ div.auto_complete ul strong.highlight {
 
 #splash_divider {
 	background: transparent url('/images/splash_arrows.png') no-repeat bottom;
-	width: 23px;
-	height: 25px;
-	margin: 86px 6px 0px;
-	margin-top: 86px;
+	width: 22px;
+	height: 20px;
+	margin: 92px 0px 0px;
 	float: left;
 	overflow: hidden;
 }
