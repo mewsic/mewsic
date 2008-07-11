@@ -70,7 +70,7 @@ Prototip.Styles = {
     stem: { position: 'bottomMiddle', width: 15, height: 10 },
     hideOn: { element: 'tip', event: 'mouseout' },
     hideAfter: 0.3,
-    offset:  { x: 0, y: -3 },
+    offset:  { x: 0, y: 3 },
     images: 'styles/default'
   },
 
