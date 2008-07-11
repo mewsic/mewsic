@@ -93,9 +93,8 @@ class Song < ActiveRecord::Base
              :page => page
   end
     
-  # STUB: sino all'implementazione degli strumenti
   def instruments
-    ['sassofono', 'batteria', 'anoleso']
+    self.tracks.count('instrument', :include => :instrument, :group => 'instrument_id').map { |id, count| Instrument.find(id) }
   end    
   
   def self.find_random_direct_siblings(limit = 5)    

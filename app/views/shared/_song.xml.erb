@@ -3,7 +3,7 @@
   <author><%= song.original_author %></author>     
   <title><%= song.title %></title>     
   <instruments><%= song.instruments.size %></instruments>  
-  <genre><%= song.genre.id %></genre>     
+  <genre><%= song.genre.id if song.genre %></genre>     
 	<bpm><%= song.bpm %></bpm>        
 	<tone><%= song.tone %></tone>       
 	<description><%= song.description %></description>
