@@ -2,13 +2,14 @@ var WorkerClient = Class.create({
 
   template_html: '<dl><dt>key</dt><dd>#{key}</dd><dt>status</dt><dd>#{status}</dd><dt>filename</dt><dd>#{output}</dd><dt>length</dt><dd>#{length}</dd></dl>',
 
-  initialize: function(element) {
+  initialize: function(element, options) {
     this.mix_form = $(element);
     this.b_onMix = this.onMix.bind(this);
     this.mix_form.observe('submit', this.b_onMix);
     this.container = this.mix_form.down('.container');
     this.template = new Template(this.template_html);
     this.processing = false;
+    this.options = options || {};
   },
 
   onMix: function(event) {
@@ -53,6 +54,9 @@ var WorkerClient = Class.create({
 
     if(worker.status == 'finished') {
       this.stop();
+      if (this.options.onComplete) {
+        this.options.onComplete(worker);
+      }
     }
   },
 
