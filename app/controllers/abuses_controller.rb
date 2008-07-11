@@ -20,7 +20,7 @@ class AbusesController < ApplicationController
       render :action => 'new'      
     elsif @abuse.save
       flash.now[:notice] = 'Thank you. Your message has been saved successfully.'
-      mail = AbuseMailer.create_notification(@abuseable)
+      mail = AbuseMailer.create_notification(@abuseable, @abuse, current_user)
       AbuseMailer.deliver(mail)
     else
       flash.now[:error] = 'Error saving the message. Please try again.'      
@@ -41,7 +41,7 @@ private
   end
   
   def redirect_to_abuseable_page
-    redirect_to send("#{@abuseable.class.name.downcase}_url", @abuseable)
+    redirect_to abuseable_url(abuseable)
   end
   
 end
