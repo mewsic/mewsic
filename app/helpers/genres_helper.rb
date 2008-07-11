@@ -16,13 +16,13 @@ module GenresHelper
   
   def genres_pagination_next_button
     if current_genre_char < 'Z'
-      link_to image_tag('move_arrow_right.png'), formatted_genres_path('html', :c => next_genre_char), :class => 'genre-pagination'
+      link_to image_tag('move_arrow_right.png'), formatted_genres_path('html', :c => next_genre_char), :class => 'genre-pagination', :onclick => 'return false'
     end
   end
   
   def genres_pagination_previous_button
     if current_genre_char > 'A'
-      link_to image_tag('move_arrow_left.png'), formatted_genres_path('html', :c => previous_genre_char), :class => 'genre-pagination'
+      link_to image_tag('move_arrow_left.png'), formatted_genres_path('html', :c => previous_genre_char), :class => 'genre-pagination', :onclick => 'return false'
     end
   end
   
