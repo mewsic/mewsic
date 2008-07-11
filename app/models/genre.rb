@@ -37,6 +37,10 @@ class Genre < ActiveRecord::Base
     self.published_songs.find(:all, :limit => limit, :order => 'created_at DESC')
   end
 
+  def song_count
+    Song.count('genre', :group => 'genre_id', :include => :genre, :conditions => ['published = ? AND genre_id = ?', true, self.id]).flatten.last || 0
+  end
+
   def to_breadcrumb
     self.name
   end

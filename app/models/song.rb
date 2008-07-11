@@ -67,7 +67,7 @@ class Song < ActiveRecord::Base
     options[:conditions] = ["songs.published = ?", true]
     self.find(:all, options)
   end
-  
+ 
   def self.find_paginated_by_genre(page, genre)
     paginate :per_page => 15, 
              :conditions => ["songs.published = ? AND genre_id = ?", true, genre.id], 
