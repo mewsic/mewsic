@@ -7,6 +7,7 @@ module ApplicationHelper
 
     options = options.symbolize_keys
     options[:class] = "rating #{type_class} #{options[:class]}"
+    options[:class] += " locked" if logged_in? && !rateable.rateable_by?(current_user)
 
     tag_options = options.map { |k,v| %(#{k}="#{v}") }.join(' ')
 

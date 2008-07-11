@@ -43,6 +43,10 @@ class Answer < ActiveRecord::Base
     update_attribute(:replies_count, replies.count)
     replies.size
   end  
+
+  def rateable_by?(user)
+    self.user_id != user.id
+  end
   
 private
 

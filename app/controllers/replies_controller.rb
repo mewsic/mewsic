@@ -24,8 +24,12 @@ class RepliesController < ApplicationController
   
   def rate    
     @reply = Reply.find(params[:id])
-    @reply.rate(params[:rate].to_i, current_user)
-    render :layout => false, :text => "#{@reply.rating_count} votes"
+    if @reply.rateable_by?(current_user)
+      @reply.rate(params[:rate].to_i, current_user)
+      render :layout => false, :text => "#{@reply.rating_count} votes"
+    else
+      render :nothing => true, :status => :bad_request
+    end
   end
   
 end

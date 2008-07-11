@@ -108,6 +108,10 @@ class Track < ActiveRecord::Base
     update_attribute(:listened_times, listened_times + 1)
   end
   
+  def rateable_by?(user)
+    self.user_id != user.id
+  end
+  
 private
   
   def set_tonality_from_tone

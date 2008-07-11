@@ -14,7 +14,6 @@ class HelpController < ApplicationController
     redirect_to :action => 'index' and return unless request.post?
 
     if @help_request.valid?
-      debugger
       MyousicaMailer.deliver_help_request(@help_request)
       flash[:notice] = "Thanks for contacting us! Your question has been sent to our help desk, you'll receive a reply in few hours."
       params[:id] ? redirect_to(:action => 'show', :id => params[:id]) : redirect_to(:action => 'index')

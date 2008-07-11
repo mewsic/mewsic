@@ -159,6 +159,10 @@ class Song < ActiveRecord::Base
     self.title
   end    
 
+  def rateable_by?(user)
+    self.user_id != user.id
+  end
+
   def self.cleanup_unpublished
     delete_all ['published = ? && created_at < ?', false, 1.week.ago]
   end

@@ -26,6 +26,10 @@ class Reply < ActiveRecord::Base
   
   validates_presence_of :body    
 
+  def rateable_by?(user)
+    self.user_id != user.id
+  end
+
 private
 
   def update_answer_last_activity_at

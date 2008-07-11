@@ -118,15 +118,6 @@ class User < ActiveRecord::Base
   
   has_private_messages
   
-  # TODO 
-  # aggiungere le seguenti relazioni:
-  # 
-  # * strumenti
-  # * mband
-  # * tracce
-  # * annunci
-  # * ammiratori
-      
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
   attr_accessible :login, :email, :password, :password_confirmation, :terms_of_service, :eula,
@@ -364,6 +355,10 @@ class User < ActiveRecord::Base
 
   def online_now?
     self.last_activity_at >= Time.now - 15.minutes if self.last_activity_at
+  end
+
+  def rateable_by?(user)
+    self.id != user.id
   end
 
   protected

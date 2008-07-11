@@ -65,8 +65,12 @@ class MbandsController < ApplicationController
   end
   
   def rate    
-    @mband.rate(params[:rate].to_i, current_user)
-    render :layout => false, :text => "#{@mband.rating_count} votes"
+    if @mband.rateable_by?(current_user)
+      @mband.rate(params[:rate].to_i, current_user)
+      render :layout => false, :text => "#{@mband.rating_count} votes"
+    else
+      render :nothing => true, :status => :bad_request
+    end
   end
   
   def set_leader    

@@ -58,8 +58,12 @@ class TracksController < ApplicationController
   
   def rate    
     @track = Track.find(params[:id])
-    @track.rate(params[:rate].to_i, current_user)
-    render :layout => false, :text => "#{@track.rating_count} votes"
+    if @track.rateable_by?(current_user)
+      @track.rate(params[:rate].to_i, current_user)
+      render :layout => false, :text => "#{@track.rating_count} votes"
+    else
+      render :nothing => true, :status => :bad_request
+    end
   end
   
   def download

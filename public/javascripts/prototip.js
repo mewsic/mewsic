@@ -57,6 +57,23 @@ Prototip.Styles = {
     title: 'Login required'
   },
 
+  'locked-rating': {
+    className: 'default',
+    closeButton: false,
+    border: 4,
+    radius: 4,
+    delay: 0.02,
+    width: 'auto',
+    borderColor: '#c1c1c1',
+    showOn: 'mousemove',
+    hook: { target: 'topMiddle', tip: 'bottomMiddle' },
+    stem: { position: 'bottomMiddle', width: 15, height: 10 },
+    hideOn: { element: 'tip', event: 'mouseout' },
+    hideAfter: 0.3,
+    offset:  { x: 0, y: -3 },
+    images: 'styles/default'
+  },
+
   'user-link': {
     className: 'default',
     closeButton: true,

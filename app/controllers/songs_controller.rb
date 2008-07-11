@@ -116,8 +116,12 @@ class SongsController < ApplicationController
   
   def rate    
     @song = Song.find(params[:id])
-    @song.rate(params[:rate].to_i, current_user)
-    render :layout => false, :text => "#{@song.rating_count} votes"
+    if @song.rateable_by?(current_user)
+      @song.rate(params[:rate].to_i, current_user)
+      render :layout => false, :text => "#{@song.rating_count} votes"
+    else
+      render :nothing => true, :status => :bad_request
+    end
   end       
 
   def download

@@ -126,7 +126,8 @@ function setupStarboxes(className) {
   $A(document.getElementsByClassName(className)).each(function(element) {
     var className = element.className.sub(/\s*rating\s*/, '');
     var rating = parseFloat(element.getAttribute('rel'));
-    var image = 'myousica_small.png'
+    var image = 'myousica_small.png';
+    var locked = !logged_in;
 
     if (element.up('.user-resume') || element.up('.song-resume') || element.up('.answer-show')) {
       image = 'myousica_big.png';
@@ -136,12 +137,16 @@ function setupStarboxes(className) {
       image = 'grey_' + image;
     }
 
+    if (element.hasClassName('locked')) {
+      locked = true;
+    }
+
     new Starbox(element, rating, {
       buttons: 5,
       max: 5,
       className: className,
       identity: element.id,
-      locked: !logged_in,
+      locked: locked,
       overlay: image
     });
   });

@@ -76,4 +76,7 @@ class Mband < ActiveRecord::Base
     (complete.size.to_f / profile.size.to_f * 100.0).round 2
   end
   
+  def rateable_by?(user)
+    !self.members.include?(user)
+  end
 end

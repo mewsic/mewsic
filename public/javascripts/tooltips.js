@@ -6,6 +6,7 @@ var Tooltips = Class.create({
       $A(document.getElementsByClassName('rating')).each(this.addRating);
       $$('img.button.mlab').each(this.addMlab);
     }
+    $A(document.getElementsByClassName('locked')).each(function(elem) { if (elem.hasClassName('rating')) this.addLockedRating(elem); }.bind(this));
     $A(document.getElementsByClassName('status')).each(this.addStatus);
 
     Ajax.Responders.register({
@@ -19,6 +20,10 @@ var Tooltips = Class.create({
 
   addRating: function(element) {
     new Tip(element, "<a href=/login>Login</a> or <a href=/signup>sign up</a> to vote!", {style: 'login'});
+  },
+
+  addLockedRating: function(element) {
+    new Tip(element, "You cannot rate yourself!", {style: 'locked-rating'});
   },
 
   addMlab: function(element) {

@@ -166,8 +166,12 @@ class UsersController < ApplicationController
   
   def rate    
     @user = User.find_from_param(params[:id])
-    @user.rate(params[:rate].to_i, current_user)
-    render :layout => false, :text => "#{@user.rating_count} votes"
+    if @user.rateable_by?(current_user)
+      @user.rate(params[:rate].to_i, current_user)
+      render :layout => false, :text => "#{@user.rating_count} votes"
+    else
+      render :nothing => true, :status => :bad_request
+    end
   end
 
   def countries
