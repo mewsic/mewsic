@@ -16,7 +16,9 @@ class Admin::SongsController < Admin::AdminController
   end
 
   def create
-    @song = Song.create!(params[:song])
+    @song = Song.new(params[:song])
+    @song.save!
+
     @track = Track.new :song_id => @song.id
     render :template => 'admin/tracks/show'
 
