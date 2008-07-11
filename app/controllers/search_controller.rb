@@ -25,8 +25,6 @@ class SearchController < ApplicationController
     @q = CGI::unescape(params[:id])
     def @q.to_breadcrumb; self; end
 
-    @show_siblings_count = true
-
     @users, @songs, @tracks, @ideas = search(@q, params[:type] || [])
     @entries = %w(users songs tracks ideas).inject({}) do |h,x|
       count = instance_variable_get("@#{x}").total_entries rescue 0

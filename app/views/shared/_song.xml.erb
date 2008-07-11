@@ -10,9 +10,6 @@
 	<rating><%= song.rating_avg.to_f %></rating>     
   <id><%= song.id %></id>         
   <filename><%= song.filename %></filename>
-  <% if @show_siblings_count; @show_siblings_count = false; -%>
-    <siblings><%= song.siblings_count %></siblings>
-  <% end -%>
   <%- if @show_mlab_id -%>
     <mlab_id><%= song.mlabs.first.id if song.mlabs.count > 0 %></mlab_id>
   <%- end -%>
