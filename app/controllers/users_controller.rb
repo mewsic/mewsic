@@ -213,7 +213,7 @@ class UsersController < ApplicationController
       'cool'       => 'coolest'
     }.fetch(params[:type]))
 
-    object = model.send(method, :limit => 10).sort_by{rand}.first # ugh. heavy.
+    object = model.send(method, :limit => 5).sort_by{rand}.first # ugh. heavy.
 
     render :nothing => true, :status => :ok and return unless object
     render :partial => partial, :object => object
