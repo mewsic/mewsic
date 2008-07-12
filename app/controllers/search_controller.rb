@@ -14,6 +14,7 @@ class SearchController < ApplicationController
       end
       
      format.xml do
+       @show_siblings_count = true
        @songs = Song.search_paginated(params[:q], :per_page => 6, :page => params[:page])
        @tracks = Track.search_paginated(params[:q], :per_page => 6, :page => params[:page])
        render :action => 'show'
@@ -39,6 +40,7 @@ class SearchController < ApplicationController
           end
         end
       end
+
       format.xml
     end
   end
