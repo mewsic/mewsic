@@ -63,9 +63,7 @@ class Song < ActiveRecord::Base
   end
   
   def self.find_newest(options = {})
-    options.merge!({:order => 'songs.created_at DESC'})
-    options[:conditions] = ["songs.published = ?", true]
-    self.find(:all, options)
+    self.find(:all, options.merge(:order => 'songs.created_at DESC', :conditions => ["songs.published = ?", true]))
   end
  
   def self.find_paginated_by_genre(page, genre)
