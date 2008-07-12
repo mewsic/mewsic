@@ -3811,7 +3811,7 @@ div.auto_complete ul strong.highlight {
 }
 
 #splash_learn_more_button.active {
-  background-color: #67C0DA;
+  background-color: #50C3E8;
 }
 
 #splash_learn_more_button a {
@@ -3822,23 +3822,37 @@ div.auto_complete ul strong.highlight {
 	display: block;
 }
 
-.splash_pappappero_slider {
+#splash_pappappero_slider {
 	text-align: center;
 	margin-top: 5px;
 }
 
-.splash_motto {
+#splash_motto {
 	margin-top: 15px;
 	width: 714px;
 	height: 60px;
 	position: absolute;
-	top: 182px;	
+	top: 183px;	
+	text-align: center;
 }
 
-.splash_motto h1 {
-	font-size: 16px;
-	font-weight: bold;
+#splash_motto h1 {
+	font-size: 27px;
+	font-weight: lighter;
 	color: #006F9F;
+	margin: 0;
+	/*line-height: 10px;*/
+}
+
+#splash_motto h2 {
+	font-size: 18px;
+	font-weight: lighter;
+	color: #006F9F;
+	margin: 0;
+}
+
+#splash_motto sup {
+	font-size: 11px;
 }
 
 #splash_container {

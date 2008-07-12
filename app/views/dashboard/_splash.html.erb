@@ -29,7 +29,7 @@
 				<div id="splash_learn_more_button" onmouseover="this.addClassName('active')" onmouseout="this.removeClassName('active')">
 					<%= link_to 'Learn More', help_path %>
 				</div>
-				<div class="splash_pappappero_slider">
+				<div id="splash_pappappero_slider">
 					<img src="/images/splash_mlab_banner.png" />
 				</div>
 			</div>
@@ -58,8 +58,8 @@
 			</div>
 		</div>
 
-		<div class="splash_motto">	
-			<h1 style="text-align: center">... myousica is coming ...</h1>
+		<div id="splash_motto">
+			<%= @motto %>
 		</div>
 	</div>
 <div id="splash_box_dx"> </div>
