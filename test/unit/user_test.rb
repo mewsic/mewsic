@@ -269,7 +269,7 @@ class UserTest < Test::Unit::TestCase
   
   def test_should_return_user_with_more_instruments
     assert (users(:quentin).instruments.size > users(:aaron).instruments.size)
-    assert_equal users(:quentin), User.find_with_more_instruments
+    assert_equal users(:quentin), User.find_most_instruments.first
   end
   
   def test_finders

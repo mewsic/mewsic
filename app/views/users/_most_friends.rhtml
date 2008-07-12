@@ -1,7 +1,7 @@
 <div class="bottom-box clear-block">
 	<div class="elements clear-block">
-		<p class="text-blue float-right">
-			<strong><%= pluralize most_friends.friends_count, 'friend' %></strong>
+		<p class="badge float-right">
+			<%= pluralize most_friends.friends_count, 'friend' %>
 		</p>
 		<p class="thumb">
 			<%= link_to avatar_image(most_friends, :small), user_path(most_friends) %>

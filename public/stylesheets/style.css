@@ -122,7 +122,7 @@ ul.list-menu{
 	padding:8px 18px 16px;
 	color:#A5B1C7;
 }
-#nav-menu a:hover{
+#nav-menu a:hover {
 	color:#28548B;
 }
 #nav-menu li.active, #nav-menu li.active a{
@@ -303,6 +303,18 @@ div.user-list-boxes div.scroll-clip {
 
 div.user-list-boxes div.slide-container {
 	padding-left: 15px;
+}
+
+div.user-list-boxes .badge {
+	color: #00A0C6;
+	font-size: 14px;
+	font-weight: lighter;
+}
+
+div.user-list-boxes img.refresh-block {
+	margin-top: 2px;
+	float: right;
+	cursor: pointer;
 }
 
 div#newest-users div.status {
@@ -3828,7 +3840,7 @@ div.auto_complete ul strong.highlight {
 }
 
 #splash_motto {
-	margin-top: 15px;
+	margin-top: 26px;
 	width: 714px;
 	height: 60px;
 	position: absolute;
@@ -3840,15 +3852,14 @@ div.auto_complete ul strong.highlight {
 	font-size: 27px;
 	font-weight: lighter;
 	color: #006F9F;
-	margin: 0;
-	/*line-height: 10px;*/
+	line-height: 12px;
 }
 
 #splash_motto h2 {
 	font-size: 18px;
 	font-weight: lighter;
 	color: #006F9F;
-	margin: 0;
+	letter-spacing: 1.3px;
 }
 
 #splash_motto sup {
@@ -3856,28 +3867,30 @@ div.auto_complete ul strong.highlight {
 }
 
 #splash_container {
-	width: 732px;
-	height: 252px;
+	width: 744px;
+	height: 279px;
+	padding-left: 0;
+	padding-right: 0;
 }
 
 #splash_box_sx {
-	background: transparent url('/images/splash_box_sx.png') no-repeat bottom;
-	width: 9px;
-	height: 252px;
+	background: transparent url(/images/splash_box_sx.png) no-repeat bottom;
+	width: 15px;
+	height: 279px;
 	float: left;
 }
 
 #splash_box_dx {
-	background: transparent url('/images/splash_box_dx.png') no-repeat bottom;
-	width: 9px;
-	height: 252px;
+	background: transparent url(/images/splash_box_dx.png) no-repeat bottom;
+	width: 15px;
+	height: 279px;
 	float: right;
 }
 
 #splash_box_core {
-	background: transparent url('/images/splash_box_rp.png') repeat-x bottom;
+	background: transparent url(/images/splash_box_rp.png) repeat-x bottom;
 	width: 714px;
-	height: 252px;
+	height: 279px;
 	float: left;
 }
 

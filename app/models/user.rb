@@ -99,6 +99,7 @@ class User < ActiveRecord::Base
   has_many :members, :class_name => 'BandMember'
   
   has_many :songs,            :order => 'songs.created_at DESC'
+  has_many :tracks,           :order => 'tracks.created_at DESC'
   has_many :published_songs,  :conditions => ["songs.published = ?", true], :order => 'songs.created_at DESC'
   has_many :answers
   has_many :replies
@@ -293,6 +294,14 @@ class User < ActiveRecord::Base
     self.find(:all, options.merge(:order => 'created_at DESC', :conditions => "activated_at IS NOT NULL AND (users.type = 'Band' OR users.type = 'Dj')"))
   end
 
+  def self.find_most_instruments(options = {})
+    self.find(:all, options.merge(:select => 'users.*, count(tracks.instrument_id) AS instrument_count', :joins => 'LEFT JOIN tracks ON users.id = tracks.user_id', :conditions => "users.activated_at IS NOT NULL AND (users.type IS NULL OR users.type = 'User') AND tracks.instrument_id IS NOT NULL", :group => 'tracks.instrument_id', :order => 'instrument_count'))
+  end
+ 
+  def self.find_most_instruments_band_or_deejays(options = {})
+    self.find(:all, options.merge(:select => 'users.*, count(tracks.instrument_id) AS instrument_count', :joins => 'LEFT JOIN tracks ON users.id = tracks.user_id', :conditions => "users.activated_at IS NOT NULL AND (users.type = 'Band' OR users.type = 'Dj') AND tracks.instrument_id IS NOT NULL", :group => 'tracks.instrument_id', :order => 'instrument_count'))
+  end
+
   def self.find_online(options = {})
     self.find(:all, options.merge(:conditions => ['last_activity_at IS NOT NULL AND last_activity_at > ?', 30.minutes.ago], :order => 'last_activity_at'))
   end
@@ -338,17 +347,6 @@ class User < ActiveRecord::Base
     # FIXME: credo che gli ammiratori debbano essere solo quello che mi ammirano.
     self.pending_friends_for_me.find(:all, :include => :avatars) #+
     #self.pending_friends_by_me.find(:all, :include => :avatars)
-  end
-  
-  # FIXME: da rendere più efficiente
-  def self.find_with_more_instruments
-    result = Instrument.count('description', :conditions => "tracks.id IS NOT NULL AND users.id IS NOT NULL AND (users.type IS NULL OR users.type = 'User')", :include => [:tracks => :owner], :group => 'tracks.user_id', :distinct => true, :order => 'count_description DESC')
-    return result.first.is_a?(Array) ? User.find(result.first.first) : nil
-  end
- 
-  def self.find_band_or_deejay_with_more_instruments
-    result = Instrument.count('description', :conditions => "users.type = 'Band' OR users.type = 'Dj'", :include => [:tracks => :owner], :group => 'user_id', :distinct => true, :order => 'count_description DESC')
-    return result.first.is_a?(Array) ? User.find(result.first.first) : nil
   end
   
   def is_leader_of?(mband)

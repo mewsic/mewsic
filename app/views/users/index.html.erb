@@ -1,4 +1,4 @@
-<% javascript('simple-slider', 'users') %>
+<% javascript('simple-slider', 'refresh-block', 'users') %>
 	<div class="box-list one-col clear-block">
 	  <div class="people-list clear-block">
 		  <h1>COOLEST</h1>
@@ -45,23 +45,26 @@
 
   <div class="box-list two-col clear-block user-list-boxes">
 	  <div class="box-rounded-gray clear-block">
+			<%= refresh_block_image_link 'most_friends', :class => 'user', :type => 'friend' %>
 		  <h1>MOST FRIENDS</h1>
-		  <div class="top-box clear-block">
+		  <div class="top-box clear-block" id="most_friends">
         <%= render :partial => 'most_friends', :collection => @friendliest %>
 			</div>
 		</div>
 	
   	<div class="box-rounded-gray clear-block">
+			<%= refresh_block_image_link 'most_instruments', :class => 'user', :type => 'instrument' %>
   		<h1>MOST INSTRUMENTS</h1>
-  		<div class="top-box clear-block">
-        <%= render :partial => 'most_instruments', :object => @most_instruments if @most_instruments %>
+  		<div class="top-box clear-block" id="most_instruments">
+        <%= render :partial => 'most_instruments', :collection => @most_instruments %>
   		</div>
   	</div>
 	
 	  <div class="box-rounded-gray clear-block">
-		  <h1>COOLEST M-BAND</h1>
-		  <div class="top-box clear-block">
-        <%= render :partial => 'coolest_mbands', :collection => @coolest_mbands %>
+			<%= refresh_block_image_link 'coolest_mbands', :class => 'mband', :type => 'cool' %>
+		  <h1>COOLEST M-BANDS</h1>
+		  <div class="top-box clear-block" id="coolest_mbands">
+        <%= render :partial => 'mbands/coolest', :collection => @coolest_mbands %>
 		  </div>
 	  </div>
   </div>

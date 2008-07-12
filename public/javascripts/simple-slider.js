@@ -1,6 +1,9 @@
 var SimpleSlider = Class.create({
   initialize: function(element, options) {
     this.elements = $(element);
+    if (!this.elements)
+      return;
+
     this.container = this.elements.up();
 
     coords = Object.extend({

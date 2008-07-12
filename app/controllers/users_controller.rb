@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     @friendliest = User.find_friendliest :limit => 1
     @coolest_mbands = Mband.find_coolest :limit => 1
     @newest = User.find_newest           :limit => 3
-    @most_instruments = User.find_with_more_instruments
+    @most_instruments = User.find_most_instruments :limit => 1
   end
 
   # render new.rhtml
@@ -178,10 +178,45 @@ class UsersController < ApplicationController
   end
   
   def auto_complete_for_message_to
+    redirect_to root_path and return unless request.xhr?
     q = params[:message][:to] if params[:message]
-    return :inline => '' if q.blank?
+    render :nothing => true if q.blank?
     @users = User.find(:all, :order => "login ASC", :conditions => ["login LIKE ?", "%#{q}%"])
     render :inline => "<%= content_tag(:ul, @users.map { |u| content_tag(:li, h(u.login)) }) %>"
+  end
+
+  def top
+    redirect_to root_path and return unless request.xhr?
+
+    if [:class, :type].any? { |p| params[p].blank? }
+      render :nothing => true, :status => :bad_request and return
+    end
+
+    unless %(user band mband).include?(params[:class]) &&
+      %(friend instrument cool).include?(params[:type])
+      render :nothing => true, :staus => :bad_request and return
+    end
+
+    model = (params[:class] == 'mband') ? Mband : User
+    method = {
+      'friend'     => 'find_friendliest',
+      'instrument' => 'find_most_instruments',
+      'cool'       => 'find_coolest'
+    }.fetch(params[:type])
+
+    method += '_band_or_deejays' if params[:class] == 'band'
+    render :nothing => true, :status => :bad_request and return unless model.respond_to? method
+
+    partial = model.name.downcase.pluralize + '/' + ({
+      'friend'     => 'most_friends',
+      'instrument' => 'most_instruments',
+      'cool'       => 'coolest'
+    }.fetch(params[:type]))
+
+    object = model.send(method, :limit => 10).sort_by{rand}.first # ugh. heavy.
+
+    render :nothing => true, :status => :ok and return unless object
+    render :partial => partial, :object => object
   end
 
 protected

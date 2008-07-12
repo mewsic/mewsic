@@ -6,7 +6,7 @@ class BandsAndDeejaysController < ApplicationController
     @prolific = User.find_prolific_band_or_deejays       :limit => 3
     @friendliest = User.find_friendliest_band_or_deejays :limit => 1
     @newest = User.find_newest_band_or_deejays           :limit => 3
-    @most_instruments = User.find_band_or_deejay_with_more_instruments
+    @most_instruments = User.find_most_instruments_band_or_deejays :limit => 1
   end
 
   def to_breadcrumb

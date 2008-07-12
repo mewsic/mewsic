@@ -1,7 +1,7 @@
 <div class="bottom-box clear-block">
 	<div class="elements clear-block">
-		<p class="text-blue float-right">
-		<strong><%= pluralize(most_instruments.instruments.size, 'instrument') %></strong>
+		<p class="badge float-right">
+			<%= pluralize(most_instruments.instruments.size, 'instrument') %>
 		</p>
 		<p class="thumb">
 			<%= link_to avatar_image(most_instruments, :small), user_path(most_instruments) %>

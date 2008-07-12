@@ -75,16 +75,16 @@ class Track < ActiveRecord::Base
   
   def self.find_paginated_by_user(page, user)
     paginate :per_page => 7,
-             :conditions => ["songs.user_id = ?", user.id],
-             :include => [:instrument, {:parent_song => :user}], 
+             :conditions => ["tracks.user_id = ?", user.id],
+             :include => :instrument, 
              :order => "tracks.title ASC",
              :page => page
   end
   
   def self.find_paginated_by_mband(page, mband)
     paginate :per_page => 7,
-             :conditions => ["songs.user_id IN (?)", mband.members.map(&:id)],
-             :include => [:instrument, {:parent_song => :user}], 
+             :conditions => ["tracks.user_id IN (?)", mband.members.map(&:id)],
+             :include => :instrument,
              :order => "tracks.title ASC",
              :page => page
   end
