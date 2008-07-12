@@ -71,7 +71,7 @@ class Mband < ActiveRecord::Base
   end
 
   def self.find_coolest(options = {})
-    find :all, options.merge(:order => 'rating_avg DESC')
+    find :all, options.merge(:order => 'rating_avg DESC', :conditions => 'members_count > 1')
   end
 
   def profile_completeness
