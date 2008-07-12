@@ -5,7 +5,6 @@ document.observe('dom:loaded', function() {
     container: name,
     spinner: name + '-spinner',
     selector: 'a.genre-pagination',
-    update_mlab: true,
-    onComplete: function() { setupStarboxes('#' + name + ' .rating') }
+    update_mlab: true
   });
 });
