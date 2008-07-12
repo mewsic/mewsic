@@ -4,7 +4,7 @@ class DashboardController < ApplicationController
   
   def index
     @people = User.find :all, :limit => 9, :include => [:avatars, :songs], :conditions => ["(users.type IS NULL OR users.type = 'User') AND users.activated_at IS NOT NULL AND pictures.id IS NOT NULL"], :order => SQL_RANDOM_FUNCTION
-    @bands = User.find :all, :limit => 3, :include => [:avatars, :songs], :conditions => ["(users.type = 'Band' OR users.type = 'Dj') AND users.activated_at IS NOT NULL AND pictures.id IS NOT NULL AND songs.id IS NOT NULL"], :order => SQL_RANDOM_FUNCTION
+    @bands = User.find :all, :limit => 3, :include => [:avatars, :songs], :conditions => ["(users.type = 'Band' OR users.type = 'Dj') AND users.activated_at IS NOT NULL AND pictures.id IS NOT NULL AND songs.published = ? AND songs.id IS NOT NULL", true], :order => SQL_RANDOM_FUNCTION
     @answers = Answer.find :all, :order => 'answers.created_at DESC', :limit => 2, :include => [{:user => :avatars}], :conditions => ["users.activated_at IS NOT NULL"]
     @songs = Song.find :all, :limit => 3, :include => [{:user => :avatars}], :conditions => ['songs.published = ?', true], :order => SQL_RANDOM_FUNCTION
     @ideas = Track.find :all, :conditions => ["tracks.idea = ?", true], :limit => 2

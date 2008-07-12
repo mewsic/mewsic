@@ -9,12 +9,12 @@ class UsersController < ApplicationController
   helper :band_members
   
   def index
-    @coolest = User.find_coolest :limit => 9
-    @best_myousicians = User.find_best :limit => 3
-    @prolific = User.find_prolific :limit => 3
+    @coolest = User.find_coolest         :limit => 9
+    @best_myousicians = User.find_best   :limit => 3
+    @prolific = User.find_prolific       :limit => 3
     @friendliest = User.find_friendliest :limit => 1
     @coolest_mbands = Mband.find_coolest :limit => 1
-    @newest = User.find_newest :limit => 3
+    @newest = User.find_newest           :limit => 3
     @most_instruments = User.find_with_more_instruments
   end
 

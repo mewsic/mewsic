@@ -257,11 +257,11 @@ class User < ActiveRecord::Base
   end
   
   def self.find_best(options = {})
-    self.find(:all, options.merge({:conditions => "songs.id IS NOT NULL AND users.activated_at IS NOT NULL AND (users.type IS NULL OR users.type = 'User')", :joins => "LEFT OUTER JOIN songs ON users.id = songs.user_id", :order => 'songs.rating_avg DESC', :include => :avatars})) 
+    self.find(:all, options.merge({:conditions => ["songs.id IS NOT NULL AND songs.published = ? AND users.activated_at IS NOT NULL AND (users.type IS NULL OR users.type = 'User')", true], :joins => "LEFT OUTER JOIN songs ON users.id = songs.user_id", :order => 'songs.rating_avg DESC', :include => :avatars})) 
   end
   
   def self.find_best_band_or_deejays(options = {})
-    self.find(:all, options.merge({:conditions => "songs.id IS NOT NULL AND users.activated_at IS NOT NULL AND (users.type = 'Band' OR users.type = 'Dj')", :joins => "LEFT OUTER JOIN songs ON users.id = songs.user_id", :order => 'songs.rating_avg DESC', :include => :avatars})) 
+    self.find(:all, options.merge({:conditions => ["songs.id IS NOT NULL AND songs.published = ? AND users.activated_at IS NOT NULL AND (users.type = 'Band' OR users.type = 'Dj')", true], :joins => "LEFT OUTER JOIN songs ON users.id = songs.user_id", :order => 'songs.rating_avg DESC', :include => :avatars})) 
   end
   
   def self.find_prolific(options = {})
