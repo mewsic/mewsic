@@ -126,9 +126,9 @@ var Rating = Class.create({
     $A(document.getElementsByClassName(this.className)).each(this.add.bind(this));
 
     if (this.logged_in && !window.observing_starboxes) {
-      var authenticity_token = $('authenticity-token').value;
+      this.authenticity_token = $('authenticity-token').value;
       window.observing_starboxes = true;
-      document.observe('starbox:rated', this.onrate);
+      document.observe('starbox:rated', this.onrate.bind(this));
     }
 
     Ajax.Responders.register({
@@ -141,7 +141,7 @@ var Rating = Class.create({
     var id = event.memo.identity.split(/_/)[1];
     new Ajax.Request('/' + rateable + 's/' + id + '/rate/', {
       method: 'PUT',
-      parameters: { authenticity_token: authenticity_token,
+      parameters: { authenticity_token: this.authenticity_token,
                     rate: event.memo.rated }
     });
   },

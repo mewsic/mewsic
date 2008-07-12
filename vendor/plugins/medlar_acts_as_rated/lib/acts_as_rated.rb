@@ -207,7 +207,6 @@ module ActiveRecord #:nodoc:
           target = self if attributes.has_key? 'rating_total'
           target ||= self.rating_statistic if acts_as_rated_options[:stats_class]
           rating_class.transaction do
-            debugger
             if r.nil?
               rate = rating_class.new
               rate.rater_id = rater.id if with_rater
