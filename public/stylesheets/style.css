@@ -244,11 +244,11 @@ html>body #search p span{
 }
 div.status {
 	float:left;
-	height:15px;
+	height:17px;
 	left:2px;
 	position:relative;
 	top:-90px;
-	width:15px;
+	width:17px;
 	z-index: 100;
 }
 

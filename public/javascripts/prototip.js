@@ -119,7 +119,7 @@ Prototip.Styles = {
     delay: 0.03,
     width: 'auto',
     hook: { target: 'bottomRight', tip: 'topLeft' },
-    offset: { x: -9, y: -7 }
+    offset: { x: -11, y: -9 }
   },
 
   'protoblue': {
