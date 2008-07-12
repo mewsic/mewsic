@@ -24,7 +24,7 @@ var Splash = Class.create({
   },
 
   request: function() {
-    $('splash_motto').down('h2').fade({duration: 0.7});
+    $('splash_motto').down('h2').fade({duration: 0.3});
     new Ajax.Request('/splash', {
       method: 'get',
       onComplete: this.complete.bind(this)
