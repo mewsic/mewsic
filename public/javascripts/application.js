@@ -118,16 +118,39 @@ var SearchBox = Class.create({
   }
 });
 
+var Rating = Class.create({
+  initialize: function(className) {
+    this.className = className;
+    this.logged_in = $('current-user-id') ? true : false;
 
-function setupStarboxes(className) {
-  var logged_in = $('current-user-id') ? true : false;
-  var authenticity_token = logged_in ? $('authenticity-token').value : false;
+    $A(document.getElementsByClassName(this.className)).each(this.add.bind(this));
 
-  $A(document.getElementsByClassName(className)).each(function(element) {
+    if (this.logged_in && !window.observing_starboxes) {
+      var authenticity_token = $('authenticity-token').value;
+      window.observing_starboxes = true;
+      document.observe('starbox:rated', this.onrate);
+    }
+
+    Ajax.Responders.register({
+      onComplete: this.responder.bind(this)
+    });
+  },
+
+  onrate: function(event) {
+    var rateable = event.memo.identity.split(/_/)[0];
+    var id = event.memo.identity.split(/_/)[1];
+    new Ajax.Request('/' + rateable + 's/' + id + '/rate/', {
+      method: 'PUT',
+      parameters: { authenticity_token: authenticity_token,
+                    rate: event.memo.rated }
+    });
+  },
+
+  add: function(element) {
     var className = element.className.sub(/\s*rating\s*/, '');
     var rating = parseFloat(element.getAttribute('rel'));
     var image = 'myousica_small.png';
-    var locked = !logged_in;
+    var locked = !this.logged_in;
 
     if (element.up('.user-resume') || element.up('.song-resume') || element.up('.answer-show')) {
       image = 'myousica_big.png';
@@ -149,21 +172,15 @@ function setupStarboxes(className) {
       locked: locked,
       overlay: image
     });
-  });
+  },
 
-  if (logged_in && !window.observing_starboxes) {
-    window.observing_starboxes = true;
-    document.observe('starbox:rated', function(event) {
-      var rateable = event.memo.identity.split(/_/)[0];
-      var id = event.memo.identity.split(/_/)[1];
-      new Ajax.Request('/' + rateable + 's/' + id + '/rate/', {
-        method: 'PUT',
-        parameters: { authenticity_token: authenticity_token,
-                      rate: event.memo.rated }
-      });
-    });
+  responder: function(r) {
+    var container = $(r.container.success);
+    if (container) {
+      container.select('.' + this.className).each(this.add.bind(this));
+    }
   }
-}
+});
 
 document.observe('dom:loaded', function(event) {
   // $('search').down('input').focus();
@@ -182,10 +199,10 @@ document.observe('dom:loaded', function(event) {
     });    
 	}
  
-  setupStarboxes('rating');
-  Message.init();
+  Rating.instance = new Rating('rating');
+  SearchBox.instance = new SearchBox('search');
 
-  new SearchBox('search');
+  Message.init();
 });
 
 var Popup = {

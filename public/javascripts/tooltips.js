@@ -1,17 +1,21 @@
 var Tooltips = Class.create({
   initialize: function() {
-    $A(document.getElementsByClassName('instrument')).each(this.addInstrument);
-
-    if (!$('current-user-id')) {
-      $A(document.getElementsByClassName('rating')).each(this.addRating);
-      $$('img.button.mlab').each(this.addMlab);
-    }
-    $A(document.getElementsByClassName('locked')).each(function(elem) { if (elem.hasClassName('rating')) this.addLockedRating(elem); }.bind(this));
-    $A(document.getElementsByClassName('status')).each(this.addStatus);
+    this.addAll(document.body);
 
     Ajax.Responders.register({
       onComplete: this.responder.bindAsEventListener(this)
     });
+  },
+
+  addAll: function(element) {
+    element.select('.instrument').each(this.addInstrument);
+
+    if (!$('current-user-id')) {
+      element.select('.rating').each(this.addRating);
+      element.select('img.button.mlab').each(this.addMlab);
+    }
+    element.select('.rating.locked').each(this.addLockedRating);
+    element.select('.status').each(this.addStatus);
   },
 
   addInstrument: function(element) {
@@ -46,32 +50,19 @@ var Tooltips = Class.create({
     new Tip(element, content, {style: 'status'});
   },
 
-  responder: function() {
-    var orphans = Tips.tips.select(function(t) {
+  responder: function(r) {
+    Tips.tips.select(function(t) {
       return t.element.parentNode == null;
-    });
-
-    orphans.each(function(t) {
+    }).each(function(t) {
       Tips.remove(t.element);
     });
 
-    $A(document.getElementsByClassName('instrument')).each(function(element) {
-      this.rehash(element, this.addInstrument);
-    }.bind(this));
-
-    if (!$('current-user-id')) {
-      $$('img.button.mlab').each(function(element) {
-        this.rehash(element, this.addMlab);
-      }.bind(this));
+    var container = $(r.container.success);
+    if (container) {
+      this.addAll(container);
     }
   },
 
-  rehash: function(element, callback) {
-    if (Tips.tips.find(function(t) { return t.element == element; }))
-      return;
-
-     callback(element);
-  }
 });
 
 document.observe('dom:loaded', function() {
