@@ -61,7 +61,7 @@ var Tooltips = Class.create({
     if (container) {
       this.addAll(container);
     }
-  },
+  }
 
 });
 
