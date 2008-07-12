@@ -1,6 +1,7 @@
 var Refresher = Class.create({
-  initialize: function(element) {
+  initialize: function(element, options) {
     this.element = $(element);
+    this.options = options || {};
     this.trigger = this.element.up().down('a.trigger');
     this.image = this.trigger.down('img');
     this.b_refresh = this.refresh.bind(this);
@@ -30,6 +31,9 @@ var Refresher = Class.create({
   complete: function() {
     this.image.src = '/images/refresh.png';
     this.element.appear({duration: 0.6, queue: 'end'});
+    if (this.options.onComplete)
+      this.options.onComplete();
+
     this.refreshing = false;
   },
 
