@@ -95,11 +95,11 @@
     			  <p class="title align-right"><%= track.title %></p>
     			  <div class="music-info">
     			    <p class="bordered"><span>bpm: <strong><%= track.bpm %></strong></span> <span>key: <strong><%= track.tonality %></strong></span> <span>runtime: <strong><%= track.length %> </strong></span></p>
-    			    <p class="float-right">
-								<%= rating(track) %>
+    			    <div class="float-right">
     			      <%= mlab_button(track) %>
     			      <%= play_button(track) %>
-              </p>
+              </div>
+							<%= rating(track, :style => 'float: right; margin: 0px 4px;', :no_clear => true) %>
     			    <p class="float-left"><%= link_to(track.parent_song.genre.name, genre_path(track.parent_song.genre.name)) if track.parent_song && track.parent_song.genre %></p>
     			  </div>
     		  </div>

@@ -8,10 +8,11 @@ module ApplicationHelper
     options = options.symbolize_keys
     options[:class] = "rating #{type_class} #{options[:class]}"
     options[:class] += " locked" if logged_in? && !rateable.rateable_by?(current_user)
+    clearer = %[<div class="clearer"></div>] unless options.delete(:no_clear)
 
     tag_options = options.map { |k,v| %(#{k}="#{v}") }.join(' ')
 
-    %[<div id="#{type_class}_#{rateable.id}" rel="#{rateable.rating_avg.to_f}" #{tag_options}></div><div class="clearer"></div>]
+    %[<div id="#{type_class}_#{rateable.id}" rel="#{rateable.rating_avg.to_f}" #{tag_options}></div>#{clearer}]
   end
   
   def body_class
