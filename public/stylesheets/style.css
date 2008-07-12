@@ -113,6 +113,7 @@ ul.list-menu{
 	color:#28548B;
 	float:left;
 	position:relative;
+	/*left:107px; to disable ideas*/
 	left:34px;
 	top:20px;
 }
@@ -3843,16 +3844,17 @@ div.auto_complete ul strong.highlight {
 	margin-top: 26px;
 	width: 714px;
 	height: 60px;
-	position: absolute;
 	top: 183px;	
 	text-align: center;
+	float: left;
 }
 
 #splash_motto h1 {
 	font-size: 27px;
 	font-weight: lighter;
 	color: #006F9F;
-	line-height: 12px;
+	line-height: 27px;
+	margin: 0;
 }
 
 #splash_motto h2 {
@@ -3860,6 +3862,7 @@ div.auto_complete ul strong.highlight {
 	font-weight: lighter;
 	color: #006F9F;
 	letter-spacing: 1.3px;
+	margin: 0;
 }
 
 #splash_motto sup {

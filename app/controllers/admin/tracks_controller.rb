@@ -2,7 +2,7 @@ require 'multipart'
 
 class Admin::TracksController < Admin::AdminController
   def index
-    @tracks = Track.find(:all, :order => 'title', :order => 'id')
+    @tracks = Track.find(:all, :order => 'title', :order => 'id DESC')
   end
 
   def new

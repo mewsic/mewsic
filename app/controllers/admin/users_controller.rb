@@ -1,6 +1,6 @@
 class Admin::UsersController < Admin::AdminController
   def index
-    @users = User.find(:all, :order => 'id')
+    @users = User.find(:all, :order => 'id DESC')
   end
   
   def show
