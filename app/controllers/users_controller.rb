@@ -198,21 +198,16 @@ class UsersController < ApplicationController
     end
 
     model = (params[:class] == 'mband') ? Mband : User
-    method = {
-      'friend'     => 'find_friendliest',
-      'instrument' => 'find_most_instruments',
-      'cool'       => 'find_coolest'
+    method, partial = {
+      'friend'     => [:find_friendliest,      'most_friends'],
+      'instrument' => [:find_most_instruments, 'most_instruments'],
+      'cool'       => [:find_coolest,          'coolest']
     }.fetch(params[:type])
 
     method += '_band_or_deejays' if params[:class] == 'band'
     render :nothing => true, :status => :bad_request and return unless model.respond_to? method
 
-    partial = model.name.downcase.pluralize + '/' + ({
-      'friend'     => 'most_friends',
-      'instrument' => 'most_instruments',
-      'cool'       => 'coolest'
-    }.fetch(params[:type]))
-
+    partial = model.name.downcase.pluralize + '/' + partial
     object = model.send(method, :limit => 5).sort_by{rand}.first # ugh. heavy.
 
     render :nothing => true, :status => :ok and return unless object

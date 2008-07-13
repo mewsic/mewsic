@@ -19,8 +19,8 @@
       <%= download_button(track) %>
       <%= link_to(track.parent_song.genre.name, genre_path(track.parent_song.genre)) if track.parent_song && track.parent_song.genre %>
     </div>
-		<%= rating(track, :class => 'float-right') %>
-    <div class="float-right">
+    <div class="float-right idea-buttons">
+			<%= rating(track, :no_clear => true) %>
       <%= mlab_button(track) %>
       <%= play_button(track) %>
 		</div>

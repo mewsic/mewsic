@@ -2,21 +2,18 @@
 	<div class="rounded-white-bottom">
 	  <div class="elements clear-block">
 			<div class="green-bg">
-				<span class="tracks-number"><span><%= best_song.tracks.size %></span></span> 
-				<p class="thumb">
-				  <%= link_to avatar_image(best_song.user, :icon), user_path(best_song.user) %>
-				</p>
-				<p class="name align-right">
-				  <%= link_to best_song.user.login, user_path(best_song.user) %></a>
-				</p>
+				<p class="thumb"><%= link_to avatar_image(best_song.user, :icon), user_path(best_song.user) %></p>
+				<p class="name"><%= link_to best_song.user.login, user_path(best_song.user) %></a></p>
 			</div>
-  		<div class="best-songs"><%= rating(best_song) %></div>
+			<div class="tracks-number"><%= best_song.tracks.size %></div> 
   		<p class="title"><%= link_to best_song.title, song_path(best_song) %></p>
+  		<p class="author"><%= h best_song.original_author %></p>
+  		<%= rating(best_song) %>
   		<p class="button float-right">
   		  <%= mlab_button(best_song) %>
   		  <%= play_button(best_song) %>
   		</p>
-  		<p><%=h best_song.original_author %></p>
+			<p class="playcount">listened <%= pluralize(best_song.listened_times, 'time') %></p>
 	  </div>
 	</div>
 </div>

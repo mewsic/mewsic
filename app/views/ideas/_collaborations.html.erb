@@ -14,25 +14,19 @@
 		
 		
 		
-		<div class="simple-list clear-block">
+		<div class="simple-list clear-block collaboration-list">
 			<h1>TOP RATED COLLABORATIONS</h1>
 
 			<div class="top-box clear-block">
 				<div class="bottom-box clear-block">
 				  <%- @top_rated.each do |track| -%>
 				    <div class="elements clear-block">
-  					  <div class="clear-block">
-  						  <div class="float-right">
-  						    <p>
-                    <%= link_to avatar_image(track.user, :small) %>
-                  </p>
-  						  </div>
-  					  </div>
+  						<div class="float-right">
+  						  <%= link_to avatar_image(track.user, :small) %>
+  						</div>
   						<p class="abstract"><%= track.title %></p>
-  						<p class="float-right">
-  						  <%= rating(track) %>
-              </p>
-  						<p class="float-left">listened <%= pluralize track.listened_times, 'time' %></p>
+							<%= rating(track, :no_clear => true) %>
+  						<p class="playcount">listened <%= pluralize track.listened_times, 'time' %></p>
   				  </div>
 				  <%- end -%>
 				</div>

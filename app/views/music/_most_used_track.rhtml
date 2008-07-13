@@ -1,29 +1,19 @@
-<% track = most_used_track.first %>
-<% song_count = most_used_track.last %>
 <div class="rounded-white-top">
 	<div class="rounded-white-bottom">
 		<div class="elements clear-block">
 			<div class="orange-bg">
-				<p class="thumb">
-				  	<%= link_to((avatar_image track.user, :icon), user_path(track.user)) %>
-				</p>
-				<p class="name">
-				  	<%= link_to(track.user.nickname, user_path(track.user)) %>
-				</p>
+				<p class="thumb"><%= link_to avatar_image(most_used_track.user, :icon), user_path(most_used_track.user) %></p>
+				<p class="name"><%= link_to most_used_track.user.nickname, user_path(most_used_track.user) %></p>
 			</div>
-		    <div class="thumb">
-					<%= track_instrument_icon(track) %>
-		    </div>
-		  	<p class="title">
-		    	<%= track.title %>
-		  	</p>
-		  	<p><%= track.parent_song.original_author if track.parent_song %></p>
-		    <p class="button float-right">
-          <%= mlab_button(track) %>
-		    	<%= play_button(track, :color => :orange) %>
-				</p>
-			<p>used <%= pluralize(song_count, 'time') %></p>
-		  <div class="most-used-tracks"><%= rating(track) %></div>
+			<div class="thumb"><%= track_instrument_icon(most_used_track) %></div>
+			<p class="title"><%= most_used_track.title %></p>
+			<p class="author"><%= most_used_track.parent_song.original_author if most_used_track.parent_song %></p>
+			<%= rating(most_used_track) %>
+			<p class="button float-right">
+				<%= mlab_button(most_used_track) %>
+				<%= play_button(most_used_track, :color => :orange) %>
+			</p>
+			<p class="playcount">used <%= pluralize(most_used_track.song_count, 'time') %></p>
 		</div>
 	</div>
 </div>

@@ -315,7 +315,6 @@ div.user-list-boxes .badge {
 div.user-list-boxes img.refresh-block {
 	margin-top: 2px;
 	float: right;
-	cursor: pointer;
 }
 
 div#newest-users div.status {
@@ -475,7 +474,7 @@ h2, h2 a{
 	margin-bottom:20px;
 }
 .box-list h1{
-	margin-bottom:20px;
+	margin-bottom:14px;
 }
 .box-list table{
 	clear:both;
@@ -516,6 +515,9 @@ tr.nav-song td{
 }
 .one-col{
 	width:275px;
+}
+.one-col-small {
+	width: 247px;
 }
 .one-col-big{
 	width:340px;
@@ -711,6 +713,7 @@ tr.nav-song td{
 	padding-bottom:0px !important;
 }
 /* collaboration */
+/*
 .collaboration-list .thumb{
 	margin-right:8px;
 	margin-bottom:0px !important;
@@ -724,6 +727,15 @@ tr.nav-song td{
 	margin:0px 5px;
 	padding:0px 5px;
 	border-left:1px solid #ABC8D9;
+}
+*/
+.collaboration-list .abstract {
+	margin: 0 !important;
+	padding: 0px !important;
+}
+.collaboration-list .rating {
+	float: none;
+	margin: 4px 0px;
 }
 /* answer */
 .answer-list .top-box{
@@ -911,17 +923,18 @@ h2.dj-label{
 }
 /* green  box */
 .green-box .top-box{
-	background:#EFF7EC;
-	padding:15px 15px 0px;
+	background:#DEEDD2;
+	padding:11px 11px 0px;
+	width: 225px;
 }
 .green-box .rounded-white-bottom{
-	background: url(/images/rounded_box_top_245px.png) no-repeat top left;
+	background: url(/images/rounded_box_top_225.png) no-repeat top left;
 	padding-top:10px;
 }
 .green-box .rounded-white-top{
-	background: url(/images/rounded_box_bottom_245px.png) no-repeat bottom left;
-	padding-bottom:10px;
-	margin-bottom:4px;
+	background: url(/images/rounded_box_bottom_225.png) no-repeat bottom left;
+	margin-bottom:8px;
+	padding-bottom:2px;
 }
 *html .green-box .rounded-white-bottom{
 	background-image: url(/images/rounded_box_top_245px.gif);
@@ -936,11 +949,22 @@ h2.dj-label{
 }
 .green-box .elements p{
 	margin-bottom:3px !important;
+	padding-bottom: 0px !important;
 }
 .green-box .thumb{
-	float:right;
-	margin:0px 4px 0px 10px !important;
+	margin:4px 8px 0px 4px !important;
+	padding:0 !important;
+}
+.green-box .title {
 	padding-top: 4px !important;
+	padding-bottom: 0px !important;
+}
+.green-box .title a {
+	color: #6c6c6c !important;
+}
+.green-box .author {
+	color: #6c6c6c !important;
+	font-style: italic;
 }
 .tracks-number{
 	background:url(/images/tracks_number_BG.png) no-repeat top left;
@@ -948,7 +972,7 @@ h2.dj-label{
 	width:29px;
 	display:block;
 	float:left;
-	margin:3px 8px 0px 4px;
+	margin:5px 8px 0px 4px;
 	text-align:center;
 	color:#fff;
 	font-weight:bold;
@@ -1009,32 +1033,42 @@ h2.dj-label{
 }
 
 .green-box .green-bg{
-	background:#EFF7EC;
+	background:#F2F8ED;
 	height:35px;
 	overflow:hidden;
 }
 .green-box .name{
-	padding-top:10px;
+	padding-top:11px;
+}
+.green-box .name a{
+	color: #1A73A4;
+}
+.green-box .elements .rating {
+	margin: 0px 0px 2px 0px;
+}
+.green-box .button {
+	width: auto !important;
 }
 /* orange  box */
 .orange-box .top-box{
-	background:#FDF3E5;
-	padding:15px 15px 0px;
+	background:#F9E7C8;
+	padding:11px 11px 0px;
+	width: 225px;
 }
 .orange-box .rounded-white-bottom{
-	background: url(/images/rounded_box_top_195px.png) no-repeat top left;
+	background: url(/images/rounded_box_top_225.png) no-repeat top left;
 	padding-top:10px;
 }
 .orange-box .rounded-white-top{
-	background: url(/images/rounded_box_bottom_195px.png) no-repeat bottom left;
-	padding-bottom:10px;
-	margin-bottom:4px;
+	background: url(/images/rounded_box_bottom_225.png) no-repeat bottom left;
+	padding-bottom:2px;
+	margin-bottom:8px;
 }
 *html .orange-box .rounded-white-bottom{
-	background-image: url(/images/rounded_box_top_195px.gif);
+	background-image: url(/images/rounded_box_top_225.gif);
 }
 *html .orange-box .rounded-white-top{
-	background-image: url(/images/rounded_box_bottom_195px.gif);
+	background-image: url(/images/rounded_box_bottom_225.gif);
 }
 .orange-box .elements{
 	border-bottom: none;
@@ -1043,23 +1077,37 @@ h2.dj-label{
 }
 .orange-box .elements p{
 	margin-bottom:3px !important;
+	padding-bottom: 0px !important;
 }
 .orange-box .orange-bg{
-	background:#FDF3E5;
+	background:#FCF3E4;
 	height:35px;
 	overflow:hidden;
 }
 .orange-box .thumb{
-	margin:2px 8px 0px 4px !important;
-	padding-top: 2px !important;
+	margin:4px 8px 0px 4px !important;
+	padding: 0 !important;
 }
-
 .orange-box .title {
 	padding-top: 4px !important;
 	padding-bottom: 0px !important;
+	color: #6c6c6c !important;
 }
 .orange-box .name{
-	padding-top:10px;
+	padding-top:11px;
+}
+.orange-box .name a{
+	color: #1A73A4;
+}
+.orange-box .elements .rating {
+	margin: 0px 0px 2px 0px;
+}
+.orange-box .button {
+	width: auto !important;
+}
+.orange-box .author {
+	color: #6c6c6c !important;
+	font-style: italic;
 }
 /* rounded box cyan */
 .rounded-cyan-top{
@@ -2324,7 +2372,11 @@ p.sign-in .button{
 .orange-text a{
 	color:#ECAF48;
 }
-
+.playcount {
+	margin: 2px !important;
+	font-size: 11px;
+	color: #6c6c6c;
+}
 .alert{
 	color:#c03;
 	font-size:14px;
@@ -2630,7 +2682,7 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 }*/
 
 .song-resume {
-	width: 100px;
+	width: 150px;
 	text-align: right;
 	margin-bottom: 6px;
 }
@@ -2735,8 +2787,18 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 	margin-left: -2px;
 }
 
-.mlab_song .rating, #genres .rating, .song-resume .rating {
+.mlab_song .rating, #genres .rating {
 	float: right;
+}
+
+.song-resume .rating {
+	float: left;
+	margin: 0;
+}
+
+td.star .rating {
+	float: right;
+	margin: 0;
 }
 
 .elements .rating {
@@ -2745,6 +2807,11 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 
 .clearer {
 	clear: both;
+}
+
+.idea-buttons .rating {
+	margin: 0px 4px !important;
+	width: 65px !important;
 }
 
 #mlab-scroller .elements {

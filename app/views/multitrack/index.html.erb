@@ -46,7 +46,9 @@
 	var flashvars = {
 		serverPath: '<%= APPLICATION[:url] %>',
 		settingsXMLPath: '<%= multitrack_config_path %>',
-		songID: <%= @song.id || 0 %>
+		songID: <%= @song.id || 0 %>,
+		isLogEnabled: true,
+		isServiceDumpEnabled: true
 	};
 	var params = { wmode: 'transparent' };
 	var attributes = { name: 'multitrackObject' };

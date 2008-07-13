@@ -27,7 +27,7 @@
   			    <%- end -%>			  
           </p>
           <div class="music-info song-resume float-right">
-						<%= rating(@song) %>
+						<%= rating(@song, :no_clear => true) %>
             <%= mlab_button(@song) %>
             <%= play_button(@song) %>
 					</div>

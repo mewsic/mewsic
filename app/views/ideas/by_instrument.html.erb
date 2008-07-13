@@ -6,8 +6,8 @@
 
 	<table width="100%" cellspacing="0" cellpadding="0" border="0">
     <tbody>
-      <%- @ideas.each do |track| -%>
-        <tr class="even">
+      <%- @ideas.each_with_index do |track, i| -%>
+				<tr class="<%= %w[even odd][i % 2] %>">
           <td>
             <span class="cyan-text"><%= track.parent_song.genre.name if track.parent_song && track.parent_song.genre %> </span>
             <%= track.user.nickname %>

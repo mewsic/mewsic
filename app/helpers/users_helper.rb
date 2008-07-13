@@ -123,7 +123,7 @@ module UsersHelper
     %[<p class="centered grey-text"><em>#{message}</em></p>] if message
   end
 
-  def refresh_block_image_link(element, url_options = {})
+  def refresh_block_image_link(url_options = {})
     link_to image_tag('refresh.png', :class => 'refresh-block'), top_users_path(url_options), :class => 'trigger'
   end
 end

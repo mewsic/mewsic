@@ -4,18 +4,34 @@
 	<media><%= APPLICATION[:media_url] %></media>
 	<current_user><%= current_user.id if logged_in? %></current_user>
 	<authenticity_token><%= form_authenticity_token if protect_against_forgery? %></authenticity_token>
+	<connection_timeout>10</connection_timeout>
 	<url_request>
 		<mylist>/users/{:id}/mlabs</mylist>
 		<mysongs>/users/{:id}/songs.xml</mysongs>
 		<search>/search/new.xml</search>
-		<song>/songs/{:id}.xml</song>
-		<song_mix>/songs/{:id}/mix.xml</song_mix>
-		<track>/tracks/{:id}</track>
+		<songs>
+			<fetch>/songs/{:id}.xml</fetch>
+			<siblings>/songs/{:id}.xml?siblings=true</siblings>
+			<mix method="post">/songs/{:id}/mix.xml</mix>
+			<update method="put">/songs/{:id}.xml</update>
+		</songs>
+		<tracks>
+			<fetch>/tracks/{:id}.xml</fetch>
+			<siblings>/tracks/{:id}.xml?siblings=true</siblings>
+			<create method="post">/tracks/{:id}.xml</create>
+		</tracks>
 		<instruments>/instruments.xml</instruments>
 		<genres>/genres.xml</genres>
-		<trackediting>/songs/{:id}.xml</trackediting>
-		<trackdelete>/tracks/delete/{:id}</trackdelete>
-		<trackupload>/tracks</trackupload>
 		<user>/user/{:id}.xml</user>
+		<media>
+			<mix>/mix</mix>
+			<encode>/encode_flv</encode>
+			<upload>/upload</upload>
+		</media>
+		<workers>
+			<mixer>/mix/status/{:key}</mixer>
+			<encoder>/encode_flv/status/{:key}</encoder>
+			<uploader>/upload/status/{:key}</uploader>
+		</workers>
 	</url_request>
 </config>

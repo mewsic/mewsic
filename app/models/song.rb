@@ -57,9 +57,8 @@ class Song < ActiveRecord::Base
     self.find(:all, :conditions => ["songs.published = ?", true])
   end      
   
-  # TODO: STUB fino ai criteri di best
   def self.find_best(options = {})
-    self.find(:all, options)
+    self.find(:all, options.merge(:conditions => ['songs.published = ?', true], :order => 'songs.listened_times DESC, songs.rating_avg DESC'))
   end
   
   def self.find_newest(options = {})
