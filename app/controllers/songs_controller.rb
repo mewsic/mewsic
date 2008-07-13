@@ -1,7 +1,7 @@
 class SongsController < ApplicationController
   
-  before_filter :login_required, :only => [:update, :rate]
-  protect_from_forgery :except => [:mix, :update]
+  before_filter :login_required, :only => [:update, :rate, :mix]
+  protect_from_forgery
   
   def index
     respond_to do |format|
