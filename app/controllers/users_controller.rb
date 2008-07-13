@@ -199,9 +199,9 @@ class UsersController < ApplicationController
 
     model = (params[:class] == 'mband') ? Mband : User
     method, partial = {
-      'friend'     => [:find_friendliest,      'most_friends'],
-      'instrument' => [:find_most_instruments, 'most_instruments'],
-      'cool'       => [:find_coolest,          'coolest']
+      'friend'     => ['find_friendliest',      'most_friends'],
+      'instrument' => ['find_most_instruments', 'most_instruments'],
+      'cool'       => ['find_coolest',          'coolest']
     }.fetch(params[:type])
 
     method += '_band_or_deejays' if params[:class] == 'band'
