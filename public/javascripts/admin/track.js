@@ -23,6 +23,7 @@ var TrackUpload = Class.create(WorkerClient, {
   },
 
   onMix: function(event) {
+    event.stop();
     this.processing = true;
   }
 });

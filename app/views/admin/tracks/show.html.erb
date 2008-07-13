@@ -45,7 +45,7 @@
 <%= submit_tag 'submit' %>
 <% end %>
 
-<% form_for 'track', :url => upload_admin_track_path, :html => { :id => 'track-upload-form', :multipart => true, :target => 'track-upload-iframe', :method => 'post', :onsubmit => "$('track-upload-iframe').show()" } do %>
+<% form_for 'track', :url => upload_admin_track_path, :html => { :id => 'track-upload-form', :multipart => true, :target => 'track-upload-iframe', :method => 'post', :onsubmit => "$('track-upload-iframe').show();" } do %>
 	upload: <%= file_field_tag :upload %>
 	<%= submit_tag 'go' %><br/>
 	<%= hidden_field_tag 'worker' %>
