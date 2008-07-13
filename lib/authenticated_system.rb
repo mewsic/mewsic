@@ -53,7 +53,7 @@ module AuthenticatedSystem
     end
 
     def admin_required
-      (login_required && current_user.is_admin?) || redirect_to(root_path)
+      (authorized? && current_user.is_admin?) || redirect_to(root_path)
     end
 
     # Redirect as appropriate when an access request fails.
