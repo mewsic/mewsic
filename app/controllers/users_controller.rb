@@ -208,7 +208,7 @@ class UsersController < ApplicationController
     render :nothing => true, :status => :bad_request and return unless model.respond_to? method
 
     partial = model.name.downcase.pluralize + '/' + partial
-    object = model.send(method, :limit => 5).sort_by{rand}.first # ugh. heavy.
+    object = model.send(method, :limit => 10).sort_by{rand}.first # ugh. heavy.
 
     render :nothing => true, :status => :ok and return unless object
     render :partial => partial, :object => object
