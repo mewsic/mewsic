@@ -33,7 +33,6 @@ class Admin::TracksController < Admin::AdminController
     render(:update) { |page| page.hide 'editing' }
 
   rescue ActiveRecord::ActiveRecordError
-  ensure
     render :action => 'show'
   end
 
