@@ -105,7 +105,7 @@ class Song < ActiveRecord::Base
   end
   
   def indirect_siblings(limit = 5)
-    mixes = Mix.find_by_sql(["select distinct song_id from mixes where track_id in (select track_id from mixes where song_id = ?) and song_id != ?", self.id, self.id])
+    mixes = Mix.find_by_sql(["select distinct song_id from mixes where track_id in (select track_id from mixes where song_id = ?) and song_id != ? LIMIT #{limit}", self.id, self.id])
     return [] if mixes.empty?
     ids = mixes.collect{|m| m.song_id}
     Song.find_by_sql(["
