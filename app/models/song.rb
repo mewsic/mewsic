@@ -77,7 +77,7 @@ class Song < ActiveRecord::Base
   def self.find_paginated_by_user(page, user)
     paginate :per_page => 3, 
              :conditions => ["songs.published = ? AND songs.user_id = ?", true, user.id], 
-             :order => "songs.title ASC",
+             :order => "songs.updated_at DESC",
              :include => [:user, {:tracks => :instrument}], 
              :page => page
   end
@@ -161,6 +161,7 @@ class Song < ActiveRecord::Base
   end
 
   def self.cleanup_unpublished
+    #find :all, :select => 'id', :joins => 'left outer join tracks on tracks.id = songs.track_id', :group => 'tracks.id', :conditions => 'count(tracks.id) == 0'
     delete_all ['published = ? && created_at < ?', false, 1.week.ago]
   end
 

@@ -75,7 +75,7 @@ class Track < ActiveRecord::Base
     paginate :per_page => 7,
              :conditions => ["tracks.user_id = ?", user.id],
              :include => :instrument, 
-             :order => "tracks.title ASC",
+             :order => "tracks.created_at DESC",
              :page => page
   end
   
@@ -83,7 +83,7 @@ class Track < ActiveRecord::Base
     paginate :per_page => 7,
              :conditions => ["tracks.user_id IN (?)", mband.members.map(&:id)],
              :include => :instrument,
-             :order => "tracks.title ASC",
+             :order => "tracks.created_at DESC",
              :page => page
   end
   
