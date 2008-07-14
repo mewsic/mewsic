@@ -44,7 +44,25 @@ var MlabSlider = Class.create(PictureSlider, {
     this.initTrackButtons();
     this.initSongButtons(); 
     this.loadingItems = new Array();
-    this.setupMlab();
+    this.setupMlab();        
+    
+    Ajax.Responders.register({ 
+      onCreate: function(r) { 
+        if(r.container && r.container.success) {          
+          var container = $(r.container.success);
+          MlabSlider.instance.releaseSongButtons(container);
+          MlabSlider.instance.releaseTrackButtons(container);
+        }
+      },
+      
+      onComplete: function(r) {
+        if(r.container && r.container.success) {          
+          var container = $(r.container.success);
+          MlabSlider.instance.initSongButtons(container);
+          MlabSlider.instance.initTrackButtons(container);
+        }
+      }
+    });
   }, 
   
   toggleTriggers: function() {
@@ -148,27 +166,53 @@ var MlabSlider = Class.create(PictureSlider, {
     });
   },
   
-  initTrackButtons: function(only_dynamic) {
+  initTrackButtons: function(options) {
+    var options = Object.extend({}, arguments[0] || {});
     var selector = '.button.mlab.track.add';
-    if(only_dynamic) selector += '.dynamic';
-    $$(selector).each(function(element) {      
-      element.observe('click', this.onAddTrack.bindAsEventListener(this, element));
+    if(options.only_dynamic) selector += '.dynamic';
+    var items = options.container ? options.container.select(selector) : $$(selector);    
+    items.each(function(element) {      
+      element.observe('click', this.onAddTrack.bind(this));
     }.bind(this));
-  },    
+
+  },
   
-  initSongButtons: function(only_dynamic) {
-    var selector = '.button.mlab.song.add';
-    if(only_dynamic) selector += '.dynamic';
-    $$(selector).each(function(element) {
-      element.observe('click', this.onAddSong.bindAsEventListener(this, element));
+  releaseTrackButtons: function(options) {
+    var options = Object.extend({}, arguments[0] || {});
+    var selector = '.button.mlab.track.add';
+    var items = options.container ? options.container.select(selector) : $$(selector);    
+    items.each(function(element) {      
+      element.stopObserving('click', this.onAddTrack.bind(this));
     }.bind(this));
   },
   
-  onAddTrack: function(event, element) {    
+  initSongButtons: function(options) {
+    var options = Object.extend({}, arguments[0] || {});
+    var selector = '.button.mlab.song.add';
+    if(options.only_dynamic) selector += '.dynamic';
+    var items = options.container ? options.container.select(selector) : $$(selector);
+    
+    items.each(function(element) {
+      element.observe('click', this.onAddSong.bind(this));
+    }.bind(this));
+  },
+  
+  releaseSongButtons: function(options) {
+    var options = Object.extend({}, arguments[0] || {});
+    var selector = '.button.mlab.song.add';
+    var items = options.container ? options.container.select(selector) : $$(selector);    
+    items.each(function(element) {      
+      element.stopObserving('click', this.onAddSong.bind(this));
+    }.bind(this));
+  },
+  
+  onAddTrack: function(event) {    
+    var element = event.element();
     this.handleItemAddition(event, element, 'track');
   },
   
-  onAddSong: function(event, element) {    
+  onAddSong: function(event) {    
+    var element = event.element();
     this.handleItemAddition(event, element, 'song');
   },
   

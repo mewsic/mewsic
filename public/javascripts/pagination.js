@@ -56,14 +56,7 @@ var Pagination = Class.create({
       this.options.loading.hide();
     } else if (this.options.spinner) {
       $(this.options.spinner).hide();
-    }
-
-    if (this.options.update_mlab && typeof(MlabSlider) != 'undefined') {
-      var mlabSlider = MlabSlider.getInstance();
-      if (mlabSlider) {
-        mlabSlider.initTrackButtons(true);
-      }
-    }
+    }    
 
     if (this.options.onComplete) {
       this.options.onComplete();

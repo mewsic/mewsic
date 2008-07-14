@@ -27,6 +27,13 @@ var Splash = Class.create({
     $('splash_motto').down('h2').fade({duration: 0.3});
     new Ajax.Request('/splash', {
       method: 'get',
+      onCreate: function() {
+        var mlabSlider = MlabSlider.getInstance();        
+        if (mlabSlider) {
+          mlabSlider.releaseTrackButtons(true, $('splash_tracks'));
+          mlabSlider.releaseSongButtons(true, $('splash_songs'));
+        }
+      }.bind(this),
       onComplete: this.complete.bind(this)
     });
   },
@@ -39,8 +46,8 @@ var Splash = Class.create({
 
     var mlabSlider = MlabSlider.getInstance();        
     if (mlabSlider) {
-      mlabSlider.initTrackButtons(true);
-      mlabSlider.initSongButtons(true);
+      mlabSlider.initTrackButtons(true, $('splash_tracks'));
+      mlabSlider.initSongButtons(true, $('splash_songs'));
     }
 
   },
