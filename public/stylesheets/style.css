@@ -1477,12 +1477,13 @@ h2.dj-label{
 .tit-classification-songs table {
 	margin:auto auto;
 }
-.tit-classification-songs h1{
-	text-indent:-500em;
-	font-size:1px;
-	margin-bottom:0px;
+.tit-classification-songs .count {
 	background: url(/images/BG_tab_title_songs.png) no-repeat bottom left;
-	padding-top:26px;
+	text-indent:95px;
+	font-size:19px;
+	margin: 0;
+	padding: 4px 0px 2px;
+	color: #3A9853;
 }
 .tit-classification-songs .top-box{
 	background-color:#EEF3E7;
@@ -1532,12 +1533,13 @@ table.mlab_tracks {
 .tit-classification-tracks table {
 	margin:auto auto;
 }
-.tit-classification-tracks h1{
-	text-indent:-500em;
-	font-size:1px;
-	margin-bottom:0px;
+.tit-classification-tracks .count{
 	background: url(/images/BG_tab_title_tracks.png) no-repeat bottom left;
-	padding-top:26px;
+	text-indent:95px;
+	font-size:19px;
+	margin: 0;
+	padding: 4px 0px 2px;
+	color: #C77527;
 }
 .tit-classification-tracks .top-box{
 	background-color:#F8ECD9;
