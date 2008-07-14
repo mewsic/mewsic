@@ -3,7 +3,7 @@ require 'uri'
 
 class Admin::SongsController < Admin::AdminController
   def index
-    @songs = Song.find(:all, :conditions => ['published = ?', true], :order => 'id DESC')
+    @songs = Song.find(:all, :conditions => 'title is not null', :order => 'id DESC')
   end
 
   def new
