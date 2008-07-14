@@ -23,6 +23,7 @@ class Admin::SongsController < Admin::AdminController
     render :template => 'admin/tracks/show'
 
   rescue ActiveRecord::ActiveRecordError
+  ensure
     render :action => 'show'
   end
 
@@ -32,6 +33,7 @@ class Admin::SongsController < Admin::AdminController
     render(:update) { |page| page.hide 'editing' }
 
   rescue ActiveRecord::ActiveRecordError
+  ensure
     render :action => 'show'
   end
 
