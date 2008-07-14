@@ -4119,3 +4119,71 @@ div.auto_complete ul strong.highlight {
 	margin-bottom: 90px;
 }
 
+.user-switch .from {
+	margin-left: 60px;
+}
+
+.user-switch .to {
+	margin-right: 60px;
+}
+
+.user-switch .from img {
+	opacity: 0.5;
+	filter: alpha(opacity=0.5);
+}
+
+.user-switch h1 {
+	margin: 0px 0px 10px 0px;
+	font-weight: bold;
+	font-size: 19px;
+	text-align: center;
+	color: #000;
+}
+
+.user-switch h2 {
+	color: #004D71;
+	font-weight: bold;
+	font-size: 15px;
+	margin-bottom: 6px;
+}
+
+.user-switch ul {
+	margin:10px 0px 15px;
+	padding-left:15px;
+	margin-top: 0px
+}
+
+.user-switch ul li {
+	color: #61656A;
+	font-size: 12px;
+}
+
+.user-switch div.container {
+	padding: 10px 30px 0px;
+}
+
+.user-switch label {
+	font-weight: bold;
+	font-size: 13px;
+	color: #004D71;
+	display: block;
+	margin-bottom: 3px;
+}
+
+.user-switch input[type="text"] {
+	width: 220px;
+	border: 1px solid #aaa;
+}
+
+.user-switch #input {
+	float: left;
+}
+
+.user-switch #button {
+	float: right;
+	margin-top: 14px;
+}
+
+.user-switch #success {
+	margin: 60px 0px;
+}

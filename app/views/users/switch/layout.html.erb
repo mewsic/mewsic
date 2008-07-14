@@ -7,26 +7,24 @@
 	</head>
 	<body>
 		<div class="user-switch">
-			<div class="float-left"><%= image_tag "#{@user.class.name.downcase}_page_label.png" %></div>
-			<div class="float-right"><%= image_tag "#{@type.downcase}_page_label.png" %></div>
+			<h1>Change user type</h1>
+			<div class="float-left from"><%= image_tag "change_#{@user.class.name.downcase}_big.png" %></div>
+			<div class="float-right to"><%= image_tag "change_#{@type.downcase}_big.png" %></div>
 			<div class="centered"><%= image_tag "change_type_arrow.png" %></div>
-			<div class="clear-block clear-float">
-				<p>
-				you are switching your user type to <em><%= @type.upcase %></em>:</p>
+			<div class="clear-block clear-float container">
+				<h2>You are switching your user type to <%= @type.upcase %>:</h2>
 				<%= yield %>
 				<%- form_tag :url => switch_type_user_url(@user) do -%>
 					<%= hidden_field_tag 'type', @type.downcase %>
 					<%= hidden_field_tag '_method', 'put' %>
-					<p style="text-align: center">
-						<label for="nickname">enter your new <em><%= @type.upcase %></em> nick name</label><br/>
+					<div id="input">
+						<label for="nickname">Enter your new <%= @type.upcase %> nick name</label>
 						<%= text_field_tag 'nickname', @user.nickname || @user.login, :class => 'text', :maxlength => 20 %>
-					</p>
-					<p style="text-align:center">
-						<input type="image" src="/images/button_send.png" />
-					</p>
+					</div>
+					<input id="button" type="image" src="/images/button_send.png" />
 				<%- end -%>
 				<%- if flash[:error] -%>
-					<p><%= image_tag 'alert_ico.gif' %> <%= flash[:error] %></p>
+					<p class="errors"><%= image_tag 'alert_ico.gif' %> <%= flash[:error] %></p>
 				<%- end -%>
 			</div>
 		</div>

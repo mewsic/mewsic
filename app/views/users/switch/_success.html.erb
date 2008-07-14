@@ -7,18 +7,17 @@
 	</head>
 	<body>
     <div id="switch-success" class="user-switch" style="display:none">
-    	<div class="clear-block clear-float">
-    		<p class="centered">
-    			Congrats! You are now a <%= @type.upcase %>.
-    		</p>
-    		<p class="centered">
-    			<%= image_tag "#{@type.downcase}_page_label.png" %>
-    		</p>
+    	<div class="clear-block clear-float container">
+				<h1>Congrats! You are now a <%= @type.upcase %>!</h1>
+				<div class="clear-block centered" id="success">
+    			<%= image_tag "change_#{@type.downcase}_big.png" %>
+    		</div>
     		<p class="centered grey-text">Reloading...</p>
     	</div>
     </div>
     <script type="text/javascript">
-    	new Effect.Appear('switch-success',{duration:0.4});
+    	new Effect.Appear('switch-success',{duration: 0.4, queue: 'end'});
+			new Effect.Pulsate('success',{duration: 1.2, from: 0.4, pulses: 3, queue: 'end'});
     	//parent.window.Lightview.hide.bind(parent.window.Lightview).delay(1.5);
     	parent.reload.delay(1.7);
     </script>
