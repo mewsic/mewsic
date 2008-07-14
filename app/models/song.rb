@@ -161,8 +161,8 @@ class Song < ActiveRecord::Base
   end
 
   def self.cleanup_unpublished
-    #find :all, :select => 'id', :joins => 'left outer join tracks on tracks.id = songs.track_id', :group => 'tracks.id', :conditions => 'count(tracks.id) == 0'
-    delete_all ['published = ? && created_at < ?', false, 1.week.ago]
+    songs = find_by_sql(['select songs.id from songs left outer join tracks on tracks.song_id = songs.id where songs.published = ? and songs.created_at < ? group by songs.id having count(tracks.id) = 0', false, 1.week.ago])
+    delete_all ['id in (?)', songs.map(&:id)]
   end
 
 private
