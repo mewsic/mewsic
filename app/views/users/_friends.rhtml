@@ -1,14 +1,14 @@
 <div id="friend-box" class="clear-block">  
-  <h1>FRIENDS <span class="no-bold">(<%= @user.friends.size %>)</span></h1>
-  <div class="<%= @user.friends.size.zero? ? 'invisible' : 'clear-block' %>">
+  <h1>FRIENDS <span class="no-bold">(<%= @user.friends_count %>)</span></h1>
+  <div class="<%= @friends.size.zero? ? 'invisible' : 'clear-block' %>">
     <div class="slide-container">
 			<div class="button">
 				<a href="#" class="slide-prev"><img src="/images/arrow_grey_left.gif"/></a>
 			</div>
 			<!--[if IE]><div style="clip: rect(0px 235px 40px 0px); position: absolute; overflow:hidden;"><![endif]-->
 			<div class="scroll-clip">
-				<div id="friends-scroller" style="padding: 0; left: 0px; width:<%= @user.friends.size * 45 %>px;">
-					<% @user.friends.each do |friend| -%>
+				<div id="friends-scroller" style="padding: 0; left: 0px; width:<%= @friends.size * 45 %>px;">
+					<% @friends.each do |friend| -%>
 						<div class="float-left" style="width: 45px; height: 40px;">
 							<%= link_to(avatar_image(friend, :small, :size => '40x40'), user_path(friend)) %>
 							<div class="status pngfix <%= friend.online_now? ? 'online' : 'offline' %>"></div>

@@ -313,14 +313,32 @@ class User < ActiveRecord::Base
     @myousica ||= User.find_by_login('myousica')
   end
 
-  # ATTENZIONE: METODO MOLTO COSTOSO
+  def friends(options = {})
+    options.assert_valid_keys :limit, :conditions, :order
+
+    limit = options[:limit] ? "limit #{options[:limit]}" : nil
+    conditions = options[:conditions] ? "AND (#{self.class.send! :sanitize_sql, options[:conditions]})" : nil
+    order = options[:order] || 'f.accepted_at ASC'
+
+    User.find_by_sql "select users.* from users inner join friendships f on (users.id = f.friend_id or users.id = f.user_id) where users.id != #{id} and (f.friend_id = #{id} or f.user_id = #{id}) and f.accepted_at is not null #{conditions} order by #{order} #{limit}"
+  end
+
   def update_friends_count
-    update_attribute(:friends_count, friends.size)
-    friends.size
+    @friends_count = nil
+    update_attribute('friends_count', friends_for_me.count + friends_by_me.count)
+    attributes['friends_count']
   end
   
   def friends_count
-    @friends_count ||= (attributes[:friends_count] || update_friends_count)
+    @friends_count ||= (attributes['friends_count'] || update_friends_count)
+  end
+
+  def songs_count
+    self.songs.count(:conditions => ['songs.published = ?', true])
+  end
+
+  def tracks_count
+    self.tracks.count
   end
   
   def to_breadcrumb
