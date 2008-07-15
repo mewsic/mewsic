@@ -9,6 +9,7 @@
 </head>
 <body class="<%= body_class %>">
   <%= hidden_field_tag 'current-user-id', current_user.id if logged_in?  %>
+  <%= hidden_field_tag 'authenticity-token', form_authenticity_token if protect_against_forgery? %>  
   <div id="header" class="page-width clear-block">
     <%= render :partial => 'shared/top_menu' %>
     <div id="logo" class="float-left"><%= clickable_logo %></div>

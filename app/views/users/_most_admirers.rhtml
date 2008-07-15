@@ -1,19 +1,19 @@
 <div class="bottom-box clear-block">
 	<div class="elements clear-block">
 		<p class="badge float-right">
-			<%= pluralize most_friends.friends_count, 'friend' %>
+			<%= pluralize most_admirers.admirers_count, 'admirer' %>
 		</p>
 		<p class="thumb">
-			<%= link_to avatar_image(most_friends, :small), user_path(most_friends) %>
+			<%= link_to avatar_image(most_admirers, :small), user_path(most_admirers) %>
 		</p>
 		<p class="name">
-			<%= link_to most_friends.login, user_path(most_friends) %>
+			<%= link_to most_admirers.login, user_path(most_admirers) %>
 		</p>
 		<p class="country">
-			<%= h most_friends.compiled_location %>
+			<%= h most_admirers.compiled_location %>
 		</p>
 		<p class="motto">
-			<%= truncate most_friends.motto, 120 %>
+			<%= truncate most_admirers.motto, 120 %>
 		</p>
 	</div>
 
@@ -23,9 +23,9 @@
 		</div>
 		<!--[if IE]><div style="clip: rect(0px 315px 30px 0px); position: absolute; overflow:hidden;"><![endif]-->
 		<div class="scroll-clip">
-			<div id="most-friends-scroller" style="width: <%=  most_friends.friends_count * 35 + 5 %>px; left: 0px;">
-				<% most_friends.friends.each do |friend| %>
-					<%= link_to avatar_image(friend, :icon), user_path(friend) %>
+			<div id="most-admirers-scroller" style="width: <%=  most_admirers.admirers_count * 35 + 5 %>px; left: 0px;">
+				<% most_admirers.admirers.each do |admirer| %>
+					<%= link_to avatar_image(admirer, :icon), user_path(admirer) %>
 				<% end %>
 			</div>
 		</div>

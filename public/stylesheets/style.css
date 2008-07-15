@@ -323,6 +323,17 @@ div#newest-users div.status {
 	left: 28px;
 }
 
+div.user-list-boxes p {
+	padding-bottom: 2px !important;
+}
+
+div.user-list-boxes .motto {
+	font-size: 11px;
+	color: #61656A;
+	display: block;
+	overflow: hidden;
+}
+
 .title, .title a{
 	font-weight:bold;
 	color:#000;

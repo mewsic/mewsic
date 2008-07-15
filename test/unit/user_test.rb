@@ -208,7 +208,11 @@ class UserTest < Test::Unit::TestCase
   
   def test_find_friendliest_should_return_the_friendliest_person
     User.find(:all).each {|u| u.update_friends_count}
-    assert_equal Friendship.count(:conditions => 'accepted_at is not null', :group => :user_id).first.last, User.find_friendliest(:limit => 1).first.friends.size
+    assert_equal Friendship.count(:conditions => 'accepted_at is not null', :group => :user_id, :order => 'count_all desc').first.last, User.find_friendliest(:limit => 1).first.friends_count
+  end
+
+  def test_find_most_admired_should_return_the_most_admired_person
+    assert_equal Friendship.count(:conditions => 'accepted_at is null', :group => :friend_id, :order => 'count_all desc').first.last, User.find_most_admired(:limit => 1).first.admirers_count
   end
   
   def test_act_as_rated_should_be_rated
@@ -249,13 +253,8 @@ class UserTest < Test::Unit::TestCase
     check_finder_for_inactive(:find_coolest)
   end  
     
-  def test_find_admirers_should_be_equal_to_pending_friends_method
-    user = users(:quentin)
-    assert_equal user.pending_friends.size, user.find_admirers.size
-  end
-  
   def test_quentin_should_have_admirers
-    assert_equal users(:quentin).find_admirers.size, 50
+    assert_equal users(:quentin).admirers.size, 50
   end
 
   def test_quentin_should_retieve_answers_from_replies

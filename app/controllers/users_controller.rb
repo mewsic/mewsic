@@ -199,13 +199,14 @@ class UsersController < ApplicationController
     end
 
     unless %(user band mband).include?(params[:class]) &&
-      %(friend instrument cool).include?(params[:type])
+      %(friend admirer instrument cool).include?(params[:type])
       render :nothing => true, :staus => :bad_request and return
     end
 
     model = (params[:class] == 'mband') ? Mband : User
     method, partial = {
       'friend'     => ['find_friendliest',      'most_friends'],
+      'admirer'    => ['find_most_admired',     'most_admirers'],
       'instrument' => ['find_most_instruments', 'most_instruments'],
       'cool'       => ['find_coolest',          'coolest']
     }.fetch(params[:type])

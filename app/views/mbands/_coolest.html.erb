@@ -12,6 +12,9 @@
 		<p class="country">
 			<%= h coolest.countries.join(', ') %>
 		</p>
+		<p class="motto">
+			<%= truncate coolest.motto, 120 %>
+		</p>
 	</div>
 	<div class="slide-container">
 		<div class="button">
@@ -20,7 +23,9 @@
 		<!--[if IE]><div style="clip: rect(0px 315px 30px 0px); position: absolute; overflow:hidden;"><![endif]-->
 		<div class="scroll-clip">
 			<div id="coolest-mband-scroller" style="width: <%= coolest.members.count * 35 + 5 %>px; left: 0px;">
-				<%= render :partial => 'friend_icon', :collection => coolest.members %>
+				<% coolest.members.each do |member| %>
+					<%= link_to avatar_image(member, :icon), user_path(member) %>
+				<% end %>
 			</div>
 		</div>
 		<!--[if IE]></div><![endif]-->

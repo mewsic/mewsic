@@ -284,7 +284,14 @@ class User < ActiveRecord::Base
   def self.find_friendliest_band_or_deejays(options = {})
     self.find(:all, options.merge(:order => 'friends_count DESC', :conditions => "users.activated_at IS NOT NULL AND (users.type = 'Band' OR users.type = 'Dj') AND users.login != 'myousica'"))
   end
+
+  def self.find_most_admired(options)
+    self.find(:all, options.merge(:select => 'users.*, count(friendships.id) as admirers_count', :joins => 'LEFT OUTER JOIN friendships ON friendships.friend_id = users.id AND friendships.accepted_at IS NULL', :conditions => "users.activated_at IS NOT NULL AND (users.type IS NULL OR users.type = 'User') AND users.login != 'myousica'", :group => 'users.id', :order => 'count(friendships.id) DESC'))
+  end
   
+  def self.find_most_admired_band_or_deejays(options)
+    self.find(:all, options.merge(:select => 'users.*, count(friendships.id) as admirers_count', :joins => 'LEFT OUTER JOIN friendships ON friendships.friend_id = users.id AND friendships.accepted_at IS NULL', :conditions => "users.activated_at IS NOT NULL AND (users.type = 'Band' OR users.type = 'Dj') AND users.login != 'myousica'", :group => 'users.id', :order => 'count(friendships.id) DESC'))
+  end
   def self.find_newest(options = {})
     self.find(:all, options.merge(:order => 'created_at DESC', :conditions => "activated_at IS NOT NULL AND (users.type IS NULL OR users.type = 'User') AND users.login != 'myousica'"))
   end
@@ -333,6 +340,14 @@ class User < ActiveRecord::Base
     @friends_count ||= (attributes['friends_count'] || update_friends_count)
   end
 
+  def admirers
+    pending_friends_for_me
+  end
+
+  def admirers_count
+    @admirers_count ||= (attributes['admirers_count'] || admirers.count).to_i
+  end
+
   def songs_count
     self.songs.count(:conditions => ['songs.published = ?', true])
   end
@@ -364,12 +379,6 @@ class User < ActiveRecord::Base
                       :limit => 4
   end   
 
-  def find_admirers
-    # FIXME: credo che gli ammiratori debbano essere solo quello che mi ammirano.
-    self.pending_friends_for_me.find(:all, :include => :avatars) #+
-    #self.pending_friends_by_me.find(:all, :include => :avatars)
-  end
-  
   def is_leader_of?(mband)
     mband.leader == self
   end

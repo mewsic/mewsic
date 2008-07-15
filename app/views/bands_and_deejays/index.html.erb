@@ -44,13 +44,21 @@
 </div>
 
 <div class="box-list two-col clear-block user-list-boxes">
-  <div class="box-rounded-gray clear-block" id="most-friends">
-		<%= refresh_block_image_link :class => 'band', :type => 'friend' %>
-		<h1>MOST FRIENDS</h1>
+  <div class="box-rounded-gray clear-block" id="most-admirers">
+		<%= refresh_block_image_link :class => 'band', :type => 'admirer' %>
+		<h1>MOST ADMIRERS</h1>
 	  <div class="top-box clear-block refresh-container">
-      <%= render :partial => 'users/most_friends', :collection => @friendliest %>
+      <%= render :partial => 'users/most_admirers', :collection => @most_admired %>
 		</div>
 	</div>
+	
+  <div class="box-rounded-gray clear-block" id="coolest-mbands">
+		<%= refresh_block_image_link :class => 'mband', :type => 'cool' %>
+	  <h1>COOLEST M-BANDS</h1>
+	  <div class="top-box clear-block refresh-container">
+      <%= render :partial => 'mbands/coolest', :collection => @coolest_mbands %>
+	  </div>
+  </div>
 
 	<div class="box-rounded-gray clear-block" id="most-instruments">
 		<%= refresh_block_image_link :class => 'band', :type => 'instrument' %>
