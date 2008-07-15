@@ -16,6 +16,14 @@ var Refresher = Class.create({
     this.b_refresh = this.refresh.bind(this);
 
     this.trigger.observe('click', this.b_refresh);
+    Event.observe( window, 'unload', this.destroy.bind(this));
+  },
+  
+  destroy: function() {
+    this.trigger.stopObserving('click', this.b_refresh);
+    this.container = null;
+    this.trigger = null;
+    this.image = null;
   },
 
   refresh: function(event) {

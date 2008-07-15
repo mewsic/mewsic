@@ -1,20 +1,33 @@
 var PictureSlider = Class.create({	
   initialize: function(element) {    
-	  this.element = $(element);
+	  this.element = $(element);	  
 		this.options = Object.extend({
 		  axis: 'horizontal'
-		}, arguments[1] || {});
-		this.scrolling_div = this.element.down('.scroll')
-		this.working = false;			
-		this.setup();           		
+		}, arguments[1] || {});								
+		this.scrolling_div = this.element.down('.scroll')				
+    this.setup();           		    
+		this.working = false;
+    Event.observe(window, 'unload', this.destroy.bind(this));		
+	},
+	
+	destroy: function() {
+	  this.back_trigger.stopObserving('click', this.b_slideBack);  
+    this.forward_trigger.stopObserving('click', this.b_slideForward);
+    this.element = null;
+    this.scrolling_div = null;
+    this.back_trigger = null;
+    this.forward_trigger = null;
 	},
 
 	setup: function() {
-	  this.step             = this.options.size;
+    this.step             = this.options.size;
     this.back_trigger     = this.element.down('.trigger.back');
-		this.forward_trigger  = this.element.down('.trigger.forward');						
-		Event.observe(this.back_trigger,    'click', this.slideBack.bind(this));
-		Event.observe(this.forward_trigger, 'click', this.slideForward.bind(this));		 
+    this.forward_trigger  = this.element.down('.trigger.forward');           
+    
+    this.b_slideBack = this.slideBack.bind(this);
+    this.back_trigger.observe('click', this.b_slideBack);    
+    this.b_slideForward = this.slideForward.bind(this);
+    this.forward_trigger.observe('click', this.b_slideForward);    
     if(this.options.toggleTriggers) this.toggleTriggers();
 	},
 	

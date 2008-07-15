@@ -57,7 +57,7 @@ var Message = {
     }    
   }
   
-};
+}; 
 
 // When object is available, do function fn.
 function when(obj, fn) {
@@ -116,7 +116,7 @@ var SearchBox = Class.create({
 
     this.form.submit();
   }
-});
+});  
 
 var Rating = Class.create({
   initialize: function(className) {
@@ -181,14 +181,14 @@ var Rating = Class.create({
     }
   }
 });
-
+        
 document.observe('dom:loaded', function(event) {
-  // $('search').down('input').focus();
-  $('logo').focus();
-
-	if ( $('log-in-errors') != null && $('log-in-errors').visible() ) {
-		$('log-in').down('input', 2).clear().focus();
-	}
+  $('search').down('input').focus();
+    $('logo').focus();
+  
+  if ( $('log-in-errors') != null && $('log-in-errors').visible() ) {
+   $('log-in').down('input', 2).clear().focus();
+  }
 	
 	if ($('mlab-scroller') != null ) {
 	  var mlab_slider = new MlabSlider('mlab-scroller',  {
@@ -201,7 +201,6 @@ document.observe('dom:loaded', function(event) {
  
   Rating.instance = new Rating('rating');
   SearchBox.instance = new SearchBox('search');
-
   Message.init();
 });
 
@@ -221,9 +220,9 @@ var Popup = {
 };
 
 function pop(url) {
-	newwindow = window.open(url,'popup', 'height=100, width=300');
-	if (window.focus) {newwindow.focus()}
-	return false;
+ newwindow = window.open(url,'popup', 'height=100, width=300');
+ if (window.focus) {newwindow.focus()}
+ return false;
 }
 
 function reload() {

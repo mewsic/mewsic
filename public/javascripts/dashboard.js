@@ -44,12 +44,6 @@ var Splash = Class.create({
     $('splash_tracks_spinner').hide();
     $('splash_songs_spinner').hide();
 
-    var mlabSlider = MlabSlider.getInstance();        
-    if (mlabSlider) {
-      mlabSlider.initTrackButtons(true, $('splash_tracks'));
-      mlabSlider.initSongButtons(true, $('splash_songs'));
-    }
-
   },
 
   appear: function(r) {

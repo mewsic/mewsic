@@ -3903,6 +3903,9 @@ Object.extend(Event, (function() {
       }
 
       var wrapper = findWrapper(id, eventName, handler);
+      if(!wrapper) {
+        alert(element.className)
+      }
       if (!wrapper) return element;
 
       if (element.removeEventListener) {

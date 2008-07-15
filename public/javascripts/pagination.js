@@ -1,6 +1,6 @@
 var Pagination = Class.create({ 
 
-  initialize: function() {
+  initialize: function() {        
     this.options = Object.extend({
       container: 'container',
       selector: 'div.pagination a'
@@ -12,10 +12,9 @@ var Pagination = Class.create({
         container: this.options.container
       });
     }
-
     this.authenticity_token = $('authenticity-token').value;
-    this.b_linkHandler = this.linkHandler.bindAsEventListener(this);
     this.initLinks();
+    Event.observe( window, 'unload', this.releaseLinks.bind(this));
   },
 
   initLinks: function() {
@@ -23,17 +22,20 @@ var Pagination = Class.create({
       return;
 
     this.links = $(this.options.container).select(this.options.selector);
-    this.links.invoke('observe', 'click', this.b_linkHandler);
+    this.links.each(function(link) {
+      link.observe('click', this.linkHandler.bind(this, link));
+    }.bind(this));
+  },
+  
+  releaseLinks: function() {
+    this.links.each(function(link) {
+      link.stopObserving('click', this.linkHandler);
+    }); 
+    this.link = new Array();
   },
 
-  linkHandler: function(event) {
+  linkHandler: function(element, event) {
     event.stop(); 
-
-    var element = event.element();
-    if (element.tagName != 'A') {
-      element = element.up('a');
-    }
-
     new Ajax.Updater(this.options.container, element.getAttribute('href'), {
       method: 'GET',
       parameters: { authenticity_token: this.authenticity_token },
@@ -48,7 +50,7 @@ var Pagination = Class.create({
     } else if (this.options.spinner) {
       $(this.options.spinner).show();
     }
-    this.links.invoke('stopObserving', 'click', this.b_linkHandler);
+    this.releaseLinks();
   },
 
   complete: function() {

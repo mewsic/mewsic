@@ -33,38 +33,25 @@ var MlabSlider = Class.create(PictureSlider, {
           	'  </div>' +
             '</div>',  
   
-  initialize: function($super, element, options) {
+  initialize: function($super, element, options) {    
     $super(element, options);    
     this.scroll_clip = this.element.down('div#scroll-clip');
     MlabSlider.instance = this;
     this.windowSize = this.options.windowSize;
     this.user_id = $('current-user-id').value;
     this.authenticity_token = $('authenticity-token').value;
-    this.loadElements();    
-    this.initTrackButtons();
-    this.initSongButtons(); 
+    this.loadElements();  
+    this.items = new Array();
     this.loadingItems = new Array();
-    this.setupMlab();        
-    
-    Ajax.Responders.register({ 
-      onCreate: function(r) { 
-        if(r.container && r.container.success) {          
-          var container = $(r.container.success);
-          MlabSlider.instance.releaseSongButtons(container);
-          MlabSlider.instance.releaseTrackButtons(container);
-        }
-      },
-      
-      onComplete: function(r) {
-        if(r.container && r.container.success) {          
-          var container = $(r.container.success);
-          MlabSlider.instance.initSongButtons(container);
-          MlabSlider.instance.initTrackButtons(container);
-        }
-      }
-    });
+    this.setupMlab();                
+    Event.observe(window, 'unload', this.destroyMlab.bind(this));
   }, 
   
+  destroyMlab: function() {
+    this.scroll_clip = null;  
+    MlabSlider.instance = null;    
+  },
+    
   toggleTriggers: function() {
     this.isBackSlidable()    ? this.back_trigger.setOpacity(1.0)     : this.back_trigger.setOpacity(0.35);
     this.isForwardSlidable() ? this.forward_trigger.setOpacity(1.0)  : this.forward_trigger.setOpacity(0.35);
@@ -83,6 +70,7 @@ var MlabSlider = Class.create(PictureSlider, {
       var type = attributes.song_id ? 'track' : 'song';
       var item = new MlabItem(type, attributes, this);      
     }.bind(this))
+    elements = null;
   },
   
   setupMlab: function() {
@@ -164,63 +152,17 @@ var MlabSlider = Class.create(PictureSlider, {
       onSuccess: this._removeItem.bind(this, item),
       onFailure: function() { window.location.reload(); }.bind(this)
     });
-  },
-  
-  initTrackButtons: function(options) {
-    var options = Object.extend({}, arguments[0] || {});
-    var selector = '.button.mlab.track.add';
-    if(options.only_dynamic) selector += '.dynamic';
-    var items = options.container ? options.container.select(selector) : $$(selector);    
-    items.each(function(element) {      
-      element.observe('click', this.onAddTrack.bind(this));
-    }.bind(this));
-
-  },
-  
-  releaseTrackButtons: function(options) {
-    var options = Object.extend({}, arguments[0] || {});
-    var selector = '.button.mlab.track.add';
-    var items = options.container ? options.container.select(selector) : $$(selector);    
-    items.each(function(element) {      
-      element.stopObserving('click', this.onAddTrack.bind(this));
-    }.bind(this));
-  },
-  
-  initSongButtons: function(options) {
-    var options = Object.extend({}, arguments[0] || {});
-    var selector = '.button.mlab.song.add';
-    if(options.only_dynamic) selector += '.dynamic';
-    var items = options.container ? options.container.select(selector) : $$(selector);
+  },     
     
-    items.each(function(element) {
-      element.observe('click', this.onAddSong.bind(this));
-    }.bind(this));
+  addTrack: function(element) {    
+    this.handleItemAddition(element, 'track');
   },
   
-  releaseSongButtons: function(options) {
-    var options = Object.extend({}, arguments[0] || {});
-    var selector = '.button.mlab.song.add';
-    var items = options.container ? options.container.select(selector) : $$(selector);    
-    items.each(function(element) {      
-      element.stopObserving('click', this.onAddSong.bind(this));
-    }.bind(this));
+  addSong: function(element) {    
+    this.handleItemAddition(element, 'song');
   },
   
-  onAddTrack: function(event) {    
-    var element = event.element();
-    this.handleItemAddition(event, element, 'track');
-  },
-  
-  onAddSong: function(event) {    
-    var element = event.element();
-    this.handleItemAddition(event, element, 'song');
-  },
-  
-  handleItemAddition: function(event, element, itemType) {    
-    event.stop(); 
-    if (element.tagName != 'IMG')
-      return false;
-
+  handleItemAddition: function(element, itemType) {        
     var image = element;
     var item_id = image.id.match(/^(\d+)_/)[1];
     var item_key = itemType + '_' + item_id;    
