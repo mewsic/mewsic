@@ -22,6 +22,8 @@
 #  rating_avg      :decimal(10, 2 
 #
 
+require 'numeric_to_runtime'
+
 class Song < ActiveRecord::Base
   
   attr_accessor :mlab
@@ -146,10 +148,7 @@ class Song < ActiveRecord::Base
   end
   
   def length
-    hours,   remainig = self.seconds.divmod(3600)
-    minutes, remainig = remainig.divmod(60)
-    seconds = remainig    
-    "#{zerofill(hours, 2)}:#{zerofill(minutes, 2)}:#{zerofill(seconds, 2)}"
+    seconds.to_runtime
   end
   
   def to_breadcrumb
@@ -160,16 +159,11 @@ class Song < ActiveRecord::Base
     self.user_id != user.id
   end
 
+  # Called by the cron runner
+  #
   def self.cleanup_unpublished
     songs = find_by_sql(['select songs.id from songs left outer join tracks on tracks.song_id = songs.id where songs.published = ? and songs.created_at < ? group by songs.id having count(tracks.id) = 0', false, 1.week.ago])
     delete_all ['id in (?)', songs.map(&:id)] unless songs.empty?
   end
 
-private
-
-  def zerofill(number, length)
-    string = number.to_s
-    (length - string.size).times{ string = "0#{string}"}
-    string
-  end  
 end

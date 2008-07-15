@@ -34,12 +34,9 @@ class SongsController < ApplicationController
     if logged_in?
       @has_abuse = Abuse.exists?(["abuseable_type = 'Song' AND abuseable_id = ? AND user_id = ?", @song.id, current_user.id])
     end
-    @direct_siblings = @song.direct_siblings
-    @indirect_siblings = @song.indirect_siblings
+
     respond_to do |format|
-      format.html do
-        @other_songs = Song.find(:all, :conditions => ["songs.user_id = ? AND songs.published = ?", @song.user, true], :order => 'songs.listened_times', :limit => 8, :include => [:user, { :mixes => { :track => [:instrument, :parent_song] } }, :genre])        
-      end
+      format.html
 
       format.xml do
         @show_siblings  = params.include?(:siblings)
@@ -62,16 +59,13 @@ class SongsController < ApplicationController
     end  
   end
   
-  def direct_sibling_tracks
+  def tracks
+    render :nothing => true, :status => :bad_request and return unless request.xhr?
+
     @song = Song.find(params[:id], :include => [:user, { :mixes => { :track => [:instrument, :parent_song] } }, :genre])        
-    render :layout => false
+    render :layout => false, :partial => 'track', :collection => @song.tracks
   end
-  
-  def indirect_sibling_tracks
-    @song = Song.find(params[:id], :include => [:user, { :mixes => { :track => [:instrument, :parent_song] } }, :genre])        
-    render :layout => false
-  end
-  
+
   def update
     @song = current_user.songs.find(params[:id])
     @song.update_attributes!(params[:song])
@@ -144,7 +138,7 @@ class SongsController < ApplicationController
     #    root /data/myousica/shared/audio;
     #    internal;
     #  }
-    response.headers['Content-Disposition'] = %[attachment; filename="#{@song.title}"]
+    response.headers['Content-Disposition'] = %[attachment; filename="#{@song.title} by #{@song.user.login}.mp3"]
     response.headers['Content-Type'] = 'audio/mpeg'
     response.headers['Cache-Control'] = 'private'
     response.headers['X-Accel-Redirect'] = @song.filename

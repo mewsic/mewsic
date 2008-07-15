@@ -22,6 +22,8 @@
 #  user_id        :integer(11)   
 #
 
+require 'numeric_to_runtime'
+
 class Track < ActiveRecord::Base
   
   attr_accessor :mlab
@@ -88,10 +90,7 @@ class Track < ActiveRecord::Base
   end
   
   def length
-    hours,   remainder = self.seconds.divmod(3600)
-    minutes, remainder = remainder.divmod(60)
-    seconds = remainder
-    "#{zerofill(hours, 2)}:#{zerofill(minutes, 2)}:#{zerofill(seconds, 2)}"
+    seconds.to_runtime
   end
   
   def user
@@ -115,11 +114,5 @@ private
   def set_tonality_from_tone
     self.tonality = self.tone unless self.tone.blank?
   end
-  
-  def zerofill(number, length)
-    string = number.to_s
-    (length - string.size).times{ string = "0#{string}"}
-    string
-  end
-  
+
 end

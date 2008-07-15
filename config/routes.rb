@@ -40,7 +40,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :sessions
 
   map.resources :songs, :has_one => :player, 
-    :member => { :mix => :post, :rate => :put , :direct_sibling_tracks => :get, :indirect_sibling_tracks => :get, :download => :get } do |song|
+    :member => { :mix => :post, :rate => :put , :tracks => :get, :download => :get } do |song|
 
     song.resources :abuses, :singular => 'abuse'
     

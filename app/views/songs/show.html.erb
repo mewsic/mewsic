@@ -5,40 +5,42 @@
     <div class="special-arrow-active"></div>
   </div>
   <div class="simple-list">
-	  <h1><%= @song.title %></h1>
-	  <div class="top-box clear-block">
+    <h1><%= @song.title %></h1>
+    <div class="top-box clear-block">
       <div class="float-right" style="padding-right:56px;">
         <div class="track-tab">
           <span class="tracks-number"><span><%= @song.tracks.count %></span></span>
         </div>
       </div>
-		  <div class="bottom-box clear-block">
-		    <div class="clear-block">	
+      <div class="bottom-box clear-block">
+        <div class="clear-block">
           <p class="music-info float-right align-right">
             <span>runtime:<br /><strong><%= @song.length %></strong></span>
           </p>
-          <p class="thumb"><%= link_to avatar_image(@song.user, :icon), user_path(@song.user) %></p>			
-  			  <p class="name"><%= link_to @song.user.nickname, user_path(@song.user) %></p>
-  			  <p class="title"><%= @song.title %></p>
-  			  <p class="grey-text clear-float"><%= @song.description %></p>
-  			  <p class="thumb">
-  			    <%- @song.tracks.each do |track| -%>
-  			      <%= track_instrument_icon(track) %>
-  			    <%- end -%>			  
+          <p class="thumb"><%= link_to avatar_image(@song.user, :icon), user_path(@song.user) %></p>
+          <p class="name"><%= link_to @song.user.nickname, user_path(@song.user) %></p>
+          <p class="title"><%= @song.title %></p>
+          <p class="grey-text clear-float"><%= @song.description %></p>
+          <p class="thumb">
+            <%- @song.tracks.each do |track| -%>
+              <%= track_instrument_icon(track) %>
+            <%- end -%>
           </p>
+          <div class="clearer"></div>
+          <p class="genre"><%= link_to(@song.genre.name, genre_path(@song.genre)) if @song.genre %></p>
           <div class="music-info song-resume float-right">
-						<%= rating(@song, :no_clear => true) %>
+            <%= rating(@song, :no_clear => true) %>
             <%= mlab_button(@song) %>
             <%= play_button(@song) %>
-					</div>
-					<div class="float-left">
-			      <%= download_button(@song) %>
-            <%= link_to(@song.genre.name, genre_path(@song.genre)) if @song.genre %>
           </div>
-        </div>		  
-      </div>	  
+          <div class="float-left">
+            <%= download_button_for @song %>
+            <%= download_link_for @song, 'Download' %>
+          </div>
+        </div>
+      </div>
     </div>
-	  <div class="music-info song-stat">
+    <div class="music-info song-stat">
       <p><strong>Stats</strong></p>
       <table width="100%" border="0" cellpadding="0" cellspacing="5" style="border-top:1px solid #E6E6E6;">
         <tr>
@@ -47,90 +49,55 @@
           <td width="20%">Rated</td>
           <td width="10%" class="align-right"><%= @song.rating_count %></td>
         </tr>
-  			<tr>
-  				<td width="40%">Edited</td>
-  				<td width="30%">15</td>
-  				<td width="20%">Created</td>
-  				<td width="10%" class="align-right"><%= @song.created_at.strftime("%m/%d/%y") %></td>
-  			</tr>
-  		</table>
-    </div>			
+        <tr>
+          <td width="40%">Edited</td>
+          <td width="30%">15</td>
+          <td width="20%">Created</td>
+          <td width="10%" class="align-right"><%= @song.created_at.strftime("%m/%d/%y") %></td>
+        </tr>
+      </table>
+    </div>
     <p class="abstract align-right">
       <%- if logged_in? && !@has_abuse -%>
-				<a href="<%= formatted_new_song_abuse_path(@song, 'html') %>" title="Report abuse :: :: width: 600, height: 400, ajax: {method:'get'}" rel="ajax" class="lightview">report abuse</a>
+        <a href="<%= formatted_new_song_abuse_path(@song, 'html') %>" title="Report abuse :: :: width: 600, height: 400, ajax: {method:'get'}" rel="ajax" class="lightview">report abuse</a>
       <%- end -%>
     </p>
   </div>
-  <div>
-    <h1>Other songs by <%= link_to @song.user.nickname, user_path(@song.user) %> <span class="no-bold">(<%= @song.user.songs.count %>)</span></h1>
-    <table width="100%" border="0" cellpadding="0" cellspacing="0">
-      <%- @other_songs.each_with_index do |song, index| -%>
-        <tr class="<%= %[even odd][index % 2] %>">
-          <td><span class="cyan-text"><%= song.genre ? link_to(song.genre.name, genre_path(song.genre)) : ''  %> </span>	<em> <%= link_to truncate(song.title, 20), song_path(song) %> </em></td>
-          <td class="star">
-            <%= rating(song) %>
-          </td>
-          <td class="button">
-            <%= mlab_button(song) %>
-            <%= play_button(song) %>
-          </td>
-        </tr>
-      <%- end -%>
-    </table>
-		<!-- <p class="abstract align-right"><a href="#">Next</a></p> -->
-  </div>  
 </div>
 
-<div class="float-left one-col-big clear-block slide-container">
-	<div class="simple-list box-grigio-stondato" style="margin-bottom: 7px">
-		<div class="top-box clear-block">
-			<div class="bottom-box clear-block">						  
-				<div id="song-tracks-container" style="top: 0px;">
-			  <%- @song.tracks.each do |track| -%>		  
-			    <div class="elements clear-block">
-    			  <p class="thumb">
-    			    <%= track_instrument_icon(track) %>
-    			    <%= link_to(avatar_image(track.user, :icon), user_path(track.user)) %>
-    			  <p class="name align-right"><%= link_to(track.user.nickname, user_path(track.user)) %></p>
-    			  <p class="title align-right"><%= track.title %></p>
-    			  <div class="music-info">
-    			    <p class="bordered"><span>bpm: <strong><%= track.bpm %></strong></span> <span>key: <strong><%= track.tonality %></strong></span> <span>runtime: <strong><%= track.length %> </strong></span></p>
-    			    <div class="float-right">
-    			      <%= mlab_button(track) %>
-    			      <%= play_button(track) %>
-              </div>
-							<%= rating(track, :style => 'float: right; margin: 0px 4px;', :no_clear => true) %>
-    			    <p class="float-left"><%= link_to(track.parent_song.genre.name, genre_path(track.parent_song.genre.name)) if track.parent_song && track.parent_song.genre %></p>
-    			  </div>
-    		  </div>
-			  <%- end -%>
-				</div>
-		  </div>
-		</div>
+<div class="float-left one-col-big clear-block slide-container song-tracks">
+  <div class="simple-list box-grigio-stondato" style="margin-bottom: 7px">
+    <div class="top-box clear-block">
+      <div class="bottom-box clear-block">
+        <div id="song-tracks-container" style="top: 0px;">
+          <%= render :partial => 'track', :collection => @song.tracks %>
+        </div>
+      </div>
+    </div>
   </div>
-	<p class="abstract align-right" style="margin-right: 9px"><a class="slide-prev" href="#"><%= image_tag 'move_arrow_up.png' %></a>  <a class="slide-next" href="#"><%= image_tag 'move_arrow_down.png' %></a></p>
+  <p class="abstract align-right" style="margin-right: 9px"><a class="slide-prev" href="#"><%= image_tag 'move_arrow_up.png' %></a>  <a class="slide-next" href="#"><%= image_tag 'move_arrow_down.png' %></a></p>
 </div>
 
 <!-- TABMENU -->
 <div id="siblings_tabmenu_container">
-	<div class="tab active" id="direct-siblings-tab">
-	  <div id="siblings_tabmenu" class="sx"> </div>
-  	<div id="siblings_tabmenu" class="rp">
-  		<p class="siblings_green_text">
-  		  <a href="#" onclick="$('indirect-siblings-tab').removeClassName('active');$('direct-siblings-tab').addClassName('active');$('indirect_siblings_container').hide();$('direct_siblings_container').show(); return false;">Other versions<span class="no-bold">(<%= @direct_siblings.size %>)</span></a>
+  <div class="tab active" id="direct-siblings-tab">
+    <div id="siblings_tabmenu" class="sx"> </div>
+    <div id="siblings_tabmenu" class="rp">
+      <p class="siblings_green_text">
+        <a href="#" onclick="$('indirect-siblings-tab').removeClassName('active');$('direct-siblings-tab').addClassName('active');$('indirect_siblings_container').hide();$('direct_siblings_container').show(); return false;">Other versions<span class="no-bold">(<%= @song.direct_siblings.count %>)</span></a>
       </p>
-  		<p class="siblings_tabmenu_title"></p>			
-  	</div>
-  	<div id="siblings_tabmenu" class="dx"> </div>
-	</div>
+      <p class="siblings_tabmenu_title"></p>
+    </div>
+    <div id="siblings_tabmenu" class="dx"> </div>
+  </div>
   <div class="tab" id="indirect-siblings-tab">
     <div id="siblings_tabmenu" class="inactive sx"> </div>
-  	<div id="siblings_tabmenu" class="inactive rp">
-  		<p class="siblings_orange_text"><a href="#" onclick="$('direct-siblings-tab').removeClassName('active');$('indirect-siblings-tab').addClassName('active');$('direct_siblings_container').hide();$('indirect_siblings_container').show(); return false;">Remote versions<span class="no-bold">(<%= @indirect_siblings.size %>)</span></a></p>
-  		<p class="siblings_tabmenu_title"></p>			
-  	</div>
-  	<div id="siblings_tabmenu" class="inactive dx"> </div>
-  </div>	
+    <div id="siblings_tabmenu" class="inactive rp">
+      <p class="siblings_orange_text"><a href="#" onclick="$('direct-siblings-tab').removeClassName('active');$('indirect-siblings-tab').addClassName('active');$('direct_siblings_container').hide();$('indirect_siblings_container').show(); return false;">Remote versions<span class="no-bold">(<%= @song.indirect_siblings.count %>)</span></a></p>
+      <p class="siblings_tabmenu_title"></p>
+    </div>
+    <div id="siblings_tabmenu" class="inactive dx"> </div>
+  </div>
 </div>
 <!-- END TABMENU -->
 
@@ -139,142 +106,28 @@
     <div class="simple-list">
       <div class="top-box clear-block">
         <div class="bottom-box clear-block" id="direct-siblings">
-        <%- @direct_siblings.each_with_index do |mix, index| song = mix.song -%>
-          <div id="direct-sibling-<%= song.id %>" class="sibling special-box clear-block<%= ['', ' grey-bg'][index % 2] %>">
-            <div class="float-right" style="padding-right:10px;">
-    			    <div class="special-arrow"></div>
-    			  </div>
-            <p class="float-right" style="position:relative;">
-              <img src="/images/spinner.gif" id="direct-sibling-tracks-loading-<%= song.id %>" style="display: none;float: left; margin: 7px 5px"/>
-      		    <span class="tracks-number" id="track-number-<%= song.id %>">                
-      		      <a href="#" onclick="new Ajax.Updater('direct-sibling-tracks', '<%= direct_sibling_tracks_song_path(song) %>', {
-      		        method: 'GET',
-      		        onLoading: function() {
-      		          $('direct-sibling-tracks').hide();
-      		          $('direct-sibling-tracks-loading-<%= song.id %>').show();
-      		          $('direct-siblings').select('.sibling').invoke('removeClassName', 'active');
-      		          $('direct-siblings').select('.tracks-number').invoke('removeClassName', 'orange');
-      		        },
-      		        onComplete: function() {
-      		          $('direct-sibling-<%= song.id %>').addClassName('active');
-      		          $('direct-sibling-tracks-loading-<%= song.id %>').hide();
-      		          $('direct-sibling-tracks').show();    		          
-      		        }
-      		      });return false;" style="color: #FFF; display: block; text-decoration: none;height: 100%;">
-      		        <%= song.tracks.count %>
-      		      </a>
-              </span>
-            </p>
-      			<p class="thumb">
-      			  <%= link_to avatar_image(song.user, :icon), user_path(song.user) %>
-            </p>
-      			<p class="name"><%= link_to song.user.nickname, user_path(song.user) %></p>
-      			<p class="title"><%= link_to song.title, song_path(song) %></p>
-						<div class="music-info">
-      			  <p class="float-right">
-      			    <%= rating(song) %>
-      			    <%= mlab_button(song) %>
-      			    <%= play_button(song) %>
-              </p>
-      			  <p class="float-left">
-                <%= download_button(song) %>
-                <%= link_to song.genre.name, genre_path(song.genre) if song.genre %>
-  						</p>
-    			  </div>
-    		  </div>
-        <%- end -%>
-
+          <%= render :partial => 'sibling', :collection => @song.direct_siblings, :locals => { :container => 'direct-siblings' } %>
+        </div>
       </div>
     </div>
   </div>
+
+  <%= render :partial => 'siblings_container', :locals => { :container => 'direct-siblings' } %>
 </div>
 
 
-  <div class="float-left one-col-big clear-block slide-container">
-    <div class="simple-list box-grigio-stondato">
-      <div class="top-box clear-block">        
-				<div class="bottom-box clear-block">        
-					<div id="direct-sibling-tracks">
-						<p class="grey-text" style="text-align:center; padding:30px;">Click on the <strong>Tracks Number</strong> icon to navigate this Song</p>  	    
-					</div>
-				</div>
-			</div>
-    </div>
-		<p class="abstract align-right"><a class="slide-prev" href="#"><%= image_tag 'move_arrow_up.png' %></a>  <a class="slide-next" href="#"><%= image_tag 'move_arrow_down.png' %></a></p>
-  </div>
-</div>
-
- 
 <div id="indirect_siblings_container" style="display: none">
   <div class="box-list special-arrow-box special-list clear-block">
     <div class="simple-list">
       <div class="top-box clear-block">
         <div class="bottom-box clear-block">
-
-  		    <div class="bottom-box clear-block" id="indirect-siblings">
-
-            <%- @indirect_siblings.each_with_index do |song, index| -%>
-              <div id="indirect-sibling-<%= song.id %>" class="sibling special-box clear-block<%= ['', ' grey-bg'][index % 2] %>">
-        			  <div class="float-right" style="padding-right:10px;">
-        			    <div class="special-arrow"></div>
-        			  </div>
-          		  <p class="float-right" style="position:relative;">
-          		    <img src="/images/spinner.gif" id="indirect-sibling-tracks-loading-<%= song.id %>" style="display: none;float: left; margin: 7px 5px"/>
-          		    <span class="tracks-number" id="track-number-<%= song.id %>">
-          		      <a href="#" onclick="new Ajax.Updater('indirect-sibling-tracks', '<%= indirect_sibling_tracks_song_path(song) %>', {
-          		        method: 'GET',
-          		        onLoading: function() {
-          		          $('indirect-sibling-tracks').hide();
-          		          $('indirect-sibling-tracks-loading-<%= song.id %>').show();
-          		          $('indirect-siblings').select('.sibling').invoke('removeClassName', 'active');        		          
-          		        },
-          		        onComplete: function() {
-          		          $('indirect-sibling-<%= song.id %>').addClassName('active');
-          		          $('indirect-sibling-tracks-loading-<%= song.id %>').hide();
-          		          $('indirect-sibling-tracks').show();    		          
-          		        }
-          		      });return false;" style="color: #FFF; display: block; text-decoration: none;height: 100%;">
-          		        <%= song.tracks.count %>
-          		      </a>
-                  </span>
-                </p>
-          			<p class="thumb">
-          			  <%= link_to avatar_image(song.user, :icon), user_path(song.user) %>
-                </p>
-          			<p class="name"><%= link_to song.user.nickname, user_path(song.user) %></p>
-          			<p class="title"><%= link_to song.title, song_path(song) %></p>
-          			<div class="music-info">
-          			  <p class="float-right">
-          			    <span class="star"><%= rating(song) %></span>
-          			    <%= mlab_button(song) %>
-          			    <%= play_button(song) %>
-                  </p>
-          			  <p class="float-left">
-      						  <%= download_button(song) %>
-                    <%= link_to song.genre.name, genre_path(song.genre) if song.genre %>
-      						</p>
-        			  </div>
-        		  </div>
-            <%- end -%>
-
-      	  </div>		  		  		  
-
-  	    </div>	  
-  	  </div>
+          <div class="bottom-box clear-block" id="indirect-siblings">
+            <%= render :partial => 'sibling', :collection => @song.indirect_siblings, :locals => { :container => 'indirect-siblings' } %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="float-left one-col-big clear-block slide-container">
-    <div class="simple-list box-grigio-stondato">
-      <div class="top-box clear-block">
-				<div class="bottom-box clear-block">
-					<div id="indirect-sibling-tracks">
-						<p class="grey-text" style="text-align:center; padding:30px;">Click on the <strong>Tracks Number</strong> icon to navigate this Song</p>
-					</div>
-				</div>
-  	  </div>
-    </div>
-    <p class="abstract align-right"><a class="slide-prev" href="#">Prev</a> | <a class="slide-next" href="#">Next</a></p>
-  </div>
-
+  <%= render :partial => 'siblings_container', :locals => { :container => 'indirect-siblings' } %>
 </div>

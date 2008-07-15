@@ -235,9 +235,9 @@ html>body #search p span{
 }
 
 /* elementi comuni */
-.name, .name a{
+.name, .name a {
 	font-weight:bold;
-	color:#000;
+	color:#28548B;
 }
 .name a:hover {
 	color:#28548B;
@@ -2387,10 +2387,14 @@ p.sign-in .button{
 .orange-text a{
 	color:#ECAF48;
 }
-.playcount {
+.playcount, .download {
 	margin: 2px !important;
+	color: #6c6c6c !important;
 	font-size: 11px;
-	color: #6c6c6c;
+}
+.genre, .genre a {
+	color: #0296C2;
+	font-weight: bold;
 }
 .alert{
 	color:#c03;
@@ -2722,6 +2726,7 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 	background:#F6F6F6 url(/images/rounded_grey_boxbottom.gif) no-repeat bottom left;
 	padding:15px;
 }
+
 /* special arrow */
 .box-grigio-stondato .top-box{
 	background:#E5E5E5 url(/images/BG_box_grigio_stondato_top.gif) no-repeat top left;
@@ -2741,6 +2746,11 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 	height:550px;
 	overflow:hidden;
 }
+
+.song-tracks .bottom-box{
+	height: 350px;
+}
+
 .box-grigio-stondato .top-box .elements{
 	background-color:#fff;
 	padding:5px 5px 0px !important;
@@ -2806,11 +2816,6 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 	float: right;
 }
 
-.song-resume .rating {
-	float: left;
-	margin: 0;
-}
-
 td.star .rating {
 	float: right;
 	margin: 0;
@@ -2824,9 +2829,15 @@ td.star .rating {
 	clear: both;
 }
 
-.idea-buttons .rating {
-	margin: 0px 4px !important;
-	width: 65px !important;
+.idea-buttons .rating, .music-info .rating {
+	margin: 0px 4px;
+	width: 65px;
+}
+
+.song-resume .rating {
+	float: left;
+	margin: 0;
+	width: 85px;
 }
 
 #mlab-scroller .elements {
@@ -4133,4 +4144,3 @@ div.auto_complete ul strong.highlight {
 	height: 40px;
 	margin-bottom: 90px;
 }
-
