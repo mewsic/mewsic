@@ -126,5 +126,17 @@ module UsersHelper
   def refresh_block_image_link(url_options = {})
     link_to image_tag('refresh.png', :class => 'refresh-block'), top_users_path(url_options), :class => 'trigger'
   end
+
+  def idea_icon_for(track)
+    image_tag(track.idea? ? 'ideas_yes.png' : 'ideas_no.png', :class => 'idea-icon')
+  end
+  def idea_link_for(track)
+    image = idea_icon_for(track)
+    if current_user_page?
+      link_to_remote image, :url => toggle_idea_user_track_path(current_user, track), :method => :put, :html => {:id => "toggle_idea_#{track.id}"}
+    else
+      image
+    end
+  end
 end
 

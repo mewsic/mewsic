@@ -1016,11 +1016,15 @@ h2.dj-label{
 }
 
 .mlab_tracks td.track-name {
-	width: 300px;
+	width: 255px;
 }
 
 .mlab_tracks p.title, .mlab_song p.title {
 	overflow: hidden;
+}
+
+.mlab_tracks .idea-icon {
+	float: left;
 }
 
 .mlab_song td.song-info {
