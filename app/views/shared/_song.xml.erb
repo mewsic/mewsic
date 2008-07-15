@@ -4,15 +4,16 @@
   <title><%= song.title %></title>     
   <instruments><%= song.instruments.size %></instruments>  
   <genre><%= song.genre.id if song.genre %></genre>     
-	<bpm><%= song.bpm %></bpm>        
-	<tone><%= song.tone %></tone>       
-	<description><%= song.description %></description>
-	<rating><%= song.rating_avg.to_f %></rating>     
+  <bpm><%= song.bpm %></bpm>        
+  <tone><%= song.tone %></tone>       
+  <description><%= song.description %></description>
+  <rating><%= song.rating_avg.to_f %></rating>     
   <id><%= song.id %></id>         
   <filename><%= song.filename %></filename>
-	<%- if @show_siblings_count -%>
-		<siblings_count><%= song.direct_siblings.size %></siblings_count>
-	<%- end -%>
+  <waveform><%= formatted_song_path song, 'png' %></waveform>
+  <%- if @show_siblings_count -%>
+    <siblings_count><%= song.direct_siblings.size %></siblings_count>
+  <%- end -%>
   <%- if @show_mlab_id -%>
     <mlab_id><%= song.mlabs.first.id if song.mlabs.count > 0 %></mlab_id>
   <%- end -%>
