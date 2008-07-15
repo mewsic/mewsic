@@ -3,10 +3,10 @@
 	<div id="login-box-core" class="pngfix">
 		<%- form_tag sessions_path do -%>  
   		<p class="login-box-title">Account Login</p>
-  			<input type="text" name="login" class="login-box-input username" value="username" />
-  			<input type="password" name="password" class="login-box-input password" value="password" />
+  			<input type="text" name="login" class="login-box-input" value="username" onblur="if(this.value=='')this.value='username'" onfocus="if(this.value=='username')this.value=''"/>
+  			<input type="password" name="password" class="login-box-input" value="password" onblur="if(this.value=='')this.value='password'" onfocus="if(this.value=='password')this.value=''"/>
   		<p class="login-box-helplinks">
-  			<a href="#" class="forgot">Forgot password?</a><br />
+				<a href="#" onclick="$('login-box-core').fade({duration:0.3});$('login-box-forgot').appear({duration:0.3,queue:'end'})">Forgot password?</a><br />
         <%= link_to 'Sign up', new_user_path %>
   		</p>		
   		<div id="login-box-remember">
@@ -18,13 +18,15 @@
 		<%- end -%>
 	</div>
 	<div id="login-box-forgot" class="pngfix" style="display: none;">
-		<% form_tag forgot_password_path, :id => 'forgot-box' do -%>
+		<% form_remote_tag :url => forgot_password_path,
+		     :loading => "$('forgot-box-spinner').show();$('login-box-forgot').fade({duration:0.3});",
+		     :complete => "$('forgot-box-spinner').hide();$('login-box-core').appear({duration:0.3,queue:'end'})" do -%>
   		<p class="login-box-title">Forgot password?</p>
       <p>
-        <input type="text" name="email" class="login-box-email email" value="Your email address" />
+        <input type="text" name="email" class="login-box-email email" value="Your email address" onblur="if(this.value=='')this.value='Your email address'" onfocus="if(this.value=='Your email address')this.value=''" />
       </p> 
   		<p class="login-box-helplinks">
-  			<a href="#" class="cancel">Cancel</a><br />
+  			<a href="#" onclick="$('login-box-forgot').fade({duration:0.3});$('login-box-core').appear({duration:0.3,queue:'end'})">Cancel</a>
   		</p>		
   		<div style="clear: both;"></div>
 			<%= image_tag 'spinner.gif', :id => 'forgot-box-spinner', :style => 'display:none; float: left' %>

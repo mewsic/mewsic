@@ -38,22 +38,16 @@ class TracksController < ApplicationController
   end
   
   def create    
-    # HACK because the SWF sends wrong parameters
-    attributes = params[:track]
-    if attributes.nil?
-      attributes = params.reject { |k,v| %w(action controller author genre).include?(k) || v == 'undefined' }
-      attributes[:instrument] = Instrument.find attributes[:instrument]
-      attributes[:filename] = '/audio/' << attributes[:filename]
-    end
-
-    attributes[:owner] = current_user
-    @track = Track.create!(attributes)
+    @track = current_user.tracks.create! params[:track]
     
     respond_to do |format|
       format.xml do
         render :xml => @track
       end 
     end
+
+  rescue ActiveRecord::RecordInvalid
+    render :nothing => true, :status => :bad_request
   end  
   
   def rate    

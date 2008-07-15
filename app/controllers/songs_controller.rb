@@ -74,7 +74,7 @@ class SongsController < ApplicationController
   
   def update
     @song = current_user.songs.find(params[:id])
-    @song.update_attributes(params[:song])
+    @song.update_attributes!(params[:song])
     if params[:song].size == 1 && @song.respond_to?(params[:song].keys.first)
       if params[:song].keys.first == 'genre_id'
         render :text => @song.genre ? @song.genre.name : ''
@@ -82,8 +82,11 @@ class SongsController < ApplicationController
         render :text => @song.send(params[:song].keys.first)
       end
     else
-      render :nothing => true
+      render :nothing => true, :status => :ok
     end
+
+  rescue ActiveRecord::ActiveRecordError
+    render :nothing => true, :status => :bad_request
   end
   
   def mix
@@ -92,19 +95,21 @@ class SongsController < ApplicationController
     tracks = params[:song].delete(:tracks) if params[:song][:tracks]
     tracks = [tracks] unless tracks.is_a?(Array)
 
-    @song.published = true
-    @song.update_attributes!(params[:song])
-
-    #@song.mixes.clear
-    tracks.each do |track|
-      mix = Mix.new
-      mix.song = @song
-      mix.track_id = track[:id]
-      mix.volume = track[:volume]
-      mix.loop = track[:loop]
-      mix.balance = track[:balance]
-      mix.time_shift = track[:time_shift]
-      mix.save!
+    Song.transaction do 
+      @song.published = true
+      @song.update_attributes!(params[:song])
+    
+      #@song.mixes.clear
+      tracks.each do |track|
+        mix = Mix.new
+        mix.song = @song
+        mix.track_id = track[:id]
+        mix.volume = track[:volume]
+        #mix.loop = track[:loop]
+        mix.balance = track[:balance]
+        #mix.time_shift = track[:time_shift]
+        mix.save!
+      end
     end
 
     respond_to do |format|
@@ -112,6 +117,9 @@ class SongsController < ApplicationController
         render :xml => @song
       end
     end
+
+  rescue ActiveRecord::ActiveRecordError
+    render :nothing => true, :status => :bad_request
   end    
   
   def rate    
