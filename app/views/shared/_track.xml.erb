@@ -4,13 +4,14 @@
   <title><%= track.title %></title>     
   <instrument><%= track.instrument.id %></instrument>  
   <genre><%= track.parent_song.genre.name if track.parent_song.genre %></genre>     
-	<bpm><%= track.bpm %></bpm>        
-	<tone><%= track.tone %></tone>       
-	<description><%= track.description %></description>
-	<rating><%= track.rating_avg.to_f %></rating>     
+  <bpm><%= track.bpm %></bpm>        
+  <key><%= track.tonality %></key> 
+  <description><%= track.description %></description>
+  <rating><%= track.rating_avg.to_f %></rating>     
   <id><%= track.id %></id>         
   <filename><%= track.filename %></filename>
   <song_count><%= track.songs.count %></song_count>
+  <waveform><%= formatted_track_path track, 'png' %></waveform>
   <% if @show_siblings; @show_siblings = false -%>
     <siblings type="direct">
       <songs>
