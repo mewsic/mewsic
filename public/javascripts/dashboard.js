@@ -27,7 +27,7 @@ var Splash = Class.create({
     $('splash_motto').down('h2').fade({duration: 0.3});
     new Ajax.Request('/splash', {
       method: 'get',
-      onCreate: function() {
+      onLoading: function() {
         var mlabSlider = MlabSlider.getInstance();        
         if (mlabSlider) {
           mlabSlider.releaseTrackButtons(true, $('splash_tracks'));
