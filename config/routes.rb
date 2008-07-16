@@ -82,7 +82,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :tracks
     admin.resources :users
     admin.resources :answers
-    admin.resources :help_pages
+    admin.resources :help_pages, :member => { :rearrange => :put }
   end
 
 end

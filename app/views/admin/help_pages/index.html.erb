@@ -1,10 +1,14 @@
-<p>Total <%= HelpPage.count %> pages</p>
+<p>
+	<%= edit_link_to 'new page', new_admin_help_page_path %><br/>
+	Total <%= HelpPage.count %> pages
+</p>
 <table class="admin_content_table" cellspacing="0" cellpadding="5">
 	<tr>
 		<th>id</th>
 		<th>position</th>
 		<th>title</th>
 		<th>body</th>
+		<th>arrange</th>
 	</tr>
 	<%= render :partial => 'admin/help_pages/help', :collection => @pages %>
 </table>
