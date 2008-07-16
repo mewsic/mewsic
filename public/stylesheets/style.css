@@ -347,7 +347,7 @@ div.user-list-boxes .motto {
 .abstract{
 	font-style:italic;
 	color:#61656A;
-	margin-bottom: 7px;
+	/*margin-bottom: 7px;*/
 }
 .abstract a{
 	color:#61656A;
@@ -495,16 +495,6 @@ h2, h2 a{
 	padding:2px 5px;
 	vertical-align:middle;
 }
-
-.box-list table td a:link, .box-list table td a:visited, .box-list table td a:active {
-	color: #000;
-	/*text-decoration: none;*/
-}
-
-.box-list table td a:hover {
-	color: #28548B;
-}
-
 
 tr.even{
 	background-color:#EDEDED;
@@ -1440,7 +1430,7 @@ h2.dj-label{
 	padding-bottom: 15px;
 }
 
-#songs_spinner, #tracks_spinner {
+#songs_spinner, #tracks_spinner, #newest_spinner, #coolest_spinner {
 	position:relative;
 	height:0px;
 	width:66px;
@@ -1492,18 +1482,25 @@ h2.dj-label{
 .tit-classification-songs table {
 	margin:auto auto;
 }
-.tit-classification-songs h1{
-	text-indent:-500em;
-	font-size:1px;
-	margin-bottom:0px;
-	background: url(/images/BG_tab_title_songs.png) no-repeat bottom left;
-	padding-top:26px;
+.tit-classification-songs p {
+	padding: 2px 0px !important;
+}
+.tit-classification-songs .count {
+	color:#AEA3A7;
+	float:left;
+	font-size:18px;
+	font-weight:bold;
+	padding-top:0px;
+	text-indent:100px;
 }
 .tit-classification-songs .top-box{
-	background-color:#EEF3E7;
+	background: url(/images/BG_tab_title_songs.png) no-repeat left top;
+	padding-top:26px;
 }
 .tit-classification-songs .elements{
 	margin-bottom:4px;
+	background-color:#EEF3E7;
+	padding-bottom:12px;
 }
 
 /* elenco generi */
@@ -1519,18 +1516,12 @@ h2.dj-label{
 .elenco-genere h1{
 	padding-left:10px;
 }
-.elenco-genere .top-box{
-}
 .elenco-genere .elements{
 	margin-bottom:2px;
 }
 .elenco-genere img.float-left{
 	margin-right:2px;
 }
-
-/*#songs p, #tracks p {
-  padding-bottom: 10px;
-}*/
 #songs p.title a, #tracks p.title a {
   text-decoration: underline;
   color: #009DC2;
@@ -1547,18 +1538,38 @@ table.mlab_tracks {
 .tit-classification-tracks table {
 	margin:auto auto;
 }
-.tit-classification-tracks h1{
-	text-indent:-500em;
-	font-size:1px;
-	margin-bottom:0px;
-	background: url(/images/BG_tab_title_tracks.png) no-repeat bottom left;
+.tit-classification-tracks p {
+	padding: 2px 0px !important;
+}
+
+.tit-classification-tracks .count {
+	color:#A89C89;
+	float:left;
+	font-size:18px;
+	font-weight:bold;
+	padding-top:0px;
+	text-indent:100px;
+}
+.tit-classification-tracks .top-box-tracks {
+	background: url(/images/BG_tab_title_tracks.png) no-repeat top left;
 	padding-top:26px;
 }
-.tit-classification-tracks .top-box{
-	background-color:#F8ECD9;
+.tit-classification-tracks .top-box-ideas {
+	background: url(/images/BG_tab_title_ideas.png) no-repeat top left;
+	padding-top:26px;
 }
-.tit-classification-tracks .elements{
+.tit-classification-tracks .bottom-box {
+	background-color:#F8ECD9;
 	margin-bottom:4px;
+	padding-bottom:12px;
+}
+.tit-classification-tracks .top-box-ideas .bottom-box {
+	padding: 12px;
+}
+.tit-classification-tracks .elements {
+	margin-bottom: 10px;
+	background-color: #fff;
+	padding: 4px 6px;
 }
 
 /* gallery */
@@ -2402,6 +2413,11 @@ p.sign-in .button{
 	font-weight:bold;
 	padding-left:20px;
 }
+.faded {
+	opacity: 0.35;
+	filter: alpha(opacity=0.35);
+}
+
 /* elementi speciali */
 .grey-divisor{
 	border-bottom:2px solid #EFEDD9;
@@ -4134,7 +4150,7 @@ div.auto_complete ul strong.highlight {
 	color: #1A73A4;
 }
 
-.genre-pagination.arrow {
+.genre-pagination.arrow, .faded.arrow {
 	display: block;
 	float: left;
 }
@@ -4143,4 +4159,73 @@ div.auto_complete ul strong.highlight {
 	width: 978px;
 	height: 40px;
 	margin-bottom: 90px;
+}
+
+.user-switch .from {
+	margin-left: 60px;
+}
+
+.user-switch .to {
+	margin-right: 60px;
+}
+
+.user-switch .from img {
+	opacity: 0.5;
+	filter: alpha(opacity=0.5);
+}
+
+.user-switch h1 {
+	margin: 0px 0px 10px 0px;
+	font-weight: bold;
+	font-size: 19px;
+	text-align: center;
+	color: #000;
+}
+
+.user-switch h2 {
+	color: #004D71;
+	font-weight: bold;
+	font-size: 15px;
+	margin-bottom: 6px;
+}
+
+.user-switch ul {
+	margin:10px 0px 15px;
+	padding-left:15px;
+	margin-top: 0px
+}
+
+.user-switch ul li {
+	color: #61656A;
+	font-size: 12px;
+}
+
+.user-switch div.container {
+	padding: 10px 30px 0px;
+}
+
+.user-switch label {
+	font-weight: bold;
+	font-size: 13px;
+	color: #004D71;
+	display: block;
+	margin-bottom: 3px;
+}
+
+.user-switch input[type="text"] {
+	width: 220px;
+	border: 1px solid #aaa;
+}
+
+.user-switch #input {
+	float: left;
+}
+
+.user-switch #button {
+	float: right;
+	margin-top: 14px;
+}
+
+.user-switch #success {
+	margin: 60px 0px;
 }

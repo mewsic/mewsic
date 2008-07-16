@@ -1,6 +1,8 @@
 class SongsController < ApplicationController
   
   before_filter :login_required, :only => [:update, :rate, :mix]
+  before_filter :song_required, :only => [:load_track, :unload_track]
+
   protect_from_forgery
   
   def index
@@ -83,11 +85,33 @@ class SongsController < ApplicationController
     render :nothing => true, :status => :bad_request
   end
   
+  def load_track
+    track = Track.find params[:track_id]
+
+    @song.mixes.create! :track => track
+    @song.seconds = @song.mixes.find(:all).map { |m| m.track.seconds }.max
+    @song.save!
+
+    render :nothing => true, :status => :ok
+
+  rescue ActiveRecord::ActiveRecordError
+    render :nothing => true, :status => :bad_request
+  end
+
+  def unload_track
+    @song.mixes.find_by_track_id(params[:track_id]).destroy
+    render :nothing => true, :status => :ok
+
+  rescue NoMethodError
+    render :nothing => true, :status => :not_found
+  rescue ActiveRecord::ActiveRecordError
+    render :nothing => true, :status => :bad_request
+  end
+
   def mix
     @song = current_user.songs.find(params[:id])
-
-    tracks = params[:song].delete(:tracks) if params[:song][:tracks]
-    tracks = [tracks] unless tracks.is_a?(Array)
+    tracks = params[:song].delete(:tracks)
+    render :nothing => true, :status => :bad_request and return unless tracks
 
     Song.transaction do 
       @song.published = true
@@ -155,4 +179,15 @@ protected
     ['Music', music_path]
   end
 
+  def song_required
+    @song = 
+      if logged_in?
+        current_user.songs.find(params[:id])
+      else
+        Song.find_unpublished(params[:id])
+      end
+
+  rescue ActiveRecord::RecordNotFound
+    render :nothing => true, :status => :not_found
+  end
 end

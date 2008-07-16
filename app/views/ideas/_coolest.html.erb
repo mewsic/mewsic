@@ -1,17 +1,21 @@
-<div class="box-list one-col-big clear-block">
+<div class="clear-block">
   <div class="simple-list azzurro-box">
     <h1>COOLEST</h1>
     <div class="top-box clear-block">
       <div class="bottom-box clear-block">
-        <%= render :partial => 'tracks_block', :locals => {:tracks => @coolest} %>
+				<%= render :partial => 'songs/track', :collection => @coolest %>
       </div>
     </div>
-    <p class="abstract align-right">
+		<p class="next">
       <% if @coolest.previous_page %>
-				<%= link_to_remote 'Prev ', :update => 'coolest-ideas', :method => :get, :url => coolest_ideas_path(:cpage => @coolest.previous_page) %>
+				<%= link_to image_tag('move_arrow_left.png'), coolest_ideas_path(:page => @coolest.previous_page), :class => 'navigation' %>
+			<% else %>
+				<%= image_tag('move_arrow_left.png', :class => 'faded') %>
 		  <% end %>
       <% if @coolest.next_page %>
-				<%= link_to_remote 'Next' , :update => 'coolest-ideas', :method => :get, :url => coolest_ideas_path(:cpage => @coolest.next_page) %>
+				<%= link_to image_tag('move_arrow_right.png'), coolest_ideas_path(:page => @coolest.next_page), :class => 'navigation' %>
+			<% else %>
+				<%= image_tag('move_arrow_right.png', :class => 'faded') %>
 		  <% end %>
     </p>
   </div>

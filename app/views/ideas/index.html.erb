@@ -1,8 +1,15 @@
-<div id="newest-ideas">
-  <%= render :partial => 'newest' %>
-</div>
-<div id="coolest-ideas">
-  <%= render :partial => 'coolest' %>
-</div>
+<% javascript 'loading', 'ideas' %>
+	<div id="newest_spinner" style="display:none;">
+		<%= image_tag 'track-spinner-big.gif' %>
+	</div>
+	<div id="newest-ideas" class="box-list one-col-big">
+		<%= render :partial => 'newest' %>
+	</div>
+	<div id="coolest_spinner" class="float-left" style="display:none;">
+		<%= image_tag 'track-spinner-big.gif' %>
+	</div>
+	<div id="coolest-ideas" class="box-list one-col-big">
+		<%= render :partial => 'coolest' %>
+	</div>
 <%= render :partial => 'collaborations' %>
 <%= render :partial => 'ideas' %>

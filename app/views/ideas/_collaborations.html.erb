@@ -1,6 +1,6 @@
 <div class="box-list one-col clear-block clear-float">
 		
-<div class="simple-list section-tags clear-block">
+		<div class="simple-list section-tags clear-block">
 			<div class="top-box clear-block">
 				<div class="bottom-box clear-block">
 				  <div class="elements clear-block">
@@ -12,8 +12,6 @@
 			</div>
 		</div>		
 		
-		
-		
 		<div class="simple-list clear-block collaboration-list">
 			<h1>TOP RATED COLLABORATIONS</h1>
 
@@ -22,7 +20,7 @@
 				  <%- @top_rated.each do |track| -%>
 				    <div class="elements clear-block">
   						<div class="float-right">
-  						  <%= link_to avatar_image(track.user, :small) %>
+  						  <%= link_to avatar_image(track.user, :small), user_path(track.user) %>
   						</div>
   						<p class="abstract"><%= track.title %></p>
 							<%= rating(track, :no_clear => true) %>
@@ -44,6 +42,7 @@
   				  <div class="elements clear-block">
   						<p class="thumb"><%= link_to avatar_image(track.user, :small), user_path(track.user) if track.user %></p>
   						<p class="name"><%= track.title %></p>
+							<p class="grey-text"><%= truncate(track.description, 40) %></p>
   						<p class="cyan-text float-right"><strong><%= pluralize track.collaboration_count, 'collaboration' %></strong></p>
   				  </div>
 				  <%- end -%>
