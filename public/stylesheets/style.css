@@ -467,19 +467,6 @@ h2, h2 a{
 	height:6px;
 	background: url(/images/BG_whiteblock_shadow_bottom.png) no-repeat top left;
 }
-.bottom-shadow-big{
-	width: 832px;
-	padding:0px 6px;
-	height:6px;
-	background: url(/images/BG_whiteblock_shadow_bottom_big.png) no-repeat top left;
-}
-.bottom-shadow-reverse{
-	float:left;
-	width: 732px;
-	padding:0px 6px;
-	height:6px;
-	background: url(/images/BG_whiteblock_shadow_bottom_reverse.png) no-repeat bottom left;
-}
 .bottom-border{
 	float:left;
 	width: 732px;

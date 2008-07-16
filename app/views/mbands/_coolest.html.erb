@@ -10,7 +10,7 @@
 			<%= link_to coolest.name, coolest %>
 		</p>
 		<p class="country">
-			<%= h coolest.countries.join(', ') %>
+			<%= h truncate(coolest.countries.join(', '), 40) %>
 		</p>
 		<p class="motto">
 			<%= truncate coolest.motto, 120 %>
