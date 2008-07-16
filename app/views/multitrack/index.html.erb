@@ -3,12 +3,12 @@
 	document.observe('dom:loaded', function() {
 		if ($('current-user-id')) {
 			$w("title original_author description").each(function(name) {
-				new Ajax.InPlaceEditor('mlab_' + name, '<%= song_path(@song) %>', {
+					new Ajax.InPlaceEditor('mlab_' + name, '<%= song_path(@song, :authenticity_token => form_authenticity_token) %>', {
 					externalControl: 'mlab_' + name + '_edit_button',
 					externalControlOnly: true,
 					rows: name == 'description' ? 5 : 1,
 					highlightendcolor: 'transparent',
-					paramName: 'song[' + name + ']',			
+					paramName: 'song[' + name + ']',
 					ajaxOptions: { method: 'PUT' },
 					onComplete: function() { $('flashcontent').refreshSong(); }
 				});
