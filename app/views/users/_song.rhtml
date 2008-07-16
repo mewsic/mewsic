@@ -8,8 +8,8 @@
     </div>
   </td>
 	<td class="song-action" align="right">
-		<%= rating(song, :class => song_counter.odd? ? 'grey-star' : '') %>
     <p class="genre"><%= link_to(song.genre.name, song.genre) %></p>
+		<%= rating(song, :clear => true, :class => song_counter.odd? ? 'grey-star' : '') %>
   </td>
 </tr>
 <tr class="<%= %w[odd even][song_counter % 2] %>">

@@ -7,13 +7,17 @@
   			<%= mlab_button(song) %>
   		</div>
   		<div class="search_icon_container"><%= link_to avatar_image(song.user, :icon), user_path(song.user) %></div>
-			<p class="search_black_text song"><%= link_to highlight_search(song.title), song_path(song) %> - <span class="music-info grey-text"><%= highlight_search truncate(song.description, 120) %></span></p>
+			<p class="search_black_text song">
+				<%= link_to highlight_search(song.title), song_path(song) %>&nbsp;
+				<span class="abstract grey-text"><%= highlight_search(song.original_author) %></span><br/>
+				<span class="music-info grey-text"><%= highlight_search truncate(song.description, 80) %></span>
+			</p>
   	</div>
 		<div class="float-right">
   		<p class="search_blue_text"><%= link_to(highlight_search(song.genre.name), genre_path(song.genre)) if song.genre %></p>
   		<p class="search_small_orange_text">Tracks</p><p class="search_gray_text">(<%= song.tracks.count %>)</p>
   		<p class="search_sky_text"><%= song.length %></p>				
-  		<div class="search_rating"><%= rating(song) %></div>
+			<%= rating(song, :clear => true) %>
   	</div>
   </div>
   <%- end -%>

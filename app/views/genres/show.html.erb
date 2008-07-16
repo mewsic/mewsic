@@ -6,9 +6,9 @@
 			<h1>TOP GENRES</H1>
 			<div class="top-box section-tags clear-block">
 				<div class="bottom-box clear-block">
-				  <div class="elements clear-block">
+					<div class="elements clear-block">
 						<%= render_tag_cloud Song, :genre, :name, :limit => 30 %>
-				  </div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -17,7 +17,7 @@
 			<h1>MOST LISTENED <%= h @genre.name.upcase %> SONGS</h1>
 			<div class="top-box clear-block">
 				<div class="bottom-box clear-block most-listened-list">
-			  		<%= render :partial => 'most_listened_song', :collection => @most_listened_songs %>
+					<%= render :partial => 'most_listened_song', :collection => @most_listened_songs %>
 				</div>
 			</div>
 		</div>	
@@ -26,35 +26,30 @@
 			<h1>MOST <%= h @genre.name.upcase %> </h1>
 			<div class="top-box clear-block">
 				<div class="bottom-box clear-block">
-			  		<%= render :partial => 'prolific_user', :collection => @prolific_users %>
+					<%= render :partial => 'prolific_user', :collection => @prolific_users %>
 				</div>
 			</div>
 		</div>
-		
 	</div>
 
-
 	<div class="box-list two-col clear-block">
-	
 		<div class="elenco-genere clear-block">
-		<h1><%= h @genre.name.upcase %></h1>
+			<h1><%= h @genre.name.upcase %></h1>
 			<div class="top-box clear-block">
 				<div class="bottom-box clear-block">
-				    <div class="elements clear-block"></div>
+					<div class="elements clear-block"></div>
 					<div class="elements clear-block"></div>
 					<div class="elements clear-block">
-					  <table border="0" cellpadding="0" cellspacing="0" width="95%">
-					  <tbody id="songs">
-					  	  <%= render :partial => 'songs'%>
-    			      </tbody>
-					  </table>
+						<table border="0" cellpadding="0" cellspacing="0" width="95%">
+							<tbody id="songs">
+								<%= render :partial => 'songs'%>
+							</tbody>
+						</table>
 					</div>
-			  </div>
+				</div>
 			</div>	
 		</div>
-		
-	  </div>			
+	</div>			
 			
-			
-    </div>
+</div>
   

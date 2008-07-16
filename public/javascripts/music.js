@@ -9,12 +9,14 @@ document.observe('dom:loaded', function() {
     update_mlab: true
   });
 
-  new Refresher('best-songs', {
-    image: '/images/bestsong_refresh.png',
-    spinner: '/images/bestsongs_spinner.gif'
-  });
-  new Refresher('most-used-tracks', {
-    image: '/images/mostused_refresh.png',
-    spinner: '/images/mostused_spinner.gif'
-  });
+  if ($('genres')) {
+    new Refresher('best-songs', {
+      image: '/images/bestsong_refresh.png',
+      spinner: '/images/bestsongs_spinner.gif'
+    });
+    new Refresher('most-used-tracks', {
+      image: '/images/mostused_refresh.png',
+      spinner: '/images/mostused_spinner.gif'
+    });
+  }
 });

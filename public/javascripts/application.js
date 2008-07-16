@@ -183,8 +183,8 @@ var Rating = Class.create({
 });
         
 document.observe('dom:loaded', function(event) {
-  $('search').down('input').focus();
-    $('logo').focus();
+  //$('search').down('input').focus();
+  //$('logo').focus();
   
   if ( $('log-in-errors') != null && $('log-in-errors').visible() ) {
    $('log-in').down('input', 2).clear().focus();

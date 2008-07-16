@@ -16,7 +16,7 @@
   		<p class="search_sky_text"><%= track.bpm %></p>				
   		<p class="search_sky_text"><%= track.tonality %></p>								
   		<p class="search_sky_text"><%= track.length %></p>				
-			<div class="search_rating"><%= rating(track) %></div>
+			<%= rating(track, :clear => true) %>
   	</div>
   </div>
   <%- end -%>

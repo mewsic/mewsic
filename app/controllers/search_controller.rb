@@ -60,10 +60,10 @@ class SearchController < ApplicationController
   private
     def search(q, types = [])
       [
-        (types.empty? || types.include?('user')) ? User.search_paginated(q, :per_page => 6, :page => params[:page]) : nil,
-        (types.empty? || (types.include?('song') || types.include?('music'))) ? Song.search_paginated(q, :per_page => 6, :page => params[:page]) : nil,
-        (types.empty? || (types.include?('track') || types.include?('music'))) ? Track.search_paginated(q, :per_page => 6, :page => params[:page]) : nil,
-        (types.empty? || types.include?('idea')) ? Track.search_paginated_ideas(q, :per_page => 6, :page => params[:page]) : nil
+        (types.empty? || types.include?('user')) ?                               User.search_paginated(q,        :per_page => 10, :page => params[:page]) : nil,
+        (types.empty? || (types.include?('song') || types.include?('music'))) ?  Song.search_paginated(q,        :per_page => 10, :page => params[:page]) : nil,
+        (types.empty? || (types.include?('track') || types.include?('music'))) ? Track.search_paginated(q,       :per_page => 10, :page => params[:page]) : nil,
+        (types.empty? || types.include?('idea')) ?                               Track.search_paginated_ideas(q, :per_page => 10, :page => params[:page]) : nil
       ]
     end
 

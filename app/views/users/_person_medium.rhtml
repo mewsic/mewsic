@@ -8,4 +8,5 @@
 		<%= link_to person_medium.login, user_path(person_medium) %>
 	</p>
 	<p class="abstract"><%= h person_medium.motto %></p>
+	<p class="playcount">myousician since <%= time_ago_in_words person_medium.created_at, true %></p>
 </div>

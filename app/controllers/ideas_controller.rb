@@ -22,6 +22,7 @@ class IdeasController < ApplicationController
   end
   
   def by_instrument
+    @instruments = Instrument.find(:all)
     @instrument = Instrument.find(params[:instrument_id])
     @ideas = @instrument.ideas.paginate(:per_page => 10, :page => params[:ipage])
     render :layout => false

@@ -706,7 +706,7 @@ tr.nav-song td{
 	background-color:#ECF1F3;
 }
 .newest-list .thumb, .most-listened-list .thumb {
-	padding-bottom:0px !important;
+	padding:0 !important;
 }
 /* collaboration */
 /*
@@ -835,12 +835,12 @@ tr.nav-song td{
 }
 /* yellow box */
 .yellow-box h1{
-	background:url(/images/BG_box_yellow_top.png) no-repeat top left;
+	/*background:url(/images/BG_box_yellow_top.png) no-repeat top left;*/
 	margin-bottom:0px;
-	padding:10px 20px;
+	padding:10px 0px;
 }
 .yellow-box .bottom-box{
-	background:url(/images/BG_box_yellow_bottom.png) no-repeat bottom left;
+	/*background:url(/images/BG_box_yellow_bottom.png) no-repeat bottom left;*/
 }
 .yellow-box .elements{
 	padding:0px 10px;
@@ -2387,6 +2387,13 @@ p.sign-in .button{
 .grey-text a{
 	color:#61656A;
 }
+.lightgrey-text{
+	color:#8D8D8D;
+	font-weight: lighter;
+}
+.lightgrey-text a{
+	color:#8D8D8D;
+}
 .orange-text{
 	color:#ECAF48;
 }
@@ -2395,7 +2402,7 @@ p.sign-in .button{
 }
 .playcount, .download {
 	margin: 2px !important;
-	color: #6c6c6c !important;
+	color: #9D9D9D !important;
 	font-size: 11px;
 }
 .genre, .genre a {
@@ -2814,13 +2821,13 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 .rating {
   /*width: 62px;*/
 	margin: 4px auto;
-  position: relative;
-  height: 13px;
+  /*position: relative;*/
+  /*height: 13px;*/
 	float: left;
 }
 
 .people-list .rating {
-	float: none;
+	margin: 6px;
 }
 
 .user-resume .rating, .testi-question .rating {
@@ -2833,7 +2840,7 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 
 td.star .rating {
 	float: right;
-	margin: 0;
+	margin: 2px 0px;
 }
 
 .elements .rating {
@@ -2853,6 +2860,10 @@ td.star .rating {
 	float: left;
 	margin: 0;
 	width: 85px;
+}
+
+.search_row .rating {
+	margin: 6px auto;
 }
 
 #mlab-scroller .elements {
@@ -3599,6 +3610,7 @@ div.hr {
 	padding-right: 15px;	
 	color: #000000;
 	font-size: 12px;	
+	overflow:hidden;
 }
 .search_black_text.user {
 	width: 200px;
@@ -3607,7 +3619,7 @@ div.hr {
 	width: 400px;
 }
 .search_black_text.song {
-	width: 350px;
+	width: 320px;
 }
 
 .search_black_text a {
@@ -3658,10 +3670,6 @@ div.hr {
 	margin-top: 6px;
 	float: left;
 	padding-right: 4px;
-}
-
-.search_rating {
-	padding-top: 2px;
 }
 
 .pagination {
@@ -4177,6 +4185,7 @@ div.auto_complete ul strong.highlight {
 
 #genre-chars .current {
 	color: #1A73A4;
+	font-weight: bold;
 }
 
 .genre-pagination.arrow, .faded.arrow {

@@ -11,7 +11,7 @@
   		<p class="search_gray_text">Uploads:</p>
 			<p class="search_small_green_text">Songs</p><p class="search_gray_text">(<%= user.tracks_count %>)</p>
 			<p class="search_small_orange_text">Tracks</p><p class="search_gray_text">(<%= user.songs_count %>)</p>
-			<div class="search_rating"><%= rating(user) %></div>
+			<%= rating(user, :clear => true) %>
   	</div>
   </div>  
   <%- end -%>

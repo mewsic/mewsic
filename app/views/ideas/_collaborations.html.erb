@@ -23,7 +23,7 @@
   						  <%= link_to avatar_image(track.user, :small), user_path(track.user) %>
   						</div>
   						<p class="abstract"><%= track.title %></p>
-							<%= rating(track, :no_clear => true) %>
+							<%= rating(track) %>
   						<p class="playcount">listened <%= pluralize track.listened_times, 'time' %></p>
   				  </div>
 				  <%- end -%>

@@ -6,8 +6,9 @@ module UsersHelper
     %|<input #{checked} #{_class} id="user_#{name}_#{value}" name="user[#{name}]" type="radio" value="#{value}" />|
   end
    
-  def current_user_page?
-    logged_in? && (current_user == @user || current_user.is_admin?)
+  def current_user_page?(options = {})
+    options[:admin] = true unless options.has_key? :admin
+    logged_in? && (current_user == @user or (options[:admin] && current_user.is_admin?))
   end
   
   def signup_error_message

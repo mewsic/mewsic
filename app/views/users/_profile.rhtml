@@ -44,7 +44,7 @@
 	</div>
 
   <div class="user-resume">
-		<%= rating(@user) %>
+		<%= rating(@user, :clear => true) %>
     <div class="float-right align-right">
       <%- unless @user.type == 'Band' -%>
         <p class="blue-text">Gender</p>
@@ -61,11 +61,10 @@
     <h2 class="black-text" id="user_city"><%= @user.city %></h2>
   </div>
   
-  <% if current_user == @user # XXX restore current_user_page? helper
-  -%>
-    <%= render :partial => 'users/my/mail' if logged_in? %>
+	<% if current_user_page? :admin => false -%>
+    <%= render :partial => 'users/my/mail' %>
   <% elsif logged_in? -%>
-    <%= render :partial => 'communicate' if logged_in? %>
+    <%= render :partial => 'communicate' %>
   <% end -%>  
   
 </div>

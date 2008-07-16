@@ -1,13 +1,11 @@
-<div class="elements clear-block">
+<div class="elements clear-block" style="padding: 0px 6px">
 	<p class="thumb">
 	  <a href="<%= user_path most_listened_song.user %>">
 	    <%= avatar_image most_listened_song.user, :icon %>
 	  </a>
 	</p>
-	<div style="padding: 0px 6px 4px 0px">
-		<p class="name align-right"><%= link_to most_listened_song.user.login, user_path(most_listened_song.user) %></a></p>
-		<p class="country align-right"><%= h most_listened_song.user.city %>, <%= h most_listened_song.user.country %></p>
-	</div>
+	<p class="name align-right"><%= link_to most_listened_song.user.login, user_path(most_listened_song.user) %></a></p>
+	<p class="country align-right"><%= h most_listened_song.user.city %>, <%= h most_listened_song.user.country %></p>
 	<div class="float-right">
 		<%= rating(most_listened_song) %>
 		<p class="button align-right">

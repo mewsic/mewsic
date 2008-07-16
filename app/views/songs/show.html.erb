@@ -29,7 +29,7 @@
           <div class="clearer"></div>
           <p class="genre"><%= link_to(@song.genre.name, genre_path(@song.genre)) if @song.genre %></p>
           <div class="music-info song-resume float-right">
-            <%= rating(@song, :no_clear => true) %>
+            <%= rating(@song) %>
             <%= mlab_button(@song) %>
             <%= play_button(@song) %>
           </div>

@@ -27,7 +27,7 @@
 	  <h1>MOST SONGS</h1>
 	  <div class="top-box clear-block">
 		  <div class="bottom-box clear-block">
-        <%= render :partial => 'person_short', :collection => @prolific %>
+        <%= render :partial => 'users/person_short', :collection => @prolific %>
 		  </div>
 	  </div>
   </div>
@@ -36,7 +36,7 @@
     <h1>NEWEST</h1>
     <div class="top-box clear-block">
 	    <div class="bottom-box clear-block" id="newest-users">
-        <%= render :partial => 'person_medium', :collection => @newest %>			
+        <%= render :partial => 'users/person_medium', :collection => @newest %>			
 	    </div>
     </div>
   </div>		

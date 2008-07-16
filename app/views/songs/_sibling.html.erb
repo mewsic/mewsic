@@ -18,6 +18,7 @@
           $('<%= container %>-<%= song.id %>').addClassName('active');
           $('<%= container %>-tracks-loading-<%= song.id %>').hide();
           $('<%= container %>-tracks').show();
+					new SimpleSlider('<%= container %>-tracks', {x:0, y:305});
         }
       });return false;" style="color: #FFF; display: block; text-decoration: none;height: 100%;">
         <%= song.tracks.count %>
@@ -34,7 +35,7 @@
       <%= link_to song.genre.name, genre_path(song.genre) if song.genre %>
     </p>
     <div class="float-right">
-      <%= rating(song, :no_clear => true) %>
+      <%= rating(song) %>
       <%= mlab_button(song) %>
       <%= play_button(song) %>
     </div>
