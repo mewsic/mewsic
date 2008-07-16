@@ -9,8 +9,8 @@
 					rows: name == 'description' ? 5 : 1,
 					highlightendcolor: 'transparent',
 					paramName: 'song[' + name + ']',			
-					ajaxOptions: { method: 'PUT' }/*,
-					onComplete: function() { $('flashcontent').refreshSong(); }*/
+					ajaxOptions: { method: 'PUT' },
+					onComplete: function() { $('flashcontent').refreshSong(); }
 				});
 			});
 			new Ajax.InPlaceSelect('mlab_genre', '<%= song_path(@song) %>', {
@@ -20,8 +20,8 @@
 				externalControl: 'mlab_genre_edit_button',
 				externalControlOnly: true,
 				ajaxOptions: { method: 'PUT' },
-				paramName: 'song[genre_id]'/*,
-				onComplete: function() { $('flashcontent').refreshSong(); }*/
+				paramName: 'song[genre_id]',
+				onComplete: function() { $('flashcontent').refreshSong(); }
 			});
 		} else {
 			$w('title original_author description genre').each(function(name) {
