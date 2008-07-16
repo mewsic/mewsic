@@ -19,7 +19,7 @@ class HelpPage < ActiveRecord::Base
   validates_presence_of :title, :body
 
   def to_param
-    title.downcase.gsub(/\s/, '-')
+    self.title.downcase.gsub(/\s/, '-') rescue nil
   end
 
   def self.find_from_param(param)
