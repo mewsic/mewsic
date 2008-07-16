@@ -1,0 +1,22 @@
+<a class="close-edit" href="#">close</a>
+<h2>editing page <%= @page.id %></h2>
+<%= error_messages_for :page %>
+<% edit_form_for @page, :url => admin_help_page_url(@page) do |f| %>
+<dl>
+	<dt>position</dt>
+	<dd><%= f.text_field :position %></dd>
+
+	<dt>title</dt>
+	<dd><%= f.text_field :title %></dd>
+
+	<dt>body</dt>
+	<dd><%= f.text_area :body, :cols => 55, :rows => 40 %></dd>
+
+	<dt>created at</dt>
+	<dd><%= @page.created_at %></dd>
+
+	<dt>updated at</dt>
+	<dd><%= @page.updated_at %></dd>
+</dl>
+<%= submit_tag 'submit' %>
+<% end %>

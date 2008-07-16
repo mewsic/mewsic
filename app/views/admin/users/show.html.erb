@@ -1,5 +1,6 @@
 <a class="close-edit" href="#">close</a>
 <h2>editing user <%= @user.id %></h2>
+<%= error_messages_for :user %>
 <% edit_form_for @user, :url => admin_user_url(@user) do |f| %>
 <dl>
 	<dt>login</dt>
