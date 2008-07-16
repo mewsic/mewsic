@@ -1,26 +1,28 @@
-<div class="count">(<%= @user.songs_count %>)</div>
-<div id="songs_container" class="top-box clear-block">
-	<div class="bottom-box clear-block">		
+<div id="songs_container" class="clear-block">
+	<div class="top-box clear-block">		
 
-		<%= render :partial => 'users/song', :collection => @songs %>
+		<div class="elements clear-block mlab_song">   
+			<table width="95%" border="0" cellpadding="5" cellspacing="0">
+				<%= render :partial => 'users/song', :collection => @songs %>
+			</table>
+			<%= empty_collection_message @songs,
+	    	    :current_user => "#{link_to 'create', music_path} your songs and enjoy!",
+  	    	  :any_user     => "#{@user.login} hasn't created any song yet"
+			-%>
+		</div>
   
 		<p class="next">      
-  	  <span class="nav-bottom">
-				<% if @songs.previous_page %>
-					<%= link_to image_tag('arrow_simple_left.png', :size => '7x9') + ' Prev', user_songs_path(@user, :page => @songs.previous_page) %>
-				<% end %>
-			</span>
-	  
-			<span class="nav-bottom">
-		  	<% if @songs.next_page %>
-					<%= link_to 'Next ' + image_tag('arrow_simple_right.png', :size => '7x9'), user_songs_path(@user, :page => @songs.next_page) %>
-		  	<% end %>
-		  </span>
+			<% if @songs.previous_page %>
+				<%= link_to image_tag('move_arrow_left.png'), user_songs_path(@user, :page => @songs.previous_page), :class => 'navigation' %>
+			<% else %>
+				<%= image_tag('move_arrow_left.png', :class => 'faded') %>
+			<% end %>
+			<% if @songs.next_page %>
+				<%= link_to image_tag('move_arrow_right.png'), user_songs_path(@user, :page => @songs.next_page), :class => 'navigation' %>
+			<% else %>
+				<%= image_tag('move_arrow_right.png', :class => 'faded') %>
+			<% end %>
   	</p>
 
-  	<%= empty_collection_message @songs,
-    	    :current_user => "#{link_to 'create', music_path} your songs and enjoy!",
-      	  :any_user     => "#{@user.login} hasn't created any song yet"
-		-%>
 	</div>
 </div>	

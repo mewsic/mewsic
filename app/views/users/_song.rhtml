@@ -1,32 +1,26 @@
-<div class="elements clear-block mlab_song">   
-  <table width="95%" border="0" cellpadding="5" cellspacing="0">
-    <tr class="odd">
-      <td class="song-info">
-        <span class="tracks-number"><span><%= song.tracks.size %></span></span>
-        <div class="float-left tracks-grey">
-          <% song.tracks.each do |track| -%>
-						<%= track_instrument_icon(track, :grey => true) %>
-          <% end -%>
-        </div>
-      </td>
-			<td class="song-action" align="right">
-        <%= rating(song) %>
-        <p><strong><%= link_to(song.genre.name, song.genre) if song.genre %></strong></p>
-      </td>
-    </tr>
-    <tr class="odd">
-      <td class="song-info">
-        <p class="name"><%= song.user.login %></p>
-        <p class="title">
-        <%= link_to song.title, song %>
-		    </p>
-      </td>
-			<td class="song-action" align="right">
-        <p>
-          <%= mlab_button(song, :dynamic => true) %>
-          <%= play_button(song) %>
-        </p>
-      </td>
-    </tr>
-  </table>
-</div>
+<tr class="<%= %w[odd even][song_counter % 2] %>">
+  <td class="song-info">
+    <span class="tracks-number"><span><%= song.tracks.size %></span></span>
+    <div class="float-left tracks-grey">
+      <% song.tracks.each do |track| -%>
+				<%= track_instrument_icon(track, :grey => true) %>
+      <% end -%>
+    </div>
+  </td>
+	<td class="song-action" align="right">
+		<%= rating(song, :class => song_counter.odd? ? 'grey-star' : '') %>
+    <p class="genre"><%= link_to(song.genre.name, song.genre) %></p>
+  </td>
+</tr>
+<tr class="<%= %w[odd even][song_counter % 2] %>">
+  <td class="song-info">
+    <p class="title"><%= link_to song.title, song %></p>
+    <p class="abstract"><%= truncate song.description, 50 %></p>
+  </td>
+	<td class="song-action" align="right">
+    <p>
+      <%= mlab_button(song, :dynamic => true) %>
+      <%= play_button(song) %>
+    </p>
+  </td>
+</tr>

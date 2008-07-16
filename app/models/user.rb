@@ -355,6 +355,10 @@ class User < ActiveRecord::Base
   def tracks_count
     self.tracks.count
   end
+
+  def ideas_count
+    self.tracks.count :conditions => ['tracks.idea = ?', true]
+  end
   
   def to_breadcrumb
     login

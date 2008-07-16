@@ -12,9 +12,17 @@ class MbandsController < ApplicationController
   # GET /mbands/1.xml
   def show
     @songs = Song.find_paginated_by_mband(1, @mband)
-    @tracks = Track.find_paginated_by_user(1, current_user)
+    @tracks =
+      if @mband.members.include? current_user
+        @tracks_count = @mband.tracks_count
+        Track.find_paginated_by_mband(1, @mband)
+      else
+        @tracks_count = @mband.ideas_count
+        Track.find_paginated_ideas_by_mband(1, @mband)
+      end
+
     respond_to do |format|
-      format.html # show.html.erb
+      format.html
       format.xml  { render :xml => @mband }
     end
   end
@@ -91,7 +99,7 @@ protected
 private
   
   def find_mband
-    @mband = Mband.find_from_param(params[:id])
+    @mband = Mband.find_from_param(params[:id], :include => :members)
 
   rescue ActiveRecord::RecordNotFound
     flash[:error] = 'M-band not found..'

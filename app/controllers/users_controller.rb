@@ -37,9 +37,17 @@ class UsersController < ApplicationController
   def show
     @user = User.find_from_param(params[:id], :include => [:avatars])
     @songs = Song.find_paginated_by_user(1, @user)
-    @tracks = Track.find_paginated_by_user(1, @user)
     @answers = @user.answers.paginate(:page => 1, :per_page => 6, :order => 'created_at DESC')
     @new_membership = MbandMembership.new
+
+    @tracks = 
+      if @user == current_user
+        @tracks_count = @user.tracks_count
+        Track.find_paginated_by_user(1, @user)
+      else
+        @tracks_count = @user.ideas_count
+        Track.find_paginated_ideas_by_user(1, @user)
+      end
 
     @friends =
       if @user.friends_count > 50 

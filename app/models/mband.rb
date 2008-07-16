@@ -63,6 +63,18 @@ class Mband < ActiveRecord::Base
     URI.encode(self.name.downcase.gsub(' ', '+'))
   end
 
+  def songs_count
+    self.members.map(&:songs_count).sum
+  end
+
+  def tracks_count
+    self.members.map(&:tracks_count).sum
+  end
+
+  def ideas_count
+    self.members.map(&:ideas_count).sum
+  end
+
   def self.find_from_param(param, options = {})
     param = param.id if param.kind_of? ActiveRecord::Base
     find_method = param.to_s =~ /^\d+$/ ? :find : :find_by_name

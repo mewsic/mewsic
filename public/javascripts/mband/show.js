@@ -3,7 +3,7 @@ document.observe('dom:loaded', function() {
     new Pagination({
       container: name,
       spinner: name + '_spinner',
-      selector: 'span.nav-bottom a',
+      selector: 'a.navigation',
       dynamic_spinner: true,
       update_mlab: true
     });

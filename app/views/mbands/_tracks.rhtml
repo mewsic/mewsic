@@ -1,29 +1,40 @@
-<h1>TRACKS</h1>
-<div class="top-box clear-block">
-  <div class="bottom-box clear-block">		
-		<div class="elements clear-block">
-      <table width="95%" border="0" cellpadding="0" cellspacing="0" class="mlab_tracks">
-        <%= render :partial => 'users/track', :collection => @tracks %>
-			</table>					  			  
-		</div>		
-	
-		<p class="next">
-  	  <span class="nav-bottom">
-			  <% if @tracks.previous_page %>
-					<%= link_to image_tag('arrow_simple_left.png', :size => '7x9') + ' Prev', mband_tracks_path(@mband, :page => @tracks.previous_page) %>
-		  	<% end %>
-			</span>
-	  
-			<span class="nav-bottom">
-				<% if @tracks.next_page %>
-					<%= link_to 'Next ' + image_tag('arrow_simple_right.png', :size => '7x9'), mband_tracks_path(@mband, :page => @tracks.next_page) %>
-			  <% end %>
-		  </span>
-		</p>
+<div class="count">(<%= current_user_mband_page? ? @mband.tracks_count : @mband.ideas_count %>)</div>
+<div id="tracks_container" class="clear-block">
+	<%- if current_user_mband_page? -%>
 
-		<%= empty_collection_message @tracks,
-    	    :current_user => "#{link_to 'import', multitrack_path} your tracks and enjoy!",
-      	  :any_user     => "#{@mband.name} hasn't uploaded any track yet"
-		-%>
-  </div>
-</div>	
+	<div class="top-box-tracks clear-block">	
+		<div class="bottom-box clear-block">
+			<table width="95%" border="0" cellpadding="0" cellspacing="0" class="mlab_tracks">
+				<%= render :partial => 'mbands/track', :collection => @tracks %>
+			</table>					  			  
+			<%- if @tracks.empty? -%>
+				<p class="centered grey-text"><%= link_to('import', multitrack_path) %> your tracks and enjoy!</p>
+			<%- end -%>
+		</div>		
+	</div>
+	<%- else -%>
+	<div class="top-box-ideas clear-block">	
+		<div class="bottom-box clear-block">
+			<%= render :partial => 'songs/track', :collection => @tracks %>
+			<%- if @tracks.empty? -%>
+				<p class="centered grey-text"><%= @mband.name %> hasn't uploaded any track yet</p>
+			<%- end -%>
+		</div>
+	</div>
+	<%- end -%>
+  
+  <p class="next">
+		<% if @tracks.previous_page %>
+			<%= link_to image_tag('move_arrow_left.png'), mband_tracks_path(@mband, :page => @tracks.previous_page), :class => 'navigation' %>
+		<% else %>
+			<%= image_tag('move_arrow_left.png', :class => 'faded') %>
+		<% end %>
+	
+	  <% if @tracks.next_page %>
+			<%= link_to image_tag('move_arrow_right.png'), mband_tracks_path(@mband, :page => @tracks.next_page), :class => 'navigation' %>
+		<% else %>
+			<%= image_tag('move_arrow_right.png', :class => 'faded') %>
+	  <% end %>
+  </p>
+</div>
+

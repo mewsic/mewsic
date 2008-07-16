@@ -1,17 +1,16 @@
-<tr class="<%= %w[even odd][track_counter % 2] %> mlab_track" id="track_<%= track.id %>">
-  <td>
-    <div class="mlab_track" style="display: none">
-      <%= render :partial => 'shared/mlab_track_info', :object => track %>
-    </div>    
+<tr class="<%= %w[odd even][track_counter % 2] %> mlab_track" id="track_<%= track.id %>">
+  <td class="track-name">    
     <p class="thumb">
       <%= track_instrument_icon(track) %>
     </p>
-    <p class="name grey-text"><%= track.user.nickname %></p>
-    <p class="title"><%= track.title %></p>
+		<p class="name"><%= link_to track.user.nickname, user_path(track.user) %></p>
+		<p class="title"><%= track.title %></p>
+		<p class="abstract"><%= truncate track.description, 50 %>
   </td>
-  <td class="star">
+  <td class="star" align="right">
     
-    <%= rating(track) %>
+    <%= idea_link_for track if track.user == current_user %>
+    <%= rating(track, :class => track_counter.odd? ? 'grey-star' : '') %>
     <p>
       <%= mlab_button(track, :dynamic => true) %>
       <%= play_button(track) %>
