@@ -82,6 +82,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :tracks
     admin.resources :users
     admin.resources :answers
+    admin.resources :help_pages
   end
 
 end
