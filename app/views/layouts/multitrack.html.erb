@@ -7,7 +7,7 @@
   <%= javascript_include_tag *%w[swfobject protoculous inplaceselect application] %> 
   <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon"/>
 </head>
-<body class="<%= body_class %>">
+<body>
   <%= hidden_field_tag 'current-user-id', current_user.id if logged_in?  %>
   <%= hidden_field_tag 'authenticity-token', form_authenticity_token if protect_against_forgery? %>  
   <div id="header" class="page-width clear-block">

@@ -29,6 +29,11 @@
 .mlab_username  {
 	color: #00496B;
 	font-weight: bold;
+	text-align: center;
+}
+
+.mlab_username a {
+  color: #1A73A4;
 }
 
 #mlab_details_container {

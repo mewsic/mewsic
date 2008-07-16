@@ -435,12 +435,12 @@ h2, h2 a{
 }
 .bg-top-body{
 	height:58px;
-	background: url(/images/BG_diagonale_top.png) repeat-x top left;
+	background: url(/images/stripes_top_grey.gif) repeat-x top left;
 }
 .bg-bottom-body{
 	height:58px !important;
 	margin-top:-58px;
-	background: url(/images/BG_diagonale_bottom.png) repeat-x bottom left;
+	background: url(/images/stripes_bottom_grey.gif) repeat-x bottom left;
 }
 .white-bg .bg-bottom-body{
 	margin-top:20px;
@@ -2557,6 +2557,10 @@ div#messages div.alert, div#messages div.error, div#messages div.notice, div#mes
   margin: 5px;
   border: 2px solid;
   position: relative;
+}
+
+div#messages a {
+	color:#1A73A4;
 }
 
 div#messages div.close {
