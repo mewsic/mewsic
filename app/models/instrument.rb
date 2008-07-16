@@ -30,9 +30,9 @@ class Instrument < ActiveRecord::Base
   def self.find_by_ideas_count(limit = 5)   
    self.find_by_sql(["
      SELECT I.*, I.id, COUNT(T.id) AS ideas_count
-     FROM instruments I LEFT JOIN tracks T ON I.id = T.instrument_id LEFT JOIN songs S on S.id = T.song_id
-     WHERE S.published = ? AND T.idea = ? GROUP BY I.id ORDER BY ideas_count DESC LIMIT ?
-    ", true, true, limit])
+     FROM instruments I LEFT JOIN tracks T ON I.id = T.instrument_id
+     WHERE T.idea = ? GROUP BY I.id ORDER BY ideas_count DESC LIMIT ?
+    ", true, limit])
   end
   
   def find_ideas
