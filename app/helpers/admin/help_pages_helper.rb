@@ -1,2 +1,2 @@
-module Admin::HelpHelper
+module Admin::HelpPagesHelper
 end
