@@ -163,7 +163,7 @@ module WillPaginate
     
   protected
 
-    def gap_marker; '...'; end
+    def gap_marker; '<span class="gap">...</span>'; end
     
     def windowed_links
       prev = nil

@@ -48,7 +48,7 @@ class Track < ActiveRecord::Base
   def self.search_paginated(q, options)
     options = {:per_page => 6, :page => 1}.merge(options)
     paginate(:per_page => options[:per_page], :page => options[:page], :include => [:mixes, :instrument, {:parent_song => {:user => :avatars}}], :conditions => [
-      "tracks.title LIKE ? OR tracks.description LIKE ? OR instruments.description LIKE ? AND tracks.idea = ?",
+      "(tracks.title LIKE ? OR tracks.description LIKE ? OR instruments.description LIKE ?) AND tracks.idea = ?",
       *(Array.new(3).fill("%#{q}%") << false)
     ])
   end
@@ -56,7 +56,7 @@ class Track < ActiveRecord::Base
   def self.search_paginated_ideas(q, options)
     options = {:per_page => 6, :page => 1}.merge(options)
     paginate(:per_page => options[:per_page], :page => options[:page], :include => [:mixes, :instrument, {:parent_song => {:user => :avatars}}], :conditions => [
-      "tracks.title LIKE ? OR tracks.description LIKE ? OR instruments.description LIKE ? AND tracks.idea = ?",
+      "(tracks.title LIKE ? OR tracks.description LIKE ? OR instruments.description LIKE ?) AND tracks.idea = ?",
       *(Array.new(3).fill("%#{q}%") << true)
     ])
   end

@@ -9,21 +9,19 @@
   		<div class="search_icon_container">
   		  <%= link_to(avatar_image(track.user, :icon), user_path(track.user)) %>
       </div>
-  		<p class="search_black_text"><%= highlight_search track.title %></p>
+			<p class="search_black_text track"><%= highlight_search track.title %> - <span class="music-info grey-text"><%= highlight_search truncate(track.description, 140) %></span></p>
   	</div>
 		<div class="float-right">
   		<p class="search_blue_text"><%= link_to(highlight_search(track.parent_song.genre.name), genre_path(track.parent_song.genre.name)) if track.parent_song && track.parent_song.genre %></p>
   		<p class="search_sky_text"><%= track.bpm %></p>				
   		<p class="search_sky_text"><%= track.tonality %></p>								
   		<p class="search_sky_text"><%= track.length %></p>				
-  		<div style="float:left;padding-top:6px;">
-  		  <%= rating(track) %>
-      </div>
+			<div class="search_rating"><%= rating(track) %></div>
   	</div>
   </div>
   <%- end -%>
-  <%= will_paginate @ideas, :class => 'pagination idea', :params => { :type => :idea }, :prev_label => "&lt;", :next_label => "&gt;" %>
-  <div style="text-align: right;">
+  <%= will_paginate @ideas, :class => 'pagination idea', :params => { :type => :idea }, :prev_label => image_tag('move_arrow_left.png'), :next_label => image_tag('move_arrow_right.png') %>
+	<div class="pagination spinner">
     <img src="/images/spinner.gif" id="idea-results-spinner" style="display:none"/>
   </div>
 <%- else -%>

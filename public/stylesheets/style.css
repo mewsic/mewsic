@@ -237,7 +237,7 @@ html>body #search p span{
 /* elementi comuni */
 .name, .name a {
 	font-weight:bold;
-	color:#28548B;
+	color:#28548B !important;
 }
 .name a:hover {
 	color:#28548B;
@@ -332,6 +332,14 @@ div.user-list-boxes .motto {
 	color: #61656A;
 	display: block;
 	overflow: hidden;
+}
+
+td.song-title a {
+	color: #000;
+}
+
+td.song-title a:hover {
+	color:#28548B;
 }
 
 .title, .title a{
@@ -3029,19 +3037,6 @@ div.popup {
 	border-right: 2px solid #BFD2DB;
 }
 
-
-.pagination {
-	float: right;
-	margin-top: 6px;
-	margin-right: 22px; 
-	margin-bottom: 1px;
-}
-
-.pagination a {
-	font-weight: bold;
-	color: #006F9F;
-}
-
 .popup table {
 	border-bottom: 1px solid #CCCCCC;
 }
@@ -3608,12 +3603,20 @@ div.hr {
 
 .search_black_text {
 	margin-bottom: 0px;
-	margin-top: 0px;
+	margin-top: 6px;
 	float: left;
 	padding-right: 15px;	
 	color: #000000;
 	font-size: 12px;	
-	width: 300px;
+}
+.search_black_text.user {
+	width: 200px;
+}
+.search_black_text.track {
+	width: 400px;
+}
+.search_black_text.song {
+	width: 350px;
 }
 
 .search_black_text a {
@@ -3664,6 +3667,41 @@ div.hr {
 	margin-top: 6px;
 	float: left;
 	padding-right: 4px;
+}
+
+.search_rating {
+	padding-top: 2px;
+}
+
+.pagination {
+	float: right;
+	margin-top: 6px;
+	margin-right: 12px; 
+	margin-bottom: 1px;
+}
+
+.pagination a, .pagination .current, .pagination .disabled, .pagination .gap {
+	display:block;
+	float:left;
+	margin: 0px 2px 2px;
+}
+
+.pagination .current {
+	border-bottom: 1px solid black;
+}
+
+.pagination a {
+	color:#006F9F;
+	font-weight:bold;
+}
+
+.pagination .disabled {
+	opacity: 0.35;
+	filter: alpha(opacity=0.35);
+}
+
+.pagination.spinner {
+	margin-right: 5px;
 }
 
 /******************** END SEARCH ********************/

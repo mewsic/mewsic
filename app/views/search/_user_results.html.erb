@@ -4,19 +4,20 @@
 		<div class="float-left">
   		<div class="search_icon_container"><%= user_type_image user %></div>
   		<div class="search_icon_container"><%= link_to avatar_image(user, :icon), user_path(user) %></div>
-  		<p class="search_black_text"><%= link_to highlight_search(user.login), user_path(user) %></p>
+  		<p class="search_black_text user name"><%= link_to highlight_search(user.login), user_path(user) %></p>
   		<p class="search_gray_text"><%= highlight_search user.country %>, <%= highlight_search user.city %></p>
   	</div>
 		<div class="float-right">
   		<p class="search_gray_text">Uploads:</p>
-  		<p class="search_small_green_text">Songs</p><p class="search_gray_text">()</p>
-  		<p class="search_small_orange_text">Tracks</p><p class="search_gray_text">()</p>
+			<p class="search_small_green_text">Songs</p><p class="search_gray_text">(<%= user.tracks_count %>)</p>
+			<p class="search_small_orange_text">Tracks</p><p class="search_gray_text">(<%= user.songs_count %>)</p>
+			<div class="search_rating"><%= rating(user) %></div>
   	</div>
   </div>  
   <%- end -%>
 
-  <%= will_paginate @users, :class => 'pagination user', :params => { :type => :user }, :prev_label => "&lt;", :next_label => "&gt;" %>
-  <div style="text-align: right;">
+  <%= will_paginate @users, :class => 'pagination user', :params => { :type => :user }, :prev_label => image_tag('move_arrow_left.png'), :next_label => image_tag('move_arrow_right.png') %>
+	<div class="pagination spinner">
     <img src="/images/spinner.gif" id="user-results-spinner" style="display: none;"/>
   </div>
 <%- else -%>

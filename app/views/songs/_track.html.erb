@@ -2,6 +2,7 @@
     			  <p class="thumb">
     			    <%= track_instrument_icon(track) %>
     			    <%= link_to(avatar_image(track.user, :icon), user_path(track.user)) %>
+						</p>
     			  <p class="name align-right"><%= link_to(track.user.nickname, user_path(track.user)) %></p>
     			  <p class="title align-right"><%= track.title %></p>
     			  <div class="music-info">
@@ -22,6 +23,7 @@
 							<div class="float-left">
 								<%= download_button_for track %>
 								<%= download_link_for track, 'Download' %>
+								<span class="music-info">Created <%= track.created_at.strftime("%m/%d/%y") %></span>
 							</div>
     			  </div>
     		  </div>
