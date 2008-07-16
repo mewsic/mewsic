@@ -21,12 +21,16 @@ module GenresHelper
   def genres_pagination_next_button
     if current_genre_char != @genre_chars.last
       link_to image_tag('move_arrow_right.png'), formatted_genres_path('html', :c => next_genre_char), :class => 'genre-pagination arrow', :onclick => 'return false'
+    else
+      image_tag('move_arrow_right.png', :class => 'faded arrow')
     end
   end
   
   def genres_pagination_previous_button
     if current_genre_char != @genre_chars.first
       link_to image_tag('move_arrow_left.png'), formatted_genres_path('html', :c => previous_genre_char), :class => 'genre-pagination arrow', :onclick => 'return false'
+    else
+      image_tag('move_arrow_left.png', :class => 'faded arrow')
     end
   end
   

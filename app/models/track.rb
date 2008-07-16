@@ -48,16 +48,16 @@ class Track < ActiveRecord::Base
   def self.search_paginated(q, options)
     options = {:per_page => 6, :page => 1}.merge(options)
     paginate(:per_page => options[:per_page], :page => options[:page], :include => [:mixes, :instrument, {:parent_song => {:user => :avatars}}], :conditions => [
-      "tracks.title LIKE ? OR tracks.description LIKE ? OR instruments.description LIKE ? AND mixes.track_id IS NOT NULL",
-      *(Array.new(3).fill("%#{q}%"))
+      "tracks.title LIKE ? OR tracks.description LIKE ? OR instruments.description LIKE ? AND tracks.idea = ?",
+      *(Array.new(3).fill("%#{q}%") << false)
     ])
   end
   
   def self.search_paginated_ideas(q, options)
     options = {:per_page => 6, :page => 1}.merge(options)
     paginate(:per_page => options[:per_page], :page => options[:page], :include => [:mixes, :instrument, {:parent_song => {:user => :avatars}}], :conditions => [
-      "tracks.title LIKE ? OR tracks.description LIKE ? OR instruments.description LIKE ? AND mixes.track_id IS NULL",
-      *(Array.new(3).fill("%#{q}%"))
+      "tracks.title LIKE ? OR tracks.description LIKE ? OR instruments.description LIKE ? AND tracks.idea = ?",
+      *(Array.new(3).fill("%#{q}%") << true)
     ])
   end
   
@@ -74,19 +74,31 @@ class Track < ActiveRecord::Base
   end
   
   def self.find_paginated_by_user(page, user)
-    paginate :per_page => 7,
-             :conditions => ["tracks.user_id = ?", user.id],
-             :include => :instrument, 
-             :order => "tracks.created_at DESC",
-             :page => page
+    user.tracks.paginate(:page => page, :per_page => 7, :include => :instrument, :order => "tracks.created_at DESC")
+  end
+
+  def self.find_paginated_ideas_by_user(page, user)
+    user.tracks.paginate(:page => page, :per_page => 3, :include => :instrument, :conditions => ['tracks.idea = ?', true], :order => "tracks.created_at DESC")
   end
   
   def self.find_paginated_by_mband(page, mband)
-    paginate :per_page => 7,
-             :conditions => ["tracks.user_id IN (?)", mband.members.map(&:id)],
-             :include => :instrument,
-             :order => "tracks.created_at DESC",
-             :page => page
+    paginate(:page => page, :per_page => 7, :include => :instrument, :conditions => ["tracks.user_id IN (?)", mband.members.map(&:id)], :order => "tracks.created_at DESC")
+  end
+
+  def self.find_paginated_ideas_by_mband(page, mband)
+    paginate(:page => page, :per_page => 3, :include => :instrument, :conditions => ["tracks.user_id IN (?) AND tracks.idea = ?", mband.members.map(&:id), true], :order => "tracks.created_at DESC")
+  end
+
+  def self.find_paginated_newest_ideas(page)
+    paginate(:page => page, :per_page => 3, :conditions => ['tracks.idea = ?', true], :order => 'tracks.created_at DESC')
+  end
+
+  def self.find_paginated_coolest_ideas(page)
+    paginate(:page => page, :per_page => 3, :include => :songs, :conditions => ['tracks.idea = ?', true], :order => 'songs.rating_avg DESC')
+  end
+
+  def self.find_paginated_top_rated_ideas(page)
+    paginate(:page => page, :per_page => 3, :conditions => ['tracks.idea = ?', true], :order => 'tracks.rating_avg DESC')
   end
   
   def length

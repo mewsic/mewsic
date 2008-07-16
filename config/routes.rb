@@ -4,7 +4,7 @@ ActionController::Routing::Routes.draw do |map|
     mband.resource :avatar
     mband.resources :photos
     mband.resources :songs
-    mband.resources :tracks
+    mband.resources :tracks, :member => { :toggle_idea => :put }
   end  
   
   map.connect 'mband_memberships/accept/:token', :controller => 'mband_memberships', :action => 'accept'
@@ -40,14 +40,12 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :sessions
 
   map.resources :songs, :has_one => :player, 
-    :member => { :mix => :post, :rate => :put , :tracks => :get, :download => :get } do |song|
+    :member => { :mix => :post, :load_track => :put, :unload_track => :put, :rate => :put , :tracks => :get, :download => :get } do |song|
 
     song.resources :abuses, :singular => 'abuse'
     
   end
-  
-  #map.connect 'songs/:id/mix', :controller => 'songs', :action => 'mix'
-  
+ 
   map.resources :tracks, :has_one => :player, :member => { :rate => :put, :download => :get }
   
   map.resources :search
@@ -62,9 +60,10 @@ ActionController::Routing::Routes.draw do |map|
   map.music '/music', :controller => 'music', :action => 'index'
   map.top_music '/music/top', :controller => 'music', :action => 'top'
 
-  map.multitrack        '/multitrack',          :controller => 'multitrack', :action => 'index'
-  map.multitrack_edit   '/multitrack/:song_id', :controller => 'multitrack', :action => 'edit'
-  map.multitrack_config '/request.config',      :controller => 'multitrack', :action => 'config'
+  map.multitrack         '/multitrack',             :controller => 'multitrack', :action => 'index'
+  map.multitrack_edit    '/multitrack/:id',         :controller => 'multitrack', :action => 'edit'
+  map.multitrack_config  '/request.config',         :controller => 'multitrack', :action => 'config'
+  map.multitrack_refresh '/multitrack/refresh/:id', :controller => 'multitrack', :action => 'refresh'
 
   map.connect '/countries', :controller => 'users', :action => 'countries'
   

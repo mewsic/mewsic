@@ -37,12 +37,9 @@ class Song < ActiveRecord::Base
   belongs_to :genre
   belongs_to :user 
   
-  validates_presence_of :title, :tone, :seconds, :genre_id, :if => Proc.new(&:published)
-  validates_associated :genre, :if => Proc.new(&:published) 
+  validates_presence_of :title, :tone, :seconds, :genre_id, :user_id, :if => Proc.new(&:published)
+  validates_associated :genre, :user, :if => Proc.new(&:published) 
 
-  validates_presence_of :user_id
-  validates_associated :user
-  
   acts_as_rated :rating_range => 0..5
   
   def self.search_paginated(q, options)
@@ -100,6 +97,14 @@ class Song < ActiveRecord::Base
     Mix.find_by_sql([
       "select distinct x.original_author, x.title, t.song_id from mixes s inner join mixes t on s.track_id = t.track_id inner join songs x on t.song_id = x.id       
       where x.id != #{self.id} ORDER BY #{SQL_RANDOM_FUNCTION} LIMIT #{limit}"])
+  end
+
+  def self.create_unpublished!
+    self.create! :published => false
+  end
+
+  def self.find_unpublished(what, options = {})
+    self.find what, options.merge(:conditions => ['published = ?', false])
   end
   
   def direct_siblings(limit = 5)

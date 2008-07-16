@@ -6,13 +6,13 @@
 				new Ajax.InPlaceEditor('mlab_' + name, '<%= song_path(@song) %>', {
 					externalControl: 'mlab_' + name + '_edit_button',
 					externalControlOnly: true,
-					highlightcolor: 'transparent',
 					rows: name == 'description' ? 5 : 1,
 					highlightendcolor: 'transparent',
 					paramName: 'song[' + name + ']',			
-					ajaxOptions: { method: 'PUT' }
-				});												 
-			});		 
+					ajaxOptions: { method: 'PUT' }/*,
+					onComplete: function() { $('flashcontent').refreshSong(); }*/
+				});
+			});
 			new Ajax.InPlaceSelect('mlab_genre', '<%= song_path(@song) %>', {
 				lazyLoading: true,
 				values_url: '/genres?ids',
@@ -20,10 +20,8 @@
 				externalControl: 'mlab_genre_edit_button',
 				externalControlOnly: true,
 				ajaxOptions: { method: 'PUT' },
-				paramName: 'song[genre_id]',
-				onComplete: Prototype.emptyFunction,
-				highlightcolor: 'transparent',
-				highlightendcolor: 'transparent'
+				paramName: 'song[genre_id]'/*,
+				onComplete: function() { $('flashcontent').refreshSong(); }*/
 			});
 		} else {
 			$w('title original_author description genre').each(function(name) {
@@ -34,6 +32,10 @@
 			});
 		}
 	});
+
+	function refreshTopPane() {
+		new Ajax.Request('<%= multitrack_refresh_path(@song) %>', {method: 'get'});
+	}
 	
 	function setFlashHeight( height ) {
 		$( 'flashcontent' ).style.height = height.toString() + 'px';
@@ -52,7 +54,7 @@
 	};
 	var params = { wmode: 'transparent' };
 	var attributes = { name: 'multitrackObject' };
-	swfobject.embedSWF( '/multitrack/Adelao_Myousica_Multitrack_Editor.swf', 'flashcontent', '978', '100%', '9.0.0', 'express-install.swf', flashvars, params, attributes );
+	swfobject.embedSWF( '/multitrack/Adelao_Myousica_Multitrack_Editor.swf', 'flashcontent', '978', '100%', '9.0.0', 'expressInstall.swf', flashvars, params, attributes );
 	
 // ]]></script>
 
@@ -79,14 +81,15 @@
 				<p class="mlab_title_big" id="mlab_title"><%= @song.title || 'Untitled' %></p>
 			</div>
 			<div id="mlab_labels_right">
-				<!-- dynamic -->
 				<div style="float: left;">
+					<!-- dynamic -->
 					<p class="mlab_label">Tracks:</p>
-					<p class="mlab_title_big"><%= @song.tracks.count %></p>
+					<p class="mlab_title_big" id="mlab_tracks"><%= @song.tracks.count %></p>
 				</div>
 				<div id="mlab_2nd_column_right">					
+					<!-- dynamic -->
 					<p class="mlab_label">Runtime:</p>
-					<p class="mlab_title_big"><%= @song.length %></p>
+					<p class="mlab_title_big" id="mlab_runtime"><%= @song.length %></p>
 				</div>
 			</div>
 		</div>
@@ -97,7 +100,7 @@
 				<p class="mlab_title_big" id="mlab_original_author"><%= @song.original_author || 'Original Author' %></p>
 			</div>
 			<div id="mlab_labels_right">
-				<!-- dynamic -->
+				<!-- inplace select -->
 				<p class="mlab_label">Genre: <a href="#" id="mlab_genre_edit_button">[edit]</a></p></p>
 				<p class="mlab_genre_text" id="mlab_genre"><%= @song.genre ? @song.genre.name : '' %></p>
 			</div>
@@ -111,7 +114,7 @@
 			<div id="mlab_labels_right">
 				<!-- dynamic -->
 				<p class="mlab_label">Instruments:</p>
-				<p class="mlab_small_text">Drum, Piano, Sax, Voice, Synth, Bass, Maracas, Trombone</p>
+				<p class="mlab_small_text" id="mlab_instruments"><%= instruments_used_in @song %></p>
 			</div>
 		</div>			
 	</div>
