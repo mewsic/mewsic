@@ -39,16 +39,24 @@ class Answer < ActiveRecord::Base
 
   def self.find_top_paginated(page, options = {})
     self.paginate options.merge(:page => page,
-                  :conditions => ["answers.closed = ?", false],
+                  :conditions => "answers.rating_avg >= 3.0",
                   :order => 'answers.rating_avg DESC, answers.replies_count DESC',
                   :include => {:user => :avatars})
   end
 
+  def self.top_count
+    self.count :conditions => "answers.rating_avg >= 3.0"
+  end
+
   def self.find_newest_paginated(page, options = {})
     self.paginate options.merge(:page => page,
-                  :conditions => ["answers.closed = ?", false],
+                  :conditions => ["answers.closed = ? AND answers.created_at > ?", false, 1.month.ago],
                   :order => 'answers.created_at DESC',
                   :include => {:user => :avatars})
+  end
+
+  def self.newest_count
+    self.count :conditions => ["answers.closed = ? AND answers.created_at > ?", false, 1.month.ago]
   end
 
   def self.find_paginated_by_user(user, page, options = {})
@@ -58,11 +66,32 @@ class Answer < ActiveRecord::Base
   def self.find_newest(options = {})
     self.find(:all, options.merge(:order => 'answers.created_at DESC'))
   end
+
+  def self.search_paginated(q, options)
+    options = {:per_page => 6, :page => 1}.merge(options)
+    self.paginate options.merge(:conditions => ["answers.body LIKE ?", "%#{q}%"],
+                  :include => {:user => :avatars},
+                  :order => 'answers.created_at DESC')
+  end
   
   def self.close_old_answers
     update_all(["closed = ?", true], ["last_activity_at < ?", 1.month.ago])
   end
-  
+
+  ### XXX XXX FIXME !!! XXX
+  def find_similar
+    keywords = self.body.split(/ /).map! do |word|
+      word.gsub! /[%_]/, ''
+      next if word.length < 5
+      "%#{word}%"
+    end
+
+    search_string = "answers.id != ? AND (" << Array.new(keywords.size).fill("answers.body LIKE ?").join(' OR ') << ")"
+    
+    Answer.find(:all, :include => {:user => :avatars}, :limit => 10, :order => 'answers.rating_avg DESC, answers.created_at DESC',
+              :conditions => [search_string, self.id, *keywords])
+  end
+
   def update_replies_count
     update_attribute(:replies_count, replies.count)
     replies.size
@@ -73,7 +102,11 @@ class Answer < ActiveRecord::Base
   end
 
   def editable?
-    created_at < 15.minutes.ago
+    created_at > 15.minutes.ago
+  end
+
+  def editable_for
+    "%d minutes %d seconds" % ((self.created_at + 15.minutes) - Time.now).divmod(60) if editable?
   end
   
 private
