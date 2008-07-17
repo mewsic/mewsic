@@ -84,15 +84,16 @@ html[xmlns] .clear-block {
 	float: left;
 }
 #top-menu{
+	color:#666;
 	font-size:11px;
 	text-align:right;
 	padding-top:3px;
 	margin-right:6px;
 }
 #top-menu a{
-	color:#000;
+	color:#666;
 	padding: 0px 7px;
-	border-right:1px solid #000;
+	/*border-right:1px solid #000;*/
 }
 #top-menu li.active{
 	font-weight:bold;
@@ -347,8 +348,8 @@ div.user-list-boxes img.refresh-block {
 
 div#newest-users div.status {
 	float: right;
-	top: -2px;
-	left: 28px;
+	top: -6px;
+	left: 30px;
 }
 
 div.user-list-boxes p {
@@ -421,16 +422,16 @@ td.song-title a:hover {
 	margin: 0px 20px 10px;
 	color:#b6b6b6;
 }
-#path.mypage{
-	float:left;
-}
 #path a{
 	color:#b6b6b6;
 	text-decoration:underline;
 }
-#path a:hover{
+#path a:hover {
 	color:#000;
 	text-decoration:none;
+}
+#path.mband, #path.mband a {
+	color: #fff;
 }
 h1, h1 a{
 	font-size:16px;
@@ -568,48 +569,8 @@ tr.nav-song td{
 .three-col{
 	width:708px;
 }
-.three-col-nospace{
-	width:732px;
-}
 .button{
-	width:62px;
-}
-/* pre lancio */
-.pre-lancio{
-	width: 600px;
-	margin:20px 20px 20px 0px;
-	color:#808080;
-}
-.pre-lancio h1{
-	color:#009DC2;
-	font-size:35px;
-}
-.pre-lancio-form{
-	width:832px;
-	margin:10px 0px 20px;
-	text-align:left;
-}
-.pre-lancio-form .elements{
-	width:320px;
-	margin: 0px 10px;
-}
-.pre-lancio-form input{
-	border:none;
-	width:260px;
-}
-.pre-lancio-form input.inputstyle[type="file"]{
-	background:#fff;
-	border:transparent;
-	font-size:11px !important;
-	font-weight:bold;
-	width:260px !important;
-}
-.pre-lancio-form label{
-	width:85px;
-	font-weight:bold;
-	display:block;
-	float:left;
-	padding-top:2px;
+	width:50px;
 }
 .rounded-angle-white-370{
 	width:350px;
@@ -797,15 +758,65 @@ tr.nav-song td{
 	color:#61656A;
 }
 
-/* answers page */
+/* search answer */
+.search-question{
+	clear:both;
+	margin:10px 1px 20px;
+	padding:10px 50px;
+	width: 630px;
+	border-bottom:1px solid #EDEDED;
+}
+.search-question * {
+	float: left;
+}
+.search-question h2 {
+	margin: 5px;
+}
+.search-question .query {
+	border:1px solid #D3D3D3;
+	width:310px;
+	height:20px;
+	margin:2px 10px;
+	float: left;
+}
+
+/* answers list */
+#my-question-mark {
+	float: right;
+	padding-right:60px;
+}
+#my-question-mark img {
+	position:absolute;
+	margin-top:-40px;
+}
+#reply-exclamation-mark {
+	float: right;
+	padding-right:50px;
+}
+#reply-exclamation-mark img {
+	position:absolute;
+	margin-top:-60px;
+}
+
 .answers .elements {
 	margin-bottom:15px;
 	border-bottom:1px solid #D9D9D9;
+	padding-bottom: 0px;
+}
+
+.similar.answers .elements {
+	padding-bottom: 0px;
 }
 
 .answers .details {
 	float: left;
 	width: 380px;
+	margin-bottom: 10px;
+}
+
+.similar.answers .details {
+	width: 600px;
+	margin-bottom: 0px;
 }
 
 .answers .rating {
@@ -818,6 +829,71 @@ tr.nav-song td{
 
 .answers h2 {
 	margin-bottom: 4px;
+}
+
+/* answer detail */
+.answer h1{
+	color:#009DC2;
+	font-size:21px;
+	margin-bottom:10px;
+}
+.answer p, .reply p{
+	padding-bottom:10px;
+}
+.reply .thumb, .answer .thumb {
+	text-align:center;
+	width:75px;
+}
+.reply .details, .answer .details {
+	width:360px; 
+	float:left;
+	margin-bottom:15px;
+	padding-bottom: 0px;
+	border-bottom: 1px solid #D9D9D9;
+}
+
+.answer .edit-command {
+	float: left;
+}
+.answer .edit-command em {
+	color: #888;
+	font-weight: lighter;
+}
+
+.answer textarea {
+	border: 1px solid #D9D9D9;
+}
+.answer .body {
+	font-size:14px;
+}
+.reply .body, .replies .body {
+	font-size: 12px;
+	font-weight:bold;
+}
+
+.answer-header{
+	margin:0px 0px 10px 90px;
+	clear:both;
+	color:#009DC2;
+}
+.answer-header h2{
+	color:#009DC2;
+	font-size:16px;
+	margin-bottom:10px;
+}
+.answer-header h2 span{
+	color:#000;
+}
+.answer-header a{
+	color:#61656A;
+}
+
+.answer-small p.replies-count {
+	padding: 0;
+	float: right;
+}
+.answer-small .rating {
+	margin: 0;
 }
 
 /* simple list */
@@ -910,6 +986,7 @@ tr.nav-song td{
 }
 h2.mband-label{
 	background:url(/images/BG_box_cyan_top_mband.png) no-repeat top left;
+	color: #FFFFFF;
 }
 h2.band-label{
 	background:url(/images/BG_box_cyan_top_band.png) no-repeat top left;
@@ -1355,6 +1432,15 @@ h2.dj-label{
 	height:150px;
 	/*margin-top: 27px;*/
 }
+
+.user-resume h1, .user-resume h2 {
+	margin-bottom: 4px;
+}
+
+.user-resume p {
+	padding-top: 4px;
+}
+
 .user-mail{
 	float:left;
 	width:180px;
@@ -1497,10 +1583,18 @@ h2.dj-label{
 	border-bottom: 1px solid #eee;
 	font-weight: bold;
 }
-.mypage-label{
+#mypage-label {
 	float:right;
-	padding:10px 10px 0px;
+	background: url(/images/angle_profiles.png) no-repeat right;
+	padding:9px 11px 0px;
+	height: 54px;
 }
+#mypage-label.mband {
+	background: url(/images/angle_mband.png) repeat-x right;
+	width: 710px;
+	float: none;
+}
+
 .change-type{
 	float:left;
 	color:#0296C2;
@@ -1509,6 +1603,7 @@ h2.dj-label{
 	text-align:right;
 	padding-right:10px;
 	border-right:1px solid #C6C6C6;
+  width: 180px;
 }
 .change-type img{
 	margin-left:8px;
@@ -1517,6 +1612,10 @@ h2.dj-label{
 	float:left;
 	padding-left:10px;
 }
+.mband .type-label {
+	float: right;
+}
+
 /* classification block */
 /* songs*/
 .tit-classification-songs {
@@ -1771,7 +1870,6 @@ html>body .gallery-photo-big >div{
 	display:inline;
 } 
 html>body .gallery-photo-thumb >.edit-command{
-
 	display:table-row;
 }
 .gallery-photo-thumb .edit-command a:hover, .gallery-photo-thumb .edit-command .active a{
@@ -2470,89 +2568,10 @@ p.sign-in .button{
 
 /* elementi speciali */
 .grey-divisor{
-	border-bottom:2px solid #EFEDD9;
+	border-bottom:2px solid #CCEAF3;
 	height:1px;
 	font-size:1px;
 }
-/* special-button */
-.special-button {
-	margin: 0px 10px;
-	display: inline;
-}
-head:first-child+body .special-button{
-	padding: 0px 40px 20px;
-	width: 50%;
-	display: table-cell;
-}
-:root .special-button{
-	padding: 0px !important;
-	width: auto !important;
-	display: inline !important; 
-}
-.special-button input{
-	font-family:Arial, Verdana, Helvetica, sans-serif;
-	font-size:18px;
-	font-weight: bold;
-	color:#fff;
-	text-align:center;
-	position: absolute;
-	padding-top: 0.45em; 
-	background: none;
-	border: none;
-}
-.special-button input.special_button_ok{
-	width:77px;
-	margin-left: -80px;
-}
-.special-button input.special_button_220{
-	width:220px;
-	margin-left: -225px;
-}
-.special-button input.special_button_small{
-        position:relative;
-	font-size:13px;
-	width:90px;
-	margin-left: -93px;
-}
-.special-button input.special_button_small_220{
-	font-size:13px;
-	width:220px;
-	margin-left: -223px;
-}
-.special-button input/* */{
-	/*margin-left: -8.2em;*/
-}
-head:first-child+body .special-button input{
-	padding-top: 0; 
-	position: relative;
-	/*margin-left: -7.2em;*/
-	border: transparent 1px solid;
-}
-:root .special-button input{
-	/*margin-left: -6.8em !important;*/
-	padding-top: 0.45em !important; 
-	position: absolute !important;
-}
-* html .special-button input{
-	padding-top: 0.40em; 
-}
-:root .special-button input.special_button_small{
-	/*margin-left: -6.8em !important;*/
-	padding-top: 0.15em !important; 
-	position: absolute !important;
-}
-* html .special-button input.special_button_small{
-	padding-top: 0.10em; 
-}
-:root .special-button input.special_button_small_220{
-	/*margin-left: -6.8em !important;*/
-	padding-top: 0.15em !important; 
-	position: absolute !important;
-}
-* html .special-button input.special_button_small_220{
-	padding-top: 0.10em; 
-}
-
 /* tag cloud */
 
 a.cloud1 {
@@ -2631,71 +2650,17 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
   background:#FFFFB1;
   border-color: #FFF281;
 }
-/* search question */
-.search-question{
-	clear:both;
-	padding:10px 50px;
-	margin:10px 0px;
-}
-/* questions */
-.thumb-question{
-	text-align:center;
-	width:75px;
-	float:left;
-	margin-bottom:15px;
-}
-.thumb-question .name, .thumb-question .name a{
-	color:#646567;
-	font-weight:normal;
-}
-
-.testi-question, .testi-answer{
-	width:360px; 
-	padding:0px 0px 15px 20px;
-	float:left;
-	margin-bottom:15px;
-	border-bottom: 1px solid #D9D9D9;
-}
-.testi-question h1{
-	color:#009DC2;
-	font-size:21px;
-	margin-bottom:10px;
-}
-.testi-question p, .testi-answer p{
-	padding-bottom:10px;
-}
-.titoletti-question{
-	margin:0px 0px 10px 95px;
-	clear:both;
-	color:#009DC2;
-}
-.titoletti-question h2{
-	color:#009DC2;
-	font-size:16px;
-	margin-bottom:10px;
-}
-.titoletti-question h2 span{
-	color:#000;
-}
-.titoletti-question a{
-	color:#61656A;
-}
-.testi-answer span{
-	margin-right:10px;
-}
-.testo-risposta{
-	font-size:14px;
-}
 
 .send-question label {
   color: #61656A;
   padding-bottom: 3px;
 }
-
 .send-question input.text, .send-question textarea {
   border: 1px solid #BFD2DB;
   width: 99%;
 }
+
+
 
 .menu-categorie{
 	padding:10px;
@@ -2881,7 +2846,7 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 	margin: 6px;
 }
 
-.user-resume .rating, .testi-question .rating {
+.user-resume .rating {
 	margin-left: -2px;
 }
 
@@ -3543,64 +3508,6 @@ div.hr {
 	margin-bottom: 15px;
 }
 
-
-/******************** TABMENU ********************/
-     
-#search_tabmenu.sx {
-	width: 13px;
-	height: 33px;
-	background: transparent url('/images/tabmenu/tabmenu_inactive_sx.png') no-repeat top;
-	float: left;
-	margin-left: 4px;
-}
-
-#search_tabmenu.rp {
-	height: 33px;
-	background: transparent url('/images/tabmenu/tabmenu_inactive_rp.png') repeat-x top;
-	float: left;
-}
-
-#search_tabmenu.dx {
-	width: 13px;
-	height: 33px;
-	background: transparent url('/images/tabmenu/tabmenu_inactive_dx.png') no-repeat top;
-	float: left;
-	margin-right: 4px;	
-}
-
-#search_tabmenu_container {
-	border-bottom: 1px solid #E6E6E6;
-	float: left;
-	height: 32px;
-	width: 100%;
-	margin-bottom: 8px;
-}
-
-.tab.active #search_tabmenu.sx {
-	width: 13px;
-	height: 33px;
-	background: transparent url('/images/tabmenu/tabmenu_active_sx.png') no-repeat top;
-	float: left;
-	margin-left: 4px;
-}
-
-.tab.active #search_tabmenu.rp {
-	height: 33px;
-	background: transparent url('/images/tabmenu/tabmenu_active_rp.png') repeat-x top;
-	float: left;
-}
-
-.tab.active #search_tabmenu.dx {
-	width: 13px;
-	height: 33px;
-	background: transparent url('/images/tabmenu/tabmenu_active_dx.png') no-repeat top;
-	float: left;
-	margin-right: 4px;	
-}
-
-
-
-
 /******************** TEXT FORMATTING ********************/
 
 #search_results {
@@ -3618,14 +3525,6 @@ div.hr {
 	margin-top: 12px;
 	margin-bottom: 6px;
 	padding-left: 8px
-}
-
-.search_tabmenu_title {
-	color:#004D71;
-	font-size:16px;
-	padding: 10px 4px 0px 8px;
-	float: left;
-	margin: 0;
 }
 
 .search_blue_text {
@@ -3827,32 +3726,9 @@ div#login {
 }
 /******************** END LOGIN BOX ********************/ 
                                                           
-/******************** SIBLINGS TABS ********************/ 
+/******************** TABMENU ********************/ 
 
-
-#siblings_tabmenu.sx {
-	width: 13px;
-	height: 33px;
-	background: transparent url('/images/tabmenu/tabmenu_inactive_sx.png') no-repeat top;
-	float: left;
-	margin-left: 4px;
-}
-
-#siblings_tabmenu.rp {
-	height: 33px;
-	background: transparent url('/images/tabmenu/tabmenu_inactive_rp.png') repeat-x top;
-	float: left;
-}
-
-#siblings_tabmenu.dx {
-	width: 13px;
-	height: 33px;
-	background: transparent url('/images/tabmenu/tabmenu_inactive_dx.png') no-repeat top;
-	float: left;
-	margin-right: 4px;	
-}
-
-#siblings_tabmenu_container {
+.tabmenu {
 	border-bottom: 1px solid #E6E6E6;
 	float: left;
 	height: 32px;
@@ -3860,7 +3736,7 @@ div#login {
 	margin-bottom: 8px;
 }
 
-.tab.active #siblings_tabmenu.sx {
+.tabmenu .tab.active .sx {
 	width: 13px;
 	height: 33px;
 	background: transparent url('/images/tabmenu/tabmenu_active_sx.png') no-repeat top;
@@ -3868,13 +3744,13 @@ div#login {
 	margin-left: 4px;
 }
 
-.tab.active #siblings_tabmenu.rp {
+.tabmenu .tab.active .rp {
 	height: 33px;
 	background: transparent url('/images/tabmenu/tabmenu_active_rp.png') repeat-x top;
 	float: left;
 }
 
-.tab.active #siblings_tabmenu.dx {
+.tabmenu .tab.active .dx {
 	width: 13px;
 	height: 33px;
 	background: transparent url('/images/tabmenu/tabmenu_active_dx.png') no-repeat top;
@@ -3882,58 +3758,46 @@ div#login {
 	margin-right: 4px;	
 }
 
-/* text formatting */
-.siblings_title {
-	color:#004D71;
-	font-size:16px;
-	margin-bottom:8px;
-	padding-left: 15px
+.tabmenu .tab .sx {
+	width: 13px;
+	height: 33px;
+	background: transparent url('/images/tabmenu/tabmenu_inactive_sx.png') no-repeat top;
+	float: left;
+	margin-left: 4px;
 }
 
-.siblings_tabmenu_title {
+.tabmenu .tab .rp {
+	height: 33px;
+	background: transparent url('/images/tabmenu/tabmenu_inactive_rp.png') repeat-x top;
+	float: left;
+}
+
+.tabmenu .tab .dx {
+	width: 13px;
+	height: 33px;
+	background: transparent url('/images/tabmenu/tabmenu_inactive_dx.png') no-repeat top;
+	float: left;
+	margin-right: 4px;	
+}
+
+.tabmenu .tab .title {
 	color:#004D71;
 	font-size:16px;
-	padding: 10px 0px 0px 15px;
+	padding: 10px 4px 0px 8px;
 	float: left;
 	margin: 0;
 }
 
-.siblings_blue_text {
-	color: #1A71A0;
-	font-size: 12px;
-	margin-bottom: 0px;
-	margin-top: 6px;
+.tabmenu .tab .counter {
+	font-weight: bold;
+	color:#004D71;
+	font-size:16px;
+	padding: 10px 0px 0px 5px;
 	float: left;
-	padding-right: 8px;
+	margin: 0;
 }
 
-.siblings_sky_text {
-	color: #0095C1;
-	font-size: 12px;
-	margin-bottom: 0px;
-	margin-top: 6px;
-	float: left;
-	padding-right: 8px;
-}
-
-.siblings_gray_text {
-	color: #646567;
-	font-size: 12px;
-	margin-bottom: 0px;
-	margin-top: 6px;
-	float: left;
-	padding-right: 8px;
-}
-
-.siblings_black_text {
-	color: #000000;
-	font-size: 12px;	
-	margin-bottom: 0px;
-	margin-top: 6px;
-	float: left;
-	padding-right: 15px;	
-}
-
+/******************** SIBLINGS TABS TEXT FORMATTING ********************/ 
 .siblings_green_text {
 	color: #93C369;
 	font-size: 16px;	
@@ -3959,25 +3823,6 @@ div#login {
 .siblings_orange_text a:link, .siblings_orange_text a:visited, .siblings_orange_text a:hover, .siblings_orange_text a:active {
   color: #ECAF48;
 }
-
-.siblings_small_green_text {
-	color: #93C369;
-	font-size: 12px;
-	margin-bottom: 0px;
-	margin-top: 6px;
-	float: left;
-	padding-right: 4px;
-}
-
-.siblings_small_orange_text {
-	color: #ECAF48;
-	font-size: 12px;
-	margin-bottom: 0px;
-	margin-top: 6px;
-	float: left;
-	padding-right: 4px;
-}
-
 /******************** END SIBLINGS TABS ********************/ 
 
 #direct-siblings .tracks-number, #indirect-siblings .tracks-number {
@@ -3987,6 +3832,7 @@ div#login {
 #direct-siblings .active .tracks-number, #indirect-siblings .active .tracks-number {
   background-image: url(/images/tracks_number_BG_orange.png);
 }
+
 /***** messages autocomplete *****/
 div.auto_complete {
   width: 350px;
