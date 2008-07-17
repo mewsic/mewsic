@@ -15,15 +15,14 @@ class SearchController < ApplicationController
       
      format.xml do
        @show_siblings_count = true
-       @songs = Song.search_paginated(params[:q], :per_page => 6, :page => params[:page])
-       @tracks = Track.search_paginated(params[:q], :per_page => 6, :page => params[:page])
+       @songs = Song.search_paginated(@q, :per_page => 6, :page => params[:page])
+       @tracks = Track.search_paginated(@q, :per_page => 6, :page => params[:page])
        render :action => 'show'
      end
     end
   end
 
   def show
-    @q = CGI::unescape(params[:id])
     def @q.to_breadcrumb; self; end
 
     @users, @songs, @tracks, @ideas = search(@q, params[:type] || [])
@@ -45,19 +44,6 @@ class SearchController < ApplicationController
     end
   end
 
-  protected
-    def check_valid_search_string
-      query = params[:q] || params[:id] || ''
-      query.gsub! /[%_]/, ''
-      if query.strip.blank?
-        flash[:error] = 'You did not enter a search string' 
-        respond_to do |format|
-          format.html { redirect_to '/' and return }
-          format.xml { render :nothing => true, :status => :bad_request }
-        end
-      end
-    end
-  
   private
     def search(q, types = [])
       [
