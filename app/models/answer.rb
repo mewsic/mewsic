@@ -52,11 +52,11 @@ class Answer < ActiveRecord::Base
   end
 
   def self.find_paginated_by_user(user, page, options = {})
-    user.answers.paginate(:page => page, options.merge(:order => 'created_at DESC'))
+    user.answers.paginate options.merge(:order => 'created_at DESC', :page => page)
   end
 
   def self.find_newest(options = {})
-    self.find(:all, options.merge(:order => 'answers.created_at DESC')
+    self.find(:all, options.merge(:order => 'answers.created_at DESC'))
   end
   
   def self.close_old_answers
