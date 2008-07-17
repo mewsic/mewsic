@@ -1,19 +1,19 @@
 <div class="elements clear-block">
-  <div class="border-angle-top clear-block">
-    <p class="thumb">
-      <%= link_to avatar_image(music.user, :icon), user_path(music.user) %>
-    </p>
-    <p class="name align-right">
-	  <%= link_to music.user.login, user_path(music.user) %>
-	</p>
-		<%= rating(music, :clear => true) %>
-    <p class="title"><%= link_to truncate(music.title, 25), music %></p>
-    <p><%=h music.original_author %></p>
-    <p class="abstract"><%=h truncate(music.description, 33) %></p>    
-    <p class="button float-right">
-      <%= mlab_button(music) %>
-      <%= play_button(music) %>
-    </p>    
-    <p class="float-left">played <%= pluralize(music.listened_times, 'time') %></p>
-  </div>
+	<div class="border-angle-top clear-block">
+		<%= rating(music) %>
+		<p class="thumb">
+			<%= link_to avatar_image(music.user, :icon), user_path(music.user) %>
+		</p>
+		<p class="name align-right">
+			<%= link_to music.user.login, user_path(music.user) %>
+		</p>
+		<p class="title"><%= link_to truncate(music.title, 25), music %></p>
+		<p><%=h music.original_author %></p>
+		<p class="abstract"><%=h truncate(music.description, 33) %></p>    
+		<p class="button float-right">
+			<%= mlab_button(music) %>
+			<%= play_button(music) %>
+		</p>    
+		<p class="float-left">played <%= pluralize(music.listened_times, 'time') %></p>
+	</div>
 </div>

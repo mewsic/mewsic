@@ -6,13 +6,13 @@ module ApplicationHelper
     type_class = 'user' if %w[dj band].include?(type_class)
 
     options = options.symbolize_keys
-    options[:class] = "rating #{type_class} #{options[:class]}"
+    clear_class = 'clear-block' if options.delete(:clear)
+    options[:class] = "rating #{clear_class} #{type_class} #{options[:class]}"
     options[:class] += " locked" if logged_in? && !rateable.rateable_by?(current_user)
-    clearer = %[<div class="clearer"></div>] if options.delete(:clear)
 
     tag_options = options.map { |k,v| %(#{k}="#{v}") }.join(' ')
 
-    %[<div id="#{type_class}_#{rateable.id}" rel="#{rateable.rating_avg.to_f}" #{tag_options}></div>#{clearer}]
+    %[<div id="#{type_class}_#{rateable.id}" rel="#{rateable.rating_avg.to_f}" #{tag_options}></div>]
   end
   
   def body_class

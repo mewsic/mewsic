@@ -16,20 +16,20 @@
 			<%= truncate coolest.motto, 120 %>
 		</p>
 	</div>
-	<div class="slide-container">
-		<div class="button">
+	<div id="coolest-mband-scroller" class="user-scroller">
+		<div class="float-left">
 			<a href="#" class="slide-prev"><img src="/images/slider_arrow_left.png"/></a>
 		</div>
-		<!--[if IE]><div style="clip: rect(0px 315px 30px 0px); position: absolute; overflow:hidden;"><![endif]-->
-		<div class="scroll-clip">
-			<div id="coolest-mband-scroller" style="width: <%= coolest.members.count * 35 + 5 %>px; left: 0px;">
-				<% coolest.members.each do |member| %>
-					<%= link_to avatar_image(member, :icon), user_path(member) %>
-				<% end %>
+		<div class="slide-container">
+			<div class="slide-clip">
+				<div class="slide-contents" style="width: <%= coolest.members.count * 35 + 5 %>px;">
+					<% coolest.members.each do |member| %>
+						<%= link_to avatar_image(member, :icon), user_path(member) %>
+					<% end %>
+				</div>
 			</div>
 		</div>
-		<!--[if IE]></div><![endif]-->
-		<div class="button">
+		<div class="float-left">
 			<a href="#" class="slide-next"><img src="/images/slider_arrow_right.png"/></a>
 		</div>
 	</div>				  	

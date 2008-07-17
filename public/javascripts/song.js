@@ -1,5 +1,5 @@
 document.observe('dom:loaded', function() {
-  $w('song-tracks-container direct-sibling-tracks indirect-sibling-tracks').each(function(element) {
-    new SimpleSlider(element, {x:0, y:305});
-  });
+  new SimpleSlider('song-tracks-container');
+  new SimpleSlider('direct-siblings-tracks-scroller');
+  new SimpleSlider('indirect-siblings-tracks-scroller');
 });

@@ -1,21 +1,27 @@
 var Tooltips = Class.create({
   initialize: function() {
-    this.addAll(document.body);
+    this.addAll(document.body, 15);
 
     Ajax.Responders.register({
       onComplete: this.responder.bindAsEventListener(this)
     });
   },
 
-  addAll: function(element) {
+  addAll: function(element, limit) {
+    // Tips for anonymous users
+    if (!$('current-user-id')) {
+      if (!Prototype.Browser.IE) {
+        element.select('.rating').slice(0,limit).each(this.addRating);
+      }
+      element.select('img.button.mlab').slice(0,limit).each(this.addMlab);
+    }
+
     element.select('.instrument').each(this.addInstrument);
 
-    if (!$('current-user-id')) {
-      element.select('.rating').each(this.addRating);
-      element.select('img.button.mlab').each(this.addMlab);
+    if (!Prototype.Browser.IE) {
+      element.select('.rating.locked').slice(0,limit).each(this.addLockedRating);
+      element.select('.status').slice(0,limit).each(this.addStatus);
     }
-    element.select('.rating.locked').each(this.addLockedRating);
-    element.select('.status').each(this.addStatus);
   },
 
   addInstrument: function(element) {
@@ -51,15 +57,14 @@ var Tooltips = Class.create({
   },
 
   responder: function(r) {
-    Tips.tips.select(function(t) {
-      return t.element.parentNode == null;
-    }).each(function(t) {
-      Tips.remove(t.element);
+    Tips.tips.each(function(t) {
+      if (t.element.parentNode == null)
+        Tips.remove(t.element);
     });
 
     var container = $(r.container.success);
     if (container) {
-      this.addAll(container);
+      this.addAll(container, 5);
     }
   }
 

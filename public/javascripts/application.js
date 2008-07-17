@@ -119,11 +119,12 @@ var SearchBox = Class.create({
 });  
 
 var Rating = Class.create({
-  initialize: function(className) {
-    this.className = className;
+  initialize: function(options) {
+    this.options = options;
     this.logged_in = $('current-user-id') ? true : false;
 
-    $A(document.getElementsByClassName(this.className)).each(this.add.bind(this));
+    var elements = $A(document.getElementsByClassName(this.options.className));
+    elements.slice(0, options.limit).each(this.add.bind(this));
 
     if (this.logged_in && !window.observing_starboxes) {
       this.authenticity_token = $('authenticity-token').value;
@@ -177,7 +178,7 @@ var Rating = Class.create({
   responder: function(r) {
     var container = $(r.container.success);
     if (container) {
-      container.select('.' + this.className).each(this.add.bind(this));
+      container.select('.' + this.options.className).each(this.add.bind(this));
     }
   }
 });
@@ -199,7 +200,7 @@ document.observe('dom:loaded', function(event) {
     });    
 	}
  
-  Rating.instance = new Rating('rating');
+  Rating.instance = new Rating({className: 'rating', limit: 30});
   SearchBox.instance = new SearchBox('search');
   Message.init();
 });

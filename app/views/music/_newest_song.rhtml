@@ -12,11 +12,9 @@
 		<p class="grey-text"><%= truncate newest_song.description, 80 %></p>
 		<p class="playcount">created <%= time_ago_in_words newest_song.created_at, true %> ago</p>
 	</div>
-	<div class="float-right">
-		<%= rating(newest_song) %>
-		<p class="button align-right">
-		  <%= mlab_button(newest_song) %>
-		  <%= play_button(newest_song) %>
-    </p>
+	<div class="float-right align-right" style="width: 62px">
+		<%= rating(newest_song) %><div class="clearer"></div>
+		<%= mlab_button(newest_song) %>
+		<%= play_button(newest_song) %>
 	</div>
 </div>

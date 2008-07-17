@@ -282,28 +282,56 @@ div#mband-members div.status {
 	position: static;
 }
 
-div.slide-container div.button {
-	width: 10px;
-	float: left;
+.user-scroller {
+	padding-bottom: 15px;
 }
 
-div.slide-container div.scroll-clip {
+.user-scroller .slide-container {
+	/*width: 10px;*/
+	float: left;
 	overflow: hidden;
 	margin: 0px 6px;
 	float: left;
 }
 
-div#friend-box div.scroll-clip,
-div#admirers-box div.scroll-clip {
+.user-scroller .slide-container {
 	width: 235px;
 }
 
-div.user-list-boxes div.scroll-clip {
-	width: 315px;
+.user-list-boxes .user-scroller {
+	padding: 0px 14px;
 }
 
-div.user-list-boxes div.slide-container {
-	padding-left: 15px;
+
+.user-list-boxes .slide-container {
+	width: 315px;
+}
+.user-list-boxes .slide-clip {
+	clip: rect(0px 315px 30px 0px);
+	width:315px;
+	height:30px;
+	position:relative;
+	overflow:hidden;
+}
+.user-list-boxes .slide-contents {
+	padding:0;
+	left:0;
+}
+
+.song-tracks .simple-list {
+	margin-bottom: 7px;
+}
+
+.song-tracks .slide-clip {
+	clip: rect(0px 320px 350px 0px);
+	width:320px;
+	height: 350px;
+	position: absolute;
+	overflow:hidden;
+}
+
+.song-tracks .slide-contents {
+	top: 0px;
 }
 
 div.user-list-boxes .badge {
@@ -544,7 +572,7 @@ tr.nav-song td{
 	width:732px;
 }
 .button{
-	width:60px;
+	width:62px;
 }
 /* pre lancio */
 .pre-lancio{
@@ -606,7 +634,7 @@ tr.nav-song td{
 .thumb{
 	float:left;
 	margin-right:15px;
-	padding-top:5px;
+	/*padding-top:5px;*/
 }
 .played-instruments .small-box {
 	margin: 2px 1px 2px 2px !important;
@@ -682,18 +710,18 @@ tr.nav-song td{
 /* music */
 .music-list .thumb{
 	float:right;
-	margin-left:8px;
-	margin-right:0px;
-	margin-bottom:0px !important;
+	margin:0px 0px 0px 8px !important;
+	padding:0 !Important;
 }
 .music-list .border-angle-top{
 	background:url(/images/BG_curves_top.gif) no-repeat top left;
-	padding:4px 8px 0px;
+	padding:8px 8px;
 	margin-bottom:5px;
 	clear:right;
 }
-.music-list .star{
-	clear:both;
+.music-list .rating{
+	float: left;
+	height: 11px;
 }
 .music-list .elements{
 	float:left;
@@ -733,7 +761,7 @@ tr.nav-song td{
 	float: none;
 	margin: 4px 0px;
 }
-/* answer */
+/* dashboard answer list */
 .answer-list .top-box{
 	background-color:#DDE4E4;
 	padding:0px 5px 5px;
@@ -768,6 +796,30 @@ tr.nav-song td{
 .home .answer-number a{
 	color:#61656A;
 }
+
+/* answers page */
+.answers .elements {
+	margin-bottom:15px;
+	border-bottom:1px solid #D9D9D9;
+}
+
+.answers .details {
+	float: left;
+	width: 380px;
+}
+
+.answers .rating {
+	float: left;
+}
+
+.answers .replies {
+	padding: 0;
+}
+
+.answers h2 {
+	margin-bottom: 4px;
+}
+
 /* simple list */
 .simple-list{
 	margin-bottom:20px;
@@ -1421,10 +1473,6 @@ h2.dj-label{
         width: 200px;
 }
 
-#friend-box, #admirers-box {
-	padding-bottom: 15px;
-}
-
 #songs_spinner, #tracks_spinner, #newest_spinner, #coolest_spinner {
 	position:relative;
 	height:0px;
@@ -1878,7 +1926,7 @@ html>body .register p{
 #change-avatar {
 	width: 94px;
 	height: 18px;
-	left:-15px;
+	left:-17px;
 	/*top:160px;*/
 	position:relative;
 	z-index:101;
@@ -2813,7 +2861,7 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 	background:url(/images/arrow_grey_special.gif) no-repeat top right;
 }
 .grey-bg{
-	background-color:#F6F6F6;
+	background-color:#EDEDED;
 }
 
 /* rating */
@@ -2823,6 +2871,9 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 	margin: 4px auto;
   /*position: relative;*/
   /*height: 13px;*/
+}
+
+.music-info .rating {
 	float: left;
 }
 
@@ -2838,8 +2889,13 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 	float: right;
 }
 
+td.star {
+	text-align: right;
+	width: 64px;
+}
+
 td.star .rating {
-	float: right;
+	/*float: right;*/
 	margin: 2px 0px;
 }
 
@@ -2863,7 +2919,9 @@ td.star .rating {
 }
 
 .search_row .rating {
-	margin: 6px auto;
+	margin: 6px 0px;
+	width: 70px;
+	float: right;
 }
 
 #mlab-scroller .elements {

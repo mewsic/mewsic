@@ -96,6 +96,10 @@ class Mband < ActiveRecord::Base
     self.members.map(&:country).uniq
   end
   
+  def compiled_location
+    countries.join(', ')
+  end
+
   def rateable_by?(user)
     !self.members.include?(user)
   end

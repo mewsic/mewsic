@@ -107,12 +107,28 @@ class Song < ActiveRecord::Base
     self.find what, options.merge(:conditions => ['published = ?', false])
   end
   
-  def direct_siblings(limit = 5)
-    Mix.find_by_sql("select distinct x.original_author, x.title, t.song_id from mixes s inner join mixes t on s.track_id = t.track_id inner join songs x on t.song_id = x.id where s.song_id = #{self.id} and x.id != #{self.id} LIMIT #{limit}")
+  def direct_siblings(limit = nil)
+    limit = "limit #{limit}" if limit
+    Song.find_by_sql("
+      select
+        distinct x.*
+      from
+        mixes s
+        inner join mixes t
+          on s.track_id = t.track_id
+        inner join songs x
+          on t.song_id = x.id
+      where
+        s.song_id = #{self.id}
+      and
+        x.id != #{self.id}
+      #{limit}
+    ")
   end
   
-  def indirect_siblings(limit = 5)
-    mixes = Mix.find_by_sql(["select distinct song_id from mixes where track_id in (select track_id from mixes where song_id = ?) and song_id != ? LIMIT #{limit}", self.id, self.id])
+  def indirect_siblings(limit = nil)
+    limit = "limit #{limit}" if limit
+    mixes = Mix.find_by_sql(["select distinct song_id from mixes where track_id in (select track_id from mixes where song_id = ?) and song_id != ? #{limit}", self.id, self.id])
     return [] if mixes.empty?
     ids = mixes.collect{|m| m.song_id}
     Song.find_by_sql(["

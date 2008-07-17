@@ -1,47 +1,43 @@
-<% song = sibling.song %>
-<div id="<%= container %>-<%= song.id %>" class="sibling special-box clear-block<%= ['', ' grey-bg'][sibling_counter % 2] %>">
+<div id="<%= container %>-<%= sibling.id %>" class="sibling special-box clear-block<%= ['', ' grey-bg'][sibling_counter % 2] %>">
   <div class="float-right" style="padding-right:10px;">
     <div class="special-arrow"></div>
   </div>
-  <p class="float-right" style="position:relative;">
-    <img src="/images/spinner.gif" id="<%= container %>-tracks-loading-<%= song.id %>" style="display: none;float: left; margin: 7px 5px"/>
-    <span class="tracks-number" id="track-number-<%= song.id %>">
-      <a href="#" onclick="new Ajax.Updater('<%= container %>-tracks', '<%= tracks_song_path(song) %>', {
+  <div class="float-right" style="position:relative;">
+    <img src="/images/spinner.gif" id="<%= container %>-tracks-loading-<%= sibling.id %>" style="display: none;float: left; margin: 7px 5px"/>
+    <span class="tracks-number" id="track-number-<%= sibling.id %>">
+      <a href="#" onclick="new Ajax.Updater('<%= container %>-tracks', '<%= tracks_song_path(sibling) %>', {
         method: 'GET',
         onLoading: function() {
           $('<%= container %>-tracks').hide();
-          $('<%= container %>-tracks-loading-<%= song.id %>').show();
+          $('<%= container %>-tracks-loading-<%= sibling.id %>').show();
           $('<%= container %>').select('.sibling').invoke('removeClassName', 'active');
           $('<%= container %>').select('.tracks-number').invoke('removeClassName', 'orange');
         },
         onComplete: function() {
-          $('<%= container %>-<%= song.id %>').addClassName('active');
-          $('<%= container %>-tracks-loading-<%= song.id %>').hide();
+          $('<%= container %>-<%= sibling.id %>').addClassName('active');
+          $('<%= container %>-tracks-loading-<%= sibling.id %>').hide();
           $('<%= container %>-tracks').show();
-					new SimpleSlider('<%= container %>-tracks', {x:0, y:305});
         }
       });return false;" style="color: #FFF; display: block; text-decoration: none;height: 100%;">
-        <%= song.tracks.count %>
+        <%= sibling.tracks.count %>
       </a>
     </span>
-  </p>
+  </div>
   <p class="thumb">
-    <%= link_to avatar_image(song.user, :icon), user_path(song.user) %>
+    <%= link_to avatar_image(sibling.user, :icon), user_path(sibling.user) %>
   </p>
-  <p class="name"><%= link_to song.user.nickname, user_path(song.user) %></p>
-  <p class="title"><%= link_to song.title, song_path(song) %></p>
-  <div class="music-info">
-    <p class="genre">
-      <%= link_to song.genre.name, genre_path(song.genre) if song.genre %>
-    </p>
-    <div class="float-right">
-      <%= rating(song) %>
-      <%= mlab_button(song) %>
-      <%= play_button(song) %>
-    </div>
-    <div class="float-left">
-      <%= download_button_for song %>
-      <%= download_link_for song, 'Download' %>
-    </div>
+  <p class="name"><%= link_to sibling.user.nickname, user_path(sibling.user) %></p>
+  <p class="title"><%= link_to sibling.title, song_path(sibling) %></p>
+  <div class="float-right align-right">
+		<%= rating(sibling, :class => sibling_counter.odd? ? 'grey-star' : '') %><div class="clearer"></div>
+    <%= mlab_button(sibling) %>
+    <%= play_button(sibling) %>
+  </div>
+  <p class="genre">
+    <%= link_to sibling.genre.name, genre_path(sibling.genre) if sibling.genre %>
+  </p>
+  <div class="float-left">
+    <%= download_button_for sibling %>
+    <%= download_link_for sibling, 'Download' %>
   </div>
 </div>

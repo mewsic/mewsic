@@ -65,17 +65,22 @@
   </div>
 </div>
 
-<div class="float-left one-col-big clear-block slide-container song-tracks">
-  <div class="simple-list box-grigio-stondato" style="margin-bottom: 7px">
+<div id="song-tracks-container" class="float-left one-col-big clear-block song-tracks">
+  <div class="simple-list box-grigio-stondato">
     <div class="top-box clear-block">
-      <div class="bottom-box clear-block">
-        <div id="song-tracks-container" style="top: 0px;">
-          <%= render :partial => 'track', :collection => @song.tracks %>
-        </div>
+			<div class="bottom-box clear-block slide-container">
+				<div class="slide-clip">
+					<div class="slide-contents">
+						<%= render :partial => 'track', :collection => @song.tracks %>
+					</div>
+				</div>
       </div>
     </div>
   </div>
-  <p class="abstract align-right" style="margin-right: 9px"><a class="slide-prev" href="#"><%= image_tag 'move_arrow_up.png' %></a>  <a class="slide-next" href="#"><%= image_tag 'move_arrow_down.png' %></a></p>
+	<p class="align-right" style="margin-right: 9px">
+		<a class="slide-prev" href="#"><%= image_tag 'move_arrow_up.png' %></a>
+		<a class="slide-next" href="#"><%= image_tag 'move_arrow_down.png' %></a>
+	</p>
 </div>
 
 <!-- TABMENU -->

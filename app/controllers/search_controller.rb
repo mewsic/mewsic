@@ -48,6 +48,7 @@ class SearchController < ApplicationController
   protected
     def check_valid_search_string
       query = params[:q] || params[:id] || ''
+      query.gsub! /[%_]/, ''
       if query.strip.blank?
         flash[:error] = 'You did not enter a search string' 
         respond_to do |format|

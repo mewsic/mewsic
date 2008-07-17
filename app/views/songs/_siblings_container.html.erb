@@ -1,12 +1,17 @@
-  <div class="float-left one-col-big clear-block slide-container song-tracks">
-    <div class="simple-list box-grigio-stondato">
-      <div class="top-box clear-block">
-				<div class="bottom-box clear-block">
-					<div id="<%= container %>-tracks">
+<div id="<%= container %>-tracks-scroller" class="float-left one-col-big clear-block slide-container song-tracks">
+  <div class="simple-list box-grigio-stondato">
+    <div class="top-box clear-block">
+			<div class="bottom-box clear-block slide-container">
+				<div class="slide-clip">
+					<div id="<%= container %>-tracks" class="slide-contents">
 						<p class="grey-text" style="text-align:center; padding:30px;">Click on the <strong>Tracks Number</strong> icon to navigate this Song</p>
 					</div>
 				</div>
-  	  </div>
-    </div>
-		<p class="align-right"><a class="slide-prev" href="#"><%= image_tag 'move_arrow_up.png' %></a>  <a class="slide-next" href="#"><%= image_tag 'move_arrow_down.png' %></a></p>
+			</div>
+		</div>
   </div>
+	<p class="align-right">
+		<a class="slide-prev" href="#"><%= image_tag 'move_arrow_up.png' %></a>
+		<a class="slide-next" href="#"><%= image_tag 'move_arrow_down.png' %></a>
+	</p>
+</div>

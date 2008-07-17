@@ -17,20 +17,20 @@
 		</p>
 	</div>
 
-	<div class="slide-container">
-		<div class="button">
+	<div id="most-friends-scroller" class="user-scroller">
+		<div class="float-left">
 			<a href="#" class="slide-prev"><img src="/images/slider_arrow_left.png"/></a>
 		</div>
-		<!--[if IE]><div style="clip: rect(0px 315px 30px 0px); position: absolute; overflow:hidden;"><![endif]-->
-		<div class="scroll-clip">
-			<div id="most-friends-scroller" style="width: <%=  most_friends.friends_count * 35 + 5 %>px; left: 0px;">
-				<% most_friends.friends.each do |friend| %>
-					<%= link_to avatar_image(friend, :icon), user_path(friend) %>
-				<% end %>
+		<div class="slide-container">
+			<div class="slide-clip">
+				<div class="slide-contents" style="width:<%= most_friends.friends_count * 35 + 5 %>px;">
+					<% most_friends.friends.each do |friend| %>
+						<%= link_to avatar_image(friend, :icon), user_path(friend) %>
+					<% end %>
+				</div>
 			</div>
 		</div>
-		<!--[if IE]></div><![endif]-->
-		<div class="button">
+		<div class="float-left">
 			<a href="#" class="slide-next"><img src="/images/slider_arrow_right.png"/></a>
 		</div>
 	</div>				  	

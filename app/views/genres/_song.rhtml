@@ -14,10 +14,8 @@
 		</p>
 	</td>
   <td class="star">
-		<%= rating(song, :class => song_counter.even? ? 'grey-star' : '') %>
-  	<p class="float-right">
-  		<%= mlab_button(song, :dynamic => true) %>
-  		<%= play_button(song) %>
-    </p>
+		<%= rating(song, :clear => true, :class => song_counter.even? ? 'grey-star' : '') %>
+  	<%= mlab_button(song, :dynamic => true) %>
+  	<%= play_button(song) %>
 	</td>
 </tr>

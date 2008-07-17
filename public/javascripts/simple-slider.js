@@ -1,25 +1,19 @@
 var SimpleSlider = Class.create({
   initialize: function(element, options) {
-    this.elements = $(element);
-    if (!this.elements)
+    this.outer = $(element);
+    if (!this.outer)
       return;
-
-    this.container = this.elements.up();
 
     coords = Object.extend({
       x: 0,
       y: 300
     }, options);
 
-    var outer = this.elements.up('.slide-container');
+    this.container = this.outer.down('div.slide-container');
+    this.elements = this.container.down('div.slide-contents');
 
-    outer.select('.slide-prev').each(function(element) {
-      element.observe('click', this.slide.bind(this, coords));
-    }.bind(this));
-
-    outer.select('.slide-next').each(function(element) {
-      element.observe('click', this.slide.bind(this, {x: -coords.x, y: -coords.y}));
-    }.bind(this));
+    this.outer.down('a.slide-prev').observe('click', this.slide.bind(this, coords));
+    this.outer.down('a.slide-next').observe('click', this.slide.bind(this, {x: -coords.x, y: -coords.y}));
   },
 
   slide: function(coords, event) {

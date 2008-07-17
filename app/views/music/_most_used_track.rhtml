@@ -8,11 +8,11 @@
 			<div class="thumb"><%= track_instrument_icon(most_used_track) %></div>
 			<p class="title"><%= truncate most_used_track.title, 30 %></p>
 			<p class="author"><%= most_used_track.parent_song.original_author if most_used_track.parent_song %></p>
-			<%= rating(most_used_track, :clear => true) %>
-			<p class="button float-right">
+			<div class="button float-right">
 				<%= mlab_button(most_used_track) %>
 				<%= play_button(most_used_track, :color => :orange) %>
-			</p>
+			</div>
+			<%= rating(most_used_track, :clear => true) %>
 			<p class="playcount">used <%= pluralize(most_used_track.song_count, 'time') %></p>
 		</div>
 	</div>

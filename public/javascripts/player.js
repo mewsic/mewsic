@@ -11,7 +11,7 @@ var Player = Class.create({
     });
   },
   
-  initLinks: function() {
+  initLinks: function(r) {
     // remove all the links no longer in the page
     this.links.each(function(row) {
       var href     = row[0];
@@ -26,11 +26,21 @@ var Player = Class.create({
     }.bind(this));
 
     // add any new links
+    /*
     $A(document.getElementsByClassName('player')).each(function(link) {
       if (this.links.get(link.href)) {
         return;
       }
+      */
 
+    var elements;
+
+    if (r)
+      elements = $(r.container.success).select('.player')
+    else
+      elements = $A(document.getElementsByClassName('player'))
+
+    elements.each(function(link) {
       var callback = this.handleClick.bindAsEventListener(this, link);
       link.observe('click', callback);
       this.links.set(link.href, {link: link, callback: callback});

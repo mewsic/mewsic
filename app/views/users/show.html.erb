@@ -11,8 +11,8 @@
     <%= render :partial => 'played' unless @user.band? %>
     <%= render :partial => 'band_members' if @user.band? %>	
     <%= render :partial => 'mbands' unless @user.band? %>	    
-    <%= render :partial => 'friends' %>
-    <%= render :partial => 'admirers' %>  
+		<%= render :partial => 'users/my/scroller', :locals => { :title => 'FRIENDS', :collection => @user.friends, :id => 'friends' } %>
+		<%= render :partial => 'users/my/scroller', :locals => { :title => 'ADMIRERS', :collection => @user.admirers, :id => 'admirers' } %>  
     <%= render :partial => 'answers' %>    
   </div>
   

@@ -30,9 +30,33 @@ class Answer < ActiveRecord::Base
 
   after_create :set_last_activity_at
   
+  def self.find_open_paginated(page, options = {})
+    self.paginate options.merge(:page => page,
+                  :conditions => ["answers.closed = ?", false],
+                  :order => 'answers.rating_avg DESC, answers.created_at DESC',
+                  :include => {:user => :avatars})
+  end
+
+  def self.find_top_paginated(page, options = {})
+    self.paginate options.merge(:page => page,
+                  :conditions => ["answers.closed = ?", false],
+                  :order => 'answers.rating_avg DESC, answers.replies_count DESC',
+                  :include => {:user => :avatars})
+  end
+
+  def self.find_newest_paginated(page, options = {})
+    self.paginate options.merge(:page => page,
+                  :conditions => ["answers.closed = ?", false],
+                  :order => 'answers.created_at DESC',
+                  :include => {:user => :avatars})
+  end
+
+  def self.find_paginated_by_user(user, page, options = {})
+    user.answers.paginate(:page => page, options.merge(:order => 'created_at DESC'))
+  end
+
   def self.find_newest(options = {})
-    options.merge!({:order => 'answers.created_at desc'})
-    self.find(:all, options)
+    self.find(:all, options.merge(:order => 'answers.created_at DESC')
   end
   
   def self.close_old_answers
@@ -46,6 +70,10 @@ class Answer < ActiveRecord::Base
 
   def rateable_by?(user)
     self.user_id != user.id
+  end
+
+  def editable?
+    created_at < 15.minutes.ago
   end
   
 private

@@ -16,10 +16,10 @@
   <%- end -%>
   <% if @show_siblings; @show_siblings = false; -%>
     <siblings type="direct">
-      <%= render :partial => 'shared/song', :collection => song.direct_siblings.collect{|mix| mix.song} %>
+      <%= render :partial => 'shared/song', :collection => song.direct_siblings %>
     </siblings>
     <siblings type="indirect">
-      <%= render :partial => 'shared/song', :collection => song.indirect_siblings.collect{|mix| mix.song} %>
+      <%= render :partial => 'shared/song', :collection => song.indirect_siblings %>
     </siblings>
   <% end -%>
   <% if @show_edit_info -%>

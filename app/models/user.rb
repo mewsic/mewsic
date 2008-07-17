@@ -316,6 +316,10 @@ class User < ActiveRecord::Base
     self.count(options.merge(:conditions => ['last_activity_at IS NOT NULL AND last_activity_at > ?', 30.minutes.ago]))
   end
 
+  def self.find_top_answers_contributors(options = {})
+    self.find(:all, options.merge(:include => [:avatars], :order => 'users.replies_count DESC'))
+  end
+
   def self.myousica
     @myousica ||= User.find_by_login('myousica')
   end
