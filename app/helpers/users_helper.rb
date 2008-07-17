@@ -107,7 +107,7 @@ module UsersHelper
   
   def page_label_for(user)
     user_type = user.type.nil? ? 'user' : user.type.downcase
-    %|<img src="/images/#{user_type}_page_label.png" alt="" width="41" height="56" />|
+    %|<img src="/images/#{user_type}_page_label.png" />|
   end
   
   def user_inbox_link

@@ -1,13 +1,13 @@
 <tr class="nav-song">
 	<td colspan="2">
-		<div id="search_tabmenu_container">
+		<div class="tabmenu">
 			<div class="float-left" style="margin: 8px 2px;">
 				<img src="/images/spinner.gif" id="songs-spinner" style="display: none" />
 			</div>
 			<div class="tab active float-right">
-				<div id="search_tabmenu" class="sx"> </div>
-				<div id="search_tabmenu" class="rp">
-					<p class="search_tabmenu_title">
+				<div class="sx"> </div>
+				<div class="rp">
+					<p class="title">
 					<% if @songs.previous_page %>
 						<%= link_to image_tag('move_arrow_left.png'), genre_songs_path(@genre, :page => @songs.previous_page), :class => 'genre-pagination' %>
 					<% else %>
@@ -21,7 +21,7 @@
 					<% end %>		  
 					</p>				
 				</div>
-				<div id="search_tabmenu" class="dx"> </div>
+				<div class="dx"> </div>
 			</div>
 		</div>
 	</td>

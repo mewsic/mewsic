@@ -2,7 +2,7 @@
 	<div class="thumb">
 		<%= link_to (avatar_image newest_song.user, :icon), user_path(newest_song.user) %>
 	</div>
-	<div class="float-right"> 
+	<div class="float-right align-right"> 
 		<p class="name"><%= link_to newest_song.user.login, user_path(newest_song.user) %></p>
 		<p class="country"><%= h newest_song.user.compiled_location %></p> 
 	</div>

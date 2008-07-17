@@ -6,6 +6,9 @@ var Pagination = Class.create({
       selector: 'div.pagination a'
     }, arguments[0] || {});
 
+    if (!$(this.options.container))
+      return;
+
     if (this.options.dynamic_spinner) {
       this.options.loading = new Loading({
         spinner: this.options.spinner, 
@@ -14,13 +17,10 @@ var Pagination = Class.create({
     }
     this.authenticity_token = $('authenticity-token').value;
     this.initLinks();
-    Event.observe( window, 'unload', this.releaseLinks.bind(this));
+    Event.observe(window, 'unload', this.releaseLinks.bind(this));
   },
 
   initLinks: function() {
-    if (!$(this.options.container))
-      return;
-
     this.links = $(this.options.container).select(this.options.selector);
     this.links.each(function(link) {
       link.observe('click', this.linkHandler.bind(this, link));

@@ -1,12 +1,11 @@
 <%- javascript 'answers' -%>
 
 <div class="box-list semi-one-col clear-block">
-  
   <div class="simple-list semi-one-col clear-block azzurro-boxes send-question">
     <h1>MY QUESTION</h1>
     <div class="top-box clear-block">
       <div class="bottom-box clear-block">
-        <div class="float-right" style="padding-right:60px;"><img src="/images/interrogativo.gif" alt="" width="50" height="53" style="position:absolute; margin-top:-40px;" /></div>
+        <div id="my-question-mark"><img src="/images/interrogativo.gif" width="50" height="53"/></div>
         <div class="elements clear-block" style="padding:15px 20px;">
           <%- form_for :answer, :url => answers_path do |f| -%>
             <p><%= f.text_area :body, :rows => 10 %></p>
@@ -16,84 +15,55 @@
       </div>
     </div>
   </div>
-	  
 </div>
-	
+  
 <div class="box-list two-col-big clear-block">
-  <div class="simple-list grey-box clear-block">
+  <div class="grey-box clear-block">
     <h1>REPLY</h1>
     <div class="top-box clear-block">
-		
-      <div class="bottom-box clear-block">
-        <div class="float-right" style="padding-right:50px;"><img src="/images/esclamativo.gif" alt="" width="50" height="53" style="position:absolute; margin-top:-60px;" /></div>
-        
-        <%- @open_answers.each do |answer| -%>
-          <div class="clear-block" style="margin-bottom:15px; border-bottom:1px solid #D9D9D9;">
-            <p class="float-left">
-              <%= link_to avatar_image(answer.user, :icon), user_path(answer.user) %>
-            </p>
-            <div style="margin:0px 10px 10px 40px;">
-              <h2 class="clearly-cyan-text"><%= link_to h(answer.body), answer_path(answer) %></h2>
-              <p class="grey-text">Question by <%= link_to answer.user.login, user_path(answer.user) %></p>
-              <p class="grey-text"><%= link_to pluralize(answer.replies_count, 'reply'), answer_path(answer) %> - <%= time_ago_in_words answer.created_at %> </p>
-            </div>
-          </div>
-        <%- end -%>
-        
-        				
-				<p class="abstract align-right"><%= link_to 'MORE OPEN QUESTIONS', open_answers_path %></p>								
+      <div class="bottom-box clear-block answers">
+        <div id="reply-exclamation-mark"><img src="/images/esclamativo.gif" width="50" height="53"/></div>
+        <%= render :partial => 'answer', :collection => @open_answers %>
+        <p class="abstract align-right"><%= link_to 'MORE OPEN QUESTIONS', open_answers_path %></p>                
       </div>
     </div>
   </div>
 </div>
 
-<div class="search-question clear-block">
-  <%- form_tag search_answers_path, :method => :get do -%>
-  <img src="/images/lente_search.gif" alt="" width="27" height="27" class="float-left" />
-  <h2 class="float-left">FIND QUESTION</h2>
-  <p class="float-left">
-    <input name="q" type="text" style="border:1px solid #D3D3D3; width:310px; height:20px; margin:0px 10px;"/>
-    </p>
-  <div class="float-left">			
-    <input type="image" src="/images/button_find.png"/>
-  </div>
-  <%- end -%>
-</div>
+<%= render :partial => 'find_question' %>
 
 <div class="box-list two-col-big clear-block">
 
-  <div class="select-tab clear-block">
-    <div class="active" id="newest-answers-container-title">
-	    <h1><a href="#" onclick="$('top-answers-container-title').removeClassName('active');$('newest-answers-container-title').addClassName('active');$('newest-answers-container').hide(); $('top-answers-container').show(); return false;">TOP QUESTIONS</a></h1>
+	<div class="tabmenu">
+    <div class="tab active" id="top-answers-tab">
+      <div class="sx"> </div>
+      <div class="rp">
+        <p class="title blue-text">
+          <a href="#" onclick="$('newest-answers-tab').removeClassName('active');$('top-answers-tab').addClassName('active');$('newest-answers-container').hide();$('top-answers-container').show(); return false;">TOP QUESTIONS</a>
+        </p>
+        <p class="counter">(<%= @top_answers_count %>)</p>
+      </div>
+      <div class="dx"> </div>
     </div>
-    <div id="top-answers-container-title">
-	    <h1><a href="#" onclick="$('newest-answers-container-title').removeClassName('active');$('top-answers-container-title').addClassName('active');$('top-answers-container').hide(); $('newest-answers-container').show(); return false;">NEWEST QUESTIONS</a></h1>
-    </div>
-  </div>
-  
-  <div class="box-list clear-block" id="top-answers-container">
-		<%= render :partial => 'top', :locals => { :answers => @top_answers } %>
-  </div>
-  
-  <div class="box-list clear-block" id="newest-answers-container" style="display: none;">
-		<%= render :partial => 'newest', :locals => { :answers => @newest_answers } %>
-  </div>	  
-  
-</div>		
-	
-	<div class="box-list semi-one-col clear-block azzurro-boxes">
-	<h2>TOP CONTRIBUTORS </h2>
-	<div class="top-box clear-block">
-		<div class="bottom-box clear-block">
-		  
-		<%- @top_contributors.each do |user| -%>
-  		<div class="elements clear-block">
-  			<p class="thumb"><%= link_to avatar_image(user, :icon), user_path(user) %></p>
-  			<p class="name"><%= link_to user.login, user_path(user) %></p>
-  			<p class="cyan-text float-right"><strong><%= pluralize(user.replies_count, 'reply') %></strong></p>
-  	  </div>
-		<%- end -%>
-		  
+    <div class="tab" id="newest-answers-tab">
+      <div class="sx"> </div>
+      <div class="rp">
+        <p class="title blue-text">
+          <a href="#" onclick="$('top-answers-tab').removeClassName('active');$('newest-answers-tab').addClassName('active');$('top-answers-container').hide();$('newest-answers-container').show(); return false;">NEWEST</a>
+        </p>
+        <p class="counter">(<%= @newest_answers_count %>)</p>
+      </div>
+      <div class="dx"> </div>
 		</div>
 	</div>
-</div>
+
+  <div class="clear-block" id="top-answers-container">
+    <%= render :partial => 'index_list', :locals => {:answers => @top_answers, :name => 'top'} %>
+  </div>
+  <div class="clear-block" id="newest-answers-container" style="display:none">
+    <%= render :partial => 'index_list', :locals => {:answers => @newest_answers, :name => 'newest'} %>
+	</div>
+
+</div>    
+
+<%= render :partial => 'top_contributors' %>

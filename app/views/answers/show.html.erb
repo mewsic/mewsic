@@ -1,120 +1,125 @@
-<div class="search-question clear-block">
-  <%- form_tag search_answers_path, :method => :get do -%>
-  <img src="/images/lente_search.gif" alt="" width="27" height="27" class="float-left" />
-  <h2 class="float-left">SEARCH ANSWER</h2>
-  <p class="float-left"><input name="q" type="text" style="border:1px solid #D3D3D3; width:310px; height:20px; margin:0px 10px;"/></p>
-  <div class="float-left">
-    <input type="image" src="/images/button_find.png"/>
-  </div>
-  <%- end -%>
-</div>
-
-
-
-<div class="bottom-border" style="width: 720px; float:none;margin-bottom:20px;"></div>
+<%= render :partial => 'find_question' %>
 
   <div class="box-list two-col-big clear-block">
     <div class="clear-block">
-      <div class="titoletti-question clear-block">
-				<p class="float-right">
-					<%- if logged_in? && !@has_abuse -%> <!--XXX-->
-				    <a href="<%= formatted_new_answer_abuse_path(@answer, 'html') %>" params="lightview_width=600,lightview_height=400" class="lightview" title="Report abuse">report abuse</a>
-				  <%- end -%>
+      <div class="answer-header clear-block">
+        <h2><%= @answer.closed? ? 'CLOSED' : 'OPEN' %> QUESTION</h2>
+        <p class="float-right abstract">
+          <%- if logged_in? && !@has_abuse -%> <!--XXX-->
+            <a href="<%= formatted_new_answer_abuse_path(@answer, 'html') %>" class="lightview" title="Report abuse">report abuse</a>
+          <%- end -%>
         </p>
-				<h2 class="float-left"><%= @answer.closed? ? 'Closed' : 'Open' %> question</h2>
-			</div>
-      <div class="top-box clear-block clear-float">
-				<div class="bottom-box clear-block">
-					<div class="elements clear-block">
-						<div class="thumb-question clear-block">
-							<p><%= link_to avatar_image(@answer.user, :icon), user_path(@answer.user) %></p>
-							<p class="name"><%= link_to @answer.user.login, user_path(@answer.user) %></p>
-						</div>
-						<div class="testi-question">
-							<h1><%= @answer.body %><%= ' <span style="font-size: 70%"><a href="#" onclick="Effect.BlindDown(\'edit-container\');return false;">[edit]</a></span>' if current_user == @answer.user && @answer.created_at > 10.minutes.ago %></h1>							
-							<div id="edit-container" style="clear:both;display: none">
-							  <%- form_for(@answer) do |f| -%>
-                  <%= f.text_area :body, :value => @answer.body %><br />
-                  <%= submit_tag 'Save', :disable_with => 'Saving...' %>
-                <%- end -%>                  
-							</div>
-							<% unless @answer.closed? %>
-							<div class="float-right">
-								<div class="special-button">
-									<div style="text-align: center; font-weight: bold;line-height: 24px; width: 220px; height: 24px;background: url('/images/special_button_cyan_big.png') no-repeat center"><a href="<%= logged_in? ? '#' : '/login' %>" style="color: #FFF; font-size:13px" onclick="<%= %[Effect.toggle('reply-form-container', 'slide'); return false;] if logged_in? %>">Reply to this question</a></div>
-								</div>								
-							</div>
-							<% end %>
-							<div class="float-left answer-show">
-								<%= rating(@answer) %>
-								<p class="grey-text"><%= time_ago_in_words(@answer.created_at) %> ago</p>
-							</div>
-							<div id="reply-form-container" style="clear:both;display: none">
-							  <%- form_for(:reply, :url => answer_replies_path(@answer)) do |f| -%>
-                  <%= f.text_area :body %><br />
-                  <%= submit_tag 'Send', :disable_with => 'Sending...' %>
-                <%- end -%>                  
-							</div>
-						</div>
+      </div>
+      <div class="elements clear-block answer">
+        <div class="thumb clear-block">
+          <p><%= link_to avatar_image(@answer.user, :icon), user_path(@answer.user) %></p>
+          <p class="name"><%= link_to @answer.user.login, user_path(@answer.user) %></p>
+        </div>
+        <div class="details">
+
+          <% if current_user_answer_page? && @answer.editable? %>
+						<span class="edit-command">
+							<a href="#" onclick="Effect.BlindDown('edit-container');return false;">[edit]</a> <em>(for another <%= @answer.editable_for %>)</em>
+						</span>
+            <div id="edit-container" style="clear:both;display: none">
+              <%- form_for(@answer) do |f| -%>
+                <%= f.text_area :body, :value => @answer.body %><br />
+                <%= image_submit_tag 'button_send.png' %>
+              <%- end -%>                  
+            </div>
+          <% end %>
+
+          <h1><%= @answer.body %></h1>
+
+          <% unless @answer.closed? %>
+            <div class="float-right">
+              <%= link_to image_tag('button_reply.png'), '#',
+                    :onclick => (logged_in? ? %[Effect.toggle('reply-form-container', 'slide'); return false] :
+                                 %[Message.show('You have to login or sign up to reply', 'notice', true); return false])
+              -%>
+              </div>                
+          <% end %>
+
+					<div class="answer-show float-left">
+						<%= rating(@answer, :class => 'float-left') %><div class="clearer"></div>
+						<p class="abstract"><%= time_ago_in_words(@answer.created_at) %> ago</p>
 					</div>
-				</div>
-			</div>
+
+          <div id="reply-form-container" style="clear:both;display: none">
+            <%- form_for(:reply, :url => answer_replies_path(@answer)) do |f| -%>
+              <%= f.text_area :body %><br />
+							<%= image_submit_tag 'button_send.png' %>
+            <%- end -%>                  
+          </div>
+        </div>
+      </div>
       
-			<div class="titoletti-question clear-block">
-				<h2 class="float-left">Replies <span>(<%= @answer.replies.count %>)</span></h2>
-			</div>
-			<div class="top-box clear-block clear-float">
-				<div class="bottom-box clear-block">				
-          <%- @answer.replies.each do |reply| -%>
-            <div class="elements clear-block">
-  						<div class="thumb-question clear-block">
-  							<p><%= link_to avatar_image(reply.user, :icon), user_path(reply.user) %></p>
-  							<p class="name"><%= link_to reply.user.login, user_path(reply.user) %></p>
-  						</div>
-  						<div class="testi-answer">
-  							<p><strong><%= reply.body %></strong></p>
-  							<div class="float-left">
-  								<p class="grey-text">
-  								<div class="star">
-  								  <%= rating(reply) %>
-                  </div>
-  								<span ><%= time_ago_in_words(reply.created_at) %> ago</span>
-  								</p>
-  							</div>
-  					  </div>
-  					</div>
-          <%- end -%>	
-				</div>
-			</div>         
+      <div class="answer-header clear-block">
+        <h2>Replies <span>(<%= @answer.replies.count %>)</span></h2>
+      </div>
+      <%- @answer.replies.each do |reply| -%>
+        <div class="elements clear-block reply">
+          <div class="thumb clear-block">
+            <p><%= link_to avatar_image(reply.user, :icon), user_path(reply.user) %></p>
+            <p class="name"><%= link_to reply.user.login, user_path(reply.user) %></p>
+          </div>
+          <div class="details">
+            <p class="body"><%= reply.body %></p>
+            <%= rating(reply, :class => 'float-left') %><div class="clearer"></div>
+            <p class="abstract float-left"><%= time_ago_in_words(reply.created_at) %> ago</p>
+          </div>
+        </div>
+      <%- end -%>  
     </div>
   </div>
 
-  <div id="other_by_user">
-    <%= render :partial => 'other_answers_by_author', :locals => { :other_answers_by_author => @other_answers_by_author, :user => @answer.user } %>
-  </div>  
-  
-  <div id="similar-questions" class="box-list three-col-nospace clear-block clear-float">
-    <div class="select-tab clear-block">   
-			<div class="active">
-				<h1>SIMILAR QUESTIONS</h1>
-			</div>
-		</div>		
-		<div class="box-list clear-block">
+	<div class="box-list semi-one-col clear-block">
+		<div class="simple-list azzurro-boxes clear-block">
+			<h2>OTHER QUESTIONS BY <%= @answer.user.login %></h2>
 			<div class="top-box clear-block">
 				<div class="bottom-box clear-block">
-					<%- @similar_answers.each do |answer| -%>					
-					  <div class="elements clear-block">
-              <p class="float-left"><%= link_to avatar_image(answer.user, :icon), user_path(answer.user) %></p>
-              <div style="margin:0px 20px 20px 40px;">
-  							<h2 class="clearly-cyan-text"><%= link_to h(answer.body), answer_path(answer) %></h2>
-								<%= rating(answer) %>
-  							<p class="grey-text float-left">
-  							  Question by  <%= link_to(answer.user.login, user_path(answer.user)) %> - <%= link_to(pluralize(answer.replies.count, 'reply'), answer_path(answer)) %> - <%= time_ago_in_words(answer.created_at) %> ago
-                </p>
-  						</div>
-  					</div>
-					<%- end -%>																				
-        </div>
-      </div>
-    </div>		  
-  </div>
+					<div id="other_by_user">
+						<%= render :partial => 'answer_small', :collection => @other_answers_by_author %>
+					</div>
+				</div>
+			</div>
+
+			<div class="float-right">
+				<%- if @other_answers_by_author.previous_page %>
+					<%= link_to_remote image_tag('move_arrow_left.png'),
+								:url => siblings_answer_path(@answer, :page => @other_answers_by_author.previous_page),
+								:update => 'other_by_user', :method => :get, :loading => "$('answers_spinner').show()" %>
+				<%- else -%>
+					<%= image_tag 'move_arrow_left.png', :class => 'faded' %>
+				<%- end -%>
+      
+				<%- if @other_answers_by_author.next_page %>
+					<%= link_to_remote image_tag('move_arrow_right.png'),
+								:url => siblings_answer_path(@answer, :page => @other_answers_by_author.next_page),
+								:update => 'other_by_user', :method => :get, :loading => "$('answers_spinner').show()" %>
+				<%- else -%>
+					<%= image_tag 'move_arrow_right.png', :class => 'faded' %>
+				<%- end -%>
+			</div>
+
+		</div>
+  </div>  
+  
+	<%# if @similar_answers.size > 0 %>
+    <div id="similar-questions" class="box-list three-col clear-block clear-float">
+			<div class="tabmenu">
+				<div class="tab active" id="top-answers-tab">
+					<div class="sx"> </div>
+					<div class="rp">
+						<p class="title blue-text">SIMILAR QUESTIONS</p>
+						<p class="counter">(<%= @similar_answers.size %>)</p>
+					</div>
+					<div class="dx"> </div>
+				</div>    
+			</div>
+
+			<div class="clear-block similar answers">
+				<%= render :partial => 'answer_medium', :collection => @similar_answers %>
+			</div>
+		</div>
+	<%# end %>

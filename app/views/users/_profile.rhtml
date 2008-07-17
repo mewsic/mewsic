@@ -2,7 +2,7 @@
 <% javascript('user/mail') if logged_in? %>
 <% javascript('user/im') %>
 
-<div class="mypage-label clear-block">
+<div id="mypage-label" class="clear-block mband">
   <%= render :partial => 'switch_type' if current_user_page? %>
   <div class="type-label">
     <%= page_label_for(@user) %>

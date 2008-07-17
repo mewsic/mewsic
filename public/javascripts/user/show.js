@@ -2,9 +2,10 @@ document.observe('dom:loaded', function() {
 	new SimpleSlider('friends-scroller', {x: 210, y:0});
   new SimpleSlider('admirers-scroller',  {x: 210, y:0});
 
-	$('path').addClassName('mypage');
-
   $w('tracks songs').each(function(name) {
+    if (!$(name))
+      return;
+
     new Pagination({
       container: name,
       spinner: name + '_spinner',

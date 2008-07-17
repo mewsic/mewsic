@@ -24,26 +24,26 @@
 
 <% if @songs || @tracks %>
 
-<div id="search_tabmenu_container">
-	<p class="search_tabmenu_title">Music:</p>
+<div class="tabmenu">
+	<p class="title">Music:</p>
 	<% if @songs %>
 	<div class="tab <%= 'active' if @songs %>" id="songs-tab">
-	  <div id="search_tabmenu" class="sx"> </div>
-  	<div id="search_tabmenu" class="rp">
+	  <div class="sx"> </div>
+  	<div class="rp">
   		<p class="search_green_text"><a href="#" onclick="$('tracks-tab').removeClassName('active');$('songs-tab').addClassName('active');$('track-results').hide();$('song-results').show(); return false;">Songs&nbsp;</a></p>
-  		<p class="search_tabmenu_title"><strong>(<%= @entries[:songs] %>)</strong></p>			
+  		<p class="counter"><strong>(<%= @entries[:songs] %>)</strong></p>			
   	</div>
-  	<div id="search_tabmenu" class="dx"> </div>
+  	<div class="dx"> </div>
 	</div>
 	<% end %>
 	<% if @tracks %>
   <div class="tab <%= 'active' if !@songs %>" id="tracks-tab">
-    <div id="search_tabmenu" class="inactive sx"> </div>
-  	<div id="search_tabmenu" class="inactive rp">
+    <div class="sx"> </div>
+  	<div class="rp">
   		<p class="search_orange_text"><a href="#" onclick="$('songs-tab').removeClassName('active');$('tracks-tab').addClassName('active');$('song-results').hide();$('track-results').show(); return false;">Tracks&nbsp;</a></p>
-  		<p class="search_tabmenu_title"><strong>(<%= @entries[:tracks] %>)</strong></p>			
+  		<p class="counter"><strong>(<%= @entries[:tracks] %>)</strong></p>			
   	</div>
-  	<div id="search_tabmenu" class="inactive dx"> </div>
+  	<div class="dx"> </div>
   </div>	
 	<% end %>
 </div>

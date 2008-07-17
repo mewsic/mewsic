@@ -1,0 +1,16 @@
+<div class="elements clear-block">
+  <div class="thumb">
+    <%= link_to avatar_image(answer.user, :icon), user_path(answer.user) %>     
+  </div>
+	<div class="clear-block details">
+    <h2 class="clearly-cyan-text"><%= link_to h(truncate(answer.body, 80)), answer %></h2>
+		<%= rating(answer) %><div class="clearer"></div>
+		<p class="grey-text float-left">
+			Question by <span class="name"><%= link_to answer.user.login, user_path(answer.user) %></span> - 
+			<%= link_to pluralize(answer.replies_count, 'reply'), answer_path(answer) %> - <span class="abstract"><%= time_ago_in_words(answer.created_at) %> ago</span>
+    </p>
+  </div>
+	<div class="replies">
+		<%= render :partial => 'reply', :collection => answer.replies.find(:all, :limit => 1) %>
+	</div>
+</div>

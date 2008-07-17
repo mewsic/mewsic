@@ -4,6 +4,7 @@
 			<%= pluralize most_admirers.admirers_count, 'admirer' %>
 		</p>
 		<p class="thumb">
+			<%= user_type_image most_admirers %>
 			<%= link_to avatar_image(most_admirers, :small), user_path(most_admirers) %>
 		</p>
 		<p class="name">
@@ -13,7 +14,7 @@
 			<%= h most_admirers.compiled_location %>
 		</p>
 		<p class="motto">
-			<%= truncate most_admirers.motto, 120 %>
+			<%= truncate most_admirers.motto, 50 %>
 		</p>
 	</div>
 

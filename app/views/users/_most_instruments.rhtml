@@ -4,6 +4,7 @@
 			<%= pluralize(most_instruments.instruments.size, 'instrument') %>
 		</p>
 		<p class="thumb">
+			<%= user_type_image most_instruments %>
 			<%= link_to avatar_image(most_instruments, :small), user_path(most_instruments) %>
 		</p>
 		<p class="name">
@@ -13,7 +14,7 @@
 			<%= most_instruments.compiled_location %>
 		</p>
 		<p class="motto">
-			<%= truncate most_instruments.motto, 120 %>
+			<%= truncate most_instruments.motto, 50 %>
 		</p>
 	</div>
 	<div id="most-instruments-scroller" class="user-scroller">

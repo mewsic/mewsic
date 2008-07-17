@@ -32,8 +32,8 @@ module ApplicationHelper
     end
   end
   
-  def breadcrumb(model_crumb = nil)
-    default_breadcrumb = '<div id="path"><a href="/">Home</a>'
+  def breadcrumb(model_crumb = nil, klass = nil)
+    default_breadcrumb = %[<div id="path" class="#{klass}"><a href="/">Home</a>]
     unless controller.controller_name == 'dashboard'
       if controller.respond_to?(:to_breadcrumb_link)
         text, path = controller.send(:to_breadcrumb_link)

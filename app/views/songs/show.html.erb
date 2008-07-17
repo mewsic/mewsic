@@ -84,24 +84,25 @@
 </div>
 
 <!-- TABMENU -->
-<div id="siblings_tabmenu_container">
+<div class="tabmenu">
   <div class="tab active" id="direct-siblings-tab">
-    <div id="siblings_tabmenu" class="sx"> </div>
-    <div id="siblings_tabmenu" class="rp">
+    <div class="sx"> </div>
+    <div class="rp">
       <p class="siblings_green_text">
-        <a href="#" onclick="$('indirect-siblings-tab').removeClassName('active');$('direct-siblings-tab').addClassName('active');$('indirect_siblings_container').hide();$('direct_siblings_container').show(); return false;">Other versions<span class="no-bold">(<%= @song.direct_siblings.size %>)</span></a>
+        <a href="#" onclick="$('indirect-siblings-tab').removeClassName('active');$('direct-siblings-tab').addClassName('active');$('indirect_siblings_container').hide();$('direct_siblings_container').show(); return false;">Other versions</a>
       </p>
-      <p class="siblings_tabmenu_title"></p>
+			<p class="counter">(<%= @song.direct_siblings.size %>)</p>
     </div>
-    <div id="siblings_tabmenu" class="dx"> </div>
+    <div class="dx"> </div>
   </div>
   <div class="tab" id="indirect-siblings-tab">
-    <div id="siblings_tabmenu" class="inactive sx"> </div>
-    <div id="siblings_tabmenu" class="inactive rp">
-      <p class="siblings_orange_text"><a href="#" onclick="$('direct-siblings-tab').removeClassName('active');$('indirect-siblings-tab').addClassName('active');$('direct_siblings_container').hide();$('indirect_siblings_container').show(); return false;">Remote versions<span class="no-bold">(<%= @song.indirect_siblings.size %>)</span></a></p>
-      <p class="siblings_tabmenu_title"></p>
+    <div class="sx"> </div>
+    <div class="rp">
+			<p class="siblings_orange_text"><a href="#" onclick="$('direct-siblings-tab').removeClassName('active');$('indirect-siblings-tab').addClassName('active');$('direct_siblings_container').hide();$('indirect_siblings_container').show(); return false;">Remote versions</a>
+			</p>
+			<p class="counter">(<%= @song.indirect_siblings.size %>)</p>
     </div>
-    <div id="siblings_tabmenu" class="inactive dx"> </div>
+    <div class="dx"> </div>
   </div>
 </div>
 <!-- END TABMENU -->

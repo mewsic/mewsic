@@ -4,6 +4,7 @@
 			<%= pluralize most_friends.friends_count, 'friend' %>
 		</p>
 		<p class="thumb">
+			<%= user_type_image most_friends %>
 			<%= link_to avatar_image(most_friends, :small), user_path(most_friends) %>
 		</p>
 		<p class="name">
@@ -13,7 +14,7 @@
 			<%= h most_friends.compiled_location %>
 		</p>
 		<p class="motto">
-			<%= truncate most_friends.motto, 120 %>
+			<%= truncate most_friends.motto, 50 %>
 		</p>
 	</div>
 

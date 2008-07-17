@@ -1,0 +1,15 @@
+<div class="box-list semi-one-col clear-block azzurro-boxes">
+  <h2>TOP CONTRIBUTORS</h2>
+  <div class="top-box clear-block">
+    <div class="bottom-box clear-block">
+      <%- @top_contributors.each do |user| -%>
+        <div class="elements clear-block">
+          <div class="thumb"><%= link_to avatar_image(user, :icon), user_path(user) %></div>
+          <p class="cyan-text float-right"><strong><%= pluralize(user.replies_count, 'reply') %></strong></p>
+          <p class="name"><%= link_to user.login, user_path(user) %></p>
+        </div>
+      <%- end -%>
+    </div>
+  </div>
+</div>
+

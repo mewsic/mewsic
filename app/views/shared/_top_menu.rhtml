@@ -2,12 +2,12 @@
   <ul class="list-menu">
     <% if logged_in? %>
     <li>Hello, <strong><%= current_user.login %></strong>! <%= current_user.is_admin? ? "[Admin]" : '' %></li>
-    <li><%= user_inbox_link %></li>
-    <li><%= link_to "My page", user_path(current_user) %></li>
-    <li><%= link_to "Logout", logout_path %></li>
+    <li><%= user_inbox_link %> |</li>
+    <li><%= link_to "My page", user_path(current_user) %> |</li>
+    <li><%= link_to "Logout", logout_path %> |</li>
     <% else %>
-    <li><%= link_to "Sign up", signup_path %></li>
-    <li><%= link_to "Log in", login_path %></li>
+    <li><%= link_to "Sign up", signup_path %> |</li>
+    <li><%= link_to "Log in", login_path %> |</li>
     <% end %>
     <li><%= link_to "Help", '/help' %></li>
   </ul>

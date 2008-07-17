@@ -1,0 +1,14 @@
+<div class="elements clear-block">
+  <div class="thumb">
+    <%= link_to avatar_image(answer_medium.user, :icon), user_path(answer_medium.user) %>     
+  </div>
+	<div class="clear-block details">
+    <h2 class="clearly-cyan-text"><%= link_to h(truncate(answer_medium.body, 120)), answer_medium %></h2>
+		<%= rating(answer_medium) %><div class="clearer"></div>
+		<p class="grey-text float-left">
+			Question by <span class="name"><%= link_to answer_medium.user.login, user_path(answer_medium.user) %></span> - 
+			<%= link_to pluralize(answer_medium.replies_count, 'reply'), answer_path(answer_medium) %> - <span class="abstract"><%= time_ago_in_words(answer_medium.created_at) %> ago</span>
+    </p>
+  </div>
+</div>
+
