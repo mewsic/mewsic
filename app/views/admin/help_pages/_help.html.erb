@@ -1,6 +1,7 @@
 <tr>
-	<td><%= edit_link_to help.id, admin_help_page_path(help) %></td>
+	<td><%= edit_link_to help.id, admin_help_page_path(help.id) %></td>
 	<td><%= help.position %></td>
+	<td><%= help.url %></td>
 	<td><%= help.title %></td>
 	<td><%= h truncate(help.body, 40) %></td>
 	<td>

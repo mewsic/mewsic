@@ -19,14 +19,14 @@ class HelpPage < ActiveRecord::Base
   validates_presence_of :title, :body
 
   def to_param
-    self.title.downcase.gsub(/\s/, '-') rescue nil
+    self.url
   end
 
   def self.find_from_param(param)
     if param.to_i > 0
       find(param)
     else
-      find :first, :conditions => ['title = ?', param.gsub('-', ' ')]
+      find_by_url(param) or raise ActiveRecord::RecordNotFound
     end
   end
   

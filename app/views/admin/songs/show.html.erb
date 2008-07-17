@@ -1,6 +1,7 @@
 <a class="close-edit" href="#">close</a>
 <h2>editing song <%= @song.id %></h2>
 <%= error_messages_for :song %>
+<span class="error"><%= flash[:error] %></span>
 <% edit_form_for @song, :url => admin_song_url(@song) do |f| %>
 <dl>
 	<dt>title</dt>

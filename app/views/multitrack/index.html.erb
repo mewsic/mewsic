@@ -13,7 +13,7 @@
 					onComplete: function() { $('flashcontent').refreshSong(); }
 				});
 			});
-			new Ajax.InPlaceSelect('mlab_genre', '<%= song_path(@song) %>', {
+			new Ajax.InPlaceSelect('mlab_genre', '<%= song_path(@song, :authenticity_token => form_authenticity_token) %>', {
 				lazyLoading: true,
 				values_url: '/genres?ids',
 				labels_url: '/genres',

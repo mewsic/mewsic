@@ -1,10 +1,13 @@
 <a class="close-edit" href="#">close</a>
 <h2>editing page <%= @page.id %></h2>
 <%= error_messages_for :page %>
-<% edit_form_for @page, :url => admin_help_page_url(@page) do |f| %>
+<% edit_form_for @page, :url => admin_help_page_url(@page.id) do |f| %>
 <dl>
 	<dt>position</dt>
 	<dd><%= f.text_field :position %></dd>
+
+	<dt>url parameter</dt>
+	<dd><%= f.text_field :url %></dd>
 
 	<dt>title</dt>
 	<dd><%= f.text_field :title %></dd>

@@ -136,3 +136,8 @@ dd:after {
 	left: 600px;
 	top: 10px;
 }
+
+.error {
+	font-size: 14px;
+	color: #f00;
+}

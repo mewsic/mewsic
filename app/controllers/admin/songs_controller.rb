@@ -16,23 +16,22 @@ class Admin::SongsController < Admin::AdminController
   end
 
   def create
-    @song = Song.new(params[:song])
-    @song.save!
-
-    @track = Track.new :song_id => @song.id
-    render :template => 'admin/tracks/show'
-
-  rescue ActiveRecord::ActiveRecordError
-    render :action => 'show'
+    @song = Song.create(params[:song])
+    if @song.valid?
+      @track = Track.new :song_id => @song.id
+      render :template => 'admin/tracks/show'
+    else
+      render :action => 'show'
+    end
   end
 
   def update
     @song = Song.find(params[:id])
-    @song.update_attributes! params[:song]
-    render(:update) { |page| page.hide 'editing' }
-
-  rescue ActiveRecord::ActiveRecordError
-    render :action => 'show'
+    if @song.update_attributes params[:song]
+      render(:update) { |page| page.hide 'editing' }
+    else
+      render :action => 'show'
+    end
   end
 
   def destroy
@@ -41,8 +40,10 @@ class Admin::SongsController < Admin::AdminController
   end
 
   def mix
-    Mix.create! :song_id => params[:id], :track_id => params[:track_id]
     @song = Song.find(params[:id])
+    mix = Mix.create :song_id => @song.id, :track_id => params[:track_id]
+    flash.now[:error] = mix.errors.to_a.join(' ') unless mix.valid?
+
     render :action => 'show'
   end
 
