@@ -4,6 +4,7 @@
 			<%= pluralize coolest.members.size, 'member' %>
 		</p>
 		<p class="thumb">
+			<%= image_tag "mband_title_label.gif" %>
 			<%= link_to avatar_image(coolest, :small), coolest %>
 		</p>
 		<p class="name">
@@ -13,7 +14,7 @@
 			<%= h truncate(coolest.countries.join(', '), 40) %>
 		</p>
 		<p class="motto">
-			<%= truncate coolest.motto, 120 %>
+			<%= truncate coolest.motto, 50 %>
 		</p>
 	</div>
 	<div id="coolest-mband-scroller" class="user-scroller">

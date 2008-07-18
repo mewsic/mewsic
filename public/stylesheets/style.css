@@ -500,13 +500,6 @@ h2, h2 a{
 	height:6px;
 	background: url(/images/BG_whiteblock_shadow_bottom.png) no-repeat top left;
 }
-.bottom-border{
-	float:left;
-	width: 732px;
-	padding:0px 6px;
-	height:1px;
-	border-top:1px solid #EDEDED;
-}
 .box-list {
 	padding-left: 20px;
 	float:left;
@@ -529,12 +522,6 @@ tr.even{
 }
 tr.odd{
 	background-color:#fff;
-}
-.nav-song h1, .nav-song .tit-sezion-tab{
-	margin-bottom:0px;
-}
-.nav-song .tit-sezion-tab{
-	height:18px;	
 }
 tr.nav-song td{
 	padding:0px;
@@ -1092,6 +1079,7 @@ h2.dj-label{
 	color:#fff;
 	font-weight:bold;
 	font-size:12px;
+	padding-top: 2px;
 }
 .tracks-number-orange, .tracks-number.orange{
 	background:url(/images/tracks_number_BG_orange.png) no-repeat top left;
@@ -1127,11 +1115,11 @@ h2.dj-label{
 	width: 225px;
 	height: 30px;
 	overflow: hidden;
-	margin-top: 3px;
+	margin-top: 5px;
 }
 
 .mlab_tracks td.track-name {
-	width: 255px;
+	width: 270px;
 }
 
 .mlab_tracks p.title, .mlab_song p.title {
@@ -1335,77 +1323,6 @@ h2.dj-label{
 	float:none;
 	padding:0px 20px 10px 20px;
 	text-align:left;
-}
-/* section tab */
-.tit-sezion-tab{
-	background: url(/images/BG_tab_title_top.gif) no-repeat top right;
-	text-align:right;
-	padding-right:35px;
-	height:23px;
-	padding-top:5px;
-	margin-bottom:12px;
-}
-.tit-sezion-tab h1{
-	float:left;
-	font-size:14px;
-	font-weight:bold;
-	color:#1A73A4;
-	padding:0px 10px;
-}
-.tit-sezion-tab .button{
-	width:auto;
-}
-.tab-title-list{
-	border-bottom: 1px solid #D9D9D9;
-}
-.tab-title-list .elements{
-	margin-bottom:15px;
-}
-.tab-title-list h1{
-	background:url(/images/BG_tab_title.gif) no-repeat top left;
-	padding:5px 0px 2px 25px;
-	font-size:14px;
-	font-weight:bold;
-	color:#1A73A4;
-}
-.tab-title-list h1 a{
-	font-size:14px;
-	color:#1A73A4;
-	margin-bottom:0px;
-}
-
-/* section tab */
-.select-tab{
-	background: url(/images/BG_tab_shadow.gif) repeat-x bottom left;
-	margin-bottom:12px;
-	height:25px;
-}
-.select-tab div{
-	background:url(/images/BG_tab_noactive_left.gif) no-repeat top left;
-	float:left;
-	padding-left: 15px;
-	margin:0;
-}
-.select-tab h1{
-	float:left;
-	background:url(/images/BG_tab_noactive_right.gif) no-repeat top right;
-	padding:3px 15px 0px 0px;
-	margin-bottom:0px;
-	font-weight:normal;
-}
-.select-tab div.active{
-	background:url(/images/BG_tab_active_left.gif) no-repeat top left;
-}
-.select-tab .active h1{
-	font-weight:normal;
-	background:url(/images/BG_tab_active_right.gif) no-repeat top right;
-}
-.select-tab h1 a{
-	font-weight:normal;
-	color:#4579A1;
-}
-.select-tab .elements{
-	margin-bottom:15px;
 }
 
 /* user blocks */
@@ -2304,7 +2221,6 @@ html>body .login p {
 }
 #mlab-scroll .name, #mlab-scroll .abstract{
 	width: 130px;
-	height: 22px;
 	overflow: hidden;
 }
 #mlab-scroll .abstract{
@@ -2319,6 +2235,9 @@ html>body .login p {
 }
 #mlab-scroll .odd{
 	background-color:#E9F4F9;
+}
+#mlab-scroll p{
+	padding-bottom: 2px;
 }
 #log-in{
 	background-color:#DDE4E4;
@@ -2397,23 +2316,37 @@ html>body .login p {
 	font-size:11px;
 	color:#0296C2;
 	clear:both;
+	margin-left: 2px;
 }
 .music-info a{
 	color:#0296C2;
 }
-.bordered{
+.track-info {
 	border-top:1px solid #EDEDED;
 	border-bottom:1px solid #EDEDED;
 	margin:5px 0px;
 }
-.bordered span{
-	/*display:inline-block;*/
-	width:100px;
-	margin-right:10px;
+.track-info div {
+	float: left;
+	height: 14px;
 }
-html>body .bordered span{
-	display:table-cell;
+
+.track-info .track-genre {
+	width:40%;
+	font-weight: bold;
+	overflow: hidden;
+	margin-left: 4px;
 }
+
+.track-info .bpm, .track-info .key {
+	width: 15%;
+}
+
+.track-info .runtime {
+	float: right;
+	margin-right: 4px;
+}
+
 p.sign-in{
 	color:#0296C2;
 	font-weight:normal;
@@ -2438,7 +2371,7 @@ p.sign-in .button{
 /* footer */
 #footer{
 	text-align:center;
-	padding: 50px 0px 20px;
+	padding: 35px 0px 0px;
 	background:#fff;
 	color:#61656A;
 }
@@ -2450,6 +2383,10 @@ p.sign-in .button{
 
 #footer a:hover {
 	text-decoration: underline;
+}
+#footer .whiteblock {
+	padding:0px 6px;
+	width: 732px;
 }
 
 /* generici correttori */
@@ -2794,13 +2731,6 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 	margin-top:7px;
 	margin-bottom:5px;
 }
-.special-arrow-active{
-	position:absolute;
-	margin-top:10px;
-	width:36px;
-	height:22px;
-	background:url(/images/arrow_grey_special.gif) no-repeat top right;
-}
 .special-box{
 	padding:4px 4px 0px;
 	/*border:2px solid #fff;*/
@@ -2814,6 +2744,9 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 	margin-top:10px;
 	width:36px;
 	height:22px;
+}
+.special-arrow.active{
+	background:url(/images/arrow_grey_special.gif) no-repeat top right;
 }
 .special-box.active .special-arrow{
 	background:url(/images/arrow_grey_special.gif) no-repeat top right;
@@ -2865,9 +2798,10 @@ td.star .rating {
 	clear: both;
 }
 
-.idea-buttons .rating, .music-info .rating {
+.idea-buttons .rating, .music-info .rating, .sibling .rating {
 	margin: 0px 4px;
 	width: 65px;
+	float: left;
 }
 
 .song-resume .rating {
@@ -2939,7 +2873,6 @@ td.star .rating {
 /* help page */
 #help-content {
   width: 410px;
-  height: 600px;
   float: left;
   padding: 10px 30px 10px 20px;
   color: #61656A;
@@ -2962,6 +2895,10 @@ td.star .rating {
   margin:0;
   padding-left: 3px;
   padding-top: 5px;
+}
+
+#help-content p.back-link {
+	padding: 20px 4px;
 }
 
 #help-content th {
@@ -3001,6 +2938,10 @@ td.star .rating {
 .help-topics li {
   font-size:14px;
   padding-bottom: 2px;
+}
+
+#help-content p.strong {
+	font-weight: bold;
 }
 
 #help-content a,
@@ -3651,6 +3592,12 @@ div.hr {
 	margin-right: 5px;
 }
 
+.page-count {
+	font-size: 11px;
+	color:#61656A;
+	margin-right: 5px;
+}
+
 /******************** END SEARCH ********************/
 
 /******************** LOGIN BOX ********************/ 
@@ -3782,7 +3729,7 @@ div#login {
 .tabmenu .tab .counter {
 	font-weight: bold;
 	color:#004D71;
-	font-size:16px;
+	font-size:12px;
 	padding: 10px 0px 0px 5px;
 	float: left;
 	margin: 0;
@@ -3818,6 +3765,11 @@ div#login {
 
 #direct-siblings .tracks-number, #indirect-siblings .tracks-number {
   background-image: url(/images/tracks_number_BG_grey.png);
+	margin-right: 0px;
+}
+
+#direct-siblings-tab .sx {
+	margin-left: 11px;
 }
 
 #direct-siblings .active .tracks-number, #indirect-siblings .active .tracks-number {
@@ -4052,12 +4004,20 @@ div.auto_complete ul strong.highlight {
 }
 
 /* report abuse popup */
+.abuse.popup {
+	width: 460px;
+	height: 310px;
+}
 
 .abuse.popup textarea {
   width: 100%;
+	height: 100%;
+	border: 1px solid #d9d9d9;
 }
-.abuse.popup {
-	width: 420px;
+
+.abuse.popup select {
+	border: 1px solid #d9d9d9;
+	width: 230px;
 }
 
 #genre-chars {
@@ -4083,9 +4043,23 @@ div.auto_complete ul strong.highlight {
 	font-weight: bold;
 }
 
-.genre-pagination.arrow, .faded.arrow {
-	display: block;
-	float: left;
+.genre-list .tabmenu {
+	margin-bottom: 4px;
+	height: 26px;
+}
+
+.genre-list .tabmenu .sx, .genre-list .tabmenu .rp, .genre-list .tabmenu .dx {
+	height: 27px !important;
+}
+
+.genre-list .tabmenu .title, .genre-list .tabmenu .counter {
+	padding-top: 8px !important;
+}
+
+.genre-list .elements {
+	margin-bottom: 16px;
+	padding-bottom: 4px;
+	border-bottom: 1px solid #D9D9D9;
 }
 
 #flashcontent {

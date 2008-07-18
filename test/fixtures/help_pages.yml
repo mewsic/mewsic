@@ -16,9 +16,23 @@
 one:
   title: Help page one
   body: Help help prot sux
+  url: one
   position: 1
 
 two:
   title: Another help page
   body: To get help, you should ask yourself
+  url: two
   position: 2
+
+mband:
+  title: "M-Band help page"
+  body: this is just a placeholder for tests
+  url: mband
+  position: 3
+
+multitrack:
+  title: "Multitrack help page"
+  body: this is just a placeholder for tests
+  url: multitrack
+  position: 4

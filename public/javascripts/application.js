@@ -155,6 +155,10 @@ var Rating = Class.create({
 
     if (element.up('.user-resume') || element.up('.song-resume') || element.up('.answer-show')) {
       image = 'myousica_big.png';
+    } else if (element.up('.answer-small') || element.up('.azzurro-box')) {
+      image = 'myousica_f3f8fa.png';
+    } else if (element.up('.grey-box')) {
+      image = 'myousica_f9f9f9.png';
     }
 
     if (element.hasClassName('grey-star')) {

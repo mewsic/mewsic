@@ -26,25 +26,25 @@ class HelpControllerTest < ActionController::TestCase
   end
 
   def test_should_redirect_if_no_help_request_was_posted
-    get :send_mail
+    get :ask
     assert_response :redirect
   end
 
   def test_should_validate_help_request
-    post :send_mail, :help => { :email => '', :body => '' }
+    post :ask, :help => { :email => '', :body => '' }
 
-    assert_response :success
+    assert_response :redirect
     assert assigns(:help_request).errors.on(:email)
     assert assigns(:help_request).errors.on(:body)
 
-    post :send_mail, :help => { :email => 'invalid email', :body => 'aaaaa' }
+    post :ask, :help => { :email => 'invalid email', :body => 'aaaaa' }
 
-    assert_response :success
+    assert_response :redirect
     assert assigns(:help_request).errors.on(:email)
   end
 
   def test_should_send_help_request
-    post :send_mail, :help => { :email => 'vjt@example.org', :body => 'test request' }
+    post :ask, :help => { :email => 'vjt@example.org', :body => 'test request' }
 
     assert_response :redirect
     assert flash[:notice]

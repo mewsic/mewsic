@@ -6,12 +6,12 @@
     			  <p class="name align-right"><%= link_to(track.user.nickname, user_path(track.user)) %></p>
     			  <p class="title align-right"><%= track.title %></p>
     			  <div class="music-info">
-							<p class="bordered">
-								<span><%= link_to(track.parent_song.genre.name, genre_path(track.parent_song.genre.name)) if track.parent_song && track.parent_song.genre %></span>
-								<span>bpm: <strong><%= track.bpm %></strong></span>
-								<span>key: <strong><%= track.tonality %></strong></span>
-								<span>runtime: <strong><%= track.length %> </strong></span>
-							</p>
+							<div class="track-info clear-block">
+								<div class="track-genre"><%= link_to(track.parent_song.genre.name, genre_path(track.parent_song.genre.name)) if track.parent_song && track.parent_song.genre %></div>
+								<div class="bpm">bpm: <strong><%= track.bpm %></strong></div>
+								<div class="key">key: <strong><%= track.tonality %></strong></div>
+								<div class="runtime">runtime: <strong><%= track.length %></strong></div>
+							</div>
 							<p class="grey-text">
 								<%= track.description %>
 							</p>
@@ -22,7 +22,6 @@
               </div>
 							<div class="float-left">
 								<%= download_button_for track %>
-								<%= download_link_for track, 'Download' %>
 								<span class="music-info">Created <%= track.created_at.strftime("%m/%d/%y") %></span>
 							</div>
     			  </div>

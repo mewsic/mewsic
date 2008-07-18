@@ -1,6 +1,6 @@
 <div id="<%= container %>-<%= sibling.id %>" class="sibling special-box clear-block<%= ['', ' grey-bg'][sibling_counter % 2] %>">
   <div class="float-right" style="padding-right:10px;">
-    <div class="special-arrow"></div>
+		<div class="special-arrow <%= 'active' if sibling_counter.zero? %>"></div>
   </div>
   <div class="float-right" style="position:relative;">
     <img src="/images/spinner.gif" id="<%= container %>-tracks-loading-<%= sibling.id %>" style="display: none;float: left; margin: 7px 5px"/>
@@ -10,6 +10,7 @@
         onLoading: function() {
           $('<%= container %>-tracks').hide();
           $('<%= container %>-tracks-loading-<%= sibling.id %>').show();
+					$('<%= container %>').select('.special-arrow').invoke('removeClassName', 'active');
           $('<%= container %>').select('.sibling').invoke('removeClassName', 'active');
           $('<%= container %>').select('.tracks-number').invoke('removeClassName', 'orange');
         },
@@ -23,19 +24,22 @@
       </a>
     </span>
   </div>
-  <p class="thumb">
+  <div class="thumb">
     <%= link_to avatar_image(sibling.user, :icon), user_path(sibling.user) %>
+  </div>
+	<p>
+		<span class="name"><%= link_to sibling.user.nickname, user_path(sibling.user) %></span><br/>
+		<span class="title"><%= link_to sibling.title, song_path(sibling) %></span>
+	</p>
+  <p class="genre float-left">
+    <%= link_to sibling.genre.name, genre_path(sibling.genre) if sibling.genre %>
   </p>
-  <p class="name"><%= link_to sibling.user.nickname, user_path(sibling.user) %></p>
-  <p class="title"><%= link_to sibling.title, song_path(sibling) %></p>
-  <div class="float-right align-right">
-		<%= rating(sibling, :class => sibling_counter.odd? ? 'grey-star' : '') %><div class="clearer"></div>
+	<p class="grey-text clear-float"><%= truncate sibling.description, 50 %></p>
+  <div class="float-right">
+		<%= rating(sibling, :class => sibling_counter.odd? ? 'grey-star' : '') %>
     <%= mlab_button(sibling) %>
     <%= play_button(sibling) %>
   </div>
-  <p class="genre">
-    <%= link_to sibling.genre.name, genre_path(sibling.genre) if sibling.genre %>
-  </p>
   <div class="float-left">
     <%= download_button_for sibling %>
     <%= download_link_for sibling, 'Download' %>

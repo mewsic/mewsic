@@ -4,8 +4,8 @@
     <div class="bottom-box clear-block">
       <%= render :partial => '/users/answer', :collection => @answers %>	
       <%= empty_collection_message @answers,
-            :current_user => "You have no question.<br/>#{link_to 'Do you want to ask something?', answers_path}",
-            :any_user     => "#{@user.login} has no question" -%>
+						:current_user => "You have no question.<br/>#{link_to 'Do you want to ask something?', answers_path}<br/>Or, you can #{link_to 'click here to learn more about answers', help_path('answers')}",
+            :any_user     => "#{@user.login} hasn't asked any question." -%>
       
       <div class="next" style="text-align: right;">
         <img src="/images/spinner.gif" id="answers_spinner" style="display: none;"/>

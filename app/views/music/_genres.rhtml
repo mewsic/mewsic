@@ -4,9 +4,8 @@
 		<div class="rp">
 			<p class="title">
 				<%= genres_pagination_previous_button %>
-				<span style="padding: 0px 4px; display:block; float: left">More Genres</span>
+				<span style="padding: 0px 8px">More Genres</span>
 		  	<%= genres_pagination_next_button %>
-				<span class="clearer"></span>
 			</p> 
 		</div>
 		<div class="dx"> </div>
@@ -18,7 +17,7 @@
 <div id="genre-chars">
 	<%= genres_pagination %>
 </div>
-<div class="tab-title-list clear-block">
+<div class="genre-list clear-block">
   <%- @genres.each do |genre| -%>
     <%= render :partial => 'music/genre', :object => genre if genre.published_songs.count > 0 %>
   <%- end -%>

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 44) do
+ActiveRecord::Schema.define(:version => 45) do
 
   create_table "abuses", :force => true do |t|
     t.integer  "abuseable_id"
@@ -122,7 +122,7 @@ ActiveRecord::Schema.define(:version => 44) do
   create_table "mixes", :force => true do |t|
     t.integer  "song_id"
     t.integer  "track_id"
-    t.integer  "volume"
+    t.float    "volume",     :default => 1.0
     t.integer  "loop"
     t.float    "balance",    :default => 0.0
     t.integer  "time_shift"

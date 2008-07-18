@@ -90,7 +90,7 @@ class Track < ActiveRecord::Base
   end
 
   def self.find_paginated_newest_ideas(page)
-    paginate(:page => page, :per_page => 3, :conditions => ['tracks.idea = ?', true], :order => 'tracks.created_at DESC')
+    paginate(:page => page, :per_page => 3, :conditions => ['tracks.idea = ? AND tracks.created_at > ?', true, 1.month.ago], :order => 'tracks.created_at DESC')
   end
 
   def self.find_paginated_coolest_ideas(page)

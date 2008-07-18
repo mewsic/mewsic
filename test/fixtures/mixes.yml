@@ -18,159 +18,159 @@
 one:
   song: let_it_be
   track: sax_for_let_it_be
-  volume: 80
+  volume: 0.8
   loop: 1
   balance: 0
   time_shift: 0
 two:
   song: let_it_be
   track: guitar_for_let_it_be
-  volume: 80
+  volume: 0.8
   loop: 1
   balance: 0
   time_shift: 0
 three:
   song: let_it_be
   track: voice_for_let_it_be
-  volume: 80
+  volume: 0.8
   loop: 1
   balance: 0
   time_shift: 0
 four:
   song: let_it_be
   track: voice_for_radio_ga_ga
-  volume: 80
+  volume: 0.8
   loop: 1
   balance: 0
   time_shift: 0
 five:
   song: radio_ga_ga
   track: voice_for_radio_ga_ga
-  volume: 80
+  volume: 0.8
   loop: 1
   balance: 0
   time_shift: 0
 mixes_1:
   song: closer
   track: guitar_for_closer
-  volume: 80
+  volume: 0.8
   loop: 1
   balance: 0
   time_shift: 0
 mixes_2:
   song: closer
   track: sax_for_closer
-  volume: 80
+  volume: 0.8
   loop: 1
   balance: 0
   time_shift: 0
 mixes_3:
   song: closer
   track: drum_for_closer
-  volume: 80
+  volume: 0.8
   loop: 1
-  balance: 0
+  balance: 0.5
   time_shift: 0
 <% 10.times do |i| %>
 mixes_<%= i + 4 %>:
   song: closer
   track: voice_for_closer_<%= i + 4 %>
-  volume: 80
+  volume: 0.8
   loop: 1
-  balance: 0
+  balance: 0.5
   time_shift: 0
 <% end %>
 gravity_blast_beat_remix_drum:
   song: gravity_blast_beat_remix
   track: drum_for_gravity_blast_beat
-  volume: 80
+  volume: 0.8
   loop: 1
-  balance: 0
+  balance: 0.5
   time_shift: 0
 gravity_blast_beat_jungle_remix_drum:
   song: gravity_blast_beat_jungle_remix
   track: drum_for_gravity_blast_beat
-  volume: 80
+  volume: 0.8
   loop: 1
-  balance: 0
+  balance: 0.5
   time_shift: 0
 
 bjbm_voice:
   song: billie_jean_by_michael_jackson
   track: voice_for_billie_jean_by_michael_jackson
-  volume: 80
+  volume: 0.8
   loop: 1
-  balance: 0
+  balance: 0.5
   time_shift: 0
 
 bjbm_drums:
   song: billie_jean_by_michael_jackson
   track: drums_for_billie_jean_by_michael_jackson
-  volume: 80
+  volume: 0.8
   loop: 1
-  balance: 0
+  balance: 0.5
   time_shift: 0
 
 bjbm_keyboards:
   song: billie_jean_by_michael_jackson
   track: keyboards_for_billie_jean_by_michael_jackson
-  volume: 80
+  volume: 0.8
   loop: 1
-  balance: 0
+  balance: 0.5
   time_shift: 0
 
 bjbm_guitar:
   song: billie_jean_by_michael_jackson
   track: guitar_for_billie_jean_by_michael_jackson
-  volume: 80
+  volume: 0.8
   loop: 1
-  balance: 0
+  balance: 0.5
   time_shift: 0
 
 bjbg_voice:
   song: billie_jean_by_giovanni
   track: voice_for_billie_jean_by_giovanni
-  volume: 80
+  volume: 0.8
   loop: 1
-  balance: 0
+  balance: 0.5
   time_shift: 0
 
 bjbg_drums:
   song: billie_jean_by_giovanni
   track: drums_for_billie_jean_by_michael_jackson
-  volume: 80
+  volume: 0.8
   loop: 1
-  balance: 0
+  balance: 0.5
   time_shift: 0
 
 bjbg_keyboards:
   song: billie_jean_by_giovanni
   track: keyboards_for_billie_jean_by_michael_jackson
-  volume: 80
+  volume: 0.8
   loop: 1
-  balance: 0
+  balance: 0.5
   time_shift: 0
 
 bjbg_guitar:
   song: billie_jean_by_giovanni
   track: guitar_for_billie_jean_by_michael_jackson
-  volume: 80
+  volume: 0.8
   loop: 1
-  balance: 0
+  balance: 0.3
   time_shift: 0
 
 bjbp_voice:
   song: billie_jean_by_pilu
   track: voice_for_billie_jean_by_giovanni
-  volume: 80
+  volume: 0.8
   loop: 1
-  balance: 0
+  balance: 0.3
   time_shift: 0
 
 bjbp_drums:
   song: billie_jean_by_pilu
   track: drums_for_billie_jean_by_pilu
-  volume: 80
+  volume: 0.8
   loop: 1
   balance: 0
   time_shift: 0

@@ -1,19 +1,15 @@
-<%- if @user.mbands.count > 0 || (current_user_page? && @user.pending_mband_invitations.count > 0) -%>
 <div class="simple-list white-box clear-block">
   <h2 class="mband-label"><%= @user.login %>'s M-Bands</h2>
   <div class="top-box clear-block">
     <div class="bottom-box clear-block">
-      <div class="elements clear-block">
-				<%= render :partial => 'mband', :collection => @user.mbands %>
-				<%- if current_user_page? && @user.pending_mband_invitations.count > 0 -%>
-					<p class="grey-text element">Pending mband invitations</p>
-					<%= render :partial => 'mband', :collection => @user.pending_mband_invitations %>
-				<%- end -%>
-      </div>
+      <%= render :partial => 'mband', :collection => @mbands %>
+      <%= empty_collection_message @mbands, :class => 'element',
+            :current_user => "You have no M-bands.<br/>#{link_to 'Click here to learn about M-bands', help_path('mband')}.",
+            :any_user     => "#{@user.class.name} #{@user.login} isn't currently member of any #{link_to 'M-bands', help_path('mband')}." -%>
+      <%- if !@mband_invitations.blank? -%>
+        <p class="grey-text element" style="border-top: 1px solid #e6f4f9">Pending mband invitations</p>
+        <%= render :partial => 'mband', :collection => @mband_invitations %>
+      <%- end -%>
     </div>
-    <%#= FIXME empty_collection_message @user.mbands,
-          :current_user => "You have no members in your mband. Why don't you add some?",
-          :any_user     => "This mband has currently no members" -%>
   </div>
 </div>
-<%- end -%>

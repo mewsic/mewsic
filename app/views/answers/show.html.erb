@@ -8,7 +8,7 @@
         <h2><%= @answer.closed? ? 'CLOSED' : 'OPEN' %> QUESTION</h2>
         <p class="float-right abstract">
           <%- if logged_in? && !@has_abuse -%> <!--XXX-->
-            <a href="<%= formatted_new_answer_abuse_path(@answer, 'html') %>" class="lightview" title="Report abuse">report abuse</a>
+						<a href="<%= formatted_new_answer_abuse_path(@answer, 'html') %>" class="lightview" rel="ajax" title="Report abuse :: :: ajax:{method:'get'},width:480,height:330">report abuse</a>
           <%- end -%>
         </p>
       </div>

@@ -391,6 +391,10 @@ class User < ActiveRecord::Base
     mband.leader == self
   end
 
+  def mbands_with_more_than_one_member
+    self.mbands.find(:all, :conditions => 'members_count > 0', :order => 'rating_avg DESC')
+  end
+
   def profile_completeness
     profile = %w(first_name last_name photos_url myspace_url blog_url skype skype_public msn msn_public)
     complete = profile.select { |attr| !self[attr].blank? }

@@ -22,11 +22,15 @@ class HelpPage < ActiveRecord::Base
     self.url
   end
 
+  def to_breadcrumb
+    self.title
+  end
+
   def self.find_from_param(param)
     if param.to_i > 0
       find(param)
     else
-      find_by_url(param) or raise ActiveRecord::RecordNotFound
+      find_by_url(param) or raise ActiveRecord::RecordNotFound, "Cannot find '#{param}' help page"
     end
   end
   

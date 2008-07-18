@@ -67,9 +67,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.connect '/countries', :controller => 'users', :action => 'countries'
   
-  map.help 'help', :controller => 'help', :action => 'index'
-  map.connect 'help/send', :controller => 'help', :action => 'send_mail'
-  map.connect 'help/:id', :controller => 'help', :action => 'show'  
+  map.resources :help, :member => { :ask => :post }
+  map.ask_help '/help/ask', :controller => 'help', :action => 'ask'
 
   map.root :controller => "dashboard"
   map.connect 'splash', :controller => 'dashboard', :action => 'splash'

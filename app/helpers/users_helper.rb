@@ -118,10 +118,12 @@ module UsersHelper
 
   def empty_collection_message(collection, options = {})
     return unless collection.size.zero?
-    options.assert_valid_keys(:current_user, :any_user)
-    message = current_user_page? ? options[:current_user] : options[:any_user] 
+    current, any = options.delete(:current_user), options.delete(:any_user)
+    message = send(options.delete(:method) || :current_user_page?) ? current : any
 
-    %[<p class="centered grey-text"><em>#{message}</em></p>] if message
+    options[:class] = "centered abstract #{options[:class]}"
+
+    content_tag :p, message, options if message
   end
 
   def refresh_block_image_link(url_options = {})
@@ -133,7 +135,7 @@ module UsersHelper
   end
   def idea_link_for(track)
     image = idea_icon_for(track)
-    if current_user_page?
+    if track.user == current_user
       link_to_remote image, :url => toggle_idea_user_track_path(current_user, track), :method => :put, :html => {:id => "toggle_idea_#{track.id}"}
     else
       image

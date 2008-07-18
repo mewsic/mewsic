@@ -6,22 +6,25 @@ class TracksController < ApplicationController
   
   def index
     if params.include?(:user_id) 
+
       @user = User.find_from_param(params[:user_id])
-      @tracks =
+      @tracks, @tracks_count =
         if current_user == @user
-          Track.find_paginated_by_user(params[:page], @user)
+          [Track.find_paginated_by_user(params[:page], @user), @user.tracks_count]
         else
-          Track.find_paginated_ideas_by_user(params[:page], @user)
+          [Track.find_paginated_ideas_by_user(params[:page], @user), @user.ideas_count]
         end
 
     elsif params.include?(:mband_id)
+
       @mband = Mband.find_from_param(params[:mband_id])
-      @tracks =
+      @tracks, @tracks_count =
         if @mband.members.include? current_user
-          Track.find_paginated_by_mband(params[:page], @mband)
+          [Track.find_paginated_by_mband(params[:page], @mband), @mband.tracks_count]
         else
-          Track.find_paginated_ideas_by_mband(params[:page], @mband)
+          [Track.find_paginated_ideas_by_mband(params[:page], @mband), @mband.ideas_count]
         end
+
     end
       
     render :layout => false

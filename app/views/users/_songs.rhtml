@@ -7,12 +7,15 @@
 				<%= render :partial => 'users/song', :collection => @songs %>
 			</table>
 			<%= empty_collection_message @songs,
-	    	    :current_user => "#{link_to 'create', music_path} your songs and enjoy!",
-  	    	  :any_user     => "#{@user.login} hasn't created any song yet"
+						:current_user => "You can create new songs with our #{link_to 'multitrack', multitrack_path}<br/>#{link_to 'Click here to learn more', help_path('multitrack')}.",
+  	    	  :any_user     => "#{@user.login} hasn't created any song yet."
 			-%>
 		</div>
   
 		<p class="next">      
+			<% if @songs.page_count > 1 %>
+				<span class="align-right page-count">Page <%= @songs.current_page %> of <%= @songs.page_count %></span>
+			<% end %>
 			<% if @songs.previous_page %>
 				<%= link_to image_tag('move_arrow_left.png'), user_songs_path(@user, :page => @songs.previous_page), :class => 'navigation' %>
 			<% else %>

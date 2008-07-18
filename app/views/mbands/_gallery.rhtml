@@ -33,8 +33,9 @@
       <div class="horizontal-scroll-box" id="gallery">
         <div id="gallery-photo-list">
           <%= render :partial => 'photo', :collection => @mband.photos %>
-          <p id="no-images-notice" style="<%= 'display:none;' if @mband.photos.size > 0 %>" class="centered grey-text">
-            <em><%= current_user_mband_page? ? 'your mband' : "#{@mband.name}" %> has no images in the gallery!</em></p>
+					<%= empty_collection_message @mband.photos, :id => 'no-images-notice', :method => :current_user_mband_page?,
+								:current_user => 'Your mband has no images in the gallery.<br/>Click "Upload pics" to add some!',
+								:any_user => "#{@mband.name} has got no images in the gallery, yet." -%>
         </div>
       </div>
     </div>

@@ -49,9 +49,9 @@ var Tooltips = Class.create({
       return;
 
     if (element.hasClassName('online')) {
-      content = "User is online now!";
+      content = "<strong>ONLINE</strong>";
     } else {
-      content = "User is offline";
+      content = "<strong>OFFLINE</strong>";
     }
     new Tip(element, content, {style: 'status'});
   },

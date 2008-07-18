@@ -40,13 +40,12 @@ class UsersController < ApplicationController
     @answers = @user.answers.paginate(:page => 1, :per_page => 6, :order => 'created_at DESC')
     @new_membership = MbandMembership.new
 
-    @tracks = 
+    @tracks, @tracks_count, @mbands = 
       if @user == current_user
-        @tracks_count = @user.tracks_count
-        Track.find_paginated_by_user(1, @user)
+        @mband_invitations = @user.pending_mband_invitations
+        [Track.find_paginated_by_user(1, @user), @user.tracks_count, @user.mbands]
       else
-        @tracks_count = @user.ideas_count
-        Track.find_paginated_ideas_by_user(1, @user)
+        [Track.find_paginated_ideas_by_user(1, @user), @user.ideas_count, @user.mbands_with_more_than_one_member]
       end
 
     @friends =

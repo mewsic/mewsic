@@ -10,17 +10,20 @@ class HelpController < ApplicationController
     @page = HelpPage.find_from_param(params[:id])    
   end
   
-  def send_mail
-    redirect_to :action => 'index' and return unless request.post?
-
+  def ask
     if @help_request.valid?
       MyousicaMailer.deliver_help_request(@help_request)
       flash[:notice] = "Thanks for contacting us! Your question has been sent to our help desk, you'll receive a reply in few hours."
-      params[:id] ? redirect_to(:action => 'show', :id => params[:id]) : redirect_to(:action => 'index')
     else
-      flash.now[:error] = "Your help request could not be sent. Please correct the errors and try again!"
-      params[:id] ? (show and render(:action => 'show')) : render(:action => 'index')
+      flash[:error] = "Your help request could not be sent. Please correct the errors and try again!"
     end        
+
+    params[:return_to] ? redirect_to(:action => 'show', :id => params[:return_to]) : redirect_to(:action => 'index')
+  end
+
+protected
+  def to_breadcrumb_link
+    ['Myousica help', help_index_path]
   end
 
 private

@@ -6,10 +6,6 @@ class AbusesController < ApplicationController
   before_filter :find_abuseable  
 
   def new    
-    unless request.xhr?
-      redirect_to_abuseable_page
-      return
-    end    
   end
 
   def create

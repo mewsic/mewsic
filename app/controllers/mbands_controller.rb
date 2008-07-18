@@ -12,13 +12,11 @@ class MbandsController < ApplicationController
   # GET /mbands/1.xml
   def show
     @songs = Song.find_paginated_by_mband(1, @mband)
-    @tracks =
-      if @mband.members.include? current_user
-        @tracks_count = @mband.tracks_count
-        Track.find_paginated_by_mband(1, @mband)
+    @tracks, @tracks_count =
+      if @mband.members.include? current_user 
+        [Track.find_paginated_by_mband(1, @mband), @mband.tracks_count]
       else
-        @tracks_count = @mband.ideas_count
-        Track.find_paginated_ideas_by_mband(1, @mband)
+        [Track.find_paginated_ideas_by_mband(1, @mband), @mband.ideas_count]
       end
 
     respond_to do |format|

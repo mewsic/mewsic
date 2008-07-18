@@ -1,4 +1,4 @@
-<%- form_for :help, @request, :url => {:action => 'send_mail', :id => params[:id] } do |f| -%>
+<%- form_for :help, @request, :url => ask_help_path(:return_to => params[:id]) do |f| -%>
   <p><label for="help_email">Your e-mail</label>
   <%= f.text_field :email, :class => 'text' %></p>
   <p><label for="help_body">Your message</label>

@@ -2,7 +2,7 @@
 <% javascript 'simple-slider', 'song' %>
 <div class="box-list special-arrow-box song-spec clear-block">
   <div class="float-right" style="padding-right:16px;">
-    <div class="special-arrow-active"></div>
+    <div class="special-arrow active"></div>
   </div>
   <div class="simple-list">
     <h1><%= @song.title %></h1>
@@ -17,9 +17,12 @@
           <p class="music-info float-right align-right">
             <span>runtime:<br /><strong><%= @song.length %></strong></span>
           </p>
-          <p class="thumb"><%= link_to avatar_image(@song.user, :icon), user_path(@song.user) %></p>
-          <p class="name"><%= link_to @song.user.nickname, user_path(@song.user) %></p>
-          <p class="title"><%= @song.title %></p>
+          <p class="thumb"><%= link_to avatar_image(@song.user, :small), user_path(@song.user) %></p>
+					<p>
+						<span class="name"><%= link_to @song.user.nickname, user_path(@song.user) %></span><br/>
+						<span class="abstract"><%= @song.original_author %></span><br/>
+						<span class="title"><%= @song.title %></span>
+					</p>
           <p class="grey-text clear-float"><%= @song.description %></p>
           <p class="thumb">
             <%- @song.tracks.each do |track| -%>
@@ -35,7 +38,7 @@
           </div>
           <div class="float-left">
             <%= download_button_for @song %>
-            <%= download_link_for @song, 'Download' %>
+            <%= download_link_for @song, 'DOWNLOAD' %>
           </div>
         </div>
       </div>

@@ -44,7 +44,7 @@
 	</div>
 
   <div class="user-resume">
-		<%= rating(@user, :clear => true) %>
+		<%= rating(@user, :class => 'float-left') %><div class="clearer"></div>
     <div class="float-right align-right">
       <%- unless @user.type == 'Band' -%>
         <p class="blue-text">Gender</p>

@@ -4,13 +4,12 @@
     <p class="title"><%= track.title %></p>
 		<p class="abstract"><%= truncate track.description, 50 %>
   </td>
-  <td class="star" align="right">
-    
-		<%= rating(track, :clear => true, :class => track_counter.odd? ? 'grey-star' : '') %>
+  <td align="right">
+		<%= rating(track, :class => (track_counter.odd? ? 'grey-star' : '') << ' float-right') %>
     <p>
-			<%= idea_link_for track %>
+		  <%= idea_link_for track %>
       <%= mlab_button(track, :dynamic => true) %>
-      <%= play_button(track) %>
-    </p>
+			<%= play_button(track) %><br/>
+		</p>
   </td>
 </tr>
