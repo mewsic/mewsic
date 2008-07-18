@@ -240,12 +240,14 @@ protected
   
   def to_breadcrumb_link
     case @user.class.name
-    when 'User', 'NilClass'
+    when 'NilClass'
       ['People', users_path]
+    when 'User'
+      ['User', users_path]
     when 'Band'
-      ['Bands', bands_and_deejays_path]
+      ['Band', bands_and_deejays_path]
     when 'Dj'
-      ['Deejays', bands_and_deejays_path]
+      ['DJ', bands_and_deejays_path]
     end
   end
 end

@@ -91,7 +91,7 @@ class MbandsController < ApplicationController
 protected
 
   def to_breadcrumb_link
-    ["M-Bands", bands_and_deejays_path]
+    [@mband ? "Mband" : "Mbands", bands_and_deejays_path]
   end
 
 private
