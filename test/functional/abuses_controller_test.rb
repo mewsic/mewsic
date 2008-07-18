@@ -9,7 +9,7 @@ class AbusesControllerTest < ActionController::TestCase
   def test_should_new_redirect_if_request_is_get
     login_as :quentin
     get :new, :answer_id => answers(:quentin_asks_about_magic).id
-    assert_response :redirect
+    assert_response :success
   end
 
   def test_should_show_get_and_assign_abuse_to_answer
