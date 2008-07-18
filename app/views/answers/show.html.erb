@@ -1,3 +1,5 @@
+<% breadcrumb @answer %>
+
 <%= render :partial => 'find_question' %>
 
   <div class="box-list two-col-big clear-block">
@@ -42,7 +44,7 @@
 
 					<div class="answer-show float-left">
 						<%= rating(@answer, :class => 'float-left') %><div class="clearer"></div>
-						<p class="abstract"><%= time_ago_in_words(@answer.created_at) %> ago</p>
+						<p class="abstract">posted <%= time_ago_in_words(@answer.created_at) %> ago</p>
 					</div>
 
           <div id="reply-form-container" style="clear:both;display: none">
@@ -74,38 +76,12 @@
   </div>
 
 	<div class="box-list semi-one-col clear-block">
-		<div class="simple-list azzurro-boxes clear-block">
-			<h2>OTHER QUESTIONS BY <%= @answer.user.login %></h2>
-			<div class="top-box clear-block">
-				<div class="bottom-box clear-block">
-					<div id="other_by_user">
-						<%= render :partial => 'answer_small', :collection => @other_answers_by_author %>
-					</div>
-				</div>
-			</div>
-
-			<div class="float-right">
-				<%- if @other_answers_by_author.previous_page %>
-					<%= link_to_remote image_tag('move_arrow_left.png'),
-								:url => siblings_answer_path(@answer, :page => @other_answers_by_author.previous_page),
-								:update => 'other_by_user', :method => :get, :loading => "$('answers_spinner').show()" %>
-				<%- else -%>
-					<%= image_tag 'move_arrow_left.png', :class => 'faded' %>
-				<%- end -%>
-      
-				<%- if @other_answers_by_author.next_page %>
-					<%= link_to_remote image_tag('move_arrow_right.png'),
-								:url => siblings_answer_path(@answer, :page => @other_answers_by_author.next_page),
-								:update => 'other_by_user', :method => :get, :loading => "$('answers_spinner').show()" %>
-				<%- else -%>
-					<%= image_tag 'move_arrow_right.png', :class => 'faded' %>
-				<%- end -%>
-			</div>
-
+		<div class="azzurro-boxes clear-block answers" id="other_by_user">
+			<%= render :partial => 'other_by_user' %>
 		</div>
   </div>  
   
-	<%# if @similar_answers.size > 0 %>
+	<% if @similar_answers.size > 0 %>
     <div id="similar-questions" class="box-list three-col clear-block clear-float">
 			<div class="tabmenu">
 				<div class="tab active" id="top-answers-tab">
@@ -122,4 +98,4 @@
 				<%= render :partial => 'answer_medium', :collection => @similar_answers %>
 			</div>
 		</div>
-	<%# end %>
+	<% end %>

@@ -60,7 +60,7 @@ class Answer < ActiveRecord::Base
   end
 
   def self.find_paginated_by_user(user, page, options = {})
-    user.answers.paginate options.merge(:order => 'created_at DESC', :page => page)
+    user.answers.paginate options.merge(:page => page, :order => 'answers.rating_avg DESC, created_at DESC') 
   end
 
   def self.find_newest(options = {})
@@ -107,6 +107,10 @@ class Answer < ActiveRecord::Base
 
   def editable_for
     "%d minutes %d seconds" % ((self.created_at + 15.minutes) - Time.now).divmod(60) if editable?
+  end
+
+  def to_breadcrumb
+    self.body[0..32] + '...'
   end
   
 private

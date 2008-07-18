@@ -2,8 +2,8 @@
 	<div class="bottom-box clear-block answers">
 		<%= render :partial => 'answer', :collection => answers %>
 	</div>
-	<div class="pagination spinner">
+	<%= will_paginate answers, :params => { :action => 'top', :type => name }, :class => 'pagination answers', :prev_label => image_tag('move_arrow_left.png'), :next_label => image_tag('move_arrow_right.png') %>
+	<div class="pagination spinner" style="float: left">
 		<img src="/images/spinner.gif" id="<%= name %>-answers-spinner" style="display: none;"/>
 	</div>
-	<%= will_paginate answers, :params => { :action => 'top', :type => name }, :class => 'pagination answers', :prev_label => image_tag('move_arrow_left.png'), :next_label => image_tag('move_arrow_right.png') %>
 </div>

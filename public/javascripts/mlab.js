@@ -54,8 +54,21 @@ var MlabSlider = Class.create(PictureSlider, {
   },
     
   toggleTriggers: function() {
-    this.isBackSlidable()    ? this.back_trigger.setOpacity(1.0)     : this.back_trigger.setOpacity(0.35);
-    this.isForwardSlidable() ? this.forward_trigger.setOpacity(1.0)  : this.forward_trigger.setOpacity(0.35);
+    if (this.isBackSlidable()) {
+      this.back_trigger.setOpacity(1.0);
+      this.back_trigger.addClassName('c');
+    } else {
+      this.back_trigger.setOpacity(0.35);
+      this.back_trigger.removeClassName('c');
+    }
+
+    if (this.isForwardSlidable()) {
+      this.forward_trigger.setOpacity(1.0);
+      this.forward_trigger.addClassName('c');
+    } else {
+      this.forward_trigger.setOpacity(0.35);
+      this.forward_trigger.removeClassName('c');
+    }
 	},   
   
   loadElements: function() {

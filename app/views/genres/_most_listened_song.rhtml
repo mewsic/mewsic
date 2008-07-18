@@ -10,7 +10,7 @@
 		<p class="title"><%= link_to truncate(most_listened_song.title, 30), most_listened_song %></p>
 		<p class="abstract"><%= h most_listened_song.original_author %></p>
 	</div>
-	<div class="float-right align-right">
+	<div class="float-right align-right" style="width: 64px">
 		<%= rating(most_listened_song, :clear => true) %>
 	  <%= mlab_button(most_listened_song) %>
 	  <%= play_button(most_listened_song) %>

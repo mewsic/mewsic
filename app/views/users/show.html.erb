@@ -21,14 +21,12 @@
 			<%= image_tag 'song-spinner-big.gif' %>
 		</div>
   	<div class="tit-classification-songs clear-block" id="songs">
-			<div class="count">(<%= @user.songs_count %>)</div>
       <%= render :partial => 'songs' %>
 	  </div>
 		<div id="tracks_spinner" style="display:none;">
 			<%= image_tag 'track-spinner-big.gif' %>
 		</div>
 	  <div class="tit-classification-tracks clear-block" id="tracks">
-			<div class="count">(<%= current_user_page? ? @user.tracks_count : @user.ideas_count %>)</div>
       <%= render :partial => 'tracks' %>  
 	  </div>
     <%= render :partial => 'gallery' %> 

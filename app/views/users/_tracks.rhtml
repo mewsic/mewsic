@@ -1,3 +1,4 @@
+<div class="count">(<%= current_user_page? ? @user.tracks_count : @user.ideas_count %>)</div>
 <div id="tracks_container" class="clear-block">
 	<%- if current_user_page? :admin => false -%>
 	<div class="top-box-tracks clear-block">	

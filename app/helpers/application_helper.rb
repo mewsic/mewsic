@@ -33,25 +33,45 @@ module ApplicationHelper
   end
   
   def breadcrumb(model_crumb = nil, klass = nil)
-    default_breadcrumb = %[<div id="path" class="#{klass}"><a href="/">Home</a>]
-    unless controller.controller_name == 'dashboard'
-      if controller.respond_to?(:to_breadcrumb_link)
-        text, path = controller.send(:to_breadcrumb_link)
-        default_breadcrumb += ' : ' + link_to(text, path)
-      else
-        default_breadcrumb += ' : ' + link_to(controller.send(:to_breadcrumb).capitalize, send("#{controller.controller_name}_path"))
-      end      
-      default_breadcrumb += ' : ' + h(model_crumb.to_breadcrumb) if model_crumb
-    end    
-    default_breadcrumb += '</div>'
-    content_for :breadcrumb, default_breadcrumb
+    return if controller.controller_name == 'dashboard'
+
+    bread = []
+    title = []
+
+    if controller.respond_to?(:to_breadcrumb_link)
+      text, path = controller.send(:to_breadcrumb_link)
+
+      bread.push link_to(text, path)
+      title.push text.downcase
+    else
+      text = controller.send(:to_breadcrumb)
+      path = send("#{controller.controller_name}_path")
+
+      bread.push link_to(text.capitalize, path)
+      title.push text.downcase
+    end
+
+    if model_crumb
+      text = h(model_crumb.to_breadcrumb)
+
+      bread.push text
+      title.push text
+    end
+
+    content_for :breadcrumb, %[<div id="path" class="#{klass}"><a href="/">Home</a> : #{bread.join(' : ')}</div>]
+    content_for :title, '- ' << title.join(' - ') unless title.empty?
   end
   
   def render_breadcrumb
     breadcrumb unless @content_for_breadcrumb
     @content_for_breadcrumb
   end
-      
+
+  def render_title
+    breadcrumb unless @content_for_title
+    @content_for_title
+  end
+ 
   def tags_for_cloud(klass, group, attribute, css_classes, limit = nil)
     limit ||= 40
     options = { :include => group, :group => group, :order => "#{group.to_s.pluralize}.#{attribute} ASC", :order => 'count_all DESC', :limit => limit }

@@ -11,6 +11,6 @@ class BandsAndDeejaysController < ApplicationController
   end
 
   def to_breadcrumb
-    'bands &amp; deejays'
+    'Bands &amp; deejays'
   end
 end

@@ -200,7 +200,9 @@ document.observe('dom:loaded', function(event) {
     });    
 	}
  
-  Rating.instance = new Rating({className: 'rating', limit: 30});
+  if (!(Prototype.Browser.IE && navigator.userAgent.indexOf('6.0') > -1))
+    Rating.instance = new Rating({className: 'rating', limit: 30});
+
   SearchBox.instance = new SearchBox('search');
   Message.init();
 });

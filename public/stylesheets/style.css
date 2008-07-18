@@ -430,7 +430,11 @@ td.song-title a:hover {
 	color:#000;
 	text-decoration:none;
 }
-#path.mband, #path.mband a {
+#path.mband {
+	position: absolute;
+	color: #fff;
+}
+#path.mband a {
 	color: #fff;
 }
 h1, h1 a{
@@ -697,23 +701,6 @@ tr.nav-song td{
 .newest-list .thumb, .most-listened-list .thumb {
 	padding:0 !important;
 }
-/* collaboration */
-/*
-.collaboration-list .thumb{
-	margin-right:8px;
-	margin-bottom:0px !important;
-}
-.collaboration-list .title{
-	clear:both;
-}
-.collaboration-list .elements{
-	float:left;
-	width:170px;
-	margin:0px 5px;
-	padding:0px 5px;
-	border-left:1px solid #ABC8D9;
-}
-*/
 .collaboration-list .abstract {
 	margin: 0 !important;
 	padding: 0px !important;
@@ -830,6 +817,7 @@ tr.nav-song td{
 .answers h2 {
 	margin-bottom: 4px;
 }
+
 
 /* answer detail */
 .answer h1{
@@ -987,6 +975,8 @@ tr.nav-song td{
 h2.mband-label{
 	background:url(/images/BG_box_cyan_top_mband.png) no-repeat top left;
 	color: #FFFFFF;
+	padding: 18px 20px 14px;
+	font-size: 15px;
 }
 h2.band-label{
 	background:url(/images/BG_box_cyan_top_band.png) no-repeat top left;
@@ -1585,14 +1575,15 @@ h2.dj-label{
 }
 #mypage-label {
 	float:right;
-	background: url(/images/angle_profiles.png) no-repeat right;
+	background: url(/images/angle_profiles.png) no-repeat right top;
 	padding:9px 11px 0px;
 	height: 54px;
 }
 #mypage-label.mband {
-	background: url(/images/angle_mband.png) repeat-x right;
+	background: url(/images/angle_mband.png) repeat-x right top;
 	width: 710px;
 	float: none;
+	height: 70px;
 }
 
 .change-type{
@@ -1634,6 +1625,7 @@ h2.dj-label{
 	font-weight:bold;
 	padding-top:0px;
 	text-indent:100px;
+	position: absolute;
 }
 .tit-classification-songs .top-box{
 	background: url(/images/BG_tab_title_songs.png) no-repeat left top;
@@ -1691,6 +1683,7 @@ table.mlab_tracks {
 	font-weight:bold;
 	padding-top:0px;
 	text-indent:100px;
+	position: absolute;
 }
 .tit-classification-tracks .top-box-tracks {
 	background: url(/images/BG_tab_title_tracks.png) no-repeat top left;
@@ -2929,14 +2922,12 @@ td.star .rating {
   background: transparent url(/images/mlab_scroll_button_top.png) no-repeat center;
   width:203px;
   height:21px;
-  cursor:pointer;
 }
 
 #mlab-scroller .trigger.forward {
   background: transparent url('/images/mlab_scroll_button_down.png') no-repeat center;
   width:203px;
   height:22px;
-  cursor:pointer;
 }
 
 #mlab-scroller .mylist {
@@ -3780,7 +3771,7 @@ div#login {
 	margin-right: 4px;	
 }
 
-.tabmenu .tab .title {
+.tabmenu .title {
 	color:#004D71;
 	font-size:16px;
 	padding: 10px 4px 0px 8px;
@@ -4170,4 +4161,5 @@ div.auto_complete ul strong.highlight {
 
 .user-switch #success {
 	margin: 60px 0px;
+	padding: 0px 130px;
 }

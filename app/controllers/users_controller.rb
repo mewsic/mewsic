@@ -240,10 +240,13 @@ protected
   end
   
   def to_breadcrumb_link
-    if @user and [Band, Dj].include? @user.class
-      ['Bands &amp; deejays', bands_and_deejays_path]
-    else
+    case @user.class.name
+    when 'User', 'NilClass'
       ['People', users_path]
+    when 'Band'
+      ['Bands', bands_and_deejays_path]
+    when 'Dj'
+      ['Deejays', bands_and_deejays_path]
     end
   end
 end

@@ -93,7 +93,7 @@ class MbandsController < ApplicationController
 protected
 
   def to_breadcrumb_link
-    ["Bands & deejays", bands_and_deejays_path]
+    ["M-Bands", bands_and_deejays_path]
   end
 
 private

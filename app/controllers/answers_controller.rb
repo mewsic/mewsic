@@ -36,8 +36,8 @@ class AnswersController < ApplicationController
   end
   
   def siblings
-    siblings = Answer.find_paginated_by_user @answer.user, params[:page], :per_page => 6, :conditions => ['answers.id != ?', @answer.id]
-    render :partial => 'answer_small', :collection => siblings
+    @other_answers_by_author = Answer.find_paginated_by_user @answer.user, params[:page].to_i, :per_page => 6, :conditions => ['answers.id != ?', @answer.id]
+    render :partial => 'other_by_user'
   end
 
   def top

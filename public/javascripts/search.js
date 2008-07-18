@@ -6,7 +6,12 @@ document.observe('dom:loaded', function() {
     new Pagination({
       container: name + '-results',
       spinner: name + '-results-spinner',
-      selector: 'div.pagination.' + name + ' a'
+      selector: 'div.pagination.' + name + ' a',
+      onComplete: function() {
+        new Effect.ScrollTo(name + '-results', {
+          offset: -40
+        });
+      }
     });
   });  
 });

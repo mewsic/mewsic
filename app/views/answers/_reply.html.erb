@@ -4,5 +4,5 @@
 <div class="clear-block details">
 	<p class="body"><%= h truncate(reply.body, 60) %></p>
 	<%= rating(reply) %><div class="clearer"></div>
-	<p class="grey-text">Reply by <%= link_to reply.user.login, user_path(reply.user) %>  - <%= time_ago_in_words(reply.created_at) %> ago</p>
-</div>											
+	<p class="grey-text">Reply by <%= link_to reply.user.login, user_path(reply.user) %> - <span class="abstract">posted <%= time_ago_in_words(reply.created_at) %> ago</span></p>
+</div>

@@ -22,8 +22,8 @@ var SimpleSlider = Class.create({
     if (this.sliding)
       return;
 
-    var top = parseInt(this.elements.style.top);
-    var left = parseInt(this.elements.style.left);
+    var top = parseInt(this.elements.style.top) || 0;
+    var left = parseInt(this.elements.style.left) || 0;
 
     if ((coords.y > 0 && top >= 0) || (coords.x > 0 && left >= 0))
       return;
