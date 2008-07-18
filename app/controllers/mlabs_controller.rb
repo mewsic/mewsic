@@ -14,7 +14,7 @@ class MlabsController < ApplicationController
       format.xml do
         headers["Content-Type"] = "text/xml;"
       end
-      format.js { render :json => @items.to_json(:methods => :user, :include => :mlabs) }
+      format.js { render :json => @items.to_json(:methods => [:user, :mlab, :original_author, :genre_name], :include => :mlabs) }
     end
     
   end

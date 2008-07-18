@@ -121,6 +121,15 @@ class Track < ActiveRecord::Base
     self.user_id != user.id
   end
   
+  def original_author
+    self.parent_song ? self.parent_song.original_author : nil
+  end
+  
+  #called by mlab.js 
+  def genre_name
+    (self.parent_song && self.parent_song.genre) ? self.parent_song.genre.name : nil
+  end
+  
 private
   
   def set_tonality_from_tone

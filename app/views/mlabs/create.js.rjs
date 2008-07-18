@@ -2,7 +2,7 @@ if @mixable
   page << %| 
   var mlabSlider = MlabSlider.getInstance();
   mlabSlider.slideToStart();
-  new MlabItem('#{@mixable.class.name.downcase}', #{@mixable.to_json(:methods => [:user, :mlab])}, mlabSlider)
+  new MlabItem('#{@mixable.class.name.downcase}', #{@mixable.to_json(:methods => [:user, :mlab, :original_author, :genre_name])}, mlabSlider)
 | 
 else
   page.alert 'There was an error. Please refresh the page.'

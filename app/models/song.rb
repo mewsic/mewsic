@@ -186,5 +186,10 @@ class Song < ActiveRecord::Base
     songs = find_by_sql(['select songs.id from songs left outer join tracks on tracks.song_id = songs.id where songs.published = ? and songs.created_at < ? group by songs.id having count(tracks.id) = 0', false, 1.week.ago])
     delete_all ['id in (?)', songs.map(&:id)] unless songs.empty?
   end
+  
+  #called by mlab.js 
+  def genre_name
+    self.genre ? self.genre.name : nil
+  end
 
 end

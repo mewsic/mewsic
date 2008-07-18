@@ -22,8 +22,9 @@ var MlabSlider = Class.create(PictureSlider, {
   
   template: '<div id="mlab_element_#{attributes.mlab_id}" class="elements #{even_odd} #{type} clear-block" style="height: 50px;">' +
   	        '  <div class="float-left">' +
-            '    <p class="name">#{type} by <a href="/users/#{attributes.user.id}">#{attributes.user.login}</a></p>' +
-            '    <p class="abstract">#{attributes.title}</p>' +
+            '    <p class="name">#{attributes.title}</p>' +
+            '    <p class="abstract">#{attributes.original_author}</p>' +
+            '    <p class="name"><a href="/users/#{attributes.user.id}">#{attributes.user.login}</a> #{attributes.genre_name}</p>' +            
           	'  </div>' +
           	'  <div class="float-left align-right">' +
           	'	  <p class="button">' +
