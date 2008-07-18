@@ -110,16 +110,18 @@ module ApplicationHelper
   end    
   
   def render_sidebar   
-    content = ''
-    return content if params[:controller] == 'sessions'
-
-    if params[:controller] == 'users' && (params[:action] == 'new' || params[:action] == 'create')
-      content << render(:partial => 'shared/share_myousica')
+    #  content << render(:partial => 'shared/share_myousica')
+    if logged_in?
+      render(:partial => 'shared/mlab')
     else
-      content << render(:partial => 'shared/login_box') unless logged_in?
-      content << render(:partial => 'shared/mlab') if logged_in?
+      content = ''
+      unless  params[:controller] == 'sessions' || (params[:controller] == 'users' && (params[:action] == 'new' || params[:action] == 'create'))
+
+        content << render(:partial => 'shared/login_box')
+      end
+
+      content << render(:partial => 'shared/mlab_notlogged')
     end
-    content
   end    
   
   def avatar_image(model, size, options = {})

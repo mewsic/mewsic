@@ -189,7 +189,7 @@ html>body #search p span{
 	color: #0296C2;
 	font-size: 11px;
 	text-decoration: underline;
-	padding: 3px 0 0 5px;
+	padding: 4px 0px 0px 8px;
 }
 
 #search p.advanced-box {
@@ -211,7 +211,7 @@ html>body #search p span{
 	width: 12px;
 	height: 12px;
 	float: right;
-	margin: 6px 5px 0 0;
+	margin: 8px 5px 0 0;
 	cursor: pointer;
 }
 
@@ -2188,12 +2188,12 @@ html>body .login p {
 #rightcol{
 	float:right;
 	position:relative;
-	top: 16px;
+	top: 24px;
 	right: 0px;
 	width:220px;
 }
 .banner-right-col, #log-in, #mlab-box{
-	margin-bottom:25px;
+	margin-bottom:6px;
 	text-align: left;
 }
 .mlab-container{
@@ -3601,6 +3601,9 @@ div.hr {
 /******************** END SEARCH ********************/
 
 /******************** LOGIN BOX ********************/ 
+div#multitrack_banner {
+	margin-top: 11px;
+}
 div#login {
 	width: 217px;
 }
@@ -3649,10 +3652,9 @@ div#login {
 }
 
 .login-box-helplinks {
-	margin: 4px;
+	margin: 8px 4px;
 	float: right;
 	text-align: right;
-	padding-bottom: 10px;
 }
 
 .login-box-helplinks a {
