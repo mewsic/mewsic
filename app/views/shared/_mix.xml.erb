@@ -5,18 +5,20 @@
   <instrument><%= mix.track.instrument.id %></instrument>  
   <genre><%= mix.track.parent_song.genre.name if mix.track.parent_song.genre %></genre>     
 	<bpm><%= mix.track.bpm %></bpm>        
-	<tone><%= mix.track.tone %></tone>       
+	<key><%= mix.track.tonality %></key>
 	<description><%= mix.track.description %></description>
 	<rating><%= mix.track.rating_avg.to_f %></rating>
   <id><%= mix.track.id %></id>         
 	<filename><%= mix.track.filename %></filename>
+  <song_count><%= track.songs.count %></song_count>
+  <waveform><%= formatted_track_path track, 'png' %></waveform>
   <volume><%= mix.volume %></volume>
   <balance><%= mix.balance %></balance>
   <% if @show_siblings; @show_siblings = false -%>
     <siblings type="direct">
-      <song>
+      <songs>
         <%= render :partial => 'shared/song', :collection => mix.track.songs %>
-      </song>
+      </songs>
     </siblings>
   <% end -%>
 </track>
