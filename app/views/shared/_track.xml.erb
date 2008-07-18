@@ -12,6 +12,7 @@
   <filename><%= track.filename %></filename>
   <song_count><%= track.songs.count %></song_count>
   <waveform><%= formatted_track_path track, 'png' %></waveform>
+  <seconds><%= track.seconds %></seconds>
   <% if @show_siblings; @show_siblings = false -%>
     <siblings type="direct">
       <songs>
