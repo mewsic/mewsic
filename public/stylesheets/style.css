@@ -506,7 +506,7 @@ h2, h2 a{
 	margin-bottom:20px;
 }
 .box-list h1{
-	margin-bottom:14px;
+	margin-bottom:13px;
 }
 .box-list table{
 	clear:both;
@@ -667,8 +667,7 @@ tr.nav-song td{
 }
 .music-list .border-angle-top{
 	background:url(/images/BG_curves_top.gif) no-repeat top left;
-	padding:8px 8px;
-	margin-bottom:5px;
+	padding:8px 8px 0px 8px;
 	clear:right;
 }
 .music-list .rating{
@@ -681,9 +680,8 @@ tr.nav-song td{
 	margin:0px 3px;
 	background:url(/images/BG_curves_bottom.gif) no-repeat bottom left;
 }
-.music-list .abstract{
-	padding:5px;
-	background-color:#ECF1F3;
+.music-list .rating{
+	margin:0 !important;
 }
 .newest-list .thumb, .most-listened-list .thumb {
 	padding:0 !important;
@@ -698,8 +696,8 @@ tr.nav-song td{
 }
 /* dashboard answer list */
 .answer-list .top-box{
-	background-color:#DDE4E4;
-	padding:0px 5px 5px;
+	background-color:#FAFCBE;
+	padding:5px;
 }
 .answer-list .thumb{
 	margin-right:12px;
@@ -710,12 +708,9 @@ tr.nav-song td{
 	float:left;
 	width:220px;
 }
-.answer-list .abstract{
-	font-style:normal;
-}
 .answer-list .elements{
-	border-bottom:2px solid #fff;
-	padding:15px 0px 0px;
+	border-bottom:1px solid #fff;
+	margin:5px;
 }
 .answer-number{
 	text-align:right;
@@ -1867,19 +1862,19 @@ html>body .gallery-photo-thumb >.edit-command{
 
 .register{
 	margin-bottom:20px;
-        width:320px;
-        height:270px;
-        float:left;
-        padding-left:30px;
+	width:320px;
+	height:226px;
+	float:left;
+	padding-left:30px;
 }
 .register p{
 	margin-bottom:10px;
 }
 .register span.required{
-        font-size:14px;
-        margin-left:4px;
-        font-weight:bold;
-        line-height:11px;
+	font-size:14px;
+	margin-left:4px;
+	font-weight:bold;
+	line-height:11px;
 }
 
 html>body .register p{
@@ -2371,7 +2366,7 @@ p.sign-in .button{
 /* footer */
 #footer{
 	text-align:center;
-	padding: 35px 0px 0px;
+	padding: 35px 0px 20px;
 	background:#fff;
 	color:#61656A;
 }
@@ -2414,7 +2409,7 @@ p.sign-in .button{
 }
 
 .margin-top-bottom{
-	margin: 20px 0px;
+	margin: 15px 0px;
 }
 .align-right{
 	text-align:right;
@@ -3869,6 +3864,7 @@ div.auto_complete ul strong.highlight {
 	height: 279px;
 	padding-left: 0;
 	padding-right: 0;
+	font-size: 11px;
 }
 
 #splash_box_sx {
@@ -3918,11 +3914,11 @@ div.auto_complete ul strong.highlight {
 
 .splash div.title {
   float: left;
-  margin-top: 5px;
+  margin-top: 8px;
 }
 
 .splash div.buttons {
-  margin-top: 5px;
+  margin-top: 8px;
   float: right;
 }
 

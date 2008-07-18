@@ -9,7 +9,7 @@
 				  <%- @splash_tracks.each_with_index do |track, index| -%>
   				  <div class="splash <%= %w[odd even][index % 2] %>">
               <%= track_instrument_icon(track) %>
-              <div class="title"><%=h truncate(track.title, 15) %></div>
+              <div class="title"><%=h truncate(track.title, 20) %></div>
               <div class="buttons">
                 <%= mlab_button(track, :dynamic => true) %>
                 <%= play_button(track) %>
@@ -46,7 +46,7 @@
 				  <%- @splash_songs.each_with_index do |song, index| -%>
   				  <div class="splash <%= %w[odd even][index % 2] %>">
   				    <span class="tracks-number"><%= song.tracks.count %></span>
-              <div class="title"><%= link_to h(truncate(song.title, 15)), song_path(song) %></div>
+              <div class="title"><%= link_to h(truncate(song.title, 20)), song_path(song) %></div>
               <div class="buttons">
                 <%= mlab_button(song, :dynamic => true) %>
                 <%= play_button(song) %>
