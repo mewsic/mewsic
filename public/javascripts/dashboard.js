@@ -1,6 +1,6 @@
 var Splash = Class.create({
   initialize: function() {
-    this.updater = new PeriodicalExecuter(this.cycle.bind(this), 10);
+    this.updater = new PeriodicalExecuter(this.cycle.bind(this), 20);
   },
   
   cycle: function() {
