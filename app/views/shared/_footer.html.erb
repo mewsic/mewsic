@@ -1,5 +1,6 @@
 <div id="footer" class="page-width">
 	<div class="whiteblock">
-		&copy; 2008 Myousica. <%= link_to 'Terms of service', '#' %> | <%= link_to 'Help', help_index_path %> | <%= link_to 'Contacts', '#' %> | <%= link_to 'Share!', '#' %> | Registered users: <%= User.count %> | Online users: <%= User.count_online %>
+		<%= link_to 'About', content_path('about') %> | <%= link_to 'Vision', content_path('vision') %> | <%= link_to 'Legal', content_path('terms-of-service') %> | <%= link_to 'Help', help_index_path %>
+		<br /><br />&copy; 2008 Myousica. | mail@myousica.com | Online users: <%= User.count_online %>
 	</div>
 </div>

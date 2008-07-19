@@ -1,7 +1,0 @@
-# TODO: remove this file if it's useless now
-#
-if @mixable
-  page << %| MlabSlider.removeItem('#{@mixable.class.name.downcase}', '#{@mixable.id}')|
-else
-  page.alert 'There was an error. Please refresh the page.'
-end

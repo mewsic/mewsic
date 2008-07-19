@@ -1,37 +1,42 @@
 var MlabItem = Class.create({
 
-  initialize: function(type, attributes, slider) {   
-    this.type = type;    
+  initialize: function(attributes, slider) {
+    this.type = attributes.type;
     this.attributes = attributes; 
-    this.attributes.mlab_id = this.extractMlabId();
+
+    if (this.type == 'song') {
+      this.attributes.title =
+        this.link_to('/songs/' + this.attributes.id, this.attributes.title);
+    }
+
+    this.attributes.genre_name =
+      this.link_to('/genres/' + this.attributes.genre_name.gsub(/ +/, '+'), this.attributes.genre_name);
+
     this.slider = slider;
     this.slider.addItem(this);
   },
-  
-  extractMlabId: function() {
-    if(this.attributes.mlabs) {
-      return this.attributes.mlabs[0].id;
-    } else {
-      return this.attributes.mlab.id;
-    }
+
+  link_to: function(path, text) {
+    return('<a href="' + path + '">' + text + '</a>');
   }
   
 });
 
 var MlabSlider = Class.create(PictureSlider, {      
   
-  template: '<div id="mlab_element_#{attributes.mlab_id}" class="elements #{even_odd} #{type} clear-block" style="height: 50px;">' +
-  	        '  <div class="float-left">' +
-            '    <p class="name">#{attributes.title}</p>' +
-            '    <p class="abstract">#{attributes.original_author}</p>' +
-            '    <p class="name"><a href="/users/#{attributes.user.id}">#{attributes.user.login}</a> #{attributes.genre_name}</p>' +            
+  template: '<div id="mlab_element_#{attributes.mlab_id}" class="elements #{even_odd} #{type} clear-block" style="height: 55px;">' +
+  	        '  <div class="info">' +
+            '    <div class="thumb"><a href="/users/#{attributes.user_id}"><img src="#{attributes.avatar}"/></a></div>' +
+            '    <div>' +
+            '      <p class="title">#{attributes.title}</p>' +
+            '      <p class="abstract">#{attributes.original_author}</p>' +
+            '    </div>' +
           	'  </div>' +
-          	'  <div class="float-left align-right">' +
-          	'	  <p class="button">' +
-          	'	    <a class="button mlab play player" href="/#{type}s/#{attributes.id}/player.html"></a>' +
-          	'	    <a href="#" class="button mlab remove" onclick="MlabSlider.destroyItem(\'#{type}\', #{attributes.id}); return false;"></a>' +
-          	'	  </p>' +
+          	'  <div class="buttons">' +
+          	'	   <a class="button mlab play player" href="/#{type}s/#{attributes.id}/player.html"></a>' +
+          	'	   <a href="#" class="button mlab remove" onclick="MlabSlider.destroyItem(\'#{type}\', #{attributes.id}); return false;"></a>' +
           	'  </div>' +
+            '  <p class="genre">#{attributes.genre_name}</p>' +            
             '</div>',  
   
   initialize: function($super, element, options) {    
@@ -45,6 +50,7 @@ var MlabSlider = Class.create(PictureSlider, {
     this.items = new Array();
     this.loadingItems = new Array();
     this.setupMlab();                
+    this.compiled_template = new Template(this.template);
     Event.observe(window, 'unload', this.destroyMlab.bind(this));
   }, 
   
@@ -58,7 +64,7 @@ var MlabSlider = Class.create(PictureSlider, {
       this.back_trigger.setOpacity(1.0);
       this.back_trigger.addClassName('c');
     } else {
-      this.back_trigger.setOpacity(0.35);
+      this.back_trigger.setOpacity(0.20);
       this.back_trigger.removeClassName('c');
     }
 
@@ -66,7 +72,7 @@ var MlabSlider = Class.create(PictureSlider, {
       this.forward_trigger.setOpacity(1.0);
       this.forward_trigger.addClassName('c');
     } else {
-      this.forward_trigger.setOpacity(0.35);
+      this.forward_trigger.setOpacity(0.20);
       this.forward_trigger.removeClassName('c');
     }
 	},   
@@ -81,8 +87,8 @@ var MlabSlider = Class.create(PictureSlider, {
   parseLoadedItems: function(response) {
     var elements = response.responseText.evalJSON();
     elements.each(function(attributes) {          
-      var type = attributes.song_id ? 'track' : 'song';
-      var item = new MlabItem(type, attributes, this);      
+      attributes.skip_highlight = true;
+      new MlabItem(attributes, this);
     }.bind(this))
     elements = null;
   },
@@ -115,14 +121,21 @@ var MlabSlider = Class.create(PictureSlider, {
     var first_element = this.scrolling_div.down();
     var _class = (first_element && first_element.hasClassName('even')) ? 'odd' : 'even';    
     item.even_odd = _class;    
-    var tpl = new Template(this.template);
-    var content = tpl.evaluate(item);    
+    var content = this.compiled_template.evaluate(item);    
     this.scrolling_div.insert({
       top: content
     });
-    MlabSlider.items.set(item.type + '_' + item.attributes.id, item);        
-    var item_key = item.type + '_' + item.attributes.id;
-    if(this.loadingItems.include(item_key)) this.loadingItems.splice(this.loadingItems.indexOf(item_key), 1);
+    var key = item.type + '_' + item.attributes.id;
+
+    MlabSlider.items.set(key, item);        
+    if (this.loadingItems.include(key))
+      this.loadingItems.splice(this.loadingItems.indexOf(key), 1);
+
+    if (!(Prototype.Browser.IE && navigator.userAgent.indexOf('6.0') > -1) && !item.attributes.skip_highlight) {
+      id = 'mlab_element_' + item.attributes.mlab_id;
+      new Effect.Pulsate(id, {duration:2.0, from: 0.3, pulses: 3});
+    }
+
     this.update();
   },
 
@@ -179,10 +192,12 @@ var MlabSlider = Class.create(PictureSlider, {
   handleItemAddition: function(element, itemType) {        
     var image = element;
     var item_id = image.id.match(/^(\d+)_/)[1];
-    var item_key = itemType + '_' + item_id;    
-    if(MlabSlider.items.get(item_key)) return;
-    if(this.loadingItems.include(item_key)) return;
-    this.loadingItems.push(item_key);
+    var key = itemType + '_' + item_id;    
+
+    if(MlabSlider.items.get(key)) return;
+    if(this.loadingItems.include(key)) return;
+
+    this.loadingItems.push(key);
     image.src = "/images/spinner.gif";    
     new Ajax.Request('/users/' + this.user_id + '/mlabs.js', {
       method: 'POST',

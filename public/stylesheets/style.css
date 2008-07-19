@@ -2191,49 +2191,7 @@ html>body .login p {
 	margin-bottom:6px;
 	text-align: left;
 }
-.mlab-container{
-	padding:0px 5px;
-	clear:both;
-}
-.mlab-enter{
-	background:url(/images/mlab_scroll_title.png) no-repeat top left;
-	height:45px;
-	width:214px;
-	text-align:right;
-	font-weight:bold;
-	color:#0099CC;
-  padding:0 !important;
-}
-.mlab-enter a{
-	display:block;
-	color:#0099CC;
-	padding-right:15px;
-	margin-top:0;
-	padding-top:18px;
-}
-#mlab-scroll{
-	padding:5px 0px;
-}
-#mlab-scroll .name, #mlab-scroll .abstract{
-	width: 130px;
-	overflow: hidden;
-}
-#mlab-scroll .abstract{
-	margin-bottom: 0px !important;
-}
-#mlab-scroll .elements{
-	padding:5px;
-	clear:both;
-}
-#mlab-scroll .even{
-	background-color:#fff;
-}
-#mlab-scroll .odd{
-	background-color:#E9F4F9;
-}
-#mlab-scroll p{
-	padding-bottom: 2px;
-}
+
 #log-in{
 	background-color:#DDE4E4;
 	color:#224C6B;
@@ -2811,17 +2769,76 @@ td.star .rating {
 	float: right;
 }
 
+/******************** MLAB SCROLLER ***************************/
+.mlab-container{
+	padding:0px 5px;
+	clear:both;
+}
+.mlab-enter{
+	background:url(/images/mlab_scroll_title.png) no-repeat top left;
+	height:45px;
+	width:214px;
+	text-align:right;
+	font-weight:bold;
+	color:#0099CC;
+  padding:0 !important;
+}
+.mlab-enter a{
+	display:block;
+	color:#0099CC;
+	padding-right:15px;
+	margin-top:0;
+	padding-top:18px;
+}
+#mlab-scroll{
+	width: 203px;
+}
+#mlab-scroll p{
+	padding-bottom: 0px;
+}
+#mlab-scroll .info {
+	float: left;
+	width: 193px;
+}
+#mlab-scroll .buttons {
+	float: right;
+}
+#mlab-scroll .title, #mlab-scroll .abstract {
+	max-height: 14px;
+	line-height: 14px;
+	overflow: hidden;
+}
+#mlab-scroll .elements{
+	padding:5px 5px 0px;
+	clear:both;
+}
+#mlab-scroll .even{
+	background-color:#fff;
+}
+#mlab-scroll .odd{
+	background-color:#E9F4F9;
+}
+
 #mlab-scroller .elements {
   position: relative;
+	min-height: 55px;
+	max-height: 55px;
+	height: 55px;
 } 
 
-#mlab-scroller a.button.mlab.play {
+#mlab-scroller div.thumb {
+	margin-right: 5px !important;
+}
+
+#mlab-scroller a.button.mlab {
   display: block;
-  position: absolute;
+	float: left;
+	margin-left: 4px;
+  /*position: absolute;
   top: 5px;
   right: 5px;
   width: 23px;
-  height: 15px;  
+  height: 15px;*/
 }
 
 #mlab-scroller .song a.button.mlab.play {
@@ -2833,19 +2850,12 @@ td.star .rating {
 }
 
 #mlab-scroller a.button.mlab.remove {
-  display: block;
-  position: absolute;
-  top: 35px;
-  right: 5px;
-  width: 23px;
-  height: 15px;
   background: transparent url('/images/mlab_trash.png') no-repeat center;
 }
 
 #mlab-scroller a.button.mlab.remove.loading {
-  background-image: url('/images/spinner.gif');
+  background-image: url('/images/spinner.gif') no-repeat center;
 }
-
 
 #mlab-scroller .trigger.back {
   background: transparent url(/images/mlab_scroll_button_top.png) no-repeat center;
@@ -2864,6 +2874,7 @@ td.star .rating {
   width:203px;
   height:26px;
 }
+/******************** END MLAB SCROLLER ***************************/
 
 /* help page */
 #help-content {
@@ -2888,10 +2899,11 @@ td.star .rating {
 }
 #help-content p, #help-content ul li {
   margin:0;
-  padding-left: 3px;
-  padding-top: 5px;
+  padding: 20px 0 20px 0;
 }
-
+#help-content p img, #help-content ul li img {
+	padding-top: 5px;
+}
 #help-content p.back-link {
 	padding: 20px 4px;
 }
@@ -2946,7 +2958,6 @@ td.star .rating {
 
 #help-sidebar {
   width: 250px;
-  height: 600px;
   float: left;
   padding: 10px 0px 20px 10px;
 }
