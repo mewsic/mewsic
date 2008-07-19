@@ -70,6 +70,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :help, :member => { :ask => :post }
   map.ask_help '/help/ask', :controller => 'help', :action => 'ask'
 
+  map.content '/content/:id', :controller => 'content', :action => 'show'
+
   map.root :controller => "dashboard"
   map.connect 'splash', :controller => 'dashboard', :action => 'splash'
   map.connect 'noop', :controller => 'dashboard', :action => 'noop'
@@ -82,6 +84,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :users
     admin.resources :answers
     admin.resources :help_pages, :member => { :rearrange => :put }
+    admin.resources :static_pages
   end
 
 end

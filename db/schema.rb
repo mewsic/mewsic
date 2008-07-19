@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 45) do
+ActiveRecord::Schema.define(:version => 46) do
 
   create_table "abuses", :force => true do |t|
     t.integer  "abuseable_id"
@@ -192,6 +192,14 @@ ActiveRecord::Schema.define(:version => 45) do
     t.integer  "rating_count"
     t.decimal  "rating_total",    :precision => 10, :scale => 2
     t.decimal  "rating_avg",      :precision => 10, :scale => 2
+  end
+
+  create_table "static_pages", :force => true do |t|
+    t.string   "title"
+    t.string   "url"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "tracks", :force => true do |t|

@@ -1,0 +1,7 @@
+<tr>
+	<td><%= edit_link_to page.id, admin_static_page_path(page.id) %></td>
+	<td><%= page.url %></td>
+	<td><%= page.title %></td>
+	<td><%= h truncate(page.body, 40) %></td>
+</tr>
+

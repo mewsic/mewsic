@@ -1,0 +1,13 @@
+<p>
+	<%= edit_link_to 'new page', new_admin_static_page_path %><br/>
+	Total <%= StaticPage.count %> pages
+</p>
+<table class="admin_content_table" cellspacing="0" cellpadding="5">
+	<tr>
+		<th>id</th>
+		<th>url</th>
+		<th>title</th>
+		<th>body</th>
+	</tr>
+	<%= render :partial => 'admin/static_pages/page', :collection => @pages %>
+</table>

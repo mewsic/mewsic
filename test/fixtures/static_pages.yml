@@ -1,0 +1,24 @@
+# == Schema Information
+# Schema version: 46
+#
+# Table name: static_pages
+#
+#  id         :integer(11)   not null, primary key
+#  title      :string(255)   
+#  url        :string(255)   
+#  body       :text          
+#  created_at :datetime      
+#  updated_at :datetime      
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+static page one:
+  title: static page one
+  url: page_one
+  body: test test prot prot sux sux
+
+static page two:
+  title: static page two
+  url: page_two
+  body: test test prot prot sux sux
