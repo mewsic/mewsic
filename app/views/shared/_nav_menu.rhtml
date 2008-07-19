@@ -1,19 +1,10 @@
 <div id="nav-menu">
     <ul class="list-menu">
       <li class="<%= check_active "users" %>"><%= link_to "people", users_path %></li>
-      <!--
-        TODO Bands & DJ non è ancora implementato
-      -->
       <li class="<%= check_active "bands_and_deejays", "mbands" %>"><%= link_to 'bands &amp; deejays', bands_and_deejays_path %> </li>
-      <!--
-        TODO Music, Ideas, answers non sono ancora implementati
-      -->
       <li class="<%= check_active "music", "genres", "songs" %>"><%= link_to "music", music_path %></li>
       <li class="<%= check_active "ideas" %>"><%= link_to "ideas", ideas_path %></li>
       <li class="<%= check_active "answers" %>"><%= link_to "answers", answers_path %></li>
-      <!--
-        TODO Implementare il search box qui in alto
-      -->
       <li id="search">
         <%- form_tag new_search_path, :method => 'get' do -%>
           <p><span>search</span></p>

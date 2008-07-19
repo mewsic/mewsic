@@ -4,10 +4,12 @@
 	  <div class="simple-list green-box clear-block" id="best-songs">
 			<%= link_to image_tag('bestsong_refresh.png', :class => 'float-right'), top_music_path(:type => 'song'), :class => 'trigger' %>
 			<h1>BEST SONGS</h1>
-			<div class="top-box clear-block refresh-container">
-				<div class="bottom-box clear-block">
-				  <%= render :partial => 'best_song', :collection => @best_songs %>
-			  </div>
+			<div class="top-box clear-block" style="min-height: 390px">
+				<div class="refresh-container">
+					<div class="bottom-box clear-block">
+						<%= render :partial => 'best_song', :collection => @best_songs %>
+					</div>
+				</div>
 			</div>
 		  </div>
 	  </div>
@@ -16,9 +18,11 @@
 		<div class="simple-list orange-box clear-block" id="most-used-tracks">
 			<%= link_to image_tag('mostused_refresh.png', :class => 'float-right'), top_music_path(:type => 'track'), :class => 'trigger' %>
 			<h1>MOST USED TRACKS</h1>
-			<div class="top-box clear-block refresh-container">
-				<div class="bottom-box clear-block" id="most-used-tracks">
-    			<%= render :partial => 'most_used_track', :collection => @most_used_tracks %>
+			<div class="top-box clear-block" style="min-height: 390px">
+				<div class="refresh-container">
+					<div class="bottom-box clear-block" id="most-used-tracks">
+						<%= render :partial => 'most_used_track', :collection => @most_used_tracks %>
+					</div>
 				</div>
 			</div>	
 		</div>

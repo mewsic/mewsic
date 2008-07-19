@@ -1054,11 +1054,16 @@ h2.dj-label{
 }
 .green-box .title {
 	padding-top: 4px !important;
-	padding-bottom: 0px !important;
+	display: block;
+	line-height: 14px;
+	max-height: 14px;
+	overflow: hidden;
 }
+/*
 .green-box .title a {
 	color: #6c6c6c !important;
 }
+*/
 .green-box .author {
 	color: #6c6c6c !important;
 	font-style: italic;
@@ -1192,8 +1197,10 @@ h2.dj-label{
 }
 .orange-box .title {
 	padding-top: 4px !important;
-	padding-bottom: 0px !important;
-	color: #6c6c6c !important;
+	display: block;
+	line-height: 14px;
+	max-height: 14px;
+	overflow: hidden;
 }
 .orange-box .name{
 	padding-top:11px;
