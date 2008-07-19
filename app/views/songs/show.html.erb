@@ -121,7 +121,7 @@
     </div>
   </div>
 
-  <%= render :partial => 'siblings_container', :locals => { :container => 'direct-siblings' } %>
+	<%= render :partial => 'siblings_container', :locals => { :container => 'direct-siblings', :empty => @song.direct_siblings.empty? } %>
 </div>
 
 
@@ -138,5 +138,5 @@
     </div>
   </div>
 
-  <%= render :partial => 'siblings_container', :locals => { :container => 'indirect-siblings' } %>
+	<%= render :partial => 'siblings_container', :locals => { :container => 'indirect-siblings', :empty => @song.indirect_siblings.empty? } %>
 </div>
