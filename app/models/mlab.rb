@@ -43,14 +43,14 @@ class Mlab < ActiveRecord::Base
 
     def self.find_songs(what = :all, options = {})
       Song.find(what, options.merge(
-        :select => 'mlabs.id AS mlab_id, "song" AS type, songs.id, songs.title, songs.original_author, users.id AS user_id, users.login AS user_login, genres.name AS genre_name, pictures.filename AS avatar',
+        :select => 'mlabs.id AS mlab_id, "song" AS type, songs.id, songs.title, songs.original_author, users.id AS user_id, users.login AS user_login, genres.name AS genre_name, pictures.id AS avatar_id',
         :joins => 'LEFT OUTER JOIN mlabs ON mlabs.mixable_id = songs.id AND mlabs.mixable_type = "Song" LEFT OUTER JOIN users ON users.id = songs.user_id LEFT OUTER JOIN genres ON genres.id = songs.genre_id LEFT OUTER JOIN pictures ON pictures.pictureable_id = songs.user_id AND pictures.pictureable_type = "User" AND pictures.type = "Avatar"',
         :order => 'mlabs.created_at'))
     end
 
     def self.find_tracks(what = :all, options = {})
       Track.find(what, options.merge(
-        :select => 'mlabs.id AS mlab_id, "track" AS type, tracks.id, tracks.title, songs.original_author, users.id AS user_id, users.login AS user_login, genres.name AS genre_name, pictures.filename AS avatar',
+        :select => 'mlabs.id AS mlab_id, "track" AS type, tracks.id, tracks.title, songs.original_author, users.id AS user_id, users.login AS user_login, genres.name AS genre_name, pictures.id AS avatar_id',
         :joins => 'LEFT OUTER JOIN mlabs ON mlabs.mixable_id = tracks.id AND mlabs.mixable_type = "Track" LEFT OUTER JOIN users ON users.id = tracks.user_id inner join songs ON songs.id = tracks.song_id LEFT OUTER JOIN genres ON genres.id = songs.genre_id LEFT OUTER JOIN pictures ON pictures.pictureable_id = songs.user_id AND pictures.pictureable_type = "User" AND pictures.type = "Avatar"',
         :order => 'mlabs.created_at'))
     end
