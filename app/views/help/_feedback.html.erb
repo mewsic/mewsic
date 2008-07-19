@@ -1,0 +1,20 @@
+<div id="help-question">
+	<div class="simple-list clear-block azzurro-boxes send-question">
+		<h1>Send us your feedback!</h1>
+		<div class="top-box clear-block">
+			<div class="bottom-box clear-block">
+				<div class="float-right" style="padding-right:60px;">
+					<img src="/images/interrogativo.gif" alt="" width="50" height="53" style="position:absolute; margin-top:-40px;" /></div>
+				<div class="elements clear-block" style="padding:15px 20px;">
+					<%- form_for :help, @request, :url => ask_help_path(:return_to => params[:id]) do |f| -%>
+						<p><label for="help_email">Your e-mail</label>
+						<%= f.text_field :email, :class => 'text' %></p>
+						<p><label for="help_body">Your message</label>
+						<%= f.text_area :body, :rows => 10 %></p>
+						<%= image_submit_tag '/images/button_send.png' %>
+					<%- end -%>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
