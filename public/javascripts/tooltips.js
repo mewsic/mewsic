@@ -34,7 +34,10 @@ var Tooltips = Class.create({
   },
 
   addLockedRating: function(element) {
-    new Tip(element, "You cannot rate yourself!", {style: 'locked-rating'});
+    var tip = new Tip(element, '  0 ratings from   0 votes', {style: 'locked-rating'});
+    element.observe('prototip:shown', function() {
+      tip.tip.update(this.down('.indicator').innerHTML);
+    });
   },
 
   addMlab: function(element) {

@@ -12,7 +12,7 @@ module ApplicationHelper
 
     tag_options = options.map { |k,v| %(#{k}="#{v}") }.join(' ')
 
-    %[<div id="#{type_class}_#{rateable.id}" rel="#{rateable.rating_avg.to_f}" #{tag_options}></div>]
+    %[<div id="#{type_class}_#{rateable.id}" rel="#{rateable.rating_avg.to_f} #{rateable.rating_count}"  #{tag_options}></div>]
   end
   
   def body_class

@@ -11,6 +11,7 @@
 .starbox .rated .hover .colorbar { background: #1e90ff; }
 .starbox .ghost { background: #a1a1a1; }
 .starbox .indicator { clear: both; }
+.starbox .locked .indicator { display: none }
 
 .starbox .answer .colorbar, .starbox .reply .colorbar { background: #1e90ff; }
 .starbox .answer .hover .colorbar, .starbox .reply .hover .colorbar { background: #006ad1; }

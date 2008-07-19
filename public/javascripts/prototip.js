@@ -50,8 +50,8 @@ Prototip.Styles = {
     showOn: 'click',
     hook: { target: 'topMiddle', tip: 'bottomMiddle' },
     stem: { position: 'bottomMiddle', width: 15, height: 10 },
-    hideOn: { element: 'tip', event: 'mouseout' },
-    hideAfter: 0.3,
+    hideOn: false, //{ element: 'tip', event: 'mouseout' },
+    //hideAfter: 0.3,
     offset:  { x: 0, y: -3 },
     images: 'styles/default',
     title: 'Login required'

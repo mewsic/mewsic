@@ -149,9 +149,13 @@ var Rating = Class.create({
 
   add: function(element) {
     var className = element.className.sub(/\s*rating\s*/, '');
-    var rating = parseFloat(element.getAttribute('rel'));
+    var rel = element.getAttribute('rel').split(/ /);
+    var rating = parseFloat(rel[0]) || 0;
+    var count = parseFloat(rel[1]) || 0;
+
     var image = 'myousica_small.png';
     var locked = !this.logged_in;
+    var indicator = false;
 
     if (element.up('.user-resume') || element.up('.song-resume') || element.up('.answer-show')) {
       image = 'myousica_big.png';
@@ -167,13 +171,16 @@ var Rating = Class.create({
 
     if (element.hasClassName('locked')) {
       locked = true;
+      indicator = '<strong>#{average}</strong> rating from <strong>#{total}</strong> votes';
     }
 
     new Starbox(element, rating, {
+      total: count,
       buttons: 5,
       max: 5,
       className: className,
       identity: element.id,
+      indicator: indicator,
       locked: locked,
       overlay: image
     });
