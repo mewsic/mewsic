@@ -134,14 +134,6 @@ module ApplicationHelper
     image_tag("#{model.class.name.downcase}_type.png", options)
   end
   
-  def download_link_for(item, text)
-    link_to text, send("download_#{item.class.name.downcase}_url", item), :class => 'download'
-  end
-
-  def download_button_for(item)
-    download_link_for item, image_tag('icon_download.png')
-  end
-
   def ajax_upload_form(model, options, &block)
     klass = model.kind_of?(User) ? User : model.class
     url = options[:url] || send("formatted_%s_%s_path" % [klass.name.underscore, options[:name]], model, 'js')

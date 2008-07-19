@@ -2436,8 +2436,10 @@ p.sign-in .button{
 .orange-text a{
 	color:#ECAF48;
 }
-.playcount, .download {
+.playcount {
 	margin: 2px !important;
+}
+a.download {
 	color: #9D9D9D !important;
 	font-size: 11px;
 }

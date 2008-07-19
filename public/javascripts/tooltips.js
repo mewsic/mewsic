@@ -14,6 +14,7 @@ var Tooltips = Class.create({
         element.select('.rating').slice(0,limit).each(this.addRating);
       }
       element.select('img.button.mlab').slice(0,limit).each(this.addMlab);
+      element.select('.download').slice(0,limit).each(this.addDownload);
     }
 
     element.select('.instrument').each(this.addInstrument);
@@ -37,7 +38,11 @@ var Tooltips = Class.create({
   },
 
   addMlab: function(element) {
-    new Tip(element, "<a href=/login>Login</a> or <a href=/signup>sign up</a> to use the <a href=/help>Mlab</a>!", {style: 'login'});
+    new Tip(element, "<a href=/login>Login</a> or <a href=/signup>sign up</a><br/>to use the <a href=/help>multitrack</a>!", {style: 'login'});
+  },
+
+  addDownload: function(element) {
+    new Tip(element, "<a href=/login>Login</a> or <a href=/signup>sign up</a> to download!", {style: 'login'});
   },
 
   addStatus: function(element) {

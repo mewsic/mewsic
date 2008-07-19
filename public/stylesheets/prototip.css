@@ -8,6 +8,7 @@
 .prototip .default {
 	width: 250px;
 	color: #808080;
+	text-align: center;
 }
 .prototip .default .toolbar {
 	background: #f1f1f1;
