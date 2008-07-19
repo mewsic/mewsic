@@ -16,8 +16,6 @@
 		<div id="user-avatar-container">
 			<%= avatar_image(@user, :big, :id => 'user-avatar-image') %>
 		</div>
-		<div class="pngfix status <%= @user.online_now? ? 'online' : 'offline' %>"></div>
-
 		<% if current_user_page? %>
 		<div id="change-avatar"> </div>
 		<div id="change-avatar-upload" style="display:none">
@@ -52,6 +50,7 @@
       <%- end -%>
     </div>
 		<p class="blue-text"><%= @user.class.name %> name</p>
+		<div class="status pngfix <%= @user.online_now? ? 'online' : 'offline' %>"></div>
     <h1 class="black-text" id="user_id"><%= @user.nickname %></h1>
     <div class="grey-divisor"><hr /></div>
     <p class="blue-text">Country <%= user_edit_button(:country) %></p>

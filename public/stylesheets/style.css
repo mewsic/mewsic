@@ -267,7 +267,7 @@ div.status.recording {
 
 div.user-profile div.status {
 	left: -2px;
-	top: -161px;
+	top: 0px;
 }
 
 div#friends-scroller div.status,
