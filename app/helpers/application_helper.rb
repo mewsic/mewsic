@@ -41,7 +41,7 @@ module ApplicationHelper
     if controller.respond_to?(:to_breadcrumb_link)
       text, path = controller.send(:to_breadcrumb_link)
 
-      bread.push link_to(text, path)
+      bread.push path ? link_to(text, path) : text
       title.push text.downcase
     else
       text = controller.send(:to_breadcrumb)
@@ -115,8 +115,7 @@ module ApplicationHelper
       render(:partial => 'shared/mlab')
     else
       content = ''
-      unless  params[:controller] == 'sessions' || (params[:controller] == 'users' && (params[:action] == 'new' || params[:action] == 'create'))
-
+      unless params[:controller] == 'sessions' || (params[:controller] == 'users' && (params[:action] == 'new' || params[:action] == 'create'))
         content << render(:partial => 'shared/login_box')
       end
 
