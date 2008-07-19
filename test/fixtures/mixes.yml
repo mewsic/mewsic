@@ -1,12 +1,12 @@
 # == Schema Information
-# Schema version: 43
+# Schema version: 46
 #
 # Table name: mixes
 #
 #  id         :integer(11)   not null, primary key
 #  song_id    :integer(11)   
 #  track_id   :integer(11)   
-#  volume     :integer(11)   
+#  volume     :float         default(1.0)
 #  loop       :integer(11)   
 #  balance    :float         default(0.0)
 #  time_shift :integer(11)   

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 43
+# Schema version: 46
 #
 # Table name: tracks
 #
@@ -19,7 +19,7 @@
 #  rating_total   :decimal(10, 2 
 #  rating_avg     :decimal(10, 2 
 #  idea           :boolean(1)    not null
-#  owner_id        :integer(11)   
+#  user_id        :integer(11)   
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 43
+# Schema version: 46
 #
 # Table name: help_pages
 #
@@ -9,6 +9,7 @@
 #  position   :integer(11)   
 #  created_at :datetime      
 #  updated_at :datetime      
+#  url        :string(255)   
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
