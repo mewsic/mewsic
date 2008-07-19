@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 46) do
+ActiveRecord::Schema.define(:version => 47) do
 
   create_table "abuses", :force => true do |t|
     t.integer  "abuseable_id"
@@ -256,8 +256,8 @@ ActiveRecord::Schema.define(:version => 46) do
     t.decimal  "rating_avg",                              :precision => 10, :scale => 2
     t.integer  "replies_count",                                                          :default => 0
     t.string   "nickname",                  :limit => 20
-    t.datetime "last_activity_at"
     t.boolean  "is_admin",                                                               :default => false
+    t.string   "status",                    :limit => 3,                                 :default => "off"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

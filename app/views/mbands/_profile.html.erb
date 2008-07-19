@@ -13,7 +13,6 @@
 		<div id="user-avatar-container">
 			<%= avatar_image(@mband, :big, :id => 'user-avatar-image') %>
 		</div>
-		<div class="pngfix status <%= @mband.members.all?(&:online_now?) ? 'online' : 'offline' %>"></div>
 
 		<% if current_user_mband_page? %>
 		<div id="change-avatar"> </div>
@@ -42,6 +41,7 @@
   <div class="user-resume">
 	  <%= rating(@mband) %>
     <p class="blue-text">Mband name </p>
+		<div class="pngfix status <%= @mband.status %>"></div>
     <h1 class="black-text" id="user_id"><%= @mband.name %></h1>
     <div class="grey-divisor"><hr /></div>    
     <p class="blue-text"><%= pluralize @mband.countries.size, 'Country' %></p>

@@ -75,6 +75,17 @@ class Mband < ActiveRecord::Base
     self.members.map(&:ideas_count).sum
   end
 
+  # If all the members share the same status, use it.
+  # Else, offline.
+  def status
+    statuses = self.members.map(&:status).uniq
+    if statuses.size == 1
+      statuses.first
+    else
+      'off'
+    end
+  end
+
   def self.find_from_param(param, options = {})
     param = param.id if param.kind_of? ActiveRecord::Base
     find_method = param.to_s =~ /^\d+$/ ? :find : :find_by_name

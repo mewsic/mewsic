@@ -38,8 +38,8 @@
 #  rating_avg                :decimal(10, 2 
 #  replies_count             :integer(11)   default(0)
 #  nickname                  :string(20)    
-#  last_activity_at          :datetime      
 #  is_admin                  :boolean(1)    
+#  status                    :string(3) default('off')
 #
 
 require 'digest/sha1'
@@ -223,10 +223,29 @@ class User < ActiveRecord::Base
   end
 
   def forget_me
-    self.last_activity_at          = nil unless self == User.myousica
+    self.status                    = 'off'
     self.remember_token_expires_at = nil
     self.remember_token            = nil
     save(false)
+  end
+
+  def status
+    if self == User.myousica
+      # Myousica is always online
+      'on'
+    elsif self.updated_at > 30.minutes.ago
+      # if this record has been updated in the last 30 minutes,
+      # trust the recorded status.
+      self.read_attribute :status
+    else
+      # else, this user went away witouth logging out. offline.
+      'off'
+    end
+  end
+
+  # legacy, can be removed, but it could prove useful.
+  def online_now?
+    %w(on rec).include? self.status
   end
 
   def compiled_location
@@ -309,11 +328,11 @@ class User < ActiveRecord::Base
   end
 
   def self.find_online(options = {})
-    self.find(:all, options.merge(:conditions => ['last_activity_at IS NOT NULL AND last_activity_at > ?', 30.minutes.ago], :order => 'last_activity_at'))
+    self.find(:all, options.merge(:conditions => ['status = ? AND updated_at > ?', 'on', 30.minutes.ago], :order => 'updated_at'))
   end
 
   def self.count_online(options = {})
-    self.count(options.merge(:conditions => ['last_activity_at IS NOT NULL AND last_activity_at > ?', 30.minutes.ago]))
+    self.count(options.merge(:conditions => ['status = ? AND updated_at > ?', 'on', 30.minutes.ago]))
   end
 
   def self.find_top_answers_contributors(options = {})
@@ -399,10 +418,6 @@ class User < ActiveRecord::Base
     profile = %w(first_name last_name photos_url myspace_url blog_url skype skype_public msn msn_public)
     complete = profile.select { |attr| !self[attr].blank? }
     (complete.size.to_f / profile.size.to_f * 100.0).round 2
-  end
-
-  def online_now?
-    self.last_activity_at >= 15.minutes.ago if self.last_activity_at
   end
 
   def rateable_by?(user)

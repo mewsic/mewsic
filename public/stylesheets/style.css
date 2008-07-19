@@ -253,15 +253,15 @@ div.status {
 	z-index: 100;
 }
 
-div.status.online {
+div.status.on {
 	background: transparent url(/images/status_online.png) top left no-repeat;
 }
 
-div.status.offline {
+div.status.off {
 	background: transparent url(/images/status_offline.png) top left no-repeat;
 }
 
-div.status.recording {
+div.status.rec {
 	background: transparent url(/images/status_recording.png) top left no-repeat;
 }
 

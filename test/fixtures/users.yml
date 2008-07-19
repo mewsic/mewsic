@@ -42,6 +42,27 @@
 #  is_admin                  :boolean(1)    
 #
 
+myousica:
+  type: User
+  login: myousica
+  email: info@myousica.com
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  activation_code: 8f24789ae988411ccf33ab0c30fe9106fab32e9b
+  activated_at: <%= 5.days.ago.to_s :db %>
+  gender: male
+  photos_url: http://my.photos.url
+  blog_url: http://my.blog.url
+  myspace_url: http://my.space.url
+  skype: skype_account
+  skype_public: <%= true %>
+  msn: info@myousica.com
+  msn_public: <%= true %>
+  country: World
+  city: Everywhere
+  motto: Myousica.com
+  nickname: myousica
+  
 quentin:
   type: User
   login: quentin

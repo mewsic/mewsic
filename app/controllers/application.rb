@@ -14,13 +14,18 @@ class ApplicationController < ActionController::Base
   include AuthenticatedSystem
   
   #before_filter :check_user_inbox
-  before_filter :update_last_user_activity
+  before_filter :update_user_status
   
   protected    
   
-  def update_last_user_activity
-    current_user.update_attribute(:last_activity_at, Time.now) if logged_in? && !request.xhr?
-    #store_location unless logged_in? || controller_name == 'sessions'
+  def update_user_status
+    multitrack_request = (controller_name == 'multitrack' || params.has_key?('BulkLoaderNoCache'))
+
+    if logged_in? && !request.xhr?
+      current_user.update_attribute(:status, multitrack_request ? 'rec' : 'on')
+    end
+
+    store_location unless logged_in? || controller_name == 'sessions' || multitrack_request
   end
 
   def check_user_inbox

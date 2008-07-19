@@ -50,7 +50,7 @@
       <%- end -%>
     </div>
 		<p class="blue-text"><%= @user.class.name %> name</p>
-		<div class="status pngfix <%= @user.online_now? ? 'online' : 'offline' %>"></div>
+		<div class="status pngfix <%= @user.status %>"></div>
     <h1 class="black-text" id="user_id"><%= @user.nickname %></h1>
     <div class="grey-divisor"><hr /></div>
     <p class="blue-text">Country <%= user_edit_button(:country) %></p>

@@ -11,7 +11,7 @@
 						<% collection.each do |user| -%>
 							<div class="float-left" style="width: 45px; height: 40px;">
 								<%= link_to(avatar_image(user, :small, :size => '40x40'), user_path(user)) %>
-								<div class="status pngfix <%= user.online_now? ? 'online' : 'offline' %>"></div>
+								<div class="status pngfix <%= user.status %>"></div>
 							</div>
 						<% end -%>
 					</div>

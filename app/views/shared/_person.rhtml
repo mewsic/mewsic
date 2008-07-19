@@ -4,5 +4,5 @@
     <%= link_to avatar_image(person, :medium, :height => 58), user_path(person) %>
   </p>
 	<p class="name"><%= link_to person.login, user_path(person) %></p>
-	<div class="pngfix status <%= person.online_now? ? 'online' : 'offline' %>"></div>
+	<div class="pngfix status <%= person.status %>"></div>
 </div>
