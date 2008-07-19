@@ -1936,9 +1936,9 @@ html>body .register p{
 #change-avatar {
 	width: 94px;
 	height: 18px;
-	left:-17px;
-	/*top:160px;*/
 	position:relative;
+	left:0px;
+	top:0px;
 	z-index:101;
 	float:left;
 }
