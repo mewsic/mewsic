@@ -110,34 +110,35 @@ class SongsController < ApplicationController
 
   def mix
     @song = current_user.songs.find(params[:id])
-    tracks = params[:song].delete(:tracks)
+    tracks = params.delete(:tracks)
     render :nothing => true, :status => :bad_request and return unless tracks
 
     Song.transaction do 
-      @song.published = true
+      if !@song.published
+        # New song
+        @song.published = true
+      else
+        # Existing song
+        @song.mixes.clear
+      end
+
       @song.update_attributes!(params[:song])
     
-      #@song.mixes.clear
       tracks.each do |track|
-        mix = Mix.new
-        mix.song = @song
-        mix.track_id = track[:id]
-        mix.volume = track[:volume]
-        #mix.loop = track[:loop]
-        mix.balance = track[:balance]
-        #mix.time_shift = track[:time_shift]
-        mix.save!
+        @song.mixes.create! :track_id => track[:id],
+          :volume => track[:volume],
+          :balance => track[:balance]
       end
     end
 
     respond_to do |format|
       format.xml do
-        render :xml => @song
+        render :nothing => true, :status => :ok
       end
     end
 
   rescue ActiveRecord::ActiveRecordError
-    render :nothing => true, :status => :bad_request
+    render :partial => 'shared/errors', :object => @song.errors, :status => :bad_request
   end    
   
   def rate    

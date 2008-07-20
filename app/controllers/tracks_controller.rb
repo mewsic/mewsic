@@ -26,7 +26,7 @@ class TracksController < ApplicationController
         end
 
     end
-      
+
     render :layout => false
   end
   
@@ -56,12 +56,12 @@ class TracksController < ApplicationController
     
     respond_to do |format|
       format.xml do
-        render :xml => @track
+        render :partial => 'shared/track', :object => @track, :status => :ok
       end 
     end
 
   rescue ActiveRecord::RecordInvalid
-    render :nothing => true, :status => :bad_request
+    render :partial => 'shared/errors', :object => @track.errors, :status => :bad_request
   end  
   
   def rate    
