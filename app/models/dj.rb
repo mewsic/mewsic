@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 46
+# Schema version: 49
 #
 # Table name: users
 #
@@ -38,8 +38,9 @@
 #  rating_avg                :decimal(10, 2 
 #  replies_count             :integer(11)   default(0)
 #  nickname                  :string(20)    
-#  last_activity_at          :datetime      
 #  is_admin                  :boolean(1)    
+#  status                    :string(3)     default("off")
+#  name_public               :boolean(1)    
 #
 
 class Dj < User

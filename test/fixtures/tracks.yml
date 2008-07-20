@@ -1,25 +1,26 @@
 # == Schema Information
-# Schema version: 46
+# Schema version: 49
 #
 # Table name: tracks
 #
-#  id             :integer(11)   not null, primary key
-#  title          :string(255)   
-#  filename       :string(255)   
-#  description    :string(255)   
-#  tonality       :string(255)   default("C")
-#  song_id        :integer(11)   
-#  instrument_id  :integer(11)   
-#  listened_times :integer(11)   default(0)
-#  seconds        :integer(11)   default(0)
-#  bpm            :integer(11)   
-#  created_at     :datetime      
-#  updated_at     :datetime      
-#  rating_count   :integer(11)   
-#  rating_total   :decimal(10, 2 
-#  rating_avg     :decimal(10, 2 
-#  idea           :boolean(1)    not null
-#  user_id        :integer(11)   
+#  id                     :integer(11)   not null, primary key
+#  title                  :string(255)   
+#  filename               :string(255)   
+#  description            :string(255)   
+#  tonality               :string(255)   default("C")
+#  song_id                :integer(11)   
+#  instrument_id          :integer(11)   
+#  listened_times         :integer(11)   default(0)
+#  seconds                :integer(11)   default(0)
+#  bpm                    :integer(11)   
+#  created_at             :datetime      
+#  updated_at             :datetime      
+#  rating_count           :integer(11)   
+#  rating_total           :decimal(10, 2 
+#  rating_avg             :decimal(10, 2 
+#  idea                   :boolean(1)    not null
+#  user_id                :integer(11)   
+#  instrument_description :string(255)   
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
