@@ -44,16 +44,4 @@ class ApplicationController < ActionController::Base
     params[name] && params[name][:uploaded_data].respond_to?(:size) && params[name][:uploaded_data].size > 0
   end
 
-  def check_valid_search_string
-    @q = CGI::unescape(params[:q] || params[:id] || '')
-    @q.gsub! /[%_]/, ''
-    if @q.strip.blank?
-      flash[:error] = 'You did not enter a search string' 
-      respond_to do |format|
-        format.html { redirect_to '/' and return }
-        format.xml { render :nothing => true, :status => :bad_request }
-      end
-    end
-  end
-
 end
