@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 46
+# Schema version: 48
 #
 # Table name: instruments
 #
@@ -28,15 +28,19 @@ class Instrument < ActiveRecord::Base
   before_save :set_default_icon
   
   def self.find_by_ideas_count(limit = 5)   
-   self.find_by_sql(["
-     SELECT I.*, I.id, COUNT(T.id) AS ideas_count
-     FROM instruments I LEFT JOIN tracks T ON I.id = T.instrument_id
-     WHERE T.idea = ? GROUP BY I.id ORDER BY ideas_count DESC LIMIT ?
-    ", true, limit])
+    self.find_by_sql(["
+      SELECT I.*, I.id, COUNT(T.id) AS ideas_count
+      FROM instruments I LEFT JOIN tracks T ON I.id = T.instrument_id
+      WHERE T.idea = ? GROUP BY I.id ORDER BY ideas_count DESC LIMIT ?
+     ", true, limit])
   end
-  
-  def find_ideas
-    self.tracks.find(:all, :conditions => ["tracks.idea = ?", true], :limit => 5)
+
+  def find_ideas(limit = 5)
+    self.ideas.find(:all, :order => 'rating_avg DESC', :limit => limit)
+  end
+
+  def find_paginated_ideas(options = {})
+    self.ideas.paginate({:order => 'rating_avg DESC', :per_page => 10}.merge(options))
   end
   
   private
