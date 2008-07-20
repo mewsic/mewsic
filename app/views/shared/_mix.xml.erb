@@ -1,12 +1,12 @@
 <track>
-  <user><%= mix.track.user.login %></user>       
-  <author><%= mix.track.parent_song.original_author if mix.track.parent_song %></author>     
-  <title><%= mix.track.title %></title>     
+  <user><%= h(mix.track.user.login) %></user>       
+  <author><%= h(mix.track.parent_song.original_author) if mix.track.parent_song %></author>     
+  <title><%= h(mix.track.title) %></title>     
   <instrument><%= mix.track.instrument.id %></instrument>  
-  <genre><%= mix.track.parent_song.genre.name if mix.track.parent_song.genre %></genre>     
+  <genre><%= mix.track.parent_song.genre.id if mix.track.parent_song && mix.track.parent_song.genre %></genre>     
 	<bpm><%= mix.track.bpm %></bpm>        
-	<key><%= mix.track.tonality %></key>
-	<description><%= mix.track.description %></description>
+	<key><%= h(mix.track.tonality) %></key>
+	<description><%= h(mix.track.description) %></description>
 	<rating><%= mix.track.rating_avg.to_f %></rating>
   <id><%= mix.track.id %></id>         
 	<filename><%= mix.track.filename %></filename>
