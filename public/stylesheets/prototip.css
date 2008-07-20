@@ -94,7 +94,8 @@
 /* creamy */
 .prototip .creamy {
 	width: 250px;
-	color: #bb9c61;
+	/*color: #bb9c61;*/
+	color: #000;
 }
 .prototip .creamy .toolbar {
 	background: #f3edc2;
@@ -104,6 +105,7 @@
 .prototip .creamy .content {
 	background: #f8f4ca;
 	padding: 5px;
+	font-weight: bold;
 }
 
 /* darkgrey */

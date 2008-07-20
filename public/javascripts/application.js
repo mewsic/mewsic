@@ -157,7 +157,9 @@ var Rating = Class.create({
     var locked = !this.logged_in;
     var indicator = false;
 
-    if (element.up('.user-resume') || element.up('.song-resume') || element.up('.answer-show')) {
+    if (element.hasClassName('grey-star')) {
+      image = 'grey_myousica_small.png';
+    } else if (element.up('.user-resume') || element.up('.song-resume') || element.up('.answer-show')) {
       image = 'myousica_big.png';
     } else if (element.up('.answer-small') || element.up('.azzurro-box')) {
       image = 'myousica_f3f8fa.png';
@@ -165,9 +167,6 @@ var Rating = Class.create({
       image = 'myousica_f9f9f9.png';
     }
 
-    if (element.hasClassName('grey-star')) {
-      image = 'grey_' + image;
-    }
 
     if (element.hasClassName('locked')) {
       locked = true;
@@ -198,12 +197,8 @@ document.observe('dom:loaded', function(event) {
   //$('search').down('input').focus();
   //$('logo').focus();
   
-  if ( $('log-in-errors') != null && $('log-in-errors').visible() ) {
-   $('log-in').down('input', 2).clear().focus();
-  }
-	
 	if ($('mlab-scroller') != null ) {
-	  var mlab_slider = new MlabSlider('mlab-scroller',  {
+	  new MlabSlider('mlab-scroller',  {
       axis: 'vertical',
       windowSize: 5,
       size: 300,
@@ -234,9 +229,11 @@ var Popup = {
 };
 
 function pop(url) {
- newwindow = window.open(url,'popup', 'height=100, width=300');
- if (window.focus) {newwindow.focus()}
- return false;
+  var popup = window.open(url,'popup', 'height=100, width=300');
+  if (window.focus) {
+    popup.focus()
+  }
+  return false;
 }
 
 function reload() {

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 46
+# Schema version: 48
 #
 # Table name: users
 #
@@ -39,7 +39,8 @@
 #  replies_count             :integer(11)   default(0)
 #  nickname                  :string(20)    
 #  is_admin                  :boolean(1)    
-#  status                    :string(3) default('off')
+#  status                    :string(3)     default("off")
+#  name_public               :boolean(1)    
 #
 
 require 'digest/sha1'
@@ -121,8 +122,8 @@ class User < ActiveRecord::Base
   
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :login, :email, :password, :password_confirmation, :terms_of_service, :eula,
-    :first_name, :last_name, :gender, :motto, :tastes, :country, :city, :age,
+  attr_accessible :password, :password_confirmation, :terms_of_service, :eula,
+    :first_name, :last_name, :name_public, :gender, :motto, :tastes, :country, :city, :age,
     :photos_url, :blog_url, :myspace_url, :skype, :msn, :skype_public, :msn_public, :nickname
   
   before_save :check_links
@@ -415,13 +416,31 @@ class User < ActiveRecord::Base
   end
 
   def profile_completeness
-    profile = %w(first_name last_name photos_url myspace_url blog_url skype skype_public msn msn_public)
+    profile = %w(first_name last_name name_public photos_url myspace_url blog_url skype skype_public msn msn_public)
     complete = profile.select { |attr| !self[attr].blank? }
     (complete.size.to_f / profile.size.to_f * 100.0).round 2
   end
 
   def rateable_by?(user)
     self.id != user.id
+  end
+
+  def switch_to!(destination)
+    User.transaction do
+      if destination == 'Band'
+        # delete all the mband memberships for this user
+        self.mband_memberships.destroy_all
+        # delete all the mbands of this user
+        Mband.destroy_all ['user_id = ?', self.id]
+
+      elsif self.type == 'Band'
+        # delete all the band members of this user
+        self.members.destroy_all
+
+      end
+
+      self.update_attribute :type, destination
+    end
   end
 
   protected

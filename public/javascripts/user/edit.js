@@ -211,19 +211,16 @@ var GenderSwitcher = Class.create({
 });
 
 var Profile = Class.create({
-  initialize: function () {
-    this.link = $('my-user-share-more-link');
-    if (!this.link)
+  initialize: function (element) {
+    this.element = $(element);
+    if (!this.element)
       return;
 
-    this.blurb = $('my-user-share-fill-in');
+    this.links = this.element.select('.my-user-share-more-link');
+    this.links.invoke('observe', 'click', this.handleClick.bind(this));
+
+    this.blurb = $('profile-completeness-container');
     this.fields = $('my-user-share');
-
-    this.setup();
-  },
-
-  setup: function () {
-    this.link.observe('click', this.handleClick.bind(this));
   },
 
   handleClick: function(event) {
@@ -237,9 +234,9 @@ var Profile = Class.create({
 
   showEditPane: function() {
     this.editing = true;
-    this.link.innerHTML = '[done]';
-    new Effect.BlindUp(this.blurb, {duration: 0.3});
-    new Effect.BlindDown(this.fields, {duration: 0.3, queue: 'end'});
+    this.links.each(function(link) { link.innerHTML = '[done]' });
+    this.blurb.fade({duration: 0.3});
+    this.fields.blindDown({duration: 0.3, queue: 'end'});
   },
 
   saveChanges: function() {
@@ -250,10 +247,10 @@ var Profile = Class.create({
       return;
 
     this.saving = true;
-    this.link.innerHTML = 'reloading...';
-    new Effect.BlindUp(this.fields, {duration: 0.3});
+    this.links.each(function(link) { link.innerHTML = 'reloading...' });
+    this.fields.fade({duration: 0.3});
 
-    reload.delay(0.4);
+    reload.delay(0.8);
   }
 });
 
@@ -265,7 +262,7 @@ document.observe('dom:loaded', function() {
     new InPlaceSelectGenerator( $w('country'), { url: '/users/', model: 'user', values_url: '/countries' } );
     new AjaxFormGenerator( $w('first_name last_name photos_url blog_url myspace_url skype msn'), { url: '/users/', model: 'user' } );
     new GenderSwitcher('change-gender');
-    new Profile();
+    new Profile('personal-details');
 
   } else if ($('mband-id')) {
     new InPlaceEditorGenerator( $w('motto tastes'), { url: '/mbands/', model: 'mband', rows: 6, maxLength: 1000} );  

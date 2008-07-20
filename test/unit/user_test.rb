@@ -76,7 +76,7 @@ class UserTest < Test::Unit::TestCase
   end
 
   def test_should_not_rehash_password
-    users(:quentin).update_attributes(:login => 'quentin2')
+    u = users(:quentin).update_attribute(:login, 'quentin2')
     assert_equal users(:quentin), User.authenticate('quentin2', 'test')
   end
 
@@ -301,7 +301,16 @@ class UserTest < Test::Unit::TestCase
     end
     
     def create_user(options = {})
-      User.create({ :login => 'quire', :gender => 'male', :email => 'quire@example.com', :password => 'quirezzz', :password_confirmation => 'quirezzz', :country => 'Italy'}.merge(options)) #, :terms_of_service => "1", :eula => "1" }.merge(options))
+      options = { :login => 'quire', :email => 'quire@example.com', :gender => 'male',
+        :password => 'quirezzz', :password_confirmation => 'quirezzz', :country => 'Italy'
+      }.merge(options)
+
+      user = User.new(options)
+      user.login = options[:login]
+      user.email = options[:email]
+      user.save
+
+      return user
     end
     
     def create_instrument

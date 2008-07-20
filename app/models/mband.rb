@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 46
+# Schema version: 48
 #
 # Table name: mbands
 #
@@ -26,7 +26,7 @@ class Mband < ActiveRecord::Base
   
   has_many :avatars, :as => :pictureable
   has_many :photos, :as => :pictureable
-  has_many :memberships, :class_name => 'MbandMembership'
+  has_many :memberships, :class_name => 'MbandMembership', :dependent => :destroy
   has_many :members, :through => :memberships, :class_name => 'User', :source => :user, :conditions => "accepted_at IS NOT NULL"
   
   belongs_to :leader, :class_name => 'User', :foreign_key => 'user_id'
