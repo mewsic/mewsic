@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 48) do
+ActiveRecord::Schema.define(:version => 49) do
 
   create_table "abuses", :force => true do |t|
     t.integer  "abuseable_id"
@@ -206,19 +206,20 @@ ActiveRecord::Schema.define(:version => 48) do
     t.string   "title"
     t.string   "filename"
     t.string   "description"
-    t.string   "tonality",                                      :default => "C"
+    t.string   "tonality",                                              :default => "C"
     t.integer  "song_id"
     t.integer  "instrument_id"
-    t.integer  "listened_times",                                :default => 0
-    t.integer  "seconds",                                       :default => 0
+    t.integer  "listened_times",                                        :default => 0
+    t.integer  "seconds",                                               :default => 0
     t.integer  "bpm"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "rating_count"
-    t.decimal  "rating_total",   :precision => 10, :scale => 2
-    t.decimal  "rating_avg",     :precision => 10, :scale => 2
-    t.boolean  "idea",                                          :default => false, :null => false
+    t.decimal  "rating_total",           :precision => 10, :scale => 2
+    t.decimal  "rating_avg",             :precision => 10, :scale => 2
+    t.boolean  "idea",                                                  :default => false, :null => false
     t.integer  "user_id"
+    t.string   "instrument_description"
   end
 
   create_table "users", :force => true do |t|
