@@ -1,14 +1,13 @@
-<div class="simple-list white-box clear-block">
-  <h2 class="mband-label"><%= @mband.name %></h2>
+<div class="simple-list white-box mband clear-block">
+  <h2><%= @mband.name %></h2>
 	<div class="top-box clear-block">
 		<div class="bottom-box clear-block">
-			<div class="elements clear-block">
-				<%= render :partial => 'membership', :collection => @mband.accepted_memberships %>
-				<%- if current_user_mband_page? && @mband.pending_memberships.size > 0 -%>
-					<p class="grey-text element">Pending members</p>
-					<%= render :partial => 'membership', :collection => @mband.pending_memberships %>
-				<%- end -%>
-			</div>			
-	  </div>
+			<%= render :partial => 'membership', :collection => @mband.accepted_memberships %>
+			<%- if current_user_mband_page? && @mband.pending_memberships.size > 0 -%>
+				<p class="grey-text element">Pending members</p>
+				<%= render :partial => 'membership', :collection => @mband.pending_memberships %>
+			<%- end -%>
+		</div>			
+		<div class="bottom-label">&nbsp;</div>
 	</div>
 </div>

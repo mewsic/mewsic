@@ -1,27 +1,36 @@
+<div id="personal-details">
+
 <div class="clear-block float-left">
 	<h1>PERSONAL DETAILS</h1>
 </div>
-<p class="float-left grey-text" style="padding-left:10px">
-	<%= link_to '[edit]', '#', :id => 'my-user-share-more-link' %>
+<p class="float-left grey-text" style="padding-left:18px">
+	<%= link_to '[edit]', '#', :class => 'my-user-share-more-link' %>
 </p>
 <div class="clear-float"></div>
-<div id="my-user-share-fill-in" class="grey-text">Your profile is <strong><%= @user.profile_completeness.round %>%</strong> complete.</div>
+<div id="profile-completeness-container">
+	<div id="profile-completeness" class="grey-text">
+		<div class="progress-bar" style="width: <%= @user.profile_completeness.round * 98/100 %>%">&nbsp;</div>
+		<div class="description">Your profile is <strong><%= @user.profile_completeness.round %>%</strong> complete.</div>
+	</div>
+</div>
 <div id="my-user-share" class="user-sharing clear-block" style="display:none">
 	<% form_for @user, :url => user_path(@user), :html => {:id => 'form_first_name'} do |f| -%>
 	  <p>
   		<label>Your first name</label>
   		<span id="loading_user_first_name" style="display:none;" class="loading">Saving...</span>
-			<%= text_field :user, :first_name, :class => 'hide-on-load ready-for-edit', :maxlength => 32 %>
+			<%= text_field :user, :first_name, :class => 'hide-on-load ready-for-edit input-small', :maxlength => 32 %>
+  		<%= check_box :user, :name_public, :class => 'hide-on-load input check-box ready-for-edit' %>  		
+  		<span class="hide-on-load">public</span>
   		<input type="submit" class="button hide-on-load" value="OK"/>
-  	  </p>
+  	</p>
   <% end -%>
 	<% form_for @user, :url => user_path(@user), :html => {:id => 'form_last_name'} do |f| -%>
 	  <p>
   		<label>Your last name</label>
   		<span id="loading_user_last_name" style="display:none;" class="loading">Saving...</span>
-  		<%= text_field :user, :last_name, :class => 'hide-on-load ready-for-edit', :maxlength => 32 %>
+  		<%= text_field :user, :last_name, :class => 'hide-on-load ready-for-edit input-small', :maxlength => 32 %>
   		<input type="submit" class="button hide-on-load" value="OK"/>
-  	  </p>
+  	</p>
   <% end -%>
 	<% form_for @user, :url => user_path(@user), :html => {:id => 'form_photos_url'} do |f| -%>
 	  <p>
@@ -29,7 +38,7 @@
   		<span id="loading_user_photos_url" style="display:none;" class="loading">Saving...</span>
   		<%= text_field :user, :photos_url, :class => 'hide-on-load ready-for-edit' %>
   		<input type="submit" class="button hide-on-load" value="OK"/>
-  	  </p>
+  	</p>
   <% end -%>
 	<% form_for @user, :url => user_path(@user), :html => {:id => 'form_blog_url'} do |f| -%>
 	  <p>
@@ -67,17 +76,24 @@
   		<input type="submit" class="button hide-on-load" value="OK"/>
   	</p>
   <% end -%>
+	<p class="centered grey-text" style="padding-top:10px">
+		<%= link_to '[done]', '#', :class => 'my-user-share-more-link' %>
+	</p>
 
 	<p>&nbsp;</p>
 	<p>You can change your password here.<br/>Leave the fields blank if you don't want to change it.</p>
 	<% form_for @user, :url => change_password_user_path(@user), :html => {:id => 'form_password', :method => 'put'} do %>
 	  <p>
   		<label>New password</label>
-  		<%= password_field :user, :password, :class => 'input-small' %>
+			<%= password_field :user, :password, :class => 'input-small' %>
+		</p>
+	  <p>
   		<label>Confirm new password</label>
   		<%= password_field :user, :password_confirmation, :class => 'input-small' %>
 			<input type="submit" class="button" value="OK"/>
 		</p>
 	<% end %>
+
+</div>
 
 </div>

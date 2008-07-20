@@ -1,29 +1,28 @@
-			    <div class="elements clear-block">
-    			  <p class="thumb">
-    			    <%= track_instrument_icon(track) %>
-    			    <%= link_to(avatar_image(track.user, :icon), user_path(track.user)) %>
-						</p>
-    			  <p class="name align-right"><%= link_to(track.user.nickname, user_path(track.user)) %></p>
-    			  <p class="title align-right"><%= track.title %></p>
-    			  <div class="music-info">
-							<div class="track-info clear-block">
-								<div class="track-genre"><%= link_to(track.parent_song.genre.name, genre_path(track.parent_song.genre.name)) if track.parent_song && track.parent_song.genre %></div>
-								<div class="bpm">bpm: <strong><%= track.bpm %></strong></div>
-								<div class="key">key: <strong><%= track.tonality %></strong></div>
-								<div class="runtime">runtime: <strong><%= track.length %></strong></div>
-							</div>
-							<p class="grey-text">
-								<%= track.description %>
-							</p>
-    			    <div class="float-right">
-								<%= rating(track) %>
-    			      <%= mlab_button(track) %>
-    			      <%= play_button(track) %>
-              </div>
-							<div class="float-left">
-								<%= download_button_for track %>
-								<span class="music-info">Created <%= track.created_at.strftime("%m/%d/%y") %></span>
-							</div>
-    			  </div>
-    		  </div>
-
+<div class="elements clear-block">
+  <p class="thumb">
+    <%= track_instrument_icon(track) %>
+    <%= link_to(avatar_image(track.user, :icon), user_path(track.user)) %>
+	</p>
+  <p class="name align-right"><%= link_to(track.user.nickname, user_path(track.user)) %></p>
+  <p class="title align-right"><%= track.title %></p>
+  <div class="music-info">
+		<div class="track-info clear-block">
+			<div class="track-genre"><%= link_to(track.parent_song.genre.name, genre_path(track.parent_song.genre.name)) if track.parent_song && track.parent_song.genre %></div>
+			<div class="bpm">bpm: <strong><%= track.bpm %></strong></div>
+			<div class="key">key: <strong><%= track.tonality %></strong></div>
+			<div class="runtime">runtime: <strong><%= track.length %></strong></div>
+		</div>
+		<p class="grey-text">
+			<%= track.description %>
+		</p>
+    <div class="float-right">
+			<%= rating(track) %>
+      <%= mlab_button(track) %>
+      <%= play_button(track) %>
+    </div>
+		<div class="float-left">
+			<%= download_button_for track %>
+			<span class="music-info">Created <%= track.created_at.strftime("%m/%d/%y") %></span>
+		</div>
+  </div>
+</div>

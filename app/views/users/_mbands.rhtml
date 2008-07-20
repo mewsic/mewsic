@@ -1,5 +1,5 @@
-<div class="simple-list white-box clear-block">
-  <h2 class="mband-label"><%= @user.login %>'s M-Bands</h2>
+<div class="simple-list white-box mband clear-block">
+  <h2><%= @user.login %>'s Mbands</h2>
   <div class="top-box clear-block">
     <div class="bottom-box clear-block">
       <%= render :partial => 'mband', :collection => @mbands %>
@@ -11,5 +11,6 @@
         <%= render :partial => 'mband', :collection => @mband_invitations %>
       <%- end -%>
     </div>
+		<div class="bottom-label">&nbsp;</div>
   </div>
 </div>

@@ -19,8 +19,18 @@ module ApplicationHelper
     controller.controller_name == "dashboard" ? "home" : ""
   end
   
-  def check_active(*controller_name)
-    controller_name.include?(controller.controller_name) ? "active" : ""
+  def check_active(*controllers)
+    current = controller.controller_name
+    if controllers.last.kind_of?(ActiveRecord::Base)
+      model = controllers.pop
+      if model.class.name == 'User' && controllers.include?('users') or
+        %w[Band Dj Mband].include?(model.class.name) && controllers.include?('bands_and_deejays')
+        'active'
+      end
+    else
+      controllers.include?(current) ? "active" : ""
+    end
+
   end
   
   def clickable_logo

@@ -6,9 +6,13 @@
 	<title>Myousica - play and share <%= render_title %></title>
   <%= stylesheet_link_tag *%w[style lightview prototip starbox] %>  
 	<script src="http://www.google.com/jsapi"></script>
-	<%= javascript_tag %[
-			google.load('prototype', '1.6.0.2');
-			google.load('scriptaculous', '1.8.1'); ]
+	<%= if RAILS_ENV == 'production'
+				javascript_tag %[
+					google.load('prototype', '1.6.0.2');
+					google.load('scriptaculous', '1.8.1'); ]
+			else
+				javascript_include_tag 'protoculous'
+			end
 	-%>
   <%= javascript_include_tag *%w[prototip starbox picture_slider mlab lightview inplaceselect player swfobject tooltips pagination application] %>
   <%= yield :head %>
