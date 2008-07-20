@@ -7,7 +7,7 @@ class IdeasController < ApplicationController
     @coolest = Track.find_paginated_coolest_ideas(1)
     @top_rated = Track.find_paginated_top_rated_ideas(1)
     @most_engaging  = Track.find_most_collaborated(3)
-    @ideas_instruments = Instrument.find_by_ideas_count
+    @ideas_instruments = Instrument.find_by_ideas_count(6)
     @instruments = Instrument.find(:all)
   end
   
@@ -23,8 +23,14 @@ class IdeasController < ApplicationController
   
   def by_instrument
     @instruments = Instrument.find(:all)
-    @instrument = Instrument.find(params[:instrument_id])
-    @ideas = @instrument.ideas.paginate(:per_page => 10, :page => params[:ipage])
+    if params[:instrument_id]
+      @instrument = Instrument.find(params[:instrument_id])
+      @ideas = @instrument.find_paginated_ideas(:per_page => 8, :page => params[:ipage])
+    else
+      @ideas_instruments = Instrument.find_by_ideas_count(4) 
+      render :partial => 'ideas_table' and return
+    end
+
     render :layout => false
   end
 

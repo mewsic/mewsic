@@ -6,8 +6,6 @@ class UsersController < ApplicationController
   
   protect_from_forgery :except => :update
 
-  helper :band_members
-  
   def index
     @coolest = User.find_coolest         :limit => 9
     @best_myousicians = User.find_best   :limit => 3
@@ -25,7 +23,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
+    @user.login = params[:user][:login]
+    @user.email = params[:user][:email]
     @user.save!
+
     flash[:notice] = "Thanks for signing up. You will receive a mail with your activation link."
     redirect_to root_url
     # self.current_user = @user
@@ -164,7 +165,7 @@ class UsersController < ApplicationController
       switch_partial = {:partial => "users/switch/#{@user.class.name.downcase}_to_#{@type.downcase}", :layout => 'users/switch/layout'}
       if request.put?
         @user.nickname = params[:nickname]
-        if @user.update_attribute(:type, @type)
+        if @user.switch_to! @type
           format.html { render :partial => "users/switch/success" }
         else
           flash.now[:error] = @user.errors.full_messages.join
