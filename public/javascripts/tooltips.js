@@ -17,7 +17,7 @@ var Tooltips = Class.create({
       element.select('.download').slice(0,limit).each(this.addDownload);
     }
 
-    element.select('.instrument').each(this.addInstrument);
+    element.select('img.instrument').each(this.addInstrument);
 
     if (!Prototype.Browser.IE) {
       element.select('.rating.locked').slice(0,limit).each(this.addLockedRating);
@@ -56,8 +56,10 @@ var Tooltips = Class.create({
       element.up('#newest-users'))
       return;
 
-    if (element.hasClassName('online')) {
+    if (element.hasClassName('on')) {
       content = "<strong>ONLINE</strong>";
+    } else if (element.hasClassName('rec')) {
+      content = "<strong>MTRACK</strong>";
     } else {
       content = "<strong>OFFLINE</strong>";
     }

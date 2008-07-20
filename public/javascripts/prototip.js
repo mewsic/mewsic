@@ -51,7 +51,7 @@ Prototip.Styles = {
     hook: { target: 'topMiddle', tip: 'bottomMiddle' },
     stem: { position: 'bottomMiddle', width: 15, height: 10 },
     hideOn: false, //{ element: 'tip', event: 'mouseout' },
-    //hideAfter: 0.3,
+    hideAfter: 1.0,
     offset:  { x: 0, y: -3 },
     images: 'styles/default',
     title: 'Login required'
@@ -92,19 +92,19 @@ Prototip.Styles = {
   },
 
   'instrument': {
-    className: 'default',
+    className: 'creamy',
     closeButton: false,
     hideAfter: 1.0,
     border: 4,
     borderColor: '#EBE4B4',
     showOn: 'mousemove',
-    hideOn: 'mouseleave',
+    //hideOn: 'mouseleave',
     images: 'styles/creamy/',
     radius: 4,
     delay: 0.05,
-    stem: { position: 'bottomLeft', height: 10, width: 12 },
-    //hook: { tip: 'bottomLeft', mouse: true },
-    offset: { x: 6, y: -48 },
+    stem: { position: 'bottomMiddle', height: 10, width: 14 },
+    hook: { tip: 'topMiddle' }, // mouse: true
+    offset: { x: 15, y: -40 },
     width: 'auto'
   },
 
