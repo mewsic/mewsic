@@ -1,35 +1,25 @@
-<div class="elements clear-block">		
-	<p class="thumb">
-	  <%= image_tag(@instrument.icon) %>
-	  <span class="cyan-text"><strong><%= link_to_remote @instrument.description, :update => 'ideas-by-instruments', :method => :get, :url => by_instrument_ideas_path(:instrument_id => @instrument.id) %></strong></span>
-  </p>
-
-	<table width="100%" cellspacing="0" cellpadding="0" border="0">
-    <tbody>
-      <%- @ideas.each_with_index do |track, i| -%>
-				<tr class="<%= %w[even odd][i % 2] %>">
-          <td>
-            <span class="cyan-text"><%= track.parent_song.genre.name if track.parent_song && track.parent_song.genre %> </span>
-            <%= track.user.nickname %>
-            <em><%= track.title %></em>
-          </td>
-          <td class="star">
-            <%= rating(track) %>
-          </td>
-          <td class="button">
-            <%= mlab_button(track) %>
-            <%= play_button(track) %>
-          </td>
-        </tr>
-      <%- end -%>
-      <p class="abstract align-right">
-        <% if @ideas.previous_page %>
-  				<%= link_to_remote 'Prev ', :update => 'ideas-by-instruments', :method => :get, :url => by_instrument_ideas_path(:instrument_id => @instrument.id, :ipage => @ideas.previous_page) %>
-  		  <% end %>
-        <% if @ideas.next_page %>
-  				<%= link_to_remote 'Next' , :update => 'ideas-by-instruments', :method => :get, :url => by_instrument_ideas_path(:instrument_id => @instrument.id, :ipage => @ideas.next_page) %>
-  		  <% end %>
-      </p>
-    </tbody>
-  </table>
+<div class="float-right">
+	<span class="align-right page-count">Page <%= @ideas.current_page %> of <%= @ideas.page_count %></span>
 </div>
+
+<h2><%= @instrument.description %></h2>
+<%= render :partial => 'songs/track', :collection => @ideas %>
+
+<div class="next">
+	<div class="float-left" id="spinner" style="display:none">
+		<%= image_tag 'spinner.gif' %>
+	</div>
+	<span class="align-right page-count">Page <%= @ideas.current_page %> of <%= @ideas.page_count %></span>
+	<% if @ideas.previous_page %>
+		<%= link_to_remote image_tag('move_arrow_left.png'), :class => 'navigation', :update => 'ideas-by-instruments', :loading => "$('spinner').show()", :complete => "new Effect.ScrollTo('ideas-by-instruments')", :method => :get, :url => by_instrument_ideas_path(:instrument_id => @instrument.id, :ipage => @ideas.previous_page) %>
+	<% else %>
+		<%= image_tag('move_arrow_left.png', :class => 'faded') %>
+  <% end %>
+  <% if @ideas.next_page %>
+		<%= link_to_remote image_tag('move_arrow_right.png'), :class => 'navigation', :update => 'ideas-by-instruments', :loading => "$('spinner').show()", :complete => "new Effect.ScrollTo('ideas-by-instruments')", :method => :get, :url => by_instrument_ideas_path(:instrument_id => @instrument.id, :ipage => @ideas.next_page) %>
+	<% else %>
+		<%= image_tag('move_arrow_right.png', :class => 'faded') %>
+  <% end %>
+</div>
+
+<%= render :partial => 'all_instruments' %>

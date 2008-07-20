@@ -1,0 +1,15 @@
+<tr class="<%= %w(even odd)[idea_row_counter % 2] %>">
+	<td>
+		<span class="genre"><%= link_to idea_row.parent_song.genre.name, idea_row.parent_song.genre if idea_row.parent_song && idea_row.parent_song.genre %></span>&nbsp;
+		<!--<span class="name"><%= link_to idea_row.user.nickname, user_path(idea_row.user) %></span>&nbsp;-->
+		<span class="abstract"><%= idea_row.title %></em>
+	</td>
+	<td class="star">
+		<%= rating(idea_row, :class => idea_row_counter.even? ? 'grey-star' : '') %>
+	</td>
+	<td class="button">
+		<%= mlab_button(idea_row) %>
+		<%= play_button(idea_row) %>
+	</td>
+</tr>
+

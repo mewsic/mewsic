@@ -1,63 +1,26 @@
 <div class="box-list two-col clear-block">
-	
-		<div class="tabmenu">
-			<div class="tab active float-right" id="top-answers-tab">
-				<div class="sx"> </div>
-				<div class="rp">
-					<p class="title blue-text">IDEAS BY INSTRUMENT</p>
-				</div>
-				<div class="dx"> </div>
-			</div>    
+
+	<div class="tabmenu">
+		<div id="tab-spinner" class="float-left" style="margin: 8px 2px;display:none">
+			<%= image_tag 'spinner.gif' %>
 		</div>
-
-		<div class="clear-block">
-		  <div class="top-box clear-block">
-				<div class="bottom-box clear-block">
-					<div id="ideas-by-instruments">
-            <%- @ideas_instruments.each do |instrument|-%>											
-    					<div class="elements clear-block"> 
-    				  		<p class="cyan-text float-right"><strong><%= pluralize instrument.ideas_count, 'track' %></strong></p>
-    						<p class="thumb">
-    						  <%= image_tag(instrument.icon) %>
-									<span class="cyan-text">
-										<strong><%= link_to_remote instrument.description, :update => 'ideas-by-instruments', :method => :get, :url => by_instrument_ideas_path(:instrument_id => instrument.id) %></strong>
-									</span>
-                </p>
-
-    						<table width="100%" cellspacing="0" cellpadding="0" border="0">
-                  <tbody>
-                    <%- instrument.find_ideas.each_with_index do |track, i| -%>
-											<tr class="<%= %w(even odd)[i % 2] %>">
-                        <td>
-                          <span class="cyan-text"><%= link_to track.parent_song.genre.name, track.parent_song.genre if track.parent_song && track.parent_song.genre %></span>&nbsp;
-													<span class="name"><%= link_to track.user.nickname, user_path(track.user) %></span>&nbsp;
-                          <em><%= track.title %></em>
-                        </td>
-                        <td class="star">
-													<%= rating(track, :class => i.even? ? 'grey-star' : '') %>
-                        </td>
-                        <td class="button">
-                          <%= mlab_button(track) %>
-                          <%= play_button(track) %>
-                        </td>
-                      </tr>
-                    <%- end -%>
-                  </tbody>
-                </table>
-    					</div>
-  					<%- end -%>
-					</div>					
-					<div class="elements clear-block"> 
-						<p class="orange-text"><strong>ALL INSTRUMENTS</strong></p>
-						<p class="thumb">
-						  <%- @instruments.each do |instrument| -%>
-								<%= link_to_remote image_tag(instrument.icon), :update => 'ideas-by-instruments', :method => :get, :url => by_instrument_ideas_path(:instrument_id => instrument.id) %>
-						  <%- end -%>
-            </p>
-					</div>					
-					
-				</div>
-			</div>						
-		</div>
-
+		<div class="tab active float-right" id="top-answers-tab">
+			<div class="sx"> </div>
+			<div class="rp">
+				<p class="title blue-text"><%= link_to_remote 'IDEAS BY INSTRUMENT', :url => by_instrument_ideas_path, :update => 'ideas-by-instruments', :method => :get, :loading => "$('tab-spinner').show()", :complete => "$('tab-spinner').hide()" %></p>
+			</div>
+			<div class="dx"> </div>
+		</div>    
 	</div>
+
+	<div class="clear-block clear-float">
+		<div class="collaboration-list top-box clear-block">
+			<div class="bottom-box clear-block">
+				<div id="ideas-by-instruments" class="grey-box">
+					<%= render :partial => 'ideas_table' %>
+				</div>					
+			</div>
+		</div>						
+	</div>
+
+</div>
