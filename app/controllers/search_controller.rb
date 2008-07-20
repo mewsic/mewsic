@@ -24,12 +24,12 @@ class SearchController < ApplicationController
          tracks_conditions_string, tracks_conditions_vars = '1=1', {}
 
          if params[:instrument] && !params[:instrument].blank?
-           tracks_conditions_string += ' AND instrument_id = :instrument'
+           tracks_conditions_string += ' AND tracks.instrument_id = :instrument'
            tracks_conditions_vars[:instrument] = params[:instrument]
          end
         
          if params[:genre] && !params[:genre].blank?
-           songs_conditions_string += ' AND genre_id = :genre'
+           songs_conditions_string += ' AND songs.genre_id = :genre'
            songs_conditions_vars[:genre] = params[:genre]
          end
         
@@ -42,35 +42,35 @@ class SearchController < ApplicationController
          end
         
          if params[:bpm] && !params[:bpm].blank?
-           tracks_conditions_string += ' AND bpm = :bpm'
+           tracks_conditions_string += ' AND tracks.bpm = :bpm'
            tracks_conditions_vars[:bpm] = params[:bpm].to_i
         
-           songs_conditions_string += ' AND bpm = :bpm'
+           songs_conditions_string += ' AND songs.bpm = :bpm'
            songs_conditions_vars[:bpm] = params[:bpm].to_i
          end
         
          if params[:key] && !params[:key].blank?
-           tracks_conditions_string += ' AND tonality = :key'
+           tracks_conditions_string += ' AND tracks.tonality = :key'
            tracks_conditions_vars[:key] = params[:key]
         
-           songs_conditions_string += ' AND tone = :key'
+           songs_conditions_string += ' AND songs.tone = :key'
            songs_conditions_vars[:key] = params[:key]
          end
         
          if params[:author] && !params[:author].blank?
            author = params[:author].gsub(/[%_]/){"\\#{$&}"}
         
-           songs_conditions_string += ' AND original_author LIKE :author'
+           songs_conditions_string += ' AND songs.original_author LIKE :author'
            songs_conditions_vars[:author] = "%#{author}%"
          end
            
          if params[:title] && !params[:title].blank?
            title = params[:title].gsub(/[%_]/){"\\#{$&}"}
         
-           tracks_conditions_string += ' AND title LIKE :title'
+           tracks_conditions_string += ' AND tracks.title LIKE :title'
            tracks_conditions_vars[:title] = "%#{title}%"
         
-           songs_conditions_string += ' AND title LIKE :title'
+           songs_conditions_string += ' AND songs.title LIKE :title'
            songs_conditions_vars[:title] = "%#{title}%"
          end
         
