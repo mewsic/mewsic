@@ -143,7 +143,7 @@ class SearchController < ApplicationController
       @q = CGI::unescape(params.delete(:q) || params.delete(:id) || '')
       @q.gsub! /%/, ''
 
-      @advanced = params.any? { |k,v| %w(instrument genre country city author title).include?(k) && !v.blank? }
+      @advanced = params.any? { |k,v| %w(instrument genre country city author title).include?(k) }
 
       if @q.strip.blank? && !@advanced
         flash[:error] = 'You did not enter a search string' 
