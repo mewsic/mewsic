@@ -46,6 +46,13 @@ class Track < ActiveRecord::Base
   
   before_save :set_tonality_from_tone  
 
+  def self.search(q, options = {})
+    find(:all, {:include => :instrument, :conditions => [
+      "tracks.title LIKE ? OR tracks.description LIKE ? OR instruments.description LIKE ?",
+      *(Array.new(3).fill("%#{q}%"))
+    ]}.merge(options))
+  end
+
   def self.search_paginated(q, options)
     options = {:per_page => 6, :page => 1}.merge(options)
     paginate(:per_page => options[:per_page], :page => options[:page], :include => [:mixes, :instrument, {:parent_song => {:user => :avatars}}], :conditions => [
