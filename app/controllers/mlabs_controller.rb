@@ -28,18 +28,21 @@ class MlabsController < ApplicationController
         Song.find(params[:item_id])
     end
 
-    @mlab = Mlab.create(:user => current_user, :mixable => mixable)
-    if @mlab.valid?
-      @item = Mlab.find_my_list_item_for(current_user, params[:type], mixable.id)
-    end
+    @mlab = Mlab.new(:user => current_user, :mixable => mixable)
+    @mlab.save!
+
+    @item = Mlab.find_my_list_item_for(current_user, params[:type], mixable.id)
 
     respond_to do |format|
-      format.xml
+      format.xml { render :nothing => true, :status => :ok }
       format.js
     end
 
   rescue ActiveRecord::RecordNotFound
-    render :nothing => true, :status => :bad_request
+    render :nothing => true, :status => :not_found
+
+  rescue ActiveRecord::RecordInvalid
+    render :partial => 'shared/errors', :object => @mlab.errors, :status => :bad_request
   end
 
   def destroy
