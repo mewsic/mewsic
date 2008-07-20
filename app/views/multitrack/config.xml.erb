@@ -22,15 +22,15 @@
 		<tracks>
 			<fetch>/tracks/{:id}.xml</fetch>
 			<siblings>/tracks/{:id}.xml?siblings=true</siblings>
-			<create method="post">/tracks/{:id}.xml</create>
+			<create method="post">/tracks.xml</create>
 		</tracks>
 		<instruments>/instruments.xml</instruments>
 		<genres>/genres.xml</genres>
 		<user>/users/{:id}.xml</user>
 		<media>
-			<mix>/mix</mix>
-			<encode>/encode_flv</encode>
-			<upload>/upload</upload>
+			<mix method="post">/mix</mix>
+			<upload method="post">/upload</upload>
+			<encode method="post">/encode_flv</encode>
 		</media>
 		<workers>
 			<mixer>/mix/status/{:key}</mixer>
