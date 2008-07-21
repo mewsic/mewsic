@@ -22,11 +22,11 @@
 <div class="admin_main">
 	<h1>ALL ACTIVITY</h1>
 	<ul id="miniflex">
-		<li><a class="menu-link" href="/admin/songs">Songs</a></li>
-		<li><a class="menu-link" href="/admin/tracks">Tracks</a></li>
-		<li><a class="menu-link" href="/admin/users">Users</a></li>
-		<li><a class="menu-link" href="/admin/help_pages">Help</a></li>
-		<li><a class="menu-link" href="/admin/static_pages">Static pages</a></li>
+		<li><%= link_to 'Songs', admin_songs_path, :class => 'menu-link' %></li>
+		<li><%= link_to 'Tracks', admin_tracks_path, :class => 'menu-link' %></li>
+		<li><%= link_to 'Users', admin_users_path, :class => 'menu-link' %></li>
+		<li><%= link_to 'Help', admin_help_pages_path, :class => 'menu-link' %></li>
+		<li><%= link_to 'Static pages', admin_static_pages_path, :class => 'menu-link' %></li>
 	</ul>
 	<div id="admin_search_container">
 		<form id="admin_search">
