@@ -102,7 +102,7 @@ class Track < ActiveRecord::Base
   end
 
   def self.find_paginated_coolest_ideas(page)
-    paginate(:page => page, :per_page => 3, :include => :songs, :conditions => ['tracks.idea = ?', true], :order => 'songs.rating_avg DESC')
+    paginate(:page => page, :per_page => 3, :include => :songs, :conditions => ['tracks.idea = ?', true], :order => 'tracks.rating_avg DESC, songs.rating_avg DESC')
   end
 
   def self.find_paginated_top_rated_ideas(page)
