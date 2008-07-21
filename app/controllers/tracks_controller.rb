@@ -2,9 +2,11 @@ class TracksController < ApplicationController
   
   before_filter :login_required, :only => [:create, :rate, :toggle_idea]
   before_filter :check_track_owner, :only => [:toggle_idea]
-  protect_from_forgery :except => [:create]
+  protect_from_forgery :except => [:create] ## XXX FIXME
   
   def index
+    redirect_to '/' and return unless request.xhr?
+
     if params.include?(:user_id) 
 
       @user = User.find_from_param(params[:user_id])
@@ -35,6 +37,7 @@ class TracksController < ApplicationController
     @show_siblings = params.include?(:siblings)
     respond_to do |format|
       format.xml
+      format.html { redirect_to '/' }
       format.png do
         if @track.filename.blank?
           flash[:error] = 'file not found'
@@ -52,16 +55,17 @@ class TracksController < ApplicationController
   end
 
   def create    
-    @track = current_user.tracks.create! params[:track]
+    @track = current_user.tracks.create params[:track]
     
     respond_to do |format|
       format.xml do
-        render :partial => 'shared/track', :object => @track, :status => :ok
+        if @track.valid?
+          render :partial => 'shared/track', :object => @track, :status => :ok
+        else
+          render :partial => 'shared/errors', :object => @track.errors, :status => :bad_request
+        end
       end 
     end
-
-  rescue ActiveRecord::RecordInvalid
-    render :partial => 'shared/errors', :object => @track.errors, :status => :bad_request
   end  
   
   def rate    

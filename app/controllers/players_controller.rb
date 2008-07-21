@@ -5,6 +5,8 @@ class PlayersController < ApplicationController
   before_filter :find_playable
 
   def show
+    redirect_to '/' and return unless request.xhr?
+
     @playable.increment_listened_times    
     @stream = @playable.filename
     @length = @playable.seconds

@@ -5,6 +5,7 @@ class InstrumentsController < ApplicationController
     
     respond_to do |format|
       format.xml
+      format.html { redirect_to '/' }
     end
   end
   

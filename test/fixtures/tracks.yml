@@ -39,6 +39,7 @@ sax_for_let_it_be:
   owner: quentin
   seconds: <%= rand(100) + 90 %>
   tonality: C
+  filename: test.mp3
 guitar_for_let_it_be:
   title: Chitarra
   parent_song: let_it_be

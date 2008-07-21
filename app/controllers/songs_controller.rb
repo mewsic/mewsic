@@ -8,6 +8,8 @@ class SongsController < ApplicationController
   def index
     respond_to do |format|
       format.html do
+        redirect_to '/' and return unless request.xhr?
+
         if params.has_key?("genre_id")
           @genre = Genre.find_from_param(params[:genre_id])
           @songs = Song.find_paginated_by_genre(params[:page], @genre)
