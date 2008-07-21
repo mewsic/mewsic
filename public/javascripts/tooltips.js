@@ -34,7 +34,7 @@ var Tooltips = Class.create({
   },
 
   addLockedRating: function(element) {
-    var tip = new Tip(element, '  0 ratings from   0 votes', {style: 'locked-rating'});
+    var tip = new Tip(element, '0.00 ratings from 0.00 votes', {style: 'locked-rating'});
     element.observe('prototip:shown', function() {
       tip.tip.update(this.down('.indicator').innerHTML);
     });
