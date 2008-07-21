@@ -49,7 +49,9 @@
 		serverPath: '<%= APPLICATION[:url] %>',
 		settingsXMLPath: '<%= multitrack_config_path %>',
 		songID: <%= @song.id || 0 %>,
+		<%- if logged_in? && current_user.is_admin? -%>
 		isLogEnabled: true,
+		<%- end -%>
 		isServiceDumpEnabled: true
 	};
 	var params = { wmode: 'transparent' };
