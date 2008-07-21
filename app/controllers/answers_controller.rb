@@ -38,6 +38,9 @@ class AnswersController < ApplicationController
   def siblings
     @other_answers_by_author = Answer.find_paginated_by_user @answer.user, params[:page].to_i, :per_page => 6, :conditions => ['answers.id != ?', @answer.id]
     render :partial => 'other_by_user'
+
+  rescue WillPaginate::InvalidPage
+    render :nothing => true, :status => :bad_request
   end
 
   def top
@@ -120,7 +123,7 @@ protected
     if @q.strip.blank?
       flash[:error] = 'You did not enter a search string' 
       respond_to do |format|
-        format.html { redirect_to '/' and return }
+        format.html { redirect_to answers_path and return }
         format.xml { render :nothing => true, :status => :bad_request }
       end
     end

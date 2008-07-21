@@ -1809,7 +1809,7 @@ html>body .gallery-photo-thumb >.edit-command{
 #profile-completeness {
 	position: absolute;
 	padding: 4px;
-	border: 1px solid #d9d9d9;
+	background: #d7d7d7;
 	width: 390px;
 	min-height: 14px;
 }
@@ -1823,6 +1823,7 @@ html>body .gallery-photo-thumb >.edit-command{
 #profile-completeness .description {
 	position: absolute;
 	padding-left: 3px;
+	color: #FFFFFF;
 }
 .user-sharing{
 	font-size:11px;
