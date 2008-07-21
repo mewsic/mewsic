@@ -1,5 +1,15 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
+
+  def load_prototype
+    if RAILS_ENV == 'production'
+      return %[<script src="http://www.google.com/jsapi"></script>] + javascript_tag(%[
+          google.load('prototype', '1.6.0.2');
+          google.load('scriptaculous', '1.8.1'); ])
+    else
+      javascript_include_tag 'protoculous'
+    end
+  end
   
   def rating(rateable, options = {})
     type_class = rateable.class.name.downcase

@@ -2385,6 +2385,10 @@ p.sign-in .button{
 	width: 732px;
 }
 
+.multitrack #footer .whiteblock {
+	width: 100%;
+}
+
 /* generici correttori */
 .no-bold{
 	font-weight:normal;

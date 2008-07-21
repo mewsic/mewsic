@@ -3,17 +3,9 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon"/>
-	<title>Myousica - play and share <%= render_title %></title>
+  <title>Myousica - play and share <%= render_title %></title>
   <%= stylesheet_link_tag *%w[style lightview prototip starbox] %>  
-	<script src="http://www.google.com/jsapi"></script>
-	<%= if RAILS_ENV == 'production'
-				javascript_tag %[
-					google.load('prototype', '1.6.0.2');
-					google.load('scriptaculous', '1.8.1'); ]
-			else
-				javascript_include_tag 'protoculous'
-			end
-	-%>
+	<%= load_prototype %>
   <%= javascript_include_tag *%w[prototip starbox picture_slider mlab lightview inplaceselect player swfobject tooltips pagination application] %>
   <%= yield :head %>
   <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon"/>
@@ -55,5 +47,14 @@
     <a style="position: absolute; top: 19px; right: 19px;" href="#" onclick="Player.instance.close();return false;"><img src="/images/button_player_close.png" /></a>
     <div class="content" style="margin-top: 5px; margin-left: 50px;"></div>
   </div>
+  <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+    var pageTracker = _gat._getTracker("UA-3674352-1");
+    pageTracker._initData();
+    pageTracker._trackPageview();
+  </script>
 </body>
 </html>
