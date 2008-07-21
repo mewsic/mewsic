@@ -34,6 +34,9 @@ private
       raise ActiveRecord::RecordNotFound
     end 
     @exists = Abuse.exists?(["abuseable_type = ? AND abuseable_id = ?", @abuseable.class.name, @abuseable.id])
+
+  rescue ActiveRecord::RecordNotFound
+    render :nothing => true, :status => :bad_request
   end
   
   def redirect_to_abuseable_page

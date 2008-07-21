@@ -12,6 +12,16 @@ class AbusesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  def test_should_check_for_abuseable
+    login_as :quentin
+    get :new, :song_id => 0
+    assert_response :bad_request
+
+    login_as :quentin
+    get :new, :answer_id => 0
+    assert_response :bad_request
+  end
+
   def test_should_show_get_and_assign_abuse_to_answer
     login_as :quentin
     xhr :get, :new, :answer_id => answers(:quentin_asks_about_magic).id
@@ -35,7 +45,16 @@ class AbusesControllerTest < ActionController::TestCase
     
     login_as :quentin
     xhr :post, :create, :answer_id => answers(:quentin_asks_about_magic).id
+    assert_response :success
+    assert assigns(:abuseable)
+    assert assigns(:abuse)
     assert_equal 1, ActionMailer::Base.deliveries.size
+
+    xhr :post, :create, :answer_id => answers(:quentin_asks_about_magic).id
+    assert_response :success
+    assert assigns(:exists)
+    assert_equal 1, ActionMailer::Base.deliveries.size
+    assert_template 'new'
   end
     
   def test_should_show_get_and_assign_abuse_to_song
