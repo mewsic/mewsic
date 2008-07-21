@@ -23,7 +23,7 @@ class SongTest < ActiveSupport::TestCase
 
   def test_paginated_by_genre
     songs = Song.find_paginated_by_genre(1, genres(:reggae))
-    assert_equal (genres(:reggae).songs.size > 15 ? 15 : genres(:reggae).songs.size), songs.size
+    assert_equal (genres(:reggae).published_songs.size > 15 ? 15 : genres(:reggae).published_songs.size), songs.size
   end 
 
   def test_paginated_by_user

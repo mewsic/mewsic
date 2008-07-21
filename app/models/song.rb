@@ -101,8 +101,9 @@ class Song < ActiveRecord::Base
   
   def self.find_random_direct_siblings(limit = 5)    
     Mix.find_by_sql([
-      "select distinct x.original_author, x.title, t.song_id from mixes s inner join mixes t on s.track_id = t.track_id inner join songs x on t.song_id = x.id       
-      where x.id != #{self.id} ORDER BY #{SQL_RANDOM_FUNCTION} LIMIT #{limit}"])
+      "SELECT DISTINCT x.original_author, x.title, t.song_id
+       FROM mixes s INNER JOIN mixes t ON s.track_id = t.track_id INNER JOIN songs x ON t.song_id = x.id
+       ORDER BY #{SQL_RANDOM_FUNCTION} LIMIT #{limit}"])
   end
 
   def self.create_unpublished!
@@ -114,19 +115,19 @@ class Song < ActiveRecord::Base
   end
   
   def direct_siblings(limit = nil)
-    limit = "limit #{limit}" if limit
+    limit = "LIMIT #{limit}" if limit
     Song.find_by_sql("
-      select
+      SELECT
         distinct x.*
-      from
+      FROM
         mixes s
-        inner join mixes t
-          on s.track_id = t.track_id
-        inner join songs x
-          on t.song_id = x.id
-      where
+        INNER JOIN mixes t
+          ON s.track_id = t.track_id
+        INNER JOIN songs x
+          ON t.song_id = x.id
+      WHERE
         s.song_id = #{self.id}
-      and
+      AND
         x.id != #{self.id}
       #{limit}
     ")

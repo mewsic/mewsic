@@ -59,6 +59,7 @@ i_want_to_break_free:
   listened_times: 1210
   tone: B#
   seconds: 190
+  published: true
 red_red_wine:
   title: Red Red Wine
   user: quentin
@@ -67,6 +68,16 @@ red_red_wine:
   listened_times: 1120
   tone: D
   seconds: 180
+  published: true
+red_red_wine_unpublished:
+  title: Red Red Wine Unpublished
+  user: quentin
+  original_author: Bob Marley
+  genre: reggae
+  listened_times: 1120
+  tone: D
+  seconds: 180
+  published: false
 space_cowboy:
   title: Space Cowboy
   user: aaron
@@ -76,6 +87,7 @@ space_cowboy:
   tone: D
   seconds: 180
   created_at: <%= 1.week.from_now.to_s(:db) %>
+  published: true
 autumn_leaves:
   title: Autumn Leaves
   user: quentin

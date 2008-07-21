@@ -28,13 +28,13 @@ class ApplicationController < ActionController::Base
     store_location unless logged_in? || controller_name == 'sessions' || multitrack_request
   end
 
-  def check_user_inbox
-    if logged_in?
-      if current_user.unread_message_count > 0
-        flash.now[:inbox] = "You have <a href=\"#{user_path(current_user)}\">#{current_user.unread_message_count} unread messages</a>."
-      end      
-    end
-  end
+  #def check_user_inbox
+  #  if logged_in?
+  #    if current_user.unread_message_count > 0
+  #      flash.now[:inbox] = "You have <a href=\"#{user_path(current_user)}\">#{current_user.unread_message_count} unread messages</a>."
+  #    end      
+  #  end
+  #end
   
   def to_breadcrumb
     controller_name

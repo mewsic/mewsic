@@ -61,6 +61,9 @@ class MlabsController < ApplicationController
       end
     end
 
+  rescue ActiveRecord::RecordNotFound
+    render :nothing => true, :status => :not_found
+
   end
 
 private

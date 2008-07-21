@@ -16,7 +16,7 @@ class Mlab < ActiveRecord::Base
   belongs_to :user
   belongs_to :mixable, :polymorphic => true
   
-  validates_presence_of :mixable
+  validates_presence_of :mixable, :user_id
 
   def self.find_my_list_items_for(user)
     songs  = find_songs  :all, :conditions => ['mlabs.user_id = ?', user.id]

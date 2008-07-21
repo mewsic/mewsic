@@ -6,13 +6,13 @@ class GenreTest < ActiveSupport::TestCase
   end
     
   def test_most_listened_songs
-    genre = Genre.find_by_name("Reggae")
-    most_listened_song_for_reggae = Song.find_by_title("Red Red Wine")
+    genre = Genre.find_by_name("Rock")
+    most_listened_song_for_rock = Song.find_by_title("I Want to Break Free")
     most_listened_songs = genre.find_most_listened :limit => 3, :include => :user
     
     assert_equal 3, most_listened_songs.size
     assert_not_nil most_listened_songs.first.user
-    assert_equal most_listened_songs.first, most_listened_song_for_reggae
+    assert_equal most_listened_songs.first, most_listened_song_for_rock
   end
   
   def test_prolific_users
@@ -28,6 +28,6 @@ class GenreTest < ActiveSupport::TestCase
   def test_genre_songs
     genre = Genre.find_by_name("Reggae")
     songs = Song.find_paginated_by_genre(1, genre)
-    assert_equal genre.songs.size > 15 ? 15 : genre.songs.size, songs.size
+    assert_equal genre.published_songs.size > 15 ? 15 : genre.published_songs.size, songs.size
   end  
 end
