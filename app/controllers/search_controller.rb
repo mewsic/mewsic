@@ -81,7 +81,7 @@ class SearchController < ApplicationController
 
              Song.find(:all, :include => [:user, :genre],
                        :conditions => [songs_conditions_string, songs_conditions_vars],
-                       :order => 'songs.rating_avg DESC, songs.created_at DESC', :limit => 10)
+                       :order => 'songs.rating_avg DESC, songs.created_at DESC', :limit => 20)
            else
              []
            end
@@ -90,15 +90,15 @@ class SearchController < ApplicationController
            if !tracks_conditions_vars.empty?
              Track.find(:all, :include => [{:parent_song => :genre}, :owner, :instrument],
                         :conditions => [tracks_conditions_string, tracks_conditions_vars],
-                        :order => 'tracks.rating_avg DESC, tracks.created_at DESC', :limit => 10)
+                        :order => 'tracks.rating_avg DESC, tracks.created_at DESC', :limit => 20)
            else 
              []
            end
 
        else
 
-         @songs = Song.search(@q, :include => [:genre, :mixes, :user], :limit => 20, :order => 'rating_avg DESC, created_at DESC')
-         @tracks = Track.search(@q, :include => [:instrument, {:parent_song => :genre}, :owner], :limit => 20, :order => 'rating_avg DESC, created_at DESC')
+         @songs = Song.search(@q, :include => [:genre, :mixes, :user], :limit => 20, :order => 'songs.rating_avg DESC, songs.created_at DESC')
+         @tracks = Track.search(@q, :include => [:instrument, {:parent_song => :genre}, :owner], :limit => 20, :order => 'tracks.rating_avg DESC, tracks.created_at DESC')
 
        end
        render :action => 'show'
