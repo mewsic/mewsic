@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   protected    
   
   def update_user_status
-    multitrack_request = (controller_name == 'multitrack' || params.has_key?('mtrack'))
+    multitrack_request = (controller_name == 'multitrack') || (params[:format] == 'xml')
 
     if logged_in? && !request.xhr?
       current_user.update_attribute(:status, multitrack_request ? 'rec' : 'on')
