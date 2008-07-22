@@ -237,5 +237,5 @@ function pop(url) {
 }
 
 function reload() {
-  window.location.href = window.location.href.sub(/#.*/, '');
+  window.location.href = window.location.href.sub(/[#?].*/, '');
 }

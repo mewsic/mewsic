@@ -10,6 +10,19 @@ module ApplicationHelper
       javascript_include_tag 'protoculous'
     end
   end
+
+  def google_analytics(id = 'UA-3674352-1')
+    return if RAILS_ENV == 'development'
+    javascript_tag(%[
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    ]) +
+    javascript_tag(%[
+      var pageTracker = _gat._getTracker("#{id}");
+      pageTracker._initData();
+      pageTracker._trackPageview();
+    ])
+  end
   
   def rating(rateable, options = {})
     type_class = rateable.class.name.downcase
@@ -171,7 +184,7 @@ class AjaxUploadFormBuilder < ActionView::Helpers::FormBuilder
     file_field name, :size => 1
   end
 
-  def hidden_iframe(name) # XXX this name is useless remove it
+  def hidden_iframe(name)
     %[<iframe name="#{name}-iframe" id="#{name}-iframe" src="about:blank"
           style="position:absolute;left:-100px;width:0px;height:0px;border:0px"></iframe>]
   end

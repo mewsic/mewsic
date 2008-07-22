@@ -40,3 +40,4 @@
 <% javascript('user/instruments') %>
 <% javascript('user/band_members') if current_user_page? && @user.band? %>
 <% javascript('user/mband_invite') if !@user.band? %>
+<% javascript('user/firstrun') if @firstrun %>

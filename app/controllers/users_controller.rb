@@ -1,7 +1,7 @@
 class UsersController < ApplicationController    
   
   before_filter :login_required, :only => :update
-  before_filter :check_if_current_user_page, :only => [:update, :switch_type, :change_password]
+  before_filter :check_if_current_user_page, :only => [:update, :switch_type, :firstrun, :change_password]
   before_filter :check_if_already_logged_in, :only => [:new]
   
   protect_from_forgery :except => :update
@@ -56,6 +56,8 @@ class UsersController < ApplicationController
         @user.friends
       end
 
+    @firstrun = (current_user == @user) && params.has_key?(:firstrun)
+
     respond_to do |format|
       format.html
       format.xml
@@ -70,11 +72,15 @@ class UsersController < ApplicationController
     self.current_user = params[:activation_code].blank? ? :false : User.find_by_activation_code(params[:activation_code])
     if logged_in? && !current_user.active?
       current_user.activate
-      flash[:notice] = "Welcome aboard, #{self.current_user.login}!"
-      redirect_to user_path(self.current_user)
+      redirect_to user_path(self.current_user, :firstrun => true)
     else
       redirect_to '/'
     end
+  end
+
+  def firstrun
+    @user = User.find_from_param(params[:id])
+    render :template => 'users/switch/firstrun', :layout => false
   end
   
   def update
@@ -155,7 +161,7 @@ class UsersController < ApplicationController
     @user = User.find_from_param(params[:id])
     @type = %W(user dj band).include?(params[:type]) && params[:type].capitalize
 
-    if !@type || @user.class.name == @type
+    if !@type #|| @user.class.name == @type
       render :partial => 'users/switch/failure', :status => :bad_request and return
     end
 
@@ -164,7 +170,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       switch_partial = {:partial => "users/switch/#{@user.class.name.downcase}_to_#{@type.downcase}", :layout => 'users/switch/layout'}
       if request.put?
-        @user.nickname = params[:nickname]
+        @user.nickname = params[:nickname] if params[:nickname]
         if @user.switch_to! @type
           format.html { render :partial => "users/switch/success" }
         else
