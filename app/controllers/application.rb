@@ -19,13 +19,13 @@ class ApplicationController < ActionController::Base
   protected    
   
   def update_user_status
-    multitrack_request = (controller_name == 'multitrack' || params.has_key?('BulkLoaderNoCache'))
+    multitrack_request = (controller_name == 'multitrack' || params.has_key?('mtrack'))
 
     if logged_in? && !request.xhr?
       current_user.update_attribute(:status, multitrack_request ? 'rec' : 'on')
     end
 
-    store_location unless logged_in? || controller_name == 'sessions' || multitrack_request
+    store_location unless logged_in? || multitrack_request || (controller_name == 'sessions')
   end
 
   #def check_user_inbox
