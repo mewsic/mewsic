@@ -30,6 +30,8 @@ private
       Answer.find(params[:answer_id])
     elsif params.include?(:song_id)
       Song.find(params[:song_id])
+    elsif params.include?(:user_id)
+      User.find_from_param(params[:user_id])
     else
       raise ActiveRecord::RecordNotFound
     end 

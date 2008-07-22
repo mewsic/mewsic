@@ -116,6 +116,8 @@ class User < ActiveRecord::Base
     :class_name => 'Mlab',
     :conditions => "mlabs.mixable_type = 'Song'" 
   
+  has_many :abuses, :as => :abuseable
+
   acts_as_rated :rating_range => 0..5
   
   has_private_messages

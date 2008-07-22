@@ -57,6 +57,7 @@ class UsersController < ApplicationController
       end
 
     @firstrun = (current_user == @user) && params.has_key?(:firstrun)
+    @has_abuse = @user.abuses.exists? ['user_id = ?', current_user.id] if logged_in?
 
     respond_to do |format|
       format.html

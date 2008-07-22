@@ -31,6 +31,12 @@
 	  </div>
     <%= render :partial => 'gallery' %> 
     <%= render :partial => 'users/my/share' if current_user_page? %> 
+
+    <p class="float-right abstract">
+      <%- if logged_in? && !current_user_page? && !@has_abuse -%> <!--XXX-->
+				<a href="<%= formatted_new_user_abuse_path(@user, 'html') %>" class="lightview" rel="ajax" title="Report abuse :: :: ajax:{method:'get'},width:480,height:330">report abuse</a>
+      <%- end -%>
+    </p>
   </div>
 
 <% javascript('loading') %>

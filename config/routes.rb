@@ -12,7 +12,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :answers, :member => { :rate => :put, :siblings => :get }, :collection => { :top => :get, :newest => :get, :open => :get, :search => :get } do |answers|
     answers.resources :replies
-    answers.resources :abuses, :singular => 'abuse'
+    answers.resources :abuses
   end
   map.connect 'replies/:id/rate', :controller => 'replies', :action => 'rate'
   
@@ -33,6 +33,7 @@ ActionController::Routing::Routes.draw do |map|
     user.resources :photos
     user.resources :mlabs
     user.resources :messages, :collection => { :delete_selected => :post, :sent => :get, :unread => :get }
+    user.resources :abuses
   end
   map.forgot_password '/forgot_password', :controller => 'users', :action => 'forgot_password'
   map.reset_password '/reset_password/:id',  :controller => 'users', :action => 'reset_password'
@@ -41,9 +42,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :songs, :has_one => :player, 
     :member => { :mix => :post, :load_track => :put, :unload_track => :put, :rate => :put , :tracks => :get, :download => :get } do |song|
-
-    song.resources :abuses, :singular => 'abuse'
-    
+    song.resources :abuses
   end
  
   map.resources :tracks, :has_one => :player, :member => { :rate => :put, :download => :get }
