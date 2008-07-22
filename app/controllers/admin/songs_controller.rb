@@ -1,7 +1,11 @@
 require 'net/http'
 require 'uri'
+require 'map_with_index'
+require 'requestify'
 
 class Admin::SongsController < Admin::AdminController
+  include Requestify
+
   def index
     @songs = Song.find(:all, :conditions => 'title is not null', :order => 'id DESC')
   end
@@ -54,9 +58,9 @@ class Admin::SongsController < Admin::AdminController
   end
 
   def mp3
-    if params[:song]
+    if params[:tracks]
       url = URI.parse("#{APPLICATION[:media_url]}/mix")
-      res = Net::HTTP.post_form(url, {'song' => params[:song]})
+      res = Net::HTTP.start(url.host, url.port) { |http| http.post(url.path, requestify(:tracks => params[:tracks])) }
     elsif params[:worker]
       url = URI.parse("#{APPLICATION[:media_url]}/mix/status/#{params[:worker]}")
       res = Net::HTTP.start(url.host, url.port) { |http| http.get(url.path) }

@@ -113,7 +113,7 @@ class SongsController < ApplicationController
   def mix
     @song = current_user.songs.find(params[:id])
     tracks = params.delete(:tracks)
-    render :nothing => true, :status => :bad_request and return unless tracks
+    render :nothing => true, :status => :bad_request and return if tracks.blank?
 
     Song.transaction do 
       if !@song.published
