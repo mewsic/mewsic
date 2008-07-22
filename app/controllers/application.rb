@@ -20,12 +20,13 @@ class ApplicationController < ActionController::Base
   
   def update_user_status
     multitrack_request = (controller_name == 'multitrack') || (params[:format] == 'xml')
+    javascript_request = params[:format] == 'js'
 
     if logged_in? && !request.xhr?
       current_user.update_attribute(:status, multitrack_request ? 'rec' : 'on')
     end
 
-    store_location unless logged_in? || multitrack_request || (controller_name == 'sessions')
+    store_location unless logged_in? || multitrack_request || javascript_request || (controller_name == 'sessions')
   end
 
   #def check_user_inbox
