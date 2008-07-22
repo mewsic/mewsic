@@ -5,7 +5,7 @@ var TrackUpload = Class.create(WorkerClient, {
       // First request
       this.startUpdater(r);
       $('track-upload-iframe').hide();
-      $('upload').value = '';
+      $('Filedata').value = '';
     } else {
       this.showWorkerStatus(r);
     }

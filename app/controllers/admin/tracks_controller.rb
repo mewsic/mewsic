@@ -43,8 +43,8 @@ class Admin::TracksController < Admin::AdminController
 
   def upload
     url = URI.parse "#{APPLICATION[:media_url]}/upload"
-    if params[:upload] && params[:upload].respond_to?(:size) && params[:upload].size > 0
-      query, headers = Multipart::Post.prepare_query(:upload => params[:upload])
+    if params[:Filedata] && params[:Filedata].respond_to?(:size) && params[:Filedata].size > 0
+      query, headers = Multipart::Post.prepare_query(:Filedata => params[:Filedata])
       res = Net::HTTP.start(url.host, url.port) { |http| http.post(url.path, query, headers) }
     elsif params[:worker]
       url = URI.parse("#{APPLICATION[:media_url]}/upload/status/#{params[:worker]}")
