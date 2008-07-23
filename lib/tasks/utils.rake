@@ -21,5 +21,24 @@ namespace :myousica do
     end
     
   end  
+
+  desc "Clean up unreferenced mp3s"
+  task :clean_up_mp3s => :environment do
+    unless ENV['MP3DIR']
+      raise ArgumentError, "Please define MP3DIR in the environment"
+    end
+
+    mp3s = (Track.find(:all, :select => 'filename', :conditions => 'filename IS NOT NULL').map(&:filename) +
+            Song.find(:all, :select => 'filename', :conditions => 'filename IS NOT NULL').map(&:filename))
+    mp3s.map! { |f| File.basename(f) }
+
+    Dir[File.join(ENV['MP3DIR'], '*.mp3')].each do |f|
+      if !mp3s.include?(File.basename(f))
+        #puts "removing #{f}"
+        File.unlink f
+        File.unlink f.sub(/mp3$/, 'png')
+      end
+    end
+  end
   
 end
