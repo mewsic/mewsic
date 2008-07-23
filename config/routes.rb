@@ -7,7 +7,8 @@ ActionController::Routing::Routes.draw do |map|
     mband.resources :tracks, :member => { :toggle_idea => :put }
   end  
   
-  map.connect 'mband_memberships/accept/:token', :controller => 'mband_memberships', :action => 'accept'
+  map.accept_mband_membership 'mband_memberships/accept/:token', :controller => 'mband_memberships', :action => 'accept'
+  map.decline_mband_membership 'mband_memberships/decline/:token', :controller => 'mband_memberships', :action => 'decline'
   map.resources :mband_memberships
   
   map.resources :answers, :member => { :rate => :put, :siblings => :get }, :collection => { :top => :get, :newest => :get, :open => :get, :search => :get } do |answers|

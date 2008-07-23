@@ -24,8 +24,8 @@ class Mband < ActiveRecord::Base
   
   acts_as_rated :rating_range => 0..5
   
-  has_many :avatars, :as => :pictureable
-  has_many :photos, :as => :pictureable
+  has_many :avatars, :as => :pictureable, :dependent => :destroy
+  has_many :photos, :as => :pictureable, :dependent => :destroy
   has_many :memberships, :class_name => 'MbandMembership', :dependent => :destroy
   has_many :members, :through => :memberships, :class_name => 'User', :source => :user, :conditions => "accepted_at IS NOT NULL"
   

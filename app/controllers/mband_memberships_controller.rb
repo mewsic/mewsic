@@ -47,6 +47,14 @@ class MbandMembershipsController < ApplicationController
     redirect_to mband_url(@membership.mband)
   end
 
+  def decline
+    @membership = MbandMembership.find(:first, :conditions => ["membership_token = ?", params[:token]])
+    @membership.destroy
+
+    flash[:notice] = "Invitation has been declined"
+    redirect_to user_url(current_user)
+  end
+
 private
 
   def find_mband    

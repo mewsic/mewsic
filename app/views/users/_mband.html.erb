@@ -5,7 +5,8 @@
       <a href="#" onclick="new Effect.ScrollTo($('user-mail').down('.popup'));MailBox.instance.openPopup();MailBox.instance.loadPage('<%= new_user_message_path(current_user, :to => to_string) %>');return false;">write</a><br/>
   <%- end -%>
   <%- if current_user_page? && mband.band_membership_with(@user).accepted_at.nil? -%>
-    <a href="/mband_memberships/accept/<%= mband.band_membership_with(@user).membership_token %>">accept</a>
+		<%= link_to 'accept', accept_mband_membership_path(mband.band_membership_with(@user).membership_token) %><br/>
+		<%= link_to 'decline', decline_mband_membership_path(mband.band_membership_with(@user).membership_token) %>
   <%- end -%>
   </p>
   <div class="thumb">
