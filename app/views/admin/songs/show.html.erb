@@ -65,7 +65,7 @@
 	<% end %>
 
 	<% edit_form_for @song, :url => mix_admin_song_path(@song) do %>
-	<%= select_tag 'track_id', options_for_select(Track.find(:all, :include => [{:parent_song => :genre}, :instrument], :order => 'songs.title, instruments.description, tracks.title, genres.name').map{|t| ["#{t.parent_song.title}: #{t.title} [#{t.instrument.description}] (#{t.parent_song.genre.name})",t.id]}) %>
+	<%= select_tag 'track_id', options_for_select(Track.find(:all, :include => [{:parent_song => :genre}, :instrument], :order => 'songs.title, instruments.description, tracks.title, genres.name').map{|t| ["#{t.parent_song.title}: #{t.title} [#{t.instrument.description}] (#{t.parent_song.genre.name if t.parent_song.genre})",t.id]}) %>
 		<%= submit_tag 'mix track' %>
 	<% end %>
 
