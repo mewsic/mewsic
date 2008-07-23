@@ -80,7 +80,7 @@
 			<div style="float: left;">
 				<!-- inplace editing -->
 				<p class="mlab_label">New project name: <a href="#" id="mlab_title_edit_button">[edit]</a></p>
-				<p class="mlab_title_big" id="mlab_title"><%= @song.title || 'Untitled' %></p>
+				<p class="mlab_title_big" id="mlab_title"><%= @song.title || 'Project title' %></p>
 			</div>
 			<div id="mlab_labels_right">
 				<div style="float: left;">
@@ -99,24 +99,24 @@
 			<div style="float: left;">
 				<!-- inplace editing -->
 				<p class="mlab_label">Author: <a href="#" id="mlab_original_author_edit_button">[edit]</a></p>
-				<p class="mlab_title_big" id="mlab_original_author"><%= @song.original_author || 'Original Author' %></p>
+				<p class="mlab_title_big" id="mlab_original_author"><%= @song.original_author || 'Project author' %></p>
 			</div>
 			<div id="mlab_labels_right">
 				<!-- inplace select -->
 				<p class="mlab_label">Genre: <a href="#" id="mlab_genre_edit_button">[edit]</a></p></p>
-				<p class="mlab_genre_text" id="mlab_genre"><%= @song.genre ? @song.genre.name : '' %></p>
+				<p class="mlab_title_big" id="mlab_genre"><%= @song.genre ? @song.genre.name : '' %></p>
 			</div>
 		</div>
 		<div id="mlab_detail_row_last">
 			<div style="float: left;">
 				<!-- inplace editing -->
 				<p class="mlab_label">Note: <a href="#" id="mlab_description_edit_button">[edit]</a></p>
-				<p class="mlab_note_text" id="mlab_description"><%=h @song.description %></p>
+				<p class="mlab_medium_text" id="mlab_description"><%=h @song.description %></p>
 			</div>
 			<div id="mlab_labels_right">
 				<!-- dynamic -->
 				<p class="mlab_label">Instruments:</p>
-				<p class="mlab_small_text" id="mlab_instruments"><%= instruments_used_in @song %></p>
+				<p class="mlab_medium_text" id="mlab_instruments"><%= instruments_used_in @song %></p>
 			</div>
 		</div>			
 	</div>

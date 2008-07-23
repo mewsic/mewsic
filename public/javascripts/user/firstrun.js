@@ -3,10 +3,10 @@ document.observe('dom:loaded', function() {
     href: '/users/' + $('current-user-id').value + '/firstrun',
     rel: 'iframe',
     options: {
+      topclose: true,
       autosize: false,
       width: 410,
-      height: 360,
-      topclose: true
+      height: 360
     }
   });
 });

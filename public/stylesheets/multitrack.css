@@ -1,9 +1,13 @@
 /********************* MLAB NEW PROJECT *********************/
 
+#search {
+	display: none;
+}
+
 #mlab_new_block_top {
 	width: 973px;
-	height: 210px;
-	margin-top: 30px;
+	height: 190px;
+	/*margin-top: 30px;*/
 }
 
 #mlab_new_block_bottom {
@@ -52,18 +56,14 @@
 #mlab_detail_row_last, #mlab_detail_row_bottom_last {
 	float: left;	
 	padding-left: 15px;	
-	width: 827px;
-}
-
-#mlab_detail_row_bottom_last {
-	width: 927px;
+	width: 800px;
 }
 
 #mlab_detail_row {
 	border-bottom: 2px solid #EFEDD5;
 	float: left;
 	padding-left: 15px;
-	width: 827px;
+	width: 800px;
 }
 
 #mlab_detail_row_bottom {
@@ -77,7 +77,7 @@
 	color: #000000;
 	font-size: 21px;
 	font-weight: bold;
-	margin-bottom: 5px;
+	/*margin-bottom: 5px;*/
 	margin-top: 3px;
 }
 
@@ -100,18 +100,15 @@
 	margin-top: 3px;
 }
 
-.mlab_genre_text {
+.mlab_medium_text {
 	font-size: 14px;
 	font-weight: bold;
 	margin-bottom: 5px;
 	margin-top: 3px;
 }
 
-.mlab_note_text {
-	font-size: 11px;
+#mlab_description {
 	width: 575px;
-	margin-bottom: 5px;
-	margin-top: 3px;
 }
 
 #mlab_labels_right {

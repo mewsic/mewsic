@@ -318,22 +318,6 @@ div#mband-members div.status {
 	left:0;
 }
 
-.song-tracks .simple-list {
-	margin-bottom: 7px;
-}
-
-.song-tracks .slide-clip {
-	clip: rect(0px 320px 350px 0px);
-	width:320px;
-	height: 350px;
-	position: absolute;
-	overflow:hidden;
-}
-
-.song-tracks .slide-contents {
-	top: 0px;
-}
-
 div.user-list-boxes .badge {
 	color: #00A0C6;
 	font-size: 14px;
@@ -2684,13 +2668,17 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 	margin-bottom: 6px;
 }
 
+.song-spec {
+	margin-top: 20px;
+}
+
 /* added 05 2008 */
 .song-spec .top-box{
 	background:url(/images/rounded_grey_bottom.gif) no-repeat bottom left;
 }
 .song-spec .top-box .track-tab{
 	position:absolute;
-	margin-top:-34px;
+	margin-top:-17px;
 	padding-left: 10px;
 	padding-top: 6px;
 	background:url(/images/rounded_grey_label_top.gif) no-repeat top left;
@@ -2700,9 +2688,34 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 	background:url(/images/rounded_grey_top.gif) no-repeat top left;
 	padding:10px 10px 0px;
 }
+.song-spec h1 {
+	display: block;
+	width: 275px;
+	font-size: 18px;
+	margin-bottom: 8px;
+}
 .song-stat{
 	background:#F6F6F6 url(/images/rounded_grey_boxbottom.gif) no-repeat bottom left;
 	padding:15px;
+}
+
+.song-tracks .simple-list {
+	margin-bottom: 7px;
+}
+
+.song-tracks .bottom-box{
+	height: 365px !important;
+}
+.song-tracks .slide-clip {
+	clip: rect(0px 320px 365px 0px);
+	width: 320px;
+	height: 365px;
+	position: absolute;
+	overflow:hidden;
+}
+
+.song-tracks .slide-contents {
+	top: 0px;
 }
 
 /* special arrow */
@@ -2723,10 +2736,6 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 	padding:10px;
 	height:550px;
 	overflow:hidden;
-}
-
-.song-tracks .bottom-box{
-	height: 350px;
 }
 
 .box-grigio-stondato .top-box .elements{
@@ -2757,6 +2766,9 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 	margin-top:10px;
 	width:36px;
 	height:22px;
+}
+.song-spec .special-arrow {
+	margin-top: 0px;
 }
 .special-arrow.active{
 	background:url(/images/arrow_grey_special.gif) no-repeat top right;

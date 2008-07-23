@@ -50,6 +50,7 @@ class MbandsController < ApplicationController
   def update
     # FIXME: cambiare l'output a seconda del formato richiesto e se ci sono errori.
     if @mband.update_attributes(params[:mband])
+      @mband.reload
       if params[:mband] && params[:mband].keys.size <= 2
         render(:text => @mband.send(params[:mband].keys.first)) and return
       end

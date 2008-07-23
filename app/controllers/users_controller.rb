@@ -88,6 +88,7 @@ class UsersController < ApplicationController
     @user = User.find_from_param(params[:id])
     # FIXME: cambiare l'output a seconda del formato richiesto e se ci sono errori.
     if @user.update_attributes(params[:user])
+      @user.reload
       if params[:user] && params[:user].keys.size <= 2
         render(:text => @user.send(params[:user].keys.first)) and return
       end

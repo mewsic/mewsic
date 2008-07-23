@@ -73,6 +73,7 @@ class SongsController < ApplicationController
   def update
     @song = current_user.songs.find(params[:id])
     @song.update_attributes!(params[:song])
+    @song.reload
     if params[:song].size == 1 && @song.respond_to?(params[:song].keys.first)
       if params[:song].keys.first == 'genre_id'
         render :text => @song.genre ? @song.genre.name : ''

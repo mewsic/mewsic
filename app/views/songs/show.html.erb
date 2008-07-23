@@ -5,7 +5,6 @@
     <div class="special-arrow active"></div>
   </div>
   <div class="simple-list">
-    <h1><%= @song.title %></h1>
     <div class="top-box clear-block">
       <div class="float-right" style="padding-right:56px;">
         <div class="track-tab">
@@ -13,6 +12,7 @@
         </div>
       </div>
       <div class="bottom-box clear-block">
+				<h1><%= @song.title %></h1>
         <div class="clear-block">
           <p class="music-info float-right align-right">
             <span>runtime:<br /><strong><%= @song.length %></strong></span>
@@ -60,9 +60,9 @@
         </tr>
       </table>
     </div>
-    <p class="abstract align-right">
+    <p class="abstract align-right" style="margin: 7px">
       <%- if logged_in? && !@has_abuse -%>
-        <a href="<%= formatted_new_song_abuse_path(@song, 'html') %>" title="Report abuse :: :: width: 600, height: 400, ajax: {method:'get'}" rel="ajax" class="lightview">report abuse</a>
+				<%= report_abuse_link_to formatted_new_song_abuse_path(@song, 'html') %>
       <%- end -%>
     </p>
   </div>

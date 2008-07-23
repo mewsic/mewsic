@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 49) do
+ActiveRecord::Schema.define(:version => 50) do
 
   create_table "abuses", :force => true do |t|
     t.integer  "abuseable_id"
@@ -176,22 +176,22 @@ ActiveRecord::Schema.define(:version => 49) do
   end
 
   create_table "songs", :force => true do |t|
-    t.string   "title"
-    t.string   "original_author"
+    t.string   "title",           :limit => 60
+    t.string   "original_author", :limit => 60
     t.string   "description"
-    t.string   "tone"
-    t.string   "filename"
+    t.string   "tone",            :limit => 2
+    t.string   "filename",        :limit => 64
     t.integer  "user_id"
     t.integer  "genre_id"
     t.integer  "bpm"
-    t.integer  "seconds",                                        :default => 0
-    t.integer  "listened_times",                                 :default => 0
-    t.boolean  "published",                                      :default => true
+    t.integer  "seconds",                                                      :default => 0
+    t.integer  "listened_times",                                               :default => 0
+    t.boolean  "published",                                                    :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "rating_count"
-    t.decimal  "rating_total",    :precision => 10, :scale => 2
-    t.decimal  "rating_avg",      :precision => 10, :scale => 2
+    t.decimal  "rating_total",                  :precision => 10, :scale => 2
+    t.decimal  "rating_avg",                    :precision => 10, :scale => 2
   end
 
   create_table "static_pages", :force => true do |t|
@@ -203,21 +203,21 @@ ActiveRecord::Schema.define(:version => 49) do
   end
 
   create_table "tracks", :force => true do |t|
-    t.string   "title"
-    t.string   "filename"
+    t.string   "title",                  :limit => 60
+    t.string   "filename",               :limit => 64
     t.string   "description"
-    t.string   "tonality",                                              :default => "C"
+    t.string   "tonality",               :limit => 2,                                 :default => "C"
     t.integer  "song_id"
     t.integer  "instrument_id"
-    t.integer  "listened_times",                                        :default => 0
-    t.integer  "seconds",                                               :default => 0
+    t.integer  "listened_times",                                                      :default => 0
+    t.integer  "seconds",                                                             :default => 0
     t.integer  "bpm"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "rating_count"
-    t.decimal  "rating_total",           :precision => 10, :scale => 2
-    t.decimal  "rating_avg",             :precision => 10, :scale => 2
-    t.boolean  "idea",                                                  :default => false, :null => false
+    t.decimal  "rating_total",                         :precision => 10, :scale => 2
+    t.decimal  "rating_avg",                           :precision => 10, :scale => 2
+    t.boolean  "idea",                                                                :default => false, :null => false
     t.integer  "user_id"
     t.string   "instrument_description"
   end

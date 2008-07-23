@@ -7,6 +7,7 @@ class MultitrackController < ApplicationController
       @song = current_user.songs.create_unpublished!
     else
       flash.now[:notice] = %(You are not logged in. Saving will be disabled, please <a href="/login">log in</a> or <a href="/signup">sign up</a> if you want to save your work!)
+      store_location
       @song = Song.create_unpublished!
     end
   end
