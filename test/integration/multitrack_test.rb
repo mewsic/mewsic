@@ -28,7 +28,7 @@ class MultitrackTest < ActionController::IntegrationTest
       
       # Multitrack: carico 2 nuove tracce
       assert_difference 'Track.count', 2 do
-        post formatted_tracks_path('xml'), :track => { :song_id => @song.id, :title => 'sample track', :tone => 'C', :instrument_id => instruments(:guitar).id, :filename => 'test.mp3' }
+        post formatted_tracks_path('xml'), :track => { :song_id => @song.id, :title => 'sample track', :tone => 'C', :instrument_id => instruments(:guitar).id, :filename => '/antani/tapioca/test.mp3' }
         assert_response :success
 
         @track_1 = assigns(:track)

@@ -57,6 +57,7 @@ class Track < ActiveRecord::Base
   acts_as_rated :rating_range => 0..5 
   
   before_save :set_tonality_from_tone  
+  before_validation :clean_up_filename
 
   after_destroy :delete_sound_file
 
@@ -167,6 +168,10 @@ private
 
   def delete_sound_file
     File.unlink File.join(APPLICATION[:media_path], self.filename)
+  end
+
+  def clean_up_filename
+    self.filename = File.basename(self.filename) if self.filename
   end
 
 end
