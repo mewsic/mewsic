@@ -1,7 +1,8 @@
 module MbandsHelper
   
-  def current_user_mband_page?
-    logged_in? && (@mband.members.include?(current_user) || current_user.is_admin?)
+  def current_user_mband_page?(options = {})
+    options[:admin] = true unless options.has_key? :admin
+    logged_in? && (@mband.members.include?(current_user) or (options[:admin] && current_user.is_admin?))
   end
   
   def mband_photo_link

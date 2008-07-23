@@ -681,7 +681,7 @@ tr.nav-song td{
 }
 .collaboration-list .rating {
 	float: left;
-	margin: 0px 10px 0px 0px;
+	margin: 0px 5px 0px 0px;
 }
 /* dashboard answer list */
 .answer-list .top-box{
@@ -1138,7 +1138,7 @@ h2.dj-label{
 
 .mlab_song td.song-action {
 	width: 100px;
-	vertical-align: middle;
+	vertical-align: bottom;
 }
 
 .green-box .green-bg{
@@ -1541,34 +1541,23 @@ h2.dj-label{
 	margin:auto auto;
 }
 .tit-classification-songs p {
-	padding: 2px 0px !important;
-}
-.tit-classification-songs .count {
-	color:#AEA3A7;
-	float:left;
-	font-size:18px;
-	font-weight:bold;
-	padding-top:0px;
-	text-indent:100px;
-	position: absolute;
+	padding: 1px 0px !important;
 }
 .tit-classification-songs .top-box{
-	background: url(/images/BG_tab_title_songs.png) no-repeat left top;
-	padding-top:26px;
+	background: url(/images/BG_tab_title_songs_top.png) no-repeat left top;
+	padding-top:10px;
+}
+.tit-classification-songs .bottom-box{
+	background: url(/images/BG_tab_title_songs_bottom.png) no-repeat left bottom;
+	padding-bottom:6px;
 }
 .tit-classification-songs .elements{
 	margin-bottom:4px;
-	background-color:#EEF3E7;
-	padding-bottom:12px;
+	background-color:#eff6e9;
+	padding-bottom:0px;
 }
 
 /* elenco generi */
-/* songs*/
-/*.elenco-genere {
-	margin-bottom:20px;
-	background-color:#EEF3E7;
-	padding:10px 0px;
-}*/
 .elenco-genere table {
 	margin:auto auto;
 }
@@ -1581,14 +1570,6 @@ h2.dj-label{
 .elenco-genere img.float-left{
 	margin-right:2px;
 }
-#songs p.title a, #tracks p.title a {
-  text-decoration: underline;
-  color: #009DC2;
-}
-
-table.mlab_tracks {
-
-}
 
 /* tracks */
 .tit-classification-tracks {
@@ -1598,40 +1579,34 @@ table.mlab_tracks {
 	margin:auto auto;
 }
 .tit-classification-tracks p {
-	padding: 2px 0px !important;
+	padding: 1px 0px !important;
 }
 
-.tit-classification-tracks .count {
-	color:#A89C89;
-	float:left;
-	font-size:18px;
-	font-weight:bold;
-	padding-top:0px;
-	text-indent:100px;
-	position: absolute;
-}
 .tit-classification-tracks .top-box-tracks {
-	background: url(/images/BG_tab_title_tracks.png) no-repeat top left;
-	padding-top:26px;
+	background: url(/images/BG_tab_title_tracks_top.png) no-repeat top left;
+	padding-top:10px;
 }
 .tit-classification-tracks .top-box-ideas {
-	background: url(/images/BG_tab_title_ideas.png) no-repeat top left;
-	padding-top:26px;
+	background: url(/images/BG_tab_title_ideas_top.png) no-repeat top left;
+	padding-top:10px;
 }
-.tit-classification-tracks .bottom-box {
-	background-color:#F8ECD9;
-	margin-bottom:4px;
-	padding-bottom:12px;
+.tit-classification-tracks .top-box-tracks .bottom-box {
+	background: url(/images/BG_tab_title_tracks_bottom.png) no-repeat bottom left;
+	padding-bottom:6px;
 }
 .tit-classification-tracks .top-box-ideas .bottom-box {
-	padding: 12px;
+	background: url(/images/BG_tab_title_ideas_bottom.png) no-repeat bottom left;
+	padding-bottom: 6px;
 }
-.tit-classification-tracks .elements {
-	margin-bottom: 10px;
-	background-color: #fff;
-	padding: 4px 6px;
+.tit-classification-tracks .top-box-tracks .elements {
+	padding: 0;
+	background-color:#fbeed8;
 }
 
+.tit-classification-tracks .top-box-ideas .elements {
+	padding: 0;
+	background-color:#d5e5ee;
+}
 /* gallery */
 .gallery {
 	background:url(/images/BG_box_gallery.gif) no-repeat top left;
@@ -2811,7 +2786,32 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 }
 
 .mlab_song .rating, #genres .rating {
-	float: right;
+	float: none;
+}
+
+#songs .tabmenu, #tracks .tabmenu {
+	margin-bottom: 0px;
+	float: none;
+	border: 0;
+}
+#songs .tabmenu .tab .title {
+	color: #a0cc80;
+}
+#tracks .tabmenu .tab .title {
+	color: #ecaf48;
+}
+#songs .tabmenu .tab .counter,
+#tracks .tabmenu .tab .counter {
+	float: none;
+	font-size: inherit;
+}
+#songs .tabmenu .tab .sx,
+#tracks .tabmenu .tab .sx {
+	margin-left: 12px;
+}
+#songs .tabmenu .tab .rp,
+#tracks .tabmenu .tab .rp {
+	padding: 0px 10px;
 }
 
 td.star {
@@ -2825,7 +2825,7 @@ td.star .rating {
 }
 
 .elements .rating {
-	width: 62px;
+	/*width: 62px;*/
 }
 
 .clearer {

@@ -9,13 +9,13 @@
   </td>
 	<td class="song-action" align="right">
     <p class="genre"><%= link_to(song.genre.name, song.genre) %></p>
-		<%= rating(song, :clear => true, :class => song_counter.odd? ? 'grey-star' : '') %>
+		<%= rating(song, :class => song_counter.odd? ? 'grey-star' : '') %>
   </td>
 </tr>
 <tr class="<%= %w[odd even][song_counter % 2] %>">
   <td class="song-info">
+    <p class="abstract"><%= truncate song.original_author, 50 %></p>
     <p class="title"><%= link_to song.title, song %></p>
-    <p class="abstract"><%= truncate song.description, 50 %></p>
   </td>
 	<td class="song-action" align="right">
     <%= mlab_button(song, :dynamic => true) %>

@@ -15,8 +15,8 @@
 <tr class="<%= %w[odd even][song_counter % 2] %>">
   <td class="song-info">
 		<p class="name"><%= link_to song.user.nickname, user_path(song.user) %></p>
+    <p class="abstract"><%= truncate song.original_author, 50 %></p>
 		<p class="title"><%= link_to song.title, song %></p>
-    <p class="abstract"><%= truncate song.description, 50 %></p>
   </td>
 	<td class="song-action" align="right">
     <%= mlab_button(song, :dynamic => true) %>
