@@ -8,6 +8,11 @@ config.cache_classes = false
 # Show full error reports and disable caching
 config.action_controller.consider_all_requests_local = true
 config.action_controller.perform_caching             = true
+config.action_controller.session = {
+  :session_key => '_myousica_session_key',
+  :secret      => '02cedf3882e78b5a99c0bec5cc75c3fc'
+}
+
 config.action_view.cache_template_extensions         = false
 config.action_view.debug_rjs                         = true
 

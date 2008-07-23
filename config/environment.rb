@@ -27,13 +27,6 @@ Rails::Initializer.run do |config|
   # (by default production uses :info, the others :debug)
   # config.log_level = :debug
 
-  # Your secret key for verifying cookie session data integrity.
-  # If you change this key, all old sessions will become invalid!
-  config.action_controller.session = {
-    :session_key => '_myousica_session_key',
-    :secret      => '02cedf3882e78b5a99c0bec5cc75c3fc'
-  }
-
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information
   # (create the session table with 'rake db:sessions:create')

@@ -11,6 +11,14 @@ config.cache_classes = true
 config.action_controller.consider_all_requests_local = false
 config.action_controller.perform_caching             = true
 
+# Your secret key for verifying cookie session data integrity.
+# If you change this key, all old sessions will become invalid!
+config.action_controller.session = {
+  :session_key => '_myousica_session_key',
+  :session_domain => '.myousica.com',
+  :secret      => '02cedf3882e78b5a99c0bec5cc75c3fc'
+}
+
 # Enable serving of images, stylesheets, and javascripts from an asset server
 # config.action_controller.asset_host                  = "http://assets.example.com"
 
