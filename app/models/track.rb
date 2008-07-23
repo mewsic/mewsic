@@ -109,7 +109,7 @@ class Track < ActiveRecord::Base
   end
 
   def self.find_paginated_ideas_by_mband(page, mband)
-    paginate(:page => page, :per_page => 3, :include => :instrument, :conditions => ["tracks.user_id IN (?) AND tracks.idea = ?", mband.members.map(&:id), true], :order => "tracks.created_at DESC")
+    paginate(:page => page, :per_page => 7, :include => :instrument, :conditions => ["tracks.user_id IN (?) AND tracks.idea = ?", mband.members.map(&:id), true], :order => "tracks.created_at DESC")
   end
 
   def self.find_paginated_newest_ideas(page)
