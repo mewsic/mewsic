@@ -33,5 +33,5 @@ APPLICATION = {
   :fms_url => 'rtmp://fms.myousica.com/live/',
   :media_url => 'http://upload.myousica.com',
   :audio_url => '/audio',
-  :media_path => '/data/myousica/shared'
+  :media_path => '/data/myousica/shared/audio'
 }
