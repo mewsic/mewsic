@@ -62,10 +62,10 @@ class MultitrackTest < ActionController::IntegrationTest
           :seconds => 180,
           :genre_id => genres(:pop).id,
          },
-         :tracks => [
-           {:id => @track_1.id, :volume => 0.3, :balance =>  1.3},
-           {:id => @track_2.id, :volume => 1.0, :balance => -0.4}
-         ]
+         :tracks => {
+           0 => {:id => @track_1.id, :volume => 0.3, :balance =>  1.3},
+           1 => {:id => @track_2.id, :volume => 1.0, :balance => -0.4}
+        }
 
       assert_response :success
 

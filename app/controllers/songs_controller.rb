@@ -127,7 +127,7 @@ class SongsController < ApplicationController
 
       @song.update_attributes!(params[:song])
     
-      tracks.each do |track|
+      tracks.each do |i, track|
         @song.mixes.create! :track_id => track[:id],
           :volume => track[:volume],
           :balance => track[:balance]
