@@ -20,14 +20,57 @@
 		<div id="songs_spinner" style="display:none;">
 			<%= image_tag 'song-spinner-big.gif' %>
 		</div>
-  	<div class="tit-classification-songs clear-block" id="songs">
-      <%= render :partial => 'songs' %>
+  	<div class="tit-classification-songs clear-block">
+			<div class="tabmenu">
+				<div class="tab active">
+					<div class="sx"> </div>
+					<div class="rp">
+						<h1 class="title">Songs <span class="counter">(<%= @user.songs_count %>)</span></h1>
+					</div>
+					<div class="dx"> </div>
+				</div>    
+			</div>
+			<div class="top-box clear-block">		
+				<div class="bottom-box clear-block">
+					<div class="elements clear-block mlab_song">   
+						<div id="songs">
+							<%= render :partial => 'songs' %>
+						</div>
+					</div>
+				</div>
+			</div>
 	  </div>
 		<div id="tracks_spinner" style="display:none;">
 			<%= image_tag 'track-spinner-big.gif' %>
 		</div>
-	  <div class="tit-classification-tracks clear-block" id="tracks">
-      <%= render :partial => 'tracks' %>  
+	  <div class="tit-classification-tracks clear-block">
+			<%- 
+				if current_user_page? :admin => false 
+					label = 'Tracks'
+					empty_message = "You can upload or record tracks with our #{link_to('multitrack editor', multitrack_path)}<br/>#{link_to 'Click here to learn more', help_path('multitrack')}"
+				else
+					label = 'Ideas'
+					empty_message = "#{@user.nickname} hasn't published any <strong>idea</strong> yet.<br/>#{link_to 'Clik here to learn more about ideas', help_path('ideas')}"
+				end
+			%>
+			<div class="tabmenu">
+				<div class="tab active">
+					<div class="sx"> </div>
+					<div class="rp">
+						<h1 class="title blue-text"><%= label %><span class="counter">(<%= @tracks_count %>)</span></h1>
+					</div>
+					<div class="dx"> </div>
+				</div>    
+			</div>
+			<div class="top-box-<%= label.downcase %> clear-block">	
+				<div class="bottom-box clear-block">
+					<div class="elements clear-block">
+						<div id="tracks">
+							<%= render :partial => 'tracks' %>  
+						</div>
+					</div>
+				</div>
+			</div>
 	  </div>
     <%= render :partial => 'gallery' %> 
     <%= render :partial => 'users/my/share' if current_user_page? %> 

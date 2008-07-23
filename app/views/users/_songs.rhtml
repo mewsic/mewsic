@@ -1,41 +1,23 @@
-<div class="tabmenu">
-	<div class="tab active">
-		<div class="sx"> </div>
-		<div class="rp">
-			<h1 class="title">Songs <span class="counter">(<%= @user.songs_count %>)</span></h1>
-		</div>
-		<div class="dx"> </div>
-	</div>    
-</div>
-<div id="songs_container" class="clear-block">
-	<div class="top-box clear-block">		
-		<div class="bottom-box clear-block">
-			<div class="elements clear-block mlab_song">   
-				<table width="95%" border="0" cellpadding="5" cellspacing="0">
-					<%= render :partial => 'users/song', :collection => @songs %>
-				</table>
-				<%= empty_collection_message @songs,
-							:current_user => "You can create new songs with our #{link_to 'multitrack', multitrack_path}<br/>#{link_to 'Click here to learn more', help_path('multitrack')}.",
-  		    	  :any_user     => "#{@user.login} hasn't created any song yet."
-				-%>
-  
-				<div class="next">      
-					<% if @songs.page_count > 1 %>
-						<span class="align-right page-count">Page <%= @songs.current_page %> of <%= @songs.page_count %></span>
-					<% end %>
-					<% if @songs.previous_page %>
-						<%= link_to image_tag('move_arrow_left.png'), user_songs_path(@user, :page => @songs.previous_page), :class => 'navigation' %>
-					<% else %>
-						<%= image_tag('move_arrow_left.png', :class => 'faded') %>
-					<% end %>
-					<% if @songs.next_page %>
-						<%= link_to image_tag('move_arrow_right.png'), user_songs_path(@user, :page => @songs.next_page), :class => 'navigation' %>
-					<% else %>
-						<%= image_tag('move_arrow_right.png', :class => 'faded') %>
-					<% end %>
-  			</div>
-			</div>
-		</div>
+<table border="0" cellpadding="5" cellspacing="0">
+	<%= render :partial => 'users/song', :collection => @songs %>
+</table>
+<%= empty_collection_message @songs,
+			:current_user => "You can create new songs with our #{link_to 'multitrack', multitrack_path}<br/>#{link_to 'Click here to learn more', help_path('multitrack')}.",
+  	  :any_user     => "#{@user.login} hasn't created any song yet."
+-%>
 
-	</div>
-</div>	
+<div class="next">      
+	<% if @songs.page_count > 1 %>
+		<span class="align-right page-count">Page <%= @songs.current_page %> of <%= @songs.page_count %></span>
+	<% end %>
+	<% if @songs.previous_page %>
+		<%= link_to image_tag('move_arrow_left.png'), user_songs_path(@user, :page => @songs.previous_page), :class => 'navigation' %>
+	<% else %>
+		<%= image_tag('move_arrow_left.png', :class => 'faded') %>
+	<% end %>
+	<% if @songs.next_page %>
+		<%= link_to image_tag('move_arrow_right.png'), user_songs_path(@user, :page => @songs.next_page), :class => 'navigation' %>
+	<% else %>
+		<%= image_tag('move_arrow_right.png', :class => 'faded') %>
+	<% end %>
+</div>

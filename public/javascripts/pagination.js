@@ -9,6 +9,9 @@ var Pagination = Class.create({
     if (!$(this.options.container))
       return;
 
+    if (!this.options.update)
+      this.options.update = this.options.container;
+
     if (this.options.dynamic_spinner) {
       this.options.loading = new Loading({
         spinner: this.options.spinner, 
@@ -36,7 +39,7 @@ var Pagination = Class.create({
 
   linkHandler: function(element, event) {
     event.stop(); 
-    new Ajax.Updater(this.options.container, element.getAttribute('href'), {
+    new Ajax.Updater(this.options.update, element.getAttribute('href'), {
       method: 'GET',
       parameters: { authenticity_token: this.authenticity_token },
       onLoading: this.loading.bind(this),

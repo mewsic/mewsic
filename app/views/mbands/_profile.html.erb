@@ -39,7 +39,7 @@
 	<% end %>
 	</div>
   <div class="user-resume">
-	  <%= rating(@mband) %>
+		<%= rating(@mband, :class => 'float-left') %><div class="clearer"></div>
     <p class="blue-text">Mband name </p>
 		<div class="pngfix status <%= @mband.status %>"></div>
     <h1 class="black-text" id="user_id"><%= @mband.name %></h1>

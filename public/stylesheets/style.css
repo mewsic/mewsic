@@ -1124,8 +1124,11 @@ h2.dj-label{
 	width: 270px;
 }
 
-.mlab_tracks p.title, .mlab_song p.title {
+.mlab_tracks p.title, .mlab_song p.title,
+.mlab_tracks p.abstract, .mlab_song p.abstract {
 	overflow: hidden;
+	display:block;
+	max-height: 14px;
 }
 
 .mlab_tracks .idea-icon {
@@ -1552,9 +1555,8 @@ h2.dj-label{
 	padding-bottom:6px;
 }
 .tit-classification-songs .elements{
-	margin-bottom:4px;
 	background-color:#eff6e9;
-	padding-bottom:0px;
+	padding:0px 10px;
 }
 
 /* elenco generi */
@@ -1579,7 +1581,7 @@ h2.dj-label{
 	margin:auto auto;
 }
 .tit-classification-tracks p {
-	padding: 1px 0px !important;
+	padding: 2px 0px 1px !important;
 }
 
 .tit-classification-tracks .top-box-tracks {
@@ -1599,7 +1601,7 @@ h2.dj-label{
 	padding-bottom: 6px;
 }
 .tit-classification-tracks .top-box-tracks .elements {
-	padding: 0;
+	padding: 0px 4px;
 	background-color:#fbeed8;
 }
 
@@ -1607,6 +1609,33 @@ h2.dj-label{
 	padding: 0;
 	background-color:#d5e5ee;
 }
+
+
+.tit-classification-songs .tabmenu, .tit-classification-tracks .tabmenu {
+	margin-bottom: 0px;
+	float: none;
+	border: 0;
+}
+.tit-classification-songs .tabmenu .tab .title {
+	color: #a0cc80;
+}
+.tit-classification-tracks .tabmenu .tab .title {
+	color: #ecaf48;
+}
+.tit-classification-songs .tabmenu .tab .counter,
+.tit-classification-tracks .tabmenu .tab .counter {
+	float: none;
+	font-size: inherit;
+}
+.tit-classification-songs .tabmenu .tab .sx,
+.tit-classification-tracks .tabmenu .tab .sx {
+	margin-left: 12px;
+}
+.tit-classification-songs .tabmenu .tab .rp,
+.tit-classification-tracks .tabmenu .tab .rp {
+	padding: 0px 10px;
+}
+
 /* gallery */
 .gallery {
 	background:url(/images/BG_box_gallery.gif) no-repeat top left;
@@ -2787,31 +2816,6 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 
 .mlab_song .rating, #genres .rating {
 	float: none;
-}
-
-#songs .tabmenu, #tracks .tabmenu {
-	margin-bottom: 0px;
-	float: none;
-	border: 0;
-}
-#songs .tabmenu .tab .title {
-	color: #a0cc80;
-}
-#tracks .tabmenu .tab .title {
-	color: #ecaf48;
-}
-#songs .tabmenu .tab .counter,
-#tracks .tabmenu .tab .counter {
-	float: none;
-	font-size: inherit;
-}
-#songs .tabmenu .tab .sx,
-#tracks .tabmenu .tab .sx {
-	margin-left: 12px;
-}
-#songs .tabmenu .tab .rp,
-#tracks .tabmenu .tab .rp {
-	padding: 0px 10px;
 }
 
 td.star {
