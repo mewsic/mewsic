@@ -22,5 +22,7 @@ APPLICATION = {
   :url => 'http://localhost:3000',
   :email => 'no-reply@myousica.com',
   :fms_url => 'rtmp://localhost:3000',
-  :media_url => 'http://localhost:3000'
+  :media_url => 'http://localhost:3001',
+  :audio_url => '/audio',
+  :media_path => File.join(RAILS_ROOT, 'test', 'fixtures', 'files')
 }

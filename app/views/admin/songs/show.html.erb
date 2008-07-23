@@ -71,14 +71,13 @@
 
 	<dl>
 		<% form_for 'song', :url => mp3_admin_song_path(@song), :html => { :id => 'mix-song-form' } do %>
-			<%#= text_area_tag 'song', mix_xml(@song), :size => '73x10' %>
 			<% @song.mixes.each_with_index do |mix, i| %>
 				<dt><%= mix.track.title %> volume</dt>
 				<dd><%= text_field_tag "tracks[#{i}][volume]", mix.volume || 1.0, :size => 5 %></dd>
 				<dt><%= mix.track.title %> balance</dt>
 				<dd><%= text_field_tag "tracks[#{i}][balance]", mix.balance || 0.0, :size => 5 %></dd>
 				<dt><%= mix.track.title %> Filename</dt>
-				<dd><%= text_field_tag "tracks[#{i}][filename]", (mix.track.filename.gsub(/^\/audio\//, '') rescue nil), :readonly => true %></dd>
+				<dd><%= text_field_tag "tracks[#{i}][filename]", mix.track.filename, :readonly => true %></dd>
 				<%= hidden_field_tag "tracks[#{i}][id]", mix.track.id %>
 			<% end %>
 			<%= submit_tag 'mix mp3' %>

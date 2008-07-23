@@ -56,7 +56,7 @@ class SongsController < ApplicationController
         response.headers['Content-Disposition'] = 'inline'
         response.headers['Content-Type'] = 'image/png'
         response.headers['Cache-Control'] = 'private'
-        response.headers['X-Accel-Redirect'] = @song.filename.sub /\.mp3$/, '.png'
+        response.headers['X-Accel-Redirect'] = @song.public_filename :waveform
 
         render :nothing => true
       end
@@ -169,7 +169,7 @@ class SongsController < ApplicationController
     response.headers['Content-Disposition'] = %[attachment; filename="#{@song.title} by #{@song.user.login}.mp3"]
     response.headers['Content-Type'] = 'audio/mpeg'
     response.headers['Cache-Control'] = 'private'
-    response.headers['X-Accel-Redirect'] = @song.filename
+    response.headers['X-Accel-Redirect'] = @song.public_filename
     render :nothing => true
 
   rescue ActiveRecord::RecordNotFound

@@ -42,12 +42,23 @@ class Track < ActiveRecord::Base
 
   belongs_to :instrument
 
-  validates_presence_of :title, :tonality, :seconds, :instrument_id, :song_id, :user_id
+  validates_presence_of :title, :tonality, :seconds, :instrument_id, :song_id, :user_id, :filename
   validates_associated :instrument, :parent_song, :owner
+  validates_each :instrument_id, :song_id, :user_id do |model, attr, value|
+    model.errors.add(attr, "invalid #{attr}") if value.to_i.zero?
+  end
+
+  validates_each :filename do |model, attr, value|
+    unless File.file?(File.join(APPLICATION[:media_path], value.to_s))
+      model.errors.add(attr, 'file not found')
+    end
+  end
   
   acts_as_rated :rating_range => 0..5 
   
   before_save :set_tonality_from_tone  
+
+  after_destroy :delete_sound_file
 
   def self.search(q, options = {})
     find(:all, {:include => :instrument, :conditions => [
@@ -131,7 +142,7 @@ class Track < ActiveRecord::Base
   def rateable_by?(user)
     self.user_id != user.id
   end
-  
+
   def original_author
     self.parent_song ? self.parent_song.original_author : nil
   end
@@ -141,10 +152,22 @@ class Track < ActiveRecord::Base
     (self.parent_song && self.parent_song.genre) ? self.parent_song.genre.name : nil
   end
   
+  # XXX not DRY (see song.rb)
+  def public_filename(type = :stream)
+    filename = self.filename.dup
+    filename.sub! /\.mp3$/, '.png' if type == :waveform
+
+    APPLICATION[:audio_url] + '/' + filename
+  end
+  
 private
   
   def set_tonality_from_tone
     self.tonality = self.tone unless self.tone.blank?
+  end
+
+  def delete_sound_file
+    File.unlink File.join(APPLICATION[:media_path], self.filename)
   end
 
 end

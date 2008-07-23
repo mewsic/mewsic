@@ -31,5 +31,7 @@ APPLICATION = {
   :url => 'http://3e4693ef.myousica.com',
   :email => 'no-reply@myousica.com',
   :fms_url => 'rtmp://fms.myousica.com/live/',
-  :media_url => 'http://upload.myousica.com'
+  :media_url => 'http://upload.myousica.com',
+  :audio_url => '/audio',
+  :media_path => '/data/myousica/shared'
 }

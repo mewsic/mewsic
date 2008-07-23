@@ -9,7 +9,7 @@
   <description><%= h(song.description) %></description>
   <rating><%= song.rating_avg.to_f %></rating>     
   <id><%= song.id %></id>         
-  <filename><%= song.filename %></filename>
+  <filename><%= song.public_filename %></filename>
   <waveform><%= formatted_song_path song, 'png' %></waveform>
   <seconds><%= song.seconds %></seconds>
   <%- if @show_siblings_count -%>

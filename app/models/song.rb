@@ -16,8 +16,13 @@ class Song < ActiveRecord::Base
   
   validates_presence_of :title, :tone, :seconds, :genre_id, :user_id, :if => Proc.new(&:published)
   validates_associated :genre, :user, :if => Proc.new(&:published) 
+  validates_each :genre_id, :user_id, :if => Proc.new(&:published) do |model, attr, value|
+    model.errors.add(attr, "invalid #{attr}") if value.to_i.zero?
+  end
 
   acts_as_rated :rating_range => 0..5    
+
+  after_destroy :delete_sound_file
 
   def self.search(q, options = {})
     find(:all, {:include => :genre, :conditions => [
@@ -173,6 +178,20 @@ class Song < ActiveRecord::Base
   #called by mlab.js 
   def genre_name
     self.genre ? self.genre.name : nil
+  end
+
+  # XXX not DRY (see track.rb)
+  def public_filename(type = :stream)
+    filename = self.filename.dup
+    filename.sub! /\.mp3$/, '.png' if type == :waveform
+
+    APPLICATION[:audio_url] + '/' + filename
+  end
+
+private
+
+  def delete_sound_file
+    File.unlink File.join(APPLICATION[:media_path], self.filename)
   end
 
 end

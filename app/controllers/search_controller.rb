@@ -131,10 +131,10 @@ class SearchController < ApplicationController
   private
     def search(q, types = [])
       [
-        (types.empty? || types.include?('user')) ?                               search_users (q, 10, params[:page] || 1) : nil,
-        (types.empty? || (types.include?('song') || types.include?('music'))) ?  search_songs (q, 10, params[:page] || 1) : nil,
+        (types.empty? || types.include?('user')) ?                               search_users(q, 10, params[:page] || 1) : nil,
+        (types.empty? || (types.include?('song') || types.include?('music'))) ?  search_songs(q, 10, params[:page] || 1) : nil,
         (types.empty? || (types.include?('track') || types.include?('music'))) ? search_tracks(q, 10, params[:page] || 1) : nil,
-        (types.empty? || types.include?('idea')) ?                               search_ideas (q, 10, params[:page] || 1) : nil
+        (types.empty? || types.include?('idea')) ?                               search_ideas(q, 10, params[:page] || 1) : nil
       ]
     end
     

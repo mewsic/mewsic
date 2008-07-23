@@ -8,7 +8,7 @@ class PlayersController < ApplicationController
     redirect_to '/' and return unless request.xhr?
 
     @playable.increment_listened_times    
-    @stream = @playable.filename
+    @stream = @playable.public_filename
     @length = @playable.seconds
     @image = send("formatted_#{@playable.class.name.underscore}_path", @playable, 'png')
   end

@@ -9,7 +9,7 @@
   <description><%= h(track.description) %></description>
   <rating><%= track.rating_avg.to_f %></rating>     
   <id><%= track.id %></id>         
-  <filename><%= track.filename %></filename>
+  <filename><%= track.public_filename %></filename>
   <song_count><%= track.songs.count %></song_count>
   <waveform><%= formatted_track_path track, 'png' %></waveform>
   <seconds><%= track.seconds %></seconds>

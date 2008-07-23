@@ -43,6 +43,7 @@ let_it_be:
   listened_times: 2230
   tone: C
   seconds: 220
+  filename: test.mp3
 radio_ga_ga:
   title: Radio Ga Ga
   user: aaron
@@ -51,6 +52,7 @@ radio_ga_ga:
   listened_times: 1290
   tone: D
   seconds: 180
+  filename: test.mp3
 i_want_to_break_free:
   title: I Want to Break Free
   user: quentin
@@ -60,6 +62,7 @@ i_want_to_break_free:
   tone: B#
   seconds: 190
   published: true
+  filename: test.mp3
 red_red_wine:
   title: Red Red Wine
   user: quentin
@@ -69,6 +72,7 @@ red_red_wine:
   tone: D
   seconds: 180
   published: true
+  filename: test.mp3
 red_red_wine_unpublished:
   title: Red Red Wine Unpublished
   user: quentin
@@ -78,6 +82,7 @@ red_red_wine_unpublished:
   tone: D
   seconds: 180
   published: false
+  filename: test.mp3
 space_cowboy:
   title: Space Cowboy
   user: aaron
@@ -88,6 +93,7 @@ space_cowboy:
   seconds: 180
   created_at: <%= 1.week.from_now.to_s(:db) %>
   published: true
+  filename: test.mp3
 autumn_leaves:
   title: Autumn Leaves
   user: quentin
@@ -96,6 +102,7 @@ autumn_leaves:
   listened_times: 290
   tone: D
   seconds: 180
+  filename: test.mp3
 closer:
   title: Closer
   user: quentin
@@ -104,6 +111,7 @@ closer:
   listened_times: 390
   tone: D
   seconds: 180
+  filename: test.mp3
 white_christmas:
   title: White Cristmas
   user: quentin
@@ -112,6 +120,7 @@ white_christmas:
   listened_times: 420
   tone: D
   seconds: 180
+  filename: test.mp3
 quentin_single_track_song:
   title: SingleTrackSong
   user: quentin
@@ -120,6 +129,7 @@ quentin_single_track_song:
   listened_times: 420
   tone: D
   seconds: 180
+  filename: test.mp3
 gravity_blast_beat:
   title: GravityBlastBeat
   user: quentin
@@ -128,6 +138,7 @@ gravity_blast_beat:
   listened_times: 0
   tone: D
   seconds: 180
+  filename: test.mp3
 gravity_blast_beat_remix:
   title: GravityBlastBeat Remix
   user: quentin
@@ -136,6 +147,7 @@ gravity_blast_beat_remix:
   listened_times: 0
   tone: D
   seconds: 180
+  filename: test.mp3
 gravity_blast_beat_jungle_remix:
   title: GravityBlastBeat Jungle Remix
   user: quentin
@@ -144,6 +156,7 @@ gravity_blast_beat_jungle_remix:
   listened_times: 0
   tone: F
   seconds: 180
+  filename: test.mp3
   
 <% 1000.times do |i| %>
 song_<%= i + 4 %>:
@@ -156,6 +169,7 @@ song_<%= i + 4 %>:
   created_at: <%= (rand(30)).days.ago.to_s :db %>
   tone: <%= ('A'..'F').to_a[rand(6)] %>
   seconds: <%= rand(300) %>
+  filename: test.mp3
 <% end %>
 <% 100.times do |i| %>
 song_aaron_<%= i + 4 %>:
@@ -167,6 +181,7 @@ song_aaron_<%= i + 4 %>:
   created_at: <%= (rand(30)).days.ago.to_s :db %>
   tone: <%= ('A'..'F').to_a[rand(6)] %>
   seconds: <%= rand(300) %>
+  filename: test.mp3
 <% end %>
 
 billie_jean_by_michael_jackson:
@@ -177,6 +192,7 @@ billie_jean_by_michael_jackson:
   listened_times: 1000
   tone: C
   seconds: 140
+  filename: test.mp3
   
 billie_jean_by_giovanni:
   title: Billie Jean by Giovanni
@@ -186,6 +202,7 @@ billie_jean_by_giovanni:
   listened_times: 900
   tone: C
   seconds: 140
+  filename: test.mp3
   
 billie_jean_by_pilu:
   title: Billie Jackson by Pilu
@@ -195,6 +212,7 @@ billie_jean_by_pilu:
   listened_times: 42
   tone: C
   seconds: 140
+  filename: test.mp3
   
 song_with_ideas:
   title: Song with ideas
@@ -205,3 +223,4 @@ song_with_ideas:
   created_at: <%= (rand(30)).days.ago.to_s :db %>
   tone: C
   seconds: 140
+  filename: test.mp3

@@ -105,7 +105,8 @@ class TracksControllerTest < ActionController::TestCase
         :tonality => 'C',
         :seconds => 180,
         :song_id => songs(:let_it_be).id,
-        :instrument_id => instruments(:guitar).id
+        :instrument_id => instruments(:guitar).id,
+        :filename => 'test.mp3'
       }
     end
 
