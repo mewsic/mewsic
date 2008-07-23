@@ -27,6 +27,9 @@ require 'numeric_to_runtime'
 
 class Track < ActiveRecord::Base
   
+  acts_as_sphinx
+  extend SphinxWillPagination
+  
   attr_accessor :mlab
   attr_accessor :tone
   

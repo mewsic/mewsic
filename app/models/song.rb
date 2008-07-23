@@ -1,30 +1,7 @@
-# == Schema Information
-# Schema version: 49
-#
-# Table name: songs
-#
-#  id              :integer(11)   not null, primary key
-#  title           :string(255)   
-#  original_author :string(255)   
-#  description     :string(255)   
-#  tone            :string(255)   
-#  filename        :string(255)   
-#  user_id         :integer(11)   
-#  genre_id        :integer(11)   
-#  bpm             :integer(11)   
-#  seconds         :integer(11)   default(0)
-#  listened_times  :integer(11)   default(0)
-#  published       :boolean(1)    default(TRUE)
-#  created_at      :datetime      
-#  updated_at      :datetime      
-#  rating_count    :integer(11)   
-#  rating_total    :decimal(10, 2 
-#  rating_avg      :decimal(10, 2 
-#
-
-require 'numeric_to_runtime'
-
 class Song < ActiveRecord::Base
+  
+  acts_as_sphinx
+  extend SphinxWillPagination
   
   attr_accessor :mlab
   
@@ -40,8 +17,7 @@ class Song < ActiveRecord::Base
   validates_presence_of :title, :tone, :seconds, :genre_id, :user_id, :if => Proc.new(&:published)
   validates_associated :genre, :user, :if => Proc.new(&:published) 
 
-  acts_as_rated :rating_range => 0..5
-  
+  acts_as_rated :rating_range => 0..5    
 
   def self.search(q, options = {})
     find(:all, {:include => :genre, :conditions => [

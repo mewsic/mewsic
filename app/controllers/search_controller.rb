@@ -131,11 +131,46 @@ class SearchController < ApplicationController
   private
     def search(q, types = [])
       [
-        (types.empty? || types.include?('user')) ?                               User.search_paginated(q,        :per_page => 10, :page => params[:page]) : nil,
-        (types.empty? || (types.include?('song') || types.include?('music'))) ?  Song.search_paginated(q,        :per_page => 10, :page => params[:page]) : nil,
-        (types.empty? || (types.include?('track') || types.include?('music'))) ? Track.search_paginated(q,       :per_page => 10, :page => params[:page]) : nil,
-        (types.empty? || types.include?('idea')) ?                               Track.search_paginated_ideas(q, :per_page => 10, :page => params[:page]) : nil
+        (types.empty? || types.include?('user')) ?                               search_users (q, 10, params[:page] || 1) : nil,
+        (types.empty? || (types.include?('song') || types.include?('music'))) ?  search_songs (q, 10, params[:page] || 1) : nil,
+        (types.empty? || (types.include?('track') || types.include?('music'))) ? search_tracks(q, 10, params[:page] || 1) : nil,
+        (types.empty? || types.include?('idea')) ?                               search_ideas (q, 10, params[:page] || 1) : nil
       ]
+    end
+    
+    def search_users(query, per_page, page)
+      User.paginate_with_sphinx(query, :sphinx => {
+        :limit => per_page,
+        :mode => :boolean,
+        :page => page
+      })
+    end
+    
+    def search_songs(query, per_page, page)
+      Song.paginate_with_sphinx(query, :sphinx => {
+        :limit => per_page,
+        :mode => :boolean,
+        :page => page
+      })
+    end
+    
+    def search_tracks(query, per_page, page)
+      Track.paginate_with_sphinx(@q, :sphinx => {
+        :limit => per_page,
+        :mode => :boolean,
+        :page => page
+      })
+    end
+    
+    def search_ideas(query, per_page, page)
+      Track.paginate_with_sphinx(@q, :sphinx => {
+        :limit => per_page,
+        :mode => :boolean,
+        :page => page,
+        :filter => {
+          'idea' => 1
+        }
+      })
     end
 
     # instrument=instrument_id&genre=genre_id&country=country&city=city&author=pink+floyd&title=the+wall
