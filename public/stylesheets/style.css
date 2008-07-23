@@ -1050,10 +1050,10 @@ h2.dj-label{
 	padding:0 !important;
 }
 .green-box .title {
-	padding-top: 4px !important;
+	padding-top: 7px !important;
 	display: block;
-	line-height: 14px;
-	max-height: 14px;
+	line-height: 12px;
+	max-height: 12px;
 	overflow: hidden;
 }
 /*
@@ -1064,6 +1064,11 @@ h2.dj-label{
 .green-box .author {
 	color: #6c6c6c !important;
 	font-style: italic;
+	display: block;
+	line-height: 12px;
+	max-height: 12px;
+	overflow: hidden;
+	padding-top: 0px;
 }
 .tracks-number{
 	background:url(/images/tracks_number_BG.png) no-repeat top left;
@@ -1214,6 +1219,10 @@ h2.dj-label{
 .orange-box .author {
 	color: #6c6c6c !important;
 	font-style: italic;
+	display: block;
+	line-height: 12px;
+	max-height: 12px;
+	overflow: hidden;
 }
 /* rounded box cyan */
 .rounded-cyan-top{
