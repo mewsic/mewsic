@@ -152,7 +152,6 @@ class Track < ActiveRecord::Base
     (self.parent_song && self.parent_song.genre) ? self.parent_song.genre.name : nil
   end
   
-  # XXX not DRY (see song.rb)
   def public_filename(type = :stream)
     filename = self.filename.dup
     filename.sub! /\.mp3$/, '.png' if type == :waveform
