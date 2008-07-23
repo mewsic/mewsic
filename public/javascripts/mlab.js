@@ -25,8 +25,10 @@ var MlabItem = Class.create({
         this.link_to('/songs/' + this.attributes.id, this.attributes.title);
     }
 
-    this.attributes.genre_name =
-      this.link_to('/genres/' + this.attributes.genre_name.gsub(/ +/, '+'), this.attributes.genre_name);
+    if (this.attributes.genre_name) {
+      this.attributes.genre_name =
+        this.link_to('/genres/' + this.attributes.genre_name.gsub(/ +/, '+'), this.attributes.genre_name);
+    }
 
     this.slider = slider;
     this.slider.addItem(this);
