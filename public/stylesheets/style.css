@@ -2990,6 +2990,9 @@ p.instrument, p.instrument a {
   color: #61656A;
   font-size: 14px;
 }
+#help-content.static {
+	width: 682px;
+}
 
 #help-content h1, #help-box h1 a {
   font-size: 20px;
