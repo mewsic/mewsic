@@ -5,7 +5,7 @@
 <itunes:summary><%= podcast_item.description %></itunes:summary>
 <enclosure url="<%= formatted_download_song_url podcast_item, 'mp3' %>" length="<%= File.size(File.join(APPLICATION[:media_path], podcast_item.filename)) rescue 0 %>" type="audio/mpeg" />
 <guid><%= download_song_url podcast_item %></guid>
-<pubDate><%= podcast_item.created_at %></pubDate>
+<pubDate><%= podcast_item.created_at.rfc2822 %></pubDate>
 <itunes:duration><%= podcast_item.length %></itunes:duration>
 <itunes:keywords></itunes:keywords>
 </item>
