@@ -3,7 +3,7 @@ class GenresController < ApplicationController
   def index              
     respond_to do |format|
       format.html do
-        redirect_to '/' and return unless request.xhr?        
+        redirect_to(music_path + '#genres') and return unless request.xhr?        
         @genre_char = params.include?(:c) && ('A'..'Z').include?(params[:c]) ? params[:c] : 'Z'
         @genres = Genre.find_with_songs(:all, :conditions => ["name LIKE ?", "#{@genre_char}%"])
         @genre_chars = Genre.find_with_songs(:all).map { |g| g.name.first.upcase }.uniq.sort
@@ -47,7 +47,7 @@ class GenresController < ApplicationController
 protected
 
   def to_breadcrumb_link
-    ['Genres', music_path]
+    ['Genres', music_path + '#genres']
   end
   
 end

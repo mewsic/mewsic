@@ -83,16 +83,40 @@ class Track < ActiveRecord::Base
     ])
   end
   
-  def self.find_most_collaborated(limit = 3)
+  def self.find_paginated_newest_ideas(options = {})
+    options.reverse_update(:page => 1, :per_page => 3)
+    paginate(options.merge(:conditions => ['tracks.idea = ? AND tracks.created_at > ?', true, 1.month.ago], :order => 'tracks.created_at DESC'))
+  end
+
+  def self.find_paginated_coolest_ideas(options = {})
+    options.reverse_update(:page => 1, :per_page => 3)
+    paginate(options.merge(:include => :songs, :conditions => ['tracks.idea = ?', true], :order => 'tracks.rating_avg DESC, songs.rating_avg DESC'))
+  end
+
+  def self.find_most_collaborated_ideas(options = {})
     self.find_by_sql(["
        SELECT T.*, COUNT(T.id) AS collaboration_count FROM tracks T, mixes M, songs S
-       WHERE T.id = M.track_id AND S.id = M.song_id AND S.published = ?
-       GROUP BY T.id ORDER BY collaboration_count DESC LIMIT ?
-      ", true, limit])
+       WHERE T.id = M.track_id AND S.id = M.song_id AND S.published = ? AND T.idea = ?
+       GROUP BY T.id ORDER BY collaboration_count DESC, T.rating_avg DESC LIMIT ?
+      ", true, true, (options[:limit] || 3)])
   end    
+
+  def self.find_paginated_top_rated_ideas(options = {})
+    options.reverse_update(:page => 1, :per_page => 3)
+    paginate(options.merge(:select => 'tracks.*, COUNT(tracks.id) AS collaboration_count',
+                           :joins => 'LEFT JOIN mixes M on M.track_id = tracks.id LEFT JOIN songs S on M.song_id = S.id = 1',
+                           :conditions => ['tracks.idea = ? AND S.published = ?', true, true],
+                           :group => 'tracks.id', :order => 'tracks.rating_avg DESC')
+            ).each { |t| t.collaboration_count = t.collaboration_count.to_i }
+  end
   
   def self.find_most_used(options = {})
-    self.find(:all, options.merge(:select => 'tracks.*, COUNT(mixes.track_id) AS song_count', :joins => 'LEFT JOIN mixes ON mixes.track_id = tracks.id LEFT JOIN songs ON mixes.song_id = songs.id AND songs.published = 1', :group => 'mixes.track_id', :order => 'song_count DESC')).each { |t| t.song_count = t.song_count.to_i }
+    self.find(:all,
+              options.merge(:select => 'tracks.*, COUNT(tracks.id) AS song_count',
+                            :joins => 'LEFT JOIN mixes M ON M.track_id = tracks.id LEFT JOIN songs S ON M.song_id = S.id',
+                            :conditions => ['tracks.idea = ? AND S.published = ?', false, true],
+                            :group => 'tracks.id', :order => 'song_count DESC')
+             ).each { |t| t.song_count = t.song_count.to_i }
   end
   
   def self.find_paginated_by_user(page, user)
@@ -109,18 +133,6 @@ class Track < ActiveRecord::Base
 
   def self.find_paginated_ideas_by_mband(page, mband)
     paginate(:page => page, :per_page => 7, :include => :instrument, :conditions => ["tracks.user_id IN (?) AND tracks.idea = ?", mband.members.map(&:id), true], :order => "tracks.created_at DESC")
-  end
-
-  def self.find_paginated_newest_ideas(page)
-    paginate(:page => page, :per_page => 3, :conditions => ['tracks.idea = ? AND tracks.created_at > ?', true, 1.month.ago], :order => 'tracks.created_at DESC')
-  end
-
-  def self.find_paginated_coolest_ideas(page)
-    paginate(:page => page, :per_page => 3, :include => :songs, :conditions => ['tracks.idea = ?', true], :order => 'tracks.rating_avg DESC, songs.rating_avg DESC')
-  end
-
-  def self.find_paginated_top_rated_ideas(page)
-    paginate(:page => page, :per_page => 3, :conditions => ['tracks.idea = ?', true], :order => 'tracks.rating_avg DESC')
   end
   
   def length

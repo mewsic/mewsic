@@ -193,6 +193,7 @@ billie_jean_by_michael_jackson:
   tone: C
   seconds: 140
   filename: test.mp3
+  published: true
   
 billie_jean_by_giovanni:
   title: Billie Jean by Giovanni
@@ -224,3 +225,17 @@ song_with_ideas:
   tone: C
   seconds: 140
   filename: test.mp3
+
+<% 4.times do |i| %>
+song_using_ideas_<%= i %>:
+  title: Using ideas <%= i %>
+  user: quentin
+  original_author: Sux
+  genre: <%= random_genre %>
+  listened_times: <%= rand(1000) %>
+  created_at: <%= (rand(30)).days.ago.to_s :db %>
+  tone: C
+  seconds: 140
+  filename: test.mp3
+<% end %>
+

@@ -11,7 +11,7 @@
   						  <%= link_to avatar_image(track.user, :small), user_path(track.user) %>
   						</div>
   						<p class="abstract"><%= track.title %></p>
-  						<p class="grey-text">listened <%= pluralize track.listened_times, 'time' %></p>
+  						<p class="grey-text">used <%= pluralize track.collaboration_count, 'time' %></p>
 							<div class="float-left">
 								<%= rating(track) %>
 								<%= mlab_button(track) %>

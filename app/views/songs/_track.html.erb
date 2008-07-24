@@ -25,7 +25,7 @@
     </div>
 		<div class="float-left">
 			<%= download_button_for track %>
-			<span class="music-info">Created <%= track.created_at.strftime("%m/%d/%y") %></span>
+			<span class="music-info">Created <%= time_ago_in_words track.created_at %> ago</span>
 		</div>
   </div>
 </div>

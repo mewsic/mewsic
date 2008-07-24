@@ -20,7 +20,7 @@ drums:
 
 guitar:
   description: Guitar
-  icon: instruments/guitar.png
+  icon: instruments/electric_guitar.png
   category: chordophones
 
 microphone:

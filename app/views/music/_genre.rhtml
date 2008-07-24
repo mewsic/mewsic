@@ -12,7 +12,8 @@
 	<table width="100%" border="0" cellpadding="0" cellspacing="0">
 		<% genre.last_songs(3).each_with_index do |song, index| -%>
 		<tr class="<%= %w[even odd][index % 2] %>">
-			<td class="song-title"><span class="name"><%= link_to song.user.login, user_path(song.user) %></span>&nbsp;&nbsp;<%= link_to(truncate(song.title, 30), song) %></td>
+			<td class="song-title">
+				<p><span class="name"><%= link_to song.user.login, user_path(song.user) %></span>&nbsp;&nbsp;<span class="title"><%= link_to(truncate(song.title, 30), song) %></span></p></td>
 			<td class="star"><%= rating(song, :class => index.even? ? 'grey-star' : '') %></td>
 			<td class="button">
 				<%= mlab_button(song, :dynamic => true) %>

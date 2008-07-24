@@ -5,7 +5,7 @@ class TrackTest < ActiveSupport::TestCase
   def test_find_most_used_tracks_should_return_tracks_and_usage
     track = Track.find_most_used(:limit => 1).first
     assert_equal tracks(:keyboards_for_billie_jean_by_michael_jackson), track
-    assert_equal 2, track.song_count
+    assert_equal 4, track.song_count
   end
   
   def test_association_with_parent

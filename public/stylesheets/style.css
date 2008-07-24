@@ -1589,9 +1589,10 @@ h2.dj-label{
 .elenco-genere p{
 	padding-bottom:1px !important;
 	display: block;
-	width: 235px;
+	width: 215px;
 	overflow: hidden;
 	max-height: 14px;
+	float: none;
 }
 
 /* tracks */
