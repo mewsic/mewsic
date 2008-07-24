@@ -144,15 +144,13 @@ module ApplicationHelper
   
   def render_sidebar   
     #  content << render(:partial => 'shared/share_myousica')
+    content = render(:partial => 'shared/banners')
     if logged_in?
-      render(:partial => 'shared/mlab')
+      content << render(:partial => 'shared/mlab')
     else
-      content = ''
       unless params[:controller] == 'sessions' || (params[:controller] == 'users' && (params[:action] == 'new' || params[:action] == 'create'))
         content << render(:partial => 'shared/login_box')
       end
-
-      content << render(:partial => 'shared/mlab_notlogged')
     end
   end    
   
