@@ -3,7 +3,6 @@ document.observe('dom:loaded', function() {
 
   new Pagination({
     container: name,
-    update: 'genres_container',
     spinner: name + '-spinner',
     selector: 'a.genre-pagination',
     update_mlab: true
