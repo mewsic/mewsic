@@ -4,6 +4,7 @@ class MultitrackController < ApplicationController
 
   def index    
     if logged_in?
+      current_user.enter_multitrack!
       @song = current_user.songs.create_unpublished!
     else
       flash.now[:notice] = %(You are not logged in. Saving will be disabled, please <a href="/login">log in</a> or <a href="/signup">sign up</a> if you want to save your work!)
@@ -23,6 +24,14 @@ class MultitrackController < ApplicationController
   
   def config
     respond_to { |format| format.xml }
+  end
+
+  def authorize
+    if User.find_by_id_and_multitrack_token(params[:id], params[:token])
+      head :ok
+    else
+      head :forbidden
+    end
   end
 
   def refresh

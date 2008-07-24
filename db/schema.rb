@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 50) do
+ActiveRecord::Schema.define(:version => 51) do
 
   create_table "abuses", :force => true do |t|
     t.integer  "abuseable_id"
@@ -260,6 +260,7 @@ ActiveRecord::Schema.define(:version => 50) do
     t.boolean  "is_admin",                                                               :default => false
     t.string   "status",                    :limit => 3,                                 :default => "off"
     t.boolean  "name_public",                                                            :default => false
+    t.string   "multitrack_token",          :limit => 64
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

@@ -239,6 +239,20 @@ class User < ActiveRecord::Base
     save(false)
   end
 
+  def enter_multitrack!
+    self.multitrack_token = encrypt("#{email}--#{Time.now}")
+    save(false)
+  end
+
+  def leave_multitrack!
+    self.multitrack_token = nil
+    save(false)
+  end
+
+  def multitrack?
+    !self.multitrack_token.nil?
+  end
+
   def status
     if self == User.myousica
       # Myousica is always online

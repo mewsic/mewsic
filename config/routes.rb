@@ -67,6 +67,7 @@ ActionController::Routing::Routes.draw do |map|
   map.multitrack_edit    '/multitrack/:id',         :controller => 'multitrack', :action => 'edit'
   map.multitrack_config  '/request.config',         :controller => 'multitrack', :action => 'config'
   map.multitrack_refresh '/multitrack/refresh/:id', :controller => 'multitrack', :action => 'refresh'
+  map.multitrack_auth    '/multitrack/_/:token/:id', :controller => 'multitrack', :action => 'authorize'
 
   map.connect '/countries', :controller => 'users', :action => 'countries'
   
