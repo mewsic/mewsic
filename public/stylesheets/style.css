@@ -815,7 +815,7 @@ tr.nav-song td{
 }
 
 .answer .edit-command {
-	float: left;
+	float: none;
 }
 .answer .edit-command em {
 	color: #888;
