@@ -33,7 +33,6 @@
 <%= render :partial => 'find_question' %>
 
 <div class="box-list two-col-big clear-block">
-
 	<div class="tabmenu">
     <div class="tab active" id="top-answers-tab">
       <div class="sx"> </div>
@@ -55,7 +54,11 @@
       </div>
       <div class="dx"> </div>
 		</div>
+		<div class="float-right" style="padding:5px">
+			<%= link_to image_tag('icon_rss.png'), answers_rss_path %>
+		</div>
 	</div>
+
 
   <div class="clear-block" id="top-answers-container">
     <%= render :partial => 'index_list', :locals => {:answers => @top_answers, :name => 'top'} %>
