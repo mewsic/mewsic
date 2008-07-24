@@ -1,6 +1,23 @@
   <% breadcrumb @genre %>
   <% javascript('music') %>
 
+	<div class="box-list two-col clear-block">
+		<div class="elenco-genere clear-block">
+			<h1>
+				<%= link_to image_tag('icon_rss.png'), genre_rss_path(@genre) %>
+				<%= h @genre.name.upcase %>
+			</h1>
+		
+			<div class="top-box clear-block">
+				<div class="bottom-box clear-block">
+					<div class="elements clear-block" id="songs">
+						<%= render :partial => 'songs'%>
+					</div>
+				</div>
+			</div>	
+		</div>
+	</div>			
+
 	<div class="box-list one-col clear-block">
 		<div class="simple-list clear-block">
 			<h1>TOP GENRES</H1>
@@ -32,21 +49,5 @@
 		</div>
 	</div>
 
-	<div class="box-list two-col clear-block">
-		<div class="elenco-genere clear-block">
-			<h1><%= h @genre.name.upcase %>
-				<%= link_to image_tag('icon_rss.png'), genre_rss_path(@genre) %>
-			</h1>
-		
-			<div class="top-box clear-block">
-				<div class="bottom-box clear-block">
-					<div class="elements clear-block" id="songs">
-						<%= render :partial => 'songs'%>
-					</div>
-				</div>
-			</div>	
-		</div>
-	</div>			
-			
 </div>
   

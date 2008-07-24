@@ -1613,6 +1613,7 @@ h2.dj-label{
 
 .tit-classification-songs .tabmenu, .tit-classification-tracks .tabmenu {
 	margin-bottom: 0px;
+	margin-right: 5px;
 	float: none;
 	border: 0;
 }
@@ -1633,7 +1634,7 @@ h2.dj-label{
 }
 .tit-classification-songs .tabmenu .tab .rp,
 .tit-classification-tracks .tabmenu .tab .rp {
-	padding: 0px 10px;
+	padding: 0px 0px 0px 10px;
 }
 
 /* gallery */
