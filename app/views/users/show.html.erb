@@ -26,6 +26,7 @@
 					<div class="sx"> </div>
 					<div class="rp">
 						<h1 class="title">Songs <span class="counter">(<%= @user.songs_count %>)</span></h1>
+						<%= link_to image_tag('icon_podcast.png', :style => 'padding: 4px 0px 0px 12px'), formatted_podcast_user_songs_path(@user, 'xml') %>
 					</div>
 					<div class="dx"> </div>
 				</div>    

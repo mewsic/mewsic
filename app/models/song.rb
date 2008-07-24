@@ -1,3 +1,5 @@
+require 'numeric_to_runtime'
+
 class Song < ActiveRecord::Base
   
   acts_as_sphinx

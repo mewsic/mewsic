@@ -70,6 +70,11 @@ class SongsController < ApplicationController
     render :layout => false, :partial => 'track', :collection => @song.tracks
   end
 
+  def podcast
+    @user = User.find_from_param params[:user_id]
+    @songs = @user.published_songs
+  end
+
   def update
     @song = current_user.songs.find(params[:id])
     @song.update_attributes!(params[:song])

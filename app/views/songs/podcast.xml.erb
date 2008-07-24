@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+ 
+<channel>
+<title><%= @user.nickname %> podcast on Myousica.com</title>
+<link><%= user_url @user %></link>
+<language>en-us</language>
+<copyright>CC <%= Time.now.year %> <%= @user.nickname %> / <%= @user.first_name %> <%= @user.last_name %></copyright>
+<itunes:subtitle><%= @user.motto %></itunes:subtitle>
+<itunes:author><%= @user.nickname %></itunes:author>
+<itunes:summary><%= @user.tastes %></itunes:summary>
+<description><%= @user.tastes %></description>
+<itunes:owner>
+<itunes:name><%= @user.nickname %></itunes:name>
+<itunes:email>info@myousica.com</itunes:email>
+</itunes:owner>
+<itunes:image href="<%= APPLICATION[:url] + @user.avatar.public_filename %>" />
+<itunes:category text="Music"/>
+ 
+<%= render :partial => 'podcast_item', :collection => @songs %>
+
+</channel>
+</rss>
