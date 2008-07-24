@@ -4,7 +4,9 @@
 	<div class="box-list two-col clear-block">
 		<div class="elenco-genere clear-block">
 			<h1>
-				<%= link_to image_tag('icon_rss.png'), genre_rss_path(@genre) %>
+				<div class="float-right">
+					<%= link_to image_tag('icon_rss.png'), genre_rss_path(@genre) %>
+				</div>
 				<%= h @genre.name.upcase %>
 			</h1>
 		
