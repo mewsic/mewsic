@@ -28,9 +28,9 @@
 		<genres>/genres.xml</genres>
 		<user>/users/{:id}.xml</user>
 		<media>
-			<mix method="post">/mix</mix>
-			<upload method="post">/upload</upload>
-			<encode method="post">/encode_flv</encode>
+			<mix method="post">/mix?<%= session_key %></mix>
+			<upload method="post">/upload?<%= session_key %></upload>
+			<encode method="post">/encode_flv?<%= session_key %></encode>
 		</media>
 		<workers>
 			<mixer>/mix/status/{:key}</mixer>
