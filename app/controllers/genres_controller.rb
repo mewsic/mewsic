@@ -35,6 +35,15 @@ class GenresController < ApplicationController
     redirect_to '/'
   end
 
+  def rss
+    @genre = Genre.find_from_param(params[:genre_id])
+    @songs = @genre.published_songs.find(:all, :limit => 40)
+
+    respond_to do |format|
+      format.xml
+    end
+  end
+
 protected
 
   def to_breadcrumb_link

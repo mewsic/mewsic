@@ -19,6 +19,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :genres do |genre|
     genre.resources :songs
+    genre.rss 'rss.xml', :controller => 'genres', :action => 'rss'
   end
   
   map.resources :instruments
