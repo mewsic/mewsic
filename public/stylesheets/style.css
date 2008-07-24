@@ -2875,7 +2875,7 @@ td.star .rating {
 }
 
 .search_row .rating {
-	margin: 6px 0px;
+	margin: 0;
 	width: 70px;
 	float: right;
 }
