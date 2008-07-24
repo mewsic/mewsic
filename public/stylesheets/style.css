@@ -346,14 +346,6 @@ div.user-list-boxes .motto {
 	overflow: hidden;
 }
 
-td.song-title a {
-	color: #000;
-}
-
-td.song-title a:hover {
-	color:#28548B;
-}
-
 .title, .title a{
 	font-weight:bold;
 	color:#000;
@@ -475,6 +467,7 @@ h2, h2 a{
 	padding:0px 6px 30px;
 	width: 732px;
 	background: url(/images/BG_whiteblock_shadow.png) repeat-y top left;
+	margin-top: -17px;
 }
 .bottom-shadow{
 	float:left;
@@ -635,7 +628,17 @@ tr.nav-song td{
 }
 .bands-dj-list .elements td.song-title {
 	width: 240px;
+}
+
+.bands-dj-list .elements td.song-title a {
+	color: #000;
+}
+
+.bands-dj-list .elements td.song-title p {
 	overflow: hidden;
+	display: block;
+	max-height: 14px;
+	padding:0 !important;
 }
 
 .bands-dj-list .elements p.name {
@@ -1563,6 +1566,17 @@ h2.dj-label{
 .elenco-genere table {
 	margin:auto auto;
 }
+.elenco-genere td.song {
+	width: 295px;
+	padding: 5px;
+}
+.elenco-genere .tracks-number {
+	margin:0px 4px 0px 0px;
+	padding:0;
+}
+.elenco-genere .thumb {
+	margin: 0px 8px 0px 0px;
+}
 .elenco-genere h1{
 	padding: 0px 10px;
 }
@@ -1571,6 +1585,13 @@ h2.dj-label{
 }
 .elenco-genere img.float-left{
 	margin-right:2px;
+}
+.elenco-genere p{
+	padding-bottom:1px !important;
+	display: block;
+	width: 235px;
+	overflow: hidden;
+	max-height: 14px;
 }
 
 /* tracks */
@@ -2482,7 +2503,8 @@ p.sign-in .button{
 }
 .small {
 	font-size: 11px;
-	color:#61656A;
+	/*color:#61656A;*/
+	color: #0296C2;
 }
 a.download {
 	color: #9D9D9D !important;

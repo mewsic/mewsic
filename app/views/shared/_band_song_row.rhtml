@@ -1,6 +1,6 @@
 <tr class="<%= band_song_row_counter.even? ? "even" : "odd" %>">
   <td class="song-title">
-    <a href="<%= song_path(band_song_row) %>"><%= band_song_row.original_author %> - <em><%= truncate(band_song_row.title, 30) %></em></a>
+		<p><a href="<%= song_path(band_song_row) %>"><span class="abstract"><%= band_song_row.original_author %></span> - <span class="title"><%= band_song_row.title %></span></a></p>
   </td>
   <td class="star">
     <%= rating(band_song_row, :class => band_song_row_counter.even? ? 'grey-star' : '') %>

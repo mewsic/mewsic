@@ -9,7 +9,7 @@
 					<div class="tab active float-right">
 						<div class="sx"> </div>
 						<div class="rp">
-							<p class="title">
+							<h1 class="title">
 								<% if @songs.previous_page %>
 									<%= link_to image_tag('move_arrow_left.png'), genre_songs_path(@genre, :page => @songs.previous_page), :class => 'genre-pagination' %>
 								<% else %>
@@ -21,7 +21,7 @@
 								<% else %>
 									<%= image_tag('move_arrow_right.png', :class => 'faded') %>
 								<% end %>		  
-							</p>				
+							</h1>				
 						</div>
 						<div class="dx"> </div>
 					</div>
@@ -31,7 +31,7 @@
 		<%= render :partial => 'genres/song', :collection => @songs %>
 	</tbody>
 </table>
-<p class="next">
+<div class="next">
 	<% if @songs.page_count > 1 %>
 		<span class="align-right page-count">Page <%= @songs.current_page %> of <%= @songs.page_count %></span>
 	<% end %>
@@ -45,4 +45,4 @@
 	<% else %>
 		<%= image_tag('move_arrow_right.png', :class => 'faded') %>
   <% end %>
-</p>
+</div>
