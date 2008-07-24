@@ -3,7 +3,7 @@
 <itunes:author><%= podcast_item.user.nickname %></itunes:author>
 <itunes:subtitle><%= podcast_item.original_author %></itunes:subtitle>
 <itunes:summary><%= podcast_item.description %></itunes:summary>
-<enclosure url="<%= download_song_url podcast_item %>" length="<%= File.size(File.join(APPLICATION[:media_path], podcast_item.filename)) rescue 0 %>" type="audio/mpeg" />
+<enclosure url="<%= formatted_download_song_url podcast_item, 'mp3' %>" length="<%= File.size(File.join(APPLICATION[:media_path], podcast_item.filename)) rescue 0 %>" type="audio/mpeg" />
 <guid><%= download_song_url podcast_item %></guid>
 <pubDate><%= podcast_item.created_at %></pubDate>
 <itunes:duration><%= podcast_item.length %></itunes:duration>
