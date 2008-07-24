@@ -98,6 +98,14 @@ module UsersHelper
     content
   end
 
+  #def podcast_link_for(user)
+  #  if request.user_agent =~ /Safari/
+  #    user_podcast_url(user).sub /^http/, 'pcast'
+  #  else
+  #    user_pcast_path(user)
+  #  end
+  #end
+
   def empty_collection_message(collection, options = {})
     return unless collection.size.zero?
     current, any = options.delete(:current_user), options.delete(:any_user)

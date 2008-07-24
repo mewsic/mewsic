@@ -80,7 +80,7 @@ Prototip.Styles = {
     border: 4,
     radius: 4,
     delay: 0,
-    width: 150,
+    width: 'auto',
     borderColor: '#c1c1c1',
     showOn: 'click',
     hook: { target: 'topMiddle', tip: 'bottomMiddle' },

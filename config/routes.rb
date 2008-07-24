@@ -26,7 +26,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :bands_and_deejays
   map.resources :users, :collection => {:auto_complete_for_message_to => :get, :top => :get}, :member => {:firstrun => :get, :switch_type => :any, :change_password => :put, :rate => :put} do |user|    
     user.resources :answers
-    user.resources :songs, :collection => { :podcast => :get }
+    user.resources :songs
     user.resources :tracks, :member => { :toggle_idea => :put }
     user.resource  :avatar
     user.resources :members, :controller => 'band_members'
@@ -35,6 +35,8 @@ ActionController::Routing::Routes.draw do |map|
     user.resources :mlabs
     user.resources :messages, :collection => { :delete_selected => :post, :sent => :get, :unread => :get }
     user.resources :abuses
+    user.podcast 'podcast.xml', :controller => 'songs', :action => 'podcast', :conditions => {:method => :get}
+    user.pcast ':user_id.pcast', :controller => 'songs', :action => 'pcast', :conditions => {:method => :get}
   end
   map.forgot_password '/forgot_password', :controller => 'users', :action => 'forgot_password'
   map.reset_password '/reset_password/:id',  :controller => 'users', :action => 'reset_password'

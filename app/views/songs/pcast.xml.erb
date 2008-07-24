@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pcast PUBLIC "-//Apple Computer//DTD PCAST 1.0//EN" "http://www.itunes.com/DTDs/pcast-1.0.dtd">
+<pcast version="1.0">
+  <channel>
+    <link rel="feed" type="application/rss+xml" href="<%= user_podcast_url @user %>" />
+    <title><%= @user.nickname %> podcast on Myousica.com</title>
+    <subtitle><%= @user.motto %></subtitle>
+    <category>Music</category>
+  </channel>
+</pcast>

@@ -3,7 +3,9 @@ var UserLinks = Class.create({
   initialize: function() {
     this.element = $('user-links');
     this.tooltip = this.element.down('div.container');
-    this.element.select('a.tip-link').each(function(link) {
+    var links = this.element.select('a.tip-link');
+    links.push($('podcast-link'));
+    links.each(function(link) {
       var contents = $(link.getAttribute('rel'));
       var title = link.title;
       link.observe('click', function(event) { event.stop(); });

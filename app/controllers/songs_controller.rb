@@ -70,9 +70,22 @@ class SongsController < ApplicationController
     render :layout => false, :partial => 'track', :collection => @song.tracks
   end
 
+  def pcast
+    @user = User.find_from_param params[:user_id]
+    response.headers['Content-Type'] = 'application/octet-stream'
+
+    respond_to do |format|
+      format.xml
+    end
+  end
+
   def podcast
     @user = User.find_from_param params[:user_id]
     @songs = @user.published_songs
+
+    respond_to do |format|
+      format.xml
+    end
   end
 
   def update
