@@ -1,6 +1,7 @@
 class MultitrackController < ApplicationController  
   
   before_filter :login_required, :only => :edit
+  before_filter :multitrack_token_required, :only => [:authorize, :update_song]
 
   def index    
     if logged_in?
@@ -26,14 +27,6 @@ class MultitrackController < ApplicationController
     respond_to { |format| format.xml }
   end
 
-  def authorize
-    if User.find_by_id_and_multitrack_token(params[:id], params[:token])
-      head :ok
-    else
-      head :forbidden
-    end
-  end
-
   def refresh
     song = Song.find(params[:id])
 
@@ -43,5 +36,34 @@ class MultitrackController < ApplicationController
       page['mlab_instruments'].update instruments_used_in(song)
     end
   end
+
+  # Used by multitrack server
+  def authorize
+    head :ok
+  end
+
+  def update_song
+    unless params[:id] && params[:filename] && params[:length]
+      head :bad_request and return
+    end
+
+    song = @user.songs.find(params[:song_id])
+    song.filename = params[:filename]
+    song.seconds = params[:length]
+    song.save!
+
+    head :ok
+
+  rescue ActiveRecord::RecordNotFound
+    head :not_found
+  rescue ActiveRecord::ActiveRecordError
+    head :bad_request
+  end
+
+  protected
+    def multitrack_token_required
+      @user = User.find_by_id_and_multitrack_token(params[:id], params[:token])
+      head :forbidden unless @user
+    end
 
 end

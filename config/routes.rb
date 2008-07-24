@@ -11,9 +11,10 @@ ActionController::Routing::Routes.draw do |map|
   map.decline_mband_membership 'mband_memberships/decline/:token', :controller => 'mband_memberships', :action => 'decline'
   map.resources :mband_memberships
   
-  map.resources :answers, :member => { :rate => :put, :siblings => :get }, :collection => { :top => :get, :newest => :get, :open => :get, :search => :get } do |answers|
-    answers.resources :replies
-    answers.resources :abuses
+  map.answers_rss 'answers/rss.xml', :controller => 'answers', :action => 'rss'
+  map.resources :answers, :member => { :rate => :put, :siblings => :get }, :collection => { :top => :get, :newest => :get, :open => :get, :search => :get } do |answer|
+    answer.resources :replies
+    answer.resources :abuses
   end
   map.connect 'replies/:id/rate', :controller => 'replies', :action => 'rate'
   
@@ -63,11 +64,12 @@ ActionController::Routing::Routes.draw do |map|
   map.music '/music', :controller => 'music', :action => 'index'
   map.top_music '/music/top', :controller => 'music', :action => 'top'
 
-  map.multitrack         '/multitrack',             :controller => 'multitrack', :action => 'index'
-  map.multitrack_edit    '/multitrack/:id',         :controller => 'multitrack', :action => 'edit'
-  map.multitrack_config  '/request.config',         :controller => 'multitrack', :action => 'config'
-  map.multitrack_refresh '/multitrack/refresh/:id', :controller => 'multitrack', :action => 'refresh'
-  map.multitrack_auth    '/multitrack/_/:token/:id', :controller => 'multitrack', :action => 'authorize'
+  map.multitrack         '/multitrack',              :controller => 'multitrack', :action => 'index'
+  map.multitrack_edit    '/multitrack/:id',          :controller => 'multitrack', :action => 'edit'
+  map.multitrack_config  '/request.config',          :controller => 'multitrack', :action => 'config'
+  map.multitrack_refresh '/multitrack/refresh/:id',  :controller => 'multitrack', :action => 'refresh'
+  map.multitrack_auth    '/multitrack/_/:token/:id', :controller => 'multitrack', :action => 'authorize', :token => /[\da-fA-F]{40}/
+  map.multitrack_song    '/multitrack/s/:token/:id', :controller => 'multitrack', :action => 'update_song', :token => /[\da-fA-F]{40}/
 
   map.connect '/countries', :controller => 'users', :action => 'countries'
   

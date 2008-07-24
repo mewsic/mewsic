@@ -58,6 +58,14 @@ class AnswersController < ApplicationController
     render :partial => 'index_list', :locals => { :answers => answers, :name => params[:type] }
   end
 
+  def rss
+    @answers = Answer.find_newest_paginated 1, :per_page => 20
+
+    respond_to do |format|
+      format.xml
+    end
+  end
+
   def create
     @answer = Answer.new(params[:answer])
     @answer.user = current_user
