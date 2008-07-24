@@ -86,11 +86,8 @@ class AnswersController < ApplicationController
   end
   
   def search
-    @answers = Answer.paginate_with_sphinx(@q, :sphinx => { 
-      :limit => 10,
-      :mode => :boolean,
-      :page => params[:page] || 1
-    })
+    @answers = Answer.search(@q, :per_page => 10, :page => params[:page] || 1, :index => 'answers', :match_mode => :boolean)
+
     render :partial => 'search_list' and return if request.xhr?
   end
   

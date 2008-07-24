@@ -2,8 +2,16 @@ require 'numeric_to_runtime'
 
 class Song < ActiveRecord::Base
   
-  acts_as_sphinx
-  extend SphinxWillPagination
+  # acts_as_sphinx
+  # extend SphinxWillPagination
+  # 
+  define_index do
+    has :genre_id
+    has :bpm
+    has :tone
+    has user.country, :as => :user_country
+  end
+ 
   
   attr_accessor :mlab
   
@@ -28,20 +36,14 @@ class Song < ActiveRecord::Base
 
   after_destroy :delete_sound_file
 
-  def self.search(q, options = {})
-    find(:all, {:include => :genre, :conditions => [
-      "songs.published = ? AND songs.title LIKE ? OR songs.original_author LIKE ? OR songs.description LIKE  ? OR genres.name LIKE ?",
-      *(Array.new(4).fill("%#{q}%")).unshift(true)
-    ]}.merge(options))
-  end
 
-  def self.search_paginated(q, options = {})
-    options = {:per_page => 6, :page => 1}.merge(options)
-    paginate(:per_page => options[:per_page], :page => options[:page], :include => [:genre, {:user => :avatars}], :conditions => [
-      "songs.published = ? AND songs.title LIKE ? OR songs.original_author LIKE ? OR songs.description LIKE  ? OR genres.name LIKE ?",
-      *(Array.new(4).fill("%#{q}%")).unshift(true)
-    ])
-  end
+  # def self.search_paginated(q, options = {})
+  #     options = {:per_page => 6, :page => 1}.merge(options)
+  #     paginate(:per_page => options[:per_page], :page => options[:page], :include => [:genre, {:user => :avatars}], :conditions => [
+  #       "songs.published = ? AND songs.title LIKE ? OR songs.original_author LIKE ? OR songs.description LIKE  ? OR genres.name LIKE ?",
+  #       *(Array.new(4).fill("%#{q}%")).unshift(true)
+  #     ])
+  #   end
   
   def self.find_published(options = {})
     self.find(:all, :conditions => ["songs.published = ?", true])

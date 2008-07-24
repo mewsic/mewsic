@@ -20,7 +20,7 @@
   	</div>
   </div>
   <%- end -%>
-  <%# will_paginate @ideas, :class => 'pagination idea', :params => { :type => :idea }, :prev_label => image_tag('move_arrow_left.png'), :next_label => image_tag('move_arrow_right.png') %>
+  <%= will_paginate @ideas, :class => 'pagination idea', :params => { :type => :idea }, :prev_label => image_tag('move_arrow_left.png'), :next_label => image_tag('move_arrow_right.png') %>
 	<div class="pagination spinner">
     <img src="/images/spinner.gif" id="idea-results-spinner" style="display:none"/>
   </div>

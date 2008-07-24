@@ -27,8 +27,13 @@ require 'numeric_to_runtime'
 
 class Track < ActiveRecord::Base
   
-  acts_as_sphinx
-  extend SphinxWillPagination
+  # acts_as_sphinx
+  #   extend SphinxWillPagination  
+  
+  define_index do   
+    has :bpm    
+    has :idea
+  end
   
   attr_accessor :mlab
   attr_accessor :tone
@@ -61,20 +66,14 @@ class Track < ActiveRecord::Base
 
   after_destroy :delete_sound_file
 
-  def self.search(q, options = {})
-    find(:all, {:include => :instrument, :conditions => [
-      "tracks.title LIKE ? OR tracks.description LIKE ? OR instruments.description LIKE ?",
-      *(Array.new(3).fill("%#{q}%"))
-    ]}.merge(options))
-  end
 
-  def self.search_paginated(q, options)
-    options = {:per_page => 6, :page => 1}.merge(options)
-    paginate(:per_page => options[:per_page], :page => options[:page], :include => [:mixes, :instrument, {:parent_song => {:user => :avatars}}], :conditions => [
-      "(tracks.title LIKE ? OR tracks.description LIKE ? OR instruments.description LIKE ?) AND tracks.idea = ?",
-      *(Array.new(3).fill("%#{q}%") << false)
-    ])
-  end
+  # def self.search_paginated(q, options)
+  #     options = {:per_page => 6, :page => 1}.merge(options)
+  #     paginate(:per_page => options[:per_page], :page => options[:page], :include => [:mixes, :instrument, {:parent_song => {:user => :avatars}}], :conditions => [
+  #       "(tracks.title LIKE ? OR tracks.description LIKE ? OR instruments.description LIKE ?) AND tracks.idea = ?",
+  #       *(Array.new(3).fill("%#{q}%") << false)
+  #     ])
+  #   end
   
   def self.search_paginated_ideas(q, options)
     options = {:per_page => 6, :page => 1}.merge(options)

@@ -18,8 +18,10 @@
 
 class Answer < ActiveRecord::Base
   
-  acts_as_sphinx
-  extend SphinxWillPagination
+  # acts_as_sphinx
+  #   extend SphinxWillPagination
+  define_index do
+  end
   
   has_many :replies, :order => 'created_at DESC'
   belongs_to :user

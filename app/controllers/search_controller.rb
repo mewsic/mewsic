@@ -15,92 +15,125 @@ class SearchController < ApplicationController
       
      format.xml do
        @show_siblings_count = true
-
+       
+       songs_conditions = {}
+       tracks_conditions = {}
+       
        if @advanced
+         songs_conditions[:genre_id]        = params[:genre].to_i if params.include?(:genre) && !params[:genre].blank?
+         if params.include?(:bpm) && !params[:bpm].blank?
+           songs_conditions[:bpm] = params[:bpm].to_i   
+           tracks_conditions[:bpm] = params[:bpm].to_i           
+         end
+       end
+       
+       @songs =   search_songs(@q, 10, 1, songs_conditions)
+       @tracks =  search_tracks(@q, 10, 1, tracks_conditions)
+        
+       #if @advanced         
          # Search string: 
          # instrument=instrument_id & genre=genre_id & country=italy & bpm=120 & key=key & author=pink+floyd & title=the+wall
          #
-         songs_conditions_string, songs_conditions_vars = '1=1', {}
-         tracks_conditions_string, tracks_conditions_vars = '1=1', {}
+         
+         # songs_conditions_string, songs_conditions_vars = '1=1', {}
+         #          tracks_conditions_string, tracks_conditions_vars = '1=1', {}
+         # 
+         #          if params[:instrument] && !params[:instrument].blank?
+         #            tracks_conditions_string += ' AND tracks.instrument_id = :instrument'
+         #            tracks_conditions_vars[:instrument] = params[:instrument]
+         #          end
+         #         
+         #          if params[:genre] && !params[:genre].blank?
+         #            songs_conditions_string += ' AND songs.genre_id = :genre'
+         #            songs_conditions_vars[:genre] = params[:genre]
+         #          end
+         #         
+         #          if params[:country] && !params[:country].blank?
+         #            tracks_conditions_string += ' AND users.country = :country'
+         #            songs_conditions_string += ' AND users.country = :country'
+         #         
+         #            tracks_conditions_vars[:country] = params[:country]
+         #            songs_conditions_vars[:country] = params[:country]
+         #          end
+         #         
+         #          if params[:bpm] && !params[:bpm].blank?
+         #            tracks_conditions_string += ' AND tracks.bpm = :bpm'
+         #            tracks_conditions_vars[:bpm] = params[:bpm].to_i
+         #         
+         #            songs_conditions_string += ' AND songs.bpm = :bpm'
+         #            songs_conditions_vars[:bpm] = params[:bpm].to_i
+         #          end
+         #         
+         #          if params[:key] && !params[:key].blank?
+         #            tracks_conditions_string += ' AND tracks.tonality = :key'
+         #            tracks_conditions_vars[:key] = params[:key]
+         #         
+         #            songs_conditions_string += ' AND songs.tone = :key'
+         #            songs_conditions_vars[:key] = params[:key]
+         #          end
+         #         
+         #          if params[:author] && !params[:author].blank?
+         #            author = params[:author].gsub(/[%_]/){"\\#{$&}"}
+         #         
+         #            songs_conditions_string += ' AND songs.original_author LIKE :author'
+         #            songs_conditions_vars[:author] = "%#{author}%"
+         #          end
+         #            
+         #          if params[:title] && !params[:title].blank?
+         #            title = params[:title].gsub(/[%_]/){"\\#{$&}"}
+         #         
+         #            tracks_conditions_string += ' AND tracks.title LIKE :title'
+         #            tracks_conditions_vars[:title] = "%#{title}%"
+         #         
+         #            songs_conditions_string += ' AND songs.title LIKE :title'
+         #            songs_conditions_vars[:title] = "%#{title}%"
+         #          end
+        
+         # @songs =
+         #   if !songs_conditions_vars.empty?
+         #     songs_conditions_string += ' AND published = :published'
+         #     songs_conditions_vars[:published] = true
+         # 
+         #     Song.find(:all, :include => [:user, :genre],
+         #               :conditions => [songs_conditions_string, songs_conditions_vars],
+         #               :order => 'songs.rating_avg DESC, songs.created_at DESC', :limit => 20)
+         #   else
+         #     []
+         #   end
+         
+         # filter = {}
+         #          filter["genre_id"] = params[:genre_id].to_i if params.include?(:genre)
+         #          @songs = Song.paginate_with_sphinx(@q, :include => [:genre, :mixes, :user], :order => 'songs.rating_avg DESC, songs.created_at DESC',
+         #            :sphinx => {
+         #              :page => 1,
+         #              :limit => 20,
+         #              :filter => {
+         #                'genre_id' => 961712978
+         #              }
+         #            }           
+         #           )
+         # 
+         #          @tracks =
+         #            if !tracks_conditions_vars.empty?
+         #              Track.find(:all, :include => [{:parent_song => :genre}, :owner, :instrument],
+         #                         :conditions => [tracks_conditions_string, tracks_conditions_vars],
+         #                         :order => 'tracks.rating_avg DESC, tracks.created_at DESC', :limit => 20)
+         #            else 
+         #              []
+         #            end
+         # 
+         #        else
+         # 
+         #          @songs = Song.paginate_with_sphinx(@q, :include => [:genre, :mixes, :user], :order => 'songs.rating_avg DESC, songs.created_at DESC',
+         #           :sphinx => {
+         #             :page => 1,
+         #             :limit => 20
+         #           }
+         #          )
+         #          @tracks = Track.search(@q, :include => [:instrument, {:parent_song => :genre}, :owner], :limit => 20, :order => 'tracks.rating_avg DESC, tracks.created_at DESC')
 
-         if params[:instrument] && !params[:instrument].blank?
-           tracks_conditions_string += ' AND tracks.instrument_id = :instrument'
-           tracks_conditions_vars[:instrument] = params[:instrument]
-         end
-        
-         if params[:genre] && !params[:genre].blank?
-           songs_conditions_string += ' AND songs.genre_id = :genre'
-           songs_conditions_vars[:genre] = params[:genre]
-         end
-        
-         if params[:country] && !params[:country].blank?
-           tracks_conditions_string += ' AND users.country = :country'
-           songs_conditions_string += ' AND users.country = :country'
-        
-           tracks_conditions_vars[:country] = params[:country]
-           songs_conditions_vars[:country] = params[:country]
-         end
-        
-         if params[:bpm] && !params[:bpm].blank?
-           tracks_conditions_string += ' AND tracks.bpm = :bpm'
-           tracks_conditions_vars[:bpm] = params[:bpm].to_i
-        
-           songs_conditions_string += ' AND songs.bpm = :bpm'
-           songs_conditions_vars[:bpm] = params[:bpm].to_i
-         end
-        
-         if params[:key] && !params[:key].blank?
-           tracks_conditions_string += ' AND tracks.tonality = :key'
-           tracks_conditions_vars[:key] = params[:key]
-        
-           songs_conditions_string += ' AND songs.tone = :key'
-           songs_conditions_vars[:key] = params[:key]
-         end
-        
-         if params[:author] && !params[:author].blank?
-           author = params[:author].gsub(/[%_]/){"\\#{$&}"}
-        
-           songs_conditions_string += ' AND songs.original_author LIKE :author'
-           songs_conditions_vars[:author] = "%#{author}%"
-         end
-           
-         if params[:title] && !params[:title].blank?
-           title = params[:title].gsub(/[%_]/){"\\#{$&}"}
-        
-           tracks_conditions_string += ' AND tracks.title LIKE :title'
-           tracks_conditions_vars[:title] = "%#{title}%"
-        
-           songs_conditions_string += ' AND songs.title LIKE :title'
-           songs_conditions_vars[:title] = "%#{title}%"
-         end
-        
-         @songs =
-           if !songs_conditions_vars.empty?
-             songs_conditions_string += ' AND published = :published'
-             songs_conditions_vars[:published] = true
-
-             Song.find(:all, :include => [:user, :genre],
-                       :conditions => [songs_conditions_string, songs_conditions_vars],
-                       :order => 'songs.rating_avg DESC, songs.created_at DESC', :limit => 20)
-           else
-             []
-           end
-
-         @tracks =
-           if !tracks_conditions_vars.empty?
-             Track.find(:all, :include => [{:parent_song => :genre}, :owner, :instrument],
-                        :conditions => [tracks_conditions_string, tracks_conditions_vars],
-                        :order => 'tracks.rating_avg DESC, tracks.created_at DESC', :limit => 20)
-           else 
-             []
-           end
-
-       else
-
-         @songs = Song.search(@q, :include => [:genre, :mixes, :user], :limit => 20, :order => 'songs.rating_avg DESC, songs.created_at DESC')
-         @tracks = Track.search(@q, :include => [:instrument, {:parent_song => :genre}, :owner], :limit => 20, :order => 'tracks.rating_avg DESC, tracks.created_at DESC')
-
-       end
+       #end
+       
        render :action => 'show'
      end
     end
@@ -139,38 +172,19 @@ class SearchController < ApplicationController
     end
     
     def search_users(query, per_page, page)
-      User.paginate_with_sphinx(query, :sphinx => {
-        :limit => per_page,
-        :mode => :boolean,
-        :page => page
-      })
+      User.search(query, :per_page => per_page, :page => page, :index => 'users', :match_mode => :boolean)
     end
     
-    def search_songs(query, per_page, page)
-      Song.paginate_with_sphinx(query, :sphinx => {
-        :limit => per_page,
-        :mode => :boolean,
-        :page => page
-      })
+    def search_songs(query, per_page, page, conditions = {})                  
+      Song.search(query, :per_page => per_page, :page => page, :index => 'songs', :match_mode => :boolean, :include => :user, :conditions => conditions)
     end
     
-    def search_tracks(query, per_page, page)
-      Track.paginate_with_sphinx(@q, :sphinx => {
-        :limit => per_page,
-        :mode => :boolean,
-        :page => page
-      })
+    def search_tracks(query, per_page, page, conditions = {})
+      Track.search(query, :per_page => per_page, :page => page, :index => 'tracks', :match_mode => :boolean, :conditions => conditions)
     end
     
     def search_ideas(query, per_page, page)
-      Track.paginate_with_sphinx(@q, :sphinx => {
-        :limit => per_page,
-        :mode => :boolean,
-        :page => page,
-        :filter => {
-          'idea' => 1
-        }
-      })
+      Track.search(query, :per_page => per_page, :page => page, :index => 'tracks', :match_mode => :boolean, :conditions => { :idea => '1' } )
     end
 
     # instrument=instrument_id&genre=genre_id&country=country&city=city&author=pink+floyd&title=the+wall
@@ -178,7 +192,7 @@ class SearchController < ApplicationController
       @q = CGI::unescape(params.delete(:q) || params.delete(:id) || '')
       @q.gsub! /%/, ''
 
-      @advanced = params.any? { |k,v| %w(instrument genre country city author title).include?(k) }
+      @advanced = params.any? { |k,v| %w(instrument bpm genre country city author title key).include?(k) }
 
       if @q.strip.blank? && !@advanced
         flash[:error] = 'You did not enter a search string' 

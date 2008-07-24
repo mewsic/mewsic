@@ -46,8 +46,12 @@
 require 'digest/sha1'
 class User < ActiveRecord::Base
   
-  acts_as_sphinx
-  extend SphinxWillPagination
+  define_index do
+  end
+  
+  # acts_as_sphinx
+  # extend SphinxWillPagination                       
+  
   # Virtual attribute for the unencrypted password
   attr_accessor :password                    
 
