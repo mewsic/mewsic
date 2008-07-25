@@ -9,24 +9,24 @@
 	<url_request>
 		<mylist>/users/{:id}/mlabs.xml</mylist>
 		<mysongs>/users/{:id}/songs.xml</mysongs>
+		<user>/users/{:id}.xml</user>
 		<search>/search/new.xml</search>
-		<songs>
-			<fetch>/songs/{:id}.xml</fetch>
-			<edit>/songs/{:id}.xml?edit=true</edit>
-			<siblings>/songs/{:id}.xml?siblings=true</siblings>
-			<mix method="post">/songs/{:id}/mix.xml</mix>
-			<update method="put">/songs/{:id}.xml</update>
-			<load method="put">/songs/{:id}/load_track.xml</load>
-			<unload method="put">/songs/{:id}/unload_track.xml</unload>
-		</songs>
-		<tracks>
-			<fetch>/tracks/{:id}.xml</fetch>
-			<siblings>/tracks/{:id}.xml?siblings=true</siblings>
-			<create method="post">/tracks.xml</create>
-		</tracks>
 		<instruments>/instruments.xml</instruments>
 		<genres>/genres.xml</genres>
-		<user>/users/{:id}.xml</user>
+		<songs>
+			<fetch>/songs/{:song_id}.xml</fetch>
+			<edit>/songs/{:song_id}.xml?edit=true</edit>
+			<siblings>/songs/{:song_id}.xml?siblings=true</siblings>
+			<mix method="post">/songs/{:song_id}/mix.xml</mix>
+			<update method="put">/songs/{:song_id}.xml</update>
+			<load method="put">/songs/{:song_id}/load_track.xml</load>
+			<unload method="put">/songs/{:song_id}/unload_track.xml</unload>
+		</songs>
+		<tracks>
+			<fetch>/tracks/{:track_id}.xml</fetch>
+			<siblings>/tracks/{:track_id}.xml?siblings=true</siblings>
+			<create method="post">/tracks.xml</create>
+		</tracks>
 		<media>
 			<mix method="post">/mix?<%= multitrack_auth_token %></mix>
 			<encode method="post">/encode_flv?<%= multitrack_auth_token %></encode>
