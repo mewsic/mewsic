@@ -113,7 +113,7 @@ class UsersControllerTest < Test::Unit::TestCase
   def test_should_activate_the_first_time
     assert_nil User.find(users(:aaron).id).activated_at
     get :activate, :activation_code => users(:aaron).activation_code
-    assert_redirected_to user_path(users(:aaron), :firstrun => true)
+    assert_redirected_to user_path(users(:aaron)) + '?welcome'
     assert_nil User.find(users(:aaron).id).activation_code
     assert_not_nil User.find(users(:aaron).id).activated_at
     

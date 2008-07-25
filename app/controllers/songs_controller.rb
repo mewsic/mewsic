@@ -164,7 +164,7 @@ class SongsController < ApplicationController
 
     respond_to do |format|
       format.xml do
-        render :nothing => true, :status => :ok
+        render :partial => 'shared/song', :object => @song
       end
     end
 
