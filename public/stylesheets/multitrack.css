@@ -42,7 +42,7 @@
 #mlab_details_container {
 	float: left;
 	width: 875px;
-	height: 175px;
+	height: 200px;
 }
 
 #mlab_detail_row_last {
@@ -85,12 +85,17 @@
 	margin-bottom: 0px;
 }
 
+#mlab_description-inplaceeditor br {
+	display: none;
+	visibility: hidden;
+}
+
 .editor_field {
 	border: 1px solid #98D1E5;
 	font-weight: bold;
 	font-size: 19px;
 	height: 23px;
-	width: 360px;
+	width: 240px;
 	margin-right: 5px;
 	padding: 2px 4px;
 }
@@ -98,11 +103,6 @@
 textarea.editor_field {
 	font-size: 14px;
 	height: 46px;
-}
-
-#mlab_description-inplaceeditor br {
-	display: none;
-	visibility: hidden;
 }
 
 .editor_ok_button {
@@ -120,6 +120,16 @@ textarea.editor_field {
 .editor_cancel_link {
 	font-size:14px;
 	color:#444;
+}
+
+.mlab_tone-inplaceselect, .mlab_genre-inplaceselect {
+	border: 1px solid #98D1E5;
+	height: 23px;
+	font-size:19px;
+	font-weight:bold;
+}
+.mlab_genre-inplaceselect {
+	width: 280px;
 }
 
 .mlab_small_text {
