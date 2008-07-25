@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+ 
+<channel>
+<title>Mband "<%= @mband.name %>" podcast on Myousica.com</title>
+<link><%= mband_url @mband %></link>
+<language>en-us</language>
+<copyright>CC <%= Time.now.year %> <%= @mband.name %></copyright>
+<itunes:subtitle><%= @mband.motto %></itunes:subtitle>
+<itunes:author><%= @mband.name %></itunes:author>
+<itunes:summary><%= @mband.tastes %></itunes:summary>
+<description><%= @mband.tastes %></description>
+<itunes:owner>
+<itunes:name><%= @mband.name %></itunes:name>
+<itunes:email>info@myousica.com</itunes:email>
+</itunes:owner>
+<itunes:image href="<%= APPLICATION[:url] + avatar_path(@mband, :medium) %>" />
+<itunes:category text="Music"/>
+ 
+<%= render :partial => 'podcast_item', :collection => @songs %>
+
+</channel>
+</rss>

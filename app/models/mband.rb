@@ -63,6 +63,11 @@ class Mband < ActiveRecord::Base
     URI.encode(self.name.downcase.gsub(' ', '+'))
   end
 
+  def published_songs
+    Song.find(:all, :conditions => ["songs.published = ? AND songs.user_id IN (?)", true, self.members.map(&:id)], 
+             :order => "songs.created_at DESC")
+  end
+
   def songs_count
     self.members.map(&:songs_count).sum
   end

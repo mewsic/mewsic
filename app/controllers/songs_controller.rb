@@ -80,11 +80,21 @@ class SongsController < ApplicationController
   end
 
   def podcast
-    @user = User.find_from_param params[:user_id]
-    @songs = @user.published_songs
+    if params[:user_id]
+      template = 'user_podcast'
+      @user = User.find_from_param params[:user_id]
+      @songs = @user.published_songs
+    elsif params[:mband_id]
+      template = 'mband_podcast'
+      @mband = Mband.find_from_param params[:mband_id]
+      @songs = @mband.published_songs
+    else
+      head :not_found and return
+    end
+
 
     respond_to do |format|
-      format.xml
+      format.xml { render :template => "songs/#{template}" }
     end
   end
 

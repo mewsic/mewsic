@@ -11,4 +11,10 @@ document.observe('dom:loaded', function() {
       update_mlab: true
     });
   });
+
+  var link = $('podcast-link');
+  var contents = $(link.getAttribute('rel'));
+  link.observe('click', function(event){event.stop()});
+  new Tip (link, contents, {style: 'user-link', title: link.title});
+
 });
