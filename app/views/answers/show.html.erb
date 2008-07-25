@@ -81,14 +81,14 @@
 		</div>
   </div>  
   
-	<% if @similar_answers.size > 0 %>
+	<% if @similar_answers.size > 1 %>
     <div id="similar-questions" class="box-list three-col clear-block clear-float">
 			<div class="tabmenu">
 				<div class="tab active" id="top-answers-tab">
 					<div class="sx"> </div>
 					<div class="rp">
 						<p class="title blue-text">SIMILAR QUESTIONS</p>
-						<p class="counter">(<%= @similar_answers.size %>)</p>
+						<p class="counter">(<%= @similar_answers.size - 1%>)</p>
 					</div>
 					<div class="dx"> </div>
 				</div>    

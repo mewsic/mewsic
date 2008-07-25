@@ -31,7 +31,7 @@ class AnswersController < ApplicationController
 
   def show
     @has_abuse = @answer.abuses.exists? ['user_id = ?', current_user.id] if logged_in?
-    @similar_answers = @answer.find_similar
+    @similar_answers = find_similar_answer(@answer, 11)
     @other_answers_by_author = Answer.find_paginated_by_user @answer.user, 1, :per_page => 6, :conditions => ['answers.id != ?', @answer.id]
   end
   
@@ -137,5 +137,13 @@ protected
       end
     end
   end
-
+  
+  def find_similar_answer(answer, per_page = 11)
+    query = answer.body.split.collect do |word|
+      word.gsub! /[^\w]/, ''
+      word if word.size > 3
+    end.uniq.compact.join(" ")
+    Answer.search(query, :per_page => per_page, :page => 1, :index => 'answers', :match_mode => :any)
+  end
+  
 end
