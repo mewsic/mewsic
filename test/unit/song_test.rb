@@ -51,4 +51,15 @@ class SongTest < ActiveSupport::TestCase
   # def test_is_a_direct_sibling_should_correctly_find_direct_siblings
   #   assert songs(:billie_jean_by_michael_jackson).is_a_indirect_sibling_of?(songs(:billie_jean_by_pilu))
   # end
+  
+  def test_should_set_key_from_tonality
+    s = songs(:let_it_be)
+    s.tone = 'B'
+    s.save    
+    assert_equal 11, s.reload.key
+    
+    s.tone = 'C#'
+    s.save    
+    assert_equal 1, s.reload.key
+  end
 end

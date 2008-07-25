@@ -23,10 +23,14 @@ class SearchController < ApplicationController
          songs_conditions[:genre_id]        = params[:genre].to_i if params.include?(:genre) && !params[:genre].blank?
          if params.include?(:bpm) && !params[:bpm].blank?
            songs_conditions[:bpm] = params[:bpm].to_i   
-           tracks_conditions[:bpm] = params[:bpm].to_i           
+           tracks_conditions[:bpm] = params[:bpm].to_i
+         end
+         if params.include?(:key) && !params[:key].blank? && key = Myousica::TONES.index(params[:key].to_s.upcase)
+           songs_conditions[:key] = key
+           tracks_conditions[:key] = key
          end
        end
-       
+
        @songs =   search_songs(@q, 10, 1, songs_conditions)
        @tracks =  search_tracks(@q, 10, 1, tracks_conditions)
         
@@ -175,8 +179,8 @@ class SearchController < ApplicationController
       User.search(query, :per_page => per_page, :page => page, :index => 'users', :match_mode => :boolean)
     end
     
-    def search_songs(query, per_page, page, conditions = {})                  
-      Song.search(query, :per_page => per_page, :page => page, :index => 'songs', :match_mode => :boolean, :include => :user, :conditions => conditions)
+    def search_songs(query, per_page, page, conditions = {})                        
+      Song.search(query, :per_page => per_page, :page => page, :index => 'songs', :match_mode => :extended, :include => :user, :conditions => conditions)
     end
     
     def search_tracks(query, per_page, page, conditions = {})

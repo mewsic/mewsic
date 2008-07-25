@@ -40,4 +40,12 @@ class TrackTest < ActiveSupport::TestCase
     assert_equal users(:quentin), t.parent_song.user
   end
   
+  def test_should_set_key_from_tonality
+    t = tracks(:drums_for_billie_jean_by_pilu)
+    t.tonality = 'B'
+    t.save
+    
+    assert_equal 11, t.reload.key
+  end
+  
 end

@@ -8,7 +8,7 @@ class Song < ActiveRecord::Base
   define_index do
     has :genre_id
     has :bpm
-    has :tone
+    has :key
     has user.country, :as => :user_country
   end
  
@@ -33,6 +33,7 @@ class Song < ActiveRecord::Base
   acts_as_rated :rating_range => 0..5    
 
   before_validation :clean_up_filename
+  before_save       :set_key_from_tone
 
   after_destroy :delete_sound_file
 
@@ -204,5 +205,10 @@ private
   def clean_up_filename
     self.filename = File.basename(self.filename) if self.filename
   end
-
+  
+  def set_key_from_tone
+    if !self.tone.blank? && (key = Myousica::TONES.index(self.tone.upcase)) 
+      self.key = key
+    end
+  end
 end

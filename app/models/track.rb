@@ -27,12 +27,10 @@ require 'numeric_to_runtime'
 
 class Track < ActiveRecord::Base
   
-  # acts_as_sphinx
-  #   extend SphinxWillPagination  
-  
   define_index do   
     has :bpm    
     has :idea
+    has :key
   end
   
   attr_accessor :mlab
@@ -61,7 +59,8 @@ class Track < ActiveRecord::Base
   
   acts_as_rated :rating_range => 0..5 
   
-  before_save :set_tonality_from_tone  
+  before_save :set_tonality_from_tone
+  before_save :set_key_from_tone
   before_validation :clean_up_filename
 
   after_destroy :delete_sound_file
@@ -176,7 +175,13 @@ private
   def set_tonality_from_tone
     self.tonality = self.tone unless self.tone.blank?
   end
-
+  
+  def set_key_from_tone
+    if !self.tonality.blank? && (key = Myousica::TONES.index(self.tonality.upcase)) 
+      self.key = key
+    end
+  end
+  
   def delete_sound_file
     File.unlink File.join(APPLICATION[:media_path], self.filename)
   end
