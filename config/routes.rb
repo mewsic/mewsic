@@ -65,12 +65,12 @@ ActionController::Routing::Routes.draw do |map|
   map.music '/music', :controller => 'music', :action => 'index'
   map.top_music '/music/top', :controller => 'music', :action => 'top'
 
-  map.multitrack         '/multitrack',              :controller => 'multitrack', :action => 'index'
-  map.multitrack_edit    '/multitrack/:id',          :controller => 'multitrack', :action => 'edit'
-  map.multitrack_config  '/request.config',          :controller => 'multitrack', :action => 'config'
-  map.multitrack_refresh '/multitrack/refresh/:id',  :controller => 'multitrack', :action => 'refresh'
-  map.multitrack_auth    '/multitrack/_/:token/:id', :controller => 'multitrack', :action => 'authorize', :token => /[\da-fA-F]{40}/
-  map.multitrack_song    '/multitrack/s/:token/:id', :controller => 'multitrack', :action => 'update_song', :token => /[\da-fA-F]{40}/
+  map.multitrack         '/multitrack',             :controller => 'multitrack', :action => 'index'
+  map.multitrack_edit    '/multitrack/:id',         :controller => 'multitrack', :action => 'edit'
+  map.multitrack_config  '/request.config',         :controller => 'multitrack', :action => 'config'
+  map.multitrack_refresh '/multitrack/refresh/:id', :controller => 'multitrack', :action => 'refresh'
+  map.multitrack_auth    '/multitrack/_/:user_id',  :controller => 'multitrack', :action => 'authorize' #, :token => /[\da-fA-F]{40}/
+  map.multitrack_song    '/multitrack/s/:user_id',  :controller => 'multitrack', :action => 'update_song' #, :token => /[\da-fA-F]{40}/
 
   map.connect '/countries', :controller => 'users', :action => 'countries'
   
@@ -79,9 +79,12 @@ ActionController::Routing::Routes.draw do |map|
 
   map.content '/content/:id', :controller => 'content', :action => 'show'
 
-  map.root :controller => "dashboard"
-  map.connect 'splash', :controller => 'dashboard', :action => 'splash'
-  map.connect 'noop', :controller => 'dashboard', :action => 'noop'
+
+  map.root :controller => 'dashboard'
+  map.splash 'splash', :controller => 'dashboard', :action => 'splash'
+  map.noop   'noop', :controller => 'dashboard', :action => 'noop'
+  #map.top_myousicians 'top', :controller => 'dashboard', :action => 'top'
+
 
   map.admin '/pappapperadmin', :controller => 'admin/dashboard', :action => 'index'
   map.upload_admin_track '/pappapperadmin/admin/tracks/upload', :controller => 'admin/tracks', :action => 'upload', :conditions => { :method => :post }

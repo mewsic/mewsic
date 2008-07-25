@@ -1,7 +1,7 @@
 class MultitrackController < ApplicationController  
   
   before_filter :login_required, :only => :edit
-  before_filter :multitrack_token_required, :only => [:authorize, :update_song]
+  # before_filter :multitrack_token_required, :only => [:authorize, :update_song]
 
   def index    
     if logged_in?
@@ -43,9 +43,10 @@ class MultitrackController < ApplicationController
   end
 
   def update_song
-    unless params[:id] && params[:filename] && params[:length]
+    unless params[:user_id] && params[:filename] && params[:length]
       head :bad_request and return
     end
+    @user = User.find(params[:user_id]) # XXX remove me
 
     song = @user.songs.find(params[:song_id])
     song.filename = params[:filename]
@@ -62,7 +63,7 @@ class MultitrackController < ApplicationController
 
   protected
     def multitrack_token_required
-      @user = User.find_by_id_and_multitrack_token(params[:id], params[:token])
+      @user = User.find_by_id_and_multitrack_token(params[:user_id], params[:token])
       head :forbidden unless @user
     end
 
