@@ -6,10 +6,13 @@
 					new Ajax.InPlaceEditor('mlab_' + name, '<%= song_path(@song, :authenticity_token => (form_authenticity_token if protect_against_forgery?)) %>', {
 					externalControl: 'mlab_' + name + '_edit_button',
 					externalControlOnly: true,
-					rows: name == 'description' ? 5 : 1,
+					rows: (name == 'description' ? 2 : 1),
+					okText: 'OK',
 					highlightendcolor: 'transparent',
 					paramName: 'song[' + name + ']',
 					ajaxOptions: { method: 'PUT' },
+					onEnterHover: Prototype.emptyFunction,
+					onLeaveHover: Prototype.emptyFunction,
 					onComplete: function() { $('flashcontent').refreshSong(); }
 				});
 			});
@@ -17,10 +20,22 @@
 				lazyLoading: true,
 				values_url: '/genres?ids',
 				labels_url: '/genres',
+				okText: 'OK',
 				externalControl: 'mlab_genre_edit_button',
 				externalControlOnly: true,
 				ajaxOptions: { method: 'PUT' },
 				paramName: 'song[genre_id]',
+				onComplete: function() { $('flashcontent').refreshSong(); }
+			});
+			new Ajax.InPlaceSelect('mlab_tone', '<%= song_path(@song, :authenticity_token => (form_authenticity_token if protect_against_forgery?)) %>', {
+				labels: <%= Myousica::TONES.inspect %>,
+				values: <%= Myousica::TONES.inspect %>,
+				lazyLoading: false,
+				okText: 'OK',
+				externalControl: 'mlab_tone_edit_button',
+				externalControlOnly: true,
+				ajaxOptions: { method: 'PUT' },
+				paramName: 'song[tone]',
 				onComplete: function() { $('flashcontent').refreshSong(); }
 			});
 		} else {
@@ -77,18 +92,23 @@
 	</div>
 	<div id="mlab_details_container">
 		<div id="mlab_detail_row">
-			<div style="float: left;">
+			<div class="mlab_labels_left">
 				<!-- inplace editing -->
 				<p class="mlab_label">New project name: <a href="#" id="mlab_title_edit_button">[edit]</a></p>
 				<p class="mlab_title_big" id="mlab_title"><%= @song.title || 'Project title' %></p>
 			</div>
-			<div id="mlab_labels_right">
+			<div class="mlab_labels_right">
+				<div class="mlab_tone">
+					<!-- inplace select -->
+					<p class="mlab_label">Tone: <a href="#" id="mlab_tone_edit_button">[edit]</a></p>
+					<p class="mlab_title_big" id="mlab_tone"><%= @song.tone %></p>
+				</div>
 				<div style="float: left;">
 					<!-- dynamic -->
 					<p class="mlab_label">Tracks:</p>
 					<p class="mlab_title_big" id="mlab_tracks"><%= @song.tracks.count %></p>
 				</div>
-				<div id="mlab_2nd_column_right">					
+				<div class="mlab_runtime">					
 					<!-- dynamic -->
 					<p class="mlab_label">Runtime:</p>
 					<p class="mlab_title_big" id="mlab_runtime"><%= @song.length %></p>
@@ -96,24 +116,26 @@
 			</div>
 		</div>
 		<div id="mlab_detail_row">
-			<div style="float: left;">
+			<div class="mlab_labels_left">
 				<!-- inplace editing -->
 				<p class="mlab_label">Author: <a href="#" id="mlab_original_author_edit_button">[edit]</a></p>
 				<p class="mlab_title_big" id="mlab_original_author"><%= @song.original_author || 'Project author' %></p>
 			</div>
-			<div id="mlab_labels_right">
-				<!-- inplace select -->
-				<p class="mlab_label">Genre: <a href="#" id="mlab_genre_edit_button">[edit]</a></p></p>
-				<p class="mlab_title_big" id="mlab_genre"><%= @song.genre ? @song.genre.name : '' %></p>
+			<div class="mlab_labels_right">
+				<div style="float: left">
+					<!-- inplace select -->
+					<p class="mlab_label">Genre: <a href="#" id="mlab_genre_edit_button">[edit]</a></p></p>
+					<p class="mlab_title_big" id="mlab_genre"><%= @song.genre ? @song.genre.name : '' %></p>
+				</div>
 			</div>
 		</div>
 		<div id="mlab_detail_row_last">
-			<div style="float: left;">
+			<div class="mlab_labels_left">
 				<!-- inplace editing -->
 				<p class="mlab_label">Note: <a href="#" id="mlab_description_edit_button">[edit]</a></p>
 				<p class="mlab_medium_text" id="mlab_description"><%=h @song.description %></p>
 			</div>
-			<div id="mlab_labels_right">
+			<div class="mlab_labels_right">
 				<!-- dynamic -->
 				<p class="mlab_label">Instruments:</p>
 				<p class="mlab_medium_text" id="mlab_instruments"><%= instruments_used_in @song %></p>

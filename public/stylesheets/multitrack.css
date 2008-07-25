@@ -6,8 +6,7 @@
 
 #mlab_new_block_top {
 	width: 973px;
-	height: 190px;
-	/*margin-top: 30px;*/
+	height: 200px;
 }
 
 #mlab_new_block_bottom {
@@ -46,14 +45,7 @@
 	height: 175px;
 }
 
-#mlab_details_container_bottom {
-	float: left;
-	width: 927px;
-	height: 175px;
-}
-
-
-#mlab_detail_row_last, #mlab_detail_row_bottom_last {
+#mlab_detail_row_last {
 	float: left;	
 	padding-left: 15px;	
 	width: 800px;
@@ -77,7 +69,6 @@
 	color: #000000;
 	font-size: 21px;
 	font-weight: bold;
-	/*margin-bottom: 5px;*/
 	margin-top: 3px;
 }
 
@@ -94,6 +85,43 @@
 	margin-bottom: 0px;
 }
 
+.editor_field {
+	border: 1px solid #98D1E5;
+	font-weight: bold;
+	font-size: 19px;
+	height: 23px;
+	width: 360px;
+	margin-right: 5px;
+	padding: 2px 4px;
+}
+
+textarea.editor_field {
+	font-size: 14px;
+	height: 46px;
+}
+
+#mlab_description-inplaceeditor br {
+	display: none;
+	visibility: hidden;
+}
+
+.editor_ok_button {
+	width:auto;
+	border:0;
+	background:none;
+	font-family:Arial, Verdana, Helvetica, sans-serif;
+	font-size:16px;
+	font-weight:bold;
+	color:#0296C2;
+	margin-top: 3px;
+	margin-right:5px;
+}
+
+.editor_cancel_link {
+	font-size:14px;
+	color:#444;
+}
+
 .mlab_small_text {
 	font-size: 11px;
 	margin-bottom: 5px;
@@ -107,29 +135,24 @@
 	margin-top: 3px;
 }
 
-#mlab_description {
-	width: 575px;
+.mlab_labels_left {
+	float: left;
+	text-align: left;
+	width: 375px;
 }
 
-#mlab_labels_right {
+.mlab_labels_right {
 	float: right;
 	text-align: left;
-	width: 216px;
+	width: 425px;
 }
 
-#mlab_labels_right_bottom {
-	float: right;
-	text-align: left;
-	width: 216px;
+.mlab_tone {
+	width: 180px;
+	float: left;
 }
 
-
-#mlab_2nd_column_right {
+.mlab_runtime {
 	float: right;
 	width: 100px;
-}
-
-#mlab_2nd_column_left {
-	float: left;
-	width: 350px;
 }

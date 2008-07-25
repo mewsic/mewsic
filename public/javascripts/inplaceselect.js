@@ -380,8 +380,8 @@ Object.extend(Ajax.InPlaceSelect.prototype, {
 
 Object.extend(Ajax.InPlaceSelect, {
   Listeners: {
-    click: 'enterEditMode',
+    click: 'enterEditMode'/*,
     mouseover: 'enterHover',
-    mouseout: 'leaveHover'
+    mouseout: 'leaveHover'*/
   }
 });
