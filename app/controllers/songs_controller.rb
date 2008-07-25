@@ -25,10 +25,14 @@ class SongsController < ApplicationController
       end
 
       format.xml do
-        render :text => 'invalid request', :status => :bad_request and return unless params[:user_id]
-
-        user = User.find_from_param params[:user_id], :include => :songs
-        @songs = user.songs.find_published
+        @user = User.find_from_param(params[:user_id])
+        @songs = @user.songs.find_published
+        #@songs = @user.songs.find(:all,
+        #  :select => 'songs.*, COUNT(mixes.id) AS mixes_count',
+        #  :joins => 'INNER JOIN mixes ON mixes.song_id = songs.id',
+        #  :conditions => ['songs.published = ?', true],
+        #  :group => 'songs.id',
+        #  :limit => 1)
       end
     end
   end
@@ -153,7 +157,8 @@ class SongsController < ApplicationController
         @song.mixes.clear
       end
 
-      @song.update_attributes!(params[:song])
+      @song.save!
+      #@song.update_attributes!(params[:song])
     
       tracks.each do |i, track|
         @song.mixes.create! :track_id => track[:id],
