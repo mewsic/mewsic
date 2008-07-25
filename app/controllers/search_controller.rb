@@ -29,9 +29,18 @@ class SearchController < ApplicationController
            songs_conditions[:key] = key
            tracks_conditions[:key] = key
          end
-       end
+         if params.include?(:instrument) && !params[:instrument].blank?  
+           tracks_conditions[:instrument_id] = params[:instrument].to_i
+         end
+         if params.include?(:title) && !params[:title].blank?  
+            @q = "#{@q} @title #{params[:title]}"
+          end
+          if params.include?(:author) && !params[:author].blank?  
+            @q = "#{@q} @author #{params[:author]}"
+          end
+       end      
 
-       @songs =   search_songs(@q, 10, 1, songs_conditions)
+       @songs =   []#search_songs(@q, 10, 1, songs_conditions)
        @tracks =  search_tracks(@q, 10, 1, tracks_conditions)
         
        #if @advanced         
@@ -184,7 +193,7 @@ class SearchController < ApplicationController
     end
     
     def search_tracks(query, per_page, page, conditions = {})
-      Track.search(query, :per_page => per_page, :page => page, :index => 'tracks', :match_mode => :boolean, :conditions => conditions)
+      Track.search(query, :per_page => per_page, :page => page, :index => 'tracks', :match_mode => :extended, :conditions => conditions)
     end
     
     def search_ideas(query, per_page, page)

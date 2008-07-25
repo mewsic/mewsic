@@ -31,6 +31,7 @@ class Track < ActiveRecord::Base
     has :bpm    
     has :idea
     has :key
+    has :instrument_id
   end
   
   attr_accessor :mlab
