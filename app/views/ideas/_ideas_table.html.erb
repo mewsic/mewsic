@@ -1,8 +1,5 @@
 <%- @ideas_instruments.each do |instrument|-%>											
 <div class="elements list clear-block"> 
-	<p class="cyan-text float-right">
-		<%= instrument_browse_link(pluralize(instrument.ideas_count, 'track'), instrument.id) %>
-	</p>
 	<div class="thumb">
 		<%= instrument_browse_icon(instrument, :class => '') %>
 	</div>
@@ -14,6 +11,9 @@
 			<%= render :partial => 'idea_row', :collection => instrument.find_ideas(3) %>
 		</tbody>
 	</table>
+	<p class="cyan-text tracks">
+		<%= instrument_browse_link(pluralize(instrument.ideas_count, 'track'), instrument.id) %>
+	</p>
 </div>
 <%- end -%>
 <%= render :partial => 'all_instruments' %>

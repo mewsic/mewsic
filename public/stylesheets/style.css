@@ -615,12 +615,6 @@ tr.nav-song td{
 	position:relative;
 }
 /* bands */
-.bands-dj-list .thumb img{
-  /* removed border
-	padding:3px;
-	background:#90CB81;
-        */
-}
 .bands-dj-list .elements{
 	border-bottom: 1px solid #D9D9D9;
 	padding-bottom:5px;
@@ -2894,6 +2888,11 @@ p.instrument, p.instrument a {
 
 #ideas-by-instruments p.instrument {
 	padding-top: 8px;
+}
+
+#ideas-by-instruments p.tracks {
+	padding: 2px 4px !important;
+	text-align: right;
 }
 
 #ideas-by-instruments .thumb {
