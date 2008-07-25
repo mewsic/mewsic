@@ -95,7 +95,7 @@
 			</div>
 
 			<div class="clear-block similar answers">
-				<%= render :partial => 'answer_medium', :collection => @similar_answers %>
+				<%= render :partial => 'answer_medium', :collection => (@similar_answers - [@answer]) %>
 			</div>
 		</div>
 	<% end %>
