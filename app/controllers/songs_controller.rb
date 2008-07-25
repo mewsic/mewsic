@@ -158,6 +158,9 @@ class SongsController < ApplicationController
       end
     end
 
+  rescue ActiveRecord::RecordNotFound
+    head :not_found
+
   rescue ActiveRecord::ActiveRecordError
     render :partial => 'shared/errors', :object => @song.errors, :status => :bad_request
   end    
