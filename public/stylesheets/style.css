@@ -1158,8 +1158,10 @@ h2.dj-label{
 .green-box .name a{
 	color: #1A73A4;
 }
-.green-box .elements .rating {
-	margin: 0px 0px 2px 0px;
+.green-box .elements .rating,
+.orange-box .elements .rating {
+	margin: 0;
+	width: 65px;
 }
 .green-box .button {
 	width: auto !important;
@@ -1215,9 +1217,6 @@ h2.dj-label{
 }
 .orange-box .name a{
 	color: #1A73A4;
-}
-.orange-box .elements .rating {
-	margin: 0px 0px 2px 0px;
 }
 .orange-box .button {
 	width: auto !important;
@@ -2852,10 +2851,6 @@ td.star {
 td.star .rating {
 	/*float: right;*/
 	margin: 2px 0px;
-}
-
-.elements .rating {
-	/*width: 62px;*/
 }
 
 .clearer {
