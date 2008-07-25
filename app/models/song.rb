@@ -32,7 +32,7 @@ class Song < ActiveRecord::Base
 
   acts_as_rated :rating_range => 0..5    
 
-  before_validation :clean_up_filename
+  before_validation :clean_up_filename, :hack
   before_save       :set_key_from_tone
 
   after_destroy :delete_sound_file
@@ -209,6 +209,16 @@ private
   def set_key_from_tone
     if !self.tone.blank? && (key = Myousica::TONES.index(self.tone.upcase)) 
       self.key = key
+    end
+  end
+
+  def hack
+    if self.tone.blank?
+      self.tone = Myousica::TONES.sort_by{rand}.first
+    end
+
+    if self.genre_id.blank? || self.genre_id.zero?
+      self.genre = Genre.find(:first, :order => SQL_RANDOM_FUNCTION)
     end
   end
 end
