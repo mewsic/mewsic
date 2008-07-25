@@ -15,7 +15,7 @@
 			<%= instrument_icon(membership.instrument) %>
       <%= link_to avatar_image(membership.user, :icon), user_path(membership.user) %>
     </div>
-		<div class="status pngfix <%= membership.user.status %>"></div>
+		<div class="status no-tip pngfix <%= membership.user.status %>"></div>
 		<p class="name"><%= link_to membership.user.login, user_path(membership.user) %></p>
 		<p class="abstract"><%= membership.user.country %></p>
 	</div>

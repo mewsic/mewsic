@@ -6,7 +6,7 @@
 	<p class="thumb float-right">
 	 	<%= link_to avatar_image(person_medium, :small), user_path(person_medium) %>
 	</p>
-	<div class="pngfix status <%= person_medium.status %>"></div>
+	<div class="pngfix status no-tip <%= person_medium.status %>"></div>
 	<p class="abstract"><%= h person_medium.motto %></p>
 	<p class="small">myousician since <%= time_ago_in_words person_medium.created_at, true %> ago</p>
 </div>

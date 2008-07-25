@@ -49,11 +49,7 @@ var Tooltips = Class.create({
   },
 
   addStatus: function(element) {
-    if (element.up('.user-profile') ||
-      element.up('#friend-box') ||
-      element.up('#admirers-box') ||
-      element.up('#mband-members') ||
-      element.up('#newest-users'))
+    if (element.hasClassName('no-tip'))
       return;
 
     if (element.hasClassName('on')) {
