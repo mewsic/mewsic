@@ -59,6 +59,10 @@ class Mband < ActiveRecord::Base
     self.name
   end
 
+  def nickname
+    self.name
+  end
+
   def to_param
     URI.encode(self.name.downcase.gsub(' ', '+'))
   end

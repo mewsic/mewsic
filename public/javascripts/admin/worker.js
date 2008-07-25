@@ -52,9 +52,9 @@ var WorkerClient = Class.create({
     var worker = this.parseWorkerStatus(r.responseXML);
     this.container.update(this.template.evaluate(worker));
 
-    if(worker.status == 'finished') {
+    if(worker.status == 'finished' || worker.status == 'error') {
       this.stop();
-      if (this.options.onComplete) {
+      if (worker.status == 'finished' && this.options.onComplete) {
         this.options.onComplete(worker);
       }
     }

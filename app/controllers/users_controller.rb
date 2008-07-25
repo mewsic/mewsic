@@ -56,7 +56,7 @@ class UsersController < ApplicationController
         @user.friends
       end
 
-    @firstrun = (current_user == @user) && params.has_key?(:firstrun)
+    @firstrun = (@user == current_user) && params.include?(:welcome)
     @has_abuse = @user.abuses.exists? ['user_id = ?', current_user.id] if logged_in?
 
     respond_to do |format|
@@ -73,7 +73,7 @@ class UsersController < ApplicationController
     self.current_user = params[:activation_code].blank? ? :false : User.find_by_activation_code(params[:activation_code])
     if logged_in? && !current_user.active?
       current_user.activate
-      redirect_to user_path(self.current_user, :firstrun => true)
+      redirect_to user_path(self.current_user + '?welcome')
     else
       redirect_to '/'
     end

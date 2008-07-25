@@ -237,5 +237,8 @@ function pop(url) {
 }
 
 function reload() {
+  //var anchor = /#/.test(window.location.href);
   window.location.href = window.location.href.sub(/[#?].*/, '');
+  //if (anchor && Prototype.Browser.WebKit)
+  //  window.location.href = window.location.href;
 }

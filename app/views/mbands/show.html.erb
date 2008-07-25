@@ -19,12 +19,8 @@
 				<div class="tab active">
 					<div class="sx"> </div>
 					<div class="rp">
-						<h1 class="title" style="margin-right: 35px">Songs <span class="counter">(<%= @mband.songs_count %>)</span></h1>
-						<%= link_to image_tag('icon_podcast.png', :style => 'margin: 4px 0px 0px 0px'),	'#', :id => 'podcast-link',
-									:title => "#{@mband.name.upcase}'S PODCAST", :rel => 'tip-pcast' %>
-						<div id="tip-pcast" style="display:none; width:400px;">Copy this address and subscribe in iTunes:<br/>
-							<%= link_to mband_podcast_url(@mband), mband_podcast_url(@mband) %>
-						</div>
+						<h1 class="title">Songs <span class="counter">(<%= @mband.songs_count %>)</span></h1>
+						<%= podcast_link_for(@mband, mband_podcast_url(@mband)) unless @mband.songs_count.zero? %>
 					</div>
 					<div class="dx"> </div>
 				</div>    
@@ -65,7 +61,7 @@
 				<div class="bottom-box clear-block">
 					<div class="elements clear-block">
 						<div id="tracks">
-							<%= render :partial => 'tracks' %>  
+							<%= render :partial => 'tracks', :locals => {:empty_message => empty_message} %>  
 						</div>
 					</div>
 				</div>		
