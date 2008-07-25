@@ -2962,10 +2962,15 @@ p.instrument, p.instrument a {
 	height: 55px;
 } 
 #mlab-scroller .elements.banner {
-	padding: 2px 4px;
+	padding: 4px 4px 0px;
 }
 #mlab-scroller .elements.banner p {
-	line-height: 18px;
+	line-height: 15px;
+	margin-top: 4px;
+	margin-right: 12px;
+	text-align: left;
+	float: right;
+	display:block;
 }
 #mlab-scroller .elements.banner p a {
 	color: #0296C2;

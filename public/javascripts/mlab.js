@@ -55,8 +55,8 @@ var MlabItem = Class.create({
 var MlabBanner = Class.create({
   template:
     '<div id="mlab_element_banner" class="elements banner even clear-block" style="height: 55px">' +
-    '  <p class="centered grey-text">This panel contains the elements you collect by clicking the <img class="remove" src="/images/button_mlab.png"/> button.' +
-    '    <a href="/help/mlab">Click here to learn more</a></p>' +
+    '  <div class="float-left"><img src="/images/mbutton_avatar.jpg"/></div><p class="grey-text">' +
+    '  Add Songs and Tracks<br/>Enter the multitrack!<br/><a href="/help/mlab">Learn more</a></p>' +
     '</div>'
   ,
 
