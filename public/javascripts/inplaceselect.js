@@ -100,9 +100,9 @@ Ajax.InPlaceSelect = Class.create({
       highlightcolor: "#FFFF99",
       highlightendcolor: "#FFFFFF",
       hoverClassName: null,
-      onComplete: function(transport, element) {
+      onComplete: Prototype.emptyFunction /*function(transport, element) {
         new Effect.Highlight(element, {startcolor: this.options.highlightcolor});
-      },
+      }*/,
       onFailure: function(transport) {
         alert("Error communicating with the server: " + transport.responseText.stripTags());
       },
@@ -327,9 +327,9 @@ Ajax.InPlaceSelect = Class.create({
     this.element.style.backgroundColor = this.originalBackground;
     Element.show(this.element);
   },
-  onComplete: function() {
+  onComplete: function(transport) {
     this.leaveEditMode();
-    //this.options.onComplete.bind(this)(transport, this.element);
+    this.options.onComplete.bind(this)(transport, this.element);
   },
   onFailure: function(transport) {
     this.options.onFailure(transport);

@@ -13,7 +13,7 @@
 					ajaxOptions: { method: 'PUT' },
 					onEnterHover: Prototype.emptyFunction,
 					onLeaveHover: Prototype.emptyFunction,
-					onComplete: function() { $('flashcontent').refreshSong(); }
+					onComplete: function() {  $('flashcontent').refreshSong(); }
 				});
 			});
 			new Ajax.InPlaceSelect('mlab_genre', '<%= song_path(@song, :authenticity_token => (form_authenticity_token if protect_against_forgery?)) %>', {
