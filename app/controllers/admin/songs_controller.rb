@@ -58,9 +58,9 @@ class Admin::SongsController < Admin::AdminController
   end
 
   def mp3
+    current_user.enter_multitrack!
     token = "?id=#{current_user.id}&token=#{current_user.multitrack_token}"
     if params[:tracks]
-      current_user.enter_multitrack!
       url = URI.parse("#{APPLICATION[:media_url]}/mix")
       res = Net::HTTP.start(url.host, url.port) { |http| http.post(url.path + token, requestify(:tracks => params[:tracks])) }
     elsif params[:worker]
