@@ -26,7 +26,7 @@ class MultitrackControllerTest < ActionController::TestCase
     assert_response :success
     assert assigns(:song)
     assert_equal false, assigns(:song).published?
-    assert !assigns(:song).new_record?
+    assert assigns(:song).new_record?
     #assert flash[:notice]
     assert_template 'index'
   end

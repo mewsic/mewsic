@@ -14,7 +14,7 @@ class SongsControllerTest < ActionController::TestCase
 
   def test_index_xml_should_response_success
     get :index, :format => 'xml'
-    assert_response :bad_request
+    assert_response :not_found
 
     get :index, :format => 'xml', :user_id => users(:quentin).id
     assert_response :success

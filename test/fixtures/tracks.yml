@@ -207,7 +207,7 @@ idea_track_<%= i %>:
   instrument: <%= random_instrument %>
   seconds: <%= rand(100) + 90 %>
   idea: <%= true %>
-  owner: <%= %w(quentin mikaband)[rand(4)] %>
+  owner: <%= %w(quentin mikaband john)[rand(3)] %>
   tonality: <%= ('A'..'F').to_a[rand(6)] %>
   filename: test.mp3
 <% end %>
