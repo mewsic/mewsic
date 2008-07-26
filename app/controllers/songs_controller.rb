@@ -35,16 +35,20 @@ class SongsController < ApplicationController
         #  :limit => 1)
       end
     end
+
+  rescue ActiveRecord::RecordNotFound
+    head :not_found
   end
   
   def show
     @song = Song.find(params[:id], :include => [:user, { :mixes => { :track => [:instrument, :parent_song] } }, :genre])        
-    if logged_in?
-      @has_abuse = Abuse.exists?(["abuseable_type = 'Song' AND abuseable_id = ? AND user_id = ?", @song.id, current_user.id])
-    end
 
     respond_to do |format|
-      format.html
+      format.html do
+        if logged_in?
+          @has_abuse = Abuse.exists?(["abuseable_type = 'Song' AND abuseable_id = ? AND user_id = ?", @song.id, current_user.id])
+        end
+      end
 
       format.xml do
         @show_siblings  = params.include?(:siblings)
@@ -64,7 +68,13 @@ class SongsController < ApplicationController
 
         render :nothing => true
       end
-    end  
+    end
+  rescue ActiveRecord::RecordNotFound
+    if params[:id].to_i.zero?
+      head :ok
+    else
+      raise
+    end
   end
   
   def tracks
@@ -177,7 +187,11 @@ class SongsController < ApplicationController
     head :not_found
 
   rescue ActiveRecord::ActiveRecordError
-    render :partial => 'shared/errors', :object => @song.errors, :status => :bad_request
+    respond_to do |format|
+      format.xml do
+        render :partial => 'shared/errors', :object => @song.errors, :status => :bad_request
+      end
+    end
   end    
   
   def rate    
