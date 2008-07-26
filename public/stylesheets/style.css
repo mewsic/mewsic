@@ -1679,9 +1679,7 @@ h2.dj-label{
 .tit-classification-tracks .tabmenu .tab .sx {
 	margin-left: 12px;
 }
-.tit-classification-songs .tabmenu .tab .rp {
-	padding: 0px 0px 0px 10px;
-}
+.tit-classification-songs .tabmenu .tab .rp,
 .tit-classification-tracks .tabmenu .tab .rp {
 	padding: 0px 10px;
 }
@@ -1891,6 +1889,9 @@ html>body .gallery-photo-thumb >.edit-command{
 .user-sharing .my-user-share-more-link {
 	font-weight: normal;
 	font-size: 12px;
+}
+.user-sharing span a {
+	color:#9CBAC7;
 }
 .user-sharing span{
 	float:left;

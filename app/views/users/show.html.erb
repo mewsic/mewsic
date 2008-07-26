@@ -26,7 +26,7 @@
 					<div class="sx"> </div>
 					<div class="rp">
 						<h1 class="title">Songs <span class="counter">(<%= @user.songs_count %>)</span></h1>
-						<%= podcast_link_for(@user, user_podcast_url(@user)) unless @user.songs_count.zero? %>
+						<%= podcast_link_for(@user, user_podcast_url(@user)) if @user.podcast_public? && (@user.songs_count > 0) %>
 					</div>
 					<div class="dx"> </div>
 				</div>    

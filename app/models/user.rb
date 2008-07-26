@@ -133,7 +133,8 @@ class User < ActiveRecord::Base
   # anything else you want your user to change should be added here.
   attr_accessible :password, :password_confirmation, :terms_of_service, :eula,
     :first_name, :last_name, :name_public, :gender, :motto, :tastes, :country, :city, :age,
-    :photos_url, :blog_url, :myspace_url, :skype, :msn, :skype_public, :msn_public, :nickname
+    :photos_url, :blog_url, :myspace_url, :skype, :msn, :skype_public, :msn_public, :nickname,
+    :podcast_public
   
   before_save :check_links
   before_save :check_nickname

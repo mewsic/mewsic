@@ -123,7 +123,7 @@ module UsersHelper
   def podcast_link_for(user, url)
     content = link_to(image_tag('icon_podcast.png'), '#', :id => 'podcast-link', :title => "#{user.nickname.upcase}'S PODCAST", :rel => 'tip-pcast')
     content << content_tag(:div, "Copy this address and subscribe in iTunes:<br/>#{link_to url, url}", :id => 'tip-pcast', :style => 'display:none;width:350px')
-    content_tag(:div, content, :style => 'margin:4px 0px 0px 35px;float:left;')
+    content_tag(:div, content, :style => 'margin:4px 0px 0px 25px;float:left;')
   end
 
 end

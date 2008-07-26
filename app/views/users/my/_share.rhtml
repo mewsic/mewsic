@@ -1,7 +1,7 @@
 <div id="personal-details">
 
 <div class="clear-block float-left">
-	<h1>PERSONAL DETAILS</h1>
+	<h1>PERSONAL DETAILS &amp; SETTINGS</h1>
 </div>
 <p class="float-left grey-text" style="padding-left:18px">
 	<%= link_to '[edit]', '#', :class => 'my-user-share-more-link' %>
@@ -70,12 +70,21 @@
 	  <p>
   		<label>MSN</label>
   		<span id="loading_user_msn" style="display:none;" class="loading">Saving...</span>
-  		<%= text_field :user, :msn, :class => 'hide-on-load input-small ready-for-edit' %>
-  		<%= check_box :user, :msn_public, :class => 'hide-on-load input check-box ready-for-edit' %>
+  		<%= f.text_field :msn, :class => 'hide-on-load input-small ready-for-edit' %>
+  		<%= f.check_box :msn_public, :class => 'hide-on-load input check-box ready-for-edit' %>
   		<span class="hide-on-load">public</span>
   		<input type="submit" class="button hide-on-load" value="OK"/>
   	</p>
   <% end -%>
+	<% form_for @user, :url => user_path(@user), :html => {:id => 'form_podcast_public'} do |f| -%>
+		<p>
+			<label>Podcasting</label>
+  		<span id="loading_user_podcast_public" style="display:none;" class="loading">Saving...</span>
+			<%= f.check_box :podcast_public, :class => 'hide-on-load input check-box ready-for-edit' %>
+  		<input type="submit" class="button hide-on-load" value="OK"/>
+			<span class="hide-on-load" style="width: 60px"><%= link_to 'learn more', help_path('podcasts') %></span>
+		</p>
+	<% end %>
 	<p class="centered grey-text" style="padding-top:10px">
 		<%= link_to '[done]', '#', :class => 'my-user-share-more-link' %>
 	</p>
