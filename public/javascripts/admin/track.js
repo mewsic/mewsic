@@ -40,7 +40,7 @@ Ajax.Responders.register({
     TrackUpload.instance = new TrackUpload('track-upload-form', {
       onComplete: function(worker) {
         $('track_seconds').value = worker.length;
-        $('track_filename').value = '/audio/' + worker.output;
+        $('track_filename').value = worker.output;
       }
     });
   }

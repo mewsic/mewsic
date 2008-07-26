@@ -13,7 +13,7 @@ Ajax.Responders.register({
     SongMix.instance = new WorkerClient('mix-song-form', {
       onComplete: function(worker) {
         $('song_seconds').value = worker.length;
-        $('song_filename').value = '/audio/' + worker.output;
+        $('song_filename').value = worker.output;
       }
     });
   }

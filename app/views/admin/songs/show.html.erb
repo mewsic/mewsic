@@ -51,7 +51,7 @@
 
 	<dt>mixed tracks</dt>
 	<dd><div style="float:left"><%= @song.tracks.find(:all, :order => 'tracks.title, instruments.description', :include => [:parent_song, :instrument]).map { |track|
-		edit_link_to("#{track.parent_song.title}: #{track.title} [#{track.instrument.description}]", admin_track_path(track)) + ' ' +
+		edit_link_to("#{track.parent_song.title if track.parent_song}: #{track.title} [#{track.instrument.description}]", admin_track_path(track)) + ' ' +
 		link_to_remote('[unmix]', :url => unmix_admin_song_path(@song, :track_id => track.id), :method => 'put', :update => 'editing')
 	}.join('<br/>') %></div><div style="clear:both"></div></dd>
 
@@ -65,7 +65,7 @@
 	<% end %>
 
 	<% edit_form_for @song, :url => mix_admin_song_path(@song) do %>
-	<%= select_tag 'track_id', options_for_select(Track.find(:all, :include => [{:parent_song => :genre}, :instrument], :order => 'songs.title, instruments.description, tracks.title, genres.name').map{|t| ["#{t.parent_song.title}: #{t.title} [#{t.instrument.description}] (#{t.parent_song.genre.name if t.parent_song.genre})",t.id]}) %>
+	<%= select_tag 'track_id', options_for_select(Track.find(:all, :include => [{:parent_song => :genre}, :instrument], :order => 'songs.title, instruments.description, tracks.title, genres.name').map{|t| ["#{t.parent_song.title if t.parent_song}: #{t.title} [#{t.instrument.description}] (#{t.parent_song.genre.name if t.parent_song && t.parent_song.genre})",t.id]}) %>
 		<%= submit_tag 'mix track' %>
 	<% end %>
 
