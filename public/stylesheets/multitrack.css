@@ -166,3 +166,25 @@ textarea.editor_field {
 	float: right;
 	width: 100px;
 }
+
+/* XXX */
+.editing {
+	font-size: 21px;
+	font-weight: bold;
+	text-align: center;
+	padding-bottom: 20px !important;
+}
+
+.editing a {
+	color: #98D1E5;
+}
+
+.editing a:hover {
+	color: #000;
+}
+
+.edit-blurb {
+	text-align: center;
+	font-size: 16px;
+	color: #444;
+}

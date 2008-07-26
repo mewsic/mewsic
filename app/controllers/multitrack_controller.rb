@@ -15,7 +15,8 @@ class MultitrackController < ApplicationController
   end
 
   def edit
-    @song = current_user.songs.find(params[:id], :conditions => ['published = ?', true])
+    @edit = true
+    @song = current_user.published_songs.find(params[:id])
     render :action => 'index'
 
   rescue ActiveRecord::RecordNotFound
