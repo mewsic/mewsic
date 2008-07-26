@@ -1,3 +1,4 @@
+<% if logged_in? %>
 <div id="mlab-box" class="clear-block">  
 	<p class="mlab-enter">
 	  <%= link_to 'Enter', multitrack_path %>
@@ -16,3 +17,8 @@
     </div>
   </div>
 </div>
+<% else %>
+<div id="multitrack_banner">
+	<%= link_to image_tag('mlab_notlogged.png'), multitrack_path %>
+</div>
+<% end %>

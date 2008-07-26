@@ -144,14 +144,12 @@ module ApplicationHelper
   
   def render_sidebar   
     #  content << render(:partial => 'shared/share_myousica')
-    content = render(:partial => 'shared/banners')
-    if logged_in?
-      content << render(:partial => 'shared/mlab')
-    else
-      unless params[:controller] == 'sessions' || (params[:controller] == 'users' && (params[:action] == 'new' || params[:action] == 'create'))
-        content << render(:partial => 'shared/login_box')
-      end
+    content = render(:partial => 'shared/side_banners_top')
+    unless logged_in? || (params[:controller] == 'sessions' || (params[:controller] == 'users' && (params[:action] == 'new' || params[:action] == 'create')))
+      content << render(:partial => 'shared/login_box')
     end
+    content << render(:partial => 'shared/mlab')
+    content << render(:partial => 'shared/side_banners_bottom')
   end    
   
   def avatar_path(model, size)
@@ -166,7 +164,8 @@ module ApplicationHelper
   end
   
   def user_type_image(model, options = {})
-    image_tag("#{model.class.name.downcase}_type.png", options)
+    suffix = "_#{options[:suffix]}" if options[:suffix]
+    image_tag("#{model.class.name.downcase}_type#{suffix}.png", options)
   end
   
   def ajax_upload_form(model, options, &block)
