@@ -94,6 +94,22 @@ class TracksControllerTest < ActionController::TestCase
     assert assigns(:track)
     assert assigns(:track).errors.on(:song_id)
     assert assigns(:track).errors.on(:instrument_id)
+    assert assigns(:track).errors.on(:filename)
+
+    assert_no_difference 'Track.count' do
+      post :create, :track => {
+        :title => 'test track',
+        :tonality => 'C',
+        :seconds => 180,
+        :song_id => 0,
+        :instrument_id => 0
+      }
+    end
+    assert_response :bad_request
+    assert assigns(:track)
+    assert assigns(:track).errors.on(:instrument_id)
+    assert assigns(:track).errors.on(:song_id)
+    assert assigns(:track).errors.on(:filename)
   end
 
   def test_should_create
