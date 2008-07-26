@@ -61,7 +61,7 @@ class Admin::SongsController < Admin::AdminController
     if params[:tracks]
       current_user.enter_multitrack!
       url = URI.parse("#{APPLICATION[:media_url]}/mix")
-      res = Net::HTTP.start(url.host, url.port) { |http| http.post(url.path + '?' + multitrack_auth_token, requestify(:tracks => params[:tracks])) }
+      res = Net::HTTP.start(url.host, url.port) { |http| http.post(url.path + "?id=#{current_user.id}&token=#{current_user.multitrack_token}", requestify(:tracks => params[:tracks])) }
     elsif params[:worker]
       url = URI.parse("#{APPLICATION[:media_url]}/mix/status/#{params[:worker]}")
       res = Net::HTTP.start(url.host, url.port) { |http| http.get(url.path) }
