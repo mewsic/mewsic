@@ -713,6 +713,38 @@ tr.nav-song td{
 	color:#61656A;
 }
 
+#myousicians h1 {
+	float: left;
+	margin: 2px 4px 13px 0px;
+}
+#myousicians img.refresh-block {
+	float: left;
+}
+#myousicians .clip {
+	width: 340px;
+	height: 180px;
+	clear: left;
+}
+#myousicians .refresh-container {
+}
+
+.myousician-box {
+	margin-bottom: 4px;
+}
+
+.myousician-box .top-box {
+	background: url(/images/user_box_bg_home.png) no-repeat left top;
+	width: 99px;
+	height: 50px;
+	padding: 4px 6px 0px;
+}
+.myousician-box .bottom-box {
+	padding: 0px 6px 4px;
+}
+.myousician-box p {
+	padding: 0 !important;
+}
+
 /* search answer */
 .search-question{
 	clear:both;
@@ -1881,7 +1913,7 @@ html>body .gallery-photo-thumb >.edit-command{
 	margin-top: 4px;
 	display: block;
 }
-.user-sharing input.button{
+.user-sharing input.button {
 	float:left;
 	width:auto;
 	border:0;
@@ -2956,7 +2988,8 @@ p.instrument, p.instrument a {
 	height: 55px;
 } 
 #mlab-scroller .elements.banner {
-	padding: 4px 4px 0px;
+	padding: 6px 4px 0px;
+	background-color: #eeeeef;
 }
 #mlab-scroller .elements.banner p {
 	line-height: 15px;
