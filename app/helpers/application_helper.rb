@@ -2,13 +2,13 @@
 module ApplicationHelper
 
   def load_prototype
-    if RAILS_ENV == 'production'
-      return %[<script src="http://www.google.com/jsapi"></script>] + javascript_tag(%[
-          google.load('prototype', '1.6.0.2');
-          google.load('scriptaculous', '1.8.1'); ])
-    else
+    #if RAILS_ENV == 'production'
+    #  return %[<script src="http://www.google.com/jsapi"></script>] + javascript_tag(%[
+    #      google.load('prototype', '1.6.0.2');
+    #      google.load('scriptaculous', '1.8.1'); ])
+    #else
       javascript_include_tag 'protoculous'
-    end
+    #end
   end
 
   def google_analytics(id = 'UA-3674352-1')
