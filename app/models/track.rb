@@ -38,8 +38,8 @@ class Track < ActiveRecord::Base
   attr_accessor :tone
   
   has_many :songs, :through => :mixes, :order => 'songs.created_at DESC'
-  has_many :mixes, :dependent => :destroy
-  has_many :mlabs, :as => :mixable
+  has_many :mixes, :dependent => :delete_all
+  has_many :mlabs, :as => :mixable, :dependent => :delete_all
   
   belongs_to :parent_song, :class_name => 'Song', :foreign_key => 'song_id'
   belongs_to :owner, :class_name => 'User', :foreign_key => 'user_id'
@@ -75,13 +75,13 @@ class Track < ActiveRecord::Base
   #     ])
   #   end
   
-  def self.search_paginated_ideas(q, options)
-    options = {:per_page => 6, :page => 1}.merge(options)
-    paginate(:per_page => options[:per_page], :page => options[:page], :include => [:mixes, :instrument, {:parent_song => {:user => :avatars}}], :conditions => [
-      "(tracks.title LIKE ? OR tracks.description LIKE ? OR instruments.description LIKE ?) AND tracks.idea = ?",
-      *(Array.new(3).fill("%#{q}%") << true)
-    ])
-  end
+  # def self.search_paginated_ideas(q, options)
+  #   options = {:per_page => 6, :page => 1}.merge(options)
+  #   paginate(:per_page => options[:per_page], :page => options[:page], :include => [:mixes, :instrument, {:parent_song => {:user => :avatars}}], :conditions => [
+  #     "(tracks.title LIKE ? OR tracks.description LIKE ? OR instruments.description LIKE ?) AND tracks.idea = ?",
+  #     *(Array.new(3).fill("%#{q}%") << true)
+  #   ])
+  # end
   
   def self.find_paginated_newest_ideas(options = {})
     options.reverse_update(:page => 1, :per_page => 3)
@@ -185,6 +185,7 @@ private
   
   def delete_sound_file
     File.unlink File.join(APPLICATION[:media_path], self.filename)
+    File.unlink File.join(APPLICATION[:media_path], self.filename.sub(/mp3$/, 'png'))
   end
 
   def clean_up_filename

@@ -15,11 +15,11 @@ class Song < ActiveRecord::Base
   
   attr_accessor :mlab
   
-  has_many :mixes, :dependent => :destroy
+  has_many :mixes, :dependent => :delete_all
   has_many :tracks, :through => :mixes, :order => 'tracks.created_at DESC'  
-  has_many :children_tracks, :class_name => 'Track'
-  has_many :mlabs, :as => :mixable
-  has_many :abuses, :as => :abuseable
+  has_many :children_tracks, :class_name => 'Track', :dependent => :destroy
+  has_many :mlabs, :as => :mixable, :dependent => :delete_all
+  has_many :abuses, :as => :abuseable, :dependent => :delete_all
 
   belongs_to :genre
   belongs_to :user 
@@ -32,7 +32,7 @@ class Song < ActiveRecord::Base
 
   acts_as_rated :rating_range => 0..5    
 
-  before_validation :clean_up_filename, :hack
+  before_validation :clean_up_filename#, :hack
   before_save       :set_key_from_tone
 
   after_destroy :delete_sound_file
@@ -199,7 +199,10 @@ class Song < ActiveRecord::Base
 private
 
   def delete_sound_file
-    File.unlink File.join(APPLICATION[:media_path], self.filename)
+    if self.filename
+      File.unlink File.join(APPLICATION[:media_path], self.filename)
+      File.unlink File.join(APPLICATION[:media_path], self.filename.sub(/mp3$/, 'png'))
+    end
   end
 
   def clean_up_filename
