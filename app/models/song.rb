@@ -32,7 +32,7 @@ class Song < ActiveRecord::Base
 
   acts_as_rated :rating_range => 0..5    
 
-  before_validation :clean_up_filename#, :hack
+  before_validation :clean_up_filename
   before_save       :set_key_from_tone
 
   after_destroy :delete_sound_file
@@ -196,6 +196,11 @@ class Song < ActiveRecord::Base
     APPLICATION[:audio_url] + '/' + filename
   end
 
+  def randomize!
+    self.tone = Myousica::TONES.sort_by{rand}.first
+    self.genre = Genre.find(:first, :order => SQL_RANDOM_FUNCTION)
+  end
+
 private
 
   def delete_sound_file
@@ -215,13 +220,4 @@ private
     end
   end
 
-  def hack
-    if self.tone.blank?
-      self.tone = Myousica::TONES.sort_by{rand}.first
-    end
-
-    if self.genre_id.blank? || self.genre_id.zero?
-      self.genre = Genre.find(:first, :order => SQL_RANDOM_FUNCTION)
-    end
-  end
 end
