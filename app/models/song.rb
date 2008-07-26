@@ -17,18 +17,16 @@ class Song < ActiveRecord::Base
   
   has_many :mixes, :dependent => :delete_all
   has_many :tracks, :through => :mixes, :order => 'tracks.created_at DESC'  
-  has_many :children_tracks, :class_name => 'Track', :dependent => :destroy
+  has_many :children_tracks, :class_name => 'Track', :dependent => :nullify
   has_many :mlabs, :as => :mixable, :dependent => :delete_all
   has_many :abuses, :as => :abuseable, :dependent => :delete_all
 
   belongs_to :genre
   belongs_to :user 
-  
-  validates_presence_of :title, :tone, :seconds, :genre_id, :user_id, :if => Proc.new(&:published)
+ 
+  validates_presence_of :title, :tone, :seconds, :if => Proc.new(&:published)
   validates_associated :genre, :user, :if => Proc.new(&:published) 
-  validates_each :genre_id, :user_id, :if => Proc.new(&:published) do |model, attr, value|
-    model.errors.add(attr, "invalid #{attr}") if value.to_i.zero?
-  end
+  validates_numericality_of :genre_id, :user_id, :greater_than => 0, :if => Proc.new(&:published)
 
   acts_as_rated :rating_range => 0..5    
 
@@ -36,7 +34,6 @@ class Song < ActiveRecord::Base
   before_save       :set_key_from_tone
 
   after_destroy :delete_sound_file
-
 
   # def self.search_paginated(q, options = {})
   #     options = {:per_page => 6, :page => 1}.merge(options)

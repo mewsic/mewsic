@@ -46,15 +46,14 @@ class Track < ActiveRecord::Base
 
   belongs_to :instrument
 
-  validates_presence_of :title, :tonality, :seconds, :instrument_id, :song_id, :user_id, :filename
+  validates_presence_of :title, :tonality, :seconds, :filename
   validates_associated :instrument, :parent_song, :owner
-  validates_each :instrument_id, :song_id, :user_id do |model, attr, value|
-    model.errors.add(attr, "invalid #{attr}") if value.to_i.zero?
-  end
+  validates_numericality_of :song_id, :greater_than => 0, :on => :create
+  validates_numericality_of :instrument_id, :user_id, :greater_than => 0
 
   validates_each :filename do |model, attr, value|
     unless File.file?(File.join(APPLICATION[:media_path], value.to_s))
-      model.errors.add(attr, 'file not found')
+      model.errors.add(attr, 'not found in media path')
     end
   end
   
