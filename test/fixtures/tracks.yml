@@ -189,6 +189,17 @@ drums_for_billie_jean_by_pilu:
   tonality: E
   filename: test.mp3
 
+<% 50.times do |i| %>
+random_track_<%= i %>:
+  title: random track <%= i %>
+  parent_song: song_<%= i * 4 %>
+  instrument: <%= random_instrument %>
+  seconds: <%= rand(500) %>
+  owner: user_<%= rand(497) + 3 %>
+  tonality: G#
+  filename: test.mp3
+<% end %>
+
 <% 100.times do |i| %>
 idea_track_<%= i %>:
   title: Idea track <%= i %>
