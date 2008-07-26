@@ -58,13 +58,14 @@ class Admin::SongsController < Admin::AdminController
   end
 
   def mp3
+    token = "?id=#{current_user.id}&token=#{current_user.multitrack_token}"
     if params[:tracks]
       current_user.enter_multitrack!
       url = URI.parse("#{APPLICATION[:media_url]}/mix")
-      res = Net::HTTP.start(url.host, url.port) { |http| http.post(url.path + "?id=#{current_user.id}&token=#{current_user.multitrack_token}", requestify(:tracks => params[:tracks])) }
+      res = Net::HTTP.start(url.host, url.port) { |http| http.post(url.path + token, requestify(:tracks => params[:tracks])) }
     elsif params[:worker]
       url = URI.parse("#{APPLICATION[:media_url]}/mix/status/#{params[:worker]}")
-      res = Net::HTTP.start(url.host, url.port) { |http| http.get(url.path) }
+      res = Net::HTTP.start(url.host, url.port) { |http| http.get(url.path + token) }
     else
       render :text => 'invalid request', :status => :bad_request and return
     end
