@@ -41,7 +41,7 @@
 				onComplete: function() { $('flashcontent').refreshSong(); }
 			});
 		} else {
-			$w('title original_author description genre').each(function(name) {
+			$w('title original_author description genre tone').each(function(name) {
 				$('mlab_' + name + '_edit_button').observe('click', function(event) {
 					event.stop();
 					alert('Log in or sign up to edit!');
