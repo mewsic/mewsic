@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
       current_user.leave_multitrack! if current_user.multitrack? && !multitrack_request
     end
 
-    store_location unless logged_in? || request.xhr? || multitrack_request || javascript_request || (controller_name == 'sessions')
+    store_location unless logged_in? || request.xhr? || multitrack_request || javascript_request || (controller_name == 'sessions') || (params[:format] == 'png')
   end
 
   #def check_user_inbox
