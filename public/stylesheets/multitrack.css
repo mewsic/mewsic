@@ -5,20 +5,16 @@
 }
 
 #mlab_new_block_top {
-	width: 973px;
-	height: 200px;
+	width: 980px;
+	background: url(/images/mlab_top_bg.png) no-repeat top right;
 }
-
-#mlab_new_block_bottom {
-	width: 927px;
-	height: 192px;
+#mlab_new_block_top p {
+	padding:0 !important;
 }
 
 #mlab_new_icons_container {
-	width: 74px;
+	width: 104px;
 	float: left;
-	padding-right: 22px;
-
 }
 
 .mlab_icon_mlab {
@@ -26,7 +22,8 @@
 }
 
 .mlab_user_avatar {
-	padding-left: 2px;
+	float: right;
+	margin: 0px 3px 0px 0px;
 }
 
 .mlab_username  {
@@ -41,68 +38,74 @@
 
 #mlab_details_container {
 	float: left;
-	width: 875px;
-	height: 200px;
+	width: 865px;
+	height: 104px;
+	margin: 12px 0px 0px 0px;
 }
 
-#mlab_detail_row_last {
-	float: left;	
-	padding-left: 15px;	
-	width: 800px;
-}
-
-#mlab_detail_row {
-	border-bottom: 2px solid #EFEDD5;
+.mlab_detail_row {
 	float: left;
-	padding-left: 15px;
-	width: 800px;
-}
-
-#mlab_detail_row_bottom {
-	border-bottom: 2px solid #C2DCE8;
-	float: left;
-	padding-left: 15px;	
-	width: 927px;
+	margin: 0 0 0 30px;
+	width: 842px;
 }
 
 .mlab_title_big {
 	color: #000000;
-	font-size: 21px;
+	font-size: 18px;
 	font-weight: bold;
-	margin-top: 3px;
+	margin:5px 0px 0px;
+	padding:0 !important;
+}
+
+.mlab_title_big_italic {
+	color: #000000;
+	font-size: 14px;
+	font-style: italic;
+	margin:5px 0px 0px;
+	padding:0 !important;
 }
 
 .mlab_label {
 	color: #808080;
-	margin-top: 5px;
-	margin-bottom: 0px;
+	font-size: 11px;
+	margin:0;
 }
 
 .mlab_label a {
-	color: #98D1E5;
+	color: #4DC4EA;
 	font-weight: bold;
-	margin-top: 5px;
-	margin-bottom: 0px;
+	margin:0;
 }
 
-#mlab_description-inplaceeditor br {
-	display: none;
-	visibility: hidden;
+#mlab_original_author {
+	display: block;
+	overflow: hidden;
+	width: 215px;
+}
+
+#mlab_title-inplaceeditor .editor_field {
+	width: 240px;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+#mlab_original_author-inplaceeditor .editor_field {
+	width: 120px;
+	font-size: 13px;
+	font-style: normal;
 }
 
 .editor_field {
 	border: 1px solid #98D1E5;
-	font-weight: bold;
-	font-size: 19px;
-	height: 23px;
-	width: 240px;
+	height: 17px;
 	margin-right: 5px;
-	padding: 2px 4px;
+	padding: 1px 4px;
 }
 
 textarea.editor_field {
 	font-size: 14px;
-	height: 46px;
+	height: 70px;
+	width: 330px;
 }
 
 .editor_ok_button {
@@ -110,61 +113,64 @@ textarea.editor_field {
 	border:0;
 	background:none;
 	font-family:Arial, Verdana, Helvetica, sans-serif;
-	font-size:16px;
+	font-size:15px;
 	font-weight:bold;
-	color:#0296C2;
+	color:#4DC4EA;
 	margin-top: 3px;
-	margin-right:5px;
+	margin-right:3px;
 }
 
 .editor_cancel_link {
-	font-size:14px;
+	font-size:13px;
 	color:#444;
 }
 
 .mlab_tone-inplaceselect, .mlab_genre-inplaceselect {
-	border: 1px solid #98D1E5;
-	height: 23px;
-	font-size:19px;
+	border: 1px solid #4DC4EA;
+	height: 17px;
+	font-size:14px;
 	font-weight:bold;
+	margin-right: 3px;
 }
 .mlab_genre-inplaceselect {
-	width: 280px;
+	width: 130px;
+	margin-right: 5px;
 }
 
 .mlab_small_text {
 	font-size: 11px;
-	margin-bottom: 5px;
-	margin-top: 3px;
-}
-
-.mlab_medium_text {
-	font-size: 14px;
-	font-weight: bold;
-	margin-bottom: 5px;
-	margin-top: 3px;
 }
 
 .mlab_labels_left {
 	float: left;
-	text-align: left;
-	width: 375px;
+	width: 340px;
+	overflow: hidden;
+	margin-right: 30px;
 }
 
 .mlab_labels_right {
 	float: right;
 	text-align: left;
-	width: 425px;
+	width: 195px;
 }
 
 .mlab_tone {
-	width: 180px;
+	width: 120px;
 	float: left;
 }
 
 .mlab_runtime {
 	float: right;
-	width: 100px;
+	width: 75px;
+}
+
+.mlab_runtime .mlab_title_big {
+	margin-top: 2px;
+}
+
+.mlab_2nd_column_right {
+	float: right;
+	width: 68px;
 }
 
 /* XXX */

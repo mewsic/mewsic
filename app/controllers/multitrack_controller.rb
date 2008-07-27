@@ -34,7 +34,7 @@ class MultitrackController < ApplicationController
     render :update do |page|
       page['mlab_tracks'].update song.tracks.count
       page['mlab_runtime'].update song.length
-      page['mlab_instruments'].update instruments_used_in(song)
+      #page['mlab_instruments'].update instruments_used_in(song)
     end
   end
 

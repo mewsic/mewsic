@@ -13,6 +13,8 @@
 					ajaxOptions: { method: 'PUT' },
 					onEnterHover: Prototype.emptyFunction,
 					onLeaveHover: Prototype.emptyFunction,
+					onEnterEditMode: (name == 'description' ? function() { $('mlab_new_block_top').style.height = '195px'; } : Prototype.emptyFunction),
+					onLeaveEditMode: (name == 'description' ? function() { $('mlab_new_block_top').style.height = '125px'; } : Prototype.emptyFunction),
 					onComplete: function() {  $('flashcontent').refreshSong(); }
 				});
 			});
@@ -63,11 +65,11 @@
 	var flashvars = {
 		serverPath: '<%= APPLICATION[:url] %>',
 		settingsXMLPath: '<%= multitrack_config_path %>',
-		songID: <%= @song.id || 0 %>,
 		<%- if logged_in? && current_user.is_admin? -%>
 		isLogEnabled: true,
+		isServiceDumpEnabled: true,
 		<%- end -%>
-		isServiceDumpEnabled: true
+		songID: <%= @song.id || 0 %>
 	};
 	var params = { wmode: 'transparent' };
 	var attributes = { name: 'multitrackObject' };
@@ -84,72 +86,61 @@
 	
 // ]]></script>
 
-<div id="mlab_new_block_top">
+<div id="mlab_new_block_top" style="height: 125px;"><!-- dynamic -->
 	<div id="mlab_new_icons_container">
 		<div class="mlab_icon_mlab">
 			<img src="/images/mlab_icon.png" />
 		</div>
-		<div class="mlab_user_avatar">
-			<% if logged_in? %>
-				<%= avatar_image current_user, :big, :width => 70, :height => 70 %>
-				<p class="mlab_username"><%= current_user.login %></p>
-			<% else %>
-				<%= image_tag 'default_avatars/avatar_big.gif', :size => '70x70' %>
-				<p class="mlab_username">Guest<br/>[<%= link_to 'sign up', signup_path %>]<br/>[<%= link_to 'log in', login_path %>]</p>
-			<% end %>
-		</div>
 	</div>
 	<div id="mlab_details_container">
-		<div id="mlab_detail_row">
+		<div class="mlab_detail_row">
 			<div class="mlab_labels_left">
 				<!-- inplace editing -->
-				<p class="mlab_label">Title: <a href="#" id="mlab_title_edit_button">[edit]</a></p>
+				<p class="mlab_label">New project name: <a href="#" id="mlab_title_edit_button">[edit]</a></p>
 				<p class="mlab_title_big" id="mlab_title"><%= @song.title || 'Project title' %></p>
 			</div>
+			<div class="float-left">
+				<!-- inplace editing -->
+				<p class="mlab_label">Author: <a href="#" id="mlab_original_author_edit_button">[edit]</a></p>
+				<p class="mlab_title_big_italic" id="mlab_original_author"><%= @song.original_author || 'Project author' %></p>
+			</div>
+			<div class="mlab_user_avatar">
+				<% if logged_in? %>
+					<%= avatar_image current_user, :small %>
+				<% else %>
+					<%= image_tag 'default_avatars/avatar_small.gif' %>
+				<% end %>
+			</div>
 			<div class="mlab_labels_right">
-				<div class="mlab_tone">
-					<!-- inplace select -->
-					<p class="mlab_label">Tone: <a href="#" id="mlab_tone_edit_button">[edit]</a></p>
-					<p class="mlab_title_big" id="mlab_tone"><%= @song.tone %></p>
-				</div>
-				<div style="float: left;">
-					<!-- dynamic -->
-					<p class="mlab_label">Tracks:</p>
-					<p class="mlab_title_big" id="mlab_tracks"><%= @song.tracks.count %></p>
-				</div>
 				<div class="mlab_runtime">					
 					<!-- dynamic -->
 					<p class="mlab_label">Runtime:</p>
 					<p class="mlab_title_big" id="mlab_runtime"><%= @song.length %></p>
 				</div>
-			</div>
-		</div>
-		<div id="mlab_detail_row">
-			<div class="mlab_labels_left">
-				<!-- inplace editing -->
-				<p class="mlab_label">Author: <a href="#" id="mlab_original_author_edit_button">[edit]</a></p>
-				<p class="mlab_title_big" id="mlab_original_author"><%= @song.original_author || 'Project author' %></p>
-			</div>
-			<div class="mlab_labels_right">
-				<div style="float: left">
-					<!-- inplace select -->
-					<p class="mlab_label">Genre: <a href="#" id="mlab_genre_edit_button">[edit]</a></p></p>
-					<p class="mlab_title_big" id="mlab_genre"><%= @song.genre ? @song.genre.name : '' %></p>
+				<div class="mlab_runtime">
+					<!-- dynamic -->
+					<p class="mlab_label">Tracks:</p>
+					<p class="mlab_title_big" id="mlab_tracks"><%= @song.tracks.count %></p>
 				</div>
 			</div>
 		</div>
-		<div id="mlab_detail_row_last">
+		<div class="mlab_detail_row">
 			<div class="mlab_labels_left">
 				<!-- inplace editing -->
 				<p class="mlab_label">Note: <a href="#" id="mlab_description_edit_button">[edit]</a></p>
-				<p class="mlab_medium_text" id="mlab_description"><%=h @song.description %></p>
+				<p class="mlab_small_text" id="mlab_description"><%=h @song.description %></p>
+			</div>
+			<div class="float-left">
+				<!-- inplace select -->
+				<p class="mlab_label">Genre: <a href="#" id="mlab_genre_edit_button">[edit]</a></p></p>
+				<p class="mlab_title_big_italic" id="mlab_genre"><%= @song.genre ? @song.genre.name : '' %></p>
 			</div>
 			<div class="mlab_labels_right">
-				<!-- dynamic -->
-				<p class="mlab_label">Instruments:</p>
-				<p class="mlab_medium_text" id="mlab_instruments"><%= instruments_used_in @song %></p>
+				<!-- inplace select -->
+				<p class="mlab_label">Tone: <a href="#" id="mlab_tone_edit_button">[edit]</a></p>
+				<p class="mlab_title_big_italic" id="mlab_tone"><%= @song.tone %></p>
 			</div>
-		</div>			
+		</div>
 	</div>
 </div>
 
