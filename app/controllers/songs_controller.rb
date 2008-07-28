@@ -173,9 +173,10 @@ class SongsController < ApplicationController
       #@song.update_attributes!(params[:song])
     
       tracks.each do |i, track|
-        @song.mixes.create! :track_id => track[:id],
-          :volume => track[:volume],
-          :balance => track[:balance]
+        next if track['filename'].blank? || !Track.exists?(['id = ?', track['id']])
+        @song.mixes.create! :track_id => track['id'],
+          :volume => track['volume'],
+          :balance => track['balance']
       end
     end
 
