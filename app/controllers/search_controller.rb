@@ -34,14 +34,14 @@ class SearchController < ApplicationController
          end
          if params.include?(:title) && !params[:title].blank?  
             @q = "#{@q} @title #{params[:title]}"
-          end
-          if params.include?(:author) && !params[:author].blank?  
-            @q = "#{@q} @author #{params[:author]}"
-          end
+         end
+         if params.include?(:author) && !params[:author].blank?  
+           @q = "#{@q} @author #{params[:author]}"
+         end
        end      
 
-       @songs =   []#search_songs(@q, 10, 1, songs_conditions)
-       @tracks =  search_tracks(@q, 10, 1, tracks_conditions)
+       @songs =   search_songs(@q, 30, 1, songs_conditions)
+       @tracks =  search_tracks(@q, 30, 1, tracks_conditions)
         
        #if @advanced         
          # Search string: 
