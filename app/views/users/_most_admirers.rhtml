@@ -14,7 +14,7 @@
 			<%= h most_admirers.compiled_location %>
 		</p>
 		<p class="motto">
-			<%= truncate most_admirers.motto, 50 %>
+			<%= truncate strip_tags(most_admirers.motto), 50 %>
 		</p>
 	</div>
 

@@ -14,7 +14,7 @@
 			<%= h most_friends.compiled_location %>
 		</p>
 		<p class="motto">
-			<%= truncate most_friends.motto, 50 %>
+			<%= truncate strip_tags(most_friends.motto), 50 %>
 		</p>
 	</div>
 
