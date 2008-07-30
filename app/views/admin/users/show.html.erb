@@ -63,6 +63,9 @@
 	<dt>rating</dt>
 	<dd><%= @user.rating_avg.to_f %></dd>
 
+	<dt>activated at</dt>
+	<dd><%= @user.activated_at || 'INACTIVE' %></dd>
+
 </dl>
 <%= submit_tag 'submit' %>
 <% end %>
