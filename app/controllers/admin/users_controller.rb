@@ -4,11 +4,11 @@ class Admin::UsersController < Admin::AdminController
   end
   
   def show
-    @user = User.find_from_param(params[:id])
+    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find_from_param(params[:id])
+    @user = User.find(params[:id])
     @user.update_attributes! params[:user]
     render :action => 'show'
   end
