@@ -1,8 +1,8 @@
 <item>
-	<title><%= h truncate(rss_item.body, 15) %></title>
+	<title><%= h truncate(rss_item.body, 40) %></title>
 	<link><%= answer_url rss_item %></link>
 	<description><%= h rss_item.body %></description>
-	<pubDate><%= rss_item.created_at.rfc2822 %></pubDate>
+	<pubDate><%= rss_item.last_activity_at.rfc2822 %></pubDate>
 	<guid><%= answer_url rss_item %></guid>
 </item>
 
