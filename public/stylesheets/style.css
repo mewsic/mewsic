@@ -1886,9 +1886,12 @@ html>body .gallery-photo-thumb >.edit-command{
 	margin-right:10px;
 	margin-top: 4px;
 }
-.user-sharing .my-user-share-more-link {
+.user-sharing .edit-link, .user-sharing .cancel-link {
 	font-weight: normal;
 	font-size: 12px;
+}
+.user-sharing .done-link {
+	font-size: 14px !important;
 }
 .user-sharing span a {
 	color:#9CBAC7;
@@ -1915,19 +1918,25 @@ html>body .gallery-photo-thumb >.edit-command{
 	display: block;
 }
 .user-sharing input.button {
-	float:left;
+	float:none;
 	width:auto;
 	border:0;
-	background:none;
 	font-family:Arial, Verdana, Helvetica, sans-serif;
 	font-size:11px;
 	font-weight:bold;
-	color:#0296C2;
+	background-color:#0296C2;
+	color: #fff;
 	margin-top: 3px;
+	cursor: hand;
+	cursor: pointer;
+}
+.user-sharing h3 {
+	margin: 10px 0px 20px;
+	color: #004D71;
 }
 /* register */
 #register-box {
-        width: 700px;
+	width: 700px;
 	font-size:13px;
 }
 

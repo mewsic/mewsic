@@ -4,7 +4,8 @@
 	<h1>PERSONAL DETAILS &amp; SETTINGS</h1>
 </div>
 <p class="float-left grey-text" style="padding-left:18px">
-	<%= link_to '[edit]', '#', :class => 'my-user-share-more-link' %>
+	<%= link_to '[edit]', '#', :class => 'edit-link' %>
+	<%= link_to '[cancel]', '#', :class => 'cancel-link', :style => 'display:none' %>
 </p>
 <div class="clear-float"></div>
 <div id="profile-completeness-container">
@@ -80,17 +81,16 @@
 		<p>
 			<label>Podcasting</label>
   		<span id="loading_user_podcast_public" style="display:none;" class="loading">Saving...</span>
-			<%= f.check_box :podcast_public, :class => 'hide-on-load input check-box ready-for-edit' %>
-  		<input type="submit" class="button hide-on-load" value="OK"/>
+			<%= f.check_box :podcast_public, :class => 'hide-on-load input check-box ready-for-edit', :onchange => "$('form_podcast_public').submit()" %>
 			<span class="hide-on-load" style="width: 60px"><%= link_to 'learn more', help_path('podcasts') %></span>
 		</p>
 	<% end %>
-	<p class="centered grey-text" style="padding-top:10px">
-		<%= link_to '[done]', '#', :class => 'my-user-share-more-link' %>
-	</p>
+	<div class="centered grey-text clear-block">
+		<%= button_to 'DONE', '#', :class => 'done-link button' %>
+	</div>
 
-	<p>&nbsp;</p>
-	<p>You can change your password here.<br/>Leave the fields blank if you don't want to change it.</p>
+	<h3>You can change your password here.<br/>
+		Leave the fields blank if you don't want to change it.</h3>
 	<% form_for @user, :url => change_password_user_path(@user), :html => {:id => 'form_password', :method => 'put'} do %>
 	  <p>
   		<label>New password</label>

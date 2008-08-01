@@ -85,8 +85,8 @@ var AjaxFormGenerator = Class.create({
       this.hideButton(form);
       form.compareValue = this.getCompareValue(form);
       this.observeFieldsChanges(form);
-      form.observe('submit', function(event) {
-        event.stop();
+      form.submit = function(event) {
+        if (event) event.stop();
         new Ajax.Request(self.options.url + self.model_id, {
           parameters: Form.serialize(this),
           onLoading: function() {                        
@@ -121,7 +121,9 @@ var AjaxFormGenerator = Class.create({
             alert(r.responseText);
           }.bind(this)
         });        
-      });
+      };
+      form.observe('submit', form.submit);
+
     }.bind(this));
   },
   
@@ -216,39 +218,49 @@ var Profile = Class.create({
     if (!this.element)
       return;
 
-    this.links = this.element.select('.my-user-share-more-link');
-    this.links.invoke('observe', 'click', this.handleClick.bind(this));
+    this.edit_link = this.element.down('.edit-link');
+    this.edit_link.observe('click', this.onEdit.bind(this));
+
+    this.cancel_link = this.element.down('.cancel-link');
+    this.cancel_link.observe('click', this.onCancel.bind(this));
+
+    this.done_link = this.element.down('.done-link');
+    this.done_link.observe('click', this.onCompleted.bind(this));
 
     this.blurb = $('profile-completeness-container');
     this.fields = $('my-user-share');
   },
 
-  handleClick: function(event) {
+  onEdit: function(event) {
     event.stop();
 
-    if (!this.editing)
-      this.showEditPane();
-    else
-      this.saveChanges();
-  },
-
-  showEditPane: function() {
-    this.editing = true;
-    this.links.each(function(link) { link.innerHTML = '[done]' });
-    this.blurb.fade({duration: 0.3});
+    this.edit_link.hide();
+    this.cancel_link.show();
+    this.blurb.fade({duration: 0.3, queue: 'end'});
     this.fields.blindDown({duration: 0.3, queue: 'end'});
+    new Effect.ScrollTo('personal-details', {duration: 0.5, queue: 'end'});
   },
 
-  saveChanges: function() {
+  onCancel: function(event) {
+    event.stop();
     if (this.saving)
       return;
 
-    if (!confirm('Done editing?'))
+    this.cancel_link.hide();
+    this.edit_link.show();
+    this.fields.blindUp({duration: 0.3});
+    this.blurb.appear({duration: 0.3, queue: 'end'});
+  },
+
+  onCompleted: function(event) {
+    event.stop();
+    if (this.saving)
       return;
 
     this.saving = true;
-    this.links.each(function(link) { link.innerHTML = 'reloading...' });
-    this.fields.fade({duration: 0.3});
+    this.cancel_link.innerHTML = 'reloading...';
+    this.fields.fade({duration: 0.3, queue: 'end'});
+    this.cancel_link.pulsate({duration: 1.0, pulses: 3, queue: 'end'});
 
     reload.delay(0.8);
   }
