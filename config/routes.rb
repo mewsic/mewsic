@@ -83,7 +83,7 @@ ActionController::Routing::Routes.draw do |map|
   map.root :controller => 'dashboard'
   map.splash 'splash', :controller => 'dashboard', :action => 'splash'
   map.noop   'noop', :controller => 'dashboard', :action => 'noop'
-  #map.top_myousicians 'top', :controller => 'dashboard', :action => 'top'
+  map.top_myousicians 'top', :controller => 'dashboard', :action => 'top'
 
 
   map.admin '/pappapperadmin', :controller => 'admin/dashboard', :action => 'index'

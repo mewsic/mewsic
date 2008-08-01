@@ -1,64 +1,26 @@
-<%- javascript('dashboard') -%>
-<%- content_for(:top) do -%>
-  <div id="splash_container" class="banner-instr-home">
-    <%= render(:partial => 'splash') %>
-  </div>
-<%- end -%>
-  <!--
-    TODO Inserire un metodo per il calcolo del path
-  -->
-
-  <%= render :partial => 'tag_cloud' %>
-  <div class="float-left margin-top-bottom">
-    <%= link_to image_tag('banner_mband.png', :alt => 'create your own m-band'), help_path('mband') %>
-  </div>
-  <div class="box-list one-col clear-block">
-    <div class="people-list clear-block">
-      <h1><%= link_to "PEOPLE", users_path %></h1>
-      <div class="top-box clear-block">
-        <div class="bottom-box clear-block">
-          <%= render :partial => 'shared/person', :collection => @people, :locals => {:color => "scarlet"} %>
-        </div>
-      </div>
+<%- javascript('refresh-block', 'dashboard') -%>
+  <%- content_for(:top) do -%>
+    <div id="splash_container" class="banner-instr-home">
+      <%= render(:partial => 'splash') %>
     </div>
-  </div>
-  <div class="box-list two-col clear-block">
-    <div id="bands-dj" class="bands-dj-list clear-block">
-      <h1><%= link_to "BANDS &amp; DEEJAYS", bands_and_deejays_path %></h1>
-      <div class="top-box clear-block">
-        <div class="bottom-box clear-block">
-          <%= render :partial => 'shared/band', :collection => @bands %>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="box-list three-col clear-block">
-    <div class="music-list clear-block">
-      <h1><%= link_to "MUSIC", music_path %></h1>
-      <div class="top-box clear-block">
-        <div class="bottom-box clear-block">
-          <%= render :partial => 'music', :collection => @songs %>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="box-list two-col clear-block">
-    <div class="collaboration-list clear-block">
-      <h1><%= link_to 'IDEAS', ideas_path %></h1>
-      <div class="top-box clear-block">
-        <div class="bottom-box clear-block">
-          <%= render :partial => 'idea', :collection => @ideas %>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="box-list one-col clear-block">
-    <div class="answer-list clear-block">
-      <h1><%= link_to "ANSWERS", answers_path %></h1>
-      <div class="top-box clear-block">
-        <div class="bottom-box clear-block">
-          <%= render :partial => 'answer', :collection => @answers %>
-        </div>
-      </div>
-    </div>
-  </div>
+  <%- end -%>
+	<div class="clear-block" id="tagcloud">
+		<p class="tags"><%= render_tag_cloud Song, :genre, :name, :limit => 37 %></p>
+		<div class="image">
+			<%= link_to image_tag('home_ideas.png', :alt => 'get your ideas out of your head'), help_path('ideas') %>
+		</div>
+	</div>
+	<div class="clear-block" id="myousicians">
+		<div class="clear-block header">
+			<h1>MYOUSICIANS</h1>
+			<%= link_to image_tag('refresh.png', :class => 'refresh-block'), top_myousicians_path, :class => 'trigger' %>
+		</div>
+		<div class="clear-block clip">
+			<div class="refresh-container">
+				<%= render :partial => 'myousician', :collection => @people %>
+			</div>
+		</div>
+		<div class="clear-block mband">
+			<%= link_to image_tag('home_mband.png', :alt => 'create your own m-band'), help_path('mband') %>
+		</div>
+	</div>

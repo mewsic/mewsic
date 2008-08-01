@@ -1,6 +1,8 @@
 <div id="footer" class="page-width">
 	<div class="whiteblock">
-		<%= link_to 'About', content_path('about') %> | <%= link_to 'Vision', content_path('vision') %> | <%= link_to 'Legal', content_path('terms-of-service') %> | <%= link_to 'Help', help_index_path %>
-		<br /><br />&copy; 2008 Myousica. | mail@myousica.com | Online users: <%= User.count_online %>
+		<span class="sky-text">
+			<%= link_to 'About', content_path('about') %> | <%= link_to 'Vision', content_path('vision') %> | <%= link_to 'Legal', content_path('terms-of-service') %> | <%= link_to 'Help', help_index_path %>
+		</span>
+		<br />Online users: <%= User.count_online %> | mail@myousica.com | &copy; 2008 Myousica.
 	</div>
 </div>

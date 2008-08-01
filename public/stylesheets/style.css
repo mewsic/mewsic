@@ -427,20 +427,6 @@ h2, h2 a{
 .bg-body{
 	background:#F3F3F4;
 }
-.banner-instr-home{
-	padding:0px 6px 25px;
-}
-.tags_container{
-	float:left;
-	padding:0px 20px;
-}
-.tags{
-	width:490px;
-	height:165px;
-}
-.tags a{
-	color:#006F9F;
-}
 .bg-top-body{
 	height:58px;
 	background: url(/images/stripes_top_grey.gif) repeat-x top left;
@@ -712,10 +698,37 @@ tr.nav-song td{
 .home .answer-number a{
 	color:#61656A;
 }
+#tagcloud {
+	margin: 20px 0px;
+	padding: 0px 20px;
+}
+#tagcloud .tags{
+	width:500px;
+	height:165px;
+	padding:0;
+	display: block;
+	overflow: hidden;
+	float: left;
+}
+#tagcloud .image {
+	float: right;
+}
+#tagcloud .tags a{
+	color:#006F9F;
+}
 
+#myousicians {
+	padding: 0px 20px;
+	margin: 20px 0px;
+	clear: left;
+}
+
+#myousicians .header {
+	padding: 2px 0px 10px;
+}
 #myousicians h1 {
 	float: left;
-	margin: 2px 4px 13px 0px;
+	margin-right: 4px;
 }
 #myousicians img.refresh-block {
 	float: left;
@@ -724,8 +737,10 @@ tr.nav-song td{
 	width: 340px;
 	height: 180px;
 	clear: left;
+	float: left;
 }
-#myousicians .refresh-container {
+#myousicians .mband {
+	float: right;
 }
 
 .myousician-box {
@@ -2424,14 +2439,14 @@ p.sign-in .button{
 
 /* footer */
 #footer{
-	text-align:center;
-	padding: 35px 0px 20px;
+	text-align:right;
+	padding: 20px 0px 20px;
 	background:#fff;
 	color:#61656A;
 }
 
 #footer a{
-	color:#28548B;
+	color:#0296C2;
 	text-decoration: none;
 }
 
@@ -2439,8 +2454,9 @@ p.sign-in .button{
 	text-decoration: underline;
 }
 #footer .whiteblock {
-	padding:0px 6px;
-	width: 732px;
+	padding: 0px 6px;
+	width: 728px;
+	line-height: 19px;
 }
 
 .multitrack #footer .whiteblock {
@@ -2502,6 +2518,9 @@ p.sign-in .button{
 }
 .clearly-cyan-text a{
 	color:#009DC2;
+}
+.sky-text {
+	color: #0296C2;
 }
 .blue-text{
 	color:#014D70;
@@ -2948,8 +2967,8 @@ p.instrument, p.instrument a {
 }
 .mlab-enter{
 	background:url(/images/mlab_scroll_title.png) no-repeat top left;
-	height:45px;
-	width:214px;
+	height:56px;
+	width:216px;
 	text-align:right;
 	font-weight:bold;
 	color:#0099CC;
@@ -2960,7 +2979,7 @@ p.instrument, p.instrument a {
 	color:#0099CC;
 	padding-right:15px;
 	margin-top:0;
-	padding-top:18px;
+	padding-top:20px;
 }
 #mlab-scroll{
 	width: 203px;
@@ -3798,13 +3817,15 @@ div.hr {
 /******************** END SEARCH ********************/
 
 /******************** LOGIN BOX ********************/ 
+div#learn_more_banner {
+	margin-bottom: 10px;
+}
 div#multitrack_banner {
-	margin-top: 11px;
+	margin-top: 15px;
 }
 div#login {
 	width: 217px;
 }
-
 #login-box-top {
 	background: transparent url('/images/login-box-top.png') no-repeat top;
 	height: 13px;

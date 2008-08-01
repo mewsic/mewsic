@@ -65,4 +65,6 @@ var Splash = Class.create({
 
 document.observe('dom:loaded', function() {
   Splash.instance = new Splash();
+
+  new Refresher('myousicians');
 });
