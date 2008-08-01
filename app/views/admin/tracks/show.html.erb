@@ -13,7 +13,7 @@
 	<dd><%= f.select :user_id, User.find(:all, :select => 'id,login', :conditions => 'activated_at IS NOT NULL', :order => 'login').map{|s| [s.login,s.id]}, :include_blank => true %></dd>
 
 	<dt>parent song</dt>
-	<dd><%= f.select :song_id, Song.find(:all, :select => 'id,title', :include => :genre, :conditions => ['published = ?', true], :order => 'title').map{|s| ["#{s.title} (#{s.genre.name})", s.id]}, :include_blank => true %></dd>
+	<dd><%= f.select :song_id, Song.find(:all, :select => 'id,title', :include => :genre, :order => 'published DESC, title').map{|s| ["#{s.title || s.id} (#{s.genre.name if s.genre})", s.id]}, :include_blank => true %></dd>
 
 	<dt>mixed songs</dt>
 	<dd><%= @track.songs.find(:all, :order => 'title').map { |song| edit_link_to("#{song.id} #{song.title}", admin_song_path(song)) }.join('<br/>') %></p></dd>
