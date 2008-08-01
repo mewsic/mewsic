@@ -3,6 +3,8 @@ require File.dirname(__FILE__) + '/../test_helper'
 class SongsControllerTest < ActionController::TestCase
   
   include AuthenticatedTestHelper
+  include Adelao::Playable::TestHelpers
+
   fixtures :all
   
   tests SongsController
@@ -90,6 +92,36 @@ class SongsControllerTest < ActionController::TestCase
 
     song.reload
     assert_equal song.mixes.count, 0
+  end
+
+  def test_should_not_destroy_if_not_logged_in
+    delete :destroy, :id => songs(:let_it_be)
+    assert_redirected_to login_path
+  end
+
+  def test_should_destroy_only_own_songs
+    login_as :quentin
+    delete :destroy, :id => songs(:let_it_be)
+    assert_response :not_found
+  end
+
+  def test_destroy_should_unpublish_a_song_with_children_tracks
+    login_as :quentin
+    song = playable_test_filename(songs(:quentin_single_track_song))
+    delete :destroy, :id => song
+    assert_response :success
+
+    assert_equal false, song.reload.published
+    assert song.mixes.empty?
+    assert song.filename.nil?
+  end
+
+  def test_destroy_should_destroy_an_empty_song
+    song = playable_test_filename(songs(:song_366))
+    login_as song.user.login.sub(/^user/, '\&_').intern
+    delete :destroy, :id => song
+    assert_response :success
+    assert !File.exists?(song.absolute_filename)
   end
 
 end

@@ -1,4 +1,5 @@
 require 'numeric_to_runtime'
+require 'playable'
 
 class Song < ActiveRecord::Base
   
@@ -12,12 +13,11 @@ class Song < ActiveRecord::Base
     has user.country, :as => :user_country
   end
  
-  
   attr_accessor :mlab
   
   has_many :mixes, :dependent => :delete_all
   has_many :tracks, :through => :mixes, :order => 'tracks.created_at DESC'  
-  has_many :children_tracks, :class_name => 'Track', :dependent => :nullify
+  has_many :children_tracks, :class_name => 'Track'
   has_many :mlabs, :as => :mixable, :dependent => :delete_all
   has_many :abuses, :as => :abuseable, :dependent => :delete_all
 
@@ -30,10 +30,10 @@ class Song < ActiveRecord::Base
 
   acts_as_rated :rating_range => 0..5    
 
-  before_validation :clean_up_filename
-  before_save       :set_key_from_tone
+  before_save    :set_key_from_tone
+  before_destroy :check_for_children_tracks
 
-  after_destroy :delete_sound_file
+  has_playable_stream
 
   # def self.search_paginated(q, options = {})
   #     options = {:per_page => 6, :page => 1}.merge(options)
@@ -175,7 +175,11 @@ class Song < ActiveRecord::Base
   # Called by the cron runner
   #
   def self.cleanup_unpublished
-    songs = find_by_sql(['select songs.id from songs left outer join tracks on tracks.song_id = songs.id where songs.published = ? and songs.created_at < ? group by songs.id having count(tracks.id) = 0', false, 1.week.ago])
+    songs = find_by_sql(['select songs.id from songs
+      left outer join tracks on tracks.song_id = songs.id
+      where songs.published = ? and songs.created_at < ?
+      group by songs.id having count(tracks.id) = 0', false, 1.week.ago])
+
     delete_all ['id in (?)', songs.map(&:id)] unless songs.empty?
   end
   
@@ -184,37 +188,18 @@ class Song < ActiveRecord::Base
     self.genre ? self.genre.name : nil
   end
 
-  def public_filename(type = :stream)
-    return nil unless self.filename
-
-    filename = self.filename.dup
-    filename.sub! /\.mp3$/, '.png' if type == :waveform
-
-    APPLICATION[:audio_url] + '/' + filename
-  end
-
   def randomize!
     self.tone = Myousica::TONES.sort_by{rand}.first
     self.genre = Genre.find(:first, :order => SQL_RANDOM_FUNCTION)
   end
 
-private
-
-  def delete_sound_file
-    if self.filename
-      File.unlink File.join(APPLICATION[:media_path], self.filename)
-      File.unlink File.join(APPLICATION[:media_path], self.filename.sub(/mp3$/, 'png'))
-    end
-  end
-
-  def clean_up_filename
-    self.filename = File.basename(self.filename) if self.filename
-  end
-  
   def set_key_from_tone
     if !self.tone.blank? && (key = Myousica::TONES.index(self.tone.upcase)) 
       self.key = key
     end
   end
 
+  def check_for_children_tracks
+    raise ActiveRecord::ReadOnlyRecord if self.children_tracks.count > 0
+  end
 end

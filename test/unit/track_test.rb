@@ -1,7 +1,8 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class TrackTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
+  include Adelao::Playable::TestHelpers
+
   def test_find_most_used_tracks_should_return_tracks_and_usage
     track = Track.find_most_used(:limit => 1).first
     assert_equal tracks(:keyboards_for_billie_jean_by_michael_jackson), track
@@ -46,6 +47,13 @@ class TrackTest < ActiveSupport::TestCase
     t.save
     
     assert_equal 11, t.reload.key
+  end
+
+  def test_should_destroy
+    t = playable_test_filename(tracks(:random_track_23))
+    assert_nothing_raised { t.destroy }
+    assert_raise(ActiveRecord::RecordNotFound) { Track.find(t.id) }
+    assert !File.exists?(t.absolute_filename)
   end
   
 end

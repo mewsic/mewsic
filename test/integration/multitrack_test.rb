@@ -92,7 +92,18 @@ class MultitrackTest < ActionController::IntegrationTest
 
       assert_equal 1.0, mix_2.volume
       assert_equal -0.4, mix_2.balance
-                        
+
+      assert !@song.published?
+
+      # Called by the multitrack server app
+      post "/multitrack/s/#{users(:quentin).id}", :song_id => @song.id,
+        :filename => '/whatever/test.mp3', :length => 2
+      assert_response :success
+
+      assert_equal 'test.mp3', @song.reload.filename
+      assert_equal 2, @song.seconds
+      assert @song.published?
+
     end # end session
   end    
 

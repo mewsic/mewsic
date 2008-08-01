@@ -1,6 +1,6 @@
 class TracksController < ApplicationController
   
-  before_filter :login_required, :only => [:create, :rate, :toggle_idea]
+  before_filter :login_required, :only => [:create, :rate, :toggle_idea, :destroy]
   before_filter :check_track_owner, :only => [:toggle_idea]
   protect_from_forgery :except => [:create] ## XXX FIXME
   
@@ -71,6 +71,21 @@ class TracksController < ApplicationController
       end 
     end
   end  
+
+  def destroy
+    @track = current_user.tracks.find(params[:id])
+    if @track.mixes.count > 0
+      head :forbidden
+    else
+      @track.destroy
+      head :ok
+    end
+
+  rescue ActiveRecord::RecordNotFound # find
+    head :not_found
+  rescue ActiveRecord::ActiveRecordError
+    head :bad_request
+  end
   
   def rate    
     @track = Track.find(params[:id])

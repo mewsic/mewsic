@@ -3,6 +3,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 class TracksControllerTest < ActionController::TestCase
 
   include AuthenticatedTestHelper
+  include Adelao::Playable::TestHelpers
 
   fixtures :all
 
@@ -170,6 +171,36 @@ class TracksControllerTest < ActionController::TestCase
     is_idea = t.idea?
     xhr :put, :toggle_idea, :user_id => users(:quentin).id, :id => t.id
     assert_response :success
+  end
+
+  def test_should_not_destroy_if_not_logged_in
+    delete :destroy, :id => tracks(:sax_for_let_it_be)
+    assert_redirected_to login_path
+  end
+
+  def test_should_destroy_only_own_tracks
+    login_as :quentin
+    delete :destroy, :id => tracks(:drum_for_closer)
+    assert_response :not_found
+  end
+
+  def test_should_not_destroy_if_track_has_collaborations
+    login_as :quentin
+    track = tracks(:sax_for_let_it_be)
+    assert_no_difference 'Track.count' do
+      delete :destroy, :id => track.id
+      assert_response :forbidden
+    end
+  end
+
+  def test_should_destroy
+    login_as :quentin
+    track = playable_test_filename(tracks(:destroyable_track))
+    assert_difference 'Track.count', -1 do
+      delete :destroy, :id => track.id
+      assert_response :ok
+    end
+    assert !File.exists?(track.absolute_filename)
   end
   
 end

@@ -189,10 +189,11 @@ drums_for_billie_jean_by_pilu:
   tonality: E
   filename: test.mp3
 
+# songs from 4 to 200 randomly have tracks
 <% 50.times do |i| %>
 random_track_<%= i %>:
   title: random track <%= i %>
-  parent_song: song_<%= i * 4 %>
+  parent_song: song_<%= (i+1) * 4 %>
   instrument: <%= random_instrument %>
   seconds: <%= rand(500) %>
   owner: user_<%= rand(497) + 3 %>
@@ -206,8 +207,18 @@ idea_track_<%= i %>:
   parent_song: song_with_ideas
   instrument: <%= random_instrument %>
   seconds: <%= rand(100) + 90 %>
-  idea: <%= true %>
+  idea: true
   owner: <%= %w(quentin mikaband john)[rand(3)] %>
   tonality: <%= ('A'..'F').to_a[rand(6)] %>
   filename: test.mp3
 <% end %>
+
+destroyable_track:
+  title: the one that can be destroyed
+  parent_song: song_666
+  instrument: <%= random_instrument %>
+  seconds: <%= rand(100) + 90 %>
+  idea: false
+  owner: quentin
+  tonality: 'C#'
+  filename: test.mp3

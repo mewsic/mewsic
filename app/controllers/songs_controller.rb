@@ -1,6 +1,6 @@
 class SongsController < ApplicationController
   
-  before_filter :login_required, :only => [:update, :rate, :mix]
+  before_filter :login_required, :only => [:update, :rate, :mix, :destroy]
   before_filter :song_required, :only => [:load_track, :unload_track]
 
   protect_from_forgery
@@ -75,6 +75,27 @@ class SongsController < ApplicationController
     else
       raise
     end
+  end
+
+  def destroy
+    @song = current_user.songs.find(params[:id])
+    if @song.children_tracks.count > 0
+      @song.published = false
+      @song.remove_stream
+      @song.mixes.clear
+      @song.save!
+    else
+      @song.destroy
+    end
+
+    head :ok
+
+  rescue ActiveRecord::RecordNotFound # find
+    head :not_found
+  rescue ActiveRecord::ReadOnlyRecord # destroy
+    head :bad_request
+  rescue ActiveRecord::RecordNotSaved # save!
+    head :forbidden
   end
   
   def tracks
@@ -161,15 +182,7 @@ class SongsController < ApplicationController
     render :nothing => true, :status => :bad_request and return if tracks.blank?
 
     Song.transaction do 
-      if !@song.published
-        # New song
-        @song.published = true
-      else
-        # Existing song
-        @song.mixes.clear
-      end
-
-      @song.save!
+      @song.mixes.clear
       #@song.update_attributes!(params[:song])
     
       tracks.each do |i, track|
@@ -178,6 +191,7 @@ class SongsController < ApplicationController
           :volume => track['volume'],
           :balance => track['balance']
       end
+      @song.save!
     end
 
     respond_to do |format|

@@ -24,6 +24,7 @@
 #
 
 require 'numeric_to_runtime'
+require 'playable'
 
 class Track < ActiveRecord::Base
   
@@ -40,20 +41,21 @@ class Track < ActiveRecord::Base
   has_many :songs, :through => :mixes, :order => 'songs.created_at DESC'
   has_many :mixes, :dependent => :delete_all
   has_many :mlabs, :as => :mixable, :dependent => :delete_all
-  
+
   belongs_to :parent_song, :class_name => 'Song', :foreign_key => 'song_id'
   belongs_to :owner, :class_name => 'User', :foreign_key => 'user_id'
 
   belongs_to :instrument
 
-  validates_presence_of :title, :tonality, :seconds, :filename
+  validates_presence_of :title, :tonality, :seconds
   validates_associated :instrument, :parent_song, :owner
   validates_numericality_of :song_id, :greater_than => 0, :on => :create
   validates_numericality_of :instrument_id, :user_id, :greater_than => 0
 
   validates_each :filename do |model, attr, value|
-    unless File.file?(File.join(APPLICATION[:media_path], value.to_s))
-      model.errors.add(attr, 'not found in media path')
+    filename = model.absolute_filename :stream
+    unless filename && File.file?(filename)
+      model.errors.add(attr, "not found in media path (#{filename})")
     end
   end
   
@@ -61,10 +63,8 @@ class Track < ActiveRecord::Base
   
   before_save :set_tonality_from_tone
   before_save :set_key_from_tone
-  before_validation :clean_up_filename
 
-  after_destroy :delete_sound_file
-
+  has_playable_stream
 
   # def self.search_paginated(q, options)
   #     options = {:per_page => 6, :page => 1}.merge(options)
@@ -163,13 +163,6 @@ class Track < ActiveRecord::Base
     (self.parent_song && self.parent_song.genre) ? self.parent_song.genre.name : nil
   end
   
-  def public_filename(type = :stream)
-    filename = self.filename.dup
-    filename.sub! /\.mp3$/, '.png' if type == :waveform
-
-    APPLICATION[:audio_url] + '/' + filename
-  end
-  
 private
   
   def set_tonality_from_tone
@@ -180,15 +173,6 @@ private
     if !self.tonality.blank? && (key = Myousica::TONES.index(self.tonality.upcase)) 
       self.key = key
     end
-  end
-  
-  def delete_sound_file
-    File.unlink File.join(APPLICATION[:media_path], self.filename)
-    File.unlink File.join(APPLICATION[:media_path], self.filename.sub(/mp3$/, 'png'))
-  end
-
-  def clean_up_filename
-    self.filename = File.basename(self.filename) if self.filename
   end
 
 end

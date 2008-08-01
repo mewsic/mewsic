@@ -53,6 +53,7 @@ class MultitrackController < ApplicationController
     song = user.songs.find(params[:song_id])
     song.filename = params[:filename]
     song.seconds = params[:length]
+    song.published = true
     song.save!
 
     head :ok
