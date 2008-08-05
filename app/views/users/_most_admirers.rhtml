@@ -24,7 +24,7 @@
 		</div>
 		<div class="slide-container">
 			<div class="slide-clip">
-				<div class="slide-contents" style="width:<%= most_admirers.admirers_count * 35 + 5 %>px;">
+				<div class="slide-contents" style="width:<%= most_admirers.admirers_count * 35 + 5 %>px;left:0px;">
 					<% most_admirers.admirers.each do |admirer| %>
 						<%= link_to avatar_image(admirer, :icon), user_path(admirer) %>
 					<% end %>

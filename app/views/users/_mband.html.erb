@@ -13,7 +13,7 @@
     <%= link_to avatar_image(mband, :icon), mband_path(mband) %>
     <%= instrument_icon(mband.band_membership_with(@user).instrument) %>
   </div>
-	<div class="status pngfix no-tip <%= mband.status %>"></div>
+	<%= status(mband, :class => 'no-tip inline') %>
   <p class="name"><%= link_to mband.name, mband_path(mband) %></p>
   <p class="grey-text"><%= pluralize(mband.members_count, 'member') %></p>
 </div>

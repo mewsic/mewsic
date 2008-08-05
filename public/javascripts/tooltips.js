@@ -1,28 +1,32 @@
 var Tooltips = Class.create({
   initialize: function() {
-    this.addAll(document.body, 15);
+    if (Prototype.Browser.IE && navigator.userAgent.indexOf('6.'))
+      return;
+
+    this.addAll($(document.body), 10);
 
     Ajax.Responders.register({
       onComplete: this.responder.bindAsEventListener(this)
     });
+
+    Event.observe(window, 'unload', this.destroy.bind(this));		
+  },
+
+  destroy: function() {
+    Tips.tips.each(function(tip) { Tips.remove(tip.element) })
   },
 
   addAll: function(element, limit) {
     // Tips for anonymous users
     if (!$('current-user-id')) {
-      if (!Prototype.Browser.IE) {
-        element.select('.rating').slice(0,limit).each(this.addRating);
-      }
+      element.select('.rating').slice(0,limit).each(this.addRating);
       element.select('img.button.mlab').slice(0,limit).each(this.addMlab);
       element.select('.download').slice(0,limit).each(this.addDownload);
     }
 
     element.select('img.instrument').each(this.addInstrument);
-
-    if (!Prototype.Browser.IE) {
-      element.select('.rating.locked').slice(0,limit).each(this.addLockedRating);
-      element.select('.status').slice(0,limit).each(this.addStatus);
-    }
+    element.select('.rating.locked').slice(0,limit).each(this.addLockedRating);
+    element.select('.status').slice(0,20).each(this.addStatus);
   },
 
   addInstrument: function(element) {

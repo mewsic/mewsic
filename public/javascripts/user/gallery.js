@@ -4,15 +4,36 @@ var GalleryItem = Class.create({
     this.setup();
   },
   setup: function() {
-    this.element.observe('mouseover', this.handleMouseOver.bind(this));
-    this.element.observe('mouseout', this.handleMouseOut.bind(this));
+    this.b_handleMouseOver = this.handleMouseOver.bind(this);
+    this.b_handleMouseOut  = this.handleMouseOut.bind(this);
+
+    this.element.observe('mouseover', this.b_handleMouseOver);
+    this.element.observe('mouseout', this.b_handleMouseOut);
+
     this.delete_button = this.element.down('.button.delete');
     this.view_button   = this.element.down('.button.view');
     this.image_thumb   = this.element.down('a.image');
 
     if (this.delete_button) {
-      this.delete_button.observe('mouseover', this.handleDeleteMouseOver.bind(this));
-      this.delete_button.observe('mouseout', this.handleDeleteMouseOut.bind(this));
+      this.b_handleDeleteMouseOver = this.handleDeleteMouseOver.bind(this);
+      this.b_handleDeleteMouseOut  = this.handleDeleteMouseOut.bind(this);
+
+      this.delete_button.observe('mouseover', this.b_handleDeleteMouseOver);
+      this.delete_button.observe('mouseout', this.b_handleDeleteMouseOut);
+    }
+  },
+  destroy: function() {
+    this.view_button = null;
+    this.image_thumb = null;
+
+    this.element.stopObserving('mouseover', this.b_handleMouseOver);
+    this.element.stopObserving('mouseout', this.b_handleMouseOut);
+    this.element = null;
+
+    if (this.delete_button) {
+      this.delete_button.stopObserving('mouseover', this.b_handleDeleteMouseOver);
+      this.delete_button.stopObserving('mouseout', this.b_handleDeleteMouseOut);
+      this.delete_button = null;
     }
   },
   handleMouseOver: function() {
@@ -40,43 +61,71 @@ var GalleryItem = Class.create({
 var Gallery = Class.create({
   initialize: function(element) {
     this.element = $(element);
-    this.elements = new Array();
+    this.elements = [];
+    this.items = [];
     this.setup();
+
+    Event.observe(window, 'unload', this.destroy.bind(this));		
   },
   setup: function() {
     this.element.select('.gallery-photo-thumb').each(function(element) {
       if(!this.elements.include(element)) {
-        new GalleryItem(element);
+        this.items.push(new GalleryItem(element));
         this.elements.push(element);
       }      
     }.bind(this));
+  },
+  destroy: function() {
+    this.element = null;
+    this.elements.clear();
+    this.items.invoke('destroy');
+    this.items.clear();
   }
 });
 
-// TODO: use CSS classes instead of ids and create either a base class
-// to inherit from or a component with callbacks, in order to DRY this
-// code and the change avatar one.
-//
 var GalleryUpload = Class.create({
   initialize: function(element) {
     this.element = $(element);
     this.setup();
+
+    Event.observe(window, 'unload', this.destroy.bind(this));		
   },
   setup: function() {
-    this.upload_trigger = this.element.down('#gallery-upload-trigger');
-    this.upload_section = this.element.down('#gallery-upload-open');
-    this.close_trigger = this.element.down('#gallery-upload-close');
+    this.upload_section = $('gallery-upload-open');
+		this.form = $('gallery-upload-form');
+		this.status = $('gallery-upload-status');
+		this.alert = $('gallery-upload-alert');
+    this.button = $('gallery-upload-button');
 
-    this.upload_trigger.observe('click', this.displayUploadForm.bind(this));
-    this.close_trigger.observe('click', this.hideUploadForm.bind(this));
+    this.upload_trigger = $('gallery-upload-trigger');
+    this.b_displayUploadForm = this.displayUploadForm.bind(this)
+    this.upload_trigger.observe('click', this.b_displayUploadForm);
 
-		this.form = this.element.down('#gallery-upload-form');
-		this.status = this.element.down('#gallery-upload-status');
-		this.alert = this.element.down('#gallery-upload-alert');
-    this.button = this.element.down('#gallery-upload-button');
+    this.close_trigger = $('gallery-upload-close');
+    this.b_hideUploadForm = this.hideUploadForm.bind(this);
+    this.close_trigger.observe('click', this.b_hideUploadForm);
 
-		this.file_input = this.element.down('#gallery-upload-file-input');
-		this.file_input.observe('change', this.uploadPhoto.bind(this));
+		this.file_input = $('gallery-upload-file-input');
+    this.b_uploadPhoto = this.uploadPhoto.bind(this);
+		this.file_input.observe('change', this.b_uploadPhoto);
+  },
+  destroy: function() {
+    this.element = null;
+
+    this.upload_section = null;
+    this.form = null;
+    this.status = null;
+    this.alert = null;
+    this.button = null;
+
+    this.upload_trigger.stopObserving('click', this.b_displayUploadForm);
+    this.upload_trigger = null;
+
+    this.close_trigger.stopObserving('click', this.b_hideUploadForm);
+    this.close_trigger = null;
+
+    this.file_input.stopObserving('change', this.b_uploadPhoto);
+    this.file_input = null;
   },
   displayUploadForm: function() {
     this.upload_trigger.style.cursor = 'default';

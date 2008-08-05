@@ -2,48 +2,77 @@ var UserAvatar = Class.create({
   initialize: function(element) {
     this.element = $(element);
     this.setup();
+
+    Event.observe(window, 'unload', this.destroy.bind(this));		
   },
   setup: function() {
-    this.element.observe('mouseover', this.handleMouseOver.bind(this));
-    this.element.observe('mouseout', this.handleMouseOut.bind(this, false));
+		this.form   = $('change-avatar-form');
+		this.alert  = $('change-avatar-alert');
+    this.image  = $('user-avatar-image');
+		this.status = $('change-avatar-status');
+		this.upload = $('change-avatar-upload');
 
-    this.image = this.element.down('#user-avatar-image');
-		this.container = this.element.down('#user-avatar-container');
-		this.change_avatar = this.element.down('#change-avatar');
-		this.container.observe('click', this.displayUploadForm.bind(this));
-		this.change_avatar.observe('click', this.displayUploadForm.bind(this));
+    this.b_handleMouseOver = this.handleMouseOver.bind(this);
+    this.b_handleMouseOut = this.handleMouseOut.bind(this);
+    this.element.observe('mouseover', this.b_handleMouseOver);
+    this.element.observe('mouseout', this.b_handleMouseOut);
 
-		this.close_link = this.element.down('#change-avatar-close');
-		this.close_link.observe('click', this.hideUploadForm.bind(this));
+    this.b_displayUploadForm = this.displayUploadForm.bind(this);
+		this.container = $('user-avatar-container');
+		this.container.observe('click', this.b_displayUploadForm);
+		this.change_avatar = $('change-avatar');
+		this.change_avatar.observe('click', this.b_displayUploadForm);
 
-		this.upload_section = this.element.down('#change-avatar-upload')
+    this.b_hideUploadForm = this.hideUploadForm.bind(this);
+		this.close_link = $('change-avatar-close');
+		this.close_link.observe('click', this.b_hideUploadForm);
 
-		this.form = this.element.down('#change-avatar-form');
-		this.alert = this.element.down('#change-avatar-alert');
-		this.status = this.element.down('#change-avatar-status');
+		this.file_input = $('change-avatar-file-input');
+    this.b_uploadNewAvatar = this.uploadNewAvatar.bind(this);
+		this.file_input.observe('change', this.b_uploadNewAvatar);
+  },
+  destroy: function() {
+    this.form   = null;
+    this.alert  = null;
+    this.image  = null;
+    this.status = null;
+    this.upload = null;
 
-		this.file_input = this.element.down('#change-avatar-file-input');
-		this.file_input.observe('change', this.uploadNewAvatar.bind(this));
+    this.element.stopObserving('mouseover', this.b_handleMouseOver);
+    this.element.stopObserving('mouseout', this.b_handleMouseOut);
+    this.element = null;
+
+    this.container.stopObserving('click', this.b_displayUploadForm);
+    this.container = null;
+
+    this.change_avatar.stopObserving('click', this.b_displayUploadForm);
+    this.change_avatar = null;
+
+    this.close_link.stopObserving('click', this.b_hideUploadForm);
+    this.close_link = null;
+
+    this.file_input.stopObserving('change', this.b_uploadNewAvatar);
+    this.file_input = null;
   },
   handleMouseOver: function() {
-	  if(this.upload_section.visible())
+	  if(this.upload.visible())
 		  return;
 
 	  this.container.addClassName('active');
 	  this.change_avatar.addClassName('active');
   },
   handleMouseOut: function(force) {
-	  if(this.upload_section.visible() && !force)
+	  if(this.upload.visible() && !force)
 		  return;
 
     this.container.removeClassName('active');
     this.change_avatar.removeClassName('active');
   },
   displayUploadForm: function() {
-    new Effect.Appear(this.upload_section, {duration: 0.5});
+    new Effect.Appear(this.upload, {duration: 0.5});
   },
   hideUploadForm: function() {
-    new Effect.Fade(this.upload_section, {duration: 0.5});
+    new Effect.Fade(this.upload, {duration: 0.5});
 		this.alert.hide();
 		this.status.className = ''
   },

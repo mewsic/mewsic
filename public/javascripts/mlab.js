@@ -302,3 +302,14 @@ MlabSlider.removeItem = function(type, id) {
     item.slider.removeItem(type, id);
   }
 }
+
+document.observe('dom:loaded', function(event) {
+	if ($('mlab-scroller') != null ) {
+	  new MlabSlider('mlab-scroller',  {
+      axis: 'vertical',
+      windowSize: 5,
+      size: 300,
+      toggleTriggers: true
+    });    
+	}
+});

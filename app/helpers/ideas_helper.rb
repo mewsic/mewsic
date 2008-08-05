@@ -23,8 +23,8 @@ module IdeasHelper
     if instrument.ideas.count.zero?
       instrument_icon(instrument, :grey => true)
     else
-      active = instrument == @instrument ? 'active' : ''
-      klass = options.delete(:class) || "instrument #{active}"
+      current = instrument == @instrument ? 'current' : ''
+      klass = options.delete(:class) || "instrument #{current}"
 
       link_to_remote instrument_icon(instrument, :class => klass),
         {:loading => "$('tab-spinner').show", :complete => "$('tab-spinner').hide()",

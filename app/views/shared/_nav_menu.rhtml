@@ -1,29 +1,35 @@
 <div id="nav-menu">
-    <ul class="list-menu">
-      <li class="<%= check_active "users", @user %>"><%= link_to "people", users_path %></li>
-      <li class="<%= check_active "bands_and_deejays", "mbands", @user||@mband %>"><%= link_to 'bands &amp; deejays', bands_and_deejays_path %> </li>
-      <li class="<%= check_active "music", "genres", "songs" %>"><%= link_to "music", music_path %></li>
-      <li class="<%= check_active "ideas" %>"><%= link_to "ideas", ideas_path %></li>
-      <li class="<%= check_active "answers" %>"><%= link_to "answers", answers_path %></li>
-      <li id="search">
-        <%- form_tag new_search_path, :method => 'get' do -%>
-          <p><span>search</span></p>
-          <p class="search-input">          
-            <%= text_field_tag :q, @q || '' %>
-            <input name="search" type="image" src="/images/search_button.png" alt="search" class="input-button" />          
-          </p>
-          <p class="collapsed-box pngfix">
-            <a class="trigger" href="#">Advanced Search</a>
-          </p>
-          <p class="advanced-box pngfix" style="display:none">
-            <span class="trigger"> </span>
-            <span class="checkboxes">
-              <%= check_box_tag 'type[]', 'user'  %><span><a href="#">People</a></span>
-              <%= check_box_tag 'type[]', 'music' %><span><a href="#">Music</a></span>
-              <%= check_box_tag 'type[]', 'idea'  %><span><a href="#">Ideas</a></span>
-            </span>
-          </p>
-        <%- end -%>
-      </li>
-    </ul>
-  </div>
+  <ul class="list-menu">
+    <li class="<%= check_active "users", @user %>"><%= link_to "people", users_path %></li>
+    <li class="<%= check_active "bands_and_deejays", "mbands", @user||@mband %>"><%= link_to 'bands &amp; deejays', bands_and_deejays_path %> </li>
+    <li class="<%= check_active "music", "genres", "songs" %>"><%= link_to "music", music_path %></li>
+    <li class="<%= check_active "ideas" %>"><%= link_to "ideas", ideas_path %></li>
+    <li class="<%= check_active "answers" %>"><%= link_to "answers", answers_path %></li>
+    <li id="search">
+      <%- form_tag new_search_path, :method => 'get' do -%>
+        <div class="tab">
+          <div class="sx"><%= image_tag 'search_angle_left.png' %></div>
+          <div class="rp"><p>search</p></div>
+          <div class="dx"><%= image_tag 'search_angle_right.png' %></div>
+        </div>
+        <p class="search-input">          
+          <%= text_field_tag :q, @q || '' %>
+					<%= image_tag 'search_button.png', :alt => 'search', :class => 'submit-button' %>
+        </p>
+				<p class="collapsed-box">
+				  <a class="trigger" href="#">Advanced Search</a>
+				</p>
+				<p class="advanced-box" style="display:none">
+					<span class="trigger">
+						<%= image_tag 'search_box_icon_close.png', :alt => 'close' %>
+					</span>
+				  <span class="checkboxes">
+						<%= check_box_tag 'type[]', 'user'  %><span><a href="#">People</a></span>
+						<%= check_box_tag 'type[]', 'music' %><span><a href="#">Music</a></span>
+						<%= check_box_tag 'type[]', 'idea'  %><span><a href="#">Ideas</a></span>
+					</span>
+				</p>
+      <%- end -%>
+    </li>
+  </ul>
+</div>

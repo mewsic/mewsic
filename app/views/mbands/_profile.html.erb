@@ -1,4 +1,4 @@
-<% javascript('user/edit') if current_user_mband_page? %>
+<% javascript('inplaceselect', 'user/edit') if current_user_mband_page? %>
 <% javascript('user/mail') if logged_in? %>
 
 <div id="mypage-label" class="mband">
@@ -41,8 +41,10 @@
   <div class="user-resume">
 		<%= rating(@mband, :class => 'float-left') %><div class="clearer"></div>
     <p class="blue-text">Mband name </p>
-		<div class="pngfix status no-tip <%= @mband.status %>"></div>
-    <h1 class="black-text" id="user_id"><%= @mband.name %></h1>
+		<h1 class="black-text" id="user_id">
+			<%= status(@mband, :class => 'no-tip inline') %>
+			<%= @mband.name %>
+		</h1>
     <div class="grey-divisor"><hr /></div>    
     <p class="blue-text"><%= pluralize @mband.countries.size, 'Country' %></p>
     <h2 class="black-text" id="user_country"><%= @mband.countries.join(', ') %></h2>

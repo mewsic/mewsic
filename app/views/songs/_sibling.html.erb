@@ -1,6 +1,6 @@
-<div id="<%= container %>-<%= sibling.id %>" class="sibling special-box clear-block<%= ['', ' grey-bg'][sibling_counter % 2] %>">
+<div id="<%= container %>-<%= sibling.id %>" class="sibling sibling-box clear-block<%= ['', ' grey-bg'][sibling_counter % 2] %>">
   <div class="float-right" style="padding-right:10px;">
-		<div class="special-arrow <%= 'active' if sibling_counter.zero? %>"></div>
+		<div class="tracks-arrow <%= 'active' if sibling_counter.zero? %>"></div>
   </div>
   <div class="float-right" style="position:relative;">
     <img src="/images/spinner.gif" id="<%= container %>-tracks-loading-<%= sibling.id %>" style="display: none;float: left; margin: 7px 5px"/>
@@ -8,16 +8,15 @@
       <a href="#" onclick="new Ajax.Updater('<%= container %>-tracks', '<%= tracks_song_path(sibling) %>', {
         method: 'GET',
         onLoading: function() {
-          $('<%= container %>-tracks').hide();
+					$('<%= container %>-tracks').fade({duration: 0.3, queue: 'end'});
           $('<%= container %>-tracks-loading-<%= sibling.id %>').show();
-					$('<%= container %>').select('.special-arrow').invoke('removeClassName', 'active');
           $('<%= container %>').select('.sibling').invoke('removeClassName', 'active');
-          $('<%= container %>').select('.tracks-number').invoke('removeClassName', 'orange');
+          $('<%= container %>').select('.tracks-arrow').invoke('removeClassName', 'active');
         },
         onComplete: function() {
-          $('<%= container %>-<%= sibling.id %>').addClassName('active');
+					$('<%= container %>-<%= sibling.id %>').addClassName('active');
           $('<%= container %>-tracks-loading-<%= sibling.id %>').hide();
-          $('<%= container %>-tracks').show();
+					$('<%= container %>-tracks').appear({duration: 0.3, queue: 'end'});
         }
       });return false;" style="color: #FFF; display: block; text-decoration: none;height: 100%;">
         <%= sibling.tracks.count %>

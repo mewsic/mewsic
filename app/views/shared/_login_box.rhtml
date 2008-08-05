@@ -1,6 +1,6 @@
 <div id="login">
-	<div id="login-box-top" class="pngfix"></div>
-	<div id="login-box-core" class="pngfix">
+	<div id="login-box-top" class="pngfix clear-block"></div>
+	<div id="login-box-core" class="pngfix clear-block">
 		<%- form_tag sessions_path do -%>  
   		<p class="login-box-title">Account Login</p>
   			<input type="text" name="login" class="login-box-input" value="username" onblur="if(this.value=='')this.value='username'" onfocus="if(this.value=='username')this.value=''"/>
@@ -17,7 +17,7 @@
   		</div>
 		<%- end -%>
 	</div>
-	<div id="login-box-forgot" class="pngfix" style="display: none;">
+	<div id="login-box-forgot" class="pngfix clear-block" style="display: none;">
 		<% form_remote_tag :url => forgot_password_path,
 		     :loading => "$('forgot-box-spinner').show();$('login-box-forgot').fade({duration:0.3});",
 		     :complete => "$('forgot-box-spinner').hide();$('login-box-core').appear({duration:0.3,queue:'end'})" do -%>
@@ -35,5 +35,5 @@
   		</div>
 		<%- end -%>
 	</div>
-	<div id="login-box-bottom" class="pngfix"></div>
+	<div id="login-box-bottom" class="pngfix clear-block"></div>
 </div>

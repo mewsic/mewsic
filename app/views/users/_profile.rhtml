@@ -1,4 +1,4 @@
-<% javascript('user/edit') if current_user_page? %>
+<% javascript('inplaceselect', 'user/edit') if current_user_page? %>
 <% javascript('user/mail') if logged_in? %>
 <% javascript('user/im') %>
 
@@ -50,8 +50,10 @@
       <%- end -%>
     </div>
 		<p class="blue-text"><%= @user.class.name %> name</p>
-		<div class="status no-tip pngfix <%= @user.status %>"></div>
-    <h1 class="black-text" id="user_id"><%= @user.nickname %></h1>
+		<h1 class="black-text" id="user_id">
+			<%= status(@user, :class => 'no-tip inline') %>
+			<%= @user.nickname %>
+		</h1>
     <div class="grey-divisor"><hr /></div>
     <p class="blue-text">Country <%= user_edit_button(:country) %></p>
     <h2 class="black-text" id="user_country"><%= @user.country %></h2>

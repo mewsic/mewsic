@@ -3,10 +3,10 @@
 		<%= link_to person_medium.login, user_path(person_medium) %>
 	</p>
 	<p class="country align-right"><%= h person_medium.compiled_location %></p>
-	<p class="thumb float-right">
+	<div class="thumb float-right">
+		<%= status(person_medium, :class => 'no-tip') %>
 	 	<%= link_to avatar_image(person_medium, :small), user_path(person_medium) %>
-	</p>
-	<div class="pngfix status no-tip <%= person_medium.status %>"></div>
+	</div>
 	<p class="abstract"><%= h person_medium.motto %></p>
 	<p class="small">myousician since <%= time_ago_in_words person_medium.created_at, true %> ago</p>
 </div>

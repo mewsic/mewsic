@@ -4,7 +4,7 @@ var SimpleSlider = Class.create({
     if (!this.outer)
       return;
 
-    coords = Object.extend({
+    var coords = Object.extend({
       x: 0,
       y: 300
     }, options);
@@ -12,8 +12,26 @@ var SimpleSlider = Class.create({
     this.container = this.outer.down('div.slide-container');
     this.elements = this.container.down('div.slide-contents');
 
-    this.outer.down('a.slide-prev').observe('click', this.slide.bind(this, coords));
-    this.outer.down('a.slide-next').observe('click', this.slide.bind(this, {x: -coords.x, y: -coords.y}));
+    this.b_slide_prev = this.slide.bind(this, coords);
+    this.prev_trigger = this.outer.down('a.slide-prev');
+
+    this.b_slide_next = this.slide.bind(this, {x: -coords.x, y: -coords.y});
+    this.next_trigger = this.outer.down('a.slide-next');
+
+    this.prev_trigger.observe('click', this.b_slide_prev);
+    this.next_trigger.observe('click', this.b_slide_next);
+
+    Event.observe(window, 'unload', this.destroy.bind(this));		
+  },
+
+  destroy: function() { 
+    this.prev_trigger.stopObserving('click', this.b_slide_prev);
+    this.next_trigger.stopObserving('click', this.b_slide_next);
+    this.outer = null;
+    this.container = null;
+    this.elements = null;
+    this.prev_trigger = null;
+    this.next_trigger = null;
   },
 
   slide: function(coords, event) {

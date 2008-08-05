@@ -38,8 +38,9 @@ module ApplicationHelper
     %[<div id="#{type_class}_#{rateable.id}" rel="#{rateable.rating_avg.to_f} #{rateable.rating_count}"  #{tag_options}></div>]
   end
   
-  def body_class
-    controller.controller_name == "dashboard" ? "home" : ""
+  def status(model, options = {})
+    name = {'on' => 'online', 'off' => 'offline', 'rec' => 'recording'}[model.status]
+    content_tag(:div, image_tag("status_#{name}.png"), :class => "status #{options[:class]}")
   end
   
   def check_active(*controllers)
@@ -167,7 +168,7 @@ module ApplicationHelper
     suffix = "_#{options[:suffix]}" if options[:suffix]
     image_tag("#{model.class.name.downcase}_type#{suffix}.png", options)
   end
-  
+
   def ajax_upload_form(model, options, &block)
     klass = model.kind_of?(User) ? User : model.class
     url = options[:url] || send("formatted_%s_%s_path" % [klass.name.underscore, options[:name]], model, 'js')

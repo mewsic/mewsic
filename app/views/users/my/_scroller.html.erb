@@ -10,8 +10,8 @@
 					<div class="slide-contents" style="padding: 0; left: 0px; width:<%= collection.size * 45 %>px;">
 						<% collection.each do |user| -%>
 							<div class="float-left" style="width: 45px; height: 40px;">
+								<%= status(user, :class => 'no-tip') %>
 								<%= link_to(avatar_image(user, :small, :size => '40x40'), user_path(user)) %>
-								<div class="status no-tip pngfix <%= user.status %>"></div>
 							</div>
 						<% end -%>
 					</div>

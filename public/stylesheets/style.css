@@ -75,13 +75,15 @@ html[xmlns] .clear-block {
 	float: left;
 }
 #beta {
-	background: transparent url(/images/beta.png) no-repeat top left;
+	position: absolute;
+}
+#beta img {
+	position: absolute;
+	left: 72px;
+	top: -2px;
+	z-index: 23;
 	height: 12px;
 	width: 26px;
-	position: relative;
-	top: -3px;
-	left: -154px;
-	float: left;
 }
 #top-menu{
 	color:#666;
@@ -114,7 +116,7 @@ ul.list-menu{
 	color:#28548B;
 	float:left;
 	position:relative;
-	left:34px;
+	left:50px;
 	top:20px;
 }
 #nav-menu a{
@@ -129,54 +131,49 @@ ul.list-menu{
 #nav-menu li.active, #nav-menu li.active a{
 	color:#006F9F;
 }
-.home #nav-menu{
-	color:#A5B1C7;
-}
-.home #nav-menu a{
-	color:#006F9F;
-}
-.home #nav-menu li.active, .home #nav-menu li.active a{
-	color:#A5B1C7;
-}
 #search{
 	position:absolute;
 	color:#FFFFFF;
 }
-#search p{
+#search .tab .sx, #search .tab .dx {
 	float:left;
-	display:block;
-	background:#67C0DA url(/images/search_angle_left.png) no-repeat top left;
+	width: 16px;
+	height: 39px;
 }
-#search p span{
-	display:block;
-	padding:10px 14px 14px;
-	background:url(/images/search_angle_right.png) no-repeat top right;
+#search .tab .rp {
+	background-color: #67C0DA;
+	float: left;
+	height: 39px;
 }
-html>body #search p span{
-	padding:10px 14px 16px;
+#search .tab .rp p {
+	display:block;
+	padding:10px 0px;
 }
 #search p.search-input{
 	margin:0px;
-	padding:10px 5px;
 	clear:both;
 	background-image:none;
 	background-color:#67C0DA;	
 	float:left;
-	height:23px;
-	width:204px;
+	height:15px;
+	width:202px;
+	padding:15px 5px;
 }
-#search p.search-input input{
-	width:173px;
+#search p.search-input input {
+	width:170px;
 	border: none;
 	font-size:10px;
 	float:left;
-	margin:5px 3px;
+	margin:0px 3px 0px;
+}
+
+#search p.search-input img {
+	float: left;
 }
 
 #search p.collapsed-box {
 	margin: 0;
 	padding: 0;
-	background: none;
 	width: 214px;
 	height: 22px;
 	background: url(/images/search_box_collapsed_bg.png) no-repeat top;
@@ -197,6 +194,7 @@ html>body #search p span{
 	background: url(/images/search_box_bg.png) no-repeat top;
 	clear:both;
 	float:left;
+	padding: 3px 0px;
 }
 
 #search p.advanced-box span {
@@ -206,11 +204,10 @@ html>body #search p span{
 }
 
 #search p.advanced-box .trigger {
-	background: transparent url(/images/search_box_icon_close.png) no-repeat top;
 	width: 12px;
 	height: 12px;
 	float: right;
-	margin: 8px 5px 0 0;
+	margin: 5px 8px 0px 0px;
 	cursor: pointer;
 }
 
@@ -243,43 +240,38 @@ html>body #search p span{
 	color:#28548B;
 }
 div.status {
-	float:left;
-	height:17px;
-	left:2px;
-	position:relative;
-	top:-90px;
-	width:17px;
+	float: left; /* for IE6 */
+	position:absolute;
 	z-index: 100;
 }
 
-div.status.on {
-	background: transparent url(/images/status_online.png) top left no-repeat;
+div.status img {
+	position: absolute;
+	width:17px;
+	height:17px;
+	top: -7px;
+	left: 0px;
 }
 
-div.status.off {
-	background: transparent url(/images/status_offline.png) top left no-repeat;
+div.status.inline {
+	position: static;
+	float: left;
+	width: 17px;
+	height: 17px;
 }
-
-div.status.rec {
-	background: transparent url(/images/status_recording.png) top left no-repeat;
-}
-
-div.user-profile div.status {
-	left: -2px;
+div.status.inline img {
+	position: static;
 	top: 0px;
 }
 
-div#friends-scroller div.status,
-div#admirers-scroller div.status {
-	left: -5px;
-	top: -45px;
+div#newest-users div.status img {
+	left: -7px;
 }
 
-div#mband-members div.status {
-	margin:0 !important;
-	padding:0 !important;
-	background-color: transparent;
-	position: static;
+div#friends-scroller div.status img,
+div#admirers-scroller div.status img {
+	left: -4px;
+	top: -4px;
 }
 
 .user-scroller {
@@ -315,7 +307,8 @@ div#mband-members div.status {
 }
 .user-list-boxes .slide-contents {
 	padding:0;
-	left:0;
+	left: 0px;
+	position: relative;
 }
 
 div.user-list-boxes .badge {
@@ -329,11 +322,6 @@ div.user-list-boxes img.refresh-block {
 	float: right;
 }
 
-div#newest-users div.status {
-	float: right;
-	top: -6px;
-	left: 30px;
-}
 
 div.user-list-boxes p {
 	padding-bottom: 2px !important;
@@ -393,9 +381,11 @@ div.user-list-boxes .motto {
 }
 /* parte centrale */
 #path{
-	padding-top:5px;
+	padding: 17px 0px 0px;
 	margin: 0px 20px 10px;
 	color:#b6b6b6;
+	top:0px;
+	position: relative;
 }
 #path a{
 	color:#b6b6b6;
@@ -408,6 +398,7 @@ div.user-list-boxes .motto {
 #path.mband {
 	position: absolute;
 	color: #fff;
+	top: -17px;
 }
 #path.mband a {
 	color: #fff;
@@ -500,10 +491,6 @@ tr.nav-song td{
 .one-col-big{
 	width:340px;
 }
-.special-arrow-box{
-	width:340px;
-	padding-right:20px;
-}
 .semi-one-col{
 	width:220px;
 }
@@ -570,6 +557,10 @@ tr.nav-song td{
 }
 
 /* people */
+.people-list {
+	width: 270px;
+	height: 360px;
+}
 .people-list .top-box{
 	margin-left: 5px;
 }
@@ -593,7 +584,15 @@ tr.nav-song td{
 	overflow:hidden;
 	padding:2px 0px !important;
 	width:75px;
+	max-width: 75px;
 }
+.people-list .rating {
+	margin: 6px;
+	height: 14px;
+	float: none;
+	clear: both;
+}
+
 .label-title{
 	padding-right:15px;
 	float:left;
@@ -690,13 +689,6 @@ tr.nav-song td{
 }
 .answer-number a{
 	color:#0296C2;
-}
-.home .answer-number{
-	text-align:right;
-	color:#61656A;
-}
-.home .answer-number a{
-	color:#61656A;
 }
 #tagcloud {
 	margin: 20px 0px;
@@ -987,25 +979,34 @@ tr.nav-song td{
 	padding:10px 20px;
 }
 .white-box.mband h2{
-	background:url(/images/BG_box_cyan_top_mband.png) no-repeat top left;
+	background: transparent url(/images/BG_box_cyan_top_mband.png) no-repeat scroll left top;
 	color: #FFFFFF;
-	padding: 18px 20px 14px;
 	font-size: 15px;
+	display: block;
+	width: 235px;
+	height: 20px;
+	padding: 18px 20px 14px;
+	border:0;
 }
 .white-box.mband .elements {
-	padding:6px 10px 2px;
-	margin:3px 0px;
+	padding:6px 10px 0px;
+	margin:0px 1px;
+	border:0;
 	background-color:#F2F6F8;
+	width: 253px;
+	height:40px;
 }
 .white-box.mband .status {
-	left:-2px;
-	top:-2px;
+	margin: 0px 4px 0px 0px;
 }
 .white-box.mband .top-box {
 	background:none;
 }
 .white-box.mband .bottom-label {
 	background: url(/images/BG_box_cyan_bottom_mband.png) no-repeat bottom center;
+	display:block;
+	height:13px;
+	width:275px;
 }
 h2.band-label{
 	background:url(/images/BG_box_cyan_top_band.png) no-repeat top left;
@@ -1402,41 +1403,41 @@ h2.dj-label{
 	padding-top: 4px;
 }
 
-.user-mail{
+#user-mail{
 	float:left;
 	width:180px;
 	height:155px;
 	background-color:#eee;
 	margin-top:5px;
 }
-.user-mail table td{
+#user-mail table td{
 	color:#014D70;
 	padding:5px 0px;
 }
-.user-mail table td a{
+#user-mail table td a{
 	color:#014D70;
 }
-.user-mail table tr.active{
+#user-mail table tr.active{
 	background:#BFDBE7;
 }
-.user-mail table td.active{
+#user-mail table td.active{
 	background:#BFDBE7 url(/images/mail_box_active.gif) no-repeat top left;
 }
 
-.user-mail div.popup {
+#user-mail div.popup {
 	width: 670px;
 	position: absolute;
 	top: 155px;
 	right: 0px;
 }
 
-.user-mail img.popup-spinner {
+#user-mail img.popup-spinner {
 	position: absolute;
 	top: 10px;
 	right: 10px;
 }
 
-.user-mail div.popup .button.close {
+#user-mail div.popup .button.close {
 	line-height: 25px;
 }
 
@@ -1546,7 +1547,7 @@ h2.dj-label{
 }
 #mypage-label {
 	float:right;
-	background: url(/images/angle_profiles.png) no-repeat right top;
+	background: url(/images/angle_profiles.gif) no-repeat right top;
 	padding:9px 11px 0px;
 	height: 54px;
 }
@@ -1783,7 +1784,7 @@ h2.dj-label{
 	display:block;
 	position: relative;
 	margin: auto auto;
-        height:60px;
+	height:60px;
 } 
 html>body .gallery-photo-thumb{
 	/*position: static;
@@ -1803,7 +1804,7 @@ html>body .gallery-photo-thumb >div{
 .gallery-photo-thumb a.active {
 	border:4px solid #88DAEE;
 	padding:0;
-        margin:0;
+	margin:0;
 } 
 .gallery-photo-big{
 	float:left;
@@ -2104,7 +2105,7 @@ html>body .register p{
 
 #change-avatar-file-input {
 	opacity: 0.01;
-	filter: alpha(opacity=0.01);
+	filter: alpha(opacity=1);
 	position: absolute;
 	top: 13px;
 	right: 13px;
@@ -2241,7 +2242,7 @@ html>body .register p{
 	right: 30px;
 	z-index: 103;
 	opacity: 0.01;
-	filter: alpha(opacity=0.01);
+	filter: alpha(opacity=1);
 }
 
 /******************** CHANGE GENDER ********************/
@@ -2577,10 +2578,10 @@ a.download {
 }
 .faded {
 	opacity: 0.35;
-	filter: alpha(opacity=0.35);
+	filter: alpha(opacity=35);
 }
-.instrument.active { /* XXX FIXME */
-	border:1px solid grey;
+.instrument.current { /* XXX FIXME */
+	border:1px solid gray;
 	height:24px;
 	padding:2px;
 	width:24px;
@@ -2681,55 +2682,6 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 }
 
 
-
-.menu-categorie{
-	padding:10px;
-	background-color:#f8f8f8;
-	margin-bottom:20px;
-}
-.menu-categorie a{
-	color:#004D71;
-	margin-right:6px;
-}
-.menu-categorie dt{
-	font-size:14px;
-	font-weight:bold;
-	color:#004D71;
-	margin-bottom:10px;
-}
-.menu-categorie ul, .menu-categorie li{
-	padding:0px;
-	margin:0px;
-	list-style-type:none;
-}
-.menu-categorie li{
-	background:url(/images/circle_arrow.gif) no-repeat top left;
-	padding-left:20px;
-	font-weight:bold;
-	font-size:14px;
-	color:#004D71;
-	position:relative;
-	z-index:1;
-}
-.menu-categorie li.active{
-	background:url(/images/circle_arrow_active.gif) no-repeat top left;
-	color:#009DC2;
-}
-.menu-categorie li.active a{
-	color:#009DC2;
-}
-.menu-categorie li p{
-	font-size:11px;
-	color:#1A71A0;
-}
-.menu-categorie li p a{
-	color:#1A71A0;
-	text-decoration:underline;
-}
-.menu-categorie li p a:hover{
-	color:#009DC2;
-	text-decoration:none;
-}
 .azzurro-boxes .elements{
 	background-color:#F3F8FA;
 	padding:5px;
@@ -2751,21 +2703,24 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 	color:#009DC2;
 }
 
-/*img#user_gender {
-  cursor: pointer;
-}*/
-
 .song-resume {
 	width: 150px;
 	text-align: right;
 	margin-bottom: 6px;
 }
 
+.song-box {
+	width:340px;
+	padding-right:20px; /* for the arrows */
+}
+
 .song-spec {
 	margin-top: 20px;
 }
 
-/* added 05 2008 */
+.song-spec .tracks-arrow {
+	margin-top: 0px;
+}
 .song-spec .top-box{
 	background:url(/images/rounded_grey_bottom.gif) no-repeat bottom left;
 }
@@ -2846,48 +2801,56 @@ div#messages div.notice, div#messages div.error, div#messages div.inbox {
 	margin-top:7px;
 	margin-bottom:5px;
 }
-.special-box{
-	padding:4px 4px 0px;
-	/*border:2px solid #fff;*/
-	margin-bottom:0px;
-}
-.special-box.active{
-	/*border:2px solid #D3D3D3;*/
-}
-.special-arrow{
+.tracks-arrow{
+	background:url(/images/arrow_grey_special.gif) no-repeat top right;
 	position:absolute;
 	margin-top:10px;
 	width:36px;
 	height:22px;
+	display:none;
 }
-.song-spec .special-arrow {
-	margin-top: 0px;
+.tracks-arrow.active {
+	display:block;
 }
-.special-arrow.active{
-	background:url(/images/arrow_grey_special.gif) no-repeat top right;
+
+.sibling-box{
+	padding:4px 6px;
+	margin:0;
 }
-.special-box.active .special-arrow{
-	background:url(/images/arrow_grey_special.gif) no-repeat top right;
+.sibling-box .tracks-number {
+  background-image: url(/images/tracks_number_BG_grey.png);
+	margin-right: 0px;
 }
+
+.sibling-box.active .tracks-number {
+  background-image: url(/images/tracks_number_BG_orange.png);
+}
+
+.sibling-box.active .tracks-arrow {
+	display: block;
+}
+
+#direct-siblings-tab .sx {
+	margin-left: 11px;
+}
+
 .grey-bg{
 	background-color:#EDEDED;
 }
 
 /* rating */
+.rating.user, .rating.song, .rating.track, .rating.answer {
+	width: auto !important;
+}
 
 .rating {
-  /*width: 62px;*/
-	margin: 4px auto;
+	margin: 4px 0px;
+  /*height: 14px;*/
   /*position: relative;*/
-  /*height: 13px;*/
 }
 
 .music-info .rating {
 	float: left;
-}
-
-.people-list .rating {
-	margin: 6px;
 }
 
 .user-resume .rating {
@@ -3022,8 +2985,7 @@ p.instrument, p.instrument a {
 }
 #mlab-scroller .elements.banner p {
 	line-height: 15px;
-	margin-top: 4px;
-	margin-right: 12px;
+	padding: 4px 12px 0px 0px;
 	text-align: left;
 	float: right;
 	display:block;
@@ -3504,7 +3466,7 @@ div.hr {
 
 #band_browse_avatar input {
 	opacity: 0.01;
-	filter: alpha(opacity=0.01);
+	filter: alpha(opacity=1);
 	position: relative;
 	top: 5px;
 	right: 25px;
@@ -3801,7 +3763,7 @@ div.hr {
 
 .pagination .disabled {
 	opacity: 0.35;
-	filter: alpha(opacity=0.35);
+	filter: alpha(opacity=35);
 }
 
 .pagination.spinner {
@@ -3827,23 +3789,28 @@ div#login {
 	width: 217px;
 }
 #login-box-top {
-	background: transparent url('/images/login-box-top.png') no-repeat top;
+	background: transparent url(/images/login-box-top.png) no-repeat top;
 	height: 13px;
-	margin: 0;
-	padding: 0;
+	/*width: 217px;*/
+	content: ".";
+	/*margin: 0;
+	padding: 0;*/
 }
 
 #login-box-bottom {
-	background: transparent url('/images/login-box-bottom.png') no-repeat top;
+	background: transparent url(/images/login-box-bottom.png) no-repeat top;
 	height: 13px;
+	/*width: 217px;*/
+	content: ".";
 }
 
 #login-box-core, #login-box-forgot {
-	background: transparent url('/images/login-box-rp.png') repeat-y top;
-	padding: 0px 16px 0px 16px;	
+	background: transparent url(/images/login-box-rp.png) repeat-y top;
+	padding: 0px 16px;	
+	margin: 0;
 	overflow: hidden;
-	width: 185px;
-	height: 142px;
+	/*width: 185px;*/
+	height: 144px;
 }
 
 .login-box-title {
@@ -3897,21 +3864,21 @@ div#login {
 .tabmenu .tab.active .sx {
 	width: 13px;
 	height: 33px;
-	background: transparent url('/images/tabmenu/tabmenu_active_sx.png') no-repeat top;
+	background: transparent url(/images/tabmenu/tabmenu_active_sx.png) no-repeat top !important;
 	float: left;
 	margin-left: 4px;
 }
 
 .tabmenu .tab.active .rp {
 	height: 33px;
-	background: transparent url('/images/tabmenu/tabmenu_active_rp.png') repeat-x top;
+	background: transparent url(/images/tabmenu/tabmenu_active_rp.png) repeat-x top !important;
 	float: left;
 }
 
 .tabmenu .tab.active .dx {
 	width: 13px;
 	height: 33px;
-	background: transparent url('/images/tabmenu/tabmenu_active_dx.png') no-repeat top;
+	background: transparent url(/images/tabmenu/tabmenu_active_dx.png) no-repeat top !important;
 	float: left;
 	margin-right: 4px;	
 }
@@ -3919,21 +3886,21 @@ div#login {
 .tabmenu .tab .sx {
 	width: 13px;
 	height: 33px;
-	background: transparent url('/images/tabmenu/tabmenu_inactive_sx.png') no-repeat top;
+	background: transparent url(/images/tabmenu/tabmenu_inactive_sx.png) no-repeat top !important;
 	float: left;
 	margin-left: 4px;
 }
 
 .tabmenu .tab .rp {
 	height: 33px;
-	background: transparent url('/images/tabmenu/tabmenu_inactive_rp.png') repeat-x top;
+	background: transparent url(/images/tabmenu/tabmenu_inactive_rp.png) repeat-x top !important;
 	float: left;
 }
 
 .tabmenu .tab .dx {
 	width: 13px;
 	height: 33px;
-	background: transparent url('/images/tabmenu/tabmenu_inactive_dx.png') no-repeat top;
+	background: transparent url(/images/tabmenu/tabmenu_inactive_dx.png) no-repeat top !important;
 	float: left;
 	margin-right: 4px;	
 }
@@ -3941,9 +3908,10 @@ div#login {
 .tabmenu .title {
 	color:#004D71;
 	font-size:16px;
-	padding: 10px 4px 0px 8px;
+	padding: 10px 8px 0px;
 	float: left;
 	margin: 0;
+	display: block;
 }
 
 .tabmenu .tab .counter {
@@ -3983,19 +3951,6 @@ div#login {
 }
 /******************** END SIBLINGS TABS ********************/ 
 
-#direct-siblings .tracks-number, #indirect-siblings .tracks-number {
-  background-image: url(/images/tracks_number_BG_grey.png);
-	margin-right: 0px;
-}
-
-#direct-siblings-tab .sx {
-	margin-left: 11px;
-}
-
-#direct-siblings .active .tracks-number, #indirect-siblings .active .tracks-number {
-  background-image: url(/images/tracks_number_BG_orange.png);
-}
-
 /***** messages autocomplete *****/
 div.auto_complete {
   width: 350px;
@@ -4023,7 +3978,6 @@ div.auto_complete ul strong.highlight {
 /***** end messages autocomplete *****/
 
 /******************** HOME SPLASH ********************/
-
 
 #splash {
   height: 200px;
@@ -4084,7 +4038,7 @@ div.auto_complete ul strong.highlight {
 
 #splash_container {
 	width: 744px;
-	height: 279px;
+	height: 310px;
 	padding-left: 0;
 	padding-right: 0;
 	font-size: 11px;
@@ -4193,11 +4147,9 @@ div.auto_complete ul strong.highlight {
 	position: relative;
 }
 
-#splash_divider {
-	background: transparent url('/images/splash_arrows.png') no-repeat bottom;
+.splash_divider {
 	width: 22px;
-	height: 20px;
-	margin: 92px 0px 0px;
+	padding-top: 90px;
 	float: left;
 	overflow: hidden;
 }
@@ -4299,7 +4251,7 @@ div.auto_complete ul strong.highlight {
 
 .user-switch .from img {
 	opacity: 0.5;
-	filter: alpha(opacity=0.5);
+	filter: alpha(opacity=50);
 }
 
 .user-switch h1 {
