@@ -170,6 +170,7 @@ ul.list-menu{
 
 #search p.search-input img {
 	float: left;
+	cursor: pointer;
 }
 
 #search p.collapsed-box {
@@ -3795,26 +3796,25 @@ div#multitrack_banner {
 	margin-top: 15px;
 }
 div#login {
-	width: 217px;
+	width: 220px;
 }
 #login-box-top {
-	background: transparent url(/images/login-box-top.png) no-repeat top;
+	background: transparent url(/images/login-box-top.png) no-repeat top right;
 	height: 13px;
 	/*width: 217px;*/
-	content: ".";
 	/*margin: 0;
 	padding: 0;*/
 }
 
 #login-box-bottom {
-	background: transparent url(/images/login-box-bottom.png) no-repeat top;
+	background: transparent url(/images/login-box-bottom.png) no-repeat top right;
 	height: 13px;
 	/*width: 217px;*/
 	content: ".";
 }
 
 #login-box-core, #login-box-forgot {
-	background: transparent url(/images/login-box-rp.png) repeat-y top;
+	background: transparent url(/images/login-box-rp.png) repeat-y top right;
 	padding: 0px 16px;	
 	margin: 0;
 	overflow: hidden;
@@ -3828,6 +3828,7 @@ div#login {
 	font-weight: bold;
 	margin: 0;
 	padding-bottom: 8px;
+	text-align: left;
 }
 
 #login-box-remember {
@@ -3846,8 +3847,7 @@ div#login {
 }
 
 .login-box-helplinks {
-	margin: 8px 4px;
-	float: right;
+	padding: 8px 0px;
 	text-align: right;
 }
 
