@@ -59,7 +59,7 @@ html[xmlns] .clear-block {
 }
 /* container */
 .page-width{
-	width:986px;
+	width:980px;
 	margin: auto auto;
 }
 /* header */
@@ -114,9 +114,8 @@ ul.list-menu{
 	font-size:15px;
 	font-weight:bold;
 	color:#28548B;
-	float:left;
+	float:right;
 	position:relative;
-	left:50px;
 	top:20px;
 }
 #nav-menu a{
@@ -132,8 +131,10 @@ ul.list-menu{
 	color:#006F9F;
 }
 #search{
-	position:absolute;
+	position:relative;
 	color:#FFFFFF;
+	float: left;
+	height:18px;
 }
 #search .tab .sx, #search .tab .dx {
 	float:left;
@@ -156,15 +157,15 @@ ul.list-menu{
 	background-color:#67C0DA;	
 	float:left;
 	height:15px;
-	width:202px;
-	padding:15px 5px;
+	width:200px;
+	padding:15px 7px;
 }
 #search p.search-input input {
 	width:170px;
 	border: none;
 	font-size:10px;
 	float:left;
-	margin:0px 3px 0px;
+	margin:0px 10px 0px 0px;
 }
 
 #search p.search-input img {
@@ -1407,7 +1408,6 @@ h2.dj-label{
 	float:left;
 	width:180px;
 	height:155px;
-	background-color:#eee;
 	margin-top:5px;
 }
 #user-mail table td{
@@ -1473,6 +1473,14 @@ h2.dj-label{
 .user-box-option div.action{
 	clear:both;
 	height:30px;
+}
+
+.user-box-option div.action p.thumb{
+	margin-right: 10px;
+}
+.user-box-option div.action p.name{
+	padding: 7px 0px !important;
+	font-weight: bold;
 }
 .user-id{
 	color:#014D70;
@@ -2306,6 +2314,7 @@ html>body .login p {
 /* right col */
 #rightcol{
 	float:right;
+	text-align: right;
 	position:relative;
 	top: 24px;
 	right: 0px;
@@ -2925,13 +2934,13 @@ p.instrument, p.instrument a {
 
 /******************** MLAB SCROLLER ***************************/
 .mlab-container{
-	padding:0px 5px;
+	padding:0px 10px;
 	clear:both;
 }
 .mlab-enter{
-	background:url(/images/mlab_scroll_title.png) no-repeat top left;
+	background:url(/images/mlab_scroll_title.png) no-repeat top right;
 	height:56px;
-	width:216px;
+	width:220px;
 	text-align:right;
 	font-weight:bold;
 	color:#0099CC;

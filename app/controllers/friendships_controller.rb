@@ -7,14 +7,33 @@ class FriendshipsController < ApplicationController
   def create    
     @friend = User.find(params[:friend_id])
     Friendship.create_or_accept(@user, @friend)    
-    redirect_to user_path(@friend)  
+
+    flash[:notice] = 
+      if @user.is_friends_with?(@friend)
+        "You and #{@friend.nickname} are now friends!"
+      else
+        "You are now an admirer of #{@friend.nickname}"
+      end
+
+    redirect_to user_path(@friend)
   end
   
   def destroy
     @friendship = Friendship.find(params[:id])
+    @friend = @friendship.friendshipped_for_me == @user ? @friendship.friendshipped_by_me : @friendship.friendshipped_for_me
+
+    flash[:notice] =
+      if @user.is_friends_with?(@friend)
+        "You are no longer a friend of #{@friend.nickname}"
+      else
+        "You are no longer an admirer of #{@friend.nickname}"
+      end
+
     @friendship.destroy_or_unaccept(@user)
-    redirect_to user_path(@friendship.friendshipped_for_me == @user ? @friendship.friendshipped_by_me : @friendship.friendshipped_for_me)
+    redirect_to user_path(@friend)
+
   rescue ActiveRecord::RecordNotFound
+    flash[:notice] = nil
     redirect_to user_path(@user)
   end
 

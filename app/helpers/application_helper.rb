@@ -40,7 +40,7 @@ module ApplicationHelper
   
   def status(model, options = {})
     name = {'on' => 'online', 'off' => 'offline', 'rec' => 'recording'}[model.status]
-    content_tag(:div, image_tag("status_#{name}.png"), :class => "status #{options[:class]}")
+    content_tag(:div, image_tag("status_#{name}.png"), :class => "status #{name} #{options[:class]}")
   end
   
   def check_active(*controllers)

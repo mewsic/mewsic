@@ -126,5 +126,17 @@ module UsersHelper
     content_tag(:div, content, :style => 'margin:4px 0px 0px 25px;float:left;')
   end
 
+
+  def friend_link_for(user, text = nil)
+    if current_user.is_friends_with?(user)
+      link_to text || 'Unfriend', user_friendship_path(current_user, current_user.friendship(user)), :method => 'delete'
+    elsif current_user.is_pending_friends_by_me_with?(user)
+      link_to text || 'Unadmire', user_friendship_path(current_user, current_user.friendship(user)), :method => 'delete'
+		elsif user.is_pending_friends_by_me_with?(current_user)
+      link_to text || 'Become friend', user_friendships_path(current_user, :friend_id => user.id), :method => 'post'
+    else
+      link_to text || 'Admire', user_friendships_path(current_user, :friend_id => user.id), :method => 'post'
+    end
+  end
 end
 

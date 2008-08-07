@@ -36,4 +36,9 @@ class SessionsController < ApplicationController
 
     redirect_back_or_default('/')
   end
+
+  def to_breadcrumb_link
+    ['Log in', nil]
+  end
+
 end

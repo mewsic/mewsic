@@ -252,7 +252,11 @@ protected
     when 'NilClass'
       ['People', users_path]
     when 'User'
-      ['User', users_path]
+      if @user.new_record?
+        ['Sign up', nil]
+      else
+        ['User', users_path]
+      end
     when 'Band'
       ['Band', bands_and_deejays_path]
     when 'Dj'
