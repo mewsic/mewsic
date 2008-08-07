@@ -258,7 +258,7 @@ class User < ActiveRecord::Base
     if self == User.myousica
       # Myousica is always online
       'on'
-    elsif self.updated_at < 30.minutes.ago
+    elsif self.updated_at > 30.minutes.ago
       # if this record has been updated in the last 30 minutes,
       # trust the recorded status.
       self.read_attribute :status
@@ -353,11 +353,11 @@ class User < ActiveRecord::Base
   end
 
   def self.find_online(options = {})
-    self.find(:all, options.merge(:conditions => ['status IN (?) AND updated_at < ?', %w(on rec), 30.minutes.ago], :order => 'updated_at'))
+    self.find(:all, options.merge(:conditions => ['status IN (?) AND updated_at > ?', %w(on rec), 30.minutes.ago], :order => 'updated_at'))
   end
 
   def self.count_online(options = {})
-    self.count(options.merge(:conditions => ['status IN (?) AND updated_at < ?', %w(on rec), 30.minutes.ago]))
+    self.count(options.merge(:conditions => ['status IN (?) AND updated_at > ?', %w(on rec), 30.minutes.ago]))
   end
 
   def self.find_top_answers_contributors(options = {})
