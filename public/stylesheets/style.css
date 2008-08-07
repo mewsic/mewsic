@@ -2941,17 +2941,17 @@ p.instrument, p.instrument a {
 	background:url(/images/mlab_scroll_title.png) no-repeat top right;
 	height:56px;
 	width:220px;
-	text-align:right;
-	font-weight:bold;
-	color:#0099CC;
+	text-align:left;
   padding:0 !important;
 }
 .mlab-enter a{
+	color:#014D70;
 	display:block;
-	color:#0099CC;
-	padding-right:15px;
-	margin-top:0;
-	padding-top:20px;
+	font-size:20px;
+	font-weight:bold;
+	line-height:20px;
+	margin:0;
+	padding:8px 10px 8px 65px;
 }
 #mlab-scroll{
 	width: 203px;
