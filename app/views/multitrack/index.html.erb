@@ -69,20 +69,13 @@
 		isLogEnabled: true,
 		isServiceDumpEnabled: true,
 		<%- end -%>
+		loadSong: <%= @edit ? 'true' : 'false' %>,
 		songID: <%= @song.id || 0 %>
 	};
 	var params = { wmode: 'transparent' };
 	var attributes = { name: 'multitrackObject' };
 
-	<%- if @edit -%>
-	document.observe('dom:loaded', function() {
-		$('flashcontent').update(
-			'<p class="editing"><%= link_to "Done editing", :back %></p>' +
-			'<p class="edit-blurb">Multitrack editing of songs is currently disabled. It will be available soon :).<br/> In the meantime, you can edit your song attributes here.</p>' );
-	});
-	<%- else -%>
 	swfobject.embedSWF( '/multitrack/Adelao_Myousica_Multitrack_Editor.swf', 'flashcontent', '978', '100%', '9.0.28', '/expressInstall.swf', flashvars, params, attributes );
-	<%- end -%>
 	
 // ]]></script>
 
