@@ -146,40 +146,40 @@ class SongsController < ApplicationController
         render :text => @song.send(params[:song].keys.first)
       end
     else
-      render :nothing => true, :status => :ok
+      head :ok
     end
 
   rescue ActiveRecord::ActiveRecordError
-    render :nothing => true, :status => :bad_request
+    head :bad_request
   end
   
   def load_track
     track = Track.find params[:track_id]
 
-    @song.mixes.create! :track => track
+    @song.mixes.create :track => track
     @song.seconds = @song.mixes.find(:all).map { |m| m.track.seconds }.max
     @song.save!
 
-    render :nothing => true, :status => :ok
+    head :ok
 
   rescue ActiveRecord::ActiveRecordError
-    render :nothing => true, :status => :bad_request
+    head :bad_request
   end
 
   def unload_track
     @song.mixes.find_by_track_id(params[:track_id]).destroy
-    render :nothing => true, :status => :ok
+    head :ok
 
   rescue NoMethodError
-    render :nothing => true, :status => :not_found
+    head :not_found
   rescue ActiveRecord::ActiveRecordError
-    render :nothing => true, :status => :bad_request
+    head :bad_request
   end
 
   def mix
     @song = current_user.songs.find(params[:id])
     tracks = params.delete(:tracks)
-    render :nothing => true, :status => :bad_request and return if tracks.blank?
+    head :bad_request and return if tracks.blank?
 
     Song.transaction do 
       @song.mixes.clear
