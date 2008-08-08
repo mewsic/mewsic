@@ -16,7 +16,7 @@ var Refresher = Class.create({
     this.b_refresh = this.refresh.bind(this);
 
     this.trigger.observe('click', this.b_refresh);
-    Event.observe( window, 'unload', this.destroy.bind(this));
+    Event.observe(window, 'unload', this.destroy.bind(this));
   },
   
   destroy: function() {

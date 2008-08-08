@@ -2,15 +2,16 @@ var Rating = Class.create({
   initialize: function(options) {
     this.options = options;
     this.logged_in = $('current-user-id') ? true : false;
-    this.elements = [];
+    this.elements = $A();
+    this.starboxes = $A();
 
     var elements = $A(document.getElementsByClassName(this.options.className));
     elements.slice(0, options.limit).each(this.add.bind(this));
 
-    if (this.logged_in && !window.observing_starboxes) {
+    if (this.logged_in) {
       this.authenticity_token = $('authenticity-token').value;
-      window.observing_starboxes = true;
-      document.observe('starbox:rated', this.onrate.bind(this));
+      this.b_onrate = this.onrate.bind(this);
+      document.observe('starbox:rated', this.b_onrate);
     }
 
     Ajax.Responders.register({
@@ -21,8 +22,34 @@ var Rating = Class.create({
   },
 
   destroy: function() {
-    this.elements.invoke('remove');
+    document.stopObserving('starbox:rated', this.b_onrate);
+
+    this.starboxes.each(function(starbox) {
+      starbox.buttons.clear();
+      starbox.buttons = null;
+
+      starbox.inputs.average = null;
+      starbox.inputs.max = null;
+      starbox.inputs.rated = null;
+      starbox.inputs.rerated = null;
+      starbox.inputs.total = null;
+      starbox.inputs = null;
+
+      starbox.colorbar = null;
+      starbox.container = null;
+      starbox.element = null;
+      starbox.hover = null;
+      starbox.starbar = null;
+      starbox.status = null;
+      starbox.wrapper = null;
+    });
+
+    this.starboxes.clear();
+    this.starboxes = null;
+
     this.elements.clear();
+    this.elements = null;
+
   },
 
   onrate: function(event) {
@@ -55,14 +82,13 @@ var Rating = Class.create({
       image = 'myousica_f9f9f9.png';
     }
 
-
     if (element.hasClassName('locked')) {
       locked = true;
       indicator = '<strong>#{average}</strong> rating from <strong>#{total}</strong> votes';
     }
 
     this.elements.push(element);
-    new Starbox(element, rating, {
+    this.starboxes.push(new Starbox(element, rating, {
       total: count,
       buttons: 5,
       max: 5,
@@ -71,7 +97,7 @@ var Rating = Class.create({
       indicator: indicator,
       locked: locked,
       overlay: image
-    });
+    }));
   },
 
   responder: function(r) {

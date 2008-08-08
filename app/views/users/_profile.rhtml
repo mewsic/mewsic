@@ -20,13 +20,13 @@
 		<div id="change-avatar"> </div>
 		<div id="change-avatar-upload" style="display:none">
 			<div id="change-avatar-bg">
-				<div style="float: right;" id="change-avatar-close">
-					<%= image_tag 'change_avatar_icon_close.png' %>
+				<div id="change-avatar-close">
+					<%= image_tag 'change_avatar_icon_close.gif' %>
 				</div>
-				<div id="change-avatar-interact">
+				<div id="change-avatar-interact clear-block">
 					<div id="change-avatar-button">
 						<% ajax_upload_form(@user, :name => :avatar, :id => 'change-avatar', :method => 'put') do |f| %>
-							<%= f.file_field :uploaded_data, :id => 'change-avatar-file-input' %>
+							<%= f.file_field :uploaded_data, :id => 'change-avatar-file-input', :size => 1 %>
 							<%= f.hidden_iframe 'change-avatar' %>
 						<% end %>
 					</div>

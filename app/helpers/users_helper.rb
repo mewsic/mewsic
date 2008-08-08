@@ -72,19 +72,17 @@ module UsersHelper
   end    
    
   def switch_type_images_for(user)
-    content = ""
-    %w[user band dj].each do |to|
-      from = user.type.nil? ? 'user' : user.type.downcase
-      icon = image_tag("change_#{to}_#{from == to ? 'active' : 'inactive'}.png")
+    from = user.type.nil? ? 'user' : user.type.downcase
+
+    %w[user band dj].map do |to|
       if from == to
-        content << icon
+        image_tag("change_#{to}_active.png", :title => "You are currently a #{from}")
       else
-        content <<
-          link_to(icon, formatted_switch_type_user_path(user, 'html', :type => to),
-            :class => 'lightview', :id => "user-switch-#{to}", :title => ' :: :: width:400, height:330')
+        link_to(image_tag("change_#{to}_inactive.png", :title => "Switch your user type to #{to}"),
+          formatted_switch_type_user_path(user, 'html', :type => to),
+          :class => 'lightview', :id => "user-switch-#{to}", :title => ' :: :: width:400, height:330')
       end
-    end
-    content
+    end.join
   end
   
   def page_label_for(user)

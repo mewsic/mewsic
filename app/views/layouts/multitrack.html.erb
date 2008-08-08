@@ -2,11 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon"/>
   <title>Myousica - play and share</title>
   <%= stylesheet_link_tag "style", "multitrack" %>     
   <%= load_prototype %>
-  <%= javascript_include_tag *%w[swfobject inplaceselect application] %> 
-  <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon"/>
+  <%= javascript_include_tag *%w[swfobject inplaceselect flash application] %> 
+  <%= yield :head %>
 </head>
 <body>
   <%= hidden_field_tag 'current-user-id', current_user.id if logged_in?  %>

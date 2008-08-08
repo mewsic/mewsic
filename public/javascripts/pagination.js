@@ -26,15 +26,18 @@ var Pagination = Class.create({
   initLinks: function() {
     this.links = $(this.options.container).select(this.options.selector);
     this.links.each(function(link) {
-      link.observe('click', this.linkHandler.bind(this, link));
+      link._handler = this.linkHandler.bind(this, link);
+      link.observe('click', link._handler);
     }.bind(this));
   },
   
   releaseLinks: function() {
     this.links.each(function(link) {
-      link.stopObserving('click', this.linkHandler);
+      link.stopObserving('click', link._handler);
+      link._handler = null;
     }); 
-    this.link = new Array();
+    this.links.clear();
+    this.links = null;
   },
 
   linkHandler: function(element, event) {

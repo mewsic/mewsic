@@ -4,8 +4,7 @@ document.observe('dom:loaded', function() {
   new Pagination({
     container: name,
     spinner: name + '-spinner',
-    selector: 'a.genre-pagination',
-    update_mlab: true
+    selector: 'a.genre-pagination'
   });
 
   if ($('genres')) {

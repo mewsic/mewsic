@@ -6,9 +6,23 @@ var Player = Class.create({
     this.open = false;
     this.links = new Hash();
     this.initLinks();
+
     Ajax.Responders.register({
       onComplete: this.initLinks.bind(this)      
     });
+
+    Event.observe(window, 'unload', this.destroy.bind(this));
+  },
+
+  destroy: function(event) {
+    this.links.each(function(row) {
+      row[1].link.stopObserving('click', row[1].callback);
+    });
+
+    this.links.clear();
+    this.links = null;
+    this.container = null;
+    this.content = null;
   },
   
   initLinks: function(r) {
@@ -30,17 +44,6 @@ var Player = Class.create({
       if (this.links.get(link.href)) {
         return;
       }
-
-    /*
-    var elements;
-
-    if (r)
-      elements = $(r.container.success).select('.player')
-    else
-      elements = $A(document.getElementsByClassName('player'))
-
-    elements.each(function(link) {
-      */
 
       var callback = this.handleClick.bindAsEventListener(this, link);
       link.observe('click', callback);

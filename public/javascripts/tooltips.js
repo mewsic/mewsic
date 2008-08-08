@@ -57,7 +57,7 @@ var Tooltips = Class.create({
       return;
 
     if (element.hasClassName('online')) {
-      content = "<strong>ONLINE</strong>";
+      content = "<strong>ONLINE </strong>";
     } else if (element.hasClassName('recording')) {
       content = "<strong> M-LAB </strong>";
     } else {

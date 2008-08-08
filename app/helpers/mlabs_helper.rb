@@ -8,7 +8,7 @@ module MlabsHelper
     html_class += ' dynamic' if options[:dynamic]
     html_class += ' c' if logged_in?
 
-    image_tag 'button_mlab.png', :class => html_class, :size => '23x15',
+    image_tag 'button_mlab.png', :class => html_class, :size => '23x15', :alt => 'Add to the my list',
       :onclick => "if(MlabSlider.instance) MlabSlider.instance.add#{mixable.class.name}(this);",
       :id => "#{mixable.id}_#{Time.now.to_i}_#{@@mlab_item_index}"
   end

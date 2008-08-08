@@ -23,6 +23,11 @@ module ApplicationHelper
       pageTracker._trackPageview();
     ])
   end
+
+  def firebug_lite
+    return if RAILS_ENV != 'development'
+    %[<script type='text/javascript' src='http://getfirebug.com/releases/lite/1.2/firebug-lite-compressed.js'></script>]
+  end
   
   def rating(rateable, options = {})
     type_class = rateable.class.name.downcase
@@ -40,7 +45,7 @@ module ApplicationHelper
   
   def status(model, options = {})
     name = {'on' => 'online', 'off' => 'offline', 'rec' => 'recording'}[model.status]
-    content_tag(:div, image_tag("status_#{name}.png"), :class => "status #{name} #{options[:class]}")
+    content_tag(:div, image_tag("status_#{name}.png", :alt => name.upcase), :class => "status #{name} #{options[:class]}")
   end
   
   def check_active(*controllers)
@@ -58,7 +63,7 @@ module ApplicationHelper
   end
   
   def clickable_logo
-    logo = image_tag "logo_myousica.gif", :title => 'myousica logo'
+    logo = image_tag "logo_myousica.gif", :alt => 'Myousica - play and share'
     if controller.controller_name == "dashboard"
       logo
     else
@@ -165,8 +170,9 @@ module ApplicationHelper
   end
   
   def user_type_image(model, options = {})
-    suffix = "_#{options[:suffix]}" if options[:suffix]
-    image_tag("#{model.class.name.downcase}_type#{suffix}.png", options)
+    suffix = "_#{options.delete(:suffix)}" if options[:suffix]
+    name = model.class.name
+    image_tag "#{name.downcase}_type#{suffix}.png", {:alt => name.upcase}.merge(options)
   end
 
   def ajax_upload_form(model, options, &block)

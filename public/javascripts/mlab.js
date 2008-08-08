@@ -92,12 +92,13 @@ var MlabSlider = Class.create(PictureSlider, {
     this.loadElements();
     this.items = new Array();
     this.loadingItems = new Array();
-    this.setupMlab();
+    this.container = this.element.down('div.container');
     Event.observe(window, 'unload', this.destroyMlab.bind(this));
   },
 
   destroyMlab: function() {
     this.scroll_clip = null;
+    this.container = null;
     MlabSlider.instance = null;
   },
 
@@ -137,10 +138,6 @@ var MlabSlider = Class.create(PictureSlider, {
       this.banner = new MlabBanner(this);
     }
     elements = null;
-  },
-
-  setupMlab: function() {
-    this.container = this.element.down('div.container');
   },
 
   update: function($super) {

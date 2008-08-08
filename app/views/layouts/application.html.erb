@@ -6,8 +6,11 @@
   <title>Myousica - play and share <%= render_title %></title>
   <%= stylesheet_link_tag *%w[style lightview prototip starbox] %>  
   <%= load_prototype %>
-  <!--[if lt IE 4]><script defer type="text/javascript" src="/javascripts/unitpngfix.js"></script><![endif]-->
-	<%= javascript_include_tag *%w[prototip picture_slider mlab pagination tooltips starbox rating lightview player swfobject application] %>
+	<!--[if lt IE 4]>
+	<script defer type="text/javascript" src="/javascripts/unitpngfix.js"></script>
+	<![endif]-->
+	<%= javascript_include_tag *%w[prototip picture_slider mlab pagination tooltips starbox player swfobject search_box flash rating lightview application]	%>
+	<%#= firebug_lite %>
   <%= yield :head %>
   <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon"/>
 </head>
@@ -16,8 +19,8 @@
   <%= hidden_field_tag 'authenticity-token', form_authenticity_token if protect_against_forgery? %>  
   <div id="header" class="page-width clear-block">
     <%= render :partial => 'shared/top_menu' %>
-		<div id="logo" class="float-left">
-			<div id="beta"><%= image_tag 'beta.png' %></div>
+		<div id="logo">
+			<div id="beta"><%= image_tag 'beta.png', :alt => "We're in beta, of course!" %></div>
 			<%= clickable_logo %>
 		</div>
     <%= render :partial => 'shared/nav_menu' %>
@@ -31,15 +34,15 @@
       </div>      
       <%= yield :top %>            
       <div class="whiteblock-shadow clear-block">
+				<!--[if lte IE 6]><div style="margin-top:17px"></div><![endif]-->
         <div id="messages">
           <% flash.each do |name, message| -%>
             <div class="<%= name %>">
-              <%= message %>
-              <div class="close"></div>
+							<p class="float-left"><%= message %></p>
+							<div class="close float-right"><%= image_tag 'button_flash_close.png', :alt => 'CLOSE' %></div>
             </div>
           <% end -%>
         </div>
-				<!--[if lte IE 6]><div style="margin-top:10px"></div><![endif]-->
 				<%= render_breadcrumb %>
 				<%= yield %>
       </div>
@@ -47,9 +50,11 @@
     <div class="bg-bottom-body"></div>
   </div>
   <%= render :partial => 'shared/footer' %>
-  <div id="player-container" style="display: none; z-index: 110; position: fixed; bottom: 0; height: 60px; width: 100%; background: transparent url('/images/blue-80.png');">
-    <a style="position: absolute; top: 19px; right: 19px;" href="#" onclick="Player.instance.close();return false;"><img src="/images/button_player_close.png" /></a>
-    <div class="content" style="margin-top: 5px; margin-left: 50px;"></div>
+  <div id="player-container" style="display:none">
+		<div class="close-link-container">
+			<a class="close-link" href="#" onclick="Player.instance.close();return false;"><img src="/images/button_player_close.png"/></a>
+		</div>
+		<div class="content"> </div>
   </div>
   <%= google_analytics %>
 </body>

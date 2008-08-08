@@ -27,8 +27,8 @@ var UserAvatar = Class.create({
 		this.close_link = $('change-avatar-close');
 		this.close_link.observe('click', this.b_hideUploadForm);
 
-		this.file_input = $('change-avatar-file-input');
     this.b_uploadNewAvatar = this.uploadNewAvatar.bind(this);
+		this.file_input = $('change-avatar-file-input');
 		this.file_input.observe('change', this.b_uploadNewAvatar);
   },
   destroy: function() {
@@ -70,11 +70,13 @@ var UserAvatar = Class.create({
   },
   displayUploadForm: function() {
     new Effect.Appear(this.upload, {duration: 0.5});
+    this.element.stopObserving('mouseout', this.b_handleMouseOut);
   },
   hideUploadForm: function() {
-    new Effect.Fade(this.upload, {duration: 0.5});
+    new Effect.Fade(this.upload, {duration: 0.5, afterFinish: this.b_handleMouseOut});
 		this.alert.hide();
 		this.status.className = ''
+    this.element.observe('mouseout', this.b_handleMouseOut);
   },
   uploadNewAvatar: function() {
     this.alert.hide();
