@@ -184,7 +184,7 @@ ul.list-menu{
 	padding: 0;
 	width: 214px;
 	height: 22px;
-	background: url(/images/search_box_collapsed_bg.png) no-repeat top;
+	background: url(/images/search_box_collapsed_bg.gif) no-repeat top;
 	position: absolute;
 	top: 85px;
 }
@@ -197,7 +197,7 @@ ul.list-menu{
 }
 
 #search .advanced-box {
-	background: url(/images/search_box_bg.png) no-repeat top;
+	background: url(/images/search_box_bg.gif) no-repeat top;
 	width: 214px;
 	height: 23px;
 	padding: 7px 0px;
@@ -280,7 +280,7 @@ div#admirers-scroller div.status img {
 	/*width: 10px;*/
 	float: left;
 	overflow: hidden;
-	margin: 0px 6px;
+	margin: -1px 6px 0px;
 	float: left;
 }
 
@@ -737,7 +737,7 @@ tr.nav-song td{
 }
 
 .myousician-box .top-box {
-	background: url(/images/user_box_bg_home.png) no-repeat left top;
+	background: url(/images/user_box_bg_home.gif) no-repeat left top;
 	width: 99px;
 	height: 50px;
 	padding: 4px 6px 0px;
@@ -898,7 +898,7 @@ tr.nav-song td{
 }
 /* box_rounded_gray */
 .box-rounded-gray{
-	background:url(/images/BG_box_rounded_gray.png) no-repeat top left;
+	background:url(/images/BG_box_rounded_gray.gif) no-repeat top left;
 	height:170px !important;
 	padding:10px 10px 0px;
 	margin-bottom:15px;
@@ -966,7 +966,7 @@ tr.nav-song td{
 }
 /* cyan box */
 .cyan-box h2{
-	background:url(/images/BG_box_cyan_top.png) no-repeat top left;
+	background:url(/images/BG_box_cyan_top.gif) no-repeat top left;
 	margin-bottom:0px;
 	padding:10px 20px;
 }
@@ -976,7 +976,7 @@ tr.nav-song td{
 	padding:10px 20px;
 }
 .white-box.mband h2{
-	background: transparent url(/images/BG_box_cyan_top_mband.png) no-repeat scroll left top;
+	background: transparent url(/images/BG_box_cyan_top_mband.jpg) no-repeat scroll left top;
 	color: #FFFFFF;
 	font-size: 15px;
 	display: block;
@@ -1000,19 +1000,13 @@ tr.nav-song td{
 	background:none;
 }
 .white-box.mband .bottom-label {
-	background: url(/images/BG_box_cyan_bottom_mband.png) no-repeat bottom center;
+	background: url(/images/BG_box_cyan_bottom_mband.gif) no-repeat bottom center;
 	display:block;
 	height:13px;
 	width:275px;
 }
-h2.band-label{
-	background:url(/images/BG_box_cyan_top_band.png) no-repeat top left;
-}
-h2.dj-label{
-	background:url(/images/BG_box_cyan_top_dj.png) no-repeat top left;
-}
 .cyan-box .top-box{
-	background:url(/images/BG_box_cyan_bottom.png) no-repeat bottom left;
+	background:url(/images/BG_box_cyan_bottom.gif) no-repeat bottom left;
 	/*padding-bottom:15px;*/
 }
 .white-box .top-box{
@@ -1069,8 +1063,7 @@ h2.dj-label{
 }
 .green-box .rounded-white-top{
 	background: url(/images/rounded_box_bottom_225.png) no-repeat bottom left;
-	margin-bottom:8px;
-	padding-bottom:2px;
+	margin-bottom:10px;
 }
 *html .green-box .rounded-white-bottom{
 	background-image: url(/images/rounded_box_top_245px.gif);
@@ -1079,9 +1072,9 @@ h2.dj-label{
 	background-image: url(/images/rounded_box_bottom_245px.gif);
 }
 .green-box .elements{
-	border-bottom: none;
-	padding:0px 10px;
-	margin-bottom:0px;
+	border: none;
+	padding:0px 10px 2px;
+	margin:0;
 }
 .green-box .elements p{
 	margin-bottom:3px !important;
@@ -1596,11 +1589,11 @@ h2.dj-label{
 	padding: 1px 0px !important;
 }
 .tit-classification-songs .top-box{
-	background: url(/images/BG_tab_title_songs_top.png) no-repeat left top;
+	background: url(/images/BG_tab_title_songs_top.gif) no-repeat left top;
 	padding-top:10px;
 }
 .tit-classification-songs .bottom-box{
-	background: url(/images/BG_tab_title_songs_bottom.png) no-repeat left bottom;
+	background: url(/images/BG_tab_title_songs_bottom.gif) no-repeat left bottom;
 	padding-bottom:6px;
 }
 .tit-classification-songs .elements{
@@ -1653,19 +1646,19 @@ h2.dj-label{
 }
 
 .tit-classification-tracks .top-box-tracks {
-	background: url(/images/BG_tab_title_tracks_top.png) no-repeat top left;
+	background: url(/images/BG_tab_title_tracks_top.gif) no-repeat top left;
 	padding-top:10px;
 }
 .tit-classification-tracks .top-box-ideas {
-	background: url(/images/BG_tab_title_ideas_top.png) no-repeat top left;
+	background: url(/images/BG_tab_title_ideas_top.gif) no-repeat top left;
 	padding-top:10px;
 }
 .tit-classification-tracks .top-box-tracks .bottom-box {
-	background: url(/images/BG_tab_title_tracks_bottom.png) no-repeat bottom left;
+	background: url(/images/BG_tab_title_tracks_bottom.gif) no-repeat bottom left;
 	padding-bottom:6px;
 }
 .tit-classification-tracks .top-box-ideas .bottom-box {
-	background: url(/images/BG_tab_title_ideas_bottom.png) no-repeat bottom left;
+	background: url(/images/BG_tab_title_ideas_bottom.gif) no-repeat bottom left;
 	padding-bottom: 6px;
 }
 .tit-classification-tracks .top-box-tracks .elements {
@@ -2933,7 +2926,7 @@ p.instrument, p.instrument a {
 	clear:both;
 }
 .mlab-enter{
-	background:url(/images/mlab_scroll_title.png) no-repeat top right;
+	background:url(/images/mlab_scroll_title.gif) no-repeat top right;
 	height:56px;
 	width:220px;
 	text-align:left;
@@ -3030,19 +3023,19 @@ p.instrument, p.instrument a {
 }
 
 #mlab-scroller .trigger.back {
-  background: transparent url(/images/mlab_scroll_button_top.png) no-repeat center;
+  background: transparent url(/images/mlab_scroll_button_top.gif) no-repeat center;
   width:203px;
   height:21px;
 }
 
 #mlab-scroller .trigger.forward {
-  background: transparent url('/images/mlab_scroll_button_down.png') no-repeat center;
+  background: transparent url(/images/mlab_scroll_button_down.gif) no-repeat center;
   width:203px;
   height:22px;
 }
 
 #mlab-scroller .mylist {
-  background: transparent url('/images/linguetta_mlab_bottom.png') no-repeat center;
+  background: transparent url(/images/linguetta_mlab_bottom.gif) no-repeat center;
   width:203px;
   height:26px;
 }
@@ -3793,7 +3786,7 @@ div#login {
 	width: 220px;
 }
 #login-box-top {
-	background: transparent url(/images/login-box-top.png) no-repeat top right;
+	background: transparent url(/images/login-box-top.gif) no-repeat top right;
 	height: 13px;
 	/*width: 217px;*/
 	/*margin: 0;
@@ -3801,14 +3794,14 @@ div#login {
 }
 
 #login-box-bottom {
-	background: transparent url(/images/login-box-bottom.png) no-repeat top right;
+	background: transparent url(/images/login-box-bottom.gif) no-repeat top right;
 	height: 13px;
 	/*width: 217px;*/
 	content: ".";
 }
 
 #login-box-core, #login-box-forgot {
-	background: transparent url(/images/login-box-rp.png) repeat-y top right;
+	background: transparent url(/images/login-box-rp.gif) repeat-y top right;
 	padding: 0px 16px;	
 	margin: 0;
 	overflow: hidden;
@@ -4048,21 +4041,21 @@ div.auto_complete ul strong.highlight {
 }
 
 #splash_box_sx {
-	background: transparent url(/images/splash_box_sx.png) no-repeat bottom;
+	background: transparent url(/images/splash_box_sx.gif) no-repeat bottom;
 	width: 15px;
 	height: 279px;
 	float: left;
 }
 
 #splash_box_dx {
-	background: transparent url(/images/splash_box_dx.png) no-repeat bottom;
+	background: transparent url(/images/splash_box_dx.gif) no-repeat bottom;
 	width: 15px;
 	height: 279px;
 	float: right;
 }
 
 #splash_box_core {
-	background: transparent url(/images/splash_box_rp.png) repeat-x bottom;
+	background: transparent url(/images/splash_box_rp.gif) repeat-x bottom;
 	width: 714px;
 	height: 279px;
 	float: left;
@@ -4128,25 +4121,26 @@ div.auto_complete ul strong.highlight {
 }
 
 #splash_tag_tracks {
-	background: transparent url('/images/splash_tag_tracks.png') no-repeat top;
-	width: 71px;
-	height: 27px;
-	margin-left: 9px;
+	background: transparent url(/images/splash_tag_tracks.gif) no-repeat top;
+	width: 67px;
+	height: 26px;
+	margin: 1px 0 0 11px;
 	position: relative;
 }
 
 #splash_tag_mlab {
-	background: transparent url('/images/splash_tag_mlab.png') no-repeat top;
-	width: 71px;
-	height: 27px;
-	margin-left: 9px;
+	background: transparent url(/images/splash_tag_mlab.gif) no-repeat top;
+	width: 67px;
+	height: 26px;
+	margin: 1px 0 0 11px;
+	position: relative;
 }
 
 #splash_tag_songs {
-	background: transparent url('/images/splash_tag_songs.png') no-repeat top;
-	width: 71px;
-	height: 27px;
-	margin-left: 9px;
+	background: transparent url(/images/splash_tag_songs.gif) no-repeat top;
+	width: 67px;
+	height: 26px;
+	margin: 1px 0 0 11px;
 	position: relative;
 }
 
@@ -4370,6 +4364,10 @@ div.auto_complete ul strong.highlight {
 	font-size: 14px;
 	color: #004D71;
 	margin-bottom: 30px;
+}
+
+.player {
+	cursor: pointer;
 }
 
 #player-container {

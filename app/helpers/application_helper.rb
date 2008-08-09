@@ -172,7 +172,7 @@ module ApplicationHelper
   def user_type_image(model, options = {})
     suffix = "_#{options.delete(:suffix)}" if options[:suffix]
     name = model.class.name
-    image_tag "#{name.downcase}_type#{suffix}.png", {:alt => name.upcase}.merge(options)
+    image_tag "#{name.downcase}_type#{suffix}.gif", {:alt => name.upcase}.merge(options)
   end
 
   def ajax_upload_form(model, options, &block)

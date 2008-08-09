@@ -20,7 +20,7 @@
   <div id="header" class="page-width clear-block">
     <%= render :partial => 'shared/top_menu' %>
 		<div id="logo">
-			<div id="beta"><%= image_tag 'beta.png', :alt => "We're in beta, of course!" %></div>
+			<div id="beta"><%= image_tag 'beta.gif', :alt => "We're in beta, of course!" %></div>
 			<%= clickable_logo %>
 		</div>
     <%= render :partial => 'shared/nav_menu' %>
@@ -34,7 +34,7 @@
       </div>      
       <%= yield :top %>            
       <div class="whiteblock-shadow clear-block">
-				<!--[if lte IE 6]><div style="margin-top:17px"></div><![endif]-->
+				<!--[if lt IE 7]><div style="margin-top:17px"></div><![endif]-->
         <div id="messages">
           <% flash.each do |name, message| -%>
             <div class="<%= name %>">

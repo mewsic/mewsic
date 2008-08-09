@@ -9,11 +9,11 @@ document.observe('dom:loaded', function() {
 
   if ($('genres')) {
     new Refresher('best-songs', {
-      image: '/images/bestsong_refresh.png',
+      image: '/images/bestsong_refresh.gif',
       spinner: '/images/bestsongs_spinner.gif'
     });
     new Refresher('most-used-tracks', {
-      image: '/images/mostused_refresh.png',
+      image: '/images/mostused_refresh.gif',
       spinner: '/images/mostused_spinner.gif'
     });
   }

@@ -9,7 +9,7 @@ var Refresher = Class.create({
     this.image = this.trigger.down('img');
 
     this.options = Object.extend({
-      image: '/images/refresh.png',
+      image: '/images/refresh.gif',
       spinner: '/images/spinner.gif'
     }, options);
 

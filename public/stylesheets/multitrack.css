@@ -4,9 +4,14 @@
 	display: none;
 }
 
+#nav-menu {
+	width: auto;
+	right: 213px;
+}
+
 #mlab_new_block_top {
 	width: 980px;
-	background: url(/images/mlab_top_bg.png) no-repeat top right;
+	background: url(/images/mlab_top_bg.gif) no-repeat top right;
 }
 #mlab_new_block_top p {
 	padding:0 !important;
@@ -23,7 +28,7 @@
 
 .mlab_user_avatar {
 	float: right;
-	margin: 0px 3px 0px 0px;
+	margin: 0;
 }
 
 .mlab_username  {
@@ -37,15 +42,16 @@
 }
 
 #mlab_details_container {
-	float: left;
+	position: absolute;
+	left: 132px;
 	width: 865px;
-	height: 104px;
-	margin: 12px 0px 0px 0px;
+	height: auto;
+	margin-top: 12px;
 }
 
 .mlab_detail_row {
 	float: left;
-	margin: 0 0 0 30px;
+	margin: 0;
 	width: 842px;
 }
 
@@ -151,7 +157,7 @@ textarea.editor_field {
 .mlab_labels_right {
 	float: right;
 	text-align: left;
-	width: 195px;
+	width: 192px;
 }
 
 .mlab_tone {

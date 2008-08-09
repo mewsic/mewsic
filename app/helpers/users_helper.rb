@@ -16,7 +16,7 @@ module UsersHelper
   end
   
   def gender_icon_path(gender)
-    'gender_ico_' << {:male => 'M', :female => 'F', :other => 'O'}[gender.to_sym] << '.png'
+    'gender_ico_' << {:male => 'M', :female => 'F', :other => 'O'}[gender.to_sym] << '.gif'
   end
 
   def gender_icon_for(user)
@@ -76,9 +76,9 @@ module UsersHelper
 
     %w[user band dj].map do |to|
       if from == to
-        image_tag("change_#{to}_active.png", :title => "You are currently a #{from}")
+        image_tag("change_#{to}_active.gif", :title => "You are currently a #{from}")
       else
-        link_to(image_tag("change_#{to}_inactive.png", :title => "Switch your user type to #{to}"),
+        link_to(image_tag("change_#{to}_inactive.gif", :title => "Switch your user type to #{to}"),
           formatted_switch_type_user_path(user, 'html', :type => to),
           :class => 'lightview', :id => "user-switch-#{to}", :title => ' :: :: width:400, height:330')
       end
@@ -87,7 +87,7 @@ module UsersHelper
   
   def page_label_for(user)
     user_type = user.type.nil? ? 'user' : user.type.downcase
-    %|<img src="/images/#{user_type}_page_label.png" />|
+    image_tag("#{user_type}_page_label.gif", :alt => user_type.upcase)
   end
   
   def user_inbox_link
@@ -115,7 +115,7 @@ module UsersHelper
   end
 
   def refresh_block_image_link(url_options = {})
-    link_to image_tag('refresh.png', :class => 'refresh-block'), top_users_path(url_options), :class => 'trigger'
+    link_to image_tag('refresh.gif', :class => 'refresh-block'), top_users_path(url_options), :class => 'trigger'
   end
 
   def podcast_link_for(user, url)

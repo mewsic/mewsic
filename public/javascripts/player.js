@@ -4,7 +4,7 @@ var Player = Class.create({
     this.container = $('player-container');
     this.content = this.container.down('.content');
     this.open = false;
-    this.links = new Hash();
+    this.buttons = new Hash();
     this.initLinks();
 
     Ajax.Responders.register({
@@ -15,48 +15,49 @@ var Player = Class.create({
   },
 
   destroy: function(event) {
-    this.links.each(function(row) {
-      row[1].link.stopObserving('click', row[1].callback);
+    this.buttons.each(function(row) {
+      row = row[1]
+      row.image.stopObserving('click', row.callback);
+      row.image = null;
+      row.callback = null;
     });
 
-    this.links.clear();
-    this.links = null;
+    this.buttons = null;
     this.container = null;
     this.content = null;
   },
   
   initLinks: function(r) {
     // remove all the links no longer in the page
-    this.links.each(function(row) {
-      var href     = row[0];
-      var link     = row[1].link;
+    this.buttons.each(function(row) {
+      var address  = row[0];
+      var image    = row[1].image;
       var callback = row[1].callback;
 
-      if (!link.parentNode) {
-        link.stopObserving('click', callback);
-        this.links.unset(href);
+      if (!image.parentNode) {
+        image.stopObserving('click', callback);
+        this.buttons.unset(address);
       }
 
     }.bind(this));
 
     // add any new links
-    $A(document.getElementsByClassName('player')).each(function(link) {
-      if (this.links.get(link.href)) {
+    $A(document.getElementsByClassName('player')).each(function(image) {
+      if (this.buttons.get(image.getAttribute('rel'))) {
         return;
       }
 
-      var callback = this.handleClick.bindAsEventListener(this, link);
-      link.observe('click', callback);
-      this.links.set(link.href, {link: link, callback: callback});
+      var callback = this.handleClick.bindAsEventListener(this, image);
+      image.observe('click', callback);
+      this.buttons.set(image.getAttribute('rel'), {image:image, callback:callback});
 
     }.bind(this));
 
   },
 
-  handleClick: function(event, link) {
+  handleClick: function(event, image) {
     event.stop();
-    var url = link.getAttribute('href');    
-    this.openContainer(url);
+    this.openContainer(image.getAttribute('rel'));
   },
   
   openContainer: function(url) {

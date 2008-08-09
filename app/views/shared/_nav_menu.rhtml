@@ -2,14 +2,14 @@
   <ul class="list-menu">
     <li id="search">
       <%- form_tag new_search_path, :method => 'get' do -%>
-        <div class="tab">
-          <div class="sx"><%= image_tag 'search_angle_left.png' %></div>
+        <div class="tab clear-block">
+          <div class="sx"><%= image_tag 'search_angle_left.gif' %></div>
           <div class="rp"><p>search</p></div>
-          <div class="dx"><%= image_tag 'search_angle_right.png' %></div>
+          <div class="dx"><%= image_tag 'search_angle_right.gif' %></div>
         </div>
-        <p class="search-input">          
+        <p class="search-input clear-block">
           <%= text_field_tag :q, @q || '' %>
-					<%= image_tag 'search_button.png', :alt => 'search', :class => 'submit-button' %>
+					<%= image_tag 'search_button.gif', :alt => 'search', :class => 'submit-button' %>
         </p>
 				<div class="collapsed-box clear-block">
 				  <a class="trigger" href="#">Advanced Search</a>
@@ -19,7 +19,7 @@
 						<%= check_box_tag 'type[]', 'user'  %><a href="#">People</a>
 						<%= check_box_tag 'type[]', 'music' %><a href="#">Music</a>
 						<%= check_box_tag 'type[]', 'idea'  %><a href="#">Ideas</a>
-						<div class="trigger"><%= image_tag 'search_box_icon_close.png', :alt => 'close' %></div>
+						<div class="trigger"><%= image_tag 'search_box_icon_close.gif', :alt => 'close' %></div>
 					</div>
 				</div>
       <%- end -%>
