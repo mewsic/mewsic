@@ -12,10 +12,13 @@
 
   <%= hidden_field_tag 'login_page' %>
 
-  <p style="padding-left: 100px;"><%= image_submit_tag '/images/button_log_in.png' %></p>
-  <p style="padding-left: 100px;">Not yet a member? <%= link_to 'Sign up!', signup_path %></p>
-  <% end -%>
+	<div class="button">
+		<%= image_submit_tag '/images/button_log_in.gif' %><br/>
+	</div>
+
+	<p class="blurb">Not yet a member? <%= link_to 'Sign up!', signup_path %></p>
 </div>
+<% end -%>
 <h2>
 <div id="help-sidebar">
   <h1>Are you in trouble?</h1>

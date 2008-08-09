@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
 
   # Show login page
   def new   
-    @help_pages = HelpPage.find(:all, :order => 'position ASC') 
+    @help_pages = HelpPage.find(:all, :order => 'position ASC') unless logged_in?
     redirect_to(user_url(current_user)) if logged_in?
   end
 
@@ -17,11 +17,11 @@ class SessionsController < ApplicationController
         cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
       end
       flash[:notice] = "Welcome back, #{self.current_user.login}!"
-      redirect_url = user_url(current_user)
+      redirect_back_or_default(user_url(current_user))
     else
       flash[:error] = "User not found or wrong password.."
+      redirect_to login_path
     end
-    redirect_back_or_default(redirect_url)
   end
 
   # Log out

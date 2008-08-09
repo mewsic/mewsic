@@ -756,6 +756,9 @@ tr.nav-song td{
 	padding:10px 50px;
 	width: 630px;
 	border-bottom:1px solid #EDEDED;
+	height: 30px;
+	min-height: 30px;
+	max-height: 30px;
 }
 .search-question * {
 	float: left;
@@ -786,23 +789,18 @@ tr.nav-song td{
 }
 #reply-exclamation-mark img {
 	position:absolute;
-	margin-top:-60px;
+	top:16px;
 }
 
 .answers .elements {
 	margin-bottom:15px;
 	border-bottom:1px solid #D9D9D9;
 	padding-bottom: 0px;
+	width: 425px;
 }
 
 .similar.answers .elements {
 	padding-bottom: 0px;
-}
-
-.answers .details {
-	float: left;
-	width: 380px;
-	margin-bottom: 10px;
 }
 
 .similar.answers .details {
@@ -810,18 +808,21 @@ tr.nav-song td{
 	margin-bottom: 0px;
 }
 
-.answers .rating {
+.answers .details {
 	float: left;
+	width: 380px !important;
+	margin-bottom: 10px;
 }
 
 .answers .replies {
 	padding: 0;
+	width: 380px;
 }
 
 .answers h2 {
 	margin-bottom: 4px;
+	width: 380px;
 }
-
 
 /* answer detail */
 .answer h1{
@@ -2301,10 +2302,28 @@ div.login {
   width: 100px;
   padding-top: 4px;
 }
-html>body .login p {
-  height: auto;
+.login p {
+  height: 20px;
   min-height: 20px;
+  max-height: 20px;
   margin-bottom: 5px;
+}
+
+.login .button {
+	float: left;
+	padding-left: 100px;
+	height: auto;
+	width: 90px;
+}
+
+.login .blurb {
+	float: left;
+	padding: 7px 10px !important;
+	font-size: 14px;
+}
+
+.login .blurb a {
+	color: #009DC2;
 }
 
 /* right col */
@@ -2622,6 +2641,8 @@ a.cloud5 {
 
 .error {
   color: red;
+	background-color: #ffe0e0;
+	font-weight: bold;
 }
 
 .user-sharing .loading {
@@ -3043,9 +3064,9 @@ p.instrument, p.instrument a {
 
 /* help page */
 #help-content {
-  width: 410px;
+  width: 60%;
   float: left;
-  padding: 10px 30px 10px 20px;
+  padding: 20px 0 0 20px;
   color: #61656A;
   font-size: 14px;
 }
@@ -3125,9 +3146,9 @@ p.instrument, p.instrument a {
 }
 
 #help-sidebar {
-  width: 250px;
-  float: left;
-  padding: 10px 0px 20px 10px;
+  width: 33%;
+  float: right;
+  padding: 20px 20px 0 0;
 }
 
 div.help-box {
@@ -3144,7 +3165,7 @@ div.help-box-top {
 
 div.help-box-sides {
   position: relative;
-  width: 247px;
+  width: 223px;
   background: url('/images/help-box-sides.gif') repeat-y;
   padding: 10px 12px;
 }
