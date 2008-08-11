@@ -66,18 +66,19 @@ var Player = Class.create({
       this.loadPage(url);
     } else {   
       this.open = true;
-      Effect.BlindDown(this.container, {      
-        afterFinish: function() {
-          this.loadPage(url);
-        }.bind(this)
+      var effect = (Prototype.Browser.IE) ? Effect.Appear : Effect.BlindDown;
+      new effect(this.container, {
+        duration: 0.5,
+        afterFinish: function() { this.loadPage(url); }.bind(this)
       });
     }    
   },
   
-  close: function() {    
-    Effect.BlindUp(this.container);
+  close: function() {
     this.open = false;
     this.clearContent();
+    var effect = (Prototype.Browser.IE) ? Effect.Fade : Effect.BlindUp;
+    new effect(this.container, {duration: 0.5});
   },
   
   clearContent: function() {

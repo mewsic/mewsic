@@ -1,19 +1,10 @@
 var Tooltips = Class.create({
   initialize: function() {
-    if (Prototype.Browser.IE && navigator.userAgent.indexOf('6.'))
-      return;
-
     this.addAll($(document.body), 10);
 
     Ajax.Responders.register({
       onComplete: this.responder.bindAsEventListener(this)
     });
-
-    Event.observe(window, 'unload', this.destroy.bind(this));		
-  },
-
-  destroy: function() {
-    Tips.tips.each(function(tip) { Tips.remove(tip.element) })
   },
 
   addAll: function(element, limit) {
@@ -23,6 +14,9 @@ var Tooltips = Class.create({
       element.select('img.button.mlab').slice(0,limit).each(this.addMlab);
       element.select('.download').slice(0,limit).each(this.addDownload);
     }
+
+    if (Prototype.Browser.IE && navigator.userAgent.indexOf('6.'))
+      return;
 
     element.select('img.instrument').each(this.addInstrument);
     element.select('.rating.locked').slice(0,limit).each(this.addLockedRating);

@@ -87,7 +87,7 @@ html[xmlns] .clear-block {
 }
 #top-menu{
 	color:#666;
-	font-size:12px;
+	font-size:11px;
 	text-align:right;
 	padding-top:3px;
 	margin-right:6px;
@@ -121,6 +121,7 @@ ul.list-menu{
 	width:720px;
 	max-height:45px;
 	min-height:45px;
+	z-index: 1;
 }
 #nav-menu a{
 	float:right;
@@ -249,6 +250,7 @@ div.status img {
 	height:17px;
 	top: -7px;
 	left: 0px;
+	z-index: 100;
 }
 
 div.status.inline {
@@ -395,7 +397,6 @@ div.user-list-boxes .motto {
 #path.mband {
 	position: absolute;
 	color: #fff;
-	top: -17px;
 }
 #path.mband a {
 	color: #fff;
@@ -414,21 +415,30 @@ h2, h2 a{
 }
 .bg-body{
 	background:#F3F3F4;
+	width: 100%;
 }
 .bg-top-body{
-	height:58px;
 	background: url(/images/stripes_top_grey.gif) repeat-x top left;
+	height: 58px !important;
+	width: 100% !important;
+	position: absolute;
+	left: 0;
+	z-index: 0;
 }
 .bg-bottom-body{
-	height:58px !important;
-	margin-top:-58px;
 	background: url(/images/stripes_bottom_grey.gif) repeat-x bottom left;
+	height: 58px !important;
+	width: 100% !important;
+	position: relative;
+	z-index: 0;
+	left: 0;
 }
 .white-bg .bg-bottom-body{
 	margin-top:20px;
 }
 #content-body{
 	position:relative;
+	z-index: 1;
 }
 #content-body p{
 	padding-bottom:5px;
@@ -441,7 +451,9 @@ h2, h2 a{
 	padding:0px 6px 30px;
 	width: 732px;
 	background: url(/images/BG_whiteblock_shadow.png) repeat-y top left;
-	margin-top: -17px;
+	top: 40px;
+	position: relative;
+	margin-bottom: -18px;
 }
 .bottom-shadow{
 	float:left;
@@ -603,7 +615,7 @@ tr.nav-song td{
 	margin-bottom:10px;
 }
 .bands-dj-list .elements td.song-title {
-	width: 240px;
+	width: 310px;
 }
 
 .bands-dj-list .elements td.song-title a {
@@ -1169,6 +1181,7 @@ tr.nav-song td{
 
 .mlab_tracks .idea-icon {
 	float: left;
+	margin-right: 2px;
 }
 
 .mlab_song td.song-info {
@@ -1215,10 +1228,10 @@ tr.nav-song td{
 	margin-bottom:8px;
 }
 *html .orange-box .rounded-white-bottom{
-	background-image: url(/images/rounded_box_top_225.gif);
+	background-image: url(/images/rounded_box_top_245px.gif);
 }
 *html .orange-box .rounded-white-top{
-	background-image: url(/images/rounded_box_bottom_225.gif);
+	background-image: url(/images/rounded_box_bottom_245px.gif);
 }
 .orange-box .elements{
 	border-bottom: none;
@@ -1892,6 +1905,7 @@ html>body .gallery-photo-thumb >.edit-command{
 	font-weight:bold;
 	color:#0296C2;
 	margin-bottom:20px;
+	clear: both;
 }
 .user-sharing p{
 	height:25px;
@@ -2331,7 +2345,7 @@ div.login {
 	float:right;
 	text-align: right;
 	position:relative;
-	top: 24px;
+	top: 75px;
 	right: 0px;
 	width:220px;
 }
@@ -2763,6 +2777,10 @@ div#messages div.notice, div#messages div.inbox {
 .song-stat{
 	background:#F6F6F6 url(/images/rounded_grey_boxbottom.gif) no-repeat bottom left;
 	padding:15px;
+}
+
+.song-tracks {
+	height: 100%;
 }
 
 .song-tracks .simple-list {
@@ -3313,7 +3331,7 @@ div.hr {
 }
 
 .band_member_details {
-	width: 62px;
+	width: 65px;
 	height: 30px;
 	float: left;
 	padding: 4px 0px;
@@ -4059,6 +4077,8 @@ div.auto_complete ul strong.highlight {
 	padding-left: 0;
 	padding-right: 0;
 	font-size: 11px;
+	position: relative;
+	top: 62px;
 }
 
 #splash_box_sx {
@@ -4392,13 +4412,16 @@ div.auto_complete ul strong.highlight {
 }
 
 #player-container {
-	background: transparent url('/images/blue-80.png');
+	background: transparent url(/images/blue.gif) repeat;
+	opacity: 0.9;
 	position: fixed;
 	display: block;
 	z-index: 110;
-	bottom: 0px;
+	bottom: 0;
+	left: 0;
 	height: 60px;
 	width: 100%;
+	overflow: auto;
 }
 
 #player-container .close-link-container {

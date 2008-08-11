@@ -2,15 +2,18 @@ var InPlaceEditorGenerator = Class.create({
   
   initialize: function(fields, options) {
     this.fields = fields;
+    this.editors = $A();
     this.options = options;
     this.current_user_id = $('current-user-id').value;
     this.model_id = $(options.model + '-id').value;
     this.setup();
+
+    Event.observe(window, 'unload', this.destroy.bind(this));
   },
   
   setup: function() {  
     this.fields.each(function(name) {
-      new Ajax.InPlaceEditor(this.options.model + '_' + name, this.options.url + this.model_id, {
+      this.editors.push(new Ajax.InPlaceEditor(this.options.model + '_' + name, this.options.url + this.model_id, {
         externalControl: 'edit_button_' + this.options.model + '_' + name,
         externalControlOnly: true,
         ajaxOptions: { method: 'PUT' },
@@ -36,8 +39,20 @@ var InPlaceEditorGenerator = Class.create({
           }
           return Form.serialize(form);
         }.bind(this)
-      });
+      }));
     }.bind(this));
+  },
+
+  destroy: function() {
+    this.editors.each(function(editor) {
+      editor.destroy();
+      editor.element = null;
+      editor.options.externalControl = null;
+      editor._controls = null;
+      editor._form = null;
+    });
+    this.editors.clear();
+    this.editors = null;
   }
 });
 
@@ -45,14 +60,17 @@ var InPlaceSelectGenerator = Class.create({
   
   initialize: function(fields, options) {
     this.fields = fields;
+    this.editors = $A();
     this.options = options;
     this.model_id = $(options.model + '-id').value;
     this.setup();
+
+    Event.observe(window, 'unload', this.destroy.bind(this));
   },
   
   setup: function() {  
     this.fields.each(function(name) {
-      new Ajax.InPlaceSelect(this.options.model + '_' + name, this.options.url + this.model_id, {
+      this.editors.push(new Ajax.InPlaceSelect(this.options.model + '_' + name, this.options.url + this.model_id, {
         lazyLoading: true,
         values_url: this.options.values_url,
         externalControl: 'edit_button_' + this.options.model + '_' + name,
@@ -62,9 +80,19 @@ var InPlaceSelectGenerator = Class.create({
         onComplete: Prototype.emptyFunction,
         highlightcolor: '#ffffff',
         highlightendcolor: '#ffffff'
-      });
+      }));
     }.bind(this));
-  }  
+  },
+
+  destroy: function() {
+    this.editors.each(function(editor) {
+      editor.destroy();
+      editor.element = null;
+      editor.options.externalControl = null;
+    });
+    this.editors.clear();
+    this.editors = null;
+  }
 });
 
 var AjaxFormGenerator = Class.create({
@@ -76,6 +104,8 @@ var AjaxFormGenerator = Class.create({
     }, options);
     this.model_id = $(options.model + '-id').value;
     this.setup();
+
+    Event.observe(window, 'unload', this.destroy.bind(this));
   },
   
   setup: function() {
@@ -126,6 +156,14 @@ var AjaxFormGenerator = Class.create({
 
     }.bind(this));
   },
+
+  destroy: function() {
+    this.forms.each(function(name) {
+      var form = $('form_' + name);
+      form.stopObserving('submit', form.submit);
+      form.submit = null;
+    });
+  },
   
   hideButton: function(form) {
     form.select('input[type="submit"]').invoke('hide');
@@ -155,16 +193,29 @@ var AjaxFormGenerator = Class.create({
 
 var GenderSwitcher = Class.create({
   initialize: function(element) {
-    this.genders = {male: 'M', female: 'F', other: 'O'};
     this.element = $(element);
     if (!this.element)
       return;
 
+    this.genders = {male: 'M', female: 'F', other: 'O'};
     this.element.style.display = 'none';
 
-    this.trigger = $((element.id||element) + '-trigger');
-    this.trigger.observe('click', this.showGenders.bind(this));
-    this.element.select('img').invoke('observe', 'click', this.setGender.bind(this));
+    this.b_showGenders = this.showGenders.bind(this);
+    this.trigger = $(this.element.id + '-trigger');
+    this.trigger.observe('click', this.b_showGenders);
+
+    this.b_setGender = this.setGender.bind(this);
+    this.element.select('img').invoke('observe', 'click', this.b_setGender);
+
+    Event.observe(window, 'unload', this.destroy.bind(this));
+  },
+
+  destroy: function(element) {
+    this.trigger.stopObserving('click', this.b_showGenders);
+    this.trigger = null;
+
+    this.element.select('img').invoke('stopObserving', 'click', this.b_setGender);
+    this.element = null;
   },
 
   showGenders: function(event) {
@@ -199,7 +250,7 @@ var GenderSwitcher = Class.create({
       duration: 0.4,
       afterFinish: function(gender) {
         this.trigger.up().insert({
-          top: new Element('img', { src: '/images/gender_ico_' + gender + '.png' })
+          top: new Element('img', { src: '/images/gender_ico_' + gender + '.gif' })
         });
         this.trigger.remove();
         this.element.remove();
@@ -218,17 +269,37 @@ var Profile = Class.create({
     if (!this.element)
       return;
 
+    this.b_onEdit = this.onEdit.bind(this);
     this.edit_link = this.element.down('.edit-link');
-    this.edit_link.observe('click', this.onEdit.bind(this));
+    this.edit_link.observe('click', this.b_onEdit);
 
+    this.b_onCancel = this.onCancel.bind(this)
     this.cancel_link = this.element.down('.cancel-link');
-    this.cancel_link.observe('click', this.onCancel.bind(this));
+    this.cancel_link.observe('click', this.b_onCancel);
 
+    this.b_onCompleted = this.onCompleted.bind(this);
     this.done_link = this.element.down('.done-link');
-    this.done_link.observe('click', this.onCompleted.bind(this));
+    this.done_link.observe('click', this.b_onCompleted);
 
     this.blurb = $('profile-completeness-container');
     this.fields = $('my-user-share');
+
+    Event.observe(window, 'unload', this.destroy.bind(this));
+  },
+
+  destroy: function() {
+    this.element = null;
+    this.blurb = null;
+    this.fields = null;
+
+    this.edit_link.stopObserving('click', this.b_onEdit);
+    this.edit_link = null;
+
+    this.cancel_link.stopObserving('click', this.b_onCancel);
+    this.cancel_link = null;
+
+    this.done_link.stopObserving('click', this.b_onCompleted);
+    this.done_link = null;
   },
 
   onEdit: function(event) {
@@ -279,6 +350,5 @@ document.observe('dom:loaded', function() {
   } else if ($('mband-id')) {
     new InPlaceEditorGenerator( $w('motto tastes'), { url: '/mbands/', model: 'mband', rows: 6, maxLength: 1000} );  
     new AjaxFormGenerator( $w('photos_url blog_url myspace_url'), { url: '/mbands/', model: 'mband' } );    
-    new Profile();
   } 
 });

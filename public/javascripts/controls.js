@@ -1,3 +1,5 @@
+// script.aculo.us controls.js v1.8.1, Thu Jan 03 22:07:12 -0500 2008
+
 // Copyright (c) 2005-2007 Thomas Fuchs (http://script.aculo.us, http://mir.aculo.us)
 //           (c) 2005-2007 Ivan Krstic (http://blogs.law.harvard.edu/ivan)
 //           (c) 2005-2007 Jon Tirsen (http://www.tirsen.com)
@@ -86,7 +88,7 @@ Autocompleter.Base = Class.create({
     Element.hide(this.update);
 
     Event.observe(this.element, 'blur', this.onBlur.bindAsEventListener(this));
-    Event.observe(this.element, 'keypress', this.onKeyPress.bindAsEventListener(this));
+    Event.observe(this.element, 'keydown', this.onKeyPress.bindAsEventListener(this));
   },
 
   show: function() {
@@ -142,12 +144,12 @@ Autocompleter.Base = Class.create({
        case Event.KEY_UP:
          this.markPrevious();
          this.render();
-         if(Prototype.Browser.WebKit) Event.stop(event);
+         Event.stop(event);
          return;
        case Event.KEY_DOWN:
          this.markNext();
          this.render();
-         if(Prototype.Browser.WebKit) Event.stop(event);
+         Event.stop(event);
          return;
       }
      else 
@@ -551,8 +553,6 @@ Ajax.InPlaceEditor = Class.create({
     fld.className = 'editor_field';
     if (this.options.submitOnBlur)
       fld.onblur = this._boundSubmitHandler;
-    if (this.options.onEditFieldCustomization)
-      this.options.onEditFieldCustomization(this, fld);
     this._controls.editor = fld;
     if (this.options.loadTextURL)
       this.loadExternalText();
@@ -918,7 +918,6 @@ Object.extend(Ajax.InPlaceEditor, {
     onFailure: function(transport, ipe) {
       alert('Error communication with the server: ' + transport.responseText.stripTags());
     },
-    onEditFieldCustomization: null, // Takes the IPE and its generated edit field.
     onFormCustomization: null, // Takes the IPE and its generated form, after editor, before controls.
     onLeaveEditMode: null,
     onLeaveHover: function(ipe) {

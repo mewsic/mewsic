@@ -35,6 +35,21 @@ var InstrumentsSelect = Class.create({
 
     this.instrument_list = null;
     this.build();
+    Event.observe(window, 'unload', this.destroy.bind(this));
+  },
+
+  destroy: function() {
+    this.element = null;
+    this.instrument_list.select('a').each(function(link) {
+      if (!link._handler)
+        return;
+      link.stopObserving('click', link._handler);
+      link._handler = null;
+    });
+    this.instrument_list = null;
+
+    this.instrument_layer.stopObserving('click', this.b_toggle);
+    this.instrument_layer = null;
   },
 
   build: function() {
@@ -66,7 +81,8 @@ var InstrumentsSelect = Class.create({
     this.element.up().insert({bottom: this.instrument_layer});
     this.element.up().insert({bottom: this.instrument_list});
 
-    this.instrument_layer.observe('click', this.toggle.bind(this));
+    this.b_toggle = this.toggle.bind(this);
+    this.instrument_layer.observe('click', this.b_toggle);
     this.instrument_list.select('a').each(this.onInstrumentClick.bind(this));
   },
 
@@ -76,7 +92,8 @@ var InstrumentsSelect = Class.create({
   },
 
   onInstrumentClick: function(link) {
-    link.observe('click', this.instrumentSelected.bind(this, link.getAttribute('rel')));
+    link._handler = this.instrumentSelected.bind(this, link.getAttribute('rel'))
+    link.observe('click', link._handler);
   },
 
   instrumentSelected: function(value, event) {

@@ -7,7 +7,6 @@
 	<%= link_to '[edit]', '#', :class => 'edit-link' %>
 	<%= link_to '[cancel]', '#', :class => 'cancel-link', :style => 'display:none' %>
 </p>
-<div class="clear-float"></div>
 <div id="profile-completeness-container">
 	<div id="profile-completeness" class="grey-text">
 		<div class="progress-bar" style="width: <%= @user.profile_completeness.round * 98/100 %>%">&nbsp;</div>

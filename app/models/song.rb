@@ -114,6 +114,8 @@ class Song < ActiveRecord::Base
         s.song_id = #{self.id}
       AND
         x.id != #{self.id}
+      AND
+        x.published = 1
       #{limit}
     ")
   end
@@ -135,6 +137,8 @@ class Song < ActiveRecord::Base
         song_id not in (?)
       and
         mixes.song_id = songs.id
+      and
+        songs.published = 1
     ",  ids, (ids << self.id)
     ])
   end

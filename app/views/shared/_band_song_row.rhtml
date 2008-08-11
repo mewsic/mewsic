@@ -1,10 +1,10 @@
 <tr class="<%= band_song_row_counter.even? ? "even" : "odd" %>">
   <td class="song-title">
-		<p><a href="<%= song_path(band_song_row) %>"><span class="abstract"><%= band_song_row.original_author %></span> - <span class="title"><%= band_song_row.title %></span></a></p>
+    <p class="title"><%= link_to(truncate(band_song_row.title, 50), band_song_row) %></p>
   </td>
-  <td class="star">
-    <%= rating(band_song_row, :class => band_song_row_counter.even? ? 'grey-star' : '') %>
-  </td>
+  <!--td class="star">
+    <%#= rating(band_song_row, :class => band_song_row_counter.even? ? 'grey-star' : '') %>
+  </td-->
   <td class="button">
     <%= mlab_button(band_song_row) %>
     <%= play_button(band_song_row) %>

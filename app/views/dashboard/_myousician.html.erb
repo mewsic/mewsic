@@ -1,6 +1,6 @@
 <div class="float-left clear-block myousician-box">
 	<div class="top-box">
-		<%= user_type_image myousician, :suffix => 'home' %>
+		<%= link_to user_type_image(myousician, :suffix => 'home'), user_path(myousician) %>
 		<%= link_to avatar_image(myousician, :small), user_path(myousician) %>
 	</div>
 	<div class="bottom-box">

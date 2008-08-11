@@ -17,6 +17,8 @@ var BandMembers = Class.create({
     this.element.select('a.edit_link').each(function(link) {
       link.observe('click', this.b_loadBandForm);
     }.bind(this));
+
+    Event.observe(window, 'unload', this.destroy.bind(this));
   },
 
   showLoading: function() {
@@ -57,7 +59,8 @@ var BandMembers = Class.create({
 
     this.avatar_form = this.element.down('#band_member_avatar-form');
     this.avatar_file_input = this.element.down('#avatar_uploaded_data');
-    this.avatar_file_input.observe('change', this.uploadNewAvatar.bind(this));
+    this.b_uploadNewAvatar = this.uploadNewAvatar.bind(this);
+    this.avatar_file_input.observe('change', this.b_uploadNewAvatar);
     this.avatar_preview = this.element.down('#band_member_avatar_preview').down('img');
 
     this.buttons = this.element.down('#band_form_buttons');
@@ -78,15 +81,16 @@ var BandMembers = Class.create({
 
     this.instrument_select = new InstrumentsSelect(this.element.down('select'));
 
-    this.b_unloadBandForm = this.unloadBandForm.bind(this);
     this.element.select('a.edit_link').each(function(link) {
       link.stopObserving('click', this.b_loadBandForm);
     }.bind(this));
 
+    this.b_unloadBandForm = this.unloadBandForm.bind(this);
     this.edit_box.down('a').innerHTML = '[done]';
     this.edit_box.down('a').observe('click', this.b_unloadBandForm);
 
-    this.members.select('a').each(this.enableMemberLinks.bind(this));
+    this.b_enableMemberLinks = this.enableMemberLinks.bind(this);
+    this.members.select('a').each(this.b_enableMemberLinks);
 
     if (this.members.descendants().size() == 0) {
       this.addMember(null);
@@ -94,6 +98,57 @@ var BandMembers = Class.create({
 
     this.hideLoading();
     this.edit_box.show();
+  },
+
+  destroy: function() {
+    this.element.select('a.edit_link').each(function(link) {
+      link.stopObserving('click', this.b_loadBandForm);
+      link.stopObserving('click', this.b_unloadBandForm);
+    });
+
+    this.element = null;
+
+    this.member_name_box = null;
+    this.instrument_box = null;
+    this.avatar_box = null;
+    this.country_box = null;
+
+    if (this.b_addMember)
+      this.add_button.stopObserving('click', this.b_addMember);
+    this.add_button = null;
+
+    this.form = null;
+    this.alert = null;
+
+    this.members.select('a').each(function(link) {
+      if (!link._handler)
+        return;
+      link.stopObserving('click', link._handler);
+      link._handler = null;
+    });
+    this.members = null;
+
+    this.avatar_form = null;
+    if (this.b_uploadNewAvatar)
+      this.avatar_file_input.stopObserving('change', this.b_uploadNewAvatar);
+    this.avatar_file_input = null;
+    this.avatar_preview = null;
+
+    this.buttons = null;
+
+    this.ok_button.stopObserving('click', this.b_submitForm);
+    this.ok_button = null;
+
+    this.cancel_button.stopObserving('click', this.b_cancelAddMember);
+    this.cancel_button = null;
+
+    this.member_name_input.stopObserving(this.b_watchMemberName);
+    this.member_name_input = null;
+
+    this.member_country = null;
+
+    this.loading = null;
+    this.instrument_select = null;
   },
 
   enableMemberLinks: function(link) {
@@ -105,9 +160,13 @@ var BandMembers = Class.create({
     var member_country = linked_id ? '' : link.up('.band_member').down('.band_member_country').innerHTML;
 
     if (link.className == 'edit') {
-      link.observe('click', this.editMember.bind(this, member_name, member_id, instrument_id, member_country));
+      if (!link._handler)
+        link._handler = this.editMember.bind(this, member_name, member_id, instrument_id, member_country)
+      link.observe('click', link._handler);
     } else if (link.className == 'delete') {
-      link.observe('click', this.deleteMember.bind(this, member_id));
+      if (!link._handler)
+        link._handler = this.deleteMember.bind(this, member_id)
+      link.observe('click', link._handler);
     }
   },
 

@@ -4,15 +4,14 @@ var UserLinks = Class.create({
     this.element = $('user-links');
     this.tooltip = this.element.down('div.container');
     this.links = this.element.select('a.tip-link');
+    this.tips = $A();
     if ($('podcast-link'))
       this.links.push($('podcast-link'));
 
     this.links.each(function(link) {
-      var contents = $(link.getAttribute('rel'));
-      var title = link.title;
       link.observe('click', this.stopEvent);
-      new Tip(link, contents, {style: 'user-link', title: title});
-    });
+      this.tips.push(new Tip(link, $(link.getAttribute('rel')), {style: 'user-link', title: link.title}));
+    }.bind(this));
 
     Event.observe(window, 'unload', this.destroy.bind(this));		
   },
@@ -25,11 +24,37 @@ var UserLinks = Class.create({
     this.element = null;
     this.tooltip = null;
 
+    this.tips.each(function(tip) {
+      tip.closeButton = null;
+      tip.content = null;
+      tip.element = null;
+      tip.target = null;
+      tip.tip = null;
+      tip.title = null;
+      tip.wrapper = null;
+      tip.iframeShim = null;
+      tip.tooltip = null;
+      tip.toolbar = null;
+      tip.stem = null;
+      tip.stemBox = null;
+      tip.stemImage = null;
+      tip.stemWrapper = null;
+      tip.borderBottom = null;
+      tip.borderCenter = null;
+      tip.borderFrame = null;
+      tip.borderMiddle = null;
+      tip.borderTop = null;
+
+      tip.options.target = null;
+      tip.options = null;
+    });
+
     this.links.invoke('stopObserving', 'click', this.stopEvent);
     this.links.clear();
     this.links = null;
 
-    Tips.tips.each(function(tip) { Tips.remove(tip.element) });
+    this.tips.clear();
+    this.tips = null;
   }
 
 });
@@ -55,7 +80,6 @@ var MSNLink = Class.create({
   },
 
   destroy: function() {
-    this.app.remove();
     this.app = null;
 
     this.links.invoke('stopObserving', 'click', this.b_onMSNClick);

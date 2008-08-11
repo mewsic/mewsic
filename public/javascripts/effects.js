@@ -1,3 +1,5 @@
+// script.aculo.us effects.js v1.8.1, Thu Jan 03 22:07:12 -0500 2008
+
 // Copyright (c) 2005-2007 Thomas Fuchs (http://script.aculo.us, http://mir.aculo.us)
 // Contributors:
 //  Justin Palmer (http://encytemedia.com/)
@@ -508,14 +510,14 @@ Effect.Highlight = Class.create(Effect.Base, {
 Effect.ScrollTo = function(element) {
   var options = arguments[1] || { },
     scrollOffsets = document.viewport.getScrollOffsets(),
-    elementOffsets = $(element).cumulativeOffset(),
-    max = (window.height || document.body.scrollHeight) - document.viewport.getHeight();  
+    elementOffsets = $(element).cumulativeOffset() /*, PATCHED vjt@openssl.it
+    max = (window.height || document.body.scrollHeight) - document.viewport.getHeight() */;  
 
   if (options.offset) elementOffsets[1] += options.offset;
 
   return new Effect.Tween(null,
     scrollOffsets.top,
-    elementOffsets[1] > max ? max : elementOffsets[1],
+    elementOffsets[1] /* > max ? max : elementOffsets[1] PATCHED vjt@openssl.it */,
     options,
     function(p){ scrollTo(scrollOffsets.left, p.round()) }
   );
@@ -1074,11 +1076,11 @@ if (document.defaultView && document.defaultView.getComputedStyle) {
   Element.getStyles = function(element) {
     element = $(element);
     var css = element.currentStyle, styles;
-    styles = Element.CSS_PROPERTIES.inject({ }, function(hash, property) {
-      hash.set(property, css[property]);
-      return hash;
+    styles = Element.CSS_PROPERTIES.inject({ }, function(results, property) {
+      results[property] = css[property];
+      return results;
     });
-    if (!styles.opacity) styles.set('opacity', element.getOpacity());
+    if (!styles.opacity) styles.opacity = element.getOpacity();
     return styles;
   };
 };

@@ -24,7 +24,7 @@
 		</div>
 		<div class="slide-container">
 			<div class="slide-clip">
-				<div class="slide-contents" style="width:<%= most_friends.friends_count * 35 + 5 %>px;">
+				<div class="slide-contents" style="width:<%= most_friends.friends_count * 32 %>px;">
 					<% most_friends.friends.each do |friend| %>
 						<%= link_to avatar_image(friend, :icon), user_path(friend) %>
 					<% end %>

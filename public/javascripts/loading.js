@@ -6,6 +6,12 @@ var Loading = Class.create({
     }, arguments[0] || {});
 
     this.options.container = $(this.options.container);
+
+    Event.observe(window, 'unload', this.destroy.bind(this));
+  },
+
+  destroy: function() {
+    this.options.container = null;
   },
 
   show: function() {

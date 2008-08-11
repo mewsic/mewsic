@@ -3,14 +3,33 @@ var MailBox = Class.create({
   initialize: function() {
     this.element = $('user-mail');
     this.authenticity_token = $('authenticity-token').value;
-    this.setup();
-  },
-  
-  setup: function() {     
+
     this.popup = this.element.down('div.popup');
     this.container = this.popup.down('div.container');
-    this.element.select('a.button.popup').invoke('observe', 'click', this.handleOpenPopup.bind(this));
-    this.popup.down('a.button.close').observe('click', this.handleClosePopup.bind(this));    
+
+    this.b_handleOpenPopup = this.handleOpenPopup.bind(this);
+    this.b_handleClosePopup = this.handleClosePopup.bind(this);
+
+    this.element.select('a.button.popup').invoke('observe', 'click', this.b_handleOpenPopup);
+    this.popup.down('a.button.close').observe('click', this.b_handleClosePopup);
+
+    if ($('current-user-page')) {
+      this.b_handleInboxLink = this.handleInboxLink.bind(this);
+      $('inbox-link').observe('click', this.b_handleInboxLink);
+    }
+    Event.observe(window, 'unload', this.destroy.bind(this));
+  },
+
+  destroy: function() {
+    this.element.select('a.button.popup').invoke('stopObserving', 'click', this.b_handleOpenPopup);
+    this.popup.down('a.button.close').stopObserving('click', this.b_handleClosePopup);
+
+    if (this.b_handleInboxLink);
+      $('inbox-link').stopObserving('click', this.b_handleInboxLink);
+
+    this.popup = null;
+    this.element = null;
+    this.container = null;
   },
   
   updateReceivedCount: function(count) {
@@ -22,15 +41,16 @@ var MailBox = Class.create({
   },
   
   handleClosePopup: function(event) {
-    event.stop();      
-    this.closePopup();    
+    event.stop();
+    this.closePopup();
   },
   
   closePopup: function() {
     this.deselectAllLinks();
     new Effect.Fade(this.popup, {
       duration: 0.3,
-      afterFinish: function() { this.container.update(''); }.bind(this) });
+      afterFinish: function() { this.container.update(''); }.bind(this)
+    });
   },
   
   handleOpenPopup: function(event) {
@@ -122,10 +142,6 @@ document.observe('dom:loaded', function() {
 
   if (window.location.href.split(/#/)[1] == 'inbox') {
     MailBox.instance.handleInboxLink();
-  }
-
-  if ($('current-user-page')) {
-    $('inbox-link').observe('click', MailBox.instance.handleInboxLink.bind(MailBox.instance));
   }
 });
 
