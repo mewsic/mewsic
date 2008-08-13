@@ -388,6 +388,11 @@ class User < ActiveRecord::Base
     @friends_count ||= (attributes['friends_count'] || update_friends_count)
   end
 
+  def update_replies_count
+    update_attribute('replies_count', replies.count)
+    attributes['replies_count']
+  end
+
   def admirers
     pending_friends_for_me
   end
