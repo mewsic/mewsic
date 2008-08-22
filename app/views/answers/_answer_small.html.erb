@@ -1,4 +1,4 @@
-<div class="elements clear-block answer-small">
+<div class="elements answer-small" style="border: 1px solid black">
 	<h3><%= link_to h(truncate(answer_small.body, 60)), answer_small %></h3>
 	<p class="replies-count grey-text"><%= link_to pluralize(answer_small.replies.count, 'reply'), answer_small %></p>
 	<%= rating(answer_small) %>

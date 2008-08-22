@@ -1,9 +1,5 @@
 <h2>OTHER QUESTIONS BY <%= @answer.user.login %></h2>
-<div class="top-box clear-block">
-	<div class="bottom-box clear-block">
-		<%= render :partial => 'answer_small', :collection => @other_answers_by_author %>
-	</div>
-</div>
+<%= render :partial => 'answer_small', :collection => @other_answers_by_author %>
 
 <div class="float-right">
 	<div class="pagination spinner" style="float: left">

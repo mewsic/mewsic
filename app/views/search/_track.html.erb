@@ -1,0 +1,18 @@
+  <div class="search_row">
+		<div class="float-left">
+  		<div class="search_icon_container">
+  			<%= play_button(track) %>
+  			<%= mlab_button(track) %>
+  		</div>
+  		<div class="search_icon_container"><%= track_instrument_icon track %></div>
+  		<div class="search_icon_container"><%= link_to(avatar_image(track.user, :icon), user_path(track.user)) %></div>
+			<p class="search_black_text track"><%= highlight_search track.title %> - <span class="music-info grey-text"><%= highlight_search truncate(track.description, 140) %></span></p>
+  	</div>
+		<%= rating(track) %>
+		<div class="float-right">
+  		<p class="search_blue_text"><%= link_to(highlight_search(track.parent_song.genre.name), genre_path(track.parent_song.genre)) if track.parent_song.genre %></p>
+  		<p class="search_sky_text"><%= track.bpm %></p>				
+  		<p class="search_sky_text"><%= track.tonality %></p>								
+  		<p class="search_sky_text"><%= track.length %></p>				
+  	</div>
+  </div>

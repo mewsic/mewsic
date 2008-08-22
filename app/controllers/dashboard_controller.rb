@@ -25,7 +25,7 @@ class DashboardController < ApplicationController
   end
 
   def noop
-    render :nothing => true, :status => :success
+    head :ok
   end
 
 private 

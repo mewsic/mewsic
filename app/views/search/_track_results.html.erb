@@ -1,24 +1,8 @@
 <%- if @tracks.size > 0 -%>
-  <%- @tracks.each do |track| -%>
-  <div class="search_row">
-		<div class="float-left">
-  		<div class="search_icon_container">
-  			<%= play_button(track) %>
-  			<%= mlab_button(track) %>
-  		</div>
-  		<div class="search_icon_container"><%= link_to(avatar_image(track.user, :icon), user_path(track.user)) %></div>
-			<p class="search_black_text track"><%= highlight_search track.title %> - <span class="music-info grey-text"><%= highlight_search truncate(track.description, 140) %></span></p>
-  	</div>
-		<%= rating(track) %>
-		<div class="float-right">
-  		<p class="search_blue_text"><%= link_to(highlight_search(track.parent_song.genre.name), genre_path(track.parent_song.genre)) if track.parent_song.genre %></p>
-  		<p class="search_sky_text"><%= track.length %></p>				
-  	</div>
-  </div>
-  <%- end -%>
+	<%= render :partial => 'track', :collection => @tracks %>
   <%= will_paginate @tracks, :class => 'pagination track', :params => { :type => :track }, :prev_label => image_tag('move_arrow_left.png'), :next_label => image_tag('move_arrow_right.png') %>
 	<div class="pagination spinner">
-    <img src="/images/spinner.gif" id="track-results-spinner" style="display:none"/>
+		<img src="/images/spinner.gif" id="track-results-spinner" style="display:none"/>
   </div>
 <%- else -%>
   <p style="margin-left: 15px" class="grey-text">No tracks found. Create'em with our <%= link_to 'multitrack', logged_in? ? "#{user_path(current_user)}/multitrack" : '/login' %>!</p>

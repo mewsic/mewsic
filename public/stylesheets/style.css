@@ -142,6 +142,9 @@ ul.list-menu{
 	height:1px;
 	width: 214px;
 }
+#search *{
+	z-index: 10;
+}
 #search .tab .sx, #search .tab .dx {
 	float:left;
 	width: 16px;
@@ -416,6 +419,8 @@ h2, h2 a{
 .bg-body{
 	background:#F3F3F4;
 	width: 100%;
+	/*z-index: -2;*/
+	position: relative;
 }
 .bg-top-body{
 	background: url(/images/stripes_top_grey.gif) repeat-x top left;
@@ -423,22 +428,23 @@ h2, h2 a{
 	width: 100% !important;
 	position: absolute;
 	left: 0;
-	z-index: 0;
+	/*z-index: -1;*/
 }
 .bg-bottom-body{
 	background: url(/images/stripes_bottom_grey.gif) repeat-x bottom left;
 	height: 58px !important;
 	width: 100% !important;
-	position: relative;
-	z-index: 0;
+	position: absolute;
+	z-index: -1;
 	left: 0;
+	bottom: -58px;
 }
 .white-bg .bg-bottom-body{
 	margin-top:20px;
 }
 #content-body{
 	position:relative;
-	z-index: 1;
+	top: 40px;
 }
 #content-body p{
 	padding-bottom:5px;
@@ -448,12 +454,12 @@ h2, h2 a{
 }
 .whiteblock-shadow{
 	float:left;
-	padding:0px 6px 30px;
+	padding:0px 6px 20px;
 	width: 732px;
 	background: url(/images/BG_whiteblock_shadow.png) repeat-y top left;
-	top: 40px;
 	position: relative;
 	margin-bottom: -18px;
+	z-index: 1;
 }
 .bottom-shadow{
 	float:left;
@@ -463,9 +469,9 @@ h2, h2 a{
 	background: url(/images/BG_whiteblock_shadow_bottom.png) no-repeat top left;
 }
 .box-list {
-	padding-left: 20px;
 	float:left;
 	margin-bottom:30px;
+	margin-left: 20px;
 }
 .box-list h1{
 	margin-bottom:13px;
@@ -891,6 +897,13 @@ tr.nav-song td{
 }
 .answer-header a{
 	color:#61656A;
+}
+
+#other_by_user {
+	width: 190px;
+}
+.answers .elements.answer-small {
+	width: 190px;
 }
 
 .answer-small p.replies-count {
@@ -2345,7 +2358,7 @@ div.login {
 	float:right;
 	text-align: right;
 	position:relative;
-	top: 75px;
+	top: 35px;
 	right: 0px;
 	width:220px;
 }
@@ -2482,6 +2495,8 @@ p.sign-in .button{
 	background-color:#fff;
 	color:#61656A;
 	line-height: 19px;
+	position: relative;
+	top: 58px;
 }
 
 #footer .content {
@@ -2924,7 +2939,7 @@ td.star .rating {
 }
 
 .search_row .rating {
-	margin: 0;
+	margin-top: 5px;
 	width: 70px;
 	float: right;
 }
@@ -2994,9 +3009,11 @@ p.instrument, p.instrument a {
 	float: right;
 }
 #mlab-scroll .title, #mlab-scroll .abstract {
+	height: 14px;
 	max-height: 14px;
 	line-height: 14px;
 	overflow: hidden;
+	display: block;
 }
 #mlab-scroll .elements{
 	padding:5px 5px 0px;
@@ -3719,7 +3736,7 @@ div.hr {
 	width: 200px;
 }
 .search_black_text.track {
-	width: 400px;
+	width: 340px;
 }
 .search_black_text.song {
 	width: 320px;
@@ -4073,12 +4090,12 @@ div.auto_complete ul strong.highlight {
 
 #splash_container {
 	width: 744px;
-	height: 310px;
+	height: 290px;
 	padding-left: 0;
 	padding-right: 0;
 	font-size: 11px;
 	position: relative;
-	top: 62px;
+	top: 0;
 }
 
 #splash_box_sx {
@@ -4231,6 +4248,12 @@ div.auto_complete ul strong.highlight {
 	width: 230px;
 }
 
+#genres {
+	float: right;
+	margin-left: 0 !important;
+	margin-right: 15px;
+}
+
 #genre-chars {
   font-size: 13px;
 	padding-right: 8px;
@@ -4252,6 +4275,7 @@ div.auto_complete ul strong.highlight {
 #genre-chars .current {
 	color: #1A73A4;
 	font-weight: bold;
+	font-size: 1.4em;
 }
 
 .genre-list .tabmenu {
