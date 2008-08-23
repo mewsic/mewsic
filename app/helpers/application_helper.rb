@@ -186,6 +186,10 @@ module ApplicationHelper
     }, &block)
   end
 
+  def ie?(version = 6)
+    request.headers['HTTP_USER_AGENT'] =~ /MSIE #{version}\.\d+/
+  end
+
 end
 
 class AjaxUploadFormBuilder < ActionView::Helpers::FormBuilder

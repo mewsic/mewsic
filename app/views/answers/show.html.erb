@@ -2,7 +2,7 @@
 
 <%= render :partial => 'find_question' %>
 
-  <div class="box-list two-col-big clear-block" style="border:1px solid black">
+  <div class="box-list two-col-big clear-block">
     <div class="clear-block">
       <div class="answer-header clear-block">
         <h2><%= @answer.closed? ? 'CLOSED' : 'OPEN' %> QUESTION</h2>
@@ -76,7 +76,7 @@
   </div>
 
 	<div class="box-list semi-one-col clear-block">
-		<div class="azzurro-boxes answers" id="other_by_user">
+		<div class="azzurro-boxes" id="other_by_user">
 			<%= render :partial => 'other_by_user' unless @other_answers_by_author.size.zero? %>
 		</div>
   </div>  

@@ -18,9 +18,9 @@
 					<span class="title"><%= link_to(truncate(song.title, 30), song) %></span>
 				</p>
 			</td>
-			<!--td class="star">
-				<%#= rating(song, :class => index.even? ? 'grey-star' : '') %>
-			</td-->
+			<td class="star">
+				<%= rating(song, :class => index.even? ? 'grey-star' : '') unless ie? %>
+			</td>
 			<td class="button">
 				<%= mlab_button(song, :dynamic => true) %>
 				<%= play_button(song) %>

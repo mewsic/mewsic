@@ -471,7 +471,7 @@ h2, h2 a{
 .box-list {
 	float:left;
 	margin-bottom:30px;
-	margin-left: 20px;
+	padding-left: 20px;
 }
 .box-list h1{
 	margin-bottom:13px;
@@ -621,7 +621,7 @@ tr.nav-song td{
 	margin-bottom:10px;
 }
 .bands-dj-list .elements td.song-title {
-	width: 310px;
+	width: 230px;
 }
 
 .bands-dj-list .elements td.song-title a {
@@ -795,19 +795,19 @@ tr.nav-song td{
 /* answers list */
 #my-question-mark {
 	float: right;
-	padding-right:60px;
 }
 #my-question-mark img {
 	position:absolute;
-	margin-top:-40px;
+	top:35px;
+	left:175px;
 }
 #reply-exclamation-mark {
 	float: right;
-	padding-right:50px;
 }
 #reply-exclamation-mark img {
 	position:absolute;
-	top:16px;
+	top:35px;
+	right:40px;
 }
 
 .answers .elements {
@@ -817,29 +817,29 @@ tr.nav-song td{
 	width: 425px;
 }
 
-.similar.answers .elements {
-	padding-bottom: 0px;
-}
-
-.similar.answers .details {
-	width: 600px;
-	margin-bottom: 0px;
-}
-
 .answers .details {
 	float: left;
-	width: 380px !important;
-	margin-bottom: 10px;
-}
-
-.answers .replies {
-	padding: 0;
 	width: 380px;
+	margin-bottom: 10px;
 }
 
 .answers h2 {
 	margin-bottom: 4px;
 	width: 380px;
+}
+
+.answers.similar .elements {
+	padding-bottom: 0px;
+	width: 690px;
+}
+
+.answers.similar .details {
+	width: 640px;
+	margin-bottom: 0px;
+}
+
+.answers.similar h2 {
+	width: 100%;
 }
 
 /* answer detail */
@@ -899,9 +899,6 @@ tr.nav-song td{
 	color:#61656A;
 }
 
-#other_by_user {
-	width: 190px;
-}
 .answers .elements.answer-small {
 	width: 190px;
 }
@@ -2726,6 +2723,7 @@ div#messages div.notice, div#messages div.inbox {
 .send-question input.text, .send-question textarea {
   border: 1px solid #BFD2DB;
   width: 99%;
+	overflow: auto;
 }
 
 
