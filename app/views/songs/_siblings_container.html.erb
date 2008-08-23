@@ -1,9 +1,9 @@
-<div id="<%= container %>-tracks-scroller" class="float-left one-col-big clear-block slide-container song-tracks">
+<div id="<%= container %>-siblings-tracks-scroller" class="float-left one-col-big clear-block slide-container song-tracks">
 	<div class="simple-list box-grigio-stondato">
 		<div class="top-box clear-block">
 			<div class="bottom-box clear-block slide-container">
 				<div class="slide-clip">
-					<div id="<%= container %>-tracks" class="slide-contents">
+					<div id="<%= container %>-siblings-tracks" class="slide-contents">
 						<p class="grey-text" style="padding:4px;">
 							<%= empty ? "There are no versions for the current song" :
 						    "Click on the <strong>Tracks Number</strong> icon<br/>to navigate this Song" %></p>
@@ -12,7 +12,7 @@
 			</div>
 		</div>
 	</div>
-	<p class="align-right">
+	<p class="align-right" style="margin-right:9px">
 		<a class="slide-prev" href="#"><%= image_tag 'move_arrow_up.png' %></a>
 		<a class="slide-next" href="#"><%= image_tag 'move_arrow_down.png' %></a>
 	</p>

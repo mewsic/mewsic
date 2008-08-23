@@ -115,13 +115,13 @@
     <div class="simple-list">
       <div class="top-box clear-block">
         <div class="bottom-box clear-block" id="direct-siblings">
-          <%= render :partial => 'sibling', :collection => @song.direct_siblings, :locals => { :container => 'direct-siblings' } %>
+          <%= render :partial => 'sibling', :collection => @song.direct_siblings, :locals => { :container => 'direct' } %>
         </div>
       </div>
     </div>
   </div>
 
-	<%= render :partial => 'siblings_container', :locals => { :container => 'direct-siblings', :empty => @song.direct_siblings.empty? } %>
+	<%= render :partial => 'siblings_container', :locals => { :container => 'direct', :empty => @song.direct_siblings.empty? } %>
 </div>
 
 
@@ -131,12 +131,12 @@
       <div class="top-box clear-block">
         <div class="bottom-box clear-block">
           <div class="bottom-box clear-block" id="indirect-siblings">
-            <%= render :partial => 'sibling', :collection => @song.indirect_siblings, :locals => { :container => 'indirect-siblings' } %>
+            <%= render :partial => 'sibling', :collection => @song.indirect_siblings, :locals => { :container => 'indirect' } %>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-	<%= render :partial => 'siblings_container', :locals => { :container => 'indirect-siblings', :empty => @song.indirect_siblings.empty? } %>
+	<%= render :partial => 'siblings_container', :locals => { :container => 'indirect', :empty => @song.indirect_siblings.empty? } %>
 </div>

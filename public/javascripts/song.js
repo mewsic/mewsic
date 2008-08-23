@@ -1,5 +1,7 @@
+var Scrollers = {};
+
 document.observe('dom:loaded', function() {
-  new SimpleSlider('song-tracks-container');
-  new SimpleSlider('direct-siblings-tracks-scroller');
-  new SimpleSlider('indirect-siblings-tracks-scroller');
+  Scrollers.song = new SimpleSlider('song-tracks-container');
+  Scrollers.direct = new SimpleSlider('direct-siblings-tracks-scroller');
+  Scrollers.indirect = new SimpleSlider('indirect-siblings-tracks-scroller');
 });
