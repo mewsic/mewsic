@@ -4,12 +4,23 @@
 	display: none;
 }
 
+#content-body {
+	top: 60px;
+}
+
+div#messages * {
+	height: 16px !important;
+	padding: 5px !important;
+}
+
 #nav-menu {
 	width: auto;
 	right: 213px;
 }
 
 #mlab_new_block_top {
+	position: relative;
+	top: 10px;
 	width: 980px;
 	background: url(/images/mlab_top_bg.gif) no-repeat top right;
 }

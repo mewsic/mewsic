@@ -12,8 +12,8 @@
           ajaxOptions: { method: 'PUT' },
           onEnterHover: Prototype.emptyFunction,
           onLeaveHover: Prototype.emptyFunction,
-          onEnterEditMode: (name == 'description' ? function() { $('mlab_new_block_top').style.height = '195px'; } : Prototype.emptyFunction),
-          onLeaveEditMode: (name == 'description' ? function() { $('mlab_new_block_top').style.height = '125px'; } : Prototype.emptyFunction),
+          onEnterEditMode: (name == 'description' ? function() { $('mlab_new_block_top').style.height = '190px'; } : Prototype.emptyFunction),
+          onLeaveEditMode: (name == 'description' ? function() { $('mlab_new_block_top').style.height = '120px'; } : Prototype.emptyFunction),
           onComplete: function() {  $('flashcontent').refreshSong(); }
         });
       });
@@ -84,7 +84,7 @@
 
 // ]]></script>
 
-<div id="mlab_new_block_top" style="height: 125px;"><!-- dynamic -->
+<div id="mlab_new_block_top" style="height: 120px;"><!-- dynamic -->
 	<div id="mlab_new_icons_container">
 		<div class="mlab_icon_mlab"><%= image_tag 'mlab_icon.jpg' %></div>
 	</div>
