@@ -8,7 +8,7 @@
 			<div class="tracks-number"><%= best_song.tracks.size %></div> 
   		<p class="title"><%= link_to truncate(best_song.title, 30), song_path(best_song) %></p>
   		<p class="author"><%= h best_song.original_author %></p>
-			<div class="clear-block" style="height:0px"></div>
+			<div></div>
   		<div class="button float-right">
   		  <%= mlab_button(best_song) %>
   		  <%= play_button(best_song) %>

@@ -1086,7 +1086,7 @@ tr.nav-song td{
 }
 .green-box .rounded-white-top{
 	background: url(/images/rounded_box_bottom_225.png) no-repeat bottom left;
-	margin-bottom:10px;
+	margin-bottom:8px;
 }
 *html .green-box .rounded-white-bottom{
 	background-image: url(/images/rounded_box_top_245px.gif);
@@ -1096,7 +1096,7 @@ tr.nav-song td{
 }
 .green-box .elements{
 	border: none;
-	padding:0px 10px 2px;
+	padding:0px 10px 4px;
 	margin:0;
 }
 .green-box .elements p{
@@ -1234,7 +1234,7 @@ tr.nav-song td{
 }
 .orange-box .rounded-white-top{
 	background: url(/images/rounded_box_bottom_225.png) no-repeat bottom left;
-	padding-bottom:2px;
+	padding-bottom:5px;
 	margin-bottom:8px;
 }
 *html .orange-box .rounded-white-bottom{
@@ -2624,7 +2624,7 @@ a.download {
 	opacity: 0.35;
 	filter: alpha(opacity=35);
 }
-.instrument.current { /* XXX FIXME */
+.current.instrument { /* XXX FIXME */
 	border:1px solid gray;
 	height:24px;
 	padding:2px;
@@ -3840,7 +3840,7 @@ div#login {
 	width: 220px;
 }
 #login-box-top {
-	background: transparent url(/images/login-box-top.gif) no-repeat top right;
+	background: transparent url(/images/login-box-top.gif) no-repeat bottom right;
 	height: 13px;
 	/*width: 217px;*/
 	/*margin: 0;
@@ -3911,6 +3911,28 @@ div#login {
 	margin-bottom: 8px;
 }
 
+.tabmenu .tab .sx {
+	width: 13px;
+	height: 33px;
+	background: transparent url(/images/tabmenu/tabmenu_inactive_sx.png) no-repeat top;
+	float: left;
+	margin-left: 4px;
+}
+
+.tabmenu .tab .rp {
+	height: 33px;
+	background: transparent url(/images/tabmenu/tabmenu_inactive_rp.png) repeat-x top;
+	float: left;
+}
+
+.tabmenu .tab .dx {
+	width: 13px;
+	height: 33px;
+	background: transparent url(/images/tabmenu/tabmenu_inactive_dx.png) no-repeat top;
+	float: left;
+	margin-right: 4px;	
+}
+
 .tabmenu .tab.active .sx {
 	width: 13px;
 	height: 33px;
@@ -3933,32 +3955,10 @@ div#login {
 	margin-right: 4px;	
 }
 
-.tabmenu .tab .sx {
-	width: 13px;
-	height: 33px;
-	background: transparent url(/images/tabmenu/tabmenu_inactive_sx.png) no-repeat top !important;
-	float: left;
-	margin-left: 4px;
-}
-
-.tabmenu .tab .rp {
-	height: 33px;
-	background: transparent url(/images/tabmenu/tabmenu_inactive_rp.png) repeat-x top !important;
-	float: left;
-}
-
-.tabmenu .tab .dx {
-	width: 13px;
-	height: 33px;
-	background: transparent url(/images/tabmenu/tabmenu_inactive_dx.png) no-repeat top !important;
-	float: left;
-	margin-right: 4px;	
-}
-
 .tabmenu .title {
 	color:#004D71;
 	font-size:16px;
-	padding: 10px 8px 0px;
+	padding: 10px 8px 0px !important;
 	float: left;
 	margin: 0;
 	display: block;
@@ -4248,8 +4248,8 @@ div.auto_complete ul strong.highlight {
 
 #genres {
 	float: right;
-	margin-left: 0 !important;
-	margin-right: 15px;
+	padding: 0 !important;
+	margin-right: 10px !important;
 }
 
 #genre-chars {
