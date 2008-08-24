@@ -2,24 +2,19 @@
 	<span class="align-right page-count">Page <%= @ideas.current_page %> of <%= @ideas.page_count %></span>
 </div>
 
-<h2><%= @instrument.description %></h2>
+<h2 id="instrument-description"><%= @instrument.description %></h2>
 <%= render :partial => 'songs/track', :collection => @ideas %>
 
 <div class="next">
-	<div class="float-left" id="spinner" style="display:none">
-		<%= image_tag 'spinner.gif' %>
-	</div>
 	<span class="align-right page-count">Page <%= @ideas.current_page %> of <%= @ideas.page_count %></span>
 	<% if @ideas.previous_page %>
-		<%= link_to_remote image_tag('move_arrow_left.png'), :class => 'navigation', :update => 'ideas-by-instruments', :loading => "$('spinner').show()", :complete => "new Effect.ScrollTo('ideas-by-instruments')", :method => :get, :url => by_instrument_ideas_path(:instrument_id => @instrument.id, :ipage => @ideas.previous_page) %>
+		<%= link_to_remote image_tag('move_arrow_left.png'), :class => 'navigation', :update => 'ideas-by-instruments', :loading => "new Effect.ScrollTo('ideas-by-instruments',{duration:0.5,offset:-40});$('tab-spinner').show()", :complete => "$('instrument-description').highlight({duration:2.0});$('tab-spinner').hide()", :method => :get, :url => by_instrument_ideas_path(:instrument_id => @instrument.id, :ipage => @ideas.previous_page) %>
 	<% else %>
 		<%= image_tag('move_arrow_left.png', :class => 'faded') %>
   <% end %>
   <% if @ideas.next_page %>
-		<%= link_to_remote image_tag('move_arrow_right.png'), :class => 'navigation', :update => 'ideas-by-instruments', :loading => "$('spinner').show()", :complete => "new Effect.ScrollTo('ideas-by-instruments')", :method => :get, :url => by_instrument_ideas_path(:instrument_id => @instrument.id, :ipage => @ideas.next_page) %>
+		<%= link_to_remote image_tag('move_arrow_right.png'), :class => 'navigation', :update => 'ideas-by-instruments', :loading => "new Effect.ScrollTo('ideas-by-instruments',{duration:0.5,offset:-40}); $('tab-spinner').show()", :complete => "$('instrument-description').highlight({duration:2.0});$('tab-spinner').hide()", :method => :get, :url => by_instrument_ideas_path(:instrument_id => @instrument.id, :ipage => @ideas.next_page) %>
 	<% else %>
 		<%= image_tag('move_arrow_right.png', :class => 'faded') %>
   <% end %>
 </div>
-
-<%= render :partial => 'all_instruments' %>

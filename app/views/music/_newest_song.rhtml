@@ -8,7 +8,7 @@
 	</div>
 	<p class="title"><%= link_to newest_song.title, newest_song %></p>
 	<p class="abstract"><%= h newest_song.original_author %></p>
-	<div class="music-info float-left" style="width: 200px">
+	<div class="music-info float-left" style="width: 180px">
 		<p class="grey-text"><%= truncate newest_song.description, 80 %></p>
 		<p class="playcount">created <%= time_ago_in_words newest_song.created_at, true %> ago</p>
 	</div>

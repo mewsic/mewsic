@@ -1,7 +1,7 @@
 <% javascript('refresh-block', 'music') %>
 
 	<div class="box-list one-col-small clear-block">
-	  <div class="simple-list green-box clear-block" id="best-songs">
+		<div class="simple-list green-box clear-block" id="best-songs">
 			<%= link_to image_tag('bestsong_refresh.gif', :class => 'float-right'), top_music_path(:type => 'song'), :class => 'trigger' %>
 			<h1>BEST SONGS</h1>
 			<div class="top-box clear-block" style="min-height: 390px">
@@ -11,8 +11,8 @@
 					</div>
 				</div>
 			</div>
-		  </div>
-	  </div>
+		</div>
+	</div>
 
 	<div class="box-list one-col-small clear-block">
 		<div class="simple-list orange-box clear-block" id="most-used-tracks">
@@ -28,20 +28,19 @@
 		</div>
 	</div>
 	
-	
 	<div class="box-list small-col clear-block">
 		<div class="simple-list section-tags clear-block">
 			<h1>TOP GENRES</h1>
 			<div class="top-box clear-block">
 				<div class="bottom-box clear-block">
-				  <div class="elements clear-block">
-				    <%= render_tag_cloud Song, :genre, :name, :limit => 18 %>
-				  </div>
-				 </div>
+					<div class="elements clear-block">
+						<%= render_tag_cloud Song, :genre, :name, :limit => 18 %>
+					</div>
+				</div>
 			</div>
 		</div>
 		<p class="centered">
-			<%= link_to image_tag('create_your_mband.gif', :alt => 'create your own m-band'), help_path('mband') %>
+		<%= link_to image_tag('create_your_mband.gif', :alt => 'create your own m-band'), help_path('mband') %>
 		</p>
 	</div>
 	
@@ -50,15 +49,13 @@
 			<h1>NEWEST</h1>
 			<div class="top-box clear-block">
 				<div class="bottom-box clear-block newest-list">
-				  <%= render :partial => 'newest_song', :collection => @newest_songs %>
+					<%= render :partial => 'newest_song', :collection => @newest_songs %>
 				</div>
 			</div>
 		</div>			
-		
+
 	</div>
-	
+
 	<div class="box-list two-col clear-block" id="genres">
-	  <%= render :partial => 'genres' %>
+		<%= render :partial => 'genres' %>
 	</div>
-	  
-</div>

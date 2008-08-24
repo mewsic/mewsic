@@ -14,7 +14,7 @@
 		</p>
 	</td>
   <td class="star">
-		<%= rating(song, :clear => true, :class => song_counter.even? ? 'grey-star' : '') %>
+		<%= rating(song, :clear => true, :class => song_counter.even? ? 'grey-star' : '') unless ie? %>
   	<%= mlab_button(song, :dynamic => true) %>
   	<%= play_button(song) %>
 	</td>

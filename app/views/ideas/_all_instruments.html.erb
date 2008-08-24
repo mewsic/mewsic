@@ -1,13 +1,17 @@
 <div class="elements clear-block" id="all-instruments"> 
-  <p class="orange-text float-left"><strong>BROWSE BY INSTRUMENT</strong></p>
-  <div class="float-left" id="all-instruments-spinner" style="display:none">
-    <%= image_tag 'spinner.gif' %>
-  </div>
+	<div class="tabmenu">
+		<div class="tab active float-right">
+			<div class="sx"> </div>
+			<div class="rp">
+				<p class="title"><span class="orange-text">BROWSE BY INSTRUMENT</span></p>
+			</div>
+			<div class="dx"> </div>
+		</div>    
+	</div>
+
 	<div class="clear-block clear-float">
   <%- @instruments.each do |instrument| -%>
-    <%= instrument_browse_icon(instrument,
-          :loading => "$('all-instruments-spinner').show(); $('all-instruments').select('.instrument').each(function(i){i.prototip.hide()})",
-          :complete => "new Effect.ScrollTo('ideas-by-instruments')") %>
+		<%= instrument_browse_icon(instrument, :id => "instrument_#{instrument.id}") %>
   <%- end -%>
   </div>
 </div>

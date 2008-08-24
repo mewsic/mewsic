@@ -14,22 +14,17 @@ module IdeasHelper
   end
 
   def instrument_browse_link(text, id)
-    link_to_remote text, :update => 'ideas-by-instruments', :method => :get,
-      :url => by_instrument_ideas_path(:instrument_id => id),
-      :loading => "$('tab-spinner').show()", :complete => "$('tab-spinner').hide()"
+    link_to text, by_instrument_ideas_path(:instrument_id => id), :class => 'browse', :rel => "instrument_#{id}"
   end
 
   def instrument_browse_icon(instrument, options = {})
     if instrument.ideas.count.zero?
       instrument_icon(instrument, :grey => true)
     else
-      current = instrument == @instrument ? 'current' : ''
-      klass = options.delete(:class) || "instrument #{current}"
-
-      link_to_remote instrument_icon(instrument, :class => klass),
-        {:loading => "$('tab-spinner').show", :complete => "$('tab-spinner').hide()",
-        :update => 'ideas-by-instruments', :method => :get,
-        :url => by_instrument_ideas_path(:instrument_id => instrument.id)}.merge(options)
+      klass = "instrument #{options.delete(:class)}"
+      image = instrument_icon instrument, :class => klass, :id => options.delete(:id)
+      link_to image, by_instrument_ideas_path(:instrument_id => instrument.id),
+        :class => 'browse', :rel => options.delete(:rel)
     end
   end
 

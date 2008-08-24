@@ -550,7 +550,6 @@ tr.nav-song td{
 .thumb{
 	float:left;
 	margin-right:15px;
-	/*padding-top:5px;*/
 }
 .played-instruments .small-box {
 	margin: 2px 1px 2px 2px !important;
@@ -1080,24 +1079,25 @@ tr.nav-song td{
 	padding:11px 11px 0px;
 	width: 225px;
 }
-.green-box .rounded-white-bottom{
-	background: url(/images/rounded_box_top_225.png) no-repeat top left;
-	padding-top:10px;
-}
 .green-box .rounded-white-top{
-	background: url(/images/rounded_box_bottom_225.png) no-repeat bottom left;
-	margin-bottom:8px;
+	background: url(/images/rounded_box_top_225.png) no-repeat bottom left;
+	height:9px;
 }
-*html .green-box .rounded-white-bottom{
-	background-image: url(/images/rounded_box_top_245px.gif);
+.green-box .rounded-white-bottom{
+	background: url(/images/rounded_box_bottom_225.png) no-repeat top left;
+	height:15px;
 }
 *html .green-box .rounded-white-top{
-	background-image: url(/images/rounded_box_bottom_245px.gif);
+	background-image: url(/images/rounded_box_top_225.gif);
+}
+*html .green-box .rounded-white-bottom{
+	background-image: url(/images/rounded_box_bottom_225.gif);
 }
 .green-box .elements{
 	border: none;
-	padding:0px 10px 4px;
+	padding:0px 10px;
 	margin:0;
+	background-color: #fff;
 }
 .green-box .elements p{
 	margin-bottom:3px !important;
@@ -1228,25 +1228,25 @@ tr.nav-song td{
 	padding:11px 11px 0px;
 	width: 225px;
 }
-.orange-box .rounded-white-bottom{
-	background: url(/images/rounded_box_top_225.png) no-repeat top left;
-	padding-top:10px;
-}
 .orange-box .rounded-white-top{
-	background: url(/images/rounded_box_bottom_225.png) no-repeat bottom left;
-	padding-bottom:5px;
-	margin-bottom:8px;
+	background: url(/images/rounded_box_top_225.png) no-repeat bottom left;
+	height: 9px;
 }
-*html .orange-box .rounded-white-bottom{
-	background-image: url(/images/rounded_box_top_245px.gif);
+.orange-box .rounded-white-bottom{
+	background: url(/images/rounded_box_bottom_225.png) no-repeat top left;
+	height: 15px;
 }
 *html .orange-box .rounded-white-top{
-	background-image: url(/images/rounded_box_bottom_245px.gif);
+	background-image: url(/images/rounded_box_top_225.gif);
+}
+*html .orange-box .rounded-white-bottom{
+	background-image: url(/images/rounded_box_bottom_225.gif);
 }
 .orange-box .elements{
-	border-bottom: none;
+	border: none;
 	padding:0px 10px;
-	margin-bottom:0px;
+	margin:0;
+	background-color: #fff;
 }
 .orange-box .elements p{
 	margin-bottom:3px !important;
@@ -1262,7 +1262,7 @@ tr.nav-song td{
 	padding: 0 !important;
 }
 .orange-box .title {
-	padding-top: 4px !important;
+	padding-top: 5px !important;
 	display: block;
 	line-height: 14px;
 	max-height: 14px;
@@ -2605,7 +2605,7 @@ p.sign-in .button{
 	color:#ECAF48;
 }
 .playcount {
-	margin: 2px !important;
+	margin: 2px 0px !important;
 }
 .small {
 	font-size: 11px;
@@ -2624,11 +2624,9 @@ a.download {
 	opacity: 0.35;
 	filter: alpha(opacity=35);
 }
-.current.instrument { /* XXX FIXME */
-	border:1px solid gray;
-	height:24px;
-	padding:2px;
-	width:24px;
+.instrument.faded {
+	opacity: 0.55;
+	filter: alpha(opacity=55);
 }
 
 /* elementi speciali */
@@ -2970,6 +2968,10 @@ p.instrument, p.instrument a {
 
 #ideas-by-instruments .thumb {
 	margin: 0px 8px 4px 1px !important;
+}
+
+#all-instruments {
+	padding: 15px 0px 5px;
 }
 
 /******************** MLAB SCROLLER ***************************/

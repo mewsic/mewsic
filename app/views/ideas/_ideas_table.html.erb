@@ -1,7 +1,7 @@
 <%- @ideas_instruments.each do |instrument|-%>											
 <div class="elements list clear-block"> 
 	<div class="thumb">
-		<%= instrument_browse_icon(instrument, :class => '') %>
+		<%= instrument_browse_icon(instrument, :rel => "instrument_#{instrument.id}") %>
 	</div>
 	<p class="instrument">
 		<%= instrument_browse_link(instrument.description, instrument.id) %>
@@ -16,4 +16,3 @@
 	</p>
 </div>
 <%- end -%>
-<%= render :partial => 'all_instruments' %>
