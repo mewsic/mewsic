@@ -8,11 +8,6 @@
 	top: 60px;
 }
 
-div#messages * {
-	height: 16px !important;
-	padding: 5px !important;
-}
-
 #nav-menu {
 	width: auto;
 	right: 213px;

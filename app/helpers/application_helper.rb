@@ -71,7 +71,7 @@ module ApplicationHelper
       link_to logo, root_path
     end
   end
-  
+
   def breadcrumb(model_crumb = nil, klass = nil)
     return if controller.controller_name == 'dashboard'
 

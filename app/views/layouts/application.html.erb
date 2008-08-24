@@ -33,14 +33,7 @@
       </div>      
       <%= yield :top %>            
       <div class="whiteblock-shadow clear-block">
-        <div id="messages">
-          <% flash.each do |name, message| -%>
-            <div class="<%= name %>">
-							<p class="float-left"><%= message %></p>
-							<div class="close float-right"><%= image_tag 'button_flash_close.png', :alt => 'CLOSE' %></div>
-            </div>
-          <% end -%>
-        </div>
+				<%= render :partial => 'shared/flash', :locals => {:flash => flash} %>
 				<%= render_breadcrumb %>
 				<%= yield %>
       </div>

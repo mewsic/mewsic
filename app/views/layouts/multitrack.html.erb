@@ -21,15 +21,7 @@
   <div class="bg-body">
     <div class="bg-top-body"></div>
     <div id="content-body" class="page-width clear-block">
-
-      <div id="messages">
-        <% flash.each do |name, message| -%>
-          <div class="<%= name %>">
-            <%= message %>
-            <div class="close"></div>
-          </div>
-        <% end -%>
-      </div>
+			<%= render :partial => 'shared/flash', :locals => {:flash => flash} %>
       <%= yield %>
     </div>
     <div class="bg-bottom-body"></div>
