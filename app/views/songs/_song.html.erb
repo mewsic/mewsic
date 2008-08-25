@@ -1,0 +1,38 @@
+    <div class="top-box clear-block">
+      <div class="float-right" style="padding-right:56px;">
+        <div class="track-tab">
+          <span class="tracks-number"><span><%= song.tracks.count %></span></span>
+        </div>
+      </div>
+      <div class="bottom-box clear-block">
+				<h1><%= song.title %></h1>
+        <div class="clear-block">
+          <p class="music-info float-right align-right">
+            <span>runtime:<br /><strong><%= song.length %></strong></span>
+          </p>
+          <p class="thumb"><%= link_to avatar_image(song.user, :small), user_path(song.user) %></p>
+					<p>
+						<span class="name"><%= link_to song.user.nickname, user_path(song.user) %></span><br/>
+						<span class="abstract"><%= song.original_author %></span><br/>
+						<span class="title"><%= song.title %></span>
+					</p>
+          <p class="grey-text clear-float"><%= song.description %></p>
+          <p class="thumb">
+            <%- song.tracks.each do |track| -%>
+              <%= track_instrument_icon(track) %>
+            <%- end -%>
+          </p>
+          <div class="clearer"></div>
+          <p class="genre"><%= link_to(song.genre.name, genre_path(song.genre)) if song.genre %></p>
+          <div class="music-info song-resume float-right">
+            <%= rating(song) %>
+            <%= mlab_button(song) %>
+            <%= play_button(song) %>
+          </div>
+          <div class="float-left">
+            <%= download_button_for song %>
+            <%= download_link_for song, 'DOWNLOAD' %>
+          </div>
+        </div>
+      </div>
+    </div>

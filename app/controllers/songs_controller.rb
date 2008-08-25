@@ -1,6 +1,6 @@
 class SongsController < ApplicationController
   
-  before_filter :login_required, :only => [:update, :rate, :mix, :destroy]
+  before_filter :login_required, :only => [:update, :rate, :mix, :destroy, :confirm_destroy]
   before_filter :song_required, :only => [:load_track, :unload_track]
 
   protect_from_forgery
@@ -88,6 +88,8 @@ class SongsController < ApplicationController
       @song.destroy
     end
 
+    flash[:notice] = "Song ##{@song.id} has been deleted."
+
     head :ok
 
   rescue ActiveRecord::RecordNotFound # find
@@ -96,6 +98,11 @@ class SongsController < ApplicationController
     head :bad_request
   rescue ActiveRecord::RecordNotSaved # save!
     head :forbidden
+  end
+
+  def confirm_destroy
+    @song = current_user.songs.find(params[:id])
+    render :partial => 'destroy'
   end
   
   def tracks

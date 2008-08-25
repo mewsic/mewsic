@@ -1195,11 +1195,11 @@ tr.nav-song td{
 }
 
 .mlab_song td.song-info {
-	width: 280px;
+	width: 240px;
 }
 
 .mlab_song td.song-action {
-	width: 100px;
+	width: 120px;
 	vertical-align: bottom;
 }
 
@@ -1305,35 +1305,6 @@ tr.nav-song td{
 }
 .rounded-cyan-elements p{
 	color:#386781;
-}
-.keycode-button{
-	background:url(/images/BG_keycode_button.png) no-repeat top left;
-	width:350px;
-	padding:12px 10px 12px !important;
-	margin: auto auto;
-	margin-bottom: 0px; 
-	margin-top: 20px; 
-}
-.keycode-button label{
-	float:left;
-	font-weight:bold;
-	color:#fff;
-}
-.keycode-button input{
-	float:left;
-	border:none;
-	width:200px;
-	margin:0px 15px;
-}
-.keycode-button input.input-button{
-	float:left;
-	background:transparent;
-	font-family:Arial, Verdana, Helvetica, sans-serif;
-	font-size:12px;
-	font-weight:bold;
-	color:#01587F;
-	margin-left:20px;
-	margin-right:0px;
 }
 /* rounded box cyan bordered */ 
 

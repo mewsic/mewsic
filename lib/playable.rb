@@ -41,6 +41,7 @@ module Adelao
 
         def delete_sound_file
           return unless self.filename
+          return if RAILS_ENV == 'development'
 
           File.unlink absolute_filename(:stream)
           File.unlink absolute_filename(:waveform)

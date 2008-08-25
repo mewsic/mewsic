@@ -1,15 +1,15 @@
 <tr class="<%= %w[odd even][song_counter % 2] %>">
-  <td class="song-info">
+	<td colspan="2">
     <span class="tracks-number"><%= song.tracks.size %></span>
     <div class="float-left tracks-grey">
       <% song.tracks.each do |track| -%>
 				<%= track_instrument_icon(track, :grey => true) %>
       <% end -%>
     </div>
-  </td>
-	<td class="song-action" align="right">
-    <p class="genre"><%= link_to(song.genre.name, song.genre) %></p>
-		<%= rating(song, :class => song_counter.odd? ? 'grey-star' : '') %>
+		<div class="float-right">
+			<p class="genre align-righ"><%= link_to(song.genre.name, song.genre) %></p>
+			<%= rating(song, :class => song_counter.odd? ? 'grey-star' : '') %>
+		</div>
   </td>
 </tr>
 <tr class="<%= %w[odd even][song_counter % 2] %>">
@@ -18,7 +18,8 @@
     <p class="title"><%= link_to song.title, song %></p>
   </td>
 	<td class="song-action" align="right">
-    <%= link_to 'edit', multitrack_edit_path(song) if current_user_page? %>
+    <%= edit_button(song) if current_user_page? %>
+		<%= delete_button(song) if current_user_page? %>
     <%= mlab_button(song, :dynamic => true) %>
     <%= play_button(song) %>
   </td>

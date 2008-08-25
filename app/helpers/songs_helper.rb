@@ -16,4 +16,13 @@ module SongsHelper
     end
   end
 
+  def edit_button(song)
+    link_to image_tag('button_edit.png', :alt => 'EDIT'), multitrack_edit_path(song)
+  end
+
+  def delete_button(song)
+    link_to image_tag('button_delete_mypage.png', :alt => 'DELETE', :title => 'Confirm song removal'),
+      confirm_destroy_user_song_path(current_user, song), :rel => 'ajax',
+      :class => 'lightview', :title => 'Confirm song removal :: :: width:400, height:330, ajax:{ method: "get" }'
+  end
 end
