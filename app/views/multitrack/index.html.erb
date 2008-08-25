@@ -29,8 +29,8 @@
         onComplete: function() { $('flashcontent').refreshSong(); }
       });
       new Ajax.InPlaceSelect('mlab_tone', '<%= song_path(@song, :authenticity_token => (form_authenticity_token if protect_against_forgery?)) %>', {
-        labels: <%= Myousica::TONES.inspect %>,
-        values: <%= Myousica::TONES.inspect %>,
+        labels: <%= Myousica::TONES.sort.inspect %>,
+        values: <%= Myousica::TONES.sort.map { |t| Myousica::TONES.index(t) }.inspect %>,
         lazyLoading: false,
         okText: 'OK',
         externalControl: 'mlab_tone_edit_button',

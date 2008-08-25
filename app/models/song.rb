@@ -198,8 +198,12 @@ class Song < ActiveRecord::Base
   end
 
   def set_key_from_tone
-    if !self.tone.blank? && (key = Myousica::TONES.index(self.tone.upcase)) 
-      self.key = key
+    return if self.tone.blank?
+    if self.tone =~ /\d+/
+      self.key = self.tone.to_i
+      self.tone = Myousica::TONES[self.key]
+    else
+      self.key = Myousica::TONES.index(self.tone.upcase)
     end
   end
 

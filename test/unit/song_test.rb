@@ -56,6 +56,7 @@ class SongTest < ActiveSupport::TestCase
   
   def test_should_set_key_from_tonality
     s = songs(:let_it_be)
+
     s.tone = 'B'
     s.save    
     assert_equal 11, s.reload.key
@@ -63,6 +64,11 @@ class SongTest < ActiveSupport::TestCase
     s.tone = 'C#'
     s.save    
     assert_equal 1, s.reload.key
+
+    s.tone = '4'
+    s.save    
+    assert_equal 4, s.reload.key
+    assert_equal 'E', s.reload.tone
   end
 
   def test_should_not_destroy_if_has_children_tracks
