@@ -2718,7 +2718,7 @@ div#messages div.notice, div#messages div.inbox {
 }
 
 .song-resume {
-	width: 150px;
+	width: 170px;
 	text-align: right;
 	margin-bottom: 6px;
 }
@@ -2901,8 +2901,7 @@ td.star .rating {
 
 .song-resume .rating {
 	float: left;
-	margin: 0;
-	width: 85px;
+	margin: 0 8px 0;
 }
 
 .search_row .rating {
