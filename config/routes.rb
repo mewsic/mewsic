@@ -30,7 +30,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users, :collection => {:auto_complete_for_message_to => :get, :top => :get}, :member => {:firstrun => :get, :switch_type => :any, :change_password => :put, :rate => :put} do |user|    
     user.resources :answers
     user.resources :songs, :member => { :confirm_destroy => :get }
-    user.resources :tracks, :member => { :toggle_idea => :put }
+    user.resources :tracks, :member => { :toggle_idea => :put, :confirm_destroy => :get }
     user.resource  :avatar
     user.resources :members, :controller => 'band_members'
     user.resources :friendships

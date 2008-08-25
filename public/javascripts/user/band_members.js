@@ -120,13 +120,15 @@ var BandMembers = Class.create({
     this.form = null;
     this.alert = null;
 
-    this.members.select('a').each(function(link) {
-      if (!link._handler)
-        return;
-      link.stopObserving('click', link._handler);
-      link._handler = null;
-    });
-    this.members = null;
+    if (this.members) {
+      this.members.select('a').each(function(link) {
+        if (!link._handler)
+          return;
+        link.stopObserving('click', link._handler);
+        link._handler = null;
+      });
+      this.members = null;
+    }
 
     this.avatar_form = null;
     if (this.b_uploadNewAvatar)
@@ -136,17 +138,22 @@ var BandMembers = Class.create({
 
     this.buttons = null;
 
-    this.ok_button.stopObserving('click', this.b_submitForm);
-    this.ok_button = null;
+    if (this.ok_button) {
+      this.ok_button.stopObserving('click', this.b_submitForm);
+      this.ok_button = null;
+    }
 
-    this.cancel_button.stopObserving('click', this.b_cancelAddMember);
-    this.cancel_button = null;
+    if (this.cancel_button) {
+      this.cancel_button.stopObserving('click', this.b_cancelAddMember);
+      this.cancel_button = null;
+    }
 
-    this.member_name_input.stopObserving(this.b_watchMemberName);
-    this.member_name_input = null;
+    if (this.member_name_input) {
+      this.member_name_input.stopObserving(this.b_watchMemberName);
+      this.member_name_input = null;
+    }
 
     this.member_country = null;
-
     this.loading = null;
     this.instrument_select = null;
   },

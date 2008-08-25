@@ -1,6 +1,6 @@
 class TracksController < ApplicationController
   
-  before_filter :login_required, :only => [:create, :rate, :toggle_idea, :destroy]
+  before_filter :login_required, :only => [:create, :rate, :toggle_idea, :destroy, :confirm_destroy]
   before_filter :check_track_owner, :only => [:toggle_idea]
   protect_from_forgery :except => [:create] ## XXX FIXME
   
@@ -78,6 +78,7 @@ class TracksController < ApplicationController
       head :forbidden
     else
       @track.destroy
+      flash[:notice] = "Track ##{@track.id} has been deleted."
       head :ok
     end
 
@@ -86,8 +87,15 @@ class TracksController < ApplicationController
   rescue ActiveRecord::ActiveRecordError
     head :bad_request
   end
+
+  def confirm_destroy
+    #redirect_to root_path and return unless request.xhr?
+    @track = current_user.tracks.find(params[:id])
+    @songs = @track.songs if @track.mixes.count > 0
+    render :partial => 'destroy'
+  end
   
-  def rate    
+  def rate
     @track = Track.find(params[:id])
     if @track.rateable_by?(current_user)
       @track.rate(params[:rate].to_i, current_user)

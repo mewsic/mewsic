@@ -1,0 +1,29 @@
+<div class="simple-list" style="width: 400px">
+	<% if @songs %>
+
+	<div class="top-box clear-block">
+		<h2>Your track is used by the following songs</h2>
+		<div class="bottom-box clear-block">
+			<%= render :partial => 'music/newest_song', :collection => @songs %>
+		</div>
+	</div>
+	<p class="grey-text centered" style="font-size: 14px; font-weight: bold;">
+		<%= link_to 'Contact us for removal', 'mailto:info@myousica.com' %>,<br/> or delete your own songs before deleting this track.
+	</p>
+
+	<% else %>
+
+	<div class="top-box clear-block">
+		<h2>Are you sure you want to delete this track?</h2>
+		<div class="bottom-box clear-block">
+			<%= render :partial => 'songs/track', :object => @track %>
+		</div>
+	</div>
+
+	<p class="grey-text centered" style="font-size: 26px; font-weight: bold;">
+	<%= link_to_remote 'DELETE', :url => track_path(@track), :method => :delete, :loading => "$('destroy-spinner').show()", :complete => 'reload()' %>
+	<%= image_tag 'spinner.gif', :id => 'destroy-spinner', :style => 'display:none' %>
+	</p>
+
+	<% end %>
+</div>

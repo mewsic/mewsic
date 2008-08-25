@@ -7,7 +7,8 @@
   <td align="right">
 		<%= rating(track, :class => (track_counter.odd? ? 'grey-star' : '') << ' float-right') %>
     <div class="clear-float">
-		  <%= idea_link_for track %>
+		  <%= idea_button(track) %>
+			<%= delete_button(track) if current_user_page? %>
       <%= mlab_button(track, :dynamic => true) %>
 			<%= play_button(track) %><br/>
 		</div>
