@@ -79,12 +79,10 @@ ActionController::Routing::Routes.draw do |map|
 
   map.content '/content/:id', :controller => 'content', :action => 'show'
 
-
-  map.root :controller => 'dashboard'
-  map.splash 'splash', :controller => 'dashboard', :action => 'splash'
-  map.noop   'noop', :controller => 'dashboard', :action => 'noop'
+  map.root                   :controller => 'dashboard'
+  map.splash 'splash',       :controller => 'dashboard', :action => 'splash'
+  map.noop   'noop/:id',     :controller => 'dashboard', :action => 'noop'
   map.top_myousicians 'top', :controller => 'dashboard', :action => 'top'
-
 
   map.admin '/pappapperadmin', :controller => 'admin/dashboard', :action => 'index'
   map.upload_admin_track '/pappapperadmin/admin/tracks/upload', :controller => 'admin/tracks', :action => 'upload', :conditions => { :method => :post }

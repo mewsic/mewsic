@@ -25,7 +25,11 @@ class DashboardController < ApplicationController
   end
 
   def noop
-    head :ok
+    if params[:id]
+      render :text => params[:id].to_i
+    else
+      head :ok
+    end
   end
 
 private 
