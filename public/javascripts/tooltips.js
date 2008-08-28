@@ -24,7 +24,7 @@ var Tooltips = Class.create({
   },
 
   addInstrument: function(element) {
-    new Tip(element, element.getAttribute('rel'), {style: 'instrument'});
+    new Tip(element, element.getAttribute('tip'), {style: 'instrument'});
   },
 
   addRating: function(element) {

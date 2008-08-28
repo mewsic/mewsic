@@ -4,7 +4,10 @@ document.observe('dom:loaded', function() {
   new Pagination({
     container: name,
     spinner: name + '-spinner',
-    selector: 'a.genre-pagination'
+    selector: 'a.genre-pagination',
+    onComplete: function() {
+      new Effect.ScrollTo(name, {duration:1.0});
+    }
   });
 
   if ($('genres')) {

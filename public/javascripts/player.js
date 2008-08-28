@@ -4,7 +4,7 @@ var Player = Class.create({
     this.container = $('player-container');
     this.content = this.container.down('.content');
     this.open = false;
-    this.buttons = new Hash();
+    this.buttons = new Array();
     this.initLinks();
 
     Ajax.Responders.register({
@@ -15,11 +15,10 @@ var Player = Class.create({
   },
 
   destroy: function(event) {
-    this.buttons.each(function(row) {
-      row = row[1]
-      row.image.stopObserving('click', row.callback);
-      row.image = null;
-      row.callback = null;
+    this.buttons.each(function(button) {
+      button.image.stopObserving('click', button.callback);
+      button.image = null;
+      button.callback = null;
     });
 
     this.buttons = null;
@@ -29,28 +28,23 @@ var Player = Class.create({
   
   initLinks: function(r) {
     // remove all the links no longer in the page
-    this.buttons.each(function(row) {
-      var address  = row[0];
-      var image    = row[1].image;
-      var callback = row[1].callback;
-
-      if (!image.parentNode) {
-        image.stopObserving('click', callback);
-        this.buttons.unset(address);
+    this.buttons = this.buttons.reject(function(button) {
+      if (!button.image.parentNode) {
+        button.image.stopObserving('click', button.callback);
+        return true;
       }
-
+      return false;
     }.bind(this));
 
     // add any new links
     $A(document.getElementsByClassName('player')).each(function(image) {
-      if (this.buttons.get(image.getAttribute('rel'))) {
+      if (image._playable)
         return;
-      }
 
       var callback = this.handleClick.bindAsEventListener(this, image);
       image.observe('click', callback);
-      this.buttons.set(image.getAttribute('rel'), {image:image, callback:callback});
-
+      image._playable = true;
+      this.buttons.push({image: image, callback: callback});
     }.bind(this));
 
   },

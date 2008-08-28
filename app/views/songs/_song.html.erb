@@ -19,7 +19,7 @@
           <p class="grey-text clear-float"><%= song.description %></p>
           <p class="thumb">
             <%- song.tracks.each do |track| -%>
-              <%= track_instrument_icon(track) %>
+							<%= track_instrument_icon(track, :playable => track) %>
             <%- end -%>
           </p>
           <div class="clearer"></div>
