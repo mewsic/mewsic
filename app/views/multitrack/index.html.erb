@@ -51,6 +51,7 @@
       controls.invoke('observe', 'click', alerter);
       Event.observe(window, 'unload', function() {
         controls.invoke('stopObserving', 'click', alerter);
+				//new Ajax.Request('<%= song_path(@song) %>', {method: 'delete'});
       });
     }
   });
@@ -71,10 +72,10 @@
     serverPath: '<%= APPLICATION[:url] %>',
     settingsXMLPath: '<%= multitrack_config_path %>',
     <%- if logged_in? && current_user.is_admin? -%>
-    isLogEnabled: true,
-    isServiceDumpEnabled: true,
+    isLogEnabled: 'yes',
+    isServiceDumpEnabled: 'yes',
     <%- end -%>
-    loadSong: <%= @edit ? 'true' : 'false' %>,
+    loadSong: '<%= @edit ? "yes" : "no" %>',
     songID: <%= @song.id || 0 %>
   };
   var params = { wmode: 'transparent' };
