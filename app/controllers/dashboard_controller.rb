@@ -1,7 +1,8 @@
 class DashboardController < ApplicationController
   
-  before_filter :find_splash_songs, :except => :noop
   before_filter :redirect_unless_xhr, :only => [:splash, :top]
+  before_filter :find_splash_songs, :except => :noop
+  session :off, :only => :noop
   
   def index
     #@bands = User.find :all, :limit => 3, :include => [:avatars, :songs], :conditions => ["(users.type = 'Band' OR users.type = 'Dj') AND users.activated_at IS NOT NULL AND pictures.id IS NOT NULL AND songs.published = ? AND songs.id IS NOT NULL", true], :order => SQL_RANDOM_FUNCTION
