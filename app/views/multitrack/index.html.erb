@@ -51,7 +51,6 @@
       controls.invoke('observe', 'click', alerter);
       Event.observe(window, 'unload', function() {
         controls.invoke('stopObserving', 'click', alerter);
-				//new Ajax.Request('<%= song_path(@song) %>', {method: 'delete'});
       });
     }
   });
