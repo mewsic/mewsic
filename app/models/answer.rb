@@ -98,11 +98,6 @@ class Answer < ActiveRecord::Base
               :conditions => [search_string, self.id, *keywords])
   end
 
-  def update_replies_count
-    update_attribute(:replies_count, replies.count)
-    replies.size
-  end  
-
   def rateable_by?(user)
     self.user_id != user.id
   end

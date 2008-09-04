@@ -4,9 +4,19 @@ namespace :myousica do
     User.find(:all).each {|u| u.update_friends_count}
   end
   
-  desc "Aggiorna il numero di replies per ogni answer"
+  desc "Aggiorna il numero di replies per ogni answer ed ogni user"
   task(:update_replies_count => :environment) do
-    Answer.find(:all).each {|a| a.update_replies_count}
+    Answer.find(:all).each do |answer|
+      answer.connection.execute(
+        "UPDATE answers SET replies_count = #{answer.replies.count} WHERE id = #{answer.id}"
+      )
+    end
+
+    User.find(:all).each do |user|
+      user.connection.execute(
+        "UPDATE users SET replies_count = #{user.replies.count} WHERE id = #{user.id}"
+      )
+    end
   end    
   
   namespace :fixtures do
