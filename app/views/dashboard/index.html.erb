@@ -1,8 +1,6 @@
 <%- javascript('refresh-block', 'dashboard') -%>
   <%- content_for(:top) do -%>
-    <div id="splash_container" class="banner-instr-home">
-      <%= render(:partial => 'splash') %>
-    </div>
+		<%= render :partial => 'splash' %>
   <%- end -%>
 	<div class="clear-block" id="tagcloud">
 		<p class="tags"><%= render_tag_cloud Song, :genre, :name, :limit => 37 %></p>

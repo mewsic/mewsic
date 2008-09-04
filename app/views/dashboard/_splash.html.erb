@@ -1,72 +1,19 @@
-<div id="splash_box_sx"> </div>
-	<div id="splash_box_core">
+<script type="text/javascript">// <![CDATA[ 
 
-		<div id="splash_elements_container">
-			<div id="splash_tag_tracks"> </div>
-			<div id="splash_box_elements">
-				<!-- dynamic -->
-				<div id="splash_tracks">
-				  <%- @splash_tracks.each_with_index do |track, index| -%>
-  				  <div class="splash <%= %w[odd even][index % 2] %>">
-              <%= track_instrument_icon(track) %>
-              <div class="title"><%=h truncate(track.title, 20) %></div>
-              <div class="buttons">
-                <%= mlab_button(track, :dynamic => true) %>
-                <%= play_button(track) %>
-              </div>
-  					</div>
-  				<%- end -%>
-				</div>
-				<!-- end dynamic -->								
-			</div>
-		</div>
-		
-		<div class="splash_divider">
-			<%= image_tag 'splash_arrows.gif' %>
-		</div>
-		
-		<div id="splash_elements_container_mlab">
-			<div id="splash_tag_mlab"> </div>
-			<div id="splash_box_elements_mlab">
-				<div id="splash_learn_more_button" onmouseover="$('splash_learn_more_button').addClassName('active')" onmouseout="$('splash_learn_more_button').removeClassName('active')">
-					<%= link_to 'Learn More', help_index_path %>
-				</div>
-				<div id="splash_pappappero_slider">
-					<%= link_to image_tag('splash_mlab_banner.jpg'), multitrack_path %>
-				</div>
-			</div>
-		</div>
+	function isLoggerAvailable() { 
+		var isfb = false; try { isfb = console.log != undefined; } catch(e) {}; return( isfb ); 
+	} 
 
-		<div class="splash_divider">
-			<%= image_tag 'splash_arrows.gif' %>
-		</div>
+	var flashvars = { 
+		serverPath: '<%= APPLICATION[:url] %>', 
+		settingsXMLPath: '/splash/config.xml', 
+		isLogEnabled: 'yes', 
+		isServiceDumpEnabled: 'no' 
+	}; 
+	var params = { wmode:'transparent' }; 
+	var attributes = { name:'splashObject' }; 
 
-		<div id="splash_elements_container">
-			<div id="splash_tag_songs"> </div>
-			<div id="splash_box_elements">
+	swfobject.embedSWF('/splash/Adelao_Myousica_Splash.swf', 'splash', '742', '380', '9.0.0', '/expressInstall.swf', flashvars, params, attributes); 
 
-				<!-- dynamic -->
-				<div id="splash_songs">
-				  <%- @splash_songs.each_with_index do |song, index| -%>
-  				  <div class="splash <%= %w[odd even][index % 2] %>">
-  				    <span class="tracks-number"><%= song.tracks.count %></span>
-              <div class="title"><%= link_to h(truncate(song.title, 20)), song_path(song) %></div>
-              <div class="buttons">
-                <%= mlab_button(song, :dynamic => true) %>
-                <%= play_button(song) %>
-              </div>
-  					</div>
-  				<%- end -%>
-				</div>
-				<!-- end dynamic -->												
-			</div>
-		</div>
-
-		<div id="splash_motto">
-			<h1>Music is Open. And now You are the Star.</h1>
-			<%= @motto %>
-		</div>
-	</div>
-<div id="splash_box_dx"> </div>
-<div id="splash_tracks_spinner" style="display:none"><%= image_tag 'track-spinner-big.gif' %></div>
-<div id="splash_songs_spinner" style="display:none"><%= image_tag 'song-spinner-big.gif' %></div>
+// ]]></script> 
+<div id="splash"></div>
