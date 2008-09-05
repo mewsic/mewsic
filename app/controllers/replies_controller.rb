@@ -8,9 +8,10 @@ class RepliesController < ApplicationController
     if @answer.closed?
       flash[:error] = 'The answer is closed'
     else
-      @reply = Reply.new(params[:reply])
-      @reply.answer = @answer
+      @reply = Reply.new params[:reply]
       @reply.user = current_user
+      @reply.answer = @answer
+
       if @reply.save
         flash[:notice] = 'Reply has been saved correctly'      
       else

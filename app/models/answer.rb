@@ -29,6 +29,7 @@ class Answer < ActiveRecord::Base
   acts_as_rated :rating_range => 0..5 
   
   attr_accessible :body
+  attr_readonly :replies_count
   
   has_many :abuses, :as => :abuseable
   

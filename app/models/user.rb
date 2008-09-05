@@ -135,6 +135,7 @@ class User < ActiveRecord::Base
     :first_name, :last_name, :name_public, :gender, :motto, :tastes, :country, :city, :age,
     :photos_url, :blog_url, :myspace_url, :skype, :msn, :skype_public, :msn_public, :nickname,
     :podcast_public
+  attr_readonly :replies_count
   
   before_save :check_links
   before_save :check_nickname
