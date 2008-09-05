@@ -20,6 +20,11 @@ class DashboardController < ApplicationController
     end
   end
 
+  def config
+    @songs = Song.find_most_collaborated :limit => 5
+    respond_to { |format| format.xml }
+  end
+
 private 
 
   def redirect_unless_xhr

@@ -72,6 +72,8 @@ ActionController::Routing::Routes.draw do |map|
   map.multitrack_auth    '/multitrack/_/:user_id',  :controller => 'multitrack', :action => 'authorize' #, :token => /[\da-fA-F]{40}/
   map.multitrack_song    '/multitrack/s/:user_id',  :controller => 'multitrack', :action => 'update_song' #, :token => /[\da-fA-F]{40}/
 
+  map.splash_config '/splash.config', :controller => 'dashboard', :action => 'config'
+
   map.connect '/countries', :controller => 'users', :action => 'countries'
   
   map.resources :help, :member => { :ask => :post }
@@ -80,7 +82,6 @@ ActionController::Routing::Routes.draw do |map|
   map.content '/content/:id', :controller => 'content', :action => 'show'
 
   map.root                   :controller => 'dashboard'
-  map.splash 'splash',       :controller => 'dashboard', :action => 'splash'
   map.noop   'noop/:id',     :controller => 'dashboard', :action => 'noop'
   map.top_myousicians 'top', :controller => 'dashboard', :action => 'top'
 

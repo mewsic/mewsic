@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+
+	<services>
+		<media><%= APPLICATION[:media_url] %></media>
+		<default_avatar>/images/default_avatars/avatar_small.gif</default_avatar>
+		<connection_timeout>30</connection_timeout>
+		<url_request>
+			<instruments>/instruments.xml</instruments>
+			<genres>/genres.xml</genres>
+			<user>/users/{:id}.xml</user>
+			<songs>
+				<fetch>/songs/{:song_id}.xml</fetch>
+				<siblings>/songs/{:song_id}.xml?siblings=true</siblings>
+			</songs>
+			<tracks>
+				<fetch>/tracks/{:track_id}.xml</fetch>
+			</tracks>
+		</url_request>
+	</services>
+
+	<slideshow interval="10">
+		<image url="/splash/test/slide-test-1.jpg"><![CDATA[Mix Yours and other Myousicians© tracks to create new songs!]]></image>
+		<image url="/splash/test/slide-test-2.jpg"><![CDATA[Upload or Record your tracks live through the M-Track©]]></image>
+		<image url="/splash/test/slide-test-3.jpg"><![CDATA[Play creating Your M-Bands© with Myousicians© from all over the world!]]></image>
+	</slideshow>
+
+	<songs interval="5">
+		<%- @songs.each do |song| -%>
+			<song id="<%= song.id %>"></song>
+		<%- end -%>
+	</songs>
+
+</config>

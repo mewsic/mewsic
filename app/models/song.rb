@@ -84,19 +84,28 @@ class Song < ActiveRecord::Base
     self.tracks.count('instrument', :include => :instrument, :group => 'instrument_id').map { |id, count| Instrument.find(id) }
   end    
   
-  def self.find_random_direct_siblings(limit = 5)    
-    Mix.find_by_sql([
-      "SELECT DISTINCT x.original_author, x.title, t.song_id
-       FROM mixes s INNER JOIN mixes t ON s.track_id = t.track_id INNER JOIN songs x ON t.song_id = x.id
-       ORDER BY #{SQL_RANDOM_FUNCTION} LIMIT #{limit}"])
-  end
-
   def self.create_unpublished!
     self.create! :published => false
   end
 
   def self.find_unpublished(what, options = {})
     self.find what, options.merge(:conditions => ['published = ?', false])
+  end
+
+  def self.find_most_collaborated(options = {})
+    limit = "LIMIT #{options[:limit]}" if options[:limit]
+    collaboration_count = options[:minimum_siblings] || 2
+    find_by_sql("
+      SELECT s.*, COUNT(DISTINCT m.song_id) AS siblings_count
+      FROM mixes m INNER JOIN mixes t ON m.track_id = t.track_id
+      INNER JOIN songs s ON t.song_id = s.id
+      INNER JOIN songs x ON m.song_id = x.id
+      WHERE s.published = 1 AND x.published = 1 AND s.id != m.song_id
+      GROUP BY s.id
+      HAVING siblings_count >= #{collaboration_count}
+      ORDER BY siblings_count DESC, s.rating_avg DESC
+      #{limit}
+    ")
   end
   
   def direct_siblings(limit = nil)
@@ -152,7 +161,7 @@ class Song < ActiveRecord::Base
   end
   
   def siblings_count
-    120
+    (attributes['siblings_count'] || direct_siblings.size).to_i
   end 
   
   def update_children_tracks_count
