@@ -88,7 +88,7 @@ class SongsController < ApplicationController
       @song.destroy
     end
 
-    flash[:notice] = "Song ##{@song.id} has been deleted."
+    flash[:notice] = "Song ##{@song.id} has been deleted." unless request.xhr?
 
     head :ok
 
@@ -101,6 +101,7 @@ class SongsController < ApplicationController
   end
 
   def confirm_destroy
+    redirect_to root_path and return unless request.xhr?
     @song = current_user.songs.find(params[:id])
     render :partial => 'destroy'
   end

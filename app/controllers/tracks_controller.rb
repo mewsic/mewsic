@@ -74,12 +74,14 @@ class TracksController < ApplicationController
 
   def destroy
     @track = current_user.tracks.find(params[:id])
-    if @track.mixes.count > 0
-      head :forbidden
-    else
+
+    if @track.destroyable?
+      @track.songs.destroy_all
       @track.destroy
       flash[:notice] = "Track ##{@track.id} has been deleted."
       head :ok
+    else
+      head :forbidden
     end
 
   rescue ActiveRecord::RecordNotFound # find
@@ -89,9 +91,9 @@ class TracksController < ApplicationController
   end
 
   def confirm_destroy
-    #redirect_to root_path and return unless request.xhr?
+    redirect_to root_path and return unless request.xhr?
     @track = current_user.tracks.find(params[:id])
-    @songs = @track.songs if @track.mixes.count > 0
+    @songs = @track.published_songs unless @track.destroyable?
     render :partial => 'destroy'
   end
   

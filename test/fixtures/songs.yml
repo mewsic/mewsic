@@ -240,3 +240,28 @@ song_using_ideas_<%= i %>:
   filename: test.mp3
 <% end %>
 
+unpublished_mixed_song:
+  title: Unpublished song with mixed tracks
+  user: quentin
+  published: false
+  original_author: Antani
+  genre: <%= random_genre %>
+  listened_times: <%= rand(50) %>
+  created_at: <%= (rand(60)).days.ago.to_s :db %>
+  tone: F
+  seconds: 100
+  filename: test.mp3
+
+<% 10.times do |i| %>
+unpublished_mixed_song_<%= i %>:
+  title: "Unpublished song with mixed tracks #<%= i %>"
+  user: quentin
+  published: false
+  original_author: Antani
+  genre: <%= random_genre %>
+  listened_times: <%= rand(50) %>
+  created_at: <%= (rand(60)).days.ago.to_s :db %>
+  tone: F
+  seconds: 100
+  filename: test.mp3
+<% end %>

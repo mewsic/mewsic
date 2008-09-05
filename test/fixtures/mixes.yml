@@ -208,3 +208,21 @@ collaboration_4:
   balance: 1.10
   loop: 0
   time_shift: 0
+
+destroyable_mix:
+  song: unpublished_mixed_song
+  track: destroyable_mixed_track
+  volume: 1.0
+  balance: 1.0
+  loop: 0
+  time_shift: 0
+
+<% 10.times do |i| %>
+destroyable_mix_<%= i %>:
+  song: unpublished_mixed_song_<%= i %>
+  track: destroyable_mixed_track<%= rand(4) %>
+  volume: 1.0
+  balance: 1.0
+  loop: 0
+  time_shift: 0
+<% end %>

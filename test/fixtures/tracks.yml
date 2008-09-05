@@ -222,3 +222,25 @@ destroyable_track:
   owner: quentin
   tonality: 'C#'
   filename: test.mp3
+
+destroyable_mixed_track:
+  title: track mixed into an unpublished song
+  parent_song: unpublished_mixed_song
+  instrument: <%= random_instrument %>
+  seconds: <%= rand(100) + 120 %>
+  idea: false
+  owner: quentin
+  tonality: 'F'
+  filename: test.mp3
+
+<% 4.times do |i| %>
+destroyable_mixed_track_<%= i %>:
+  title: "track mixed into an unpublished song #<%= i %>"
+  parent_song: unpublished_mixed_song_<%= rand(10) %>
+  instrument: <%= random_instrument %>
+  seconds: <%= rand(100) + 120 %>
+  idea: false
+  owner: quentin
+  tonality: 'F'
+  filename: test.mp3
+<% end %>

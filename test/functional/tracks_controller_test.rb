@@ -202,5 +202,25 @@ class TracksControllerTest < ActionController::TestCase
     end
     assert !File.exists?(track.absolute_filename)
   end
-  
+
+  def test_should_destroy_mixed_track_with_unpublished_song
+    login_as :quentin
+
+    4.times do |i|
+      track = playable_test_filename(tracks("destroyable_mixed_track_#{i}"))
+      songs = track.songs.each { |s| playable_test_filename(s) }
+      mixes = track.mixes.dup
+
+      delete :destroy, :id => track.id
+      assert_response :ok
+
+      assert_raise(ActiveRecord::RecordNotFound) { Track.find track.id }
+      assert_raise(ActiveRecord::RecordNotFound) { Song.find songs.map(&:id) } if songs.size > 0
+      assert_raise(ActiveRecord::RecordNotFound) { Mix.find mixes.map(&:id) } if mixes.size > 0
+
+      assert !File.exists?(track.absolute_filename)
+      songs.each { |song| assert !File.exists?(song.absolute_filename) }
+    end
+  end
+
 end

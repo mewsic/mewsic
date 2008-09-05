@@ -39,6 +39,7 @@ class Track < ActiveRecord::Base
   attr_accessor :tone
   
   has_many :songs, :through => :mixes, :order => 'songs.created_at DESC'
+  has_many :published_songs, :through => :mixes, :order => 'songs.created_at DESC', :conditions => ['songs.published = ?', true], :class_name => 'Song', :source => :song
   has_many :mixes, :dependent => :delete_all
   has_many :mlabs, :as => :mixable, :dependent => :delete_all
 
@@ -108,7 +109,7 @@ class Track < ActiveRecord::Base
                            :group => 'tracks.id', :order => 'tracks.rating_avg DESC')
             ).each { |t| t.collaboration_count = t.collaboration_count.to_i }
   end
-  
+
   def self.find_most_used(options = {})
     self.find(:all,
               options.merge(:select => 'tracks.*, COUNT(tracks.id) AS song_count',
@@ -152,6 +153,10 @@ class Track < ActiveRecord::Base
   
   def rateable_by?(user)
     self.user_id != user.id
+  end
+
+  def destroyable?
+    self.mixes.count.zero? || self.mixes.all? { |mix| !mix.song.published? }
   end
 
   def original_author

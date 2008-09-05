@@ -208,6 +208,6 @@ class Song < ActiveRecord::Base
   end
 
   def check_for_children_tracks
-    raise ActiveRecord::ReadOnlyRecord if self.children_tracks.count > 0
+    raise ActiveRecord::ReadOnlyRecord if self.published? && self.children_tracks.count > 0
   end
 end

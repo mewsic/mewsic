@@ -55,5 +55,16 @@ class TrackTest < ActiveSupport::TestCase
     assert_raise(ActiveRecord::RecordNotFound) { Track.find(t.id) }
     assert !File.exists?(t.absolute_filename)
   end
-  
+
+  def test_should_destroy_mixed_track_with_unpublished_song
+    t = playable_test_filename tracks(:destroyable_mixed_track)
+    m = mixes(:destroyable_mix)
+
+    assert_nothing_raised { t.destroy }
+    assert_raise(ActiveRecord::RecordNotFound) { Track.find(t.id) }
+    assert_raise(ActiveRecord::RecordNotFound) { Mix.find(m.id) }
+
+    assert !File.exists?(t.absolute_filename)
+  end
+
 end

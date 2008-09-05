@@ -34,7 +34,7 @@ module Adelao
 
           case kind
           when :stream then self.filename
-          when :waveform then self.filename.sub /\.mp3$/, '.png' 
+          when :waveform then self.filename.sub /\.mp3$/, '.png' # XXX
           else raise ArgumentError, "invalid file kind: #{kind}"
           end
         end
@@ -54,12 +54,14 @@ module Adelao
 
     module TestHelpers
       def playable_test_filename(playable)
+        id = rand 2**16
         [:stream, :waveform].each do |kind|
           path = playable.absolute_filename kind
           dir, name = File.dirname(path), File.basename(path)
-          File.link path, "#{dir}/.#{name}"
+          temp = File.join(dir, ".#{id}.#{name}")
+          File.link path, temp
         end
-        playable.update_attribute :filename, ".#{playable.filename}"
+        playable.update_attribute :filename, ".#{id}.#{playable.filename}"
         return playable
       end
     end
