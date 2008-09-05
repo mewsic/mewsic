@@ -11,7 +11,8 @@ document.observe('dom:loaded', function() {
       spinner: name + '_spinner',
       selector: 'a.navigation',
       dynamic_spinner: true,
-      update_mlab: true
+      update_mlab: true,
+      onComplete: function() { Lightview.updateViews(); }
     });
   });
 
