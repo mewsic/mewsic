@@ -4,13 +4,13 @@
 	<services>
 		<media><%= APPLICATION[:media_url] %></media>
 		<default_avatar>/images/default_avatars/avatar_small.gif</default_avatar>
+		<learnmore>/help/multitrack</learnmore>
 		<connection_timeout>30</connection_timeout>
 		<url_request>
 			<instruments>/instruments.xml</instruments>
 			<genres>/genres.xml</genres>
 			<user>/users/{:id}.xml</user>
-			<songs>/songs/{:song_id}.xml?siblings=true</songs>
-			<learnmore>/help/multitrack</learnmore>
+			<song>/songs/{:song_id}.xml?siblings=true</song>
 		</url_request>
 	</services>
 
