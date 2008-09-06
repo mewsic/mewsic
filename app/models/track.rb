@@ -156,7 +156,7 @@ class Track < ActiveRecord::Base
   end
 
   def destroyable?
-    self.mixes.count.zero? || self.mixes.all? { |mix| !mix.song.published? }
+    self.mixes.count.zero? || self.mixes.all? { |mix| !mix.song.published? rescue true } # XXX remove that rescue
   end
 
   def original_author
