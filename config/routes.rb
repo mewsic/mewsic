@@ -67,12 +67,12 @@ ActionController::Routing::Routes.draw do |map|
 
   map.multitrack         '/multitrack',             :controller => 'multitrack', :action => 'index'
   map.multitrack_edit    '/multitrack/:id',         :controller => 'multitrack', :action => 'edit'
-  map.multitrack_config  '/request.config',         :controller => 'multitrack', :action => 'config'
+  map.multitrack_config  '/multitrack.xml',         :controller => 'multitrack', :action => 'config', :format => 'xml'
   map.multitrack_refresh '/multitrack/refresh/:id', :controller => 'multitrack', :action => 'refresh'
   map.multitrack_auth    '/multitrack/_/:user_id',  :controller => 'multitrack', :action => 'authorize' #, :token => /[\da-fA-F]{40}/
   map.multitrack_song    '/multitrack/s/:user_id',  :controller => 'multitrack', :action => 'update_song' #, :token => /[\da-fA-F]{40}/
 
-  map.splash_config '/splash.config', :controller => 'dashboard', :action => 'config'
+  map.splash_config '/splash.xml', :controller => 'dashboard', :action => 'config', :format => 'xml'
 
   map.connect '/countries', :controller => 'users', :action => 'countries'
   
