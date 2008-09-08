@@ -26,12 +26,12 @@
 	}
 
 	var flashvars = { 
-		serverPath: '<%= APPLICATION[:url] %>', 
-		settingsXMLPath: '<%= splash_config_path %>',
 		<%- if logged_in? && current_user.is_admin? -%>
 		isLogEnabled: 'yes', 
-		isServiceDumpEnabled: 'no' 
+		isServiceDumpEnabled: 'no',
 		<%- end -%>
+		serverPath: '<%= APPLICATION[:url] %>', 
+		settingsXMLPath: '<%= splash_config_path %>'
 	}; 
 	var params = { wmode:'transparent' }; 
 	var attributes = { name:'splashObject' }; 
