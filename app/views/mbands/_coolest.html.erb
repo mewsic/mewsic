@@ -23,7 +23,7 @@
 		</div>
 		<div class="slide-container">
 			<div class="slide-clip">
-				<div class="slide-contents" style="width: <%= coolest.members.count * 32 %>px;">
+				<div class="slide-contents" style="width: <%= coolest.members.count * 35 %>px;">
 					<% coolest.members.each do |member| %>
 						<%= link_to avatar_image(member, :icon), user_path(member) %>
 					<% end %>
