@@ -68,7 +68,7 @@ class MultitrackControllerTest < ActionController::TestCase
   end
 
   def test_should_send_config
-    get :config
+    get :config, :format => 'xml'
 
     assert_response :success
     assert_template 'config'
