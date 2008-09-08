@@ -4,7 +4,7 @@
 	<services>
 		<media><%= APPLICATION[:media_url] %></media>
 		<default_avatar>/images/default_avatars/avatar_small.gif</default_avatar>
-		<learnmore>/help/multitrack</learnmore>
+		<learnmore>/help</learnmore>
 		<connection_timeout>30</connection_timeout>
 		<url_request>
 			<instruments>/instruments.xml</instruments>
@@ -14,13 +14,13 @@
 		</url_request>
 	</services>
 
-	<slideshow interval="10">
+	<slideshow interval="7">
 		<image url="/splash/test/slide-test-1.jpg"><![CDATA[Mix Yours and other Myousicians© tracks to create new songs!]]></image>
 		<image url="/splash/test/slide-test-2.jpg"><![CDATA[Upload or Record your tracks live through the M-Track©]]></image>
 		<image url="/splash/test/slide-test-3.jpg"><![CDATA[Play creating Your M-Bands© with Myousicians© from all over the world!]]></image>
 	</slideshow>
 
-	<songs interval="5">
+	<songs interval="3">
 		<%- @songs.each do |song| -%>
 			<song id="<%= song.id %>"></song>
 		<%- end -%>
