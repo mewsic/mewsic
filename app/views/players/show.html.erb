@@ -5,14 +5,14 @@
 
 	var flashvars = {
 		serverPath: '<%= APPLICATION[:url] %>',
-		soundLength: <%= @length %>,
-		soundPath: '<%= @stream %>',
-		wavePath: '<%= @image %>',
+		soundLength: <%= @playable.seconds %>,
+		soundPath: '<%= escape_javascript @playable.public_filename %>',
+		wavePath: '<%= escape_javascript @waveform %>',
 		title: '<%= escape_javascript @playable.title %>',
 		author: '<%= escape_javascript @playable.original_author %>',
 		genre: '<%= escape_javascript @playable.genre.name rescue nil %>',
-		user: '<%= escape_javascript @playable.user.login %>',
-		avatar: '<%= escape_javascript @playable.user.avatar.public_filename(:small) rescue nil %>'
+		user: '<%= escape_javascript @playable.user.login rescue nil %>',
+		avatar: '<%= escape_javascript @playable.user.avatar.public_filename(:small) rescue "/images/default_avatars/avatar_small.gif" %>'
 	};
 
 	var params = { wmode: 'transparent' };
