@@ -6,6 +6,8 @@
 	var flashvars = {
 		serverPath: '<%= APPLICATION[:url] %>',
 		soundLength: <%= @playable.seconds %>,
+		soundID: <%= @playable.id %>,
+		soundType: '<%= @playable.class.name.underscore %>',
 		soundPath: '<%= escape_javascript @playable.public_filename %>',
 		wavePath: '<%= escape_javascript @waveform %>',
 		title: '<%= escape_javascript @playable.title %>',
