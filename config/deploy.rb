@@ -78,6 +78,7 @@ task :myousica_symlinks, :roles => [:app, :web], :except => {:no_release => true
   symlink_videos
   symlink_multitrack
   symlink_splash
+  symlink_players
 end
 
 task :symlink_photos, :roles => [:app, :web], :except => {:no_release => true, :no_symlink => true} do
@@ -102,6 +103,10 @@ end
 
 task :symlink_splash, :roles => [:app, :web], :except => {:no_release => true, :no_symlink => true} do
   run "cd #{current_release}/public rm -rf splash; ln -s #{shared_path}/splash ."
+end
+
+task :symlink_players, :roles => [:app, :web], :except => {:no_release => true, :no_symlink => true} do
+  run "cd #{current_release}/public rm -rf players; ln -s #{shared_path}/players ."
 end
 
 # =============================================================================
