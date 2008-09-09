@@ -93,10 +93,10 @@ class Song < ActiveRecord::Base
   end
 
   def self.find_most_collaborated(options = {})
-    limit = "LIMIT #{options[:limit]}" if options[:limit]
     collaboration_count = options[:minimum_siblings] || 2
-    find_by_sql(["
-      SELECT s.*, COUNT(DISTINCT m.song_id) -1 AS siblings_count
+    songs = find_by_sql(["
+      SELECT s.*, COUNT(DISTINCT m.song_id) -1 AS siblings_count,
+        GROUP_CONCAT(DISTINCT m.song_id ORDER BY m.song_id) AS signature
       FROM mixes m LEFT OUTER JOIN mixes t ON m.track_id = t.track_id
       LEFT OUTER JOIN songs s ON t.song_id = s.id
       LEFT OUTER JOIN songs x ON m.song_id = x.id
@@ -104,8 +104,16 @@ class Song < ActiveRecord::Base
       GROUP BY s.id
       HAVING siblings_count >= ?
       ORDER BY siblings_count DESC, s.rating_avg DESC
-      #{limit}
     ", true, true, collaboration_count])
+
+    signatures = []
+    songs = songs.select { |song|
+      next if signatures.include? song.signature
+      signatures.push song.signature
+    }
+    songs = songs.slice(0, options[:limit].to_i) if options[:limit]
+
+    return songs
   end
   
   def direct_siblings(limit = nil)
