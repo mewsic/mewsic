@@ -4215,7 +4215,7 @@ div.auto_complete ul strong.highlight {
 
 #player-container {
 	background: transparent url(/images/blue.gif) repeat;
-	opacity: 0.9;
+	/*opacity: 0.9;*/
 	position: fixed;
 	display: block;
 	z-index: 110;
@@ -4239,6 +4239,7 @@ div.auto_complete ul strong.highlight {
 }
 
 #player-container .content {
-	margin-top: 5px;
-	margin-left: 50px;
+	margin: 5px auto 0;
+	z-index: 120;
+	width: 980px;
 }
