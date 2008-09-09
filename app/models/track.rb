@@ -163,9 +163,13 @@ class Track < ActiveRecord::Base
     self.parent_song ? self.parent_song.original_author : nil
   end
   
+  def genre
+    (self.parent_song && self.parent_song.genre) ? self.parent_song.genre : nil
+  end
+
   #called by mlab.js 
   def genre_name
-    (self.parent_song && self.parent_song.genre) ? self.parent_song.genre.name : nil
+    self.genre.name if self.genre
   end
   
 private

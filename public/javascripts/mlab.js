@@ -9,7 +9,7 @@ var MlabItem = Class.create({
     '    </div>' +
   	'  </div>' +
   	'  <div class="buttons">' +
-  	'	   <a class="button mlab play player" href="/#{type}s/#{attributes.id}/player.html"></a>' +
+  	'	   <a class="button mlab play player" rel="/#{type}s/#{attributes.id}/player.html"></a>' +
   	'	   <a href="#" class="button mlab remove" onclick="MlabSlider.destroyItem(\'#{type}\', #{attributes.id}); return false;"></a>' +
   	'  </div>' +
     '  <p class="genre">#{attributes.genre_name}</p>' +
