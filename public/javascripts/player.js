@@ -87,6 +87,19 @@ var Player = Class.create({
   
 });
 
+function player_mlab(type, id) {
+  if (!MlabSlider.instance) {
+    alert("You have to register to use the My List feature");
+    return;
+  }
+
+  if (type == 'song') {
+    MlabSlider.instance.addSong({id: String(id) + '_'});
+  } else if (type == 'track') {
+    MlabSlider.instance.addTrack({id: String(id) + '_'});
+  }
+}
+
 document.observe('dom:loaded', function(event) {
   Player.instance = new Player();
 });
