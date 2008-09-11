@@ -4252,8 +4252,9 @@ div.auto_complete ul strong.highlight {
 
 #video-player {
 	width: 220px;
-	height: 202px;
+	/*height: 202px;*/
+	height: 162px;
 	position: relative;
-	background: url('/images/video-player-bottom.png') left bottom no-repeat;
+	background: url('/images/video-player-bottom-temp.png') left bottom no-repeat;
 	margin: 0 /* 0 20px 0*/;
 }
