@@ -4273,6 +4273,6 @@ div.auto_complete ul strong.highlight {
 	/*height: 202px;*/
 	height: 135px;
 	position: relative;
-	background: url('/images/video-player-bottom-temp.png') left bottom no-repeat;
+	/*background: url('/images/video-player-bottom-temp.png') left bottom no-repeat;*/
 	margin: 0 /* 0 20px 0*/;
 }
