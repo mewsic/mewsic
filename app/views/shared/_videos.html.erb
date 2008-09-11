@@ -13,6 +13,10 @@
 		return(isfb);
 	}
 
+	function fullscreen_video() {
+		Lightview.show({href: "<%= APPLICATION[:url] %>/videos/myousica.mov" });
+	}
+
 	var flashvars = {
 		<%- if logged_in? && current_user.is_admin? -%>
 		isLogEnabled:'yes',
