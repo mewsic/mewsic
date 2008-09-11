@@ -23,7 +23,7 @@ class Answer < ActiveRecord::Base
   define_index do
   end
   
-  has_many :replies, :order => 'created_at DESC'
+  has_many :replies, :order => 'created_at DESC', :dependent => :delete_all
   belongs_to :user
   
   acts_as_rated :rating_range => 0..5 

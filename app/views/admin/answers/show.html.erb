@@ -1,0 +1,27 @@
+<a class="close-edit" href="#">close</a>
+<h2>editing answer <%= @answer.id %></h2>
+<%= error_messages_for :answer %>
+<% edit_form_for @answer, :url => admin_answer_url(@answer) do |f| %>
+<dl>
+	<dt>body</dt>
+	<dd><%= f.text_area :body %></dd>
+
+	<dt>user</dt>
+	<dd><%= f.select :user_id, User.find(:all, :select => 'login,id', :conditions => 'activated_at IS NOT NULL', :order => 'login').map {|u| [u.login,u.id]}, :include_blank => true %></dd>
+
+	<dt>created at</dt>
+	<dd><%= @answer.created_at %></dd>
+
+	<dt>updated at</dt>
+	<dd><%= @answer.updated_at %></dd>
+
+	<dt>rating</dt>
+	<dd><%= @answer.rating_avg.to_f %></dd>
+
+</dl>
+<%= submit_tag 'submit' %>
+<% end %>
+
+<% edit_form_for @answer, :url => admin_answer_url(@answer), :method => 'delete' do %>
+	<%= submit_tag 'delete', :confirm => 'sure?!' %>
+<% end %>
