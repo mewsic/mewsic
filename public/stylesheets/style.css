@@ -342,7 +342,7 @@ div.user-list-boxes .motto {
 	color:#000;
 }
 .title a:hover {
-	color:#28548B;
+	color:#000;
 }
 .country{
 	color:#777;
@@ -2550,6 +2550,9 @@ p.sign-in .button{
 .blue-text a{
 	color:#014D70;
 }
+.blue-text a:hover {
+	color:#014D70;
+}
 .black-text{
 	color:#000;
 }
@@ -2574,6 +2577,9 @@ p.sign-in .button{
 }
 .orange-text a{
 	color:#ECAF48;
+}
+.bold-text {
+	font-weight:bold;
 }
 .playcount {
 	margin: 2px 0px !important;
@@ -4075,10 +4081,18 @@ div.auto_complete ul strong.highlight {
 	border-bottom: 1px solid #D9D9D9;
 }
 
+.genre-list p {
+	padding: 0 !important;
+}
+
 #flashcontent {
 	width: 978px;
 	height: 40px;
 	margin-bottom: 90px;
+}
+
+#user_country, #user_city {
+	font-weight: normal;
 }
 
 .user-switch .from {
