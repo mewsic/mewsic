@@ -17,9 +17,9 @@
 		<%- if logged_in? && current_user.is_admin? -%>
 		isLogEnabled:'yes',
 		<%- end -%>
-		videoURL:'/videos/myousica-video-promo.flv',
-		posterURL:'/videos/myousica-video-promo.jpg',
-		videoLength: 134
+		videoURL:'/videos/converted/myousica.flv',
+		posterURL:'/videos/converted/myousica.jpg',
+		videoLength: 45
 	};
 
 	var params = {
@@ -28,7 +28,7 @@
 
 	var attributes = {name: 'videoPlayer'};
 
-	swfobject.embedSWF('/players/Adelao_Myousica_Video_Player.swf', 'video-player', '220', '157', '9.0.0', '/expressInstall.swf', flashvars, params, attributes);
+	swfobject.embedSWF('/players/Adelao_Myousica_Video_Player.swf', 'video-player', '220', '130', '9.0.0', '/expressInstall.swf', flashvars, params, attributes);
 	// ]]></script>
 
 <div id="video-container">

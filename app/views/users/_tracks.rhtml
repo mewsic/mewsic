@@ -7,18 +7,19 @@
 <%- end -%>
 
 <div class="next">
-	<% if @tracks.page_count > 1 %>
-		<span class="align-right page-count">Page <%= @tracks.current_page %> of <%= @tracks.page_count %></span>
-	<% end %>
+	<div class="float-right">
 	<% if @tracks.previous_page %>
 		<%= link_to image_tag('move_arrow_left.png'), user_tracks_path(@user, :page => @tracks.previous_page), :class => 'navigation' %>
 	<% else %>
 		<%= image_tag('move_arrow_left.png', :class => 'faded') %>
 	<% end %>
-
   <% if @tracks.next_page %>
 		<%= link_to image_tag('move_arrow_right.png'), user_tracks_path(@user, :page => @tracks.next_page), :class => 'navigation' %>
 	<% else %>
 		<%= image_tag('move_arrow_right.png', :class => 'faded') %>
   <% end %>
+	</div>
+	<% if @tracks.page_count > 1 %>
+		<p class="float-right page-count">Page <%= @tracks.current_page %> of <%= @tracks.page_count %></p>
+	<% end %>
 </div>

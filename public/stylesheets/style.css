@@ -1595,6 +1595,9 @@ tr.nav-song td{
 	background-color:#eff6e9;
 	padding:0px 10px;
 }
+.tit-classification-songs .page-count{
+	margin-top: 2px;
+}
 
 /* elenco generi */
 .elenco-genere table {
@@ -1634,7 +1637,8 @@ tr.nav-song td{
 	margin-bottom:20px;
 }
 .tit-classification-tracks table {
-	margin:auto auto;
+	margin: auto;
+	width: 95%;
 }
 .tit-classification-tracks p {
 	padding: 2px 0px 1px !important;
@@ -4267,7 +4271,7 @@ div.auto_complete ul strong.highlight {
 #video-player {
 	width: 220px;
 	/*height: 202px;*/
-	height: 162px;
+	height: 135px;
 	position: relative;
 	background: url('/images/video-player-bottom-temp.png') left bottom no-repeat;
 	margin: 0 /* 0 20px 0*/;
