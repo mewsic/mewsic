@@ -150,14 +150,18 @@ module ApplicationHelper
   end    
   
   def render_sidebar   
-    #  content << render(:partial => 'shared/share_myousica')
-    content = render(:partial => 'shared/side_banners_top')
+    content = ''
+    # content << render(:partial => 'shared/share_myousica')
+
+    content << render(:partial => 'shared/side_banners_top')
+    content << render(:partial => 'shared/videos')
+
     unless logged_in? || (params[:controller] == 'sessions' || (params[:controller] == 'users' && (params[:action] == 'new' || params[:action] == 'create')))
       content << render(:partial => 'shared/login_box')
     end
+
     content << render(:partial => 'shared/mlab')
     content << render(:partial => 'shared/side_banners_bottom')
-    content << render(:partial => 'shared/videos')
   end    
   
   def avatar_path(model, size)

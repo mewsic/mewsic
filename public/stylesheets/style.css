@@ -131,6 +131,7 @@ ul.list-menu{
 }
 #nav-menu a:hover {
 	color:#28548B;
+	text-decoration: none;
 }
 #nav-menu li.active, #nav-menu li.active a{
 	color:#006F9F;
@@ -4246,7 +4247,7 @@ div.auto_complete ul strong.highlight {
 
 #video-container {
 	padding: 0;
-	margin: 0 auto;
+	margin: 10px auto;
 	width: 220px;
 }
 
@@ -4255,5 +4256,5 @@ div.auto_complete ul strong.highlight {
 	height: 202px;
 	position: relative;
 	background: url('/images/video-player-bottom.png') left bottom no-repeat;
-	margin: 0 0 20px 0;
+	margin: 0 /* 0 20px 0*/;
 }
