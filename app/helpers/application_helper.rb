@@ -157,6 +157,7 @@ module ApplicationHelper
     end
     content << render(:partial => 'shared/mlab')
     content << render(:partial => 'shared/side_banners_bottom')
+    content << render(:partial => 'shared/videos')
   end    
   
   def avatar_path(model, size)

@@ -4243,3 +4243,17 @@ div.auto_complete ul strong.highlight {
 	z-index: 120;
 	width: 980px;
 }
+
+#video-container {
+	padding: 0;
+	margin: 0 auto;
+	width: 220px;
+}
+
+#video-player {
+	width: 220px;
+	height: 202px;
+	position: relative;
+	background: url('/images/video-player-bottom.png') left bottom no-repeat;
+	margin: 0 0 20px 0;
+}
