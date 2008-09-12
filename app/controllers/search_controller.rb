@@ -185,19 +185,19 @@ class SearchController < ApplicationController
     end
     
     def search_users(query, per_page, page)
-      User.search(query, :per_page => per_page, :page => page, :index => 'users', :match_mode => :boolean)
+      User.search(query, :per_page => per_page, :page => page, :index => 'users', :match_mode => :boolean).compact
     end
     
     def search_songs(query, per_page, page, conditions = {})                        
-      Song.search(query, :per_page => per_page, :page => page, :index => 'songs', :match_mode => :extended, :include => :user, :conditions => conditions)
+      Song.search(query, :per_page => per_page, :page => page, :index => 'songs', :match_mode => :extended, :include => :user, :conditions => conditions).compact
     end
     
     def search_tracks(query, per_page, page, conditions = {})
-      Track.search(query, :per_page => per_page, :page => page, :index => 'tracks', :match_mode => :extended, :conditions => conditions)
+      Track.search(query, :per_page => per_page, :page => page, :index => 'tracks', :match_mode => :extended, :conditions => conditions).compact
     end
     
     def search_ideas(query, per_page, page)
-      Track.search(query, :per_page => per_page, :page => page, :index => 'tracks', :match_mode => :boolean, :conditions => { :idea => '1' } )
+      Track.search(query, :per_page => per_page, :page => page, :index => 'tracks', :match_mode => :boolean, :conditions => { :idea => '1' } ).compact
     end
 
     # instrument=instrument_id&genre=genre_id&country=country&city=city&author=pink+floyd&title=the+wall
