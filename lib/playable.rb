@@ -40,7 +40,7 @@ module Adelao
         end
 
         def delete_sound_file
-          return unless self.filename
+          return if self.filename.blank?
           return if RAILS_ENV == 'development'
 
           File.unlink absolute_filename(:stream)
