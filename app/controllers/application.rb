@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   protected    
   
   def update_user_status
-    multitrack_request = (controller_name == 'multitrack') || (params[:format] == 'xml')
+    multitrack_request = request.env['HTTP_REFERER'] && request.env['HTTP_REFERER'] =~ /\/multitrack/i
     javascript_request = params[:format] == 'js'
 
     if logged_in? && !request.xhr?
