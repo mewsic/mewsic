@@ -34,7 +34,7 @@ class Mband < ActiveRecord::Base
   attr_accessible :name, :motto, :tastes, :photos_url, :blog_url, :myspace_url
   
   validates_presence_of   :name
-  validates_format_of     :name, :with => /^[a-z]['\w ]+$/i, :if => Proc.new{|m| !m.name.blank?}, :message => 'only letters, numbers, spaces and underscore allowed!'
+  validates_format_of     :name, :with => /^[a-z]['\w_- ]+$/i, :if => Proc.new{|m| !m.name.blank?}, :message => 'only letters, numbers, spaces and underscore allowed!'
 
   validates_format_of     :photos_url, :blog_url, :myspace_url, :with => /^(((http|https):\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?)?$/ix, :message => 'invalid internet address'
 

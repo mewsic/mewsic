@@ -20,11 +20,10 @@ class MbandMembershipsController < ApplicationController
     end
     
     flash[:notice] = "User '#{@user.login}' has been invited to the '#{@mband.name}' M-band as a '#{@instrument.description}' player!"
+    redirect_to mband_url(@mband)
 
   rescue ActiveRecord::ActiveRecordError
     flash[:error] = "Invalid request"
-
-  ensure
     redirect_to mband_url(@mband)
   end
 
