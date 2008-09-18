@@ -1,6 +1,6 @@
 class MultitrackController < ApplicationController  
   
-  before_filter :login_required, :only => :edit
+  before_filter :login_required, :only => [:edit, :beta_edit]
   before_filter :stable_multitrack, :only => [:index, :edit]
   before_filter :beta_multitrack, :only => [:beta_index, :beta_edit]
 
