@@ -40,7 +40,7 @@ class Admin::SongsController < Admin::AdminController
 
   def destroy
     Song.find(params[:id]).destroy
-    render(:update) { |page| page.hide 'editing' }
+    update_after_destroy
   end
 
   def mix

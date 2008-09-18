@@ -38,7 +38,7 @@ class Admin::TracksController < Admin::AdminController
 
   def destroy
     Track.find(params[:id]).destroy
-    render(:update) { |page| page.hide 'editing' }
+    update_after_destroy
   end
 
   def upload

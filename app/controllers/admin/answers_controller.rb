@@ -15,7 +15,7 @@ class Admin::AnswersController < Admin::AdminController
 
   def destroy
     Answer.find(params[:id]).destroy
-    render(:update) { |page| page.hide 'editing' }
+    update_after_destroy
   end
 
 end
