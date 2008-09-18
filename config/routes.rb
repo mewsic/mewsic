@@ -71,7 +71,8 @@ ActionController::Routing::Routes.draw do |map|
   map.multitrack_refresh '/multitrack/refresh/:id', :controller => 'multitrack', :action => 'refresh'
   map.multitrack_auth    '/multitrack/_/:user_id',  :controller => 'multitrack', :action => 'authorize' #, :token => /[\da-fA-F]{40}/
   map.multitrack_song    '/multitrack/s/:user_id',  :controller => 'multitrack', :action => 'update_song' #, :token => /[\da-fA-F]{40}/
-  map.multitrack_beta    '/pappapperotrack',        :controller => 'multitrack', :action => 'beta'
+  map.multitrack_beta    '/pappapperotrack',        :controller => 'multitrack', :action => 'beta_index'
+  map.multitrack_beta    '/pappapperotrack/:id',    :controller => 'multitrack', :action => 'beta_edit'
 
   map.splash_config '/splash.xml', :controller => 'dashboard', :action => 'config', :format => 'xml'
 

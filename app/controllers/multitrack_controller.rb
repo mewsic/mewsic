@@ -1,9 +1,10 @@
 class MultitrackController < ApplicationController  
   
   before_filter :login_required, :only => :edit
+  before_filter :stable_multitrack, :only => [:index, :edit]
+  before_filter :beta_multitrack, :only => [:beta_index, :beta_edit]
 
   def index    
-    @swf = 'Adelao_Myousica_Multitrack_Editor.swf'
     if logged_in?
       current_user.enter_multitrack!
       @song = current_user.songs.create_unpublished!
@@ -15,9 +16,8 @@ class MultitrackController < ApplicationController
     end
   end
 
-  def beta
+  def beta_index
     index
-    @swf = 'Adelao_Myousica_Multitrack_Editor_beta.swf'
     render :action => 'index'
   end
 
@@ -29,6 +29,10 @@ class MultitrackController < ApplicationController
   rescue ActiveRecord::RecordNotFound
     flash[:error] = 'Song not found..'
     redirect_to '/'
+  end
+
+  def beta_edit
+    edit
   end
   
   def config
@@ -71,5 +75,14 @@ class MultitrackController < ApplicationController
   rescue ActiveRecord::ActiveRecordError
     head :bad_request
   end
+
+  private
+    def stable_multitrack
+      @swf = 'Adelao_Myousica_Multitrack_Editor.swf'
+    end
+
+    def beta_multitrack
+      @swf = 'Adelao_Myousica_Multitrack_Editor_beta.swf'
+    end
 
 end
