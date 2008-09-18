@@ -4,4 +4,5 @@
 	<td><%= track.instrument.description %></td>
 	<td><%= edit_link_to track.user.login, admin_user_path(track.user) %></td>
 	<td><%= edit_link_to track.parent_song.title, admin_song_path(track.parent_song) if track.parent_song %></td>
+	<td><%= track.created_at.strftime "%d/%m/%Y %H:%M:%S" %></td>
 </tr>
