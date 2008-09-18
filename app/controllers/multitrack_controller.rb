@@ -3,6 +3,7 @@ class MultitrackController < ApplicationController
   before_filter :login_required, :only => :edit
 
   def index    
+    @swf = 'Adelao_Myousica_Multitrack_Editor.swf'
     if logged_in?
       current_user.enter_multitrack!
       @song = current_user.songs.create_unpublished!
@@ -12,6 +13,12 @@ class MultitrackController < ApplicationController
       @song = Song.new :published => false
       @song.randomize!
     end
+  end
+
+  def beta
+    index
+    @swf = 'Adelao_Myousica_Multitrack_Editor_beta.swf'
+    render :action => 'index'
   end
 
   def edit
