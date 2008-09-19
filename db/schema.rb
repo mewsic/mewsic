@@ -275,6 +275,7 @@ ActiveRecord::Schema.define(:version => 55) do
     t.string   "poster",      :limit => 64
     t.string   "highres",     :limit => 64
     t.string   "thumb",       :limit => 64
+    t.integer  "length"
     t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -8,6 +8,7 @@ class CreateVideos < ActiveRecord::Migration
       t.string :highres,     :limit => 64
       t.string :thumb,       :limit => 64
 
+      t.integer :length
       t.integer :position 
 
       t.timestamps
