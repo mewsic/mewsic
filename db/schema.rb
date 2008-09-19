@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 54) do
+ActiveRecord::Schema.define(:version => 55) do
 
   create_table "abuses", :force => true do |t|
     t.integer  "abuseable_id"
@@ -267,5 +267,17 @@ ActiveRecord::Schema.define(:version => 54) do
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
+
+  create_table "videos", :force => true do |t|
+    t.string   "name",        :limit => 32
+    t.string   "description"
+    t.string   "filename",    :limit => 64
+    t.string   "poster",      :limit => 64
+    t.string   "highres",     :limit => 64
+    t.string   "thumb",       :limit => 64
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

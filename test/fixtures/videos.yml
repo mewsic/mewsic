@@ -1,0 +1,52 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+# one:
+#   column: value
+#
+# two:
+#   column: value
+#
+promo:
+  name: promo
+  description: Myousica official promo
+  filename: myousica.flv
+  poster: myousica.jpg
+  highres: myousica.mov
+  thumb: myousica_thumb.jpg
+  position: 1
+
+dj_experience:
+  name: dj experience
+  description: Myousica DJ Experience
+  filename: myousica_dj.flv
+  poster: myousica_dj.jpg
+  highres: myousica_dj.mov
+  thumb: myousica_dj_thumb.jpg
+  position: 2
+
+doublebass_experience:
+  name: doublebass experience
+  description: Myousica Double Bass Experience
+  filename: myousica_doublebass.flv
+  poster: myousica_doublebass.jpg
+  highres: myousica_doublebass.mov
+  thumb: myousica_doublebass_thumb.jpg
+  position: 3
+
+guitar_experience:
+  name: guitar experience
+  description: Myousica Guitar Experience
+  filename: myousica_guitar.flv
+  poster: myousica_guitar.jpg
+  highres: myousica_guitar.mov
+  thumb: myousica_guitar_thumb.jpg
+  position: 4
+
+violin_experience:
+  name: violin experience
+  description: Myousica Violin Experience
+  filename: myousica_violin.flv
+  poster: myousica_violin.jpg
+  highres: myousica_violin.mov
+  thumb: myousica_violin_thumb.jpg
+  position: 5
