@@ -14,4 +14,13 @@ class Video < ActiveRecord::Base
     [APPLICATION[:video_url], self.send(method)].join('/')
   end
 
+  def to_json
+    {:filename    => self.public_filename(:video),
+     :poster      => self.public_filename(:poster),
+     :highres     => self.public_filename(:highres),
+     :length      => self.length,
+     :name        => self.name,
+     :description => self.description}.to_json
+  end
+
 end

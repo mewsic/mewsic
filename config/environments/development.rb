@@ -27,5 +27,6 @@ APPLICATION = {
   :fms_url => 'http://localhost:3000',
   :media_url => 'http://localhost:3001',
   :audio_url => '/audio',
+  :video_url => '/videos',
   :media_path => File.join(RAILS_ROOT, 'public', 'audio')
 }

@@ -1,46 +1,111 @@
 <script type="text/javascript">// <![CDATA[
 
-	function setFlashHeight( height ) {
-		$('video-player').style.height = height.toString() + 'px';
+	function setFlashHeight(height) {
+		$(Video.instance.element).style.height = height.toString() + 'px';
 	}
 
 	function isLoggerAvailable() {
 		var isfb = false;
-		try {
-			isfb = console.log != undefined;
-		}
-		catch(err) {};
+		try { isfb = console.log != undefined; } catch(err) {};
 		return(isfb);
 	}
 
 	function fullscreen_video() {
 		Lightview.show({
-			href: "<%= APPLICATION[:url] %>/videos/myousica.mov",
+			href: Video.instance.highres,
 			rel: 'quicktime',
-			title: 'MYOUSICA :: PLAY AND SHARE', options: {
+			title: 'MYOUSICA :: PLAY AND SHARE :: ' + Video.instance.description,
+			options: {
 				width: 600, height: 480, topclose: false, menubar: true
 			}
 		});
 	}
 
-	var flashvars = {
-		<%- if logged_in? && current_user.is_admin? -%>
-		isLogEnabled:'yes',
-		<%- end -%>
-		videoURL:'/videos/converted/myousica.flv',
-		posterURL:'/videos/converted/myousica.jpg',
-		videoLength: 48
-	};
+	var Video = Class.create({
+		initialize: function() {
+			this.player = '/players/Adelao_Myousica_Video_Player.swf';
+			this.element = 'video-player';
+			this.scroller = 'video-scroller';
+			this.container = 'video-container';
+			this.linkSelector = '.video-link';
+			this.videos = [ <%= Video.find(:all).map(&:to_json).join(',') %> ];
 
-	var params = {
-		wmode:'transparent'
-	};
+			this.setupLinks();
+		},
 
-	var attributes = {name: 'videoPlayer'};
+		embed: function(video) {
+			if ($(this.element)) {
+				swfobject.removeSWF(this.element);
+			}
 
-	swfobject.embedSWF('/players/Adelao_Myousica_Video_Player.swf', 'video-player', '220', '130', '9.0.0', '/expressInstall.swf', flashvars, params, attributes);
+			$(this.container).insert({
+				'top': new Element('div', {id: this.element})
+			});
+
+			this.highres = video.highres;
+			this.description = video.description;
+
+			var flashvars = {
+				<%- if logged_in? && current_user.is_admin? -%>
+				isLogEnabled:'yes',
+				<%- end -%>
+				videoURL: video.filename,
+				posterURL: video.poster,
+				videoLength: video.length
+			};
+
+			var params = {
+				wmode:'transparent'
+			};
+
+			var attributes = {name: 'videoPlayer'};
+
+			swfobject.embedSWF(this.player, this.element, '220', '130', '9.0.0', '/expressInstall.swf', flashvars, params, attributes);
+		},
+
+		setupLinks: function() {
+			$(this.scroller).select(this.linkSelector).each(function(link) {
+				link.observe('click', this.handleClick.bind(this));
+			}.bind(this));
+		},
+
+		handleClick: function(event) {
+			event.stop();
+
+			var name = event.element().up().getAttribute('rel');
+			var video = this.videos.find(function(v) { return v.name == name });
+
+			if (video) {
+				this.embed(video);
+			}
+		}
+	});
+
+	document.observe('dom:loaded', function() {
+		Video.instance = new Video();
+		Video.instance.embed(<%= Video.find_by_name('promo').to_json %>);
+
+		new SimpleSlider('video-scroller', {x: 120, y: 0});
+	});
+
 	// ]]></script>
 
 <div id="video-container">
-	<div id="video-player"></div>
+</div>
+<div id="video-scroller" class="clear-block">
+	<div class="float-left">
+		<a href="#" class="slide-prev"><img src="/images/slider_arrow_left.gif"/></a>
+	</div>
+	<div class="slide-container">
+		<div class="slide-clip">
+			<div class="slide-contents" style="width:<%= Video.count * 55 %>px;left:0px;text-align:left;">
+				<% Video.find(:all, :order => :position).each do |video| %>
+					<a href="#" class="video-link" rel="<%= video.name %>"><img src="<%= video.public_filename :thumb %>" /></a>
+				<% end %>
+			</div>
+		</div>
+	</div>
+	<div class="float-left">
+		<a href="#" class="slide-next"><img src="/images/slider_arrow_right.gif"/></a>
+	</div>
 </div>
