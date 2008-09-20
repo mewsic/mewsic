@@ -84,6 +84,7 @@ quentin:
   city: Bari
   motto: Arma Virumque Cano Troiae qui primus ab oris
   nickname: quentin
+  is_admin: true
 aaron:
   login: aaron
   email: aaron@example.com

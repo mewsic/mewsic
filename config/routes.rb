@@ -96,6 +96,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :answers
     admin.resources :help_pages, :member => { :rearrange => :put }
     admin.resources :static_pages
+    admin.resources :videos, :member => { :rearrange => :put }
   end
 
 end

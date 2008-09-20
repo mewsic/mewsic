@@ -1,0 +1,13 @@
+<p>Total <%= Video.count %> videos</p>
+<table class="admin_content_table" cellspacing="0" cellpadding="5">
+	<tr>
+		<th>id</th>
+		<th>name</th>
+		<th>description</th>
+		<th>length</th>
+		<th>date</th>
+		<th>arrange</th>
+	</tr>
+	<%= render :partial => 'video', :collection => @videos %>
+</table>
+

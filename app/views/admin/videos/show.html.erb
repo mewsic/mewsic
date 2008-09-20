@@ -1,0 +1,47 @@
+<a class="close-edit" href="#">close</a>
+<h2>editing video <%= @video.id %></h2>
+<%= error_messages_for :video %>
+<span class="error"><%= flash[:error] %></span>
+<% edit_form_for @video, :url => admin_video_url(@video) do |f| %>
+<dl>
+	<dt>name</dt>
+	<dd><%= f.text_field :name %></dd>
+
+	<dt>description</dt>
+	<dd><%= f.text_field :description %></dd>
+
+	<dt>filename</dt>
+	<dd><%= f.text_field :filename %></dd>
+
+	<dt>poster image</dt>
+	<dd>
+		<%= f.text_field :poster %>
+		<img src="<%= @video.public_filename :poster %>"/>
+	</dd>
+
+	<dt>high res video</dt>
+	<dd>
+		<%= f.text_field :highres %>
+		<%= link_to 'watch', @video.public_filename(:highres), :target => '_blank' %>
+	</dd>
+
+	<dt>thumbnail</dt>
+	<dd>
+		<%= f.text_field :thumb %>
+		<img src="<%= @video.public_filename :thumb %>"/>
+	</dd>
+
+	<dt>length</dt>
+	<dd><%= f.text_field :length %></dd>
+
+	<dt>position</dt>
+	<dd><%= @video.position %></dd>
+
+	<dt>created at</dt>
+	<dd><%= @video.created_at %></dd>
+
+	<dt>updated at</dt>
+	<dd><%= @video.updated_at %></dd>
+</dl>
+<%= submit_tag 'submit' %>
+<% end %>

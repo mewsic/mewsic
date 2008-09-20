@@ -25,7 +25,10 @@
 	<dd><%= f.select :instrument_id, Instrument.find(:all, :order => 'description').map { |i| [i.description, i.id] }, :include_blank => true %></dd>
 
 	<dt>filename</dt>
-	<dd><%= f.text_field :filename %></dd>
+	<dd>
+		<%= f.text_field :filename %>
+		<%= link_to 'play', @track.public_filename, :target => '_blank' %>
+	</dd>
 
 	<dt>bpm</dt>
 	<dd><%= f.text_field :bpm %></dd>

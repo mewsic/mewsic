@@ -1,0 +1,12 @@
+<tr>
+	<td><%= edit_link_to video.id, admin_video_path(video.id) %></td>
+	<td><%= video.name %></td>
+	<td><%= video.description %></td>
+	<td><%= video.length %></td>
+	<td><%= video.created_at.strftime "%d/%m/%Y %H:%M:%S" %></td>
+	<td>
+		<%= link_to_remote ' up ', :url => rearrange_admin_video_path(video, :move => 'up'), :method => :put, :update => 'admin_content' %> -
+		<%= link_to_remote 'down', :url => rearrange_admin_video_path(video, :move => 'down'), :method => :put, :update => 'admin_content' %>
+	</td>
+</tr>
+

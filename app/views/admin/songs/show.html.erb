@@ -17,7 +17,10 @@
 	<dd><%= f.text_field :tone %></dd>
 
 	<dt>filename</dt>
-	<dd><%= f.text_field :filename %></dd>
+	<dd>
+		<%= f.text_field :filename %>
+		<%= link_to 'play', @song.public_filename, :target => '_blank' %>
+	</dd>
 
 	<dt>user</dt>
 	<dd><%= f.select :user_id, User.find(:all, :select => 'login,id', :conditions => 'activated_at IS NOT NULL', :order => 'login').map {|u| [u.login,u.id]}, :include_blank => true %></dd>
