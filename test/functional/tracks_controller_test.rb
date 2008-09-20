@@ -7,6 +7,16 @@ class TracksControllerTest < ActionController::TestCase
 
   fixtures :all
 
+  def setup
+    ActionMailer::Base.delivery_method = :test
+    ActionMailer::Base.perform_deliveries = true
+    ActionMailer::Base.deliveries = []
+  end
+
+  def teardown
+    ActionMailer::Base.deliveries = []
+  end
+
   def test_index_should_response_redirect
     get :index, :id => users(:quentin).id
     assert_response :redirect
@@ -128,6 +138,7 @@ class TracksControllerTest < ActionController::TestCase
     end
 
     assert_response :success
+    assert_equal 1, ActionMailer::Base.deliveries.size
 
     assert assigns(:track)
     assert_equal assigns(:track).title, 'test track'

@@ -8,7 +8,11 @@ class UserObserver < ActiveRecord::Observer
   end
 
   def after_save(user)  
-    UserMailer.deliver_activation(user)      if user.pending?
+    if user.pending?
+      UserMailer.deliver_activation(user)
+      MyousicaMailer.deliver_new_user_notification(user)
+    end
+
     UserMailer.deliver_forgot_password(user) if user.recently_forgot_password?
     UserMailer.deliver_reset_password(user)  if user.recently_reset_password?
   end

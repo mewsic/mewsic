@@ -5,8 +5,15 @@ class MultitrackControllerTest < ActionController::TestCase
   fixtures :all
   tests MultitrackController
 
+  def setup
+    ActionMailer::Base.delivery_method = :test
+    ActionMailer::Base.perform_deliveries = true
+    ActionMailer::Base.deliveries = []
+  end
+
   def teardown
     @request.session[:user] = nil
+    ActionMailer::Base.deliveries = []
   end
 
   def test_index_as_logged_in
@@ -78,4 +85,34 @@ class MultitrackControllerTest < ActionController::TestCase
     get :refresh, :id => songs(:i_want_to_break_free).id
     assert_response :success
   end
+
+  def test_should_update_song_when_encoding_completes
+    # First update a song that's still not published...
+    #
+    get :update_song, :user_id => users(:quentin).id,
+      :song_id => songs(:red_red_wine_unpublished).id,
+      :filename => 'test.mp3', :length => 10
+
+    assert_response :success
+    song = songs(:red_red_wine_unpublished).reload
+
+    # ...in order to verify that the new song notice has been sent
+    #
+    assert song.published?
+    assert_equal 'test.mp3', song.filename
+    assert_equal 10, song.seconds
+    assert_equal 1, ActionMailer::Base.deliveries.size
+    ActionMailer::Base.deliveries = []
+
+    # And then .. update it again....
+    get :update_song, :user_id => users(:quentin).id,
+      :song_id => songs(:red_red_wine_unpublished).id,
+      :filename => 'test.mp3', :length => 10
+
+    # ...in order to verify that no new notice is being sent
+    song = song.reload
+    assert song.published?
+    assert_equal 0, ActionMailer::Base.deliveries.size
+  end
+
 end

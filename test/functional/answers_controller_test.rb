@@ -5,7 +5,17 @@ class AnswersControllerTest < ActionController::TestCase
   include AuthenticatedTestHelper
   
   fixtures :users, :answers
-  
+
+  def setup
+    ActionMailer::Base.delivery_method = :test
+    ActionMailer::Base.perform_deliveries = true
+    ActionMailer::Base.deliveries = []
+  end
+
+  def teardown
+    ActionMailer::Base.deliveries = []
+  end
+
   def test_sould_show_answers
     get :index
     assert_response :success
@@ -132,10 +142,11 @@ class AnswersControllerTest < ActionController::TestCase
     login_as :quentin
     quentin_answers_count = users(:quentin).answers.count
     assert_difference 'Answer.count' do
-      post :create, :answer => { :body => "Waht's you name"}
+      post :create, :answer => { :body => "What's your name?"}
       assert_response :redirect
     end
     assert_equal quentin_answers_count + 1, users(:quentin).answers.count
+    assert_equal 1, ActionMailer::Base.deliveries.size
   end
   
   def test_should_not_rate

@@ -39,7 +39,8 @@ Rails::Initializer.run do |config|
 
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector
-  config.active_record.observers = :user_observer, :friendship_observer, :reply_observer, :mband_membership_observer
+  config.active_record.observers = :user_observer, :friendship_observer, :reply_observer,
+    :mband_membership_observer, :track_observer, :song_observer, :answer_observer
 
   # Make Active Record use UTC-base instead of local time
   # config.active_record.default_timezone = :utc
@@ -49,33 +50,3 @@ Rails::Initializer.run do |config|
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded
 end
-
-# Allow few html tags to sanitize()
-ActionView::Base.sanitized_allowed_tags.clear
-ActionView::Base.sanitized_allowed_tags = *%w(strong em b i code small address ul li abbr br a p)
-
-ActionView::Base.field_error_proc = Proc.new do |html_tag, instance| 
-  "<span class=\"fieldWithErrors\">#{html_tag}</span><span class=\"error\"><img src=\"/images/alert_ico.gif\" alt="" /> #{[instance.error_message].flatten.first}</span>"
-#  %{<div class="error-with-field">#{html} <small class="error">&bull; #{[instance.error_message].flatten.first}</small></div>}  
-end
-
-# Nasty hack, see: http://www.ruby-forum.com/topic/129186#576193
-#
-TMail::HeaderField::FNAME_TO_CLASS.delete 'content-id'
-
-ExceptionNotifier.exception_recipients = %w(franz.andrea@gmail.com marcello.barnaba@gmail.com)
-ExceptionNotifier.sender_address = %("Myousica Application Error" <error@myousica.com>)
-ExceptionNotifier.email_prefix = "[MYOUSICA ERROR] "
-
-
-connection = ActiveRecord::Base.connection
-SQL_RANDOM_FUNCTION = if connection.class.to_s == "ActiveRecord::ConnectionAdapters::SQLite3Adapter"
-  'random()'
-elsif connection.class.to_s == "ActiveRecord::ConnectionAdapters::MysqlAdapter"
-  'rand()'
-else
-  raise "Unsupported adapter for random extraction."
-end
-
-# PNG respond_to
-Mime::Type.register 'image/png', :png

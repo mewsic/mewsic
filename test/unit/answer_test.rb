@@ -11,7 +11,7 @@ class AnswerTest < ActiveSupport::TestCase
   
   def test_should_create
     assert_difference 'Answer.count' do
-      create_answer
+      a = create_answer
     end
   end
   
@@ -40,7 +40,10 @@ class AnswerTest < ActiveSupport::TestCase
 private
   
   def create_answer(options = {})
-    Answer.create({:body => 'lorem ipsum'}.merge(options))
+    returning Answer.new({:body => 'lorem ipsum'}.merge(options)) do |answer|
+      answer.user = users(:quentin)
+      answer.save
+    end
   end
   
 end

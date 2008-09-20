@@ -19,7 +19,7 @@ class Song < ActiveRecord::Base
   has_many :tracks, :through => :mixes, :order => 'tracks.created_at DESC'  
   has_many :children_tracks, :class_name => 'Track'
   has_many :mlabs, :as => :mixable, :dependent => :delete_all
-  has_many :abuses, :as => :abuseable, :dependent => :delete_all
+  has_many :abuses, :as => :abuseable, :dependent => :delete_all, :class_name => 'Abuse'
 
   belongs_to :genre
   belongs_to :user 
@@ -191,6 +191,17 @@ class Song < ActiveRecord::Base
 
   def rateable_by?(user)
     self.user_id != user.id
+  end
+
+  def publish!
+    @new = true if !self.published?
+    self.published = true
+    self.save!
+  end
+
+  # Returns true if the song has just been created
+  def new?
+    @new
   end
 
   # Called by the cron runner

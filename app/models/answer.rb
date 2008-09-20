@@ -33,7 +33,8 @@ class Answer < ActiveRecord::Base
   
   has_many :abuses, :as => :abuseable
   
-  validates_presence_of :body
+  validates_presence_of :body, :user_id
+  validates_associated :user
 
   after_create :set_last_activity_at
   
