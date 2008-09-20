@@ -40,7 +40,7 @@ class Answer < ActiveRecord::Base
   def self.find_open_paginated(page, options = {})
     self.paginate options.merge(:page => page,
                   :conditions => ["answers.closed = ?", false],
-                  :order => 'answers.rating_avg DESC, answers.created_at DESC',
+                  :order => 'answers.created_at DESC, answers.rating_avg DESC',
                   :include => {:user => :avatars})
   end
 
