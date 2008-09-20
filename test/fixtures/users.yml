@@ -84,7 +84,6 @@ quentin:
   city: Bari
   motto: Arma Virumque Cano Troiae qui primus ab oris
   nickname: quentin
-  is_admin: true
 aaron:
   login: aaron
   email: aaron@example.com
@@ -108,6 +107,7 @@ john:
   country: Italy
   city: Bari
   motto: in girum imus nocte et consumimur igni
+  is_admin: true
 
 <% for i in 3..500 %>user_<%= i %>:
   type: User
