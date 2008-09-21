@@ -18,7 +18,7 @@ Country: #{user.country}
 City   : #{user.city}
 Name   : #{user.first_name} #{user.last_name}
 
-#{user_url(user, :host => APPLICATION[:url])}
+#{APPLICATION[:url]}#{user_path(user)}
     EOF
     @recipients = 'activity@myousica.com'
     @from       = 'register@myousica.com'
@@ -51,7 +51,7 @@ Tone  : #{song.tone}
 Length: #{song.length}
 Genre : #{song.genre.name rescue nil}
 
-#{song_url(song, :host => APPLICATION[:url])}
+#{APPLICATION[:url]}#{song_path(song)}
 #{APPLICATION[:url]}#{song.public_filename}
     EOF
     @recipients = 'activity@myousica.com'
@@ -67,7 +67,7 @@ Body follows.
 #{answer.body}
 ---------------8<------- cut ------- >8---------------
 
-#{answer_url(answer, :host => APPLICATION[:url])}
+#{APPLICATION[:url]}#{answer_path(answer)}
     EOF
     @recipients = 'activity@myousica.com'
     @from       = 'newquestion@myousica.com'
