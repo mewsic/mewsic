@@ -12,7 +12,7 @@ require 'eycap/recipes'
 
 set :keep_releases, 5
 set :application,   'myousica'
-set :repository,    'git@github.com:vjt/myousica.git'
+set :repository,    'git@myousica_github.com:vjt/myousica.git'
 set :user,          'adelaosrl'
 set :password,      'dshUak8s'
 set :deploy_to,     "/data/#{application}"
