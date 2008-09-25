@@ -6,7 +6,7 @@
     <div class="clear-block">
       <div class="answer-header clear-block">
         <h2><%= @answer.closed? ? 'CLOSED' : 'OPEN' %> QUESTION</h2>
-        <p class="float-right abstract">
+        <p class="abuse-link float-right">
           <%- if logged_in? && !@has_abuse -%> <!--XXX-->
 						<%= report_abuse_link_to formatted_new_answer_abuse_path(@answer, 'html') %>
           <%- end -%>

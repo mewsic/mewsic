@@ -27,5 +27,8 @@
 			<%= download_button_for track %>
 			<span class="music-info">Created <%= time_ago_in_words track.created_at %> ago</span>
 		</div>
+		<div class="clear-float abuse-link align-right">
+			<%= report_abuse_link_to formatted_new_track_abuse_path(track, 'html'), 'report abuse' %>
+		</div>
   </div>
 </div>

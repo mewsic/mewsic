@@ -42,6 +42,7 @@ class Track < ActiveRecord::Base
   has_many :published_songs, :through => :mixes, :order => 'songs.created_at DESC', :conditions => ['songs.published = ?', true], :class_name => 'Song', :source => :song
   has_many :mixes, :dependent => :delete_all
   has_many :mlabs, :as => :mixable, :dependent => :delete_all
+  has_many :abuses, :as => :abuseable, :dependent => :delete_all, :class_name => 'Abuse'
 
   belongs_to :parent_song, :class_name => 'Song', :foreign_key => 'song_id'
   belongs_to :owner, :class_name => 'User', :foreign_key => 'user_id'

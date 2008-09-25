@@ -23,7 +23,7 @@
         </tr>
       </table>
     </div>
-    <p class="abstract align-right" style="margin: 7px">
+    <p class="abuse-link align-right" style="margin: 7px">
       <%- if logged_in? && !@has_abuse -%>
 				<%= report_abuse_link_to formatted_new_song_abuse_path(@song, 'html') %>
       <%- end -%>

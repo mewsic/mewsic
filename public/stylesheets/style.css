@@ -4031,6 +4031,12 @@ div.auto_complete ul strong.highlight {
 	width: 230px;
 }
 
+.abuse-link a {
+	font-style:italic;
+	color:#61656A;
+	font-size: 11px;
+}
+
 #genres {
 	float: right;
 	padding: 0 !important;

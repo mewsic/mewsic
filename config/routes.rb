@@ -51,7 +51,9 @@ ActionController::Routing::Routes.draw do |map|
     song.resources :abuses
   end
  
-  map.resources :tracks, :has_one => :player, :member => { :rate => :put, :download => :get }
+  map.resources :tracks, :has_one => :player, :member => { :rate => :put, :download => :get } do |track|
+    track.resources :abuses
+  end
   
   map.resources :search
 

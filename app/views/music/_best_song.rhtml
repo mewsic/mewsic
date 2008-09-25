@@ -16,6 +16,7 @@
 	<div class="float-left">
 		<%= rating(best_song) %>
 	</div>
-	<p class="playcount clear-float">listened <%= pluralize(best_song.listened_times, 'time') %></p>
+	<p class="float-left clear-float">listened <%= pluralize(best_song.listened_times, 'time') %></p>
+	<p class="abuse-link float-right"><%= report_abuse_link_to formatted_new_song_abuse_path(best_song, 'html'), 'report' %></p>
 </div>
 <div class="rounded-white-bottom"></div>
