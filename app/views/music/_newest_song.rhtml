@@ -8,6 +8,7 @@
 	</div>
 	<p class="title"><%= link_to newest_song.title, newest_song %></p>
 	<p class="abstract"><%= h newest_song.original_author %></p>
+	<p class="genre"><%= link_to(newest_song.genre.name, newest_song.genre) if newest_song.genre %></p>
 	<div class="music-info float-left" style="width: 180px">
 		<p class="grey-text"><%= truncate newest_song.description, 80 %></p>
 		<p class="playcount">created <%= time_ago_in_words newest_song.created_at, true %> ago</p>
@@ -16,5 +17,8 @@
 		<%= rating(newest_song) %><div class="clearer"></div>
 		<%= mlab_button(newest_song) %>
 		<%= play_button(newest_song) %>
+		<p class="abuse-link">
+			<%= report_abuse_link_to formatted_new_song_abuse_path(newest_song, 'html'), 'report' %>
+		</p>
 	</div>
 </div>
