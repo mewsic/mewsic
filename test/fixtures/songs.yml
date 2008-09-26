@@ -265,3 +265,15 @@ unpublished_mixed_song_<%= i %>:
   seconds: 100
   filename: test.mp3
 <% end %>
+
+really_short_song:
+  title: Really short song for increment count test
+  user: quentin
+  published: false
+  original_author: Antani
+  genre: <%= random_genre %>
+  listened_times: <%= rand(50) %>
+  created_at: <%= (rand(60)).days.ago.to_s :db %>
+  tone: F
+  seconds: 10
+  filename: test.mp3

@@ -244,3 +244,13 @@ destroyable_mixed_track_<%= i %>:
   tonality: 'F'
   filename: test.mp3
 <% end %>
+
+really_short_track:
+  title: Really short track for increment count test
+  parent_song: song_401
+  instrument: <%= random_instrument %>
+  seconds: 10
+  idea: false
+  owner: user_401
+  tonality: 'G'
+  filename: test.mp3
