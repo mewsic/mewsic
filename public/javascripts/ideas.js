@@ -172,7 +172,7 @@ document.observe('dom:loaded', function() {
 
     new Pagination({
       container: name + '-ideas',
-      spinner: name + '_spinner',
+      spinner: name + '-spinner',
       selector: 'a.navigation',
       dynamic_spinner: true
     });
