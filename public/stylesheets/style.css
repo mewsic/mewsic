@@ -1509,7 +1509,7 @@ tr.nav-song td{
         width: 200px;
 }
 
-#songs_spinner, #tracks_spinner, #newest_spinner, #coolest_spinner {
+#songs_spinner, #tracks_spinner, #newest-spinner, #coolest-spinner {
 	position:relative;
 	height:0px;
 	width:66px;
@@ -2597,8 +2597,8 @@ a.download {
 	font-weight: bold;
 }
 .faded {
-	opacity: 0.35;
-	filter: alpha(opacity=35);
+	opacity: 0.50;
+	filter: alpha(opacity=50);
 }
 .instrument.faded {
 	opacity: 0.55;
