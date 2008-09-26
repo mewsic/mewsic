@@ -2412,7 +2412,7 @@ div.login {
 .track-info {
 	border-top:1px solid #EDEDED;
 	border-bottom:1px solid #EDEDED;
-	margin:5px 0px;
+	margin:/*5px*/ 0px;
 }
 .track-info div {
 	float: left;
@@ -2916,8 +2916,8 @@ td.star .rating {
 }
 
 #ideas-by-instruments .elements {
-	margin: 10px 0px;
-	padding: 8px;
+	margin: 0 0 5px;
+	padding: 0 15px;
 	background-color: #f9f9f9;
 }
 
