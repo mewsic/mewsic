@@ -55,6 +55,10 @@ var Pagination = Class.create({
       this.options.loading.show();
     } else if (this.options.spinner) {
       $(this.options.spinner).show();
+    } else if (this.options.spinners) {
+      this.options.spinners.each(function(id) {
+        $(id).show();
+      })
     }
     this.releaseLinks();
   },
