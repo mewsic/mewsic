@@ -7,7 +7,7 @@
       <% end -%>
     </div>
 		<div class="float-right">
-			<p class="genre align-righ"><%= link_to(song.genre.name, song.genre) %></p>
+			<p class="genre align-right"><%= link_to(song.genre.name, song.genre) %></p>
 			<%= rating(song, :class => song_counter.odd? ? 'grey-star' : '') %>
 		</div>
   </td>
