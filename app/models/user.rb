@@ -365,6 +365,20 @@ class User < ActiveRecord::Base
     self.find(:all, options.merge(:include => [:avatars], :order => 'users.replies_count DESC'))
   end
 
+  def self.find_top_myousicians(options = {})
+    #self.find :all, options.merge(
+    #  :select => 'COUNT(tracks.id) AS tracks_count, users.*',
+    #  :joins => 'INNER JOIN tracks ON tracks.user_id = users.id',
+    #  :conditions => ["users.activated_at IS NOT NULL"], #XXX XXX AND pictures.id IS NOT NULL XXX XXX
+    #  :order => SQL_RANDOM_FUNCTION, # 'tracks_count DESC, users.rating_avg DESC',
+    #  :group => 'users.id')
+    #
+    options.assert_valid_keys :limit
+    qry = "SELECT COUNT(tracks.id) AS tracks_count, users.* FROM users INNER JOIN tracks ON tracks.user_id = users.id WHERE (users.activated_at IS NOT NULL) GROUP BY users.id HAVING tracks_count > 2 ORDER BY #{SQL_RANDOM_FUNCTION}"
+    qry += " LIMIT #{options[:limit]}" if options[:limit]
+    self.find_by_sql qry
+  end
+
   def self.myousica
     @myousica ||= User.find_by_login('myousica')
   end
@@ -376,7 +390,7 @@ class User < ActiveRecord::Base
     conditions = options[:conditions] ? "AND (#{self.class.send! :sanitize_sql, options[:conditions]})" : nil
     order = options[:order] || 'f.accepted_at DESC'
 
-    User.find_by_sql "select users.* from users inner join friendships f on (users.id = f.friend_id or users.id = f.user_id) where users.id != #{id} and (f.friend_id = #{id} or f.user_id = #{id}) and f.accepted_at is not null #{conditions} order by #{order} #{limit}"
+    self.find_by_sql "select users.* from users inner join friendships f on (users.id = f.friend_id or users.id = f.user_id) where users.id != #{id} and (f.friend_id = #{id} or f.user_id = #{id}) and f.accepted_at is not null #{conditions} order by #{order} #{limit}"
   end
 
   def update_friends_count
