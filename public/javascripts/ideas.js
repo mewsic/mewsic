@@ -174,7 +174,10 @@ document.observe('dom:loaded', function() {
       container: name + '-ideas',
       spinner: name + '-spinner',
       selector: 'a.navigation',
-      dynamic_spinner: true
+      dynamic_spinner: true,
+      onComplete: function() {
+        new Effect.ScrollTo(name + '-ideas', {duration: 0.7});
+      }
     });
   });
 
