@@ -1,4 +1,4 @@
-<% javascript('refresh-block', 'music') %>
+<% javascript('refresh-block', 'loading', 'music') %>
 
 	<div class="box-list one-col-small clear-block">
 		<div class="simple-list green-box clear-block" id="best-songs">
@@ -44,16 +44,8 @@
 		</p>
 	</div>
 	
-	<div class="box-list one-col clear-block clear-float">
-		<div class="simple-list clear-block">
-			<h1>NEWEST</h1>
-			<div class="top-box clear-block">
-				<div class="bottom-box clear-block newest-list">
-					<%= render :partial => 'newest_song', :collection => @newest_songs %>
-				</div>
-			</div>
-		</div>			
-
+	<div id="newest" class="box-list one-col clear-block clear-float">
+		<%= render :partial => 'newest' %>
 	</div>
 
 	<div class="box-list two-col clear-block" id="genres">

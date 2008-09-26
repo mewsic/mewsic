@@ -64,8 +64,9 @@ ActionController::Routing::Routes.draw do |map|
   map.login '/login', :controller => 'sessions', :action => 'new'
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   
-  map.music '/music', :controller => 'music', :action => 'index'
-  map.top_music '/music/top', :controller => 'music', :action => 'top'
+  map.music        '/music',         :controller => 'music', :action => 'index'
+  map.top_music    '/music/top',     :controller => 'music', :action => 'top'
+  map.newest_music '/music/newest/', :controller => 'music', :action => 'newest'
 
   map.multitrack         '/multitrack',             :controller => 'multitrack', :action => 'index'
   map.multitrack_edit    '/multitrack/:id',         :controller => 'multitrack', :action => 'edit'

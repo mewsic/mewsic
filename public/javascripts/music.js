@@ -3,12 +3,23 @@ document.observe('dom:loaded', function() {
 
   new Pagination({
     container: name,
-    spinner: name + '-spinner',
+    spinners: $w(name + '-spinner-top ' + name + '-spinner-bottom'),
     selector: 'a.genre-pagination',
     onComplete: function() {
       new Effect.ScrollTo(name, {duration:1.0});
     }
   });
+
+  if ($('newest')) {
+    new Pagination({
+      container: 'newest',
+      selector: 'a.navigation',
+      spinners: $w('songs-spinner-top songs-spinner-bottom'),
+      onComplete: function() {
+        new Effect.ScrollTo('newest', {duration: 1.0});
+      }
+    });
+  }
 
   if ($('genres')) {
     new Refresher('best-songs', {

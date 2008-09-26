@@ -1,11 +1,17 @@
 class MusicController < ApplicationController
+  before_filter :redirect_unless_xhr, :only => :newest
+
   def index
     @best_songs = Song.find_best :limit => 3, :include => [:tracks, :user]
     @most_used_tracks = Track.find_most_used :limit => 3
     @genre_chars = Genre.find_with_songs(:all).map { |g| g.name.first.upcase }.uniq.sort
     @genres = Genre.find_with_songs(:all, :conditions => ["name LIKE ?", "#{@genre_chars.first}%"])
-    @newest_songs = Song.find_newest :limit => 5, :include => [:tracks, :user]
-    @newest_answers = Answer.find_newest :limit => 3, :include => [:user, :replies]
+    @newest = Song.find_newest_paginated :page => 1, :per_page => 5, :include => :user
+  end
+
+  def newest
+    @newest = Song.find_newest_paginated :page => params[:page], :per_page => 5, :include => :user
+    render :partial => 'newest'
   end
 
   def top
@@ -23,4 +29,10 @@ class MusicController < ApplicationController
 
     render :partial => partial, :collection => collection
   end
+
+  private
+    def redirect_unless_xhr
+      redirect_to music_url unless request.xhr?
+    end
+
 end
