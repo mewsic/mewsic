@@ -6,10 +6,8 @@
 				<%= track_instrument_icon(track, :grey => true) %>
       <% end -%>
     </div>
-		<div class="float-right">
-			<p class="genre align-right"><%= link_to(song.genre.name, song.genre) %></p>
-			<%= rating(song, :class => song_counter.odd? ? 'grey-star' : '') %>
-		</div>
+		<p class="genre align-right"><%= link_to(song.genre.name, song.genre) %></p>
+		<%= rating(song, :class => song_counter.odd? ? 'grey-star' : '') %>
   </td>
 </tr>
 <tr class="<%= %w[odd even][song_counter % 2] %>">

@@ -1198,6 +1198,10 @@ tr.nav-song td{
 	vertical-align: bottom;
 }
 
+.mlab_song .rating {
+	float: right;
+}
+
 .green-box .green-bg{
 	background:#F2F8ED;
 	height:35px;
@@ -2880,7 +2884,7 @@ div#messages div.notice, div#messages div.inbox {
 	margin-left: -2px;
 }
 
-.mlab_song .rating, #genres .rating {
+#genres .rating {
 	float: none;
 }
 
