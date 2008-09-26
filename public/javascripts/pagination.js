@@ -68,7 +68,11 @@ var Pagination = Class.create({
       this.options.loading.hide();
     } else if (this.options.spinner) {
       $(this.options.spinner).hide();
-    }    
+    }  else if (this.options.spinners) {
+      this.options.spinners.each(function(id) {
+        $(id).hide();
+      })
+    }   
 
     if (this.options.onComplete) {
       this.options.onComplete();
