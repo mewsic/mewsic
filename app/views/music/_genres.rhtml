@@ -12,7 +12,7 @@
 	</div>
 </div>
 <div class="float-left">
-	<img src="/images/spinner.gif" id="genres-spinner" style="display: none;"/>
+	<%= image_tag 'spinner.gif', :id => 'genres-spinner-top', :style => 'display:none' %>
 </div>
 <div id="genre-chars">
 	<%= genres_pagination %>
@@ -26,7 +26,10 @@
         :any_user     => "No genres"
 	-%>
 </div>
-<p class="title align-right">
+<p class="title float-right">
 	<%= genres_pagination_previous_button %>
 	<%= genres_pagination_next_button %>
 </p>
+<div class="float-right">
+	<%= image_tag 'spinner.gif', :id => 'genres-spinner-bottom', :style => 'display:none' %>
+</div>
