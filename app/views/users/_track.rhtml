@@ -12,5 +12,8 @@
       <%= mlab_button(track, :dynamic => true) %>
 			<%= play_button(track) %><br/>
 		</div>
+		<div class="abuse-link">
+			<%= report_abuse_link_to formatted_new_track_abuse_path(track, 'html') %>
+		</div>
   </td>
 </tr>

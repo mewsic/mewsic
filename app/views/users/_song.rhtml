@@ -18,9 +18,14 @@
     <p class="title"><%= link_to song.title, song %></p>
   </td>
 	<td class="song-action" align="right">
-    <%= edit_button(song) if current_user_page? %>
-		<%= delete_button(song) if current_user_page? %>
-    <%= mlab_button(song, :dynamic => true) %>
-    <%= play_button(song) %>
+		<div>
+			<%= edit_button(song) if current_user_page? %>
+			<%= delete_button(song) if current_user_page? %>
+			<%= mlab_button(song, :dynamic => true) %>
+			<%= play_button(song) %>
+		</div>
+		<div class="abuse-link">
+			<%= report_abuse_link_to formatted_new_song_abuse_path(song, 'html') %>
+		</div>
   </td>
 </tr>
