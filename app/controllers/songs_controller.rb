@@ -27,12 +27,6 @@ class SongsController < ApplicationController
       format.xml do
         @user = User.find_from_param(params[:user_id])
         @songs = @user.songs.find_published
-        #@songs = @user.songs.find(:all,
-        #  :select => 'songs.*, COUNT(mixes.id) AS mixes_count',
-        #  :joins => 'INNER JOIN mixes ON mixes.song_id = songs.id',
-        #  :conditions => ['songs.published = ?', true],
-        #  :group => 'songs.id',
-        #  :limit => 1)
       end
     end
 
