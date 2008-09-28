@@ -57,7 +57,7 @@ class Song < ActiveRecord::Base
 
   def self.find_newest_paginated(options = {})
     paginate options.reverse_merge(
-             :conditions => ['songs.published = ? AND songs.created_at < ?', true, 1.month.ago],
+             :conditions => ['songs.published = ? AND songs.created_at > ?', true, 1.month.ago],
              :order => 'songs.created_at DESC',
              :per_page => 7,
              :page => 1)
