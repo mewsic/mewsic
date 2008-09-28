@@ -29,7 +29,7 @@ class IdeasController < ApplicationController
       @ideas = @instrument.find_paginated_ideas(:page => params[:ipage], :per_page => 8)
       render :layout => false
     else
-      @ideas_instruments = Instrument.find_by_ideas_count :limit => 4
+      @ideas_instruments = Instrument.find_by_ideas_count :limit => 6
       render :partial => 'ideas_table'
     end
 
