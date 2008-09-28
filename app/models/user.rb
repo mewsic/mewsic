@@ -374,7 +374,10 @@ class User < ActiveRecord::Base
     #  :group => 'users.id')
     #
     options.assert_valid_keys :limit
-    qry = "SELECT COUNT(tracks.id) AS tracks_count, users.* FROM users INNER JOIN tracks ON tracks.user_id = users.id WHERE (users.activated_at IS NOT NULL) GROUP BY users.id HAVING tracks_count > 2 ORDER BY #{SQL_RANDOM_FUNCTION}"
+    qry = "SELECT COUNT(tracks.id) AS tracks_count, users.*
+           FROM users INNER JOIN tracks ON tracks.user_id = users.id
+           INNER JOIN pictures ON (pictures.pictureable_id = users.id AND pictures.pictureable_type = 'User' AND pictures.type = 'Avatar')
+           WHERE (users.activated_at IS NOT NULL) GROUP BY users.id HAVING tracks_count > 2 ORDER BY #{SQL_RANDOM_FUNCTION}"
     qry += " LIMIT #{options[:limit]}" if options[:limit]
     self.find_by_sql qry
   end

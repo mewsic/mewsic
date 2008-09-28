@@ -756,9 +756,13 @@ tr.nav-song td{
 }
 .myousician-box .bottom-box {
 	padding: 0px 6px 4px;
+	width: 99px;
 }
 .myousician-box p {
 	padding: 0 !important;
+	overflow: hidden;
+	width: 90px;
+	display: block;
 }
 
 /* search answer */

@@ -245,7 +245,7 @@ class UserTest < Test::Unit::TestCase
     assert_equal %w[Guitar Saxophone], u.instruments.collect{|j| j.description }.sort
   end
   
-  def test_quentin_should_has_photos
+  def test_quentin_should_have_photos
     assert_equal 2, users(:quentin).photos.size
   end
   
@@ -269,6 +269,13 @@ class UserTest < Test::Unit::TestCase
   def test_should_return_user_with_more_instruments
     assert (users(:quentin).instruments.size > users(:aaron).instruments.size)
     assert_equal users(:quentin), User.find_most_instruments.first
+  end
+
+  def test_top_myousicians
+    users = User.find_top_myousicians
+    assert_equal 2, users.size
+    assert users.all? { |u| u.tracks_count >= 2 }
+    assert users.all? { |u| !u.avatar.nil? }
   end
   
   def test_finders

@@ -19,30 +19,37 @@
 #  updated_at       :datetime      
 #
 
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-# one:
-#   column: value
-#
-# two:
-#   column: value
-
-
 first_photo_for_quentin:
   pictureable: quentin
   pictureable_type: User
   type: Photo
   filename: image_msn.jpg
-  content_type: images/jpeg
+  content_type: image/jpeg
+
 second_photo_for_quentin:
   pictureable: quentin 
   pictureable_type: User
   type: Photo
   filename: morto.png
-  content_type: images/png
+  content_type: image/png
+
 first_photo_for_users_1:
   pictureable: user_1
   pictureable_type: User
   type: Photo
   filename: zucca.jpg
-  content_type: images/jpeg
+  content_type: image/jpeg
+
+avatar_for_quentin:
+  pictureable: quentin
+  pictureable_type: User
+  type: Avatar
+  filename: sux.png
+  content_type: image/png
+
+avatar_for_john:
+  pictureable: john
+  pictureable_type: User
+  type: Avatar
+  filename: sux.png
+  content_type: image/png
