@@ -79,16 +79,16 @@ class AvatarsControllerTest < ActionController::TestCase
   end  
 
   def test_should_create_and_destroy_previous        
-    login_as :quentin
+    login_as :user_300
     assert_difference 'Avatar.count' do             
-      put :update, :user_id => users(:quentin), :avatar => {
+      put :update, :user_id => users(:user_300), :avatar => {
         :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/files/test.jpg'), 'image/jpeg')
       }, :format => 'js'
-      put :update, :user_id => users(:quentin), :avatar => {
+      put :update, :user_id => users(:user_300), :avatar => {
         :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/files/test.jpg'), 'image/jpeg')
       }, :format => 'js'
     end
-    assert_equal 1, users(:quentin).avatars.count
+    assert_equal 1, users(:user_300).avatars.count
     assert_response :success
   end
   
@@ -137,39 +137,39 @@ class AvatarsControllerTest < ActionController::TestCase
   end
 
 	def test_should_validate_content_type
-    login_as :quentin
+    login_as :user_250
     assert_no_difference 'Avatar.count' do 
-      put :update, :user_id => users(:quentin),
+      put :update, :user_id => users(:user_250),
         :avatar => {
           :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/mlabs.yml'), 'text/yaml')
         }, :format => 'js'
     end
     assert_response :success
 
-    assert_equal 0, users(:quentin).avatars.count
+    assert_equal 0, users(:user_250).avatars.count
 	end
 
 	def test_should_keep_current_avatar_in_case_of_failure
-    login_as :quentin
+    login_as :user_240
     assert_difference 'Avatar.count' do 
-      put :update, :user_id => users(:quentin),
+      put :update, :user_id => users(:user_240),
         :avatar => {
           :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/files/test.jpg'), 'image/jpeg')
         }, :format => 'js'
     end
 
     assert_response :success
-    assert_equal 1, users(:quentin).avatars.count
+    assert_equal 1, users(:user_240).avatars.count
 
     assert_no_difference 'Avatar.count' do 
-      put :update, :user_id => users(:quentin),
+      put :update, :user_id => users(:user_240),
         :avatar => {
           :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/mlabs.yml'), 'text/yaml')
         }, :format => 'js'
     end
 
     assert_response :success
-    assert_equal 1, users(:quentin).avatars.count
+    assert_equal 1, users(:user_240).avatars.count
   end
 
 private
