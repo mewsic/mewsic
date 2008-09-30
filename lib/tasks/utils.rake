@@ -18,6 +18,20 @@ namespace :myousica do
       )
     end
   end    
+
+  namespace :sphinx do
+    config = File.join(RAILS_ROOT, 'config', 'sphinx_development.config')
+
+    desc "Start sphinx with development config"
+    task(:start => :environment) do
+      puts `searchd --config #{config}`
+    end
+
+    task(:stop => :environment) do
+      puts `searchd --config #{config} --stop`
+    end
+
+  end
   
   namespace :fixtures do
     
