@@ -21,7 +21,7 @@ class SessionsControllerTest < Test::Unit::TestCase
     post :create, :login => 'quentin', :password => 'test'
     assert session[:user]
     assert_response :redirect
-    deny flash[:login_error]
+    deny flash[:error]
   end
 
   def test_should_fail_login_and_not_redirect

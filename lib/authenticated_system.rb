@@ -85,13 +85,20 @@ module AuthenticatedSystem
     def store_location
       session[:return_to] = request.request_uri
     end
+
+    def forget_location
+      session[:return_to] = nil
+    end
+
+    def stored_location
+      session[:return_to]
+    end
     
     # Redirect to the URI stored by the most recent store_location call or
     # to the passed default.
     def redirect_back_or_default(default)
-      session[:return_to] ? redirect_to(session[:return_to]) : redirect_to(default)
-      #redirect_to(default)
-      session[:return_to] = nil
+      stored_location ? redirect_to(stored_location) : redirect_to(default)
+      forget_location
     end
     
     # Inclusion hook to make #current_user and #logged_in?
