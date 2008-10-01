@@ -31,6 +31,10 @@ namespace :myousica do
       puts `searchd --config #{config} --stop`
     end
 
+    task(:rehash => :environment) do
+      puts `indexer --config #{config} --all --rotate`
+    end
+
   end
   
   namespace :fixtures do

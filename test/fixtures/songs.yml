@@ -23,6 +23,8 @@
 #
 
 <% 
+  require 'myousica'
+
   def shuffle(array)
     size = array.size
     r = [rand(size),rand(size)]
@@ -44,6 +46,8 @@ let_it_be:
   tone: C
   seconds: 220
   filename: test.mp3
+  bpm: 120
+  key: <%= Myousica.key('C') %>
 radio_ga_ga:
   title: Radio Ga Ga
   user: aaron
@@ -53,6 +57,8 @@ radio_ga_ga:
   tone: D
   seconds: 180
   filename: test.mp3
+  bpm: 100
+  key: <%= Myousica.key('D') %>
 i_want_to_break_free:
   title: I Want to Break Free
   user: quentin
@@ -63,6 +69,8 @@ i_want_to_break_free:
   seconds: 190
   published: true
   filename: test.mp3
+  bpm: 140
+  key: <%= Myousica.key('B#') %>
 red_red_wine:
   title: Red Red Wine
   user: quentin
@@ -73,6 +81,8 @@ red_red_wine:
   seconds: 180
   published: true
   filename: test.mp3
+  bpm: 80
+  key: <%= Myousica.key('D') %>
 red_red_wine_unpublished:
   title: Red Red Wine Unpublished
   user: quentin
@@ -83,6 +93,8 @@ red_red_wine_unpublished:
   seconds: 180
   published: false
   filename: test.mp3
+  bpm: 80
+  key: <%= Myousica.key('D') %>
 space_cowboy:
   title: Space Cowboy
   user: aaron
@@ -94,6 +106,8 @@ space_cowboy:
   created_at: <%= 1.week.from_now.to_s(:db) %>
   published: true
   filename: test.mp3
+  bpm: 180
+  key: <%= Myousica.key('D') %>
 autumn_leaves:
   title: Autumn Leaves
   user: quentin
@@ -103,6 +117,8 @@ autumn_leaves:
   tone: D
   seconds: 180
   filename: test.mp3
+  bpm: 80
+  key: <%= Myousica.key('D') %>
 closer:
   title: Closer
   user: quentin
@@ -112,6 +128,8 @@ closer:
   tone: D
   seconds: 180
   filename: test.mp3
+  bpm: 80
+  key: <%= Myousica.key('D') %>
 white_christmas:
   title: White Cristmas
   user: quentin
@@ -121,6 +139,8 @@ white_christmas:
   tone: D
   seconds: 180
   filename: test.mp3
+  bpm: 80
+  key: <%= Myousica.key('D') %>
 quentin_single_track_song:
   title: SingleTrackSong
   user: quentin
@@ -130,6 +150,8 @@ quentin_single_track_song:
   tone: D
   seconds: 180
   filename: test.mp3
+  bpm: 120
+  key: <%= Myousica.key('D') %>
 gravity_blast_beat:
   title: GravityBlastBeat
   user: quentin
@@ -139,6 +161,8 @@ gravity_blast_beat:
   tone: D
   seconds: 180
   filename: test.mp3
+  bpm: 140
+  key: <%= Myousica.key('D') %>
 gravity_blast_beat_remix:
   title: GravityBlastBeat Remix
   user: quentin
@@ -148,6 +172,8 @@ gravity_blast_beat_remix:
   tone: D
   seconds: 180
   filename: test.mp3
+  bpm: 140
+  key: <%= Myousica.key('D') %>
 gravity_blast_beat_jungle_remix:
   title: GravityBlastBeat Jungle Remix
   user: quentin
@@ -157,6 +183,8 @@ gravity_blast_beat_jungle_remix:
   tone: F
   seconds: 180
   filename: test.mp3
+  bpm: 90
+  key: <%= Myousica.key('F') %>
   
 # songs from 0 to 200 randomly have tracks
 <% 1000.times do |i| %>
@@ -168,9 +196,11 @@ song_<%= i + 4 %>:
   genre: <%= random_genre %>
   listened_times: <%= rand(1000) %>
   created_at: <%= (rand(30)).days.ago.to_s :db %>
-  tone: <%= ('A'..'F').to_a[rand(6)] %>
+  tone: <%= t = ('A'..'F').to_a[rand(6)] %>
   seconds: <%= rand(300) %>
   filename: test.mp3
+  bpm: 133
+  key: <%= Myousica.key(t) %>
 <% end %>
 <% 100.times do |i| %>
 song_aaron_<%= i + 4 %>:
@@ -180,9 +210,11 @@ song_aaron_<%= i + 4 %>:
   genre: <%= random_genre %>
   listened_times: <%= rand(1000) %>
   created_at: <%= (rand(30)).days.ago.to_s :db %>
-  tone: <%= ('A'..'F').to_a[rand(6)] %>
+  tone: <%= t = ('A'..'F').to_a[rand(6)] %>
   seconds: <%= rand(300) %>
   filename: test.mp3
+  bpm: 144
+  key: <%= Myousica.key(t) %>
 <% end %>
 
 billie_jean_by_michael_jackson:
@@ -195,6 +227,8 @@ billie_jean_by_michael_jackson:
   seconds: 140
   filename: test.mp3
   published: true
+  bpm: 130
+  key: <%= Myousica.key('C') %>
   
 billie_jean_by_giovanni:
   title: Billie Jean by Giovanni
@@ -205,6 +239,8 @@ billie_jean_by_giovanni:
   tone: C
   seconds: 140
   filename: test.mp3
+  bpm: 130
+  key: <%= Myousica.key('C') %>
   
 billie_jean_by_pilu:
   title: Billie Jackson by Pilu
@@ -215,6 +251,8 @@ billie_jean_by_pilu:
   tone: C
   seconds: 140
   filename: test.mp3
+  bpm: 130
+  key: <%= Myousica.key('C') %>
   
 song_with_ideas:
   title: Song with ideas
@@ -226,6 +264,8 @@ song_with_ideas:
   tone: C
   seconds: 140
   filename: test.mp3
+  bpm: 130
+  key: <%= Myousica.key('C') %>
 
 <% 4.times do |i| %>
 song_using_ideas_<%= i %>:
@@ -238,6 +278,8 @@ song_using_ideas_<%= i %>:
   tone: C
   seconds: 140
   filename: test.mp3
+  bpm: 170
+  key: <%= Myousica.key('C') %>
 <% end %>
 
 unpublished_mixed_song:
@@ -251,6 +293,8 @@ unpublished_mixed_song:
   tone: F
   seconds: 100
   filename: test.mp3
+  bpm: 170
+  key: <%= Myousica.key('F') %>
 
 <% 10.times do |i| %>
 unpublished_mixed_song_<%= i %>:
@@ -264,4 +308,6 @@ unpublished_mixed_song_<%= i %>:
   tone: F
   seconds: 100
   filename: test.mp3
+  bpm: 170
+  key: <%= Myousica.key('F') %>
 <% end %>

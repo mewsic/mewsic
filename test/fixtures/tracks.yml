@@ -40,6 +40,8 @@ sax_for_let_it_be:
   seconds: <%= rand(100) + 90 %>
   tonality: C
   filename: test.mp3
+  bpm: 120
+  key: <%= Myousica.key('C') %>
 guitar_for_let_it_be:
   title: Chitarra
   parent_song: let_it_be
@@ -48,6 +50,8 @@ guitar_for_let_it_be:
   seconds: <%= rand(100) + 90 %>
   tonality: C
   filename: test.mp3
+  bpm: 120
+  key: <%= Myousica.key('C') %>
 voice_for_let_it_be:
   title: Voce
   parent_song: let_it_be
@@ -56,6 +60,8 @@ voice_for_let_it_be:
   seconds: <%= rand(100) + 90 %>
   tonality: C
   filename: test.mp3
+  bpm: 120
+  key: <%= Myousica.key('C') %>
 voice_for_radio_ga_ga:
   title: Voce
   parent_song: radio_ga_ga
@@ -64,6 +70,8 @@ voice_for_radio_ga_ga:
   seconds: <%= rand(100) + 90 %>
   tonality: B
   filename: test.mp3
+  bpm: 100
+  key: <%= Myousica.key('B') %>
 guitar_for_closer:
   title: Chitarra
   parent_song: closer
@@ -72,6 +80,8 @@ guitar_for_closer:
   seconds: <%= rand(100) + 90 %>
   tonality: B
   filename: test.mp3
+  bpm: 80
+  key: <%= Myousica.key('B') %>
 sax_for_closer:
   title: Sassofono
   parent_song: closer
@@ -80,6 +90,8 @@ sax_for_closer:
   seconds: <%= rand(100) + 90 %>
   tonality: B
   filename: test.mp3
+  bpm: 80
+  key: <%= Myousica.key('B') %>
 drum_for_closer:
   title: Batteria
   parent_song: closer
@@ -88,6 +100,8 @@ drum_for_closer:
   seconds: <%= rand(100) + 90 %>
   tonality: B
   filename: test.mp3
+  bpm: 80
+  key: <%= Myousica.key('B') %>
 <% 10.times do |i| %>
 voice_for_closer_<%= i + 4 %>:
   title: Voice
@@ -98,6 +112,8 @@ voice_for_closer_<%= i + 4 %>:
   owner: <%= %w(quentin mikaband)[rand(4)] %>
   tonality: D
   filename: test.mp3
+  bpm: 80
+  key: <%= Myousica.key('D') %>
 <% end %>
 drum_for_single_track_song:
   title: Drums for single track song
@@ -107,6 +123,8 @@ drum_for_single_track_song:
   owner: aaron
   tonality: D
   filename: test.mp3
+  bpm: 120
+  key: <%= Myousica.key('D') %>
 guitar_for_single_track_song:
   title: Guitar for single track song
   parent_song: quentin_single_track_song
@@ -115,6 +133,8 @@ guitar_for_single_track_song:
   owner: john
   tonality: D
   filename: test.mp3
+  bpm: 120
+  key: <%= Myousica.key('D') %>
 voice_for_single_track_song:
   title: Voice for single track song
   parent_song: quentin_single_track_song
@@ -123,6 +143,8 @@ voice_for_single_track_song:
   owner: quentin
   tonality: D
   filename: test.mp3
+  bpm: 120
+  key: <%= Myousica.key('D') %>
 drum_for_gravity_blast_beat:
   title: Drums for gravity blast beat
   parent_song: gravity_blast_beat
@@ -131,6 +153,8 @@ drum_for_gravity_blast_beat:
   owner: aaron
   tonality: D
   filename: test.mp3
+  bpm: 140
+  key: <%= Myousica.key('D') %>
 
 # Don't touch these fixtures. They're central to a test that has to run
 # or the cheerleader will die and the world won't be saved.
@@ -143,6 +167,8 @@ voice_for_billie_jean_by_michael_jackson:
   owner: quentin
   tonality: E
   filename: test.mp3
+  bpm: 130
+  key: <%= Myousica.key('E') %>
   
 drums_for_billie_jean_by_michael_jackson:
   title: Drums for Billie Jean
@@ -152,6 +178,8 @@ drums_for_billie_jean_by_michael_jackson:
   owner: aaron
   tonality: E
   filename: test.mp3
+  bpm: 130
+  key: <%= Myousica.key('E') %>
   
 keyboards_for_billie_jean_by_michael_jackson:
   title: Keyboards for Billie Jean
@@ -161,6 +189,8 @@ keyboards_for_billie_jean_by_michael_jackson:
   owner: quentin
   tonality: E
   filename: test.mp3
+  bpm: 130
+  key: <%= Myousica.key('E') %>
 
 guitar_for_billie_jean_by_michael_jackson:
   title: Guitar for Billie Jean
@@ -170,6 +200,8 @@ guitar_for_billie_jean_by_michael_jackson:
   owner: quentin
   tonality: E
   filename: test.mp3
+  bpm: 130
+  key: <%= Myousica.key('E') %>
   
 voice_for_billie_jean_by_giovanni:
   title: Voice for Billie Jean by Giovanni
@@ -179,6 +211,8 @@ voice_for_billie_jean_by_giovanni:
   owner: quentin
   tonality: E
   filename: test.mp3
+  bpm: 130
+  key: <%= Myousica.key('E') %>
 
 drums_for_billie_jean_by_pilu:
   title: Drums for Billie Jean by Pilu
@@ -188,6 +222,8 @@ drums_for_billie_jean_by_pilu:
   owner: quentin
   tonality: E
   filename: test.mp3
+  bpm: 130
+  key: <%= Myousica.key('E') %>
 
 # songs from 4 to 200 randomly have tracks
 <% 50.times do |i| %>
@@ -199,6 +235,8 @@ random_track_<%= i %>:
   owner: user_<%= rand(497) + 3 %>
   tonality: G#
   filename: test.mp3
+  bpm: 133
+  key: <%= Myousica.key('G#') %>
 <% end %>
 
 <% 100.times do |i| %>
@@ -209,8 +247,10 @@ idea_track_<%= i %>:
   seconds: <%= rand(100) + 90 %>
   idea: true
   owner: <%= %w(quentin mikaband john)[rand(3)] %>
-  tonality: <%= ('A'..'F').to_a[rand(6)] %>
+  tonality: <%= t = ('A'..'F').to_a[rand(6)] %>
   filename: test.mp3
+  bpm: 130
+  key: <%= Myousica.key(t) %>
 <% end %>
 
 destroyable_track:
@@ -222,6 +262,8 @@ destroyable_track:
   owner: quentin
   tonality: 'C#'
   filename: test.mp3
+  bpm: 133
+  key: <%= Myousica.key('C#') %>
 
 destroyable_mixed_track:
   title: track mixed into an unpublished song
@@ -232,6 +274,8 @@ destroyable_mixed_track:
   owner: quentin
   tonality: 'F'
   filename: test.mp3
+  bpm: 170
+  key: <%= Myousica.key('F') %>
 
 <% 4.times do |i| %>
 destroyable_mixed_track_<%= i %>:
@@ -243,4 +287,6 @@ destroyable_mixed_track_<%= i %>:
   owner: quentin
   tonality: 'F'
   filename: test.mp3
+  bpm: 170
+  key: <%= Myousica.key('F') %>
 <% end %>

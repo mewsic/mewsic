@@ -12,5 +12,7 @@ class SearchControllerTest < ActionController::TestCase
     assert_equal 1, REXML::XPath.match(xml, "//songs").size
     assert_equal 0, REXML::XPath.match(xml, "//non_existing_element").size
   end
+
+  # XXX WRITE TESTS
   
 end
