@@ -28,11 +28,15 @@ class Instrument < ActiveRecord::Base
   before_save :set_default_icon
   
   def self.find_by_ideas_count(options = {})
-    self.find_by_sql(["
+    find_by_sql(["
       SELECT I.*, I.id, COUNT(T.id) AS ideas_count
       FROM instruments I LEFT JOIN tracks T ON I.id = T.instrument_id
       WHERE T.idea = ? GROUP BY I.id ORDER BY ideas_count DESC LIMIT ?
      ", true, (options[:limit] || 5)])
+  end
+
+  def self.find_used
+    find :all,:include => :tracks, :conditions => 'tracks.id IS NOT NULL', :order => 'instruments.description'
   end
 
   def find_ideas(limit = 5)

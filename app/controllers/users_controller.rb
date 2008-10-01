@@ -196,7 +196,14 @@ class UsersController < ApplicationController
   end
 
   def countries
-    render :json => ActionView::Helpers::FormOptionsHelper::COUNTRIES
+    respond_to do |format|
+      format.js do
+       render :text => ActionView::Helpers::FormOptionsHelper::COUNTRIES.to_json
+      end
+      format.xml do
+        @countries = User.find_countries
+      end
+    end
   end
   
   def auto_complete_for_message_to

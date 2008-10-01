@@ -386,6 +386,10 @@ class User < ActiveRecord::Base
     @myousica ||= User.find_by_login('myousica')
   end
 
+  def self.find_countries
+    find(:all, :select => 'country', :group => 'country', :order => 'country', :conditions => "login != 'myousica'").map(&:country)
+  end
+
   def friends(options = {})
     options.assert_valid_keys :limit, :conditions, :order
 

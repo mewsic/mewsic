@@ -10,11 +10,11 @@ class GenresController < ApplicationController
         render :layout => false
       end
       format.xml do
-        @genres = Genre.find(:all, params[:page])
+        @genres = params[:search] ? Genre.find_with_songs(:all, :order => 'name') :
+          Genre.find(:all, :order => 'name')
       end
       format.js do
         @genres = Genre.find(:all).collect{|g| params.include?(:ids) ? g.id : g.name}
-        headers["Content-Type"] = "application/json;"
         render :text => @genres.to_json
       end
     end    

@@ -158,7 +158,7 @@ Ajax.InPlaceSelect = Class.create({
     this.unregisterListeners();
   },
   parseValues: function(transport) {
-    this.options.values = transport.responseJSON;
+    this.options.values = transport.responseText.evalJSON();
 
     if (!this.options.labels_url)
       this.options.labels = this.options.values;
@@ -167,7 +167,7 @@ Ajax.InPlaceSelect = Class.create({
       this.enterEditMode();
   },
   parseLabels: function(transport) {
-    this.options.labels = transport.responseJSON;
+    this.options.labels = transport.responseText.evalJSON();
 
     if (this.options.values.size() > 0)
       this.enterEditMode();

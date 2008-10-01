@@ -79,7 +79,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.splash_config '/splash.xml', :controller => 'dashboard', :action => 'config', :format => 'xml'
 
-  map.connect '/countries', :controller => 'users', :action => 'countries'
+  map.connect '/countries.:format', :controller => 'users', :action => 'countries'
   
   map.resources :help, :member => { :ask => :post }
   map.ask_help '/help/ask', :controller => 'help', :action => 'ask'

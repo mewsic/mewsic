@@ -287,13 +287,15 @@ class UsersControllerTest < Test::Unit::TestCase
   end
 
   def test_countries
-    xhr :get, :countries
+    xhr :get, :countries, :format => 'js'
     assert_response :success
-
-    assert_equal 'application/json', @response.content_type
+    assert_equal 'text/javascript', @response.content_type
 
     countries_json = ActionView::Helpers::FormOptionsHelper::COUNTRIES.to_json
     assert_equal countries_json, @response.body
+
+    get :countries, :format => 'xml'
+    assert_response :success
   end
 
 #  def test_should_fetch_im_contact
