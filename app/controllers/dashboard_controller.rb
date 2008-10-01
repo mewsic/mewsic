@@ -5,6 +5,7 @@ class DashboardController < ApplicationController
   
   def index
     @people = User.find_top_myousicians :limit => 6
+    @vat = true
   end
 
   def top
