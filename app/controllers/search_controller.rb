@@ -33,10 +33,13 @@ class SearchController < ApplicationController
            tracks_conditions[:instrument_id] = params[:instrument].to_i
          end
          if params.include?(:title) && !params[:title].blank?  
-            @q = "#{@q} @title #{params[:title]}"
+           @q = "#{@q} @title #{params[:title]}"
          end
          if params.include?(:author) && !params[:author].blank?  
            @q = "#{@q} @author #{params[:author]}"
+         end
+         if params.include?(:country) && !params[:country].blank?
+           @q = "#{@q} @user_country #{params[:country]}"
          end
        end      
 

@@ -33,6 +33,7 @@ class Track < ActiveRecord::Base
     has :idea
     has :key
     has :instrument_id
+    has owner.country, :as => :user_country
   end
   
   attr_accessor :mlab
