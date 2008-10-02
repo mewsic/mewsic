@@ -32,6 +32,7 @@
 			<fetch>/tracks/{:track_id}.xml</fetch>
 			<siblings>/tracks/{:track_id}.xml?siblings=true</siblings>
 			<create method="post">/tracks.xml</create>
+			<download>/tracks/{:track_id}/download</download>
 		</tracks>
 		<media>
 			<mix method="post">/mix?<%= multitrack_auth_token %></mix>
