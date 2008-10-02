@@ -38,6 +38,7 @@ var MailBox = Class.create({
   
   updateUnreadCount: function(count) {
     this.element.down('.unread.count').update(count);
+    $('inbox-link').update("inbox (" + count + ")");
   },
   
   handleClosePopup: function(event) {
