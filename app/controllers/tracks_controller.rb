@@ -78,7 +78,7 @@ class TracksController < ApplicationController
     if @track.destroyable?
       @track.songs.destroy_all
       @track.destroy
-      flash[:notice] = "Track ##{@track.id} has been deleted."
+      flash[:notice] = "Track '#{@track.title}' has been deleted."
       head :ok
     else
       head :forbidden

@@ -82,7 +82,7 @@ class SongsController < ApplicationController
       @song.destroy
     end
 
-    flash[:notice] = "Song ##{@song.id} has been deleted." unless request.xhr?
+    flash[:notice] = "Song '#{@song.title}' has been deleted."
 
     head :ok
 
