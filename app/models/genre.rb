@@ -23,8 +23,8 @@ class Genre < ActiveRecord::Base
   end
 
   def self.find_with_songs(what, options = {})
-    Genre.with_scope :find => {:include => :published_songs, :conditions => 'songs.id IS NOT NULL'} do
-      Genre.find what, options
+    with_scope :find => {:include => :published_songs, :conditions => 'songs.id IS NOT NULL'} do
+      find what, options
     end
   end
   
