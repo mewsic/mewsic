@@ -5,6 +5,7 @@
 
 	var flashvars = {
 		serverPath: '<%= APPLICATION[:url] %>',
+		playcountPath: '<%= @playcount_path %>',
 		soundLength: <%= @playable.seconds %>,
 		soundID: <%= @playable.id %>,
 		soundType: '<%= @playable_type %>',

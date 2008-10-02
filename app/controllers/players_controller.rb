@@ -4,11 +4,11 @@ class PlayersController < ApplicationController
   layout false
 
   def show
-    redirect_to '/' and return unless @playable && request.xhr?
+    redirect_to '/' and return unless @playable #&& request.xhr?
 
     session[:playcount_barrier] = Time.now.to_i + @playable.seconds/2
     @playable_type = @playable.class.name.underscore
-    @increment_path = send("#{@playable_type}_increment_path", @playable)
+    @playcount_path = send("#{@playable_type}_increment_path", @playable)
     @waveform = send("formatted_#{@playable_type}_path", @playable, 'png')
   end
 

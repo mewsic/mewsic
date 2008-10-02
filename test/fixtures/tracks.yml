@@ -295,7 +295,7 @@ really_short_track:
   title: Really short track for increment count test
   parent_song: song_401
   instrument: <%= random_instrument %>
-  seconds: 10
+  seconds: 4
   idea: false
   owner: user_401
   tonality: 'G'

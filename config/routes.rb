@@ -54,6 +54,7 @@ ActionController::Routing::Routes.draw do |map|
  
   map.resources :tracks, :has_one => :player, :member => { :rate => :put, :download => :get } do |track|
     track.resources :abuses
+    track.increment 'i', :controller => 'players', :action => 'increment', :conditions => {:method => :put}
   end
   
   map.resources :search

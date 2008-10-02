@@ -321,5 +321,5 @@ really_short_song:
   listened_times: <%= rand(50) %>
   created_at: <%= (rand(60)).days.ago.to_s :db %>
   tone: F
-  seconds: 10
+  seconds: 4
   filename: test.mp3
