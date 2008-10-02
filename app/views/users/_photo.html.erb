@@ -1,6 +1,6 @@
 <div class="gallery-photo-thumb" id="gallery-photo-thumb-<%= photo.id %>">
   <div style="position: relative;">
-		<a href="<%= photo.public_filename(:large) %>" rel="gallery[<%= @user.nickname %>]" title=" :: :: " class="lightview image">
+		<a href="<%= photo.public_filename(:large) %>" rel="gallery[<%= @user.login %>]" title=" :: :: " class="lightview image">
       <%= image_tag(photo.public_filename(:small), :alt => photo.filename) %>
     <span class="button view" style="display:none"></span></a>    
     <% if current_user_page? %>

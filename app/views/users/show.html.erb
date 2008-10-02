@@ -51,7 +51,7 @@
 					empty_message = "You can upload or record tracks with our #{link_to('multitrack editor', multitrack_path)}<br/>#{link_to 'Click here to learn more', help_path('multitrack')}"
 				else
 					label = 'Ideas'
-					empty_message = "#{@user.nickname} hasn't published any <strong>idea</strong> yet.<br/>#{link_to 'Clik here to learn more about ideas', help_path('ideas')}"
+					empty_message = "#{@user.login} hasn't published any <strong>idea</strong> yet.<br/>#{link_to 'Clik here to learn more about ideas', help_path('ideas')}"
 				end
 			%>
 			<div class="tabmenu">

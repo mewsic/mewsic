@@ -1,5 +1,5 @@
 <user>
   <id><%= @user.id %></id>
-	<nickname><%= @user.nickname %></nickname>
+	<nickname><%= @user.login %></nickname>
 	<avatar><%= @user.avatar ? @user.avatar.public_filename(:small) : '/images/default_avatars/avatar_small.gif' %></avatar>
 </user>

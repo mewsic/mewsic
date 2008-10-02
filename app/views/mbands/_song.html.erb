@@ -13,7 +13,7 @@
 </tr>
 <tr class="<%= %w[odd even][song_counter % 2] %>">
 	<td class="song-info">
-		<p class="name"><%= link_to song.user.nickname, user_path(song.user) %></p>
+		<p class="name"><%= link_to song.user.login, user_path(song.user) %></p>
 		<p class="abstract"><%= truncate song.original_author, 50 %></p>
 		<p class="title"><%= link_to song.title, song %></p>
 		<p class="small sky-text">last updated <%= time_ago_in_words song.updated_at %> ago</p>

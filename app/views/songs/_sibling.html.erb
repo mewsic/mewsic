@@ -28,7 +28,7 @@
     <%= link_to avatar_image(sibling.user, :icon), user_path(sibling.user) %>
   </div>
 	<p>
-		<span class="name"><%= link_to sibling.user.nickname, user_path(sibling.user) %></span><br/>
+		<span class="name"><%= link_to sibling.user.login, user_path(sibling.user) %></span><br/>
 		<span class="title"><%= link_to sibling.title, song_path(sibling) %></span>
 	</p>
   <p class="genre float-left">

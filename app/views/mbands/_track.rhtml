@@ -1,7 +1,7 @@
 <tr class="<%= %w[odd even][track_counter % 2] %> mlab_track" id="track_<%= track.id %>">
 	<td class="track-name">		
 		<p class="thumb"><%= track_instrument_icon(track) %></p>
-		<p class="name"><%= link_to track.user.nickname, user_path(track.user) %></p>
+		<p class="name"><%= link_to track.user.login, user_path(track.user) %></p>
 		<p class="title"><%= track.title %></p>
 		<p class="abstract"><%= truncate track.description, 50 %>
 		<p class="small sky-text">last updated <%= time_ago_in_words track.updated_at %> ago</p>

@@ -3,7 +3,7 @@
 		<%= track_instrument_icon(track, :playable => track) %>
     <%= link_to(avatar_image(track.user, :icon), user_path(track.user)) %>
 	</p>
-  <p class="name align-right"><%= link_to(track.user.nickname, user_path(track.user)) %></p>
+  <p class="name align-right"><%= link_to(track.user.login, user_path(track.user)) %></p>
   <p class="title align-right"><%= track.title %></p>
   <div class="music-info">
 		<div class="track-info clear-block">

@@ -12,7 +12,7 @@
           </p>
           <p class="thumb"><%= link_to avatar_image(song.user, :small), user_path(song.user) %></p>
 					<p>
-						<span class="name"><%= link_to song.user.nickname, user_path(song.user) %></span><br/>
+						<span class="name"><%= link_to song.user.login, user_path(song.user) %></span><br/>
 						<span class="abstract"><%= song.original_author %></span><br/>
 						<span class="title"><%= song.title %></span>
 					</p>

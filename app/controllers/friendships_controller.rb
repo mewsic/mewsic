@@ -10,9 +10,9 @@ class FriendshipsController < ApplicationController
 
     flash[:notice] = 
       if @user.is_friends_with?(@friend)
-        "You and #{@friend.nickname} are now friends!"
+        "You and #{@friend.login} are now friends!"
       else
-        "You are now an admirer of #{@friend.nickname}"
+        "You are now an admirer of #{@friend.login}"
       end
 
     redirect_to user_path(@friend)
@@ -24,9 +24,9 @@ class FriendshipsController < ApplicationController
 
     flash[:notice] =
       if @user.is_friends_with?(@friend)
-        "You are no longer a friend of #{@friend.nickname}"
+        "You are no longer a friend of #{@friend.login}"
       else
-        "You are no longer an admirer of #{@friend.nickname}"
+        "You are no longer an admirer of #{@friend.login}"
       end
 
     @friendship.destroy_or_unaccept(@user)

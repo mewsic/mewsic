@@ -22,7 +22,7 @@ module BandMembersHelper
 
   def member_name(member)
     if member.linked_to_myousica_user?
-      link_to member.nickname, user_path(member.linked_user)
+      link_to member.linked_user.login, user_path(member.linked_user)
     else
       member.nickname
     end
