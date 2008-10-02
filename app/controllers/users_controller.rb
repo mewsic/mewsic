@@ -36,31 +36,36 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = User.find_from_param(params[:id], :include => [:avatars])
-    @songs = Song.find_paginated_by_user(1, @user)
-    @answers = @user.answers.paginate(:page => 1, :per_page => 6, :order => 'created_at DESC')
-    @new_membership = MbandMembership.new
-
-    @tracks, @tracks_count, @mbands = 
-      if @user == current_user
-        @mband_invitations = @user.pending_mband_invitations
-        [Track.find_paginated_by_user(1, @user), @user.tracks_count, @user.mbands]
-      else
-        [Track.find_paginated_ideas_by_user(1, @user), @user.ideas_count, @user.mbands_with_more_than_one_member]
-      end
-
-    @friends =
-      if @user.friends_count > 50 
-        @user.friends :limit => 50, :order => SQL_RANDOM_FUNCTION
-      else
-        @user.friends
-      end
-
-    @firstrun = (@user == current_user) && params.include?(:welcome)
-    @has_abuse = @user.abuses.exists? ['user_id = ?', current_user.id] if logged_in?
+    @user = User.find_from_param(params[:id], :include => :avatars)
 
     respond_to do |format|
-      format.html
+      format.html do
+        current_user_page = current_user == @user
+
+        @songs = Song.find_paginated_by_user(1, @user, :skip_blank => !current_user_page)
+        @songs_count = @user.songs_count(:skip_blank => !current_user_page)
+        @answers = @user.answers.paginate(:page => 1, :per_page => 6, :order => 'created_at DESC')
+        @new_membership = MbandMembership.new
+
+        @tracks, @tracks_count, @mbands = 
+          if current_user_page
+            @mband_invitations = @user.pending_mband_invitations
+            [Track.find_paginated_by_user(1, @user), @user.tracks_count, @user.mbands]
+          else
+            [Track.find_paginated_ideas_by_user(1, @user), @user.ideas_count, @user.mbands_with_more_than_one_member]
+          end
+
+        @friends =
+          if @user.friends_count > 50 
+            @user.friends :limit => 50, :order => SQL_RANDOM_FUNCTION
+          else
+            @user.friends
+          end
+
+        @firstrun = current_user_page && params.include?(:welcome)
+        @has_abuse = @user.abuses.exists? ['user_id = ?', current_user.id] if logged_in?
+      end
+
       format.xml
     end
 
@@ -245,7 +250,7 @@ class UsersController < ApplicationController
   end
 
 protected
-  
+
   def check_if_current_user_page
     redirect_to('/') and return unless (current_user.id == User.from_param(params[:id])) || current_user.is_admin?
   end

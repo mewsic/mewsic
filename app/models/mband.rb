@@ -44,6 +44,7 @@ class Mband < ActiveRecord::Base
                 :sanitize => [:motto, :tastes]
   
   def band_membership_with(user)
+    return false if user == :false
     self.memberships.find(:first, :conditions => ["user_id = ?", user.id])
   end
 
@@ -72,8 +73,8 @@ class Mband < ActiveRecord::Base
              :order => "songs.created_at DESC")
   end
 
-  def songs_count
-    self.members.map(&:songs_count).sum
+  def songs_count(options = {})
+    self.members.map {|m| m.songs_count(options) }.sum
   end
 
   def tracks_count

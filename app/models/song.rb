@@ -72,17 +72,21 @@ class Song < ActiveRecord::Base
   end
   
   # TODO: Unire i due metodi in uno unico 
-  def self.find_paginated_by_user(page, user)
+  def self.find_paginated_by_user(page, user, options = {})
+    conditions = ["songs.published = ? AND songs.user_id = ?", true, user.id]
+    conditions[0] += " AND tracks.id IS NOT NULL" if options[:skip_blank]
     paginate :per_page => 3, 
-             :conditions => ["songs.published = ? AND songs.user_id = ?", true, user.id], 
+             :conditions => conditions,
              :order => "songs.updated_at DESC",
              :include => [:user, {:tracks => :instrument}], 
              :page => page
   end
   
-  def self.find_paginated_by_mband(page, mband)
+  def self.find_paginated_by_mband(page, mband, options = {})
+    conditions = ["songs.published = ? AND users.id IN (?)", true, mband.members.map(&:id)]
+    conditions[0] += " AND tracks.id IS NOT NULL" if options[:skip_blank]
     paginate :per_page => 3, 
-             :conditions => ["songs.published = ? AND users.id IN (?)", true, mband.members.map(&:id)], 
+             :conditions => conditions,
              :order => "songs.updated_at DESC",
              :include => [:user, {:tracks => :instrument}], 
              :page => page

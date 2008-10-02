@@ -108,7 +108,8 @@ class User < ActiveRecord::Base
   
   has_many :songs,            :order => 'songs.created_at DESC'
   has_many :tracks,           :order => 'tracks.created_at DESC'
-  has_many :published_songs,  :conditions => ["songs.published = ?", true], :order => 'songs.created_at DESC', :class_name => 'Song'
+  has_many :ideas,            :conditions => ['tracks.idea = ?', true], :order => 'tracks.created_at DESC', :class_name => 'Track'
+  has_many :published_songs,  :conditions => ['songs.published = ?', true], :order => 'songs.created_at DESC', :class_name => 'Song'
   has_many :answers
   has_many :replies
   has_many :photos, :as => :pictureable
@@ -418,8 +419,12 @@ class User < ActiveRecord::Base
     @admirers_count ||= (attributes['admirers_count'] || admirers.count).to_i
   end
 
-  def songs_count
-    self.songs.count(:conditions => ['songs.published = ?', true])
+  def songs_count(options = {})
+    if options[:skip_blank]
+      self.songs.count(:include => :tracks, :conditions => ['songs.published = ? AND tracks.id IS NOT NULL', true])
+    else
+      self.published_songs.count
+    end
   end
 
   def tracks_count
@@ -427,7 +432,7 @@ class User < ActiveRecord::Base
   end
 
   def ideas_count
-    self.tracks.count :conditions => ['tracks.idea = ?', true]
+    self.ideas.count
   end
   
   def to_breadcrumb

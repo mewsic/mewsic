@@ -15,10 +15,10 @@ class SongsController < ApplicationController
           @songs = Song.find_paginated_by_genre(params[:page], @genre)
         elsif params.has_key?("user_id")
           @user = User.find_from_param(params[:user_id])
-          @songs = Song.find_paginated_by_user(params[:page], @user)
+          @songs = Song.find_paginated_by_user(params[:page], @user, :skip_blank => current_user != @user)
         elsif params.has_key?("mband_id")
           @mband = Mband.find_from_param(params[:mband_id])
-          @songs = Song.find_paginated_by_mband(params[:page], @mband)
+          @songs = Song.find_paginated_by_mband(params[:page], @mband, :skip_blank => !@mband.band_membership_with(current_user))
         end
 
         render :layout => false

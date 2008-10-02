@@ -1171,7 +1171,7 @@ tr.nav-song td{
 }
 
 .tracks-grey {
-	width: 210px;
+	width: 240px;
 	height: 30px;
 	overflow: hidden;
 	margin-top: 5px;
@@ -1204,6 +1204,11 @@ tr.nav-song td{
 
 .mlab_song .rating {
 	float: right;
+}
+
+.mlab_song .alert {
+	margin-top: 10px;
+	float: left;
 }
 
 .green-box .green-bg{

@@ -19,8 +19,8 @@
 				<div class="tab active">
 					<div class="sx"> </div>
 					<div class="rp">
-						<h1 class="title">Songs <span class="counter">(<%= @mband.songs_count %>)</span></h1>
-						<%= podcast_link_for(@mband, mband_podcast_url(@mband)) unless @mband.songs_count.zero? %>
+						<h1 class="title">Songs <span class="counter">(<%= @songs_count %>)</span></h1>
+						<%= podcast_link_for(@mband, mband_podcast_url(@mband)) unless @songs_count.zero? %>
 					</div>
 					<div class="dx"> </div>
 				</div>    

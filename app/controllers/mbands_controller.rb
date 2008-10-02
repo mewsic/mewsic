@@ -11,9 +11,12 @@ class MbandsController < ApplicationController
   # GET /mbands/1
   # GET /mbands/1.xml
   def show
-    @songs = Song.find_paginated_by_mband(1, @mband)
+    current_user_mband_page = @mband.band_membership_with(current_user)
+
+    @songs = Song.find_paginated_by_mband(1, @mband, :skip_blank => !current_user_mband_page)
+    @songs_count = @mband.songs_count(:skip_blank => !current_user_mband_page)
     @tracks, @tracks_count =
-      if @mband.members.include? current_user 
+      if current_user_mband_page
         [Track.find_paginated_by_mband(1, @mband), @mband.tracks_count]
       else
         [Track.find_paginated_ideas_by_mband(1, @mband), @mband.ideas_count]

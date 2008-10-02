@@ -188,12 +188,25 @@ class UsersControllerTest < Test::Unit::TestCase
     assert assigns(:user)
   end    
   
-  def test_show_should_have_tracks_assigned
-    call_and_test_show
+  def test_show_should_have_ideas_and_songs_with_tracks_assigned
+    call_and_test_show :format => 'html'
+    assert assigns(:tracks)
+    assert assigns(:tracks).all? { |t| t.idea? }
+
     assert assigns(:songs)
-    # assert_equal 3, assigns(:songs).size
-    #     assert_equal 7, assigns(:tracks).size
-  end  
+    assert assigns(:songs).all? { |s| s.tracks.count > 0 }
+    assert assigns(:songs_count) == 10
+  end
+  
+  def test_show_current_user_page_should_have_tracks_and_songs_assigned
+    login_as :quentin
+
+    call_and_test_show :format => 'html'
+    assert assigns(:tracks)
+
+    assert assigns(:songs)
+    assert assigns(:songs_count) == 17
+  end
   
   def test_should_redirect_unless_xhr
     get :forgot_password
@@ -332,8 +345,8 @@ class UsersControllerTest < Test::Unit::TestCase
         :password => 'quirezzz', :password_confirmation => 'quirezzz', :country => 'Italy'}.merge(options) # , :terms_of_service => '1', :eula => '1' }.merge(options)
     end
     
-    def call_and_test_show
-      get :show, :id => users(:quentin).id
+    def call_and_test_show(options = {})
+      get :show, options.merge(:id => users(:quentin).id)
       assert_response :success
     end
 end
