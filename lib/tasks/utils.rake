@@ -1,10 +1,10 @@
 namespace :myousica do
-  desc "Aggiorna il numero degli amici di una persona"
+  desc "Update friends count for every user"
   task(:update_friends_count => :environment) do
     User.find(:all).each {|u| u.update_friends_count}
   end
   
-  desc "Aggiorna il numero di replies per ogni answer ed ogni user"
+  desc "Update answer replies count for every answer and every user"
   task(:update_replies_count => :environment) do
     Answer.find(:all).each do |answer|
       answer.connection.execute(
@@ -18,6 +18,31 @@ namespace :myousica do
       )
     end
   end    
+
+  namespace :fixtures do
+    desc "Load fixtures and update both friends and replies count"
+    task :load => [ "db:fixtures:load",  "myousica:update_friends_count", "myousica:update_replies_count"]
+  end  
+
+  namespace :flash do
+    desc "Update the flash swfs from the production slices on EY"
+    task(:update => :environment) do
+      def update(path)
+        FileUtils.mkdir_p File.join(RAILS_ROOT, 'public', *path[0..-2])
+        File.open File.join(RAILS_ROOT, 'public', *path), 'w+' do |f|
+          uri = URI.parse "http://myousica.com/#{path.join('/')}"
+          puts "Updating #{path.last} from #{uri}"
+          f.write Net::HTTP.get(uri)
+        end
+      end
+
+      update ['multitrack', 'Adelao_Myousica_Multitrack_Editor.swf']
+      update ['players', 'Adelao_Myousica_Player.swf']
+      update ['players', 'Adelao_Myousica_Video_Player.swf']
+      update ['splash', 'Adelao_Myousica_Splash.swf']
+      (1..3).each { |i| update ['splash', 'slides', "#{i}.jpg"] }
+    end
+  end
 
   namespace :sphinx do
     config = File.join(RAILS_ROOT, 'config', 'sphinx_development.config')
@@ -37,19 +62,6 @@ namespace :myousica do
 
   end
   
-  namespace :fixtures do
-    
-    desc "Carica le fixtures ed aggiorna il numero degli amici di una persona"
-    task :load => [ "db:fixtures:load",  "myousica:update_friends_count", "myousica:update_replies_count"]
-    
-    desc "Setto un mp3 come default x tutte le song e track"
-    task :dragonforce => :environment do
-      Track.update_all("filename = 'audio/dragonforce.mp3'")
-      Song.update_all("filename = 'audio/dragonforce.mp3'")
-    end
-    
-  end  
-
   desc "Clean up unreferenced mp3s"
   task :clean_up_mp3s => :environment do
     unless ENV['MP3DIR']
