@@ -288,6 +288,7 @@ var BandMembers = Class.create({
     this.add_button.show();
 
     this.member_name_input.value = '';
+    this.member_country.value = '';
     this.instrument_select.setValue('');
 
     this.member_name_box.hide();
@@ -325,11 +326,6 @@ var BandMembers = Class.create({
 
       // ..show it!
       this.avatar_preview.src = current_avatar.src;
-
-      // and cache its id so if the user changes it it'll be destroyed
-      if (!current_avatar.id.blank()) {
-        this.avatar_id = current_avatar.id;
-      }
 
       // finally make the avatar and country boxes appear
       this.avatar_box.show();
