@@ -12,7 +12,7 @@ class DashboardController < ApplicationController
   before_filter :redirect_unless_xhr, :only => :top
   session :off, :only => :noop
   
-  # GET /
+  # <tt>GET /</tt>
   #
   # The home page contains banners, swf objects and a list of top myousicians
   #
@@ -20,7 +20,7 @@ class DashboardController < ApplicationController
     @people = User.find_top_myousicians :limit => 6
   end
 
-  # XHR GET /top
+  # <tt>XHR GET /top</tt>
   #
   # Returns a list of top myousicians, triggered when the user clicks the "refresh" button
   # in the "Top myousicians" section of the home page.
@@ -37,7 +37,7 @@ class DashboardController < ApplicationController
     render :partial => 'myousician', :collection => @people
   end
 
-  # GET /noop
+  # <tt>GET /noop</tt>
   #
   # Pingback method, used by Engine Yard monitoring software. If passed an ID, it is echoed back.
   # Session is OFF in this method!
@@ -50,7 +50,7 @@ class DashboardController < ApplicationController
     end
   end
 
-  # GET /splash.xml
+  # <tt>GET /splash.xml</tt>
   #
   # Renders the splash configuration, finding the 5 most collaborated songs (see Song#find_most_collaborated).
   #

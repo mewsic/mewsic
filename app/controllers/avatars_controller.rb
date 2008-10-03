@@ -21,7 +21,7 @@ class AvatarsController < ApplicationController
   before_filter :check_current_user, :only => :update
   before_filter :check_file_upload,  :only => [:create, :update]
 
-  # POST /avatars.js
+  # <tt>POST /avatars.js</tt>
   #
   # Called by the BandMembers JavaScript widget (see public/javascripts/user/band_members.js)
   # upon the AJAX file upload. Avatars are created unbound, because the file upload completes
@@ -53,7 +53,7 @@ class AvatarsController < ApplicationController
 
   end
 
-  # PUT /users/:id/avatar
+  # <tt>PUT /users/:id/avatar</tt>
   #
   # Misleading use of RESTful routes, because this action actually creates a new avatar linked to
   # the pictureable found by the +find_pictureable+ method. If the uploaded avatar is valid, the
@@ -97,7 +97,7 @@ class AvatarsController < ApplicationController
     end
   end
 
-  # DELETE /avatars/:id
+  # <tt>DELETE /avatars/:id</tt>
   #
   # Called by the BandMembers JavaScript widget, when an user changes the avatar of a BandMember.
   # It pays attention to destroy only unbound avatars, e.g. generated when an user repeatedly

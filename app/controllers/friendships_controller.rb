@@ -22,7 +22,7 @@ class FriendshipsController < ApplicationController
   before_filter :find_user
   before_filter :check_current_user
   
-  # POST /users/:user_id/friendships
+  # <tt>POST /users/:user_id/friendships</tt>
   #
   # Creates a new friendship between the current user and the one passed via
   # the <tt>friend_id</tt> parameter. If the passed user is already a friend
@@ -43,7 +43,7 @@ class FriendshipsController < ApplicationController
     redirect_to user_path(@friend)
   end
 
-  # DELETE /users/:user_id/friendships/:id
+  # <tt>DELETE /users/:user_id/friendships/:id</tt>
   #
   # Destroy or unaccept a friendship request. If the current friendship is one-way
   # (the current user is an admirer of the given one), it is destroyed. If it is

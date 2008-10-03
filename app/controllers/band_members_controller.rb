@@ -24,7 +24,7 @@ class BandMembersController < ApplicationController
   before_filter :check_if_current_user_page
   before_filter :check_if_band  
 
-  # XHR GET /users/:id/members
+  # <tt>XHR GET /users/:id/members</tt>
   #
   # Renders the contents of the band using the <tt>_band_member.html.erb</tt> template, or the
   # <tt>_no_band_members.html.erb</tt> one if no band members are present. It's called when the
@@ -38,7 +38,7 @@ class BandMembersController < ApplicationController
     end
   end
 
-  # XHR GET /users/:id/members/new
+  # <tt>XHR GET /users/:id/members/new</tt>
   #
   # Renders a band member form. Called when entering edit mode from the JS BandMembers widget
   # (see public/javascripts/user/band_members.js).
@@ -48,7 +48,7 @@ class BandMembersController < ApplicationController
     render :partial => 'users/my/band_member_form'
   end
   
-  # XHR POST /users/:id/members
+  # <tt>XHR POST /users/:id/members</tt>
   #
   # Creates a new BandMember instance and links it to the current user object. It calls
   # +link_to_user_if_myousica_id!+ to check whether this member should be linked to an
@@ -74,7 +74,7 @@ class BandMembersController < ApplicationController
     render :text => 'invalid request!', :status => :bad_request
   end
 
-  # XHR PUT /users/:id/members/:id
+  # <tt>XHR PUT /users/:id/members/:id</tt>
   #
   # Updates a BandMember instance and calls +link_to_user_if_myousica_id!+ to check
   # whether this member should be linked to an existing myousica user.
@@ -99,7 +99,7 @@ class BandMembersController < ApplicationController
     render :text => 'invalid request!', :status => :bad_request
   end
 
-  # XHR DELETE /users/:id/members/:member_id
+  # <tt>XHR DELETE /users/:id/members/:member_id</tt>
   #
   # Deletes a BandMember instance, rendering nothing with a 200 status.
   # Renders nothing with a 400 status in case of failure.

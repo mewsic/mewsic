@@ -19,7 +19,7 @@ class AnswersController < ApplicationController
   before_filter :check_answer_owner, :only => :update
   before_filter :check_valid_search_string, :only => :search
 
-  # GET /answers
+  # <tt>GET /answers</tt>
   #
   # The index page contains listings of open, top and newest answers, along with a list of
   # top contributors. Top and newest answers are shown in paginated tabs, updated by the
@@ -43,7 +43,7 @@ class AnswersController < ApplicationController
     end
   end
 
-  # GET /answers/open
+  # <tt>GET /answers/open</tt>
   #
   # This action shows a listing of open questions and a list of top contributors.
   #
@@ -52,7 +52,7 @@ class AnswersController < ApplicationController
     @top_contributors = User.find_top_answers_contributors :limit => 10
   end
 
-  # GET /answers/:id
+  # <tt>GET /answers/:id</tt>
   #
   # Action to show an answer, along with similar ones (see Answer#find_similar for details).
   #
@@ -62,7 +62,7 @@ class AnswersController < ApplicationController
     @other_answers_by_author = Answer.find_paginated_by_user @answer.user, 1, :per_page => 6, :conditions => ['answers.id != ?', @answer.id]
   end
   
-  # XHR GET /answers/:id/siblings
+  # <tt>XHR GET /answers/:id/siblings</tt>
   # Action called via XHR to paginate an user's answers, used in the "more by user" in the AnswersController#show action.
   #
   def siblings
@@ -73,7 +73,7 @@ class AnswersController < ApplicationController
     render :nothing => true, :status => :bad_request
   end
 
-  # XHR GET /answers/top?type=[open|top|newest]
+  # <tt>XHR GET /answers/top?type=[open|top|newest]</tt>
   #
   # Action called via XHR to paginate and render open, top and newest answers. params[:type] contains
   # which kind of index to fetch.
@@ -93,7 +93,7 @@ class AnswersController < ApplicationController
     render :partial => 'index_list', :locals => { :answers => answers, :name => params[:type] }
   end
 
-  # GET /answers/rss.xml
+  # <tt>GET /answers/rss.xml</tt>
   #
   # Generates an RSS feed of the 20 newest answers
   #
@@ -105,7 +105,7 @@ class AnswersController < ApplicationController
     end
   end
 
-  # POST /answers
+  # <tt>POST /answers</tt>
   #
   # Creates a new answer.
   #
@@ -142,8 +142,8 @@ class AnswersController < ApplicationController
     redirect_to answer_url(@answer)
   end
   
-  # GET /answers/search?q=search+string[&page=X]
-  # XHR GET /answers/search?q=search+string[&page=X]
+  # <tt>GET /answers/search?q=search+string[&page=X]</tt>
+  # <tt>XHR GET /answers/search?q=search+string[&page=X]</tt>
   #
   # Searches through the answers using the supplied query string. User input is validated by the +check_valid_search_string+
   # method. Requests coming through XHR are for pagination purposes.
@@ -154,7 +154,7 @@ class AnswersController < ApplicationController
     render :partial => 'search_list' and return if request.xhr?
   end
   
-  # XHR PUT /answers/:id/rate
+  # <tt>XHR PUT /answers/:id/rate</tt>
   #
   # Rates an answer, as long as Answer#rateable_by? returns true. If this answer is not rateable by the current user, nothing
   # is rendered with a 400 status.
