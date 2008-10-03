@@ -1,3 +1,18 @@
+# Myousica Abuses controller
+#
+# (C) 2008 Medlar s.r.l.
+# (C) 2008 Adelao Group
+# 
+# == Description
+#
+# This RESTful controller handles the Abuse creation process, triggered by abuse links throughout
+# the site and displayed into a <tt>Lightview</tt>.
+#
+# The +Abuse+ model uses a polymorphic <tt>has_many</tt> association with different models, see the
+# +find_abuseable+ method for details.
+#
+# Login is required in order to create new abuses.
+#
 class AbusesController < ApplicationController
   
   layout false
@@ -5,9 +20,26 @@ class AbusesController < ApplicationController
   before_filter :login_required
   before_filter :find_abuseable  
 
+  # GET /abuses/new
+  #
+  # Show the abuse creation form if an abuse for the current object does not exist.
+  # If it exists, the view renders "Notification already sent".
+  #
+  # This view is rendered inside a <tt>Lightview</tt>
+  #
   def new    
   end
 
+  # POST /abuses/create
+  #
+  # Create a new abuse if it does not exist, show a notification if it does.
+  # Upon creation, a notification is sent to abuse@myousica.com with object
+  # details (see <tt>app/views/abuse_mailer/notification.erb</tt>) and user
+  # supplied message.
+  #
+  # This view closes the <tt>Lightview</tt> and shows the flash contents using
+  # the Message Javascript object (see <tt>public/javascripts/flash.js</tt>).
+  #
   def create
     @abuse = Abuse.new(params[:abuse])
     @abuse.abuseable = @abuseable
@@ -25,6 +57,15 @@ class AbusesController < ApplicationController
 
 private
 
+  # Find the abuseable, using Rails parameter name conventions. The models that
+  # currently have got the polymorphic <tt>has_many</tt> association are: +Answer+,
+  # +Song+, +Track+ and +User+.
+  # 
+  # This method also checks if an abuse for the requested object exists and saves
+  # the result in the <tt>@exist</tt> instance variable.
+  #
+  # If no abuseable is found, nothing is rendered with a 404 status.
+  #
   def find_abuseable
     @abuseable = if params.include?(:answer_id)
       Answer.find(params[:answer_id])
@@ -40,11 +81,7 @@ private
     @exists = Abuse.exists?(["abuseable_type = ? AND abuseable_id = ?", @abuseable.class.name, @abuseable.id])
 
   rescue ActiveRecord::RecordNotFound
-    render :nothing => true, :status => :bad_request
-  end
-  
-  def redirect_to_abuseable_page
-    redirect_to send("#{@abuseable.class.name.downcase}_url", @abuseable)
+    render :nothing => true, :status => :not_found
   end
   
 end
