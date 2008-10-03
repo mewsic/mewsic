@@ -1,8 +1,8 @@
 # Myousica Answers controller
 #
-# (C) 2008 Medlar s.r.l.
-# (C) 2008 Mikamai s.r.l.
-# (C) 2008 Adelao Group
+# Copyright:: (C) 2008 Medlar s.r.l.
+# Copyright:: (C) 2008 Mikamai s.r.l.
+# Copyright:: (C) 2008 Adelao Group
 # 
 # == Description
 #
@@ -124,7 +124,7 @@ class AnswersController < ApplicationController
     end
   end
   
-  # PUT /answers/:id
+  # <tt>PUT /answers/:id</tt>
   #
   # Updates an existing answer, as long as Answer#editable? allows it.
   #

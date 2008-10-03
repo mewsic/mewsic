@@ -1,6 +1,6 @@
 # Myousica Bands and Deejays Controller
 #
-# (C) 2008 Medlar s.r.l.
+# Copyright:: (C) 2008 Medlar s.r.l.
 # 
 # The bands & deejays page controller. It merely displays an index page similar to the users
 # one. Every other user operation is handled via the UsersController.

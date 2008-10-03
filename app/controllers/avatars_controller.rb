@@ -1,6 +1,6 @@
 # Myousica Avatars controller.
 #
-# (C) 2008 Adelao Group
+# Copyright:: (C) 2008 Adelao Group
 #
 # == Description
 #

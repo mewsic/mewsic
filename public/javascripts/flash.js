@@ -1,7 +1,7 @@
 /* Dynamic flas messages Class
- * (C) 2008 Medlar s.r.l.
- * (C) 2008 Adelao Group
- *
+ * Copyright:: (C) 2008 Medlar s.r.l.
+ * Copyright:: (C) 2008 Adelao Group
+ * 
  * == Description
  *
  * This class handles dynamic flash messages visualization. It uses the Prototype Template class

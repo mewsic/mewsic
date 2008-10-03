@@ -1,8 +1,8 @@
 # Myousica Base Application Controller
 #
-# (C) 2008 Medlar s.r.l.
-# (C) 2008 Mikamai s.r.l.
-# (C) 2008 Adelao Group
+# Copyright:: (C) 2008 Medlar s.r.l.
+# Copyright:: (C) 2008 Mikamai s.r.l.
+# Copyright:: (C) 2008 Adelao Group
 #
 # Filters added to this controller apply to all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.

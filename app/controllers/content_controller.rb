@@ -1,6 +1,6 @@
 # Myousica Bands and Deejays Controller
 #
-# (C) 2008 Adelao Group
+# Copyright:: (C) 2008 Adelao Group
 # 
 # Super-simple controller to show static content pages
 #

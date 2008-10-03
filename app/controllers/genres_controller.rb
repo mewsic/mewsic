@@ -1,5 +1,33 @@
+# Myousica Genres Controller
+#
+# Copyright:: (C) 2008 Medlar s.r.l.
+# Copyright:: (C) 2008 Mikamai s.r.l.
+# Copyright:: (C) 2008 Adelao Group
+#
+# == Description
+#
+# This RESTful controller implements listing of genres for the <tt>/music</tt> page and for
+# XML (multitrack) and JS (forms) requests, showing songs that pertain to a genre and RSS
+# feeds of the newest songs.
+#
 class GenresController < ApplicationController  
-    
+
+  # <tt>GET /genres.:format</tt>
+  #
+  # Print out a listing of genres. Depending on the format, different actions are carried out.
+  # 
+  # HTML: for the <tt>/music</tt> page, print out genres with songs (Genre#find_with_songs) and
+  # the last 3 songs of it (Genre#last_songs, called by <tt>app/views/music/_genre.rhtml</tt>).
+  # The view for this method is <tt>app/views/music/_genres.rhtml</tt>.
+  #
+  # XML: Returns an XML sheet of genres. If the <tt>search</tt> parameter is given, only genres
+  # with songs are selected, it is used by the advanced search features of the multitrack. The
+  # full genre list is used in the upload/record track dialog of the multitrack, instead.
+  #
+  # JS: Returns a JSON array containing all the genre names. It is used by the M-Lab in place
+  # select (see <tt>app/views/multitrack/index.html.erb</tt>, <tt>mlab_genre</tt>). If the <tt>
+  # ids</tt> parameter is given, a JSON array of the genre ids is returned.
+  #
   def index              
     respond_to do |format|
       format.html do
@@ -20,6 +48,12 @@ class GenresController < ApplicationController
     end    
   end
   
+  # <tt>GET /genres/:genre_id</tt>
+  #
+  # Show the genre page, that contains a listing of genre's songs, the most listened ones and
+  # most prolific users. Only HTML output is supported. When a genre is not found, user is
+  # redirected to /.
+  #
   def show
     @genre = Genre.find_from_param(params[:id])
     @most_listened_songs = @genre.find_most_listened :limit => 3, :include => :user
@@ -35,6 +69,10 @@ class GenresController < ApplicationController
     redirect_to '/'
   end
 
+  # <tt>GET /genres/:genre_id/rss.xml</tt>
+  #
+  # Generates an RSS feed of 40 most recent published songs.
+  #
   def rss
     @genre = Genre.find_from_param(params[:genre_id])
     @songs = @genre.published_songs.find(:all, :limit => 40)
@@ -46,6 +84,9 @@ class GenresController < ApplicationController
 
 protected
 
+  # Helper that generates the breadcrumb link for this controller.
+  # The target is /music#genres, because genre index is displayed only on the music page.
+  #
   def to_breadcrumb_link
     ['Genres', music_path + '#genres']
   end

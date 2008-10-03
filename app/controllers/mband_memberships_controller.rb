@@ -1,8 +1,28 @@
+# Myousica M-Band Memberships Controller
+#
+# Copyright:: (C) 2008 Medlar s.r.l.
+# Copyright:: (C) 2008 Mikamai s.r.l.
+# Copyright:: (C) 2008 Adelao Group
+#
+# == Description
+# 
+# This RESTful controller implements +create+ and +destroy+ operation on MbandMemberships, that
+# represent a membership to an Mband.
+#
+# Memberships are to be confirmed by the recipient and can be declined, the +accept+ and +decline+
+# actions accomplish these goals. Login is required for all these actions.
+#
 class MbandMembershipsController < ApplicationController
   
   before_filter :login_required
   before_filter :find_mband, :only => :create
 
+  # <tt>POST /mband_memberships</tt>
+  #
+  # Create a new membership between the Mband found in the +find_mband+ filter and the passed
+  # <tt>user_id</tt> parameter, as an <tt>instrument_id</tt> player. An user must be a member
+  # of the Mband in order to invite others. See the +find_mband+ filter also.
+  #
   def create        
     @user = User.find_from_param(params[:user_id])    
     @instrument = Instrument.find(params[:instrument_id])
@@ -27,6 +47,11 @@ class MbandMembershipsController < ApplicationController
     redirect_to mband_url(@mband)
   end
 
+  # <tt>DELETE /mband_memberships/:id</tt>
+  #
+  # Destroys an existing membership, doing the necessary sanity checks. User is redirected
+  # to its page upon completion.
+  #
   def destroy
     @membership = MbandMembership.find(params[:id])
     redirect_to '/' unless @membership.mband.members.include?(current_user)
@@ -38,6 +63,10 @@ class MbandMembershipsController < ApplicationController
     end
   end
   
+  # <tt>GET /mband_memberships/accept/:token</tt>
+  #
+  # Finds an Mband by accept token and finalize the membership. User is redirected to Mband page upon completion.
+  #
   def accept
     @membership = MbandMembership.find(:first, :conditions => ["membership_token = ?", params[:token]])
     @membership.accept!
@@ -46,6 +75,10 @@ class MbandMembershipsController < ApplicationController
     redirect_to mband_url(@membership.mband)
   end
 
+  # <tt>GET /mband_memberships/decline/:token</tt>
+  #
+  # Decline (so, destroy) a membership. User is redirected to its own page upon completion.
+  #
   def decline
     @membership = MbandMembership.find(:first, :conditions => ["membership_token = ?", params[:token]])
     @membership.destroy
@@ -56,6 +89,10 @@ class MbandMembershipsController < ApplicationController
 
 private
 
+  # Filter that searches for an Mband if an <tt>mband_id</tt> parameter is passed. If it is blank
+  # or '0', a new Mband is created with the supplied <tt>mband_name</tt> and its creator is automatically
+  # promoted as the Mband leader.
+  #
   def find_mband    
     if params[:mband_id].blank? || params[:mband_id] == '0'
       @mband = Mband.create(:name => params[:mband_name])      

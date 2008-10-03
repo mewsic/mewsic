@@ -1,8 +1,8 @@
 # Myousica Dashboard Controller
 #
-# (C) 2008 Medlar s.r.l.
-# (C) 2008 Mikamai s.r.l.
-# (C) 2008 Adelao Group
+# Copyright:: (C) 2008 Medlar s.r.l.
+# Copyright:: (C) 2008 Mikamai s.r.l.
+# Copyright:: (C) 2008 Adelao Group
 # 
 # This controller implements myousica home page, renders the Splash swf configuration and
 # implements a pingback method for the Engine Yard monitoring software.
