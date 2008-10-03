@@ -1,6 +1,5 @@
 require 'net/http'
 require 'uri'
-require 'map_with_index'
 require 'requestify'
 
 class Admin::SongsController < Admin::AdminController

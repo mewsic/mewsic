@@ -1,3 +1,5 @@
+require 'map_with_index'
+
 module Requestify
   private
     # Taken from ActionController::Integration::Session and patched to use map_with_index
