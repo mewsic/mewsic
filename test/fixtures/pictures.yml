@@ -23,33 +23,61 @@ first_photo_for_quentin:
   pictureable: quentin
   pictureable_type: User
   type: Photo
-  filename: image_msn.jpg
-  content_type: image/jpeg
+  content_type: image/gif
+  attachment_file: test/fixtures/files/chord_1000_random.gif
 
 second_photo_for_quentin:
   pictureable: quentin 
   pictureable_type: User
   type: Photo
-  filename: morto.png
-  content_type: image/png
+  content_type: image/jpeg
+  attachment_file: test/fixtures/files/photo_user_test.jpg
+
+third_photo_for_quentin:
+  pictureable: quentin
+  pictureable_type: User
+  type: Photo
+  content_type: image/jpeg
+  attachment_file: test/fixtures/files/unix_magic.jpg
+
+dharma_photo_for_quentin:
+  pictureable: quentin 
+  pictureable_type: User
+  type: Photo
+  content_type: image/jpeg
+  attachment_file: test/fixtures/files/dharma_ndstr.jpg
+
+dharma_photo_for_john:
+  pictureable: john
+  pictureable_type: User
+  type: Photo
+  content_type: image/jpeg
+  attachment_file: test/fixtures/files/dharma_ndstr.jpg
 
 first_photo_for_users_1:
   pictureable: user_1
   pictureable_type: User
   type: Photo
-  filename: zucca.jpg
   content_type: image/jpeg
+  attachment_file: test/fixtures/files/unix_magic.jpg
 
 avatar_for_quentin:
   pictureable: quentin
   pictureable_type: User
   type: Avatar
-  filename: sux.png
   content_type: image/png
+  attachment_file: test/fixtures/files/myousica_avatar.png
 
 avatar_for_john:
   pictureable: john
   pictureable_type: User
   type: Avatar
-  filename: sux.png
   content_type: image/png
+  attachment_file: test/fixtures/files/code_avatar.png
+
+avatar_for_mikaband:
+  pictureable: mikaband
+  pictureable_type: Band
+  type: Avatar
+  content_type: image/jpeg
+  attachment_file: test/fixtures/files/dharma_ndstr.jpg

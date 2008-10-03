@@ -266,6 +266,19 @@ song_with_ideas:
   filename: test.mp3
   bpm: 130
   key: <%= Myousica.key('C') %>
+  
+quentin_productions:
+  title: Quentin productions huge song
+  user: quentin
+  original_author: Boh
+  genre: <%= random_genre %>
+  listened_times: <%= rand(100) %>
+  created_at: <%= (rand(30)).days.ago.to_s :db %>
+  tone: F
+  seconds: 140
+  filename: test.mp3
+  bpm: 130
+  key: <%= Myousica.key('F') %>
 
 <% 4.times do |i| %>
 song_using_ideas_<%= i %>:

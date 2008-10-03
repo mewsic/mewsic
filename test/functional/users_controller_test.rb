@@ -205,7 +205,7 @@ class UsersControllerTest < Test::Unit::TestCase
     assert assigns(:tracks)
 
     assert assigns(:songs)
-    assert assigns(:songs_count) == 17
+    assert_equal 18, assigns(:songs_count)
   end
   
   def test_should_redirect_unless_xhr

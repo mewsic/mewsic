@@ -246,7 +246,7 @@ class UserTest < Test::Unit::TestCase
   end
   
   def test_quentin_should_have_photos
-    assert_equal 2, users(:quentin).photos.size
+    assert_equal 4, users(:quentin).photos.size
   end
   
   def test_find_coolest_should_not_return_inactive_users
