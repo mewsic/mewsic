@@ -15,19 +15,19 @@ class AbusesControllerTest < ActionController::TestCase
   def test_should_check_for_abuseable
     login_as :quentin
     get :new, :song_id => 0
-    assert_response :bad_request
+    assert_response :not_found
 
     login_as :quentin
     get :new, :answer_id => 0
-    assert_response :bad_request
+    assert_response :not_found
 
     login_as :quentin
     get :new, :track_id => 0
-    assert_response :bad_request
+    assert_response :not_found
 
     login_as :quentin
     get :new, :user_id => 0
-    assert_response :bad_request
+    assert_response :not_found
   end
 
   def test_should_show_get_and_assign_abuse_to_answer
