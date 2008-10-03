@@ -101,6 +101,10 @@ module ApplicationHelper
     content_for :breadcrumb, %[<div id="path" class="#{klass}"><a href="/">Home</a> : #{bread.join(' : ')}</div>]
     content_for :title, '- ' << title.join(' - ') unless title.empty?
   end
+
+  def meta_description(description)
+    content_for :meta_description, "Myousica.com - #{description}"
+  end
   
   def render_breadcrumb
     breadcrumb unless @content_for_breadcrumb

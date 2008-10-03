@@ -1,4 +1,5 @@
 <% breadcrumb @song %>
+<% meta_description h("Song #{@song.title} by myousician #{@song.user.login}. It is tagged under #{@song.genre.name.downcase} and last updated #{time_ago_in_words @song.updated_at} ago") %>
 <% javascript 'simple-slider', 'song' %>
 <div class="box-list song-box song-spec clear-block">
   <div class="float-right" style="padding-right:16px;">

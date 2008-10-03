@@ -2,6 +2,7 @@
 <%= hidden_field_tag 'current-user-page', 1 if current_user_page? %>
 
   <% breadcrumb @user, 'float-left' %>
+  <% meta_description h("User #{@user.login} is a myousica #{@user.class.name}.. and features #{@user.songs.count} songs and #{@user.tracks.count} tracks created on myousica!") %>
   
   <%= render :partial => 'profile' %>
   

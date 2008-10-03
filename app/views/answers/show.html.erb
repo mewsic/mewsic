@@ -1,4 +1,5 @@
 <% breadcrumb @answer %>
+<% meta_description "answer with #{@answer.replies.count} replies. It is about \"#{truncate @answer.body, 60}\"" %>
 
 <%= render :partial => 'find_question' %>
 
