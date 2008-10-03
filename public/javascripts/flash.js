@@ -1,3 +1,20 @@
+/* Dynamic flas messages Class
+ * (C) 2008 Medlar s.r.l.
+ * (C) 2008 Adelao Group
+ *
+ * == Description
+ *
+ * This class handles dynamic flash messages visualization. It uses the Prototype Template class
+ * for the flash div contents, and inserts the evaluation of it into the #messages div (see 
+ * app/views/shared/_flash.html.erb).
+ *
+ * To add a new flash message, do Message.show(message, type [, close_previous]); where +type+ is one
+ * of ['alert', 'error', 'notice', 'inbox']. +close_previous+, if true, closes the last message shown.
+ *
+ * The two methods +Message.error+ and +Message.notice+ are shorthands for displaying error and notice
+ * type messages.
+ * 
+ */
 var Message = {
   
   template: new Template('<div class="#{type}"><p class="float-left">#{message}</p><div class="close float-right"><img src="/images/button_flash_close.png"></div></div>'),
