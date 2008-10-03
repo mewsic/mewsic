@@ -12,7 +12,6 @@
 #  country        :string(45)    
 #  linked_user_id :integer(11)   
 #
-
 class BandMember < ActiveRecord::Base
   belongs_to :user
   belongs_to :instrument
@@ -31,6 +30,11 @@ class BandMember < ActiveRecord::Base
 
   def linked_to_myousica_user?
     !self.linked_user_id.blank?
+  end
+
+  def update_avatar(id)
+    self.avatars.destroy_all
+    self.avatars << Avatar.find(id)
   end
 
   def link_to(user)
