@@ -86,18 +86,12 @@ class Answer < ActiveRecord::Base
     update_all(["closed = ?", true], ["last_activity_at < ?", 1.month.ago])
   end
 
-  ### XXX XXX FIXME !!! XXX
-  def find_similar
-    keywords = self.body.split(/ /).map! do |word|
-      word.gsub! /[%_]/, ''
-      next if word.length < 5
-      "%#{word}%"
-    end
-
-    search_string = "answers.id != ? AND (" << Array.new(keywords.size).fill("answers.body LIKE ?").join(' OR ') << ")"
-    
-    Answer.find(:all, :include => {:user => :avatars}, :limit => 10, :order => 'answers.rating_avg DESC, answers.created_at DESC',
-              :conditions => [search_string, self.id, *keywords])
+  def find_similar(per_page = 11)
+    query = self.body.split.collect do |word|
+      word.gsub! /[^\w]/, ''
+      word if word.size > 3
+    end.uniq.compact.join(' ')
+    Answer.search(query, :per_page => per_page, :page => 1, :index => 'answers', :match_mode => :any)
   end
 
   def rateable_by?(user)
