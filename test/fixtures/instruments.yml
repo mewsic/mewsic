@@ -32,3 +32,28 @@ saxophone:
   description: Saxophone
   icon: instruments/saxophone.png
   category: idiophones
+
+trumpet:
+  description: Trumpeg
+  icon: instruments/trumpet.png
+  category: petophones
+
+piano:
+  description: Piano
+  icon: instruments/piano.png
+  category: chordophones
+
+mandolin:
+  description: Mandolin
+  icon: instruments/mandolin.png
+  category: chordophones
+
+conga:
+  description: Conga
+  icon: instruments/conga.png
+  category: membranophones
+
+harp:
+  description: Harp
+  icon: instruments/harp.png
+  category: chordophones
