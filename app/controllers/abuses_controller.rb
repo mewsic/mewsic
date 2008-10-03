@@ -1,6 +1,7 @@
 # Myousica Abuses controller
 #
 # (C) 2008 Medlar s.r.l.
+# (C) 2008 Mikamai s.r.l.
 # (C) 2008 Adelao Group
 # 
 # == Description
