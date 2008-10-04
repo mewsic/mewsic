@@ -1,7 +1,7 @@
 namespace :myousica do
 
   desc "Populate the development environment"
-  task :initialize => ["myousica:fixtures:load", "myousica:flash:update", "myousica:videos:download"]
+  task :initialize => ["myousica:fixtures:load", "myousica:flash:update", "myousica:videos:download", "myousica:sphinx:generate_config"]
 
   desc "Update friends count for every user"
   task(:update_friends_count => :environment) do
@@ -93,6 +93,15 @@ namespace :myousica do
 
   namespace :sphinx do
     config = File.join(RAILS_ROOT, 'config', 'sphinx_development.config')
+
+    desc "Generate sphinx development config file"
+    task(:generate_config => :environment) do
+      puts "* Generating Sphinx config file"
+
+      File.open(config, 'w+') do |f|
+        f.write ERB.new(File.read("#{config}.erb")).result
+      end
+    end
 
     desc "Start sphinx with development config"
     task(:start => :environment) do
