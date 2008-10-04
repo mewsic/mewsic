@@ -1,11 +1,17 @@
 namespace :myousica do
+
+  desc "Populate the development environment"
+  task :initialize => ["myousica:fixtures:load", "myousica:flash:update", "myousica:videos:download"]
+
   desc "Update friends count for every user"
   task(:update_friends_count => :environment) do
+    puts "* Updating friends count.."
     User.find(:all).each {|u| u.update_friends_count}
   end
   
   desc "Update answer replies count for every answer and every user"
   task(:update_replies_count => :environment) do
+    puts "* Updating answer replies count.."
     Answer.find(:all).each do |answer|
       answer.connection.execute(
         "UPDATE answers SET replies_count = #{answer.replies.count} WHERE id = #{answer.id}"
@@ -17,11 +23,23 @@ namespace :myousica do
         "UPDATE users SET replies_count = #{user.replies.count} WHERE id = #{user.id}"
       )
     end
-  end    
+  end
+
+  desc "Copy the test mp3s from test/fixtures/files to public/audio"
+  task(:copy_test_mp3s => :environment) do
+    puts "* Copying test mp3s into public/audio"
+    FileUtils.mkdir_p File.join(RAILS_ROOT, 'public', 'audio')
+
+    %w(mp3 png).each do |ext|
+      FileUtils.cp File.join(RAILS_ROOT, 'test', 'fixtures', 'files', "test.#{ext}"),
+        File.join(RAILS_ROOT, 'public', 'audio')
+    end
+  end
 
   namespace :fixtures do
     desc "Load fixtures and update both friends and replies count"
-    task :load => [ "db:fixtures:load",  "myousica:update_friends_count", "myousica:update_replies_count"]
+    task :load => [ "db:fixtures:load",  "myousica:update_friends_count",
+      "myousica:update_replies_count", "myousica:copy_test_mp3s"]
   end  
 
   namespace :flash do
@@ -31,16 +49,45 @@ namespace :myousica do
         FileUtils.mkdir_p File.join(RAILS_ROOT, 'public', *path[0..-2])
         File.open File.join(RAILS_ROOT, 'public', *path), 'w+' do |f|
           uri = URI.parse "http://myousica.com/#{path.join('/')}"
-          puts "Updating #{path.last} from #{uri}"
+          puts "  Updating #{path.last} from #{uri}"
           f.write Net::HTTP.get(uri)
         end
       end
+
+      puts "* Updating flash applications"
 
       update ['multitrack', 'Adelao_Myousica_Multitrack_Editor.swf']
       update ['players', 'Adelao_Myousica_Player.swf']
       update ['players', 'Adelao_Myousica_Video_Player.swf']
       update ['splash', 'Adelao_Myousica_Splash.swf']
       (1..3).each { |i| update ['splash', 'slides', "#{i}.jpg"] }
+    end
+  end
+
+  namespace :videos do
+    desc "Download current videos from myousica.com"
+    task(:download => :environment) do
+      path = File.join(RAILS_ROOT, 'public', 'videos')
+
+      FileUtils.mkdir_p path
+      Video.find(:all).each do |video|
+        puts "* Processing #{video.description} video"
+
+        [:filename, :highres, :poster, :thumb].each do |kind|
+          uri = URI.parse("http://myousica.com#{video.public_filename(kind)}")
+          printf "  Downloading #{video.description} #{kind} from #{uri} .. "
+          $stdout.flush
+
+          filename = File.join(path, video.send(kind))
+          if File.exists? filename
+            puts '[exists]'
+            next
+          end
+
+          File.open(filename, 'w+') { |f| f.write Net::HTTP.get(uri) }
+          puts 'done!'
+        end
+      end
     end
   end
 
