@@ -98,6 +98,7 @@ namespace :myousica do
     task(:generate_config => :environment) do
       puts "* Generating Sphinx config file"
 
+      FileUtils.mkdir_p File.join(RAILS_ROOT, 'index')
       File.open(config, 'w+') do |f|
         f.write ERB.new(File.read("#{config}.erb")).result
       end
