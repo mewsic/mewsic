@@ -1,0 +1,33 @@
+# Myousica database configuration file
+#
+# Development environment
+#
+development:
+  adapter: mysql # Currently only mysql is supported
+  database: myousica_development
+  username: 
+  password: 
+  # If you access your server locally, set the path
+  # to the UNIX socket here.
+  #
+  # socket: /opt/local/var/run/mysql5/mysqld.sock
+
+# Test environment
+# WARNING: The test database will be cleaned up and populated
+# when you run the "test" rake task (rake test) and its subtasks.
+#
+test:
+  adapter: mysql
+  database: myousica_test
+  username: 
+  password: 
+  # socket: /opt/local/var/run/mysql5/mysqld.sock
+
+# Production environment
+#
+production:
+  adapter: mysql
+  database: myousica_production
+  username:
+  password:
+  # socket: /opt/local/var/run/mysql5/mysqld.sock
