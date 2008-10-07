@@ -45,7 +45,7 @@
 	
           <p class="tos">
           By clicking "sign up" below, you agree to Myousica's 
-          <%= link_to_function 'terms of service', 'Popup.open("/TOS.html", {width:800,height:550})' %> and 
+          <%= link_to_function 'terms of service', %[Popup.open("#{content_path('terms-of-service')}", {width:800,height:550})] %> and 
           <%= link_to_function 'license agreement', 'Popup.open("http://creativecommons.org/licenses/nc-sampling+/1.0/deed", {width:800,height:550})' %>
           </p>
 
