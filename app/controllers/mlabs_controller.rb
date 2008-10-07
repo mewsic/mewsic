@@ -1,3 +1,22 @@
+# Myousica Mlabs Controller
+#
+# Copyright:: (C) 2008 Medlar s.r.l.
+# Copyright:: (C) 2008 Mikamai s.r.l.
+#
+# == Description
+#
+# This controller handles M-Labs, which are the rows shown in the "My List" scroller on the right
+# sidebar of the site. Because the My List is stateful, its contents are saved to the database in
+# order to make them fetchable by different sources (the scroller and the multitrack, as of now).
+#
+# Because of the high number of requests this controller receives, the data fetch is optimized in
+# the model (see Mlab#find_my_list_items_for and Mlab#find_my_list_item_for). Login is required to
+# access these actions (+login_required+) and an user can see only its own My List
+# (+check_user_identity+).
+#
+# For details on the JS client, see <tt>public/javascripts/mlab.js</tt>. The XML client is written
+# in AS3 and resides under the <tt>myousica-multitrack-editor</tt> github repository.
+#
 class MlabsController < ApplicationController
 
   layout nil
@@ -5,6 +24,18 @@ class MlabsController < ApplicationController
   before_filter :login_required
   before_filter :check_user_identity
 
+  # <tt>GET /users/:user_id/mlabs.xml</tt>
+  # <tt>GET /users/:user_id/mlabs.js</tt>
+  #
+  # Returns an index of the user songs and tracks in the My List basket. The XML format uses two
+  # eager-loaded queries, results are printed out using the <tt>app/views/shared/_{song,track}.xml.erb</tt>
+  # views.
+  #
+  # The JS output is optimized because it does receive a request on every page load, so the
+  # Mlab#find_my_list_items_for method is called.
+  #
+  # The HTML output is not used and sends out a redirect to '/'.
+  #
   def index
     respond_to do |format|
       format.xml do
@@ -20,6 +51,17 @@ class MlabsController < ApplicationController
     end
   end
 
+  # <tt>POST /users/:user_id/mlabs.js</tt>
+  # <tt>POST /users/:user_id/mlabs.xml</tt>
+  #
+  # Creates a new Mlab instance, associated to the <tt>current_user</tt> and to the mixable
+  # whose id is passed via the <tt>item_id</tt> parameter. A mixable can be either a +Song+
+  # or a +Track+. An user can trigger an Mlab creation, that is, add an item to the My List
+  # by clicking the cyan "M" buttons throughout the site.
+  #
+  # The XML format will be used by the multitrack, when it will implement My List addition,
+  # the JS format is instead used by the right sidebar My List scroller.
+  #
   def create
     mixable = case params[:type]
       when 'track'
@@ -45,6 +87,13 @@ class MlabsController < ApplicationController
     render :partial => 'shared/errors', :object => @mlab.errors, :status => :bad_request
   end
 
+  # <tt>DELETE /users/:user_id/mlabs/id.js</tt>
+  # <tt>DELETE /users/:user_id/mlabs/id.xml</tt>
+  #
+  # Destroys an Mlab, when the user requests removal of an item from the My List, triggering
+  # it by clicking the "Trash" button in the scroller. The multitrack currently does not 
+  # implement the My List handling, the XML format is in place when it will.
+  #
   def destroy
     @mlab     = Mlab.find(params[:id])
     @mixable  = @mlab.mixable
@@ -68,7 +117,9 @@ class MlabsController < ApplicationController
 
 private
 
-  # TODO: esportare questo metodo in una libreria in modo tale da usarlo in altri controller  
+  # Filter that checks the passed user id matches the <tt>current_user</tt> id.
+  # TODO: export this method in a library in order to be used from other controllers
+  #
   def check_user_identity
     redirect_to('/') and return unless current_user.id == User.from_param(params[:user_id])
   end
