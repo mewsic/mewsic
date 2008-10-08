@@ -3,7 +3,7 @@ namespace :myousica do
   desc "Populate the development environment"
   task :initialize => ["db:migrate", "myousica:directories", "myousica:fixtures:load",
       "myousica:flash:update", "myousica:videos:download", "myousica:sphinx:config",
-      "myousica:sphinx:rehash", "myousica:sphinx:start"]
+      "myousica:sphinx:initialize", "myousica:sphinx:start"]
 
   desc "Create all required myousica directories"
   task :directories => :environment do
@@ -124,6 +124,11 @@ namespace :myousica do
 
     task(:rehash => :environment) do
       puts `indexer --config #{config} --all --rotate`
+    end
+
+    desc "Initialize sphinx indices"
+    task(:initialize => :environment) do
+      puts `indexer --config #{config} --all`
     end
 
   end
