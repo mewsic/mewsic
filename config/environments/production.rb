@@ -14,9 +14,9 @@ config.action_controller.perform_caching             = true
 # Your secret key for verifying cookie session data integrity.
 # If you change this key, all old sessions will become invalid!
 config.action_controller.session = {
-  :session_key => '_myousica_session_key',
+  :session_key => '_myousica_sess',
   :session_domain => '.myousica.com',
-  :secret      => '02cedf3882e78b5a99c0bec5cc75c3fc'
+  :secret      => '1ad6c4dd41760f8b5bb6012bfccef2c038e0931f'
 }
 
 # Enable serving of images, stylesheets, and javascripts from an asset server

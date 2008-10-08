@@ -9,8 +9,8 @@ config.cache_classes = false
 config.action_controller.consider_all_requests_local = true
 config.action_controller.perform_caching             = true
 config.action_controller.session = {
-  :session_key => '_myousica_session_key',
-  :secret      => '02cedf3882e78b5a99c0bec5cc75c3fc'
+  :session_key => '_myousica_sess',
+  :secret      => '1ad6c4dd41760f8b5bb6012bfccef2c038e0931f'
 }
 
 config.action_view.cache_template_extensions         = false
