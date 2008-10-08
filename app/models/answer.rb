@@ -107,8 +107,8 @@ class Answer < ActiveRecord::Base
   end
 
   def to_breadcrumb
-    self.body[0..32] + '...'
-  end
+    self.body
+  end  
   
 private
 

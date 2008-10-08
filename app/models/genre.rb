@@ -50,7 +50,7 @@ class Genre < ActiveRecord::Base
   def to_breadcrumb
     self.name
   end
-
+  
   def to_param
     URI.encode(self.name.downcase.gsub(' ', '+'))
   end    
