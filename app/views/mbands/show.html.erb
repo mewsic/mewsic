@@ -1,7 +1,8 @@
+<% title "Myousica - Mbands: #{@mband.name}" %>
+<% meta_description "The #{@mband.name} Mband profile on Myousica, the first open music community." %>
 <%= hidden_field_tag 'mband-id', @mband.id  %>
 
   <% breadcrumb @mband, 'float-left mband' %>
-  <% meta_description h("#{@mband.name} is a myousica M-Band. It features #{@mband.songs_count} songs and #{@mband.tracks_count} tracks, collaboratively created on myousica!") %>
   
   <%= render :partial => 'profile' %>
   

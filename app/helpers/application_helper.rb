@@ -81,34 +81,30 @@ module ApplicationHelper
     return if controller.controller_name == 'dashboard'
 
     bread = []
-    title = []
 
     if controller.respond_to?(:to_breadcrumb_link)
       text, path = controller.send(:to_breadcrumb_link)
-
       bread.push path ? link_to(text, path) : text
-      title.push text.downcase
     else
       text = controller.send(:to_breadcrumb)
       path = send("#{controller.controller_name}_path")
-
       bread.push link_to(text.capitalize, path)
-      title.push text.downcase
     end
 
     if model_crumb
-      text = h(model_crumb.to_breadcrumb)
-
+      text = h(truncate(model_crumb.to_breadcrumb, 50))
       bread.push text
-      title.push text
     end
 
     content_for :breadcrumb, %[<div id="path" class="#{klass}"><a href="/">Home</a> : #{bread.join(' : ')}</div>]
-    content_for :title, '- ' << title.join(' - ') unless title.empty?
   end
 
-  def meta_description(description)
-    content_for :meta_description, "Myousica.com - #{description}"
+  def title(text = "")
+    content_for :title, h(text)
+  end
+
+  def meta_description(description = "")
+    content_for :meta_description, h(description)
   end
   
   def render_breadcrumb
@@ -117,8 +113,21 @@ module ApplicationHelper
   end
 
   def render_title
-    breadcrumb unless @content_for_title
-    @content_for_title
+    title unless @content_for_title
+    if @content_for_title.blank? 
+      nil 
+    else 
+      @content_for_title 
+    end
+  end
+ 
+  def render_meta_description
+    title unless @content_for_meta_description
+    if @content_for_meta_description.blank? 
+      nil 
+    else 
+      @content_for_meta_description
+    end
   end
  
   def tags_for_cloud(klass, group, attribute, css_classes, limit = nil)

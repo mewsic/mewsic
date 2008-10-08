@@ -1,5 +1,6 @@
+<% title "Myousica - #{@song.title} (#{@song.original_author}), #{@song.genre.name} Song by #{@song.user.login}" %>
 <% breadcrumb @song %>
-<% meta_description h("Song #{@song.title} by myousician #{@song.user.login}. It is tagged under #{@song.genre.name.downcase} and last updated #{time_ago_in_words @song.updated_at} ago") %>
+<% meta_description "Myousica is the first open music community. Play this #{@song.genre.name} song &laquo;#{@song.title}&raquo; by #{@song.user.login}. Then record, share and download your own version!" %>
 <% javascript 'simple-slider', 'song' %>
 <div class="box-list song-box song-spec clear-block">
   <div class="float-right" style="padding-right:16px;">
