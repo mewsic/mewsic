@@ -6,7 +6,7 @@ module Adelao
 
     module ClassMethods
       def has_playable_stream
-        raise ArgumentError, "missing filename field" unless self.columns.map(&:name).include?('filename')
+        raise ArgumentError, "missing filename field" unless self.columns.map(&:name).include?('filename') rescue nil
         before_validation :clean_up_filename
         after_destroy     :delete_sound_file
         include Adelao::Playable::InstanceMethods
