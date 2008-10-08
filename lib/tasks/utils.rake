@@ -1,7 +1,16 @@
 namespace :myousica do
 
   desc "Populate the development environment"
-  task :initialize => ["db:migrate", "myousica:fixtures:load", "myousica:flash:update", "myousica:videos:download", "myousica:sphinx:config"]
+  task :initialize => ["db:migrate", "myousica:directories", "myousica:fixtures:load",
+      "myousica:flash:update", "myousica:videos:download", "myousica:sphinx:config",
+      "myousica:sphinx:rehash", "myousica:sphinx:start"]
+
+  desc "Create all required myousica directories"
+  task :directories => :environment do
+    Rake::Task['tmp:create'].invoke
+    mkdir_p 'index'
+    mkdir_p 'log'
+  end
 
   desc "Update friends count for every user"
   task(:update_friends_count => :environment) do
