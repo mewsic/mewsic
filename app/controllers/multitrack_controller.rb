@@ -4,6 +4,8 @@ class MultitrackController < ApplicationController
   before_filter :stable_multitrack, :only => [:index, :edit]
   before_filter :beta_multitrack, :only => [:beta_index, :beta_edit]
 
+  protect_from_forgery :except => [:authorize, :update_song] # Called only locally
+
   def index    
     if logged_in?
       current_user.enter_multitrack!
