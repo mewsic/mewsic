@@ -59,6 +59,16 @@ class DashboardController < ApplicationController
     respond_to { |format| format.xml }
   end
 
+  # <tt>GET /index/:origin</tt>
+  #
+  # Tracks a pageview coming from :origin, and sends it to google analytics.
+  #
+  def track
+    @origin = params[:origin]
+    redirect_to '/' and return unless %(yt fb).include? @origin
+    render :layout => false
+  end
+
 private 
 
   # Filter to redirect to / if the request is not coming through XHR

@@ -12,16 +12,21 @@ module ApplicationHelper
     end
   end
 
-  def google_analytics(id = 'UA-3674352-1')
+  def google_analytics_load
     return if RAILS_ENV == 'development'
     javascript_tag(%[
       var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
       document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-    ]) +
+    ])
+  end
+
+  def google_analytics_track(pagename = nil, id = 'UA-3674352-1')
+    return if RAILS_ENV == 'development'
+    pagename = %("#{pagename}") unless pagename.nil?
     javascript_tag(%[
       var pageTracker = _gat._getTracker("#{id}");
       pageTracker._initData();
-      pageTracker._trackPageview();
+      pageTracker._trackPageview(#{pagename});
     ])
   end
 
