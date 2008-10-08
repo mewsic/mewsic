@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 55) do
+ActiveRecord::Schema.define(:version => 56) do
 
   create_table "abuses", :force => true do |t|
     t.integer  "abuseable_id"
@@ -154,6 +154,13 @@ ActiveRecord::Schema.define(:version => 55) do
     t.datetime "updated_at"
   end
 
+  create_table "profile_views", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "viewer",     :limit => 32
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "ratings", :force => true do |t|
     t.integer "rater_id"
     t.integer "rated_id"
@@ -264,6 +271,7 @@ ActiveRecord::Schema.define(:version => 55) do
     t.boolean  "name_public",                                                            :default => false
     t.string   "multitrack_token",          :limit => 64
     t.boolean  "podcast_public",                                                         :default => true
+    t.integer  "profile_views",                                                          :default => 0
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

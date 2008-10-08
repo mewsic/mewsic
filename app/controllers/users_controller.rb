@@ -42,6 +42,7 @@ class UsersController < ApplicationController
       format.html do
         current_user_page = current_user == @user
 
+        @user.profile_viewed_by(tracked_user) unless current_user_page
         @songs = Song.find_paginated_by_user(1, @user, :skip_blank => !current_user_page)
         @songs_count = @user.songs_count(:skip_blank => !current_user_page)
         @answers = @user.answers.paginate(:page => 1, :per_page => 6, :order => 'created_at DESC')

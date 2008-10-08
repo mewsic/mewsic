@@ -63,6 +63,7 @@ myousica:
   city: Everywhere
   motto: Myousica.com
   nickname: myousica
+  profile_views: 48
   
 quentin:
   type: User
@@ -84,6 +85,7 @@ quentin:
   city: Bari
   motto: Arma Virumque Cano Troiae qui primus ab oris
   nickname: quentin
+  profile_views: 1516
 aaron:
   login: aaron
   email: aaron@example.com
@@ -108,6 +110,7 @@ john:
   city: Bari
   motto: in girum imus nocte et consumimur igni
   is_admin: true
+  profile_views: 2342
 
 <% for i in 3..500 %>user_<%= i %>:
   type: User

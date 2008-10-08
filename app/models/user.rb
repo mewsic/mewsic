@@ -136,7 +136,7 @@ class User < ActiveRecord::Base
     :first_name, :last_name, :name_public, :gender, :motto, :tastes, :country, :city, :age,
     :photos_url, :blog_url, :myspace_url, :skype, :msn, :skype_public, :msn_public, :nickname,
     :podcast_public
-  attr_readonly :replies_count
+  attr_readonly :replies_count, :profile_views
   
   before_save :check_links
   before_save :check_nickname
@@ -492,6 +492,10 @@ class User < ActiveRecord::Base
 
       self.update_attribute :type, destination
     end
+  end
+
+  def profile_viewed_by(viewer)
+    ProfileView.create :user => self, :viewer => viewer
   end
 
   protected
