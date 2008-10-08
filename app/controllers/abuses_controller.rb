@@ -26,9 +26,11 @@ class AbusesController < ApplicationController
   # Show the abuse creation form if an abuse for the current object does not exist.
   # If it exists, the view renders "Notification already sent".
   #
-  # This view is rendered inside a <tt>Lightview</tt>
+  # This view is rendered inside a <tt>Lightview</tt>.
   #
   def new    
+    klass = @abuseable.kind_of?(User) ? User : @abuseable.class
+    @abuse_form_url = send "#{klass.name.downcase}_abuses_path", @abuseable
   end
 
   # <tt>POST /abuses/create</tt>

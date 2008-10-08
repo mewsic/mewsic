@@ -1,7 +1,7 @@
 <div class="clear-block abuse popup" id="report-abuse-popup">
 	<div>
 	  <%- if !@exists -%>
-  	  <%- remote_form_for :abuse, :url => send("#{@abuseable.class.name.downcase}_abuses_path", @abuseable), :update => 'report-abuse-popup' do |f| -%>
+  	  <%- remote_form_for :abuse, :url => @abuse_form_url, :update => 'report-abuse-popup' do |f| -%>
   	    <p>
   	      <label for="abuse_topic">Topic</label><br />
   	      <%= f.select :topic, ["Copyright Violation", "Inappropriate Content"] %>
