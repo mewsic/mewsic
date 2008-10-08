@@ -45,15 +45,13 @@ class MultitrackController < ApplicationController
     render :update do |page|
       page['mlab_tracks'].update song.tracks.count
       page['mlab_runtime'].update song.length
-      #page['mlab_instruments'].update instruments_used_in(song)
     end
   end
 
   # Used by multitrack server
   def authorize
-    head :ok # XXX FIXME XXX
-    #@user = User.find_by_id_and_multitrack_token(params[:user_id], params[:token])
-    #head(@user ? :ok : :forbidden)
+    @user = User.find_by_id_and_multitrack_token(params[:user_id], params[:token])
+    head(@user ? :ok : :forbidden)
   end
 
   def update_song
