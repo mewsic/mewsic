@@ -10,12 +10,12 @@ creating and composing music online. The whole myousica infrastructure is compos
 
 This app implements most of the business logic, while the multitrack-server one handles file
 uploads and MP3 encoding and downmixing using ffmpeg (http://ffmpeg.mplayerhq.hu) and sox
-(http://www.sox.org).
+(http://sox.sf.net).
 
 == Quickstart
 
  * Install Ruby >= 1.8.6, Rubygems >= 1.0 and Rails == 2.0.2
- * Install the Sphinx full text search engine (http://sphinxsearch.org/)
+ * Install the Sphinx full text search engine (http://sphinxsearch.com/)
  * Clone the git repository (git clone git@github.com:vjt/myousica.git)
  * Create a config/database.yml (example in config/database.yml.example)
  * Verify that database connectivity is working by running script/console
