@@ -6,7 +6,7 @@ class AbusesControllerTest < ActionController::TestCase
   
   fixtures :users, :answers, :songs, :tracks
     
-  def test_should_new_redirect_if_request_is_get
+  def test_new_should_render_abuse_form
     login_as :quentin
     get :new, :answer_id => answers(:quentin_asks_about_magic).id
     assert_response :success
