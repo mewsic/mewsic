@@ -109,7 +109,20 @@ voice_for_closer_<%= i + 4 %>:
   instrument: microphone
   seconds: <%= rand(100) + 90 %>
   created_at: <%= (rand(30)).days.ago.to_s :db %>
-  owner: <%= %w(quentin mikaband john)[rand(4)] %>
+  owner: <%= %w(quentin mikaband)[rand(2)] %>
+  tonality: D
+  filename: test.mp3
+  bpm: 80
+  key: <%= Myousica.key('D') %>
+<% end %>
+<% 2.times do |i| %>
+voice_for_closer_by_john_<%= i %>:
+  title: Voice
+  parent_song: closer
+  instrument: microphone
+  seconds: <%= rand(100) + 90 %>
+  created_at: <%= (rand(30)).days.ago.to_s :db %>
+  owner: john
   tonality: D
   filename: test.mp3
   bpm: 80
