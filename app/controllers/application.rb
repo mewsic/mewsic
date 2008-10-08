@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
   
   #before_filter :check_user_inbox
   before_filter :update_user_status
+  before_filter :set_tracking_cookie
   
 protected    
   
@@ -40,6 +41,16 @@ protected
     end
 
     store_location unless logged_in? || request.xhr? || multitrack_request || javascript_request || (controller_name == 'sessions') || (params[:format] == 'png') || (params[:format] == 'xml')
+  end
+
+  def set_tracking_cookie
+    unless cookies[:__mt]
+      @tracked_user = cookies[:__mt] = "#{rand(2**24)}.#{Time.now.to_f}"
+    end
+  end
+
+  def tracked_user
+    cookies[:__mt] || @tracked_user
   end
 
   #def check_user_inbox

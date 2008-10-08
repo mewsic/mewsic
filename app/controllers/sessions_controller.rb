@@ -28,11 +28,10 @@ class SessionsController < ApplicationController
   def destroy
     if logged_in?
       self.current_user.forget_me
+      self.current_user = nil
+      cookies.delete :auth_token
       flash[:notice] = "You have been logged out"
     end
-
-    cookies.delete :auth_token
-    reset_session
 
     redirect_back_or_default('/')
   end
