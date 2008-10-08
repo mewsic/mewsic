@@ -33,7 +33,6 @@ class MlabsControllerTest < ActionController::TestCase
     assert_response :success
   end
   
-  require 'ruby-debug'
   def test_should_create
     login_as :quentin
     assert_difference 'Mlab.count', 2 do
