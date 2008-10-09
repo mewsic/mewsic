@@ -89,7 +89,7 @@ ActionController::Routing::Routes.draw do |map|
   map.root                              :controller => 'dashboard'
   map.noop            '/noop/:id',      :controller => 'dashboard', :action => 'noop'
   map.top_myousicians '/top',           :controller => 'dashboard', :action => 'top'
-  map.track           '/index/:origin', :controller => 'dashboard', :action => 'track'
+  map.landing         '/index/:origin', :controller => 'dashboard', :action => 'track'
 
   map.admin '/pappapperadmin', :controller => 'admin/dashboard', :action => 'index'
   map.upload_admin_track '/pappapperadmin/admin/tracks/upload', :controller => 'admin/tracks', :action => 'upload', :conditions => { :method => :post }
