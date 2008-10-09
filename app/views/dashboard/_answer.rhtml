@@ -1,6 +1,0 @@
-<div class="elements clear-block">
-  <p class="thumb"><%= link_to avatar_image(answer.user, :icon), user_path(answer.user) %></p>
-	<p class="name"><%= link_to answer.user.login, user_path(answer.user) %></p>
-	<p class="abstract"><%= link_to pluralize(answer.replies_count, 'reply'), answer %>, <%= time_ago_in_words(answer.created_at) %> ago</p>
-	<p class="grey-text"><%= link_to h(truncate(answer.body, 120)), answer %></p>
-</div>
