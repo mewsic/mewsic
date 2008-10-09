@@ -122,19 +122,19 @@ class Track < ActiveRecord::Base
   end
   
   def self.find_paginated_by_user(page, user)
-    user.tracks.paginate(:page => page, :per_page => 7, :include => :instrument, :order => "tracks.created_at DESC")
+    user.tracks.paginate(:page => page, :per_page => 7, :include => :instrument, :order => "tracks.updated_at DESC")
   end
 
   def self.find_paginated_ideas_by_user(page, user)
-    user.tracks.paginate(:page => page, :per_page => 7, :include => :instrument, :conditions => ['tracks.idea = ?', true], :order => "tracks.created_at DESC")
+    user.tracks.paginate(:page => page, :per_page => 7, :include => :instrument, :conditions => ['tracks.idea = ?', true], :order => "tracks.updated_at DESC")
   end
   
   def self.find_paginated_by_mband(page, mband)
-    paginate(:page => page, :per_page => 7, :include => :instrument, :conditions => ["tracks.user_id IN (?)", mband.members.map(&:id)], :order => "tracks.created_at DESC")
+    paginate(:page => page, :per_page => 7, :include => :instrument, :conditions => ["tracks.user_id IN (?)", mband.members.map(&:id)], :order => "tracks.updated_at DESC")
   end
 
   def self.find_paginated_ideas_by_mband(page, mband)
-    paginate(:page => page, :per_page => 7, :include => :instrument, :conditions => ["tracks.user_id IN (?) AND tracks.idea = ?", mband.members.map(&:id), true], :order => "tracks.created_at DESC")
+    paginate(:page => page, :per_page => 7, :include => :instrument, :conditions => ["tracks.user_id IN (?) AND tracks.idea = ?", mband.members.map(&:id), true], :order => "tracks.updated_at DESC")
   end
   
   def length
