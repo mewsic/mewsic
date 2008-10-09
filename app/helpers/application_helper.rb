@@ -22,7 +22,7 @@ module ApplicationHelper
 
   def google_analytics_track(pagename = nil, id = 'UA-3674352-1')
     return if RAILS_ENV == 'development'
-    pagename = %("#{pagename}") unless pagename.nil?
+    pagename = %("#{escape_javascript(pagename)}") unless pagename.nil?
     javascript_tag(%[
       var pageTracker = _gat._getTracker("#{id}");
       pageTracker._initData();

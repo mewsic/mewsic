@@ -10,6 +10,7 @@
 class DashboardController < ApplicationController
   
   before_filter :redirect_unless_xhr, :only => :top
+  before_filter :find_top_myousicians, :only => [:index, :top, :track]
   session :off, :only => :noop
   
   # <tt>GET /</tt>
@@ -17,7 +18,7 @@ class DashboardController < ApplicationController
   # The home page contains banners, swf objects and a list of top myousicians
   #
   def index
-    @people = User.find_top_myousicians :limit => 6
+    respond_to { |format| format.html }
   end
 
   # <tt>XHR GET /top</tt>
@@ -33,8 +34,18 @@ class DashboardController < ApplicationController
   # See User#find_top_myousicians for the selection criteria.
   #
   def top
-    @people = User.find_top_myousicians :limit => 6 #.sort_by{rand}.slice(0, 6).sort{|a,b|b.tracks_count.to_i <=> a.tracks_count.to_i}
     render :partial => 'myousician', :collection => @people
+  end
+
+  # <tt>GET /index/:origin</tt>
+  #
+  # Tracks a pageview coming from :origin, and sends it to google analytics.
+  # This action renders the home page.
+  #
+  def track
+    redirect_to '/' and return unless %(yt fb).include? params[:origin]
+    @landing_origin = "landing_#{params[:origin]}"
+    render :action => 'index'
   end
 
   # <tt>GET /noop</tt>
@@ -59,22 +70,18 @@ class DashboardController < ApplicationController
     respond_to { |format| format.xml }
   end
 
-  # <tt>GET /index/:origin</tt>
-  #
-  # Tracks a pageview coming from :origin, and sends it to google analytics.
-  #
-  def track
-    @origin = params[:origin]
-    redirect_to '/' and return unless %(yt fb).include? @origin
-    render :layout => false
-  end
-
 private 
 
   # Filter to redirect to / if the request is not coming through XHR
   #
   def redirect_unless_xhr
     redirect_to '/' and return unless request.xhr?
+  end
+
+  # Filter that finds the top myousicians to display in the home page
+  #
+  def find_top_myousicians
+    @people = User.find_top_myousicians :limit => 6 #.sort_by{rand}.slice(0, 6).sort{|a,b|b.tracks_count.to_i <=> a.tracks_count.to_i}
   end
   
 end
