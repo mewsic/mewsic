@@ -77,7 +77,7 @@ class Song < ActiveRecord::Base
     conditions[0] += " AND tracks.id IS NOT NULL" if options[:skip_blank]
     paginate :per_page => 3, 
              :conditions => conditions,
-             :order => "songs.updated_at DESC",
+             :order => "songs.created_at DESC",
              :include => [:user, {:tracks => :instrument}], 
              :page => page
   end
@@ -87,7 +87,7 @@ class Song < ActiveRecord::Base
     conditions[0] += " AND tracks.id IS NOT NULL" if options[:skip_blank]
     paginate :per_page => 3, 
              :conditions => conditions,
-             :order => "songs.updated_at DESC",
+             :order => "songs.created_at DESC",
              :include => [:user, {:tracks => :instrument}], 
              :page => page
   end

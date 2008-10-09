@@ -4,7 +4,7 @@
 		<p class="name"><%= link_to track.user.login, user_path(track.user) %></p>
 		<p class="title"><%= track.title %></p>
 		<p class="abstract"><%= truncate track.description, 50 %>
-		<p class="small sky-text">last updated <%= time_ago_in_words track.updated_at %> ago</p>
+		<p class="small sky-text">created <%= time_ago_in_words track.created_at %> ago</p>
 	</td>
 	<td align="right">
 		<%= rating(track, :class => (track_counter.odd? ? 'grey-star' : '') << ' float-right') %>
