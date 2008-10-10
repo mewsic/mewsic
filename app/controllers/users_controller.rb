@@ -263,7 +263,7 @@ protected
   def to_breadcrumb_link
     case @user.class.name
     when 'NilClass'
-      ['People', users_path]
+      ['People', nil]
     when 'User'
       if @user.new_record?
         ['Sign up', nil]

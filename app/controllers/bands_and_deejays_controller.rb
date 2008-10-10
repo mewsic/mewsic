@@ -25,7 +25,7 @@ class BandsAndDeejaysController < ApplicationController
 
   # Helper to show in the breadcrumb a descriptive title of this section
   #
-  def to_breadcrumb
-    'Bands &amp; deejays'
+  def to_breadcrumb_link
+    ['Bands &amp; deejays', nil]
   end
 end
