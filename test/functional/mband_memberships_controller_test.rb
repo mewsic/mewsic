@@ -5,28 +5,25 @@ class MbandMembershipsControllerTest < ActionController::TestCase
   fixtures :all
   include AuthenticatedTestHelper
 
-  def test_should_create    
-    login_as :quentin
-    assert_difference 'Mband.count' do
-      @mband = Mband.create(:name => 'my mband')
-      membership = MbandMembership.create(:user => users(:quentin), :mband => @mband, :instrument => instruments(:guitar))
-      membership.accept!
+  def setup
+    @controller = MbandMembershipsController.new
+    @request    = ActionController::TestRequest.new
+    @response   = ActionController::TestResponse.new
+    ActionMailer::Base.delivery_method = :test
+    ActionMailer::Base.perform_deliveries = true
+    ActionMailer::Base.deliveries = []
+  end
 
-      @mband.memberships << membership
-      @mband.save
-      assert_equal users(:quentin), @mband.leader
-    end      
-
-    assert_difference 'MbandMembership.count' do
-      post :create, :mband_id => @mband.id, :user_id => users(:user_11).id, :instrument_id => instruments(:microphone).id
-      post :create, :mband_id => @mband.id, :user_id => users(:quentin).id, :instrument_id => instruments(:saxophone).id
-    end                
-
-    assert_equal @mband.members_count, @mband.reload.members_count
+  def teardown
+    ActionMailer::Base.deliveries = []
   end
   
-  def test_should_create_new_mband
+  def test_should_create_new_mband_and_memberships
     login_as :quentin
+
+    quentin_messages_count = users(:quentin).received_messages.count
+    user_11_messages_count = users(:user_11).received_messages.count
+
     assert_difference 'Mband.count' do      
       assert_difference 'MbandMembership.count', 2 do
         post :create, :mband_name => 'new mband', :leader_instrument_id => instruments(:drums).id,
@@ -34,7 +31,15 @@ class MbandMembershipsControllerTest < ActionController::TestCase
       end
     end
 
-    assert_equal 1, Mband.find_by_name('new mband').members_count
+    mband = assigns(:mband)
+    assert_not_nil mband
+    assert mband.valid?
+
+    assert_equal 1, mband.reload.members_count
+
+    assert_equal quentin_messages_count, users(:quentin).received_messages.count
+    assert_equal user_11_messages_count + 1, users(:user_11).received_messages.count
+    assert_equal 1, ActionMailer::Base.deliveries.size
   end
   
   def test_should_accept
@@ -44,11 +49,16 @@ class MbandMembershipsControllerTest < ActionController::TestCase
     quentin_band_members_count = mbands(:quentin_mband).members.count
     cached_quentin_band_members_count = mbands(:quentin_mband).members_count
 
+    user_11_messages_count = users(:user_11).received_messages.count
+
     assert_equal quentin_band_members_count, cached_quentin_band_members_count 
         
     assert_difference 'MbandMembership.count' do
       post :create, :mband_id => mbands(:quentin_mband).id, :user_id => users(:user_11).id, :instrument_id => instruments(:drums).id
     end
+
+    assert_equal user_11_messages_count + 1, users(:user_11).received_messages.count
+    assert_equal 1, ActionMailer::Base.deliveries.size
 
     assert_equal quentin_band_memberships_count + 1, mbands(:quentin_mband).reload.memberships.count
     assert_equal quentin_band_members_count, mbands(:quentin_mband).reload.members.count
@@ -60,7 +70,6 @@ class MbandMembershipsControllerTest < ActionController::TestCase
 
     assert_equal quentin_band_members_count + 1, mbands(:quentin_mband).reload.members.count
     assert_equal cached_quentin_band_members_count + 1, mbands(:quentin_mband).reload.members_count
-
     assert_equal mbands(:quentin_mband).reload.members_count, mbands(:quentin_mband).reload.members.count
   end
   

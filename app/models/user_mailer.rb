@@ -51,6 +51,16 @@ class UserMailer < ActionMailer::Base
     end
   end
 
+  def mband_invitation(membership)
+    with_user_email_for(membership.user) do
+      @subject       << 'M-band invitation!'
+      @body[:user]    = membership.mband.leader
+      @body[:mband]   = membership.mband
+      @body[:url]     = APPLICATION[:url] + "/mbands/#{membership.mband.to_param}"
+      @body[:accept]  = APPLICATION[:url] + "/mband_memberships/accept/#{membership.membership_token}"
+    end
+  end
+
   protected
     def with_user_email_for(user)
       @recipients     = "#{user.email}"
