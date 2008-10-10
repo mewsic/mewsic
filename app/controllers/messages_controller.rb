@@ -161,7 +161,7 @@ private
   # Filter that checks that the passed user id is the same as the current logged in user id.
   #
   def check_user_identity
-    redirect_to('/') and return unless (current_user == @user) || current_user.is_admin?
+    render :text => 'You cannot access this mailbox.', :status => :forbidden unless (current_user == @user) || current_user.is_admin?
   end
   
 end
