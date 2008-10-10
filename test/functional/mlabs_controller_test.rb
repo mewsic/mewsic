@@ -8,7 +8,7 @@ class MlabsControllerTest < ActionController::TestCase
   fixtures :all
   
   def setup
-    @controller = MlabController.new
+    @controller = MlabsController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
   end
