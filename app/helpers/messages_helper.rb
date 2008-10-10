@@ -1,7 +1,7 @@
 module MessagesHelper
   
   def link_to_message_by_body(user, message)
-    string = link_to truncate(message.subject), user_message_path(user, message, :page => params[:page]), :class => 'ajax'
+    string = link_to truncate(message.subject, 50), user_message_path(user, message, :page => params[:page]), :class => 'ajax'
     string = "<strong>#{string}</strong>" if user == message.recipient && !message.read?
     string
   end

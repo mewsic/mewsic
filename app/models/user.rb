@@ -479,9 +479,11 @@ class User < ActiveRecord::Base
   def switch_to!(destination)
     User.transaction do
       if destination == 'Band'
-        # delete all the mband memberships for this user
+        # delete all the mband memberships
         self.mband_memberships.destroy_all
-        # delete all the mbands of this user
+        # remove the gender
+        self.gender = nil
+        # delete all the mbands
         Mband.destroy_all ['user_id = ?', self.id]
 
       elsif self.type == 'Band'
@@ -496,6 +498,14 @@ class User < ActiveRecord::Base
 
   def profile_viewed_by(viewer)
     ProfileView.create :user => self, :viewer => viewer
+  end
+
+  def his
+    self.gender == 'female' ? 'her' : 'his'
+  end
+
+  def him
+    self.gender == 'female' ? 'her' : 'him'
   end
 
   protected

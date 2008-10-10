@@ -31,7 +31,7 @@ class FriendshipsController < ApplicationController
   # 
   def create    
     @friend = User.find(params[:friend_id])
-    Friendship.create_or_accept(@user, @friend)    
+    @friendship = Friendship.create_or_accept(@user, @friend)    
 
     flash[:notice] = 
       if @user.is_friends_with?(@friend)
@@ -48,7 +48,7 @@ class FriendshipsController < ApplicationController
   # Destroy or unaccept a friendship request. If the current friendship is one-way
   # (the current user is an admirer of the given one), it is destroyed. If it is
   # two-way (the users are actual friends), the given user becomes an admirer of
-  # the current one.
+  # the current one if he didn't initiate the friendship. It is destroyed otherwise.
   #
   def destroy
     @friendship = Friendship.find(params[:id])
@@ -82,7 +82,7 @@ private
   # Filter to check the requested user is actually the current one
   #
   def check_current_user
-    redirect_to '/' unless @user.id == current_user.id || current_user.is_admin?
+    redirect_to '/' unless @user.id == current_user.id
   end    
   
 end

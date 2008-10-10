@@ -1,26 +1,42 @@
 class FriendshipObserver < ActiveRecord::Observer
   def after_create(friendship)
-    return if friendship.friendshipped_for_me == User.myousica
+    sender, recipient = friendship.friendshipped_by_me, friendship.friendshipped_for_me
 
-    subject = "New friend request from #{friendship.friendshipped_by_me.login}"
-    body    = %|
-    <p>Your new admirer is #{friendship.friendshipped_by_me.login}.</p><p>To become friends you need to
-    <a href="#{APPLICATION[:url]}/users/#{(friendship.friendshipped_by_me.to_param)}">go to his profile and admire him</a></p>
-    |
+    return if recipient == User.myousica
+
+    subject = "You have a new admirer: #{sender.login}!"
+    body    = <<-EOM
+<p><strong>#{sender.login}</strong> admires you.</p><p><br/></p>
+<p>If you wanna become friends with #{sender.him}, you have to admire #{sender.login} back</p>
+<p>from #{sender.his} page, by clicking on <a href="#{APPLICATION[:url]}/users/#{sender.to_param}">this link</a>.</p>
+    EOM
+
     @message = Message.new(:subject => subject, :body => body)
-    @message.sender = friendship.friendshipped_by_me
-    @message.recipient = friendship.friendshipped_for_me
+    @message.sender = sender
+    @message.recipient = recipient
     @message.save
+
+    UserMailer.deliver_admire_notification(recipient, sender)
   end
-  
-  def after_destroy(friendship)
-    subject = "Unfriend from #{friendship.friendshipped_by_me.login}"
-    body    = %|
-    <p><a href="#{APPLICATION[:url]}/users/#{(friendship.friendshipped_by_me.to_param)}">#{friendship.friendshipped_by_me.login}</a> has removed you from his friends.</p>
-    |
+
+  def after_save(friendship)
+    return unless friendship.established?
+
+    # Two-way friendship has been established
+    #
+    sender, recipient = friendship.friendshipped_for_me, friendship.friendshipped_by_me
+    subject = "You are now friends with #{sender.login}"
+    body    = <<-EOM
+<p><rong>Bravo!</strong></p>
+<p>Musician <a href="#{APPLICATION[:url]}/users/#{sender.to_param}">#{sender.login}</a> admires you too. You are now friends!</p>
+    EOM
+
     @message = Message.new(:subject => subject, :body => body)
-    @message.sender = friendship.friendshipped_by_me
-    @message.recipient = friendship.friendshipped_for_me
+    @message.sender = sender
+    @message.recipient = recipient
     @message.save
-  end    
+
+    UserMailer.deliver_friendship_notification(recipient, sender)
+  end
+
 end

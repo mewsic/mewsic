@@ -1,45 +1,66 @@
 class UserMailer < ActionMailer::Base
   def signup_notification(user)
-    setup_email(user)
-    @subject    += 'Welcome! Please activate your account'
-    @body[:url]  = APPLICATION[:url] + "/activate/#{user.activation_code}"
-
-    add_alternative_parts 'signup_notification'
+    with_user_email_for(user) do
+      @subject    << 'Welcome! Please activate your account'
+      @body[:url]  = APPLICATION[:url] + "/activate/#{user.activation_code}"
+    end
   end
   
   def activation(user)
-    setup_email(user)
-    @subject    += 'Your account has been activated!'
-    @body[:url]  = APPLICATION[:url]
-
-    add_alternative_parts 'activation'
+    with_user_email_for(user) do
+      @subject    << 'Your account has been activated!'
+      @body[:url]  = APPLICATION[:url]
+    end
   end
   
   def forgot_password(user)
-    setup_email(user)
-    @subject    += 'Request to change your password'
-    @body[:url]  = APPLICATION[:url] + "/reset_password/#{user.password_reset_code}" 
-
-    add_alternative_parts 'forgot_password'
+    with_user_email_for(user) do
+      @subject    << 'Request to change your password'
+      @body[:url]  = APPLICATION[:url] + "/reset_password/#{user.password_reset_code}" 
+    end
   end
 
   def reset_password(user)
-    setup_email(user)
-    @subject    += 'Your password has been reset'
-
-    add_alternative_parts 'reset_password'
+    with_user_email_for(user) do
+      @subject    << 'Your password has been reset'
+    end
   end
-    
+
+  def admire_notification(user, admirer)
+    with_user_email_for(user) do
+      @subject        << 'You have a new admirer!'
+      @body[:url]      = APPLICATION[:url] + "/users/#{admirer.to_param}"
+      @body[:admirer]  = admirer
+    end
+  end
+
+  def friendship_notification(user, friend)
+    with_user_email_for(user) do
+      @subject       << "You are now friends with #{friend.login}"
+      @body[:url]     = APPLICATION[:url] + "/users/#{friend.to_param}"
+      @body[:friend]  = friend
+    end
+  end
+
   protected
-    def setup_email(user)
-      @recipients  = "#{user.email}"
-      @from        = "Myousica <#{APPLICATION[:email]}>"
-      @subject     = "[MYOUSICA] "
-      @sent_on     = Time.now
-      @body[:user] = user
+    def with_user_email_for(user)
+      @recipients     = "#{user.email}"
+      @from           = "Myousica <#{APPLICATION[:email]}>"
+      @subject        = "[MYOUSICA] "
+      @sent_on        = Time.now
+      @body[:user]    = user
+      @body[:subject] = @subject
+
+      yield
+
+      add_alternative_parts
     end
 
-    def add_alternative_parts(template_name)
+    def add_alternative_parts
+      # infer template name from caller method name
+      # this means that the method name must be the
+      # same as the template name.
+      template_name = caller[1].scan(/`(\w+)'/).flatten.first
       content_type 'multipart/related'
 
       part 'text/html' do |p|

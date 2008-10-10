@@ -1,0 +1,8 @@
+Myousica admire notification
+
+
+<%= @admirer.login %> admires you.
+
+If you wanna become friend with <%= @admirer.him %>, you have to admire <%= @admirer.login %> back from <%= @admirer.his %> page, by clicking on the link below:
+
+  <%= "#{APPLICATION[:url]}/users/#{@admirer.to_param}" %>
