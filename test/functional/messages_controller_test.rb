@@ -5,6 +5,19 @@ class MessagesControllerTest < ActionController::TestCase
   include AuthenticatedTestHelper
   fixtures :all  
   
+  def setup
+    @controller = MessagesController.new
+    @request    = ActionController::TestRequest.new
+    @response   = ActionController::TestResponse.new
+    ActionMailer::Base.delivery_method = :test
+    ActionMailer::Base.perform_deliveries = true
+    ActionMailer::Base.deliveries = []
+  end
+
+  def teardown
+    ActionMailer::Base.deliveries = []
+  end
+
   def test_index_redirect_unless_logged
     get :index, :user_id => users(:quentin)
     assert_response :redirect
@@ -53,6 +66,7 @@ class MessagesControllerTest < ActionController::TestCase
     end
     assert_equal quentin_sent_count + 1,      users(:quentin).sent_messages.count
     assert_equal user_10_received_count + 1,  users(:user_10).received_messages.count
+    assert_equal 1, ActionMailer::Base.deliveries.size
   end
   
   def test_should_create_message_for_multiple_recipients

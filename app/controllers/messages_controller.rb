@@ -110,6 +110,7 @@ class MessagesController < ApplicationController
       @message.sender = @user
       @message.recipient = User.find_by_login(login)
       if @message.save
+        UserMailer.deliver_message_notification(@message)
         @good_recipients << login
       else
         @bad_recipients << login

@@ -42,6 +42,15 @@ class UserMailer < ActionMailer::Base
     end
   end
 
+  def message_notification(message)
+    with_user_email_for(message.recipient) do
+      @subject       << "#{message.sender.login} has sent you a message!"
+      @body[:sender]  = message.sender
+      @body[:profile] = APPLICATION[:url] + "/users/#{message.sender.to_param}"
+      @body[:inbox]   = APPLICATION[:url] + "/users/#{message.recipient.to_param}#inbox"
+    end
+  end
+
   protected
     def with_user_email_for(user)
       @recipients     = "#{user.email}"
