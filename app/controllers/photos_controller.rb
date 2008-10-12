@@ -71,7 +71,7 @@ private
     if params[:user_id]
       redirect_to '/' and return unless (current_user == @user) || current_user.is_admin?
     elsif params[:mband_id]
-      redirect_to '/' and return unless @pictureable.members.include?(current_user) || current_user.is_admin?
+      redirect_to '/' and return unless @mband.members.include?(current_user) || current_user.is_admin?
     end
   end
 
