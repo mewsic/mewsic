@@ -216,7 +216,7 @@ class UsersController < ApplicationController
     redirect_to root_path and return unless request.xhr?
     q = params[:message][:to] if params[:message]
     render :nothing => true if q.blank?
-    @users = User.find(:all, :order => "login ASC", :conditions => ["login LIKE ?", "%#{q}%"])
+    @users = User.find(:all, :order => "login ASC", :conditions => ["login LIKE ?", "%#{q}%"], :limit => 10)
     render :inline => "<%= content_tag(:ul, @users.map { |u| content_tag(:li, h(u.login)) }) %>"
   end
 
