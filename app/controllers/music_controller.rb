@@ -1,5 +1,5 @@
 class MusicController < ApplicationController
-  before_filter :redirect_unless_xhr, :only => :newest
+  before_filter :redirect_unless_xhr, :except => :index
 
   def index
     @best_songs = Song.find_best :limit => 3, :include => [:tracks, :user]
