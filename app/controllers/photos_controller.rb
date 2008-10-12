@@ -48,6 +48,9 @@ class PhotosController < ApplicationController
       format.html { redirect_to_pictureable_path }
       format.js
     end
+
+  rescue ActiveRecord::RecordNotFound
+    render :nothing => true, :status => :not_found
   end
 
 private
