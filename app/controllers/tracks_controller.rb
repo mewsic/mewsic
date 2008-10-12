@@ -43,12 +43,7 @@ class TracksController < ApplicationController
           redirect_to '/' and return
         end
 
-        response.headers['Content-Disposition'] = 'inline'
-        response.headers['Content-Type'] = 'image/png'
-        response.headers['Cache-Control'] = 'private'
-        response.headers['X-Accel-Redirect'] = @track.public_filename :waveform
-
-        render :nothing => true
+        x_accel_redirect @track.public_filename(:waveform), :content_type => 'image/png'
       end
     end
   end
@@ -123,11 +118,9 @@ class TracksController < ApplicationController
     #    root /data/myousica/shared/audio;
     #    internal;
     #  }
-    response.headers['Content-Disposition'] = %[attachment; filename="#{@track.instrument.description} for #{@track.title} by #{@track.user.login}.mp3"]
-    response.headers['Content-Type'] = 'audio/mpeg'
-    response.headers['Cache-Control'] = 'private'
-    response.headers['X-Accel-Redirect'] = @track.public_filename
-    render :nothing => true
+    x_accel_redirect @track.public_filename,
+      :disposition =>  %[attachment; filename="#{@track.instrument.description} for #{@track.title} by #{@track.user.login}.mp3"],
+      :content_type => 'audio/mpeg'
 
   rescue ActiveRecord::RecordNotFound
     flash[:error] = 'Track not found'

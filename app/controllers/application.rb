@@ -80,4 +80,21 @@ protected
     redirect_to root_path unless request.xhr?
   end
 
+  # Utility method that sends out an X-Accel-Redirect header for nginx. The web server then starts uploading
+  # the file to the client, leaving the mongrel free to process another request. <tt>send_file</tt> is evil.
+  #
+  def x_accel_redirect(filename, options = {})
+    options.reverse_update(
+      :disposition => 'inline',
+      :content_type => 'application/octet-stream',
+      :cache_control => 'private')
+
+    response.headers['Content-Disposition'] = options[:disposition]
+    response.headers['Content-Type']        = options[:content_type]
+    response.headers['Cache-Control']       = options[:cache_control]
+    response.headers['X-Accel-Redirect']    = filename
+
+    render :nothing => true
+  end
+
 end

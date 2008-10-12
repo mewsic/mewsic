@@ -31,7 +31,7 @@ class Test::Unit::TestCase
   # need to change this line to explicitly name the order you desire.
   #
   # Note: You'll currently still have to declare fixtures explicitly in integration tests
-  # -- they do not yet inherent this setting
+  # -- they do not yet inherit this setting
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
@@ -45,5 +45,13 @@ class Test::Unit::TestCase
     rated_object.rate(4, users(:quentin))
     assert rated_object.reload.rated?
     assert_equal 4.0, rated_object.rating_average
+  end
+
+  def assert_x_accel_redirect(options)
+    assert_response :success
+    assert @response.body.blank?
+    assert_equal options[:filename], @response.headers['X-Accel-Redirect']
+    # ActionController::Integration oddities
+    assert (@response.headers['Content-Type'] || @response.headers['type']) =~ /^#{options[:content_type]}/
   end
 end
