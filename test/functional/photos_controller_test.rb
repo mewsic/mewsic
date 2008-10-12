@@ -15,6 +15,7 @@ class PhotosControllerTest < ActionController::TestCase
   fixtures :users, :pictures
   
   def teardown
+    super
     FileUtils.rm_rf(File.join(RAILS_ROOT, 'test_uploaded_photos'))
   end
   

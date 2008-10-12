@@ -10,6 +10,7 @@ class HelpControllerTest < ActionController::TestCase
   end
 
   def teardown
+    super
     ActionMailer::Base.deliveries = []
   end
 

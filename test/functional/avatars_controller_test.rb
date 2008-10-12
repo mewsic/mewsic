@@ -16,10 +16,11 @@ class AvatarsControllerTest < ActionController::TestCase
   fixtures :users, :pictures
   
   def setup
-    FileUtils.mkdir(File.join(RAILS_ROOT, 'test_uploaded_photos'))
+    FileUtils.mkdir_p(File.join(RAILS_ROOT, 'test_uploaded_photos'))
   end
 
   def teardown
+    super
     FileUtils.rm_rf(File.join(RAILS_ROOT, 'test_uploaded_photos'))
   end
   

@@ -2,19 +2,18 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class MbandMembershipsControllerTest < ActionController::TestCase
   
-  fixtures :all
   include AuthenticatedTestHelper
 
+  fixtures :users, :mbands
+
   def setup
-    @controller = MbandMembershipsController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
     ActionMailer::Base.delivery_method = :test
     ActionMailer::Base.perform_deliveries = true
     ActionMailer::Base.deliveries = []
   end
 
   def teardown
+    super
     ActionMailer::Base.deliveries = []
   end
   

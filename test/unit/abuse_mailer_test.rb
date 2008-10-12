@@ -2,8 +2,10 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class AbuseMailerTest < ActionMailer::TestCase
   tests AbuseMailer
+  fixtures :answers, :users
 
   def setup
+    super
     ActionMailer::Base.delivery_method = :test
     ActionMailer::Base.perform_deliveries = true
     ActionMailer::Base.deliveries = []

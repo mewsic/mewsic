@@ -3,16 +3,15 @@ require File.dirname(__FILE__) + '/../test_helper'
 class MultitrackControllerTest < ActionController::TestCase
   include AuthenticatedTestHelper
   fixtures :all
-  tests MultitrackController
 
-  def setup
-    ActionMailer::Base.delivery_method = :test
-    ActionMailer::Base.perform_deliveries = true
-    ActionMailer::Base.deliveries = []
-  end
+  #def setup
+  #  ActionMailer::Base.delivery_method = :test
+  #  ActionMailer::Base.perform_deliveries = true
+  #  ActionMailer::Base.deliveries = []
+  #end
 
   def teardown
-    @request.session[:user] = nil
+    super
     ActionMailer::Base.deliveries = []
   end
 

@@ -6,15 +6,13 @@ class MessagesControllerTest < ActionController::TestCase
   fixtures :all  
   
   def setup
-    @controller = MessagesController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
     ActionMailer::Base.delivery_method = :test
     ActionMailer::Base.perform_deliveries = true
     ActionMailer::Base.deliveries = []
   end
 
   def teardown
+    super
     ActionMailer::Base.deliveries = []
   end
 
