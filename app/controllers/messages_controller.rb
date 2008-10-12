@@ -20,7 +20,7 @@ class MessagesController < ApplicationController
   
   layout false
   
-  before_filter :redirect_unless_xhr
+  before_filter :redirect_to_root_unless_xhr
   before_filter :find_user
   before_filter :login_required
   before_filter :check_user_identity  
@@ -138,12 +138,6 @@ class MessagesController < ApplicationController
     
 private
 
-  # Filter that redirects to '/' unless the request is not XHR.
-  #
-  def redirect_unless_xhr
-    redirect_to '/' unless request.xhr?
-  end
-  
   # Filter that finds an user by login and redirects to '/' if not found.
   #
   def find_user

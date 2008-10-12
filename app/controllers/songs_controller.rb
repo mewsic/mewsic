@@ -2,6 +2,7 @@ class SongsController < ApplicationController
   
   before_filter :login_required, :only => [:update, :rate, :mix, :destroy, :confirm_destroy]
   before_filter :song_required, :only => [:load_track, :unload_track]
+  before_filter :redirect_to_root_unless_xhr, :only => :confirm_destroy
 
   protect_from_forgery
   
@@ -95,7 +96,6 @@ class SongsController < ApplicationController
   end
 
   def confirm_destroy
-    redirect_to root_path and return unless request.xhr?
     @song = current_user.songs.find(params[:id])
     render :partial => 'destroy'
   end

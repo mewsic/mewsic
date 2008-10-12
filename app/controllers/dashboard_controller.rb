@@ -9,7 +9,7 @@
 #
 class DashboardController < ApplicationController
   
-  before_filter :redirect_unless_xhr, :only => :top
+  before_filter :redirect_to_root_unless_xhr, :only => :top
   before_filter :find_top_myousicians, :only => [:index, :top, :track]
   session :off, :only => :noop
   
@@ -71,12 +71,6 @@ class DashboardController < ApplicationController
   end
 
 private 
-
-  # Filter to redirect to / if the request is not coming through XHR
-  #
-  def redirect_unless_xhr
-    redirect_to '/' and return unless request.xhr?
-  end
 
   # Filter that finds the top myousicians to display in the home page
   #

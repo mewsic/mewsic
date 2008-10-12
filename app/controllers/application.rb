@@ -74,4 +74,10 @@ protected
     params[name] && params[name][:uploaded_data].respond_to?(:size) && params[name][:uploaded_data].size > 0
   end
 
+  # Utility method that redirects to the root path unless the request comes through XHR
+  #
+  def redirect_to_root_unless_xhr
+    redirect_to root_path unless request.xhr?
+  end
+
 end

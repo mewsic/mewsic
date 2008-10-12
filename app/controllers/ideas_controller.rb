@@ -74,7 +74,7 @@ private
   # Filter to redirect to ideas_url if the request is not XHR
   #
   def redirect_unless_xhr
-    redirect_to ideas_url unless request.xhr?
+    redirect_to ideas_path unless request.xhr?
   end
   
 end

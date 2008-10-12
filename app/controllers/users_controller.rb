@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_filter :login_required, :only => :update
   before_filter :check_if_current_user_page, :only => [:update, :switch_type, :firstrun, :change_password]
   before_filter :check_if_already_logged_in, :only => [:new]
+  before_filter :redirect_to_root_unless_xhr, :only => [:auto_complete_for_message_to, :top, :rate]
   
   protect_from_forgery :except => :update
 
@@ -92,7 +93,6 @@ class UsersController < ApplicationController
   
   def update
     @user = User.find_from_param(params[:id])
-    # FIXME: cambiare l'output a seconda del formato richiesto e se ci sono errori.
     if @user.update_attributes(params[:user])
       @user.reload
       if params[:user] && params[:user].keys.size <= 2
@@ -143,7 +143,7 @@ class UsersController < ApplicationController
       end        
   rescue
       logger.error "Invalid Reset Code entered" 
-      flash[:notice] = "Sorry - That is an invalid password reset code. Please check your code and try again. (Perhaps your email client inserted a carriage return?" 
+      flash[:notice] = "Sorry - That is an invalid password reset code. Please check your code and try again. (Perhaps your email client inserted a carriage return?)" 
       redirect_to '/'
   end
 
@@ -213,7 +213,6 @@ class UsersController < ApplicationController
   end
   
   def auto_complete_for_message_to
-    redirect_to root_path and return unless request.xhr?
     q = params[:message][:to] if params[:message]
     render :nothing => true if q.blank?
     @users = User.find(:all, :order => "login ASC", :conditions => ["login LIKE ?", "%#{q}%"], :limit => 10)
@@ -221,8 +220,6 @@ class UsersController < ApplicationController
   end
 
   def top
-    redirect_to root_path and return unless request.xhr?
-
     if [:class, :type].any? { |p| params[p].blank? }
       render :nothing => true, :status => :bad_request and return
     end
