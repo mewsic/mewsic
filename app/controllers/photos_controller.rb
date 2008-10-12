@@ -6,7 +6,7 @@ class PhotosController < ApplicationController
   before_filter :check_photo_count, :only => :create
   
   def index
-    redirect_to '/'
+    redirect_to_pictureable_path
   end
 
   def create 
@@ -43,11 +43,9 @@ class PhotosController < ApplicationController
   def destroy 
     @photo = @pictureable.photos.find(params[:id])
     @photo.destroy
+
     respond_to do |format|
-      format.html do
-        url = params[:mband_id] ? mband_photos_path(@pictureable) : user_photos_path(@pictureable)
-        redirect_to(url)
-      end
+      format.html { redirect_to_pictureable_path }
       format.js
     end
   end
@@ -61,6 +59,8 @@ private
     elsif params[:mband_id]
       @pictureable = Mband.find_from_param(params[:mband_id])  
       @mband = @pictureable
+    else
+      redirect_to '/'
     end
   end  
   
@@ -76,6 +76,10 @@ private
     if @pictureable.photos.count > 9
       @upload_limit = 10
     end
+  end
+
+  def redirect_to_pictureable_path
+    redirect_to(params[:mband_id] ? mband_path(@pictureable) : user_path(@pictureable))
   end
   
 end
