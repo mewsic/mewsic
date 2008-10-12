@@ -53,7 +53,8 @@ class AvatarsController < ApplicationController
 
   end
 
-  # <tt>PUT /users/:id/avatar</tt>
+  # <tt>PUT /users/:user_id/avatar</tt>
+  # <tt>PUT /mbands/:mband_id/avatar</tt>
   #
   # Misleading use of RESTful routes, because this action actually creates a new avatar linked to
   # the pictureable found by the +find_pictureable+ method. If the uploaded avatar is valid, the
