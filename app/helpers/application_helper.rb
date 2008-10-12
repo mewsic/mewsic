@@ -99,11 +99,11 @@ module ApplicationHelper
     content_for :breadcrumb, %[<div id="path" class="#{klass}"><a href="/">Home</a> : #{bread.join(' : ')}</div>]
   end
 
-  def title(text = "")
+  def title(text)
     content_for :title, h(text)
   end
 
-  def meta_description(description = "")
+  def meta_description(description)
     content_for :meta_description, h(description)
   end
   
@@ -113,21 +113,11 @@ module ApplicationHelper
   end
 
   def render_title
-    title unless @content_for_title
-    if @content_for_title.blank? 
-      nil 
-    else 
-      @content_for_title 
-    end
+    @content_for_title 
   end
  
   def render_meta_description
-    title unless @content_for_meta_description
-    if @content_for_meta_description.blank? 
-      nil 
-    else 
-      @content_for_meta_description
-    end
+    @content_for_meta_description
   end
  
   def tags_for_cloud(klass, group, attribute, css_classes, limit = nil)
