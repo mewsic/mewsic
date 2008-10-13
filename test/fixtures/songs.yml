@@ -277,7 +277,7 @@ quentin_productions:
   tone: F
   seconds: 140
   filename: test.mp3
-  bpm: 130
+  bpm: 166
   key: <%= Myousica.key('F') %>
 
 <% 4.times do |i| %>

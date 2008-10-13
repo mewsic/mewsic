@@ -276,7 +276,7 @@ quentin_productions_track_<%= i %>:
   owner: quentin
   tonality: <%= t = ('A'..'F').to_a[rand(6)] %>
   filename: test.mp3
-  bpm: 130
+  bpm: 166
   key: <%= Myousica.key(t) %>
 <% end %>
 
