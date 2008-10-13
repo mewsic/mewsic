@@ -5,7 +5,7 @@ class TracksControllerTest < ActionController::TestCase
   include AuthenticatedTestHelper
   include Adelao::Playable::TestHelpers
 
-  fixtures :all
+  fixtures :users, :songs, :tracks, :genres, :mixes, :instruments
 
   def setup
     ActionMailer::Base.delivery_method = :test

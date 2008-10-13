@@ -3,6 +3,8 @@ require File.dirname(__FILE__) + '/../test_helper'
 class GenresControllerTest < ActionController::TestCase
   tests GenresController
 
+  fixtures :genres, :songs, :tracks
+
   def test_index_html_should_respond_success_if_xhr
     get :index, :format => 'html'
     assert_response :redirect

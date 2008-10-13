@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 class MessagesControllerTest < ActionController::TestCase
   
   include AuthenticatedTestHelper
-  fixtures :all  
+  fixtures :users, :messages
   
   def setup
     ActionMailer::Base.delivery_method = :test

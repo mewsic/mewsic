@@ -3,7 +3,8 @@ require File.dirname(__FILE__) + '/../test_helper'
 class MlabTest < ActiveSupport::TestCase
 
   include AuthenticatedTestHelper
-  fixtures :all
+
+  fixtures :users, :songs, :tracks
   
   def test_should_create  
     quentin_mlab_items_count  = users(:quentin).mlabs.count

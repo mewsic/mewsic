@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class MessageTest < ActiveSupport::TestCase
 
-  fixtures :all
+  fixtures :users, :messages
 
   def test_should_create_message
     count = users(:user_10).sent_messages.count

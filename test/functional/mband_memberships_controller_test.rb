@@ -4,7 +4,7 @@ class MbandMembershipsControllerTest < ActionController::TestCase
   
   include AuthenticatedTestHelper
 
-  fixtures :users, :mbands
+  fixtures :users, :mbands, :instruments, :mband_memberships
 
   def setup
     ActionMailer::Base.delivery_method = :test

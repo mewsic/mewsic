@@ -3,7 +3,7 @@ require "#{File.dirname(__FILE__)}/../test_helper"
 class MultitrackTest < ActionController::IntegrationTest
 
   include AuthenticatedTestHelper
-  fixtures :all
+  fixtures :users, :instruments, :mlabs, :genres
 
   def test_multitrack_workflow
     session = open_session do |sess|

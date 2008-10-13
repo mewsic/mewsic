@@ -1,6 +1,8 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class AnswerTest < ActiveSupport::TestCase
+
+  fixtures :answers, :users
   
   def test_should_validate_presence_of_body
     assert_no_difference 'Answer.count' do

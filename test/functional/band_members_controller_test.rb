@@ -4,7 +4,7 @@ class BandMembersControllerTest < ActionController::TestCase
 
   include AuthenticatedTestHelper
 
-  fixtures :users, :instruments
+  fixtures :users, :instruments, :band_members
 
   def test_should_show_band_members
     login_as :mikaband

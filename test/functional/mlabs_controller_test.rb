@@ -5,7 +5,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 class MlabsControllerTest < ActionController::TestCase
   
   include AuthenticatedTestHelper
-  fixtures :all
+  fixtures :users, :mlabs, :songs, :tracks
   
   def setup
     @controller = MlabsController.new

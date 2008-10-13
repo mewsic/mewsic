@@ -5,7 +5,7 @@ class SongsControllerTest < ActionController::TestCase
   include AuthenticatedTestHelper
   include Adelao::Playable::TestHelpers
 
-  fixtures :all
+  fixtures :users, :songs, :tracks, :genres, :mixes
   
   tests SongsController
 

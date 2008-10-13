@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class MultitrackControllerTest < ActionController::TestCase
   include AuthenticatedTestHelper
-  fixtures :all
+  fixtures :users, :songs
 
   #def setup
   #  ActionMailer::Base.delivery_method = :test

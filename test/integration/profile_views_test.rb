@@ -8,8 +8,8 @@ class ProfileViewsTest < ActionController::IntegrationTest
     user = users(:quentin)
     views = users(:quentin).profile_views
 
-    20.times do |i|
-      assert_difference 'ProfileView.count' do
+    assert_difference 'ProfileView.count', 20 do
+      20.times do |i|
         get user_path(user)
         assert_response :success
         assert_equal views, user.profile_views

@@ -3,6 +3,8 @@ require File.dirname(__FILE__) + '/../test_helper'
 class TrackTest < ActiveSupport::TestCase
   include Adelao::Playable::TestHelpers
 
+  fixtures :users, :songs, :tracks, :instruments, :mixes
+
   def test_find_most_used_tracks_should_return_tracks_and_usage
     track = Track.find_most_used(:limit => 1).first
     assert_equal tracks(:keyboards_for_billie_jean_by_michael_jackson), track

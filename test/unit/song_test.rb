@@ -3,6 +3,8 @@ require File.dirname(__FILE__) + '/../test_helper'
 class SongTest < ActiveSupport::TestCase
   include Adelao::Playable::TestHelpers
 
+  fixtures :users, :songs, :genres, :mixes, :tracks
+
   def test_association_with_children
     assert_equal 3, songs(:let_it_be).children_tracks.size
   end

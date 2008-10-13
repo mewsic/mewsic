@@ -3,6 +3,8 @@ require 'rexml/document'
 
 class SearchControllerTest < ActionController::TestCase
 
+  fixtures :users, :songs, :tracks, :genres, :instruments
+
   def setup
     super
     setup_sphinx

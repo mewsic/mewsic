@@ -1,9 +1,9 @@
 require "#{File.dirname(__FILE__)}/../test_helper"
 
 class LoginTest < ActionController::IntegrationTest
-  # fixtures :your, :models
 
-  # Replace this with your real tests.
+  fixtures :users, :songs
+
   def test_login_from_dashboard_should_redirect_to_user_page
     get root_path
     log_in

@@ -1,5 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 class GenreTest < ActiveSupport::TestCase
+
+  fixtures :genres, :users, :songs
   
   def test_find_paginated
     assert_equal 5, Genre.find_paginated(1).size
