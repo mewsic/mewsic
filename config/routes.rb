@@ -17,7 +17,7 @@ ActionController::Routing::Routes.draw do |map|
     answer.resources :replies
     answer.resources :abuses
   end
-  map.connect 'replies/:id/rate', :controller => 'replies', :action => 'rate'
+  map.rate_reply 'replies/:id/rate', :controller => 'replies', :action => 'rate', :conditions => { :method => :put }
   
   map.resources :genres do |genre|
     genre.resources :songs
