@@ -55,7 +55,8 @@ ActionController::Routing::Routes.draw do |map|
     track.resources :abuses
   end
   
-  map.resources :search
+  map.search '/search', :controller => 'search', :action => 'show', :format => 'html', :conditions => { :method => :get }
+  map.formatted_search '/search.:format', :controller => 'search', :action => 'show', :conditions => { :method => :get }
 
   map.resources :avatars
   

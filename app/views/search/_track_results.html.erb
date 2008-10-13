@@ -1,6 +1,6 @@
 <%- if @tracks.size > 0 -%>
 	<%= render :partial => 'track', :collection => @tracks %>
-  <%= will_paginate @tracks, :class => 'pagination track', :params => { :type => :track }, :prev_label => image_tag('move_arrow_left.png'), :next_label => image_tag('move_arrow_right.png') %>
+	<%= will_paginate @tracks, :class => 'pagination track', :params => { :type => :track, :q => @q }, :prev_label => image_tag('move_arrow_left.png'), :next_label => image_tag('move_arrow_right.png') %>
 	<div class="pagination spinner">
 		<img src="/images/spinner.gif" id="track-results-spinner" style="display:none"/>
   </div>
