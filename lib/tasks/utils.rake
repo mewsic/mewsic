@@ -109,7 +109,7 @@ namespace :myousica do
 
       FileUtils.mkdir_p File.join(RAILS_ROOT, 'index')
       File.open(config, 'w+') do |f|
-        f.write ERB.new(File.read("#{config}.erb")).result
+        f.write ERB.new(File.read(File.join(RAILS_ROOT, 'config', 'sphinx.config.erb'))).result
       end
     end
 

@@ -54,4 +54,25 @@ class Test::Unit::TestCase
     # ActionController::Integration oddities
     assert (@response.headers['Content-Type'] || @response.headers['type']) =~ /^#{options[:content_type]}/
   end
+
+  def setup_sphinx
+    return if $sphinx_config
+
+    $sphinx_config = File.join(RAILS_ROOT, 'config', 'sphinx_test.config')
+    File.open($sphinx_config, 'w+') do |config|
+      template = File.read(File.join(RAILS_ROOT, 'config', 'sphinx.config.erb'))
+      config.write ERB.new(template).result
+    end unless File.exists? $sphinx_config
+
+    `searchd --config #{$sphinx_config.sub('test', 'development')} --stop`
+
+    `indexer --config #$sphinx_config --all`
+    `searchd --config #$sphinx_config`
+
+    at_exit do
+      `searchd --config #$sphinx_config --stop`
+      `searchd --config #{$sphinx_config.sub('test', 'development')}`
+    end
+  end
+
 end
