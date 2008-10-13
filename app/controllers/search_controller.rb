@@ -59,33 +59,28 @@ class SearchController < ApplicationController
        songs_conditions = {}
        tracks_conditions = {}
 
-       if @advanced
-         # Search string:
-         # instrument=instrument_id & genre=genre_id & country=italy & bpm=120 & key=key & author=pink+floyd & title=the+wall
-         #
-         if params.include?(:genre) && !params[:genre].blank?
-           songs_conditions[:genre_id] = params[:genre].to_i
-         end
-         if params.include?(:bpm) && !params[:bpm].blank?
-           songs_conditions[:bpm] = params[:bpm].to_i
-           tracks_conditions[:bpm] = params[:bpm].to_i
-         end
-         if params.include?(:key) && !params[:key].blank? && key = Myousica::TONES.index(params[:key].to_s.upcase)
-           songs_conditions[:key] = key
-           tracks_conditions[:key] = key
-         end
-         if params.include?(:instrument) && !params[:instrument].blank?
-           tracks_conditions[:instrument_id] = params[:instrument].to_i
-         end
-         if params.include?(:title) && !params[:title].blank?
-           @q = "#{@q} @title #{params[:title]}"
-         end
-         if params.include?(:author) && !params[:author].blank?
-           @q = "#{@q} @author #{params[:author]}"
-         end
-         if params.include?(:country) && !params[:country].blank?
-           @q = "#{@q} @user_country #{params[:country]}"
-         end
+       if params.include?(:genre) && !params[:genre].blank?
+         songs_conditions[:genre_id] = params[:genre].to_i
+       end
+       if params.include?(:bpm) && !params[:bpm].blank?
+         songs_conditions[:bpm] = params[:bpm].to_i
+         tracks_conditions[:bpm] = params[:bpm].to_i
+       end
+       if params.include?(:key) && !params[:key].blank? && key = Myousica::TONES.index(params[:key].to_s.upcase)
+         songs_conditions[:key] = key
+         tracks_conditions[:key] = key
+       end
+       if params.include?(:instrument) && !params[:instrument].blank?
+         tracks_conditions[:instrument_id] = params[:instrument].to_i
+       end
+       if params.include?(:title) && !params[:title].blank?
+         @q = "#{@q} @title #{params[:title]}"
+       end
+       if params.include?(:author) && !params[:author].blank?
+         @q = "#{@q} @author #{params[:author]}"
+       end
+       if params.include?(:country) && !params[:country].blank?
+         @q = "#{@q} @user_country #{params[:country]}"
        end
 
        @songs  = search_songs(@q, 30, 1, songs_conditions)
@@ -164,12 +159,11 @@ class SearchController < ApplicationController
       @q = CGI::unescape(params.delete(:q) || '')
       @q.gsub! /%/, ''
 
-      @advanced = params.any? { |k,v| %w(instrument bpm genre country city author title key).include?(k) }
-
-      if @q.strip.blank? && !@advanced
+      advanced = params.any? { |k,v| %w(instrument bpm genre country city author title key).include?(k) }
+      if @q.strip.blank? && !advanced
         flash[:error] = 'You did not enter a search string'
         respond_to do |format|
-          format.html { redirect_to '/' and return }
+          format.html { redirect_to '/' }
           format.xml { render :nothing => true, :status => :bad_request }
         end
       end
