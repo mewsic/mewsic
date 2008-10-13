@@ -5,8 +5,8 @@ ActionController::Routing::Routes.draw do |map|
     mband.resources :photos
     mband.resources :songs
     mband.resources :tracks, :member => { :toggle_idea => :put }
-    mband.podcast 'podcast.xml', :controller => 'songs', :action => 'podcast', :conditions => {:method => :get}
   end  
+  map.mband_podcast 'podcast.xml', :controller => 'podcasts', :action => 'show', :conditions => {:method => :get}
   
   map.accept_mband_membership 'mband_memberships/accept/:token', :controller => 'mband_memberships', :action => 'accept'
   map.decline_mband_membership 'mband_memberships/decline/:token', :controller => 'mband_memberships', :action => 'decline'
@@ -38,9 +38,9 @@ ActionController::Routing::Routes.draw do |map|
     user.resources :mlabs
     user.resources :messages, :collection => { :delete_selected => :post, :sent => :get, :unread => :get }
     user.resources :abuses
-    user.podcast 'podcast.xml', :controller => 'songs', :action => 'podcast', :conditions => {:method => :get}
-    user.pcast ':user_id.pcast', :controller => 'songs', :action => 'pcast', :conditions => {:method => :get}
   end
+  map.user_podcast '/users/:user_id/podcast.xml', :controller => 'podcasts', :action => 'show', :conditions => {:method => :get}
+  map.user_pcast '/users/:user_id/:user_id.pcast', :controller => 'podcasts', :action => 'pcast', :conditions => {:method => :get}
   map.forgot_password '/forgot_password', :controller => 'users', :action => 'forgot_password'
   map.reset_password '/reset_password/:id',  :controller => 'users', :action => 'reset_password'
     
