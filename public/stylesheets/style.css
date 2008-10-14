@@ -849,6 +849,9 @@ tr.nav-song td{
 .answer p, .reply p{
 	padding-bottom:10px;
 }
+.answer p.name {
+	overflow-x: hidden
+}
 .reply .thumb, .answer .thumb {
 	text-align:center;
 	width:75px;
