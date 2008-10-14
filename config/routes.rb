@@ -6,7 +6,7 @@ ActionController::Routing::Routes.draw do |map|
     mband.resources :songs
     mband.resources :tracks
   end  
-  map.mband_podcast 'podcast.xml', :controller => 'podcasts', :action => 'show', :conditions => {:method => :get}
+  map.mband_podcast '/mbands/:mband_id/podcast.xml', :controller => 'podcasts', :action => 'show', :conditions => {:method => :get}
   
   map.accept_mband_membership 'mband_memberships/accept/:token', :controller => 'mband_memberships', :action => 'accept'
   map.decline_mband_membership 'mband_memberships/decline/:token', :controller => 'mband_memberships', :action => 'decline'
