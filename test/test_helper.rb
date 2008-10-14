@@ -3,6 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'test_help'
 require 'redgreen' unless ENV["TM_MODE"]
 require 'fixture_helpers'
+require 'rexml/document'
 
 class Test::Unit::TestCase
   # Transactional fixtures accelerate your tests by wrapping each test method
@@ -45,6 +46,23 @@ class Test::Unit::TestCase
     assert_equal options[:filename], @response.headers['X-Accel-Redirect']
     # ActionController::Integration oddities
     assert (@response.headers['Content-Type'] || @response.headers['type']) =~ /^#{options[:content_type]}/
+  end
+
+  def assert_valid_podcast(options = {})
+    xml = REXML::Document.new(@response.body)
+    assert_not_nil xml
+
+    assert_equal 1, REXML::XPath.match(xml, "//channel").size
+    assert_equal options[:nitems], REXML::XPath.match(xml, "//title").size
+    assert_equal 0, REXML::XPath.match(xml, "//non_existing_element").size
+  end
+
+  def assert_valid_pcast
+    xml = REXML::Document.new(@response.body)
+    assert_not_nil xml
+
+    assert_equal 1, REXML::XPath.match(xml, "//pcast").size
+    assert_equal 0, REXML::XPath.match(xml, "//non_existing_element").size
   end
 
   def setup_sphinx
