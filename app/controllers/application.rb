@@ -37,7 +37,7 @@ protected
 
     if logged_in? && !request.xhr?
       current_user.update_attribute(:status, multitrack_request ? 'rec' : 'on')
-      current_user.leave_multitrack! if current_user.multitrack? && !multitrack_request
+      #current_user.leave_multitrack! if current_user.multitrack? && !multitrack_request
     end
 
     store_location unless logged_in? || request.xhr? || multitrack_request || javascript_request || (controller_name == 'sessions') || (params[:format] == 'png') || (params[:format] == 'xml')
