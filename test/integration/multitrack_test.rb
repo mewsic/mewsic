@@ -33,7 +33,7 @@ class MultitrackTest < ActionController::IntegrationTest
       auth_token = @user.reload.multitrack_token
       assert_not_nil auth_token
 
-      post multitrack_auth_path(@user.id, :token => auth_token)
+      post multitrack_auth_path(@user.id), :token => auth_token
       assert_response :success
 
       # Load two tracks
