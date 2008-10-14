@@ -1,7 +1,6 @@
 class TracksController < ApplicationController
 
   before_filter :login_required, :only => [:create, :rate, :toggle_idea, :destroy, :confirm_destroy]
-  before_filter :check_track_owner, :only => [:toggle_idea]
   before_filter :redirect_to_root_unless_xhr, :only => [:confirm_destroy, :rate]
   protect_from_forgery :except => [:create] ## XXX FIXME
 
@@ -97,6 +96,7 @@ class TracksController < ApplicationController
   end
 
   def toggle_idea
+    @track = current_user.tracks.find(params[:id])
     @track.idea = @track.idea? ? false : true
     @track.save
 
@@ -104,6 +104,9 @@ class TracksController < ApplicationController
       format.html { redirect_to user_url(current_user) }
       format.js
     end
+
+  rescue ActiveRecord::RecordNotFound
+    redirect_to login_path
   end
 
   def download
@@ -125,16 +128,6 @@ class TracksController < ApplicationController
   rescue ActiveRecord::RecordNotFound
     flash[:error] = 'Track not found'
     redirect_to music_path
-  end
-
-private
-
-  def check_track_owner
-    @user = User.find_from_param(params[:user_id])
-    @track = Track.find(params[:id])
-    if @user != current_user || @track.user != current_user
-      redirect_to login_path
-    end
   end
 
 end

@@ -7,7 +7,7 @@ module IdeasHelper
   def idea_button(track)
     image = idea_icon(track)
     if track.user == current_user
-      link_to_remote image, :url => toggle_idea_user_track_path(current_user, track), :method => :put, :html => {:id => "toggle_idea_#{track.id}"}
+      link_to_remote image, :url => toggle_idea_track_path(track), :method => :put, :html => {:id => "toggle_idea_#{track.id}"}
     else
       image
     end

@@ -4,7 +4,7 @@ ActionController::Routing::Routes.draw do |map|
     mband.resource :avatar
     mband.resources :photos
     mband.resources :songs
-    mband.resources :tracks, :member => { :toggle_idea => :put }
+    mband.resources :tracks
   end  
   map.mband_podcast 'podcast.xml', :controller => 'podcasts', :action => 'show', :conditions => {:method => :get}
   
@@ -30,7 +30,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users, :collection => {:auto_complete_for_message_to => :get, :top => :get}, :member => {:firstrun => :get, :switch_type => :any, :change_password => :put, :rate => :put} do |user|    
     user.resources :answers
     user.resources :songs
-    user.resources :tracks, :member => { :toggle_idea => :put }
+    user.resources :tracks
     user.resource  :avatar
     user.resources :members, :controller => 'band_members'
     user.resources :friendships
@@ -51,7 +51,7 @@ ActionController::Routing::Routes.draw do |map|
     song.resources :abuses
   end
  
-  map.resources :tracks, :has_one => :player, :member => { :rate => :put, :download => :get, :confirm_destroy => :get } do |track|
+  map.resources :tracks, :has_one => :player, :member => { :rate => :put, :toggle_idea => :put, :download => :get, :confirm_destroy => :get } do |track|
     track.resources :abuses
   end
   
