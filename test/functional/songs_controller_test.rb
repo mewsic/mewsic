@@ -112,6 +112,18 @@ class SongsControllerTest < ActionController::TestCase
     assert_equal song.mixes.count, 0
   end
 
+  def test_should_not_show_destroy_confirmation_if_not_logged_in
+    xhr :get, :confirm_destroy, :id => songs(:let_it_be)
+    assert_response :redirect
+  end
+
+  def test_should_show_destroy_confirmation
+    login_as :quentin
+    xhr :get, :confirm_destroy, :id => songs(:quentin_single_track_song)
+    assert_response :success
+    assert_template '_destroy'
+  end
+
   def test_should_not_destroy_if_not_logged_in
     delete :destroy, :id => songs(:let_it_be)
     assert_redirected_to login_path

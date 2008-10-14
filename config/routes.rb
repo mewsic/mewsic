@@ -29,8 +29,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :bands_and_deejays
   map.resources :users, :collection => {:auto_complete_for_message_to => :get, :top => :get}, :member => {:firstrun => :get, :switch_type => :any, :change_password => :put, :rate => :put} do |user|    
     user.resources :answers
-    user.resources :songs, :member => { :confirm_destroy => :get }
-    user.resources :tracks, :member => { :toggle_idea => :put, :confirm_destroy => :get }
+    user.resources :songs
+    user.resources :tracks, :member => { :toggle_idea => :put }
     user.resource  :avatar
     user.resources :members, :controller => 'band_members'
     user.resources :friendships
@@ -47,11 +47,11 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :sessions
 
   map.resources :songs, :has_one => :player, 
-    :member => { :mix => :post, :load_track => :put, :unload_track => :put, :rate => :put , :tracks => :get, :download => :get } do |song|
+    :member => { :mix => :post, :load_track => :put, :unload_track => :put, :rate => :put , :tracks => :get, :download => :get, :confirm_destroy => :get } do |song|
     song.resources :abuses
   end
  
-  map.resources :tracks, :has_one => :player, :member => { :rate => :put, :download => :get } do |track|
+  map.resources :tracks, :has_one => :player, :member => { :rate => :put, :download => :get, :confirm_destroy => :get } do |track|
     track.resources :abuses
   end
   
