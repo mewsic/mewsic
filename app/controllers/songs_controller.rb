@@ -1,3 +1,13 @@
+# Myousica Songs controller.
+#
+# Copyright:: (C) 2008 Medlar s.r.l.
+# Copyright:: (C) 2008 Mikamai s.r.l.
+# Copyright:: (C) 2008 Adelao Group
+#
+# == Description
+#
+# This controller handles operations on Song objects.
+#
 class SongsController < ApplicationController
   
   before_filter :login_required, :only => [:update, :rate, :mix, :destroy, :confirm_destroy]
@@ -6,6 +16,15 @@ class SongsController < ApplicationController
 
   protect_from_forgery
   
+  # <tt>XHR GET /songs?[genre_id|user_id|mband_id]=ID</tt>
+  # <tt>GET /songs.xml?user_id=ID</tt>
+  #
+  # * HTML format: renders a paginated index of songs by Genre, User or Mband. Every
+  #   model has its own template: <tt>{genres,users,mbands}/_songs.html.erb</tt>.
+  #   Song objects are returned by Song#find_paginated_by_genre, Song#find_paginated_by_user
+  #   and Song#find_paginated_by_mband.
+  # * XML format: returns an XML representation of the given user published songs.
+  #
   def index
     respond_to do |format|
       format.html do
@@ -35,6 +54,16 @@ class SongsController < ApplicationController
     head :not_found
   end
   
+  # <tt>GET /songs/:song_id</tt>
+  # <tt>GET /songs/:song_id.xml</tt>
+  # <tt>GET /songs/:song_id.png</tt>
+  #
+  # * HTML format: shows the song page
+  # * XML format: shows the XML representation of the given song. Siblings (versions) info is included
+  #   if the <tt>siblings</tt> param is present. Edit (volume & balance) info is included if the <tt>
+  #   edit</tt> parameter is present.
+  # * PNG format: streams the waveform png to the client using +x_accel_redirect+.
+  #
   def show
     @song = Song.find(params[:id], :include => [:user, { :mixes => { :track => [:instrument, :parent_song] } }, :genre])        
 
@@ -67,6 +96,14 @@ class SongsController < ApplicationController
     end
   end
 
+  # <tt>DELETE /songs/:id</tt>
+  #
+  # Tries to destroy the given Song instance. Because songs are used by tracks to inherit Genre
+  # information, a Song with direct children tracks cannot be deleted. In this case, it is marked
+  # as unpublished, its stream is removed and its mixes too.
+  #
+  # When a song has got no children tracks it is destroyed, and mixes are removed as a dependency.
+  #
   def destroy
     @song = current_user.songs.find(params[:id])
     if @song.children_tracks.count > 0
@@ -90,11 +127,20 @@ class SongsController < ApplicationController
     head :forbidden
   end
 
+  # <tt>GET /songs/:id/confirm_destroy</tt>
+  #
+  # Renders the <tt>_destroy.html.erb</tt> partial that asks the user confirmation
+  # before deleting a Song.
+  #
   def confirm_destroy
     @song = current_user.songs.find(params[:id])
     render :partial => 'destroy'
   end
   
+  # <tt>XHR GET /songs/:id/tracks</tt>
+  #
+  # Renders the <tt>_track.html.erb</tt> partial for every track in the given song.
+  #
   def tracks
     render :nothing => true, :status => :bad_request and return unless request.xhr?
 
@@ -103,6 +149,13 @@ class SongsController < ApplicationController
   end
 
 
+  # <tt>PUT /songs/:id</tt>
+  #
+  # Updates the song record with the given parameters. An user can modify only
+  # its own songs.
+  # If updating a single attribute, this action renders the new value of it.
+  # If updating multiple ones, nothing is rendered with a 200 status.
+  #
   def update
     @song = current_user.songs.find(params[:id])
     @song.update_attributes!(params[:song])
@@ -121,6 +174,14 @@ class SongsController < ApplicationController
     head :bad_request
   end
   
+  # <tt>PUT /songs/:id/load_track</tt>
+  #
+  # This action is called by the multitrack SWF when adding a new track to the stage,
+  # in order to reflect this addition into the database, by creating a new Mix with
+  # the given track and updating the song length to the maximum length of its tracks.
+  #
+  # Nothing is rendered, the HTTP response code carries the result of the operation.
+  #
   def load_track
     track = Track.find params[:track_id]
 
@@ -134,6 +195,12 @@ class SongsController < ApplicationController
     head :bad_request
   end
 
+  # <tt>PUT /songs/:id/unload_track</tt>
+  #
+  # This action is called by the multitrack SWF when removing a track from the stage,
+  # in order to remove the associated Mix with the given track. Nothing is rendered,
+  # the HTTP response code carries the result of the operation.
+  # 
   def unload_track
     @song.mixes.find_by_track_id(params[:track_id]).destroy
     head :ok
@@ -144,6 +211,16 @@ class SongsController < ApplicationController
     head :bad_request
   end
 
+  # <tt>POST /songs/:id/mix</tt>
+  #
+  # This action is called by the multitrack SWF when saving a myousica project. Its
+  # function is to create Mix object for every track added to the current project and
+  # to save volume and balance information. Currently the SWF sends out some wrong
+  # track IDs, which are ignored by this method.
+  #
+  # Upon success, the XML representation of a song is rendered. Upon failure, the
+  # <tt>shared/_errors.xml.erb</tt> partial is rendered instead.
+  #
   def mix
     @song = current_user.songs.find(params[:id])
     tracks = params.delete(:tracks)
@@ -179,6 +256,11 @@ class SongsController < ApplicationController
     end
   end    
   
+  # <tt>PUT /songs/:id/rate</tt>
+  #
+  # Rates a song, if Song#rateable_by? returns true, and prints the number of votes if successful.
+  # If the Song isn't rateable by the current_user, nothing is rendered with a 400 status.
+  #
   def rate    
     @song = Song.find(params[:id])
     if @song.rateable_by?(current_user)
@@ -189,6 +271,11 @@ class SongsController < ApplicationController
     end
   end       
 
+  # <tt>GET /songs/:id/download</tt>
+  #
+  # Streams the song mp3 to the client, using +x_accel_redirect+ and by providing a nice title using
+  # saved song metadata.
+  #
   def download
     @song = Song.find(params[:id])
     if @song.filename.blank?
@@ -212,10 +299,15 @@ class SongsController < ApplicationController
   
 protected
 
+  # Renders "Music" into the breadcrumb with a link to <tt>music_path</tt> (<tt>/music</tt>)
+  #
   def to_breadcrumb_link
     ['Music', music_path]
   end
 
+  # Tries to locate a song from the current user ones.
+  # If no one is found, this request comes from an anonymous user, so send out a 404.
+  #
   def song_required
     @song = 
       if logged_in?
