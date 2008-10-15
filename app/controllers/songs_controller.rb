@@ -127,7 +127,7 @@ class SongsController < ApplicationController
     head :forbidden
   end
 
-  # <tt>GET /songs/:id/confirm_destroy</tt>
+  # <tt>XHR GET /songs/:id/confirm_destroy</tt>
   #
   # Renders the <tt>_destroy.html.erb</tt> partial that asks the user confirmation
   # before deleting a Song.
@@ -273,8 +273,8 @@ class SongsController < ApplicationController
 
   # <tt>GET /songs/:id/download</tt>
   #
-  # Streams the song mp3 to the client, using +x_accel_redirect+ and by providing a nice title using
-  # saved song metadata.
+  # Streams the Song mp3 to the client, using +x_accel_redirect+ and by providing a nice title using
+  # the song attributes: <tt>song.title</tt> and <tt>song.user.login</tt>.
   #
   def download
     @song = Song.find(params[:id])
