@@ -100,7 +100,7 @@ protected
   # Utility method to check whether the current request comes from a Googlebot
   #
   def googlebot?
-    request.headers['User-Agent'] =~ /Googlebot/i
+    request.user_agent.downcase =~ /googlebot/
   end
 
 end

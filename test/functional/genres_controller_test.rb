@@ -50,7 +50,7 @@ class GenresControllerTest < ActionController::TestCase
   end
 
   def test_should_404_if_genre_not_found_by_googlebot
-    @request.headers['User-Agent'] = 'Googlebot'
+    @request.user_agent = %[Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)]
     get :show, :id => 0
     assert_response :not_found
   end
