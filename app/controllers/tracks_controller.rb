@@ -1,12 +1,10 @@
 class TracksController < ApplicationController
 
   before_filter :login_required, :only => [:create, :rate, :toggle_idea, :destroy, :confirm_destroy]
-  before_filter :redirect_to_root_unless_xhr, :only => [:confirm_destroy, :rate]
+  before_filter :redirect_to_root_unless_xhr, :only => [:index, :confirm_destroy, :rate]
   protect_from_forgery :except => [:create] ## XXX FIXME
 
   def index
-    redirect_to '/' and return unless request.xhr?
-
     if params.include?(:user_id)
       @user = User.find_from_param(params[:user_id])
       @tracks =
