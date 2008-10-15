@@ -54,5 +54,11 @@ class GenresControllerTest < ActionController::TestCase
     get :show, :id => 0
     assert_response :not_found
   end
+
+  # XXX HACK HACK HACK XXX
+  def test_acustic_hack
+    get :show, :id => 'acustic'
+    assert_redirected_to '/genres/Acoustic'
+  end
   
 end

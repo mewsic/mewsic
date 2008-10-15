@@ -68,8 +68,13 @@ class GenresController < ApplicationController
     if googlebot?
       render :nothing => true, :status => :not_found
     else
-      flash[:error] = 'Genre not found..'
-      redirect_to '/'
+      # XXX HACK HACK HACK XXX
+      if params[:id] =~ /acustic/i
+        redirect_to '/genres/Acoustic'
+      else
+        flash[:error] = 'Genre not found..'
+        redirect_to '/'
+      end
     end
   end
 
