@@ -65,8 +65,12 @@ class GenresController < ApplicationController
     end
 
   rescue ActiveRecord::RecordNotFound
-    flash[:error] = 'Genre not found..'
-    redirect_to '/'
+    if googlebot?
+      render :nothing => true, :status => :not_found
+    else
+      flash[:error] = 'Genre not found..'
+      redirect_to '/'
+    end
   end
 
   # <tt>GET /genres/:genre_id/rss.xml</tt>

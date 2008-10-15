@@ -97,4 +97,10 @@ protected
     render :nothing => true
   end
 
+  # Utility method to check whether the current request comes from a Googlebot
+  #
+  def googlebot?
+    request.headers['User-Agent'] =~ /Googlebot/
+  end
+
 end

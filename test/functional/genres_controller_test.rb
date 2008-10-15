@@ -42,12 +42,17 @@ class GenresControllerTest < ActionController::TestCase
     #     assert_equal 20, assigns(:songs).size
   end
   
-  def test_should_raise_excpetion_if_genre_not_found
-    begin
-      get :show, :id => 0
-    rescue Exception => e
-      assert e.kind_of?(ActiveRecord::RecordNotFound)
-    end
+  def test_should_redirect_if_genre_not_found
+    get :show, :id => 0
+    assert_response :redirect
+    assert_redirected_to '/'
+    assert_not_nil flash[:error]
+  end
+
+  def test_should_404_if_genre_not_found_by_googlebot
+    @request.headers['User-Agent'] = 'Googlebot'
+    get :show, :id => 0
+    assert_response :not_found
   end
   
 end
