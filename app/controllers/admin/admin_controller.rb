@@ -1,3 +1,4 @@
+module Admin; end #:nodoc:
 class Admin::AdminController < ApplicationController #:nodoc:
   before_filter :admin_required
   layout nil
