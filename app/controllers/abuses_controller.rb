@@ -21,7 +21,7 @@ class AbusesController < ApplicationController
   before_filter :login_required
   before_filter :find_abuseable  
 
-  # <tt>GET /abuses/new</tt>
+  # ==== GET /abuses/new
   #
   # Show the abuse creation form if an abuse for the current object does not exist.
   # If it exists, the view renders "Notification already sent".
@@ -33,7 +33,7 @@ class AbusesController < ApplicationController
     @abuse_form_url = send "#{klass.name.downcase}_abuses_path", @abuseable
   end
 
-  # <tt>POST /abuses/create</tt>
+  # ==== POST /abuses/create
   #
   # Create a new abuse if it does not exist, show a notification if it does.
   # Upon creation, a notification is sent to abuse@myousica.com with object

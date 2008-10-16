@@ -10,7 +10,7 @@
 #
 class SessionsController < ApplicationController
 
-  # <tt>GET /login</tt>
+  # ==== GET /login
   #
   # Show login page.
   #
@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
     redirect_to(user_url(current_user)) if logged_in?
   end
 
-  # <tt>POST /sessions</tt>
+  # ==== POST /sessions
   #
   # Log in
   #
@@ -39,7 +39,7 @@ class SessionsController < ApplicationController
     end
   end
 
-  # <tt>GET /logout</tt>
+  # ==== GET /logout
   #
   # Log out
   #

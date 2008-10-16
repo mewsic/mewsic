@@ -16,8 +16,8 @@ class TracksController < ApplicationController
   before_filter :redirect_to_root_unless_xhr, :only => [:index, :confirm_destroy, :rate]
   protect_from_forgery :except => [:create] ## XXX FIXME
 
-  # <tt>XHR GET /users/:user_id/tracks<tt>
-  # <tt>XHR GET /mbands/:mband_id/tracks</tt>
+  # ==== XHR GET /users/:user_id/tracks
+  # ==== XHR GET /mbands/:mband_id/tracks
   #
   # This action is used to paginate the tracks index in the User/Mband page.
   # If the current user is browsing its own page, a complete listing of tracks
@@ -48,8 +48,8 @@ class TracksController < ApplicationController
     end
   end
 
-  # <tt>GET /tracks/:id.xml</tt>
-  # <tt>GET /tracks/:id.png</tt>
+  # ==== GET /tracks/:id.xml
+  # ==== GET /tracks/:id.png
   #
   # * XML format: shows the XML representation of the given track. Siblings (versions) info is included
   #   if the <tt>siblings</tt> param is present.
@@ -72,7 +72,7 @@ class TracksController < ApplicationController
     end
   end
 
-  # <tt>POST /tracks.xml</tt>
+  # ==== POST /tracks.xml
   #
   # Creates a new track, whose attributes are carried in the <tt>:track</tt> params hash.
   # If it is Track#valid?, the action renders the XML representation of the newly created
@@ -93,7 +93,7 @@ class TracksController < ApplicationController
     end
   end
 
-  # <tt>DELETE /tracks/:id</tt>
+  # ==== DELETE /tracks/:id
   #
   # Tries to destroy the given track, if the Track#destroyable? method returns true. Nothing is
   # rendered. if successful => 200, if not => 403, if not found => 404, any other error => 400.
@@ -116,7 +116,7 @@ class TracksController < ApplicationController
     head :bad_request
   end
 
-  # <tt>XHR GET /tracks/:id/confirm_destroy</tt>
+  # ==== XHR GET /tracks/:id/confirm_destroy
   #
   # Renders the <tt>_destroy.html.erb</tt> partial that asks the user confirmation
   # before deleting a Track. If the Track#destroyable? method returns false, means
@@ -129,7 +129,7 @@ class TracksController < ApplicationController
     render :partial => 'destroy'
   end
 
-  # <tt>PUT /tracks/:id/rate</tt>
+  # ==== PUT /tracks/:id/rate
   #
   # Rates a track, if Track#rateable_by? returns true, and prints the number of votes if successful.
   # If the Track isn't rateable by the current_user, nothing is rendered with a 400 status.
@@ -144,7 +144,7 @@ class TracksController < ApplicationController
     end
   end
 
-  # <tt>XHR PUT /tracks/:id/toggle_idea</tt>
+  # ==== XHR PUT /tracks/:id/toggle_idea
   #
   # Toggles the <tt>idea</tt> flag of a Track. Only the track owner can access this action.
   #
@@ -162,7 +162,7 @@ class TracksController < ApplicationController
     redirect_to login_path
   end
 
-  # <tt>GET /tracks/:id/download</tt>
+  # ==== GET /tracks/:id/download
   #
   # Streams the Track mp3 to the client, using +x_accel_redirect+ and by providing a nice title using
   # the track attributes: <tt>instrument.description</tt>, <tt>track.title</tt> and <tt>track.user.login</tt>.

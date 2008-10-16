@@ -12,7 +12,7 @@
 class MusicController < ApplicationController
   before_filter :redirect_unless_xhr, :except => :index
 
-  # <tt>GET /music</tt>
+  # ==== GET /music
   #
   # Renders the whole music page, by fetching best songs, most used tracks, genres and
   # newest songs. Nothing special here.
@@ -25,7 +25,7 @@ class MusicController < ApplicationController
     @newest = Song.find_newest_paginated :page => 1, :per_page => 5, :include => :user
   end
 
-  # <tt>XHR GET /music/newest</tt>
+  # ==== XHR GET /music/newest
   #
   # Renders the <tt>_newest.html.erb</tt> partial to implement the pagination of newest songs.
   #
@@ -34,7 +34,7 @@ class MusicController < ApplicationController
     render :partial => 'newest'
   end
 
-  # <tt>XHR GET /music/top?type=[song|track]</tt>
+  # ==== XHR GET /music/top?type=[song|track]
   #
   # Renders the two top blocks of best songs and most used tracks, discriminating which to show
   # using the type parameter. Results are shown randomized. This code is quite complicated.

@@ -16,8 +16,8 @@ class SongsController < ApplicationController
 
   protect_from_forgery
   
-  # <tt>XHR GET /songs?[genre_id|user_id|mband_id]=ID</tt>
-  # <tt>GET /songs.xml?user_id=ID</tt>
+  # ==== XHR GET /songs?[genre_id|user_id|mband_id]=ID
+  # ==== GET /songs.xml?user_id=ID
   #
   # * HTML format: renders a paginated index of songs by Genre, User or Mband. Every
   #   model has its own template: <tt>{genres,users,mbands}/_songs.html.erb</tt>.
@@ -54,9 +54,9 @@ class SongsController < ApplicationController
     head :not_found
   end
   
-  # <tt>GET /songs/:song_id</tt>
-  # <tt>GET /songs/:song_id.xml</tt>
-  # <tt>GET /songs/:song_id.png</tt>
+  # ==== GET /songs/:song_id
+  # ==== GET /songs/:song_id.xml
+  # ==== GET /songs/:song_id.png
   #
   # * HTML format: shows the song page
   # * XML format: shows the XML representation of the given song. Siblings (versions) info is included
@@ -96,7 +96,7 @@ class SongsController < ApplicationController
     end
   end
 
-  # <tt>DELETE /songs/:id</tt>
+  # ==== DELETE /songs/:id
   #
   # Tries to destroy the given Song instance. Because songs are used by tracks to inherit Genre
   # information, a Song with direct children tracks cannot be deleted. In this case, it is marked
@@ -127,7 +127,7 @@ class SongsController < ApplicationController
     head :forbidden
   end
 
-  # <tt>XHR GET /songs/:id/confirm_destroy</tt>
+  # ==== XHR GET /songs/:id/confirm_destroy
   #
   # Renders the <tt>_destroy.html.erb</tt> partial that asks the user confirmation
   # before deleting a Song.
@@ -137,7 +137,7 @@ class SongsController < ApplicationController
     render :partial => 'destroy'
   end
   
-  # <tt>XHR GET /songs/:id/tracks</tt>
+  # ==== XHR GET /songs/:id/tracks
   #
   # Renders the <tt>_track.html.erb</tt> partial for every track in the given song.
   #
@@ -149,7 +149,7 @@ class SongsController < ApplicationController
   end
 
 
-  # <tt>PUT /songs/:id</tt>
+  # ==== PUT /songs/:id
   #
   # Updates the song record with the given parameters. An user can modify only
   # its own songs.
@@ -174,7 +174,7 @@ class SongsController < ApplicationController
     head :bad_request
   end
   
-  # <tt>PUT /songs/:id/load_track</tt>
+  # ==== PUT /songs/:id/load_track
   #
   # This action is called by the multitrack SWF when adding a new track to the stage,
   # in order to reflect this addition into the database, by creating a new Mix with
@@ -195,7 +195,7 @@ class SongsController < ApplicationController
     head :bad_request
   end
 
-  # <tt>PUT /songs/:id/unload_track</tt>
+  # ==== PUT /songs/:id/unload_track
   #
   # This action is called by the multitrack SWF when removing a track from the stage,
   # in order to remove the associated Mix with the given track. Nothing is rendered,
@@ -211,7 +211,7 @@ class SongsController < ApplicationController
     head :bad_request
   end
 
-  # <tt>POST /songs/:id/mix</tt>
+  # ==== POST /songs/:id/mix
   #
   # This action is called by the multitrack SWF when saving a myousica project. Its
   # function is to create Mix object for every track added to the current project and
@@ -256,7 +256,7 @@ class SongsController < ApplicationController
     end
   end    
   
-  # <tt>PUT /songs/:id/rate</tt>
+  # ==== PUT /songs/:id/rate
   #
   # Rates a song, if Song#rateable_by? returns true, and prints the number of votes if successful.
   # If the Song isn't rateable by the current_user, nothing is rendered with a 400 status.
@@ -271,7 +271,7 @@ class SongsController < ApplicationController
     end
   end       
 
-  # <tt>GET /songs/:id/download</tt>
+  # ==== GET /songs/:id/download
   #
   # Streams the Song mp3 to the client, using +x_accel_redirect+ and by providing a nice title using
   # the song attributes: <tt>song.title</tt> and <tt>song.user.login</tt>.

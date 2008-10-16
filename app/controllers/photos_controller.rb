@@ -22,8 +22,8 @@ class PhotosController < ApplicationController
   before_filter :check_current_user
   before_filter :check_photo_count, :only => :create
   
-  # <tt>GET /users/:user_id/photos</tt>
-  # <tt>GET /mbands/:mband_id/photos</tt>
+  # ==== GET /users/:user_id/photos
+  # ==== GET /mbands/:mband_id/photos
   #
   # Redirects to pictureable path (see +redirect_to_pictureable_path+).
   #
@@ -31,8 +31,8 @@ class PhotosController < ApplicationController
     redirect_to_pictureable_path
   end
 
-  # <tt>POST /users/:user_id/photos</tt>
-  # <tt>POST /mbands/:mband_id/photos</tt>
+  # ==== POST /users/:user_id/photos
+  # ==== POST /mbands/:mband_id/photos
   #
   # Creates a new photo and associates it to the given pictureable. This view is loaded
   # inside an hidden IFRAME to implement the AJAX file upload (see the <tt>responds_to_parent</tt>
@@ -81,8 +81,8 @@ class PhotosController < ApplicationController
     end
   end
 
-  # <tt>DELETE /users/:user_id/photos/:id</tt>
-  # <tt>DELETE /mbands/:mband_id/photos/:id</tt>
+  # ==== DELETE /users/:user_id/photos/:id
+  # ==== DELETE /mbands/:mband_id/photos/:id
   #
   # Removes a photo from the gallery and updates the page via a RJS view.
   # If the photo with the given id is not found, nothing is rendered with 

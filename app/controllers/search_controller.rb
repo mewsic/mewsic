@@ -15,8 +15,8 @@ class SearchController < ApplicationController
 
   before_filter :check_valid_search_query
 
-  # <tt>GET /search?q=query</tt>
-  # <tt>GET /search.xml?q=query & instrument=instrument_id & genre=genre_id & country=italy & bpm=120 & key=C# & author=pink+floyd & title=the+wall</tt>
+  # ==== GET /search?q=query
+  # ==== GET /search.xml?q=query & instrument=instrument_id & genre=genre_id & country=italy & bpm=120 & key=C# & author=pink+floyd & title=the+wall
   #
   # This action performs a search and shows the results, in HTML and XML format. The former is for
   # browsers, the latter for the Multitrack SWF. The HTML output accepts a <tt>type</tt> parameter

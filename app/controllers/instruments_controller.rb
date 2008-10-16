@@ -9,7 +9,7 @@
 #
 class InstrumentsController < ApplicationController
 
-  # <tt>GET /instruments.xml</tt>
+  # ==== GET /instruments.xml
   #
   # Renders an XML sheet containing all instruments, sorted by description.
   # If HTML output is requested, user is  redirected to '/'.

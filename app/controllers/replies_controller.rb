@@ -16,7 +16,7 @@ class RepliesController < ApplicationController
 
   before_filter :login_required
 
-  # <tt>POST /answers/:answer_id/replies</tt>
+  # ==== POST /answers/:answer_id/replies
   #
   # Creates a new reply linked to the given <tt>answer_id</tt>, unless the answer is
   # already closed (see Answer#closed?) or the model validation fails.
@@ -41,7 +41,7 @@ class RepliesController < ApplicationController
     redirect_to answer_url(@answer)
   end
 
-  # <tt>PUT /replies/:id/rate</tt>
+  # ==== PUT /replies/:id/rate
   #
   # Rates a reply, if it is rateable by the current user (see Reply#rateable_by?).
   #

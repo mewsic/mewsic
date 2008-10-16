@@ -12,7 +12,7 @@
 #
 class GenresController < ApplicationController  
 
-  # <tt>GET /genres.:format</tt>
+  # ==== GET /genres.:format
   #
   # Print out a listing of genres. Depending on the format, different actions are carried out.
   # 
@@ -48,7 +48,7 @@ class GenresController < ApplicationController
     end    
   end
   
-  # <tt>GET /genres/:genre_id</tt>
+  # ==== GET /genres/:genre_id
   #
   # Show the genre page, that contains a listing of genre's songs, the most listened ones and
   # most prolific users. Only HTML output is supported. When a genre is not found, user is
@@ -78,7 +78,7 @@ class GenresController < ApplicationController
     end
   end
 
-  # <tt>GET /genres/:genre_id/rss.xml</tt>
+  # ==== GET /genres/:genre_id/rss.xml
   #
   # Generates an RSS feed of 40 most recent published songs.
   #

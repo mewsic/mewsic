@@ -9,7 +9,7 @@
 # This simple controller generates users' and mbands' podcasts.
 #
 class PodcastsController < ApplicationController
-  # <tt>GET /users/:user_id/:user_id.pcast</tt>
+  # ==== GET /users/:user_id/:user_id.pcast
   #
   # Renders the very simple pcast format that describes iTunes where to find
   # a specific podcast. Useful only for Windows clients.
@@ -23,8 +23,8 @@ class PodcastsController < ApplicationController
     end
   end
 
-  # <tt>GET /users/:user_id/podcast.xml</tt>
-  # <tt>GET /mbands/:mband_id/podcast.xml</tt>
+  # ==== GET /users/:user_id/podcast.xml
+  # ==== GET /mbands/:mband_id/podcast.xml
   #
   # Generates an user or an mband's podcast with current published songs.
   # Renders nothing with a 403 status if the podcast is not marked as public

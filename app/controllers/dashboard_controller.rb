@@ -13,7 +13,7 @@ class DashboardController < ApplicationController
   before_filter :find_top_myousicians, :only => [:index, :top, :track]
   session :off, :only => :noop
   
-  # <tt>GET /</tt>
+  # ==== GET /
   #
   # The home page contains banners, swf objects and a list of top myousicians
   #
@@ -21,7 +21,7 @@ class DashboardController < ApplicationController
     respond_to { |format| format.html }
   end
 
-  # <tt>XHR GET /top</tt>
+  # ==== XHR GET /top
   #
   # Returns a list of top myousicians, triggered when the user clicks the "refresh" button
   # in the "Top myousicians" section of the home page.
@@ -37,7 +37,7 @@ class DashboardController < ApplicationController
     render :partial => 'myousician', :collection => @people
   end
 
-  # <tt>GET /index/:origin</tt>
+  # ==== GET /index/:origin
   #
   # Tracks a pageview coming from :origin, and sends it to google analytics.
   # This action renders the home page.
@@ -48,7 +48,7 @@ class DashboardController < ApplicationController
     render :action => 'index'
   end
 
-  # <tt>GET /noop</tt>
+  # ==== GET /noop
   #
   # Pingback method, used by Engine Yard monitoring software. If passed an ID, it is echoed back.
   # Session is OFF in this method!
@@ -61,7 +61,7 @@ class DashboardController < ApplicationController
     end
   end
 
-  # <tt>GET /splash.xml</tt>
+  # ==== GET /splash.xml
   #
   # Renders the splash configuration, finding the 5 most collaborated songs (see Song#find_most_collaborated).
   #

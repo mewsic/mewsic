@@ -24,8 +24,8 @@ class MlabsController < ApplicationController
   before_filter :login_required
   before_filter :check_user_identity
 
-  # <tt>GET /users/:user_id/mlabs.xml</tt>
-  # <tt>GET /users/:user_id/mlabs.js</tt>
+  # ==== GET /users/:user_id/mlabs.xml
+  # ==== GET /users/:user_id/mlabs.js
   #
   # Returns an index of the user songs and tracks in the My List basket. The XML format uses two
   # eager-loaded queries, results are printed out using the <tt>app/views/shared/_{song,track}.xml.erb</tt>
@@ -51,8 +51,8 @@ class MlabsController < ApplicationController
     end
   end
 
-  # <tt>POST /users/:user_id/mlabs.js</tt>
-  # <tt>POST /users/:user_id/mlabs.xml</tt>
+  # ==== POST /users/:user_id/mlabs.js
+  # ==== POST /users/:user_id/mlabs.xml
   #
   # Creates a new Mlab instance, associated to the <tt>current_user</tt> and to the mixable
   # whose id is passed via the <tt>item_id</tt> parameter. A mixable can be either a +Song+
@@ -87,8 +87,8 @@ class MlabsController < ApplicationController
     render :partial => 'shared/errors', :object => @mlab.errors, :status => :bad_request
   end
 
-  # <tt>DELETE /users/:user_id/mlabs/id.js</tt>
-  # <tt>DELETE /users/:user_id/mlabs/id.xml</tt>
+  # ==== DELETE /users/:user_id/mlabs/id.js
+  # ==== DELETE /users/:user_id/mlabs/id.xml
   #
   # Destroys an Mlab, when the user requests removal of an item from the My List, triggering
   # it by clicking the "Trash" button in the scroller. The multitrack currently does not 

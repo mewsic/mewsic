@@ -14,7 +14,7 @@ class IdeasController < ApplicationController
 
   before_filter :redirect_unless_xhr, :only => [:newest, :coolest, :by_instrument]
 
-  # <tt>GET /ideas</tt>
+  # ==== GET /ideas
   #
   # Show the index page of the ideas section, featuring newest, coolest, top rated and most
   # engaging ideas. See Track#find_paginated_newest_ideas, +Track.find_paginated_coolest_ideas+,
@@ -31,7 +31,7 @@ class IdeasController < ApplicationController
     @instruments = Instrument.find(:all)
   end
   
-  # <tt>XHR GET /ideas/newest?page=N</tt>
+  # ==== XHR GET /ideas/newest?page=N
   #
   # Paginate and render newest ideas for the topmost page blocks. Called via XHR.
   #
@@ -40,7 +40,7 @@ class IdeasController < ApplicationController
     render :partial => 'newest'
   end
   
-  # <tt>XHR GET /ideas/coolest?page=N</tt>
+  # ==== XHR GET /ideas/coolest?page=N
   #
   # Paginate and render coolest ideas for the topmost page blocks. Called via XHR.
   #
@@ -49,7 +49,7 @@ class IdeasController < ApplicationController
     render :partial => 'coolest'
   end
   
-  # <tt>XHR GET /ideas/by_instrument[?instrument_id=N]</tt>
+  # ==== XHR GET /ideas/by_instrument[?instrument_id=N]
   #
   # If the <tt>instrument_id</tt> parameter is passed, renders a table with ideas details
   # using the <tt>app/views/songs/_track.html.erb</tt> partial. If it is not given, it

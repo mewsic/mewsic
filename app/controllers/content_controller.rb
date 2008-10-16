@@ -5,7 +5,7 @@
 # Super-simple controller to show static content pages
 #
 class ContentController < ApplicationController
-  # <tt>GET /content/:id</tt>
+  # ==== GET /content/:id
   #
   # Shows a static page.
   #

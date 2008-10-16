@@ -7,7 +7,7 @@
 #
 class BandsAndDeejaysController < ApplicationController
 
-  # <tt>GET /bands_and_deejays</tt>
+  # ==== GET /bands_and_deejays
   #
   # Shows the index page for bands and deejays, with coolest, best myousicians,
   # prolific users, most admired, coolest mbands, newest bands/deejays and most

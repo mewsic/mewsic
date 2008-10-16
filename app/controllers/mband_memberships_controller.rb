@@ -17,7 +17,7 @@ class MbandMembershipsController < ApplicationController
   before_filter :login_required
   before_filter :find_mband, :only => :create
 
-  # <tt>POST /mband_memberships</tt>
+  # ==== POST /mband_memberships
   #
   # Create a new membership between the Mband found in the +find_mband+ filter and the passed
   # <tt>user_id</tt> parameter, as an <tt>instrument_id</tt> player. An user must be a member
@@ -47,7 +47,7 @@ class MbandMembershipsController < ApplicationController
     redirect_to mband_url(@mband)
   end
 
-  # <tt>DELETE /mband_memberships/:id</tt>
+  # ==== DELETE /mband_memberships/:id
   #
   # Destroys an existing membership, doing the necessary sanity checks. User is redirected
   # to its page upon completion.
@@ -63,7 +63,7 @@ class MbandMembershipsController < ApplicationController
     end
   end
   
-  # <tt>GET /mband_memberships/accept/:token</tt>
+  # ==== GET /mband_memberships/accept/:token
   #
   # Finds an Mband by accept token and finalize the membership. User is redirected to Mband page upon completion.
   #
@@ -75,7 +75,7 @@ class MbandMembershipsController < ApplicationController
     redirect_to mband_url(@membership.mband)
   end
 
-  # <tt>GET /mband_memberships/decline/:token</tt>
+  # ==== GET /mband_memberships/decline/:token
   #
   # Decline (so, destroy) a membership. User is redirected to its own page upon completion.
   #

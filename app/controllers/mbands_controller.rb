@@ -21,7 +21,7 @@ class MbandsController < ApplicationController
 
   protect_from_forgery :except => :update   
 
-  # <tt>GET /mbands/:id</tt>
+  # ==== GET /mbands/:id
   #
   # Shows the M-Band page, displaying the whole track list if the user is a member of the
   # M-band, or only tracks marked as ideas if not.
@@ -39,7 +39,7 @@ class MbandsController < ApplicationController
       end
   end
 
-  # <tt>POST /mbands</tt>
+  # ==== POST /mbands
   #
   # Creates a new M-Band, setting the current_user as the leader, and creates a new 
   # MbandMembership between the current user and the newly created M-Band, accepted
@@ -63,7 +63,7 @@ class MbandsController < ApplicationController
     end
   end
 
-  # <tt>PUT /mbands/:id</tt>
+  # ==== PUT /mbands/:id
   #
   # Updates the attributes of and M-Band. This code uses a trick to identify if the request
   # was made by the Ajax.Inplaceeditor prototype widget: if there are less than 3 attributes
@@ -85,7 +85,7 @@ class MbandsController < ApplicationController
     end  
   end
 
-  # <tt>DELETE /mbands/:id</tt>
+  # ==== DELETE /mbands/:id
   #
   # Destroys an M-Band. Currently there is no link on the site that calls this method,
   # and FIXME it should be fixed to make some sanity checks.
@@ -99,7 +99,7 @@ class MbandsController < ApplicationController
     end
   end
   
-  # <tt>PUT /mbands/:id/rate</tt>
+  # ==== PUT /mbands/:id/rate
   #
   # Rates an M-Band, by calling ActiveRecord::Acts::Rated::RateMethods::rate method of the
   # <tt>vendor/plugins/medlar_acts_as_rated</tt> plugin, if the Mband is rateable by the
@@ -115,7 +115,7 @@ class MbandsController < ApplicationController
     end
   end
   
-  # <tt>PUT /mbands/:id/set_leader</tt>
+  # ==== PUT /mbands/:id/set_leader
   #
   # Sets a new user as the leader, iff the current user is the leader of the Mband. If not,
   # nothing is rendered with a 400 status.

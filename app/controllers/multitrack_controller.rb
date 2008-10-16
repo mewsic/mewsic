@@ -20,7 +20,7 @@ class MultitrackController < ApplicationController
 
   protect_from_forgery :except => [:authorize, :update_song] # Called only locally
 
-  # <tt>GET /multitrack</tt>
+  # ==== GET /multitrack
   #
   # This action renders the multitrack on a blank new empty unpublished song. If the user is
   # logged in, a multitrack auth token is created by the User#enter_multitrack! method and the
@@ -41,7 +41,7 @@ class MultitrackController < ApplicationController
     end
   end
 
-  # <tt>GET /pappapperotrack</tt>
+  # ==== GET /pappapperotrack
   #
   # This action serves the same purpose as +index+, but uses a different SWF (see the
   # +beta_multitrack+ filter).
@@ -51,7 +51,7 @@ class MultitrackController < ApplicationController
     render :action => 'index'
   end
 
-  # <tt>GET /multitrack/:id</tt>
+  # ==== GET /multitrack/:id
   #
   # This action renders the multitrack in edit mode on the song whose id is passed in the
   # :id parameter. Users can edit only their own songs and have to be logged in.
@@ -66,7 +66,7 @@ class MultitrackController < ApplicationController
     redirect_to '/'
   end
 
-  # <tt>GET /pappapperotrack/:id</tt>
+  # ==== GET /pappapperotrack/:id
   #
   # Renders the beta multitrack (see the +beta_multitrack+ filter) in edit mode on the
   # specified song
@@ -75,7 +75,7 @@ class MultitrackController < ApplicationController
     edit
   end
   
-  # <tt>GET /multitrack.xml</tt>
+  # ==== GET /multitrack.xml
   #
   # This action renders the multitrack configuration.
   #
@@ -83,7 +83,7 @@ class MultitrackController < ApplicationController
     respond_to { |format| format.xml }
   end
 
-  # <tt>GET /multitrack/refresh/:id</tt>
+  # ==== GET /multitrack/refresh/:id
   #
   # This action is called by the multitrack SWF when a new track is added to the stage,
   # in order to update tracks number and song runtime in the top pane.
@@ -97,7 +97,7 @@ class MultitrackController < ApplicationController
     end
   end
 
-  # <tt>POST /multitrack/_/:user_id</tt>
+  # ==== POST /multitrack/_/:user_id
   #
   # When an user enters the multitrack (+index+ and +beta_index+), a random token is
   # generated and saved into the DB, this token is then checked by this method by the
@@ -113,7 +113,7 @@ class MultitrackController < ApplicationController
     head(@user ? :ok : :forbidden)
   end
 
-  # <tt>POST /multitrack/s/:user_id</tt>
+  # ==== POST /multitrack/s/:user_id
   #
   # This action is called by the multitrack-server app when the final mixdown of a
   # song is completed, in order to not make the user wait for it, after hitting "save

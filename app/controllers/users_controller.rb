@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   
   protect_from_forgery :except => :update
 
-  # <tt>GET /users</tt>
+  # ==== GET /users
   #
   # Renders the users index page, using User#find_coolest, User#find_best, User#find_prolific
   # User#find_friendliest, User#find_newest, User#find_most_instruments and Mband#find_coolest.
@@ -40,8 +40,8 @@ class UsersController < ApplicationController
     @most_instruments = User.find_most_instruments :limit => 1
   end
 
-  # <tt>GET /signup</tt>
-  # <tt>GET /users/new</tt>
+  # ==== GET /signup
+  # ==== GET /users/new
   #
   # Renders the signup page.
   #
@@ -49,7 +49,7 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  # <tt>POST /users</tt>
+  # ==== POST /users
   #
   # Creates a new user, and lets the UserObserver send out an activation link via e-mail.
   # If any validation fails, the signup page (<tt>new.html.erb</tt>) is rendered with
@@ -69,8 +69,8 @@ class UsersController < ApplicationController
     render :action => 'new'
   end
   
-  # <tt>GET /users/:id</tt>
-  # <tt>GET /users/:id.xml</tt>
+  # ==== GET /users/:id
+  # ==== GET /users/:id.xml
   #
   # * HTML format: renders the user own page, tracks the profile view using User#profile_viewed_by,
   #   renders a listing of user songs while skipping empty ones (see Song#find_paginated_by_user)
@@ -119,7 +119,7 @@ class UsersController < ApplicationController
     redirect_to '/'
   end
   
-  # <tt>GET /activate/:activation_code</tt>
+  # ==== GET /activate/:activation_code
   #
   # Processes the initial user activation: a link with a valid activation_code is sent out in the
   # signup e-mail. If the code is valid, the user is logged in, activated and redirected to its
@@ -136,7 +136,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # <tt>GET /users/:id/firstrun</tt>
+  # ==== GET /users/:id/firstrun
   #
   # Shows the <tt>users/switch/_firstrun.html.erb</tt> template to the user, that gives it a
   # warm welcome to Myousica and informs it about the different user types. The user can then
@@ -147,7 +147,7 @@ class UsersController < ApplicationController
     render :template => 'users/switch/firstrun', :layout => false
   end
   
-  # <tt>PUT /users/:id</tt>
+  # ==== PUT /users/:id
   #
   # Updates an user record with the given parameters. An user can change only its own data,
   # because this method has got the +check_if_current_user_page+ filter attached.
@@ -171,7 +171,7 @@ class UsersController < ApplicationController
     render :nothing => true, :status => :bad_request
   end
   
-  # <tt>XHR POST /forgot_password</tt>
+  # ==== XHR POST /forgot_password
   #
   # Calls the User#forgot_password method if given a correct email address in the POST
   # parameters. The HTML output format redirects to '/' and is currently unused,, the
@@ -195,8 +195,8 @@ class UsersController < ApplicationController
     end
   end
 
-  # <tt>GET /reset_password/:id</tt>
-  # <tt>POST /reset_password</tt>
+  # ==== GET /reset_password/:id
+  # ==== POST /reset_password
   #
   #  * <tt>GET</tt>: This action shows the password reset form if a valid password reset code
   #    has been passed as the <tt>id</tt> parameter.
@@ -234,7 +234,7 @@ class UsersController < ApplicationController
     redirect_to '/'
   end
 
-  # <tt>PUT /users/:id/change_password</tt>
+  # ==== PUT /users/:id/change_password
   #
   # This action makes user able to change their passwords, it is called from the "Personal informations"
   # block on the user page. If the password change succeeds, a flash notice is shown to the user. If it
@@ -258,8 +258,8 @@ class UsersController < ApplicationController
     redirect_to user_url(current_user)
   end
   
-  # <tt>GET /users/:id/switch_type</tt>
-  # <tt>PUT /users/:id/switch_type</tt>
+  # ==== GET /users/:id/switch_type
+  # ==== PUT /users/:id/switch_type
   #
   #  * <tt>GET</tt>: shows one of the <tt>app/views/users/switch/*_to_*.erb</tt> partials, depending
   #    on which class the user is currently and the desired destination type.
@@ -292,7 +292,7 @@ class UsersController < ApplicationController
     end
   end
   
-  # <tt>PUT /users/:id/rate</tt>
+  # ==== PUT /users/:id/rate
   #
   # Rates the given user, if User#rateable_by returns true when passed the current user and
   # prints out the number of votes if successful. Nothing is rendered with a 400 status otherwise.
@@ -307,8 +307,8 @@ class UsersController < ApplicationController
     end
   end
 
-  # <tt>GET /countries.js</tt>
-  # <tt>GET /countries.xml</tt>
+  # ==== GET /countries.js
+  # ==== GET /countries.xml
   #
   # * JS format: prints a JSON representation of ActionView::Helpers::FormOptionsHelper::COUNTRIES
   # * XML format: renders a simple XML yielding all the countries that have got at least 1 user (see
@@ -325,7 +325,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # <tt>GET /users/auto_complete_for_message_to</tt>
+  # ==== GET /users/auto_complete_for_message_to
   #
   # Helper action used by the To: field when composing a new message. Yields an &lt;ul&gt; HTML element containing
   # users whose logins match the string passed in <tt>params[:message][:to]</tt>.
@@ -337,7 +337,7 @@ class UsersController < ApplicationController
     render :inline => "<%= content_tag(:ul, @users.map { |u| content_tag(:li, h(u.login)) }) %>"
   end
 
-  # <tt>GET /users/top</tt>
+  # ==== GET /users/top
   #
   # Renders one of the four <tt>most_friends</tt>, <tt>most_admirers</tt>, <tt>most_instruments</tt>
   # or <tt>coolest</tt> partials for User or Mbands. This action is used by the blue refresh arrows

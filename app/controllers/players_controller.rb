@@ -17,8 +17,8 @@ class PlayersController < ApplicationController
   before_filter :redirect_to_root_unless_xhr
   before_filter :find_playable
 
-  # <tt>XHR GET /songs/:song_id/player.html</tt>
-  # <tt>XHR GET /tracks/:track_id/player.html</tt>
+  # ==== XHR GET /songs/:song_id/player.html
+  # ==== XHR GET /tracks/:track_id/player.html
   #
   # Renders the <tt>app/views/show.html.erb</tt> view, which contains the JavaScript that
   # initializes the player SWF object. Currently the play count is incremented when the 

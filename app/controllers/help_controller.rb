@@ -15,14 +15,14 @@ class HelpController < ApplicationController
   before_filter :find_pages
   before_filter :create_help_request
   
-  # <tt>GET /help</tt>
+  # ==== GET /help
   #
   # Renders the help index page. See the +find_pages+ filter for details.
   #
   def index    
   end
   
-  # <tt>GET /help/:help_page_id</tt>
+  # ==== GET /help/:help_page_id
   #
   # Renders a single help page, along with help topic list
   #
@@ -30,7 +30,7 @@ class HelpController < ApplicationController
     @page = HelpPage.find_from_param(params[:id])    
   end
   
-  # <tt>POST /help/ask</tt>
+  # ==== POST /help/ask
   #
   # Delivers an help request sent via the "Send Feedback" form on help pages, if it passes validation.
   #
