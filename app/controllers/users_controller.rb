@@ -116,28 +116,29 @@ class UsersController < ApplicationController
   end
 
   def reset_password
-    @user = User.find_by_password_reset_code(params[:id])
-    raise if @user.nil?
-    return if @user unless params[:password]
-      if (params[:password] == params[:password_confirmation])
-        self.current_user = @user #for the next two lines to work
-        current_user.password_confirmation = params[:password_confirmation]
-        current_user.password = params[:password]                
-        if current_user.valid? && !params[:password].blank?
-          current_user.reset_password
-          current_user.save
-          flash[:notice] = "Password reset"          
-          redirect_to user_path(current_user)
-        else
-          flash.now[:notice] = "Password too short"
-         end        
+    @user = User.find_by_password_reset_code(params[:id]) or raise
+    return if request.get?
+
+    if (params[:password] == params[:password_confirmation])
+      self.current_user = @user #for the next two lines to work
+      current_user.password_confirmation = params[:password_confirmation]
+      current_user.password = params[:password]
+      if current_user.valid? && !params[:password].blank?
+        current_user.reset_password
+        current_user.save
+        flash[:notice] = "Password reset"
+        redirect_to user_path(current_user)
       else
-        flash.now[:notice] = "Password mismatch"         
-      end        
+        flash.now[:notice] = "Password too short"
+       end
+    else
+      flash.now[:notice] = "Password mismatch"
+    end
+
   rescue
-      logger.error "Invalid Reset Code entered" 
-      flash[:notice] = "Sorry - That is an invalid password reset code. Please check your code and try again. (Perhaps your email client inserted a carriage return?)" 
-      redirect_to '/'
+    logger.error "Invalid Reset Code entered"
+    flash[:notice] = "Sorry - That is an invalid password reset code. Please check your code and try again. (Perhaps your email client inserted a carriage return?)"
+    redirect_to '/'
   end
 
   def change_password

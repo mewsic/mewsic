@@ -224,21 +224,29 @@ class UsersControllerTest < ActionController::TestCase
   end
   
   def test_should_redirect_if_code_not_found
-    #users(:quentin).update_attribute(:password_reset_code, 'pippo')
     post :reset_password, :id => 'pippo'
-    assert_response :redirect
-    assert flash[:notice]
+    assert_redirected_to '/'
+
+    assert flash[:notice] =~ /^Sorry/
     assert_equal 0, ActionMailer::Base.deliveries.size      
   end
   
   def test_should_reset_password
     assert_nil User.authenticate('quentin', 'pippo')
+
     users(:quentin).update_attribute(:password_reset_code, 'pippo')
+
+    get :reset_password, :id => 'pippo'
+    assert_response :success
+    assert_template 'reset_password'
+
     post :reset_password, :id => 'pippo', :password => 'pippozzz', :password_confirmation => 'pippozzz'
     assert_redirected_to user_path(users(:quentin))
+
     assert flash[:notice]
     assert_equal 1, ActionMailer::Base.deliveries.size      
     assert_nil users(:quentin).reload.password_reset_code
+
     assert User.authenticate('quentin', 'pippozzz')
   end
   
