@@ -1,3 +1,21 @@
+# Myousica Users controller.
+#
+# Copyright:: (C) 2008 Medlar s.r.l.
+# Copyright:: (C) 2008 Mikamai s.r.l.
+# Copyright:: (C) 2008 Adelao Group
+#
+# == Description
+#
+# This huge controller handles many of the most important functions of the site: users +index+, the signup
+# page (+new+ action) and user creation (+create+); the user page (+show+ action) with its editing features
+# (the +update+ action); user activation (+activate+); password handling: +forgot_password+, +reset_password+
+# and +change_password+; user type switch (+switch_type+ and +firstrun+); user rating (+rate+).
+#
+# Plus, some utility methods are included: +countries+, +auto_complete_for_message_to+ and +top+.
+#
+# Login and ownership of the user is required to access the +update+, +switch_type+, +firstrun+ and +change_password+
+# actions. +auto_complete_for_message_to+, +top+ and +rate+ have to be called only via XHR instead.
+#
 class UsersController < ApplicationController    
   
   before_filter :login_required, :only => [:update, :switch_type, :firstrun, :change_password]
@@ -7,6 +25,11 @@ class UsersController < ApplicationController
   
   protect_from_forgery :except => :update
 
+  # <tt>GET /users</tt>
+  #
+  # Renders the users index page, using User#find_coolest, User#find_best, User#find_prolific
+  # User#find_friendliest, User#find_newest, User#find_most_instruments and Mband#find_coolest.
+  #
   def index
     @coolest = User.find_coolest         :limit => 9
     @best_myousicians = User.find_best   :limit => 3
@@ -17,11 +40,21 @@ class UsersController < ApplicationController
     @most_instruments = User.find_most_instruments :limit => 1
   end
 
-  # render new.rhtml
+  # <tt>GET /signup</tt>
+  # <tt>GET /users/new</tt>
+  #
+  # Renders the signup page.
+  #
   def new
     @user = User.new
   end
 
+  # <tt>POST /users</tt>
+  #
+  # Creates a new user, and lets the UserObserver send out an activation link via e-mail.
+  # If any validation fails, the signup page (<tt>new.html.erb</tt>) is rendered with
+  # the resulting errors.
+  #
   def create
     @user = User.new(params[:user])
     @user.login = params[:user][:login]
@@ -36,6 +69,23 @@ class UsersController < ApplicationController
     render :action => 'new'
   end
   
+  # <tt>GET /users/:id</tt>
+  # <tt>GET /users/:id.xml</tt>
+  #
+  # * HTML format: renders the user own page, tracks the profile view using User#profile_viewed_by,
+  #   renders a listing of user songs while skipping empty ones (see Song#find_paginated_by_user)
+  #   and shows user's answers.
+  #
+  #   If the user is navigating its own page, it sees all the tracks it has uploaded on the site,
+  #   pending mband invitations and all mbands even if they're composed of only one member.
+  #   If the user navigates another user page, it sees only idea tracks, no mband invitations and
+  #   only mbands with more than one member.
+  #
+  #   If the <tt>welcome</tt> parameter is passed, the <tt>public/javascripts/user/firstrun.js</tt>
+  #   javascript code is run, that shows the +firstrun+ action into a <tt>Lightview</tt>.
+  #
+  # * XML format: renders some user information, as defined by the <tt>show.xml.erb</tt> template.
+  #
   def show
     @user = User.find_from_param(params[:id], :include => :avatars)
 
@@ -69,6 +119,13 @@ class UsersController < ApplicationController
     redirect_to '/'
   end
   
+  # <tt>GET /activate/:activation_code</tt>
+  #
+  # Processes the initial user activation: a link with a valid activation_code is sent out in the
+  # signup e-mail. If the code is valid, the user is logged in, activated and redirected to its
+  # own page with the <tt>?welcome</tt> parameter added, that will trigger the first run welcome.
+  # If the code is not valid, the user is redirected to '/'.
+  #
   def activate
     self.current_user = params[:activation_code].blank? ? :false : User.find_by_activation_code(params[:activation_code])
     if logged_in? && !current_user.active?
@@ -79,11 +136,25 @@ class UsersController < ApplicationController
     end
   end
 
+  # <tt>GET /users/:id/firstrun</tt>
+  #
+  # Shows the <tt>users/switch/_firstrun.html.erb</tt> template to the user, that gives it a
+  # warm welcome to Myousica and informs it about the different user types. The user can then
+  # switch types and start its myousica experience :-).
+  #
   def firstrun
     @user = User.find_from_param(params[:id])
     render :template => 'users/switch/firstrun', :layout => false
   end
   
+  # <tt>PUT /users/:id</tt>
+  #
+  # Updates an user record with the given parameters. An user can change only its own data,
+  # because this method has got the +check_if_current_user_page+ filter attached.
+  #
+  # If updating a single attribute, this action renders the new value of it.
+  # If updating multiple ones, nothing is rendered with a 200 status.
+  #
   def update
     @user = User.find_from_param(params[:id])
     if @user.update_attributes(params[:user])
@@ -100,6 +171,15 @@ class UsersController < ApplicationController
     render :nothing => true, :status => :bad_request
   end
   
+  # <tt>XHR POST /forgot_password</tt>
+  #
+  # Calls the User#forgot_password method if given a correct email address in the POST
+  # parameters. The HTML output format redirects to '/' and is currently unused,, the
+  # JS one adds shows the user the <tt>flash</tt> contents using the  <tt>Message</tt>
+  # object (see <tt>public/javascripts/flash.js</tt>).
+  #
+  # A password reset link to the user e-mail address is sent if successful.
+  #
   def forgot_password    
     if !params[:email].blank? && @user = User.find_by_email(params[:email])
       flash.now[:notice] = "A password reset link has been sent to your email address" 
@@ -115,6 +195,19 @@ class UsersController < ApplicationController
     end
   end
 
+  # <tt>GET /reset_password/:id</tt>
+  # <tt>POST /reset_password</tt>
+  #
+  #  * <tt>GET</tt>: This action shows the password reset form if a valid password reset code
+  #    has been passed as the <tt>id</tt> parameter.
+  #  * <tt>POST</tt>: This action tries to update the user password from the provided one, as
+  #    long as it matches the confirmation and the user object passes the validation.
+  #    If successful, the action redirects to the current user own page, if it fails, errors
+  #    are shown in the flash.
+  #
+  #  If an invalid reset code is entered, the user is redirected to '/' with an error message
+  #  that asks it to try again.
+  #
   def reset_password
     @user = User.find_by_password_reset_code(params[:id]) or raise
     return if request.get?
@@ -141,6 +234,12 @@ class UsersController < ApplicationController
     redirect_to '/'
   end
 
+  # <tt>PUT /users/:id/change_password</tt>
+  #
+  # This action makes user able to change their passwords, it is called from the "Personal informations"
+  # block on the user page. If the password change succeeds, a flash notice is shown to the user. If it
+  # fails, validation errors are spit out in a flash error message.
+  #
   def change_password
     user = params[:user]
     if user[:password].blank? || user[:password_confirmation].blank?
@@ -159,6 +258,14 @@ class UsersController < ApplicationController
     redirect_to user_url(current_user)
   end
   
+  # <tt>GET /users/:id/switch_type</tt>
+  # <tt>PUT /users/:id/switch_type</tt>
+  #
+  #  * <tt>GET</tt>: shows one of the <tt>app/views/users/switch/*_to_*.erb</tt> partials, depending
+  #    on which class the user is currently and the desired destination type.
+  #  * <tt>PUT</tt>: updates the user's type using the <tt>type</tt> param. It currently can be one
+  #    of [User, Dj, Band].
+  #
   def switch_type
     @user = User.find_from_param(params[:id])
     @type = %W(user dj band).include?(params[:type]) && params[:type].capitalize
@@ -185,6 +292,11 @@ class UsersController < ApplicationController
     end
   end
   
+  # <tt>PUT /users/:id/rate</tt>
+  #
+  # Rates the given user, if User#rateable_by returns true when passed the current user and
+  # prints out the number of votes if successful. Nothing is rendered with a 400 status otherwise.
+  #
   def rate    
     @user = User.find_from_param(params[:id])
     if @user.rateable_by?(current_user)
@@ -195,6 +307,13 @@ class UsersController < ApplicationController
     end
   end
 
+  # <tt>GET /countries.js</tt>
+  # <tt>GET /countries.xml</tt>
+  #
+  # * JS format: prints a JSON representation of ActionView::Helpers::FormOptionsHelper::COUNTRIES
+  # * XML format: renders a simple XML yielding all the countries that have got at least 1 user (see
+  #   User#find_countries).
+  #
   def countries
     respond_to do |format|
       format.js do
@@ -205,7 +324,12 @@ class UsersController < ApplicationController
       end
     end
   end
-  
+
+  # <tt>GET /users/auto_complete_for_message_to</tt>
+  #
+  # Helper action used by the To: field when composing a new message. Yields an &lt;ul&gt; HTML element containing
+  # users whose logins match the string passed in <tt>params[:message][:to]</tt>.
+  #
   def auto_complete_for_message_to
     q = params[:message][:to] if params[:message]
     render :nothing => true if q.blank?
@@ -213,6 +337,12 @@ class UsersController < ApplicationController
     render :inline => "<%= content_tag(:ul, @users.map { |u| content_tag(:li, h(u.login)) }) %>"
   end
 
+  # <tt>GET /users/top</tt>
+  #
+  # Renders one of the four <tt>most_friends</tt>, <tt>most_admirers</tt>, <tt>most_instruments</tt>
+  # or <tt>coolest</tt> partials for User or Mbands. This action is used by the blue refresh arrows
+  # on user and bands&deejays listings, in order to show a randomly picked "top" user.
+  #
   def top
     if [:class, :type].any? { |p| params[p].blank? }
       render :nothing => true, :status => :bad_request and return
@@ -243,14 +373,23 @@ class UsersController < ApplicationController
 
 protected
 
+  # Filter that checks whether the user is browsing its own page
+  #
   def check_if_current_user_page
     redirect_to('/') and return unless (current_user.id == User.from_param(params[:id])) || current_user.is_admin?
   end
 
+  # Filter that checks whether an user is logged in XXX FIXME remove this
+  #
   def check_if_already_logged_in
     redirect_to(user_url(current_user)) if logged_in?
   end
   
+  # Helper that generates the breadcrumb link. If the user is navigating the index,
+  # "People" is shown with no link. If the <tt>@user</tt> is a new record, this is
+  # a "Sign up". In other cases, "User", "Band" or "DJ" is shown with the link to
+  # the respective index (<tt>users_path</tt> or <tt>bands_and_deejays_path</tt>).
+  #
   def to_breadcrumb_link
     case @user.class.name
     when 'NilClass'
