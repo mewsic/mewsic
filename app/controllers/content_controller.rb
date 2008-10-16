@@ -1,4 +1,4 @@
-# Myousica Bands and Deejays Controller
+# Myousica Content Controller
 #
 # Copyright:: (C) 2008 Adelao Group
 # 

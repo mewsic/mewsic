@@ -1,13 +1,28 @@
+# Myousica Sessions controller.
+#
+# Copyright:: (C) 2008 Medlar s.r.l.
+# Copyright:: (C) 2008 Mikamai s.r.l.
+# Copyright:: (C) 2008 Adelao Group
+#
+# == Description
+#
 # This controller handles the login/logout function of the site.  
+#
 class SessionsController < ApplicationController
 
-  # Show login page
+  # <tt>GET /login</tt>
+  #
+  # Show login page.
+  #
   def new   
     @help_pages = HelpPage.find(:all, :order => 'position ASC') unless logged_in?
     redirect_to(user_url(current_user)) if logged_in?
   end
 
+  # <tt>POST /sessions</tt>
+  #
   # Log in
+  #
   def create
     self.current_user = User.authenticate(params[:login], params[:password])
     if logged_in?
@@ -24,7 +39,10 @@ class SessionsController < ApplicationController
     end
   end
 
+  # <tt>GET /logout</tt>
+  #
   # Log out
+  #
   def destroy
     if logged_in?
       self.current_user.forget_me
