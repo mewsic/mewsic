@@ -11,20 +11,42 @@
 #
 
 # quentin has 50 friends
-# aaron has asked for 100 friends
 <% for i in 1..50 %>
 quentin_relationship_<%= i %>:
   friendshipped_by_me: quentin
-  friendshipped_for_me: <%= "user_#{i + 2}" %>
+  friendshipped_for_me: user_<%= i + 2 %>
   accepted_at: <%= 3.days.ago %>
 <% end %>
-<% for i in 51..151 %>
+
+# aaron has asked for 100 friends
+#
+<% for i in 51..150 %>
 aaron_relationship_<%= i %>:
   friendshipped_by_me: aaron
-  friendshipped_for_me: <%= "user_#{i + 2}" %>
+  friendshipped_for_me: user_<%= i + 2 %>
 <% end  %>
-<% for i in 152..201 %>
+
+# quentin has 50 admirers
+#
+<% for i in 151..200 %>
 quentin_relationship_<%= i %>:
   friendshipped_by_me: user_<%= i + 2 %>
   friendshipped_for_me: quentin
+<% end %>
+
+# john has 80 friends
+#
+<% for i in 201..280 %>
+john_relationship_<%= i %>:
+  friendshipped_by_me: john
+  friendshipped_for_me: user_<%= i + 2 %>
+  accepted_at: <%= 1.day.ago %>
+<% end %>
+
+# john has 60 admirers
+#
+<% for i in 281..340 %>
+john_relationship_<%= i %>:
+  friendshipped_by_me: user_<%= i + 2 %>
+  friendshipped_for_me: john
 <% end %>

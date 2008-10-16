@@ -1,6 +1,6 @@
 class UsersController < ApplicationController    
   
-  before_filter :login_required, :only => :update
+  before_filter :login_required, :only => [:update, :switch_type, :firstrun, :change_password]
   before_filter :check_if_current_user_page, :only => [:update, :switch_type, :firstrun, :change_password]
   before_filter :check_if_already_logged_in, :only => [:new]
   before_filter :redirect_to_root_unless_xhr, :only => [:auto_complete_for_message_to, :top, :rate]
@@ -55,13 +55,6 @@ class UsersController < ApplicationController
             [Track.find_paginated_by_user(1, @user), @user.tracks_count, @user.mbands]
           else
             [Track.find_paginated_ideas_by_user(1, @user), @user.ideas_count, @user.mbands_with_more_than_one_member]
-          end
-
-        @friends =
-          if @user.friends_count > 50 
-            @user.friends :limit => 50, :order => SQL_RANDOM_FUNCTION
-          else
-            @user.friends
           end
 
         @firstrun = current_user_page && params.include?(:welcome)
