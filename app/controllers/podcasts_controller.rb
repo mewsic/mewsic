@@ -1,4 +1,19 @@
+# Myousica Podcasts controller.
+#
+# Copyright:: (C) 2008 Medlar s.r.l.
+# Copyright:: (C) 2008 Mikamai s.r.l.
+# Copyright:: (C) 2008 Adelao Group
+#
+# == Description
+#
+# This simple controller generates users' and mbands' podcasts.
+#
 class PodcastsController < ApplicationController
+  # <tt>GET /users/:user_id/:user_id.pcast</tt>
+  #
+  # Renders the very simple pcast format that describes iTunes where to find
+  # a specific podcast. Useful only for Windows clients.
+  #
   def pcast
     @user = User.find_from_param params[:user_id]
     response.headers['Content-Type'] = 'application/octet-stream'
@@ -8,6 +23,13 @@ class PodcastsController < ApplicationController
     end
   end
 
+  # <tt>GET /users/:user_id/podcast.xml</tt>
+  # <tt>GET /mbands/:mband_id/podcast.xml</tt>
+  #
+  # Generates an user or an mband's podcast with current published songs.
+  # Renders nothing with a 403 status if the podcast is not marked as public
+  # in the user preferences.
+  #
   def show
     if params[:user_id]
       template = 'user_podcast'
