@@ -1,6 +1,6 @@
 require 'multipart'
 
-class Admin::TracksController < Admin::AdminController
+class Admin::TracksController < Admin::AdminController #:nodoc:
   def index
     @tracks = Track.find(:all, :order => 'title', :order => 'id DESC')
   end

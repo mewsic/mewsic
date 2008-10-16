@@ -1,2 +1,2 @@
-module Admin::AnswersHelper
+module Admin::AnswersHelper #:nodoc:
 end

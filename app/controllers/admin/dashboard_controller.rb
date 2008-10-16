@@ -1,4 +1,4 @@
-class Admin::DashboardController < Admin::AdminController
+class Admin::DashboardController < Admin::AdminController #:nodoc:
   layout 'admin'
 
   def index

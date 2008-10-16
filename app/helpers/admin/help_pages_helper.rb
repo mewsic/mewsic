@@ -1,2 +1,2 @@
-module Admin::HelpPagesHelper
+module Admin::HelpPagesHelper #:nodoc:
 end

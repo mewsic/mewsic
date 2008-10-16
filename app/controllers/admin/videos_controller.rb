@@ -1,4 +1,4 @@
-class Admin::VideosController < Admin::AdminController
+class Admin::VideosController < Admin::AdminController #:nodoc:
   def index
     @videos = Video.find(:all, :order => 'position')
   end

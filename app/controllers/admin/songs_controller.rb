@@ -2,7 +2,7 @@ require 'net/http'
 require 'uri'
 require 'requestify'
 
-class Admin::SongsController < Admin::AdminController
+class Admin::SongsController < Admin::AdminController #:nodoc:
   include Requestify
 
   def index

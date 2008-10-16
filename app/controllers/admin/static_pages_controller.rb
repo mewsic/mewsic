@@ -1,4 +1,4 @@
-class Admin::StaticPagesController < Admin::AdminController
+class Admin::StaticPagesController < Admin::AdminController #:nodoc:
   def index
     @pages = StaticPage.find(:all, :order => 'id DESC')
   end

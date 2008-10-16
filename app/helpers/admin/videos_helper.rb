@@ -1,2 +1,2 @@
-module Admin::VideosHelper
+module Admin::VideosHelper #:nodoc:
 end

@@ -1,2 +1,2 @@
-module Admin::StaticPagesHelper
+module Admin::StaticPagesHelper #:nodoc:
 end

@@ -1,2 +1,2 @@
-module Admin::SongsHelper
+module Admin::SongsHelpe #:nodoc:r
 end

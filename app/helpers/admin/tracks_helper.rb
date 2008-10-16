@@ -1,2 +1,2 @@
-module Admin::TracksHelper
+module Admin::TracksHelper #:nodoc:
 end

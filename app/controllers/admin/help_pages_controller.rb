@@ -1,4 +1,4 @@
-class Admin::HelpPagesController < Admin::AdminController
+class Admin::HelpPagesController < Admin::AdminController #:nodoc:
   def index
     @pages = HelpPage.find(:all, :order => 'position')
   end

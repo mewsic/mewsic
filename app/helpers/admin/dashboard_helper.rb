@@ -1,4 +1,4 @@
-module Admin::DashboardHelper
+module Admin::DashboardHelper #:nodoc:
   def edit_link_to(name, options = {}, html_options = {})
     link_to name, options, html_options.merge(:class => 'edit-link')
   end

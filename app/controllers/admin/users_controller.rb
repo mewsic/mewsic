@@ -1,4 +1,4 @@
-class Admin::UsersController < Admin::AdminController
+class Admin::UsersController < Admin::AdminController #:nodoc:
   def index
     @users = User.find(:all, :order => 'id DESC')
   end

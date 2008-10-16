@@ -1,4 +1,4 @@
-class Admin::AnswersController < Admin::AdminController
+class Admin::AnswersController < Admin::AdminController #:nodoc:
   def index
     @answers = Answer.find(:all, :order => 'id DESC')
   end

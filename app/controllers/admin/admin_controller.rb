@@ -1,4 +1,4 @@
-class Admin::AdminController < ApplicationController
+class Admin::AdminController < ApplicationController #:nodoc:
   before_filter :admin_required
   layout nil
   helper :all
