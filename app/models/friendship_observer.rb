@@ -27,8 +27,8 @@ class FriendshipObserver < ActiveRecord::Observer
     sender, recipient = friendship.friendshipped_for_me, friendship.friendshipped_by_me
     subject = "You are now friends with #{sender.login}"
     body    = <<-EOM
-<p><rong>Bravo!</strong></p>
-<p>Musician <a href="#{APPLICATION[:url]}/users/#{sender.to_param}">#{sender.login}</a> admires you too. You are now friends!</p>
+<p><strong>Bravo!</strong></p>
+<p>Myousician <a href="#{APPLICATION[:url]}/users/#{sender.to_param}">#{sender.login}</a> admires you too. You are now friends!</p>
     EOM
 
     @message = Message.new(:subject => subject, :body => body)
