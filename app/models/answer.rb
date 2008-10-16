@@ -17,8 +17,6 @@
 
 class Answer < ActiveRecord::Base
   
-  # acts_as_sphinx
-  #   extend SphinxWillPagination
   define_index do
   end
   
@@ -74,13 +72,6 @@ class Answer < ActiveRecord::Base
     self.find(:all, options.merge(:order => 'answers.created_at DESC'))
   end
 
-  def self.search_paginated(q, options)
-    options = {:per_page => 6, :page => 1}.merge(options)
-    self.paginate options.merge(:conditions => ["answers.body LIKE ?", "%#{q}%"],
-                  :include => {:user => :avatars},
-                  :order => 'answers.created_at DESC')
-  end
-  
   def self.close_old_answers
     update_all(["closed = ?", true], ["last_activity_at < ?", 1.month.ago])
   end

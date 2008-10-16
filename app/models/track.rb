@@ -69,22 +69,6 @@ class Track < ActiveRecord::Base
 
   has_playable_stream
 
-  # def self.search_paginated(q, options)
-  #     options = {:per_page => 6, :page => 1}.merge(options)
-  #     paginate(:per_page => options[:per_page], :page => options[:page], :include => [:mixes, :instrument, {:parent_song => {:user => :avatars}}], :conditions => [
-  #       "(tracks.title LIKE ? OR tracks.description LIKE ? OR instruments.description LIKE ?) AND tracks.idea = ?",
-  #       *(Array.new(3).fill("%#{q}%") << false)
-  #     ])
-  #   end
-  
-  # def self.search_paginated_ideas(q, options)
-  #   options = {:per_page => 6, :page => 1}.merge(options)
-  #   paginate(:per_page => options[:per_page], :page => options[:page], :include => [:mixes, :instrument, {:parent_song => {:user => :avatars}}], :conditions => [
-  #     "(tracks.title LIKE ? OR tracks.description LIKE ? OR instruments.description LIKE ?) AND tracks.idea = ?",
-  #     *(Array.new(3).fill("%#{q}%") << true)
-  #   ])
-  # end
-  
   def self.find_paginated_newest_ideas(options = {})
     options.reverse_update(:page => 1, :per_page => 3)
     paginate(options.merge(:conditions => ['tracks.idea = ? AND tracks.created_at > ?', true, 1.month.ago], :order => 'tracks.created_at DESC'))

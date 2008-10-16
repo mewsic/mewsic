@@ -51,9 +51,6 @@ class User < ActiveRecord::Base
   define_index do
   end
   
-  # acts_as_sphinx
-  # extend SphinxWillPagination                       
-  
   # Virtual attribute for the unencrypted password
   attr_accessor :password                    
 
@@ -81,8 +78,6 @@ class User < ActiveRecord::Base
                                        :message => 'invalid internet address'
 
   validates_uniqueness_of   :login, :email, :case_sensitive => false
-  #validates_acceptance_of :terms_of_service, :on => :create, :allow_nil => false
-  #validates_acceptance_of :eula, :on => :create, :allow_nil => false, :message => "must be abided"
 
   validates_inclusion_of    :gender, :in => %w(male female other), :allow_nil => true, :allow_blank => true
 
@@ -134,29 +129,14 @@ class User < ActiveRecord::Base
   
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :password, :password_confirmation, :terms_of_service, :eula,
-    :first_name, :last_name, :name_public, :gender, :motto, :tastes, :country, :city, :age,
-    :photos_url, :blog_url, :myspace_url, :skype, :msn, :skype_public, :msn_public, :nickname,
-    :podcast_public
+  attr_accessible :password, :password_confirmation, :first_name, :last_name, :name_public,
+    :gender, :motto, :tastes, :country, :city, :age, :photos_url, :blog_url, :myspace_url,
+    :skype, :msn, :skype_public, :msn_public, :nickname, :podcast_public
   attr_readonly :replies_count, :profile_views
   
   before_save :check_links
   before_save :check_nickname
-                      
-  def self.search_paginated(q, options)
-    options = {:per_page => 6, :page => 1}.merge(options)
-    with_scope :find => {:conditions => 'activated_at IS NOT NULL'} do # TODO: DRY this common SELECT condition
-      paginate(:per_page => options[:per_page], :include => :avatars, :page => options[:page], :conditions => [
-        "users.login LIKE ? OR users.country LIKE ? OR users.city LIKE  ?",
-        *(Array.new(3).fill("%#{q}%"))
-      ])
-    end
-  end
-  
-  def is_pending_friends_by_me_with?(user)    
-    Friendship.find(:first, :conditions => ["user_id = ? AND friend_id = ? AND accepted_at IS NULL", self.id, user.id])
-  end
-    
+
   def band?
     self.type == 'Band'
   end
@@ -391,6 +371,10 @@ class User < ActiveRecord::Base
 
   def self.find_countries
     find(:all, :select => 'country', :group => 'country', :order => 'country', :conditions => "login != 'myousica'").map(&:country)
+  end
+
+  def is_pending_friends_by_me_with?(user)
+    Friendship.find(:first, :conditions => ["user_id = ? AND friend_id = ? AND accepted_at IS NULL", self.id, user.id])
   end
 
   def friends(options = {})
