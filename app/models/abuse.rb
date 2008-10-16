@@ -1,3 +1,7 @@
+# Copyright:: (C) 2008 Medlar s.r.l.
+# Copyright:: (C) 2008 Mikamai s.r.l.
+# Copyright:: (C) 2008 Adelao Group
+#
 # == Schema Information
 #
 # Table name: abuses
@@ -11,6 +15,18 @@
 #  updated_at     :datetime      
 #  topic          :string(255)   
 #
+# == Description
+#
+# This model represents an abuse report for an abuseable object (currently Song, Track,
+# Answer and User).
+#
+# <tt>body</tt> is optional and contains user-provided comments, while <tt>topic</tt> is
+# required and is selected by the user when reporting the abuse.
+#
+# == Associations
+#
+# * belongs to an User, which is the reporter of the Abuse
+# * belongs to a polymorphic abuseable object.
 
 class Abuse < ActiveRecord::Base
   

@@ -1,3 +1,7 @@
+# Copyright:: (C) 2008 Medlar s.r.l.
+# Copyright:: (C) 2008 Mikamai s.r.l.
+# Copyright:: (C) 2008 Adelao Group
+#
 # == Schema Information
 #
 # Table name: pictures
@@ -17,7 +21,11 @@
 #  created_at       :datetime      
 #  updated_at       :datetime      
 #
-
+# == Description
+#
+# This model represents an user avatar. It subclasses the Picture model and uses
+# <tt>attachment_fu</tt> to store image files on the file system.
+#
 class Avatar < Picture
   has_attachment :storage => :file_system,
     :path_prefix => 'public/avatars',

@@ -1,3 +1,6 @@
+# Copyright:: (C) 2008 Medlar s.r.l.
+# Copyright:: (C) 2008 Mikamai s.r.l.
+#
 # == Schema Information
 #
 # Table name: users
@@ -44,7 +47,11 @@
 #  podcast_public            :boolean(1)    default(TRUE)
 #  profile_views             :integer(11)   default(0)
 #
-
+# == Description
+#
+# Subclass of User that uses Rails' Single-Table-Inheritance to implement different
+# kinds of users. See also +Dj+ and +User+.
+#
 class Band < User
 
   #has_many :members, :class_name => 'BandMember', :foreign_key => :band_id
