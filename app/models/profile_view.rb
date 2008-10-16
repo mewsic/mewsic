@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: profile_views
+#
+#  id         :integer(11)   not null, primary key
+#  user_id    :integer(11)   
+#  viewer     :string(32)    
+#  created_at :datetime      
+#  updated_at :datetime      
+#
+
 class ProfileView < ActiveRecord::Base
   belongs_to :user
 

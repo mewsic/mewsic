@@ -1,4 +1,18 @@
 # == Schema Information
+#
+# Table name: band_members
+#
+#  id             :integer(11)   not null, primary key
+#  nickname       :string(20)    
+#  instrument_id  :integer(11)   
+#  user_id        :integer(11)   
+#  created_at     :datetime      
+#  updated_at     :datetime      
+#  country        :string(45)    
+#  linked_user_id :integer(11)   
+#
+
+# == Schema Information
 # Schema version: 49
 #
 # Table name: band_members

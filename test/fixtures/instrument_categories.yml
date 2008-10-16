@@ -1,5 +1,4 @@
 # == Schema Information
-# Schema version: 49
 #
 # Table name: instrument_categories
 #

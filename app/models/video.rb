@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: videos
+#
+#  id          :integer(11)   not null, primary key
+#  name        :string(32)    
+#  description :string(255)   
+#  filename    :string(64)    
+#  poster      :string(64)    
+#  highres     :string(64)    
+#  thumb       :string(64)    
+#  length      :integer(11)   
+#  position    :integer(11)   
+#  created_at  :datetime      
+#  updated_at  :datetime      
+#
+
 class Video < ActiveRecord::Base
 
   acts_as_list

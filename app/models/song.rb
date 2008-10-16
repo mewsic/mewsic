@@ -1,3 +1,27 @@
+# == Schema Information
+#
+# Table name: songs
+#
+#  id              :integer(11)   not null, primary key
+#  title           :string(60)    
+#  original_author :string(60)    
+#  description     :string(255)   
+#  tone            :string(2)     
+#  filename        :string(64)    
+#  user_id         :integer(11)   
+#  genre_id        :integer(11)   
+#  bpm             :integer(11)   
+#  seconds         :integer(11)   default(0)
+#  listened_times  :integer(11)   default(0)
+#  published       :boolean(1)    default(TRUE)
+#  created_at      :datetime      
+#  updated_at      :datetime      
+#  rating_count    :integer(11)   
+#  rating_total    :decimal(10, 2 
+#  rating_avg      :decimal(10, 2 
+#  key             :integer(11)   
+#
+
 require 'numeric_to_runtime'
 require 'playable'
 

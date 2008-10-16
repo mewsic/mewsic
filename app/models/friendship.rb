@@ -1,5 +1,4 @@
 # == Schema Information
-# Schema version: 49
 #
 # Table name: friendships
 #
@@ -9,6 +8,7 @@
 #  created_at  :datetime      
 #  accepted_at :datetime      
 #
+
 class Friendship < ActiveRecord::Base
 
   belongs_to :friendshipped_by_me,   :foreign_key => "user_id",   :class_name => "User"

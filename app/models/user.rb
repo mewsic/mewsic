@@ -1,5 +1,4 @@
 # == Schema Information
-# Schema version: 49
 #
 # Table name: users
 #
@@ -41,6 +40,9 @@
 #  is_admin                  :boolean(1)    
 #  status                    :string(3)     default("off")
 #  name_public               :boolean(1)    
+#  multitrack_token          :string(64)    
+#  podcast_public            :boolean(1)    default(TRUE)
+#  profile_views             :integer(11)   default(0)
 #
 
 require 'digest/sha1'

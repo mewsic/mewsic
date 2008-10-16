@@ -1,13 +1,12 @@
 # == Schema Information
-# Schema version: 49
 #
 # Table name: tracks
 #
 #  id                     :integer(11)   not null, primary key
-#  title                  :string(255)   
-#  filename               :string(255)   
+#  title                  :string(60)    
+#  filename               :string(64)    
 #  description            :string(255)   
-#  tonality               :string(255)   default("C")
+#  tonality               :string(2)     default("C")
 #  song_id                :integer(11)   
 #  instrument_id          :integer(11)   
 #  listened_times         :integer(11)   default(0)
@@ -21,6 +20,7 @@
 #  idea                   :boolean(1)    not null
 #  user_id                :integer(11)   
 #  instrument_description :string(255)   
+#  key                    :integer(11)   
 #
 
 require 'numeric_to_runtime'
