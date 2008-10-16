@@ -27,7 +27,7 @@
 #
 # * belongs to an User, which is the reporter of the Abuse
 # * belongs to a polymorphic abuseable object.
-
+# 
 class Abuse < ActiveRecord::Base
   
   belongs_to :user

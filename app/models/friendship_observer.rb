@@ -1,4 +1,16 @@
+# Copyright:: (C) 2008 Medlar s.r.l.
+# Copyright:: (C) 2008 Mikamai s.r.l.
+# Copyright:: (C) 2008 Adelao Group
+#
+# This observer adds two callbacks to the Friendship model, in order to send out private
+# messages and e-mail notifications when new admiral or friendship relationships are
+# established.
+#
 class FriendshipObserver < ActiveRecord::Observer
+  # When created, a Friendship can only be an admiral relationship, because it has still
+  # not been accepted by the recipient. This method sends out a message to the recipient
+  # and an e-mail notification using UserMailer#admire_notification.
+  #
   def after_create(friendship)
     sender, recipient = friendship.friendshipped_by_me, friendship.friendshipped_for_me
 
@@ -19,6 +31,10 @@ class FriendshipObserver < ActiveRecord::Observer
     UserMailer.deliver_admire_notification(recipient, sender)
   end
 
+  # This callback sends out a message and an e-mail notification when the friendship has
+  # been accepted by the recipient. The Friendship is marked as established in the
+  # Friendship#create_or_accept method.
+  #
   def after_save(friendship)
     return unless friendship.established?
 

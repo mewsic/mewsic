@@ -31,8 +31,8 @@
 #
 # == Validations
 #
-# * Validates presence of <tt>nickname</tt> if this member isn't linked to an user
-# * Validates presence of <tt>linked_user_id</tt> if this member is linked to an user
+# * <b>validates_presence_of</b> <tt>nickname</tt> if this member isn't linked to an user
+# * <b>validates_presence_of</b> <tt>linked_user_id</tt> if this member is linked to an user
 #
 class BandMember < ActiveRecord::Base
   belongs_to :user

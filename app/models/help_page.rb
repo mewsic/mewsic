@@ -10,22 +10,33 @@
 #  updated_at :datetime      
 #  url        :string(255)   
 #
-
+# == Description
+#
+# This model represents an help page, and +acts_as_list+ because the order of pages is
+# important.
+#
+# == Validations
+#
+# * <b>validates_presence_of</b> <tt>title</tt> and <tt>body</tt>.
+#
 class HelpPage < ActiveRecord::Base
   xss_terminate :except => [:title, :body]
-  
+
   acts_as_list
-  
+
   validates_presence_of :title, :body
 
+  # Shows the <tt>url</tt> attribute in HTTP paths.
   def to_param
     self.url
   end
 
+  # Puts the page title into the breadcrumb.
   def to_breadcrumb
     self.title
   end
 
+  # Finds an help page by <tt>id</tt> or <tt>url</tt>, as returned by the +to_param+ method.
   def self.find_from_param(param)
     if param.to_i > 0
       find(param)
@@ -33,5 +44,5 @@ class HelpPage < ActiveRecord::Base
       find_by_url(param) or raise ActiveRecord::RecordNotFound, "Cannot find '#{param}' help page"
     end
   end
-  
+
 end
