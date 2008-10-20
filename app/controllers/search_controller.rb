@@ -47,6 +47,7 @@ class SearchController < ApplicationController
           count = instance_variable_get("@#{x}").total_entries rescue 0
           h.update(x.to_sym => count)
         end
+        @active_tab = @entries.reject{|k,v| k == :users}.sort_by{|k,v|v}.last.first
 
         if request.xhr? && %w[user song track idea].include?(params[:type])
           render(:partial => "#{params[:type]}_results", :layout => false) and return

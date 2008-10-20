@@ -26,7 +26,7 @@
 
 <div class="tabmenu">
 	<p class="title">Music:</p>
-	<div class="tab <%= 'active' if @songs %>" id="songs-tab" style="display:<%= 'none' unless @songs %>">
+	<div class="tab <%= 'active' if @active_tab == :songs %>" id="songs-tab" style="display:<%= 'none' unless @songs %>">
 	  <div class="sx"> </div>
   	<div class="rp">
   		<p class="search_green_text"><a href="#" onclick="$('tracks-tab','ideas-tab').invoke('removeClassName','active');$('songs-tab').addClassName('active');$('track-results', 'idea-results').invoke('hide');$('song-results').show(); return false;">Songs&nbsp;</a></p>
@@ -34,7 +34,7 @@
   	</div>
   	<div class="dx"> </div>
 	</div>
-  <div class="tab <%= 'active' if !@songs %>" id="tracks-tab" style="display:<%= 'none' unless @tracks %>">
+  <div class="tab <%= 'active' if @active_tab == :tracks %>" id="tracks-tab" style="display:<%= 'none' unless @tracks %>">
     <div class="sx"> </div>
   	<div class="rp">
   		<p class="search_orange_text"><a href="#" onclick="$('songs-tab','ideas-tab').invoke('removeClassName','active');$('tracks-tab').addClassName('active');$('song-results','idea-results').invoke('hide');$('track-results').show(); return false;">Tracks&nbsp;</a></p>
@@ -42,7 +42,7 @@
   	</div>
   	<div class="dx"> </div>
   </div>	
-	<div class="tab <%= 'active' if !@songs && !@tracks %>" id="ideas-tab" style="display:<%= 'none' unless @ideas %>">
+	<div class="tab <%= 'active' if @active_tab == :ideas %>" id="ideas-tab" style="display:<%= 'none' unless @ideas %>">
     <div class="sx"> </div>
   	<div class="rp">
   		<p class="search_orange_text"><a href="#" onclick="$('songs-tab','tracks-tab').invoke('removeClassName','active');$('ideas-tab').addClassName('active');$('song-results','track-results').invoke('hide');$('idea-results').show(); return false;">Ideas&nbsp;</a></p>
@@ -58,15 +58,15 @@
 
 <div style="clear:both"> </div>
 
-<div id="song-results">
+<div id="song-results" style="<%= 'display: none;' if @active_tab != :songs %>">
   <%= render :partial => 'song_results' if @songs %>
 </div>
 
-<div id="track-results" style="<%= 'display: none;' if @songs %>">
+<div id="track-results" style="<%= 'display: none;' if @active_tab != :tracks %>">
   <%= render :partial => 'track_results' if @tracks %>
 </div>
 
-<div id="idea-results" style="<%= 'display: none;' if @songs || @tracks %>">
+<div id="idea-results" style="<%= 'display: none;' if @active_tab != :ideas %>">
   <%= render :partial => 'idea_results' if @ideas %>
 </div>
 
