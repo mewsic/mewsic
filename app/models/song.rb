@@ -26,16 +26,17 @@ require 'numeric_to_runtime'
 require 'playable'
 
 class Song < ActiveRecord::Base
-  
+
   define_index do
-    has :genre_id
-    has :bpm
-    has :key
-    has user.country, :as => :user_country
+    has :genre_id, :bpm, :key
+    indexes :title, :description, :tone
+    indexes :original_author, :as => :author
+    indexes genre.name, :as => :genre
+    indexes user.country, :as => :country
   end
  
   attr_accessor :mlab
-  
+
   has_many :mixes, :dependent => :delete_all
   has_many :tracks, :through => :mixes, :order => 'tracks.created_at DESC'  
   has_many :children_tracks, :class_name => 'Track'

@@ -49,6 +49,7 @@ require 'digest/sha1'
 class User < ActiveRecord::Base
   
   define_index do
+    indexes :login, :nickname, :motto, :tastes, :country
   end
   
   # Virtual attribute for the unencrypted password

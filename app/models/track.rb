@@ -28,12 +28,12 @@ require 'playable'
 
 class Track < ActiveRecord::Base
   
-  define_index do   
-    has :bpm    
-    has :idea
-    has :key
-    has :instrument_id
-    has owner.country, :as => :user_country
+  define_index do
+    has :bpm, :idea, :key, :instrument_id
+    indexes :title, :description, :instrument_description
+    indexes owner.country, :as => :country
+    indexes parent_song.original_author, :as => :author
+    indexes instrument.description, :as => :instrument
   end
   
   attr_accessor :mlab

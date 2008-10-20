@@ -44,6 +44,7 @@
 class Answer < ActiveRecord::Base
   
   define_index do
+    indexes :body
   end
   
   has_many :replies, :order => 'created_at DESC', :dependent => :delete_all

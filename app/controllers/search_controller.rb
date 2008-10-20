@@ -101,7 +101,7 @@ class SearchController < ApplicationController
       [
         (types.empty? || types.include?('user')) ?                               search_users(q, 10, params[:page] || 1) : nil,
         (types.empty? || (types.include?('song') || types.include?('music'))) ?  search_songs(q, 10, params[:page] || 1) : nil,
-        (types.empty? || (types.include?('track') || types.include?('music'))) ? search_tracks(q, 10, params[:page] || 1) : nil,
+        (types.empty? || (types.include?('track') || types.include?('music'))) ? search_tracks(q, 10, params[:page] || 1, :idea => 0) : nil,
         (types.empty? || types.include?('idea')) ?                               search_ideas(q, 10, params[:page] || 1) : nil
       ]
     end
@@ -113,7 +113,7 @@ class SearchController < ApplicationController
     #  * <tt>page</tt>: page number to show
     #
     def search_users(query, per_page, page)
-      User.search(query, :per_page => per_page, :page => page, :index => 'users', :match_mode => :boolean).compact
+      User.search(query, :per_page => per_page, :page => page, :index => 'users', :match_mode => :all).compact
     end
 
     # Helper that searches the songs index. Returns an Array of Song objects.
@@ -144,7 +144,7 @@ class SearchController < ApplicationController
     #  * <tt>page</tt>: page number to show
     #
     def search_ideas(query, per_page, page)
-      Track.search(query, :per_page => per_page, :page => page, :index => 'tracks', :match_mode => :boolean, :conditions => { :idea => '1' } ).compact
+      Track.search(query, :per_page => per_page, :page => page, :index => 'tracks', :match_mode => :extended, :conditions => { :idea => '1' } ).compact
     end
 
     # Filter that checks that the search query is not blank. The string is unescaped with CGI::unescape, and
