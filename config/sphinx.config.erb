@@ -3,14 +3,15 @@
   case RAILS_ENV
   when 'production'
     index = '/var/lib/sphinx'
-    pids = '/var/run/sphinx'
+    pid = '/var/run/sphinx/myousica.pid'
     log = '/data/myousica/shared/log'
   when 'development'
     index = File.join(RAILS_ROOT, 'index')
-    pids = File.join(RAILS_ROOT, 'tmp', 'pids')
+    pid = File.join(RAILS_ROOT, 'tmp', 'pids', 'searchd.pid')
     log = File.join(RAILS_ROOT, 'log')
   when 'test'
-    index = pids = log = File.join(RAILS_ROOT, 'test', 'index')
+    index = log = File.join(RAILS_ROOT, 'test', 'index')
+    pid = File.join(index, 'searchd.pid')
     FileUtils.mkdir_p index
   end
 %>
@@ -456,7 +457,7 @@ searchd
 
   # PID file, searchd process ID file name
   # mandatory
-  pid_file      = <%= pids %>/searchd.pid
+  pid_file      = <%= pid %>
 
   # max amount of matches the daemon ever keeps in RAM, per-index
   # WARNING, THERE'S ALSO PER-QUERY LIMIT, SEE SetLimits() API CALL
