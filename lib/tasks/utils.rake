@@ -101,11 +101,11 @@ namespace :myousica do
   end
 
   namespace :sphinx do
-    config = File.join(RAILS_ROOT, 'config', 'sphinx_development.config')
+    config = File.join(RAILS_ROOT, 'config', "sphinx_#{RAILS_ENV}.config")
 
     desc "Generate sphinx development config file"
     task(:config => :environment) do
-      puts "* Generating Sphinx config file"
+      puts "* Generating Sphinx config file into #{config}"
 
       FileUtils.mkdir_p File.join(RAILS_ROOT, 'index')
       File.open(config, 'w+') do |f|
