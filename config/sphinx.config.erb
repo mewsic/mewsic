@@ -2,8 +2,8 @@
   config = ActiveRecord::Base.connection.instance_variable_get(:@config)
   case RAILS_ENV
   when 'production'
-    index = '/data/myousica/shared/index'
-    pids = '/var/lib/sphinx'
+    index = '/var/lib/sphinx'
+    pids = '/var/run/sphinx'
     log = '/data/myousica/shared/log'
   when 'development'
     index = File.join(RAILS_ROOT, 'index')

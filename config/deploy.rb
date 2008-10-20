@@ -45,10 +45,10 @@ ssh_options[:paranoid] = false
 task :production do
   
   role :web, '65.74.174.196:8221' # mongrel, mongrel
-  role :app, '65.74.174.196:8221', :mongrel => true, :mongrel => true
+  role :app, '65.74.174.196:8221', :mongrel => true, :sphinx => true
   role :db, '65.74.174.196:8221', :primary => true
   
-  role :app, '65.74.174.196:8222', :no_release => true, :mongrel => true, :mongrel => true
+  role :app, '65.74.174.196:8222', :no_release => true, :mongrel => true, :sphinx => true
   
   set :rails_env, 'production'
   set :environment_database, defer { production_database }
