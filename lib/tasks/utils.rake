@@ -151,5 +151,29 @@ namespace :myousica do
       end
     end
   end
+
+  namespace :doc do
+    desc "Sync documentation on ulisse"
+    task :sync => :environment do
+      puts "Generating code documentation.."
+      Rake::Task['doc:app'].invoke
+
+      puts "R-syncing to ulisse.adelao.it"
+      `rsync -vvr #{RAILS_ROOT}/doc/app/* ulisse.adelao.it:/var/www/intranet/rdoc/myousica`
+    end
+  end
+
+  namespace :rcov do
+    desc "Sync coverage on ulisse"
+    task :sync => :environment do
+      puts "Running coverage tests"
+      Rake::Task['test:units:rcov'].invoke
+      Rake::Task['test:functionals:rcov'].invoke
+      Rake::Task['test:integration:rcov'].invoke
+
+      puts "R-syncing to ulisse.adelao.it"
+      `rsync -vvr #{RAILS_ROOT}/coverage/* ulisse.adelao.it:/var/www/intranet/rcov/myousica`
+    end
+  end
   
 end
