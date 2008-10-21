@@ -1,7 +1,7 @@
 require "#{File.dirname(__FILE__)}/../test_helper"
 
 class PodcastsTest < ActionController::IntegrationTest
-  fixtures :users, :songs
+  fixtures :users, :songs, :mbands, :mband_memberships
 
   def test_user_podcast
     get '/users/quentin/podcast.xml'
