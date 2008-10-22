@@ -1,3 +1,7 @@
+# Copyright:: (C) 2008 Medlar s.r.l.
+# Copyright:: (C) 2008 Mikamai s.r.l.
+# Copyright:: (C) 2008 Adelao Group
+#
 # == Schema Information
 #
 # Table name: mbands
@@ -42,7 +46,7 @@
 # * <b>validates_presence_of</b> <tt>name</tt>
 # * <b>validates_format_of</b> <tt>name</tt> with a Regexp that allows only letters, numbers, spaces and underscore
 # * <b>validates_format_of</b> <tt>photos_url</tt>, <tt>blog_url</tt> and <tt>myspace_url</tt> with a Regexp that
-#   checks for a valid internet address
+#   checks for a valid URL.
 # * <b>validates_uniqueness_of</b> <tt>name</tt>, case insensitive
 #
 class Mband < ActiveRecord::Base

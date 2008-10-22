@@ -1,3 +1,7 @@
+# Copyright:: (C) 2008 Medlar s.r.l.
+# Copyright:: (C) 2008 Mikamai s.r.l.
+# Copyright:: (C) 2008 Adelao Group
+#
 # == Schema Information
 #
 # Table name: mband_memberships

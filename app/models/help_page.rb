@@ -1,3 +1,5 @@
+# Copyright:: (C) 2008 Adelao Group
+#
 # == Schema Information
 #
 # Table name: help_pages
@@ -12,8 +14,10 @@
 #
 # == Description
 #
-# This model represents an help page, and +acts_as_list+ because the order of pages is
-# important.
+# This model represents an help page. +acts_as_list+ to implement customizable 
+# display ordering. As of now, no sanitization is made either on title nor on body,
+# because help pages are now intended to be created from raw html using the raw
+# admin interface.
 #
 # == Validations
 #

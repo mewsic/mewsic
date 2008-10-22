@@ -25,9 +25,9 @@
 #
 # == Associations
 #
-# * belongs to an User, which is the reporter of the Abuse
-# * belongs to a polymorphic abuseable object.
-# 
+# * <b>belongs_to</b> an User, the reporter of the Abuse.
+# * <b>belongs_to</b> a polymorphic abuseable object.
+#
 class Abuse < ActiveRecord::Base
   
   belongs_to :user
