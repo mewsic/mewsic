@@ -7,7 +7,7 @@ namespace :myousica do
 
   desc "Create all required myousica directories"
   task :directories => :environment do
-    Rake::Task['tmp:create'].invoke
+    Task['tmp:create'].invoke
     mkdir_p 'index'
     mkdir_p 'log'
   end
@@ -153,20 +153,40 @@ namespace :myousica do
   end
 
   namespace :doc do
+    allison = %[allison --all --line-numbers --inline-source --charset utf-8]
 
     desc "Generate myousica documentation"
     task :app => :environment do
-      `rm -rf doc/app`
-      puts `allison --all --line-numbers --inline-source --charset utf-8 --title "Myousica documentation" -o doc/app doc/README_FOR_APP app/**/*.rb lib/*.rb`
+      rm_rf 'doc/app' rescue nil
+      files = FileList.new('app/**/*.rb', 'lib/**/*.rb')
+      sh "#{allison} --title 'Myousica documentation' -o doc/app doc/README_FOR_APP #{files}"
+    end
+
+    desc "Generate plugins documentation"
+    task :plugins => :environment do
+      rm_rf 'doc/plugins' rescue nil
+      FileList['vendor/plugins/**'].each do |plugin|
+        name = File.basename(plugin)
+        files = FileList.new("#{plugin}/lib/**/*.rb")
+        option = nil
+
+        if File.exist?("#{plugin}/README")
+          files.include("#{plugin}/README")    
+          option = "--main '#{plugin}/README'"
+        end
+        files.include("#{plugin}/CHANGELOG") if File.exist?("#{plugin}/CHANGELOG")
+        
+        sh "#{allison} --title 'Myousica - #{name} documentation' -o doc/plugins/#{name} #{option} #{files}"
+      end
     end
 
     desc "Sync documentation on ulisse"
     task :sync => :environment do
-      puts "Generating code documentation.."
-      Rake::Task['myousica:doc:app'].invoke
+      puts "R-syncing app doc"
+      sh "rsync -r #{RAILS_ROOT}/doc/app/* ulisse.adelao.it:/var/www/intranet/rdoc/myousica"
 
-      puts "R-syncing to ulisse.adelao.it"
-      `rsync -vvr #{RAILS_ROOT}/doc/app/* ulisse.adelao.it:/var/www/intranet/rdoc/myousica`
+      puts "R-syncing plugins doc"
+      sh "rsync -r #{RAILS_ROOT}/doc/plugins/* ulisse.adelao.it:/var/www/intranet/rdoc/myousica/plugins"
     end
   end
 
@@ -174,9 +194,9 @@ namespace :myousica do
     desc "Sync coverage on ulisse"
     task :sync => :environment do
       puts "Running coverage tests"
-      Rake::Task['test:units:rcov'].invoke
-      Rake::Task['test:functionals:rcov'].invoke
-      Rake::Task['test:integration:rcov'].invoke
+      Task['test:units:rcov'].invoke
+      Task['test:functionals:rcov'].invoke
+      Task['test:integration:rcov'].invoke
 
       puts "R-syncing to ulisse.adelao.it"
       `rsync -vvr #{RAILS_ROOT}/coverage/* ulisse.adelao.it:/var/www/intranet/rcov/myousica`

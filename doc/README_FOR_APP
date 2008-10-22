@@ -12,6 +12,8 @@ This app implements most of the business logic, while the multitrack-server one 
 uploads and MP3 encoding and downmixing using ffmpeg (http://ffmpeg.mplayerhq.hu) and sox
 (http://sox.sf.net).
 
+Myousica plugins' documentation is located at https://ulisse.adelao.it/rdoc/myousica/plugins/
+
 == User workflow
 
 == Concepts
