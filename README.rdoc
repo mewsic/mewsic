@@ -3,10 +3,10 @@
 The myousica application is a RESTful Rails 2.0 app that implements an open platform for
 creating and composing music online. The whole myousica infrastructure is composed of:
 
- * This RESTful app;
- * The multitrack-server app, located on github at http://github.com/vjt/multitrack-server;
- * 4 SWF components that consume the services of both apps, located on github;
- * Flash Media Server 3, that interacts with the multitrack-server app and the multitrack.
+* This RESTful app;
+* The multitrack-server app, located on github at http://github.com/vjt/multitrack-server;
+* 4 SWF components that consume the services of both apps, located on github;
+* Flash Media Server 3, that interacts with the multitrack-server app and the multitrack.
 
 This app implements most of the business logic, while the multitrack-server one handles file
 uploads and MP3 encoding and downmixing using ffmpeg (http://ffmpeg.mplayerhq.hu) and sox
@@ -14,39 +14,39 @@ uploads and MP3 encoding and downmixing using ffmpeg (http://ffmpeg.mplayerhq.hu
 
 == Required software
 
- * Ruby >= 1.8.6, Rubygems >= 1.3
- * The freeimage library (http://freeimage.sf.net)
- * The following gems: Rails == 2.0.4, image_science >= 1.1.3, mongrel, redgreen, ruby-debug, mime-types and wirble
- * The Sphinx full text search engine (http://sphinxsearch.com/)
+* Ruby >= 1.8.6, Rubygems >= 1.3
+* The freeimage library (http://freeimage.sf.net)
+* The following gems: Rails == 2.0.4, image_science >= 1.1.3, mongrel, redgreen, ruby-debug, mime-types and wirble
+* The Sphinx full text search engine (http://sphinxsearch.com/)
 
 == Quickstart
 
- * Clone the git repository (git clone git@github.com:vjt/myousica.git)
- * Create a config/database.yml (example in config/database.yml.example)
- * Create the myousica_development, myousica_test and myousica_production DBs
- * Verify that database connectivity is working by running script/console
- * Issue rake myousica:initialize
- * Run ruby script/server and connect to http://localhost:3000/ and you're set.
+* Clone the git repository (git clone git@github.com:vjt/myousica.git)
+* Create a config/database.yml (example in config/database.yml.example)
+* Create the myousica_development, myousica_test and myousica_production DBs
+* Verify that database connectivity is working by running script/console
+* Issue rake myousica:initialize
+* Run ruby script/server and connect to http://localhost:3000/ and you're set.
 
 == Goodies
 
- * If using vim, update your .vimrc with these instructions: https://github.com/vjt/myousica/wikis/vimrc
- * Update your .irbrc with these instructions: https://github.com/vjt/myousica/wikis/irbrc
+* If using vim, update your .vimrc with these instructions: https://github.com/vjt/myousica/wikis/vimrc
+* Update your .irbrc with these instructions: https://github.com/vjt/myousica/wikis/irbrc
 
 The "myousica:initialize" rake task is a shorthand for 
- * rake db:migrate               - migrates the database schema to the latest version
- * rake myousica:fixtures:load   - loads all the fixtures as example data in the DB
- * rake myousica:flash:update    - downloads the latest SWFs from the online site
- * rake myousica:videos:download - downloads all the videos from the online site
- * rake myousica:sphinx:config   - generates the sphinx config file using database.yml
+* rake db:migrate               - migrates the database schema to the latest version
+* rake myousica:fixtures:load   - loads all the fixtures as example data in the DB
+* rake myousica:flash:update    - downloads the latest SWFs from the online site
+* rake myousica:videos:download - downloads all the videos from the online site
+* rake myousica:sphinx:config   - generates the sphinx config file using database.yml
 
 Other useful tasks are defined in lib/tasks/utils.rake:
- * rake myousica:sphinx:start    - starts the sphinx daemon
- * rake myousica:sphinx:stop     - stops the sphinx daemon
- * rake myousica:sphinx:rehash   - rebuilds the sphinx index
- * rake myousica:clean_up_mp3s   - cleans up unreferenced mp3s in ENV['MP3DIR']
- * rake myousica:update_friends_count
- * rake myousica:update_replies_count
+* rake myousica:sphinx:start    - starts the sphinx daemon
+* rake myousica:sphinx:stop     - stops the sphinx daemon
+* rake myousica:sphinx:rehash   - rebuilds the sphinx index
+* rake myousica:clean_up_mp3s   - cleans up unreferenced mp3s in ENV['MP3DIR']
+* rake myousica:update_friends_count
+* rake myousica:update_replies_count
 
 == Now?
 
