@@ -14,5 +14,7 @@ class BandsAndDeejaysControllerTest < ActionController::TestCase
     assert assigns(:coolest_mbands)
     assert assigns(:newest)
     assert assigns(:most_instruments)
+
+    assert_template 'index'
   end
 end

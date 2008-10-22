@@ -13,11 +13,15 @@ class IdeasControllerTest < ActionController::TestCase
     assert assigns(:most_engaging)
     assert assigns(:ideas_instruments)
     assert assigns(:instruments)
+
+    assert_template 'index'
+    
   end
 
   def test_newest
     xhr :get, :newest
     assert_response :success
+    assert_template '_newest'
 
     assert assigns(:newest)
   end
@@ -25,6 +29,7 @@ class IdeasControllerTest < ActionController::TestCase
   def test_coolest
     xhr :get, :coolest
     assert_response :success
+    assert_template '_coolest'
 
     assert assigns(:coolest)
   end
@@ -34,10 +39,12 @@ class IdeasControllerTest < ActionController::TestCase
     assert_response :success
     assert assigns(:instrument)
     assert assigns(:ideas)
+    assert_template 'by_instrument'
 
     xhr :get, :by_instrument
     assert_response :success
     assert assigns(:ideas_instruments)
+    assert_template '_ideas_table'
   end
   
 end
