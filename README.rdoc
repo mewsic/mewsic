@@ -12,21 +12,26 @@ This app implements most of the business logic, while the multitrack-server one 
 uploads and MP3 encoding and downmixing using ffmpeg (http://ffmpeg.mplayerhq.hu) and sox
 (http://sox.sf.net).
 
+== Required software
+
+ * Ruby >= 1.8.6, Rubygems >= 1.3
+ * The freeimage library (http://freeimage.sf.net)
+ * The following gems: Rails == 2.0.4, image_science >= 1.1.3, mongrel, redgreen, ruby-debug, mime-types and wirble
+ * The Sphinx full text search engine (http://sphinxsearch.com/)
+
 == Quickstart
 
- * Install Ruby >= 1.8.6, Rubygems >= 1.0
- * Install the freeimage library (http://freeimage.sf.net)
- * Install the gems: Rails == 2.0.2, image_science >= 1.1.3, mongrel, redgreen, ruby-debug, mime-types and wirble
- * Update your .irbrc with these instructions: https://github.com/vjt/myousica/wikis/irbrc
- * If using vim, update your .vimrc with these instructions: https://github.com/vjt/myousica/wikis/vimrc
- * Install the Sphinx full text search engine (http://sphinxsearch.com/)
  * Clone the git repository (git clone git@github.com:vjt/myousica.git)
  * Create a config/database.yml (example in config/database.yml.example)
- * Verify that database connectivity is working by running script/console
  * Create the myousica_development, myousica_test and myousica_production DBs
- * Create the log and tmp directories
+ * Verify that database connectivity is working by running script/console
  * Issue rake myousica:initialize
  * Run ruby script/server and connect to http://localhost:3000/ and you're set.
+
+== Goodies
+
+ * If using vim, update your .vimrc with these instructions: https://github.com/vjt/myousica/wikis/vimrc
+ * Update your .irbrc with these instructions: https://github.com/vjt/myousica/wikis/irbrc
 
 The "myousica:initialize" rake task is a shorthand for 
  * rake db:migrate               - migrates the database schema to the latest version
@@ -43,6 +48,6 @@ Other useful tasks are defined in lib/tasks/utils.rake:
  * rake myousica:update_friends_count
  * rake myousica:update_replies_count
 
-== Description of Contents
+== Now?
 
-TBD
+Complete Rdoc is available at https://ulisse.adelao.it/rdoc/myousica
