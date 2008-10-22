@@ -1,3 +1,7 @@
+# Copyright:: (C) 2008 Medlar s.r.l.
+# Copyright:: (C) 2008 Mikamai s.r.l.
+# Copyright:: (C) 2008 Adelao Group
+#
 # == Schema Information
 #
 # Table name: mixes
@@ -12,7 +16,23 @@
 #  created_at :datetime      
 #  updated_at :datetime      
 #
-
+# == Description
+#
+# The Mix serves two purposes: associates tracks to songs, and it is the central concept of
+# the song versioning system. See the Song#direct_siblings and Song#indirect_siblings methods
+# for details.
+#
+# == Associations
+#
+# * <b>belongs_to</b> a Song
+# * <b>belongs_to</b> a Track
+#
+# == Validations
+#
+# * <b>validates_presence_of</b> <tt>song_id</tt>
+# * <b>validates_associated</b> <tt>song</tt>, <tt>track</tt>
+# * <b>validates_uniqueness_of</b> <tt>track_id</tt>, in the <tt>song_id</tt> scope.
+#
 class Mix < ActiveRecord::Base
   belongs_to :song
   belongs_to :track

@@ -1,4 +1,18 @@
+# Copyright:: (C) 2008 Medlar s.r.l.
+# Copyright:: (C) 2008 Mikamai s.r.l.
+# Copyright:: (C) 2008 Adelao Group
+#
+# Observer for the MbandMembership model, only used to send out the "New Mband invitation" messages to users.
+#
 class MbandMembershipObserver < ActiveRecord::Observer
+
+  # After creation of a membership, if it's not the leader one and has not been accepted yet,
+  # sends out a private message and an e-mail to the <tt>membership.user</tt>. The sender is
+  # the Mband's leader, and bodies contain links to accept or decline the membership using the
+  # <tt>membership_token</tt> Mband attribute.
+  #
+  # The notification e-mail is sent using the UserMailer.
+  #
   def after_create(membership)    
     return if membership.mband.leader == membership.user || !membership.accepted_at.nil?
 
