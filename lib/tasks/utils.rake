@@ -153,10 +153,17 @@ namespace :myousica do
   end
 
   namespace :doc do
+
+    desc "Generate myousica documentation"
+    task :app => :environment do
+      `rm -rf doc/app`
+      puts `allison --all --line-numbers --inline-source --charset utf-8 --title "Myousica documentation" -o doc/app doc/README_FOR_APP app/**/*.rb lib/*.rb`
+    end
+
     desc "Sync documentation on ulisse"
     task :sync => :environment do
       puts "Generating code documentation.."
-      Rake::Task['doc:app'].invoke
+      Rake::Task['myousica:doc:app'].invoke
 
       puts "R-syncing to ulisse.adelao.it"
       `rsync -vvr #{RAILS_ROOT}/doc/app/* ulisse.adelao.it:/var/www/intranet/rdoc/myousica`
