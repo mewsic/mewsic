@@ -37,6 +37,14 @@
 # * <b>has_many</b> <tt>members</tt>, <tt>:through => :memberships</tt>, where <tt>accepted_at is not null</tt> [User]
 # * <b>belongs_to</b> <tt>leader</tt> [User]
 #
+# == Validations
+#
+# * <b>validates_presence_of</b> <tt>name</tt>
+# * <b>validates_format_of</b> <tt>name</tt> with a Regexp that allows only letters, numbers, spaces and underscore
+# * <b>validates_format_of</b> <tt>photos_url</tt>, <tt>blog_url</tt> and <tt>myspace_url</tt> with a Regexp that
+#   checks for a valid internet address
+# * <b>validates_uniqueness_of</b> <tt>name</tt>, case insensitive
+#
 class Mband < ActiveRecord::Base
   
   acts_as_rated :rating_range => 0..5
@@ -60,50 +68,71 @@ class Mband < ActiveRecord::Base
   xss_terminate :except => [:name, :photos_url, :blog_url, :myspace_url],
                 :sanitize => [:motto, :tastes]
   
+  # Checks whether the passed <tt>user</tt> is a member of this Mband
+  #
   def band_membership_with(user)
     return false if user == :false
     self.memberships.find(:first, :conditions => ["user_id = ?", user.id])
   end
 
+  # Returns a collection of accepted +MbandMmbership+s
+  #
   def accepted_memberships
     self.memberships.find(:all, :conditions => 'accepted_at IS NOT NULL')
   end
 
+  # Returns a collection of pending +MbandMembership+s
+  #
   def pending_memberships
     self.memberships.find(:all, :conditions => 'accepted_at IS NULL')
   end
   
+  # Prints out the Mband name into the breadcrumb
+  #
   def to_breadcrumb
     self.name
   end
 
+  # Returns the Mband name, for compatibility with User#nickname
+  #
   def nickname
     self.name
   end
 
+  # URLencodes the downcased mband name
+  #
   def to_param
     URI.encode(self.name.downcase.gsub(' ', '+'))
   end
 
+  # Returns all the published songs by the members of this Mband
+  #
   def published_songs
     Song.find(:all, :conditions => ["songs.published = ? AND songs.user_id IN (?)", true, self.members.map(&:id)], 
              :order => "songs.created_at DESC")
   end
 
+  # Returns the total count of published songs by the members of this Mband
+  #
   def songs_count(options = {})
     self.members.map {|m| m.songs_count(options) }.sum
   end
 
+  # Returns the total count of tracks by the members of this Mband
+  #
   def tracks_count
     self.members.map(&:tracks_count).sum
   end
 
+  # Returns the total count of ideas by the members of this Mband
+  #
   def ideas_count
     self.members.map(&:ideas_count).sum
   end
 
-  # If all the members share the same status, use it.
-  # Else, offline.
+  # If all the members share the same status, use it, else, offline.
+  # Valid statuses are '<tt>on</tt>', '<tt>rec</tt>' and '<tt>off</tt>'.
+  #
   def status
     statuses = self.members.map(&:status).uniq
     if statuses.size == 1
@@ -113,6 +142,10 @@ class Mband < ActiveRecord::Base
     end
   end
 
+  # Finds an Mband using the string produced by +to_param+, or by numeric 
+  # ID. This methods mimics the standard <tt>find</tt>, because it raises
+  # an ActiveRecord::RecordNotFound exception if no Mband is found.
+  #
   def self.find_from_param(param, options = {})
     param = param.id if param.kind_of? ActiveRecord::Base
     find_method = param.to_s =~ /^\d+$/ ? :find : :find_by_name
@@ -120,24 +153,37 @@ class Mband < ActiveRecord::Base
     send(find_method, param, options) or raise ActiveRecord::RecordNotFound
   end
 
+  # Finds the coolest Mbands, that is, Mbands sorted by <tt>rating_avg</tt>. Only Mbands with
+  # more than one member are returned.
+  #
   def self.find_coolest(options = {})
     find :all, options.merge(:order => 'rating_avg DESC', :conditions => 'members_count > 1')
   end
 
+  # Calculates profile completeness, by checking whether the 3 configurable URLs (<tt>photos_url</tt>,
+  # <tt>myspace_url</tt> and <tt>blog_url</tt>) are compiled or not, and extracts a percent value.
+  #
   def profile_completeness
     profile = %w(photos_url myspace_url blog_url)
     complete = profile.select { |attr| !self[attr].blank? }
     (complete.size.to_f / profile.size.to_f * 100.0).round 2
   end
 
+  # Returns an array of all members' countries
+  #
   def countries
     self.members.map(&:country).uniq
   end
   
+  # Joins the members' countries with a comma
+  #
   def compiled_location
     countries.join(', ')
   end
 
+  # Returns true if this Mband is rateable by the passed User object.
+  # An Mband is NOT rateable by its members.
+  #
   def rateable_by?(user)
     !self.members.include?(user)
   end
