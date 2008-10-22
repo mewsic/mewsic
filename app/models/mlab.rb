@@ -20,11 +20,11 @@ class Mlab < ActiveRecord::Base
   def self.find_my_list_items_for(user)
     songs  = find_songs  :all, :conditions => ['mlabs.user_id = ?', user.id]
     tracks = find_tracks :all, :conditions => ['mlabs.user_id = ?', user.id]
-    (songs + tracks).map { |mixable| item_attributes_of(mixable) }
+    (songs + tracks).map { |mixable| fetch_avatar_for(mixable) }
   end
 
   def self.find_my_list_item_for(user, type, id)
-    item_attributes_of(
+    fetch_avatar_for(
       case type
         when 'track' then find_tracks id, :conditions => ['mlabs.user_id = ?', user.id]
         when 'song'  then find_songs  id, :conditions => ['mlabs.user_id = ?', user.id]
@@ -33,7 +33,7 @@ class Mlab < ActiveRecord::Base
   end
 
   private
-    def self.item_attributes_of(mixable)
+    def self.fetch_avatar_for(mixable)
       avatar = Picture.find(mixable.attributes.delete('avatar_id')).
         public_filename(:icon) rescue '/images/default_avatars/avatar_icon.gif'
 
