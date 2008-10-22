@@ -18,7 +18,25 @@
 #  rating_avg    :decimal(10, 2 
 #  members_count :integer(11)   default(0)
 #
-
+# == Description
+#
+# An M-Band is an aggregation of users that play together on myousica, implemented
+# with an <tt>has_many :members, :through => :memberships</tt>, where memberships
+# are instances of the MbandMembership class.
+#
+# Every M-Band is managed by a <tt>leader</tt>, that can send invitations to users
+# to join. The receiver must accept it before becoming part of the M-Band.
+#
+# M-Bands have pages very similar to user ones.
+#
+# == Associations
+#
+# * <b>has_many</b> <tt>avatars</tt>, destroyed calling *_destroy callbacks upon destroy. [Avatar]
+# * <b>has_many</b> <tt>photos</tt>, like above [Photo]
+# * <b>has_many</b> <tt>memberships</tt>, like above, [MbandMembership]
+# * <b>has_many</b> <tt>members</tt>, <tt>:through => :memberships</tt>, where <tt>accepted_at is not null</tt> [User]
+# * <b>belongs_to</b> <tt>leader</tt> [User]
+#
 class Mband < ActiveRecord::Base
   
   acts_as_rated :rating_range => 0..5
