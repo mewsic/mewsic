@@ -1,3 +1,5 @@
+# Copyright:: (C) 2008 Adelao Group
+#
 # == Schema Information
 #
 # Table name: profile_views
@@ -8,7 +10,18 @@
 #  created_at :datetime      
 #  updated_at :datetime      
 #
-
+# == Description
+#
+# Profile views collection works using the <tt>__mt</tt> tracking cookie
+# (see ApplicationController#set_tracking_cookie) that is stored into the
+# <tt>viewer</tt> attribute.
+#
+# Profile viewers must be unique in the <tt>user_id</tt> scope, so a viewer
+# can increment the counter only once.
+#
+# Each hour, a Cron job runs the +count_and_cleanup+ method to collect all
+# unique visitors and update the User <tt>profile_views</tt> counter.
+#
 class ProfileView < ActiveRecord::Base
   belongs_to :user
 

@@ -1,3 +1,7 @@
+# Copyright:: (C) 2008 Medlar s.r.l.
+# Copyright:: (C) 2008 Mikamai s.r.l.
+# Copyright:: (C) 2008 Adelao Group
+#
 # == Schema Information
 #
 # Table name: pictures
@@ -17,7 +21,14 @@
 #  created_at       :datetime      
 #  updated_at       :datetime      
 #
-
+# == Description
+#
+# Base class for the Avatar and Photo models. It has a polymorphic belongs_to
+# association because Pictures can be associated to Users, Bands, Deejays, Band
+# Members, etc.
+#
+# Content type is checked for inclusion in a short list (see the source).
+#
 class Picture < ActiveRecord::Base
   belongs_to :pictureable, :polymorphic => true
   validates_inclusion_of :content_type, :in => %w(image/jpeg image/pjpeg image/png image/gif)
