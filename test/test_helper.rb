@@ -40,9 +40,13 @@ class Test::Unit::TestCase
     assert_equal 4.0, rated_object.rating_average
   end
 
-  def assert_x_accel_redirect(options)
-    assert_response :success
+  def assert_blank_response(code = :success)
+    assert_response code
     assert @response.body.blank?
+  end
+
+  def assert_x_accel_redirect(options)
+    assert_blank_response
     assert_equal options[:filename], @response.headers['X-Accel-Redirect']
     # ActionController::Integration oddities
     assert (@response.headers['Content-Type'] || @response.headers['type']) =~ /^#{options[:content_type]}/
