@@ -197,12 +197,7 @@ class Song < ActiveRecord::Base
   def siblings_count
     (attributes['siblings_count'] || direct_siblings.size).to_i
   end 
-  
-  def update_children_tracks_count
-    self.children_tracks_count = self.children_tracks.count(true)
-    save    
-  end
-  
+
   def increment_listened_times
     update_attribute(:listened_times, listened_times + 1)
   end
