@@ -1,3 +1,15 @@
+# Copyright:: (C) 2008 Medlar s.r.l.
+# Copyright:: (C) 2008 Mikamai s.r.l.
+# Copyright:: (C) 2008 Adelao Group
+#
+# == Description
+#
+# This mailer sends out user help requests (HelpRequest model) and administrative
+# notifications when a new User, Song, Track or Answer is created.
+#
+# Each method is self-documenting, help requests are sent from help@myousica.com
+# while administrivia comes from activity@myousica.com.
+#
 class MyousicaMailer < ActionMailer::Base
 
   def help_request(request, sent_at = Time.now)
