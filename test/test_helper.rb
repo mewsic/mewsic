@@ -69,6 +69,26 @@ class Test::Unit::TestCase
     assert_equal 0, REXML::XPath.match(xml, "//non_existing_element").size
   end
 
+  def assert_valid_rss(options = {})
+    xml = REXML::Document.new(@response.body)
+    assert_not_nil xml
+
+    assert_equal 1, REXML::XPath.match(xml, '/rss').size
+    assert_equal 1, REXML::XPath.match(xml, '/rss/channel').size
+    assert_equal 1, REXML::XPath.match(xml, '/rss/channel/title').size
+    assert_equal 1, REXML::XPath.match(xml, '/rss/channel/link').size
+    assert_equal 1, REXML::XPath.match(xml, '/rss/channel/description').size
+    assert_equal 1, REXML::XPath.match(xml, '/rss/channel/pubDate').size
+
+    nitems = REXML::XPath.match(xml, '/rss/channel/item').size
+
+    if options[:nitems]
+      assert_equal options[:nitems], nitems
+    else
+      assert nitems > 0
+    end
+  end
+
   def setup_sphinx
     return if $sphinx_config
 
