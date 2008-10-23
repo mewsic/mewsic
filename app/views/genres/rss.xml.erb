@@ -5,7 +5,7 @@
 		<link><%= genre_url @genre %></link>
 		<description>Newest <%= @genre.name %> songs published on Myousica.com</description>
     <language>en-us</language>
-		<pubDate><%= @songs.first.created_at.rfc2822 %></pubDate>
+		<pubDate><%= @pubdate.rfc2822 %></pubDate>
 		<lastBuildDate><%= Time.now.rfc2822 %></lastBuildDate>
     <generator>myousica</generator>
     <managingEditor>info@myousica.com</managingEditor>

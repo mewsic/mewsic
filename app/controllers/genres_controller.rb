@@ -54,12 +54,16 @@ class GenresController < ApplicationController
   # most prolific users. Only HTML output is supported. When a genre is not found, user is
   # redirected to /.
   #
+  # If a Genre has got no songs, the user is redirected to <tt>music_path</tt>.
+  #
   def show
     @genre = Genre.find_from_param(params[:id])
     @most_listened_songs = @genre.find_most_listened :limit => 3, :include => :user
     @prolific_users = @genre.find_most_prolific_users :limit => 3
     @songs = Song.find_paginated_by_genre(1, @genre)
     
+    redirect_to music_path and return if @songs.empty?
+
     respond_to do |format|
       format.html
     end
@@ -85,6 +89,7 @@ class GenresController < ApplicationController
   def rss
     @genre = Genre.find_from_param(params[:genre_id])
     @songs = @genre.published_songs.find(:all, :limit => 40)
+    @pubdate = @songs.first.created_at rescue Time.now
 
     respond_to do |format|
       format.xml

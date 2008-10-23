@@ -60,5 +60,28 @@ class GenresControllerTest < ActionController::TestCase
     get :show, :id => 'acustic'
     assert_redirected_to '/genres/Acoustic'
   end
+
+  def test_show_should_redirect_to_music_path_if_genre_has_no_songs
+    get :show, :id => genres(:no_songs).id
+    assert_redirected_to music_path
+  end
+
+  def test_rss_should_render_rss
+    rss :blues
+    assert_response :success
+    assert_template 'rss'
+    assert_valid_rss :nitems => genres(:blues).songs.count
+  end
+
+  def test_rss_should_print_empty_rss_if_genre_has_no_songs
+    rss :no_songs
+    assert_response :success
+    assert_valid_rss :nitems => 0
+  end
+
+  private
+  def rss(genre)
+    get :rss, :genre_id => genres(genre), :path_prefix => '/genres/:genre_id', :name_prefix => 'genre_'
+  end
   
 end

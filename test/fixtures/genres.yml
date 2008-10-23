@@ -194,3 +194,5 @@ trip-hop:
   name: Trip-hop
 world_music:
   name: World Music
+no_songs:
+  name: Empty Genre
