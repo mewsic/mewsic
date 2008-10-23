@@ -26,7 +26,7 @@ class MessagesController < ApplicationController
   before_filter :check_user_identity  
   before_filter :fix_page_number, :only => :index
   
-  # ==== GET /users/:user_id/messages
+  # ==== XHR GET /users/:user_id/messages
   #
   # Returns the User#received_messages index, paginated with 10 elements per page.
   # If the page number passed is greater than the page count, the last page is rendered.
@@ -39,7 +39,7 @@ class MessagesController < ApplicationController
     end
   end
 
-  # ==== GET /users/:user_id/messages/sent
+  # ==== XHR GET /users/:user_id/messages/sent
   #
   # Renders the User#sent_messages index, using the <tt>index.html.erb</tt> template.
   # Paginated with 10 messages per page.
@@ -49,7 +49,7 @@ class MessagesController < ApplicationController
     render :action => 'index'
   end
   
-  # ==== GET /users/:user_id/messages/unread
+  # ==== XHR GET /users/:user_id/messages/unread
   #
   # Renders the User#received_messages index, using the <tt>index.html.erb</tt>template.
   # Paginated with 10 messages per page.
@@ -59,7 +59,7 @@ class MessagesController < ApplicationController
     render :action => 'index'                                   
   end
 
-  # ==== GET /users/:user_id/messages/:id
+  # ==== XHR GET /users/:user_id/messages/:id
   #
   # Shows a message, reading it using the Message#read method and showing it using the 
   # <tt>show.html.erb</tt> partial. If no message with the passed id is found, the <tt>
@@ -71,7 +71,7 @@ class MessagesController < ApplicationController
     render :partial => 'not_found'
   end
 
-  # ==== GET /users/:user_id/messages/new
+  # ==== XHR GET /users/:user_id/messages/new
   #
   # Shows the message composition form, filling recipient, subject and body if this is
   # a reply to another message. In this case, the replying message id is passed via
@@ -92,7 +92,7 @@ class MessagesController < ApplicationController
   rescue ActiveRecord::RecordNotFound
   end
 
-  # ==== POST /users/:user_id/messages
+  # ==== XHR POST /users/:user_id/messages
   #
   # Creates a new message. Multiple recipients may be specified, separating them
   # with a comma. Results are rendered by the <tt>create.js.erb</tt> view, 'cause
@@ -122,18 +122,13 @@ class MessagesController < ApplicationController
     end
   end
   
-  # ==== DELETE /users/:user_id/messages/:id
+  # ==== XHR DELETE /users/:user_id/messages/:id
   #
   # Destroys a message by marking it as deleted (see the +mark_deleted+ method).
   #
   def destroy
     @message = Message.read(params[:id], @user)
     @message.mark_deleted(@user)
-    respond_to do |format|
-      format.html do        
-        redirect_to :action => (@message.sender == @user ? 'sent' : 'index'), :page => params[:page]
-      end
-    end
   end          
     
 private

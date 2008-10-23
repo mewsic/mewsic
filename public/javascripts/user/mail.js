@@ -82,7 +82,7 @@ var MailBox = Class.create({
   onDestroyMessage: function(event, link) {     
     event.stop();
     if(confirm('Are you sure?')) {      
-      this.loadPage(link.getAttribute('href'), {
+      new Ajax.Request(link.getAttribute('href'), {
         method: 'delete',
         parameters: {
           authenticity_token: encodeURIComponent(this.authenticity_token),
