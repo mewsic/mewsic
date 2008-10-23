@@ -1,0 +1,7 @@
+User: <%= @answer.user.login %>
+Body follows.
+---------------8<------- cut ------- >8---------------
+<%= @answer.body %>
+---------------8<------- cut ------- >8---------------
+
+<%= APPLICATION[:url] + answer_path(@answer) %>

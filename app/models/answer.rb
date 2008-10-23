@@ -23,14 +23,15 @@
 # This model represents an Answer. The body field is indexed by sphinx and used for
 # full-text searches. This model +acts_as_rated+, with a rating range from 0 to 5.
 #
-# An answer can be open or closed, as saved in the <tt>closed</tt> attribute. Answer
+# An Answer can be open or closed, as saved in the <tt>closed</tt> attribute. Answer
 # closing happens automatically when there are no replies in one month. Every time a
 # Reply is added, the <tt>last_activity_at</tt> is updated keeping the Answer open.
 #
 # == Associations
 #
-# * <b>has_many</b> <tt>replies</tt>: ordered by <tt>created_at</tt>, deleted all upon destroy.
-# * <b>has_many</b> <tt>abuses</tt>: no order, polymorphic as <tt>abuseable</tt> (see Abuse).
+# * <b>has_many</b> <tt>replies</tt>, ordered by creation time, and deleted all upon
+#   destroy [Reply]
+# * <b>has_many</b> <tt>abuses</tt>, polymorphic as <tt>abuseable</tt> [Abuse]
 #
 # == Validations
 #
@@ -39,29 +40,28 @@
 #
 # == Callbacks
 #
-# * <b>after_create</b> <tt>set_last_activity_at</tt>: sets <tt>last_activity_at</tt> to <tt>created_at</tt>
+# * <b>after_create</b> +set_last_activity_at+
 #
 class Answer < ActiveRecord::Base
   
-  define_index do
-    indexes :body
-  end
-  
   has_many :replies, :order => 'created_at DESC', :dependent => :delete_all
-  belongs_to :user
-  
-  acts_as_rated :rating_range => 0..5 
-  
-  attr_accessible :body
-  attr_readonly :replies_count
-  
   has_many :abuses, :as => :abuseable
+  belongs_to :user
   
   validates_presence_of :body, :user_id
   validates_associated :user
 
   after_create :set_last_activity_at
+
+  acts_as_rated :rating_range => 0..5 
+
+  attr_accessible :body
+  attr_readonly :replies_count
   
+  define_index do
+    indexes :body
+  end
+
   # Finds open answers (whose have got the <tt>closed</tt> attribute to <tt>false</tt>)
   # and orders 'em by creation date and average rating. Eager-loads users and their
   # avatars. Paginated.
@@ -148,7 +148,8 @@ class Answer < ActiveRecord::Base
   end  
   
 private
-
+  # sets <tt>last_activity_at</tt> to <tt>created_at</tt>
+  #
   def set_last_activity_at
     update_attribute(:last_activity_at, self.created_at)
   end

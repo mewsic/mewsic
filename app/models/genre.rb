@@ -1,3 +1,7 @@
+# Copyright:: (C) 2008 Medlar s.r.l.
+# Copyright:: (C) 2008 Mikamai s.r.l.
+# Copyright:: (C) 2008 Adelao Group
+#
 # == Schema Information
 #
 # Table name: genres
@@ -14,8 +18,8 @@
 # == Associations
 #
 # * <b>has_many</b> <tt>songs</tt>, ordered by creation time
-# * <b>has_many</b> <tt>published_songs</tt>, which are songs whose <tt>published</tt>
-#   attribute is set to true. Ordered by creation time.
+# * <b>has_many</b> <tt>published_songs</tt>, songs where <tt>published</tt> is true,
+#   ordered by creation time.
 #
 class Genre < ActiveRecord::Base
 

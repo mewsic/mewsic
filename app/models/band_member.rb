@@ -22,17 +22,18 @@
 # and a country or "linked" members to actual myousica users.
 # If this member is linked, the <tt>facade</tt> plugin makes the <tt>country</tt>,
 # <tt>avatars</tt> and <tt>nickname</tt> methods return data from the linked user record.
+# See https://ulisse.adelao.it/rdoc/myousica/plugins/facade/.
 #
 # == Associations
-#
-# * <b>belongs_to</b> <tt>user</tt>: the Band this member refers to
-# * <b>belongs_to</b> <tt>instrument</tt>: the Instrument this members plays on myousica
-# * <b>belongs_to</b> <tt>linked_user</tt>: the optional linked User to this member
+# 
+# Belongs to a Band, to the Instrument this member plays in the Band and to an optional
+# linked myousica User (<tt>linked_user</tt>). Has many +Avatar+s.
 #
 # == Validations
 #
-# * <b>validates_presence_of</b> <tt>nickname</tt> if this member isn't linked to an user
-# * <b>validates_presence_of</b> <tt>linked_user_id</tt> if this member is linked to an user
+# Validates presence of <tt>nickname</tt> if this member is not linked to an User, 
+# <tt>linked_user_id</tt> if it is. Validates presence of the <tt>instrument_id</tt>
+# and a valid associated Instrument.
 #
 class BandMember < ActiveRecord::Base
   belongs_to :user

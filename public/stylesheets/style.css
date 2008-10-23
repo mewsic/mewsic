@@ -3247,7 +3247,7 @@ div.popup {
 	border: 1px solid #BFD2DB;
 	background: #fff;
 	width: 595px;
-	height: 215px;
+	min-height: 215px;
 	float:left;
 	padding:4px;
 }

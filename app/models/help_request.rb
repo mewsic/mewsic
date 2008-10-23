@@ -1,3 +1,5 @@
+# Copyright:: (C) 2008 Adelao Group
+#
 # == Schema Information
 #
 #  email :string        

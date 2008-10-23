@@ -24,7 +24,11 @@
 # == Description
 #
 # This model represents an user avatar. It subclasses the Picture model and uses
-# <tt>attachment_fu</tt> to store image files on the file system.
+# the <tt>attachment_fu</tt> plugin to store image files on the file system, into
+# the <tt>public/avatars</tt> path.
+#
+# See https://ulisse.adelao.it/rdoc/myousica/plugins/attachment_fu for details on
+# <tt>attachment_fu</tt>.
 #
 class Avatar < Picture
   has_attachment :storage => :file_system,

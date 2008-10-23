@@ -1,3 +1,7 @@
+# Copyright:: (C) 2008 Medlar s.r.l.
+# Copyright:: (C) 2008 Mikamai s.r.l.
+# Copyright:: (C) 2008 Adelao Group
+#
 # == Schema Information
 #
 # Table name: instruments
@@ -22,15 +26,12 @@
 #
 # == Validations
 #
-# * <b>validates_presence_of</b> <tt>description</tt>
-# * <b>validates_uniqueness_of</b> <tt>description</tt>, case insensitive
-# * <b>validates_presence_of</b> <tt>category_id</tt>
-# * <b>validates_associated</b> <tt>category</tt>
+# Validates presence of <tt>description</tt> and <tt>category_id</tt>, the uniqueness
+# of the <tt>description</tt> (case insensitive) and the associated <tt>category</tt>.
 #
 # == Callbacks
 #
-# * <b>before_save</b> +set_default_icon+: sets the default icon inferring it by the
-#   instrument name.
+# * <b>before_save</b> +set_default_icon+
 #
 class Instrument < ActiveRecord::Base
 

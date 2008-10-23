@@ -1,11 +1,24 @@
-== myousica.com
+== Welcome to the Myousica infrastructure documentation
 
-Myousica is the first worldwide open music community!
+The myousica application is a RESTful Rails 2.0 app that implements an open platform for
+creating and composing music online. The whole myousica infrastructure is composed of:
 
-Join the community and be a Myousician.
+* This RESTful app;
+* The multitrack-server app, located on github at http://github.com/vjt/multitrack-server;
+* 4 SWF components that consume the services of both apps, located on github;
+* Flash Media Server 3, that interacts with the multitrack-server app and the multitrack.
 
-You can:
- * Listen to unreleased versions of your favourite songs;
- * Record your own tracks, singing and playing live through our multitrack, in your office or your rehearsal room;
- * Edit and Mix tracks from other Myousicians;
- * Create your M-Band and jam with musicians and amateurs worldwide.
+This app implements most of the business logic, while the multitrack-server one handles file
+uploads and MP3 encoding and downmixing using ffmpeg (http://ffmpeg.mplayerhq.hu) and sox
+(http://sox.sf.net).
+
+Myousica plugins' documentation is located at https://ulisse.adelao.it/rdoc/myousica/plugins/
+
+== User workflow
+
+== Concepts
+
+== Data flow
+
+== Integration
+

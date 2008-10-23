@@ -26,12 +26,16 @@
 # destroyed and no relation exists between the two users. If the recipients breaks it
 # instead, the initiator goes back to the <b>admirer</b> status.
 #
+# This model is used by the <tt>medlar_has_many_friends</tt> plugin that implements most of
+# the friendly methods to manipulate friend lists.
+# See https://ulisse.adelao.it/rdoc/myousica/plugins/medlar_has_many_friends/.
+#
 # == Associations
 #
-# * <b>belongs_to</b> <tt>friendshipped_by_me</tt> (<tt>user_id</tt>): the initiator of 
-#   this friendship.
+# * <b>belongs_to</b> <tt>friendshipped_by_me</tt> (<tt>user_id</tt>): the User that 
+#   initiated this friendship.
 # * <b>belongs_to</b> <tt>friendshipped_for_me</tt> (<tt>friend_id</tt>): the recipient
-#   of this friendship.
+#   User of this friendship.
 #
 # == Validations
 #

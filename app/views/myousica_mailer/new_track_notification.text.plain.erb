@@ -1,0 +1,8 @@
+Title : <%= @track.title %>
+Descr.: <%= @track.description %>
+User  : <%= @track.user.login rescue nil %>
+Tone  : <%= @track.tonality %>
+Length: <%= @track.length %>
+Genre : <%= @track.genre %>
+
+<%= APPLICATION[:url] %><%= @track.public_filename %>

@@ -1,3 +1,7 @@
+# Copyright:: (C) 2008 Medlar s.r.l.
+# Copyright:: (C) 2008 Mikamai s.r.l.
+# Copyright:: (C) 2008 Adelao Group
+#
 # == Schema Information
 #
 # Table name: instrument_categories
@@ -18,7 +22,7 @@
 #
 # == Validations
 #
-# * <b>validates_presence_of</b> <tt>description</tt>
+# Validates presence of the <tt>description</tt>.
 #
 class InstrumentCategory < ActiveRecord::Base
   has_many :instruments, :foreign_key => 'category_id'
