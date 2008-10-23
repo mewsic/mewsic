@@ -1,3 +1,7 @@
+# Copyright:: (C) 2008 Medlar s.r.l.
+# Copyright:: (C) 2008 Mikamai s.r.l.
+# Copyright:: (C) 2008 Adelao Group
+#
 # == Schema Information
 #
 # Table name: songs
@@ -21,7 +25,66 @@
 #  rating_avg      :decimal(10, 2 
 #  key             :integer(11)   
 #
-
+# == Description
+#
+# The Song model is one of the most important models in Myousica. It serves as a song container
+# and implements many finders used by different controllers.
+#
+# A Song instance currently serves two purposes:
+# - Implement a User song, with its associated tracks via the <tt>mixes</tt>
+# - Store the <tt>original_author</tt> and Genre informations for a Track, currently not
+#   stored in the <tt>tracks</tt> table.
+#
+# Songs have associated tracks via direct foreign key, too (the <tt>song_id</tt> attribute in
+# the Track model), named <tt>children_tracks</tt>. These ones do not appear on the site, and
+# serve merely to store genre and author information for the track.
+# Tracks are associated this way to a Song when recording live or uploading streams via the
+# multitrack SWF.
+#
+# The <tt>published</tt> attribute sets whether a Song has to be displayed on the site, because
+# unpublished songs are scraps created automatically when a registered user enters the multitrack.
+# When a project is saved and the song encoded and mixed down, the <tt>published</tt> attribute
+# is set to <tt>true</tt> by the MultitrackController#update_song method.
+#
+# Songs are full-text indexed by Sphinx and can be rated, using the <tt>medlar_acts_as_rated</tt>
+# plugin (https://ulisse.adelao.it/rdoc/myousica/plugins/medlar_acts_as_rated).
+#
+# Each Song has also a playable MP3 stream, handled by the Playable module. The Song model is
+# instrumented by calling Playable#has_playable_stream in the class context.
+#
+# This model implements also the song versioning system, each version is called a <tt>sibling</tt>:
+# <b>direct versions</b> are +direct_siblings+ while <b>remote versions</b> are called
+# +remote_siblings+.
+#
+# FIXME: currently tonality information is stored in <b>TWO</b> attributes: <tt>tone</tt> and <tt>
+# key</tt>. That's because <tt>tone</tt> is a String that's not feasible for filtering and ordering
+# purposes via Sphinx. To not break existing code, the <tt>key</tt> integer attribute was added,
+# updated by the +set_key_from_tone+ <tt>before_save</tt> callback.
+#
+# == Associations
+#
+# * <b>has_many</b> <tt>mixes</tt>, deleted all upon destroy. [Mix]
+# * <b>has_many</b> <tt>tracks</tt> <b>through</b> <tt>mixes</tt> [Track]
+# * <b>has_many</b> <tt>children_tracks</tt> [Track]
+# * <b>has_many</b> <tt>mlabs</tt> [Mlab]
+# * <b>has_many</b> <tt>abuses</tt> [Abuse]
+#
+# * <b>belongs_to</b> a Genre
+# * <b>belongs_to</b> an User
+#
+# == Validations
+#
+# * <b>validates_presence_of</b> <tt>title</tt>, <tt>tone</tt> and <tt>seconds</tt> if the 
+#   Song is <tt>published</tt>
+# * <b>validates_associated</b> Genre and User if the Song is <tt>published</tt>
+# * <b>validates_numericality_of</b> <tt>genre_id</tt> and <tt>user_id</tt>, greater than 0,
+#   if the Song is <tt>published</tt>
+#
+# == Callbacks
+#
+# * <b>before_save</b> +set_key_from_tone+
+# * <b>before_destroy</b> +check_for_children_tracks+
+#
 require 'numeric_to_runtime'
 require 'playable'
 
@@ -57,18 +120,29 @@ class Song < ActiveRecord::Base
 
   has_playable_stream
 
+  # Finds all published songs
+  #
   def self.find_published(options = {})
     self.find(:all, :conditions => ["songs.published = ?", true])
   end      
   
+  # Finds all published songs, ordering them by play count and rating average.
+  #
   def self.find_best(options = {})
     self.find(:all, options.merge(:conditions => ['songs.published = ?', true], :order => 'songs.listened_times DESC, songs.rating_avg DESC'))
   end
   
+  # Finds all published songs, ordering them by creation time.
+  #
   def self.find_newest(options = {})
     self.find(:all, options.merge(:conditions => ["songs.published = ?", true], :order => 'songs.created_at DESC'))
   end
 
+  # Paginates the published songs created in the last month, ordering them by creation time.
+  # By default, the first of 7 elements pages is returned. All the <tt>paginate</tt> options
+  # are overridable. See the <tt>will_paginate</tt> plugin documentation for details:
+  # https://ulisse.adelao.it/rdoc/myousica/plugins/will_paginate
+  #
   def self.find_newest_paginated(options = {})
     paginate options.reverse_merge(
              :conditions => ['songs.published = ? AND songs.created_at > ?', true, 1.month.ago],
@@ -77,6 +151,9 @@ class Song < ActiveRecord::Base
              :page => 1)
   end
  
+  # Paginates published songs for a given genre, ordering them by song title. 15 elements per
+  # page are returned.
+  #
   def self.find_paginated_by_genre(page, genre)
     paginate :per_page => 15, 
              :conditions => ["songs.published = ? AND genre_id = ?", true, genre.id], 
@@ -85,7 +162,11 @@ class Song < ActiveRecord::Base
              :page => page
   end
   
-  # TODO: Unire i due metodi in uno unico 
+  # Paginates published songs for a given User, ordering them by creation time. 3 elements per
+  # page are returned. Used by UsersController#show to implement an User personal page.
+  #
+  # If <tt>options[:skip_blank]</tt> is not nil, only songs that have got tracks are fetched.
+  #
   def self.find_paginated_by_user(page, user, options = {})
     conditions = ["songs.published = ? AND songs.user_id = ?", true, user.id]
     conditions[0] += " AND tracks.id IS NOT NULL" if options[:skip_blank]
@@ -96,6 +177,11 @@ class Song < ActiveRecord::Base
              :page => page
   end
   
+  # Paginates published songs for a given Mband, ordering them by creation time. 3 elements
+  # per page are returned. Used by MbandsController#show to implement an Mband personal page.
+  #
+  # If <tt>options[:skip_blank]</tt> is not nil, only songs that have got tracks are fetched.
+  #
   def self.find_paginated_by_mband(page, mband, options = {})
     conditions = ["songs.published = ? AND users.id IN (?)", true, mband.members.map(&:id)]
     conditions[0] += " AND tracks.id IS NOT NULL" if options[:skip_blank]
@@ -105,19 +191,31 @@ class Song < ActiveRecord::Base
              :include => [:user, {:tracks => :instrument}], 
              :page => page
   end
-    
+
+  # Returns an array of all instruments used into this song.
+  #
   def instruments
     self.tracks.count('instrument', :include => :instrument, :group => 'instrument_id').map { |id, count| Instrument.find(id) }
   end    
   
+  # Shorthand to create an unpublished Song. Used by MultitrackController#show, when an user
+  # enters the multitrack. The unpublished Song instance serves to store user data while he
+  # is working: because every editing control in the M-Lab is in-place, Song has to be created
+  # in advance.
+  #
   def self.create_unpublished!
     self.create! :published => false
   end
 
+  # Finds unpublished songs.
+  #
   def self.find_unpublished(what, options = {})
     self.find what, options.merge(:conditions => ['published = ?', false])
   end
 
+  # Finds most collaborated songs, using a MySQL-only query (sorry), used by DashboardController#config
+  # to implement the Splash configuration.
+  #
   def self.find_most_collaborated(options = {})
     collaboration_count = options[:minimum_siblings] || 2
     songs = find_by_sql(["
@@ -142,6 +240,13 @@ class Song < ActiveRecord::Base
     return songs
   end
   
+  # Returns the direct versions of a Song, identified by the presence of a Mix that links
+  # the same track to different songs. So, if song <tt>s1</tt> contains tracks <tt>t1</tt>,
+  # <tt>t2</tt> and <tt>t3</tt>, every other song <tt>sX</tt> that contains one of those
+  # tracks is a version of <tt>s1</tt>.
+  #
+  # Implementation is with a custom SQL query executed via Song#find_by_sql.
+  #
   def direct_siblings(limit = nil)
     limit = "LIMIT #{limit}" if limit
     Song.find_by_sql("
@@ -163,6 +268,11 @@ class Song < ActiveRecord::Base
     ")
   end
   
+  # Returns the remote versions of a Song, that is, versions that have two degrees of separation
+  # from the current one. It is implemented by fetching all the songs that share at least one
+  # track with the current one (direct versions), and then every other song that share a track
+  # with them (remote versions). Direct versions are then excluded.
+  #
   def indirect_siblings(limit = nil)
     limit = "limit #{limit}" if limit
     mixes = Mix.find_by_sql(["select distinct song_id from mixes where track_id in (select track_id from mixes where song_id = ?) and song_id != ? #{limit}", self.id, self.id])
@@ -186,46 +296,71 @@ class Song < ActiveRecord::Base
     ])
   end
   
+  # Checks whether the passed Song is a direct version of this one.
+  #
   def is_a_direct_sibling_of?(song)
     direct_siblings.collect.include?(song)
   end
   
+  # Checks whether the passed Song is an indirect version of this one.
+  #
   def is_a_indirect_sibling_of?(song)
     indirect_siblings.collect.include?(song)
   end
   
+  # Returns the direct siblings count for this track. The +find_most_collaborated+ method
+  # precalculates this counter, in order to optimize frequent calls made by the Splash SWF,
+  # so this method first checks whether a <tt>siblings_count</tt> attribute is present, if
+  # not it proceeds to querying the database for the +direct_siblings+ array and returning
+  # its <tt>size</tt>.
+  #
   def siblings_count
     (attributes['siblings_count'] || direct_siblings.size).to_i
   end 
 
+  # Increment the <tt>listened_times</tt> counter. Currently called by PlayersController#show.
+  #
   def increment_listened_times
     update_attribute(:listened_times, listened_times + 1)
   end
-  
+
+  # Returns the pretty-printed length of the current song. See Numeric#to_runtime for details
+  # on the formatting.
+  #
   def length
     seconds.to_runtime
   end
-  
+
+  # Prints the song title into the breadcrumb (see ApplicationController#breadcrumb for details).
+  #
   def to_breadcrumb
     self.title
   end    
 
+  # Checks whether this Song is rateable by the passed User. A Song is not rateable by its creator.
+  #
   def rateable_by?(user)
     self.user_id != user.id
   end
 
+  # Shorthand to set the <tt>published</tt> attribute to <tt>true</tt> and save the song afterwards.
+  # It also sets the <tt>@new</tt> instance variable to true if this song is yet not published, in
+  # order for the SongObserver to send out a notification of "new song published on myousica".
+  #
   def publish!
     @new = true if !self.published?
     self.published = true
     self.save!
   end
 
-  # Returns true if the song has just been created
+  # Returns true if the song has just been created. See the +publish!+ method for details.
+  #
   def new?
     @new
   end
 
-  # Called by the cron runner
+  # Called by the cron runner, to clean up unpublished songs that have got no children
+  # tracks and have been created more than one week ago.
   #
   def self.cleanup_unpublished
     songs = find_by_sql(['select songs.id from songs
@@ -236,16 +371,28 @@ class Song < ActiveRecord::Base
     delete_all ['id in (?)', songs.map(&:id)] unless songs.empty?
   end
   
-  #called by mlab.js 
+  # Shorthand to fetch the genre name. XXX: looks like this method is unused. remove it.
+  #
   def genre_name
     self.genre ? self.genre.name : nil
   end
 
+  # Randomizes the <tt>tone</tt> and the <tt>genre</tt> attributes of this song, used by
+  # the MultitrackController#show method, when rendering the editor to users not logged
+  # in.
+  #
   def randomize!
     self.tone = Myousica::TONES.sort_by{rand}.first
     self.genre = Genre.find(:first, :order => SQL_RANDOM_FUNCTION)
   end
 
+  # <tt>before_save</tt> callback that updates both the <tt>tone</tt> and <tt>key</tt>
+  # attribute. If the <tt>tone</tt> is an integer, it is put into the <tt>key</tt> and
+  # the <tt>tone</tt> updated with the corrisponding tone string as defined in the
+  # Myousica module.
+  # If <tt>tone</tt> is a tone string, the <tt>key</tt> attribute is updated with the
+  # integer index of that tone string, as returned by the Myousica module.
+  #
   def set_key_from_tone
     return if self.tone.blank?
     if self.tone =~ /\d+/
@@ -256,6 +403,9 @@ class Song < ActiveRecord::Base
     end
   end
 
+  # Checks whether this song has got children tracks, and raises ActiveRecord::ReadOnlyRecord
+  # if it has. Used as a barrier to make songs with children tracks undeletable.
+  #
   def check_for_children_tracks
     raise ActiveRecord::ReadOnlyRecord if self.published? && self.children_tracks.count > 0
   end
