@@ -86,7 +86,7 @@ class MultitrackControllerTest < ActionController::TestCase
   end
 
   def test_should_update_song_when_encoding_completes
-    # First update a song that's still not published...
+    # First update a song that's still not published and without tracks...
     #
     get :update_song, :user_id => users(:quentin).id,
       :song_id => songs(:red_red_wine_unpublished).id,
@@ -95,7 +95,9 @@ class MultitrackControllerTest < ActionController::TestCase
     assert_response :success
     song = songs(:red_red_wine_unpublished).reload
 
-    # ...in order to verify that the new song notice has been sent
+    # ...in order to verify that the new song administrative notice has been
+    # queued. Because the song has got no tracks, no collaboration notification
+    # will be sent out.
     #
     assert song.published?
     assert_equal 'test.mp3', song.filename
@@ -108,10 +110,31 @@ class MultitrackControllerTest < ActionController::TestCase
       :song_id => songs(:red_red_wine_unpublished).id,
       :filename => 'test.mp3', :length => 10
 
-    # ...in order to verify that no new notice is being sent
+    # ...in order to verify that no new administrative notice is being generated.
     song = song.reload
     assert song.published?
     assert_equal 0, ActionMailer::Base.deliveries.size
+  end
+
+  def test_should_send_out_collaboration_notifications
+    song = songs(:closer)
+    song.update_attribute 'published', false
+    deny song.reload.published?
+
+    get :update_song, :user_id => users(:quentin),
+      :song_id => song.id, :filename => 'test.mp3',
+      :length => 5
+
+    assert_blank_response :success
+
+    song = song.reload
+
+    deny song.tracks.empty?
+    assert_equal 5, song.seconds
+
+    assert_equal 3, ActionMailer::Base.deliveries.size
+    assert_equal %w(activity@myousica.com mikaband@example.com aaron@example.com),
+      ActionMailer::Base.deliveries.map(&:to).flatten
   end
 
 end

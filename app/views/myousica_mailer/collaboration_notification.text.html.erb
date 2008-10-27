@@ -1,0 +1,16 @@
+<p class="p4"><span class="s2">Hi <%= @user.login %>,</span></p>
+<p class="p6"><br></p>
+<p class="p5"><span class="s2">Myousician <%= @song.user.login %> has used <%= pluralize(@tracks.size, 'track') %> uploaded by you.</span></p>
+
+<ul>
+<%- @tracks.each do |track| -%>
+<li><%= track.title %> (<%= track.genre.name rescue nil %>) <%= truncate(track.description, 40) %></li>
+<%- end -%>
+</ul>
+
+<p class="p5"><span class="s2">and created a new myousica song: <%= @song.title %> (<%= @song.genre.name %>, <%= truncate(@song.description, 40) %>).</span></p>
+
+<p class="p6"><br></p>
+
+<p class="p5"><span class="s2">You can listen to <%= @song.user.login %>'s song by clicking here: <%= APPLICATION[:url] %>/songs/<%= @song.id %>, or visit <%= @song.user.login %>'s personal page on myousica by clicking here: <%= APPLICATION[:url] %>/users/<%= @song.user.to_param %></span></p>.
+

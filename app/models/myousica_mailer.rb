@@ -4,8 +4,12 @@
 #
 # == Description
 #
-# This mailer sends out user help requests (HelpRequest model) and administrative
-# notifications when a new User, Song, Track or Answer is created.
+# This mailer sends out user help requests (HelpRequest model), collaboration
+# notifications and administrative ones when a new User, Song, Track or Answer
+# is created.
+#
+# Collaboration notifications are triggered when an user creates a new Song
+# using a Track from another user.
 #
 # Each method is self-documenting, help requests are sent from help@myousica.com
 # while administrivia comes from activity@myousica.com.
@@ -19,6 +23,17 @@ class MyousicaMailer < ActionMailer::Base
     @from       = request.email
     @sent_on    = sent_at
     @headers    = {}
+  end
+
+  def collaboration_notification(recipient, song, tracks)
+    @subject    = %[ Bravo! Myousician "#{song.user.login}" has used your tracks in a new myousica song! ]
+    @recipients = recipient.email
+    @from       = 'noreply@myousica.com'
+    @layout     = 'user_mailer'
+
+    @body[:user] = recipient
+    @body[:song] = song
+    @body[:tracks] = tracks
   end
 
   def new_user_notification(user)
