@@ -330,11 +330,11 @@ class User < ActiveRecord::Base
   end
 
   def self.find_most_instruments(options = {})
-    self.find(:all, options.merge(:select => 'users.*, count(tracks.instrument_id) AS instrument_count', :joins => 'LEFT JOIN tracks ON users.id = tracks.user_id', :conditions => "users.activated_at IS NOT NULL AND (users.type IS NULL OR users.type = 'User') AND tracks.instrument_id IS NOT NULL AND users.login != 'myousica'", :group => 'tracks.instrument_id', :order => 'instrument_count'))
+    self.find(:all, options.merge(:select => 'users.*, count(tracks.instrument_id) AS instrument_count', :joins => 'LEFT JOIN tracks ON users.id = tracks.user_id', :conditions => "users.activated_at IS NOT NULL AND (users.type IS NULL OR users.type = 'User') AND tracks.instrument_id IS NOT NULL AND users.login != 'myousica'", :group => 'tracks.instrument_id', :order => 'instrument_count DESC'))
   end
  
   def self.find_most_instruments_band_or_deejays(options = {})
-    self.find(:all, options.merge(:select => 'users.*, count(tracks.instrument_id) AS instrument_count', :joins => 'LEFT JOIN tracks ON users.id = tracks.user_id', :conditions => "users.activated_at IS NOT NULL AND (users.type = 'Band' OR users.type = 'Dj') AND tracks.instrument_id IS NOT NULL AND users.login != 'myousica'", :group => 'tracks.instrument_id', :order => 'instrument_count'))
+    self.find(:all, options.merge(:select => 'users.*, count(tracks.instrument_id) AS instrument_count', :joins => 'LEFT JOIN tracks ON users.id = tracks.user_id', :conditions => "users.activated_at IS NOT NULL AND (users.type = 'Band' OR users.type = 'Dj') AND tracks.instrument_id IS NOT NULL AND users.login != 'myousica'", :group => 'tracks.instrument_id', :order => 'instrument_count DESC'))
   end
 
   def self.find_online(options = {})
