@@ -1004,9 +1004,10 @@ tr.nav-song td{
 	color: #FFFFFF;
 	font-size: 15px;
 	display: block;
-	width: 235px;
+	width: 210px;
 	height: 20px;
-	padding: 18px 20px 14px;
+	overflow-y: hidden;
+	padding: 15px 50px 20px 15px;
 	border:0;
 }
 .white-box.mband .elements {
