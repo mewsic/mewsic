@@ -152,6 +152,10 @@ namespace :myousica do
     end
   end
 
+  def rsync(local, remote)
+    sh("rsync -rlt4 --exclude README.html --exclude HEADER.html --exclude .htaccess #{local} ulisse.adelao.it:/var/www/intranet/#{remote}")
+  end
+
   namespace :doc do
     allison = %[allison --all --line-numbers --inline-source --charset utf-8]
 
@@ -183,10 +187,10 @@ namespace :myousica do
     desc "Sync documentation on ulisse"
     task :sync => :environment do
       puts "R-syncing app doc"
-      sh "rsync -r #{RAILS_ROOT}/doc/app/* ulisse.adelao.it:/var/www/intranet/rdoc/myousica"
+      rsync "#{RAILS_ROOT}/doc/app/*", "rdoc/myousica"
 
       puts "R-syncing plugins doc"
-      sh "rsync -r #{RAILS_ROOT}/doc/plugins/* ulisse.adelao.it:/var/www/intranet/rdoc/myousica/plugins"
+      rsync "#{RAILS_ROOT}/doc/plugins/*", "rdoc/myousica/plugins"
     end
   end
 
@@ -199,7 +203,7 @@ namespace :myousica do
       Task['test:integration:rcov'].invoke
 
       puts "R-syncing to ulisse.adelao.it"
-      `rsync -vvr #{RAILS_ROOT}/coverage/* ulisse.adelao.it:/var/www/intranet/rcov/myousica`
+      rsync "#{RAILS_ROOT}/coverage/*", "rcov/myousica"
     end
   end
   
