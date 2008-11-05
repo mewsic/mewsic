@@ -7,7 +7,7 @@ namespace :myousica do
 
   desc "Create all required myousica directories"
   task :directories => :environment do
-    Task['tmp:create'].invoke
+    Rake::Task['tmp:create'].invoke
     mkdir_p 'index'
     mkdir_p 'log'
   end
@@ -198,9 +198,9 @@ namespace :myousica do
     desc "Sync coverage on ulisse"
     task :sync => :environment do
       puts "Running coverage tests"
-      Task['test:units:rcov'].invoke
-      Task['test:functionals:rcov'].invoke
-      Task['test:integration:rcov'].invoke
+      Rake::Task['test:units:rcov'].invoke
+      Rake::Task['test:functionals:rcov'].invoke
+      Rake::Task['test:integration:rcov'].invoke
 
       puts "R-syncing to ulisse.adelao.it"
       rsync "#{RAILS_ROOT}/coverage/*", "rcov/myousica"
