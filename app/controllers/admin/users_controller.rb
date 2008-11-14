@@ -4,11 +4,11 @@ class Admin::UsersController < Admin::AdminController #:nodoc:
   end
   
   def show
-    @user = User.find(params[:id])
+    @user = User.find_from_param(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = User.find_from_param(params[:id])
     if @user.update_attributes! params[:user]
       render(:update) { |page| page.hide 'editing' }
     else
