@@ -49,10 +49,12 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :songs, :has_one => :player, 
     :member => { :mix => :post, :load_track => :put, :unload_track => :put, :rate => :put , :tracks => :get, :download => :get, :confirm_destroy => :get } do |song|
     song.resources :abuses
+    song.increment 'i', :controller => 'players', :action => 'increment', :conditions => {:method => :put}
   end
  
   map.resources :tracks, :has_one => :player, :member => { :rate => :put, :toggle_idea => :put, :download => :get, :confirm_destroy => :get } do |track|
     track.resources :abuses
+    track.increment 'i', :controller => 'players', :action => 'increment', :conditions => {:method => :put}
   end
   
   map.search '/search', :controller => 'search', :action => 'show', :format => 'html', :conditions => { :method => :get }

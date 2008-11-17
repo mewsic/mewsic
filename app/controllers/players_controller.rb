@@ -25,8 +25,22 @@ class PlayersController < ApplicationController
   # player is loaded, leading to easy abuse. It will be fixed soon.
   #
   def show
-    @playable.increment_listened_times    
-    @waveform = send("formatted_#{@playable.class.name.underscore}_path", @playable, 'png')
+    redirect_to '/' and return unless @playable
+
+    session[:playcount_barrier] = Time.now.to_i + @playable.seconds/2
+    @playable_type = @playable.class.name.underscore
+    @playcount_path = send("#{@playable_type}_increment_path", @playable)
+    @waveform = send("formatted_#{@playable_type}_path", @playable, 'png')
+  end
+
+  def increment
+    if session[:playcount_barrier].nil? || Time.now.to_i < session[:playcount_barrier]
+      head :bad_request
+    else
+      @playable.increment_listened_times
+      head :ok
+    end
+    session[:playcount_barrier] = nil
   end
   
 private

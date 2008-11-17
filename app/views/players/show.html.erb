@@ -5,11 +5,13 @@
 
 	var flashvars = {
 		serverPath: '<%= APPLICATION[:url] %>',
+		playcountPath: '<%= @playcount_path %>',
 		soundLength: <%= @playable.seconds %>,
 		soundID: <%= @playable.id %>,
-		soundType: '<%= @playable.class.name.underscore %>',
+		soundType: '<%= @playable_type %>',
 		soundPath: '<%= escape_javascript @playable.public_filename %>',
 		wavePath: '<%= escape_javascript @waveform %>',
+		countPath: '<%= @increment_path %>',
 		title: '<%= escape_javascript @playable.title %>',
 		author: '<%= escape_javascript @playable.original_author %>',
 		genre: '<%= escape_javascript @playable.genre.name rescue nil %>',
