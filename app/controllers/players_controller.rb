@@ -14,7 +14,7 @@ class PlayersController < ApplicationController
   
   layout false
 
-  before_filter :redirect_to_root_unless_xhr
+  before_filter :redirect_to_root_unless_xhr, :except => :increment
   before_filter :find_playable
 
   # ==== XHR GET /songs/:song_id/player.html

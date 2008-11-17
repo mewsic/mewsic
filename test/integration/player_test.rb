@@ -15,13 +15,13 @@ class PlayerTest < ActionController::IntegrationTest
     assert_equal listened_times, song.reload.listened_times
     assert_equal "/songs/#{song.id}/i", assigns(:playcount_path)
 
-    xml_http_request :put, "/songs/#{song.id}/i"
+    put "/songs/#{song.id}/i"
     assert_response :bad_request
     assert_equal listened_times, song.reload.listened_times
 
     sleep song.seconds/2
 
-    xml_http_request :put, "/songs/#{song.id}/i"
+    put "/songs/#{song.id}/i"
     assert_response :bad_request
     assert_equal listened_times, song.reload.listened_times
   end
@@ -36,7 +36,7 @@ class PlayerTest < ActionController::IntegrationTest
 
     sleep song.seconds/2
 
-    xml_http_request :put, "/songs/#{song.id}/i"
+    put "/songs/#{song.id}/i"
     assert_response :success
     assert_equal listened_times + 1, song.reload.listened_times
   end
@@ -50,13 +50,13 @@ class PlayerTest < ActionController::IntegrationTest
     assert_equal listened_times, track.reload.listened_times
     assert_equal "/tracks/#{track.id}/i", assigns(:playcount_path)
 
-    xml_http_request :put, "/tracks/#{track.id}/i"
+    put "/tracks/#{track.id}/i"
     assert_response :bad_request
     assert_equal listened_times, track.reload.listened_times
 
     sleep track.seconds/2
 
-    xml_http_request :put, "/tracks/#{track.id}/i"
+    put "/tracks/#{track.id}/i"
     assert_response :bad_request
     assert_equal listened_times, track.reload.listened_times
   end
@@ -71,7 +71,7 @@ class PlayerTest < ActionController::IntegrationTest
 
     sleep track.seconds/2
 
-    xml_http_request :put, "/tracks/#{track.id}/i"
+    put "/tracks/#{track.id}/i"
     assert_response :success
     assert_equal listened_times + 1, track.reload.listened_times
   end
