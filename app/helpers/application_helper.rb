@@ -192,6 +192,23 @@ module ApplicationHelper
     request.headers['HTTP_USER_AGENT'] =~ /MSIE #{version}\.\d+/
   end
 
+  def notification_url(path)
+    APPLICATION[:url] + path
+  end
+
+  # Builds an anchor element using the APPLICATION[:url] URI base.
+  # Used in e-mail notifications, where the context doesn't contain
+  # the current site URI base.
+  #
+  def notification_link_to(text, path = nil)
+    if path.nil?
+      path = notification_url(text)
+      link_to path, path
+    else
+      link_to text, notification_url(path)
+    end
+  end
+
 end
 
 class AjaxUploadFormBuilder < ActionView::Helpers::FormBuilder

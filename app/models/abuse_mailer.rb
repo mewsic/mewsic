@@ -5,6 +5,7 @@
 # This is the mailer that sends out abuse notifications.
 #
 class AbuseMailer < ActionMailer::Base
+  helper :application
 
   # Sends out an abuse notification to abuse@myousica.com from no-reply@myousica.com
   #

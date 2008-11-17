@@ -1,22 +1,21 @@
 class UserMailer < ActionMailer::Base
+  helper :application
+
   def signup_notification(user)
     with_user_email_for(user) do
       @subject    << 'Welcome! Please activate your account'
-      @body[:url]  = APPLICATION[:url] + "/activate/#{user.activation_code}"
     end
   end
   
   def activation(user)
     with_user_email_for(user) do
       @subject    << 'Your account has been activated!'
-      @body[:url]  = APPLICATION[:url]
     end
   end
   
   def forgot_password(user)
     with_user_email_for(user) do
       @subject    << 'Request to change your password'
-      @body[:url]  = APPLICATION[:url] + "/reset_password/#{user.password_reset_code}" 
     end
   end
 
@@ -29,7 +28,6 @@ class UserMailer < ActionMailer::Base
   def admire_notification(user, admirer)
     with_user_email_for(user) do
       @subject        << 'You have a new admirer!'
-      @body[:url]      = APPLICATION[:url] + "/users/#{admirer.to_param}"
       @body[:admirer]  = admirer
     end
   end
@@ -37,7 +35,6 @@ class UserMailer < ActionMailer::Base
   def friendship_notification(user, friend)
     with_user_email_for(user) do
       @subject       << "You are now friends with #{friend.login}"
-      @body[:url]     = APPLICATION[:url] + "/users/#{friend.to_param}"
       @body[:friend]  = friend
     end
   end
@@ -45,9 +42,7 @@ class UserMailer < ActionMailer::Base
   def message_notification(message)
     with_user_email_for(message.recipient) do
       @subject       << "#{message.sender.login} has sent you a message!"
-      @body[:sender]  = message.sender
-      @body[:profile] = APPLICATION[:url] + "/users/#{message.sender.to_param}"
-      @body[:inbox]   = APPLICATION[:url] + "/users/#{message.recipient.to_param}#inbox"
+      @body[:message] = message
     end
   end
 
@@ -56,8 +51,15 @@ class UserMailer < ActionMailer::Base
       @subject       << 'M-band invitation!'
       @body[:user]    = membership.mband.leader
       @body[:mband]   = membership.mband
-      @body[:url]     = APPLICATION[:url] + "/mbands/#{membership.mband.to_param}"
-      @body[:accept]  = APPLICATION[:url] + "/mband_memberships/accept/#{membership.membership_token}"
+      @body[:token]   = membership.membership_token
+    end
+  end
+
+  def collaboration_notification(recipient, song, tracks)
+    with_user_email_for(recipient) do
+      @subject    << %[ Bravo! Myousician "#{song.user.login}" has used your tracks in a new myousica song! ]
+      @body[:song] = song
+      @body[:tracks] = tracks
     end
   end
 

@@ -1,2 +1,2 @@
 <p class="p4"><span class="s2"><strong>Bravo!</strong></span></p>
-<p class="p5"><span class="s2">Myousician <a href="<%= @url %>"><%= @friend.login %></a> admires you too. You are now friends!</span></p>
+<p class="p5"><span class="s2">Myousician <%= notification_link_to @friend.login, user_path(@friend) %> admires you too. You are now friends!</span></p>

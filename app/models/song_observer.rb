@@ -17,7 +17,7 @@ class SongObserver < ActiveRecord::Observer
 
     # Deliver collaboration notification to all the participants of the song
     collaborations.each do |user, tracks|
-      MyousicaMailer.deliver_collaboration_notification(user, song, tracks)
+      UserMailer.deliver_collaboration_notification(user, song, tracks)
     end
 
   end

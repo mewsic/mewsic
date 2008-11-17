@@ -1,8 +1,8 @@
-<p>Sender: <%= @sender.class.name %> <%= @sender.login %> (<%= APPLICATION[:url] + user_path(@sender) %>)</p>
+<p>Sender: <%= @sender.class.name %> <%= @sender.login %> (<%= notification_url user_path(@sender) %>)</p>
 <p>Date: <%= @abuse.created_at %></p>
 <p>Abuseable: <%= @abuseable.class.name %></p>
 <p>ID: <%= @abuseable.id %></p>
-<p>URI: <%= APPLICATION[:url] + send("#{@abuseable.class.name.downcase}_path", @abuseable) %></p>
+<p>URI: <%= notification_url send("#{@abuseable.class.name.downcase}_path", @abuseable) %></p>
 <p>Topic: <%= @abuse.topic %></p>
 
 <p>Comments follow.</p>

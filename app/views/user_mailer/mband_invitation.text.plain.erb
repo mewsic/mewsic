@@ -1,5 +1,5 @@
-Myousician <%= @user.login %> has invited you to join <%= @mband.name %> [<%= @url %>] M-Band and play together.
+Myousician <%= @user.login %> has invited you to join <%= @mband.name %> [<%= notification_url mband_path(@mband) %>] M-Band and play together.
 
 Click on the link below to join the M-band!
 
-  <%= @accept %>
+  <%= notification_url accept_mband_membership_path(@token) %>

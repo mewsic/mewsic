@@ -15,6 +15,7 @@
 # while administrivia comes from activity@myousica.com.
 #
 class MyousicaMailer < ActionMailer::Base
+  helper :application
 
   def help_request(request, sent_at = Time.now)
     @subject    = 'Myousica Help Question'
@@ -23,17 +24,6 @@ class MyousicaMailer < ActionMailer::Base
     @from       = request.email
     @sent_on    = sent_at
     @headers    = {}
-  end
-
-  def collaboration_notification(recipient, song, tracks)
-    @subject    = %[ Bravo! Myousician "#{song.user.login}" has used your tracks in a new myousica song! ]
-    @recipients = recipient.email
-    @from       = 'noreply@myousica.com'
-    @layout     = 'user_mailer'
-
-    @body[:user] = recipient
-    @body[:song] = song
-    @body[:tracks] = tracks
   end
 
   def new_user_notification(user)

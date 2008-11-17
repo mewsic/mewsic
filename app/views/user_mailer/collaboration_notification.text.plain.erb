@@ -8,5 +8,5 @@ Myousician <%= @song.user.login %> has used <%= pluralize(@tracks.size, 'track')
 
 and created a new myousica song: <%= @song.title %> (<%= @song.genre.name %>, <%= truncate(@song.description, 40) %>).
 
-You can listen to <%= @song.user.login %>'s song by clicking here: <%= APPLICATION[:url] %>/songs/<%= @song.id %>, or visit <%= @song.user.login %>'s personal page on myousica by clicking here: <%= APPLICATION[:url] %>/users/<%= @song.user.to_param %>.
+You can listen to <%= @song.user.login %>'s song by clicking here: <%= notification_url song_path(@song) %>, or visit <%= @song.user.login %>'s personal page on myousica by clicking here: <%= notification_url user_path(@song.user) %>.
 

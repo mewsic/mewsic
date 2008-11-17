@@ -4,4 +4,4 @@ Country: <%= @user.country %>
 City   : <%= @user.city %>
 Name   : <%= @user.first_name %> <%= @user.last_name %>
 
-<%= APPLICATION[:url] %><%= user_path(@user) %>
+<%= notification_url user_path(@user) %>

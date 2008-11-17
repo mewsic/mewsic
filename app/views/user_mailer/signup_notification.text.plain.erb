@@ -3,7 +3,7 @@ Welcome in the most open and innovative community about music!
 
 Please click this link to activate your account:
 
-  <%= @url %>
+  <%= notification_url activate_path(@user.activation_code) %>
 
 Your login data:
 Username: <%= @user.login %>

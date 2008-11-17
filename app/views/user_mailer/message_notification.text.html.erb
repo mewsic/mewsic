@@ -1,5 +1,5 @@
-<p class="p4"><span class="s2">You have a new message from <a href="<%= @profile %>"><strong><%= @sender.login %></strong></a>.</span></p>
+<p class="p4"><span class="s2">You have a new message from <strong><%= notification_link_to @message.sender.login, user_path(@message.sender) %></strong>.</span></p>
 <p class="p6"><span class="s2"></span><br></p>
 <p class="p5"><span class="s2">You can read your message by clicking on the link below: </span></p>
 <p class="p6"><span class="s2"></span><br></p>
-<p class="p5"><span class="s2"><a href="<%= @inbox %>"><%= @inbox %></a></span></p>
+<p class="p5"><span class="s2"><%= notification_link_to user_path(@message.recipient) + '#inbox' %></span></p>

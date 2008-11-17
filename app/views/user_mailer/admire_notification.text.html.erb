@@ -1,6 +1,6 @@
-<p class="p4"><span class="s2"><strong><a href="<%= @url %>"><%= @admirer.login %></a></strong> admires you.</span></p>
+<p class="p4"><span class="s2"><strong><%= notification_link_to @admirer.login, user_path(@admirer) %></strong> admires you.</span></p>
 <p class="p6"><br></p>
 <p class="p5"><span class="s2">If you wanna become friend with <%= @admirer.him %>, you have to admire <%= @admirer.login %> back</span></p>
 <p class="p5"><span class="s2">from <%= @admirer.his %> page, by clicking on the link below:</span></p>
 <p class="p6"><br></p>
-<p class="p5"><span class="s2"><a href="<%= @url %>"><%= @url %></a></span></p>
+<p class="p5"><span class="s2"><%= notification_link_to @admirer.login, user_path(@admirer) %></span></p>

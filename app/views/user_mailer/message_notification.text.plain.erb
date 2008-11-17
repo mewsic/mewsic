@@ -1,5 +1,5 @@
-You have a new message from <%= @sender.login %> [<%= @profile %>]
+You have a new message from <%= @message.sender.login %> [<%= notification_url user_path(@message.sender) %>]
 
 You can read your message by clicking on the link below: 
 
-  <%= @inbox %>
+  <%= notification_url user_path(@message.recipient) + '#inbox' %>

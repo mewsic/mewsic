@@ -5,4 +5,4 @@ Tone  : <%= @track.tonality %>
 Length: <%= @track.length %>
 Genre : <%= @track.genre %>
 
-<%= APPLICATION[:url] %><%= @track.public_filename %>
+<%= notification_url @track.public_filename %>
