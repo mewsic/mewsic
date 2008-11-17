@@ -96,10 +96,10 @@ class AnswersController < ApplicationController
 
   # ==== GET /answers/rss.xml
   #
-  # Generates an RSS feed of the 20 newest answers
+  # Generates an RSS feed of the last 20 answers
   #
   def rss
-    @answers = Answer.find_newest_paginated 1, :per_page => 20
+    @answers = Answer.find :all, :order => 'answers.created_at DESC', :limit => 20
 
     respond_to do |format|
       format.xml
