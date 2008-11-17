@@ -51,7 +51,7 @@ class Track < ActiveRecord::Base
   belongs_to :instrument
 
   validates_presence_of :title, :tonality, :seconds
-  validates_associated :instrument, :parent_song, :owner
+  validates_associated :instrument, :parent_song #, :owner
   validates_numericality_of :song_id, :greater_than => 0, :on => :create
   validates_numericality_of :instrument_id, :user_id, :greater_than => 0
 
