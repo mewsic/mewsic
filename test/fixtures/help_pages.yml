@@ -36,3 +36,12 @@ multitrack:
   body: this is just a placeholder for tests
   url: multitrack
   position: 4
+
+mypage:
+  title: "Mypage help"
+  body: '<div id="video"></div>
+    <script type="text/javascript" src="/javascripts/help.js"></script>
+    <script type="text/javascript">embedVideo("video", "myousica_help_mypage", 193)</script>'
+  url: mypage
+  position: 5
+

@@ -1,5 +1,7 @@
 <script type="text/javascript">// <![CDATA[
 
+	var VideoPlayer = '/players/Adelao_Myousica_Video_Player.swf';
+
 	function setFlashHeight(height) {
 		$(Video.instance.element).style.height = height.toString() + 'px';
 	}
@@ -12,18 +14,20 @@
 
 	function fullscreen_video() {
 		Lightview.show({
-			href: Video.instance.highres,
-			rel: 'quicktime',
+			href: VideoPlayer,
+			rel: 'flash',
 			title: 'MYOUSICA :: PLAY AND SHARE :: ' + Video.instance.description,
 			options: {
-				width: 600, height: 480, topclose: false, menubar: true
+				width: 600, height: 480, topclose: false, menubar: true,
+				flashvars: "videoURL=" + Video.instance.highres +
+					"&videoLength=" + Video.instance.length +
+					"&autoPlay=true&hideFullscreen=true"
 			}
 		});
 	}
 
 	var Video = Class.create({
 		initialize: function() {
-			this.player = '/players/Adelao_Myousica_Video_Player.swf';
 			this.element = 'video-player';
 			this.scroller = 'video-scroller';
 			this.container = 'video-container';
@@ -42,6 +46,7 @@
 				'top': new Element('div', {id: this.element})
 			});
 
+			this.length = video.length;
 			this.highres = video.highres;
 			this.description = video.description;
 
@@ -60,7 +65,7 @@
 
 			var attributes = {name: 'videoPlayer'};
 
-			swfobject.embedSWF(this.player, this.element, '220', '130', '9.0.0', '/expressInstall.swf', flashvars, params, attributes);
+			swfobject.embedSWF(VideoPlayer, this.element, '220', '130', '9.0.0', '/expressInstall.swf', flashvars, params, attributes);
 		},
 
 		setupLinks: function() {
