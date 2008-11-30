@@ -9,6 +9,8 @@
 # This simple controller generates users' and mbands' podcasts.
 #
 class PodcastsController < ApplicationController
+  session :off
+
   # ==== GET /users/:user_id/:user_id.pcast
   #
   # Renders the very simple pcast format that describes iTunes where to find
