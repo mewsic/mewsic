@@ -64,7 +64,11 @@
 	<dd><%= @user.rating_avg.to_f %></dd>
 
 	<dt>activated at</dt>
-	<dd><%= @user.activated_at || 'INACTIVE' %></dd>
+	<dd>
+		<%= f.text_field :activated_at, :readonly => true %>
+		<%= check_box_tag :active, (@user.activated_at || Time.now).to_s(:db), !!@user.activated_at,
+			:onchange => "$('user_activated_at').value = this.checked ? this.value : ''" %>
+	</dd>
 
 </dl>
 <%= submit_tag 'submit' %>
