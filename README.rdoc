@@ -51,3 +51,5 @@ Other useful tasks are defined in lib/tasks/utils.rake:
 == Now?
 
 Complete Rdoc is available at https://ulisse.adelao.it/rdoc/myousica
+
+Enjoy!
