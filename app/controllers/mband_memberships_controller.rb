@@ -69,10 +69,14 @@ class MbandMembershipsController < ApplicationController
   #
   def accept
     @membership = MbandMembership.find(:first, :conditions => ["membership_token = ?", params[:token]])
-    @membership.accept!
-
-    flash[:notice] = "Invitation has been accepted"
-    redirect_to mband_url(@membership.mband)
+    if @membership.accepted_at.nil?
+      @membership.accept!
+      flash[:notice] = "Invitation has been accepted"
+      redirect_to mband_url(@membership.mband)
+    else
+      flash[:notice] = "You're already a member of this M-band"  
+      redirect_to mband_url(@membership.mband)
+    end
   end
 
   # ==== GET /mband_memberships/decline/:token
@@ -81,10 +85,15 @@ class MbandMembershipsController < ApplicationController
   #
   def decline
     @membership = MbandMembership.find(:first, :conditions => ["membership_token = ?", params[:token]])
-    @membership.destroy
-
-    flash[:notice] = "Invitation has been declined"
-    redirect_to user_url(current_user)
+    if @membership.accepted_at.nil?
+      @membership.destroy
+      flash[:notice] = "Invitation has been declined"
+      redirect_to user_url(current_user)
+    else
+      flash[:notice] = "You cannot decline this invitation anymore"  
+      redirect_to mband_url(@membership.mband)
+    end
+      
   end
 
 private
