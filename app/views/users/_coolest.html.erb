@@ -1,1 +1,21 @@
-<%# empty, see UsersController#top to know why %>
+<div class="people-list clear-block">
+  <h1>COOLEST</h1>
+  <div class="top-box clear-block">
+	  <div class="bottom-box clear-block">
+      <%= render :partial => 'shared/person', :collection => @coolest, :locals => {:color => "blue"} %>			  
+	  </div>
+  </div>
+	<p class="next">
+		<span class="align-right page-count">Page <%= @coolest.current_page %> of <%= @coolest.page_count %></span>
+    <% if @coolest.previous_page %>
+			<%= link_to image_tag('move_arrow_left.png'), coolest_users_path(:page => @coolest.previous_page), :class => 'navigation' %>
+		<% else %>
+			<%= image_tag('move_arrow_left.png', :class => 'faded') %>
+	  <% end %>
+    <% if @coolest.next_page %>
+			<%= link_to image_tag('move_arrow_right.png'), coolest_users_path(:page => @coolest.next_page), :class => 'navigation' %>
+		<% else %>
+			<%= image_tag('move_arrow_right.png', :class => 'faded') %>
+	  <% end %>
+  </p>
+</div>
