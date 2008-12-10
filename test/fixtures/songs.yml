@@ -202,6 +202,36 @@ song_<%= i + 4 %>:
   bpm: 133
   key: <%= Myousica.key(t) %>
 <% end %>
+<% 1000.times do |i| %>
+song_<%= i + 4 %>:
+  title: <%= shuffle(%w( Love Honesty Roma Sex Radio Let It Be Radio Want I Live Forever My Way Bohemian Rhapsody )) %>
+  user: <%= "band_#{rand(497) + 3}" %>
+  original_author: <%= %w(Queen Beatles Elvis Vasco R.E.M.)[rand(5)] %>
+  description: "This is one of the most famous songs made in the '80th"
+  genre: <%= random_genre %>
+  listened_times: <%= rand(1000) %>
+  created_at: <%= (rand(30)).days.ago.to_s :db %>
+  tone: <%= t = ('A'..'F').to_a[rand(6)] %>
+  seconds: <%= rand(300) %>
+  filename: test.mp3
+  bpm: 133
+  key: <%= Myousica.key(t) %>
+<% end %>
+<% 1000.times do |i| %>
+song_<%= i + 4 %>:
+  title: <%= shuffle(%w( Love Honesty Roma Sex Radio Let It Be Radio Want I Live Forever My Way Bohemian Rhapsody )) %>
+  user: <%= "dj_#{rand(497) + 3}" %>
+  original_author: <%= %w(Queen Beatles Elvis Vasco R.E.M.)[rand(5)] %>
+  description: "This is one of the most famous songs made in the '80th"
+  genre: <%= random_genre %>
+  listened_times: <%= rand(1000) %>
+  created_at: <%= (rand(30)).days.ago.to_s :db %>
+  tone: <%= t = ('A'..'F').to_a[rand(6)] %>
+  seconds: <%= rand(300) %>
+  filename: test.mp3
+  bpm: 133
+  key: <%= Myousica.key(t) %>
+<% end %>
 <% 100.times do |i| %>
 song_aaron_<%= i + 4 %>:
   title: <%= shuffle(%w( Love Honesty Roma Sex Radio Let It Be Radio Want I Live Forever My Way Bohemian Rhapsody )) %>
