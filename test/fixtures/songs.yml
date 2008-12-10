@@ -203,7 +203,7 @@ song_<%= i + 4 %>:
   key: <%= Myousica.key(t) %>
 <% end %>
 <% 1000.times do |i| %>
-song_<%= i + 4 %>:
+song_<%= i + 1004 %>:
   title: <%= shuffle(%w( Love Honesty Roma Sex Radio Let It Be Radio Want I Live Forever My Way Bohemian Rhapsody )) %>
   user: <%= "band_#{rand(497) + 3}" %>
   original_author: <%= %w(Queen Beatles Elvis Vasco R.E.M.)[rand(5)] %>
@@ -218,7 +218,7 @@ song_<%= i + 4 %>:
   key: <%= Myousica.key(t) %>
 <% end %>
 <% 1000.times do |i| %>
-song_<%= i + 4 %>:
+song_<%= i + 2004 %>:
   title: <%= shuffle(%w( Love Honesty Roma Sex Radio Let It Be Radio Want I Live Forever My Way Bohemian Rhapsody )) %>
   user: <%= "dj_#{rand(497) + 3}" %>
   original_author: <%= %w(Queen Beatles Elvis Vasco R.E.M.)[rand(5)] %>
