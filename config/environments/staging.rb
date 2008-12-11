@@ -26,7 +26,8 @@ config.action_controller.session = {
 # config.action_mailer.raise_delivery_errors = false
 config.action_mailer.delivery_method = :staging
 config.action_mailer.default_content_type = 'text/html'
-module ActionMailer
+
+module ::ActionMailer
   class Base
     def perform_delivery_staging(mail)
       mail.to = 'staging@myousica.com'
