@@ -12,23 +12,11 @@ require 'eycap/recipes'
 
 set :keep_releases, 5
 set :application,   'myousica'
-set :repository,    'git@myousica_github.com:vjt/myousica.git'
-set :user,          'adelaosrl'
-set :password,      'dshUak8s'
-set :deploy_to,     "/data/#{application}"
-set :deploy_via,    :filtered_remote_cache
-set :repository_cache,    "/var/cache/engineyard/#{application}"
-set :monit_group,   'myousica'
 set :scm,           :git
 
 # This will execute the Git revision parsing on the *remote* server rather than locally
 set :real_revision, 			lambda { source.query_revision(revision) { |cmd| capture(cmd) } }
 #
-set :production_database,'myousica_production'
-set :production_dbhost, 'mysql50-3-master'
-#
-set :dbuser, 'adelaosrl_db'
-set :dbpass, '4asrsWrh'
 
 # comment out if it gives you trouble. newest net/ssh needs this set.
 ssh_options[:paranoid] = false
@@ -43,6 +31,19 @@ ssh_options[:paranoid] = false
 # :primary => true.
 
 task :production do
+  set :user,          'adelaosrl'
+  set :password,      'dshUak8s'
+
+  set :dbuser, 'adelaosrl_db'
+  set :dbpass, '4asrsWrh'
+  set :dbhost, 'mysql50-3-master'
+  set :dbname, 'myousica_production'
+
+  set :deploy_to,     "/data/#{application}"
+  set :deploy_via,    :filtered_remote_cache
+  set :repository,    'git@myousica_github.com:vjt/myousica.git'
+  set :repository_cache,    "/var/cache/engineyard/#{application}"
+  set :monit_group,   'myousica'
   
   role :web, '65.74.174.196:8221' # mongrel, mongrel
   role :app, '65.74.174.196:8221', :mongrel => true, :sphinx => true
@@ -51,8 +52,38 @@ task :production do
   role :app, '65.74.174.196:8222', :no_release => true, :mongrel => true, :sphinx => true
   
   set :rails_env, 'production'
-  set :environment_database, defer { production_database }
-  set :environment_dbhost, defer { production_dbhost }
+
+  set :environment_database, defer { dbname }
+  set :environment_dbhost, defer { dbhost }
+end
+
+task :staging do
+  set :user, 'myousica'
+  set :password, 'plies25}chis'
+
+  set :dbuser, 'myousica'
+  set :dbpass, 'Leann82-full'
+  set :dbname, 'myousica'
+  set :dbhost, 'localhost'
+
+  set :deploy_to, "/srv/rails/#{application}"
+  set :deploy_via,    :filtered_remote_cache
+  set :repository,    'git@github.com:vjt/myousica.git'
+  set :repository_cache,    "/var/cache/rails/#{application}"
+
+  role :web, '89.97.211.110'
+  role :app, '89.97.211.110'
+  role :db, '89.97.211.110', :primary => :true
+
+  set :rails_env, 'staging'
+  set :environment_database, defer { dbname }
+  set :environment_dbhost, defer { dbhost }
+
+  namespace :deploy do
+    task :restart do
+      run "touch #{current_path}/tmp/restart.txt"
+    end
+  end
 end
 
 # =============================================================================
