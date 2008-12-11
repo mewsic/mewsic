@@ -1,49 +1,40 @@
 <% title "Myousica - Bands & Deejays" %>
 <% meta_description "Myousica is the first open music community. Play with thousands of bands & deejays, create a virtual band, record, mix and share your favourite songs" %>
-<% javascript('simple-slider', 'refresh-block', 'bands_and_deejays') %>
+<% javascript('simple-slider', 'refresh-block', 'loading', 'bands_and_deejays') %>
 <div class="box-list one-col clear-block">
-  <div class="people-list clear-block">
-	  <h1>COOLEST</h1>
-	  <div class="top-box clear-block">
-		  <div class="bottom-box clear-block">
-        <%= render :partial => 'shared/person', :collection => @coolest, :locals => {:color => "blue"} %>			  
-		  </div>
-	  </div>
+  <div id="coolest-spinner" style="display:none;">
+  	<%= image_tag 'track-spinner-big.gif' %>
+  </div>
+  <div id="coolest-users">
+  	<%= render :partial => 'coolest' %>
   </div>
 </div>
 
 <div class="box-list two-col clear-block">
-  <div class="bands-dj-list clear-block">
-    <h1>BEST MYOUSICIANS</h1>
-	  <div class="top-box clear-block">
-		  <div class="bottom-box clear-block">
-		    <%= render :partial => 'shared/band', :collection => @best_myousicians %>
-		  </div>
-	  </div>	
+  <div id="best-spinner" style="display:none;">
+  	<%= image_tag 'track-spinner-big.gif' %>
+  </div>
+  <div id="best-users">
+  	<%= render :partial => 'best' %>
   </div>
 </div>
 
 <div class="box-list one-col clear-block clear-float">
-  
-  <div class="simple-list clear-block">
-	  <h1>MOST SONGS</h1>
-	  <div class="yellow-box top-box clear-block">
-		  <div class="bottom-box clear-block">
-        <%= render :partial => 'users/person_short', :collection => @prolific %>
-		  </div>
-	  </div>
+  <div id="prolific-spinner" style="display:none;">
+  	<%= image_tag 'track-spinner-big.gif' %>
   </div>
-
-  <div class="simple-list yellow-box clear-block">
-    <h1>NEWEST</h1>
-    <div class="top-box clear-block">
-	    <div class="bottom-box clear-block" id="newest-users">
-        <%= render :partial => 'users/person_medium', :collection => @newest %>			
-	    </div>
-    </div>
-  </div>		
-  
+  <div id="prolific-users">
+  	<%= render :partial => 'prolific' %>
+  </div>
+  <div id="newest-spinner" style="display:none;">
+		<%= image_tag 'track-spinner-big.gif' %>
+	</div>
+	<div id="newest-users">
+		<%= render :partial => 'newest' %>
+	</div>
 </div>
+
+
 
 <div class="box-list two-col clear-block user-list-boxes">
   <div class="box-rounded-gray clear-block" id="most-admirers">

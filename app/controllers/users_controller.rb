@@ -31,13 +31,45 @@ class UsersController < ApplicationController
   # User#find_friendliest, User#find_newest, User#find_most_instruments and Mband#find_coolest.
   #
   def index
-    @coolest = User.find_coolest         :limit => 9
-    @best_myousicians = User.find_best   :limit => 3
-    @prolific = User.find_prolific       :limit => 3
-    @friendliest = User.find_friendliest :limit => 1
-    @coolest_mbands = Mband.find_coolest :limit => 1
-    @newest = User.find_newest           :limit => 3
-    @most_instruments = User.find_most_instruments :limit => 1
+    @coolest = User.find_paginated_coolest          :limit => 9    
+    @best_myousicians = User.find_paginated_best    :page => 1, :per_page => 3    
+    @prolific = User.find_paginated_prolific        :limit => 3
+    @friendliest = User.find_friendliest            :limit => 1
+    @coolest_mbands = Mband.find_coolest            :limit => 1
+    @newest = User.find_paginated_newest            :page => 1, :per_page => 3
+    @most_instruments = User.find_most_instruments  :limit => 1
+  end
+
+  # ==== XHR GET /users/newest?page=N
+  #
+  # Paginate and render newest users for the topmost page blocks. Called via XHR.
+  def newest
+    @newest = User.find_paginated_newest :page => params[:page], :per_page => 3
+    render :partial => 'newest'
+  end
+ 
+  # ==== XHR GET /users/coolest?page=N
+  #
+  # Paginate and render coolest users for the topmost page blocks. Called via XHR. 
+  def coolest
+    @coolest = User.find_paginated_coolest :page => params[:page], :per_page => 9
+    render :partial => 'coolest'
+  end
+
+  # ==== XHR GET /users/prolific?page=N
+  #
+  # Paginate and render most prolific users for the topmost page blocks. Called via XHR.
+  def prolific
+    @prolific = User.find_paginated_prolific :page => params[:page], :per_page => 3
+    render :partial => 'prolific'
+  end
+  
+  # ==== XHR GET /users/best?page=N
+  #
+  # Paginate and render best myousicians for the topmost page blocks. Called via XHR.
+  def best
+    @best_myousicians = User.find_paginated_best_bands_and_deejays :page => params[:page], :per_page => 3
+    render :partial => 'best'
   end
 
   # ==== GET /signup
