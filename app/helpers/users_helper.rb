@@ -136,5 +136,5 @@ module UsersHelper
       link_to text || 'Admire', user_friendships_path(current_user, :friend_id => user.id), :method => 'post'
     end
   end
-end
 
+end

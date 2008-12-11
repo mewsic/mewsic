@@ -45,6 +45,12 @@
 #  profile_views             :integer(11)   default(0)
 #
 
+<%
+  def random_rating
+    Math.log(rand(500)) % 5
+  end
+%>
+
 myousica:
   type: User
   login: myousica
@@ -76,7 +82,7 @@ quentin:
   activation_code: 8f24789ae988411ccf33ab0c30fe9106fab32e9b
   activated_at: <%= 5.days.ago.to_s :db %>
   gender: male
-  rating_avg: 5
+  rating_avg: <%= random_rating %>
   photos_url: http://my.photos.url
   blog_url: http://my.blog.url
   myspace_url: http://my.space.url
@@ -122,11 +128,12 @@ john:
   salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
   crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
   activated_at: <%= 5.days.ago.to_s :db %>
-  rating_avg: <%= rand(5) %>
+  rating_avg: <%= random_rating %>
   gender: <%= ['male', 'female', 'other'][rand(3)] %>  
   country: <%= ['Italy', 'Usa', 'Canada', 'Japan', 'Germany', 'Portugal', 'Spain'][rand(7)] %>
   city: <%= ['Rome', 'Geneve', 'Seattle', 'Milan', 'Bari', 'Modugno', 'Tokyo', 'Beijing'][rand(8)] %>
   motto: <%= %w( un in insieme a caso di parole tra cui prenderne un paio per fare il motto random della persona random ).sort_by {rand}.join(" ") %>
+  nickname: user<%= i %>
 <% end %>
 
 <% for i in 3..500 %>dj_<%= i %>:
@@ -136,11 +143,12 @@ john:
   salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
   crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
   activated_at: <%= 5.days.ago.to_s :db %>
-  rating_avg: <%= rand(5) %>
+  rating_avg: <%= random_rating %>
   gender: <%= ['male', 'female', 'other'][rand(3)] %>  
   country: <%= ['Italy', 'Usa', 'Canada', 'Japan', 'Germany', 'Portugal', 'Spain'][rand(7)] %>
   city: <%= ['Rome', 'Geneve', 'Seattle', 'Milan', 'Bari', 'Modugno', 'Tokyo', 'Beijing'][rand(8)] %>
   motto: <%= %w( un in insieme a caso di parole tra cui prenderne un paio per fare il motto random della persona random ).sort_by {rand}.join(" ") %>
+  nickname: dj<%= i %>
 <% end %>
 
 <% for i in 3..500 %>band_<%= i %>:
@@ -149,12 +157,13 @@ john:
   email: band<%= i %>@medlar.it
   salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
   crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
-  rating_avg: <%= rand(5) %>
+  rating_avg: <%= random_rating %>
   activated_at: <%= 5.days.ago.to_s :db %>
   gender: <%= ['male', 'female', 'other'][rand(3)] %>  
   country: <%= ['Italy', 'Usa', 'Canada', 'Japan', 'Germany', 'Portugal', 'Spain'][rand(7)] %>
   city: <%= ['Rome', 'Geneve', 'Seattle', 'Milan', 'Bari', 'Modugno', 'Tokyo', 'Beijing'][rand(8)] %>
   motto: <%= %w( un in insieme a caso di parole tra cui prenderne un paio per fare il motto random della persona random ).sort_by {rand}.join(" ") %>
+  nickname: band<%= i %>
 <% end %>
 
 
@@ -167,7 +176,7 @@ mikaband:
   activation_code: 8f24789ae988411ccf33ab0c30fe9106fab32e9b
   activated_at: <%= 5.days.ago.to_s :db %>
   gender: male
-  rating_avg: 5
+  rating_avg: <%= random_rating %>
   photos_url: http://my.photos.url
   blog_url: http://my.blog.url
   myspace_url: http://my.space.url
