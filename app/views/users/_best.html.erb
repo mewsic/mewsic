@@ -1,0 +1,21 @@
+<div class="bands-dj-list clear-block">
+  <h1>BEST MYOUSICIANS</h1>
+  <div class="top-box clear-block">
+	  <div class="bottom-box clear-block">
+	    <%= render :partial => 'shared/band', :collection => @best_myousicians %>
+	  </div>
+  </div>
+  <p class="next">
+		<span class="align-right page-count">Page <%= @best_myousicians.current_page %> of <%= @best_myousicians.page_count %></span>
+    <% if @best_myousicians.previous_page %>
+			<%= link_to image_tag('move_arrow_left.png'), best_users_path(:page => @best_myousicians.previous_page), :class => 'navigation' %>
+		<% else %>
+			<%= image_tag('move_arrow_left.png', :class => 'faded') %>
+	  <% end %>
+    <% if @best_myousicians.next_page %>
+			<%= link_to image_tag('move_arrow_right.png'), best_users_path(:page => @best_myousicians.next_page), :class => 'navigation' %>
+		<% else %>
+			<%= image_tag('move_arrow_right.png', :class => 'faded') %>
+	  <% end %>
+  </p>	
+</div>
