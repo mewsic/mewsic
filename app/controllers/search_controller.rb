@@ -99,6 +99,7 @@ class SearchController < ApplicationController
     # +search_users+, +search_songs+, +search_tracks+ and +search_ideas+.
     #
     def search(q, types = [])
+      q = "*#{q}*" unless q.index('*') # temporary hack
       [
         (types.empty? || types.include?('user')) ?                               search_users(q, 10, params[:page] || 1) : nil,
         (types.empty? || (types.include?('song') || types.include?('music'))) ?  search_songs(q, 10, params[:page] || 1) : nil,
