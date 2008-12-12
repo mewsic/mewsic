@@ -37,10 +37,6 @@ module ::ActionMailer
   end
 end
 
-
-# Attachments on EY
-ENV['INLINEDIR'] = "/srv/rails/myousica/tmp/#{$$}"
-
 APPLICATION = {
   :url => 'http://myousica.adelao.it',
   :email => 'no-reply@myousica.adelao.it',
