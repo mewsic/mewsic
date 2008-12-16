@@ -16,7 +16,8 @@
 		author: '<%= escape_javascript @playable.original_author %>',
 		genre: '<%= escape_javascript @playable.genre.name rescue nil %>',
 		user: '<%= escape_javascript @playable.user.login rescue nil %>',
-		avatar: '<%= escape_javascript @playable.user.avatar.public_filename(:small) rescue "/images/default_avatars/avatar_small.gif" %>'
+		avatar: '<%= escape_javascript @playable.user.avatar.public_filename(:small) rescue "/images/default_avatars/avatar_small.gif" %>',
+		<%= player_icon_flashvar_for(@playable) %>
 	};
 
 	var params = { wmode: 'transparent' };
