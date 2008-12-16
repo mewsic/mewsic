@@ -14,11 +14,11 @@ module PlayersHelper
   end
 
   def player_icon_flashvar_for(playable)
-		if playable.is_a?(Song)
+    if playable.is_a?(Song)
       %[trackCount: #{playable.tracks.count}]
-		elsif playable.is_a?(Track)
+    elsif playable.is_a?(Track)
       %[instrumentIcon: '#{image_path playable.instrument.icon}']
-		end
+    end
   end
 
 end
