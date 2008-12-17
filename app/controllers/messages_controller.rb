@@ -24,7 +24,7 @@ class MessagesController < ApplicationController
   before_filter :find_user
   before_filter :login_required
   before_filter :check_user_identity  
-  before_filter :fix_page_number, :only => :index
+  before_filter :fix_page_number, :only => [:index, :show, :unread]
   
   # ==== XHR GET /users/:user_id/messages
   #
@@ -129,6 +129,8 @@ class MessagesController < ApplicationController
   def destroy
     @message = Message.read(params[:id], @user)
     @message.mark_deleted(@user)
+
+    head :ok if params[:inbox]
   end          
     
 private

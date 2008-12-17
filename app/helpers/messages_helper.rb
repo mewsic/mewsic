@@ -23,4 +23,7 @@ module MessagesHelper
       MailBox.instance.updateReceivedCount(#{user.received_messages.count});)
   end
 
+  def current_page_number
+		%[<div style="display:none" class="pagination"><span class="current">#{@page}</span></div>]
+  end
 end

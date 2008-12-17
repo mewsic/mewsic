@@ -3277,6 +3277,12 @@ div.hr {
 	margin-top: 10px;
 }
 
+#new-message .delete_button {
+	float: left;
+	margin-top: 10px;
+	margin-left: 65px;
+}
+
 #message_label {
 	width: 60px;
 	height: 180px;
