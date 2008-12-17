@@ -72,19 +72,19 @@ class TracksControllerTest < ActionController::TestCase
     assert assigns(:track)
     assert_equal assigns(:track).id, tracks(:sax_for_let_it_be).id
 
-    get :show, :id => tracks(:sax_for_let_it_be), :format => 'png'
-    assert_response :success
-    assert_x_accel_redirect :filename => "#{APPLICATION[:audio_url]}/#{tracks(:sax_for_let_it_be).filename.sub('.mp3', '.png')}", :content_type => 'image/png'
+    assert_x_accel_redirect :filename => "#{APPLICATION[:audio_url]}/#{tracks(:sax_for_let_it_be).filename.sub('.mp3', '.png')}", :content_type => 'image/png' do
+      get :show, :id => tracks(:sax_for_let_it_be), :format => 'png'
+    end
+
     assert assigns(:track)
     assert_equal assigns(:track).id, tracks(:sax_for_let_it_be).id
   end
 
   def test_should_download
     track = tracks(:sax_for_let_it_be)
-
-    get :download, :id => track.id
-    assert_x_accel_redirect :filename => "#{APPLICATION[:audio_url]}/#{track.filename}",
-      :content_type => 'audio/mpeg'
+    assert_x_accel_redirect :filename => "#{APPLICATION[:audio_url]}/#{track.filename}", :content_type => 'audio/mpeg' do
+      get :download, :id => track.id
+    end
   end
 
   def test_should_not_create_unless_logged_in

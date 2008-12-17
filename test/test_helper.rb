@@ -40,14 +40,32 @@ class Test::Unit::TestCase
     assert_equal 4.0, rated_object.rating_average
   end
 
+  def assert_x_accel_redirect(options, &block)
+
+    @request.env['SERVER_SOFTWARE'] = 'Nginx 0.6.17'
+    block.call
+    assert_download_acceleration_header options.merge(:header => 'X-Accel-Redirect')
+
+    @request.env['SERVER_SOFTWARE'] = 'Apache/2.2.8 (Ubuntu) Phusion_Passenger/2.0.5'
+    block.call
+    assert_download_acceleration_header options.merge(:header => 'X-Sendfile', :filename => File.join(RAILS_ROOT, 'public', options[:filename]))
+
+    @request.env['SERVER_SOFTWARE'] = 'Mongrel'
+    block.call
+    assert_response :success
+    deny @response.body.blank?
+
+  end
+
   def assert_blank_response(code = :success)
     assert_response code
     assert @response.body.blank?
   end
 
-  def assert_x_accel_redirect(options)
+  def assert_download_acceleration_header(options)
+    assert_response :success
     assert_blank_response
-    assert_equal options[:filename], @response.headers['X-Accel-Redirect']
+    assert_equal options[:filename], @response.headers[options[:header]]
     # ActionController::Integration oddities
     assert (@response.headers['Content-Type'] || @response.headers['type']) =~ /^#{options[:content_type]}/
   end
