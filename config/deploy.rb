@@ -60,6 +60,7 @@ end
 task :staging do
   set :user, 'myousica'
   set :password, 'plies25}chis'
+  set :use_sudo, false
 
   set :dbuser, 'myousica'
   set :dbpass, 'Leann82-full'
