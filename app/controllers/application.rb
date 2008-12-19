@@ -92,9 +92,18 @@ protected
     response.headers['Content-Disposition'] = options[:disposition]
     response.headers['Content-Type']        = options[:content_type]
     response.headers['Cache-Control']       = options[:cache_control]
-    response.headers['X-Accel-Redirect']    = filename
 
-    render :nothing => true
+    case request.server_software
+    when /apache/
+      response.headers['X-Sendfile']          = File.join(RAILS_ROOT, 'public', filename)
+      head :ok
+    when /nginx/
+      response.headers['X-Accel-Redirect']    = filename
+      head :ok
+    else
+      send_file File.join(RAILS_ROOT, 'public', filename),
+        :type => options[:content_type], :disposition => options[:disposition]
+    end
   end
 
   # Utility method to check whether the current request comes from a Googlebot

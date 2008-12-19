@@ -81,12 +81,22 @@ var MailBox = Class.create({
   
   onDestroyMessage: function(event, link) {     
     event.stop();
-    if(confirm('Are you sure?')) {      
-      new Ajax.Request(link.getAttribute('href'), {
+    var href = link.getAttribute('href');
+
+    if (confirm('Are you sure?')) {      
+      new Ajax.Request(href, {
         method: 'delete',
         parameters: {
           authenticity_token: encodeURIComponent(this.authenticity_token),
           page: this.currentPage()
+        },
+        onComplete: function() {
+          if (/inbox/.match(href)) {
+            this.loadUnreadMessagesPage();
+          }
+        }.bind(this),
+        onFailure: function() {
+          alert("Error while deleting your message. Please refresh the page.");
         }
       });
     }
@@ -121,6 +131,10 @@ var MailBox = Class.create({
     $('popup-spinner').hide();    
   },
 
+  loadUnreadMessagesPage: function() {
+    this.loadPage('/users/' + $('user-id').value + '/messages/unread?page=' + this.currentPage());
+  },
+
   handleInboxLink: function(event) {
     if (event) event.stop();
 
@@ -133,7 +147,7 @@ var MailBox = Class.create({
     new Effect.ScrollTo(this.element, {duration: 0.4});
 
     this.openPopup();
-    this.loadPage('/users/' + $('user-id').value + '/messages/unread');
+    this.loadUnreadMessagesPage();
   }
   
 });

@@ -8,9 +8,13 @@
 	<div id="message_body">
 		<%= sanitize_message @message %>
 	</div>
+	<%= current_page_number %>
+	<div class="delete_button">
+		<%= link_to 'Delete', user_message_path(@user, @message, :inbox => true), :class => 'destroy' %>
+	</div>
 	<div class="send_button">
-		<%= link_to 'Reply', new_user_message_path(@user, :reply => @message.id ), :class => 'ajax' %> |
-		<%= link_to 'Back to Inbox', user_messages_path(@user, :page => params[:page]), :class => 'ajax' %>    
+		<%= link_to 'Reply', new_user_message_path(@user, :reply => @message.id, :page => @page), :class => 'ajax' %> |
+		<%= link_to 'Back to Inbox', user_messages_path(@user, :page => @page), :class => 'ajax' %>    
 	</div>
 </div>
 <%= javascript_tag update_messages_count_javascript_for(@user) %>

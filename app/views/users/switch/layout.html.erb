@@ -3,6 +3,7 @@
 	<head>
 		<%= stylesheet_link_tag 'style' %>
 		<%= load_prototype %>
+		<%= javascript_include_tag 'user/gender' %>
 		<title>myousica - switch user type</title>
 	</head>
 	<body>
@@ -20,6 +21,11 @@
 					<div id="input">
 						<label for="nickname">Enter your new <%= @type.upcase %> nick name</label>
 						<%= text_field_tag 'nickname', @user.nickname || @user.login, :class => 'text', :maxlength => 20 %>
+						<% if %[user dj].include? @type.downcase %>
+							<%= hidden_field_tag 'user-id', @user.id %>
+							<%= gender_switcher_for(@user) %>
+							<%= javascript_tag %[new GenderSwitcher('change-gender')] %>
+						<% end %>
 					</div>
 					<input id="button" type="image" src="/images/button_send.png" />
 				<%- end -%>

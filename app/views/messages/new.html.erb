@@ -16,6 +16,10 @@
     <div id="message_label"><span class="label">Message:</span></div>
     <%= f.text_area :body, :cols => 75, :rows => 17 %>
 
+		<%= current_page_number %>
+		<div class="delete_button">
+			<%= link_to 'Cancel', user_message_path(@user, params[:reply], :page => params[:page]), :class => 'ajax' %>
+		</div>
     <div class="send_button">
       <%= image_submit_tag 'new_message_button_send.png', :id => 'new_message_send_button' %>
     </div>    

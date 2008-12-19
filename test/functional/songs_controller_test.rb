@@ -55,16 +55,16 @@ class SongsControllerTest < ActionController::TestCase
     assert assigns(:song)
     assert_equal assigns(:song).id, songs(:let_it_be).id
 
-    get :show, :id => songs(:let_it_be).id, :format => 'png'
-    assert_x_accel_redirect :filename => "#{APPLICATION[:audio_url]}/#{songs(:let_it_be).filename.sub('.mp3', '.png')}",
-      :content_type => 'image/png'
+    assert_x_accel_redirect :filename => "#{APPLICATION[:audio_url]}/#{songs(:let_it_be).filename.sub('.mp3', '.png')}", :content_type => 'image/png' do
+      get :show, :id => songs(:let_it_be).id, :format => 'png'
+    end
   end
 
   def test_should_download
     song = songs(:let_it_be)
-    get :download, :id => song.id
-    assert_x_accel_redirect :filename => "#{APPLICATION[:audio_url]}/#{song.filename}",
-      :content_type => 'audio/mpeg'
+    assert_x_accel_redirect :filename => "#{APPLICATION[:audio_url]}/#{song.filename}", :content_type => 'audio/mpeg' do
+      get :download, :id => song.id
+    end
   end
   
   def test_show_should_redirect_unless_song

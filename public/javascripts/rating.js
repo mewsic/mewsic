@@ -101,6 +101,9 @@ var Rating = Class.create({
   },
 
   responder: function(r) {
+    if (!r.container || !r.container.success)
+      return;
+
     var container = $(r.container.success);
     if (container) {
       container.select('.' + this.options.className).each(this.add.bind(this));

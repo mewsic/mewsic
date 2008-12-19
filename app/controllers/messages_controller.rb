@@ -24,7 +24,7 @@ class MessagesController < ApplicationController
   before_filter :find_user
   before_filter :login_required
   before_filter :check_user_identity  
-  before_filter :fix_page_number, :only => :index
+  before_filter :fix_page_number, :only => [:index, :show, :unread]
   
   # ==== XHR GET /users/:user_id/messages
   #
@@ -126,9 +126,19 @@ class MessagesController < ApplicationController
   #
   # Destroys a message by marking it as deleted (see the +mark_deleted+ method).
   #
+  # This method by default renders an RJS view, because it's called by the trash
+  # icon present on message listings. The RJS view updates the index by removing
+  # the message row. When this method is instead called via the "Delete" link
+  # on the message#show page, an additional <tt>inbox</tt> parameter is passed,
+  # that makes this action render an empty body with a 200 OK status. The <tt>
+  # user/mail.js</tt> javascript then loads the message index again into the
+  # $$("#user-mail .popup.mail .container") DIV element.
+  #
   def destroy
     @message = Message.read(params[:id], @user)
     @message.mark_deleted(@user)
+
+    head :ok if params[:inbox]
   end          
     
 private
