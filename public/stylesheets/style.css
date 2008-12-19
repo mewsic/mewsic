@@ -567,7 +567,7 @@ tr.nav-song td{
 
 /* people */
 .people-list {
-	width: 270px;
+	width: 275px;
 	height: 360px;
 }
 .people-list .top-box{
@@ -980,7 +980,7 @@ tr.nav-song td{
 .yellow-box h1{
 	/*background:url(/images/BG_box_yellow_top.png) no-repeat top left;*/
 	margin-bottom:0px;
-	padding:10px 0px;
+	padding:0 0 10px;
 }
 .yellow-box .bottom-box{
 	/*background:url(/images/BG_box_yellow_bottom.png) no-repeat bottom left;*/
