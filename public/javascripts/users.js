@@ -23,15 +23,12 @@ document.observe('dom:loaded', function() {
     if (!$(name + '-users'))
       return;
 	
-	
-
     new Pagination({
       container: name + '-users',
-      spinner: name + '-spinner',
+      spinners: [name + '-spinner-top', name + '-spinner-bottom'],
       selector: 'a.navigation',
-      dynamic_spinner: false,
       onComplete: function() {
-        new Effect.ScrollTo(name + '-users', {duration: 0.7});
+        new Effect.ScrollTo(name + '-users', {duration: 1.0});
       }
     });
   });

@@ -1,13 +1,6 @@
 <div class="clear-block">
   <div class="simple-list yellow-box">
-    <h1>MOST SONGS</h1>
-    <div class="top-box clear-block">
-  	  <div class="bottom-box clear-block">
-        <%= render :partial => 'users/person_short', :collection => @prolific %>
-      </div>
-    </div>
-  	<p class="next">
-  		<span class="align-right page-count">Page <%= @prolific.current_page %> of <%= @prolific.page_count %></span>
+  	<p class="float-right">
       <% if @prolific.previous_page %>
   			<%= link_to image_tag('move_arrow_left.png'), prolific_users_path(:page => @prolific.previous_page), :class => 'navigation' %>
   		<% else %>
@@ -19,5 +12,29 @@
   			<%= image_tag('move_arrow_right.png', :class => 'faded') %>
   	  <% end %>
     </p>
+    <div id="prolific-spinner-top" class="float-right" style="display:none;">
+    	<%= image_tag 'spinner.gif' %>
+    </div>
+    <h1>MOST SONGS</h1>
+    <div class="top-box clear-block">
+  	  <div class="bottom-box clear-block">
+        <%= render :partial => 'users/person_short', :collection => @prolific %>
+      </div>
+    </div>
+  	<p class="float-right">
+      <% if @prolific.previous_page %>
+  			<%= link_to image_tag('move_arrow_left.png'), prolific_users_path(:page => @prolific.previous_page), :class => 'navigation' %>
+  		<% else %>
+  			<%= image_tag('move_arrow_left.png', :class => 'faded') %>
+  	  <% end %>
+      <% if @prolific.next_page %>
+  			<%= link_to image_tag('move_arrow_right.png'), prolific_users_path(:page => @prolific.next_page), :class => 'navigation' %>
+  		<% else %>
+  			<%= image_tag('move_arrow_right.png', :class => 'faded') %>
+  	  <% end %>
+    </p>
+    <div id="prolific-spinner-bottom" class="float-right" style="display:none;">
+    	<%= image_tag 'spinner.gif' %>
+    </div>
   </div>
 </div>
