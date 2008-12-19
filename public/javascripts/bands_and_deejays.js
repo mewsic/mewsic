@@ -25,7 +25,7 @@ document.observe('dom:loaded', function() {
 
     new Pagination({
       container: name + '-users',
-      spinner: name + '-spinner',
+      spinners: [name + '-spinner-top', name + '-spinner-bottom'],
       selector: 'a.navigation',
       dynamic_spinner: false,
       onComplete: function() {
