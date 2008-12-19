@@ -22,12 +22,14 @@ document.observe('dom:loaded', function() {
   $w('newest coolest prolific best').each(function(name) {
     if (!$(name + '-users'))
       return;
+	
+	
 
     new Pagination({
       container: name + '-users',
       spinner: name + '-spinner',
       selector: 'a.navigation',
-      dynamic_spinner: true,
+      dynamic_spinner: false,
       onComplete: function() {
         new Effect.ScrollTo(name + '-users', {duration: 0.7});
       }

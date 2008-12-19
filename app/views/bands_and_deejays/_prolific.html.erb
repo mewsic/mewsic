@@ -6,9 +6,8 @@
         <%= render :partial => 'users/person_short', :collection => @prolific %>
       </div>
     </div>
-  	<p class="next">
-  		<span class="align-right page-count">Page <%= @prolific.current_page %> of <%= @prolific.page_count %></span>
-      <% if @prolific.previous_page %>
+  	<p class="float-right">
+  	  <% if @prolific.previous_page %>
   			<%= link_to image_tag('move_arrow_left.png'), prolific_bands_and_deejays_path(:page => @prolific.previous_page), :class => 'navigation' %>
   		<% else %>
   			<%= image_tag('move_arrow_left.png', :class => 'faded') %>
@@ -19,5 +18,8 @@
   			<%= image_tag('move_arrow_right.png', :class => 'faded') %>
   	  <% end %>
     </p>
+    <div id="prolific-spinner" class="float-right" style="display:none;">
+  		<%= image_tag 'spinner.gif' %>
+  	</div>
   </div>
 </div>
