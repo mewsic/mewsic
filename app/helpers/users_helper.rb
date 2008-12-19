@@ -137,4 +137,31 @@ module UsersHelper
     end
   end
 
+  # Quick & dirty, but it works. Used both on users/ and bands_and_deejays/ views.
+  #
+  def navigation_arrows_for(object_name, section, position = nil)
+    object = instance_variable_get "@#{object_name.intern}"
+    path = "#{object_name}_#{section}_path"
+
+    links = content_tag(:p, :class => 'float-right') do
+      navigation_arrow_for(object, :previous_page, path) + ' ' +
+      navigation_arrow_for(object, :next_page, path)
+    end
+
+    spinner = content_tag(:div, :id => "#{object_name}-spinner%s" % (position ? "-#{position}" : nil), :class => 'float-right', :style => 'display:none') do
+      image_tag 'spinner.gif'
+    end
+
+    links + spinner
+  end
+
+  def navigation_arrow_for(object, method, path)
+    direction = method == :previous_page ? 'left' : 'right'
+    if object.send(method)
+      link_to image_tag("move_arrow_#{direction}.png"), send(path, :page => object.send(method)), :class => 'navigation'
+    else
+      image_tag("move_arrow_#{direction}.png", :class => 'faded')
+    end
+  end
+
 end
