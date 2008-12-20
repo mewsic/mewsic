@@ -40,6 +40,12 @@ class HelpPage < ActiveRecord::Base
     self.title
   end
 
+  # Sitemap priority for this instance
+  # FIXME: This should change logaritmically using rating_avg
+  def priority
+    0.6
+  end
+
   # Finds an help page by <tt>id</tt> or <tt>url</tt>, as returned by the +to_param+ method.
   def self.find_from_param(param)
     if param.to_i > 0

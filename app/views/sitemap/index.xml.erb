@@ -1,0 +1,28 @@
+<!-- Myousica sitemap - Generated on <%= Time.now.rfc822 %> -->
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+	<url>
+		<loc><%= sitemap_root_path %>/</loc>
+		<lastmod><%= Time.now.at_beginning_of_week.iso8601 %></lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.7</priority>
+	</url>
+<%- @indexes.each do |page| -%>
+	<url>
+		<loc><%= sitemap_path_for page %></loc>
+		<lastmod><%= Time.now.beginning_of_day.iso8601 %></lastmod>
+		<changefreq>daily</changefreq>
+		<priority>0.9</priority>
+	</url>
+<%- end -%>
+<%- @resources.each do |name, objects| -%>
+	<!------------------- <%= name.capitalize %> ----------------->
+	<%- objects.each do |object| -%>
+	<url>
+		<loc><%= sitemap_path_for name.singularize, object %></loc>
+		<lastmod><%= object.updated_at.iso8601 %></lastmod>
+		<priority><%= object.priority %></priority>
+	</url>
+	<%- end -%>
+<%- end -%>
+</urlset>

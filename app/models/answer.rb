@@ -146,6 +146,12 @@ class Answer < ActiveRecord::Base
   def to_breadcrumb
     self.body
   end  
+
+  # Sitemap priority for this instance
+  # FIXME: This should change logaritmically using rating_avg
+  def priority
+    0.6
+  end
   
 private
   # sets <tt>last_activity_at</tt> to <tt>created_at</tt>

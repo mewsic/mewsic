@@ -63,6 +63,11 @@ class Genre < ActiveRecord::Base
     self.published_songs.find(:all, :limit => limit, :order => 'created_at DESC')
   end
 
+  # Returns the most recent song updated_at timestamp for this genre
+  def updated_at
+    self.published_songs.sort_by{|s|s.created_at}.reverse!.first.updated_at
+  end
+
   # Returns the number of published songs for this genre.
   def song_count
     Song.count('genre', :group => 'genre_id', :include => :genre, :conditions => ['published = ? AND genre_id = ?', true, self.id]).flatten.last || 0
@@ -76,6 +81,12 @@ class Genre < ActiveRecord::Base
   # Returns an URI-encoded representation of the genre name, for usage in path names.
   def to_param
     URI.encode(self.name.downcase.gsub(' ', '+'))
+  end
+
+  # Sitemap priority for this instance
+  # FIXME: This should change logaritmically using rating_avg
+  def priority
+    0.5
   end
 
   # Finds a genre by ID or by param, as returned by +to_param+.

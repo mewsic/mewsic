@@ -161,7 +161,13 @@ class Mband < ActiveRecord::Base
   # more than one member are returned.
   #
   def self.find_coolest(options = {})
-    find :all, options.merge(:order => 'rating_avg DESC', :conditions => 'members_count > 1')
+    find_real :order => 'rating_avg DESC'
+  end
+
+  # Finds all the mbands with at least one member
+  #
+  def self.find_real(options = {})
+    find :all, options.merge(:conditions => 'members_count > 1')
   end
 
   # Calculates profile completeness, by checking whether the 3 configurable URLs (<tt>photos_url</tt>,
@@ -190,5 +196,11 @@ class Mband < ActiveRecord::Base
   #
   def rateable_by?(user)
     !self.members.include?(user)
+  end
+
+  # Sitemap priority for this instance
+  # FIXME: This should change logaritmically using rating_avg
+  def priority
+    0.6
   end
 end

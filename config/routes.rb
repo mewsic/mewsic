@@ -96,6 +96,8 @@ ActionController::Routing::Routes.draw do |map|
   map.index           '/index.:format', :controller => 'dashboard'
   map.connect         '/index',         :controller => 'dashboard'
 
+  map.sitemap         '/sitemap.xml',   :controller => 'sitemap', :format => 'xml'
+
   map.admin '/pappapperadmin', :controller => 'admin/dashboard', :action => 'index'
   map.upload_admin_track '/pappapperadmin/admin/tracks/upload', :controller => 'admin/tracks', :action => 'upload', :conditions => { :method => :post }
   map.namespace(:admin, :namespace => '', :name_prefix => '', :path_prefix => 'pappapperadmin') do |admin|

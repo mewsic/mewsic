@@ -386,6 +386,12 @@ class Song < ActiveRecord::Base
     self.genre = Genre.find(:first, :order => SQL_RANDOM_FUNCTION)
   end
 
+  # Sitemap priority for this instance
+  # FIXME: This should change logaritmically using rating_avg
+  def priority
+    0.7
+  end
+
   # <tt>before_save</tt> callback that updates both the <tt>tone</tt> and <tt>key</tt>
   # attribute. If the <tt>tone</tt> is an integer, it is put into the <tt>key</tt> and
   # the <tt>tone</tt> updated with the corrisponding tone string as defined in the

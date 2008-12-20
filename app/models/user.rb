@@ -278,6 +278,13 @@ class User < ActiveRecord::Base
     send(find_method, param, options.merge(:conditions => "users.activated_at IS NOT NULL")) or raise ActiveRecord::RecordNotFound
   end
   
+  # Finds all activated users. WARNING: This method does return User, Band and DJ instances!
+  # It is the only one to exhibit this behaviour, and it is currently used only by the Sitemap
+  # controller.
+  def self.find_activated(options = {})
+    self.find(:all, options.merge({:conditions => ["activated_at IS NOT NULL"]}))
+  end
+
   def self.find_coolest(options = {})
     self.find(:all, options.merge({:conditions => ["activated_at IS NOT NULL AND (type IS NULL OR type = 'User') AND login != 'myousica'"], :order => 'rating_avg DESC'})) 
   end
@@ -549,6 +556,12 @@ class User < ActiveRecord::Base
 
   def him
     self.gender == 'female' ? 'her' : 'him'
+  end
+
+  # Sitemap priority for this instance
+  # FIXME: This should change logaritmically using rating_avg
+  def priority
+    0.6
   end
 
   protected
