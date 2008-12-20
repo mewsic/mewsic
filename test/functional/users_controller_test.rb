@@ -80,7 +80,7 @@ class UsersControllerTest < ActionController::TestCase
     assert assigns(:coolest)
     #assert_equal 9, assigns(:coolest).size
     
-    assert assigns(:best_myousicians)
+    assert assigns(:best)
     #assert_equal 3, assigns(:best_myousicians).size
     
     assert assigns(:prolific)

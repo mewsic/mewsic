@@ -17,7 +17,7 @@ class BandsAndDeejaysController < ApplicationController
   #
   def index
     @coolest = User.find_paginated_coolest_bands_and_deejays        :limit => 9
-    @best = User.find_paginated_best_bands_and_deejays  :page => 1, :per_page => 3
+    @best = User.find_paginated_best_bands_and_deejays              :page => 1, :per_page => 3
     @prolific = User.find_paginated_prolific_bands_and_deejays      :page => 1, :per_page => 3
     @most_admired = User.find_most_admired_band_or_deejays          :limit => 1
     @coolest_mbands = Mband.find_coolest                            :limit => 1

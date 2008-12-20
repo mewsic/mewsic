@@ -32,7 +32,7 @@ class UsersController < ApplicationController
   #
   def index
     @coolest = User.find_paginated_coolest          :limit => 9    
-    @best = User.find_paginated_best    :page => 1, :per_page => 3    
+    @best = User.find_paginated_best                :page => 1, :per_page => 3    
     @prolific = User.find_paginated_prolific        :limit => 3
     @friendliest = User.find_friendliest            :limit => 1
     @coolest_mbands = Mband.find_coolest            :limit => 1

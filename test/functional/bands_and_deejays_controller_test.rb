@@ -8,7 +8,7 @@ class BandsAndDeejaysControllerTest < ActionController::TestCase
     assert_response :success
     
     assert assigns(:coolest)
-    assert assigns(:best_myousicians)
+    assert assigns(:best)
     assert assigns(:prolific)
     assert assigns(:most_admired)
     assert assigns(:coolest_mbands)
