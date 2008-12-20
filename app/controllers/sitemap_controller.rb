@@ -1,5 +1,11 @@
+require 'resolv'
+
 class SitemapController < ApplicationController
   layout nil
+
+  if RAILS_ENV == 'production'
+    before_filter :check_googlebot
+  end
 
   def index
     @indexes = %w(users bands_and_deejays music ideas answers help_index multitrack)
@@ -12,4 +18,15 @@ class SitemapController < ApplicationController
       'mbands' => Mband.find_real
     }
   end
+
+  private
+    def check_googlebot
+      address = Resolv::IPv4.create(request.remote_ip).to_name
+      ptr = Resolv::DNS.open {|dns| dns.getname address }.to_s
+
+      head :not_authorized unless ptr =~ /\.googlebot\.com$/
+
+    rescue Resolv::ResolvError
+      head :bad_request
+    end
 end
