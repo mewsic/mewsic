@@ -10,16 +10,20 @@ document.observe('dom:loaded', function() {
     }
   });
 
-  if ($('newest')) {
+  $w('newest').each(function(name) {
+    if (!$(name + '-music'))
+      return;
+
     new Pagination({
-      container: 'newest',
+      container: name + '-music',
+      spinners: [name + '-spinner-top', name + '-spinner-bottom'],
       selector: 'a.navigation',
-      spinners: $w('songs-spinner-top songs-spinner-bottom'),
+      dynamic_spinner: false,
       onComplete: function() {
-        new Effect.ScrollTo('newest', {duration: 1.0});
+        new Effect.ScrollTo(name + '-music', {duration: 0.7});
       }
     });
-  }
+  });
 
   if ($('genres')) {
     new Refresher('best-songs', {

@@ -1,38 +1,10 @@
 <div class="bands-dj-list clear-block">
-  <p class="float-right">
-    <% if @best_myousicians.previous_page %>
-			<%= link_to image_tag('move_arrow_left.png'), best_bands_and_deejays_path(:page => @best_myousicians.previous_page), :class => 'navigation' %>
-		<% else %>
-			<%= image_tag('move_arrow_left.png', :class => 'faded') %>
-	  <% end %>
-    <% if @best_myousicians.next_page %>
-			<%= link_to image_tag('move_arrow_right.png'), best_bands_and_deejays_path(:page => @best_myousicians.next_page), :class => 'navigation' %>
-		<% else %>
-			<%= image_tag('move_arrow_right.png', :class => 'faded') %>
-	  <% end %>
-  </p>
-  <div id="best-spinner-top" class="float-right" style="display:none;">
-		<%= image_tag 'spinner.gif' %>
-	</div>
+  <%= navigation_arrows_for 'best', 'bands_and_deejays', 'top' %>
   <h1>BEST MYOUSICIANS</h1>
   <div class="top-box clear-block">
 	  <div class="bottom-box clear-block">
-	    <%= render :partial => 'shared/band', :collection => @best_myousicians %>
+	    <%= render :partial => 'shared/band', :collection => @best %>
 	  </div>
   </div>
-  <p class="float-right">
-    <% if @best_myousicians.previous_page %>
-			<%= link_to image_tag('move_arrow_left.png'), best_bands_and_deejays_path(:page => @best_myousicians.previous_page), :class => 'navigation' %>
-		<% else %>
-			<%= image_tag('move_arrow_left.png', :class => 'faded') %>
-	  <% end %>
-    <% if @best_myousicians.next_page %>
-			<%= link_to image_tag('move_arrow_right.png'), best_bands_and_deejays_path(:page => @best_myousicians.next_page), :class => 'navigation' %>
-		<% else %>
-			<%= image_tag('move_arrow_right.png', :class => 'faded') %>
-	  <% end %>
-  </p>
-  <div id="best-spinner-bottom" class="float-right" style="display:none;">
-		<%= image_tag 'spinner.gif' %>
-	</div>
+	<%= navigation_arrows_for 'best', 'bands_and_deejays', 'bottom' %>
 </div>

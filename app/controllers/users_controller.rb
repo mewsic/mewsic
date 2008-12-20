@@ -32,7 +32,7 @@ class UsersController < ApplicationController
   #
   def index
     @coolest = User.find_paginated_coolest          :limit => 9    
-    @best_myousicians = User.find_paginated_best    :page => 1, :per_page => 3    
+    @best = User.find_paginated_best    :page => 1, :per_page => 3    
     @prolific = User.find_paginated_prolific        :limit => 3
     @friendliest = User.find_friendliest            :limit => 1
     @coolest_mbands = Mband.find_coolest            :limit => 1
@@ -68,7 +68,7 @@ class UsersController < ApplicationController
   #
   # Paginate and render best myousicians for the topmost page blocks. Called via XHR.
   def best
-    @best_myousicians = User.find_paginated_best_bands_and_deejays :page => params[:page], :per_page => 3
+    @best = User.find_paginated_best_bands_and_deejays :page => params[:page], :per_page => 3
     render :partial => 'best'
   end
 
