@@ -1,7 +1,7 @@
 module PlayersHelper
   
   def play_button(playable, options = {})
-    if playable.filename == ""
+    if playable.filename.blank?
       options.reverse_update(:color => :grey, :class => 'player-disabled')
     else           
       options.reverse_update(:color => playable.is_a?(Track) ? :orange : :green, :class => 'player')
