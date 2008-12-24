@@ -1,8 +1,13 @@
 module PlayersHelper
   
-  def play_button(playable, options = {})    
-    options.reverse_update(:color => playable.is_a?(Track) ? :orange : :green)
-    image_tag "button_play_#{options[:color]}#{options[:size]}.png", :alt => 'PLAY', :class => 'player',
+  def play_button(playable, options = {})
+    if playable.filename.blank?
+      options.reverse_update(:color => :grey, :class => 'player-disabled')
+    else           
+      options.reverse_update(:color => playable.is_a?(Track) ? :orange : :green, :class => 'player')
+    end
+    
+    image_tag "button_play_#{options[:color]}#{options[:size]}.png", :alt => 'PLAY', :class => "#{options[:class]}",
       :rel => send("formatted_#{playable.class.name.downcase}_player_path", playable, 'html')
   end
   

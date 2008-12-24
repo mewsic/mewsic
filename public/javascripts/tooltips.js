@@ -21,6 +21,7 @@ var Tooltips = Class.create({
     element.select('img.instrument').each(this.addInstrument);
     element.select('.rating.locked').slice(0,limit).each(this.addLockedRating);
     element.select('.status').slice(0,20).each(this.addStatus);
+    element.select('.player-disabled').each(this.addSongEncoding);
   },
 
   addInstrument: function(element) {
@@ -29,6 +30,10 @@ var Tooltips = Class.create({
 
   addRating: function(element) {
     new Tip(element, "<a href=/login>Login</a> or <a href=/signup>sign up</a> to vote!", {style: 'login'});
+  },
+
+  addSongEncoding: function(element) {
+    new Tip(element, "This song is currently encoding.<br />Please wait a few moments and reload the page", {style: 'locked-rating'});
   },
 
   addLockedRating: function(element) {
