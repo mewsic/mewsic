@@ -31,3 +31,10 @@ quentin_mband:
   name: The Quentin mband
   leader: quentin
   members_count: 1
+
+<% 10.times do |i| %>
+mband_<%= i %>:
+  name: Mband<%= i %>
+  leader: <%= %w(quentin john user30 user420).sort_by{rand}.first %>
+  members_count: 4
+<% end %>

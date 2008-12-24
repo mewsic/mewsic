@@ -161,7 +161,7 @@ class Mband < ActiveRecord::Base
   # more than one member are returned.
   #
   def self.find_coolest(options = {})
-    find_real :order => 'rating_avg DESC'
+    find_real options.reverse_merge(:order => 'rating_avg DESC')
   end
 
   # Finds all the mbands with at least one member
