@@ -1,11 +1,10 @@
-<!-- Myousica sitemap - Generated on <%= Time.now.rfc822 %> -->
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
 		<loc><%= sitemap_root_path %>/</loc>
 		<lastmod><%= Time.now.at_beginning_of_week.iso8601 %></lastmod>
 		<changefreq>weekly</changefreq>
-		<priority>0.7</priority>
+		<priority>1.0</priority>
 	</url>
 <%- @indexes.each do |page| -%>
 	<url>
@@ -16,7 +15,6 @@
 	</url>
 <%- end -%>
 <%- @resources.each do |name, objects| -%>
-	<!------------------- <%= name.capitalize %> ----------------->
 	<%- objects.each do |object| -%>
 	<url>
 		<loc><%= sitemap_path_for name.singularize, object %></loc>

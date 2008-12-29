@@ -3,9 +3,9 @@ require 'resolv'
 class SitemapController < ApplicationController
   layout nil
 
-  if RAILS_ENV == 'production'
-    before_filter :check_googlebot
-  end
+  #if RAILS_ENV == 'production'
+  #  before_filter :check_googlebot
+  #end
 
   def index
     @indexes = %w(users bands_and_deejays music ideas answers help_index multitrack)
