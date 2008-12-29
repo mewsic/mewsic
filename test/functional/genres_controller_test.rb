@@ -70,7 +70,7 @@ class GenresControllerTest < ActionController::TestCase
     rss :blues
     assert_response :success
     assert_template 'rss'
-    assert_valid_rss :nitems => genres(:blues).songs.count
+    assert_valid_rss :nitems => genres(:blues).published_songs.count(:limit => 40)
   end
 
   def test_rss_should_print_empty_rss_if_genre_has_no_songs
