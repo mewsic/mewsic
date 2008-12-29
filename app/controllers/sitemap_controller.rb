@@ -24,7 +24,7 @@ class SitemapController < ApplicationController
       address = Resolv::IPv4.create(request.remote_ip).to_name
       ptr = Resolv::DNS.open {|dns| dns.getname address }.to_s
 
-      head :not_authorized unless ptr =~ /\.googlebot\.com$/
+      head :forbidden unless ptr =~ /\.googlebot\.com$/
 
     rescue Resolv::ResolvError
       head :bad_request
