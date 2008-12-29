@@ -1,0 +1,13 @@
+<a class="close-edit" href="#">cancel</a>
+<h2>composing new mass message</h2>
+<% edit_form_for @message, :url => admin_mass_message_url(@message),
+	:onsubmit => "if(!confirm('Are you sure you want to send a message to #{@user_count} users?!')) return false;" do |f| %>
+<dl>
+	<dt>subject</dt>
+	<dd><%= f.text_field :subject %></dd>
+
+	<dt>body</dt>
+	<dd><%= f.text_area :body %></dd>
+</dl>
+<%= submit_tag 'send' %>
+<% end %>

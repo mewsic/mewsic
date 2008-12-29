@@ -280,9 +280,14 @@ class User < ActiveRecord::Base
   
   # Finds all activated users. WARNING: This method does return User, Band and DJ instances!
   # It is the only one to exhibit this behaviour, and it is currently used only by the Sitemap
-  # controller.
+  # controller and the Admin::MassMessagesController.
+  #
   def self.find_activated(options = {})
-    self.find(:all, options.merge({:conditions => ["activated_at IS NOT NULL"]}))
+    self.find(:all, options.merge(:conditions => "activated_at IS NOT NULL"))
+  end
+
+  def self.count_activated(options = {})
+    self.count(:conditions => "activated_at IS NOT NULL")
   end
 
   def self.find_coolest(options = {})

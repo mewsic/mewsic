@@ -43,7 +43,7 @@ ActionController::Routing::Routes.draw do |map|
   map.user_pcast '/users/:user_id/:user_id.pcast', :controller => 'podcasts', :action => 'pcast', :conditions => {:method => :get}
   map.forgot_password '/forgot_password', :controller => 'users', :action => 'forgot_password'
   map.reset_password '/reset_password/:id',  :controller => 'users', :action => 'reset_password'
-    
+
   map.resources :sessions
 
   map.resources :songs, :has_one => :player, 
@@ -108,6 +108,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :help_pages, :member => { :rearrange => :put }
     admin.resources :static_pages
     admin.resources :videos, :member => { :rearrange => :put }
+    admin.resources :mass_messages
   end
 
 end

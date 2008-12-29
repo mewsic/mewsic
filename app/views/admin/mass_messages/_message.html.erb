@@ -1,0 +1,6 @@
+<tr id="row_<%= message.id %>">
+	<td><%= message.id %></td>
+	<td><%=h message.subject %></td>
+	<td><%=h truncate(strip_tags(message.body), 30) %></td>
+	<td><%= message.created_at.strftime "%d/%m/%Y %H:%M:%S" %></td>
+</tr>

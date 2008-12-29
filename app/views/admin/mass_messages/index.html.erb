@@ -1,0 +1,14 @@
+<br/>
+<p>
+	<%= edit_link_to 'new message', new_admin_mass_message_path %><br/>
+	Total <%= @count %> messages sent
+</p>
+<table class="admin_content_table" cellspacing="0" cellpadding="0">
+	<tr>
+		<th>id</th>
+		<th>subject</th>
+		<th>body</th>
+		<th>date</th>
+	</tr>
+	<%= render :partial => 'message', :collection => @messages %>
+</table>
