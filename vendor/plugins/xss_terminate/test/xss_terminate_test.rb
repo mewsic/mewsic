@@ -47,4 +47,26 @@ class XssTerminateTest < Test::Unit::TestCase
     
     assert_equal "&lt;script&gt;alert('xss in extended')&lt;/script&gt;", r.extended
   end
+  
+  # issue reported by linojon
+  def test_nil_attributes_should_be_allowed_with_html5
+    review = Review.create!(:title => nil, :body => nil)
+    
+    assert_nil review.title
+    assert_nil review.body
+  end
+  
+  # issue reported by Garrett Dimon and jmcnevin
+  def test_active_record_session_store_does_not_cause_nil_exception
+    assert_nil CGI::Session::ActiveRecordStore::Session.xss_terminate_options
+
+    session = CGI::Session::ActiveRecordStore::Session.new(:session_id => 'foo', :data => 'blah')
+    assert session.save
+  end
+
+  def test_do_not_save_invalid_models_after_sanitizing
+    c = Comment.new(:title => "<br />")
+    assert !c.save
+    assert_not_nil c.errors.on(:title)
+  end
 end
