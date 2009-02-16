@@ -6,7 +6,7 @@
 	</div>
 	<div>
 		<div class="tracks-number"><%= best_song.tracks.size %></div> 
-		<p class="title"><%= link_to truncate(best_song.title, 30), song_path(best_song) %></p>
+		<p class="title"><%= link_to truncate(best_song.title, :length => 30), song_path(best_song) %></p>
 		<p class="author"><%= h best_song.original_author %></p>
 	</div>
 	<div class="button float-right">

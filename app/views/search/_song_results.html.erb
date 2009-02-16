@@ -10,7 +10,7 @@
 			<p class="search_black_text song">
 				<%= link_to highlight_search(song.title), song_path(song) %>&nbsp;
 				<span class="abstract grey-text"><%= highlight_search(song.original_author) %></span><br/>
-				<span class="music-info grey-text"><%= highlight_search truncate(song.description, 80) %></span>
+				<span class="music-info grey-text"><%= highlight_search truncate(song.description, :length => 80) %></span>
 			</p>
   	</div>
 		<%= rating(song) %>

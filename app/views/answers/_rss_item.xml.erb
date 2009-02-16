@@ -1,5 +1,5 @@
 <item>
-	<title><%= h truncate(rss_item.body, 40) %></title>
+	<title><%= h truncate(rss_item.body, :length => 40) %></title>
 	<link><%= answer_url rss_item %></link>
 	<description><%= h rss_item.body %></description>
 	<pubDate><%= rss_item.last_activity_at.rfc2822 %></pubDate>

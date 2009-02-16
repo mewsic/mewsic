@@ -92,7 +92,7 @@ module ApplicationHelper
     end
 
     if model_crumb
-      text = h(truncate(model_crumb.to_breadcrumb, 50))
+      text = h(truncate(model_crumb.to_breadcrumb, :length => 50))
       bread.push text
     end
 

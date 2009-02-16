@@ -3,7 +3,7 @@
     <%= link_to avatar_image(answer_medium.user, :icon), user_path(answer_medium.user) %>     
   </div>
 	<div class="clear-block details">
-    <h2 class="clearly-cyan-text"><%= link_to h(truncate(answer_medium.body, 120)), answer_medium %></h2>
+    <h2 class="clearly-cyan-text"><%= link_to h(truncate(answer_medium.body, :length => 120)), answer_medium %></h2>
 		<%= rating(answer_medium) %><div class="clearer"></div>
 		<p class="grey-text float-left">
 			Question by <span class="name"><%= link_to answer_medium.user.login, user_path(answer_medium.user) %></span> - 

@@ -2,7 +2,7 @@
 	<td class="track-name">		
 		<p class="thumb"><%= track_instrument_icon(track) %></p>
 		<p class="title"><%= track.title %></p>
-		<p class="abstract"><%= truncate track.description, 50 %>
+		<p class="abstract"><%= truncate track.description, :length => 50 %>
 		<p class="small sky-text">created <%= time_ago_in_words track.created_at %> ago</p>
 	</td>
 	<td align="right">

@@ -34,7 +34,7 @@
   <p class="genre float-left">
     <%= link_to sibling.genre.name, genre_path(sibling.genre) if sibling.genre %>
   </p>
-	<p class="grey-text clear-float"><%= truncate sibling.description, 50 %></p>
+	<p class="grey-text clear-float"><%= truncate sibling.description, :length => 50 %></p>
   <div class="float-right">
 		<%= rating(sibling, :class => sibling_counter.odd? ? 'grey-star' : '') %>
     <%= mlab_button(sibling) %>

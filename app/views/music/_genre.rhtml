@@ -15,7 +15,7 @@
 			<td class="song-title">
 				<p>
 					<span class="name"><%= link_to song.user.login, user_path(song.user) %></span>&nbsp;&nbsp;
-					<span class="title"><%= link_to(truncate(song.title, 30), song) %></span>
+					<span class="title"><%= link_to(truncate(song.title, :length => 30), song) %></span>
 				</p>
 			</td>
 			<td class="star">

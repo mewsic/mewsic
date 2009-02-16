@@ -1,4 +1,4 @@
-<% title "#{truncate(@answer.body, 50)} - Myousica Answers" %>
+<% title "#{truncate(@answer.body, :length => 50)} - Myousica Answers" %>
 <% breadcrumb @answer %>
 <% meta_description "Answer to &laquo;#{@answer.body}&raquo; on Myousica Answers" %>
 

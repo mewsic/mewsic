@@ -13,7 +13,7 @@
 </tr>
 <tr class="<%= %w[odd even][song_counter % 2] %>">
 	<td class="song-info">
-		<p class="abstract"><%= truncate song.original_author, 50 %></p>
+		<p class="abstract"><%= truncate song.original_author, :length => 50 %></p>
 		<p class="title"><%= link_to song.title, song %></p>
 		<p class="small sky-text">created <%= time_ago_in_words song.created_at %> ago</p>
 	</td>

@@ -4,6 +4,6 @@
 	</p>
 	<p class="name align-right">
 		<%= link_to answer.user.login, answer.user %></a></p>
-	<p class="abstract"><%= h truncate(answer.body, 150) %></p>
+	<p class="abstract"><%= h truncate(answer.body, :length => 150) %></p>
 	<p class="abstract align-right"><%= pluralize(answer.replies.size, 'reply')%></p>
 </div>

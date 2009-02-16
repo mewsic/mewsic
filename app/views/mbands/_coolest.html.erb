@@ -11,10 +11,10 @@
 			<%= link_to coolest.name, coolest %>
 		</p>
 		<p class="country">
-			<%= h truncate(coolest.countries.join(', '), 40) %>
+			<%= h truncate(coolest.countries.join(', '), :length => 40) %>
 		</p>
 		<p class="motto">
-			<%= truncate strip_tags(coolest.motto), 50 %>
+			<%= truncate strip_tags(coolest.motto), :length => 50 %>
 		</p>
 	</div>
 	<div id="coolest-mband-scroller" class="user-scroller">

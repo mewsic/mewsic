@@ -34,7 +34,7 @@
 					<div class="elements clear-block">
 						<p class="thumb"><%= link_to avatar_image(track.user, :small), user_path(track.user) if track.user %></p>
 						<p class="title"><%= track.title %></p>
-						<p class="grey-text"><%= truncate(track.description, 40) %></p>
+						<p class="grey-text"><%= truncate(track.description, :length => 40) %></p>
 						<div class="cyan-text float-left"><%= pluralize track.collaboration_count, 'collaboration' %></div>
 						<div class="float-right">
 							<%= rating(track) %>
