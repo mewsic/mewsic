@@ -119,7 +119,7 @@ class UsersController < ApplicationController
   # * XML format: renders some user information, as defined by the <tt>show.xml.erb</tt> template.
   #
   def show
-    @user = User.find_from_param(params[:id], :include => :avatars)
+    @user = User.find_from_param(params[:id], :include => :avatar)
 
     respond_to do |format|
       format.html do

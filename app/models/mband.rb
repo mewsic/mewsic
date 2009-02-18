@@ -35,7 +35,7 @@
 #
 # == Associations
 #
-# * <b>has_many</b> <tt>avatars</tt>, destroyed calling *_destroy callbacks upon destroy. [Avatar]
+# * <b>has_one</b> <tt>avatar</tt>, destroyed calling *_destroy callbacks upon destroy. [Avatar]
 # * <b>has_many</b> <tt>photos</tt>, like above [Photo]
 # * <b>has_many</b> <tt>memberships</tt>, like above, [MbandMembership]
 # * <b>has_many</b> <tt>members</tt>, <tt>:through => :memberships</tt>, where <tt>accepted_at is not null</tt> [User]
@@ -53,7 +53,7 @@ class Mband < ActiveRecord::Base
   
   acts_as_rated :rating_range => 0..5
   
-  has_many :avatars, :as => :pictureable, :dependent => :destroy
+  has_one :avatar, :as => :pictureable, :dependent => :destroy
   has_many :photos, :as => :pictureable, :dependent => :destroy
   has_many :memberships, :class_name => 'MbandMembership', :dependent => :destroy
   has_many :members, :through => :memberships, :class_name => 'User', :source => :user, :conditions => "accepted_at IS NOT NULL"

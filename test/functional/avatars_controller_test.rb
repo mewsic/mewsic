@@ -64,7 +64,7 @@ class AvatarsControllerTest < ActionController::TestCase
     login_as :user_10
     put :update, :user_id => users(:quentin), :format => 'js'
     assert_not_nil assigns["pictureable"]
-    assert_nil assigns["avatars"]
+    assert_nil assigns["avatar"]
     assert_response :redirect
 
     put :update, :user_id => users(:quentin), :format => 'html'
@@ -89,14 +89,14 @@ class AvatarsControllerTest < ActionController::TestCase
         :uploaded_data => uploaded_file(File.join(RAILS_ROOT, 'test/fixtures/files/test.jpg'), 'image/jpeg')
       }, :format => 'js'
     end
-    assert_equal 1, users(:user_300).avatars.count
+    assert_not_nil users(:user_300).avatar
     assert_response :success
   end
   
   def test_should_not_create_if_not_current_user
     login_as :user_3
-    quentin_avatars_count = users(:quentin).avatars.count
-    user_3_avatars_count = users(:user_3).avatars.count
+    quentin_avatar_nil = users(:quentin).avatar.nil?
+    user_3_avatar_nil = users(:user_3).avatar.nil?
     assert_no_difference 'Avatar.count' do 
       put :update, :user_id => users(:quentin),
         :avatar => {
@@ -104,8 +104,8 @@ class AvatarsControllerTest < ActionController::TestCase
         }, :format => 'js'
     end
     assert_response :redirect
-    assert_equal quentin_avatars_count, users(:quentin).avatars.count
-    assert_equal user_3_avatars_count, users(:user_3).avatars.count
+    assert_equal quentin_avatar_nil, users(:quentin).avatar.nil?
+    assert_equal user_3_avatar_nil, users(:user_3).avatar.nil?
   end
   
   def test_should_not_create_unless_logged_in
@@ -126,7 +126,7 @@ class AvatarsControllerTest < ActionController::TestCase
       }, :format => 'js'
     assert_response :success
 
-    avatar = users(:quentin).avatars.first
+    avatar = users(:quentin).avatar
     Avatar.attachment_options[:thumbnails].each do |key, size|
       next unless size.is_a? Fixnum # Check only fixed-size images
 
@@ -147,7 +147,7 @@ class AvatarsControllerTest < ActionController::TestCase
     end
     assert_response :success
 
-    assert_equal 0, users(:user_250).avatars.count
+    assert_nil users(:user_250).avatar.nil?
 	end
 
 	def test_should_keep_current_avatar_in_case_of_failure
@@ -160,7 +160,7 @@ class AvatarsControllerTest < ActionController::TestCase
     end
 
     assert_response :success
-    assert_equal 1, users(:user_240).avatars.count
+    assert_not_nil users(:user_240).avatar
 
     assert_no_difference 'Avatar.count' do 
       put :update, :user_id => users(:user_240),
@@ -170,7 +170,7 @@ class AvatarsControllerTest < ActionController::TestCase
     end
 
     assert_response :success
-    assert_equal 1, users(:user_240).avatars.count
+    assert_not_nil users(:user_240).avatar
   end
 
 private

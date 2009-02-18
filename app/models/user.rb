@@ -112,7 +112,7 @@ class User < ActiveRecord::Base
   has_many :replies
   has_many :photos, :as => :pictureable
 
-  has_many :avatars, :as => :pictureable
+  has_one :avatar, :as => :pictureable
   
   has_many :mlabs
   has_many :mlab_tracks, 
@@ -299,11 +299,11 @@ class User < ActiveRecord::Base
   end
   
   def self.find_best(options = {})
-    self.find(:all, options.merge({:conditions => ["songs.id IS NOT NULL AND songs.published = ? AND users.activated_at IS NOT NULL AND (users.type IS NULL OR users.type = 'User') AND users.login != 'myousica'", true], :joins => "LEFT OUTER JOIN songs ON users.id = songs.user_id", :order => 'songs.rating_avg DESC', :include => :avatars})) 
+    self.find(:all, options.merge({:conditions => ["songs.id IS NOT NULL AND songs.published = ? AND users.activated_at IS NOT NULL AND (users.type IS NULL OR users.type = 'User') AND users.login != 'myousica'", true], :joins => "LEFT OUTER JOIN songs ON users.id = songs.user_id", :order => 'songs.rating_avg DESC', :include => :avatar})) 
   end
   
   def self.find_best_band_or_deejays(options = {})
-    self.find(:all, options.merge({:conditions => ["songs.id IS NOT NULL AND songs.published = ? AND users.activated_at IS NOT NULL AND (users.type = 'Band' OR users.type = 'Dj') AND users.login != 'myousica'", true], :joins => "LEFT OUTER JOIN songs ON users.id = songs.user_id", :order => 'songs.rating_avg DESC', :include => :avatars})) 
+    self.find(:all, options.merge({:conditions => ["songs.id IS NOT NULL AND songs.published = ? AND users.activated_at IS NOT NULL AND (users.type = 'Band' OR users.type = 'Dj') AND users.login != 'myousica'", true], :joins => "LEFT OUTER JOIN songs ON users.id = songs.user_id", :order => 'songs.rating_avg DESC', :include => :avatar})) 
   end
   
   def self.find_prolific(options = {})
@@ -340,12 +340,12 @@ class User < ActiveRecord::Base
   
   def self.find_paginated_best(options = {})
     options.reverse_update(:page => 1, :per_page => 3)
-    paginate(options.merge({:conditions => ["songs.id IS NOT NULL AND songs.published = ? AND users.activated_at IS NOT NULL AND (users.type IS NULL OR users.type = 'User') AND users.login != 'myousica'", true], :joins => "LEFT OUTER JOIN songs ON users.id = songs.user_id", :order => 'songs.rating_avg DESC', :include => :avatars})) 
+    paginate(options.merge({:conditions => ["songs.id IS NOT NULL AND songs.published = ? AND users.activated_at IS NOT NULL AND (users.type IS NULL OR users.type = 'User') AND users.login != 'myousica'", true], :joins => "LEFT OUTER JOIN songs ON users.id = songs.user_id", :order => 'songs.rating_avg DESC', :include => :avatar})) 
   end
   
   def self.find_paginated_best_bands_and_deejays(options = {})
     options.reverse_update(:page => 1, :per_page => 3)
-    paginate(options.merge({:conditions => ["songs.id IS NOT NULL AND songs.published = ? AND users.activated_at IS NOT NULL AND (users.type = 'Band' OR users.type = 'Dj') AND users.login != 'myousica'", true], :joins => "LEFT OUTER JOIN songs ON users.id = songs.user_id", :order => 'songs.rating_avg DESC', :include => :avatars})) 
+    paginate(options.merge({:conditions => ["songs.id IS NOT NULL AND songs.published = ? AND users.activated_at IS NOT NULL AND (users.type = 'Band' OR users.type = 'Dj') AND users.login != 'myousica'", true], :joins => "LEFT OUTER JOIN songs ON users.id = songs.user_id", :order => 'songs.rating_avg DESC', :include => :avatar})) 
   end
   
   def self.find_paginated_newest_bands_and_deejays(options = {})
@@ -414,7 +414,7 @@ class User < ActiveRecord::Base
   end
 
   def self.find_top_answers_contributors(options = {})
-    self.find(:all, options.merge(:include => [:avatars], :order => 'users.replies_count DESC'))
+    self.find(:all, options.merge(:include => [:avatar], :order => 'users.replies_count DESC'))
   end
 
   def self.find_top_myousicians(options = {})
@@ -502,9 +502,9 @@ class User < ActiveRecord::Base
     self.songs.find(:all, options.merge(:conditions => ['published = ?', true], :order => 'rating_avg DESC'))
   end
   
-  def avatar
-    avatars.find(:all, :order => 'created_at DESC').first
-  end
+  #def avatar
+  #  avatars.find(:all, :order => 'created_at DESC').first
+  #end
   
   def find_related_answers
     Answer.find :all, :select => 'DISTINCT',

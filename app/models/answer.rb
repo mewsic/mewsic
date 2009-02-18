@@ -69,7 +69,7 @@ class Answer < ActiveRecord::Base
     self.paginate options.merge(:page => page,
                   :conditions => ["answers.closed = ?", false],
                   :order => 'answers.created_at DESC, answers.rating_avg DESC',
-                  :include => {:user => :avatars})
+                  :include => {:user => :avatar})
   end
 
   # Finds top answers (whose rating average is >= 3.0) and orders 'em by rating average
@@ -78,7 +78,7 @@ class Answer < ActiveRecord::Base
     self.paginate options.merge(:page => page,
                   :conditions => "answers.rating_avg >= 3.0",
                   :order => 'answers.rating_avg DESC, answers.replies_count DESC',
-                  :include => {:user => :avatars})
+                  :include => {:user => :avatar})
   end
 
   # Counts top answers, whose rating average is >= 3.0.
@@ -92,7 +92,7 @@ class Answer < ActiveRecord::Base
     self.paginate options.merge(:page => page,
                   :conditions => ["answers.closed = ? AND answers.created_at > ?", false, 1.month.ago],
                   :order => 'answers.created_at DESC',
-                  :include => {:user => :avatars})
+                  :include => {:user => :avatar})
   end
 
   # Counts newest answers, whose are not <tt>closed</tt> and have been created in the

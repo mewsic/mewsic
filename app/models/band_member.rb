@@ -39,7 +39,7 @@ class BandMember < ActiveRecord::Base
   belongs_to :user
   belongs_to :instrument
   belongs_to :linked_user, :class_name => 'User' 
-  has_many   :avatars, :as => :pictureable, :dependent => :destroy
+  has_one   :avatar, :as => :pictureable, :dependent => :destroy
   
   attr_accessible :nickname, :country, :instrument_id, :linked_user_id
 
@@ -59,8 +59,8 @@ class BandMember < ActiveRecord::Base
   # Removes all the avatars of the member and adds an existing one whose id is passed
   # as the first parameter
   def update_avatar(id)
-    self.avatars.destroy_all
-    self.avatars << Avatar.find(id)
+    self.avatar.destroy
+    self.avatar << Avatar.find(id)
   end
 
   # Links this member to an existing myousica user, by erasing the <tt>nickname</tt> and <tt>country</tt>
@@ -69,7 +69,7 @@ class BandMember < ActiveRecord::Base
   def link_to(user)
     self.unlink!
     self.nickname = self.country = nil
-    self.avatars_without_facade.each(&:destroy)
+    self.avatar.destroy
     self.linked_user_id = user.id
   end
 
