@@ -14,6 +14,6 @@
       </tr>
     <%- end -%>
   </table>
-  <%= will_paginate @messages, :prev_label => "&lt;", :next_label => "&gt;" %>
+  <%= will_paginate @messages, :previous_label => "&lt;", :next_label => "&gt;" %>
 </div>
 <%= javascript_tag update_messages_count_javascript_for(@user) %>

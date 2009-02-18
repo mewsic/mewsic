@@ -21,7 +21,7 @@
   	</div>
   </div>
   <%- end -%>
-	<%= will_paginate @songs, :class => 'pagination song', :params => { :type => :song, :q => @q }, :prev_label => image_tag('move_arrow_left.png'), :next_label => image_tag('move_arrow_right.png') %>
+	<%= will_paginate @songs, :class => 'pagination song', :params => { :type => :song, :q => @q }, :previous_label => image_tag('move_arrow_left.png'), :next_label => image_tag('move_arrow_right.png') %>
 	<div class="pagination spinner">
     <img src="/images/spinner.gif" id="song-results-spinner" style="display:none"/>
   </div>

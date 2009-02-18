@@ -34,8 +34,8 @@ class MessagesController < ApplicationController
   def index
     @messages = @user.received_messages.paginate(:page => @page, :per_page => 10)
 
-    if @messages.page_count > 1 && params[:page].to_i > @messages.page_count
-      redirect_to(:action => 'index', :page =>  @messages.page_count) and return
+    if @messages.total_pages > 1 && params[:page].to_i > @messages.total_pages
+      redirect_to(:action => 'index', :page =>  @messages.total_pages) and return
     end
   end
 

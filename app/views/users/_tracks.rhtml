@@ -19,7 +19,7 @@
 		<%= image_tag('move_arrow_right.png', :class => 'faded') %>
   <% end %>
 	</div>
-	<% if @tracks.page_count > 1 %>
-		<p class="float-right page-count">Page <%= @tracks.current_page %> of <%= @tracks.page_count %></p>
+	<% if @tracks.total_pages > 1 %>
+		<p class="float-right page-count">Page <%= @tracks.current_page %> of <%= @tracks.total_pages %></p>
 	<% end %>
 </div>

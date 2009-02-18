@@ -6,8 +6,8 @@
 		  :any_user     => "#{@mband.name} hasn't created any song yet"
 -%>
 <div class="next">      
-	<% if @songs.page_count > 1 %>
-		<span class="align-right page-count">Page <%= @songs.current_page %> of <%= @songs.page_count %></span>
+	<% if @songs.total_pages > 1 %>
+		<span class="align-right page-count">Page <%= @songs.current_page %> of <%= @songs.total_pages %></span>
 	<% end %>
 	<% if @songs.previous_page %>
 		<%= link_to image_tag('move_arrow_left.png'), mband_songs_path(@mband, :page => @songs.previous_page), :class => 'navigation' %>
