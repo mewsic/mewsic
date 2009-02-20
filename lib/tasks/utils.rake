@@ -153,7 +153,7 @@ namespace :myousica do
   end
 
   def rsync(local, remote)
-    sh("rsync -rlt4 --exclude README.html --exclude HEADER.html --exclude .htaccess #{local} ulisse.adelao.it:/var/www/intranet/#{remote}")
+    sh("rsync -rlt4 --exclude README.html --exclude HEADER.html --exclude .htaccess #{local} myousica@myousica.adelao.it:/srv/#{remote}")
   end
 
   namespace :doc do

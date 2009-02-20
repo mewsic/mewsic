@@ -50,6 +50,7 @@ Other useful tasks are defined in lib/tasks/utils.rake:
 
 == Now?
 
-Complete Rdoc is available at https://ulisse.adelao.it/rdoc/myousica
+Complete Rdoc is available at https://myousica.adelao.it/rdoc
+C0 test coverage report is at https://myousica.adelao.it/rcov
 
 Enjoy!
