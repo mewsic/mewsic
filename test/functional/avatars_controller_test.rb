@@ -147,7 +147,7 @@ class AvatarsControllerTest < ActionController::TestCase
     end
     assert_response :success
 
-    assert_nil users(:user_250).avatar.nil?
+    assert_nil users(:user_250).avatar
 	end
 
 	def test_should_keep_current_avatar_in_case_of_failure

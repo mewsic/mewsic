@@ -60,7 +60,7 @@ class BandMember < ActiveRecord::Base
   # as the first parameter
   def update_avatar(id)
     self.avatar.destroy
-    self.avatar << Avatar.find(id)
+    self.avatar = Avatar.find(id)
   end
 
   # Links this member to an existing myousica user, by erasing the <tt>nickname</tt> and <tt>country</tt>

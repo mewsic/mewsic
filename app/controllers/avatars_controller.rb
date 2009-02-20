@@ -68,7 +68,11 @@ class AvatarsController < ApplicationController
     @avatar = Avatar.new(params[:avatar].merge({:pictureable => @pictureable}))
     respond_to do |format|
       if @avatar.valid?
-        @pictureable.avatar.destroy
+        
+        if ! @pictureable.avatar.nil?
+          @pictureable.avatar.destroy
+        end
+        
         @avatar.save!
 
         format.html { redirect_to user_url(current_user) }
