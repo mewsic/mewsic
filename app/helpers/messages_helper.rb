@@ -13,6 +13,14 @@ module MessagesHelper
     string = "<strong>#{string}</strong>" if user == message.recipient && !message.read?
     string
   end
+
+  def message_if_replying_or_messages_list_path_for(user)
+    if params[:reply]
+      user_message_path(user, params[:reply], :page => params[:page])
+    else
+      user_messages_path(@user, :page => params[:page])
+    end
+  end
   
   def sanitize_message(message)
     white_list message.body.gsub("\n", "<br />")    
