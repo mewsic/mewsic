@@ -21,6 +21,6 @@ module AuthenticatedTestHelper
 
   private
     def logout_from_controller!
-      @controller.send! :current_user=, nil
+      @controller.send :current_user=, nil
     end
 end
