@@ -60,15 +60,15 @@ class User < ActiveRecord::Base
   validates_presence_of     :password_confirmation,      :if => :password_required?
   validates_confirmation_of :password,                   :if => :password_required?
   validates_length_of       :password, :within => 6..20, :if => :password_required?,
-                                       :too_short => 'too short! minimum %d chars',
-                                       :too_long => 'too long! maximum %d chars'
+                                       :too_short => 'too short! minimum {{count}} chars',
+                                       :too_long => 'too long! maximum {{count}} chars'
   validates_length_of       :login,    :within => 3..20,
-                                       :too_short => 'too short! minimum %d chars',
-                                       :too_long => 'too long! maximum %d chars'
-  validates_length_of       :city,     :maximum => 25,  :allow_nil => true, :allow_blank => true, :message => 'too long! max %d chars'
-  validates_length_of       :country,  :maximum => 45,  :allow_nil => true, :allow_blank => true, :message => 'too long! max %d chars!'
-  validates_length_of       :motto,    :maximum => 1500, :allow_nil => true, :allow_blank => true, :message => 'too long.. sorry! max %d chars'
-  validates_length_of       :tastes,   :maximum => 1500, :allow_nil => true, :allow_blank => true, :message => 'too long.. sorry! max %d chars'
+                                       :too_short => 'too short! minimum {{count}} chars',
+                                       :too_long => 'too long! maximum {{count}} chars'
+  validates_length_of       :city,     :maximum => 25,  :allow_nil => true, :allow_blank => true, :message => 'too long! max {{count}} chars'
+  validates_length_of       :country,  :maximum => 45,  :allow_nil => true, :allow_blank => true, :message => 'too long! max {{count}} chars!'
+  validates_length_of       :motto,    :maximum => 1500, :allow_nil => true, :allow_blank => true, :message => 'too long.. sorry! max {{count}} chars'
+  validates_length_of       :tastes,   :maximum => 1500, :allow_nil => true, :allow_blank => true, :message => 'too long.. sorry! max {{count}} chars'
 
   validates_format_of       :email,    :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :on => :create, :message => 'invalid e-mail'
   validates_format_of       :login,    :with => /^[a-z][\w_-]+$/i, :if => Proc.new{|u| !u.login.blank?}, :message => 'only letters, numbers and underscore allowed!'
