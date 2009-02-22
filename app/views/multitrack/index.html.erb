@@ -1,6 +1,6 @@
 <script type="text/javascript" charset="utf-8">// <![CDATA[
   document.observe('dom:loaded', function() {
-    if ($('current-user-id')) {
+    <% if logged_in? %>
       $w("title original_author description").each(function(name) {
           new Ajax.InPlaceEditor('mlab_' + name, '<%= song_path(@song, :authenticity_token => (form_authenticity_token if protect_against_forgery?)) %>', {
           externalControl: 'mlab_' + name + '_edit_button',
@@ -39,7 +39,7 @@
         paramName: 'song[tone]',
         onComplete: function() { $('flashcontent').refreshSong(); }
       });
-    } else {
+    <% else %>
       var controls = $w('title original_author description genre tone').map(function(name) {
         return $('mlab_' + name + '_edit_button');
       });
@@ -52,7 +52,7 @@
       Event.observe(window, 'unload', function() {
         controls.invoke('stopObserving', 'click', alerter);
       });
-    }
+    <% end %>
   });
 
   function refreshTopPane() {
