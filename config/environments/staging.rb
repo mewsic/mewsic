@@ -40,8 +40,8 @@ end
 APPLICATION = {
   :url => 'http://mewsic.stage.lime5.it',
   :email => 'no-reply@mewsic.stage.lime5.it',
-  :fms_url => 'rtmp://mewsic.stage.lime5.it/',
-  :media_url => 'http://mewsic.stage.lime5.it',
+  :fms_url => 'rtmp://upload.mewsic.stage.lime5.it/',
+  :media_url => 'http://upload.mewsic.stage.lime5.it',
   :audio_url => '/audio',
   :video_url => '/videos',
   :media_path => '/srv/rails/mewsic/shared/audio'
