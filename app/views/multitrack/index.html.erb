@@ -70,10 +70,10 @@
   var flashvars = {
     serverPath: '<%= APPLICATION[:url] %>',
     settingsXMLPath: '<%= multitrack_config_path %>',
-    <%- if logged_in? && current_user.is_admin? -%>
+    <%#- if logged_in? && current_user.is_admin? -%>
     isLogEnabled: 'yes',
     isServiceDumpEnabled: 'yes',
-    <%- end -%>
+    <%#- end -%>
     loadSong: '<%= @edit ? "yes" : "no" %>',
     songID: <%= @song.id || 0 %>
   };

@@ -10,8 +10,8 @@ config.cache_classes = true
 config.action_controller.consider_all_requests_local = true
 config.action_controller.perform_caching             = false
 config.action_controller.session = {
-  :session_key => '_myousica_sess',
-  :secret      => '1ad6c4dd41760f8b5bb6012bfccef2c038e0931f'
+  :session_key => '_mewsic_sess',
+  :secret      => 'aef2c038e1d6c4d1760f80931fd4b5bb6012bfcc'
 }
 
 # Disable request forgery protection in test environment
@@ -24,8 +24,8 @@ config.action_mailer.delivery_method = :test
 
 APPLICATION = {
   :url => 'http://localhost:3000',
-  :email => 'no-reply@myousica.com',
-  :fms_url => 'rtmp://localhost:3000',
+  :email => 'no-reply@mewsic.test',
+  :fms_url => 'rtmp://localhost',
   :media_url => 'http://localhost:3001',
   :audio_url => '/audio',
   :video_url => '/videos',

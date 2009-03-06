@@ -14,9 +14,9 @@ config.action_controller.perform_caching             = true
 # Your secret key for verifying cookie session data integrity.
 # If you change this key, all old sessions will become invalid!
 config.action_controller.session = {
-  :session_key => '_myousica_sess',
-  :session_domain => 'myousica.adelao.it',
-  :secret      => 'eec1655098f49587abd17cb7a83c3cfa9fbec766'
+  :session_key => '_mewsic_sess',
+  :session_domain => 'mewsic.stage.lime5.it',
+  :secret      => 'e5ccedb91c7693cf86e16a550f47cb7a83a879fb'
 }
 
 # Enable serving of images, stylesheets, and javascripts from an asset server
@@ -30,7 +30,7 @@ config.action_mailer.default_content_type = 'text/html'
 module ::ActionMailer
   class Base
     def perform_delivery_staging(mail)
-      mail.to = 'staging@myousica.com'
+      mail.to = 'staging@mewsic.stage.lime5.it'
       mail.cc = mail.bcc = ''
       perform_delivery_sendmail(mail)
     end
@@ -38,11 +38,11 @@ module ::ActionMailer
 end
 
 APPLICATION = {
-  :url => 'http://myousica.adelao.it',
-  :email => 'no-reply@myousica.adelao.it',
-  :fms_url => 'rtmp://myousica.adelao.it/live/',
-  :media_url => 'http://myousica.adelao.it',
+  :url => 'http://mewsic.stage.lime5.it',
+  :email => 'no-reply@mewsic.stage.lime5.it',
+  :fms_url => 'rtmp://mewsic.stage.lime5.it/',
+  :media_url => 'http://mewsic.stage.lime5.it',
   :audio_url => '/audio',
   :video_url => '/videos',
-  :media_path => '/srv/rails/myousica/shared/audio'
+  :media_path => '/srv/rails/mewsic/shared/audio'
 }

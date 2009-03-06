@@ -1,7 +1,7 @@
-== Welcome to Myousica.com development
+== Welcome to MEWSIC development
 
-The myousica application is a RESTful Rails 2.0 app that implements an open platform for
-creating and composing music online. The whole myousica infrastructure is composed of:
+The mewsic application is a RESTful Rails 2.0 app that implements an open platform for
+creating and composing music online. The whole mewsic infrastructure is composed of:
 
 * This RESTful app;
 * The multitrack-server app, located on github at http://github.com/vjt/multitrack-server;
@@ -21,36 +21,36 @@ uploads and MP3 encoding and downmixing using ffmpeg (http://ffmpeg.mplayerhq.hu
 
 == Quickstart
 
-* Clone the git repository (git clone git@github.com:vjt/myousica.git)
+* Clone the git repository (git clone git@github.com:vjt/mewsic.git)
 * Create a config/database.yml (example in config/database.yml.example)
-* Create the myousica_development, myousica_test and myousica_production DBs
+* Create the mewsic_development, mewsic_test and mewsic_production DBs
 * Verify that database connectivity is working by running script/console
-* Issue rake myousica:initialize
+* Issue rake mewsic:initialize
 * Run ruby script/server and connect to http://localhost:3000/ and you're set.
 
 == Goodies
 
-* If using vim, update your .vimrc with these instructions: https://github.com/vjt/myousica/wikis/vimrc
-* Update your .irbrc with these instructions: https://github.com/vjt/myousica/wikis/irbrc
+* If using vim, update your .vimrc with these instructions: https://github.com/vjt/mewsic/wikis/vimrc
+* Update your .irbrc with these instructions: https://github.com/vjt/mewsic/wikis/irbrc
 
-The "myousica:initialize" rake task is a shorthand for 
+The "mewsic:initialize" rake task is a shorthand for 
 * rake db:migrate               - migrates the database schema to the latest version
-* rake myousica:fixtures:load   - loads all the fixtures as example data in the DB
-* rake myousica:flash:update    - downloads the latest SWFs from the online site
-* rake myousica:videos:download - downloads all the videos from the online site
-* rake myousica:sphinx:config   - generates the sphinx config file using database.yml
+* rake mewsic:fixtures:load   - loads all the fixtures as example data in the DB
+* rake mewsic:flash:update    - downloads the latest SWFs from the online site
+* rake mewsic:videos:download - downloads all the videos from the online site
+* rake mewsic:sphinx:config   - generates the sphinx config file using database.yml
 
 Other useful tasks are defined in lib/tasks/utils.rake:
-* rake myousica:sphinx:start    - starts the sphinx daemon
-* rake myousica:sphinx:stop     - stops the sphinx daemon
-* rake myousica:sphinx:rehash   - rebuilds the sphinx index
-* rake myousica:clean_up_mp3s   - cleans up unreferenced mp3s in ENV['MP3DIR']
-* rake myousica:update_friends_count
-* rake myousica:update_replies_count
+* rake mewsic:sphinx:start    - starts the sphinx daemon
+* rake mewsic:sphinx:stop     - stops the sphinx daemon
+* rake mewsic:sphinx:rehash   - rebuilds the sphinx index
+* rake mewsic:clean_up_mp3s   - cleans up unreferenced mp3s in ENV['MP3DIR']
+* rake mewsic:update_friends_count
+* rake mewsic:update_replies_count
 
 == Now?
 
-Complete Rdoc is available at https://myousica.adelao.it/rdoc
-C0 test coverage report is at https://myousica.adelao.it/rcov
+Complete Rdoc is available at https://mewsic.stage.lime5.it/rdoc
+C0 test coverage report is at https://mewsic.stage.lime5.it/rcov
 
 Enjoy!

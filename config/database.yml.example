@@ -1,10 +1,10 @@
-# Myousica database configuration file
+# Mewsic database configuration file
 #
 # Development environment
 #
 development:
   adapter: mysql # Currently only mysql is supported
-  database: myousica_development
+  database: mewsic_development
   username: 
   password: 
   # If you access your server locally, set the path
@@ -18,7 +18,7 @@ development:
 #
 test:
   adapter: mysql
-  database: myousica_test
+  database: mewsic_test
   username: 
   password: 
   # socket: /opt/local/var/run/mysql5/mysqld.sock
@@ -27,7 +27,7 @@ test:
 #
 production:
   adapter: mysql
-  database: myousica_production
+  database: mewsic_production
   username:
   password:
   # socket: /opt/local/var/run/mysql5/mysqld.sock

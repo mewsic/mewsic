@@ -1,11 +1,14 @@
-namespace :myousica do
+STAGE_SERVER = 'mewsic.stage.lime5.it'
+RDOC_DIR='/srv'
+
+namespace :mewsic do
 
   desc "Populate the development environment"
-  task :initialize => ["db:migrate", "myousica:directories", "myousica:fixtures:load",
-      "myousica:flash:update", "myousica:videos:download", "myousica:sphinx:config",
-      "myousica:sphinx:initialize", "myousica:sphinx:start"]
+  task :initialize => ["db:migrate", "mewsic:directories", "mewsic:fixtures:load",
+      "mewsic:flash:update", "mewsic:videos:download", "mewsic:sphinx:config",
+      "mewsic:sphinx:initialize", "mewsic:sphinx:start"]
 
-  desc "Create all required myousica directories"
+  desc "Create all required mewsic directories"
   task :directories => :environment do
     Rake::Task['tmp:create'].invoke
     mkdir_p 'index'
@@ -47,17 +50,17 @@ namespace :myousica do
 
   namespace :fixtures do
     desc "Load fixtures and update both friends and replies count"
-    task :load => [ "db:fixtures:load",  "myousica:update_friends_count",
-      "myousica:update_replies_count", "myousica:copy_test_mp3s"]
+    task :load => [ "db:fixtures:load",  "mewsic:update_friends_count",
+      "mewsic:update_replies_count", "mewsic:copy_test_mp3s"]
   end  
 
   namespace :flash do
-    desc "Update the flash swfs from the production slices on EY"
+    desc "Update the flash swfs"
     task(:update => :environment) do
       def update(path)
         FileUtils.mkdir_p File.join(RAILS_ROOT, 'public', *path[0..-2])
         File.open File.join(RAILS_ROOT, 'public', *path), 'w+' do |f|
-          uri = URI.parse "http://myousica.com/#{path.join('/')}"
+          uri = URI.parse "http://#{STAGE_SERVER}/#{path.join('/')}"
           puts "  Updating #{path.last} from #{uri}"
           f.write Net::HTTP.get(uri)
         end
@@ -65,16 +68,16 @@ namespace :myousica do
 
       puts "* Updating flash applications"
 
-      update ['multitrack', 'Adelao_Myousica_Multitrack_Editor.swf']
-      update ['players', 'Adelao_Myousica_Player.swf']
-      update ['players', 'Adelao_Myousica_Video_Player.swf']
-      update ['splash', 'Adelao_Myousica_Splash.swf']
+      update ['multitrack', 'Multitrack_Editor.swf']
+      update ['players', 'Player.swf']
+      update ['players', 'Video_Player.swf']
+      update ['splash', 'Splash.swf']
       (1..3).each { |i| update ['splash', 'slides', "#{i}.jpg"] }
     end
   end
 
   namespace :videos do
-    desc "Download current videos from myousica.com"
+    desc "Download current videos from #{STAGE_SERVER}"
     task(:download => :environment) do
       path = File.join(RAILS_ROOT, 'public', 'videos')
 
@@ -83,7 +86,7 @@ namespace :myousica do
         puts "* Processing #{video.description} video"
 
         [:filename, :highres, :poster, :thumb].each do |kind|
-          uri = URI.parse("http://myousica.com#{video.public_filename(kind)}")
+          uri = URI.parse("http://#{STAGE_SERVER}#{video.public_filename(kind)}")
           printf "  Downloading #{video.description} #{kind} from #{uri} .. "
           $stdout.flush
 
@@ -153,17 +156,17 @@ namespace :myousica do
   end
 
   def rsync(local, remote)
-    sh("rsync -rlt4 --exclude README.html --exclude HEADER.html --exclude .htaccess #{local} myousica@myousica.adelao.it:/srv/#{remote}")
+    sh("rsync -rlt4 --exclude README.html --exclude HEADER.html --exclude .htaccess #{local} mewsic@#{STAGE_SERVER}:#{RDOC_DIR}/#{remote}")
   end
 
   namespace :doc do
     allison = %[allison --all --line-numbers --inline-source --charset utf-8]
 
-    desc "Generate myousica documentation"
+    desc "Generate mewsic documentation"
     task :app => :environment do
       rm_rf 'doc/app' rescue nil
       files = FileList.new('app/**/*.rb', 'lib/**/*.rb')
-      sh "#{allison} --title 'Myousica documentation' -o doc/app doc/README_FOR_APP #{files}"
+      sh "#{allison} --title 'mewsic documentation' -o doc/app doc/README_FOR_APP #{files}"
     end
 
     desc "Generate plugins documentation"
@@ -180,17 +183,17 @@ namespace :myousica do
         end
         files.include("#{plugin}/CHANGELOG") if File.exist?("#{plugin}/CHANGELOG")
         
-        sh "#{allison} --title 'Myousica - #{name} documentation' -o doc/plugins/#{name} #{option} #{files}"
+        sh "#{allison} --title 'mewsic - #{name} documentation' -o doc/plugins/#{name} #{option} #{files}"
       end
     end
 
     desc "Sync documentation on ulisse"
     task :sync => :environment do
-      puts "R-syncing app doc"
-      rsync "#{RAILS_ROOT}/doc/app/*", "rdoc/myousica"
+      puts "R-syncing app doc to #{STAGE_SERVER}"
+      rsync "#{RAILS_ROOT}/doc/app/*", "rdoc/mewsic"
 
-      puts "R-syncing plugins doc"
-      rsync "#{RAILS_ROOT}/doc/plugins/*", "rdoc/myousica/plugins"
+      puts "R-syncing plugins doc to #{STAGE_SERVER}"
+      rsync "#{RAILS_ROOT}/doc/plugins/*", "rdoc/mewsic/plugins"
     end
   end
 
@@ -202,8 +205,8 @@ namespace :myousica do
       Rake::Task['test:functionals:rcov'].invoke
       Rake::Task['test:integration:rcov'].invoke
 
-      puts "R-syncing to ulisse.adelao.it"
-      rsync "#{RAILS_ROOT}/coverage/*", "rcov/myousica"
+      puts "R-syncing coverage to #{STAGE_SERVER}"
+      rsync "#{RAILS_ROOT}/coverage/*", "rcov/mewsic"
     end
   end
   

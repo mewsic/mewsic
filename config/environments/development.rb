@@ -9,7 +9,7 @@ config.cache_classes = false
 config.action_controller.consider_all_requests_local = true
 config.action_controller.perform_caching             = true
 config.action_controller.session = {
-  :session_key => '_myousica_sess',
+  :session_key => '_mewsic_sess',
   :secret      => '1ad6c4dd41760f8b5bb6012bfccef2c038e0931f'
 }
 
@@ -24,7 +24,7 @@ config.action_mailer.delivery_method = :sendmail
 
 APPLICATION = {
   :url => 'http://localhost:3000',
-  :email => 'no-reply@myousica.com',
+  :email => 'no-reply@mewsic.local',
   :fms_url => 'rtmp://localhost/',
   :media_url => 'http://localhost:3001',
   :audio_url => '/audio',

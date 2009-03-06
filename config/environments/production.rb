@@ -14,9 +14,9 @@ config.action_controller.perform_caching             = true
 # Your secret key for verifying cookie session data integrity.
 # If you change this key, all old sessions will become invalid!
 config.action_controller.session = {
-  :session_key => '_myousica_sess',
-  :session_domain => '.myousica.com',
-  :secret      => '1ad6c4dd41760f8b5bb6012bfccef2c038e0931f'
+  :session_key => '_mewsic_sess',
+  :session_domain => '.mewsic.com',
+  :secret      => 'b0bf476cf838ea5bdb60fcce1209d412c01d631f'
 }
 
 # Enable serving of images, stylesheets, and javascripts from an asset server
@@ -29,18 +29,18 @@ config.action_mailer.default_content_type = 'text/html'
 config.action_mailer.smtp_settings = {
   :address => 'smtp',
   :port => 25,
-  :domain => 'myousica.com'
+  :domain => 'mewsic.com'
 }
 
 # Attachments on EY
 ENV['INLINEDIR'] = "/tmp/#{$$}"
 
 APPLICATION = {
-  :url => 'http://myousica.com',
-  :email => 'no-reply@myousica.com',
-  :fms_url => 'rtmp://fms.myousica.com/live/',
-  :media_url => 'http://upload.myousica.com',
+  :url => 'http://mewsic.com',
+  :email => 'no-reply@mewsic.com',
+  :fms_url => 'rtmp://upload.mewsic.com/',
+  :media_url => 'http://upload.mewsic.com/',
   :audio_url => '/audio',
   :video_url => '/videos',
-  :media_path => '/data/myousica/shared/audio'
+  :media_path => '/srv/rails/mewsic/shared/audio'
 }
