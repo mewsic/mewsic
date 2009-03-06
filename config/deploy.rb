@@ -30,32 +30,32 @@ ssh_options[:paranoid] = false
 # be used to single out a specific subset of boxes in a particular role, like
 # :primary => true.
 
-task :production do
-  set :user,          'adelaosrl'
-  set :password,      'dshUak8s'
-
-  set :dbuser, 'adelaosrl_db'
-  set :dbpass, '4asrsWrh'
-  set :dbhost, 'mysql50-3-master'
-  set :dbname, 'myousica_production'
-
-  set :deploy_to,     "/data/#{application}"
-  set :deploy_via,    :filtered_remote_cache
-  set :repository,    'git@myousica_github.com:vjt/myousica.git'
-  set :repository_cache,    "/var/cache/engineyard/#{application}"
-  set :monit_group,   'myousica'
-  
-  role :web, '65.74.174.196:8221' # mongrel, mongrel
-  role :app, '65.74.174.196:8221', :mongrel => true, :sphinx => true
-  role :db, '65.74.174.196:8221', :primary => true
-  
-  role :app, '65.74.174.196:8222', :no_release => true, :mongrel => true, :sphinx => true
-  
-  set :rails_env, 'production'
-
-  set :environment_database, defer { dbname }
-  set :environment_dbhost, defer { dbhost }
-end
+#task :production do
+#  set :user,          'adelaosrl'
+#  set :password,      'dshUak8s'
+#
+#  set :dbuser, 'adelaosrl_db'
+#  set :dbpass, '4asrsWrh'
+#  set :dbhost, 'mysql50-3-master'
+#  set :dbname, 'myousica_production'
+#
+#  set :deploy_to,     "/data/#{application}"
+#  set :deploy_via,    :filtered_remote_cache
+#  set :repository,    'git@myousica_github.com:vjt/myousica.git'
+#  set :repository_cache,    "/var/cache/engineyard/#{application}"
+#  set :monit_group,   'myousica'
+#  
+#  role :web, '65.74.174.196:8221' # mongrel, mongrel
+#  role :app, '65.74.174.196:8221', :mongrel => true, :sphinx => true
+#  role :db, '65.74.174.196:8221', :primary => true
+#  
+#  role :app, '65.74.174.196:8222', :no_release => true, :mongrel => true, :sphinx => true
+#  
+#  set :rails_env, 'production'
+#
+#  set :environment_database, defer { dbname }
+#  set :environment_dbhost, defer { dbhost }
+#end
 
 task :staging do
   set :user, 'myousica'
@@ -72,9 +72,9 @@ task :staging do
   set :repository,    'git@github.com:vjt/myousica.git'
   set :repository_cache,    "/var/cache/rails/#{application}"
 
-  role :web, '89.97.211.110'
-  role :app, '89.97.211.110'
-  role :db, '89.97.211.110', :primary => :true
+  role :web, '89.97.211.109'
+  role :app, '89.97.211.109'
+  role :db, '89.97.211.109', :primary => :true
 
   set :rails_env, 'staging'
   set :environment_database, defer { dbname }
