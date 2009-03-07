@@ -163,13 +163,13 @@ class TracksControllerTest < ActionController::TestCase
 
   def test_toggle_idea_should_redirect_if_not_logged_in
     put :toggle_idea, :id => tracks(:guitar_for_closer).id
-    assert_redirected_to new_session_path
+    assert_redirected_to login_path
   end
 
   def test_toggle_idea_should_redirect_current_user_is_not_the_track_user
     login_as :user_10
     put :toggle_idea, :id => tracks(:guitar_for_closer).id
-    assert_redirected_to new_session_path
+    assert_redirected_to login_path
   end
 
   def test_toggle_idea_should_toggle_idea
