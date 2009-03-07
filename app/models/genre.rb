@@ -80,7 +80,7 @@ class Genre < ActiveRecord::Base
 
   # Returns an URI-encoded representation of the genre name, for usage in path names.
   def to_param
-    URI.encode(self.name.downcase.gsub(' ', '+'))
+    CGI.escape self.name.downcase
   end
 
   # Sitemap priority for this instance
@@ -94,7 +94,7 @@ class Genre < ActiveRecord::Base
   def self.find_from_param(param, options = {})
     param = param.id if param.kind_of? ActiveRecord::Base
     find_method = param.to_s =~ /^\d+$/ ? :find : :find_by_name
-    param = URI.decode(param.gsub('+', ' ')) if find_method == :find_by_name
+    param = CGI.unescape param if find_method == :find_by_name
     send(find_method, param, options) or raise ActiveRecord::RecordNotFound
   end
 
