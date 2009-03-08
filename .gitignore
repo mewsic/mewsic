@@ -9,3 +9,6 @@ index
 .lesshst
 *._*
 .viminfo
+.profile
+.ruby_inline
+.ssh
