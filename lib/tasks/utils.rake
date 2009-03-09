@@ -45,7 +45,7 @@ namespace :mewsic do
         end
         files.include("#{plugin}/CHANGELOG") if File.exist?("#{plugin}/CHANGELOG")
         
-        sh "#{allison} --title 'mewsic - #{name} documentation' -o #{rdoc_dir}/#{name} #{option} #{files}"
+        sh "#{rdoc} --title 'mewsic - #{name} documentation' -o #{rdoc_dir}/#{name} #{option} #{files}"
       end
     end
   end
