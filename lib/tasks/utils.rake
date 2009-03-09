@@ -1,5 +1,4 @@
 STAGE_SERVER = 'mewsic.stage.lime5.it'
-RDOC_DIR='/srv'
 
 namespace :mewsic do
 
@@ -155,23 +154,20 @@ namespace :mewsic do
     end
   end
 
-  def rsync(local, remote)
-    sh("rsync -rlt4 --exclude README.html --exclude HEADER.html --exclude .htaccess #{local} mewsic@#{STAGE_SERVER}:#{RDOC_DIR}/#{remote}")
-  end
-
   namespace :doc do
     allison = %[allison --all --line-numbers --inline-source --charset utf-8]
+    rdoc_dir = ENV['RDOC_OUTPUT'] || 'doc/app'
 
     desc "Generate mewsic documentation"
     task :app => :environment do
-      rm_rf 'doc/app' rescue nil
+      rm_rf rdoc_dir rescue nil
       files = FileList.new('app/**/*.rb', 'lib/**/*.rb')
-      sh "#{allison} --title 'mewsic documentation' -o doc/app doc/README_FOR_APP #{files}"
+      sh "#{allison} --title 'mewsic documentation' -o #{rdoc_dir} doc/README_FOR_APP #{files}"
     end
 
     desc "Generate plugins documentation"
     task :plugins => :environment do
-      rm_rf 'doc/plugins' rescue nil
+      rm_rf rdoc_dir + '/plugins' rescue nil
       FileList['vendor/plugins/**'].each do |plugin|
         name = File.basename(plugin)
         files = FileList.new("#{plugin}/lib/**/*.rb")
@@ -183,31 +179,21 @@ namespace :mewsic do
         end
         files.include("#{plugin}/CHANGELOG") if File.exist?("#{plugin}/CHANGELOG")
         
-        sh "#{allison} --title 'mewsic - #{name} documentation' -o doc/plugins/#{name} #{option} #{files}"
+        sh "#{allison} --title 'mewsic - #{name} documentation' -o #{rdoc_dir + '/plugins'}/#{name} #{option} #{files}"
       end
-    end
-
-    desc "Sync documentation on ulisse"
-    task :sync => :environment do
-      puts "R-syncing app doc to #{STAGE_SERVER}"
-      rsync "#{RAILS_ROOT}/doc/app/*", "rdoc/mewsic"
-
-      puts "R-syncing plugins doc to #{STAGE_SERVER}"
-      rsync "#{RAILS_ROOT}/doc/plugins/*", "rdoc/mewsic/plugins"
     end
   end
 
-  namespace :rcov do
-    desc "Sync coverage on ulisse"
-    task :sync => :environment do
-      puts "Running coverage tests"
-      Rake::Task['test:units:rcov'].invoke
-      Rake::Task['test:functionals:rcov'].invoke
-      Rake::Task['test:integration:rcov'].invoke
+  # Cruisecontrol task
+  task :cruise => :environment do
+    puts 'Generating documentation..'
+    ENV['RDOC_OUTPUT'] = '/srv/rdoc/mewsic'
+    Rake::Task['mewsic:doc:app'].invoke
+    Rake::Task['mewsic:doc:plugins'].invoke
 
-      puts "R-syncing coverage to #{STAGE_SERVER}"
-      rsync "#{RAILS_ROOT}/coverage/*", "rcov/mewsic"
-    end
+    puts 'Running coverage tests'
+    ENV['RCOV_OUTPUT'] = '/srv/rcov/mewsic'
+    Rake::Task['test:coverage'].invoke
   end
   
 end
