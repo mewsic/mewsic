@@ -30,32 +30,32 @@ namespace :mewsic do
       sh "#{rdoc} --title 'mewsic documentation' -o #{rdoc_dir} doc/README_FOR_APP #{files}"
     end
 
-    desc "Generate plugins documentation"
-    task :plugins => :environment do
-      rdoc_dir = (ENV['RDOC_OUTPUT'] || 'doc/app') + '/plugins'
-      rm_rf rdoc_dir rescue nil
-      FileList['vendor/plugins/**'].each do |plugin|
-        name = File.basename(plugin)
-        files = FileList.new("#{plugin}/lib/**/*.rb")
-        option = nil
+    #desc "Generate plugins documentation"
+    #task :plugins => :environment do
+    #  rdoc_dir = (ENV['RDOC_OUTPUT'] || 'doc/app') + '/plugins'
+    #  rm_rf rdoc_dir rescue nil
+    #  FileList['vendor/plugins/**'].each do |plugin|
+    #    name = File.basename(plugin)
+    #    files = FileList.new("#{plugin}/lib/**/*.rb")
+    #    option = nil
+    #    if File.exist?("#{plugin}/README")
+    #      files.include("#{plugin}/README")    
+    #      option = "--main '#{plugin}/README'"
+    #    end
+    #    files.include("#{plugin}/CHANGELOG") if File.exist?("#{plugin}/CHANGELOG")
+    #    
+    #    sh "#{rdoc} --title 'mewsic - #{name} documentation' -o #{rdoc_dir}/#{name} #{option} #{files}"
+    #  end
+    #end
 
-        if File.exist?("#{plugin}/README")
-          files.include("#{plugin}/README")    
-          option = "--main '#{plugin}/README'"
-        end
-        files.include("#{plugin}/CHANGELOG") if File.exist?("#{plugin}/CHANGELOG")
-        
-        sh "#{rdoc} --title 'mewsic - #{name} documentation' -o #{rdoc_dir}/#{name} #{option} #{files}"
-      end
-    end
   end
-
+    
   # Cruisecontrol task
   task :cruise => :environment do
     puts 'Generating documentation..'
     ENV['RDOC_OUTPUT'] = '/srv/rdoc/mewsic'
     Rake::Task['mewsic:doc:app'].invoke
-    Rake::Task['mewsic:doc:plugins'].invoke
+    #Rake::Task['mewsic:doc:plugins'].invoke
 
     puts 'Running coverage tests'
     ENV['RCOV_OUTPUT'] = '/srv/rcov/mewsic'
