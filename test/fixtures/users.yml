@@ -47,7 +47,7 @@
 
 <%
   def random_rating
-    Math.log(rand(500)) % 5
+    Math.log(rand(500) + 1) % 5
   end
 %>
 

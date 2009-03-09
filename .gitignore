@@ -4,3 +4,11 @@ coverage
 index
 .*.swp
 .idea
+.AppleDB/
+.AppleDesktop/
+.lesshst
+*._*
+.viminfo
+.profile
+.ruby_inline
+.ssh
