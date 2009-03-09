@@ -62,6 +62,19 @@ end
 
 # =============================================================================
 # Any custom after tasks can go here.
+namespace :deploy do
+  desc "Fast deploy, without full clone"
+  task :fast, :roles => :app do
+    run "cd #{current_path}; git checkout master; git pull"
+    restart
+  end
+
+  desc "Restart Application"
+  task :restart, :roles => :app do
+    run "touch #{current_path}/tmp/restart.txt"
+  end
+end
+
 after "deploy:setup", "setup_mewsic_folders"
 task :setup_mewsic_folders, :roles => [:app, :web], :except  => {:no_release => true, :no_symlink => true} do
   setup_photos
