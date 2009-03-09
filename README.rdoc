@@ -50,7 +50,7 @@ Other useful tasks are defined in lib/tasks/utils.rake:
 
 == Now?
 
-Complete Rdoc is available at https://mewsic.stage.lime5.it/rdoc
-C0 test coverage report is at https://mewsic.stage.lime5.it/rcov
+Complete Rdoc is available at https://stage.lime5.it/rdoc/mewsic
+C0 test coverage report is at https://stage.lime5.it/rcov/mewsic
 
 Enjoy!
