@@ -1,3 +1,2 @@
 database.yml
-sphinx_development.config
-sphinx_test.config
+sphinx_*.config
