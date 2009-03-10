@@ -2,8 +2,8 @@ namespace :mewsic do
 
   desc "Populate the development environment"
   task :initialize => ["db:migrate", "mewsic:directories", "mewsic:fixtures:load",
-      "mewsic:flash:update", "mewsic:videos:download", "mewsic:sphinx:config",
-      "mewsic:sphinx:initialize", "mewsic:sphinx:start"]
+      #"mewsic:flash:update", "mewsic:videos:download",
+      "mewsic:sphinx:config", "mewsic:sphinx:initialize", "mewsic:sphinx:start"]
 
   desc "Create all required mewsic directories"
   task :directories => :environment do
