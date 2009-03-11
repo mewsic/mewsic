@@ -1,3 +1,18 @@
+# == Schema Information
+# Schema version: 20090311224230
+#
+# Table name: mband_memberships
+#
+#  id               :integer(4)    not null, primary key
+#  mband_id         :integer(4)    
+#  user_id          :integer(4)    
+#  membership_token :string(255)   
+#  accepted_at      :datetime      
+#  created_at       :datetime      
+#  updated_at       :datetime      
+#  instrument_id    :integer(4)    
+#
+
 # Copyright:: (C) 2008 Medlar s.r.l.
 # Copyright:: (C) 2008 Mikamai s.r.l.
 # Copyright:: (C) 2008 Adelao Group

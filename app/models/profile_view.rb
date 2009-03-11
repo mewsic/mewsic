@@ -1,3 +1,15 @@
+# == Schema Information
+# Schema version: 20090311224230
+#
+# Table name: profile_views
+#
+#  id         :integer(4)    not null, primary key
+#  user_id    :integer(4)    
+#  viewer     :string(32)    
+#  created_at :datetime      
+#  updated_at :datetime      
+#
+
 # Copyright:: (C) 2008 Adelao Group
 #
 # == Schema Information

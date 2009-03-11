@@ -1,3 +1,19 @@
+# == Schema Information
+# Schema version: 20090311224230
+#
+# Table name: replies
+#
+#  id           :integer(4)    not null, primary key
+#  answer_id    :integer(4)    
+#  user_id      :integer(4)    
+#  body         :text          
+#  created_at   :datetime      
+#  updated_at   :datetime      
+#  rating_count :integer(4)    
+#  rating_total :decimal(10, 2 
+#  rating_avg   :decimal(10, 2 
+#
+
 # Copyright:: (C) 2008 Medlar s.r.l.
 # Copyright:: (C) 2008 Mikamai s.r.l.
 # Copyright:: (C) 2008 Adelao Group

@@ -1,3 +1,12 @@
+# == Schema Information
+# Schema version: 20090311224230
+#
+# Table name: help_requests
+#
+#  email :string        
+#  body  :text          
+#
+
 # Copyright:: (C) 2008 Adelao Group
 #
 # == Schema Information

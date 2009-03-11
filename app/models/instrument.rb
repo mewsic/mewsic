@@ -1,3 +1,16 @@
+# == Schema Information
+# Schema version: 20090311224230
+#
+# Table name: instruments
+#
+#  id          :integer(4)    not null, primary key
+#  description :string(255)   
+#  icon        :string(255)   
+#  created_at  :datetime      
+#  updated_at  :datetime      
+#  category_id :integer(4)    
+#
+
 # Copyright:: (C) 2008 Medlar s.r.l.
 # Copyright:: (C) 2008 Mikamai s.r.l.
 # Copyright:: (C) 2008 Adelao Group

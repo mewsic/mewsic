@@ -1,3 +1,12 @@
+# == Schema Information
+# Schema version: 20090311224230
+#
+# Table name: genres
+#
+#  id   :integer(4)    not null, primary key
+#  name :string(255)   
+#
+
 # Copyright:: (C) 2008 Medlar s.r.l.
 # Copyright:: (C) 2008 Mikamai s.r.l.
 # Copyright:: (C) 2008 Adelao Group

@@ -1,3 +1,16 @@
+# == Schema Information
+# Schema version: 20090311224230
+#
+# Table name: mlabs
+#
+#  id           :integer(4)    not null, primary key
+#  user_id      :integer(4)    
+#  mixable_id   :integer(4)    
+#  mixable_type :string(255)   
+#  created_at   :datetime      
+#  updated_at   :datetime      
+#
+
 # Copyright:: (C) 2008 Medlar s.r.l.
 # Copyright:: (C) 2008 Mikamai s.r.l.
 # Copyright:: (C) 2008 Adelao Group

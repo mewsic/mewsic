@@ -1,3 +1,28 @@
+# == Schema Information
+# Schema version: 20090311224230
+#
+# Table name: songs
+#
+#  id              :integer(4)    not null, primary key
+#  title           :string(60)    
+#  original_author :string(60)    
+#  description     :string(255)   
+#  tone            :string(2)     
+#  filename        :string(64)    
+#  user_id         :integer(4)    
+#  genre_id        :integer(4)    
+#  bpm             :integer(4)    
+#  seconds         :integer(4)    default(0)
+#  listened_times  :integer(4)    default(0)
+#  published       :boolean(1)    default(TRUE)
+#  created_at      :datetime      
+#  updated_at      :datetime      
+#  rating_count    :integer(4)    
+#  rating_total    :decimal(10, 2 
+#  rating_avg      :decimal(10, 2 
+#  key             :integer(4)    
+#
+
 # Copyright:: (C) 2008 Medlar s.r.l.
 # Copyright:: (C) 2008 Mikamai s.r.l.
 # Copyright:: (C) 2008 Adelao Group

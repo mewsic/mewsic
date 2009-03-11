@@ -1,3 +1,18 @@
+# == Schema Information
+# Schema version: 20090311224230
+#
+# Table name: abuses
+#
+#  id             :integer(4)    not null, primary key
+#  abuseable_id   :integer(4)    
+#  abuseable_type :string(255)   
+#  user_id        :integer(4)    
+#  body           :text          
+#  created_at     :datetime      
+#  updated_at     :datetime      
+#  topic          :string(255)   
+#
+
 # Copyright:: (C) 2008 Medlar s.r.l.
 # Copyright:: (C) 2008 Mikamai s.r.l.
 # Copyright:: (C) 2008 Adelao Group

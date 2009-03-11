@@ -1,3 +1,14 @@
+# == Schema Information
+# Schema version: 20090311224230
+#
+# Table name: instrument_categories
+#
+#  id          :integer(4)    not null, primary key
+#  description :string(255)   
+#  created_at  :datetime      
+#  updated_at  :datetime      
+#
+
 # Copyright:: (C) 2008 Medlar s.r.l.
 # Copyright:: (C) 2008 Mikamai s.r.l.
 # Copyright:: (C) 2008 Adelao Group

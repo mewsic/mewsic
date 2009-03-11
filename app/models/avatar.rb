@@ -1,3 +1,24 @@
+# == Schema Information
+# Schema version: 20090311224230
+#
+# Table name: pictures
+#
+#  id               :integer(4)    not null, primary key
+#  pictureable_id   :integer(4)    
+#  pictureable_type :string(255)   
+#  type             :string(255)   
+#  size             :integer(4)    
+#  content_type     :string(255)   
+#  filename         :string(255)   
+#  string           :string(255)   
+#  thumbnail        :string(255)   
+#  height           :integer(4)    
+#  width            :integer(4)    
+#  parent_id        :integer(4)    
+#  created_at       :datetime      
+#  updated_at       :datetime      
+#
+
 # Copyright:: (C) 2008 Medlar s.r.l.
 # Copyright:: (C) 2008 Mikamai s.r.l.
 # Copyright:: (C) 2008 Adelao Group

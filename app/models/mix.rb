@@ -1,3 +1,19 @@
+# == Schema Information
+# Schema version: 20090311224230
+#
+# Table name: mixes
+#
+#  id         :integer(4)    not null, primary key
+#  song_id    :integer(4)    
+#  track_id   :integer(4)    
+#  volume     :float         default(1.0)
+#  loop       :integer(4)    
+#  balance    :float         default(0.0)
+#  time_shift :integer(4)    
+#  created_at :datetime      
+#  updated_at :datetime      
+#
+
 # Copyright:: (C) 2008 Medlar s.r.l.
 # Copyright:: (C) 2008 Mikamai s.r.l.
 # Copyright:: (C) 2008 Adelao Group

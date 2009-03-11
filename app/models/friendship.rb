@@ -1,3 +1,15 @@
+# == Schema Information
+# Schema version: 20090311224230
+#
+# Table name: friendships
+#
+#  id          :integer(4)    not null, primary key
+#  user_id     :integer(4)    not null
+#  friend_id   :integer(4)    not null
+#  created_at  :datetime      
+#  accepted_at :datetime      
+#
+
 # Copyright:: (C) 2008 Medlar s.r.l.
 # Copyright:: (C) 2008 Mikamai s.r.l.
 # Copyright:: (C) 2008 Adelao Group

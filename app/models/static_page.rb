@@ -1,8 +1,9 @@
 # == Schema Information
+# Schema version: 20090311224230
 #
 # Table name: static_pages
 #
-#  id         :integer(11)   not null, primary key
+#  id         :integer(4)    not null, primary key
 #  title      :string(255)   
 #  url        :string(255)   
 #  body       :text          

@@ -1,3 +1,15 @@
+# == Schema Information
+# Schema version: 20090311224230
+#
+# Table name: ratings
+#
+#  id         :integer(4)    not null, primary key
+#  rater_id   :integer(4)    
+#  rated_id   :integer(4)    
+#  rated_type :string(255)   
+#  rating     :decimal(10, 2 
+#
+
 # Copyright:: (C) 2008 Medlar s.r.l.
 # Copyright:: (C) 2008 Mikamai s.r.l.
 #

@@ -1,3 +1,17 @@
+# == Schema Information
+# Schema version: 20090311224230
+#
+# Table name: help_pages
+#
+#  id         :integer(4)    not null, primary key
+#  title      :string(255)   
+#  body       :text          
+#  position   :integer(4)    
+#  created_at :datetime      
+#  updated_at :datetime      
+#  url        :string(255)   
+#
+
 # Copyright:: (C) 2008 Adelao Group
 #
 # == Schema Information

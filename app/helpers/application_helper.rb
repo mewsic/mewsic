@@ -60,7 +60,7 @@ module ApplicationHelper
   end
   
   def active_class(controller, klass = 'current')
-    (self.controller.controller_name == controller) ? klass, '' 
+    (self.controller.controller_name == controller) ? klass : '' 
   end
   
   def clickable_logo(image)

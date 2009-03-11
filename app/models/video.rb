@@ -1,16 +1,17 @@
 # == Schema Information
+# Schema version: 20090311224230
 #
 # Table name: videos
 #
-#  id          :integer(11)   not null, primary key
+#  id          :integer(4)    not null, primary key
 #  name        :string(32)    
 #  description :string(255)   
 #  filename    :string(64)    
 #  poster      :string(64)    
 #  highres     :string(64)    
 #  thumb       :string(64)    
-#  length      :integer(11)   
-#  position    :integer(11)   
+#  length      :integer(4)    
+#  position    :integer(4)    
 #  created_at  :datetime      
 #  updated_at  :datetime      
 #
