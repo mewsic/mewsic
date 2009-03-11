@@ -1,8 +1,0 @@
-<div class="thumb">
-	<%= link_to avatar_image(reply.user, :icon), user_path(reply.user) %>  
-</div>
-<div class="details">
-	<p class="body"><%= h truncate(reply.body, :length => 60) %></p>
-	<%= rating(reply) %><div class="clearer"></div>
-	<p class="grey-text">Reply by <%= link_to reply.user.login, user_path(reply.user) %> - <span class="abstract">posted <%= time_ago_in_words(reply.created_at) %> ago</span></p>
-</div>

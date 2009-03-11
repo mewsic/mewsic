@@ -1,9 +1,0 @@
-if @item
-  page << %[
-    var mlabSlider = MlabSlider.getInstance();
-    mlabSlider.slideToStart();
-    new MlabItem(#{@item.to_json}, mlabSlider);
-  ]
-else
-  page.alert 'There was an error. Please refresh the page.'
-end

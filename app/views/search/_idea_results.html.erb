@@ -1,9 +1,0 @@
-<%- if @ideas.size > 0 -%>
-	<%= render :partial => 'track', :collection => @ideas %>
-	<%= will_paginate @ideas, :class => 'pagination track', :params => { :type => :track, :q => @q }, :previous_label => image_tag('move_arrow_left.png'), :next_label => image_tag('move_arrow_right.png') %>
-	<div class="pagination spinner">
-		<img src="/images/spinner.gif" id="idea-results-spinner" style="display:none"/>
-  </div>
-<%- else -%>
-  <p style="margin-left: 15px" class="grey-text">No ideas found. Create'em with our <%= link_to 'multitrack', multitrack_path %>!</p>
-<%- end -%>

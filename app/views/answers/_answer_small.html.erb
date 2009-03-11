@@ -1,5 +1,0 @@
-<div class="elements answer-small">
-	<h3><%= link_to h(truncate(answer_small.body, :length => 60)), answer_small %></h3>
-	<p class="replies-count grey-text"><%= link_to pluralize(answer_small.replies.count, 'reply'), answer_small %></p>
-	<%= rating(answer_small) %>
-</div>

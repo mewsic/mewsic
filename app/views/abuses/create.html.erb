@@ -1,7 +1,0 @@
-<script type="text/javascript" charset="utf-8">
-  Lightview.hide();
-  <%- flash.each do |type, message| %>
-	  Message.show('<%= escape_javascript(message) %>', '<%= escape_javascript(type.to_s) %>');  
-  <%- end -%>
-	new Effect.ScrollTo('messages', {offset: -40});
-</script>

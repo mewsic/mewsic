@@ -1,8 +1,0 @@
-page.remove "gallery-photo-thumb-#{@photo.id}"
-page << "Lightview.updateViews();"
-
-if params[:mband_id]
-  page.visual_effect(:appear, 'no-images-notice') if @mband.photos.size.zero?
-else 
-  page.visual_effect(:appear, 'no-images-notice') if @user.photos.size.zero?
-end

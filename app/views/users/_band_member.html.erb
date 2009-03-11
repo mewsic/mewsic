@@ -1,9 +1,0 @@
-			<div class="band_member" id="band_member_<%= band_member.id %>">
-				<div class="band_member_details">
-					<%= instrument_icon band_member.instrument if band_member.instrument %>
-					<%= avatar_image band_member, :icon, :class => :avatar %>
-				</div>
-				<span class="band_member_name"><%= member_name(band_member) %></span>
-				<span class="band_member_country"><%= band_member.country %></span>
-			</div>
-

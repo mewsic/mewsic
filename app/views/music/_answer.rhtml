@@ -1,9 +1,0 @@
-<div class="elements clear-block">
-	<p class="thumb">
-	  <%= link_to (avatar_image answer.user, :icon), answer.user %>
-	</p>
-	<p class="name align-right">
-		<%= link_to answer.user.login, answer.user %></a></p>
-	<p class="abstract"><%= h truncate(answer.body, :length => 150) %></p>
-	<p class="abstract align-right"><%= pluralize(answer.replies.size, 'reply')%></p>
-</div>

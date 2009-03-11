@@ -1,4 +1,0 @@
-page.visual_effect :fade, "message_#{params[:id]}", :duration => 1
-page.delay(1.seconds) do
-  page.remove "message_#{params[:id]}"
-end

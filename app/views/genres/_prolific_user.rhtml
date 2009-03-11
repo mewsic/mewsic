@@ -1,6 +1,0 @@
-<div class="elements clear-block" style="padding: 0px 6px">
-	<p class="thumb"><%= link_to (avatar_image prolific_user, :small), user_path(prolific_user) %></p>
-	<p class="cyan-text float-right"><strong><%= pluralize(prolific_user.count, 'song') %></strong></p>
-	<p class="name"><%= link_to prolific_user.login, user_path(prolific_user) %></p>
-	<p class="country"><%= h prolific_user.compiled_location %></p>
-</div>
