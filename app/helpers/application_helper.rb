@@ -1,16 +1,21 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
 
-  def load_jquery
+  def jquery_javascript_tags
     if RAILS_ENV == 'production'
-    #  return %[<script src="http://www.google.com/jsapi"></script>] + javascript_tag(%[
-    #      google.load('prototype', '1.6.0.2');
-    #      google.load('scriptaculous', '1.8.1'); ])
-    #  javascript_include_tag 'protoculous'
-    # XXX TMP
+      # Load from google APIs
+      #
+      #  return %[<script src="http://www.google.com/jsapi"></script>] + javascript_tag(%[
+      #      google.load('jquery', '1.3.2');
+      #      google.load('jquery-ui', '1.6.0'); ])
+      javascript_include_tag 'jquery-1.3.2.min.js', 'jquery-ui-1.7.custom.min.js'
     else
-    #  javascript_include_tag *%w[prototype scriptaculous]
+      javascript_include_tag 'jquery-1.3.2.js', 'jquery-ui-1.7.custom.js'
     end
+  end
+
+  def jquery_stylesheet_tags
+    stylesheet_include_tag 'themes/base/ui.all.css'
   end
 
   def google_analytics_load
@@ -54,24 +59,12 @@ module ApplicationHelper
     content_tag(:div, image_tag("status_#{name}.png", :alt => name.upcase), :class => "status #{name} #{options[:class]}")
   end
   
-  def check_active(*controllers)
-    # XXX TMP
-    current = controller.controller_name
-    if controllers.last.kind_of?(ActiveRecord::Base)
-      model = controllers.pop
-      if model.class.name == 'User' && controllers.include?('users') or
-        %w[Mband].include?(model.class.name) && controllers.include?('mbands')
-        'active'
-      end
-    else
-      controllers.include?(current) ? "active" : ""
-    end
-
+  def active_class(controller, klass = 'current')
+    (self.controller.controller_name == controller) ? klass, '' 
   end
   
-  def clickable_logo
-    # XXX TMP
-    logo = image_tag ".gif", :alt => ''
+  def clickable_logo(image)
+    logo = image_tag image, :alt => 'MEWSIC'
     if controller.controller_name == "dashboard"
       logo
     else

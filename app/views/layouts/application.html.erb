@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+  <title>MEWSIC</title>
+
+  <%= stylesheet_include_tag *%w( type layout color instruments appbar ) %>
+
+  <%= jquery_javascript_tags %>
+  <%= jquery_stylesheet_tags %>
+
+  <script type="text/javascript" src="javascripts/jquery.corner.js"></script>
+
+  <script type="text/javascript" src="javascripts/jquery.MetaData.js"></script>
+  <script type="text/javascript" src="javascripts/jquery.rating.pack.js"></script>
+  <link rel="stylesheet" type="text/css" href="stylesheets/jquery.rating.css" />
+  
+  <script type="text/javascript" src="javascripts/jquery.dataTables.min.js"></script>  
+  <link rel="stylesheet" type="text/css" href="stylesheets/dataTables.css" />    
+
+  <script type="text/javascript">
+    $(function() {
+      // Tabs
+      $("#playlist_tabs").tabs();
+
+      // Rounded corners
+      $('.roundTop10').corner("top 10px");
+      $('.round10').corner("10px");
+      $('.bevelsmall').corner("bevel 1px");
+
+      // ??
+      $("#addthis").click(function () {
+        $(this).effect("transfer", { to: "#fb_menu_inbox_unread_count_holder", className: 'ui-effects-transfer' }, 1000);
+        return false;
+      });
+    });
+  </script>
+
+</head>
+<body>
+
+<!-- HEADER -->
+<div id="header">
+  <div class="logo">
+    <%= clickable_logo 'header_logo.jpg' %>
+  </div>
+  <ul class="navigation fleft">
+    <li><%= link_to 'People', users_path, :class => active_class('users') %></li>
+    <li><%= link_to 'Bands', mbands_path, :class => active_class('mbands') %> </li>
+    <li><%= link_to 'Songs', songs_path, :class => active_class('songs') %></li>
+    <li><%= link_to 'Instruments', tracks_path, :class => active_class('tracks') %></li>
+    <li><%= link_to 'Answers', answers_path,  :class => active_class('answers') %></li>
+  </ul>
+  
+  <ul class="login fright">
+    <li><a href="" class="join_button">JOIN NOW</a></li>
+    <li>or connect with <a href="" class="facebook">Facebook</a></li>
+    <li><div class="divider"> </div></li>
+    <li><a href="" class="login_button">LOGIN</a></li>
+  </ul>  
+  <div class="clear"> </div>
+  <div id="breadcrumb_bar">
+    <div class="corner_lt fleft"> </div>
+    <div class="bar_rp fleft"> </div>
+    <div class="corner_rt fleft"> </div>
+  </div>
+</div>
+<!-- END HEADER -->
+
+<!-- CONTENT -->
+<div id="content">
+  <%= yield %>
+</div>
+
+<div id="bottom_bar">
+  <div class="corner_lb fleft"> </div>
+  <div class="bottom_rp fleft"> </div>
+  <div class="corner_rb fleft"> </div>
+</div>
+<!-- END CONTENT -->
+
+<div class="clear"> </div>
+<!-- FOOTER -->
+<div class="top_footer_grad roundTop10">
+  <div id="top_footer" class="roundTop10">
+    <!-- TOP FOOTER GROUP -->    
+    <div class="top_tags">
+      <h2>Top Tags</h2>
+      <span class="subtitle block">Lorem ipsum dolor</span>
+      <p class="tag_genre">
+        <a href="">Acid Jazz/Fusion</a>  <a href="">Acoustic</a>  <a href="">Alternative   Rock</a>  <a href="">Ambient</a>  <a href="">Blues</a>  
+        <a href="">British Pop</a>  <a href="">Classic Rock</a>  <a href="">Country</a>  <a href="">Country Rock</a>  <a href="">Crossover</a>  <a href="">Dance</a>  
+        <a href="">Disco</a>  <a href="">Drum & Bass</a>  <a href="">EBM</a>  <a   href="">Electro-Rock</a>  <a href="">Electronic</a>  <a href="">Folk Rock</a>  <a href="">Funk</a>
+      </p>
+    </div>
+    <ul class="best_people">
+      <h2>Best Mewsicians</h2>
+      <span class="subtitle block">Lorem ipsum dolor</span>
+      <li class="user_thumb">
+        <img src="images/thumb_loader.gif" width="39" height="39" />
+      </li>
+      <li class="user_thumb">
+        <img src="images/thumb_loader.gif" width="39" height="39" />
+      </li>
+      <li class="user_thumb">
+        <img src="images/thumb_loader.gif" width="39" height="39" />
+        <img src="images/user_thumb.jpg" width="40" height="40" class="loaded" />
+      </li>
+      <li class="user_thumb">
+        <img src="images/thumb_loader.gif" width="39" height="39" />
+        <img src="images/user_thumb.jpg" width="40" height="40" class="loaded" />
+      </li>
+    </ul>
+    <ul class="new_band">
+      <h2>Newest M-Bands</h2>
+      <span class="subtitle block">Lorem ipsum dolor</span>
+      <li class="user_thumb">
+        <img src="images/thumb_loader.gif" width="39" height="39" />
+        <img src="images/user_thumb.jpg" width="40" height="40" class="loaded" />
+      </li>
+      <li class="user_thumb">
+        <img src="images/thumb_loader.gif" width="39" height="39" />
+        <img src="images/user_thumb.jpg" width="40" height="40" class="loaded" />
+      </li>
+      <li class="user_thumb">
+        <img src="images/thumb_loader.gif" width="39" height="39" />
+      </li>
+      <li class="user_thumb">
+        <img src="images/thumb_loader.gif" width="39" height="39" />
+      </li>
+    </ul>
+
+    <% yield :footer %>
+      
+    <!-- END TOP FOOTER GROUP -->    
+    <!-- BOTTOM FOOTER GROUP -->    
+    <div class="bottom_footer_grad roundTop10">
+      <div id="bottom_footer" class="roundTop10">
+        <ul class="fleft">
+          <h2>MEWSIC</h2>
+          <li><a href="">About</a></li>
+          <li><a href="">Vision</a></li>
+          <li><a href="">Team</a></li>
+          <li><a href="">Blog</a></li>
+          <li><a href="">Contact</a></li>                              
+          <li><a href="">Licensing</a></li>
+          <li><a href="">Media Kit</a></li>          
+        </ul>
+        <ul class="follow_us fleft">
+          <h2>FOLLOW US</h2>
+          <li><a href="" class="facebook">Facebook</a></li>
+          <li><a href="" class="myspace">Myspace</a></li>
+          <li><a href="" class="podcast">Podcasts</a></li>
+          <li><a href="" class="rss">RSS</a></li>
+        </ul>
+        <ul class="fleft">
+          <h2>GET INVOLVED</h2>
+          <li><a href="">Contests</a></li>
+          <li><a href="">Call to action</a></li>
+          <li><a href="">Promote</a></li>
+        </ul>
+        <ul class="fleft">
+          <h2>SHARE</h2>
+        </ul>
+        
+        <div class="clear"> </div>
+        
+        <div class="footer_copy">&copy; 2009 All rights reserved&nbsp;&nbsp; 
+          <a href="maito:">mail@mewsic.com</a>
+        </div>
+       </div>
+    </div>
+    <!-- END BOTTOM FOOTER GROUP -->
+  </div>
+</div>
+<!-- END FOOTER -->
+
+<!-- APPLICATION BAR -->
+<div id="app_bar_env">
+
+  <div id="app_bar">
+    <div class="tooltip_small playlist_actions" style="display: ">
+      <strong>Added to playlist</strong>
+    </div>
+    <div class="tooltip_small activity" style="display: none">
+      <strong>Activity</strong>
+    </div>
+
+      <!-- XXX TODO: Rinominare classi/id che e' tutto copiato da Facebook ;-) -->
+      <div class="tab_app_icons fright">
+        <span class="fb_menu_count_holder" id="fb_menu_inbox_unread_count_holder">
+          <span class="tl">
+            <span class="tr">
+              <span class="br">
+                <span id="fb_menu_inbox_unread_count" class="bl">4</span>
+                </span>
+              </span>
+            </span>
+          </span>
+        </span>        
+      </div>
+  </div>  
+
+</div>
+<!-- END APP BAR -->
+
+</body>
+</html>
