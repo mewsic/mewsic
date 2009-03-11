@@ -1,8 +1,9 @@
 # == Schema Information
+# Schema version: 20090311224230
 #
 # Table name: users
 #
-#  id                        :integer(11)   not null, primary key
+#  id                        :integer(4)    not null, primary key
 #  login                     :string(255)   
 #  email                     :string(255)   
 #  remember_token            :string(255)   
@@ -22,57 +23,28 @@
 #  crypted_password          :string(40)    
 #  salt                      :string(40)    
 #  string                    :string(40)    
-#  type                      :string(255)   
 #  motto                     :text          
 #  tastes                    :text          
 #  remember_token_expires_at :datetime      
 #  activated_at              :datetime      
-#  friends_count             :integer(11)   
-#  age                       :integer(11)   
+#  friends_count             :integer(4)    
+#  age                       :integer(4)    
 #  password_reset_code       :string(255)   
 #  created_at                :datetime      
 #  updated_at                :datetime      
-#  rating_count              :integer(11)   
+#  rating_count              :integer(4)    
 #  rating_total              :decimal(10, 2 
 #  rating_avg                :decimal(10, 2 
-#  replies_count             :integer(11)   default(0)
+#  replies_count             :integer(4)    default(0)
 #  nickname                  :string(20)    
 #  is_admin                  :boolean(1)    
 #  status                    :string(3)     default("off")
 #  name_public               :boolean(1)    
 #  multitrack_token          :string(64)    
 #  podcast_public            :boolean(1)    default(TRUE)
-#  profile_views             :integer(11)   default(0)
+#  profile_views             :integer(4)    default(0)
 #
 
-<%
-  def random_rating
-    Math.log(rand(500) + 1) % 5
-  end
-%>
-
-myousica:
-  type: User
-  login: myousica
-  email: info@myousica.com
-  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
-  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
-  activation_code: 8f24789ae988411ccf33ab0c30fe9106fab32e9b
-  activated_at: <%= 5.days.ago.to_s :db %>
-  gender: male
-  photos_url: http://my.photos.url
-  blog_url: http://my.blog.url
-  myspace_url: http://my.space.url
-  skype: skype_account
-  skype_public: <%= true %>
-  msn: info@myousica.com
-  msn_public: <%= true %>
-  country: World
-  city: Everywhere
-  motto: Myousica.com
-  nickname: myousica
-  profile_views: 48
-  
 quentin:
   type: User
   login: quentin
@@ -80,16 +52,16 @@ quentin:
   salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
   crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
   activation_code: 8f24789ae988411ccf33ab0c30fe9106fab32e9b
-  activated_at: <%= 5.days.ago.to_s :db %>
+  activated_at: <%= 1.day.ago.to_s :db %>
   gender: male
-  rating_avg: <%= random_rating %>
-  photos_url: http://my.photos.url
-  blog_url: http://my.blog.url
-  myspace_url: http://my.space.url
+  rating_avg: <%= rand * 5 %>
+  photos_url: http://photos.example.com/
+  blog_url: http://blog.example.com/
+  myspace_url: http://myspace.example.com/
   skype: skype_account
-  skype_public: <%= true %>
+  skype_public: true
   msn: quentin@example.org
-  msn_public: <%= true %>
+  msn_public: true
   country: Italy
   city: Bari
   motto: Arma Virumque Cano Troiae qui primus ab oris
@@ -107,104 +79,30 @@ aaron:
   motto: Nel mezzo del cammin di nostra vita mi ritrovai nel culo una matita. Ahi, che dolor! Era una carioca a dodici color.
   msn: aaron@example.org
 john:
-  type: User
   login: john
   email: john@example.com
   salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
   crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
   activation_code: 8f24789ae988411ccf33ab0c30fe9106fab32e9b
-  activated_at: <%= 3.days.ago.to_s :db %>
+  activated_at: <%= rand(3).days.ago.to_s :db %>
   gender: male
   country: Italy
   city: Bari
-  motto: in girum imus nocte et consumimur igni
+  motto:in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni.  
   is_admin: true
   profile_views: 2342
 
-<% for i in 3..500 %>user_<%= i %>:
-  type: User
+<% for i in 3..500 %>
+user_<%= i %>:
   login: user<%= i %>
-  email: user<%= i %>@medlar.it
-  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
-  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
-  activated_at: <%= 5.days.ago.to_s :db %>
-  rating_avg: <%= random_rating %>
-  gender: <%= ['male', 'female', 'other'][rand(3)] %>  
-  country: <%= ['Italy', 'Usa', 'Canada', 'Japan', 'Germany', 'Portugal', 'Spain'][rand(7)] %>
-  city: <%= ['Rome', 'Geneve', 'Seattle', 'Milan', 'Bari', 'Modugno', 'Tokyo', 'Beijing'][rand(8)] %>
-  motto: <%= %w( un in insieme a caso di parole tra cui prenderne un paio per fare il motto random della persona random ).sort_by {rand}.join(" ") %>
   nickname: user<%= i %>
+  email: user<%= i %>@example.net
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  activated_at: <%= rand(30).days.ago.to_s :db %>
+  rating_avg: <%= rand * 5 %>
+  gender: <%= ['male', 'female', 'other'].rand %>  
+  country: <%= ['Italy', 'Usa', 'Canada', 'Japan', 'Germany', 'Portugal', 'Spain'].rand %>
+  city: <%= ['Rome', 'Geneve', 'Seattle', 'Milan', 'Bari', 'Modugno', 'Tokyo', 'Beijing'].rand %>
+  motto: <%= %w( Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultricies blandit nisi. Nullam malesuada. Curabitur orci. Donec congue dolor vitae diam. Vestibulum sagittis, erat non commodo bibendum, sapien mauris vulputate sapien, id aliquam sapien lacus eu justo. Nam vitae turpis. Suspendisse potenti. Quisque ornare, nulla vel blandit ultricies, ligula quam tincidunt orci, et malesuada sapien ipsum eu mi. Proin at nibh vitae mi elementum fringilla. Phasellus sit amet enim sit amet dolor porttitor molestie. Nam fringilla. Sed id purus. Ut ullamcorper nulla a elit. Integer mauris odio, dictum quis, convallis id, aliquam vitae, turpis. Praesent elementum, elit sed bibendum lobortis, massa dui gravida lectus, id accumsan justo elit ac lorem. Phasellus cursus dui id neque. In feugiat. In sagittis egestas nisl. ).sort_by {rand}.join(" ").capitalize %>
 <% end %>
-
-<% for i in 3..500 %>dj_<%= i %>:
-  type: Dj
-  login: dj<%= i %>
-  email: dj<%= i %>@medlar.it
-  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
-  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
-  activated_at: <%= 5.days.ago.to_s :db %>
-  rating_avg: <%= random_rating %>
-  gender: <%= ['male', 'female', 'other'][rand(3)] %>  
-  country: <%= ['Italy', 'Usa', 'Canada', 'Japan', 'Germany', 'Portugal', 'Spain'][rand(7)] %>
-  city: <%= ['Rome', 'Geneve', 'Seattle', 'Milan', 'Bari', 'Modugno', 'Tokyo', 'Beijing'][rand(8)] %>
-  motto: <%= %w( un in insieme a caso di parole tra cui prenderne un paio per fare il motto random della persona random ).sort_by {rand}.join(" ") %>
-  nickname: dj<%= i %>
-<% end %>
-
-<% for i in 3..500 %>band_<%= i %>:
-  type: Band
-  login: band<%= i %>
-  email: band<%= i %>@medlar.it
-  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
-  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
-  rating_avg: <%= random_rating %>
-  activated_at: <%= 5.days.ago.to_s :db %>
-  gender: <%= ['male', 'female', 'other'][rand(3)] %>  
-  country: <%= ['Italy', 'Usa', 'Canada', 'Japan', 'Germany', 'Portugal', 'Spain'][rand(7)] %>
-  city: <%= ['Rome', 'Geneve', 'Seattle', 'Milan', 'Bari', 'Modugno', 'Tokyo', 'Beijing'][rand(8)] %>
-  motto: <%= %w( un in insieme a caso di parole tra cui prenderne un paio per fare il motto random della persona random ).sort_by {rand}.join(" ") %>
-  nickname: band<%= i %>
-<% end %>
-
-
-mikaband:
-  type: Band
-  login: mikaband
-  email: mikaband@example.com
-  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
-  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
-  activation_code: 8f24789ae988411ccf33ab0c30fe9106fab32e9b
-  activated_at: <%= 5.days.ago.to_s :db %>
-  gender: male
-  rating_avg: <%= random_rating %>
-  photos_url: http://my.photos.url
-  blog_url: http://my.blog.url
-  myspace_url: http://my.space.url
-  skype: mikaband.skype
-  skype_public: <%= true %>
-  msn: mikaband@example.org
-  msn_public: <%= true %>
-  country: Italy
-  city: Milano
-  motto: Arma Virumque Cano Troiae qui primus ab oris
-
-sdozzodj:
-  type: Dj
-  login: sdozzodj
-  email: sdozzodj@example.com
-  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
-  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
-  activation_code: 8f24789ae988411ccf33ab0c30fe9106fab32e9b
-  activated_at: <%= 5.days.ago.to_s :db %>
-  gender: male
-  rating_avg: 5
-  photos_url: http://my.photos.url
-  blog_url: http://my.blog.url
-  myspace_url: http://my.space.url
-  skype: mikaband.skype
-  skype_public: <%= true %>
-  msn: sdozzodj@example.org
-  msn_public: <%= true %>
-  country: Italy
-  city: Milano
-  motto: Arma Virumque Cano Troiae qui primus ab oris

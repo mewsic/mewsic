@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 56) do
+ActiveRecord::Schema.define(:version => 20090311224230) do
 
   create_table "abuses", :force => true do |t|
     t.integer  "abuseable_id"
@@ -251,7 +251,6 @@ ActiveRecord::Schema.define(:version => 56) do
     t.string   "crypted_password",          :limit => 40
     t.string   "salt",                      :limit => 40
     t.string   "string",                    :limit => 40
-    t.string   "type"
     t.text     "motto"
     t.text     "tastes"
     t.datetime "remember_token_expires_at"

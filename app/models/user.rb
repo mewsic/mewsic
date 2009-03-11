@@ -1,8 +1,9 @@
 # == Schema Information
+# Schema version: 20090311224230
 #
 # Table name: users
 #
-#  id                        :integer(11)   not null, primary key
+#  id                        :integer(4)    not null, primary key
 #  login                     :string(255)   
 #  email                     :string(255)   
 #  remember_token            :string(255)   
@@ -22,27 +23,26 @@
 #  crypted_password          :string(40)    
 #  salt                      :string(40)    
 #  string                    :string(40)    
-#  type                      :string(255)   
 #  motto                     :text          
 #  tastes                    :text          
 #  remember_token_expires_at :datetime      
 #  activated_at              :datetime      
-#  friends_count             :integer(11)   
-#  age                       :integer(11)   
+#  friends_count             :integer(4)    
+#  age                       :integer(4)    
 #  password_reset_code       :string(255)   
 #  created_at                :datetime      
 #  updated_at                :datetime      
-#  rating_count              :integer(11)   
+#  rating_count              :integer(4)    
 #  rating_total              :decimal(10, 2 
 #  rating_avg                :decimal(10, 2 
-#  replies_count             :integer(11)   default(0)
+#  replies_count             :integer(4)    default(0)
 #  nickname                  :string(20)    
 #  is_admin                  :boolean(1)    
 #  status                    :string(3)     default("off")
 #  name_public               :boolean(1)    
 #  multitrack_token          :string(64)    
 #  podcast_public            :boolean(1)    default(TRUE)
-#  profile_views             :integer(11)   default(0)
+#  profile_views             :integer(4)    default(0)
 #
 
 require 'digest/sha1'
@@ -101,9 +101,6 @@ class User < ActiveRecord::Base
 
   has_many_friends
 
-  # If type == 'Band'
-  has_many :members, :class_name => 'BandMember'
-  
   has_many :songs,            :order => 'songs.created_at DESC'
   has_many :tracks,           :order => 'tracks.created_at DESC'
   has_many :ideas,            :conditions => ['tracks.idea = ?', true], :order => 'tracks.created_at DESC', :class_name => 'Track'
@@ -137,10 +134,6 @@ class User < ActiveRecord::Base
   
   before_save :check_links
   before_save :check_nickname
-
-  def band?
-    self.type == 'Band'
-  end
 
   def forgot_password
     @forgotten_password = true
@@ -240,10 +233,7 @@ class User < ActiveRecord::Base
   end
 
   def status
-    if self == User.myousica
-      # Myousica is always online
-      'on'
-    elsif self.updated_at > 30.minutes.ago
+    if self.updated_at > 30.minutes.ago
       # if this record has been updated in the last 30 minutes,
       # trust the recorded status.
       self.read_attribute :status
@@ -278,9 +268,7 @@ class User < ActiveRecord::Base
     send(find_method, param, options.merge(:conditions => "users.activated_at IS NOT NULL")) or raise ActiveRecord::RecordNotFound
   end
   
-  # Finds all activated users. WARNING: This method does return User, Band and DJ instances!
-  # It is the only one to exhibit this behaviour, and it is currently used only by the Sitemap
-  # controller and the Admin::MassMessagesController.
+  # Finds all activated users.
   #
   def self.find_activated(options = {})
     self.find(:all, options.merge(:conditions => "activated_at IS NOT NULL"))
@@ -291,85 +279,39 @@ class User < ActiveRecord::Base
   end
 
   def self.find_coolest(options = {})
-    self.find(:all, options.merge({:conditions => ["activated_at IS NOT NULL AND (type IS NULL OR type = 'User') AND login != 'myousica'"], :order => 'rating_avg DESC'})) 
-  end
-  
-  def self.find_coolest_band_or_deejays(options = {})
-    self.find(:all, options.merge({:conditions => ["activated_at IS NOT NULL AND (type = 'Band' OR type = 'Dj') AND login != 'myousica'"], :order => 'rating_avg DESC'})) 
+    self.find(:all, options.merge({:conditions => ['activated_at IS NOT NULL'], :order => 'rating_avg DESC'})) 
   end
   
   def self.find_best(options = {})
-    self.find(:all, options.merge({:conditions => ["songs.id IS NOT NULL AND songs.published = ? AND users.activated_at IS NOT NULL AND (users.type IS NULL OR users.type = 'User') AND users.login != 'myousica'", true], :joins => "LEFT OUTER JOIN songs ON users.id = songs.user_id", :order => 'songs.rating_avg DESC', :include => :avatar})) 
-  end
-  
-  def self.find_best_band_or_deejays(options = {})
-    self.find(:all, options.merge({:conditions => ["songs.id IS NOT NULL AND songs.published = ? AND users.activated_at IS NOT NULL AND (users.type = 'Band' OR users.type = 'Dj') AND users.login != 'myousica'", true], :joins => "LEFT OUTER JOIN songs ON users.id = songs.user_id", :order => 'songs.rating_avg DESC', :include => :avatar})) 
+    self.find(:all, options.merge({:conditions => ["songs.id IS NOT NULL AND songs.published = ? AND users.activated_at IS NOT NULL", true], :joins => "LEFT OUTER JOIN songs ON users.id = songs.user_id", :order => 'songs.rating_avg DESC', :include => :avatar})) 
   end
   
   def self.find_prolific(options = {})
-    qry = "SELECT users.*, songs.title, count(songs.id) AS songs_count FROM users LEFT JOIN songs ON users.id = songs.user_id WHERE (users.type = 'User' OR users.type IS NULL) AND users.activated_at IS NOT NULL AND songs.published = ? AND users.login != 'myousica' GROUP BY users.id ORDER BY songs_count DESC"
+    qry = "SELECT users.*, songs.title, count(songs.id) AS songs_count FROM users LEFT JOIN songs ON users.id = songs.user_id WHERE users.activated_at IS NOT NULL AND songs.published = ? GROUP BY users.id ORDER BY songs_count DESC"
     qry += " LIMIT #{options[:limit]}" if options.has_key?(:limit)
     User.find_by_sql([qry, true])
   end
-  
-  def self.find_prolific_band_or_deejays(options = {})
-    qry = "SELECT users.*, songs.title, count(songs.id) AS songs_count FROM users LEFT JOIN songs ON users.id = songs.user_id WHERE (users.type = 'Band' OR users.type = 'Dj') AND users.activated_at IS NOT NULL AND songs.published = ? AND users.login != 'myousica' GROUP BY users.id ORDER BY songs_count DESC"
-    qry += " LIMIT #{options[:limit]}" if options.has_key?(:limit)
-    User.find_by_sql([qry, true])
-  end  
   
   def self.find_friendliest(options)
-    self.find(:all, options.merge(:order => 'friends_count DESC', :conditions => "users.activated_at IS NOT NULL AND (users.type IS NULL OR users.type = 'User') AND users.login != 'myousica'"))
-  end
-
-  def self.find_friendliest_band_or_deejays(options = {})
-    self.find(:all, options.merge(:order => 'friends_count DESC', :conditions => "users.activated_at IS NOT NULL AND (users.type = 'Band' OR users.type = 'Dj') AND users.login != 'myousica'"))
+    self.find(:all, options.merge(:order => 'friends_count DESC', :conditions => "users.activated_at IS NOT NULL"))
   end
 
   def self.find_most_admired(options)
-    self.find(:all, options.merge(:select => 'users.*, count(friendships.id) as admirers_count', :joins => 'LEFT OUTER JOIN friendships ON friendships.friend_id = users.id AND friendships.accepted_at IS NULL', :conditions => "users.activated_at IS NOT NULL AND (users.type IS NULL OR users.type = 'User') AND users.login != 'myousica'", :group => 'users.id', :order => 'count(friendships.id) DESC'))
-  end
-  
-  def self.find_most_admired_band_or_deejays(options)
-    self.find(:all, options.merge(:select => 'users.*, count(friendships.id) as admirers_count', :joins => 'LEFT OUTER JOIN friendships ON friendships.friend_id = users.id AND friendships.accepted_at IS NULL', :conditions => "users.activated_at IS NOT NULL AND (users.type = 'Band' OR users.type = 'Dj') AND users.login != 'myousica'", :group => 'users.id', :order => 'count(friendships.id) DESC'))
+    self.find(:all, options.merge(:select => 'users.*, count(friendships.id) as admirers_count', :joins => 'LEFT OUTER JOIN friendships ON friendships.friend_id = users.id AND friendships.accepted_at IS NULL', :conditions => "users.activated_at IS NOT NULL", :group => 'users.id', :order => 'count(friendships.id) DESC'))
   end
   
   def self.find_newest(options = {})
-    self.find(:all, options.merge(:order => 'created_at DESC', :conditions => "activated_at IS NOT NULL AND (users.type IS NULL OR users.type = 'User') AND users.login != 'myousica'"))
+    self.find(:all, options.merge(:order => 'created_at DESC', :conditions => 'activated_at IS NOT NULL'))
   end
   
   def self.find_paginated_best(options = {})
     options.reverse_update(:page => 1, :per_page => 3)
-    paginate(options.merge({:conditions => ["songs.id IS NOT NULL AND songs.published = ? AND users.activated_at IS NOT NULL AND (users.type IS NULL OR users.type = 'User') AND users.login != 'myousica'", true], :joins => "LEFT OUTER JOIN songs ON users.id = songs.user_id", :order => 'songs.rating_avg DESC', :include => :avatar})) 
-  end
-  
-  def self.find_paginated_best_bands_and_deejays(options = {})
-    options.reverse_update(:page => 1, :per_page => 3)
-    paginate(options.merge({:conditions => ["songs.id IS NOT NULL AND songs.published = ? AND users.activated_at IS NOT NULL AND (users.type = 'Band' OR users.type = 'Dj') AND users.login != 'myousica'", true], :joins => "LEFT OUTER JOIN songs ON users.id = songs.user_id", :order => 'songs.rating_avg DESC', :include => :avatar})) 
-  end
-  
-  def self.find_paginated_newest_bands_and_deejays(options = {})
-    options.reverse_update(:page => 1, :per_page => 3)
-    paginate(options.merge(:order => 'created_at DESC', :conditions => "activated_at IS NOT NULL AND (users.type = 'Band' OR users.type = 'Dj') AND users.login != 'myousica'"))
-  end
-  
-  def self.find_paginated_newest(options = {})
-    options.reverse_update(:page => 1, :per_page => 3)
-    paginate(options.merge(:order => 'created_at DESC', :conditions => "activated_at IS NOT NULL AND (users.type IS NULL OR users.type = 'User') AND users.login != 'myousica'"))
+    paginate(options.merge({:conditions => ["songs.id IS NOT NULL AND songs.published = ? AND users.activated_at IS NOT NULL", true], :joins => "LEFT OUTER JOIN songs ON users.id = songs.user_id", :order => 'songs.rating_avg DESC', :include => :avatar})) 
   end
 
-  def self.find_paginated_prolific_bands_and_deejays(options = {})
+  def self.find_paginated_newest(options = {})
     options.reverse_update(:page => 1, :per_page => 3)
-    #qry = "SELECT users.*, songs.title, count(songs.id) AS songs_count FROM users LEFT JOIN songs ON users.id = songs.user_id WHERE (users.type = 'User' OR users.type IS NULL) AND users.activated_at IS NOT NULL AND songs.published = ? AND users.login != 'myousica' GROUP BY users.id ORDER BY songs_count DESC"
-    #qry += " LIMIT #{options[:limit]}" if options.has_key?(:limit)
-    #User.find_by_sql([qry, true])
-    paginate(options.merge(
-      :select => "users.*, songs.title, count(songs.id) AS songs_count",
-      :joins => "LEFT JOIN songs ON users.id = songs.user_id",
-      :conditions => ["(users.type = 'Band' OR users.type = 'Dj') AND users.activated_at IS NOT NULL AND songs.published = ? AND users.login != 'myousica'", true],
-      :group => "users.id",
-      :order => "songs_count DESC"      
-      ))
+    paginate(options.merge(:order => 'created_at DESC', :conditions => "activated_at IS NOT NULL"))
   end
 
   def self.find_paginated_prolific(options = {})
@@ -377,32 +319,19 @@ class User < ActiveRecord::Base
     paginate(options.merge(
       :select => "users.*, songs.title, count(songs.id) AS songs_count",
       :joins => "LEFT JOIN songs ON users.id = songs.user_id",
-      :conditions => ["(users.type = 'User' OR users.type IS NULL) AND users.activated_at IS NOT NULL AND songs.published = ? AND users.login != 'myousica'", true],
+      :conditions => "users.activated_at IS NOT NULL",
       :group => "users.id",
       :order => "songs_count DESC"      
-      ))
+    ))
   end
 
-  def self.find_paginated_coolest_bands_and_deejays(options = {})
-    options.reverse_update(:page => 1, :per_page => 9)
-    paginate(options.merge({:conditions => ["activated_at IS NOT NULL AND (type = 'Band' OR type = 'Dj') AND login != 'myousica'"], :order => 'rating_avg DESC'})) 
-  end
-  
   def self.find_paginated_coolest(options = {})
     options.reverse_update(:page => 1, :per_page => 9)
-    paginate(options.merge({:conditions => ["activated_at IS NOT NULL AND (type IS NULL OR type = 'User') AND login != 'myousica'"], :order => 'rating_avg DESC'})) 
-  end
-
-  def self.find_newest_band_or_deejays(options = {})
-    self.find(:all, options.merge(:order => 'created_at DESC', :conditions => "activated_at IS NOT NULL AND (users.type = 'Band' OR users.type = 'Dj') AND users.login != 'myousica'"))
+    paginate(options.merge({:conditions => 'activated_at IS NOT NULL', :order => 'rating_avg DESC'})) 
   end
 
   def self.find_most_instruments(options = {})
-    self.find(:all, options.merge(:select => 'users.*, count(distinct tracks.instrument_id) AS instrument_count', :joins => 'LEFT JOIN tracks ON users.id = tracks.user_id', :conditions => "users.activated_at IS NOT NULL AND (users.type IS NULL OR users.type = 'User') AND tracks.instrument_id IS NOT NULL AND users.login != 'myousica'", :group => 'users.id', :order => 'instrument_count DESC'))
-  end
- 
-  def self.find_most_instruments_band_or_deejays(options = {})
-    self.find(:all, options.merge(:select => 'users.*, count(distinct tracks.instrument_id) AS instrument_count', :joins => 'LEFT JOIN tracks ON users.id = tracks.user_id', :conditions => "users.activated_at IS NOT NULL AND (users.type = 'Band' OR users.type = 'Dj') AND tracks.instrument_id IS NOT NULL AND users.login != 'myousica'", :group => 'users.id', :order => 'instrument_count DESC'))
+    self.find(:all, options.merge(:select => 'users.*, count(distinct tracks.instrument_id) AS instrument_count', :joins => 'LEFT JOIN tracks ON users.id = tracks.user_id', :conditions => "users.activated_at IS NOT NULL AND tracks.instrument_id IS NOT NULL", :group => 'users.id', :order => 'instrument_count DESC'))
   end
 
   def self.find_online(options = {})
@@ -417,7 +346,7 @@ class User < ActiveRecord::Base
     self.find(:all, options.merge(:include => [:avatar], :order => 'users.replies_count DESC'))
   end
 
-  def self.find_top_myousicians(options = {})
+  def self.find_top_mewsicians(options = {})
     #self.find :all, options.merge(
     #  :select => 'COUNT(tracks.id) AS tracks_count, users.*',
     #  :joins => 'INNER JOIN tracks ON tracks.user_id = users.id',
@@ -434,12 +363,8 @@ class User < ActiveRecord::Base
     self.find_by_sql qry
   end
 
-  def self.myousica
-    @myousica ||= User.find_by_login('myousica')
-  end
-
   def self.find_countries
-    find(:all, :select => 'country', :group => 'country', :order => 'country', :conditions => "login != 'myousica'").map(&:country)
+    find(:all, :select => 'country', :group => 'country', :order => 'country').map(&:country)
   end
 
   def is_pending_friends_by_me_with?(user)
@@ -529,26 +454,6 @@ class User < ActiveRecord::Base
 
   def rateable_by?(user)
     self.id != user.id
-  end
-
-  def switch_to!(destination)
-    User.transaction do
-      if destination == 'Band'
-        # delete all the mband memberships
-        self.mband_memberships.destroy_all
-        # remove the gender
-        self.gender = nil
-        # delete all the mbands
-        Mband.destroy_all ['user_id = ?', self.id]
-
-      elsif self.type == 'Band'
-        # delete all the band members of this user
-        self.members.destroy_all
-
-      end
-
-      self.update_attribute :type, destination
-    end
   end
 
   def profile_viewed_by(viewer)
