@@ -1,14 +1,15 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
 
-  def load_prototype
+  def load_jquery
     if RAILS_ENV == 'production'
     #  return %[<script src="http://www.google.com/jsapi"></script>] + javascript_tag(%[
     #      google.load('prototype', '1.6.0.2');
     #      google.load('scriptaculous', '1.8.1'); ])
-      javascript_include_tag 'protoculous'
+    #  javascript_include_tag 'protoculous'
+    # XXX TMP
     else
-      javascript_include_tag *%w[prototype scriptaculous]
+    #  javascript_include_tag *%w[prototype scriptaculous]
     end
   end
 
@@ -20,7 +21,7 @@ module ApplicationHelper
     ])
   end
 
-  def google_analytics_track(pagename = nil, id = 'UA-3674352-1')
+  def google_analytics_track(pagename = nil, id = nil)
     return if RAILS_ENV == 'development'
     pagename = %("#{escape_javascript(pagename)}") unless pagename.nil?
     javascript_tag(%[
@@ -36,16 +37,15 @@ module ApplicationHelper
   end
   
   def rating(rateable, options = {})
-    type_class = rateable.class.name.downcase
-    type_class = 'user' if %w[dj band].include?(type_class)
+    klass = rateable.class.name.downcase
 
     options = options.symbolize_keys
-    clear_class = 'clear-block' if options.delete(:clear)
-    options[:class] = "rating #{clear_class} #{type_class} #{options[:class]}"
+    options[:class] = "rating #{klass} #{options[:class]}"
     options[:class] += " locked" if logged_in? && !rateable.rateable_by?(current_user)
 
     tag_options = options.map { |k,v| %(#{k}="#{v}") }.join(' ')
 
+    # XXX TMP
     %[<div id="#{type_class}_#{rateable.id}" rel="#{rateable.rating_avg.to_f} #{rateable.rating_count}"  #{tag_options}></div>]
   end
   
@@ -55,11 +55,12 @@ module ApplicationHelper
   end
   
   def check_active(*controllers)
+    # XXX TMP
     current = controller.controller_name
     if controllers.last.kind_of?(ActiveRecord::Base)
       model = controllers.pop
       if model.class.name == 'User' && controllers.include?('users') or
-        %w[Band Dj Mband].include?(model.class.name) && controllers.include?('bands_and_deejays')
+        %w[Mband].include?(model.class.name) && controllers.include?('mbands')
         'active'
       end
     else
@@ -69,7 +70,8 @@ module ApplicationHelper
   end
   
   def clickable_logo
-    logo = image_tag "logo_myousica.gif", :alt => 'Myousica - play and share'
+    # XXX TMP
+    logo = image_tag ".gif", :alt => ''
     if controller.controller_name == "dashboard"
       logo
     else
@@ -158,26 +160,11 @@ module ApplicationHelper
   end    
   
   def render_sidebar   
-    content = ''
-    # content << render(:partial => 'shared/share_myousica')
-
-    content << render(:partial => 'shared/side_banners_top')
-    content << render(:partial => 'shared/videos')
-
+    # XXX TMP
     unless logged_in? || (params[:controller] == 'sessions' || (params[:controller] == 'users' && (params[:action] == 'new' || params[:action] == 'create')))
-      content << render(:partial => 'shared/login_box')
     end
-
-    content << render(:partial => 'shared/mlab')
-    content << render(:partial => 'shared/side_banners_bottom')
   end    
   
-  def user_type_image(model, options = {})
-    suffix = "_#{options.delete(:suffix)}" if options[:suffix]
-    name = model.class.name
-    image_tag "#{name.downcase}_type#{suffix}.gif", {:alt => name.upcase}.merge(options)
-  end
-
   def ajax_upload_form(model, options, &block)
     klass = model.kind_of?(User) ? User : model.class
     url = options[:url] || send("formatted_%s_%s_path" % [klass.name.underscore, options[:name]], model, 'js')

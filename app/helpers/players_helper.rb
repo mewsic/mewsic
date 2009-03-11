@@ -1,6 +1,7 @@
 module PlayersHelper
   
   def play_button(playable, options = {})
+    # XXX TMP
     if playable.filename.blank?
       options.reverse_update(:color => :grey, :class => 'player-disabled')
     else           
@@ -12,6 +13,7 @@ module PlayersHelper
   end
   
   def delete_button(playable)
+    # XXX TMP
     class_name = playable.class.name.downcase
     url = send("confirm_destroy_#{class_name}_url", playable)
     link_to image_tag('button_delete_mypage.png', :alt => 'DELETE', :title => "Delete #{class_name}"),
@@ -19,6 +21,7 @@ module PlayersHelper
   end
 
   def player_icon_flashvar_for(playable)
+    # XXX TMP
     if playable.is_a?(Song)
       %[trackCount: #{playable.tracks.count}]
     elsif playable.is_a?(Track)

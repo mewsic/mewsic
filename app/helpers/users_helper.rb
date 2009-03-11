@@ -72,6 +72,7 @@ module UsersHelper
   end    
    
   def switch_type_images_for(user)
+    # XXX TMP
     from = user.type.nil? ? 'user' : user.type.downcase
 
     %w[user band dj].map do |to|
@@ -84,25 +85,17 @@ module UsersHelper
       end
     end.join
   end
-  
+
   def page_label_for(user)
     user_type = user.type.nil? ? 'user' : user.type.downcase
     image_tag("#{user_type}_page_label.gif", :alt => user_type.upcase)
   end
-  
+
   def user_inbox_link
     content = link_to("inbox (#{current_user.unread_message_count})", user_path(current_user) + '#inbox', :id => 'inbox-link');
     content = "<strong>#{content}</strong>" if current_user.unread_message_count > 0
     content
   end
-
-  #def podcast_link_for(user)
-  #  if request.user_agent =~ /Safari/
-  #    user_podcast_url(user).sub /^http/, 'pcast'
-  #  else
-  #    user_pcast_path(user)
-  #  end
-  #end
 
   def empty_collection_message(collection, options = {})
     return unless collection.size.zero?

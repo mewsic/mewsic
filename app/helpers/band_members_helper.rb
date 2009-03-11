@@ -21,6 +21,7 @@ module BandMembersHelper
   end
 
   def member_name(member)
+    # XXX TMP
     if member.linked_to_myousica_user?
       link_to member.linked_user.login, user_path(member.linked_user)
     else
