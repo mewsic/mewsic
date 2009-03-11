@@ -94,6 +94,11 @@ class Mband < ActiveRecord::Base
   xss_terminate :except => [:name, :photos_url, :blog_url, :myspace_url],
                 :sanitize => [:motto, :tastes]
   
+  def self.find_newest(options = {})
+    options[:limit] ||= 10
+    find(:all, options.merge(:conditions => 'members_count > 1', :order => 'created_at'))
+  end
+
   # Checks whether the passed <tt>user</tt> is a member of this Mband
   #
   def band_membership_with(user)

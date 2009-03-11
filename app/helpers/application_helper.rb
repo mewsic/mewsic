@@ -15,7 +15,7 @@ module ApplicationHelper
   end
 
   def jquery_stylesheet_tags
-    stylesheet_include_tag 'themes/base/ui.all.css'
+    stylesheet_link_tag 'themes/base/ui.all.css'
   end
 
   def google_analytics_load

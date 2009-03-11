@@ -7,7 +7,7 @@
 
   <title>MEWSIC</title>
 
-  <%= stylesheet_include_tag *%w( type layout color instruments appbar ) %>
+  <%= stylesheet_link_tag *%w( type layout color instruments appbar ) %>
 
   <%= jquery_javascript_tags %>
   <%= jquery_stylesheet_tags %>
@@ -133,7 +133,7 @@
       </li>
     </ul>
 
-    <% yield :footer %>
+    <%= yield :footer %>
       
     <!-- END TOP FOOTER GROUP -->    
     <!-- BOTTOM FOOTER GROUP -->    
