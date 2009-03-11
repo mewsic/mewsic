@@ -1,0 +1,51 @@
+body {
+	font-family: "Lucida Grande",Arial,Helvetica,Verdana,sans-serif;
+	font-size: 11px;
+}
+.navigation, .pick_ad {
+	font-family: Arial,Helvetica,Verdana;	
+}
+.h3 {
+	font-family: "Helvetica Neue",Helvetica,Verdana;
+}
+#top_footer h2, #top_footer .subtitle, h1, .rightCol h2, .related_list h2,
+#playlist_container h2 {
+	font-family: "Trebuchet MS";
+}
+.navigation, #top_footer h2, .rightCol h2,
+.pick_ad, .related_list h2,
+#playlist_container h2 {
+	font-size: 15px;
+	font-weight: bold;
+}
+h1 {
+	font-size: 18px;
+	font-weight: bold;
+}
+h3 {
+	font-size: 22px;
+	font-weight: bold;
+}
+.pick_wrap h1 {
+	font-family: "Lucida Grande",Arial,Helvetica,Verdana,sans-serif !important;	
+	font-size: 17px;
+	font-weight: bold;
+}
+
+.pick_page_anchors li a,
+.song_controls li a {
+	font-size: 9px;
+	font-weight: bold;
+}
+.footer_copy {
+	font-size: 10px;
+}
+.join_button, .login_button, .login li,
+#bottom_footer h2 {
+	font-size: 11px;
+	font-weight: bold;
+}
+
+.top_tags .tag_genre, .interview {
+	font-size: 12px;
+}

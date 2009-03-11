@@ -1,0 +1,568 @@
+body {
+	margin: 0;
+	background: #F0F0F0 url('../images/body_grad.gif') repeat-x top;
+	color: #000000;
+}
+
+#header {
+	position: relative;
+	top: 0;
+	margin: auto;
+	width: 969px;
+	height: 100px;
+}
+
+.logo {
+	width: 174px;
+	height: 47px;
+	position: absolute;
+	left: 0;
+	margin-left: 8px;
+}
+
+
+/* GENERAL RULES */
+img {
+	border: 0px;
+}
+
+.fleft {
+	float: left;
+}
+
+.fright {
+	float: right;
+}
+
+.alright {
+	text-align: right;
+}
+
+.alleft {
+	text-align: left;
+}
+
+.block {
+	display: block;
+}
+
+.clear {
+	clear: both;
+}
+
+
+
+/* MENU */
+.navigation {
+	margin: 55px 0 -3px 8px;
+	padding: 0 0 10px 0;
+}
+.navigation li {
+	display: inline;
+	list-style: none;
+	padding: 0 30px 10px 0;
+}
+.navigation .current {
+	background: transparent url('../images/menu_current.gif') no-repeat bottom center;
+	padding: 0 0 10px 0;
+}
+
+
+/* HEADER LOGIN JOIN BAR */
+.join_button, .pick_page_anchors .anchors {
+	padding: 1px 7px;
+}
+
+.login {
+	padding: 0;
+	margin-top: 13px;
+}
+.login li {
+	margin: 10px 0 0 0;
+	display: inline;
+	list-style: none;
+	padding-right: 5px;
+}
+.login .divider {
+	border-right: 1px dotted #CCCCCC;
+	display: inline;
+	margin-left: 6px;
+}
+.login_button {
+		padding: 1px 10px;
+		margin-left: 15px;
+}
+
+
+
+/* IMAGE ROUND CORNER LAYOUT */
+#breadcrumb_bar, #bottom_bar {
+	margin: auto;
+	width: 969px;
+	height: 20px;
+	overflow: hidden;
+}
+#bottom_bar { margin-bottom: 28px; }
+
+/* white */
+.corner_lt {
+	width: 20px;
+	height: 20px;
+	background: transparent url('../images/content_lt.png') no-repeat;	
+}
+.bar_rp {
+	width: 929px;
+	height: 20px;
+	background: transparent url('../images/content_top_rp.png') repeat-x;		
+}
+.corner_rt {
+	width: 20px;
+	height: 20px;
+	background: transparent url('../images/content_rt.png') no-repeat;		
+}
+
+/* blue */
+.corner_lt_blue {
+	width: 20px;
+	height: 20px;
+	background: transparent url('../images/content_lt_blue.png') no-repeat;	
+}
+.bar_rp_blue {
+	width: 929px;
+	height: 20px;
+	background: transparent url('../images/content_top_rp_blue.png') repeat-x;		
+}
+.corner_rt_blue {
+	width: 20px;
+	height: 20px;
+	background: transparent url('../images/content_rt_blue.png') no-repeat;		
+}
+
+.corner_lb {
+	width: 20px;
+	height: 20px;
+	background: transparent url('../images/content_lb.png') no-repeat;	
+}
+.bottom_rp {
+	width: 929px;
+	height: 20px;
+	background: transparent url('../images/content_bottom_rp.png') repeat-x;		
+}
+.corner_rb {
+	width: 20px;
+	height: 20px;
+	background: transparent url('../images/content_rb.png') no-repeat;		
+}
+
+
+
+/* CONTENT AND WRAPPER */
+#content {
+	margin: auto;
+	width: 969px;
+	background: transparent url('../images/content_bg.png') repeat-y top;
+	clear: both;
+	overflow: visible;
+	position: relative;
+
+}
+
+.leftCol {
+	width: 100%;
+	overflow: hidden;
+	display: inline;
+	margin-right: -246px;
+	background: url('../images/contentr_sidebar_wrap.gif') repeat-y right top;
+}
+.leftColWrapper {
+	margin-right: 246px;
+	overflow: hidden;
+	padding: 18px;
+}
+.rightCol {
+	width: 210px;
+	position: relative;
+	display: inline;
+	padding: 18px 16px;
+}
+
+
+/* PICK OF THE WEEK LAYOUT */
+.pick_wrap {
+	width: 697px;
+	padding-bottom: 30px;
+	background: transparent url('../images/pick_head_bg.gif') repeat-x top;
+}
+.pick_wrap .pick_ad {
+	width: 454px;
+	height: 255px;
+}
+.pick_info { 
+	margin: 0;
+	position: relative;
+	top: 5px; left: 0;
+}
+.pick_info strong {
+	background-color: #00385D;
+	padding: 5px 11px;
+	line-height: 17px;
+}
+.pick_details {
+	margin-left: 10px;
+	width: 233px;
+	height: 100%;
+}
+.pick_wrap h1 {
+	margin: 8px 0 0 0;
+}
+
+.margin30 { margin-top: 30px }
+
+
+/* most player artist related */
+.item_count { margin-top: 4px; }
+.video_thumb {
+	width: 110px;
+	height: 90px;
+	padding: 2px;
+	margin-top: 17px;
+	cursor: pointer;	
+}
+.video_thumb .still_play {
+	background: url('../images/video_still_play.png') no-repeat right center;
+	width: 107px;
+	height: 29px;
+	position: absolute;
+}
+
+/* lastfm link box */
+.lastfm_box {
+	width: 225px;
+	border: 1px solid #E6E6E6;
+	margin: 7px 0 12px 0;
+}
+.lastfm_box .fmlinks {
+	padding: 0;
+	margin: 5px 10px 7px 10px;
+	width: 205px;
+}
+.footer_right_content .fmlinks { margin: -4px 4px 3px 0 ; padding: 0; }
+
+.fmlinks li, .footer_right_content .fmlinks li {
+	list-style: none;
+	position: relative;
+}
+.fmlinks li { margin: 0 0 1px 55px; }
+.footer_right_content .fmlinks li { margin: 0 0 1px 0; }
+
+.fmlinks .gray_spec { margin-bottom: 5px; }
+.footer_right_content .gray_spec { 
+	background: url('../images/lastfm_tag.jpg') no-repeat;
+	line-height: 10px; 
+	padding: 0 0 5px 50px;
+}
+
+.lastfm_lists {
+	background: url('../images/lastfm_list_icon.png') no-repeat;
+	padding-left: 18px;
+}
+
+/* RIGHT FOOTER CONTET SNIP */
+.snip { width: 290px; margin-top: 5px; }
+.snip img { margin-right: 5px; }
+
+/* SONG BLOCK CONTAINER DIMENSION SPEC */
+.w454 { width: 454px; } /* pick of the week, most player artist */
+.w440 { width: 440px; } /* footer right content */
+
+/* SONG BLOCK */
+.song_block, #top_footer .song_block {
+	width: 100%;
+	height: 43px;
+	padding-top: 4px;
+}
+.song_block { border-bottom: 1px solid #E6E6E6;}
+#top_footer .song_block { border-top: 1px solid #305A78 !important; border-bottom: none !important; }
+
+#top_footer .song_block:hover { background-color: #104063; }
+.song_block:hover { background-color: #F2F2F3; }
+.song_block .avatar, .song_block .tracks_count, .avatar {
+	width: 40px;
+	height: 40px;
+}
+.song_block .avatar, .song_block .tracks_count, .instr_avatar {
+ 	margin-left: 4px;	
+}
+
+#top_footer .song_block .avatar {
+	background: url('../images/thumb_loader.gif') no-repeat center;
+}
+.song_block .avatar, .avatar {
+	background: url('../images/thumb_loader_white.gif') no-repeat center;
+}
+.song_block .tracks_count {
+	cursor: pointer;
+	text-align: center;
+}
+.song_block .tracks_count h3 {
+	margin: 0 0 0 -2px;
+	line-height: 26px;
+	letter-spacing: -2px;
+}
+.song_details {
+	padding: 2px 0 0 7px;
+}
+.song_details .song_title { line-height: 7px; }
+.song_details .song_author { line-height: 19px; }
+
+.song_controls {
+	padding: 0;
+	margin: 2px 4px 0 0;
+	direction: rtl;
+}
+.song_controls li {
+	list-style: none;
+	display: inline;
+	padding-right: 0;
+}
+
+.control_add, .control_mix, .control_play { padding: 1px 3px; }
+.mixable_link a {
+	display: block;
+	padding-bottom: 10px;
+}
+/* useless ? */
+.star_container {
+	display: inline;
+}
+
+
+/* SIDEBAR COOLEST PEOPLE CHART */
+.votes_chart {
+	width: 202px;
+	height: 40px;
+}
+.people_chart .song_author {
+	line-height: 16px !important;
+}
+.chart_value {
+	margin-left: -4px;
+	padding-right: 4px;
+	background: url('../images/chart_bar.gif') no-repeat bottom right;
+}
+
+
+
+
+/* RIGHTCOL SIDEBAR LISTS RULES */
+.rightCol ul {
+	width: 202px;
+	padding: 0;
+	margin: 0;	
+}
+.rightCol li {
+	margin: 0 0 10px 5px;
+	list-style: none;	
+}
+.rightCol h2 {
+	margin: 0 0 10px 0;
+}
+.rightCol .avatar { margin-right: 4px; }
+
+
+/* RELATED LISTS */
+.related_list {
+	padding: 0;
+	margin: 0;
+}
+.related_list h2 {
+	margin: 0 0 8px 0;
+}
+.related_list li {
+	list-style: none;
+	display: inline;
+	margin-left: 3px;
+}
+
+
+/* SIDEBAR YOU KNOW */
+.you_know span {
+	padding-left: 21px;
+}
+
+/* LIST ICONS */
+.icons { display: block; }
+.lightbulb {
+	background: url('../images/icons/lightbulb.png') no-repeat left top;
+}
+.world {
+	background: url('../images/icons/world.png') no-repeat left top;
+}
+
+
+
+
+/* FOOTER */
+#bottom_footer, .bottom_footer_grad {
+	width: 960px;
+	height: 188px;
+}
+.bottom_footer_grad {
+	margin-top: 220px;	
+}
+#top_footer, .top_footer_grad {
+	width: 960px;
+	margin: auto;
+}
+
+.bottom_footer_grad, .top_footer_grad {
+	padding-top: 6px;
+}
+#bottom_footer h2 {
+	width: 200px;
+	border-bottom: 1px dotted #64BEE0;
+	margin: 18px 0 9px 0 !important;
+	padding: 0 0 4px 5px;
+}
+#bottom_footer ul {
+	padding-left: 28px;
+	margin: 0;
+}
+#bottom_footer ul li {
+	list-style: none;
+	padding: 0 0 1px 5px;	
+}
+
+/* FOLLOW US LIST */
+.follow_us li {
+	padding-bottom: 4px !important;
+}
+.follow_us a {
+	padding: 1px 0 1px 20px;
+}
+.follow_us .rss {
+	background: url('../images/icons/feed.png') no-repeat;
+}
+.follow_us .podcast {
+	background: url('../images/icons/transmit_blue.png') no-repeat;
+}
+.follow_us .myspace {
+	background: url('../images/icons/user.png') no-repeat;
+}
+.follow_us .facebook {
+	background: url('../images/icons/shape_square.png') no-repeat;
+}
+
+#top_footer h2 {
+	margin: 0;
+}
+
+/* FOOTER CONTENT */
+.top_tags {
+	width: 433px;
+	margin: 20px 0 14px 0;
+	position: absolute;
+	padding-left: 25px;
+}
+.footer_right_content .tag_genre { display: inline; }
+.tag_genre {
+	margin: 0;
+}
+.tag_genre a {
+	padding-right: 8px;
+}
+.pick_wrap .tag_genre a {
+	padding: 1;
+}
+
+.pick_page_anchors { 
+	padding: 0; 
+	margin: 29px 0 17px 0;
+}
+.pick_page_anchors li {
+	list-style: none;
+	display: inline;
+	padding-right: 5px;
+}
+
+
+.best_people, .new_band {
+	padding: 0;
+	margin: 120px 0 0 25px;
+	position: absolute;
+}
+.new_band {
+	padding-left: 265px;
+}
+.best_people li, .new_band li {
+	list-style: none;
+	display: inline;
+}
+
+#top_footer .subtitle {
+	margin-bottom: 7px;
+}
+.best_people .user_thumb, .new_band .user_thumb {
+	margin-right: 9px;	
+}
+.loaded {
+	margin-left: -44px;
+}
+
+.footer_right_content {
+	position: absolute right;
+	width: 433px;
+	margin: 20px 25px 0 0;
+	padding: 0;
+}
+.footer_right_content .border_list {
+	list-style: none;
+	border-top: 1px solid #00172B;
+	overflow: hidden;
+}
+
+
+.footer_copy {
+	width: 100%;
+	text-align: center;
+	margin-top: 10px;
+}
+
+
+
+/* MISSION TUTORIAL */
+#mission_tutorial {
+	width: 720px;
+	height: 226px;
+	margin-left: 5px;
+}
+#mission_search {
+	width: 238px;
+	height: 226px;
+	margin-left: 2px;
+}
+.search_call {
+	margin: 46px 0 18px 11px;
+}
+.search_call_input {
+	border: 0;
+	margin: 0 5px 0 9px;
+	height: 20px;
+	width: 150px;
+	font-size: 15px;
+	font-weight: bold;
+	color: #696969;
+	padding: 6px 9px;
+}
+.search_call_submit {
+	border: 0;
+	font-size: 15px;
+	font-weight: bold;
+	cursor: pointer;
+	height: 32px;
+	color: #FFFFFF;
+	background: url('../images/go_bg.png') repeat-x left top;
+	padding: 0 9px;
+}
+
+
