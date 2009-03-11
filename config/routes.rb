@@ -26,13 +26,11 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :instruments
   map.resources :ideas, :collection => {:newest => :get, :coolest => :get, :by_instrument => :get}
-  map.resources :bands_and_deejays, :collection => {:newest => :get, :coolest => :get, :prolific => :get, :best => :get}
-  map.resources :users, :collection => {:auto_complete_for_message_to => :get, :top => :get, :newest => :get, :best => :get, :coolest => :get, :prolific => :get}, :member => {:firstrun => :get, :switch_type => :any, :change_password => :put, :rate => :put} do |user|    
+  map.resources :users, :collection => {:auto_complete_for_message_to => :get, :top => :get, :newest => :get, :best => :get, :coolest => :get, :prolific => :get}, :member => {:firstrun => :get, :change_password => :put, :rate => :put} do |user|    
     user.resources :answers
     user.resources :songs
     user.resources :tracks
     user.resource  :avatar
-    user.resources :members, :controller => 'band_members'
     user.resources :friendships
     user.resources :photos
     user.resources :mlabs
@@ -77,10 +75,6 @@ ActionController::Routing::Routes.draw do |map|
   map.multitrack_refresh '/multitrack/refresh/:id', :controller => 'multitrack', :action => 'refresh'
   map.multitrack_auth    '/multitrack/_/:user_id',  :controller => 'multitrack', :action => 'authorize'
   map.multitrack_song    '/multitrack/s/:user_id',  :controller => 'multitrack', :action => 'update_song'
-  map.multitrack_beta    '/pappapperotrack',        :controller => 'multitrack', :action => 'beta_index'
-  map.multitrack_beta    '/pappapperotrack/:id',    :controller => 'multitrack', :action => 'beta_edit'
-
-  map.splash_config '/splash.xml', :controller => 'dashboard', :action => 'config', :format => 'xml'
 
   map.connect '/countries.:format', :controller => 'users', :action => 'countries'
   
@@ -98,9 +92,9 @@ ActionController::Routing::Routes.draw do |map|
 
   map.sitemap         '/sitemap.xml',   :controller => 'sitemap', :format => 'xml'
 
-  map.admin '/pappapperadmin', :controller => 'admin/dashboard', :action => 'index'
-  map.upload_admin_track '/pappapperadmin/admin/tracks/upload', :controller => 'admin/tracks', :action => 'upload', :conditions => { :method => :post }
-  map.namespace(:admin, :namespace => '', :name_prefix => '', :path_prefix => 'pappapperadmin') do |admin|
+  map.admin '/admin', :controller => 'admin/dashboard', :action => 'index'
+  map.upload_admin_track '/admin/admin/tracks/upload', :controller => 'admin/tracks', :action => 'upload', :conditions => { :method => :post }
+  map.namespace(:admin, :namespace => '', :name_prefix => '', :path_prefix => 'admin') do |admin|
     admin.resources :songs, :member => { :mix => :put, :unmix => :put, :mp3 => :post }
     admin.resources :tracks
     admin.resources :users

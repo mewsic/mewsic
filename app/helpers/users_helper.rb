@@ -70,21 +70,6 @@ module UsersHelper
   def user_edit_button(field)
     %|<a href="#" class="edit" id="edit_button_user_#{field.to_s}">[edit]</a>| if current_user_page?
   end    
-   
-  def switch_type_images_for(user)
-    # XXX TMP
-    from = user.type.nil? ? 'user' : user.type.downcase
-
-    %w[user band dj].map do |to|
-      if from == to
-        image_tag("change_#{to}_active.gif", :title => "You are currently a #{from}")
-      else
-        link_to(image_tag("change_#{to}_inactive.gif", :title => "Switch your user type to #{to}"),
-          formatted_switch_type_user_path(user, 'html', :type => to),
-          :class => 'lightview', :id => "user-switch-#{to}", :title => ' :: :: width:400, height:330')
-      end
-    end.join
-  end
 
   def page_label_for(user)
     user_type = user.type.nil? ? 'user' : user.type.downcase

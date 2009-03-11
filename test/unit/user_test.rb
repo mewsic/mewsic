@@ -232,11 +232,6 @@ class UserTest < Test::Unit::TestCase
     assert_equal 5, User.find_by_login('quentin').given_ratings.size
   end
         
-  def test_should_set_user_type
-    u = Dj.create({ :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire'}) #, :terms_of_service => "1", :eula => "1" })
-    assert_equal 'Dj', u[:type]
-  end
-  
   def test_should_retrieve_distinct_instrument
     u = create_user
     s = u.songs.create(:title => 'My song', :tone => 'C', :genre => genres(:blues))
@@ -284,13 +279,8 @@ class UserTest < Test::Unit::TestCase
   end
   
   def test_finders
-    finder_list = [:find_coolest, :find_prolific, :find_friendliest, :find_best, :find_newest,
-                   :find_coolest_band_or_deejays, :find_prolific_band_or_deejays,
-                   :find_friendliest_band_or_deejays, :find_best_band_or_deejays,
-                   :find_newest_band_or_deejays]
-    finder_list.each do |f|
-      check_finder_for_inactive(f)
-    end
+    finders = [:find_coolest, :find_prolific, :find_friendliest, :find_best, :find_newest]
+    finders.each { |f| check_finder_for_inactive(f) }
   end
   
   def test_should_add_http_to_non_blank_links
@@ -308,8 +298,8 @@ class UserTest < Test::Unit::TestCase
   protected
     
     def check_finder_for_inactive(finder)
-      results = User.send(finder, {}).select {|u| u.activated_at.nil? } 
-      assert (results.size == 0), finder
+      results = User.send(finder, {})
+      assert results.all? { |u| !u.activated_at.nil? } 
     end
     
     def create_user(options = {})

@@ -386,7 +386,7 @@ class User < ActiveRecord::Base
     update_attribute('friends_count', friends_for_me.count + friends_by_me.count)
     attributes['friends_count']
   end
-  
+
   def friends_count
     @friends_count ||= (attributes['friends_count'] || update_friends_count)
   end

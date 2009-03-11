@@ -9,17 +9,17 @@
 # This huge controller handles many of the most important functions of the site: users +index+, the signup
 # page (+new+ action) and user creation (+create+); the user page (+show+ action) with its editing features
 # (the +update+ action); user activation (+activate+); password handling: +forgot_password+, +reset_password+
-# and +change_password+; user type switch (+switch_type+ and +firstrun+); user rating (+rate+).
+# and +change_password+; user rating (+rate+).
 #
 # Plus, some utility methods are included: +countries+, +auto_complete_for_message_to+ and +top+.
 #
-# Login and ownership of the user is required to access the +update+, +switch_type+, +firstrun+ and +change_password+
+# Login and ownership of the user is required to access the +update+ and +change_password+
 # actions. +auto_complete_for_message_to+, +top+ and +rate+ have to be called only via XHR instead.
 #
 class UsersController < ApplicationController    
   
-  before_filter :login_required, :only => [:update, :switch_type, :firstrun, :change_password]
-  before_filter :check_if_current_user_page, :only => [:update, :switch_type, :firstrun, :change_password]
+  before_filter :login_required, :only => [:update, :change_password]
+  before_filter :check_if_current_user_page, :only => [:update, :change_password]
   before_filter :check_if_already_logged_in, :only => [:new]
   before_filter :redirect_to_root_unless_xhr, :only => [:auto_complete_for_message_to, :top, :rate]
   
@@ -113,9 +113,6 @@ class UsersController < ApplicationController
   #   If the user navigates another user page, it sees only idea tracks, no mband invitations and
   #   only mbands with more than one member.
   #
-  #   If the <tt>welcome</tt> parameter is passed, the <tt>public/javascripts/user/firstrun.js</tt>
-  #   javascript code is run, that shows the +firstrun+ action into a <tt>Lightview</tt>.
-  #
   # * XML format: renders some user information, as defined by the <tt>show.xml.erb</tt> template.
   #
   def show
@@ -139,7 +136,6 @@ class UsersController < ApplicationController
             [Track.find_paginated_ideas_by_user(1, @user), @user.ideas_count, @user.mbands_with_more_than_one_member]
           end
 
-        @firstrun = current_user_page && params.include?(:welcome)
         @has_abuse = @user.abuses.exists? ['user_id = ?', current_user.id] if logged_in?
       end
 
@@ -168,17 +164,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # ==== GET /users/:id/firstrun
-  #
-  # Shows the <tt>users/switch/_firstrun.html.erb</tt> template to the user, that gives it a
-  # warm welcome to Myousica and informs it about the different user types. The user can then
-  # switch types and start its myousica experience :-).
-  #
-  def firstrun
-    @user = User.find_from_param(params[:id])
-    render :template => 'users/switch/firstrun', :layout => false
-  end
-  
   # ==== PUT /users/:id
   #
   # Updates an user record with the given parameters. An user can change only its own data,
@@ -288,40 +273,6 @@ class UsersController < ApplicationController
     end
 
     redirect_to user_url(current_user)
-  end
-  
-  # ==== GET /users/:id/switch_type
-  # ==== PUT /users/:id/switch_type
-  #
-  #  * <tt>GET</tt>: shows one of the <tt>app/views/users/switch/*_to_*.erb</tt> partials, depending
-  #    on which class the user is currently and the desired destination type.
-  #  * <tt>PUT</tt>: updates the user's type using the <tt>type</tt> param. It currently can be one
-  #    of [User, Dj, Band].
-  #
-  def switch_type
-    @user = User.find_from_param(params[:id])
-    @type = %W(user dj band).include?(params[:type]) && params[:type].capitalize
-
-    if !@type #|| @user.class.name == @type
-      render :partial => 'users/switch/failure', :status => :bad_request and return
-    end
-
-    render :nothing => true, :status => :bad_request and return if request.post? || request.delete?
-
-    respond_to do |format|
-      switch_partial = {:partial => "users/switch/#{@user.class.name.downcase}_to_#{@type.downcase}", :layout => 'users/switch/layout'}
-      if request.put?
-        @user.nickname = params[:nickname] if params[:nickname]
-        if @user.switch_to! @type
-          format.html { render :partial => "users/switch/success" }
-        else
-          flash.now[:error] = @user.errors.full_messages.join
-          format.html { render switch_partial }
-        end
-      else
-        format.html { render switch_partial }
-      end
-    end
   end
   
   # ==== PUT /users/:id/rate
