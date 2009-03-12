@@ -24,8 +24,6 @@
 #
 
 <% 
-  require 'myousica'
-
   def shuffle(array)
     size = array.size
     r = [rand(size),rand(size)]

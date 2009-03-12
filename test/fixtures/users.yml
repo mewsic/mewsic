@@ -46,7 +46,6 @@
 #
 
 quentin:
-  type: User
   login: quentin
   email: quentin@example.com
   salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
@@ -88,7 +87,7 @@ john:
   gender: male
   country: Italy
   city: Bari
-  motto:in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni.  
+  motto: in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni.  
   is_admin: true
   profile_views: 2342
 

@@ -3,33 +3,10 @@
   <author><%= h(song.original_author) %></author>     
   <title><%= h(song.title) %></title>     
   <instruments><%= song.instruments.size %></instruments>  
-  <genre><%= song.genre.id if song.genre %></genre>     
-  <bpm><%= song.bpm %></bpm>        
-  <tone><%= h(song.tone) %></tone>       
   <description><%= h(song.description) %></description>
   <rating><%= song.rating_avg.to_f %></rating>     
   <id><%= song.id %></id>         
   <filename><%= song.public_filename %></filename>
   <waveform><%= formatted_song_path song, 'png' %></waveform>
   <seconds><%= song.seconds %></seconds>
-  <%- if @show_siblings_count -%>
-    <siblings_count><%= song.direct_siblings.size %></siblings_count>
-  <%- end -%>
-  <% if @show_siblings; @show_siblings = false; -%>
-    <siblings type="direct">
-      <%= render :partial => 'shared/song', :collection => song.direct_siblings %>
-    </siblings>
-    <siblings type="indirect">
-      <%= render :partial => 'shared/song', :collection => song.indirect_siblings %>
-    </siblings>
-  <% end -%>
-  <% if @show_edit_info -%>
-    <%= render :partial => 'shared/mixes', :object => song.mixes %>    
-  <% else -%>
-    <tracks>
-      <% song.mixes.each do |mix| -%>
-        <%= render :partial => 'shared/track', :object => mix.track %>    
-      <% end -%>
-    </tracks>    
-  <% end -%>
 </song>

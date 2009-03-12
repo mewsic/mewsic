@@ -1,25 +1,12 @@
 <track>
-  <user><%= h(mix.track.user.login) %></user>       
-  <author><%= h(mix.track.parent_song.original_author) if mix.track.parent_song %></author>     
-  <title><%= h(mix.track.title) %></title>     
-  <instrument><%= mix.track.instrument.id %></instrument>  
-  <genre><%= mix.track.parent_song.genre.id if mix.track.parent_song && mix.track.parent_song.genre %></genre>     
-	<bpm><%= mix.track.bpm %></bpm>        
-	<key><%= h(mix.track.tonality) %></key>
-	<description><%= h(mix.track.description) %></description>
-	<rating><%= mix.track.rating_avg.to_f %></rating>
   <id><%= mix.track.id %></id>         
+  <user><%= h(mix.track.user.login) %></user>       
+  <title><%= h(mix.track.title) %></title>     
+  <author><%= h(mix.track.parent_song.original_author) if mix.track.parent_song %></author>     
+  <instrument><%= mix.track.instrument.id %></instrument>  
+	<rating><%= mix.track.rating_avg.to_f %></rating>
 	<filename><%= mix.track.public_filename %></filename>
-  <song_count><%= mix.track.songs.count %></song_count>
   <waveform><%= formatted_track_path mix.track, 'png' %></waveform>
   <seconds><%= mix.track.seconds %></seconds>
   <volume><%= mix.volume %></volume>
-  <balance><%= mix.balance %></balance>
-  <% if @show_siblings; @show_siblings = false -%>
-    <siblings type="direct">
-      <songs>
-        <%= render :partial => 'shared/song', :collection => mix.track.songs %>
-      </songs>
-    </siblings>
-  <% end -%>
 </track>

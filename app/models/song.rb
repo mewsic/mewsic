@@ -5,13 +5,8 @@
 #
 #  id              :integer(4)    not null, primary key
 #  title           :string(60)    
-#  original_author :string(60)    
-#  description     :string(255)   
-#  tone            :string(2)     
 #  filename        :string(64)    
 #  user_id         :integer(4)    
-#  genre_id        :integer(4)    
-#  bpm             :integer(4)    
 #  seconds         :integer(4)    default(0)
 #  listened_times  :integer(4)    default(0)
 #  published       :boolean(1)    default(TRUE)
@@ -20,45 +15,18 @@
 #  rating_count    :integer(4)    
 #  rating_total    :decimal(10, 2 
 #  rating_avg      :decimal(10, 2 
-#  key             :integer(4)    
 #
 
 # Copyright:: (C) 2008 Medlar s.r.l.
 # Copyright:: (C) 2008 Mikamai s.r.l.
 # Copyright:: (C) 2008 Adelao Group
 #
-# == Schema Information
-#
-# Table name: songs
-#
-#  id              :integer(11)   not null, primary key
-#  title           :string(60)    
-#  original_author :string(60)    
-#  description     :string(255)   
-#  tone            :string(2)     
-#  filename        :string(64)    
-#  user_id         :integer(11)   
-#  genre_id        :integer(11)   
-#  bpm             :integer(11)   
-#  seconds         :integer(11)   default(0)
-#  listened_times  :integer(11)   default(0)
-#  published       :boolean(1)    default(TRUE)
-#  created_at      :datetime      
-#  updated_at      :datetime      
-#  rating_count    :integer(11)   
-#  rating_total    :decimal(10, 2 
-#  rating_avg      :decimal(10, 2 
-#  key             :integer(11)   
-#
 # == Description
 #
-# The Song model is one of the most important models in Myousica. It serves as a song container
+# The Song model is one of the most important models in MEWSIC. It serves as a song container
 # and implements many finders used by different controllers.
 #
-# A Song instance currently serves two purposes:
-# - Implement a User song, with its associated tracks via the <tt>mixes</tt>
-# - Store the <tt>original_author</tt> and Genre informations for a Track, currently not
-#   stored in the <tt>tracks</tt> table.
+# Tracks are associated via an <tt>has_many :through</tt> the <tt>Mix</tt> join model.
 #
 # Songs have associated tracks via direct foreign key, too (the <tt>song_id</tt> attribute in
 # the Track model), named <tt>children_tracks</tt>. These ones do not appear on the site, and
@@ -72,7 +40,7 @@
 # is set to <tt>true</tt> by the MultitrackController#update_song method.
 #
 # Songs are full-text indexed by Sphinx and can be rated, using the <tt>medlar_acts_as_rated</tt>
-# plugin (https://ulisse.adelao.it/rdoc/myousica/plugins/medlar_acts_as_rated).
+# plugin (https://mewsic.stage.lime5.it/rdoc/mewsic/plugins/medlar_acts_as_rated).
 #
 # Each Song has also a playable MP3 stream, handled by the Playable module. The Song model is
 # instrumented by calling Playable#has_playable_stream in the class context.
@@ -81,17 +49,11 @@
 # <b>direct versions</b> are +direct_siblings+ while <b>remote versions</b> are called
 # +remote_siblings+.
 #
-# FIXME: currently tonality information is stored in <b>TWO</b> attributes: <tt>tone</tt> and <tt>
-# key</tt>. That's because <tt>tone</tt> is a String that's not feasible for filtering and ordering
-# purposes via Sphinx. To not break existing code, the <tt>key</tt> integer attribute was added,
-# updated by the +set_key_from_tone+ <tt>before_save</tt> callback.
-#
 # == Associations
 #
 # * <b>has_many</b> <tt>mixes</tt>, deleted all upon destroy. [Mix]
 # * <b>has_many</b> <tt>tracks</tt> <b>through</b> <tt>mixes</tt> [Track]
 # * <b>has_many</b> <tt>children_tracks</tt> [Track]
-# * <b>has_many</b> <tt>mlabs</tt> [Mlab]
 # * <b>has_many</b> <tt>abuses</tt> [Abuse]
 #
 # * <b>belongs_to</b> a Genre
@@ -99,7 +61,7 @@
 #
 # == Validations
 #
-# * <b>validates_presence_of</b> <tt>title</tt>, <tt>tone</tt> and <tt>seconds</tt> if the 
+# * <b>validates_presence_of</b> <tt>title</tt>, and <tt>seconds</tt> if the 
 #   Song is <tt>published</tt>
 # * <b>validates_associated</b> Genre and User if the Song is <tt>published</tt>
 # * <b>validates_numericality_of</b> <tt>genre_id</tt> and <tt>user_id</tt>, greater than 0,
@@ -107,7 +69,6 @@
 #
 # == Callbacks
 #
-# * <b>before_save</b> +set_key_from_tone+
 # * <b>before_destroy</b> +check_for_children_tracks+
 #
 require 'numeric_to_runtime'
@@ -116,10 +77,7 @@ require 'playable'
 class Song < ActiveRecord::Base
 
   define_index do
-    has :genre_id, :bpm, :key
-    indexes :title, :description, :tone
-    indexes :original_author, :as => :author
-    indexes genre.name, :as => :genre
+    indexes :title
     indexes user.country, :as => :country
   end
  
@@ -128,19 +86,17 @@ class Song < ActiveRecord::Base
   has_many :mixes, :dependent => :delete_all
   has_many :tracks, :through => :mixes, :order => 'tracks.created_at DESC'  
   has_many :children_tracks, :class_name => 'Track'
-  has_many :mlabs, :as => :mixable, :dependent => :delete_all
-  has_many :abuses, :as => :abuseable, :dependent => :delete_all, :class_name => 'Abuse'
+  #has_many :mlabs, :as => :mixable, :dependent => :delete_all
+  #has_many :abuses, :as => :abuseable, :dependent => :delete_all, :class_name => 'Abuse'
 
-  belongs_to :genre
   belongs_to :user 
  
-  validates_presence_of :title, :tone, :seconds, :if => Proc.new(&:published)
-  validates_associated :genre, :user, :if => Proc.new(&:published) 
-  validates_numericality_of :genre_id, :user_id, :greater_than => 0, :if => Proc.new(&:published)
+  validates_presence_of :title, :if => Proc.new(&:published)
+  validates_associated :user, :if => Proc.new(&:published) 
+  validates_numericality_of :user_id, :greater_than => 0
 
-  acts_as_rated :rating_range => 0..5    
+  acts_as_rated :rating_range => 0..5
 
-  before_save    :set_key_from_tone
   before_destroy :check_for_children_tracks
 
   has_playable_stream
@@ -238,8 +194,8 @@ class Song < ActiveRecord::Base
     self.find what, options.merge(:conditions => ['published = ?', false])
   end
 
-  # Finds most collaborated songs, using a MySQL-only query (sorry), used by DashboardController#config
-  # to implement the Splash configuration.
+  # Finds most collaborated songs, using a MySQL-only query (sorry),
+  # used by DashboardController#config to implement Splash configuration.
   #
   def self.find_most_collaborated(options = {})
     collaboration_count = options[:minimum_siblings] || 2
@@ -402,12 +358,10 @@ class Song < ActiveRecord::Base
     self.genre ? self.genre.name : nil
   end
 
-  # Randomizes the <tt>tone</tt> and the <tt>genre</tt> attributes of this song, used by
-  # the MultitrackController#show method, when rendering the editor to users not logged
-  # in.
+  # Randomizes the <tt>genre</tt> attribute of a song, used by the MultitrackController#show
+  # method, when rendering the editor to guest users.
   #
   def randomize!
-    self.tone = Myousica::TONES.sort_by{rand}.first
     self.genre = Genre.find(:first, :order => SQL_RANDOM_FUNCTION)
   end
 
@@ -415,23 +369,6 @@ class Song < ActiveRecord::Base
   # FIXME: This should change logaritmically using rating_avg
   def priority
     0.7
-  end
-
-  # <tt>before_save</tt> callback that updates both the <tt>tone</tt> and <tt>key</tt>
-  # attribute. If the <tt>tone</tt> is an integer, it is put into the <tt>key</tt> and
-  # the <tt>tone</tt> updated with the corrisponding tone string as defined in the
-  # Myousica module.
-  # If <tt>tone</tt> is a tone string, the <tt>key</tt> attribute is updated with the
-  # integer index of that tone string, as returned by the Myousica module.
-  #
-  def set_key_from_tone
-    return if self.tone.blank?
-    if self.tone =~ /\d+/
-      self.key = self.tone.to_i
-      self.tone = Myousica::TONES[self.key]
-    else
-      self.key = Myousica::TONES.index(self.tone.upcase)
-    end
   end
 
   # Checks whether this song has got children tracks, and raises ActiveRecord::ReadOnlyRecord
