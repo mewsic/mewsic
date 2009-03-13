@@ -35,14 +35,12 @@ class Track < ActiveRecord::Base
   attr_accessor :mlab
   
   has_many :songs, :through => :mixes, :order => 'songs.created_at DESC'
-  has_many :published_songs, :through => :mixes, :order => 'songs.created_at DESC', :conditions => ['songs.published = ?', true], :class_name => 'Song', :source => :song
-
   has_many :mixes, :dependent => :delete_all
   has_many :mlabs, :as => :mixable, :dependent => :delete_all
   #has_many :abuses, :as => :abuseable, :dependent => :delete_all, :class_name => 'Abuse'
 
   belongs_to :parent_song, :class_name => 'Song'
-  belongs_to :user
+  belongs_to :user, :polymorphic => true
   belongs_to :instrument
 
   validates_presence_of :title, :seconds
@@ -60,6 +58,8 @@ class Track < ActiveRecord::Base
   acts_as_rated :rating_range => 0..5 
   
   has_playable_stream
+
+  named_scope :published, :conditions => {:published => true}
 
   def self.find_most_used(options = {})
     self.find(:all,

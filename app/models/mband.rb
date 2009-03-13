@@ -79,6 +79,9 @@ class Mband < ActiveRecord::Base
   has_many :photos, :as => :pictureable, :dependent => :destroy
   has_many :memberships, :class_name => 'MbandMembership', :dependent => :destroy
   has_many :members, :through => :memberships, :class_name => 'User', :source => :user, :conditions => "accepted_at IS NOT NULL"
+
+  has_many :songs, :as => :user
+  has_many :tracks, :as => :user
   
   belongs_to :leader, :class_name => 'User', :foreign_key => 'user_id'
   
@@ -93,6 +96,8 @@ class Mband < ActiveRecord::Base
                                                      
   xss_terminate :except => [:name, :photos_url, :blog_url, :myspace_url],
                 :sanitize => [:motto, :tastes]
+
+  named_scope :real, :conditions => 'members_count > 1'
   
   def self.find_newest(options = {})
     options[:limit] ||= 10
@@ -133,32 +138,7 @@ class Mband < ActiveRecord::Base
   # URLencodes the downcased mband name
   #
   def to_param
-    URI.encode(self.name.downcase.gsub(' ', '+'))
-  end
-
-  # Returns all the published songs by the members of this Mband
-  #
-  def published_songs
-    Song.find(:all, :conditions => ["songs.published = ? AND songs.user_id IN (?)", true, self.members.map(&:id)], 
-             :order => "songs.created_at DESC")
-  end
-
-  # Returns the total count of published songs by the members of this Mband
-  #
-  def songs_count(options = {})
-    self.members.map {|m| m.songs_count(options) }.sum
-  end
-
-  # Returns the total count of tracks by the members of this Mband
-  #
-  def tracks_count
-    self.members.map(&:tracks_count).sum
-  end
-
-  # Returns the total count of ideas by the members of this Mband
-  #
-  def ideas_count
-    self.members.map(&:ideas_count).sum
+    CGI.escape(self.name.downcase)
   end
 
   # If all the members share the same status, use it, else, offline.
@@ -180,7 +160,7 @@ class Mband < ActiveRecord::Base
   def self.find_from_param(param, options = {})
     param = param.id if param.kind_of? ActiveRecord::Base
     find_method = param.to_s =~ /^\d+$/ ? :find : :find_by_name
-    param = URI.decode(param.gsub('+', ' ')) if find_method == :find_by_name
+    param = CGI.unescape(param) if find_method == :find_by_name
     send(find_method, param, options) or raise ActiveRecord::RecordNotFound
   end
 
@@ -192,9 +172,9 @@ class Mband < ActiveRecord::Base
   end
 
   # Finds all the mbands with at least one member
-  #
+  # XXX deprecated #
   def self.find_real(options = {})
-    find :all, options.merge(:conditions => 'members_count > 1')
+    self.real
   end
 
   # Calculates profile completeness, by checking whether the 3 configurable URLs (<tt>photos_url</tt>,

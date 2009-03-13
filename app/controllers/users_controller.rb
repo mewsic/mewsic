@@ -17,12 +17,12 @@
 # actions. +auto_complete_for_message_to+, +top+ and +rate+ have to be called only via XHR instead.
 #
 class UsersController < ApplicationController    
-  
+
   before_filter :login_required, :only => [:update, :change_password]
   before_filter :check_if_current_user_page, :only => [:update, :change_password]
   before_filter :check_if_already_logged_in, :only => [:new]
   before_filter :redirect_to_root_unless_xhr, :only => [:auto_complete_for_message_to, :top, :rate]
-  
+
   protect_from_forgery :except => :update
 
   # ==== GET /users
@@ -108,10 +108,11 @@ class UsersController < ApplicationController
   #   renders a listing of user songs while skipping empty ones (see Song#find_paginated_by_user)
   #   and shows user's answers.
   #
+  #   XXX XXX XXX XXX
   #   If the user is navigating its own page, it sees all the tracks it has uploaded on the site,
   #   pending mband invitations and all mbands even if they're composed of only one member.
   #   If the user navigates another user page, it sees only idea tracks, no mband invitations and
-  #   only mbands with more than one member.
+  #   only mbands with more than one member. XXX This semantics are to be reviewed
   #
   # * XML format: renders some user information, as defined by the <tt>show.xml.erb</tt> template.
   #
@@ -123,20 +124,27 @@ class UsersController < ApplicationController
         current_user_page = current_user == @user
 
         @user.profile_viewed_by(tracked_user) unless current_user_page
-        @songs = Song.find_paginated_by_user(1, @user, :skip_blank => !current_user_page)
-        @songs_count = @user.songs_count(:skip_blank => !current_user_page)
+        @songs = @user.songs.published.with_tracks.paginate(:page => 1, :per_page => 5)
+        @songs_count = @user.songs.published.with_tracks.count
+
+        @tracks = @user.tracks.paginate(:page => 1, :per_page => 7, :order => 'created_at DESC')
+        @tracks_count = @user.tracks.count
+
         @answers = @user.answers.paginate(:page => 1, :per_page => 6, :order => 'created_at DESC')
+
+        @mbands = @user.mbands
+
         @new_membership = MbandMembership.new
 
-        @tracks, @tracks_count, @mbands = 
-          if current_user_page
-            @mband_invitations = @user.pending_mband_invitations
-            [Track.find_paginated_by_user(1, @user), @user.tracks_count, @user.mbands]
-          else
-            [Track.find_paginated_ideas_by_user(1, @user), @user.ideas_count, @user.mbands_with_more_than_one_member]
-          end
-
         @has_abuse = @user.abuses.exists? ['user_id = ?', current_user.id] if logged_in?
+
+        #@tracks, @tracks_count, @mbands = 
+        #  if current_user_page
+        #    @mband_invitations = @user.pending_mband_invitations
+        #    [Track.find_paginated_by_user(1, @user), @user.tracks_count, @user.mbands]
+        #  else
+        #    [Track.find_paginated_ideas_by_user(1, @user), @user.ideas_count, @user.mbands_with_more_than_one_member]
+        #  end
       end
 
       format.xml

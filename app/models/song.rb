@@ -77,18 +77,19 @@ class Song < ActiveRecord::Base
  
   attr_accessor :mlab
 
+  belongs_to :user, :polymorphic => true
+
   has_many :mixes, :dependent => :delete_all
   has_many :tracks, :through => :mixes, :order => 'tracks.created_at DESC'  
   has_many :children_tracks, :class_name => 'Track'
+
   # This association is here only for the :dependent trigger
   has_many :mlabs, :as => :mixable, :dependent => :delete_all
   #has_many :abuses, :as => :abuseable, :dependent => :delete_all, :class_name => 'Abuse'
-
-  belongs_to :user 
  
-  validates_presence_of :title, :if => Proc.new(&:published)
-  validates_associated :user, :if => Proc.new(&:published) 
-  validates_numericality_of :user_id, :greater_than => 0
+  validates_presence_of :title,               :if => Proc.new(&:published)
+  validates_associated :user,                 :if => Proc.new(&:published) 
+  validates_length_of :tracks, :minimum => 1, :if => Proc.new(&:published)
 
   acts_as_rated :rating_range => 0..5
 
@@ -99,20 +100,21 @@ class Song < ActiveRecord::Base
 
   # Finds all published songs
   #
-  def self.find_published(options = {})
-    self.find(:all, :conditions => ["songs.published = ?", true])
-  end      
-  
+  named_scope :published, :conditions => {:published => true}
+  named_scope :unpublished, :conditions => {:published => false}
+
+  named_scope :with_tracks, :include => :tracks, :conditions => 'tracks.id IS NOT NULL'
+
   # Finds all published songs, ordering them by play count and rating average.
   #
   def self.find_best(options = {})
-    self.find(:all, options.merge(:conditions => ['songs.published = ?', true], :order => 'songs.listened_times DESC, songs.rating_avg DESC'))
+    published.find(:all, options.merge(:order => 'songs.listened_times DESC, songs.rating_avg DESC'))
   end
   
   # Finds all published songs, ordering them by creation time.
   #
   def self.find_newest(options = {})
-    self.find(:all, options.merge(:conditions => ["songs.published = ?", true], :order => 'songs.created_at DESC'))
+    published.find(:all, options.merge(:order => 'songs.created_at DESC'))
   end
 
   # Paginates the published songs created in the last month, ordering them by creation time.
@@ -121,43 +123,13 @@ class Song < ActiveRecord::Base
   # https://stage.lime5.it/rdoc/mewsic/plugins/will_paginate
   #
   def self.find_newest_paginated(options = {})
-    paginate options.reverse_merge(
-             :conditions => ['songs.published = ? AND songs.created_at > ?', true, 1.month.ago],
+    published.paginate(options.reverse_merge(
+             :conditions => ['songs.created_at > ?', 1.month.ago],
              :order => 'songs.created_at DESC',
              :per_page => 7,
-             :page => 1)
+             :page => 1))
   end
  
-  # Paginates published songs for a given User, ordering them by creation time. 3 elements per
-  # page are returned. Used by UsersController#show to implement an User personal page.
-  #
-  # If <tt>options[:skip_blank]</tt> is not nil, only songs that have got tracks are fetched.
-  #
-  def self.find_paginated_by_user(page, user, options = {})
-    conditions = ["songs.published = ? AND songs.user_id = ?", true, user.id]
-    conditions[0] += " AND tracks.id IS NOT NULL" if options[:skip_blank]
-    paginate :per_page => 3, 
-             :conditions => conditions,
-             :order => "songs.created_at DESC",
-             :include => [:user, {:tracks => :instrument}], 
-             :page => page
-  end
-  
-  # Paginates published songs for a given Mband, ordering them by creation time. 3 elements
-  # per page are returned. Used by MbandsController#show to implement an Mband personal page.
-  #
-  # If <tt>options[:skip_blank]</tt> is not nil, only songs that have got tracks are fetched.
-  #
-  def self.find_paginated_by_mband(page, mband, options = {})
-    conditions = ["songs.published = ? AND users.id IN (?)", true, mband.members.map(&:id)]
-    conditions[0] += " AND tracks.id IS NOT NULL" if options[:skip_blank]
-    paginate :per_page => 3, 
-             :conditions => conditions,
-             :order => "songs.created_at DESC",
-             :include => [:user, {:tracks => :instrument}], 
-             :page => page
-  end
-
   # Returns an array of all instruments used into this song.
   #
   def instruments
@@ -173,11 +145,6 @@ class Song < ActiveRecord::Base
     self.create! :published => false
   end
 
-  # Finds unpublished songs.
-  #
-  def self.find_unpublished(what, options = {})
-    self.find what, options.merge(:conditions => ['published = ?', false])
-  end
 
   # Finds most collaborated songs, using a MySQL-only query (sorry).
   #

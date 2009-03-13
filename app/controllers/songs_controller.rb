@@ -19,10 +19,9 @@ class SongsController < ApplicationController
   # ==== XHR GET /songs?[genre_id|user_id|mband_id]=ID
   # ==== GET /songs.xml?user_id=ID
   #
-  # * HTML format: renders a paginated index of songs by Genre, User or Mband. Every
-  #   model has its own template: <tt>{genres,users,mbands}/_songs.html.erb</tt>.
-  #   Song objects are returned by Song#find_paginated_by_genre, Song#find_paginated_by_user
-  #   and Song#find_paginated_by_mband.
+  # * HTML format: renders a paginated index of songs by User or Mband. Every
+  #   model has its own template: <tt>{users,mbands}/_songs.html.erb</tt>.
+  #   Song objects are returned by Song#find_paginated_by_user and Song#find_paginated_by_mband.
   # * XML format: returns an XML representation of the given user published songs.
   #
   def index
@@ -30,23 +29,22 @@ class SongsController < ApplicationController
       format.html do
         redirect_to '/' and return unless request.xhr?
 
-        if params.has_key?("genre_id")
-          @genre = Genre.find_from_param(params[:genre_id])
-          @songs = Song.find_paginated_by_genre(params[:page], @genre)
-        elsif params.has_key?("user_id")
-          @user = User.find_from_param(params[:user_id])
-          @songs = Song.find_paginated_by_user(params[:page], @user, :skip_blank => current_user != @user)
-        elsif params.has_key?("mband_id")
-          @mband = Mband.find_from_param(params[:mband_id])
-          @songs = Song.find_paginated_by_mband(params[:page], @mband, :skip_blank => !@mband.band_membership_with(current_user))
-        end
+        @author =
+          if params[:user_id]
+            User.find_from_param(params[:user_id])
+          elsif params[:mband_id]
+            Mband.find_from_param(params[:mband_id])
+          end
+
+        @songs = @author.songs.published.with_tracks.paginate
+                   :page => params[:page], :per_page => 3
 
         render :layout => false
       end
 
       format.xml do
         @user = User.find_from_param(params[:user_id])
-        @songs = @user.songs.find_published
+        @songs = @user.songs.published.with_tracks
       end
     end
 
@@ -65,7 +63,7 @@ class SongsController < ApplicationController
   # * PNG format: streams the waveform png to the client using +x_accel_redirect+.
   #
   def show
-    @song = Song.find(params[:id], :include => [:user, { :mixes => { :track => [:instrument, :parent_song] } }, :genre])        
+    @song = Song.find(params[:id], :include => [:user, { :mixes => { :track => [:instrument, :parent_song] } }])        
 
     respond_to do |format|
       format.html do
@@ -313,7 +311,7 @@ protected
       if logged_in?
         current_user.songs.find(params[:id])
       else
-        Song.find_unpublished(params[:id])
+        Song.unpublished.find(params[:id])
       end
 
   rescue ActiveRecord::RecordNotFound

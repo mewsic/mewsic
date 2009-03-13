@@ -101,10 +101,9 @@ class User < ActiveRecord::Base
 
   has_many_friends
 
-  has_many :songs,            :order => 'songs.created_at DESC'
-  has_many :tracks,           :order => 'tracks.created_at DESC'
-  has_many :ideas,            :conditions => ['tracks.idea = ?', true], :order => 'tracks.created_at DESC', :class_name => 'Track'
-  has_many :published_songs,  :conditions => ['songs.published = ?', true], :order => 'songs.created_at DESC', :class_name => 'Song'
+  has_many :songs, :as => :user, :order => 'songs.created_at DESC'
+  has_many :tracks, :as => :user, :order => 'tracks.created_at DESC'
+
   has_many :answers
   has_many :replies
   has_many :photos, :as => :pictureable
