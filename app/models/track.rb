@@ -83,8 +83,7 @@ class Track < ActiveRecord::Base
   end
   
   def increment_listened_times
-    # increment(:listened_times) XXX
-    update_attribute(:listened_times, listened_times + 1)
+    increment(:listened_times)
   end
   
   def rateable_by?(user)

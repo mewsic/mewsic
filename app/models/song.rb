@@ -45,10 +45,6 @@
 # Each Song has also a playable MP3 stream, handled by the Playable module. The Song model is
 # instrumented by calling Playable#has_playable_stream in the class context.
 #
-# This model implements also the song versioning system, each version is called a <tt>sibling</tt>:
-# <b>direct versions</b> are +direct_siblings+ while <b>remote versions</b> are called
-# +remote_siblings+.
-#
 # == Associations
 #
 # * <b>has_many</b> <tt>mixes</tt>, deleted all upon destroy. [Mix]
@@ -183,21 +179,20 @@ class Song < ActiveRecord::Base
     self.find what, options.merge(:conditions => ['published = ?', false])
   end
 
-  # Finds most collaborated songs, using a MySQL-only query (sorry),
-  # used by DashboardController#config to implement Splash configuration.
+  # Finds most collaborated songs, using a MySQL-only query (sorry).
   #
   def self.find_most_collaborated(options = {})
-    collaboration_count = options[:minimum_siblings] || 2
+    collaboration_count = options[:minimum] || 2
     songs = find_by_sql(["
-      SELECT s.*, COUNT(DISTINCT m.song_id) -1 AS siblings_count,
+      SELECT s.*, COUNT(DISTINCT m.song_id) -1 AS collaboration_count,
         GROUP_CONCAT(DISTINCT m.song_id ORDER BY m.song_id) AS signature
       FROM mixes m LEFT OUTER JOIN mixes t ON m.track_id = t.track_id
       LEFT OUTER JOIN songs s ON t.song_id = s.id
       LEFT OUTER JOIN songs x ON m.song_id = x.id
       WHERE s.published = ? AND x.published = ?
       GROUP BY s.id
-      HAVING siblings_count >= ?
-      ORDER BY siblings_count DESC, s.rating_avg DESC
+      HAVING collaboration_count >= ?
+      ORDER BY collaboration_count DESC, s.rating_avg DESC
     ", true, true, collaboration_count])
 
     signatures = []
@@ -210,88 +205,33 @@ class Song < ActiveRecord::Base
     return songs
   end
   
-  # Returns the direct versions of a Song, identified by the presence of a Mix that links
-  # the same track to different songs. So, if song <tt>s1</tt> contains tracks <tt>t1</tt>,
-  # <tt>t2</tt> and <tt>t3</tt>, every other song <tt>sX</tt> that contains one of those
-  # tracks is a version of <tt>s1</tt>.
+  # Returns mixable songs, that share at least one track with this one.
   #
-  # Implementation is with a custom SQL query executed via Song#find_by_sql.
-  #
-  def direct_siblings(limit = nil)
-    limit = "LIMIT #{limit}" if limit
-    Song.find_by_sql("
-      SELECT
-        distinct x.*
-      FROM
-        mixes s
-        INNER JOIN mixes t
-          ON s.track_id = t.track_id
-        INNER JOIN songs x
-          ON t.song_id = x.id
-      WHERE
-        s.song_id = #{self.id}
-      AND
-        x.id != #{self.id}
-      AND
-        x.published = 1
-      #{limit}
-    ")
-  end
-  
-  # Returns the remote versions of a Song, that is, versions that have two degrees of separation
-  # from the current one. It is implemented by fetching all the songs that share at least one
-  # track with the current one (direct versions), and then every other song that share a track
-  # with them (remote versions). Direct versions are then excluded.
-  #
-  def indirect_siblings(limit = nil)
-    limit = "limit #{limit}" if limit
-    mixes = Mix.find_by_sql(["select distinct song_id from mixes where track_id in (select track_id from mixes where song_id = ?) and song_id != ? #{limit}", self.id, self.id])
-    return [] if mixes.empty?
-    ids = mixes.collect{|m| m.song_id}
-    Song.find_by_sql(["
-      select
-        distinct(mixes.song_id),
-        songs.*
-      from
-        mixes, songs
-      where
-        track_id in (select track_id from mixes where song_id in (?) )
-      and 
-        song_id not in (?)
-      and
-        mixes.song_id = songs.id
-      and
-        songs.published = 1
-    ",  ids, (ids << self.id)
-    ])
+  def mixables(options = {})
+    track_ids = self.tracks.map(&:id)
+    Song.find(:all, :include => :mixes,
+              :conditions => ['mixes.track_id IN (?) AND mixes.song_id <> ?', track_ids, self.id])
   end
   
   # Checks whether the passed Song is a direct version of this one.
   #
-  def is_a_direct_sibling_of?(song)
-    direct_siblings.collect.include?(song)
+  def is_mixable_with?(song)
+    mixables.include?(song)
   end
   
-  # Checks whether the passed Song is an indirect version of this one.
+  # Returns the mixables count for this song. The +find_most_collaborated+ method
+  # precalculates this counter, in order to optimize frequent calls,  so this method
+  # first checks whether a <tt>collaboration_count</tt> attribute is present, if not 
+  # it queries the database for the +mixables+ array and returns its <tt>size</tt>.
   #
-  def is_a_indirect_sibling_of?(song)
-    indirect_siblings.collect.include?(song)
-  end
-  
-  # Returns the direct siblings count for this track. The +find_most_collaborated+ method
-  # precalculates this counter, in order to optimize frequent calls made by the Splash SWF,
-  # so this method first checks whether a <tt>siblings_count</tt> attribute is present, if
-  # not it proceeds to querying the database for the +direct_siblings+ array and returning
-  # its <tt>size</tt>.
-  #
-  def siblings_count
-    (attributes['siblings_count'] || direct_siblings.size).to_i
+  def collaboration_count
+    (attributes['collaboration_count'] || mixables.size).to_i
   end 
 
   # Increment the <tt>listened_times</tt> counter. Currently called by PlayersController#show.
   #
   def increment_listened_times
-    update_attribute(:listened_times, listened_times + 1)
+    increment(:listened_times)
   end
 
   # Returns the pretty-printed length of the current song. See Numeric#to_runtime for details
