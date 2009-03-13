@@ -1,20 +1,22 @@
 # == Schema Information
-# Schema version: 20090311224230
+# Schema version: 20090312174538
 #
 # Table name: songs
 #
-#  id              :integer(4)    not null, primary key
-#  title           :string(60)    
-#  filename        :string(64)    
-#  user_id         :integer(4)    
-#  seconds         :integer(4)    default(0)
-#  listened_times  :integer(4)    default(0)
-#  published       :boolean(1)    default(TRUE)
-#  created_at      :datetime      
-#  updated_at      :datetime      
-#  rating_count    :integer(4)    
-#  rating_total    :decimal(10, 2 
-#  rating_avg      :decimal(10, 2 
+#  id             :integer(4)    not null, primary key
+#  title          :string(60)    
+#  author         :string(60)    
+#  description    :text          
+#  filename       :string(64)    
+#  user_id        :integer(4)    
+#  seconds        :integer(4)    default(0)
+#  listened_times :integer(4)    default(0)
+#  published      :boolean(1)    default(TRUE)
+#  created_at     :datetime      
+#  updated_at     :datetime      
+#  rating_count   :integer(4)    
+#  rating_total   :decimal(10, 2 
+#  rating_avg     :decimal(10, 2 
 #
 
 # Copyright:: (C) 2008 Medlar s.r.l.
