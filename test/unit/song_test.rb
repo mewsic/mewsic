@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 class SongTest < ActiveSupport::TestCase
   include Adelao::Playable::TestHelpers
 
-  fixtures :users, :songs, :genres, :mixes, :tracks
+  fixtures :users, :songs, :mixes, :tracks
 
   def test_association_with_children
     assert_equal 3, songs(:let_it_be).children_tracks.size
@@ -24,11 +24,6 @@ class SongTest < ActiveSupport::TestCase
     assert songs.size <= 3
     assert_equal last_song, songs.first
   end
-
-  def test_paginated_by_genre
-    songs = Song.find_paginated_by_genre(1, genres(:reggae))
-    assert_equal (genres(:reggae).published_songs.size > 15 ? 15 : genres(:reggae).published_songs.size), songs.size
-  end 
 
   def test_paginated_by_user
     songs = Song.find_paginated_by_user(1, users(:aaron))
@@ -55,23 +50,6 @@ class SongTest < ActiveSupport::TestCase
   # def test_is_a_direct_sibling_should_correctly_find_direct_siblings
   #   assert songs(:billie_jean_by_michael_jackson).is_a_indirect_sibling_of?(songs(:billie_jean_by_pilu))
   # end
-  
-  def test_should_set_key_from_tonality
-    s = songs(:let_it_be)
-
-    s.tone = 'B'
-    s.save    
-    assert_equal 11, s.reload.key
-    
-    s.tone = 'C#'
-    s.save    
-    assert_equal 1, s.reload.key
-
-    s.tone = '4'
-    s.save    
-    assert_equal 4, s.reload.key
-    assert_equal 'E', s.reload.tone
-  end
 
   def test_should_not_destroy_if_has_children_tracks
     s = songs(:let_it_be)

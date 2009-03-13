@@ -23,11 +23,6 @@ class TrackTest < ActiveSupport::TestCase
     assert instruments(:guitar), tracks(:guitar_for_let_it_be).instrument
   end
 
-  def test_should_not_have_genre
-    t = Track.find_by_title("Basso")
-    assert !t.respond_to?(:genre)
-  end
-  
   def test_paginated_by_user
     songs = Track.find_paginated_by_user(1, users(:aaron))
     assert songs.size < 8
@@ -41,14 +36,6 @@ class TrackTest < ActiveSupport::TestCase
     assert_not_equal t.parent_song.user, t.user
     assert_equal users(:mikaband), t.user
     assert_equal users(:quentin), t.parent_song.user
-  end
-  
-  def test_should_set_key_from_tonality
-    t = tracks(:drums_for_billie_jean_by_pilu)
-    t.tonality = 'B'
-    t.save
-    
-    assert_equal 11, t.reload.key
   end
 
   def test_should_destroy

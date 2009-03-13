@@ -54,7 +54,6 @@
 # * <b>has_many</b> <tt>children_tracks</tt> [Track]
 # * <b>has_many</b> <tt>abuses</tt> [Abuse]
 #
-# * <b>belongs_to</b> a Genre
 # * <b>belongs_to</b> an User
 #
 # == Validations
