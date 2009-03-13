@@ -5,170 +5,140 @@
 #
 #  id                     :integer(4)    not null, primary key
 #  title                  :string(60)    
+#  author                 :string(60)    
 #  filename               :string(64)    
 #  description            :string(255)   
-#  tonality               :string(2)     default("C")
 #  song_id                :integer(4)    
 #  instrument_id          :integer(4)    
 #  listened_times         :integer(4)    default(0)
 #  seconds                :integer(4)    default(0)
-#  bpm                    :integer(4)    
 #  created_at             :datetime      
 #  updated_at             :datetime      
 #  rating_count           :integer(4)    
 #  rating_total           :decimal(10, 2 
 #  rating_avg             :decimal(10, 2 
-#  idea                   :boolean(1)    not null
 #  user_id                :integer(4)    
-#  instrument_description :string(255)   
-#  key                    :integer(4)    
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 <% 
   def random_instrument
-    instruments = %w(drums guitar microphone saxophone trumpet piano mandolin conga harp)
-    instruments[rand(instruments.size)]
+    %w(drums guitar microphone saxophone trumpet piano mandolin conga harp).rand
   end
 %>
 
 sax_for_let_it_be:
   title: Sassofono
+  author: Beatles
   parent_song: let_it_be
   instrument: saxophone
-  owner: quentin
+  user: quentin
   seconds: <%= rand(100) + 90 %>
-  tonality: C
   filename: test.mp3
-  bpm: 120
-  key: <%= Myousica.key('C') %>
+
 guitar_for_let_it_be:
   title: Chitarra
+  author: Beatles
   parent_song: let_it_be
   instrument: guitar
-  owner: quentin
+  user: quentin
   seconds: <%= rand(100) + 90 %>
-  tonality: C
   filename: test.mp3
-  bpm: 120
-  key: <%= Myousica.key('C') %>
+
 voice_for_let_it_be:
   title: Voce
   parent_song: let_it_be
   instrument: microphone
-  owner: quentin
+  user: quentin
   seconds: <%= rand(100) + 90 %>
-  tonality: C
   filename: test.mp3
-  bpm: 120
-  key: <%= Myousica.key('C') %>
+
 voice_for_radio_ga_ga:
   title: Voce
   parent_song: radio_ga_ga
   instrument: microphone
-  owner: quentin
+  user: quentin
   seconds: <%= rand(100) + 90 %>
-  tonality: B
   filename: test.mp3
-  bpm: 100
-  key: <%= Myousica.key('B') %>
+
 guitar_for_closer:
   title: Chitarra
   parent_song: closer
   instrument: guitar
-  owner: quentin
+  user: quentin
   seconds: <%= rand(100) + 90 %>
-  tonality: B
   filename: test.mp3
-  bpm: 80
-  key: <%= Myousica.key('B') %>
+
 sax_for_closer:
   title: Sassofono
   parent_song: closer
   instrument: saxophone
-  owner: quentin
+  user: quentin
   seconds: <%= rand(100) + 90 %>
-  tonality: B
   filename: test.mp3
-  bpm: 80
-  key: <%= Myousica.key('B') %>
+
 drum_for_closer:
   title: Batteria
   parent_song: closer
   instrument: drums
-  owner: aaron
+  user: aaron
   seconds: <%= rand(100) + 90 %>
-  tonality: B
   filename: test.mp3
-  bpm: 80
-  key: <%= Myousica.key('B') %>
+
 <% 10.times do |i| %>
 voice_for_closer_<%= i + 4 %>:
   title: Voice
   parent_song: closer
   instrument: microphone
   seconds: <%= rand(100) + 90 %>
-  created_at: <%= (rand(30)).days.ago.to_s :db %>
-  owner: <%= %w(quentin mikaband)[rand(2)] %>
-  tonality: D
+  created_at: <%= rand(30).days.ago.to_s :db %>
+  user: <%= %w(quentin john).rand %>
   filename: test.mp3
-  bpm: 80
-  key: <%= Myousica.key('D') %>
 <% end %>
+
 <% 2.times do |i| %>
 voice_for_closer_by_john_<%= i %>:
   title: Voice
   parent_song: closer
   instrument: microphone
   seconds: <%= rand(100) + 90 %>
-  created_at: <%= (rand(30)).days.ago.to_s :db %>
-  owner: john
-  tonality: D
+  created_at: <%= rand(30).days.ago.to_s :db %>
+  user: john
   filename: test.mp3
-  bpm: 80
-  key: <%= Myousica.key('D') %>
 <% end %>
+
 drum_for_single_track_song:
   title: Drums for single track song
   parent_song: quentin_single_track_song
   instrument: drums
   seconds: 205
-  owner: aaron
-  tonality: D
+  user: aaron
   filename: test.mp3
-  bpm: 120
-  key: <%= Myousica.key('D') %>
+
 guitar_for_single_track_song:
   title: Guitar for single track song
   parent_song: quentin_single_track_song
   instrument: guitar
   seconds: 205
-  owner: john
-  tonality: D
+  user: john
   filename: test.mp3
-  bpm: 120
-  key: <%= Myousica.key('D') %>
+
 voice_for_single_track_song:
   title: Voice for single track song
   parent_song: quentin_single_track_song
   instrument: microphone
   seconds: 205
-  owner: quentin
-  tonality: D
+  user: quentin
   filename: test.mp3
-  bpm: 120
-  key: <%= Myousica.key('D') %>
+
 drum_for_gravity_blast_beat:
   title: Drums for gravity blast beat
   parent_song: gravity_blast_beat
   instrument: drums
   seconds: 205
-  owner: aaron
-  tonality: D
+  user: aaron
   filename: test.mp3
-  bpm: 140
-  key: <%= Myousica.key('D') %>
 
 # Don't touch these fixtures. They're central to a test that has to run
 # or the cheerleader will die and the world won't be saved.
@@ -178,66 +148,48 @@ voice_for_billie_jean_by_michael_jackson:
   parent_song: billie_jean_by_michael_jackson
   instrument: microphone
   seconds: 314
-  owner: quentin
-  tonality: E
+  user: quentin
   filename: test.mp3
-  bpm: 130
-  key: <%= Myousica.key('E') %>
   
 drums_for_billie_jean_by_michael_jackson:
   title: Drums for Billie Jean
   parent_song: billie_jean_by_michael_jackson
   instrument: drums
   seconds: 213
-  owner: aaron
-  tonality: E
+  user: aaron
   filename: test.mp3
-  bpm: 130
-  key: <%= Myousica.key('E') %>
   
 keyboards_for_billie_jean_by_michael_jackson:
   title: Keyboards for Billie Jean
   parent_song: billie_jean_by_michael_jackson
   instrument: saxophone
   seconds: 213
-  owner: quentin
-  tonality: E
+  user: quentin
   filename: test.mp3
-  bpm: 130
-  key: <%= Myousica.key('E') %>
 
 guitar_for_billie_jean_by_michael_jackson:
   title: Guitar for Billie Jean
   parent_song: billie_jean_by_michael_jackson
   instrument: guitar
   seconds: 213
-  owner: quentin
-  tonality: E
+  user: quentin
   filename: test.mp3
-  bpm: 130
-  key: <%= Myousica.key('E') %>
   
 voice_for_billie_jean_by_giovanni:
   title: Voice for Billie Jean by Giovanni
   parent_song: billie_jean_by_giovanni
   instrument: microphone
   seconds: 314
-  owner: quentin
-  tonality: E
+  user: quentin
   filename: test.mp3
-  bpm: 130
-  key: <%= Myousica.key('E') %>
 
 drums_for_billie_jean_by_pilu:
   title: Drums for Billie Jean by Pilu
   parent_song: billie_jean_by_pilu
   instrument: drums
   seconds: 213
-  owner: quentin
-  tonality: E
+  user: quentin
   filename: test.mp3
-  bpm: 130
-  key: <%= Myousica.key('E') %>
 
 # songs from 4 to 200 randomly have tracks
 <% 50.times do |i| %>
@@ -246,39 +198,8 @@ random_track_<%= i %>:
   parent_song: song_<%= (i+1) * 4 %>
   instrument: <%= random_instrument %>
   seconds: <%= rand(500) %>
-  owner: user_<%= rand(497) + 3 %>
-  tonality: G#
+  user: user_<%= rand(497) + 3 %>
   filename: test.mp3
-  bpm: 133
-  key: <%= Myousica.key('G#') %>
-<% end %>
-
-<% 100.times do |i| %>
-idea_track_<%= i %>:
-  title: Idea track <%= i %>
-  parent_song: song_with_ideas
-  instrument: <%= random_instrument %>
-  seconds: <%= rand(100) + 90 %>
-  idea: true
-  owner: <%= %w(quentin mikaband)[rand(2)] %>
-  tonality: <%= t = ('A'..'F').to_a[rand(6)] %>
-  filename: test.mp3
-  bpm: 130
-  key: <%= Myousica.key(t) %>
-<% end %>
-
-<% 30.times do |i| %>
-quentin_productions_track_<%= i %>:
-  title: Quentin productions <%= i %>
-  parent_song: quentin_productions
-  instrument: <%= random_instrument %>
-  seconds: <%= rand(100) + 90 %>
-  idea: true
-  owner: quentin
-  tonality: <%= t = ('A'..'F').to_a[rand(6)] %>
-  filename: test.mp3
-  bpm: 166
-  key: <%= Myousica.key(t) %>
 <% end %>
 
 destroyable_track:
@@ -286,24 +207,16 @@ destroyable_track:
   parent_song: song_666
   instrument: <%= random_instrument %>
   seconds: <%= rand(100) + 90 %>
-  idea: false
-  owner: quentin
-  tonality: 'C#'
+  user: quentin
   filename: test.mp3
-  bpm: 133
-  key: <%= Myousica.key('C#') %>
 
 destroyable_mixed_track:
   title: track mixed into an unpublished song
   parent_song: unpublished_mixed_song
   instrument: <%= random_instrument %>
   seconds: <%= rand(100) + 120 %>
-  idea: false
-  owner: quentin
-  tonality: 'F'
+  user: quentin
   filename: test.mp3
-  bpm: 170
-  key: <%= Myousica.key('F') %>
 
 <% 4.times do |i| %>
 destroyable_mixed_track_<%= i %>:
@@ -311,12 +224,8 @@ destroyable_mixed_track_<%= i %>:
   parent_song: unpublished_mixed_song_<%= rand(10) %>
   instrument: <%= random_instrument %>
   seconds: <%= rand(100) + 120 %>
-  idea: false
-  owner: quentin
-  tonality: 'F'
+  user: quentin
   filename: test.mp3
-  bpm: 170
-  key: <%= Myousica.key('F') %>
 <% end %>
 
 really_short_track:
@@ -324,7 +233,4 @@ really_short_track:
   parent_song: song_401
   instrument: <%= random_instrument %>
   seconds: 4
-  idea: false
-  owner: user_401
-  tonality: 'G'
-  filename: test.mp3
+  user: user_401

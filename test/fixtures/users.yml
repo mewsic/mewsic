@@ -66,6 +66,7 @@ quentin:
   motto: Arma Virumque Cano Troiae qui primus ab oris
   nickname: quentin
   profile_views: 1516
+
 aaron:
   login: aaron
   email: aaron@example.com
@@ -77,6 +78,7 @@ aaron:
   city: Bari
   motto: Nel mezzo del cammin di nostra vita mi ritrovai nel culo una matita. Ahi, che dolor! Era una carioca a dodici color.
   msn: aaron@example.org
+
 john:
   login: john
   email: john@example.com

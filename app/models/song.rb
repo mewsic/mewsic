@@ -29,10 +29,8 @@
 # Tracks are associated via an <tt>has_many :through</tt> the <tt>Mix</tt> join model.
 #
 # Songs have associated tracks via direct foreign key, too (the <tt>song_id</tt> attribute in
-# the Track model), named <tt>children_tracks</tt>. These ones do not appear on the site, and
-# serve merely to store genre and author information for the track.
-# Tracks are associated this way to a Song when recording live or uploading streams via the
-# multitrack SWF.
+# the Track model), named <tt>children_tracks</tt>, and associated to a Song when recording
+# live or uploading streams via the multitrack app.
 #
 # The <tt>published</tt> attribute sets whether a Song has to be displayed on the site, because
 # unpublished songs are scraps created automatically when a registered user enters the multitrack.
@@ -40,7 +38,7 @@
 # is set to <tt>true</tt> by the MultitrackController#update_song method.
 #
 # Songs are full-text indexed by Sphinx and can be rated, using the <tt>medlar_acts_as_rated</tt>
-# plugin (https://mewsic.stage.lime5.it/rdoc/mewsic/plugins/medlar_acts_as_rated).
+# plugin (https://stage.lime5.it/rdoc/mewsic/plugins/medlar_acts_as_rated).
 #
 # Each Song has also a playable MP3 stream, handled by the Playable module. The Song model is
 # instrumented by calling Playable#has_playable_stream in the class context.
@@ -63,9 +61,8 @@
 #
 # * <b>validates_presence_of</b> <tt>title</tt>, and <tt>seconds</tt> if the 
 #   Song is <tt>published</tt>
-# * <b>validates_associated</b> Genre and User if the Song is <tt>published</tt>
-# * <b>validates_numericality_of</b> <tt>genre_id</tt> and <tt>user_id</tt>, greater than 0,
-#   if the Song is <tt>published</tt>
+# * <b>validates_associated</b> User if the Song is <tt>published</tt>
+# * <b>validates_numericality_of</b> <tt>user_id</tt>, greater than 0 if the Song is <tt>published</tt>
 #
 # == Callbacks
 #
@@ -76,17 +73,18 @@ require 'playable'
 
 class Song < ActiveRecord::Base
 
-  define_index do
-    indexes :title
-    indexes user.country, :as => :country
-  end
+  #define_index do
+  #  indexes :title, :author, :description
+  #  indexes user.country, :as => :country
+  #end
  
   attr_accessor :mlab
 
   has_many :mixes, :dependent => :delete_all
   has_many :tracks, :through => :mixes, :order => 'tracks.created_at DESC'  
   has_many :children_tracks, :class_name => 'Track'
-  #has_many :mlabs, :as => :mixable, :dependent => :delete_all
+  # This association is here only for the :dependent trigger
+  has_many :mlabs, :as => :mixable, :dependent => :delete_all
   #has_many :abuses, :as => :abuseable, :dependent => :delete_all, :class_name => 'Abuse'
 
   belongs_to :user 
@@ -97,6 +95,7 @@ class Song < ActiveRecord::Base
 
   acts_as_rated :rating_range => 0..5
 
+  before_save :copy_author_information_from_user
   before_destroy :check_for_children_tracks
 
   has_playable_stream
@@ -122,7 +121,7 @@ class Song < ActiveRecord::Base
   # Paginates the published songs created in the last month, ordering them by creation time.
   # By default, the first of 7 elements pages is returned. All the <tt>paginate</tt> options
   # are overridable. See the <tt>will_paginate</tt> plugin documentation for details:
-  # https://ulisse.adelao.it/rdoc/myousica/plugins/will_paginate
+  # https://stage.lime5.it/rdoc/mewsic/plugins/will_paginate
   #
   def self.find_newest_paginated(options = {})
     paginate options.reverse_merge(
@@ -132,17 +131,6 @@ class Song < ActiveRecord::Base
              :page => 1)
   end
  
-  # Paginates published songs for a given genre, ordering them by song title. 15 elements per
-  # page are returned.
-  #
-  def self.find_paginated_by_genre(page, genre)
-    paginate :per_page => 15, 
-             :conditions => ["songs.published = ? AND genre_id = ?", true, genre.id], 
-             :order => "songs.title ASC",
-             :include => [:user, {:tracks => :instrument}], 
-             :page => page
-  end
-  
   # Paginates published songs for a given User, ordering them by creation time. 3 elements per
   # page are returned. Used by UsersController#show to implement an User personal page.
   #
@@ -326,7 +314,7 @@ class Song < ActiveRecord::Base
 
   # Shorthand to set the <tt>published</tt> attribute to <tt>true</tt> and save the song afterwards.
   # It also sets the <tt>@new</tt> instance variable to true if this song is yet not published, in
-  # order for the SongObserver to send out a notification of "new song published on myousica".
+  # order for the SongObserver to send out a notification of "new song published".
   #
   def publish!
     @new = true if !self.published?
@@ -352,19 +340,6 @@ class Song < ActiveRecord::Base
     delete_all ['id in (?)', songs.map(&:id)] unless songs.empty?
   end
   
-  # Shorthand to fetch the genre name. XXX: looks like this method is unused. remove it.
-  #
-  def genre_name
-    self.genre ? self.genre.name : nil
-  end
-
-  # Randomizes the <tt>genre</tt> attribute of a song, used by the MultitrackController#show
-  # method, when rendering the editor to guest users.
-  #
-  def randomize!
-    self.genre = Genre.find(:first, :order => SQL_RANDOM_FUNCTION)
-  end
-
   # Sitemap priority for this instance
   # FIXME: This should change logaritmically using rating_avg
   def priority
@@ -376,5 +351,9 @@ class Song < ActiveRecord::Base
   #
   def check_for_children_tracks
     raise ActiveRecord::ReadOnlyRecord if self.published? && self.children_tracks.count > 0
+  end
+
+  def copy_author_information_from_user
+    self.author = self.user.login if self.author.blank?
   end
 end
