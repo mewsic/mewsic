@@ -1,4 +1,4 @@
-class SimplifyMixes < ActiveRecord::Migration
+class RenameSiblingsToMixables < ActiveRecord::Migration
   def self.up
     remove_column :mixes, :loop
     remove_column :mixes, :balance
