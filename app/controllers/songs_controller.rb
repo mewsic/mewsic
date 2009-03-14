@@ -71,10 +71,7 @@ class SongsController < ApplicationController
         end
       end
 
-      format.xml do
-        @show_siblings  = params.include?(:siblings)
-        @show_edit_info = params.include?(:edit) && params[:edit] == 'true'
-      end
+      format.xml
 
       format.png do
         if @song.filename.blank?

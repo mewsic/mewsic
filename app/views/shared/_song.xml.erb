@@ -9,4 +9,5 @@
   <filename><%= song.public_filename %></filename>
   <waveform><%= formatted_song_path song, 'png' %></waveform>
   <seconds><%= song.seconds %></seconds>
+  <%= render :partial => 'shared/mixes', :object => song.mixes %>
 </song>

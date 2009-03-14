@@ -7,30 +7,18 @@
 	<authenticity_token><%= form_authenticity_token if protect_against_forgery? %></authenticity_token>
 	<connection_timeout>30</connection_timeout>
 	<default_avatar>/images/default_avatars/avatar_small.gif</default_avatar>
-	<sync>-1.0</sync>
+  <sync>-1.0</sync> <!-- XXX remove me -->
 	<url_request>
-		<mylist>/users/{:id}/mlabs.xml</mylist>
-		<mysongs>/users/{:id}/songs.xml</mysongs>
+		<playlist>/users/{:id}/mlabs.xml</playlist>
 		<user>/users/{:id}.xml</user>
-		<search>/search.xml</search>
-		<instruments>/instruments.xml</instruments>
-		<instruments_search>/instruments.xml?search=true</instruments_search>
-		<genres>/genres.xml</genres>
-		<genres_search>/genres.xml?search=true</genres_search>
-		<countries_search>/countries.xml</countries_search>
 		<ping>/noop</ping>
 		<songs>
 			<fetch>/songs/{:song_id}.xml</fetch>
-			<edit>/songs/{:song_id}.xml?edit=true</edit>
-			<siblings>/songs/{:song_id}.xml?siblings=true</siblings>
 			<mix method="post">/songs/{:song_id}/mix.xml</mix>
 			<update method="put">/songs/{:song_id}.xml</update>
-			<load method="put">/songs/{:song_id}/load_track.xml</load>
-			<unload method="put">/songs/{:song_id}/unload_track.xml</unload>
 		</songs>
 		<tracks>
 			<fetch>/tracks/{:track_id}.xml</fetch>
-			<siblings>/tracks/{:track_id}.xml?siblings=true</siblings>
 			<create method="post">/tracks.xml</create>
 			<download>/tracks/{:track_id}/download</download>
 		</tracks>
