@@ -1,121 +1,59 @@
 require 'spec/spec_helper'
+require 'will_paginate/collection'
 
 describe ThinkingSphinx::Search do
-  describe "instance_from_result method" do
+  describe "search method" do
     before :each do
-      Person.stub_method(:find => true)
-      ThinkingSphinx::Search.stub_method(:class_from_crc => Person)
+      @client = Riddle::Client.stub_instance(
+        :filters    => [],
+        :filters=   => true,
+        :id_range=  => true,
+        :sort_mode  => :asc,
+        :limit      => 5,
+        :offset=    => 0,
+        :sort_mode= => true,
+        :query      => {
+          :matches  => [],
+          :total    => 50
+        }
+      )
+      
+      ThinkingSphinx::Search.stub_methods(
+        :client_from_options => @client,
+        :search_conditions   => ["", []]
+      )
     end
     
-    after :each do
-      Person.unstub_method(:find)
-      ThinkingSphinx::Search.unstub_method(:class_from_crc)
+    describe ":star option" do
+      
+      it "should not apply by default" do
+        ThinkingSphinx::Search.search "foo bar"
+        @client.should have_received(:query).with("foo bar")
+      end
+
+      it "should apply when passed, and handle full extended syntax" do
+        input    = %{a b* c (d | e) 123 5&6 (f_f g) !h "i j" "k l"~10 "m n"/3 @o p -(q|r)}
+        expected = %{*a* b* *c* (*d* | *e*) *123* *5*&*6* (*f_f* *g*) !*h* "i j" "k l"~10 "m n"/3 @o *p* -(*q*|*r*)}
+        ThinkingSphinx::Search.search input, :star => true
+        @client.should have_received(:query).with(expected)
+      end
+
+      it "should default to /\w+/ as token" do
+        ThinkingSphinx::Search.search "foo@bar.com", :star => true
+        @client.should have_received(:query).with("*foo*@*bar*.*com*")
+      end
+
+      it "should honour custom token" do
+        ThinkingSphinx::Search.search "foo@bar.com -foo-bar", :star => /[\w@.-]+/u
+        @client.should have_received(:query).with("*foo@bar.com* -*foo-bar*")
+      end
+
     end
-
-    it "should honour the :include option" do
-      ThinkingSphinx::Search.send(
-        :instance_from_result,
-        {:doc => 1, :attributes => {"class_crc" => 123}},
-        {:include => :assoc}
-      )
-
-      Person.should have_received(:find).with(1, :include => :assoc, :select => nil)
-    end
-
-    it "should honour the :select option" do
-      ThinkingSphinx::Search.send(
-        :instance_from_result,
-        {:doc => 1, :attributes => {"class_crc" => 123}},
-        {:select => :columns}
-      )
-
-      Person.should have_received(:find).with(1, :include => nil, :select => :columns)
-    end
-
   end
+end
 
-  describe "instances_from_results method" do
-    before :each do
-      @person_a = Person.stub_instance
-      @person_b = Person.stub_instance
-      @person_c = Person.stub_instance
-
-      @results = [
-        {:doc => @person_a.id},
-        {:doc => @person_b.id},
-        {:doc => @person_c.id}
-      ]
-      
-      Person.stub_method(
-        :find => [@person_c, @person_a, @person_b]
-      )
-      ThinkingSphinx::Search.stub_method(:instance_from_result => true)
-    end
-
-    after :each do
-      Person.unstub_method(:find)
-      ThinkingSphinx::Search.unstub_method(:instance_from_result)
-    end
-
-    it "should pass calls to instance_from_result if no class given" do
-      ThinkingSphinx::Search.send(
-        :instances_from_results, @results
-      )
-
-      ThinkingSphinx::Search.should have_received(:instance_from_result).with(
-        {:doc => @person_a.id}, {}
-      )
-      ThinkingSphinx::Search.should have_received(:instance_from_result).with(
-        {:doc => @person_b.id}, {}
-      )
-      ThinkingSphinx::Search.should have_received(:instance_from_result).with(
-        {:doc => @person_c.id}, {}
-      )
-    end
-
-    it "should call a find on all ids for the class" do
-      ThinkingSphinx::Search.send(
-        :instances_from_results, @results, {}, Person
-      )
-      
-      Person.should have_received(:find).with(
-        :all,
-        :conditions => {:id => [@person_a.id, @person_b.id, @person_c.id]},
-        :include    => nil,
-        :select     => nil
-      )
-    end
-
-    it "should honour the :include option" do
-      ThinkingSphinx::Search.send(
-        :instances_from_results, @results, {:include => :something}, Person
-      )
-      
-      Person.should have_received(:find).with(
-        :all,
-        :conditions => {:id => [@person_a.id, @person_b.id, @person_c.id]},
-        :include    => :something,
-        :select     => nil
-      )
-    end
-
-    it "should honour the :select option" do
-      ThinkingSphinx::Search.send(
-        :instances_from_results, @results, {:select => :fields}, Person
-      )
-      
-      Person.should have_received(:find).with(
-        :all,
-        :conditions => {:id => [@person_a.id, @person_b.id, @person_c.id]},
-        :include    => nil,
-        :select     => :fields
-      )
-    end
-
-    it "should sort the objects the same as the result set" do
-      ThinkingSphinx::Search.send(
-        :instances_from_results, @results, {:select => :fields}, Person
-      ).should == [@person_a, @person_b, @person_c]
-    end
+describe ThinkingSphinx::Search, "playing nice with Search model" do
+  it "should not conflict with models called Search" do
+    lambda { Search.find(:all) }.should_not raise_error
   end
 end

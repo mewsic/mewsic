@@ -72,6 +72,12 @@
 # * <b>validates_uniqueness_of</b> <tt>name</tt>, case insensitive
 #
 class Mband < ActiveRecord::Base
+
+  define_index do
+    indexes :name, :motto, :tastes
+    where 'members_count > 1'
+    set_property :delta => true
+  end
   
   acts_as_rated :rating_range => 0..5
   

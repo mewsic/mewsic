@@ -1,0 +1,29 @@
+<% conf = <<-EOC
+  sql_range_step: 16777216
+  min_prefix_len: 3
+  enable_star: true
+  html_strip: true
+  morphology: false
+EOC
+%>
+
+development:
+<%= conf %>
+
+test:
+<%= conf %>
+
+staging:
+<%= conf %>
+  searchd_file_path: '/srv/sphinx/mewsic'
+  searchd_log_file: '/srv/sphinx/mewsic/log/searchd.log'
+  query_log_file: '/srv/sphinx/mewsic/log/query.log'
+  pid_file: '/srv/sphinx/mewsic/searchd.pid'
+
+production:
+<%= conf %>
+  searchd_file_path: '/srv/sphinx/mewsic'
+  searchd_log_file: '/srv/sphinx/mewsic/log/searchd.log'
+  query_log_file: '/srv/sphinx/mewsic/log/query.log'
+  pid_file: '/srv/sphinx/mewsic/searchd.pid'
+

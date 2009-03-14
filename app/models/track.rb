@@ -25,12 +25,14 @@ require 'playable'
 
 class Track < ActiveRecord::Base
   
-  #define_index do
-  #  has :instrument_id
-  #  indexes :title, :description
-  #  indexes user.country, :as => :country
-  #  indexes instrument.description, :as => :instrument
-  #end
+  define_index do
+    has :instrument_id
+    indexes :title, :description
+    indexes user.country, :as => :country
+    indexes instrument.description, :as => :instrument
+    where 'published = 1'
+    set_property :delta => true
+  end
   
   attr_accessor :mlab
   
@@ -60,6 +62,7 @@ class Track < ActiveRecord::Base
   has_playable_stream
 
   named_scope :published, :conditions => {:published => true}
+  named_scope :unpublished, :conditions => {:published => false}
 
   def self.find_most_used(options = {})
     self.find(:all,

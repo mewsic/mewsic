@@ -70,10 +70,12 @@ require 'playable'
 
 class Song < ActiveRecord::Base
 
-  #define_index do
-  #  indexes :title, :author, :description
-  #  indexes user.country, :as => :country
-  #end
+  define_index do
+    indexes :title, :author, :description
+    indexes user.country, :as => :country
+    where 'published = 1'
+    set_property :delta => true
+  end
  
   attr_accessor :mlab
 

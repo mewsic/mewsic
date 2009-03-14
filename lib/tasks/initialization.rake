@@ -3,7 +3,7 @@ namespace :mewsic do
   desc "Populate the development environment"
   task :initialize => ["db:migrate", "mewsic:directories", "mewsic:fixtures:load",
       #"mewsic:flash:update", "mewsic:videos:download",
-      "mewsic:sphinx:config", "mewsic:sphinx:initialize", "mewsic:sphinx:start"]
+      ]
 
   desc "Create all required mewsic directories"
   task :directories => :environment do
@@ -50,37 +50,4 @@ namespace :mewsic do
     task :load => [ "db:fixtures:load",  "mewsic:update_friends_count",
       "mewsic:update_replies_count", "mewsic:copy_test_mp3s"]
   end  
-
-  namespace :sphinx do
-    config = File.join(RAILS_ROOT, 'config', "sphinx_#{RAILS_ENV}.config")
-
-    desc "Generate sphinx development config file"
-    task(:config => :environment) do
-      puts "* Generating Sphinx config file into #{config}"
-
-      FileUtils.mkdir_p File.join(RAILS_ROOT, 'index')
-      File.open(config, 'w+') do |f|
-        f.write ERB.new(File.read(File.join(RAILS_ROOT, 'config', 'sphinx.config.erb'))).result
-      end
-    end
-
-    desc "Start sphinx with development config"
-    task(:start => :environment) do
-      puts `searchd --config #{config}`
-    end
-
-    task(:stop => :environment) do
-      puts `searchd --config #{config} --stop`
-    end
-
-    task(:rehash => :environment) do
-      puts `indexer --config #{config} --all --rotate`
-    end
-
-    desc "Initialize sphinx indices"
-    task(:initialize => :environment) do
-      puts `indexer --config #{config} --all`
-    end
-
-  end
 end

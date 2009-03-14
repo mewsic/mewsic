@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090312174538) do
+ActiveRecord::Schema.define(:version => 20090314133430) do
 
   create_table "abuses", :force => true do |t|
     t.integer  "abuseable_id"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20090312174538) do
     t.decimal  "rating_avg",       :precision => 10, :scale => 2
     t.boolean  "closed",                                          :default => false, :null => false
     t.datetime "last_activity_at"
+    t.boolean  "delta",                                           :default => false
   end
 
   create_table "band_members", :force => true do |t|
@@ -105,6 +106,7 @@ ActiveRecord::Schema.define(:version => 20090312174538) do
     t.decimal  "rating_total",  :precision => 10, :scale => 2
     t.decimal  "rating_avg",    :precision => 10, :scale => 2
     t.integer  "members_count",                                :default => 0
+    t.boolean  "delta",                                        :default => false
   end
 
   create_table "messages", :force => true do |t|
@@ -123,9 +125,6 @@ ActiveRecord::Schema.define(:version => 20090312174538) do
     t.integer  "song_id"
     t.integer  "track_id"
     t.float    "volume",     :default => 1.0
-    t.integer  "loop"
-    t.float    "balance",    :default => 0.0
-    t.integer  "time_shift"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -196,6 +195,8 @@ ActiveRecord::Schema.define(:version => 20090312174538) do
     t.integer  "rating_count"
     t.decimal  "rating_total",                 :precision => 10, :scale => 2
     t.decimal  "rating_avg",                   :precision => 10, :scale => 2
+    t.string   "user_type",      :limit => 10
+    t.boolean  "delta",                                                       :default => false
   end
 
   create_table "static_pages", :force => true do |t|
@@ -221,6 +222,9 @@ ActiveRecord::Schema.define(:version => 20090312174538) do
     t.decimal  "rating_avg",                   :precision => 10, :scale => 2
     t.integer  "user_id"
     t.string   "author",         :limit => 60
+    t.string   "user_type",      :limit => 10
+    t.boolean  "published",                                                   :default => false
+    t.boolean  "delta",                                                       :default => false
   end
 
   create_table "users", :force => true do |t|
@@ -263,6 +267,7 @@ ActiveRecord::Schema.define(:version => 20090312174538) do
     t.string   "multitrack_token",          :limit => 64
     t.boolean  "podcast_public",                                                         :default => true
     t.integer  "profile_views",                                                          :default => 0
+    t.boolean  "delta",                                                                  :default => false
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

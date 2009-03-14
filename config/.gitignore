@@ -1,2 +1,2 @@
 database.yml
-sphinx_*.config
+*.sphinx.conf

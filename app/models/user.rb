@@ -50,6 +50,8 @@ class User < ActiveRecord::Base
   
   define_index do
     indexes :login, :nickname, :motto, :tastes, :country
+    where 'activated_at IS NOT NULL'
+    set_property :delta => true
   end
   
   # Virtual attribute for the unencrypted password

@@ -20,22 +20,6 @@
 # Copyright:: (C) 2008 Mikamai s.r.l.
 # Copyright:: (C) 2008 Adelao Group
 #
-# == Schema Information
-#
-# Table name: answers
-#
-#  id               :integer(11)   not null, primary key
-#  user_id          :integer(11)   owner of this answer
-#  body             :text          answer body
-#  replies_count    :integer(11)   default(0)
-#  last_activity_at :datetime      last reply time
-#  closed           :boolean(1)    not null
-#  created_at       :datetime
-#  updated_at       :datetime
-#  rating_count     :integer(11)
-#  rating_total     :decimal(10, 2)
-#  rating_avg       :decimal(10, 2)
-#
 # == Description
 #
 # This model represents an Answer. The body field is indexed by sphinx and used for
@@ -78,6 +62,7 @@ class Answer < ActiveRecord::Base
   
   define_index do
     indexes :body
+    set_property :delta => true
   end
 
   # Finds open answers (whose have got the <tt>closed</tt> attribute to <tt>false</tt>)
