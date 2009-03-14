@@ -8,26 +8,29 @@ module Mynyml
     # it gets added to the db
     def insert_fixture_with_attachment(fixture, table_name)
       if klass = attachment_model?(fixture)
-
-        fixture   = fixture.to_hash
         full_path = fixture.delete('attachment_file')
-        mime_type = fixture.delete('content_type') || guess_mime_type(full_path) || 'image/png'
-        assert_attachment_exists(full_path)
 
-        require 'action_controller/test_process'
-        attachment = klass.new
-        attachment.uploaded_data = ActionController::TestUploadedFile.new(full_path, mime_type)
-        attachment.instance_variable_get(:@attributes)['id'] = fixture['id'] #pwn id
-        attachment.valid? #trigger validation for the callbacks
-        without_transaction do
-          attachment.send(:after_process_attachment) #manually call after_save callback
+        if RAILS_ENV != 'test'
+          fixture   = fixture.to_hash
+          mime_type = fixture.delete('content_type') || guess_mime_type(full_path) || 'image/png'
+          assert_attachment_exists(full_path)
+
+          require 'action_controller/test_process'
+          attachment = klass.new
+          attachment.uploaded_data = ActionController::TestUploadedFile.new(full_path, mime_type)
+          attachment.instance_variable_get(:@attributes)['id'] = fixture['id'] #pwn id
+          attachment.valid? #trigger validation for the callbacks
+          without_transaction do
+            attachment.send(:after_process_attachment) #manually call after_save callback
+          end
+
+          fixture = Fixture.new(attachment.attributes.update(fixture), klass)
         end
-
-        fixture = Fixture.new(attachment.attributes.update(fixture), klass)
       end
+
       insert_fixture_without_attachment(fixture, table_name)
     end
-    
+
     private
 
       def attachment_model?(fixture)
