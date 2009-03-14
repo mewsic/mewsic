@@ -93,7 +93,7 @@ john:
   is_admin: true
   profile_views: 2342
 
-<% for i in 3..500 %>
+<% for i in 0..500 %>
 user_<%= i %>:
   login: user<%= i %>
   nickname: user<%= i %>

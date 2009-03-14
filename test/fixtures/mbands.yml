@@ -32,7 +32,7 @@ scapokkier:
 
 <% 10.times do |i| %>
 mband_<%= i %>:
-  name: Mband<%= i %>
+  name: M-Band <%= i %>
   leader: <%= %w(quentin john user30 user420).sort_by{rand}.first %>
   members_count: 4
 <% end %>

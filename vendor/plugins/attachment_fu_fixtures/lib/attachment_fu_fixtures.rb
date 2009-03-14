@@ -8,7 +8,7 @@ module Mynyml
     # it gets added to the db
     def insert_fixture_with_attachment(fixture, table_name)
       if klass = attachment_model?(fixture)
-        full_path = fixture.delete('attachment_file')
+        full_path = fixture.to_hash.delete('attachment_file')
 
         if RAILS_ENV != 'test'
           fixture   = fixture.to_hash

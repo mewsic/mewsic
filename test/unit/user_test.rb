@@ -219,7 +219,7 @@ class UserTest < Test::Unit::TestCase
   def test_find_most_admired_should_return_the_most_admired_person
     assert_equal Friendship.count(:conditions => 'accepted_at is null', :group => :friend_id, :order => 'count_all desc').first.last, User.find_most_admired(:limit => 1).first.admirers_count
   end
-  
+
   def test_act_as_rated_should_be_rated
     assert_acts_as_rated('User')
   end
@@ -233,16 +233,7 @@ class UserTest < Test::Unit::TestCase
   end
         
   def test_should_retrieve_distinct_instrument
-    u = create_user
-    s = u.songs.create(:title => 'My song')
-    i = create_instrument
-    assert_difference 'Track.count', 4 do
-      Mix.create(:track => Track.create(:title => 'sux sux 1', :instrument => i.first, :parent_song => s, :owner => u, :seconds => 128, :filename => 'test.mp3'), :song => s)
-      Mix.create(:track => Track.create(:title => 'sux sux 2', :instrument => i.first, :parent_song => s, :owner => u, :seconds => 164, :filename => 'test.mp3'), :song => s)
-      Mix.create(:track => Track.create(:title => 'sux sux 3', :instrument => i.last,  :parent_song => s, :owner => u, :seconds => 190, :filename => 'test.mp3'), :song => s)
-      Mix.create(:track => Track.create(:title => 'sux sux 4', :instrument => i.last,  :parent_song => s, :owner => u, :seconds => 256, :filename => 'test.mp3'), :song => s)
-    end
-    assert_equal %w[Guitar Saxophone], u.instruments.collect{|j| j.description }.sort
+    assert_equal [instruments(:guitar), instruments(:microphone)], users(:john).instruments
   end
   
   def test_quentin_should_have_photos
@@ -271,8 +262,8 @@ class UserTest < Test::Unit::TestCase
     assert_equal users(:quentin), User.find_most_instruments.first
   end
 
-  def test_top_myousicians
-    users = User.find_top_myousicians
+  def test_top_mewsicians
+    users = User.find_top_mewsicians
     assert_equal 2, users.size
     assert users.all? { |u| u.tracks_count >= 2 }
     assert users.all? { |u| !u.avatar.nil? }

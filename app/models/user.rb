@@ -347,14 +347,10 @@ class User < ActiveRecord::Base
     self.find(:all, options.merge(:include => [:avatar], :order => 'users.replies_count DESC'))
   end
 
+  # Finds all the activated users that have an avatar and have created most
+  # tracks, ordering by track count.
+  #
   def self.find_top_mewsicians(options = {})
-    #self.find :all, options.merge(
-    #  :select => 'COUNT(tracks.id) AS tracks_count, users.*',
-    #  :joins => 'INNER JOIN tracks ON tracks.user_id = users.id',
-    #  :conditions => ["users.activated_at IS NOT NULL"], #XXX XXX AND pictures.id IS NOT NULL XXX XXX
-    #  :order => SQL_RANDOM_FUNCTION, # 'tracks_count DESC, users.rating_avg DESC',
-    #  :group => 'users.id')
-    #
     options.assert_valid_keys :limit
     qry = "SELECT COUNT(tracks.id) AS tracks_count, users.*
            FROM users INNER JOIN tracks ON tracks.user_id = users.id
@@ -412,10 +408,6 @@ class User < ActiveRecord::Base
     self.tracks.count
   end
 
-  def ideas_count
-    self.ideas.count
-  end
-  
   def to_breadcrumb
     login
   end

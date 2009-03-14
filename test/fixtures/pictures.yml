@@ -80,7 +80,8 @@ avatar_for_john:
   content_type: image/png
   attachment_file: <%= random_avatar %>
 
-<% 100.times do |i| %>
+# The first 50 users have a random avatar
+<% 50.times do |i| %>
 avatar_for_user_<%= i %>:
   pictureable: user_<%= rand(500) %>
   pictureable_type: User
