@@ -36,8 +36,7 @@ class SongsController < ApplicationController
             Mband.find_from_param(params[:mband_id])
           end
 
-        @songs = @author.songs.published.with_tracks.paginate
-                   :page => params[:page], :per_page => 3
+        @songs = @author.songs.published.with_tracks.paginate(:page => params[:page], :per_page => 3)
 
         render :layout => false
       end
