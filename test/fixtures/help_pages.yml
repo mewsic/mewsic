@@ -42,7 +42,7 @@ mypage:
   title: "Mypage help"
   body: '<div id="video"></div>
     <script type="text/javascript" src="/javascripts/help.js"></script>
-    <script type="text/javascript">embedVideo("video", "myousica_help_mypage", 193)</script>'
+    <script type="text/javascript">embedVideo("video", "mewsic_help_mypage", 193)</script>'
   url: mypage
   position: 5
 

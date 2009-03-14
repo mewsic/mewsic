@@ -21,7 +21,3 @@ track_sax_for_let_it_be_for_quentin:
   user: quentin
   mixable: sax_for_let_it_be
   mixable_type: Track
-# two:
-#   user_id: 1
-#   mixable_id: 1
-#   mixable_type: MyString

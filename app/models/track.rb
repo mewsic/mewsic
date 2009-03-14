@@ -41,7 +41,7 @@ class Track < ActiveRecord::Base
   has_many :mlabs, :as => :mixable, :dependent => :delete_all
   #has_many :abuses, :as => :abuseable, :dependent => :delete_all, :class_name => 'Abuse'
 
-  belongs_to :parent_song, :class_name => 'Song'
+  belongs_to :parent_song, :class_name => 'Song', :foreign_key => 'song_id'
   belongs_to :user, :polymorphic => true
   belongs_to :instrument
 

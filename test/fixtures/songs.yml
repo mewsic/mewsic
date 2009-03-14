@@ -29,7 +29,6 @@ let_it_be:
   title: Let It Be
   user: aaron
   author: Beatles
-  genre: country
   listened_times: 2230
   seconds: 220
   filename: test.mp3
@@ -135,24 +134,14 @@ gravity_blast_beat_jungle_remix:
   seconds: 180
   filename: test.mp3
   
-# songs from 0 to 200 randomly have tracks
+# songs from 4 to 200 randomly have children tracks, see tracks.yml 
+# songs from 201 to 304 randomly have mixed tracks, see mixes.yml
 <% 300.times do |i| %>
 song_<%= i + 4 %>:
   title: <%= shuffle(%w( Love Honesty Roma Sex Radio Let It Be Radio Want I Live Forever My Way Bohemian Rhapsody )) %>
   user: <%= "user_#{rand(497) + 3}" %>
   author: <%= %w(Queen Beatles Elvis Vasco R.E.M.).rand %>
   description: "This is one of the most famous songs made in the '80th"
-  listened_times: <%= rand(1000) %>
-  created_at: <%= (rand(30)).days.ago.to_s :db %>
-  seconds: <%= rand(300) %>
-  filename: test.mp3
-<% end %>
-
-<% 100.times do |i| %>
-song_aaron_<%= i + 4 %>:
-  title: <%= shuffle(%w( Love Honesty Roma Sex Radio Let It Be Radio Want I Live Forever My Way Bohemian Rhapsody )) %>
-  user: aaron
-  author: <%= %w(Queen Beatles Elvis Vasco R.E.M.)[rand(5)] %>
   listened_times: <%= rand(1000) %>
   created_at: <%= (rand(30)).days.ago.to_s :db %>
   seconds: <%= rand(300) %>
@@ -224,3 +213,13 @@ really_short_song:
   seconds: 4
   filename: test.mp3
   published: false
+
+empty_song:
+  title: empty song
+  user: user_37
+  author: Someone
+  listened_times: <%= rand(200) %>
+  created_at: <%= rand(30).days.ago.to_s :db %>
+  seconds: 100
+  filename: test.mp3
+  published: true

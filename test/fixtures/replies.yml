@@ -17,7 +17,9 @@
 first_reply:
   user: quentin
   answer: user_10_asks_about_magic
+  body: "No, I don't believe in it."
 girls_reply:
   user: quentin
   answer: user_10_asks_about_girls
+  body: "The one that sucks!"
   

@@ -191,11 +191,12 @@ drums_for_billie_jean_by_pilu:
   user: quentin
   filename: test.mp3
 
-# songs from 4 to 200 randomly have tracks
+# songs from 4 to 200 randomly have children tracks
+# see songs.yml
 <% 50.times do |i| %>
 random_track_<%= i %>:
   title: random track <%= i %>
-  parent_song: song_<%= (i+1) * 4 %>
+  parent_song: song_<%= rand(197) + 4 %>
   instrument: <%= random_instrument %>
   seconds: <%= rand(500) %>
   user: user_<%= rand(497) + 3 %>
@@ -230,7 +231,7 @@ destroyable_mixed_track_<%= i %>:
 
 really_short_track:
   title: Really short track for increment count test
-  parent_song: song_401
+  parent_song: song_201
   instrument: <%= random_instrument %>
   seconds: 4
   user: user_401

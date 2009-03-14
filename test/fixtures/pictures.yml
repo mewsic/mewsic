@@ -17,7 +17,12 @@
 #  parent_id        :integer(4)    
 #  created_at       :datetime      
 #  updated_at       :datetime      
-#
+
+<%
+  def random_avatar
+    "test/fixtures/files/" + %w( dharma_ndstr.jpg myousica_avatar.png code_avatar.png ).rand
+  end
+%>
 
 first_photo_for_quentin:
   pictureable: quentin
@@ -66,18 +71,27 @@ avatar_for_quentin:
   pictureable_type: User
   type: Avatar
   content_type: image/png
-  attachment_file: test/fixtures/files/myousica_avatar.png
+  attachment_file: <%= random_avatar %>
 
 avatar_for_john:
   pictureable: john
   pictureable_type: User
   type: Avatar
   content_type: image/png
-  attachment_file: test/fixtures/files/code_avatar.png
+  attachment_file: <%= random_avatar %>
 
-avatar_for_mikaband:
-  pictureable: mikaband
-  pictureable_type: Band
+<% 100.times do |i| %>
+avatar_for_user_<%= i %>:
+  pictureable: user_<%= rand(500) %>
+  pictureable_type: User
   type: Avatar
-  content_type: image/jpeg
-  attachment_file: test/fixtures/files/dharma_ndstr.jpg
+  attachment_file: <%= random_avatar %>
+<% end %>
+
+<% 10.times do |i| %>
+avatar_for_mband_<%= i %>:
+  pictureable: mband_<%= i %>
+  pictureable_type: Mband
+  type: Avatar
+  attachment_file: <%= random_avatar %>
+<% end %>

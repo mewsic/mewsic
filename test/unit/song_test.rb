@@ -30,27 +30,6 @@ class SongTest < ActiveSupport::TestCase
     assert_equal 3, songs.size
   end 
   
-  def test_direct_siblings
-    song = songs(:gravity_blast_beat_jungle_remix)
-    #assert_equal 2, song.direct_siblings.size
-    track = tracks(:drum_for_gravity_blast_beat)
-    #puts track.mixes.count
-  end
-  
-  def test_is_a_direct_sibling_should_correctly_find_direct_siblings
-    assert songs(:billie_jean_by_michael_jackson).is_a_direct_sibling_of?(songs(:billie_jean_by_giovanni))
-    deny songs(:billie_jean_by_michael_jackson).is_a_direct_sibling_of?(songs(:billie_jean_by_pilu))
-    assert songs(:billie_jean_by_pilu).is_a_direct_sibling_of?(songs(:billie_jean_by_giovanni))
-  end
-  
-  def test_is_a_indirect_sibling_should_correctly_find_indirect_siblings
-    assert songs(:billie_jean_by_michael_jackson).is_a_indirect_sibling_of?(songs(:billie_jean_by_pilu))    
-  end
-  
-  # def test_is_a_direct_sibling_should_correctly_find_direct_siblings
-  #   assert songs(:billie_jean_by_michael_jackson).is_a_indirect_sibling_of?(songs(:billie_jean_by_pilu))
-  # end
-
   def test_should_not_destroy_if_has_children_tracks
     s = songs(:let_it_be)
     assert_raise(ActiveRecord::ReadOnlyRecord) { s.destroy }

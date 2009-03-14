@@ -44,6 +44,6 @@ still_open_answer:
   
 <% 100.times do |i| %>
 answer_<%= i + 3 %>:
-  user: user_10
-  body: Nel mezzo del cammin di nostra vita mi ritrovai nel culo una matita. Ahi, che dolor! Era una carioca a dodici color.
+  user: <%= %w( user_10 user_20 user_42 user_54 ).rand %>
+  body: <%= %w( Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent molestie nibh non lectus. Fusce diam. Donec erat mi, fringilla nec, rhoncus non, iaculis at, augue. Nulla consectetur. Aliquam consequat dolor et dui. Etiam a dolor. Curabitur quis orci at est consectetur pretium. Integer porttitor, eros at egestas fringilla, velit dolor volutpat justo, laoreet consectetur nibh orci in felis. Vestibulum a turpis eget arcu blandit malesuada. Nullam at massa. Sed auctor consectetur nunc. Fusce luctus. Mauris luctus velit et lacus. Proin ac elit. Donec enim diam, tempus sed, varius nec, vestibulum sit amet, est. Suspendisse sed augue. Nullam commodo, est ut consequat imperdiet, urna diam laoreet lectus, sed rutrum dui arcu quis ipsum. Donec in nisl eu diam hendrerit hendrerit. Cras scelerisque quam quis arcu ).sort_by{rand}.join(' ').capitalize %>.
 <% end %>

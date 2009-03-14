@@ -21,12 +21,14 @@
   subject: Hello <%= i %> from user_10
   body: Hello Quentin, how are you?
 <% end %>
+
 <% 30.times do |i| %>message_from_quentin_<%= i %>:
   sender: quentin
   recipient: user_10  
   subject: Hello <%= i %> from quentin
   body: Hello User10, how are you?
 <% end %>
+
 message_from_user_10_to_user_11:
   sender: user_10
   recipient: user_11

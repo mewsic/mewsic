@@ -25,6 +25,6 @@ quentin_for_quentin_mband:
 mband_membership_<%= i %>:
   mband: mband_<%= i / 4 %>
   user: user_<%= rand(497) + 3 %> 
-  instrument: <%= %w(guitar drums microphone saxophone trumpet).sort_by{rand}.first %>
+  instrument: <%= %w( guitar drums microphone saxophone trumpet ).sort_by{rand}.first %>
   accepted_at: <%= rand(20).days.ago.to_s :db %>
 <% end %>
