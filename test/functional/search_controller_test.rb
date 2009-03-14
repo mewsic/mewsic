@@ -26,7 +26,6 @@ class SearchControllerTest < ActionController::TestCase
     assert_equal 0, assigns(:users).size
     assert_equal 1, assigns(:songs).size
     assert_equal 0, assigns(:tracks).size
-    assert_equal 0, assigns(:ideas).size
   end
 
   def test_should_paginate
@@ -36,7 +35,6 @@ class SearchControllerTest < ActionController::TestCase
     assert_equal 0, assigns(:songs).size
     assert_nil assigns(:tracks)
     assert_nil assigns(:users)
-    assert_nil assigns(:ideas)
   end
 
   # XML format

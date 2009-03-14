@@ -183,7 +183,8 @@ class UsersControllerTest < ActionController::TestCase
   def test_show_should_have_ideas_and_songs_with_tracks_assigned
     call_and_test_show :format => 'html'
     assert assigns(:tracks)
-    assert assigns(:tracks).all? { |t| t.idea? }
+    assert false # XXX FIXME
+    # assert assigns(:tracks).all? { |t| t.idea? }
 
     assert assigns(:songs)
     assert assigns(:songs).all? { |s| s.tracks.count > 0 }

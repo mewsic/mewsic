@@ -191,24 +191,6 @@ song_301_keyboards:
   balance: 0.5
   time_shift: 0
 
-<% 3.times do |i| %>
-collaboration_<%= i %>:
-  song: song_using_ideas_<%= i %>
-  track: idea_track_33
-  volume: 0.4
-  balance: 0.2
-  loop: 0
-  time_shift: 0
-<% end %>
-
-collaboration_4:
-  song: song_using_ideas_3
-  track: idea_track_23
-  volume: 0.99
-  balance: 1.10
-  loop: 0
-  time_shift: 0
-
 destroyable_mix:
   song: unpublished_mixed_song
   track: destroyable_mixed_track

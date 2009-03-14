@@ -184,15 +184,6 @@ billie_jean_by_pilu:
   seconds: 140
   filename: test.mp3
   
-song_with_ideas:
-  title: Song with ideas
-  user: quentin
-  author: Boh
-  listened_times: <%= rand(1000) %>
-  created_at: <%= (rand(30)).days.ago.to_s :db %>
-  seconds: 140
-  filename: test.mp3
-  
 quentin_productions:
   title: Quentin productions huge song
   user: quentin

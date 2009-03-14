@@ -23,24 +23,23 @@ class TracksControllerTest < ActionController::TestCase
     assert_response :redirect
   end
 
-  def xhr_index_should_send_ideas_if_not_current_user
+  def xhr_index_should_send_only_published_tracks_if_not_current_user
     xhr :get, :index, :user_id => users(:quentin).id
     assert_response :success
     assert_equal assings(:user).id, genres(:quentin).id
+
+    assert false ## XXX FIXME
+
     assert assigns(:tracks)
     assert_equal assigns(:tracks).map(&:user_id).uniq.first, users(:quentin).id
-    assert assigns(:tracks).all { |t| t.idea? }
     assert assigns(:tracks_count)
-    assert_equal assigns(:tracks_count), users(:quentin).ideas_count
 
     xhr :get, :index, :mband_id => mbands(:quentin_mband).id
     assert_response :success
     assert_equal assings(:mband).id, genres(:quentin_mband).id
     assert assigns(:tracks)
     assert_equal assigns(:tracks).all? { |t| mbands(:quentin_mband).members.map(&:user_id).include? t.user_id }
-    assert assigns(:tracks).all { |t| t.idea? }
     assert assigns(:tracks_count)
-    assert_equal assings(:tracks_count), mbands(:quentin_mband).ideas_count
   end
 
   def xhr_index_should_send_tracks_if_not_current_user
@@ -159,39 +158,6 @@ class TracksControllerTest < ActionController::TestCase
     rescue Exception => e
       assert e.kind_of?(ActiveRecord::RecordNotFound)
     end
-  end
-
-  def test_toggle_idea_should_redirect_if_not_logged_in
-    put :toggle_idea, :id => tracks(:guitar_for_closer).id
-    assert_redirected_to login_path
-  end
-
-  def test_toggle_idea_should_redirect_current_user_is_not_the_track_user
-    login_as :user_10
-    put :toggle_idea, :id => tracks(:guitar_for_closer).id
-    assert_redirected_to login_path
-  end
-
-  def test_toggle_idea_should_toggle_idea
-    login_as :quentin
-    t = tracks(:guitar_for_closer)
-    is_idea = t.idea?
-
-    xhr :put, :toggle_idea, :id => t.id
-    assert_response :success
-    assert_not_equal is_idea, t.reload.idea?
-
-    put :toggle_idea, :id => t.id
-    assert_redirected_to user_path(users(:quentin))
-    assert_equal is_idea, t.reload.idea?
-  end
-
-  def test_toggle_idea_should_toggle_idea_and_render_js
-    login_as :quentin
-    t = tracks(:guitar_for_closer)
-    is_idea = t.idea?
-    xhr :put, :toggle_idea, :id => t.id
-    assert_response :success
   end
 
   def test_should_not_show_destroy_confirmation_if_not_logged_in
