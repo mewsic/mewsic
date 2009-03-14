@@ -75,6 +75,9 @@ class MbandMembership < ActiveRecord::Base
 
   after_destroy :decrement_mband_members_count
 
+  named_scope :accepted, :conditions => 'accepted_at IS NOT NULL'
+  named_scope :pending, :conditions => 'accepted_at IS NULL'
+
   # Updates this membership setting <tt>accepted_at</tt> to the current time and
   # increments the <tt>members_count</tt> attribute.
   #

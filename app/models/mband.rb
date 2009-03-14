@@ -24,36 +24,14 @@
 # Copyright:: (C) 2008 Mikamai s.r.l.
 # Copyright:: (C) 2008 Adelao Group
 #
-# == Schema Information
-#
-# Table name: mbands
-#
-#  id            :integer(11)   not null, primary key
-#  name          :string(255)   
-#  photos_url    :string(255)   
-#  blog_url      :string(255)   
-#  myspace_url   :string(255)   
-#  motto         :text          
-#  tastes        :text          
-#  friends_count :integer(11)   
-#  user_id       :integer(11)   
-#  created_at    :datetime      
-#  updated_at    :datetime      
-#  rating_count  :integer(11)   
-#  rating_total  :decimal(10, 2 
-#  rating_avg    :decimal(10, 2 
-#  members_count :integer(11)   default(0)
-#
 # == Description
 #
-# An M-Band is an aggregation of users that play together on myousica, implemented
+# An M-Band is an aggregation of users that play together on mewsic, implemented
 # with an <tt>has_many :members, :through => :memberships</tt>, where memberships
 # are instances of the MbandMembership class.
 #
 # Every M-Band is managed by a <tt>leader</tt>, that can send invitations to users
 # to join. The receiver must accept it before becoming part of the M-Band.
-#
-# M-Bands have pages very similar to user ones.
 #
 # == Associations
 #
@@ -105,14 +83,20 @@ class Mband < ActiveRecord::Base
   named_scope :real, :conditions => 'members_count > 1'
   
   def self.find_newest(options = {})
-    options[:limit] ||= 10
-    find(:all, options.merge(:conditions => 'members_count > 1', :order => 'created_at'))
+    real.find(:all, options.merge(:order => 'created_at'))
   end
 
-  # Returns all published tracks from band members, sorted by rating average
+  # Finds the coolest Mbands, that is, Mbands sorted by <tt>rating_avg</tt>. Only Mbands with
+  # more than one member are returned.
   #
-  def tracks
-    members.find(:all, :include => :tracks).map { |u| u.tracks.published }.flatten.sort_by(&:rating_avg)
+  def self.find_coolest(options = {})
+    find_real options.reverse_merge(:order => 'rating_avg DESC')
+  end
+
+  # Finds all the mbands with at least one member
+  # XXX deprecated #
+  def self.find_real(options = {})
+    self.real
   end
 
   # Checks whether the passed <tt>user</tt> is a member of this Mband
@@ -122,18 +106,41 @@ class Mband < ActiveRecord::Base
     self.memberships.find(:first, :conditions => ["user_id = ?", user.id])
   end
 
-  # Returns a collection of accepted +MbandMmbership+s
+  # Returns all published tracks from band members, sorted by rating average
   #
-  def accepted_memberships
-    self.memberships.find(:all, :conditions => 'accepted_at IS NOT NULL')
+  def tracks
+    members.find(:all, :include => :tracks).map { |u| u.tracks.published }.flatten.sort_by(&:rating_avg)
   end
 
-  # Returns a collection of pending +MbandMembership+s
+  # If a member is recording, show it. If any of the members is online,
+  # show it. If they are all offline, show it.
   #
-  def pending_memberships
-    self.memberships.find(:all, :conditions => 'accepted_at IS NULL')
+  # Valid statuses are '<tt>on</tt>', '<tt>rec</tt>' and '<tt>off</tt>'.
+  #
+  def status
+    statuses = members.map(&:status).uniq
+    if statuses.include? 'rec'
+      'rec'
+    elsif statuses.include? 'on'
+      'on'
+    else
+      'off'
+    end
+  end
+
+  # Returns an array of all members' countries
+  #
+  def countries
+    self.members.map(&:country).uniq
   end
   
+  # Returns true if this Mband is rateable by the passed User object.
+  # An Mband is NOT rateable by its members.
+  #
+  def rateable_by?(user)
+    !self.members.include?(user)
+  end
+
   # Prints out the Mband name into the breadcrumb
   #
   def to_breadcrumb
@@ -152,18 +159,6 @@ class Mband < ActiveRecord::Base
     CGI.escape(self.name.downcase)
   end
 
-  # If all the members share the same status, use it, else, offline.
-  # Valid statuses are '<tt>on</tt>', '<tt>rec</tt>' and '<tt>off</tt>'.
-  #
-  def status
-    statuses = self.members.map(&:status).uniq
-    if statuses.size == 1
-      statuses.first
-    else
-      'off'
-    end
-  end
-
   # Finds an Mband using the string produced by +to_param+, or by numeric 
   # ID. This methods mimics the standard <tt>find</tt>, because it raises
   # an ActiveRecord::RecordNotFound exception if no Mband is found.
@@ -175,19 +170,6 @@ class Mband < ActiveRecord::Base
     send(find_method, param, options) or raise ActiveRecord::RecordNotFound
   end
 
-  # Finds the coolest Mbands, that is, Mbands sorted by <tt>rating_avg</tt>. Only Mbands with
-  # more than one member are returned.
-  #
-  def self.find_coolest(options = {})
-    find_real options.reverse_merge(:order => 'rating_avg DESC')
-  end
-
-  # Finds all the mbands with at least one member
-  # XXX deprecated #
-  def self.find_real(options = {})
-    self.real
-  end
-
   # Calculates profile completeness, by checking whether the 3 configurable URLs (<tt>photos_url</tt>,
   # <tt>myspace_url</tt> and <tt>blog_url</tt>) are compiled or not, and extracts a percent value.
   #
@@ -197,23 +179,10 @@ class Mband < ActiveRecord::Base
     (complete.size.to_f / profile.size.to_f * 100.0).round 2
   end
 
-  # Returns an array of all members' countries
-  #
-  def countries
-    self.members.map(&:country).uniq
-  end
-  
   # Joins the members' countries with a comma
   #
   def compiled_location
     countries.join(', ')
-  end
-
-  # Returns true if this Mband is rateable by the passed User object.
-  # An Mband is NOT rateable by its members.
-  #
-  def rateable_by?(user)
-    !self.members.include?(user)
   end
 
   # Sitemap priority for this instance

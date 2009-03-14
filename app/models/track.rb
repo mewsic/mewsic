@@ -80,8 +80,10 @@ class Track < ActiveRecord::Base
     increment(:listened_times)
   end
   
+  # An user cannot rate its own tracks
+  #
   def rateable_by?(user)
-    self.user.id != user.id
+    self.user.rateable_by?(user)
   end
 
   # Destroyable policy.

@@ -132,7 +132,7 @@ class Answer < ActiveRecord::Base
 
   # Returns true if the answer is rateable by the passed user. Answers cannot be voted by their owner.
   def rateable_by?(user)
-    self.user_id != user.id
+    self.user.rateable_by?(user)
   end
 
   # Returns true if the answer body is editable. Only answers created in the last 15 minutes are editable.

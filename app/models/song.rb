@@ -221,11 +221,7 @@ class Song < ActiveRecord::Base
   # A User Song is not rateable by its creator, a Mband Song is not rateable by its members.
   #
   def rateable_by?(user)
-    if self.user.respond_to? :members
-      !self.user.members.include?(user)
-    else
-      self.user.id != user.id
-    end
+    self.user.rateable_by?(user)
   end
 
   # Shorthand to set the <tt>published</tt> attribute to <tt>true</tt> and save the song afterwards.

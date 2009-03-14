@@ -69,7 +69,7 @@ class Reply < ActiveRecord::Base
   # A Reply cannot be rated by its owner.
   #
   def rateable_by?(user)
-    self.user_id != user.id
+    self.user.rateable_by?(user)
   end
 
 private
