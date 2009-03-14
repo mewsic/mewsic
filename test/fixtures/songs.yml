@@ -24,6 +24,10 @@
     array.sort_by{rand}[0..rand(array.size)].join(' ')
   end
 
+  def random_rating
+    rand * 5
+  end
+
   def random_title
     shuffle(%w( Nec quis lorem. Aliquam erat volutpat. Nullam euismod magna in nulla. Nullam interdum ipsum vitae tellus. Quisque hendrerit, ligula iaculis cursus tincidunt, quam )).capitalize + '.'
   end
@@ -41,6 +45,7 @@ let_it_be:
   listened_times: 2230
   seconds: 220
   filename: test.mp3
+  rating_avg: <%= random_rating %>
 
 radio_ga_ga:
   title: Radio Ga Ga
@@ -50,6 +55,7 @@ radio_ga_ga:
   listened_times: 1290
   seconds: 180
   filename: test.mp3
+  rating_avg: <%= random_rating %>
 
 i_want_to_break_free:
   title: I Want to Break Free
@@ -60,6 +66,7 @@ i_want_to_break_free:
   seconds: 190
   filename: test.mp3
   published: true
+  rating_avg: <%= random_rating %>
 
 red_red_wine:
   title: Red Red Wine
@@ -70,6 +77,7 @@ red_red_wine:
   seconds: 180
   published: true
   filename: test.mp3
+  rating_avg: <%= random_rating %>
 
 red_red_wine_unpublished:
   title: Red Red Wine Unpublished
@@ -80,6 +88,7 @@ red_red_wine_unpublished:
   seconds: 180
   published: false
   filename: test.mp3
+  rating_avg: <%= random_rating %>
 
 space_cowboy:
   title: Space Cowboy
@@ -91,6 +100,7 @@ space_cowboy:
   created_at: <%= 1.week.from_now.to_s(:db) %>
   published: true
   filename: test.mp3
+  rating_avg: <%= random_rating %>
 
 autumn_leaves:
   title: Autumn Leaves
@@ -100,6 +110,7 @@ autumn_leaves:
   listened_times: 290
   seconds: 180
   filename: test.mp3
+  rating_avg: <%= random_rating %>
 
 closer:
   title: Closer
@@ -109,6 +120,7 @@ closer:
   listened_times: 390
   seconds: 180
   filename: test.mp3
+  rating_avg: <%= random_rating %>
 
 white_christmas:
   title: White Cristmas
@@ -118,6 +130,7 @@ white_christmas:
   listened_times: 420
   seconds: 180
   filename: test.mp3
+  rating_avg: <%= random_rating %>
 
 quentin_single_track_song:
   title: SingleTrackSong
@@ -127,6 +140,7 @@ quentin_single_track_song:
   listened_times: 420
   seconds: 180
   filename: test.mp3
+  rating_avg: <%= random_rating %>
 
 # Mixable songs
 #
@@ -138,6 +152,7 @@ let_it_be_punk_remix:
   listened_times: 190
   seconds: 180
   filename: test.mp3
+  rating_avg: <%= random_rating %>
 
 let_it_be_dnb_remix:
   title: "Let it be d&b Remix"
@@ -147,6 +162,7 @@ let_it_be_dnb_remix:
   listened_times: 0
   seconds: 180
   filename: test.mp3
+  rating_avg: <%= random_rating %>
 
 closer_jungle_remix:
   title: Closer Jungle Remix
@@ -156,6 +172,7 @@ closer_jungle_remix:
   listened_times: 0
   seconds: 180
   filename: test.mp3
+  rating_avg: <%= random_rating %>
   
 white_christmas_electro_remix:
   title: GravityBlastBeat Jungle Remix
@@ -165,6 +182,7 @@ white_christmas_electro_remix:
   listened_times: 0
   seconds: 180
   filename: test.mp3
+  rating_avg: <%= random_rating %>
   
 # songs from 4 to 200 randomly have children tracks, see tracks.yml 
 # songs from 201 to 304 randomly have mixed tracks, see mixes.yml
@@ -179,6 +197,7 @@ song_<%= i + 4 %>:
   created_at: <%= rand(30).days.ago.to_s :db %>
   seconds: <%= rand(300) %>
   filename: test.mp3
+  rating_avg: <%= random_rating %>
 <% end %>
 
 <% 50.times do |i| %>
@@ -192,6 +211,7 @@ mband_song_<%= i %>:
   created_at: <%= rand(30).days.ago.to_s :db %>
   seconds: <%= rand(300) %>
   filename: test.mp3
+  rating_avg: <%= random_rating %>
 <% end %>
 
 quentin_productions:
@@ -202,6 +222,7 @@ quentin_productions:
   created_at: <%= (rand(30)).days.ago.to_s :db %>
   seconds: 140
   filename: test.mp3
+  rating_avg: <%= random_rating %>
 
 unpublished_mixed_song:
   title: Unpublished song with mixed tracks
@@ -212,6 +233,7 @@ unpublished_mixed_song:
   seconds: 100
   filename: test.mp3
   published: false
+  rating_avg: <%= random_rating %>
 
 <% 10.times do |i| %>
 unpublished_mixed_song_<%= i %>:
@@ -223,6 +245,7 @@ unpublished_mixed_song_<%= i %>:
   created_at: <%= (rand(60)).days.ago.to_s :db %>
   seconds: 100
   filename: test.mp3
+  rating_avg: <%= random_rating %>
 <% end %>
 
 really_short_song:
@@ -234,6 +257,7 @@ really_short_song:
   seconds: 4
   filename: test.mp3
   published: false
+  rating_avg: <%= random_rating %>
 
 empty_song:
   title: empty song
@@ -244,3 +268,4 @@ empty_song:
   seconds: 100
   filename: test.mp3
   published: true
+  rating_avg: <%= random_rating %>

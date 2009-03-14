@@ -42,7 +42,7 @@ class Track < ActiveRecord::Base
   #has_many :abuses, :as => :abuseable, :dependent => :delete_all, :class_name => 'Abuse'
 
   belongs_to :parent_song, :class_name => 'Song', :foreign_key => 'song_id'
-  belongs_to :user, :polymorphic => true
+  belongs_to :user
   belongs_to :instrument
 
   validates_presence_of :title, :seconds
@@ -64,23 +64,14 @@ class Track < ActiveRecord::Base
   named_scope :published, :conditions => {:published => true}
   named_scope :unpublished, :conditions => {:published => false}
 
+  # Finds most collaborated tracks and sets a virtual <tt>song_count</tt> attribute that yields
+  # the song count for each track.
+  #
   def self.find_most_used(options = {})
-    self.find(:all,
-              options.merge(:select => 'tracks.*, COUNT(tracks.id) AS song_count',
-                            :joins => 'LEFT JOIN mixes M ON M.track_id = tracks.id LEFT JOIN songs S ON M.song_id = S.id',
-                            :conditions => ['S.published = ?', true],
-                            :group => 'tracks.id', :order => 'song_count DESC')
-             ).each { |t| t.song_count = t.song_count.to_i }
+    limit = "LIMIT #{options[:limit]}" if options[:limit]
+    self.find_by_sql(["SELECT tracks.*, COUNT(tracks.id) AS song_count FROM tracks LEFT JOIN mixes M ON M.track_id = tracks.id LEFT JOIN songs S ON M.song_id = S.id WHERE S.published = ? GROUP BY tracks.id ORDER BY song_count DESC #{limit}", true]).each { |t| t.song_count = t.song_count.to_i }
   end
   
-  def self.find_paginated_by_user(page, user)
-    user.tracks.paginate(:page => page, :per_page => 7, :include => :instrument, :order => "tracks.created_at DESC")
-  end
-
-  def self.find_paginated_by_mband(page, mband)
-    paginate(:page => page, :per_page => 7, :include => :instrument, :conditions => ["tracks.user_id IN (?)", mband.members.map(&:id)], :order => "tracks.created_at DESC")
-  end
-
   def length
     seconds.to_runtime
   end
@@ -90,9 +81,12 @@ class Track < ActiveRecord::Base
   end
   
   def rateable_by?(user)
-    self.user_id != user.id
+    self.user.id != user.id
   end
 
+  # Destroyable policy.
+  # A track is not destroyable if it is mixed into other published songs.
+  #
   def destroyable?
     self.mixes.count.zero? || self.mixes.all? { |mix| !mix.song.published? rescue true } # XXX remove that rescue
   end

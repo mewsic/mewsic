@@ -80,15 +80,14 @@ class Mband < ActiveRecord::Base
   end
   
   acts_as_rated :rating_range => 0..5
-  
+
   has_one :avatar, :as => :pictureable, :dependent => :destroy
   has_many :photos, :as => :pictureable, :dependent => :destroy
   has_many :memberships, :class_name => 'MbandMembership', :dependent => :destroy
   has_many :members, :through => :memberships, :class_name => 'User', :source => :user, :conditions => "accepted_at IS NOT NULL"
 
   has_many :songs, :as => :user
-  has_many :tracks, :as => :user
-  
+
   belongs_to :leader, :class_name => 'User', :foreign_key => 'user_id'
   
   attr_accessible :name, :motto, :tastes, :photos_url, :blog_url, :myspace_url
@@ -108,6 +107,12 @@ class Mband < ActiveRecord::Base
   def self.find_newest(options = {})
     options[:limit] ||= 10
     find(:all, options.merge(:conditions => 'members_count > 1', :order => 'created_at'))
+  end
+
+  # Returns all published tracks from band members, sorted by rating average
+  #
+  def tracks
+    members.find(:all, :include => :tracks).map { |u| u.tracks.published }.flatten.sort_by(&:rating_avg)
   end
 
   # Checks whether the passed <tt>user</tt> is a member of this Mband

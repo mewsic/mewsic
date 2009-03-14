@@ -104,10 +104,10 @@ class User < ActiveRecord::Base
   has_many_friends
 
   has_many :songs, :as => :user, :order => 'songs.created_at DESC'
-  has_many :tracks, :as => :user, :order => 'tracks.created_at DESC'
+  has_many :tracks, :order => 'tracks.created_at DESC'
 
-  has_many :answers
-  has_many :replies
+  has_many :answers, :order => 'answers.created_at DESC'
+  has_many :replies, :order => 'answers.created_at DESC'
   has_many :photos, :as => :pictureable
 
   has_one :avatar, :as => :pictureable
