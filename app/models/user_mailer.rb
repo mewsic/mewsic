@@ -93,7 +93,7 @@ class UserMailer < ActionMailer::Base
       end
 
       attachment 'image/png' do |a|
-        a.body = File.read(File.join(RAILS_ROOT, 'public', 'images', 'logo.png'))
+        a.body = File.read(File.join(RAILS_ROOT, 'public', 'images', 'logo.jpg'))
         a.content_disposition = 'inline'
         a.headers['Content-ID'] = '<logo>'
       end
