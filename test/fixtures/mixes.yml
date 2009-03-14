@@ -15,45 +15,93 @@
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-one:
+let_it_be_sax:
   song: let_it_be
   track: sax_for_let_it_be
   volume: 0.8
 
-two:
+let_it_be_guitar:
   song: let_it_be
   track: guitar_for_let_it_be
   volume: 0.8
 
-three:
+let_it_be_voice:
   song: let_it_be
   track: voice_for_let_it_be
   volume: 0.8
 
-four:
-  song: let_it_be
-  track: voice_for_radio_ga_ga
-  volume: 0.8
-
-five:
+radio_ga_ga_voice:
   song: radio_ga_ga
   track: voice_for_radio_ga_ga
   volume: 0.8
 
-mixes_1:
+closer_guitar:
   song: closer
   track: guitar_for_closer
   volume: 0.8
 
-mixes_2:
+closer_sax:
   song: closer
   track: sax_for_closer
   volume: 0.8
 
-mixes_3:
+closer_drums:
   song: closer
   track: drum_for_closer
   volume: 0.8
+
+white_christmas_guitar:
+  song: white_christmas
+  track: guitar_for_single_track_song
+  volume: 0.9
+
+white_christmas_drums:
+  song: white_christmas
+  track: drum_for_white_christmas
+  volume: 0.5
+
+let_it_be_punk_remix_guitar:
+  song: let_it_be_punk_remix
+  track: guitar_for_let_it_be
+  volume: 1
+
+let_it_be_punk_remix_voice:
+  song: let_it_be_punk_remix
+  track: voice_for_radio_ga_ga
+  volume: 1
+
+let_it_be_dnb_remix_guitar:
+  song: let_it_be_dnb_remix
+  track: guitar_for_closer
+  volume: 1
+
+let_it_be_dnb_remix_sax:
+  song: let_it_be_dnb_remix
+  track: sax_for_let_it_be
+  volume: 0.6
+
+closer_jungle_remix_drums:
+  song: closer_jungle_remix
+  track: drum_for_closer
+  volume: 0.7
+
+closer_jungle_remix_guitar:
+  song: closer_jungle_remix
+  track: guitar_for_let_it_be
+  volume: 1
+
+white_christmas_electro_remix_guitar:
+  song: white_christmas_electro_remix
+  track: guitar_for_closer
+  volume: 0.7
+
+white_christmas_electro_remix_drums:
+  song: white_christmas_electro_remix
+  track: drum_for_white_christmas
+
+white_christmas_electro_remix_sax:
+  song: white_christmas_electro_remix
+  track: sax_for_closer
 
 <% 10.times do |i| %>
 mixes_<%= i + 4 %>:
@@ -70,78 +118,6 @@ random_mixes_<%= i %>:
   track: random_track_<%= rand(50) + 1 %>
   volume: <%= rand %>
 <% end %>
-
-# Versioning fixtures, to be removed
-#
-gravity_blast_beat_remix_drum:
-  song: gravity_blast_beat_remix
-  track: drum_for_gravity_blast_beat
-  volume: 0.8
-
-gravity_blast_beat_jungle_remix_drum:
-  song: gravity_blast_beat_jungle_remix
-  track: drum_for_gravity_blast_beat
-  volume: 0.8
-
-bjbm_voice:
-  song: billie_jean_by_michael_jackson
-  track: voice_for_billie_jean_by_michael_jackson
-  volume: 0.8
-
-bjbm_drums:
-  song: billie_jean_by_michael_jackson
-  track: drums_for_billie_jean_by_michael_jackson
-  volume: 0.8
-
-bjbm_keyboards:
-  song: billie_jean_by_michael_jackson
-  track: keyboards_for_billie_jean_by_michael_jackson
-  volume: 0.8
-
-bjbm_guitar:
-  song: billie_jean_by_michael_jackson
-  track: guitar_for_billie_jean_by_michael_jackson
-  volume: 0.8
-
-bjbg_voice:
-  song: billie_jean_by_giovanni
-  track: voice_for_billie_jean_by_giovanni
-  volume: 0.8
-
-bjbg_drums:
-  song: billie_jean_by_giovanni
-  track: drums_for_billie_jean_by_michael_jackson
-  volume: 0.8
-
-bjbg_keyboards:
-  song: billie_jean_by_giovanni
-  track: keyboards_for_billie_jean_by_michael_jackson
-  volume: 0.8
-
-bjbg_guitar:
-  song: billie_jean_by_giovanni
-  track: guitar_for_billie_jean_by_michael_jackson
-  volume: 0.8
-
-bjbp_voice:
-  song: billie_jean_by_pilu
-  track: voice_for_billie_jean_by_giovanni
-  volume: 0.8
-
-bjbp_drums:
-  song: billie_jean_by_pilu
-  track: drums_for_billie_jean_by_pilu
-  volume: 0.8
-
-song_300_keyboards:
-  song: song_300
-  track: keyboards_for_billie_jean_by_michael_jackson
-  volume: 0.8
-
-song_301_keyboards:
-  song: song_301
-  track: keyboards_for_billie_jean_by_michael_jackson
-  volume: 0.8
 
 destroyable_mix:
   song: unpublished_mixed_song

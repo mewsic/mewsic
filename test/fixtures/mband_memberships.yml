@@ -13,13 +13,35 @@
 #  instrument_id    :integer(4)    
 #
 
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
 quentin_for_quentin_mband:
   mband: quentin_mband
   user: quentin
   instrument: guitar
   accepted_at: <%= 5.days.ago.to_s :db %>
+
+john_for_quentin_mband:
+  mband: quentin_mband
+  user: quentin
+  instrument: voice
+  accepted_at: <%= rand(5).days.ago.to_s :db %>
+
+john_for_scapokkier:
+  mband: scapokkier
+  user: john
+  instrument: guitar
+  accepted_at: <%= 4.days.ago.to_s :db %>
+
+quentin_for_scapokkier:
+  mband: scapokkier
+  user: quentin
+  instrument: drums
+  accepted_at: <%= rand(4).days.ago.to_s :db %>
+
+user_42_for_scapokkier:
+  mband: scapokkier
+  user: user_42
+  instrument: sax
+  accepted_at: <%= rand(4).days.ago.to_s :db %>
 
 <% 40.times do |i| %>
 mband_membership_<%= i %>:

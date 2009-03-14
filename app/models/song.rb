@@ -95,7 +95,7 @@ class Song < ActiveRecord::Base
 
   acts_as_rated :rating_range => 0..5
 
-  before_save :copy_author_information_from_user
+  before_save :copy_author_information_from_user, :if => Proc.new(&:published)
   before_destroy :check_for_children_tracks
 
   has_playable_stream
@@ -106,6 +106,8 @@ class Song < ActiveRecord::Base
   named_scope :unpublished, :conditions => {:published => false}
 
   named_scope :with_tracks, :include => :tracks, :conditions => 'tracks.id IS NOT NULL'
+
+  named_scope :newest, :order => 'songs.created_at DESC', :conditions => ['songs.created_at < ?', 1.month.ago]
 
   # Finds all published songs, ordering them by play count and rating average.
   #
@@ -146,7 +148,6 @@ class Song < ActiveRecord::Base
   def self.create_unpublished!
     self.create! :published => false
   end
-
 
   # Finds most collaborated songs, using a MySQL-only query (sorry).
   #
@@ -189,7 +190,7 @@ class Song < ActiveRecord::Base
   end
   
   # Returns the mixables count for this song. The +find_most_collaborated+ method
-  # precalculates this counter, in order to optimize frequent calls,  so this method
+  # precalculates this counter, in order to optimize frequent calls, so this method
   # first checks whether a <tt>collaboration_count</tt> attribute is present, if not 
   # it queries the database for the +mixables+ array and returns its <tt>size</tt>.
   #
@@ -216,10 +217,15 @@ class Song < ActiveRecord::Base
     self.title
   end    
 
-  # Checks whether this Song is rateable by the passed User. A Song is not rateable by its creator.
+  # Checks whether this Song is rateable by the given user.
+  # A User Song is not rateable by its creator, a Mband Song is not rateable by its members.
   #
   def rateable_by?(user)
-    self.user_id != user.id
+    if self.user.respond_to? :members
+      !self.user.members.include?(user)
+    else
+      self.user.id != user.id
+    end
   end
 
   # Shorthand to set the <tt>published</tt> attribute to <tt>true</tt> and save the song afterwards.

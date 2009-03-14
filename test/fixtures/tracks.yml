@@ -86,6 +86,14 @@ drum_for_closer:
   seconds: <%= rand(100) + 90 %>
   filename: test.mp3
 
+voice_for_white_christmas:
+  title: Voice
+  parent_song: song_120
+  instrument: microphone
+  user: john
+  seconds: <%= rand(100) + 90 %>
+  filename: test.mp3
+
 <% 10.times do |i| %>
 voice_for_closer_<%= i + 4 %>:
   title: Voice
@@ -132,63 +140,12 @@ voice_for_single_track_song:
   user: quentin
   filename: test.mp3
 
-drum_for_gravity_blast_beat:
-  title: Drums for gravity blast beat
-  parent_song: gravity_blast_beat
+drum_for_white_christmas:
+  title: Drums for white christmas
+  parent_song: white_christmas
   instrument: drums
   seconds: 205
   user: aaron
-  filename: test.mp3
-
-# Don't touch these fixtures. They're central to a test that has to run
-# or the cheerleader will die and the world won't be saved.
-# -- Mohinder Suresh
-voice_for_billie_jean_by_michael_jackson:
-  title: Voice for Billie Jean
-  parent_song: billie_jean_by_michael_jackson
-  instrument: microphone
-  seconds: 314
-  user: quentin
-  filename: test.mp3
-  
-drums_for_billie_jean_by_michael_jackson:
-  title: Drums for Billie Jean
-  parent_song: billie_jean_by_michael_jackson
-  instrument: drums
-  seconds: 213
-  user: aaron
-  filename: test.mp3
-  
-keyboards_for_billie_jean_by_michael_jackson:
-  title: Keyboards for Billie Jean
-  parent_song: billie_jean_by_michael_jackson
-  instrument: saxophone
-  seconds: 213
-  user: quentin
-  filename: test.mp3
-
-guitar_for_billie_jean_by_michael_jackson:
-  title: Guitar for Billie Jean
-  parent_song: billie_jean_by_michael_jackson
-  instrument: guitar
-  seconds: 213
-  user: quentin
-  filename: test.mp3
-  
-voice_for_billie_jean_by_giovanni:
-  title: Voice for Billie Jean by Giovanni
-  parent_song: billie_jean_by_giovanni
-  instrument: microphone
-  seconds: 314
-  user: quentin
-  filename: test.mp3
-
-drums_for_billie_jean_by_pilu:
-  title: Drums for Billie Jean by Pilu
-  parent_song: billie_jean_by_pilu
-  instrument: drums
-  seconds: 213
-  user: quentin
   filename: test.mp3
 
 # songs from 4 to 200 randomly have children tracks

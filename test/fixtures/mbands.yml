@@ -20,18 +20,15 @@
 #  members_count :integer(4)    default(0)
 #
 
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-# one:
-#   column: value
-#
-# two:
-#   column: value
-
 quentin_mband:
   name: The Quentin mband
   leader: quentin
-  members_count: 1
+  members_count: 2
+
+scapokkier:
+  name: The official scapokkiers
+  leader: john
+  members_count: 3
 
 <% 10.times do |i| %>
 mband_<%= i %>:

@@ -21,13 +21,22 @@
 
 <% 
   def shuffle(array)
-    array.sort_by{rand}.join(' ')[0..rand(array.size)]
+    array.sort_by{rand}[0..rand(array.size)].join(' ')
+  end
+
+  def random_title
+    shuffle(%w( Nec quis lorem. Aliquam erat volutpat. Nullam euismod magna in nulla. Nullam interdum ipsum vitae tellus. Quisque hendrerit, ligula iaculis cursus tincidunt, quam )).capitalize + '.'
+  end
+
+  def random_description
+    %w( Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam consectetur, purus molestie rutrum vestibulum, orci sapien scelerisque dolor, et eleifend risus lacus eu lacus. Donec non nulla laoreet dui tempor tempus. Nam ullamcorper velit a nulla. Nunc at risus non sem vehicula ullamcorper. Donec quis lorem. Aliquam erat volutpat. Nullam euismod magna in nulla. Nullam interdum ipsum vitae tellus. Quisque hendrerit, ligula iaculis cursus tincidunt, quam ipsum scelerisque lacus, eu accumsan magna urna ac felis. Mauris porttitor nibh at mauris. Suspendisse neque mauris, fringilla nec, auctor vitae, semper nec, sapien. <br/> <br/> Donec at ligula blandit velit molestie fermentum. Quisque cursus vulputate tellus. Vestibulum ac lectus vel turpis venenatis auctor. Quisque fringilla quam ac ipsum. Aliquam tempus, metus ac porta cursus, nibh arcu consectetur purus, non tincidunt elit metus quis augue. Fusce sodales, mauris at scelerisque fermentum, ipsum tortor aliquam lectus, vitae euismod tortor enim id metus. Aenean interdum risus eget enim. Curabitur id est. Aliquam mi elit, facilisis eget, sagittis in, mollis sit amet, risus. Quisque rutrum laoreet justo. Nunc dictum lorem sit amet tellus. Quisque non quam. Sed tempus mi sit amet augue. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut molestie quam eu massa condimentum hendrerit. ).sort_by{rand}.join(' ').capitalize
   end
 %>
 
 let_it_be:
   title: Let It Be
   user: aaron
+  user_type: User
   author: Beatles
   listened_times: 2230
   seconds: 220
@@ -36,6 +45,7 @@ let_it_be:
 radio_ga_ga:
   title: Radio Ga Ga
   user: aaron
+  user_type: User
   author: Queen
   listened_times: 1290
   seconds: 180
@@ -43,7 +53,8 @@ radio_ga_ga:
 
 i_want_to_break_free:
   title: I Want to Break Free
-  user: quentin
+  user: scapokkier
+  user_type: Mband
   author: Queen
   listened_times: 1210
   seconds: 190
@@ -53,6 +64,7 @@ i_want_to_break_free:
 red_red_wine:
   title: Red Red Wine
   user: quentin
+  user_type: User
   author: Bob Marley
   listened_times: 1120
   seconds: 180
@@ -62,6 +74,7 @@ red_red_wine:
 red_red_wine_unpublished:
   title: Red Red Wine Unpublished
   user: quentin
+  user_type: User
   author: Bob Marley
   listened_times: 1120
   seconds: 180
@@ -70,7 +83,8 @@ red_red_wine_unpublished:
 
 space_cowboy:
   title: Space Cowboy
-  user: aaron
+  user: scapokkier
+  user_type: Mband
   author: Jamiroquai
   listened_times: 1001
   seconds: 180
@@ -80,7 +94,8 @@ space_cowboy:
 
 autumn_leaves:
   title: Autumn Leaves
-  user: quentin
+  user: scapokkier
+  user_type: Mband
   author: Miles Davis
   listened_times: 290
   seconds: 180
@@ -89,6 +104,7 @@ autumn_leaves:
 closer:
   title: Closer
   user: quentin
+  user_type: User
   author: Travis
   listened_times: 390
   seconds: 180
@@ -97,6 +113,7 @@ closer:
 white_christmas:
   title: White Cristmas
   user: quentin
+  user_type: User
   author: Louis Armstrong
   listened_times: 420
   seconds: 180
@@ -105,30 +122,45 @@ white_christmas:
 quentin_single_track_song:
   title: SingleTrackSong
   user: quentin
+  user_type: User
   author: Louis Armstrong
   listened_times: 420
   seconds: 180
   filename: test.mp3
 
-gravity_blast_beat:
-  title: GravityBlastBeat
+# Mixable songs
+#
+let_it_be_punk_remix:
+  title: Let it be punk remix
   user: quentin
+  user_type: User
+  author: Gino il fantino
+  listened_times: 190
+  seconds: 180
+  filename: test.mp3
+
+let_it_be_dnb_remix:
+  title: "Let it be d&b Remix"
+  user: scapokkier
+  user_type: Mband
   author: Gino il fantino
   listened_times: 0
   seconds: 180
   filename: test.mp3
 
-gravity_blast_beat_remix:
-  title: GravityBlastBeat Remix
+closer_jungle_remix:
+  title: Closer Jungle Remix
   user: quentin
+  user_type: User
   author: Gino il fantino
   listened_times: 0
   seconds: 180
   filename: test.mp3
-
-gravity_blast_beat_jungle_remix:
+  
+white_christmas_electro_remix:
   title: GravityBlastBeat Jungle Remix
   user: quentin
+  user_type: User
   author: Gino il fantino
   listened_times: 0
   seconds: 180
@@ -138,41 +170,30 @@ gravity_blast_beat_jungle_remix:
 # songs from 201 to 304 randomly have mixed tracks, see mixes.yml
 <% 300.times do |i| %>
 song_<%= i + 4 %>:
-  title: <%= shuffle(%w( Love Honesty Roma Sex Radio Let It Be Radio Want I Live Forever My Way Bohemian Rhapsody )) %>
+  title: <%= random_title %>
   user: <%= "user_#{rand(497) + 3}" %>
+  user_type: User
   author: <%= %w(Queen Beatles Elvis Vasco R.E.M.).rand %>
-  description: "This is one of the most famous songs made in the '80th"
+  description: <%= random_description %>.
   listened_times: <%= rand(1000) %>
-  created_at: <%= (rand(30)).days.ago.to_s :db %>
+  created_at: <%= rand(30).days.ago.to_s :db %>
   seconds: <%= rand(300) %>
   filename: test.mp3
 <% end %>
 
-billie_jean_by_michael_jackson:
-  title: Billie Jean ORIGINAL
-  user: quentin
-  author: Michael Jackson
-  listened_times: 1000
-  seconds: 140
+<% 50.times do |i| %>
+mband_song_<%= i %>:
+  title: <%= random_title %>
+  user: <%= "mband_#{rand(10)}" %>
+  user_type: Mband
+  author: <%= %w(Queen Beatles Elvis Vasco R.E.M.).rand %>
+  description: <%= random_description %>.
+  listened_times: <%= rand(1000) %>
+  created_at: <%= rand(30).days.ago.to_s :db %>
+  seconds: <%= rand(300) %>
   filename: test.mp3
-  published: true
-  
-billie_jean_by_giovanni:
-  title: Billie Jean by Giovanni
-  user: quentin
-  author: Michael Jackson
-  listened_times: 900
-  seconds: 140
-  filename: test.mp3
-  
-billie_jean_by_pilu:
-  title: Billie Jackson by Pilu
-  user: quentin
-  author: Pilu Jackson
-  listened_times: 42
-  seconds: 140
-  filename: test.mp3
-  
+<% end %>
+
 quentin_productions:
   title: Quentin productions huge song
   user: quentin
