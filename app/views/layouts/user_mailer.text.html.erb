@@ -19,14 +19,14 @@
   </style>
 </head>
 <body>
-  <p class="p1"><span class="s1"><img src="cid:logo_myousica"></span></p>
+  <p class="p1"><span class="s1"><img src="cid:logo"></span></p>
   <p class="p3"><br></p>
   <p class="p3"><br></p>
   <%= yield %>
   <p class="p6"><br></p>
   <p class="p6"><br></p>
   <p class="p5"><span class="s2">Thank you,</span></p>
-  <p class="p5"><span class="s2">Myousica Staff</span></p>
-  <p class="p8"><span class="s3"><a href="mailto:mail@myousica.com">mail@myousica.com</a></span></p>
+  <p class="p5"><span class="s2">MEWSIC Staff</span></p>
+  <p class="p8"><span class="s3"><a href="mailto:<%= APPLICATION[:email] %>"><%= APPLICATION[:email] %></a></span></p>
 </body>
 </html>

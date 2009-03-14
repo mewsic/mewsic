@@ -14,8 +14,6 @@ class FriendshipObserver < ActiveRecord::Observer
   def after_create(friendship)
     sender, recipient = friendship.friendshipped_by_me, friendship.friendshipped_for_me
 
-    return if recipient == User.myousica
-
     subject = "You have a new admirer: #{sender.login}!"
     body    = <<-EOM
 <p><strong>#{sender.login}</strong> admires you.</p><p><br/></p>

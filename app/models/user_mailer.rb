@@ -57,7 +57,7 @@ class UserMailer < ActionMailer::Base
 
   def collaboration_notification(recipient, song, tracks)
     with_user_email_for(recipient) do
-      @subject    << %[ Bravo! Myousician "#{song.user.login}" has used your tracks in a new myousica song! ]
+      @subject    << %[ Bravo! "#{song.user.login}" has used your tracks in a new song! ]
       @body[:song] = song
       @body[:tracks] = tracks
     end
@@ -66,8 +66,8 @@ class UserMailer < ActionMailer::Base
   protected
     def with_user_email_for(user)
       @recipients     = "#{user.email}"
-      @from           = "Myousica <#{APPLICATION[:email]}>"
-      @subject        = "[MYOUSICA] "
+      @from           = "MEWSIC <#{APPLICATION[:email]}>"
+      @subject        = "[MEWSIC] "
       @sent_on        = Time.now
       @body[:user]    = user
       @body[:subject] = @subject
@@ -93,9 +93,9 @@ class UserMailer < ActionMailer::Base
       end
 
       attachment 'image/png' do |a|
-        a.body = File.read(File.join(RAILS_ROOT, 'public', 'images', 'logo_myousica.png'))
+        a.body = File.read(File.join(RAILS_ROOT, 'public', 'images', 'logo.png'))
         a.content_disposition = 'inline'
-        a.headers['Content-ID'] = '<logo_myousica>'
+        a.headers['Content-ID'] = '<logo>'
       end
     end
 end
