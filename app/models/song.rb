@@ -74,7 +74,7 @@ class Song < ActiveRecord::Base
 
   belongs_to :user, :polymorphic => true
 
-  has_many :mixes
+  has_many :mixes, :conditions => 'deleted = 0'
   has_many :tracks, :through => :mixes, :order => 'mixes.created_at DESC'  
 
   has_many :mlabs, :as => :mixable
@@ -87,6 +87,7 @@ class Song < ActiveRecord::Base
   before_validation :copy_author_information_from_user, :if => Proc.new(&:published?)
 
   before_destroy :check_if_deleted
+  before_destroy :destroy_mixes
 
   acts_as_rated :rating_range => 0..5
 
@@ -112,11 +113,11 @@ class Song < ActiveRecord::Base
   # its status is "public" or "private". Being +published?+ triggers additional
   # validation (presence of title, associated user, minimum 1 track)
   def published?
-    [statuses.public, statuses.private].include?(self.status)
+    [:public, :private].include?(self.status)
   end
 
   def accessible_by?(user)
-    (self.status == statuses.private && self.user == user) || self.status == statuses.public
+    (self.status == :private && self.user == user) || self.status == :public
   end
 
   # Finds all "best" public songs, ordered by play count and rating average.
@@ -169,7 +170,7 @@ class Song < ActiveRecord::Base
       FROM mixes m LEFT OUTER JOIN mixes t ON m.track_id = t.track_id
       LEFT OUTER JOIN songs s ON t.song_id = s.id
       LEFT OUTER JOIN songs x ON m.song_id = x.id
-      WHERE s.status = :published AND x.status = :published
+      WHERE s.status = :published AND x.status = :published AND m.deleted = 0
       GROUP BY s.id
       HAVING collaboration_count >= :minimum
       ORDER BY collaboration_count DESC, s.rating_avg DESC
@@ -238,10 +239,10 @@ class Song < ActiveRecord::Base
   # and delete all the mixes and mlabs linked to this track.
   def delete
     Song.transaction do
+      self.status = :deleted
+      self.save!
       self.mixes.destroy_all
       self.mlabs.destroy_all
-      self.status = statuses.deleted
-      self.save!
     end
   end
 
@@ -280,6 +281,10 @@ class Song < ActiveRecord::Base
   # A track can be destroyed only if it is already deleted.
   def check_if_deleted
     raise ActiveRecord::ReadOnlyRecord unless deleted?
+  end
+
+  def destroy_mixes
+    Mix.delete_all ['song_id = ?', self.id]
   end
 
 end

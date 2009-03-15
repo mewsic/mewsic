@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090315152448) do
+ActiveRecord::Schema.define(:version => 20090315195812) do
 
   create_table "abuses", :force => true do |t|
     t.integer  "abuseable_id"
@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(:version => 20090315152448) do
     t.float    "volume",     :default => 1.0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "deleted",    :default => false
   end
 
   create_table "mlabs", :force => true do |t|

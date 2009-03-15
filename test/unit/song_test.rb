@@ -66,9 +66,10 @@ class SongTest < ActiveSupport::TestCase
     m = mixes(:private_mix)
 
     assert_nothing_raised { s.delete }
+    assert File.exists?(s.absolute_filename)
 
     assert s.reload.deleted?
-    assert_raise(ActiveRecord::RecordNotFound) { m.reload }
+    assert m.reload.deleted?
   end
 
   def test_destroy
@@ -78,10 +79,8 @@ class SongTest < ActiveSupport::TestCase
     assert_raise(ActiveRecord::ReadOnlyRecord) { s.destroy } 
     assert_nothing_raised { m.reload; s.reload }
 
-    assert_nothing_raised { s.delete }
-    assert File.exists?(s.absolute_filename)
+    assert_nothing_raised { s.delete; s.destroy }
 
-    assert_nothing_raised { s.destroy }
     assert_raise(ActiveRecord::RecordNotFound) { s.reload }
     assert_raise(ActiveRecord::RecordNotFound) { m.reload }
 

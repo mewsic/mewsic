@@ -26,32 +26,35 @@ class TrackTest < ActiveSupport::TestCase
     assert Track.private.all?(&:private?)
   end
 
-  def test_deleted_status
+  def test_deleted
     s = songs(:private_song)
     t = tracks(:private_track)
     m = mixes(:private_mix)
     assert_raise(ActiveRecord::ReadOnlyRecord) { t.delete } 
 
-    assert_nothing_raised { s.delete; t.delete }
+    assert_nothing_raised { s.delete }
+    assert_nothing_raised { t.delete }
 
     assert t.reload.deleted?
     assert s.reload.deleted?
-    assert_raise(ActiveRecord::RecordNotFound) { m.reload }
+    assert m.reload.deleted?
   end
 
   def test_destroy
-    s = playable_test_filename songs(:private_song)
     t = playable_test_filename tracks(:private_track)
+    s = songs(:private_song)
     m = mixes(:private_mix)
 
     assert_raise(ActiveRecord::ReadOnlyRecord) { t.destroy } 
-    assert_nothing_raised { m.reload }
+    assert_nothing_raised { t.reload; m.reload }
 
     assert_nothing_raised { s.delete; t.delete; t.destroy }
 
     assert_raise(ActiveRecord::RecordNotFound) { t.reload }
     assert_raise(ActiveRecord::RecordNotFound) { m.reload }
     assert_nothing_raised { s.reload }
+    assert_equal 0, s.tracks.count
+    assert s.deleted?
 
     assert !File.exists?(t.absolute_filename)
     assert File.exists?(s.absolute_filename)

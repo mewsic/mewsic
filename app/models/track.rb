@@ -28,7 +28,7 @@ class Track < ActiveRecord::Base
   
   attr_accessor :mlab
   
-  has_many :mixes
+  has_many :mixes, :conditions => 'deleted = 0'
   has_many :songs, :through => :mixes, :order => 'songs.created_at DESC'
 
   has_many :mlabs, :as => :mixable
@@ -49,6 +49,7 @@ class Track < ActiveRecord::Base
   end
 
   before_destroy :check_if_deleted
+  before_destroy :destroy_mixes
   
   acts_as_rated :rating_range => 0..5 
   
@@ -70,7 +71,7 @@ class Track < ActiveRecord::Base
   end
 
   def accessible_by?(user)
-    (self.status == statuses.private && self.user == user) || self.status == statuses.public
+    (self.status == :private && self.user == user) || self.status == :public
   end
 
   # Finds most collaborated tracks and sets a virtual <tt>song_count</tt> attribute that yields
@@ -78,7 +79,7 @@ class Track < ActiveRecord::Base
   #
   def self.find_most_used(options = {})
     limit = "LIMIT #{options[:limit]}" if options[:limit]
-    self.find_by_sql(["SELECT tracks.*, COUNT(tracks.id) AS song_count FROM tracks LEFT JOIN mixes M ON M.track_id = tracks.id LEFT JOIN songs S ON M.song_id = S.id WHERE S.status = ? GROUP BY tracks.id ORDER BY song_count DESC #{limit}", Song.statuses.public]).each { |t| t.song_count = t.song_count.to_i }
+    self.find_by_sql(["SELECT tracks.*, COUNT(tracks.id) AS song_count FROM tracks LEFT JOIN mixes M ON M.track_id = tracks.id LEFT JOIN songs S ON M.song_id = S.id WHERE M.deleted = 0 AND S.status = ? GROUP BY tracks.id ORDER BY song_count DESC #{limit}", Song.statuses.public]).each { |t| t.song_count = t.song_count.to_i }
   end
   
   def length
@@ -100,10 +101,10 @@ class Track < ActiveRecord::Base
   def delete
     Track.transaction do
       raise ActiveRecord::ReadOnlyRecord unless deletable?
+      self.status = :deleted
+      self.save!
       self.mixes.destroy_all
       self.mlabs.destroy_all
-      self.status = statuses.deleted
-      self.save!
     end
   end
 
@@ -112,12 +113,16 @@ class Track < ActiveRecord::Base
   # A track is not deletable if it is mixed into other published songs (either public or private)
   #
   def deletable?
-    self.mixes.count.zero? || self.mixes.all? { |mix| !mix.song.published? }
+    self.mixes.count.zero? || !self.mixes.any? { |mix| mix.song.published? }
   end
 
   # A track can be destroyed only if it is already deleted.
   def check_if_deleted
     raise ActiveRecord::ReadOnlyRecord unless deleted?
+  end
+
+  def destroy_mixes
+    Mix.delete_all ['track_id = ?', self.id]
   end
 
 end

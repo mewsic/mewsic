@@ -1,4 +1,5 @@
-# (C) 2009 Marcello Barnaba <vjt@openssl.it>
+#  (C) 2009 Marcello Barnaba <vjt@openssl.it>
+# Released under the terms of the MIT License
 #
 module MultipleStatuses
   def self.included(target)
@@ -13,7 +14,7 @@ module MultipleStatuses
       statuses_hash.each do |name, status|
         # Defines a query method on the model instance, one
         # for each status name (e.g. Song#published?)
-        define_method("#{name}?") { self.status == status }
+        define_method("#{name}?") { self.read_attribute(:status) == status }
 
         # Defines on the `statuses` object a method for
         # each status name. Each return the status value.
@@ -21,10 +22,31 @@ module MultipleStatuses
         #
         class<<statuses;self;end.send(:define_method, name) { status }
       end
+
+      include InstanceMethods
     end
   end
 
   module InstanceMethods
+    def status(format = nil)
+      status = read_attribute :status
+      if format == :db
+        status
+      else
+        statuses.invert[status]
+      end
+    end
+
+    def status=(value)
+      if statuses.has_key? value
+        write_attribute :status, statuses[value]
+      elsif statuses.values.include? value
+        write_attribute :status, value
+      else
+        raise ArgumentError, "invalid status #{value.inspect}"
+      end
+    end
+
   end
 end
 

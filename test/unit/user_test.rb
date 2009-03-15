@@ -263,6 +263,7 @@ class UserTest < Test::Unit::TestCase
     assert_equal users(:quentin), User.find_most_instruments.first
   end
 
+  # This test can randomly fail. It'll be fixed.
   def test_top_mewsicians
     users = User.find_top_mewsicians
     assert_equal 2, users.size
