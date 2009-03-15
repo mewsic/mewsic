@@ -17,6 +17,6 @@ class MbandTest < ActiveSupport::TestCase
 
   def test_tracks
     mband = mbands(:mband_1)
-    assert mband.tracks.all? { |t| t.kind_of?(Track) && mband.members.include(t.user) }
+    assert mband.tracks.all? { |t| t.kind_of?(Track) && mband.members.include?(t.user) }
   end
 end

@@ -39,6 +39,7 @@ sax_for_let_it_be:
   seconds: <%= rand(100) + 90 %>
   filename: test.mp3
   rating_avg: <%= random_rating %>
+  status: <%= Track.statuses.public %>
 
 guitar_for_let_it_be:
   title: Chitarra
@@ -48,6 +49,7 @@ guitar_for_let_it_be:
   seconds: <%= rand(100) + 90 %>
   filename: test.mp3
   rating_avg: <%= random_rating %>
+  status: <%= Track.statuses.public %>
 
 voice_for_let_it_be:
   title: Voce
@@ -56,6 +58,7 @@ voice_for_let_it_be:
   seconds: <%= rand(100) + 90 %>
   filename: test.mp3
   rating_avg: <%= random_rating %>
+  status: <%= Track.statuses.public %>
 
 voice_for_red_red_wine:
   title: red red wine
@@ -64,6 +67,7 @@ voice_for_red_red_wine:
   seconds: <%= rand(100) + 90 %>
   filename: test.mp3
   rating_avg: <%= random_rating %>
+  status: <%= Track.statuses.private %>
 
 guitar_for_red_red_wine:
   title: red red wine
@@ -72,6 +76,7 @@ guitar_for_red_red_wine:
   seconds: <%= rand(100) + 90 %>
   filename: test.mp3
   rating_avg: <%= random_rating %>
+  status: <%= Track.statuses.public %>
 
 voice_for_radio_ga_ga:
   title: Voce
@@ -80,6 +85,7 @@ voice_for_radio_ga_ga:
   seconds: <%= rand(100) + 90 %>
   filename: test.mp3
   rating_avg: <%= random_rating %>
+  status: <%= Track.statuses.public %>
 
 synthetizer_for_space_cowboy:
   title: Space cowboy
@@ -88,6 +94,7 @@ synthetizer_for_space_cowboy:
   seconds: <%= rand(200) + 90 %>
   filename: test.mp3
   rating_avg: <%= random_rating %>
+  status: <%= Track.statuses.public %>
 
 turntables_for_space_cowboy:
   title: Space cowboy
@@ -96,6 +103,7 @@ turntables_for_space_cowboy:
   seconds: <%= rand(200) + 90 %>
   filename: test.mp3
   rating_avg: <%= random_rating %>
+  status: <%= Track.statuses.public %>
 
 guitar_for_closer:
   title: Chitarra
@@ -104,6 +112,7 @@ guitar_for_closer:
   seconds: <%= rand(100) + 90 %>
   filename: test.mp3
   rating_avg: <%= random_rating %>
+  status: <%= Track.statuses.public %>
 
 sax_for_closer:
   title: Sassofono
@@ -112,14 +121,16 @@ sax_for_closer:
   seconds: <%= rand(100) + 90 %>
   filename: test.mp3
   rating_avg: <%= random_rating %>
+  status: <%= Track.statuses.public %>
 
 drum_for_closer:
   title: Batteria
   instrument: drums
-  user: aaron
+  user: quentin
   seconds: <%= rand(100) + 90 %>
   filename: test.mp3
   rating_avg: <%= random_rating %>
+  status: <%= Track.statuses.public %>
 
 voice_for_white_christmas:
   title: Voice
@@ -128,6 +139,7 @@ voice_for_white_christmas:
   seconds: <%= rand(100) + 90 %>
   filename: test.mp3
   rating_avg: <%= random_rating %>
+  status: <%= Track.statuses.public %>
 
 <% 10.times do |i| %>
 voice_for_closer_<%= i + 4 %>:
@@ -138,6 +150,7 @@ voice_for_closer_<%= i + 4 %>:
   user: <%= %w(quentin john).rand %>
   filename: test.mp3
   rating_avg: <%= random_rating %>
+  status: <%= Track.statuses.public %>
 <% end %>
 
 <% 2.times do |i| %>
@@ -149,15 +162,17 @@ voice_for_closer_by_john_<%= i %>:
   user: john
   filename: test.mp3
   rating_avg: <%= random_rating %>
+  status: <%= Track.statuses.public %>
 <% end %>
 
 drum_for_single_track_song:
   title: Drums for single track song
   instrument: drums
   seconds: 205
-  user: aaron
+  user: quentin
   filename: test.mp3
   rating_avg: <%= random_rating %>
+  status: <%= Track.statuses.public %>
 
 guitar_for_single_track_song:
   title: Guitar for single track song
@@ -166,6 +181,7 @@ guitar_for_single_track_song:
   user: john
   filename: test.mp3
   rating_avg: <%= random_rating %>
+  status: <%= Track.statuses.public %>
 
 voice_for_single_track_song:
   title: Voice for single track song
@@ -174,23 +190,26 @@ voice_for_single_track_song:
   user: quentin
   filename: test.mp3
   rating_avg: <%= random_rating %>
+  status: <%= Track.statuses.public %>
 
 drum_for_white_christmas:
   title: Drums for white christmas
   instrument: drums
   seconds: 205
-  user: aaron
+  user: quentin
   filename: test.mp3
   rating_avg: <%= random_rating %>
+  status: <%= Track.statuses.public %>
 
 <% 50.times do |i| %>
 random_track_<%= i %>:
   title: random track <%= i %>
   instrument: <%= random_instrument %>
   seconds: <%= rand(500) %>
-  user: user_<%= rand(497) + 3 %>
+  user: user_<%= rand(500) %>
   filename: test.mp3
   rating_avg: <%= random_rating %>
+  status: <%= Track.statuses.public %>
 <% end %>
 
 destroyable_track:
@@ -200,6 +219,7 @@ destroyable_track:
   user: quentin
   filename: test.mp3
   rating_avg: <%= random_rating %>
+  status: <%= Track.statuses.public %>
 
 private_track:
   title: track mixed into a private song
@@ -207,6 +227,7 @@ private_track:
   seconds: <%= rand(100) + 120 %>
   user: quentin
   filename: test.mp3
+  status: <%= Track.statuses.private %>
 
 <% 4.times do |i| %>
 private_track_<%= i %>:
@@ -215,6 +236,7 @@ private_track_<%= i %>:
   seconds: <%= rand(100) + 120 %>
   user: quentin
   filename: test.mp3
+  status: <%= Track.statuses.private %>
 <% end %>
 
 really_short_track:
@@ -223,3 +245,4 @@ really_short_track:
   seconds: 4
   user: quentin
   rating_avg: <%= random_rating %>
+  status: <%= Track.statuses.public %>

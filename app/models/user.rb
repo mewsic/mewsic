@@ -105,6 +105,7 @@ class User < ActiveRecord::Base
 
   has_many :songs, :as => :user, :order => 'songs.created_at DESC'
   has_many :tracks, :order => 'tracks.created_at DESC'
+  has_many :featurings
 
   has_many :answers, :order => 'answers.created_at DESC'
   has_many :replies, :order => 'answers.created_at DESC'

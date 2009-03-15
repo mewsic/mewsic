@@ -26,6 +26,28 @@ class TrackTest < ActiveSupport::TestCase
     assert Track.private.all?(&:private?)
   end
 
+  def test_accessibility
+    # Private track, in a song with featurings
+    private_with_feat = tracks(:voice_for_red_red_wine)
+    assert private_with_feat.accessible_by?(users(:john))    # Author
+    deny   private_with_feat.accessible_by?(users(:quentin)) # Featuring, without song scope
+    assert private_with_feat.accessible_by?(users(:quentin), # Featuring, with a song that includes the track
+                                            songs(:red_red_wine_unpublished))
+    deny   private_with_feat.accessible_by?(users(:quentin), # Featuring, with extraneous song
+                                            songs(:let_it_be))
+
+    # Private track, without any featuring in any song
+    assert tracks(:private_track).accessible_by?(users(:quentin))
+    deny   tracks(:private_track).accessible_by?(users(:john))
+    deny   tracks(:private_track).accessible_by?(users(:john), songs(:private_song))
+    deny   tracks(:private_track).accessible_by?(users(:john), songs(:let_it_be))
+
+    # Public track
+    assert tracks(:guitar_for_red_red_wine).accessible_by?(users(:quentin))
+    assert tracks(:guitar_for_red_red_wine).accessible_by?(users(:john))
+    assert tracks(:guitar_for_red_red_wine).accessible_by?(users("user_#{rand 500}".intern))
+  end
+
   def test_deleted
     s = songs(:private_song)
     t = tracks(:private_track)

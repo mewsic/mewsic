@@ -40,12 +40,12 @@ red_red_wine_guitar:
   track: guitar_for_red_red_wine
   volume: <%= rand %>
 
-red_rew_wine_unpublished_guitar:
+red_red_wine_unpublished_guitar:
   song: red_red_wine_unpublished
   track: guitar_for_red_red_wine
   volume: <%= rand %>
 
-red_rew_wine_unpublished_voice:
+red_red_wine_unpublished_voice:
   song: red_red_wine_unpublished
   track: voice_for_red_red_wine
   volume: <%= rand %>

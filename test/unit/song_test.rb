@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 class SongTest < ActiveSupport::TestCase
   include Playable::TestHelpers
 
-  fixtures :users, :songs, :mixes, :tracks, :instruments, :mbands
+  fixtures :users, :songs, :mixes, :tracks, :instruments, :mbands, :featurings
 
   def test_tracks_association
     assert_equal 3, songs(:let_it_be).tracks.size
@@ -59,6 +59,22 @@ class SongTest < ActiveSupport::TestCase
     assert Song.public.all?(&:public?)
     assert Song.private.all?(&:published?)
     assert Song.private.all?(&:private?)
+  end
+
+  def test_accessibility
+    # Private song with featurings
+    private_with_feats = songs(:red_red_wine_unpublished)
+
+    assert private_with_feats.accessible_by?(users(:quentin)) # Author
+    assert private_with_feats.accessible_by?(users(:john))    # Featuring
+    deny   private_with_feats.accessible_by?(users(:user_42)) # No one
+
+    # Private song with no feats
+    assert songs(:private_song).accessible_by?(users(:quentin)) # Author
+    deny   songs(:private_song).accessible_by?(users(:john))    # No one
+
+    # Public song
+    assert songs(:let_it_be).accessible_by?(users("user_#{rand 500}".intern))
   end
   
   def test_delete

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090315195812) do
+ActiveRecord::Schema.define(:version => 20090315212808) do
 
   create_table "abuses", :force => true do |t|
     t.integer  "abuseable_id"
@@ -43,6 +43,13 @@ ActiveRecord::Schema.define(:version => 20090315195812) do
     t.datetime "updated_at"
     t.string   "country",        :limit => 45
     t.integer  "linked_user_id"
+  end
+
+  create_table "featurings", :force => true do |t|
+    t.integer  "song_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "friendships", :force => true do |t|

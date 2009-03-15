@@ -70,8 +70,12 @@ class Track < ActiveRecord::Base
     set_property :delta => true
   end
 
-  def accessible_by?(user)
-    (self.status == :private && self.user == user) || self.status == :public
+  def accessible_by?(user, song = nil)
+    if self.status == :private
+      (song && song.private? && song.tracks.include?(self)) ? song.accessible_by?(user) : (self.user == user)
+    elsif self.status == :public
+      true
+    end
   end
 
   # Finds most collaborated tracks and sets a virtual <tt>song_count</tt> attribute that yields

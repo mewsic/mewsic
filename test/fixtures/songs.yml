@@ -195,6 +195,7 @@ mband_song_<%= i %>:
 quentin_productions:
   title: Quentin productions huge song
   user: quentin
+  user_type: User
   author: Boh
   listened_times: <%= rand(100) %>
   created_at: <%= (rand(30)).days.ago.to_s :db %>
@@ -205,9 +206,10 @@ quentin_productions:
 private_song:
   title: Private song with a single mixed track
   user: quentin
+  user_type: User
   author: Antani
   listened_times: <%= rand(50) %>
-  created_at: <%= (rand(60)).days.ago.to_s :db %>
+  created_at: <%= rand(60).days.ago.to_s :db %>
   seconds: 100
   filename: test.mp3
   status: <%= Song.statuses.private %>
@@ -216,9 +218,10 @@ private_song:
 private_song_<%= i %>:
   title: "Private song with mixed tracks #<%= i %>"
   user: quentin
+  user_type: User
   author: Antani
   listened_times: <%= rand(50) %>
-  created_at: <%= (rand(60)).days.ago.to_s :db %>
+  created_at: <%= rand(60).days.ago.to_s :db %>
   seconds: 100
   filename: test.mp3
   status: <%= Song.statuses.private %>
@@ -228,6 +231,7 @@ private_song_<%= i %>:
 really_short_song:
   title: Really short song for increment count test
   user: quentin
+  user_type: User
   author: Antani
   listened_times: <%= rand(50) %>
   created_at: <%= (rand(60)).days.ago.to_s :db %>
@@ -239,6 +243,7 @@ really_short_song:
 temporary_song:
   title: temporary song
   user: user_37
+  user_type: User
   listened_times: 0
   created_at: <%= 1.day.ago.to_s :db %>
   seconds: 100

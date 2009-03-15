@@ -76,6 +76,7 @@ class Song < ActiveRecord::Base
 
   has_many :mixes, :conditions => 'deleted = 0'
   has_many :tracks, :through => :mixes, :order => 'mixes.created_at DESC'  
+  has_many :featurings, :include => :user
 
   has_many :mlabs, :as => :mixable
   #has_many :abuses, :as => :abuseable, :class_name => 'Abuse'
@@ -116,8 +117,16 @@ class Song < ActiveRecord::Base
     [:public, :private].include?(self.status)
   end
 
+  # Song accessibility policy: a private song is accessible by its creator
+  # and all the users that have been added to the featurings list.
+  # A public song is accessible by anyone.
+  #
   def accessible_by?(user)
-    (self.status == :private && self.user == user) || self.status == :public
+    if self.status == :private
+      self.user == user || self.featurings.map(&:user).include?(user)
+    elsif status == :public
+      true
+    end
   end
 
   # Finds all "best" public songs, ordered by play count and rating average.
@@ -241,8 +250,11 @@ class Song < ActiveRecord::Base
     Song.transaction do
       self.status = :deleted
       self.save!
+
       self.mixes.destroy_all
       self.mlabs.destroy_all
+
+      self.featurings.destroy_all
     end
   end
 
