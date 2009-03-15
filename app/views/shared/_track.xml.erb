@@ -2,7 +2,7 @@
   <id><%= track.id %></id>         
   <user><%= h(track.user.login) %></user>       
   <title><%= h(track.title) %></title>     
-  <author><%= h(track.parent_song.original_author) if track.parent_song %></author>     
+  <author><%= h(track.author) %></author>
   <instrument><%= track.instrument.id %></instrument>  
   <rating><%= track.rating_avg.to_f %></rating>     
   <filename><%= track.public_filename %></filename>

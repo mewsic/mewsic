@@ -13,10 +13,6 @@ class TrackTest < ActiveSupport::TestCase
     assert_equal max_usage, track.song_count
   end
   
-  def test_association_with_parent
-    assert_equal songs(:radio_ga_ga), tracks(:voice_for_radio_ga_ga).parent_song
-  end
-  
   def test_should_act_as_rated
     assert_acts_as_rated('Track')
   end

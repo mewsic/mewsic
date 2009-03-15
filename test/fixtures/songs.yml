@@ -184,12 +184,11 @@ white_christmas_electro_remix:
   filename: test.mp3
   rating_avg: <%= random_rating %>
   
-# songs from 4 to 200 randomly have children tracks, see tracks.yml 
-# songs from 201 to 304 randomly have mixed tracks, see mixes.yml
-<% 300.times do |i| %>
-song_<%= i + 4 %>:
+# these songs have randomly mixed in tracks, see mixes.yml
+<% 200.times do |i| %>
+song_<%= i %>:
   title: <%= random_title %>
-  user: <%= "user_#{rand(497) + 3}" %>
+  user: <%= "user_#{rand(498) + 3}" %>
   user_type: User
   author: <%= %w(Queen Beatles Elvis Vasco R.E.M.).rand %>
   description: <%= random_description %>.

@@ -110,11 +110,10 @@ mixes_<%= i + 4 %>:
   volume: 0.8
 <% end %>
 
-# songs from 201 to 304 randomly have mixed tracks
-# see songs.yml
-<% 100.times do |i| %>
+# all songs have randomly got some tracks, see songs.yml
+<% 400.times do |i| %>
 random_mixes_<%= i %>:
-  song: song_<%= rand(101) + 101 %>
+  song: song_<%= rand(200) %>
   track: random_track_<%= rand(50) + 1 %>
   volume: <%= rand %>
 <% end %>

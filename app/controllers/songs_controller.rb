@@ -16,7 +16,7 @@ class SongsController < ApplicationController
 
   protect_from_forgery
   
-  # ==== XHR GET /songs?[genre_id|user_id|mband_id]=ID
+  # ==== XHR GET /songs?[user_id|mband_id]=ID
   # ==== GET /songs.xml?user_id=ID
   #
   # * HTML format: renders a paginated index of songs by User or Mband. Every
@@ -62,7 +62,7 @@ class SongsController < ApplicationController
   # * PNG format: streams the waveform png to the client using +x_accel_redirect+.
   #
   def show
-    @song = Song.find(params[:id], :include => [:user, { :mixes => { :track => [:instrument, :parent_song] } }])        
+    @song = Song.find(params[:id], :include => [:user, {:mixes => {:track => :instrument}}])
 
     respond_to do |format|
       format.html do
@@ -92,33 +92,20 @@ class SongsController < ApplicationController
 
   # ==== DELETE /songs/:id
   #
-  # Tries to destroy the given Song instance. Because songs are used by tracks to inherit Genre
-  # information, a Song with direct children tracks cannot be deleted. In this case, it is marked
-  # as unpublished, its stream is removed and its mixes too.
-  #
-  # When a song has got no children tracks it is destroyed, and mixes are removed as a dependency.
+  # Tries to destroy the given Song instance.
   #
   def destroy
     @song = current_user.songs.find(params[:id])
-    if @song.children_tracks.count > 0
-      @song.published = false
-      @song.remove_stream
-      @song.mixes.clear
-      @song.save!
-    else
-      @song.destroy
-    end
+    @song.destroy
 
     flash[:notice] = "Song '#{@song.title}' has been deleted."
 
     head :ok
 
   rescue ActiveRecord::RecordNotFound # find
-    head :not_found
+    head :forbidden
   rescue ActiveRecord::ReadOnlyRecord # destroy
     head :bad_request
-  rescue ActiveRecord::RecordNotSaved # save!
-    head :forbidden
   end
 
   # ==== XHR GET /songs/:id/confirm_destroy
@@ -138,7 +125,7 @@ class SongsController < ApplicationController
   def tracks
     render :nothing => true, :status => :bad_request and return unless request.xhr?
 
-    @song = Song.find(params[:id], :include => [:user, { :mixes => { :track => [:instrument, :parent_song] } }, :genre])        
+    @song = Song.find(params[:id], :include => [:user, {:mixes => {:track => :instrument}}])        
     render :layout => false, :partial => 'track', :collection => @song.tracks
   end
 
@@ -155,11 +142,7 @@ class SongsController < ApplicationController
     @song.update_attributes!(params[:song])
     @song.reload
     if params[:song].size == 1 && @song.respond_to?(params[:song].keys.first)
-      if params[:song].keys.first == 'genre_id'
-        render :text => @song.genre ? @song.genre.name : ''
-      else
-        render :text => @song.send(params[:song].keys.first)
-      end
+      render :text => @song.send(params[:song].keys.first)
     else
       head :ok
     end

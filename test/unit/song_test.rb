@@ -5,11 +5,7 @@ class SongTest < ActiveSupport::TestCase
 
   fixtures :users, :songs, :mixes, :tracks, :instruments, :mbands
 
-  def test_association_with_keys
-    assert_equal 3, songs(:let_it_be).children_tracks.size
-  end
-  
-  def test_association_with_mixes
+  def test_tracks_association
     assert_equal 3, songs(:let_it_be).tracks.size
   end
 
@@ -53,12 +49,12 @@ class SongTest < ActiveSupport::TestCase
     assert !Song.unpublished.all?(&:published?)
   end
   
-  def test_should_not_destroy_if_has_children_tracks
-    s = songs(:let_it_be)
-    assert_raise(ActiveRecord::ReadOnlyRecord) { s.destroy }
-    assert_not_nil s.reload
-    assert File.exists?(s.absolute_filename)
-  end
+  #def test_should_not_destroy_if_has_children_tracks
+  #  s = songs(:let_it_be)
+  #  assert_raise(ActiveRecord::ReadOnlyRecord) { s.destroy }
+  #  assert_not_nil s.reload
+  #  assert File.exists?(s.absolute_filename)
+  #end
 
   def test_should_destroy_an_empty_song
     s = playable_test_filename(songs(:empty_song))

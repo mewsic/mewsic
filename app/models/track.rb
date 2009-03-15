@@ -41,13 +41,11 @@ class Track < ActiveRecord::Base
   has_many :mlabs, :as => :mixable, :dependent => :delete_all
   #has_many :abuses, :as => :abuseable, :dependent => :delete_all, :class_name => 'Abuse'
 
-  belongs_to :parent_song, :class_name => 'Song', :foreign_key => 'song_id'
   belongs_to :user
   belongs_to :instrument
 
   validates_presence_of :title, :seconds
-  validates_associated :instrument, :parent_song
-  validates_numericality_of :song_id, :greater_than => 0, :on => :create
+  validates_associated :instrument
   validates_numericality_of :instrument_id, :user_id, :greater_than => 0
 
   validates_each :filename do |model, attr, value|

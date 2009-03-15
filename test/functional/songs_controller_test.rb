@@ -135,16 +135,16 @@ class SongsControllerTest < ActionController::TestCase
     assert_response :not_found
   end
 
-  def test_destroy_should_unpublish_a_song_with_children_tracks
-    login_as :quentin
-    song = playable_test_filename(songs(:quentin_single_track_song))
-    delete :destroy, :id => song
-    assert_response :success
-
-    assert_equal false, song.reload.published
-    assert song.mixes.empty?
-    assert song.filename.nil?
-  end
+  #def test_destroy_should_unpublish_a_song_with_children_tracks
+  #  login_as :quentin
+  #  song = playable_test_filename(songs(:quentin_single_track_song))
+  #  delete :destroy, :id => song
+  #  assert_response :success
+#
+#    assert_equal false, song.reload.published
+#    assert song.mixes.empty?
+#    assert song.filename.nil?
+#  end
 
   def test_destroy_should_destroy_an_empty_song
     song = playable_test_filename(songs(:song_366))

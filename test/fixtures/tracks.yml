@@ -7,7 +7,6 @@
 #  title          :string(60)    
 #  filename       :string(64)    
 #  description    :text          
-#  song_id        :integer(4)    
 #  instrument_id  :integer(4)    
 #  listened_times :integer(4)    default(0)
 #  seconds        :integer(4)    default(0)
@@ -35,7 +34,6 @@
 sax_for_let_it_be:
   title: Sassofono
   author: Beatles
-  parent_song: let_it_be
   instrument: saxophone
   user: quentin
   seconds: <%= rand(100) + 90 %>
@@ -45,7 +43,6 @@ sax_for_let_it_be:
 guitar_for_let_it_be:
   title: Chitarra
   author: Beatles
-  parent_song: let_it_be
   instrument: guitar
   user: quentin
   seconds: <%= rand(100) + 90 %>
@@ -54,7 +51,6 @@ guitar_for_let_it_be:
 
 voice_for_let_it_be:
   title: Voce
-  parent_song: let_it_be
   instrument: microphone
   user: quentin
   seconds: <%= rand(100) + 90 %>
@@ -63,7 +59,6 @@ voice_for_let_it_be:
 
 voice_for_radio_ga_ga:
   title: Voce
-  parent_song: radio_ga_ga
   instrument: microphone
   user: quentin
   seconds: <%= rand(100) + 90 %>
@@ -72,7 +67,6 @@ voice_for_radio_ga_ga:
 
 guitar_for_closer:
   title: Chitarra
-  parent_song: closer
   instrument: guitar
   user: quentin
   seconds: <%= rand(100) + 90 %>
@@ -81,7 +75,6 @@ guitar_for_closer:
 
 sax_for_closer:
   title: Sassofono
-  parent_song: closer
   instrument: saxophone
   user: quentin
   seconds: <%= rand(100) + 90 %>
@@ -90,7 +83,6 @@ sax_for_closer:
 
 drum_for_closer:
   title: Batteria
-  parent_song: closer
   instrument: drums
   user: aaron
   seconds: <%= rand(100) + 90 %>
@@ -99,7 +91,6 @@ drum_for_closer:
 
 voice_for_white_christmas:
   title: Voice
-  parent_song: song_120
   instrument: microphone
   user: john
   seconds: <%= rand(100) + 90 %>
@@ -109,7 +100,6 @@ voice_for_white_christmas:
 <% 10.times do |i| %>
 voice_for_closer_<%= i + 4 %>:
   title: Voice
-  parent_song: closer
   instrument: microphone
   seconds: <%= rand(100) + 90 %>
   created_at: <%= rand(30).days.ago.to_s :db %>
@@ -121,7 +111,6 @@ voice_for_closer_<%= i + 4 %>:
 <% 2.times do |i| %>
 voice_for_closer_by_john_<%= i %>:
   title: Voice
-  parent_song: closer
   instrument: microphone
   seconds: <%= rand(100) + 90 %>
   created_at: <%= rand(30).days.ago.to_s :db %>
@@ -132,7 +121,6 @@ voice_for_closer_by_john_<%= i %>:
 
 drum_for_single_track_song:
   title: Drums for single track song
-  parent_song: quentin_single_track_song
   instrument: drums
   seconds: 205
   user: aaron
@@ -141,7 +129,6 @@ drum_for_single_track_song:
 
 guitar_for_single_track_song:
   title: Guitar for single track song
-  parent_song: quentin_single_track_song
   instrument: guitar
   seconds: 205
   user: john
@@ -150,7 +137,6 @@ guitar_for_single_track_song:
 
 voice_for_single_track_song:
   title: Voice for single track song
-  parent_song: quentin_single_track_song
   instrument: microphone
   seconds: 205
   user: quentin
@@ -159,7 +145,6 @@ voice_for_single_track_song:
 
 drum_for_white_christmas:
   title: Drums for white christmas
-  parent_song: white_christmas
   instrument: drums
   seconds: 205
   user: aaron
@@ -171,7 +156,6 @@ drum_for_white_christmas:
 <% 50.times do |i| %>
 random_track_<%= i %>:
   title: random track <%= i %>
-  parent_song: song_<%= rand(197) + 4 %>
   instrument: <%= random_instrument %>
   seconds: <%= rand(500) %>
   user: user_<%= rand(497) + 3 %>
@@ -181,7 +165,6 @@ random_track_<%= i %>:
 
 destroyable_track:
   title: the one that can be destroyed
-  parent_song: song_666
   instrument: <%= random_instrument %>
   seconds: <%= rand(100) + 90 %>
   user: quentin
@@ -190,7 +173,6 @@ destroyable_track:
 
 destroyable_mixed_track:
   title: track mixed into an unpublished song
-  parent_song: unpublished_mixed_song
   instrument: <%= random_instrument %>
   seconds: <%= rand(100) + 120 %>
   user: quentin
@@ -200,7 +182,6 @@ destroyable_mixed_track:
 <% 4.times do |i| %>
 destroyable_mixed_track_<%= i %>:
   title: "track mixed into an unpublished song #<%= i %>"
-  parent_song: unpublished_mixed_song_<%= rand(10) %>
   instrument: <%= random_instrument %>
   seconds: <%= rand(100) + 120 %>
   user: quentin
@@ -210,7 +191,6 @@ destroyable_mixed_track_<%= i %>:
 
 really_short_track:
   title: Really short track for increment count test
-  parent_song: song_201
   instrument: <%= random_instrument %>
   seconds: 4
   user: user_401

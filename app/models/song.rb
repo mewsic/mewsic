@@ -30,10 +30,6 @@
 #
 # Tracks are associated via an <tt>has_many :through</tt> the <tt>Mix</tt> join model.
 #
-# Songs have associated tracks via direct foreign key, too (the <tt>song_id</tt> attribute in
-# the Track model), named <tt>children_tracks</tt>, and associated to a Song when recording
-# live or uploading streams via the multitrack app.
-#
 # The <tt>published</tt> attribute sets whether a Song has to be displayed on the site, because
 # unpublished songs are scraps created automatically when a registered user enters the multitrack.
 # When a project is saved and the song encoded and mixed down, the <tt>published</tt> attribute
@@ -49,7 +45,6 @@
 #
 # * <b>has_many</b> <tt>mixes</tt>, deleted all upon destroy. [Mix]
 # * <b>has_many</b> <tt>tracks</tt> <b>through</b> <tt>mixes</tt> [Track]
-# * <b>has_many</b> <tt>children_tracks</tt> [Track]
 # * <b>has_many</b> <tt>abuses</tt> [Abuse]
 #
 # * <b>belongs_to</b> an User
@@ -60,10 +55,6 @@
 #   Song is <tt>published</tt>
 # * <b>validates_associated</b> User if the Song is <tt>published</tt>
 # * <b>validates_numericality_of</b> <tt>user_id</tt>, greater than 0 if the Song is <tt>published</tt>
-#
-# == Callbacks
-#
-# * <b>before_destroy</b> +check_for_children_tracks+
 #
 require 'numeric_to_runtime'
 require 'playable'
@@ -82,8 +73,7 @@ class Song < ActiveRecord::Base
   belongs_to :user, :polymorphic => true
 
   has_many :mixes, :dependent => :delete_all
-  has_many :tracks, :through => :mixes, :order => 'tracks.created_at DESC'  
-  has_many :children_tracks, :class_name => 'Track'
+  has_many :tracks, :through => :mixes, :order => 'mixes.created_at DESC'  
 
   # This association is here only for the :dependent trigger
   has_many :mlabs, :as => :mixable, :dependent => :delete_all
@@ -96,7 +86,6 @@ class Song < ActiveRecord::Base
   acts_as_rated :rating_range => 0..5
 
   before_save :copy_author_information_from_user, :if => Proc.new(&:published)
-  before_destroy :check_for_children_tracks
 
   has_playable_stream
 
@@ -242,7 +231,7 @@ class Song < ActiveRecord::Base
 
   # Called by the cron runner, to clean up unpublished songs that have got no children
   # tracks and have been created more than one week ago.
-  #
+  # #XXX FIXME#
   def self.cleanup_unpublished
     songs = find_by_sql(['select songs.id from songs
       left outer join tracks on tracks.song_id = songs.id
@@ -256,13 +245,6 @@ class Song < ActiveRecord::Base
   # FIXME: This should change logaritmically using rating_avg
   def priority
     0.7
-  end
-
-  # Checks whether this song has got children tracks, and raises ActiveRecord::ReadOnlyRecord
-  # if it has. Used as a barrier to make songs with children tracks undeletable.
-  #
-  def check_for_children_tracks
-    raise ActiveRecord::ReadOnlyRecord if self.published? && self.children_tracks.count > 0
   end
 
   def copy_author_information_from_user

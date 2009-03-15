@@ -25,9 +25,6 @@
 	<dt>user</dt>
 	<dd><%= f.select :user_id, User.find(:all, :select => 'login,id', :conditions => 'activated_at IS NOT NULL', :order => 'login').map {|u| [u.login,u.id]}, :include_blank => true %></dd>
 
-	<dt>genre</dt>
-	<dd><%= f.select :genre_id, Genre.find(:all, :order => 'name').map { |g| [g.name,g.id] }, :include_blank => true %></dd>
-
 	<dt>bpm</dt>
 	<dd><%= f.text_field :bpm %></dd>
 
@@ -49,12 +46,9 @@
 	<dt>rating</dt>
 	<dd><%= @song.rating_avg.to_f %></dd>
 
-	<dt>children tracks</dt>
-	<dd><div style="float:left"><%= @song.children_tracks.find(:all, :order => 'tracks.title, instruments.description', :include => :instrument).map { |track| edit_link_to("#{track.title} [#{track.instrument.description}]", admin_track_path(track)) }.join('<br/>') %></div><div style="clear:both"></div></dd>
-
-	<dt>mixed tracks</dt>
-	<dd><div style="float:left"><%= @song.tracks.find(:all, :order => 'tracks.title, instruments.description', :include => [:parent_song, :instrument]).map { |track|
-		edit_link_to("#{track.parent_song.title if track.parent_song}: #{track.title} [#{track.instrument.description}]", admin_track_path(track)) + ' ' +
+	<dt>tracks</dt>
+	<dd><div style="float:left"><%= @song.tracks.find(:all, :order => 'tracks.title, instruments.description', :include => [:instrument]).map { |track|
+		edit_link_to("#{track.title} [#{track.instrument.description}]", admin_track_path(track)) + ' ' +
 		link_to_remote('[unmix]', :url => unmix_admin_song_path(@song, :track_id => track.id), :method => 'put', :update => 'editing')
 	}.join('<br/>') %></div><div style="clear:both"></div></dd>
 
@@ -68,7 +62,7 @@
 	<% end %>
 
 	<% edit_form_for @song, :url => mix_admin_song_path(@song) do %>
-	<%= select_tag 'track_id', options_for_select(Track.find(:all, :include => [{:parent_song => :genre}, :instrument], :order => 'songs.title, instruments.description, tracks.title, genres.name').map{|t| ["#{t.parent_song.title if t.parent_song}: #{t.title} [#{t.instrument.description}] (#{t.parent_song.genre.name if t.parent_song && t.parent_song.genre})",t.id]}) %>
+	<%= select_tag 'track_id', options_for_select(Track.find(:all, :include => :instrument, :order => 'songs.title, instruments.description, tracks.title').map{|t| ["#{t.title} [#{t.instrument.description}]",t.id]}) %>
 		<%= submit_tag 'mix track' %>
 	<% end %>
 

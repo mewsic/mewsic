@@ -41,7 +41,7 @@ class TracksController < ApplicationController
   # * PNG format: streams the waveform png to the client using +x_accel_redirect+.
   #
   def show
-    @track = Track.find(params[:id], :include => [:instrument, :parent_song])
+    @track = Track.find(params[:id], :include => :instrument)
 
     respond_to do |format|
       format.xml
