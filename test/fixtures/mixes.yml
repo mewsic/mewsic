@@ -35,6 +35,31 @@ radio_ga_ga_voice:
   track: voice_for_radio_ga_ga
   volume: 0.8
 
+red_red_wine_guitar:
+  song: red_red_wine
+  track: guitar_for_red_red_wine
+  volume: <%= rand %>
+
+red_rew_wine_unpublished_guitar:
+  song: red_red_wine_unpublished
+  track: guitar_for_red_red_wine
+  volume: <%= rand %>
+
+red_rew_wine_unpublished_voice:
+  song: red_red_wine_unpublished
+  track: voice_for_red_red_wine
+  volume: <%= rand %>
+
+space_cowboy_turntables:
+  song: space_cowboy
+  track: turntables_for_space_cowboy
+  volume: <%= rand %>
+
+space_cowboy_syntetizer:
+  song: space_cowboy
+  track: synthetizer_for_space_cowboy
+  volume: <%= rand %>
+
 closer_guitar:
   song: closer
   track: guitar_for_closer
@@ -118,14 +143,15 @@ random_mixes_<%= i %>:
   volume: <%= rand %>
 <% end %>
 
-destroyable_mix:
-  song: unpublished_mixed_song
-  track: destroyable_mixed_track
+# Private mixes
+private_mix:
+  song: private_song
+  track: private_track
   volume: 1.0
 
 <% 10.times do |i| %>
-destroyable_mix_<%= i %>:
-  song: unpublished_mixed_song_<%= i %>
-  track: destroyable_mixed_track<%= rand(4) %>
+private_mix_<%= i %>:
+  song: private_song_<%= i %>
+  track: private_track_<%= rand(4) %>
   volume: 1.0
 <% end %>

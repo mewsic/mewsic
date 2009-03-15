@@ -284,13 +284,13 @@ class User < ActiveRecord::Base
   end
   
   def self.find_best(options = {})
-    self.find(:all, options.merge({:conditions => ["songs.id IS NOT NULL AND songs.published = ? AND users.activated_at IS NOT NULL", true], :joins => "LEFT OUTER JOIN songs ON users.id = songs.user_id", :order => 'songs.rating_avg DESC', :include => :avatar})) 
+    self.find(:all, options.merge({:conditions => ["songs.id IS NOT NULL AND songs.status = ? AND users.activated_at IS NOT NULL", Song.statuses.public], :joins => "LEFT OUTER JOIN songs ON users.id = songs.user_id", :order => 'songs.rating_avg DESC', :include => :avatar})) 
   end
   
   def self.find_prolific(options = {})
-    qry = "SELECT users.*, songs.title, count(songs.id) AS songs_count FROM users LEFT JOIN songs ON users.id = songs.user_id WHERE users.activated_at IS NOT NULL AND songs.published = ? GROUP BY users.id ORDER BY songs_count DESC"
+    qry = "SELECT users.*, songs.title, count(songs.id) AS songs_count FROM users LEFT JOIN songs ON users.id = songs.user_id WHERE users.activated_at IS NOT NULL AND songs.status = ? GROUP BY users.id ORDER BY songs_count DESC"
     qry += " LIMIT #{options[:limit]}" if options.has_key?(:limit)
-    User.find_by_sql([qry, true])
+    User.find_by_sql([qry, Song.statuses.public])
   end
   
   def self.find_friendliest(options)

@@ -57,11 +57,43 @@ voice_for_let_it_be:
   filename: test.mp3
   rating_avg: <%= random_rating %>
 
+voice_for_red_red_wine:
+  title: red red wine
+  instrument: microphone
+  user: john
+  seconds: <%= rand(100) + 90 %>
+  filename: test.mp3
+  rating_avg: <%= random_rating %>
+
+guitar_for_red_red_wine:
+  title: red red wine
+  instrument: guitar
+  user: john
+  seconds: <%= rand(100) + 90 %>
+  filename: test.mp3
+  rating_avg: <%= random_rating %>
+
 voice_for_radio_ga_ga:
   title: Voce
   instrument: microphone
   user: quentin
   seconds: <%= rand(100) + 90 %>
+  filename: test.mp3
+  rating_avg: <%= random_rating %>
+
+synthetizer_for_space_cowboy:
+  title: Space cowboy
+  instrument: synthetizer
+  user: john
+  seconds: <%= rand(200) + 90 %>
+  filename: test.mp3
+  rating_avg: <%= random_rating %>
+
+turntables_for_space_cowboy:
+  title: Space cowboy
+  instrument: turntables 
+  user: john
+  seconds: <%= rand(200) + 90 %>
   filename: test.mp3
   rating_avg: <%= random_rating %>
 
@@ -151,8 +183,6 @@ drum_for_white_christmas:
   filename: test.mp3
   rating_avg: <%= random_rating %>
 
-# songs from 4 to 200 randomly have children tracks
-# see songs.yml
 <% 50.times do |i| %>
 random_track_<%= i %>:
   title: random track <%= i %>
@@ -171,27 +201,25 @@ destroyable_track:
   filename: test.mp3
   rating_avg: <%= random_rating %>
 
-destroyable_mixed_track:
-  title: track mixed into an unpublished song
+private_track:
+  title: track mixed into a private song
   instrument: <%= random_instrument %>
   seconds: <%= rand(100) + 120 %>
   user: quentin
   filename: test.mp3
-  rating_avg: <%= random_rating %>
 
 <% 4.times do |i| %>
-destroyable_mixed_track_<%= i %>:
-  title: "track mixed into an unpublished song #<%= i %>"
+private_track_<%= i %>:
+  title: "track mixed into a private song #<%= i %>"
   instrument: <%= random_instrument %>
   seconds: <%= rand(100) + 120 %>
   user: quentin
   filename: test.mp3
-  rating_avg: <%= random_rating %>
 <% end %>
 
 really_short_track:
   title: Really short track for increment count test
   instrument: <%= random_instrument %>
   seconds: 4
-  user: user_401
+  user: quentin
   rating_avg: <%= random_rating %>

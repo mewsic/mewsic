@@ -233,7 +233,8 @@ class UserTest < Test::Unit::TestCase
   end
         
   def test_should_retrieve_distinct_instrument
-    assert_equal [instruments(:guitar), instruments(:microphone)], users(:john).instruments
+    expected = [:guitar, :microphone, :synthetizer, :turntables].map { |i| instruments(i) }
+    assert_equal [], expected - users(:john).instruments
   end
   
   def test_quentin_should_have_photos

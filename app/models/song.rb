@@ -11,7 +11,7 @@
 #  user_id        :integer(4)    
 #  seconds        :integer(4)    default(0)
 #  listened_times :integer(4)    default(0)
-#  published      :boolean(1)    default(TRUE)
+#  status         :integer(4)    default(-2)
 #  created_at     :datetime      
 #  updated_at     :datetime      
 #  rating_count   :integer(4)    
@@ -30,16 +30,24 @@
 #
 # Tracks are associated via an <tt>has_many :through</tt> the <tt>Mix</tt> join model.
 #
-# The <tt>published</tt> attribute sets whether a Song has to be displayed on the site, because
-# unpublished songs are scraps created automatically when a registered user enters the multitrack.
-# When a project is saved and the song encoded and mixed down, the <tt>published</tt> attribute
-# is set to <tt>true</tt> by the MultitrackController#update_song method.
+# The <tt>status</tt> attribute can have 4 values:
+# * statuses.public    - accessible and remixable by everyone on the site
+# * statuses.private   - accessible and editable only by its author
+# * statuses.temporary - scrap, created when entering the multitrac
+# * statuses.deleted   - deleted by its author, and completely invisible
 #
-# Songs are full-text indexed by Sphinx and can be rated, using the <tt>medlar_acts_as_rated</tt>
-# plugin (https://stage.lime5.it/rdoc/mewsic/plugins/medlar_acts_as_rated).
+# Only .public songs are visible in search results, full-text indexed by sphinx using the
+# thinking-sphinx plugin (git version, currently 1.1.6).
 #
-# Each Song has also a playable MP3 stream, handled by the Playable module. The Song model is
-# instrumented by calling Playable#has_playable_stream in the class context.
+# Before a song can be saved as .public or .private, additional validation is needed, and
+# this semantic is implemented in the +published?+ method, added with an :if => condition
+# to the validations.
+#
+# Songs can be rated, using the <tt>medlar_acts_as_rated</tt> plugin
+# (https://stage.lime5.it/rdoc/mewsic/plugins/medlar_acts_as_rated).
+#
+# Each Song has also a playable MP3 stream, handled by the Playable module. The Song model
+# is instrumented by calling Playable#has_playable_stream in the class context.
 #
 # == Associations
 #
@@ -49,74 +57,88 @@
 #
 # * <b>belongs_to</b> an User
 #
-# == Validations
+# == Validations, ran only if +published?+ returns true
 #
-# * <b>validates_presence_of</b> <tt>title</tt>, and <tt>seconds</tt> if the 
-#   Song is <tt>published</tt>
-# * <b>validates_associated</b> User if the Song is <tt>published</tt>
-# * <b>validates_numericality_of</b> <tt>user_id</tt>, greater than 0 if the Song is <tt>published</tt>
+# * <b>validates_presence_of</b> <tt>title</tt>, and <tt>seconds</tt>
+# * <b>validates_associated</b> User
+# * <b>validates_numericality_of</b> <tt>user_id</tt>, greater than 0
 #
 require 'numeric_to_runtime'
 require 'playable'
+require 'statuses'
 
 class Song < ActiveRecord::Base
 
-  define_index do
-    indexes :title, :author, :description
-    indexes user.country, :as => :country
-    where 'published = 1'
-    set_property :delta => true
-  end
- 
+  ## XXX Remove me
   attr_accessor :mlab
 
   belongs_to :user, :polymorphic => true
 
-  has_many :mixes, :dependent => :delete_all
+  has_many :mixes
   has_many :tracks, :through => :mixes, :order => 'mixes.created_at DESC'  
 
-  # This association is here only for the :dependent trigger
-  has_many :mlabs, :as => :mixable, :dependent => :delete_all
-  #has_many :abuses, :as => :abuseable, :dependent => :delete_all, :class_name => 'Abuse'
+  has_many :mlabs, :as => :mixable
+  #has_many :abuses, :as => :abuseable, :class_name => 'Abuse'
  
-  validates_presence_of :title,               :if => Proc.new(&:published)
-  validates_associated :user,                 :if => Proc.new(&:published) 
-  validates_length_of :tracks, :minimum => 1, :if => Proc.new(&:published)
+  validates_presence_of :title, :author,      :if => Proc.new(&:published?)
+  validates_associated :user,                 :if => Proc.new(&:published?) 
+  validates_length_of :tracks, :minimum => 1, :if => Proc.new(&:published?)
+
+  before_validation :copy_author_information_from_user, :if => Proc.new(&:published?)
+
+  before_destroy :check_if_deleted
 
   acts_as_rated :rating_range => 0..5
 
-  before_save :copy_author_information_from_user, :if => Proc.new(&:published)
-
   has_playable_stream
 
-  # Finds all published songs
-  #
-  named_scope :published, :conditions => {:published => true}
-  named_scope :unpublished, :conditions => {:published => false}
+  # Song statuses, and dynamic defininition of public? private? deleted? and temporary? methods
+  has_multiple_statuses :public => 1, :private => 2, :deleted => -1, :temporary => -2
 
-  named_scope :with_tracks, :include => :tracks, :conditions => 'tracks.id IS NOT NULL'
+  named_scope :public, :conditions => {:status => statuses.public}
+  named_scope :private, :conditions => {:status => statuses.private}
 
+  define_index do
+    indexes :title, :author, :description
+    indexes user.country, :as => :country
+    where "status = #{statuses.public}"
+    set_property :delta => true
+  end
+
+  # XXX just testing, maybe will replace the find_newest finder
   named_scope :newest, :order => 'songs.created_at DESC', :conditions => ['songs.created_at < ?', 1.month.ago]
 
-  # Finds all published songs, ordering them by play count and rating average.
-  #
-  def self.find_best(options = {})
-    published.find(:all, options.merge(:order => 'songs.listened_times DESC, songs.rating_avg DESC'))
-  end
-  
-  # Finds all published songs, ordering them by creation time.
-  #
-  def self.find_newest(options = {})
-    published.find(:all, options.merge(:order => 'songs.created_at DESC'))
+  # Returns whether a song is accessible by an user via the frontend, so if
+  # its status is "public" or "private". Being +published?+ triggers additional
+  # validation (presence of title, associated user, minimum 1 track)
+  def published?
+    [statuses.public, statuses.private].include?(self.status)
   end
 
-  # Paginates the published songs created in the last month, ordering them by creation time.
-  # By default, the first of 7 elements pages is returned. All the <tt>paginate</tt> options
-  # are overridable. See the <tt>will_paginate</tt> plugin documentation for details:
+  def accessible_by?(user)
+    (self.status == statuses.private && self.user == user) || self.status == statuses.public
+  end
+
+  # Finds all "best" public songs, ordered by play count and rating average.
+  #
+  def self.find_best(options = {})
+    self.public.find(:all, options.merge(:order => 'songs.listened_times DESC, songs.rating_avg DESC'))
+  end
+  
+  # Finds all "newest" public songs, ordered by creation time.
+  #
+  def self.find_newest(options = {})
+    self.public.find(:all, options.merge(:order => 'songs.created_at DESC'))
+  end
+
+  # Paginates the public songs created in the last month, ordered by creation time.
+  # By default, the first of 7 elements pages is returned.
+  # All the <tt>paginate</tt> options are overridable. See the <tt>will_paginate</tt>
+  # plugin documentation for details:
   # https://stage.lime5.it/rdoc/mewsic/plugins/will_paginate
   #
   def self.find_newest_paginated(options = {})
-    published.paginate(options.reverse_merge(
+    self.public.paginate(options.reverse_merge(
              :conditions => ['songs.created_at > ?', 1.month.ago],
              :order => 'songs.created_at DESC',
              :per_page => 7,
@@ -129,13 +151,12 @@ class Song < ActiveRecord::Base
     self.tracks.count('instrument', :include => :instrument, :group => 'instrument_id').map { |id, count| Instrument.find(id) }
   end    
   
-  # Shorthand to create an unpublished Song. Used by MultitrackController#show, when an user
-  # enters the multitrack. The unpublished Song instance serves to store user data while he
-  # is working: because every editing control in the M-Lab is in-place, Song has to be created
-  # in advance.
+  # Shorthand to create an temporary Song. Used by MultitrackController#show, when an user
+  # enters the multitrack. It serves to store user data while he is working: because every
+  # editing control in the M-Lab uses ajax in-place, Song has to be created in advance.
   #
-  def self.create_unpublished!
-    self.create! :published => false
+  def self.create_temporary!
+    self.create! :status => statuses.temporary
   end
 
   # Finds most collaborated songs, using a MySQL-only query (sorry).
@@ -148,11 +169,11 @@ class Song < ActiveRecord::Base
       FROM mixes m LEFT OUTER JOIN mixes t ON m.track_id = t.track_id
       LEFT OUTER JOIN songs s ON t.song_id = s.id
       LEFT OUTER JOIN songs x ON m.song_id = x.id
-      WHERE s.published = ? AND x.published = ?
+      WHERE s.status = :published AND x.status = :published
       GROUP BY s.id
-      HAVING collaboration_count >= ?
+      HAVING collaboration_count >= :minimum
       ORDER BY collaboration_count DESC, s.rating_avg DESC
-    ", true, true, collaboration_count])
+    ", {:published => statuses.public, :minimum => collaboration_count}])
 
     signatures = []
     songs = songs.select { |song|
@@ -168,7 +189,7 @@ class Song < ActiveRecord::Base
   #
   def mixables(options = {})
     track_ids = self.tracks.map(&:id)
-    Song.find(:all, :include => :mixes,
+    Song.public.find(:all, :include => :mixes,
               :conditions => ['mixes.track_id IN (?) AND mixes.song_id <> ?', track_ids, self.id])
   end
   
@@ -213,13 +234,24 @@ class Song < ActiveRecord::Base
     self.user.rateable_by?(user)
   end
 
-  # Shorthand to set the <tt>published</tt> attribute to <tt>true</tt> and save the song afterwards.
-  # It also sets the <tt>@new</tt> instance variable to true if this song is yet not published, in
-  # order for the SongObserver to send out a notification of "new song published".
+  # Set the :deleted status rather than deleting the record,
+  # and delete all the mixes and mlabs linked to this track.
+  def delete
+    Song.transaction do
+      self.mixes.destroy_all
+      self.mlabs.destroy_all
+      self.status = statuses.deleted
+      self.save!
+    end
+  end
+
+  # Shorthand to publish and save a song.
+  # It sets the <tt>@new</tt> instance variable to true if this song was private,
+  # used by the SongObserver to send out the "new song published" notification.
   #
   def publish!
-    @new = true if !self.published?
-    self.published = true
+    @new = true if self.private?
+    self.status = statuses.public
     self.save!
   end
 
@@ -229,16 +261,10 @@ class Song < ActiveRecord::Base
     @new
   end
 
-  # Called by the cron runner, to clean up unpublished songs that have got no children
-  # tracks and have been created more than one week ago.
-  # #XXX FIXME#
-  def self.cleanup_unpublished
-    songs = find_by_sql(['select songs.id from songs
-      left outer join tracks on tracks.song_id = songs.id
-      where songs.published = ? and songs.created_at < ?
-      group by songs.id having count(tracks.id) = 0', false, 1.week.ago])
-
-    delete_all ['id in (?)', songs.map(&:id)] unless songs.empty?
+  # Called by the cron runner, to clean up temporary songs created more than a week ago.
+  #
+  def self.cleanup_temporary
+    destroy_all ['status = ? AND created_at < ?', statuses.temporary, 1.week.ago]
   end
   
   # Sitemap priority for this instance
@@ -250,4 +276,10 @@ class Song < ActiveRecord::Base
   def copy_author_information_from_user
     self.author = self.user.login if self.author.blank?
   end
+
+  # A track can be destroyed only if it is already deleted.
+  def check_if_deleted
+    raise ActiveRecord::ReadOnlyRecord unless deleted?
+  end
+
 end

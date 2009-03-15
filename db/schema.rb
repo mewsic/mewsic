@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090315144943) do
+ActiveRecord::Schema.define(:version => 20090315152448) do
 
   create_table "abuses", :force => true do |t|
     t.integer  "abuseable_id"
@@ -189,7 +189,7 @@ ActiveRecord::Schema.define(:version => 20090315144943) do
     t.integer  "user_id"
     t.integer  "seconds",                                                     :default => 0
     t.integer  "listened_times",                                              :default => 0
-    t.boolean  "published",                                                   :default => true
+    t.integer  "status",                                                      :default => -2
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "rating_count"
@@ -221,7 +221,7 @@ ActiveRecord::Schema.define(:version => 20090315144943) do
     t.decimal  "rating_avg",                   :precision => 10, :scale => 2
     t.integer  "user_id"
     t.string   "author",         :limit => 60
-    t.boolean  "published",                                                   :default => false
+    t.integer  "status",                                                      :default => 2
     t.boolean  "delta",                                                       :default => false
   end
 

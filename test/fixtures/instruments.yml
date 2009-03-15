@@ -57,3 +57,13 @@ harp:
   description: Harp
   icon: instruments/harp.png
   category: chordophones
+
+turntables:
+  description: Turntables
+  icon: instruments/turntables.png
+  category: membranophones
+
+synthetizer:
+  description: Synthetizer
+  icon: instruments/syntethizer.png
+  category: membranophones

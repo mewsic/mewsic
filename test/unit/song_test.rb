@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class SongTest < ActiveSupport::TestCase
-  include Adelao::Playable::TestHelpers
+  include Playable::TestHelpers
 
   fixtures :users, :songs, :mixes, :tracks, :instruments, :mbands
 
@@ -32,8 +32,18 @@ class SongTest < ActiveSupport::TestCase
     assert songs(:let_it_be).is_mixable_with?(songs(:closer_jungle_remix))
   end
 
-  def test_create_unpublished
-    assert Song.create_unpublished!.published == false
+  def test_most_collaborated
+    most_collaborated = Song.find_most_collaborated.first
+    max_collaboration_count = Mix.count :include => :song,
+      :conditions => ['track_id IN (?) and songs.id <> ? and songs.status = ?',
+        most_collaborated.tracks.map(&:id), most_collaborated.id, Song.statuses.public]
+
+    assert most_collaborated.public?
+    assert max_collaboration_count, most_collaborated.mixables.size
+  end
+
+  def test_create_temporary
+    assert Song.create_temporary!.temporary?
   end
 
   def test_find_newest
@@ -44,22 +54,37 @@ class SongTest < ActiveSupport::TestCase
     assert_equal last_song, songs.first
   end
 
-  def test_published_and_unpublished_scopes
-    assert Song.published.all?(&:published?)
-    assert !Song.unpublished.all?(&:published?)
+  def test_public_and_private_scopes
+    assert Song.public.all?(&:published?)
+    assert Song.public.all?(&:public?)
+    assert Song.private.all?(&:published?)
+    assert Song.private.all?(&:private?)
   end
   
-  #def test_should_not_destroy_if_has_children_tracks
-  #  s = songs(:let_it_be)
-  #  assert_raise(ActiveRecord::ReadOnlyRecord) { s.destroy }
-  #  assert_not_nil s.reload
-  #  assert File.exists?(s.absolute_filename)
-  #end
+  def test_delete
+    s = songs(:private_song)
+    m = mixes(:private_mix)
 
-  def test_should_destroy_an_empty_song
-    s = playable_test_filename(songs(:empty_song))
+    assert_nothing_raised { s.delete }
+
+    assert s.reload.deleted?
+    assert_raise(ActiveRecord::RecordNotFound) { m.reload }
+  end
+
+  def test_destroy
+    s = playable_test_filename songs(:private_song)
+    m = mixes(:private_mix)
+
+    assert_raise(ActiveRecord::ReadOnlyRecord) { s.destroy } 
+    assert_nothing_raised { m.reload; s.reload }
+
+    assert_nothing_raised { s.delete }
+    assert File.exists?(s.absolute_filename)
+
     assert_nothing_raised { s.destroy }
-    assert_raise(ActiveRecord::RecordNotFound) { Song.find(s.id) }
+    assert_raise(ActiveRecord::RecordNotFound) { s.reload }
+    assert_raise(ActiveRecord::RecordNotFound) { m.reload }
+
     assert !File.exists?(s.absolute_filename)
   end
 

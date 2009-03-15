@@ -22,30 +22,23 @@
 
 require 'numeric_to_runtime'
 require 'playable'
+require 'statuses'
 
 class Track < ActiveRecord::Base
   
-  define_index do
-    has :instrument_id
-    indexes :title, :description
-    indexes user.country, :as => :country
-    indexes instrument.description, :as => :instrument
-    where 'published = 1'
-    set_property :delta => true
-  end
-  
   attr_accessor :mlab
   
+  has_many :mixes
   has_many :songs, :through => :mixes, :order => 'songs.created_at DESC'
-  has_many :mixes, :dependent => :delete_all
-  has_many :mlabs, :as => :mixable, :dependent => :delete_all
-  #has_many :abuses, :as => :abuseable, :dependent => :delete_all, :class_name => 'Abuse'
+
+  has_many :mlabs, :as => :mixable
+  #has_many :abuses, :as => :abuseable, :class_name => 'Abuse'
 
   belongs_to :user
   belongs_to :instrument
 
   validates_presence_of :title, :seconds
-  validates_associated :instrument
+  validates_associated :instrument, :user
   validates_numericality_of :instrument_id, :user_id, :greater_than => 0
 
   validates_each :filename do |model, attr, value|
@@ -54,20 +47,38 @@ class Track < ActiveRecord::Base
       model.errors.add(attr, "not found in media path (#{filename})")
     end
   end
+
+  before_destroy :check_if_deleted
   
   acts_as_rated :rating_range => 0..5 
   
   has_playable_stream
 
-  named_scope :published, :conditions => {:published => true}
-  named_scope :unpublished, :conditions => {:published => false}
+  has_multiple_statuses :public => 1, :private => 2, :deleted => -1
+
+  # Track statuses
+  named_scope :public, :conditions => {:status => statuses.public}
+  named_scope :private, :conditions => {:status => statuses.private}
+
+  define_index do
+    has :instrument_id
+    indexes :title, :description
+    indexes user.country, :as => :country
+    indexes instrument.description, :as => :instrument
+    where "status = #{statuses.public}"
+    set_property :delta => true
+  end
+
+  def accessible_by?(user)
+    (self.status == statuses.private && self.user == user) || self.status == statuses.public
+  end
 
   # Finds most collaborated tracks and sets a virtual <tt>song_count</tt> attribute that yields
   # the song count for each track.
   #
   def self.find_most_used(options = {})
     limit = "LIMIT #{options[:limit]}" if options[:limit]
-    self.find_by_sql(["SELECT tracks.*, COUNT(tracks.id) AS song_count FROM tracks LEFT JOIN mixes M ON M.track_id = tracks.id LEFT JOIN songs S ON M.song_id = S.id WHERE S.published = ? GROUP BY tracks.id ORDER BY song_count DESC #{limit}", true]).each { |t| t.song_count = t.song_count.to_i }
+    self.find_by_sql(["SELECT tracks.*, COUNT(tracks.id) AS song_count FROM tracks LEFT JOIN mixes M ON M.track_id = tracks.id LEFT JOIN songs S ON M.song_id = S.id WHERE S.status = ? GROUP BY tracks.id ORDER BY song_count DESC #{limit}", Song.statuses.public]).each { |t| t.song_count = t.song_count.to_i }
   end
   
   def length
@@ -84,11 +95,29 @@ class Track < ActiveRecord::Base
     self.user.rateable_by?(user)
   end
 
-  # Destroyable policy.
-  # A track is not destroyable if it is mixed into other published songs.
+  # Set the :deleted status rather than deleting the record,
+  # and delete all the mixes and mlabs linked to this track.
+  def delete
+    Track.transaction do
+      raise ActiveRecord::ReadOnlyRecord unless deletable?
+      self.mixes.destroy_all
+      self.mlabs.destroy_all
+      self.status = statuses.deleted
+      self.save!
+    end
+  end
+
+  private
+  # Deletable policy.
+  # A track is not deletable if it is mixed into other published songs (either public or private)
   #
-  def destroyable?
-    self.mixes.count.zero? || self.mixes.all? { |mix| !mix.song.published? rescue true } # XXX remove that rescue
+  def deletable?
+    self.mixes.count.zero? || self.mixes.all? { |mix| !mix.song.published? }
+  end
+
+  # A track can be destroyed only if it is already deleted.
+  def check_if_deleted
+    raise ActiveRecord::ReadOnlyRecord unless deleted?
   end
 
 end

@@ -27,7 +27,7 @@
 #
 # == Validations
 #
-# * <b>validates_presence_of</b> <tt>song_id</tt>
+# * <b>validates_numericality of</b> <tt>song_id</tt> and <tt>track_id</tt>, both greater than 0
 # * <b>validates_associated</b> <tt>song</tt>, <tt>track</tt>
 # * <b>validates_uniqueness_of</b> <tt>track_id</tt>, in the <tt>song_id</tt> scope.
 #
@@ -35,7 +35,7 @@ class Mix < ActiveRecord::Base
   belongs_to :song
   belongs_to :track
 
-  validates_presence_of :song_id, :track_id
+  validates_numericality_of :song_id, :track_id, :greater_than => 0
   validates_associated :song, :track
 
   validates_uniqueness_of :track_id, :scope => :song_id

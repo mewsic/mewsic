@@ -11,7 +11,7 @@
 #  user_id        :integer(4)    
 #  seconds        :integer(4)    default(0)
 #  listened_times :integer(4)    default(0)
-#  published      :boolean(1)    default(TRUE)
+#  status         :integer(4)    default(-2)
 #  created_at     :datetime      
 #  updated_at     :datetime      
 #  rating_count   :integer(4)    
@@ -45,6 +45,7 @@ let_it_be:
   listened_times: 2230
   seconds: 220
   filename: test.mp3
+  status: <%= Song.statuses.public %>
   rating_avg: <%= random_rating %>
 
 radio_ga_ga:
@@ -55,17 +56,7 @@ radio_ga_ga:
   listened_times: 1290
   seconds: 180
   filename: test.mp3
-  rating_avg: <%= random_rating %>
-
-i_want_to_break_free:
-  title: I Want to Break Free
-  user: scapokkier
-  user_type: Mband
-  author: Queen
-  listened_times: 1210
-  seconds: 190
-  filename: test.mp3
-  published: true
+  status: <%= Song.statuses.public %>
   rating_avg: <%= random_rating %>
 
 red_red_wine:
@@ -75,8 +66,8 @@ red_red_wine:
   author: Bob Marley
   listened_times: 1120
   seconds: 180
-  published: true
   filename: test.mp3
+  status: <%= Song.statuses.public %>
   rating_avg: <%= random_rating %>
 
 red_red_wine_unpublished:
@@ -86,8 +77,8 @@ red_red_wine_unpublished:
   author: Bob Marley
   listened_times: 1120
   seconds: 180
-  published: false
   filename: test.mp3
+  status: <%= Song.statuses.private %>
   rating_avg: <%= random_rating %>
 
 space_cowboy:
@@ -98,18 +89,8 @@ space_cowboy:
   listened_times: 1001
   seconds: 180
   created_at: <%= 1.week.from_now.to_s(:db) %>
-  published: true
   filename: test.mp3
-  rating_avg: <%= random_rating %>
-
-autumn_leaves:
-  title: Autumn Leaves
-  user: scapokkier
-  user_type: Mband
-  author: Miles Davis
-  listened_times: 290
-  seconds: 180
-  filename: test.mp3
+  status: <%= Song.statuses.public %>
   rating_avg: <%= random_rating %>
 
 closer:
@@ -120,6 +101,7 @@ closer:
   listened_times: 390
   seconds: 180
   filename: test.mp3
+  status: <%= Song.statuses.public %>
   rating_avg: <%= random_rating %>
 
 white_christmas:
@@ -130,16 +112,7 @@ white_christmas:
   listened_times: 420
   seconds: 180
   filename: test.mp3
-  rating_avg: <%= random_rating %>
-
-quentin_single_track_song:
-  title: SingleTrackSong
-  user: quentin
-  user_type: User
-  author: Louis Armstrong
-  listened_times: 420
-  seconds: 180
-  filename: test.mp3
+  status: <%= Song.statuses.public %>
   rating_avg: <%= random_rating %>
 
 # Mixable songs
@@ -152,6 +125,7 @@ let_it_be_punk_remix:
   listened_times: 190
   seconds: 180
   filename: test.mp3
+  status: <%= Song.statuses.public %>
   rating_avg: <%= random_rating %>
 
 let_it_be_dnb_remix:
@@ -162,6 +136,7 @@ let_it_be_dnb_remix:
   listened_times: 0
   seconds: 180
   filename: test.mp3
+  status: <%= Song.statuses.public %>
   rating_avg: <%= random_rating %>
 
 closer_jungle_remix:
@@ -172,6 +147,7 @@ closer_jungle_remix:
   listened_times: 0
   seconds: 180
   filename: test.mp3
+  status: <%= Song.statuses.public %>
   rating_avg: <%= random_rating %>
   
 white_christmas_electro_remix:
@@ -182,6 +158,7 @@ white_christmas_electro_remix:
   listened_times: 0
   seconds: 180
   filename: test.mp3
+  status: <%= Song.statuses.public %>
   rating_avg: <%= random_rating %>
   
 # these songs have randomly mixed in tracks, see mixes.yml
@@ -196,6 +173,7 @@ song_<%= i %>:
   created_at: <%= rand(30).days.ago.to_s :db %>
   seconds: <%= rand(300) %>
   filename: test.mp3
+  status: <%= Song.statuses.public %>
   rating_avg: <%= random_rating %>
 <% end %>
 
@@ -210,6 +188,7 @@ mband_song_<%= i %>:
   created_at: <%= rand(30).days.ago.to_s :db %>
   seconds: <%= rand(300) %>
   filename: test.mp3
+  status: <%= Song.statuses.public %>
   rating_avg: <%= random_rating %>
 <% end %>
 
@@ -223,27 +202,26 @@ quentin_productions:
   filename: test.mp3
   rating_avg: <%= random_rating %>
 
-unpublished_mixed_song:
-  title: Unpublished song with mixed tracks
+private_song:
+  title: Private song with a single mixed track
   user: quentin
   author: Antani
   listened_times: <%= rand(50) %>
   created_at: <%= (rand(60)).days.ago.to_s :db %>
   seconds: 100
   filename: test.mp3
-  published: false
-  rating_avg: <%= random_rating %>
+  status: <%= Song.statuses.private %>
 
 <% 10.times do |i| %>
-unpublished_mixed_song_<%= i %>:
-  title: "Unpublished song with mixed tracks #<%= i %>"
+private_song_<%= i %>:
+  title: "Private song with mixed tracks #<%= i %>"
   user: quentin
-  published: false
   author: Antani
   listened_times: <%= rand(50) %>
   created_at: <%= (rand(60)).days.ago.to_s :db %>
   seconds: 100
   filename: test.mp3
+  status: <%= Song.statuses.private %>
   rating_avg: <%= random_rating %>
 <% end %>
 
@@ -255,16 +233,13 @@ really_short_song:
   created_at: <%= (rand(60)).days.ago.to_s :db %>
   seconds: 4
   filename: test.mp3
-  published: false
+  status: <%= Song.statuses.public %>
   rating_avg: <%= random_rating %>
 
-empty_song:
-  title: empty song
+temporary_song:
+  title: temporary song
   user: user_37
-  author: Someone
-  listened_times: <%= rand(200) %>
-  created_at: <%= rand(30).days.ago.to_s :db %>
+  listened_times: 0
+  created_at: <%= 1.day.ago.to_s :db %>
   seconds: 100
-  filename: test.mp3
-  published: true
-  rating_avg: <%= random_rating %>
+  status: <%= Song.statuses.temporary %>

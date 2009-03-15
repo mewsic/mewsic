@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class TrackTest < ActiveSupport::TestCase
-  include Adelao::Playable::TestHelpers
+  include Playable::TestHelpers
 
   fixtures :users, :songs, :tracks, :instruments, :mixes
 
@@ -21,27 +21,40 @@ class TrackTest < ActiveSupport::TestCase
     assert instruments(:guitar), tracks(:guitar_for_let_it_be).instrument
   end
 
-  def test_published_and_unpublished_named_scopes
-    assert Track.published.all?(&:published?)
-    assert !Track.unpublished.all?(&:published?)
-  end
-  
-  def test_should_destroy
-    t = playable_test_filename(tracks(:destroyable_track))
-    assert_nothing_raised { t.destroy }
-    assert_raise(ActiveRecord::RecordNotFound) { Track.find(t.id) }
-    assert !File.exists?(t.absolute_filename)
+  def test_public_and_private_named_scopes
+    assert Track.public.all?(&:public?)
+    assert Track.private.all?(&:private?)
   end
 
-  def test_should_destroy_mixed_track_with_unpublished_song
-    t = playable_test_filename tracks(:destroyable_mixed_track)
-    m = mixes(:destroyable_mix)
+  def test_deleted_status
+    s = songs(:private_song)
+    t = tracks(:private_track)
+    m = mixes(:private_mix)
+    assert_raise(ActiveRecord::ReadOnlyRecord) { t.delete } 
 
-    assert_nothing_raised { t.destroy }
-    assert_raise(ActiveRecord::RecordNotFound) { Track.find(t.id) }
-    assert_raise(ActiveRecord::RecordNotFound) { Mix.find(m.id) }
+    assert_nothing_raised { s.delete; t.delete }
+
+    assert t.reload.deleted?
+    assert s.reload.deleted?
+    assert_raise(ActiveRecord::RecordNotFound) { m.reload }
+  end
+
+  def test_destroy
+    s = playable_test_filename songs(:private_song)
+    t = playable_test_filename tracks(:private_track)
+    m = mixes(:private_mix)
+
+    assert_raise(ActiveRecord::ReadOnlyRecord) { t.destroy } 
+    assert_nothing_raised { m.reload }
+
+    assert_nothing_raised { s.delete; t.delete; t.destroy }
+
+    assert_raise(ActiveRecord::RecordNotFound) { t.reload }
+    assert_raise(ActiveRecord::RecordNotFound) { m.reload }
+    assert_nothing_raised { s.reload }
 
     assert !File.exists?(t.absolute_filename)
+    assert File.exists?(s.absolute_filename)
   end
 
 end

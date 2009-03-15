@@ -106,10 +106,10 @@ class Mband < ActiveRecord::Base
     self.memberships.find(:first, :conditions => ["user_id = ?", user.id])
   end
 
-  # Returns all published tracks from band members, sorted by rating average
+  # Returns all public tracks from band members, sorted by rating average
   #
   def tracks
-    members.find(:all, :include => :tracks).map { |u| u.tracks.published }.flatten.sort_by(&:rating_avg)
+    members.find(:all, :include => :tracks).map { |u| u.tracks.public }.flatten.sort_by(&:rating_avg)
   end
 
   # If a member is recording, show it. If any of the members is online,
