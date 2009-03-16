@@ -47,6 +47,8 @@ let_it_be:
   filename: test.mp3
   status: <%= Song.statuses.public %>
   rating_avg: <%= random_rating %>
+  lft: 1 # needed because of the awesome_nested_set test
+  rgt: 2 # in song unit tests (test_remix_tree)
 
 radio_ga_ga:
   title: Radio Ga Ga

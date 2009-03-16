@@ -254,4 +254,5 @@ really_short_track:
   seconds: 4
   user: quentin
   rating_avg: <%= random_rating %>
+  filename: test.mp3
   status: <%= Track.statuses.public %>

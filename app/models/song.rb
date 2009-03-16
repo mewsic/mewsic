@@ -72,6 +72,8 @@ class Song < ActiveRecord::Base
   ## XXX Remove me
   attr_accessor :mlab
 
+  acts_as_nested_set
+
   belongs_to :user, :polymorphic => true
 
   has_many :mixes, :conditions => 'deleted = 0'
@@ -86,6 +88,7 @@ class Song < ActiveRecord::Base
   validates_length_of :tracks, :minimum => 1, :if => Proc.new(&:published?)
 
   before_validation :copy_author_information_from_user, :if => Proc.new(&:published?)
+  before_save :remove_parent_if_it_shares_no_tracks,    :if => Proc.new(&:published?)
 
   before_destroy :check_if_deleted
   before_destroy :destroy_mixes
@@ -154,12 +157,6 @@ class Song < ActiveRecord::Base
              :per_page => 7,
              :page => 1))
   end
- 
-  # Returns an array of all instruments used into this song.
-  #
-  def instruments
-    self.tracks.count('instrument', :include => :instrument, :group => 'instrument_id').map { |id, count| Instrument.find(id) }
-  end    
   
   # Shorthand to create an temporary Song. Used by MultitrackController#show, when an user
   # enters the multitrack. It serves to store user data while he is working: because every
@@ -194,6 +191,12 @@ class Song < ActiveRecord::Base
 
     return songs
   end
+ 
+  # Returns an array of all instruments used into this song.
+  #
+  def instruments
+    self.tracks.count('instrument', :include => :instrument, :group => 'instrument_id').map { |id, count| Instrument.find(id) }
+  end    
   
   # Returns mixable songs, that share at least one track with this one.
   #
@@ -244,6 +247,15 @@ class Song < ActiveRecord::Base
     self.user.rateable_by?(user)
   end
 
+  def create_remix
+    remix = self.clone
+    remix.tracks = self.tracks
+    remix.status = :private
+    remix.save!
+    remix.move_to_child_of self
+    return remix
+  end
+
   # Set the :deleted status rather than deleting the record,
   # and delete all the mixes and mlabs linked to this track.
   def delete
@@ -251,9 +263,11 @@ class Song < ActiveRecord::Base
       self.status = :deleted
       self.save!
 
+      # sets deleted = 0
       self.mixes.destroy_all
-      self.mlabs.destroy_all
 
+      # actually deletes
+      self.mlabs.destroy_all
       self.featurings.destroy_all
     end
   end
@@ -288,6 +302,12 @@ class Song < ActiveRecord::Base
 
   def copy_author_information_from_user
     self.author = self.user.login if self.author.blank?
+  end
+
+  def remove_parent_if_it_shares_no_tracks
+    if self.parent && (self.tracks & self.parent.tracks).empty?
+      self.move_to_root
+    end
   end
 
   # A track can be destroyed only if it is already deleted.

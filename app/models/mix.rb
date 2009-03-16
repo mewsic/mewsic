@@ -36,7 +36,7 @@ class Mix < ActiveRecord::Base
   belongs_to :track
 
   validates_numericality_of :song_id, :track_id, :greater_than => 0
-  validates_associated :song, :track, :on => :create
+  #validates_associated :song, :track, :on => :create
 
   validates_uniqueness_of :track_id, :scope => :song_id
 

@@ -77,6 +77,22 @@ class SongTest < ActiveSupport::TestCase
     assert songs(:let_it_be).accessible_by?(users("user_#{rand 500}".intern))
   end
   
+  def test_remix_tree
+    song = songs(:let_it_be)
+    remix = nil
+
+    assert_nothing_raised { remix = song.create_remix }
+    assert remix.valid?
+    assert_equal song, remix.parent 
+
+    remix.tracks.clear
+    remix.tracks << tracks(:drum_for_closer)
+    assert remix.valid?
+
+    remix.save
+    assert_equal nil, remix.parent
+  end
+
   def test_delete
     s = songs(:private_song)
     m = mixes(:private_mix)

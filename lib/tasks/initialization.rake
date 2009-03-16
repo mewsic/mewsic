@@ -45,9 +45,15 @@ namespace :mewsic do
     end
   end
 
+  task(:update_nested_set => :environment) do
+    puts "* Updating Song nested set"
+    Song.find(:all).each { |s| s.send(:set_default_left_and_right); s.save! }
+  end
+
   namespace :fixtures do
     desc "Load fixtures and update both friends and replies count"
     task :load => [ "db:fixtures:load",  "mewsic:update_friends_count",
-      "mewsic:update_replies_count", "mewsic:copy_test_mp3s"]
+      "mewsic:update_replies_count", "mewsic:copy_test_mp3s",
+      "mewsic:update_nested_set"]
   end  
 end
