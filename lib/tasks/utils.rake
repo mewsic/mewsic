@@ -52,12 +52,15 @@ namespace :mewsic do
     
   # Cruisecontrol task
   task :cruise => :environment do
+    puts 'Migrating database..'
+    Rake::Task['db:migrate'].invoke
+
     puts 'Generating documentation..'
     ENV['RDOC_OUTPUT'] = '/srv/rdoc/mewsic'
     Rake::Task['mewsic:doc:app'].invoke
     #Rake::Task['mewsic:doc:plugins'].invoke
 
-    puts 'Running coverage tests'
+    puts 'Running coverage tests..'
     ENV['RCOV_OUTPUT'] = '/srv/rcov/mewsic'
     Rake::Task['test:coverage'].invoke
   end
