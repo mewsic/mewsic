@@ -11,7 +11,7 @@
 class SongsController < ApplicationController
   
   before_filter :login_required, :only => [:update, :rate, :mix, :destroy, :confirm_destroy]
-  before_filter :song_required, :only => [:load_track, :unload_track]
+  before_filter :writable_song_required, :only => [:update, :mix]
   before_filter :redirect_to_root_unless_xhr, :only => :confirm_destroy
 
   protect_from_forgery
@@ -56,15 +56,14 @@ class SongsController < ApplicationController
   # ==== GET /songs/:song_id.png
   #
   # * HTML format: shows the song page
-  # * XML format: shows the XML representation of the given song. Siblings (versions) info is included
-  #   if the <tt>siblings</tt> param is present. Edit (volume & balance) info is included if the <tt>
-  #   edit</tt> parameter is present.
+  # * XML format: shows the XML representation of the given song.
   # * PNG format: streams the waveform png to the client using +x_accel_redirect+.
   #
   def show
     @song = Song.find(params[:id], :include => [:user, {:mixes => {:track => :instrument}}])
 
     respond_to do |format|
+
       format.html do
         if logged_in?
           @has_abuse = Abuse.exists?(["abuseable_type = 'Song' AND abuseable_id = ? AND user_id = ?", @song.id, current_user.id])
@@ -82,6 +81,7 @@ class SongsController < ApplicationController
         x_accel_redirect @song.public_filename(:waveform), :content_type => 'image/png'
       end
     end
+
   rescue ActiveRecord::RecordNotFound
     if params[:id].to_i.zero?
       head :ok
@@ -92,11 +92,11 @@ class SongsController < ApplicationController
 
   # ==== DELETE /songs/:id
   #
-  # Tries to destroy the given Song instance.
+  # Tries to delete the given Song instance.
   #
   def destroy
     @song = current_user.songs.find(params[:id])
-    @song.destroy
+    @song.delete
 
     flash[:notice] = "Song '#{@song.title}' has been deleted."
 
@@ -104,7 +104,7 @@ class SongsController < ApplicationController
 
   rescue ActiveRecord::RecordNotFound # find
     head :forbidden
-  rescue ActiveRecord::ReadOnlyRecord # destroy
+  rescue ActiveRecord::ReadOnlyRecord # delete
     head :bad_request
   end
 
@@ -138,9 +138,10 @@ class SongsController < ApplicationController
   # If updating multiple ones, nothing is rendered with a 200 status.
   #
   def update
-    @song = current_user.songs.find(params[:id])
+    current_user.tag(@song, :with => params.delete(:tag_list)) if params[:tag_list]
     @song.update_attributes!(params[:song])
     @song.reload
+
     if params[:song].size == 1 && @song.respond_to?(params[:song].keys.first)
       render :text => @song.send(params[:song].keys.first)
     else
@@ -151,43 +152,6 @@ class SongsController < ApplicationController
     head :bad_request
   end
   
-  # ==== PUT /songs/:id/load_track
-  #
-  # This action is called by the multitrack SWF when adding a new track to the stage,
-  # in order to reflect this addition into the database, by creating a new Mix with
-  # the given track and updating the song length to the maximum length of its tracks.
-  #
-  # Nothing is rendered, the HTTP response code carries the result of the operation.
-  #
-  def load_track
-    track = Track.find params[:track_id]
-
-    @song.mixes.create :track => track
-    @song.seconds = @song.mixes.find(:all).map { |m| m.track.seconds }.max
-    @song.save!
-
-    head :ok
-
-  rescue ActiveRecord::ActiveRecordError
-    head :bad_request
-  end
-
-  # ==== PUT /songs/:id/unload_track
-  #
-  # This action is called by the multitrack SWF when removing a track from the stage,
-  # in order to remove the associated Mix with the given track. Nothing is rendered,
-  # the HTTP response code carries the result of the operation.
-  # 
-  def unload_track
-    @song.mixes.find_by_track_id(params[:track_id]).destroy
-    head :ok
-
-  rescue NoMethodError
-    head :not_found
-  rescue ActiveRecord::ActiveRecordError
-    head :bad_request
-  end
-
   # ==== POST /songs/:id/mix
   #
   # This action is called by the multitrack SWF when saving a myousica project. Its
@@ -199,19 +163,17 @@ class SongsController < ApplicationController
   # <tt>shared/_errors.xml.erb</tt> partial is rendered instead.
   #
   def mix
-    @song = current_user.songs.find(params[:id])
     tracks = params.delete(:tracks)
     head :bad_request and return if tracks.blank?
 
     Song.transaction do 
       @song.mixes.clear
-      #@song.update_attributes!(params[:song])
+      #@song.update_attributes!(params[:song]) # XXX
     
       tracks.each do |i, track|
         next if track['filename'].blank? || !Track.exists?(['id = ?', track['id']])
         @song.mixes.create! :track_id => track['id'],
-          :volume => track['volume'],
-          :balance => track['balance']
+          :volume => track['volume']
       end
       @song.save!
     end
@@ -282,18 +244,8 @@ protected
     ['Music', music_path]
   end
 
-  # Tries to locate a song from the current user ones.
-  # If no one is found, this request comes from an anonymous user, so send out a 404.
-  #
-  def song_required
-    @song = 
-      if logged_in?
-        current_user.songs.find(params[:id])
-      else
-        Song.unpublished.find(params[:id])
-      end
-
-  rescue ActiveRecord::RecordNotFound
-    render :nothing => true, :status => :not_found
+  def writable_song_required
+    @song = Song.find(params[:id])
+    head :forbidden and return unless @song.accessible_by? current_user
   end
 end

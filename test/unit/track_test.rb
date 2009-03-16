@@ -61,7 +61,7 @@ class TrackTest < ActiveSupport::TestCase
     assert_raise(ActiveRecord::ReadOnlyRecord) { t.delete } 
 
     assert_nothing_raised { s.delete }
-    assert_nothing_raised { t.delete }
+    assert_nothing_raised { t.reload.delete }
 
     assert t.reload.deleted?
     assert s.reload.deleted?

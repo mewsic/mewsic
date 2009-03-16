@@ -65,7 +65,9 @@ class TracksController < ApplicationController
   # status.
   #
   def create
+    tags = params.delete(:tag_list)
     @track = current_user.tracks.create params[:track]
+    current_user.tag(@track, :with => tags, :on => :tags) if tags
 
     respond_to do |format|
       format.xml do
@@ -80,20 +82,17 @@ class TracksController < ApplicationController
 
   # ==== DELETE /tracks/:id
   #
-  # Tries to destroy the given track, if the Track#destroyable? method returns true. Nothing is
+  # Tries to destroy the given track, if the Track#deletable? method returns true. Nothing is
   # rendered. if successful => 200, if not => 403, if not found => 404, any other error => 400.
   #
   def destroy
     @track = current_user.tracks.find(params[:id])
 
-    if @track.destroyable?
-      @track.songs.destroy_all
-      @track.destroy
-      flash[:notice] = "Track '#{@track.title}' has been deleted."
-      head :ok
-    else
-      head :forbidden
-    end
+    head :forbidden and return unless @track.deletable?
+    @track.delete
+
+    flash[:notice] = "Track '#{@track.title}' has been deleted."
+    head :ok
 
   rescue ActiveRecord::RecordNotFound # find
     head :not_found
@@ -104,13 +103,13 @@ class TracksController < ApplicationController
   # ==== XHR GET /tracks/:id/confirm_destroy
   #
   # Renders the <tt>_destroy.html.erb</tt> partial that asks the user confirmation
-  # before deleting a Track. If the Track#destroyable? method returns false, means
+  # before deleting a Track. If the Track#deletable? method returns false, means
   # that the track is used by a number of songs: the user is shown a listing and
   # asked to delete its own songs that use the track first or contact support for removal.
   #
   def confirm_destroy
     @track = current_user.tracks.find(params[:id])
-    @songs = @track.published_songs unless @track.destroyable?
+    @songs = @track.dependent_songs unless @track.deletable?
     render :partial => 'destroy'
   end
 

@@ -113,14 +113,18 @@ class Track < ActiveRecord::Base
     end
   end
 
-  private
   # Deletable policy.
   # A track is not deletable if it is mixed into other published songs (either public or private)
   #
   def deletable?
-    self.mixes.count.zero? || !self.mixes.any? { |mix| mix.song.published? }
+    dependent_songs.empty?
   end
 
+  def dependent_songs
+    self.songs.select(&:published?)
+  end
+
+  private
   # A track can be destroyed only if it is already deleted.
   def check_if_deleted
     raise ActiveRecord::ReadOnlyRecord unless deleted?

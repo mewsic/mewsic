@@ -2,6 +2,7 @@
   <user><%= h(song.user.login) if song.user %></user>       
   <author><%= h(song.original_author) %></author>     
   <title><%= h(song.title) %></title>     
+  <tags><%= h(song.tag_list.join(',')) %></tags>
   <instruments><%= song.instruments.size %></instruments>  
   <description><%= h(song.description) %></description>
   <rating><%= song.rating_avg.to_f %></rating>     

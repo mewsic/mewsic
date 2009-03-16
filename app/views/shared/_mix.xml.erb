@@ -3,9 +3,10 @@
   <user><%= h(mix.track.user.login) %></user>       
   <title><%= h(mix.track.title) %></title>     
   <author><%= h(mix.track.author) %></author>     
+  <tags><%= h(mix.track.tag_list.join(',')) %></tags>
   <instrument><%= mix.track.instrument.id %></instrument>  
-	<rating><%= mix.track.rating_avg.to_f %></rating>
-	<filename><%= mix.track.public_filename %></filename>
+  <rating><%= mix.track.rating_avg.to_f %></rating>
+  <filename><%= mix.track.public_filename %></filename>
   <waveform><%= formatted_track_path mix.track, 'png' %></waveform>
   <seconds><%= mix.track.seconds %></seconds>
   <volume><%= mix.volume %></volume>
