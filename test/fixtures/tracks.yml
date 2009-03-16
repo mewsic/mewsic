@@ -201,6 +201,15 @@ drum_for_white_christmas:
   rating_avg: <%= random_rating %>
   status: <%= Track.statuses.public %>
 
+hi_fidelity_and_extremely_cool_loops:
+  title: Hi fidelity loops, assured quality
+  instrument: drums
+  seconds: 203
+  user: quentin
+  filename: test.mp3
+  rating_avg: <%= random_rating %>
+  status: <%= Track.statuses.public %>
+
 <% 50.times do |i| %>
 random_track_<%= i %>:
   title: random track <%= i %>

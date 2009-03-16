@@ -4,6 +4,6 @@ class AddTrackPublishedStatus < ActiveRecord::Migration
   end
 
   def self.down
-    remove_column :tracks, :published, :boolean
+    remove_column :tracks, :published
   end
 end

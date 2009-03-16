@@ -10,7 +10,7 @@ class AddPolymorphicTrackAndSongsOwnerships < ActiveRecord::Migration
   end
 
   def self.down
-    remove_column :songs, :user_type, :limit => 10
-    remove_column :tracks, :user_type, :limit => 10
+    remove_column :songs, :user_type
+    remove_column :tracks, :user_type
   end
 end

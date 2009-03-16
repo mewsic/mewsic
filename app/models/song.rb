@@ -104,7 +104,7 @@ class Song < ActiveRecord::Base
     indexes :title, :author, :description
     indexes user.country, :as => :country
     where "status = #{statuses.public}"
-    set_property :delta => true
+    #set_property :delta => true
   end
 
   # XXX just testing, maybe will replace the find_newest finder

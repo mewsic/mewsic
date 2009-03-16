@@ -19,16 +19,17 @@ class SimplifySongStructure < ActiveRecord::Migration
   end
 
   def self.down
-    rename_column :songs, :author, :original_author
+    #rename_column :songs, :author, :original_author
+    change_column :songs, :description, :string
 
-    add_column :songs, :original_author, :string, :limit => 60
-    add_column :songs, :description, :string
     add_column :songs, :tone, :string, :limit => 2
     add_column :songs, :genre_id, :integer
     add_column :songs, :bpm, :integer
     add_column :songs, :key, :integer
 
-    add_column :tracks, :description, :string
+    remove_column :tracks, :author
+    change_column :tracks, :description, :string
+
     add_column :tracks, :tonality, :string, :limit => 2, :default => 'C'
     add_column :tracks, :bpm, :integer
     add_column :tracks, :idea, :boolean, :default => false, :null => false

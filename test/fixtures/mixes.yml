@@ -14,7 +14,6 @@
 #  updated_at :datetime      
 #
 
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 let_it_be_sax:
   song: let_it_be
   track: sax_for_let_it_be
@@ -128,6 +127,7 @@ white_christmas_electro_remix_sax:
   song: white_christmas_electro_remix
   track: sax_for_closer
 
+# Closer has got lots of voice tracks. Still unknown why.
 <% 10.times do |i| %>
 mixes_<%= i + 4 %>:
   song: closer
@@ -135,13 +135,38 @@ mixes_<%= i + 4 %>:
   volume: 0.8
 <% end %>
 
+
 # all songs have randomly got some tracks, see songs.yml
-<% 400.times do |i| %>
-random_mixes_<%= i %>:
-  song: song_<%= rand(200) %>
-  track: random_track_<%= rand(50) + 1 %>
+# User songs
+<% 200.times do |i| %>
+mix_for_song_<%= i %>:
+  song: song_<%= i %>
+  track: hi_fidelity_and_extremely_cool_loops
   volume: <%= rand %>
 <% end %>
+
+<% 400.times do |i| %>
+random_mix_for_song_<%= i %>:
+  song: song_<%= rand(200) %>
+  track: random_track_<%= rand(50) %>
+  volume: <%= rand %>
+<% end %>
+
+# Mband songs
+<% 50.times do |i| %>
+mix_for_mband_song_<%= i %>:
+  song: mband_song_<%= i %>
+  track: hi_fidelity_and_extremely_cool_loops
+  volume: <%= rand %>
+<% end %>
+
+<% 100.times do |i| %>
+random_mix_for_mband_song_<%= i %>:
+  song: mband_song_<%= i %>
+  track: random_track_<%= rand(50) %>
+  volume: <%= rand %>
+<% end %>
+
 
 # Private mixes
 private_mix:
@@ -155,3 +180,7 @@ private_mix_<%= i %>:
   track: private_track_<%= rand(4) %>
   volume: 1.0
 <% end %>
+
+really_short_mix:
+  song: really_short_song
+  track: really_short_track

@@ -67,7 +67,7 @@ class Track < ActiveRecord::Base
     indexes user.country, :as => :country
     indexes instrument.description, :as => :instrument
     where "status = #{statuses.public}"
-    set_property :delta => true
+    #set_property :delta => true
   end
 
   def accessible_by?(user, song = nil)

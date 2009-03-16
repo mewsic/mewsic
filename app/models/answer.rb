@@ -62,7 +62,7 @@ class Answer < ActiveRecord::Base
   
   define_index do
     indexes :body
-    set_property :delta => true
+    #set_property :delta => true
   end
 
   # Finds open answers (whose have got the <tt>closed</tt> attribute to <tt>false</tt>)

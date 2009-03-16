@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
   define_index do
     indexes :login, :nickname, :motto, :tastes, :country
     where 'activated_at IS NOT NULL'
-    set_property :delta => true
+    #set_property :delta => true
   end
   
   # Virtual attribute for the unencrypted password
@@ -299,7 +299,9 @@ class User < ActiveRecord::Base
   end
 
   def self.find_most_admired(options)
-    self.find(:all, options.merge(:select => 'users.*, count(friendships.id) as admirers_count', :joins => 'LEFT OUTER JOIN friendships ON friendships.friend_id = users.id AND friendships.accepted_at IS NULL', :conditions => "users.activated_at IS NOT NULL", :group => 'users.id', :order => 'count(friendships.id) DESC'))
+    self.find(:all, options.merge(:select => 'users.*, count(friendships.id) as admirers_count',
+                                  :joins => 'LEFT OUTER JOIN friendships ON friendships.friend_id = users.id AND friendships.accepted_at IS NULL',
+                                  :conditions => "users.activated_at IS NOT NULL", :group => 'users.id', :order => 'count(friendships.id) DESC'))
   end
   
   def self.find_newest(options = {})
@@ -308,7 +310,8 @@ class User < ActiveRecord::Base
   
   def self.find_paginated_best(options = {})
     options.reverse_update(:page => 1, :per_page => 3)
-    paginate(options.merge({:conditions => ["songs.id IS NOT NULL AND songs.published = ? AND users.activated_at IS NOT NULL", true], :joins => "LEFT OUTER JOIN songs ON users.id = songs.user_id", :order => 'songs.rating_avg DESC', :include => :avatar})) 
+    paginate(options.merge({:conditions => ["songs.id IS NOT NULL AND songs.status = ? AND users.activated_at IS NOT NULL", Song.statuses.public],
+                           :joins => "LEFT OUTER JOIN songs ON users.id = songs.user_id", :order => 'songs.rating_avg DESC', :include => :avatar})) 
   end
 
   def self.find_paginated_newest(options = {})
@@ -398,10 +401,10 @@ class User < ActiveRecord::Base
   end
 
   def songs_count(options = {})
-    if options[:skip_blank]
-      self.songs.count(:include => :tracks, :conditions => ['songs.published = ? AND tracks.id IS NOT NULL', true])
+    if options[:skip_blank] # XXX remove me, because no blank songs are allowed anymore..
+      self.songs.public.count(:include => :tracks, :conditions => 'mixes.id IS NOT NULL')
     else
-      self.published_songs.count
+      self.songs.public.count
     end
   end
 
@@ -418,7 +421,7 @@ class User < ActiveRecord::Base
   end
 
   def best_songs(options = {})
-    self.songs.find(:all, options.merge(:conditions => ['published = ?', true], :order => 'rating_avg DESC'))
+    self.songs.public.find(:all, :order => 'rating_avg DESC')
   end
   
   #def avatar
