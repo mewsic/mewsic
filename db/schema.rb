@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090316014351) do
+ActiveRecord::Schema.define(:version => 20090316035139) do
 
   create_table "abuses", :force => true do |t|
     t.integer  "abuseable_id"
@@ -35,16 +35,6 @@ ActiveRecord::Schema.define(:version => 20090316014351) do
     t.boolean  "delta",                                           :default => false
   end
 
-  create_table "band_members", :force => true do |t|
-    t.string   "nickname",       :limit => 20
-    t.integer  "instrument_id"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "country",        :limit => 45
-    t.integer  "linked_user_id"
-  end
-
   create_table "featurings", :force => true do |t|
     t.integer  "song_id"
     t.integer  "user_id"
@@ -58,12 +48,6 @@ ActiveRecord::Schema.define(:version => 20090316014351) do
     t.datetime "created_at"
     t.datetime "accepted_at"
   end
-
-  create_table "genres", :force => true do |t|
-    t.string "name"
-  end
-
-  add_index "genres", ["name"], :name => "index_genres_on_name"
 
   create_table "help_pages", :force => true do |t|
     t.string   "title"
