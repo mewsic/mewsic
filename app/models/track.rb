@@ -52,6 +52,7 @@ class Track < ActiveRecord::Base
   before_destroy :destroy_mixes
   
   acts_as_rated :rating_range => 0..5 
+  acts_as_taggable_on :tags
   
   has_playable_stream
 

@@ -124,6 +124,7 @@ class User < ActiveRecord::Base
   has_many :abuses, :as => :abuseable
 
   acts_as_rated :rating_range => 0..5
+  acts_as_tagger
   
   has_private_messages
   

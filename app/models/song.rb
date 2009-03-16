@@ -72,8 +72,6 @@ class Song < ActiveRecord::Base
   ## XXX Remove me
   attr_accessor :mlab
 
-  acts_as_nested_set
-
   belongs_to :user, :polymorphic => true
 
   has_many :mixes, :conditions => 'deleted = 0'
@@ -94,6 +92,8 @@ class Song < ActiveRecord::Base
   before_destroy :destroy_mixes
 
   acts_as_rated :rating_range => 0..5
+  acts_as_nested_set
+  acts_as_taggable_on :tags
 
   has_playable_stream
 

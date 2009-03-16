@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 class TrackTest < ActiveSupport::TestCase
   include Playable::TestHelpers
 
-  fixtures :users, :songs, :tracks, :instruments, :mixes
+  fixtures :users, :songs, :tracks, :instruments, :mixes, :tags, :taggings
 
   def test_find_most_used_tracks_should_return_tracks_and_usage
     max_usage = Mix.count(:group => :track_id, :order => 'count_all DESC').first.last
@@ -46,6 +46,12 @@ class TrackTest < ActiveSupport::TestCase
     assert tracks(:guitar_for_red_red_wine).accessible_by?(users(:quentin))
     assert tracks(:guitar_for_red_red_wine).accessible_by?(users(:john))
     assert tracks(:guitar_for_red_red_wine).accessible_by?(users("user_#{rand 500}".intern))
+  end
+
+  def test_taggings
+    assert_equal 3, tracks(:guitar_for_let_it_be).tag_list.size
+    assert_equal 2, tracks(:guitar_for_let_it_be).tag_counts.first.count
+    assert_equal [tracks(:voice_for_radio_ga_ga)], tracks(:guitar_for_let_it_be).find_related_tags
   end
 
   def test_deleted

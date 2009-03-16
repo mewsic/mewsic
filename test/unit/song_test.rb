@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 class SongTest < ActiveSupport::TestCase
   include Playable::TestHelpers
 
-  fixtures :users, :songs, :mixes, :tracks, :instruments, :mbands, :featurings
+  fixtures :users, :songs, :mixes, :tracks, :instruments, :mbands, :featurings, :tags, :taggings
 
   def test_tracks_association
     assert_equal 3, songs(:let_it_be).tracks.size
@@ -91,6 +91,12 @@ class SongTest < ActiveSupport::TestCase
 
     remix.save
     assert_equal nil, remix.parent
+  end
+
+  def test_taggings
+    assert_equal 3, songs(:let_it_be).tag_list.size
+    assert_equal 2, songs(:let_it_be).tag_counts.first.count
+    assert_equal [songs(:radio_ga_ga)], songs(:let_it_be).find_related_tags
   end
 
   def test_delete

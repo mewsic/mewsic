@@ -1,0 +1,81 @@
+# Song tags
+let_it_be_rock_by_quentin:
+  tag: rock
+  taggable: let_it_be
+  taggable_type: Song
+  tagger: quentin
+  tagger_type: User
+  context: tags
+
+let_it_be_120bpm_by_quentin:
+  tag: _120bpm
+  taggable: let_it_be
+  taggable_type: Song
+  tagger: quentin
+  tagger_type: User
+  context: tags
+
+let_it_be_rock_by_john:
+  tag: rock
+  taggable: let_it_be
+  taggable_type: Song
+  tagger: john
+  tagger_type: User
+  context: tags
+
+let_it_be_cool_by_john:
+  tag: cool
+  taggable: let_it_be
+  taggable_type: Song
+  tagger: john
+  tagger_type: User
+  context: tags
+
+radio_ga_ga_cool_by_quentin:
+  tag: cool
+  taggable: radio_ga_ga
+  taggable_type: Song
+  tagger: quentin
+  tagger_type: User
+  context: tags
+
+# Track tags
+guitar_for_let_it_be_rock_by_quentin:
+  tag: rock
+  taggable: guitar_for_let_it_be
+  taggable_type: Track
+  tagger: quentin
+  tagger_type: User
+  context: tags
+
+guitar_for_let_it_be_120bpm_by_quentin:
+  tag: _120bpm
+  taggable: guitar_for_let_it_be
+  taggable_type: Track
+  tagger: quentin
+  tagger_type: User
+  context: tags
+
+guitar_for_let_it_be_rock_by_john:
+  tag: rock
+  taggable: guitar_for_let_it_be
+  taggable_type: Track
+  tagger: john
+  tagger_type: User
+  context: tags
+
+guitar_for_let_it_be_cool_by_john:
+  tag: cool
+  taggable: guitar_for_let_it_be
+  taggable_type: Track
+  tagger: john
+  tagger_type: User
+  context: tags
+
+voice_for_radio_ga_ga_cool_by_quentin:
+  tag: cool
+  taggable: voice_for_radio_ga_ga
+  taggable_type: Track
+  tagger: quentin
+  tagger_type: User
+  context: tags
