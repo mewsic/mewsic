@@ -81,12 +81,12 @@ class Song < ActiveRecord::Base
   has_many :mlabs, :as => :mixable
   #has_many :abuses, :as => :abuseable, :class_name => 'Abuse'
  
-  validates_presence_of :title, :author,      :if => Proc.new(&:published?)
-  validates_associated :user,                 :if => Proc.new(&:published?) 
-  validates_length_of :tracks, :minimum => 1, :if => Proc.new(&:published?)
+  validates_presence_of :title, :author,      :if => :published?
+  validates_associated :user,                 :if => :published?
+  validates_length_of :tracks, :minimum => 1, :if => :published?
 
-  before_validation :copy_author_information_from_user, :if => Proc.new(&:published?)
-  before_save :remove_parent_if_it_shares_no_tracks,    :if => Proc.new(&:published?)
+  before_validation :copy_author_information_from_user, :if => :published?
+  before_save :remove_parent_if_it_shares_no_tracks,    :if => :published?
 
   before_destroy :check_if_deleted
   before_destroy :destroy_mixes
