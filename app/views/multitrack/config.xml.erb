@@ -15,12 +15,10 @@
 		<songs>
 			<fetch>/songs/{:song_id}.xml</fetch>
 			<mix method="post">/songs/{:song_id}/mix.xml</mix>
-			<update method="put">/songs/{:song_id}.xml</update>
 		</songs>
 		<tracks>
 			<fetch>/tracks/{:track_id}.xml</fetch>
 			<create method="post">/tracks.xml</create>
-			<download>/tracks/{:track_id}/download</download>
 		</tracks>
 		<media>
 			<mix method="post">/mix?<%= multitrack_auth_token %></mix>
