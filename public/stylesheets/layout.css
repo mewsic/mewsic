@@ -22,34 +22,16 @@ body {
 
 
 /* GENERAL RULES */
-img {
-	border: 0px;
-}
-
-.fleft {
-	float: left;
-}
-
-.fright {
-	float: right;
-}
-
-.alright {
-	text-align: right;
-}
-
-.alleft {
-	text-align: left;
-}
-
-.block {
-	display: block;
-}
-
-.clear {
-	clear: both;
-}
-
+img { border: 0px; }
+.fleft { float: left; }
+.fright { float: right; }
+.alright { text-align: right; }
+.alleft { text-align: left; }
+.block { display: block; }
+.clear { clear: both; }
+ul { padding: 0; margin:0; }
+.margin30 { margin-top: 30px }
+.margin7 { margin-top: 7px }
 
 
 /* MENU */
@@ -177,7 +159,7 @@ img {
 .leftColWrapper {
 	margin-right: 246px;
 	overflow: hidden;
-	padding: 18px;
+	padding: 13px 10px 10px 16px;
 }
 .rightCol {
 	width: 210px;
@@ -190,8 +172,9 @@ img {
 /* PICK OF THE WEEK LAYOUT */
 .pick_wrap {
 	width: 697px;
-	padding-bottom: 30px;
+	padding: 3px 0 30px 0;
 	background: transparent url('../images/pick_head_bg.gif') repeat-x top;
+	overflow: hidden;
 }
 .pick_wrap .pick_ad {
 	width: 454px;
@@ -212,11 +195,16 @@ img {
 	width: 233px;
 	height: 100%;
 }
-.pick_wrap h1 {
+.pick_details .mband_icon  {
+	padding: 0 0 5px 23px;
+	background: url('../images/icons/mband_big.png') no-repeat 0 1px;
+}
+
+.pick_details h1, .pick_details .mband {
 	margin: 8px 0 0 0;
 }
 
-.margin30 { margin-top: 30px }
+
 
 
 /* most player artist related */
@@ -269,7 +257,33 @@ img {
 
 /* RIGHT FOOTER CONTET SNIP */
 .snip { width: 290px; margin-top: 5px; }
-.snip img { margin-right: 5px; }
+.snip .tag_genre, .snip .footer_name_link, .snip .item_count { margin-left: 5px !important; }
+
+.mband_pick_footer .footer_name_link {
+	background: url('../images/icons/mband_small.png') no-repeat;
+	margin-left: 88px !important;
+	padding: 0 0 7px 17px;
+}
+
+
+.mband_pick_footer .item_count { margin-top: 6px; padding-left: 85px; }
+
+.mband_pick_footer .snip { 
+	padding: 7px 8px 6px 5px;
+	width: 420px;
+	height: 55px;
+ }
+
+.footer_right_content .mband_more_tag { border-top: 1px solid #001E35 !important; }
+.mband_more_tag a { padding: 1px 10px 2px 10px; }
+
+.mband_pick_footer .snip .mband_flags { margin-top: -55px; padding:0;}
+
+.mband_flags li {
+	display: inline;
+	margin-left: 3px;
+}
+
 
 /* SONG BLOCK CONTAINER DIMENSION SPEC */
 .w454 { width: 454px; } /* pick of the week, most player artist */
@@ -291,8 +305,10 @@ img {
 	height: 40px;
 }
 .song_block .avatar, .song_block .tracks_count, .instr_avatar {
- 	margin-left: 4px;	
+ 	margin-left: 5px;	
 }
+
+
 
 #top_footer .song_block .avatar {
 	background: url('../images/thumb_loader.gif') no-repeat center;
@@ -305,9 +321,9 @@ img {
 	text-align: center;
 }
 .song_block .tracks_count h3 {
-	margin: 0 0 0 -2px;
-	line-height: 26px;
-	letter-spacing: -2px;
+	margin: 4px 0 -3px -1px;
+	line-height: 22px;
+	letter-spacing: -1px;
 }
 .song_details {
 	padding: 2px 0 0 7px;
@@ -369,6 +385,8 @@ img {
 }
 .rightCol .avatar { margin-right: 4px; }
 
+.rightCol .tag_genre { margin-bottom: 10px; }
+
 
 /* RELATED LISTS */
 .related_list {
@@ -408,7 +426,7 @@ img {
 	height: 188px;
 }
 .bottom_footer_grad {
-	margin-top: 220px;	
+	margin-top: 8px;	
 }
 #top_footer, .top_footer_grad {
 	width: 960px;
@@ -453,7 +471,7 @@ img {
 	background: url('../images/icons/shape_square.png') no-repeat;
 }
 
-#top_footer h2 {
+h2 {
 	margin: 0;
 }
 
@@ -465,6 +483,7 @@ img {
 	padding-left: 25px;
 }
 .footer_right_content .tag_genre { display: inline; }
+
 .tag_genre {
 	margin: 0;
 }
@@ -479,6 +498,7 @@ img {
 	padding: 0; 
 	margin: 29px 0 17px 0;
 }
+
 .pick_page_anchors li {
 	list-style: none;
 	display: inline;
@@ -499,7 +519,7 @@ img {
 	display: inline;
 }
 
-#top_footer .subtitle {
+.subtitle {
 	margin-bottom: 7px;
 }
 .best_people .user_thumb, .new_band .user_thumb {
@@ -566,3 +586,214 @@ img {
 }
 
 
+/* EXPLANATION BANNER */
+#expl_banner {
+	width: 635px;
+	height: 95px;
+	margin-bottom: 10px;
+	padding: 25px 25px 14px 37px;
+}
+.expl_band { 
+	width: 89px;
+	height: 79px;
+	margin: 5px 20px 0 0;
+	background: url('../images/icons/expl_band_icon.jpg') no-repeat left; 
+}
+
+#expl_hide { margin-top: -15px; cursor: pointer; }
+#expl_banner h1 {
+	margin: 0 0 10px 0;
+}
+#expl_banner p { margin: 0; line-height: 16px; }
+
+.expl_links {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.expl_links li {
+	display: inline;
+}
+.expl_links li a {
+	background: url('../images/icons/expl_link_list.jpg') no-repeat;
+	padding: 0 0 0 20px;
+	margin-left: 25px;
+}
+
+
+/* MBAND MEMBERS BLOCK */
+.mband_members {
+	padding: 6px 0 10px 2px;
+	width: 100%;
+	border-bottom: 1px solid #E6E6E6;
+}
+.mband_count {
+	margin-bottom: 9px;
+}
+
+.instr_flag { margin-top: 24px }
+.mband_more { margin-top: 6px; }
+
+.mband_members .first_margin { margin-left: 3px; }
+
+
+
+
+/* COOLEST MBAND */
+.mband_coolest_wrap {
+	width: 697px;
+	padding: 3px 0 30px 0;
+	overflow: hidden;
+	border-top: 1px solid #CCCCCC;
+	margin-top: 10px;
+}
+
+
+.mband_coolest_ad { margin-top: 20px; }
+.mband_icon { margin-top: 15px !important; }
+
+/* bottom tools */
+.bottom_tools {
+	width: 100%;
+	border-top: 1px solid #E6E6E6;
+	margin-top: 10px;
+}
+
+.mband_browse {
+	background: url('../images/icons/magnifier.png') no-repeat left;
+	padding: 3px;
+	margin-left: 9px;
+}
+.mband_browse span {
+	padding: 3px 3px 3px 17px;
+	margin-right: 6px;
+}
+
+
+/* more active mbands, sidebar */
+.mband_name {
+	background: url('../images/icons/mband_small.png') no-repeat;
+	margin: 4px 0 0 43px;
+	padding-left: 18px;
+}
+.bands_new .mband_name, .bands_new .tag_genre { margin-left: 90px; }
+.bands_new .tag_genre { margin-top: 5px; margin-bottom: 5px; }
+
+
+.newest { margin: 0 !important; }
+
+
+/* INSTRUMENTS SEARCH */
+#instr_search_box, #instr_list_box {
+	width: 697px;
+	overflow: hidden;
+}
+
+.browse_pane {
+	width: 592px;
+	overflow: hidden;
+}
+.list_head {
+	width: 592px;
+	margin-top: 10px;
+}
+
+.pane_heading {
+	padding: 10px 0 5px 0;
+	border-top: 2px solid #E3F5FF;	
+}
+.pane_content {
+	width: 100%;
+}
+
+#instr_show {
+	width: 100%;
+	padding-bottom: 8px;
+}
+
+.browse_pane_left {
+	width: 105px;
+}
+.browse_pane_right {
+	width: 592px;
+}
+#instr_list_box .browse_pane_right { margin-top: 23px; }
+
+.maingenre_type li {
+	display: inline;
+	float: left;
+}
+.maingenre_type li { 
+	padding: 4px 8px;
+ }
+
+
+.instr_type li, .maingenre_type li {
+	list-style: none;
+	font-weight: bold;
+}
+#instr_search_box .instr_type li:hover, #instr_search_box .maingenre_type li:hover {
+	background-color: #E8E8E8;
+}
+#instr_search_box .instr_type .current, #instr_search_box .maingenre_type .current {
+	background-color: #D9D9D9;
+}
+
+.instr_type li a {
+	display: block;
+	padding: 2px 10px 2px 2px;
+}
+
+.loader {
+	background: url('../images/loader_small.gif') no-repeat right;
+	width: 98px;
+	height: 16px;
+	margin-bottom: 6px;
+}
+
+
+/* NEWEST INSTRUMENTS */
+#newest_list {
+	border-left: 1px dashed #999999;
+	padding-left: 19px;
+}
+
+/* BULLET PAGING */
+.paging_bg {
+	padding: 5px 4px 6px 6px;
+	background-color: #F3F3F3;
+}
+
+.bullet_paging {
+	list-style: none;
+}
+.bullet_paging li {
+	display: inline;
+	float: left;
+}
+
+.bullet .on, .bullet .off {
+	width: 8px;
+	height: 8px;
+	display: block;
+	margin: 4px 7px 0 0;
+}
+.bullet .on {
+	background: url('../images/paging_bullets.png') no-repeat center;
+}
+.bullet .off {
+	background: url('../images/paging_bullets.png') no-repeat top;
+}
+.bullet .off:hover {
+	background: url('../images/paging_bullets.png') no-repeat bottom;	
+}
+
+.pager .prev, .pager .next {
+	width: 30px;
+	height: 15px;
+	display: block;
+}
+.pager .prev { background: url('../images/paging_prev.gif') no-repeat top; }
+.pager .prev:hover { background: url('../images/paging_prev.gif') no-repeat bottom; }
+.pager .next { background: url('../images/paging_next.gif') no-repeat top; }
+.pager .next:hover { background: url('../images/paging_next.gif') no-repeat bottom; }

@@ -1,8 +1,10 @@
 .navigation a:link, .navigation a:visited,
-.facebook, .facebook:visited {
+.facebook, .facebook:visited, 
+.instr_type .current a, .maingenre_type .current a {
 	color: #00385D;
 }
 
+.none,
 .navigation a, .join_button, .login_button, .facebook:hover,
 #bottom_footer li a, .tag_genre a,
 .pick_ad,
@@ -10,11 +12,21 @@
 .song_title, .song_author,
 .control_add, .control_mix, .control_play, .item_count,
 .lastfm_lists,
-.footer_name_link {
+.footer_name_link,
+.expl_links li a,
+.mband_count, .mband_more, .mband_more_tag a, .mband_name, .mband_browse, .mband_browse:hover,
+.instr_type a, .instr_type a:hover, .instr_type a:visited,
+.maingenre_type a, .maingenre_type a:hover, .maingenre_type a:visited,
+.shadow_big a {
 	text-decoration: none;
 }
-#bottom_footer li a:hover, .pick_wrap .tag_genre a, .interview a:hover,
-.item_count:hover, .footer_name_link:hover {
+
+.none:hover,
+#bottom_footer li a:hover, .tag_genre a:hover, .interview a:hover,
+.item_count:hover, .footer_name_link:hover,
+.expl_links li a:hover, #expl_hide:hover,
+.mband_count:hover, .mband_more:hover, .mband_more_tag a:hover, .mband_name:hover,
+.shadow_big a:hover, .mband_browse span:hover {
 	text-decoration: underline;
 }
 
@@ -28,7 +40,8 @@
 #top_footer .song_title, #top_footer .song_author,
 .footer_right_content .gray_spec,
 .footer_name_link,
-#playlist .song_title, #playlist .playlist_song_title:visited {
+#playlist .song_title, #playlist .playlist_song_title:visited,
+#expl_banner h1, #expl_banner p  {
 	color: #FFFFFF;
 }
 #bottom_footer li a:visited {
@@ -57,7 +70,7 @@
 .pick_page_anchors .song { color: #C0E8FF; }
 .pick_page_anchors .song:hover { color: #FFFFFF; border-bottom: 0; }
 
-.item_count {
+.item_count, .mband_count, .mband_more, .mband_browse {
 	color: #0071BC;
 }
 
@@ -70,16 +83,24 @@
 .control_play { background-color: #00AC00; }
 
 
-.related_list h2 {
+h2, .rightCol h2, .mband_name, .subtitle {
 	color: #064970;
 }
 
+.expl_links li a {
+	color: #EAF7FF;
+}
 
 #app_bar {
 	background-color: #0296C2;
 }
 
-.song_block .tracks_count { background-color: #006F9F; }
+.instr_type a, .maingenre_type a {
+	color: #0296C2;
+}
+
+
+.song_block .tracks_count, #instr_show { background-color: #006F9F; }
 .song_block .instr_avatar { }
 
 
@@ -87,14 +108,15 @@
 	border-bottom: 1px solid green;
 }
 
-.login_button, .pick_page_anchors .song {
+.login_button, .pick_page_anchors .song,
+#expl_banner {
 	background-color: #00385D;
 }
 .login_button:hover {
 	color: #C0D4E8;
 }
 
-#bottom_footer {
+#bottom_footer, .mband_pick_footer .snip, .mband_more_tag a {
 	background-color: #001E35;
 }
 .bottom_footer_grad {
@@ -122,7 +144,7 @@
 }
 
 /* GLOBAL LINK COLOR */
-.tag_genre a, a {
+.tag_genre a, a, #expl_hide {
 	color: #0099FF;
 }
 .mixable_link a {
@@ -131,10 +153,17 @@
 	font-weight: normal !important;
 }
 
-
-.you_know span, .rightCol h2 {
+.you_know span {
 	color: #282828;
 }
 .you_know span a:link, .you_know a:visited {
 	color: #5794C6;
+}
+
+.mband_more_tag a {
+	color: #29ABE2;
+}
+
+.shadow_big a, #instr_list_box .instr_type li a:hover {
+	color: #ADD9FF;
 }

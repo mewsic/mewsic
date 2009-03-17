@@ -8,8 +8,23 @@
 	background-image: url('../images/icons/instruments_white.png');
  }
 
+.shadow_big { 
+	background: url('../images/icons/instruments_shadow_big.png') no-repeat top;
+	margin: 20px 16px 0 34px;
+	padding-bottom: 13px;
+	text-align: center;
+	cursor: pointer;
+}
+.instr_big { 
+	width: 60px;
+	height: 60px;
+	display: block;
+	background-image: url('../images/icons/instruments_big.png');
+ }
 
-/* Positioning */
+
+
+/* INSTR Positioning */
 
 /* first row */
 .icon_1 { background-position: 0 0; }
@@ -51,3 +66,50 @@
 .icon_33 { background-position: -160px -160px; }
 .icon_34 { background-position: -200px -160px; }
 .icon_35 { background-position: -238px -160px; }
+
+
+
+
+
+/* INSTR BIG Positioning */
+
+/* first row */
+.icon_41 { background-position: 0 0; }
+.icon_42 { background-position: -60px 0; }
+.icon_43 { background-position: -120px 0; }
+.icon_44 { background-position: -179px -1px; }
+.icon_45 { background-position: -239px 0; }
+.icon_46 { background-position: -299px -1px; }
+.icon_47 { background-position: -358px -1px; }
+/* second row */
+.icon_48 { background-position: 0 -60px; }
+.icon_49 { background-position: -60px -60px; }
+.icon_50 { background-position: -120px -60px; }
+.icon_51 { background-position: -180px -60px; }
+.icon_52 { background-position: -240px -60px; }
+.icon_53 { background-position: -300px -60px; }
+.icon_54 { background-position: -358px -60px; }
+/* third row */
+.icon_55 { background-position: -2px 120px; }
+.icon_56 { background-position: -60px -120px; }
+.icon_57 { background-position: -120px -120px; }
+.icon_58 { background-position: -180px -120px; }
+.icon_59 { background-position: -239px -120px; }
+.icon_60 { background-position: -300px -120px; }
+.icon_61 { background-position: -360px -120px; }
+/* fourth row */
+.icon_62 { background-position: 0 -180px; }
+.icon_63 { background-position: -60px -180px; }
+.icon_64 { background-position: -120px -180px; }
+.icon_65 { background-position: -180px -180px; }
+.icon_66 { background-position: -240px -180px; }
+.icon_67 { background-position: -298px -180px; }
+.icon_68 { background-position: -358px -180px; }
+/* fifth row */
+.icon_69 { background-position: 0 -240px; }
+.icon_70 { background-position: -60px -240px; }
+.icon_71 { background-position: -120px -240px; }
+.icon_72 { background-position: -179px -240px; }
+.icon_73 { background-position: -240px -240px; }
+.icon_74 { background-position: -300px -240px; }
+.icon_75 { background-position: -358px -240px; }

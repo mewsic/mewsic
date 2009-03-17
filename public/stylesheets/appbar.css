@@ -24,30 +24,48 @@
 }
 
 /* NOTIFICATION BADGE */
-.fb_menu_count_holder {
-background-image:url(../images/notification_red.png);
+.notification_red {
+background-image:url('../images/notification_red.png');
 display:inline-block;
 margin: 4px 4px; /* margin-left: 7px if count > 9 */
 color: #FFFFFF;
 line-height: 15px;
 }
-.fb_menu_count_holder .tl {
-background-position:left top;
-}
-.fb_menu_count_holder span {
-background-image:url(../images/notification_red.png);
+.notification_red span {
+background-image:url('../images/notification_red.png');
 display:inline-block;
 }
-.fb_menu_count_holder .tr {
+/* INSTRUMENTS COUNT */
+.instr_counter {
+background-image:url('../images/instruments_count.png');
+display:inline-block;
+color: #FFFFFF;
+line-height: 15px;
+margin-left: 60px;
+}
+
+.instr_counter span {
+background-image:url('../images/instruments_count.png');
+display:inline-block;
+}
+
+.notification_red .tl, .instr_counter .tl {
+background-position:left top;
+}
+.notification_red .tr, .instr_counter .tr {
 background-position:right top;
 }
-.fb_menu_count_holder .br {
+.notification_red .br, .instr_counter .br {
 background-position:right bottom;
 }
-.fb_menu_count_holder .bl {
+.notification_red .bl, .instr_counter .bl {
 background-position:left bottom;
 padding:0 6px 1px;
 }
+
+
+
+
 
 /*.ui-effects-transfer { background-color: #E6E6E6; padding: 5px; } */
 .ui-effects-transfer { background: url('../images/icons/world.png') no-repeat top; padding:5px; } 
@@ -61,6 +79,7 @@ padding:0 6px 1px;
 	bottom: 31px;
 	padding-bottom: 4px;
 }
+
 .tooltip_small strong {
 	color: yellow;
 	background: #282828;
