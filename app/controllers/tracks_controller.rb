@@ -7,53 +7,60 @@
 # == Description
 #
 # This controller handles operation on Track objects. Login is required to access "write" methods:
-# +create+, +rate+, +toggle_idea+, +confirm_destroy+ and +destroy+. The +index+ and +show+ ones are
+# +create+, +rate+, +confirm_destroy+ and +destroy+. The +index+ and +show+ ones are
 # public instead.
 #
 class TracksController < ApplicationController
 
-  before_filter :login_required, :only => [:create, :rate, :toggle_idea, :destroy, :confirm_destroy]
-  before_filter :redirect_to_root_unless_xhr, :only => [:index, :confirm_destroy, :rate]
-  protect_from_forgery :except => :create ## XXX FIXME
+  before_filter :login_required, :only => [:create, :update, :rate, :destroy, :confirm_destroy]
+  before_filter :accessible_track_required, :only => [:show, :download]
+  before_filter :writable_track_required, :only => :update
+  before_filter :destroyable_track_required, :only => [:destroy, :confirm_destroy]
+  before_filter :redirect_to_root_unless_xhr, :only => [:index, :rate, :destroy, :confirm_destroy]
+
+  protect_from_forgery :except => :create ## XXX FIXME FIX THE MULTITRACK
 
   # ==== XHR GET /users/:user_id/tracks
   # ==== XHR GET /mbands/:mband_id/tracks
   #
   # This action is used to paginate the tracks index in the User/Mband page.
-  # Only published tracks are shown.
+  # FIXME: Only published tracks are shown.
   #
   def index
-    if params.include?(:user_id)
-      @author = User.find_from_param(params[:user_id])
-      @tracks = @author.tracks.published.paginate(:page => params[:page], :per_page => 7)
-    elsif params.include?(:mband_id)
-      @author = Mband.find_from_param(params[:mband_id])
-      @tracks = @author.tracks.paginate(:page => params[:page], :per_page => 10)
-    end
+    @author = 
+      if params.include?(:user_id)
+        User.find_from_param(params[:user_id])
+      elsif params.include?(:mband_id)
+        Mband.find_from_param(params[:mband_id])
+      else
+        head :bad_request and return
+      end
 
+    @tracks = @author.tracks.public.paginate(:page => params[:page], :per_page => 10)
     render :partial => @author.class.table_name + '/tracks'
   end
 
+  # ==== GET /tracks/:id.html
   # ==== GET /tracks/:id.xml
   # ==== GET /tracks/:id.png
   #
+  # * HTML format: shows the track page
   # * XML format: shows the XML representation of the given track.
   # * PNG format: streams the waveform png to the client using +x_accel_redirect+.
   #
   def show
-    @track = Track.find(params[:id], :include => :instrument)
-
     respond_to do |format|
-      format.xml
-      format.html { redirect_to '/' }
-      format.png do
-        if @track.filename.blank?
-          flash[:error] = 'file not found'
-          redirect_to '/' and return
-        end
+      format.html do
+        @has_abuse = @track.abuses.exist?(['user_id = ?', current_user.id]) if logged_in?
+      end
 
+      format.xml { render :partial => 'shared/track' }
+
+      format.png do
+        head :not_found and return if @track.filename.blank?
         x_accel_redirect @track.public_filename(:waveform), :content_type => 'image/png'
       end
+
     end
   end
 
@@ -65,7 +72,7 @@ class TracksController < ApplicationController
   # status.
   #
   def create
-    tags = params.delete(:tag_list)
+    tags = params.delete(:tag_list) # XXX TEST THIS FSCKING STUFF
     @track = current_user.tracks.create params[:track]
     current_user.tag(@track, :with => tags, :on => :tags) if tags
 
@@ -80,24 +87,41 @@ class TracksController < ApplicationController
     end
   end
 
+  # ==== PUT /tracks/:id
+  #
+  # Updates the Track with values passed via params[:track].
+  # An user can modify only its own tracks.
+  # If updating a single attribute, this action renders its new value.
+  # If updating multiple ones, nothing is rendered with a 200 status.
+  #
+  def update
+    current_user.tag(@track, :with => params.delete(:tag_list)) if params[:tag_list]
+    @track.update_attributes!(params[:track])
+    @track.reload
+
+    if params[:track].size == 1 && @track.respond_to?(params[:track].keys.first)
+      render :text => @track.send(params[:track].keys.first)
+    else
+      head :ok
+    end
+
+  rescue ActiveRecord::ActiveRecordError
+    head :bad_request
+  end
+  
   # ==== DELETE /tracks/:id
   #
-  # Tries to destroy the given track, if the Track#deletable? method returns true. Nothing is
-  # rendered. if successful => 200, if not => 403, if not found => 404, any other error => 400.
+  # Tries to Track#delete the given track id. Nothing is rendered.
+  # If successful => 200, if not => 403, if not found => 404, any other error => 400.
   #
   def destroy
-    @track = current_user.tracks.find(params[:id])
-
-    head :forbidden and return unless @track.deletable?
     @track.delete
 
     flash[:notice] = "Track '#{@track.title}' has been deleted."
     head :ok
 
-  rescue ActiveRecord::RecordNotFound # find
-    head :not_found
   rescue ActiveRecord::ActiveRecordError
-    head :bad_request
+    head :forbidden
   end
 
   # ==== XHR GET /tracks/:id/confirm_destroy
@@ -105,10 +129,10 @@ class TracksController < ApplicationController
   # Renders the <tt>_destroy.html.erb</tt> partial that asks the user confirmation
   # before deleting a Track. If the Track#deletable? method returns false, means
   # that the track is used by a number of songs: the user is shown a listing and
-  # asked to delete its own songs that use the track first or contact support for removal.
+  # asked to delete its own songs that use the track first or contact support for
+  # removal.
   #
   def confirm_destroy
-    @track = current_user.tracks.find(params[:id])
     @songs = @track.dependent_songs unless @track.deletable?
     render :partial => 'destroy'
   end
@@ -124,20 +148,20 @@ class TracksController < ApplicationController
       @track.rate(params[:rate].to_i, current_user)
       render :layout => false, :text => "#{@track.rating_count} votes"
     else
-      render :nothing => true, :status => :bad_request
+      render :nothing => true, :status => :forbidden
     end
   end
 
   # ==== GET /tracks/:id/download
   #
-  # Streams the Track mp3 to the client, using +x_accel_redirect+ and by providing a nice title using
-  # the track attributes: <tt>instrument.description</tt>, <tt>track.title</tt> and <tt>track.user.login</tt>.
+  # Streams the Track mp3 to the client, using +x_accel_redirect+ and by providing a nice title
+  # using track attributes: <tt>instrument.description</tt>, <tt>track.title</tt> and
+  # <tt>track.user.login</tt>.
   #
   def download
-    @track = Track.find(params[:id])
     if @track.filename.blank?
       flash[:error] = 'File not found'
-      redirect_to :back and return
+      redirect_to track_path(@track) and return
     end
 
     # Requires the following nginx configuration:
@@ -150,10 +174,29 @@ class TracksController < ApplicationController
     x_accel_redirect @track.public_filename,
       :disposition =>  %[attachment; filename="#{@track.instrument.description} for #{@track.title} by #{@track.user.login}.mp3"],
       :content_type => 'audio/mpeg'
-
-  rescue ActiveRecord::RecordNotFound
-    flash[:error] = 'Track not found'
-    redirect_to music_path
   end
+
+  private
+    def accessible_track_required
+      @track = Track.find(params[:id], :include => :instrument)
+      head :forbidden unless @track.accessible_by? current_user
+
+    rescue ActiveRecord::RecordNotFound
+      head :not_found
+    end
+    
+    def writable_track_required
+      @track = Track.find(params[:id])
+      head :forbidden unless @track.editable_by? current_user
+
+    rescue ActiveRecord::RecordNotFound
+      head :not_found
+    end
+
+    def destroyable_track_required
+      @track = current_user.tracks.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      head :forbidden
+    end
 
 end

@@ -222,7 +222,7 @@ random_track_<%= i %>:
 <% end %>
 
 destroyable_track:
-  title: the one that can be destroyed
+  title: the one that can be destroyed, because it is not mixed in any song
   instrument: <%= random_instrument %>
   seconds: <%= rand(100) + 90 %>
   user: quentin

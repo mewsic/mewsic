@@ -26,20 +26,23 @@ require 'statuses'
 
 class Track < ActiveRecord::Base
   
+  # XXX REMOVE ME
   attr_accessor :mlab
+
+  attr_protected :user_id, :listened_times
   
   has_many :mixes, :conditions => 'deleted = 0'
   has_many :songs, :through => :mixes, :order => 'songs.created_at DESC'
 
   has_many :mlabs, :as => :mixable
-  #has_many :abuses, :as => :abuseable, :class_name => 'Abuse'
+  has_many :abuses, :as => :abuseable, :class_name => 'Abuse'
 
   belongs_to :user
   belongs_to :instrument
 
-  validates_presence_of :seconds
   validates_associated :user
   validates_numericality_of :user_id, :greater_than => 0
+  validates_numericality_of :seconds, :greater_than => 0
 
   validates_presence_of :title,                                 :if => :public?
   validates_numericality_of :instrument_id, :greater_than => 0, :if => :public?
@@ -75,12 +78,21 @@ class Track < ActiveRecord::Base
     #set_property :delta => true
   end
 
+  # A private track is accessible by its owner, or if a song is specified and the given
+  # user is a collaborator of it.
+  # Public tracks are accessible by everyone.
+  #
   def accessible_by?(user, song = nil)
     if self.status == :private
       (song && song.private? && song.tracks.include?(self)) ? song.accessible_by?(user) : (self.user == user)
     elsif self.status == :public
       true
     end
+  end
+
+  # Tracks are editable only by its owners
+  def editable_by?(user)
+    self.user == user
   end
 
   # Finds most collaborated tracks and sets a virtual <tt>song_count</tt> attribute that yields

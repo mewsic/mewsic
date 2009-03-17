@@ -106,10 +106,17 @@ class Mband < ActiveRecord::Base
     self.memberships.find(:first, :conditions => ["user_id = ?", user.id])
   end
 
-  # Returns all public tracks from band members, sorted by rating average
+  # Returns all tracks by all Mband members, sorted by rating average.
+  # Only tracks in the named scope specified as first parameter are
+  # returned, :public by default.
   #
   def tracks
-    members.find(:all, :include => :tracks).map { |u| u.tracks.public }.flatten.sort_by(&:rating_avg)
+    tracks = members.find(:all, :include => :tracks).map(&:tracks).flatten.sort_by { |t| t.rating_avg || 0 }
+    # Emulate named_scope semantics using Array#select
+    def tracks.public;  self.select(&:public?)  end
+    def tracks.private; self.select(&:private?) end
+
+    return tracks
   end
 
   # If a member is recording, show it. If any of the members is online,

@@ -36,14 +36,14 @@ class MultitrackTest < ActionController::IntegrationTest
       # Create two tracks
       #
       assert_difference 'Track.count', 2 do
-        post formatted_tracks_path('xml'), :track => { :title => 'sample track', :instrument_id => instruments(:guitar).id, :filename => '/antani/tapioca/test.mp3' }
+        post formatted_tracks_path('xml'), :track => { :title => 'sample track', :instrument_id => instruments(:guitar).id, :filename => '/antani/tapioca/test.mp3', :seconds => 10 }
         assert_response :success
 
         @track_1 = assigns(:track)
         assert_equal 'sample track', @track_1.title
         assert @track_1.private?
 
-        post formatted_tracks_path('xml'), :track => { :title => 'sample track 2', :instrument_id => instruments(:guitar).id, :filename => 'test.mp3' }
+        post formatted_tracks_path('xml'), :track => { :title => 'sample track 2', :instrument_id => instruments(:guitar).id, :filename => 'test.mp3', :seconds => 60 }
         assert_response :success
 
         @track_2 = assigns(:track)
@@ -65,10 +65,9 @@ class MultitrackTest < ActionController::IntegrationTest
       #
       post "/songs/#{@song.id}/mix",
          :tracks => {
-           0 => {:id => @track_1.id, :volume => 0.3, :filename => 'test.mp3'},
-           1 => {:id => @track_2.id, :volume => 1.0, :filename => 'test.mp3'},
-           2 => {:id => rand(65535), :volume => 1.0, :filename => ''},
-           3 => {:id => @track_1.id, :volume => 1.0, :filename => ''}
+           0 => {:id => @track_1.id, :volume => 0.3},
+           1 => {:id => @track_2.id, :volume => 1.0},
+           2 => {:id => rand(65535), :volume => -10} # XXX REMOVE ME, SHOULD BE FIXED IN AS3
         }
 
       assert_response :success
