@@ -72,6 +72,8 @@ class Song < ActiveRecord::Base
   ## XXX Remove me
   attr_accessor :mlab
 
+  attr_protected :user_id, :listened_times
+
   belongs_to :user, :polymorphic => true
 
   has_many :mixes, :conditions => 'deleted = 0'
@@ -79,7 +81,7 @@ class Song < ActiveRecord::Base
   has_many :featurings, :include => :user
 
   has_many :mlabs, :as => :mixable
-  #has_many :abuses, :as => :abuseable, :class_name => 'Abuse'
+  has_many :abuses, :as => :abuseable, :class_name => 'Abuse'
  
   validates_presence_of :title, :author,      :if => :published?
   validates_associated :user,                 :if => :published?

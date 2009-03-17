@@ -147,9 +147,9 @@ class UserTest < Test::Unit::TestCase
   end
   
   def test_pending_friends_for_and_by
-    assert_equal [], users(:aaron).pending_friends_for_me
-    assert_equal [users(:aaron)], users(:user_58).pending_friends_for_me
-    assert_equal 100, users(:aaron).pending_friends_by_me.size
+    assert_equal [], users(:user_42).pending_friends_for_me
+    assert_equal [users(:user_42)], users(:user_58).pending_friends_for_me
+    assert_equal 100, users(:user_42).pending_friends_by_me.size
   end
   
   def test_friends
@@ -161,8 +161,8 @@ class UserTest < Test::Unit::TestCase
   end
   
   def test_pending_friends
-    assert_equal 100, users(:aaron).pending_friends.size
-    assert_equal [users(:aaron)], users(:user_98).pending_friends
+    assert_equal 100, users(:user_42).pending_friends.size
+    assert_equal [users(:user_42)], users(:user_98).pending_friends
 
     assert_equal 60, users(:john).pending_friends.size
     assert_equal [users(:john)], users(:user_300).pending_friends

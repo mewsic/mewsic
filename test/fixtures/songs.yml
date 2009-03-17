@@ -39,7 +39,7 @@
 
 let_it_be:
   title: Let It Be
-  user: aaron
+  user: user_10
   user_type: User
   author: Beatles
   listened_times: 2230
@@ -53,7 +53,7 @@ let_it_be:
 
 radio_ga_ga:
   title: Radio Ga Ga
-  user: aaron
+  user: user_4
   user_type: User
   author: Queen
   listened_times: 1290

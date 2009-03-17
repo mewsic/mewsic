@@ -18,13 +18,13 @@ quentin_relationship_<%= i %>:
   accepted_at: <%= 3.days.ago %>
 <% end %>
 
-# aaron has asked for 100 friends
-#
+# user_42 has asked for 100 friends
+
 <% for i in 51..150 %>
-aaron_relationship_<%= i %>:
-  friendshipped_by_me: aaron
-  friendshipped_for_me: user_<%= i + 2 %>
-<% end  %>
+user_42_relationship_<%= i %>:
+ friendshipped_by_me: user_42
+ friendshipped_for_me: user_<%= i + 2 %>
+<% end %>
 
 # quentin has 50 admirers
 #

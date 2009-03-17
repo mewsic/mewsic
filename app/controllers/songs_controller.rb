@@ -11,41 +11,33 @@
 class SongsController < ApplicationController
   
   before_filter :login_required, :only => [:update, :rate, :mix, :destroy, :confirm_destroy]
+  before_filter :accessible_song_required, :only => [:show, :tracks, :download]
   before_filter :writable_song_required, :only => [:update, :mix]
-  before_filter :redirect_to_root_unless_xhr, :only => :confirm_destroy
+  before_filter :destroyable_song_required, :only => [:destroy, :confirm_destroy]
+  before_filter :redirect_to_root_unless_xhr, :only => [:tracks, :confirm_destroy]
 
   protect_from_forgery
   
   # ==== XHR GET /songs?[user_id|mband_id]=ID
-  # ==== GET /songs.xml?user_id=ID
   #
   # * HTML format: renders a paginated index of songs by User or Mband. Every
   #   model has its own template: <tt>{users,mbands}/_songs.html.erb</tt>.
   #   Song objects are returned by Song#find_paginated_by_user and Song#find_paginated_by_mband.
-  # * XML format: returns an XML representation of the given user published songs.
+  #
+  # # FIXME # Only public songs are returned.
   #
   def index
-    respond_to do |format|
-      format.html do
-        redirect_to '/' and return unless request.xhr?
-
-        @author =
-          if params[:user_id]
-            User.find_from_param(params[:user_id])
-          elsif params[:mband_id]
-            Mband.find_from_param(params[:mband_id])
-          end
-
-        @songs = @author.songs.published.with_tracks.paginate(:page => params[:page], :per_page => 3)
-
-        render :layout => false
+    redirect_to '/' and return unless request.xhr?
+   
+    @author =
+      if params[:user_id]
+        User.find_from_param(params[:user_id])
+      elsif params[:mband_id]
+        Mband.find_from_param(params[:mband_id])
       end
-
-      format.xml do
-        @user = User.find_from_param(params[:user_id])
-        @songs = @user.songs.published.with_tracks
-      end
-    end
+   
+    @songs = @author.songs.public.paginate(:page => params[:page], :per_page => 3)
+    render :layout => false
 
   rescue ActiveRecord::RecordNotFound
     head :not_found
@@ -60,63 +52,51 @@ class SongsController < ApplicationController
   # * PNG format: streams the waveform png to the client using +x_accel_redirect+.
   #
   def show
-    @song = Song.find(params[:id], :include => [:user, {:mixes => {:track => :instrument}}])
-
     respond_to do |format|
 
       format.html do
         if logged_in?
-          @has_abuse = Abuse.exists?(["abuseable_type = 'Song' AND abuseable_id = ? AND user_id = ?", @song.id, current_user.id])
+          @has_abuse = @song.abuses.exists?(["user_id = ?", current_user.id])
         end
       end
 
       format.xml do
-        @tracks = true
+        @tracks = true # show the tracks in the XML repr
+        render :partial => 'shared/song'
       end
 
       format.png do
         if @song.filename.blank?
-          flash[:error] = 'file not found'
-          redirect_to '/' and return
+          flash[:error] = 'File not found' # XXX FIXME ugly message
+          redirect_to song_path(@song) and return
         end
 
         x_accel_redirect @song.public_filename(:waveform), :content_type => 'image/png'
       end
     end
-
-  rescue ActiveRecord::RecordNotFound
-    if params[:id].to_i.zero?
-      head :ok
-    else
-      raise
-    end
   end
 
   # ==== DELETE /songs/:id
   #
-  # Tries to delete the given Song instance.
+  # Tries to delete the given Song instance. Only the creator can delete it.
+  #
+  # TODO: What about Mband-owned songs?
   #
   def destroy
-    @song = current_user.songs.find(params[:id])
     @song.delete
 
     flash[:notice] = "Song '#{@song.title}' has been deleted."
-
     head :ok
-
-  rescue ActiveRecord::RecordNotFound # find
-    head :forbidden
-  rescue ActiveRecord::ReadOnlyRecord # delete
-    head :bad_request
   end
 
   # ==== XHR GET /songs/:id/confirm_destroy
   #
   # Renders the <tt>_destroy.html.erb</tt> partial that asks the user confirmation
-  # before deleting a Song.
+  # before deleting a Song. Only the creator can delete it.
+  #
+  # TODO: What about Mband-owned songs?
   #
   def confirm_destroy
-    @song = current_user.songs.find(params[:id])
     render :partial => 'destroy'
   end
   
@@ -125,12 +105,8 @@ class SongsController < ApplicationController
   # Renders the <tt>_track.html.erb</tt> partial for every track in the given song.
   #
   def tracks
-    render :nothing => true, :status => :bad_request and return unless request.xhr?
-
-    @song = Song.find(params[:id], :include => [:user, {:mixes => {:track => :instrument}}])        
     render :layout => false, :partial => 'track', :collection => @song.tracks
   end
-
 
   # ==== PUT /songs/:id
   #
@@ -150,7 +126,7 @@ class SongsController < ApplicationController
       head :ok
     end
 
-  rescue ActiveRecord::ActiveRecordError
+  rescue ActiveRecord::ActiveRecordError, ArgumentError
     head :bad_request
   end
   
@@ -164,6 +140,8 @@ class SongsController < ApplicationController
   # Upon success, the XML representation of a song is rendered. Upon failure, the
   # <tt>shared/_errors.xml.erb</tt> partial is rendered instead.
   #
+  # XXX THIS HAS TO BE REWORKED OUT WITH ADD/REMOVE TRACK METHODS TO BETTER SPECIFY PERMISSIONS
+  #
   def mix
     tracks = params.delete(:tracks)
     head :bad_request and return if tracks.blank?
@@ -172,7 +150,7 @@ class SongsController < ApplicationController
       @song.mixes.clear
     
       tracks.each do |i, track|
-        next if track['filename'].blank? || !Track.exists?(['id = ?', track['id']])
+        next unless Track.exists?(['id = ?', track['id']]) # XXX REMOVE ME, SHOULD BE FIXED IN AS3
         @song.mixes.create! :track_id => track['id'], :volume => track['volume']
       end
 
@@ -184,10 +162,7 @@ class SongsController < ApplicationController
       format.xml { render :partial => 'shared/song', :object => @song }
     end
 
-  rescue ActiveRecord::RecordNotFound
-    head :not_found
-
-  rescue ActiveRecord::ActiveRecordError
+  rescue ActiveRecord::ActiveRecordError, NoMethodError, TypeError
     # XXX this should be handled via JavaScript
     respond_to do |format|
       format.xml do
@@ -199,7 +174,7 @@ class SongsController < ApplicationController
   # ==== PUT /songs/:id/rate
   #
   # Rates a song, if Song#rateable_by? returns true, and prints the number of votes if successful.
-  # If the Song isn't rateable by the current_user, nothing is rendered with a 400 status.
+  # If the Song isn't rateable by the current_user, nothing is rendered with a 403 status.
   #
   def rate    
     @song = Song.find(params[:id])
@@ -207,7 +182,7 @@ class SongsController < ApplicationController
       @song.rate(params[:rate].to_i, current_user)
       render :layout => false, :text => "#{@song.rating_count} votes"
     else
-      render :nothing => true, :status => :bad_request
+      render :nothing => true, :status => :forbidden
     end
   end       
 
@@ -217,7 +192,6 @@ class SongsController < ApplicationController
   # the song attributes: <tt>song.title</tt> and <tt>song.user.login</tt>.
   #
   def download
-    @song = Song.find(params[:id])
     if @song.filename.blank?
       flash[:error] = 'File not found'
       redirect_to song_path(@song) and return
@@ -231,10 +205,6 @@ class SongsController < ApplicationController
     x_accel_redirect @song.public_filename,
       :disposition => %[attachment; filename="#{@song.title} by #{@song.user.login}.mp3"],
       :content_type => 'audio/mpeg'
-
-  rescue ActiveRecord::RecordNotFound
-    flash[:error] = 'Song not found'
-    redirect_to music_path
   end
   
 protected
@@ -245,8 +215,30 @@ protected
     ['Music', music_path]
   end
 
+  def accessible_song_required
+    @song = Song.find(params[:id], :include => [:user, {:mixes => {:track => :instrument}}])        
+    head :forbidden and return unless @song.accessible_by? current_user
+
+    # XXX REMOVE ME # CURRENTLY SONG ID = 0 MEANS "NOT LOGGED IN"
+  rescue ActiveRecord::RecordNotFound
+    if params[:id].to_i.zero?
+      head :ok
+    else
+      raise
+    end
+  end
+
   def writable_song_required
     @song = Song.find(params[:id])
     head :forbidden and return unless @song.editable_by? current_user
+
+  rescue ActiveRecord::RecordNotFound
+    head :not_found
+  end
+
+  def destroyable_song_required
+    @song = current_user.songs.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    head :forbidden
   end
 end
