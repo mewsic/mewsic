@@ -43,7 +43,7 @@ module MultipleStatuses
       elsif statuses.values.include? value
         write_attribute :status, value
       else
-        raise ArgumentError, "invalid status #{value.inspect}"
+        raise ActiveRecord::ActiveRecordError, "invalid status #{value.inspect}"
       end
     end
 

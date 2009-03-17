@@ -1,9 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class SongsControllerTest < ActionController::TestCase
-  
   include AuthenticatedTestHelper
-  include Playable::TestHelpers
 
   fixtures :users, :mbands, :songs, :tracks, :mixes
   
@@ -58,7 +56,7 @@ class SongsControllerTest < ActionController::TestCase
     song.update_attribute(:filename, nil)
 
     get :show, :id => song, :format => 'png'
-    assert_response :redirect
+    assert_response :not_found
   end
 
   def test_show_should_check_song_private_status
@@ -221,12 +219,17 @@ class SongsControllerTest < ActionController::TestCase
   def test_should_rate
     login_as :quentin
     song = songs(:let_it_be)
-    post :rate, :id => song.id, :rate => 2
-    assert_response :success
+    assert_difference 'Rating.count' do
+      xhr :put, :rate, :id => song.id, :rate => 2
+      assert_response :success
+    end
+    assert_equal 2.0, assigns(:songs).rating_avg.to_f
 
     song = songs(:red_red_wine)
-    post :rate, :id => song.id, :rate => 2
-    assert_response :forbidden
+    assert_no_difference 'Rating.count' do
+      xhr :put, :rate, :id => song.id, :rate => 2
+      assert_response :forbidden
+    end
   end
 
   def test_should_not_show_destroy_confirmation_if_not_logged_in
@@ -265,7 +268,7 @@ class SongsControllerTest < ActionController::TestCase
 
   #def test_destroy_should_unpublish_a_song_with_children_tracks
   #  login_as :quentin
-  #  song = playable_test_filename(songs(:quentin_single_track_song))
+  #  song = songs(:quentin_single_track_song)
   #  delete :destroy, :id => song
   #  assert_response :success
   #
@@ -275,7 +278,7 @@ class SongsControllerTest < ActionController::TestCase
   #end
 
   def test_destroy_should_delete_a_song
-    song = playable_test_filename(songs(:song_50))
+    song = songs(:song_50)
     login_as song.user.login.sub(/^user/, '\&_').intern
 
     delete :destroy, :id => song

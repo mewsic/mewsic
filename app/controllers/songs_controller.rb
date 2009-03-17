@@ -14,7 +14,7 @@ class SongsController < ApplicationController
   before_filter :accessible_song_required, :only => [:show, :tracks, :download]
   before_filter :writable_song_required, :only => [:update, :mix]
   before_filter :destroyable_song_required, :only => [:destroy, :confirm_destroy]
-  before_filter :redirect_to_root_unless_xhr, :only => [:tracks, :confirm_destroy]
+  before_filter :redirect_to_root_unless_xhr, :only => [:tracks, :rate, :confirm_destroy]
 
   protect_from_forgery
   
@@ -22,7 +22,6 @@ class SongsController < ApplicationController
   #
   # * HTML format: renders a paginated index of songs by User or Mband. Every
   #   model has its own template: <tt>{users,mbands}/_songs.html.erb</tt>.
-  #   Song objects are returned by Song#find_paginated_by_user and Song#find_paginated_by_mband.
   #
   # # FIXME # Only public songs are returned.
   #
@@ -34,6 +33,8 @@ class SongsController < ApplicationController
         User.find_from_param(params[:user_id])
       elsif params[:mband_id]
         Mband.find_from_param(params[:mband_id])
+      else
+        head :bad_request and return
       end
    
     @songs = @author.songs.public.paginate(:page => params[:page], :per_page => 3)
@@ -55,9 +56,7 @@ class SongsController < ApplicationController
     respond_to do |format|
 
       format.html do
-        if logged_in?
-          @has_abuse = @song.abuses.exists?(["user_id = ?", current_user.id])
-        end
+        @has_abuse = @song.abuses.exists?(['user_id = ?', current_user.id]) if logged_in?
       end
 
       format.xml do
@@ -66,11 +65,7 @@ class SongsController < ApplicationController
       end
 
       format.png do
-        if @song.filename.blank?
-          flash[:error] = 'File not found' # XXX FIXME ugly message
-          redirect_to song_path(@song) and return
-        end
-
+        head :not_found and return if @song.filename.blank?
         x_accel_redirect @song.public_filename(:waveform), :content_type => 'image/png'
       end
     end
@@ -126,7 +121,7 @@ class SongsController < ApplicationController
       head :ok
     end
 
-  rescue ActiveRecord::ActiveRecordError, ArgumentError
+  rescue ActiveRecord::ActiveRecordError
     head :bad_request
   end
   
@@ -151,7 +146,7 @@ class SongsController < ApplicationController
     
       tracks.each do |i, track|
         next unless Track.exists?(['id = ?', track['id']]) # XXX REMOVE ME, SHOULD BE FIXED IN AS3
-        @song.mixes.create! :track_id => track['id'], :volume => track['volume']
+        @song.mixes.create :track_id => track['id'], :volume => track['volume']
       end
 
       @song.preserve!
@@ -162,7 +157,10 @@ class SongsController < ApplicationController
       format.xml { render :partial => 'shared/song', :object => @song }
     end
 
-  rescue ActiveRecord::ActiveRecordError, NoMethodError, TypeError
+  rescue NoMethodError, TypeError
+    head :bad_request
+
+  rescue ActiveRecord::ActiveRecordError
     # XXX this should be handled via JavaScript
     respond_to do |format|
       format.xml do
@@ -217,7 +215,7 @@ protected
 
   def accessible_song_required
     @song = Song.find(params[:id], :include => [:user, {:mixes => {:track => :instrument}}])        
-    head :forbidden and return unless @song.accessible_by? current_user
+    head :forbidden unless @song.accessible_by? current_user
 
     # XXX REMOVE ME # CURRENTLY SONG ID = 0 MEANS "NOT LOGGED IN"
   rescue ActiveRecord::RecordNotFound
@@ -230,7 +228,7 @@ protected
 
   def writable_song_required
     @song = Song.find(params[:id])
-    head :forbidden and return unless @song.editable_by? current_user
+    head :forbidden unless @song.editable_by? current_user
 
   rescue ActiveRecord::RecordNotFound
     head :not_found
