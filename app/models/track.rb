@@ -37,9 +37,13 @@ class Track < ActiveRecord::Base
   belongs_to :user
   belongs_to :instrument
 
-  validates_presence_of :title, :seconds
-  validates_associated :instrument, :user
-  validates_numericality_of :instrument_id, :user_id, :greater_than => 0
+  validates_presence_of :seconds
+  validates_associated :user
+  validates_numericality_of :user_id, :greater_than => 0
+
+  validates_presence_of :title,                                 :if => :public?
+  validates_numericality_of :instrument_id, :greater_than => 0, :if => :public?
+  validates_associated :instrument,                             :if => :public?
 
   validates_each :filename do |model, attr, value|
     filename = model.absolute_filename :stream
