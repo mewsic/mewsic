@@ -5,62 +5,41 @@
 #
 # == Description
 #
-# This controller handles M-Labs, which are the rows shown in the "My List" scroller on the right
-# sidebar of the site. Because the My List is stateful, its contents are saved to the database in
-# order to make them fetchable by different sources (the scroller and the multitrack, as of now).
+# This controller handles M-Labs, which are Playlist items on the site.
+# User playlist is persisted across sessions, hence this model.
 #
-# Because of the high number of requests this controller receives, the data fetch is optimized in
-# the model (see Mlab#find_my_list_items_for and Mlab#find_my_list_item_for). Login is required to
-# access these actions (+login_required+) and an user can see only its own My List
-# (+check_user_identity+).
+# Login is required to access these actions (+login_required+) and an user can see and edit only
+# its own Playlist (+check_playlist_access+).
 #
-# For details on the JS client, see <tt>public/javascripts/mlab.js</tt>. The XML client is written
-# in AS3 and resides under the <tt>myousica-multitrack-editor</tt> github repository.
+# For details on the JS client, see <tt>public/javascripts/playlist.js</tt>.
 #
 class MlabsController < ApplicationController
 
   layout nil
 
   before_filter :login_required
-  before_filter :check_user_identity
+  before_filter :check_playlist_access
 
-  # ==== GET /users/:user_id/mlabs.xml
-  # ==== GET /users/:user_id/mlabs.js
+  # ==== GET /users/:user_id/playlist.js
   #
-  # Returns an index of the user songs and tracks in the My List basket. The XML format uses two
-  # eager-loaded queries, results are printed out using the <tt>app/views/shared/_{song,track}.xml.erb</tt>
-  # views.
-  #
-  # The JS output is optimized because it does receive a request on every page load, so the
-  # Mlab#find_my_list_items_for method is called.
-  #
+  # Returns an index of the user songs and tracks in the Playlist, in JSON format.
   # The HTML output is not used and sends out a redirect to '/'.
   #
   def index
     respond_to do |format|
-      format.xml do
-        @songs = Song.find(:all, :include => [:mlabs, :user], :conditions => ["mlabs.user_id = ?", current_user])
-        @tracks = Track.find(:all, :include => [:mlabs, :owner], :conditions => ["mlabs.user_id = ?", current_user])
-      end
-
-      format.js do
-        render :json => Mlab.find_my_list_items_for(current_user)
-      end
-
+      format.js { render :json => Mlab.items_for(current_user) }
       format.html { redirect_to '/' }
     end
   end
 
-  # ==== POST /users/:user_id/mlabs.js
-  # ==== POST /users/:user_id/mlabs.xml
+  # ==== POST /users/:user_id/playlist.js
   #
   # Creates a new Mlab instance, associated to the <tt>current_user</tt> and to the mixable
   # whose id is passed via the <tt>item_id</tt> parameter. A mixable can be either a +Song+
-  # or a +Track+. An user can trigger an Mlab creation, that is, add an item to the My List
-  # by clicking the cyan "M" buttons throughout the site.
+  # or a +Track+. An user can trigger an Mlab creation, that is, add an item to its Playlist
+  # by clicking the cyan "ADD" buttons throughout the site.
   #
-  # The XML format will be used by the multitrack, when it will implement My List addition,
-  # the JS format is instead used by the right sidebar My List scroller.
+  # The only format supported is JS, used by the bottom Playlist control.
   #
   def create
     mixable = case params[:type]
@@ -70,58 +49,47 @@ class MlabsController < ApplicationController
         Song.find(params[:item_id])
     end
 
-    @mlab = Mlab.new(:user => current_user, :mixable => mixable)
-    @mlab.save!
+    head :forbidden and return unless mixable.accessible_by?(current_user)
 
-    @item = Mlab.find_my_list_item_for(current_user, params[:type], mixable.id)
+    @mlab = current_user.mlabs.create!(:mixable => mixable)
 
     respond_to do |format|
-      format.xml { render :nothing => true, :status => :ok }
-      format.js
+      format.js { render :json => mixable.to_json }
+      format.html { redirect_to '/' }
     end
 
   rescue ActiveRecord::RecordNotFound
-    render :nothing => true, :status => :not_found
+    head :not_found
 
   rescue ActiveRecord::RecordInvalid
-    render :partial => 'shared/errors', :object => @mlab.errors, :status => :bad_request
+    render :json => {:errors => @mlab.errors}, :status => :bad_request
   end
 
   # ==== DELETE /users/:user_id/mlabs/id.js
-  # ==== DELETE /users/:user_id/mlabs/id.xml
   #
-  # Destroys an Mlab, when the user requests removal of an item from the My List, triggering
+  # Destroys an Mlab, when the user requests removal of an item from the Playlist, triggering
   # it by clicking the "Trash" button in the scroller. The multitrack currently does not 
-  # implement the My List handling, the XML format is in place when it will.
+  # implement the Playist handling, the XML format is in place when it will.
   #
   def destroy
-    @mlab     = Mlab.find(params[:id])
-    @mixable  = @mlab.mixable
+    destroyed = current_user.mlabs.find(params[:id]).destroy
 
-    if @mlab.destroy
-      respond_to do |format|
-        format.xml { render :nothing => true, :status => :ok }
-        format.js  { render :nothing => true, :status => :ok }
-      end
-    else
-      respond_to do |format|
-        format.xml { render :nothing => true, :status => :bad_request }
-        format.js  { render :nothing => true, :status => :bad_request }
-      end
+    respond_to do |format|
+      format.js { head(destroyed ? :ok : :bad_request) }
+      format.html { redirect_to '/' }
     end
 
   rescue ActiveRecord::RecordNotFound
-    render :nothing => true, :status => :not_found
-
+    head :not_found
   end
 
 private
 
-  # Filter that checks the passed user id matches the <tt>current_user</tt> id.
-  # TODO: export this method in a library in order to be used from other controllers
+  # Filter that checks the passed user id matches the <tt>current_user</tt> id, and
+  # sends out a 403 forbidden status otherwise.
   #
-  def check_user_identity
-    redirect_to('/') and return unless current_user.id == User.from_param(params[:user_id])
+  def check_playlist_access
+    head :forbidden and return unless current_user.id == User.from_param(params[:user_id])
   end
 
 end

@@ -33,7 +33,7 @@ ActionController::Routing::Routes.draw do |map|
     user.resource  :avatar
     user.resources :friendships
     user.resources :photos
-    user.resources :mlabs
+    user.resources :mlabs, :as => 'playlist'
     user.resources :messages, :collection => { :delete_selected => :post, :sent => :get, :unread => :get }
     user.resources :abuses
   end

@@ -1,23 +1,29 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class MlabTest < ActiveSupport::TestCase
-
-  include AuthenticatedTestHelper
-
-  fixtures :users, :songs, :tracks
+  fixtures :users, :songs, :tracks, :mlabs, :mixes
   
   def test_should_create  
-    quentin_mlab_items_count  = users(:quentin).mlabs.count
-    quentin_mlab_tracks_count = users(:quentin).mlab_tracks.count
-    quentin_mlab_songs_count  = users(:quentin).mlab_songs.count
+    user = users(:quentin)
+
+    items, tracks, songs = [user.mlabs, user.mlabs.tracks, user.mlabs.songs].map(&:to_a)
+
     assert_difference 'Mlab.count', 3 do
       create_mlab_track
       create_mlab_track
       create_mlab_song
     end
-    assert_equal quentin_mlab_items_count   + 3, users(:quentin).mlabs.count
-    assert_equal quentin_mlab_tracks_count  + 2, users(:quentin).mlab_tracks.count
-    assert_equal quentin_mlab_songs_count   + 1, users(:quentin).mlab_songs.count        
+
+    user.reload
+
+    assert_equal items.size  + 3, user.mlabs.to_a.size
+    assert_equal tracks.size + 2, user.mlabs.tracks.to_a.size
+    assert_equal songs.size  + 1, user.mlabs.songs.to_a.size
+  end
+
+  def test_should_return_playlist_items
+    user = users(:quentin)
+    assert_equal user.mlabs.songs + user.mlabs.tracks, Mlab.items_for(user)
   end
 
 private

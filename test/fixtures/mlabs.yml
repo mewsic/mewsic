@@ -17,7 +17,18 @@ song_let_it_be_for_quentin:
   user: quentin
   mixable: let_it_be
   mixable_type: Song
+
 track_sax_for_let_it_be_for_quentin:
   user: quentin
   mixable: sax_for_let_it_be
+  mixable_type: Track
+
+song_closer_for_john:
+  user: john
+  mixable: closer
+  mixable_type: Song
+
+track_guitar_for_red_red_wine_for_john:
+  user: john
+  mixable: guitar_for_red_red_wine
   mixable_type: Track

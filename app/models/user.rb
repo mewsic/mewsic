@@ -113,13 +113,12 @@ class User < ActiveRecord::Base
 
   has_one :avatar, :as => :pictureable
   
-  has_many :mlabs
-  has_many :mlab_tracks, 
-    :class_name => 'Mlab',
-    :conditions => "mlabs.mixable_type = 'Track'"    
-  has_many :mlab_songs, 
-    :class_name => 'Mlab',
-    :conditions => "mlabs.mixable_type = 'Song'" 
+  # If you're getting a EagerLoadPolymorphicError because of
+  # this :include => :mixable, try to avoid your .count on
+  # the association if possible (e.g. use .size), or if you
+  # can't, *comment* it out. A better solution may be in front
+  # of your nose but you're still not seeing it. -vjt
+  has_many :mlabs, :include => :mixable
   
   has_many :abuses, :as => :abuseable
 

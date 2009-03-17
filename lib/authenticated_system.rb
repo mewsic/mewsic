@@ -75,6 +75,9 @@ module AuthenticatedSystem
           headers["WWW-Authenticate"] = %(Basic realm="myousica.com")
           render :text => "Could't authenticate you", :status => '401 Unauthorized'
         end
+        accepts.js do
+          head :forbidden
+        end
       end
       false
     end  
