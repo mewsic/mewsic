@@ -8,7 +8,12 @@ index
 .AppleDesktop/
 .lesshst
 *._*
-.viminfo
+.vim*
 .profile
 .ruby_inline
 .ssh
+.Xauthority
+.bash*
+.gitconfig
+.subversion
+.gem
