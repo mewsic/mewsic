@@ -48,7 +48,8 @@ let_it_be:
   status: <%= Song.statuses.public %>
   rating_avg: <%= random_rating %>
   lft: 1 # needed because of the awesome_nested_set test
-  rgt: 2 # in song unit tests (test_remix_tree)
+  rgt: 2 # in song unit tests (test_remix_tree) and in multitrack
+         # functional test (test_should_remix_*)
 
 radio_ga_ga:
   title: Radio Ga Ga

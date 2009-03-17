@@ -4,11 +4,7 @@ class MultitrackControllerTest < ActionController::TestCase
   include AuthenticatedTestHelper
   fixtures :users, :songs
 
-  #def setup
-  #  ActionMailer::Base.delivery_method = :test
-  #  ActionMailer::Base.perform_deliveries = true
-  #  ActionMailer::Base.deliveries = []
-  #end
+  tests MultitrackController
 
   def teardown
     super
@@ -20,9 +16,11 @@ class MultitrackControllerTest < ActionController::TestCase
 
     get :index
     assert_response :success
+
     assert assigns(:song)
     assert_equal false, assigns(:song).published?
-    assert !assigns(:song).new_record?
+    deny   assigns(:song).new_record?
+
     assert_equal users(:quentin).id, assigns(:song).user_id
     assert_template 'index'
   end
@@ -30,28 +28,67 @@ class MultitrackControllerTest < ActionController::TestCase
   def test_index_as_guest
     get :index
     assert_response :success
+
     assert assigns(:song)
     assert_equal false, assigns(:song).published?
     assert assigns(:song).new_record?
-    #assert flash[:notice]
+
+    assert flash.now[:notice]
+    assert stored_location
+
     assert_template 'index'
   end
 
-  def test_should_edit
+  def test_should_remix_own_public_song
     login_as :quentin
 
-    get :edit, :id => songs(:i_want_to_break_free).id
+    get :edit, :id => songs(:let_it_be).id
+    assert assigns(:remix)
+    assert assigns(:remix).remix_of?(songs(:let_it_be))
+    assert songs(:let_it_be).remixes.include?(assigns(:remix))
+    assert_redirected_to multitrack_edit_path(assigns(:remix))
+  end
+
+  def test_should_remix_any_public_song
+    login_as :john
+
+    get :edit, :id => songs(:let_it_be).id
+    assert assigns(:remix)
+    assert_redirected_to multitrack_edit_path(assigns(:remix))
+  end
+
+  def test_should_edit_private_song_as_owner
+    login_as :quentin
+
+    get :edit, :id => songs(:red_red_wine_unpublished).id
+    assert_response :success
+
     assert assigns(:song)
-    assert_equal songs(:i_want_to_break_free).id, assigns(:song).id
+    assert_equal songs(:red_red_wine_unpublished).id, assigns(:song).id
     assert assigns(:song).published?
-    assert !assigns(:song).new_record?
+    assert assigns(:song).private?
+    deny   assigns(:song).new_record?
+
     assert_template 'index'
   end
 
-  def test_should_not_edit_because_not_logged_in
-    get :edit, :id => songs(:let_it_be).id
+  def test_should_edit_private_song_as_collaborator
+    login_as :john
 
-    assert_response :redirect
+    get :edit, :id => songs(:red_red_wine_unpublished).id
+    assert_response :success
+    assert_template 'index'
+  end
+
+  def test_should_not_edit_unaccessible_private_song
+    login_as :user_4
+
+    get :edit, :id => songs(:red_red_wine_unpublished).id
+    assert_redirected_to root_path
+  end
+
+  def test_should_not_edit_if_not_logged_in
+    get :edit, :id => songs(:let_it_be).id
     assert_redirected_to login_path
   end
 
@@ -64,15 +101,6 @@ class MultitrackControllerTest < ActionController::TestCase
     assert_redirected_to root_path
   end
 
-  def test_should_not_edit_because_song_unpublished
-    login_as :quentin
-
-    get :edit, :id => songs(:red_red_wine_unpublished).id
-    assert_response :redirect
-    assert flash[:error]
-    assert_redirected_to root_path
-  end
-
   def test_should_send_config
     get :config, :format => 'xml'
 
@@ -80,61 +108,75 @@ class MultitrackControllerTest < ActionController::TestCase
     assert_template 'config'
   end
 
-  def test_should_refresh
-    get :refresh, :id => songs(:i_want_to_break_free).id
-    assert_response :success
-  end
+  #def test_should_refresh
+  #  get :refresh, :id => songs(:let_it_be).id
+  #  assert_response :success
+  #end
 
-  def test_should_update_song_when_encoding_completes
-    # First update a song that's still not published and without tracks...
-    #
+  def test_should_update_private_song
     get :update_song, :user_id => users(:quentin).id,
       :song_id => songs(:red_red_wine_unpublished).id,
-      :filename => 'test.mp3', :length => 10
+      :filename => 'wtf.mp3', :length => 42
 
     assert_response :success
     song = songs(:red_red_wine_unpublished).reload
 
-    # ...in order to verify that the new song administrative notice has been
-    # queued. Because the song has got no tracks, no collaboration notification
-    # will be sent out.
-    #
+    assert song.private?
     assert song.published?
-    assert_equal 'test.mp3', song.filename
-    assert_equal 10, song.seconds
-    assert_equal 1, ActionMailer::Base.deliveries.size
-    ActionMailer::Base.deliveries = []
 
-    # And then .. update it again....
+    assert_equal 'wtf.mp3', song.filename
+    assert_equal 42, song.seconds
+  end
+
+  def test_should_not_update_public_song
     get :update_song, :user_id => users(:quentin).id,
-      :song_id => songs(:red_red_wine_unpublished).id,
-      :filename => 'test.mp3', :length => 10
+      :song_id => songs(:let_it_be).id, :filename => 'sux.mp3',
+      :length => 42
 
-    # ...in order to verify that no new administrative notice is being generated.
-    song = song.reload
-    assert song.published?
-    assert_equal 0, ActionMailer::Base.deliveries.size
+    assert_response :not_found
+    song = songs(:let_it_be).reload
+    assert_not_equal 'sux.mp3', song.filename
+    assert_not_equal 42, song.seconds
   end
 
-  def test_should_send_out_collaboration_notifications
-    song = songs(:closer)
-    song.update_attribute 'published', false
-    deny song.reload.published?
+    # ...in order to verify that the new song administrative notice has been
+    # queued. XXX song update does not imply anymore automated publishing.
+    #
+    #assert_equal 1, ActionMailer::Base.deliveries.size
+    #ActionMailer::Base.deliveries = []
 
-    get :update_song, :user_id => users(:quentin),
-      :song_id => song.id, :filename => 'test.mp3',
-      :length => 5
+    ## And then .. update it again....
+    #get :update_song, :user_id => users(:quentin).id,
+    #  :song_id => songs(:red_red_wine_unpublished).id,
+    #  :filename => 'test.mp3', :length => 10
 
-    assert_blank_response :success
+    ## ...in order to verify that no new administrative notice is being generated.
+    #song = song.reload
+    #assert song.published?
+    #assert_equal 0, ActionMailer::Base.deliveries.size
+  #end
 
-    song = song.reload
-
-    deny song.tracks.empty?
-    assert_equal 5, song.seconds
-
-    assert_equal 3, ActionMailer::Base.deliveries.size
-    assert_equal %w(activity@myousica.com mikaband@example.com aaron@example.com),
-      ActionMailer::Base.deliveries.map(&:to).flatten
-  end
+  #def test_should_send_out_collaboration_notifications
+  #  song = songs(:closer)
+  #  song.status = :temporary
+  #  song.save
+  #
+  #  deny song.reload.published?
+  #
+  #  get :update_song, :user_id => users(:quentin),
+  #    :song_id => song.id, :filename => 'test.mp3',
+  #    :length => 5
+  #
+  #  assert_blank_response :success
+  #
+  #  song = song.reload
+  #
+  #  deny song.tracks.empty?
+  #  assert_equal 5, song.seconds
+  #
+  #  assert_equal 3, ActionMailer::Base.deliveries.size
+  #  assert_equal %w(activity@myousica.com mikaband@example.com aaron@example.com),
+  #    ActionMailer::Base.deliveries.map(&:to).flatten
+  #end
 
 end

@@ -69,12 +69,25 @@ class SongTest < ActiveSupport::TestCase
     assert private_with_feats.accessible_by?(users(:john))    # Featuring
     deny   private_with_feats.accessible_by?(users(:user_42)) # No one
 
+    assert private_with_feats.editable_by?(users(:quentin))
+    assert private_with_feats.editable_by?(users(:john))
+    deny   private_with_feats.editable_by?(users(:user_42))
+
     # Private song with no feats
-    assert songs(:private_song).accessible_by?(users(:quentin)) # Author
-    deny   songs(:private_song).accessible_by?(users(:john))    # No one
+    private_with_no_feats = songs(:private_song)
+
+    assert private_with_no_feats.accessible_by?(users(:quentin)) # Author
+    deny   private_with_no_feats.accessible_by?(users(:john))    # No one
+
+    assert private_with_no_feats.editable_by?(users(:quentin))
+    deny   private_with_no_feats.editable_by?(users(:john))
 
     # Public song
-    assert songs(:let_it_be).accessible_by?(users("user_#{rand 500}".intern))
+    public_song = songs(:let_it_be)
+
+    assert public_song.accessible_by?(users("user_#{rand 500}".intern)) # Rand
+    deny   public_song.editable_by?(users("user_#{rand 500}".intern))   # Rand
+    deny   public_song.editable_by?(users(:quentin))                    # Author
   end
   
   def test_remix_tree
@@ -83,6 +96,9 @@ class SongTest < ActiveSupport::TestCase
 
     assert_nothing_raised { remix = song.create_remix }
     assert remix.valid?
+
+    assert remix.remix_of?(song)
+    assert song.remixes.include?(remix)
     assert_equal song, remix.parent 
 
     remix.tracks.clear

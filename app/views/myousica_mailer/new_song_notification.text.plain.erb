@@ -1,10 +1,8 @@
 Title : <%= @song.title %>
-Author: <%= @song.original_author %>
+Author: <%= @song.author %>
 Descr.: <%= @song.description %>
 User  : <%= @song.user.login rescue nil %>
-Tone  : <%= @song.tone %>
 Length: <%= @song.length %>
-Genre : <%= @song.genre.name rescue nil %>
 
 <%= notification_url song_path(@song) %>
 <%= notification_url @song.public_filename %>

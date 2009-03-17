@@ -1,6 +1,6 @@
 <song>
   <user><%= h(song.user.login) if song.user %></user>       
-  <author><%= h(song.original_author) %></author>     
+  <author><%= h(song.author) %></author>     
   <title><%= h(song.title) %></title>     
   <tags><%= h(song.tag_list.join(',')) %></tags>
   <instruments><%= song.instruments.size %></instruments>  
@@ -10,5 +10,5 @@
   <filename><%= song.public_filename %></filename>
   <waveform><%= formatted_song_path song, 'png' %></waveform>
   <seconds><%= song.seconds %></seconds>
-  <%= render :partial => 'shared/mixes', :object => song.mixes %>
+  <%= render :partial => 'shared/mixes', :object => song.mixes if @tracks %>
 </song>

@@ -19,6 +19,10 @@ module AuthenticatedTestHelper
     authorize_as nil
   end
 
+  def stored_location
+    @controller.send(:stored_location)
+  end
+
   private
     def logout_from_controller!
       @controller.send :current_user=, nil

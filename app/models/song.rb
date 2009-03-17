@@ -120,14 +120,25 @@ class Song < ActiveRecord::Base
     [:public, :private].include?(self.status)
   end
 
-  # Song accessibility policy: a private song is accessible by its creator
+  # Song edit policy: a private song is accessible by its creator
   # and all the users that have been added to the featurings list.
   # A public song is accessible by anyone.
+  # TODO: Implement only track addition for featurings, and not complete editing
   #
+  def editable_by?(user)
+    if self.status == :private
+      self.user == user || self.featurings.map(&:user).include?(user)
+    elsif status == :temporary
+      true # XXX FIXME SECURITY HOLE RIGHT HERE: ANY USER CAN MODIFY TEMP SONGS FIXME
+    elsif status == :public
+      false
+    end
+  end
+
   def accessible_by?(user)
     if self.status == :private
       self.user == user || self.featurings.map(&:user).include?(user)
-    elsif status == :public
+    elsif status == :public || status == :temporary
       true
     end
   end
@@ -256,6 +267,14 @@ class Song < ActiveRecord::Base
     return remix
   end
 
+  def remix_of?(song)
+    self.ancestors.include? song
+  end
+
+  def remixes
+    self.children
+  end
+
   # Set the :deleted status rather than deleting the record,
   # and delete all the mixes and mlabs linked to this track.
   def delete
@@ -270,6 +289,13 @@ class Song < ActiveRecord::Base
       self.mlabs.destroy_all
       self.featurings.destroy_all
     end
+  end
+
+  # Shorthand to remove the temporary status of a song, setting it to the one
+  # passed via the first parameter (:private by default)
+  def preserve!(status = :private)
+    self.status = status if self.temporary?
+    self.save!
   end
 
   # Shorthand to publish and save a song.

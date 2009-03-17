@@ -70,7 +70,9 @@ class SongsController < ApplicationController
         end
       end
 
-      format.xml
+      format.xml do
+        @tracks = true
+      end
 
       format.png do
         if @song.filename.blank?
@@ -168,26 +170,25 @@ class SongsController < ApplicationController
 
     Song.transaction do 
       @song.mixes.clear
-      #@song.update_attributes!(params[:song]) # XXX
     
       tracks.each do |i, track|
         next if track['filename'].blank? || !Track.exists?(['id = ?', track['id']])
-        @song.mixes.create! :track_id => track['id'],
-          :volume => track['volume']
+        @song.mixes.create! :track_id => track['id'], :volume => track['volume']
       end
-      @song.save!
+
+      @song.preserve!
     end
 
+    # XXX mostly useless
     respond_to do |format|
-      format.xml do
-        render :partial => 'shared/song', :object => @song
-      end
+      format.xml { render :partial => 'shared/song', :object => @song }
     end
 
   rescue ActiveRecord::RecordNotFound
     head :not_found
 
   rescue ActiveRecord::ActiveRecordError
+    # XXX this should be handled via JavaScript
     respond_to do |format|
       format.xml do
         render :partial => 'shared/errors', :object => @song.errors, :status => :bad_request
@@ -246,6 +247,6 @@ protected
 
   def writable_song_required
     @song = Song.find(params[:id])
-    head :forbidden and return unless @song.accessible_by? current_user
+    head :forbidden and return unless @song.editable_by? current_user
   end
 end
