@@ -1,4 +1,4 @@
-<!-- Moved into app/views/layouts/application.html.erb -->
+<!-- Moved into app/views/shared/_footer.html.erb -->
 
 <div class="clear"> </div>
 <!-- FOOTER -->
@@ -101,11 +101,13 @@
 
 
 
+<!-- Moved in public/javascripts/application.js -->
 <script type="text/javascript">
 		$('.roundTop10').corner("top 10px");
 		$('.roundBottom10').corner("bottom 10px");		
 		$('.round10').corner("10px");
 		$('.bevelsmall').corner("bevel 1px");
 </script>
+
 </body>
 </html>

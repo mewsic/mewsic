@@ -1,4 +1,4 @@
-<!-- Moved into app/views/layouts/application.html.erb -->
+<!-- Moved into app/views/shared/_application_bar.html.erb -->
 
 <!-- APPLICATION BAR -->
 <div id="app_bar_env">

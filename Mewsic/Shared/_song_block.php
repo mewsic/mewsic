@@ -1,3 +1,5 @@
+<!-- Moved into app/views/shared/_song_block.html.erb -->
+
 <div class="song_block fleft">
 	<div class="avatar fleft">
 		<img src="images/user_thumb.jpg" width="40" height="40" />					
