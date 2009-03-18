@@ -15,11 +15,17 @@
 #
 class MbandsController < ApplicationController
   
-  before_filter :login_required,  :except => :show
+  before_filter :login_required,  :except => [:index, :show]
   before_filter :find_mband, :except => [:index, :new, :create]
   before_filter :mband_membership_required,  :only => [:update, :destroy, :set_leader]
 
-  protect_from_forgery :except => :update   
+  protect_from_forgery :except => :update # XXX FIXME
+
+  # ==== GET /mbands
+  #
+  def index
+    @mbands = Mband.real.paginate(:per_page => 10, :page => params[:page])
+  end
 
   # ==== GET /mbands/:id
   #

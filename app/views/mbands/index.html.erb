@@ -1,0 +1,84 @@
+  <!-- LEFTCOL -->
+  <div class="leftCol fleft">
+    <div class="leftColWrapper">
+
+      <!-- EXPL BANNER -->
+        <div id="expl_banner">
+          <span id="expl_hide" class="fright">hide</span>
+          <span class="expl_band fleft"> </span>
+          <h1>Create MewBands with people from all the world.</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean semper, ipsum<br />
+          eget dapibus sagittis, nunc nunc feugiat neque, vel blandit turpis<br />
+          tellus eu leo. Fusce semper.</p>
+          <ul class="expl_links fright">
+            <li><a href=""><strong>Create</strong></a></li>
+            <li><a href=""><strong>Learn More</strong></a></li>
+          </ul>
+        </div>
+      <!-- END EXPL BANNER -->
+
+      <%= render :partial => 'mbands/pick_of_the_week' %>
+      <%= render :partial => 'mbands/coolest' %>
+    </div>
+  </div>
+  <!-- END LEFTCOL -->
+
+  <!-- RIGHTCOL -->
+  <div class="rightCol fright">
+
+    <h2>M-Bands play</h2>
+    <p class="tag_genre">
+      <a href="">Acid Jazz/Fusion,</a>  <a href="">Acoustic,</a>  <a href="">Alternative   Rock,</a>  <a href="">Ambient,</a>  <a href="">Blues,</a>
+      <a href="">British Pop,</a>  <a href="">Classic Rock,</a>  <a href="">Country,</a>  <a href="">Country Rock,</a>  <a href="">Crossover,</a>  <a href="">Dance,</a>
+      <a href="">Disco,</a>  <a href="">Drum & Bass,</a>  <a href="">EBM,</a>  <a   href="">Electro-Rock,</a>  <a href="">Electronic,</a>  <a href="">Folk Rock,</a>  <a href="">Funk</a>
+    </p>
+    <ul class="pick_page_anchors">
+      <li><a href="" class="anchors">Join an M-Band</a></li>
+      <li><a href="" class="anchors">Create your own</a></li>
+    </ul>
+    <br />
+
+    <%= render :partial => 'mbands/newest' %>
+    <%= render :partial => 'shared/did_you_know' %>
+
+  </div>
+  <!-- END RIGHTCOL -->
+
+  <div class="clear"> </div>
+
+<% content_for :footer do %>
+<ul class="footer_right_content mband_pick_footer fright">
+  <div class=".w440">
+  <h2>M-Band of the Week</h2>
+  <div class="snip fleft">
+
+      <a href=""  title="David Bowie" class="fleft">
+        <img src="images/temp/coolest_mband.jpg" width="85" height="55" />
+      </a>
+      <a href="" class="footer_name_link block" title="Sbalndons">
+        Sblendons
+      </a>
+      <p class="tag_genre block">
+        <a href="">Acid Jazz,</a><a href="">Acoustic,</a><a href="">Alternative</a>
+      </p>
+      <a class="item_count block" href="">(109) songs</a>
+
+    <div class="clear"> </div>
+    <ul class="mband_flags fright">
+      <%= flag_list(3) %>
+    </ul>
+  </div>
+  <div class="clear"> </div>
+    <% 2.times do %>
+      <li class='border_list'>
+        <%= render :partial => 'shared/song_block' %>
+      </li>
+    <% end %>
+
+    <li class="mband_more_tag border_list">
+      <a href="" class="fright">More songs from this M-band (23)</a>
+    </li>
+
+  </div>
+</ul>
+<% end %>

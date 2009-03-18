@@ -1,3 +1,5 @@
+<!-- Moved into app/views/mbands/_coolest.html.erb -->
+
 <p class="pick_info block">
 	<strong>COOLEST MBANDS</strong>
 </p>

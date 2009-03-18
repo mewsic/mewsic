@@ -1,3 +1,4 @@
+<!-- Moved into app/views/mbands/index.html.erb -->
 <? include('__heading.php') ?>
 
 <!-- CONTENT -->

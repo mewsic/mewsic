@@ -1,3 +1,5 @@
+<!-- Moved into app/views/mbands/_pick_of_the_week.html.erb -->
+
 <div class="pick_wrap">
 		<a href="" class="pick_ad block fleft" title="Gerardo Palla" style="background-image: url('images/temp/pick_enzo.jpg');">
 			<p class="pick_info block">

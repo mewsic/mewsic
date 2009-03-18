@@ -1,3 +1,5 @@
+<!-- Moved on the bottom of app/views/mbands/index.html.erb -->
+
 <ul class="footer_right_content mband_pick_footer fright">
 	<div class=".w440">
 	<h2>M-Band of the Week</h2>

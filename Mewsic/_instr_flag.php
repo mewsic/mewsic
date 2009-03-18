@@ -2,6 +2,9 @@
 	function lineup($users) {
 		for($i=0;$i<$users;$i++) {
 ?>
+
+<!-- this piece moved into views/mbands/_instrument_flag.html.erb -->
+
 <div class="instr_avatar instr_shadow fleft <? if($i==0){ print first_margin; } ?>">
 	<span class="instr icon_<? echo rand(1,35) ?>"> 
 		<span class="instr_flag fright">
@@ -22,6 +25,7 @@
 	function flag_list($flags) {
 		for($i=0;$i<$flags;$i++) {
 ?>
+<!-- this piece moved into helper flag_icon, located in helpers/mband_helper.rb -->
 			<li>
 				<img src="images/icons/flags/<? echo rand(1,53) ?>.gif" width="16" />
 			</li>
