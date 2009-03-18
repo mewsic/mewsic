@@ -29,13 +29,14 @@ class Track < ActiveRecord::Base
   # XXX REMOVE ME
   attr_accessor :mlab
 
-  attr_protected :user_id, :listened_times
+  attr_protected :user_id, :listened_times, :comments_count
   
   has_many :mixes, :conditions => 'deleted = 0'
   has_many :songs, :through => :mixes, :order => 'songs.created_at DESC'
 
   has_many :mlabs, :as => :mixable
   has_many :abuses, :as => :abuseable, :class_name => 'Abuse'
+  has_many :comments, :as => :commentable, :order => 'comments.created_at DESC'
 
   belongs_to :user
   belongs_to :instrument

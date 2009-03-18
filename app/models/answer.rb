@@ -6,7 +6,6 @@
 #  id               :integer(4)    not null, primary key
 #  user_id          :integer(4)    
 #  body             :text          
-#  replies_count    :integer(4)    default(0)
 #  created_at       :datetime      
 #  updated_at       :datetime      
 #  rating_count     :integer(4)    
@@ -14,6 +13,7 @@
 #  rating_avg       :decimal(10, 2 
 #  closed           :boolean(1)    not null
 #  last_activity_at :datetime      
+#  comments_count   :integer(4)    default(0)
 #
 
 # Copyright:: (C) 2008 Medlar s.r.l.
@@ -26,13 +26,13 @@
 # full-text searches. This model +acts_as_rated+, with a rating range from 0 to 5.
 #
 # An Answer can be open or closed, as saved in the <tt>closed</tt> attribute. Answer
-# closing happens automatically when there are no replies in one month. Every time a
-# Reply is added, the <tt>last_activity_at</tt> is updated keeping the Answer open.
+# closing happens automatically when there are no comments in one month. Every time a
+# Comment is added, the <tt>last_activity_at</tt> is updated keeping the Answer open.
 #
 # == Associations
 #
-# * <b>has_many</b> <tt>replies</tt>, ordered by creation time, and deleted all upon
-#   destroy [Reply]
+# * <b>has_many</b> <tt>comments</tt>, ordered by creation time, and deleted all upon
+#   destroy [Comment]
 # * <b>has_many</b> <tt>abuses</tt>, polymorphic as <tt>abuseable</tt> [Abuse]
 #
 # == Validations
@@ -46,7 +46,7 @@
 #
 class Answer < ActiveRecord::Base
   
-  has_many :replies, :order => 'created_at DESC', :dependent => :delete_all
+  has_many :comments, :as => :commentable, :order => 'created_at DESC', :dependent => :delete_all
   has_many :abuses, :as => :abuseable
   belongs_to :user
   
@@ -58,7 +58,7 @@ class Answer < ActiveRecord::Base
   acts_as_rated :rating_range => 0..5 
 
   attr_accessible :body
-  attr_readonly :replies_count
+  attr_readonly :comments_count
   
   define_index do
     indexes :body
@@ -76,11 +76,11 @@ class Answer < ActiveRecord::Base
   end
 
   # Finds top answers (whose rating average is >= 3.0) and orders 'em by rating average
-  # and replies count. Eager-loads users and their avatars. Paginated.
+  # and comment count. Eager-loads users and their avatars. Paginated.
   def self.find_top_paginated(page, options = {})
     self.paginate options.merge(:page => page,
                   :conditions => "answers.rating_avg >= 3.0",
-                  :order => 'answers.rating_avg DESC, answers.replies_count DESC',
+                  :order => 'answers.rating_avg DESC, answers.comments_count DESC',
                   :include => {:user => :avatar})
   end
 

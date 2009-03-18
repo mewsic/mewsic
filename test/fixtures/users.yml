@@ -35,7 +35,6 @@
 #  rating_count              :integer(4)    
 #  rating_total              :decimal(10, 2 
 #  rating_avg                :decimal(10, 2 
-#  replies_count             :integer(4)    default(0)
 #  nickname                  :string(20)    
 #  is_admin                  :boolean(1)    
 #  status                    :string(3)     default("off")
@@ -43,6 +42,8 @@
 #  multitrack_token          :string(64)    
 #  podcast_public            :boolean(1)    default(TRUE)
 #  profile_views             :integer(4)    default(0)
+#  comments_count            :integer(4)    default(0)
+#  writings_count            :integer(4)    default(0)
 #
 
 quentin:
@@ -66,6 +67,7 @@ quentin:
   motto: Arma Virumque Cano Troiae qui primus ab oris
   nickname: quentin
   profile_views: 1516
+  writings_count: 1
 
 aaron:
   login: aaron
@@ -92,6 +94,7 @@ john:
   motto: in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni.  
   is_admin: true
   profile_views: 2342
+  writings_count: 1
 
 <% for i in 0..500 %>
 user_<%= i %>:

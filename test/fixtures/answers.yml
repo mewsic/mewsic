@@ -6,7 +6,6 @@
 #  id               :integer(4)    not null, primary key
 #  user_id          :integer(4)    
 #  body             :text          
-#  replies_count    :integer(4)    default(0)
 #  created_at       :datetime      
 #  updated_at       :datetime      
 #  rating_count     :integer(4)    
@@ -14,31 +13,33 @@
 #  rating_avg       :decimal(10, 2 
 #  closed           :boolean(1)    not null
 #  last_activity_at :datetime      
+#  comments_count   :integer(4)    default(0)
 #
 
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-quentin_asks_about_magic:
-  user: quentin
-  body: Come si gioca a Magic The Gathering
-  
 user_10_asks_about_soccer:
   user: user_10
-  body: What is your favorite soccer team?
+  body: "Don't you think people talks too much about soccer?"
   
-user_10_asks_about_girls:
+quentin_asks_about_magic:
+  user: quentin
+  body: "Do you believe in magic and magicians?"
+  comments_count: 1
+  
+user_10_asks_about_religion:
   user: user_10
-  body: What is your favorite kind of girl?
+  body: "Do you believe in God? Are you a theist?"
   created_at: <%= 1.week.ago.to_s(:db) %>
+  comments_count: 1
 
 closed_answer:
   user: user_10
-  body: What is your favorite kind of girl?
-  closed: <%= true %>
+  body: "This answer is closed"
+  closed: true
   created_at: <%= 2.months.ago.to_s(:db) %>
 
 still_open_answer:
   user: user_10
-  body: still open
+  body: "This answer is still open, but should be closed shortly"
   created_at: <%= 2.months.ago.to_s(:db) %>
   last_activity_at: <%= 2.months.ago.to_s(:db) %>
   

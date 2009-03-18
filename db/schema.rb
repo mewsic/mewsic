@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090316035139) do
+ActiveRecord::Schema.define(:version => 20090318040029) do
 
   create_table "abuses", :force => true do |t|
     t.integer  "abuseable_id"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(:version => 20090316035139) do
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
     t.text     "body"
-    t.integer  "replies_count",                                   :default => 0
+    t.integer  "comments_count",                                  :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "rating_count"
@@ -34,6 +34,23 @@ ActiveRecord::Schema.define(:version => 20090316035139) do
     t.datetime "last_activity_at"
     t.boolean  "delta",                                           :default => false
   end
+
+  create_table "comments", :force => true do |t|
+    t.string   "title",            :limit => 60
+    t.text     "body"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.integer  "user_id"
+    t.integer  "rating_count"
+    t.decimal  "rating_total",                   :precision => 10, :scale => 2
+    t.decimal  "rating_avg",                     :precision => 10, :scale => 2
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["commentable_id"], :name => "index_comments_on_commentable_id"
+  add_index "comments", ["commentable_type"], :name => "index_comments_on_commentable_type"
+  add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
   create_table "featurings", :force => true do |t|
     t.integer  "song_id"
@@ -94,10 +111,11 @@ ActiveRecord::Schema.define(:version => 20090316035139) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "rating_count"
-    t.decimal  "rating_total",  :precision => 10, :scale => 2
-    t.decimal  "rating_avg",    :precision => 10, :scale => 2
-    t.integer  "members_count",                                :default => 0
-    t.boolean  "delta",                                        :default => false
+    t.decimal  "rating_total",   :precision => 10, :scale => 2
+    t.decimal  "rating_avg",     :precision => 10, :scale => 2
+    t.integer  "members_count",                                 :default => 0
+    t.boolean  "delta",                                         :default => false
+    t.integer  "comments_count",                                :default => 0
   end
 
   create_table "messages", :force => true do |t|
@@ -162,17 +180,6 @@ ActiveRecord::Schema.define(:version => 20090316035139) do
   add_index "ratings", ["rated_type", "rated_id"], :name => "index_ratings_on_rated_type_and_rated_id"
   add_index "ratings", ["rater_id"], :name => "index_ratings_on_rater_id"
 
-  create_table "replies", :force => true do |t|
-    t.integer  "answer_id"
-    t.integer  "user_id"
-    t.text     "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "rating_count"
-    t.decimal  "rating_total", :precision => 10, :scale => 2
-    t.decimal  "rating_avg",   :precision => 10, :scale => 2
-  end
-
   create_table "songs", :force => true do |t|
     t.string   "title",          :limit => 60
     t.string   "author",         :limit => 60
@@ -192,6 +199,7 @@ ActiveRecord::Schema.define(:version => 20090316035139) do
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
+    t.integer  "comments_count",                                              :default => 0
   end
 
   create_table "static_pages", :force => true do |t|
@@ -235,6 +243,7 @@ ActiveRecord::Schema.define(:version => 20090316035139) do
     t.string   "author",         :limit => 60
     t.integer  "status",                                                      :default => 2
     t.boolean  "delta",                                                       :default => false
+    t.integer  "comments_count",                                              :default => 0
   end
 
   create_table "users", :force => true do |t|
@@ -269,7 +278,7 @@ ActiveRecord::Schema.define(:version => 20090316035139) do
     t.integer  "rating_count"
     t.decimal  "rating_total",                            :precision => 10, :scale => 2
     t.decimal  "rating_avg",                              :precision => 10, :scale => 2
-    t.integer  "replies_count",                                                          :default => 0
+    t.integer  "writings_count",                                                         :default => 0
     t.string   "nickname",                  :limit => 20
     t.boolean  "is_admin",                                                               :default => false
     t.string   "status",                    :limit => 3,                                 :default => "off"
@@ -278,6 +287,7 @@ ActiveRecord::Schema.define(:version => 20090316035139) do
     t.boolean  "podcast_public",                                                         :default => true
     t.integer  "profile_views",                                                          :default => 0
     t.boolean  "delta",                                                                  :default => false
+    t.integer  "comments_count",                                                         :default => 0
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

@@ -40,6 +40,23 @@ class Test::Unit::TestCase
     assert_equal 4.0, rated_object.rating_average
   end
 
+  def assert_commentable(object, options = {})
+    comment = object.comments.create(:body => 'Just a test')
+    count = object.comments_count
+
+    comment.user = users(options[:by] || :quentin)
+    assert comment.valid?
+    assert_nothing_raised { comment.save! }
+
+    comment.reload
+
+    assert_equal 'Just a test', comment.body
+    assert_equal object, comment.commentable
+    assert_equal count + 1, object.reload.comments_count
+
+    return comment
+  end
+
   def assert_x_accel_redirect(options, &block)
 
     @request.env['SERVER_SOFTWARE'] = 'Nginx 0.6.17'

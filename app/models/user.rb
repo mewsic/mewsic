@@ -35,7 +35,6 @@
 #  rating_count              :integer(4)    
 #  rating_total              :decimal(10, 2 
 #  rating_avg                :decimal(10, 2 
-#  replies_count             :integer(4)    default(0)
 #  nickname                  :string(20)    
 #  is_admin                  :boolean(1)    
 #  status                    :string(3)     default("off")
@@ -43,6 +42,8 @@
 #  multitrack_token          :string(64)    
 #  podcast_public            :boolean(1)    default(TRUE)
 #  profile_views             :integer(4)    default(0)
+#  comments_count            :integer(4)    default(0)
+#  writings_count            :integer(4)    default(0)
 #
 
 require 'digest/sha1'
@@ -108,8 +109,10 @@ class User < ActiveRecord::Base
   has_many :featurings
 
   has_many :answers, :order => 'answers.created_at DESC'
-  has_many :replies, :order => 'answers.created_at DESC'
   has_many :photos, :as => :pictureable
+
+  has_many :comments, :as => :commentable, :order => 'comments.created_at DESC'
+  has_many :writings, :source => :comment, :class_name => 'Comment'
 
   has_one :avatar, :as => :pictureable
   
@@ -132,7 +135,7 @@ class User < ActiveRecord::Base
   attr_accessible :password, :password_confirmation, :first_name, :last_name, :name_public,
     :gender, :motto, :tastes, :country, :city, :age, :photos_url, :blog_url, :myspace_url,
     :skype, :msn, :skype_public, :msn_public, :nickname, :podcast_public
-  attr_readonly :replies_count, :profile_views
+  attr_readonly :comments_count, :writings_count, :profile_views
   
   before_save :check_links
   before_save :check_nickname
@@ -348,7 +351,7 @@ class User < ActiveRecord::Base
   end
 
   def self.find_top_answers_contributors(options = {})
-    self.find(:all, options.merge(:include => [:avatar], :order => 'users.replies_count DESC'))
+    self.find(:all, options.merge(:include => [:avatar], :order => 'users.writings_count DESC'))
   end
 
   # Finds all the activated users that have an avatar and have created most
@@ -428,13 +431,6 @@ class User < ActiveRecord::Base
   #  avatars.find(:all, :order => 'created_at DESC').first
   #end
   
-  def find_related_answers
-    Answer.find :all, :select => 'DISTINCT',
-                      :include => ['replies', 'user'], 
-                      :conditions => ['replies.user_id = ? OR answers.user_id = ?', self.id, self.id],
-                      :limit => 4
-  end   
-
   def is_leader_of?(mband)
     mband.leader == self
   end

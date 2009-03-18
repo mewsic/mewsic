@@ -1,0 +1,30 @@
+# == Schema Information
+# Schema version: 20090312174538
+#
+# Table name: comments
+#
+#  id               :integer(4) not null, primary key
+#  title            :string(60)
+#  body             :text          
+#  commentable_id   :integer(4)    
+#  commentable_type :integer(4)    
+#  user_id          :integer(4)    
+#  rating_count     :integer(4)    
+#  rating_total     :decimal(10, 2)
+#  rating_avg       :decimal(10, 2)
+#  created_at       :datetime      
+#  updated_at       :datetime      
+#
+
+john_replies_to_quentins_magic_question:
+  user: john
+  commentable: quentin_asks_about_magic
+  commentable_type: Answer
+  body: "No, I don't believe in it."
+
+quentin_replies_to_user_10s_religion_question:
+  user: quentin
+  commentable: user_10_asks_about_religion
+  commentable_type: Answer
+  body: "The bad news is that there is no God. The good news is that you don't need it."
+

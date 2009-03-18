@@ -5,7 +5,7 @@ class TracksControllerTest < ActionController::TestCase
   include AuthenticatedTestHelper
 
   tests TracksController
-  fixtures :users, :mbands, :songs, :tracks, :genres, :mixes, :instruments
+  fixtures :users, :mbands, :songs, :tracks, :mixes, :instruments
 
   def setup
     ActionMailer::Base.delivery_method = :test

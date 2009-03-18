@@ -180,7 +180,7 @@ protected
   # Filter to find an answer whose id is passed in params[:id]
   #
   def find_answer
-    @answer = Answer.find(params[:id], :include => :replies)
+    @answer = Answer.find(params[:id], :include => :comments)
   end
   
   # Filter that checks ownership of an answer

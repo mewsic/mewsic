@@ -18,20 +18,20 @@ namespace :mewsic do
     User.find(:all).each {|u| u.update_friends_count}
   end
   
-  desc "Update answer replies count for every answer and every user"
-  task(:update_replies_count => :environment) do
-    puts "* Updating answer replies count.."
-    Answer.find(:all).each do |answer|
-      answer.connection.execute(
-        "UPDATE answers SET replies_count = #{answer.replies.count} WHERE id = #{answer.id}"
-      )
+  desc "Update comment counters for every answer and every user"
+  task(:update_comments_count => :environment) do
+    print '* Updating comments count:'
+    [Answer, Mband, Song, Track, User].each do |model|
+      Comment.count(:all, :conditions => "commentable_type = '#{model}'", :group => :commentable_id).each do |id, count|
+        model.connection.execute "UPDATE #{model.table_name} SET comments_count = #{count} WHERE id = #{id}"
+      end
+      print ' ' + model.name
     end
 
-    User.find(:all).each do |user|
-      user.connection.execute(
-        "UPDATE users SET replies_count = #{user.replies.count} WHERE id = #{user.id}"
-      )
+    Comment.count(:all, :group => :user_id).each do |id, count|
+      User.connection.execute "UPDATE #{User.table_name} SET comments_count = #{count} WHERE id = #{id}"
     end
+    puts '.'
   end
 
   desc "Copy the test mp3s from test/fixtures/files to public/audio"
@@ -51,9 +51,9 @@ namespace :mewsic do
   end
 
   namespace :fixtures do
-    desc "Load fixtures and update both friends and replies count"
+    desc "Load fixtures and update both friends and comments count"
     task :load => [ "db:fixtures:load",  "mewsic:update_friends_count",
-      "mewsic:update_replies_count", "mewsic:copy_test_mp3s",
+      "mewsic:update_comments_count", "mewsic:copy_test_mp3s",
       "mewsic:update_nested_set"]
   end  
 end

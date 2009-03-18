@@ -4,7 +4,7 @@ class UserTest < Test::Unit::TestCase
   # Be sure to include AuthenticatedTestHelper in test/test_helper.rb instead.
   # Then, you can remove it from this and the functional test.
   include AuthenticatedTestHelper
-  fixtures :users, :tracks, :songs, :friendships, :pictures, :answers, :replies, :instruments
+  fixtures :users, :tracks, :songs, :friendships, :pictures, :instruments
 
   def test_should_create_user_and_send_mail
     assert_difference 'User.count' do
@@ -249,15 +249,6 @@ class UserTest < Test::Unit::TestCase
     assert_equal users(:quentin).admirers.size, 50
   end
 
-  def test_quentin_should_retieve_answers_from_replies
-    answers = users(:quentin).find_related_answers
-    assert answers.include?(replies(:girls_reply).answer)
-  end
-
-  def test_quentin_should_not_have_duplicated_answers
-    assert_equal users(:quentin).find_related_answers.size, 2
-  end
-  
   def test_should_return_user_with_more_instruments
     assert (users(:quentin).instruments.size > users(:aaron).instruments.size)
     assert_equal users(:quentin), User.find_most_instruments.first

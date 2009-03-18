@@ -18,6 +18,7 @@
 #  rating_total  :decimal(10, 2 
 #  rating_avg    :decimal(10, 2 
 #  members_count :integer(4)    default(0)
+#  comments_count :integer(4)   default(0)
 #
 
 # Copyright:: (C) 2008 Medlar s.r.l.
@@ -66,9 +67,12 @@ class Mband < ActiveRecord::Base
 
   has_many :songs, :as => :user
 
+  has_many :comments, :as => :commentable, :order => 'comments.created_at DESC'
+
   belongs_to :leader, :class_name => 'User', :foreign_key => 'user_id'
   
   attr_accessible :name, :motto, :tastes, :photos_url, :blog_url, :myspace_url
+  attr_readonly :members_count, :comments_count
   
   validates_presence_of   :name
   validates_format_of     :name, :with => /^[a-z]['\w _-]+$/i, :if => Proc.new{|m| !m.name.blank?}, :message => 'only letters, numbers, spaces and underscore allowed!'

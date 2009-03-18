@@ -72,7 +72,7 @@ class Song < ActiveRecord::Base
   ## XXX Remove me
   attr_accessor :mlab
 
-  attr_protected :user_id, :listened_times
+  attr_protected :user_id, :listened_times, :comments_count
 
   belongs_to :user, :polymorphic => true
 
@@ -82,6 +82,7 @@ class Song < ActiveRecord::Base
 
   has_many :mlabs, :as => :mixable
   has_many :abuses, :as => :abuseable, :class_name => 'Abuse'
+  has_many :comments, :as => :commentable, :order => 'comments.created_at DESC'
  
   validates_presence_of :title, :author,      :if => :published?
   validates_associated :user,                 :if => :published?
