@@ -7,7 +7,7 @@ module ApplicationHelper
       #
       #  return %[<script src="http://www.google.com/jsapi"></script>] + javascript_tag(%[
       #      google.load('jquery', '1.3.2');
-      #      google.load('jquery-ui', '1.6.0'); ])
+      #      google.load('jquery-ui', '1.7.0'); ])
       javascript_include_tag 'jquery-1.3.2.min.js', 'jquery-ui-1.7.custom.min.js'
     else
       javascript_include_tag 'jquery-1.3.2.js', 'jquery-ui-1.7.custom.js'
