@@ -43,6 +43,7 @@
 	function instr_show($count) {
 		for($i=0;$i<$count;$i++) {
 ?>
+<!-- this piece moved into app/views/tracks/_instrument_big.html.erb -->
 <div class="instr_avatar shadow_big  fleft">
 	<span class="instr instr_big icon_<? echo rand(41,75) ?>"> 
 		<span class="instr_counter">

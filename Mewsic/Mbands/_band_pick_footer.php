@@ -1,4 +1,4 @@
-<!-- Moved on the bottom of app/views/mbands/index.html.erb -->
+<!-- Moved into of app/views/mbands/_footer.html.erb -->
 
 <ul class="footer_right_content mband_pick_footer fright">
 	<div class=".w440">

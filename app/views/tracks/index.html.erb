@@ -1,8 +1,3 @@
-<? include('__heading.php') ?>
-
-<!-- CONTENT -->
-<div id="content">
-
 	<!-- LEFTCOL -->
 	<div class="leftCol fleft">
 		<div class="leftColWrapper">
@@ -22,10 +17,8 @@
 				</div>
 			<!-- END EXPL BANNER -->
 
-
-			<?  ?>
-			<? include('_instruments_search.php') ?>
-			<? include('_instruments_newest.php') ?>			
+      <%= render :partial => 'tracks/search' %>
+      <%= render :partial => 'tracks/newest' %>
 
 		</div>
 	</div>
@@ -33,23 +26,12 @@
 
 	<!-- RIGHTCOL -->	
 	<div class="rightCol fright">
-
-			<?  ?>
-			<? include('_didyouknow.php') ?>	
-
+    <%= render :partial => 'shared/did_you_know' %>
 	</div>
 	<!-- END RIGHTCOL -->	
 	
 	<div class="clear"> </div>
-</div>
-<div id="bottom_bar">
-	<div class="corner_lb fleft"> </div>
-	<div class="bottom_rp fleft"> </div>
-	<div class="corner_rb fleft"> </div>
-</div>
-<!-- END CONTENT -->
 
-<? include('_application.php'); ?>
-
-<? $partial = "_band_pick_footer.php"; ?>
-<? include('__footer.php'); ?>
+<% content_for :footer do %>
+  <%= render :partial => 'mbands/footer' %>
+<% end %>

@@ -1,3 +1,5 @@
+<!-- Moved into app/views/tracks/_search.html.erb -->
+
 <div id="instr_search_box">
 		<div class="browse_pane pane_heading fright">
 			<h2>Instruments on Mewsic</h2>

@@ -20,9 +20,12 @@
 			</div>
 			<div class="browse_pane_right fleft">
 				<div id="newest_list" class="fleft">
-					<? for($i=0;$i<6;$i++){ include('_instrument_block.php'); } ?>
+          <% 6.times do %>
+            <%= render :partial => 'shared/instrument_block' %>
+          <% end %>
 				</div>
 			</div>
 		</div>
 </div>
 <div class="clear"> </div>
+

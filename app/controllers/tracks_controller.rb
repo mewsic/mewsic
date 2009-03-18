@@ -13,31 +13,28 @@
 class TracksController < ApplicationController
 
   before_filter :login_required, :only => [:create, :update, :rate, :destroy, :confirm_destroy]
+  before_filter :find_author, :only => :index
   before_filter :accessible_track_required, :only => [:show, :download]
   before_filter :writable_track_required, :only => :update
   before_filter :destroyable_track_required, :only => [:destroy, :confirm_destroy]
-  before_filter :redirect_to_root_unless_xhr, :only => [:index, :rate, :destroy, :confirm_destroy]
+  before_filter :redirect_to_root_unless_xhr, :only => [:rate, :destroy, :confirm_destroy]
 
   protect_from_forgery :except => :create ## XXX FIXME FIX THE MULTITRACK
 
+  # ==== GET /tracks
   # ==== XHR GET /users/:user_id/tracks
   # ==== XHR GET /mbands/:mband_id/tracks
   #
-  # This action is used to paginate the tracks index in the User/Mband page.
+  # Show site-wide tracks index or paginate the tracks indexes in the User/Mband page.
   # FIXME: Only published tracks are shown.
   #
   def index
-    @author = 
-      if params.include?(:user_id)
-        User.find_from_param(params[:user_id])
-      elsif params.include?(:mband_id)
-        Mband.find_from_param(params[:mband_id])
-      else
-        head :bad_request and return
-      end
-
-    @tracks = @author.tracks.public.paginate(:page => params[:page], :per_page => 10)
-    render :partial => @author.class.table_name + '/tracks'
+    if @author
+      @tracks = @author.tracks.public.paginate(:page => params[:page], :per_page => 10)
+      render :partial => 'shared/instrument_block', :collection => @tracks
+    else
+      @tracks = Track.public.find(:all, :order => 'created_at DESC')
+    end
   end
 
   # ==== GET /tracks/:id.html
@@ -177,6 +174,15 @@ class TracksController < ApplicationController
   end
 
   private
+    def find_author
+      @author = 
+        if params[:user_id]
+          User.find_from_param(params[:user_id])
+        elsif params[:mband_id]
+          Mband.find_from_param(params[:mband_id])
+        end
+    end
+
     def accessible_track_required
       @track = Track.find(params[:id], :include => :instrument)
       head :forbidden unless @track.accessible_by? current_user
