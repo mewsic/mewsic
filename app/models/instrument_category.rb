@@ -13,15 +13,6 @@
 # Copyright:: (C) 2008 Mikamai s.r.l.
 # Copyright:: (C) 2008 Adelao Group
 #
-# == Schema Information
-#
-# Table name: instrument_categories
-#
-#  id          :integer(11)   not null, primary key
-#  description :string(255)   
-#  created_at  :datetime      
-#  updated_at  :datetime      
-#
 # == Description
 #
 # This super-simple model represents an instrument category.
