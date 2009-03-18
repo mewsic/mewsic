@@ -21,23 +21,9 @@
   <script type="text/javascript" src="javascripts/jquery.dataTables.min.js"></script>  
   <link rel="stylesheet" type="text/css" href="stylesheets/dataTables.css" />    
 
-  <script type="text/javascript">
-    $(function() {
-      // Tabs
-      $("#playlist_tabs").tabs();
+  <%= javascript_include_tag 'application' %>
 
-      // Rounded corners
-      $('.roundTop10').corner("top 10px");
-      $('.round10').corner("10px");
-      $('.bevelsmall').corner("bevel 1px");
-
-      // ??
-      $("#addthis").click(function () {
-        $(this).effect("transfer", { to: "#fb_menu_inbox_unread_count_holder", className: 'ui-effects-transfer' }, 1000);
-        return false;
-      });
-    });
-  </script>
+  <%= yield :head %>
 
 </head>
 <body>
@@ -135,6 +121,7 @@
 
     <%= yield :footer %>
       
+      <div class="clear"> </div>
     <!-- END TOP FOOTER GROUP -->    
     <!-- BOTTOM FOOTER GROUP -->    
     <div class="bottom_footer_grad roundTop10">

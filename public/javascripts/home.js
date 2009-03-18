@@ -14,4 +14,4 @@ $(function() {
     $('#expl_banner').hide("blind", {}, 1000);
   });
 
-});  
+});
