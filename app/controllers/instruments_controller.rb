@@ -12,14 +12,14 @@ class InstrumentsController < ApplicationController
   # ==== GET /instruments.xml
   #
   # Renders an XML sheet containing all instruments, sorted by description.
-  # If HTML output is requested, user is  redirected to '/'.
+  # If HTML output is requested, user is  redirected to root_path.
   #
   def index
-    @instruments = params[:search] ? Instrument.find_used : Instrument.find(:all, :order => 'description')
+    @instruments = Instrument.find(:all, :order => 'description')
     
     respond_to do |format|
-      format.xml
-      format.html { redirect_to '/' }
+      format.xml { render :partial => 'multitrack/instruments' }
+      format.html { redirect_to root_path }
     end
   end
   

@@ -223,7 +223,7 @@ class SongsControllerTest < ActionController::TestCase
       xhr :put, :rate, :id => song.id, :rate => 2
       assert_response :success
     end
-    assert_equal 2.0, assigns(:songs).rating_avg.to_f
+    assert_equal 2.0, assigns(:song).rating_avg.to_f
 
     song = songs(:red_red_wine)
     assert_no_difference 'Rating.count' do

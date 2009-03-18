@@ -54,7 +54,7 @@ class TracksController < ApplicationController
         @has_abuse = @track.abuses.exist?(['user_id = ?', current_user.id]) if logged_in?
       end
 
-      format.xml { render :partial => 'shared/track' }
+      format.xml { render :partial => 'multitrack/track' }
 
       format.png do
         head :not_found and return if @track.filename.blank?
@@ -68,7 +68,7 @@ class TracksController < ApplicationController
   #
   # Creates a new track, whose attributes are carried in the <tt>:track</tt> params hash.
   # If it is Track#valid?, the action renders the XML representation of the newly created
-  # Track. if not, the <tt>shared/_errors.xml.erb</tt> partial is rendered with a 400
+  # Track. if not, the <tt>multitrack/_errors.xml.erb</tt> partial is rendered with a 400
   # status.
   #
   def create
@@ -79,9 +79,9 @@ class TracksController < ApplicationController
     respond_to do |format|
       format.xml do
         if @track.valid?
-          render :partial => 'shared/track', :object => @track, :status => :ok
+          render :partial => 'multitrack/track', :object => @track, :status => :ok
         else
-          render :partial => 'shared/errors', :object => @track.errors, :status => :bad_request
+          render :partial => 'multitrack/errors', :object => @track.errors, :status => :bad_request
         end
       end
     end

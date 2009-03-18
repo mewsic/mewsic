@@ -61,7 +61,7 @@ class SongsController < ApplicationController
 
       format.xml do
         @tracks = true # show the tracks in the XML repr
-        render :partial => 'shared/song'
+        render :partial => 'multitrack/song'
       end
 
       format.png do
@@ -133,7 +133,7 @@ class SongsController < ApplicationController
   # track IDs, which are ignored by this method.
   #
   # Upon success, the XML representation of a song is rendered. Upon failure, the
-  # <tt>shared/_errors.xml.erb</tt> partial is rendered instead.
+  # <tt>multitrack/_errors.xml.erb</tt> partial is rendered instead.
   #
   # XXX THIS HAS TO BE REWORKED OUT WITH ADD/REMOVE TRACK METHODS TO BETTER SPECIFY PERMISSIONS
   #
@@ -154,7 +154,7 @@ class SongsController < ApplicationController
 
     # XXX mostly useless
     respond_to do |format|
-      format.xml { render :partial => 'shared/song', :object => @song }
+      format.xml { render :partial => 'multitrack/song', :object => @song }
     end
 
   rescue NoMethodError, TypeError
@@ -164,7 +164,7 @@ class SongsController < ApplicationController
     # XXX this should be handled via JavaScript
     respond_to do |format|
       format.xml do
-        render :partial => 'shared/errors', :object => @song.errors, :status => :bad_request
+        render :partial => 'multitrack/errors', :object => @song.errors, :status => :bad_request
       end
     end
   end    
