@@ -1,3 +1,4 @@
+<!-- Moved into app/views/users/_most_played.html.erb -->
 <div class="pick_wrap margin30">
 		<a href="" class="pick_ad block fleft" title="David Bowie" style="background-image: url('images/temp/pick_bowie.jpg');">
 			<p class="pick_info block">

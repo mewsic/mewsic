@@ -1,3 +1,4 @@
+<!-- Moved into app/views/shared/_instrument_block.html.erb -->
 <div class="song_block fleft">
 	<div class="avatar fleft">
 		<img src="images/temp/avatar_alvarez.jpg" width="40" height="40" />					
@@ -9,7 +10,7 @@
 		<a href="" class="song_title">Lorem ipsum dolor sit amet</a><br />
 		<a href="" class="song_author"><strong>Alvarez de la Fonzeca</strong></a><br />
 
-		<? include('_stars.php') ?>
+		<%# rating %>
 	</div>
 	
 	<ul class="song_controls fright">

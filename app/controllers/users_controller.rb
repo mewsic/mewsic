@@ -31,13 +31,13 @@ class UsersController < ApplicationController
   # User#find_friendliest, User#find_newest, User#find_most_instruments and Mband#find_coolest.
   #
   def index
-    @coolest = User.find_paginated_coolest          :limit => 9    
-    @best = User.find_paginated_best                :page => 1, :per_page => 3    
-    @prolific = User.find_paginated_prolific        :limit => 3
-    @friendliest = User.find_friendliest            :limit => 1
-    @coolest_mbands = Mband.find_coolest            :limit => 1
-    @newest = User.find_paginated_newest            :page => 1, :per_page => 3
-    @most_instruments = User.find_most_instruments  :limit => 1
+    #@coolest = User.find_paginated_coolest          :limit => 9    
+    #@best = User.find_paginated_best                :page => 1, :per_page => 3    
+    #@prolific = User.find_paginated_prolific        :limit => 3
+    #@friendliest = User.find_friendliest            :limit => 1
+    #@coolest_mbands = Mband.find_coolest            :limit => 1
+    #@newest = User.find_paginated_newest            :page => 1, :per_page => 3
+    #@most_instruments = User.find_most_instruments  :limit => 1
   end
 
   # ==== XHR GET /users/newest?page=N

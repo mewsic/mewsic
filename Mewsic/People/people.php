@@ -1,3 +1,5 @@
+<!-- moved into app/views/users/index.html.erb -->
+
 <? include('__heading.php') ?>
 
 <!-- CONTENT -->

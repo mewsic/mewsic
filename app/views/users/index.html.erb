@@ -1,4 +1,26 @@
-<!-- Moved on the bottom of app/views/users/index.html.erb -->
+	<!-- EXPL BANNER -->
+
+	<!-- END EXPL BANNER -->
+
+	<!-- LEFTCOL -->
+	<div class="leftCol fleft">
+		<div class="leftColWrapper">
+      <%= render :partial => 'users/pick_of_the_week' %>
+      <%= render :partial => 'users/most_played' %>
+		</div>
+	</div>
+	<!-- END LEFTCOL -->	
+
+	<!-- RIGHTCOL -->	
+	<div class="rightCol fright">
+
+    <%= render :partial => 'users/coolest' %>
+    <%= render :partial => 'shared/did_you_know' %>
+
+	</div>
+	<!-- END RIGHTCOL -->	
+
+<% content_for :footer do %>
 <ul class="footer_right_content fright">
 	<div class=".w440">
 	<h2>Most played artist</h2>
@@ -24,7 +46,11 @@
 		<li><a href="" class="lastfm_lists">Parlano le puttane</a></li>
 	</ul>													
 	<div class="clear"> </div>
-	
-		<? for($i=0;$i<2;$i++){ echo"<li class='border_list'>"; include('_song_block.php'); echo"</li>"; } ?>					
+
+  <% 4.times do %>
+    <%= render :partial => 'shared/song_block' %>
+  <% end %>
+
 	</div>
 </ul>		
+<% end %>

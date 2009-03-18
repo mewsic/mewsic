@@ -44,11 +44,18 @@
 
 		<!-- SONG BLOCK -->
 		<div class="w454 fleft">
-			<? for($i=0;$i<3;$i++){ include('_song_block.php'); } ?>
+      <% 3.times do %>
+        <%= render :partial => 'shared/song_block' %>
+      <% end %>
+
+			<!-- non e' esploso, e' solo per vedere i blocchi instr :_) -ndstr -->
+      <!-- uhm. -vjt -->
+      <% 4.times do %>
+        <%= render :partial => 'shared/instrument_block' %>
+      <% end %>
 			
-			<!-- non e' esploso, e' solo per vedere i blocchi instr :_) -->
-			<? for($i=0;$i<4;$i++){ include('_instrument_block.php'); } ?>
 		</div>
 		<!-- END SONG BLOCK -->
 </div>
 <div class="clear"> </div>
+
