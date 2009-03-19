@@ -36,12 +36,4 @@ class DashboardController < ApplicationController
     end
   end
 
-  # ==== GET /splash.xml
-  #
-  # Renders the splash configuration.
-  #
-  def config
-    respond_to { |format| format.xml }
-  end
-
 end

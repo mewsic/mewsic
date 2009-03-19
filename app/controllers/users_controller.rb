@@ -148,7 +148,7 @@ class UsersController < ApplicationController
         #  end
       end
 
-      format.xml
+      format.xml { render :partial => 'multitrack/user' }
     end
 
   rescue ActiveRecord::RecordNotFound
