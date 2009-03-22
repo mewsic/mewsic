@@ -7,11 +7,9 @@
 	<authenticity_token><%= form_authenticity_token if protect_against_forgery? %></authenticity_token>
 	<connection_timeout>30</connection_timeout>
 	<default_avatar>/images/default_avatars/avatar_small.gif</default_avatar>
-  <sync>-1.0</sync> <!-- XXX remove me -->
 	<url_request>
-		<playlist>/users/{:id}/mlabs.xml</playlist>
+		<instruments>/instruments.xml</instruments>
 		<user>/users/{:id}.xml</user>
-		<ping>/noop</ping>
 		<songs>
 			<fetch>/songs/{:song_id}.xml</fetch>
 			<mix method="post">/songs/{:song_id}/mix.xml</mix>
