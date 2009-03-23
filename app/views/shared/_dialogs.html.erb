@@ -1,0 +1,89 @@
+<!-- SIGN UP -->
+<div id="dialog" title="Create account" style="display:none">
+	<p id="validateTips">All form fields are required.</p>
+
+	<form>
+	<fieldset>
+		<label for="name">Name</label>
+		<input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all" />
+		<label for="email">Email</label>
+		<input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all" />
+		<label for="password">Password</label>
+		<input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all" />
+	</fieldset>
+	</form>
+	<p>
+		Log-in using Facebook Connect
+	</p>
+</div>
+
+
+
+<!-- CHANGE AVATAR -->
+<div id="change_avatar" title="Your Avatar" style="display:none">
+	<script type="text/javascript" charset="utf-8">
+	$(function() {
+		$("#avatar_actions").tabs();
+	});
+	</script>
+
+	<div id="avatar_actions">
+		<ul>
+			<li><a href="#avatar-upload">Upload</a></li>
+			<li><a href="#avatar-adjust">Adjust</a></li>
+		</ul>
+		<div id="avatar-upload">
+	
+		</div>
+		<div id="avatar-adjust">
+
+		</div>
+	</div>
+</div>
+
+
+
+<!-- SHARE TO WALL -->
+<div id="share_songs_dialog" title="Share your songs" style="display:none">
+	<script type="text/javascript" charset="utf-8">
+	$(function() {
+		$("#share_songs_actions").tabs();
+	});
+	</script>
+
+	<div id="share_songs_actions">
+		<ul>
+			<li><a href="#action_song">Songs</a></li>
+			<li><a href="#action_instr">Instruments</a></li>
+		</ul>
+		<div id="action_song">
+			song list
+		</div>
+		<div id="action_instr">
+			instr list
+		</div>
+	</div>
+</div>
+
+
+
+<div id="share_media_dialog" title="Share pictures or videos" style="display:none">
+	<script type="text/javascript" charset="utf-8">
+	$(function() {
+		$("#share_media_actions").tabs();
+	});
+	</script>
+
+	<div id="share_media_actions">
+		<ul>
+			<li><a href="#action_picture">Pictures</a></li>
+			<li><a href="#action_video">Videos</a></li>
+		</ul>
+		<div id="action_picture">
+			picture list
+		</div>
+		<div id="action_video">
+			video list
+		</div>
+	</div>
+</div>

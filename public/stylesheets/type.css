@@ -6,8 +6,18 @@ body {
 	font-family: Arial,Helvetica,Verdana;	
 }
 
-h2, #top_footer .subtitle, h1, #expl_banner p  {
+h2, #top_footer .subtitle, h1, #expl_banner p, .cat_title  {
 	font-family: "Trebuchet MS";
+}
+
+.weight-bold { font-weight: bold; }
+
+
+.cat_title, .s13 {
+	font-size: 13px;
+}
+.s15 {
+	font-size: 15px;
 }
 
 #expl_banner p {
@@ -16,7 +26,7 @@ h2, #top_footer .subtitle, h1, #expl_banner p  {
 
 .navigation, #top_footer h2, .rightCol h2,
 .pick_info, .related_list h2,
-#playlist_container h2 {
+#playlist_container h2, h2 {
 	font-size: 15px;
 	font-weight: bold;
 }
@@ -28,11 +38,11 @@ h3 {
 	font-size: 22px;
 	font-weight: bold;
 }
-h3 {
+h3, textarea {
 	font-family: Helvetica !important;
 }
 
-.pick_wrap h1 {
+.pick_wrap h1, .ui-dialog .ui-dialog-title {
 	font-family: "Lucida Grande",Arial,Helvetica,Verdana,sans-serif !important;	
 	font-size: 17px;
 	font-weight: bold;
@@ -43,7 +53,7 @@ h3 {
 	font-size: 9px;
 	font-weight: bold;
 }
-.footer_copy {
+.footer_copy, .ten {
 	font-size: 10px;
 }
 .join_button, .login_button, .login li,
@@ -53,6 +63,7 @@ h3 {
 }
 
 .top_tags .tag_genre,
-.expl_links li a {
+.expl_links li a,
+.body12 {
 	font-size: 12px;
 }

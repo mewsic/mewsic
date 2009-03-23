@@ -1,10 +1,22 @@
-	<!-- EXPL BANNER -->
-
-	<!-- END EXPL BANNER -->
-
 	<!-- LEFTCOL -->
 	<div class="leftCol fleft">
 		<div class="leftColWrapper">
+
+  	<!-- EXPL BANNER -->
+    <div id="expl_banner">
+      <span id="expl_hide" class="fright">hide</span>
+      <span class="expl_band fleft"> </span>
+      <h1>Mewsic is full of musicians, just like you!.</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean semper, ipsum<br />
+      eget dapibus sagittis, nunc nunc feugiat neque, vel blandit turpis<br />
+      tellus eu leo. Fusce semper.</p>
+      <ul class="expl_links fright">
+        <li><a href=""><strong>Join now</strong></a></li>
+        <li><a href=""><strong>Learn More</strong></a></li>
+      </ul>
+    </div>
+  	<!-- END EXPL BANNER -->
+
       <%= render :partial => 'users/pick_of_the_week' %>
       <%= render :partial => 'users/most_played' %>
 		</div>
@@ -20,9 +32,11 @@
 	</div>
 	<!-- END RIGHTCOL -->	
 
+	<div class="clear"> </div>
+	
 <% content_for :footer do %>
 <ul class="footer_right_content fright">
-	<div class=".w440">
+	<div class="w440">
 	<h2>Most played artist</h2>
 	<div class="snip fleft">
 		<a href=""  title="David Bowie" class="fleft">
@@ -47,8 +61,10 @@
 	</ul>													
 	<div class="clear"> </div>
 
-  <% 4.times do %>
-    <%= render :partial => 'shared/song_block' %>
+  <% 2.times do %>
+    <li class="border_list">
+      <%= render :partial => 'shared/song_block' %>
+    </li>
   <% end %>
 
 	</div>

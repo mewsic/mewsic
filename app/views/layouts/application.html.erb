@@ -7,7 +7,7 @@
 
   <title>MEWSIC</title>
 
-  <%= stylesheet_link_tag *%w( type layout color instruments appbar ) %>
+  <%= stylesheet_link_tag *%w( type layout color instruments appbar profile ) %>
 
   <%= jquery_javascript_tags %>
   <%= jquery_stylesheet_tags %>
@@ -21,7 +21,7 @@
   <script type="text/javascript" src="javascripts/jquery.dataTables.min.js"></script>  
   <link rel="stylesheet" type="text/css" href="stylesheets/dataTables.css" />    
 
-  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag *%w( application home ) %>
 
   <%= yield :head %>
 
@@ -41,12 +41,12 @@
     <li><%= link_to 'Answers', answers_path,  :class => active_class('answers') %></li>
   </ul>
   
-  <ul class="login fright">
-    <li><a href="" class="join_button">JOIN NOW</a></li>
-    <li>or connect with <a href="" class="facebook">Facebook</a></li>
-    <li><div class="divider"> </div></li>
-    <li><a href="" class="login_button">LOGIN</a></li>
-  </ul>  
+	<ul class="login fright">
+		<li><a href="#join" id="create-user" class="join_button">JOIN NOW</a></li>
+		<li>or connect with <a href="" class="facebook">Facebook</a></li>
+		<li><div class="divider"> </div></li>
+		<li><a href="profile.php" class="login_button">LOGIN</a></li>
+	</ul>
   <div class="clear"> </div>
   <div id="breadcrumb_bar">
     <div class="corner_lt_blue fleft"> </div>
@@ -55,6 +55,8 @@
   </div>
 </div>
 <!-- END HEADER -->
+
+<%= render :partial => 'shared/dialogs' %>
 
 <!-- CONTENT -->
 <div id="content">

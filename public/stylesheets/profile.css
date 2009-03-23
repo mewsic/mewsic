@@ -1,0 +1,217 @@
+/* PROFILE PAGE */
+/* Users Tabs */
+.profile .ui-tabs-nav li a {
+	padding: .4em 1.5em !important;
+}
+.force_right { float: right !important; }
+
+
+
+
+/* WALL */
+.upper_part { 
+	width: 434px;
+	overflow: hidden; 
+}
+.wall_box { 
+	width: 375px;
+	height: 13px;
+	border: 1px solid #CCCCCC;
+	padding: 4px;
+	font-size: 13px !important;
+}
+.wall_avatars { padding: 1px 5px 0 0; width: 44px; height: 44px; }
+
+.wall_post { 
+	padding: 1px 13px; 
+	color: #ffffff; 
+	font-family: Helvetica;
+	margin-top: 7px;
+	cursor: pointer;
+}
+.wall_post { background: url('../images/go_bg.png') repeat-x top; }
+.wall_post:hover { background: url('../images/go_bg.png') repeat-x bottom; }
+
+/* share links wall */
+.share_links_wall { 
+	margin: 5px 0 0 49px !important;
+	position: absolute;
+}
+.share_links_wall li {
+	margin: 0px;
+	display: inline-block;
+	margin-left: 4px;
+	height: 16px;
+}
+/* icons */
+.share_links_wall .share_song_icon { background: url('../images/icons/music.png') no-repeat left; }
+.share_links_wall .share_picture_icon { background: url('../images/icons/picture.png') no-repeat left; }
+.share_links_wall .share_video_icon { background: url('../images/icons/television.png') no-repeat left; }
+.share_links_wall li a { padding-left: 21px; }
+
+
+/* wall posts */
+.posted_date {
+	border-top: 1px solid #CCCCCC;
+	color: #8B9298;
+	margin-top: 10px;
+	padding-top: 2px;
+}
+
+.message { margin: 0 20px 0 49px; }
+.posted_comment {
+	margin: 6px 0 10px 0;
+	overflow: hidden;
+	padding-bottom: 10px;
+	border-bottom: 1px dashed #D6D6D6;
+}
+.post_balloon {
+	width: 90%;
+	min-height: 12px;
+	border-bottom: 1px solid #D5D5D5;
+	padding: 7px 12px;
+	margin-left: 14px;
+	color: #333333;
+}
+.gray_sprite, .blue_sprite {
+	width: 14px;
+	height: 15px;
+	margin-top: 5px;
+}
+.gray_sprite { background: url('../images/balloon_gray_sprite.gif') no-repeat top; }
+.blue_sprite { background: url('../images/balloon_blue_sprite.gif') no-repeat top; }
+
+.post_delete {
+	width: 13px;
+	height: 13px;
+	background: url('../images/icons/bullet_remove.gif') no-repeat top;
+	cursor: pointer;
+}
+.day_last { border-bottom: none; }
+
+.attach_list {
+	overflow: hidden;
+	background: url('../images/icons/attach.png') no-repeat top left;
+	width: 371px;
+	padding-left: 17px;
+	margin-left: -3px;
+}
+
+
+/* profile lists */
+#profile_tabs .extended_wall h2 {
+	margin: 0 0 10px 0;
+}
+#profile_tabs .extended_wall li { 
+	margin: 0 0 10px 5px;
+	list-style: none;	
+	overflow: hidden;
+}
+
+#profile_tabs .extended_wall li a { padding: 0 !important; }
+.extended_wall {
+	list-style: none;
+	overflow: hidden;
+	width: 208px;
+	margin-top: 22px;
+}
+.extended_wall h2 { margin-bottom: 2px; }
+.extended_wall span { padding-left: 21px; }
+.extended_wall p { margin-top: 0; padding-bottom: 8px; border-bottom: 1px dotted #999999; }
+
+
+
+
+
+
+/* MAILBOX 
+   Unread Message Count Badge */
+
+.mailbox_unread {
+background-image:url('../images/mailbox_unread.png');
+display:inline-block;
+color: #FFFFFF;
+line-height: 15px;
+font-size: 11px !important;
+margin-top: -15px;
+}
+.mailbox_unread span {
+background-image:url('../images/mailbox_unread.png');
+display:inline-block;
+}
+
+.mailbox_unread .tl {
+background-position:left top;
+}
+.mailbox_unread .tr {
+background-position:right top;
+}
+.mailbox_unread .br {
+background-position:right bottom;
+}
+.mailbox_unread .bl {
+background-position:left bottom;
+padding:0 6px 1px;
+}
+
+
+/* dataTables Custom */
+#mailbox_wrapper {
+	clear: none;
+}
+#mailbox_wrapper a {
+	color: #064970;
+	text-decoration: none;
+}
+#mailbox_filter input {
+	width: 193px;
+	padding: 4px 4px 4px 23px;
+	margin: 0;
+	border: 1px solid #999999;
+	background: #FFFFFF url('../images/icons/input_search.gif') no-repeat left;
+}
+
+#mailbox_wrapper .dataTables_filter {
+	width: 222px !important;
+}
+
+#mailbox_processing {
+	position: relative;
+	margin-left: 0;
+	left: 0;
+}
+
+#mailbox  thead th {
+	border-bottom: 1px solid #CCCCCC;
+}
+
+/* Accounts Icons */
+.inbox_accounts { 
+	list-style: none;  
+	width: 164px;
+	margin: 18px 16px 0 0;
+}
+.inbox_accounts li, .inbox_accounts ol { cursor: pointer; }
+.inbox_accounts li:hover, .inbox_accounts ol:hover { color: #0296C2; }
+.inbox_accounts li {
+	display: block;
+	padding: 5px 0 5px 23px;
+}
+.inbox_accounts ol { 
+	padding: 2px 0 2px 35px;
+}
+.inbox_accounts .new { border-bottom: 1px solid #CCCCCC; background: url('../images/icons/mailbox/email_add.png') no-repeat center left; }
+.inbox_accounts .inbox { margin-top: 10px; background: url('../images/icons/mailbox/email.png') no-repeat center left; }
+.inbox_accounts .collab { background: url('../images/icons/mailbox/arrow_in.png') no-repeat center left; }
+.inbox_accounts .freq { background: url('../images/icons/mailbox/group.png') no-repeat center left; }
+.inbox_accounts .mbands { background: url('../images/icons/mband_big.png') no-repeat center left; }
+
+
+
+/* Mail Content */
+#mail_content {
+	width: 511px;
+}
+
+.inbox_avatar { padding-right: 5px; }
+

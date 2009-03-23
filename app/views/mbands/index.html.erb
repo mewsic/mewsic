@@ -32,19 +32,17 @@
       <a href="">British Pop,</a>  <a href="">Classic Rock,</a>  <a href="">Country,</a>  <a href="">Country Rock,</a>  <a href="">Crossover,</a>  <a href="">Dance,</a>
       <a href="">Disco,</a>  <a href="">Drum & Bass,</a>  <a href="">EBM,</a>  <a   href="">Electro-Rock,</a>  <a href="">Electronic,</a>  <a href="">Folk Rock,</a>  <a href="">Funk</a>
     </p>
-    <ul class="pick_page_anchors">
-      <li><a href="" class="anchors">Join an M-Band</a></li>
-      <li><a href="" class="anchors">Create your own</a></li>
-    </ul>
-    <br />
-
+		<span class="divider block"> </span>
+		
     <%= render :partial => 'mbands/newest' %>
+		<span class="divider block"> </span>
+		
     <%= render :partial => 'shared/did_you_know' %>
 
   </div>
   <!-- END RIGHTCOL -->
 
-  <div class="clear"> </div>
+	<div class="clear"> </div>
 
 <% content_for :footer do %>
   <%= render :partial => 'mbands/footer' %>

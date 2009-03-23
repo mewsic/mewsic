@@ -1,0 +1,66 @@
+	<!-- LEFTCOL -->
+	<div class="leftCol fleft">
+		<div class="leftColWrapper">
+
+			<!-- EXPL BANNER -->
+				<div id="expl_banner">
+					<span id="expl_hide" class="fright">hide</span>
+					<span class="expl_band fleft"> </span>
+					<h1>Songs with people from all the world.</h1>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean semper, ipsum<br />
+					eget dapibus sagittis, nunc nunc feugiat neque, vel blandit turpis<br />
+					tellus eu leo. Fusce semper.</p>
+					<ul class="expl_links fright">
+						<li><a href=""><strong>Learn More</strong></a></li>
+					</ul>
+				</div>
+			<!-- END EXPL BANNER -->
+
+      <!-- 
+			<? include('_song_pick.php') ?>
+			<? include('_song_newest.php') ?>
+			<? include('_song_coolest.php') ?>			
+      -->
+      
+		</div>
+	</div>
+	<!-- END LEFTCOL -->	
+
+	<!-- RIGHTCOL -->	
+	<div class="rightCol fright">
+
+		<h2>Popular Tags</h2>
+		<p class="tag_genre">
+			<a href="">Acid Jazz/Fusion,</a>  <a href="">Acoustic,</a>  <a href="">Alternative 	Rock,</a>  <a href="">Ambient,</a>  <a href="">Blues,</a>  
+			<a href="">British Pop,</a>  <a href="">Classic Rock,</a>  <a href="">Country,</a>  <a href="">Country Rock,</a>  <a href="">Crossover,</a>  <a href="">Dance,</a>  
+			<a href="">Disco,</a>  <a href="">Drum & Bass,</a>  <a href="">EBM,</a>  <a 	href="">Electro-Rock,</a>  <a href="">Electronic,</a>  <a href="">Folk Rock,</a>  <a href="">Funk</a><a href="">Acid Jazz/Fusion,</a>  <a href="">Acoustic,</a>  <a href="">Alternative 	Rock,</a>  <a href="">Ambient,</a>  <a href="">Blues</a>
+		</p>
+		<span class="divider block"> </span>	
+
+    <!--
+			<? include('_video_sidebar.php') ?>			
+			<span class="divider block"> </span>
+
+			<? include('_song_moremixable.php') ?>
+			<span class="divider block"> </span>
+      -->
+
+			<h2>Most played Artists</h2>
+			<p class="tag_genre body12">
+				<a href="">Tommy Califano,</a>  <a href="">Barac Mobil,</a>  <a href="">Dustin Pinkerlake,</a>  <a href="">Pino,</a>  <a href="">Angelo & Cirillo,</a>  
+				<a href="">Alvarez de la Fonzeca,</a>  <a href="">XXX84,</a>  <a href="">B 52,</a>  <a href="">Pane e Pomodoro,</a>  <a href="">Ajira Airlines,</a>  <a href="">Vincent Burd</a>  
+			</p>
+			<span class="divider block"> </span>
+
+      <!-- 
+			<? include('_didyouknow.php') ?>	
+      -->
+      
+	</div>
+	<!-- END RIGHTCOL -->	
+	
+	<div class="clear"> </div>
+
+  <% content_for :footer do %>
+    <%= render :partial => 'mbands/footer' %>
+  <% end %>
