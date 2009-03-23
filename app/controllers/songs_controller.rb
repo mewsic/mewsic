@@ -26,6 +26,7 @@ class SongsController < ApplicationController
   # # FIXME # Only public songs are returned.
   #
   def index
+    return
     redirect_to '/' and return unless request.xhr?
    
     @author =

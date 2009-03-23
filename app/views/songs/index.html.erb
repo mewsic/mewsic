@@ -16,11 +16,9 @@
 				</div>
 			<!-- END EXPL BANNER -->
 
-      <!-- 
-			<? include('_song_pick.php') ?>
-			<? include('_song_newest.php') ?>
-			<? include('_song_coolest.php') ?>			
-      -->
+      <%= render :partial => 'songs/pick' %>
+      <%= render :partial => 'songs/newest' %>      
+      <%= render :partial => 'songs/coolest' %>      
       
 		</div>
 	</div>
@@ -37,13 +35,12 @@
 		</p>
 		<span class="divider block"> </span>	
 
-    <!--
-			<? include('_video_sidebar.php') ?>			
+      <%= render :partial => 'shared/video_sidebar' %>     
+      <span class="divider block"> </span>
+
+      <%= render :partial => 'shared/moremixable_sidebar' %>
 			<span class="divider block"> </span>
 
-			<? include('_song_moremixable.php') ?>
-			<span class="divider block"> </span>
-      -->
 
 			<h2>Most played Artists</h2>
 			<p class="tag_genre body12">
@@ -52,15 +49,13 @@
 			</p>
 			<span class="divider block"> </span>
 
-      <!-- 
-			<? include('_didyouknow.php') ?>	
-      -->
-      
+      <%= render :partial => 'shared/did_you_know' %>
+            
 	</div>
 	<!-- END RIGHTCOL -->	
 	
 	<div class="clear"> </div>
 
   <% content_for :footer do %>
-    <%= render :partial => 'mbands/footer' %>
+    <%= render :partial => 'songs/footer' %>
   <% end %>
