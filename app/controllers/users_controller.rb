@@ -125,11 +125,11 @@ class UsersController < ApplicationController
 
         @user.profile_viewed_by(tracked_user) unless current_user_page
 
-        @songs = @user.songs.published.with_tracks.paginate(:page => 1, :per_page => 5)
-        @songs_count = @user.songs.published.with_tracks.count
+        @songs = @user.songs.public.paginate(:page => 1, :per_page => 5)
+        @songs_count = @user.songs.public.count
 
-        @tracks = @user.tracks.published.paginate(:page => 1, :per_page => 7)
-        @tracks_count = @user.tracks.published.count
+        @tracks = @user.tracks.public.paginate(:page => 1, :per_page => 7)
+        @tracks_count = @user.tracks.public.count
 
         @answers = @user.answers.paginate(:page => 1, :per_page => 6)
 
