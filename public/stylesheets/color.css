@@ -26,7 +26,7 @@
 .item_count:hover, .footer_name_link:hover,
 .expl_links li a:hover, #expl_hide:hover,
 .mband_count:hover, .mband_more:hover, .mband_more_tag a:hover, .mband_name:hover,
-.shadow_big a:hover, .mband_browse span:hover {
+.shadow_big a:hover, .mband_browse span:hover, .song_show p a:hover {
 	text-decoration: underline;
 }
 
@@ -85,7 +85,6 @@ label { color: #999999; }
 .control_mix { background-color: #FF5600; }
 .control_play { background-color: #00AC00; }
 
-
 h2, .rightCol h2, .mband_name, .subtitle {
 	color: #064970;
 }
@@ -134,7 +133,8 @@ h2, .rightCol h2, .mband_name, .subtitle {
 	background-color: #D4D4D4;
 }
 
-.pick_wrap h1, #playlist_container h2 {
+.pick_wrap h1, #playlist_container h2, 
+.song_show h3, .song_show p a, .author_info h2, .heading_blue {
 	color: #0A385D;
 }
 
@@ -186,4 +186,8 @@ h2, .rightCol h2, .mband_name, .subtitle {
 }
 .blue7 {
 	background-color: #EDF5F8;
+}
+
+.status_balloon {
+	background-color: #FFFFC7;
 }

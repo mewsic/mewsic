@@ -34,6 +34,7 @@ ul { padding: 0; margin:0; }
 .margin7 { margin-top: 7px }
 input { border: 0; font-size: 12px; }
 .border { padding: 1px; border: 1px solid #CCCCCC; display: block; }
+.nomargin { margin: 0 !important; }
 
 
 /* DIALOGS FORMS */
@@ -87,14 +88,13 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 	list-style: none;
 	padding-right: 5px;
 }
-.login .divider {
+.login .spacer {
 	border-right: 1px dotted #CCCCCC;
-	display: inline;
 	margin-left: 6px;
 }
 .login_button {
-		padding: 1px 10px;
-		margin-left: 15px;
+	padding: 1px 10px;
+	margin-left: 15px;
 }
 
 
@@ -183,13 +183,18 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 	overflow: hidden;
 	padding: 13px 10px 10px 16px;
 }
+.leftColMin {
+	width: 860px;
+}
 .rightCol {
 	width: 210px;
 	position: relative;
 	display: inline;
 	padding: 18px 16px;
 }
-
+.rightColMax {
+	width: 318px;
+}
 
 /* PICK OF THE WEEK LAYOUT */
 .pick_wrap {
@@ -399,6 +404,33 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 
 
 
+
+/* SONG SHOW PAGE EXPANDED BLOCK */
+.song_expanded {
+	background-color: #F2F2F2;
+	border-bottom: 1px solid #64BEE0;
+}
+.tree_conn {
+	width: 519px;
+	background: url('../images/song_tree.gif') repeat-y left top;
+}
+.tree_conn_last {
+	width: 519px;
+	background: url('../images/song_tree_last.gif') no-repeat left top;
+	margin-bottom: 15px;
+}
+
+.tree_conn p { 
+	margin: 6px 0 0 24px;
+	padding-bottom: 3px;
+	border-bottom: 1px solid #E6E6E6;
+}
+.tree_elem {
+	width: 500px;
+}
+.mix_invite h1 { margin: 5px; }
+
+
 #top_footer .song_block .avatar {
 	background: url('../images/thumb_loader.gif') no-repeat center;
 }
@@ -422,9 +454,11 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 
 .song_controls {
 	padding: 0;
-	margin: 24px 4px 0 0;
+	margin: 24px 4px 0 0 !important;
 	direction: rtl;
-	position: absolute right;
+}
+.controls_sidebar {
+	direction: ltr !important;
 }
 .sidebar_moremixable .song_controls {
 	direction: ltr;
@@ -441,8 +475,6 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 	background-color: #F2F2F3;
 }
 
-
-
 .song_controls li {
 	list-style: none;
 	display: inline;
@@ -454,11 +486,18 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 	display: block;
 	padding-bottom: 10px;
 }
-/* useless ? */
-.star_container {
-	display: inline;
-	margin-top: 5px;
+
+
+/* SIDEBAR MIXABLE SONG */
+.mixable_genre {
+	overflow: hidden;
+	margin-top: 10px;
+	padding: 5px 12px;
+	border-bottom: 1px solid #CCCCCC;
+	line-height: 21px;
 }
+
+
 
 
 /* SIDEBAR COOLEST PEOPLE CHART */
@@ -491,6 +530,8 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 	width: 202px;
 	margin: 0;	
 }
+.rightColMax ul { width: 100% !important; }
+.rightColMax li { margin: 0 !important; }
 
 .rightCol li {
 	margin: 0 0 10px 5px;
@@ -504,7 +545,8 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 .divider {
 	border-bottom: 1px dashed #CCCCCC;
 	margin: 15px 0 15px -16px;
-	width: 238px;
+	padding-right: 28px; 
+	width: 100%;
 }
 
 .rightCol .avatar { margin-right: 4px; }
@@ -534,12 +576,8 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 
 /* LIST ICONS */
 .icons { display: block; }
-.lightbulb {
-	background: url('../images/icons/lightbulb.png') no-repeat left top;
-}
-.world {
-	background: url('../images/icons/world.png') no-repeat left top;
-}
+.lightbulb { background: url('../images/icons/lightbulb.png') no-repeat left top; }
+.world { background: url('../images/icons/world.png') no-repeat left top; }
 
 
 
@@ -582,18 +620,10 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 .follow_us a {
 	padding: 1px 0 1px 20px;
 }
-.follow_us .rss {
-	background: url('../images/icons/feed.png') no-repeat;
-}
-.follow_us .podcast {
-	background: url('../images/icons/transmit_blue.png') no-repeat;
-}
-.follow_us .myspace {
-	background: url('../images/icons/user.png') no-repeat;
-}
-.follow_us .facebook {
-	background: url('../images/icons/shape_square.png') no-repeat;
-}
+.follow_us .rss { background: url('../images/icons/feed.png') no-repeat; }
+.follow_us .podcast { background: url('../images/icons/podcast.png') no-repeat; }
+.follow_us .myspace { background: url('../images/icons/user.png') no-repeat; }
+.follow_us .facebook { background: url('../images/icons/facebook.gif') no-repeat; }
 
 h2 {
 	margin: 0;
@@ -695,6 +725,7 @@ h2 {
 	color: #696969;
 	padding: 6px 9px;
 }
+
 .search_call_submit {
 	border: 0;
 	font-size: 15px;
@@ -844,10 +875,8 @@ h2 {
 .maingenre_type li {
 	display: inline;
 	float: left;
-}
-.maingenre_type li { 
 	padding: 4px 8px;
- }
+}
 
 
 .instr_type li, .maingenre_type li {
@@ -1036,3 +1065,48 @@ h2 {
 	list-style: none;
 }
 
+
+/* SONG DETAIL PAGE SONGSHOW */
+.song_show { 
+	margin-bottom: 10px;
+	width: 308px;
+}
+.song_show h3, .song_show p { margin: 0; }
+.song_show p { margin-top: 4px; }
+.song_show p a { font-weight: bold; text-decoration: none; }
+
+.author_info {
+	width: 220px;
+}
+.author_info .podcast_icon {
+	padding-left: 18px;
+}
+
+.author_info .balloon {
+	width: 100%;
+	min-height: 30px;
+	margin: 6px 0 10px 0;
+}
+.author_info .balloon .blurp_author { margin-left: 13px; }
+.author_info .balloon .status_show {
+	background-color: #FFFF9F;
+	padding: 5px 8px;
+	color: #014D70;
+	border-bottom: 1px solid #CCCCCC;
+}
+
+.song_actions {
+	height: 14px;
+	padding: 7px 10px;
+	margin-top: 15px;
+	background-color: #DCF2FF;
+}
+.song_actions .actions {
+	list-style: none;
+}
+.actions li {
+	display: inline;
+	padding-left: 19px;
+	margin: 0 38px 0 0;
+}
+.actions .last { margin-right: 0 !important;}

@@ -27,7 +27,7 @@
 .notification_red {
 background-image:url('../images/notification_red.png');
 display:inline-block;
-margin: 4px 4px; /* margin-left: 7px if count > 9 */
+margin: 4px 4px;
 color: #FFFFFF;
 line-height: 15px;
 }
@@ -35,6 +35,34 @@ line-height: 15px;
 background-image:url('../images/notification_red.png');
 display:inline-block;
 }
+
+/* GENRE SELECTOR  */
+.genre_selector {
+background-image:url('../images/genre_selector.png');
+display:inline-block;
+margin: 4px 4px;
+color: #FFFFFF;
+line-height: 15px;
+}
+.genre_selector span {
+background-image:url('../images/genre_selector.png');
+display:inline-block;
+}
+.selector_disabled {
+	display:inline-block;
+	margin: 4px 4px;
+	color: #0099FF;
+	line-height: 15px;
+}
+.selector_disabled span { 
+	display:inline-block; 
+	cursor: pointer; 
+}
+.selector_disabled .bl {
+padding:0 6px 1px;
+}
+
+
 /* INSTRUMENTS COUNT */
 .instr_counter {
 background-image:url('../images/instruments_count.png');
@@ -43,22 +71,21 @@ color: #FFFFFF;
 line-height: 15px;
 margin-left: 60px;
 }
-
 .instr_counter span {
 background-image:url('../images/instruments_count.png');
 display:inline-block;
 }
 
-.notification_red .tl, .instr_counter .tl {
+.notification_red .tl, .instr_counter .tl, .genre_selector .tl {
 background-position:left top;
 }
-.notification_red .tr, .instr_counter .tr {
+.notification_red .tr, .instr_counter .tr, .genre_selector .tr {
 background-position:right top;
 }
-.notification_red .br, .instr_counter .br {
+.notification_red .br, .instr_counter .br, .genre_selector .br {
 background-position:right bottom;
 }
-.notification_red .bl, .instr_counter .bl {
+.notification_red .bl, .instr_counter .bl, .genre_selector .bl {
 background-position:left bottom;
 padding:0 6px 1px;
 }

@@ -19,6 +19,9 @@ h2, #top_footer .subtitle, h1, #expl_banner p, .cat_title  {
 .s15 {
 	font-size: 15px;
 }
+.s21 {
+	font-size: 21px !important;
+}
 
 #expl_banner p {
 	font-size: 14px;
@@ -34,12 +37,20 @@ h1, #instr_search_box h2 {
 	font-size: 18px;
 	font-weight: bold;
 }
+
 h3 {
 	font-size: 22px;
 	font-weight: bold;
 }
 h3, textarea {
 	font-family: Helvetica !important;
+}
+
+.lucida { 	font-family: "Lucida Grande",Arial,Helvetica,Verdana,sans-serif !important;	}
+.heading_21 {
+	font-family: "Lucida Grande",Arial,Helvetica,Verdana,sans-serif !important;	
+	font-size: 21px;
+	font-weight: bold;	
 }
 
 .pick_wrap h1, .ui-dialog .ui-dialog-title {

@@ -1,0 +1,119 @@
+	<!-- LEFTCOL -->
+	<div class="leftCol fleft">
+		<div class="leftColWrapper">
+
+		<div class="profile_upshow">
+			<div id="user_avatar" class="fleft">
+				<a href="#avatar" id="avatar_dialog" class="avatar_change none">
+					change avatar
+				</a>
+			</div>
+
+			<div class="status_container fleft">			
+				<h2 class="user_name heading_21">Pinca Palla</h2>
+
+				<span class="blurp_sidebar block fleft"> </span>
+				<div class="user_status status_balloon fleft">
+					<form>
+						<input type="text" class="status_input fleft" 	value="What are you doing now?">
+						<input type="submit" class="status_submit fleft" value="Share">
+					</form>					
+					<!-- 
+					<p class="nomargin">
+						Ho la macchina in doppia fila, di solito la lascio in terza fila, ma 	questa volta credo proprio d’averla lasciata in seconda.
+					</p>
+				-->
+				</div>
+			</div>
+			
+			<div class="user_actions fright">
+			<ul class="weight-bold profile">
+				<li class="admire_icon"><a href="" class="none">Admire</a></li>
+				<li class="sendmessage_icon"><a href="" class="none">Send Message</a></li>
+				<li class="mbands_icon"><a href="" class="none">Invite M-Band</a></li>
+				<li class="collab_icon"><a href="" class="none">Ask Collaboration</a></li>
+				<li class="podcast_icon"><a href="" class="none">Podcast</a></li>																		
+			</ul>
+			<div class="ui-state-highlight action_notice">
+			<span class="profile ui-icon ui-icon-info fleft" style="margin-right:4px;"> </span>
+			Message was sent succesfully
+			</div>
+			<!-- 
+			<div class="ui-state-error action_notice">
+			<span class="profile ui-icon ui-icon-alert fleft" style="margin-right:4px;"> </span>
+			There was an error, please retry
+			</div>
+			-->
+			</div>
+		
+		</div>
+
+				<script type="text/javascript" charset="utf-8">
+				$(function() {
+					$("#profile_tabs").tabs({
+						selected: 0
+					});
+				});
+				</script>
+				<div id="profile_tabs" class="profile">
+					<ul class="profile">
+						<li class="profile"><a href="#profile-wall">WALL</a></li>
+						<li class="profile"><a href="#profile-info">INFO</a></li>
+						<li class="profile"><a href="#profile-songs">SONGS</a></li>
+						<li class="profile"><a href="#profile-media">PHOTOS & VIDEOS</a></li>						
+						<li class="profile force_right"><a href="#profile-inbox">MAILBOX</a></li>						
+					</ul>
+					<div id="profile-wall" class="profile">
+						<div class="w454 fleft">
+                <%= render :partial => 'shared/wall' %>
+						</div>
+						<div class="fright">              
+              NOTIFICATIONS
+						</div>
+					</div>
+					<div id="profile-info" class="profile">
+            <!-- JCROP TEST put it in change avatar dialog -->
+						<table>
+						<tr>
+						<td>
+						<img src="images/temp/profile_main_orig.jpg" id="cropbox" />
+						</td>
+						<td>
+						<div style="width:200px;height:200px;overflow:hidden;">
+							<img src="images/temp/profile_main_orig.jpg" id="preview" />
+						</div>
+
+						</td>
+						</tr>
+						</table>
+					</div>
+					<div id="profile-songs" class="profile">
+						SONGS
+					</div>
+					<div id="profile-media" class="profile">
+						MEDIA
+					</div>					
+					<div id="profile-inbox" class="profile">
+              MAILBOX
+					</div>
+				</div>
+				
+				
+			
+		</div>
+	</div>
+	<!-- END LEFTCOL -->	
+
+	<!-- RIGHTCOL -->	
+	<div class="rightCol fright">
+	
+    <%= render :partial => 'shared/did_you_know' %>
+
+	</div>
+	<!-- END RIGHTCOL -->	
+	
+	<div class="clear"> </div>
+
+  <% content_for :footer do %>
+    <%= render :partial => 'songs/footer' %>
+  <% end %>

@@ -13,13 +13,17 @@
   <%= jquery_stylesheet_tags %>
 
   <script type="text/javascript" src="javascripts/jquery.corner.js"></script>
-
+  <script type="text/javascript" src="javascripts/jquery.simpleautogrow.js"></script>  
   <script type="text/javascript" src="javascripts/jquery.MetaData.js"></script>
   <script type="text/javascript" src="javascripts/jquery.rating.pack.js"></script>
   <link rel="stylesheet" type="text/css" href="stylesheets/jquery.rating.css" />
   
   <script type="text/javascript" src="javascripts/jquery.dataTables.min.js"></script>  
   <link rel="stylesheet" type="text/css" href="stylesheets/dataTables.css" />    
+
+  <script type="text/javascript" src="javascripts/jquery.Jcrop.pack.js"></script>  
+  <link rel="stylesheet" type="text/css" href="stylesheets/jquery.Jcrop.css" />    
+
 
   <%= javascript_include_tag *%w( application home ) %>
 
@@ -44,7 +48,6 @@
 	<ul class="login fright">
 		<li><a href="#join" id="create-user" class="join_button">JOIN NOW</a></li>
 		<li>or connect with <a href="" class="facebook">Facebook</a></li>
-		<li><div class="divider"> </div></li>
 		<li><a href="profile.php" class="login_button">LOGIN</a></li>
 	</ul>
   <div class="clear"> </div>
