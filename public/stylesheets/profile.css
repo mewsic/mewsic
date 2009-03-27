@@ -29,7 +29,7 @@
 	border-bottom: 1px solid #D4D4D4;
 }
 .status_container { margin-left: -13px; }
-.status_container .blurp_sidebar { margin-top: 7px; }
+.status_container .blurp_status { margin-top: 7px; }
 
 
 /* STATUS FORM */
@@ -63,8 +63,8 @@
 
 /* user blurp balloon sprites */
 .blurp_status, .blurp_sidebar { width: 10px; height: 16px; }
-.blurp_status { background: url('../images/icons/profile/users_balloon_sprites.png') no-repeat top; }
-.blurp_sidebar { background: url('../images/icons/profile/users_balloon_sprites.png') no-repeat bottom; }
+.blurp_status { background: url('../images/icons/profile/users_balloon_sprites.png') no-repeat bottom; }
+.blurp_sidebar { background: url('../images/icons/profile/users_balloon_sprites.png') no-repeat top; }
 .blurp_author { width: 15px; height: 10px; background: url('../images/icons/profile/author_balloon_sprite.png') no-repeat bottom; }
 
 
@@ -84,6 +84,7 @@
 	font-size: 13px !important;
 }
 .wall_avatars { padding: 1px 5px 0 0; width: 44px; height: 44px; }
+.wall_heading { margin-bottom: 15px; border-bottom: 1px solid #CCCCCC; width: 434px; }
 
 .wall_post { 
 	padding: 1px 7px; 

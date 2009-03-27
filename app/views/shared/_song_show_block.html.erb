@@ -1,0 +1,43 @@
+<div class="song_block song_expanded fleft">
+	<div class="avatar fleft">
+		<img src="/images/temp/avatar_ndstr.jpg" width="40" height="40" />					
+	</div>
+	<div class="tracks_count fleft">
+		<h3><%= rand(23) %></h3>
+		Instr.s
+	</div>
+	<div class="song_details fleft">
+		<a href="" class="song_title">Lorem ipsum dolor sit amet</a><br />
+		<a href="" class="song_author"><strong>Gerardo Palla</strong></a><br />
+		<a href="" class="mixable_link">Mixable songs (23)</a>
+	</div>
+
+	<div class="fright" style="margin: 4px 4px 0 0">
+    <%# rating %>
+	</div>
+	<ul class="song_controls">
+		<li><a href="" class="control_add">ADD</a></li>
+		<li><a href="" class="control_mix">MIX</a></li>
+		<li><a href="" class="control_play">PLAY</a></li>
+	</ul>
+</div>
+<div class="tree_conn fright">
+	<p class="block">
+		<span class="profile ui-icon ui-icon-triangle-1-s fleft" style="margin-right:4px;">			
+		</span>		
+		Intrsuments of this song
+	</p>
+  <% 3.times do %>
+      <%= render :partial => 'shared/instruments_tree' %>
+  <% end %>
+</div>
+<div class="tree_conn_last fright">
+<div class="song_block tree_elem mix_invite blue7 fright">
+	<div class="avatar fleft">
+		<img src="/images/temp/avatar_enzo.jpg" width="40" height="40" />					
+	</div>
+	<div class="song_details fleft">
+		<h1 class="sixsixsix">Record your instrument now!</h1>
+	</div>
+</div>
+</div>

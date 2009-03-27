@@ -1,8 +1,7 @@
 <!-- WALL has fluid layout :_) -->
 <script type="text/javascript" charset="utf-8">
-/* su firefox sembra non  prenda l'invio O_o */
 $(document).ready(function(){
-  $('#grow').simpleautogrow();
+  $('#grow').simpleautogrow()
 });
 </script>
 
@@ -90,8 +89,8 @@ Questa e' la mia ultima composizione, ascoltala! magari potremmo collaborare per
 			
 			<!-- ATTACH BLOCK -->
 			<div class="attach_list"> 
-				<? include('_song_block.php') ?>
-				<? include('_instrument_block.php') ?>				
+      <%= render :partial => 'shared/song_block' %>
+      <%= render :partial => 'shared/instrument_block' %>
 			</div>
 			<!-- end attach -->
 		</div>
@@ -122,3 +121,51 @@ Altro che le merdate che fai di solito.Sed sagittis. Aenean tristique, enim id p
 		</div>
 
 	<span class="posted_date block ten">March 21, 2009</span>
+	
+  	<div class="posted_comment">
+  		<div class="post_delete fright"> </div>
+  		<a href="" class="wall_avatars avatar fleft">
+  			<img src="/images/temp/avatar_fabio.jpg" class=" border" width="40" height="40" />					
+  		</a>
+  		<div class="message">
+  			<span class="gray_sprite fleft"> </span>
+  			<!-- class blue7 for comment with attachment -->
+  			<div class="post_balloon blue7">
+  				<span class="sixsixsix">at 3:14PM
+  				<a href="" class="song_author weight-bold">Fabio Grande</a> said:</span> 
+  Questa e' la mia ultima composizione, ascoltala! magari potremmo collaborare per evolverla, che ne dici ?&nbsp;<a href="" class="none">Reply</a>
+  			</div>
+
+  			<!-- ATTACH BLOCK -->
+  			<div class="attach_list"> 
+        <%= render :partial => 'shared/song_block' %>
+        <%= render :partial => 'shared/instrument_block' %>
+  			</div>
+  			<!-- end attach -->
+  		</div>
+  	</div>
+
+
+  		<!-- RP -->
+  		<div class="posted_comment day_last">
+  			<div class="post_delete fright"> </div>
+  			<a href="" class="wall_avatars avatar fleft">
+  				<img src="/images/temp/avatar_enzo.jpg" class=" border" width="40" height="40" />					
+  			</a>
+  			<div class="message">
+  				<span class="gray_sprite fleft"> </span>
+  				<!-- class blue7 for comment with attachment -->
+  				<div class="post_balloon blue7">
+  					<span class="sixsixsix">at 3:14PM
+  					<a href="" class="song_author weight-bold">Enzo's Untouchable Quintet</a> said:</span> 
+  Altro che le merdate che fai di solito.Sed sagittis. Aenean tristique, enim id placerat volutpat, tortor dui accumsan felis, sodales aliquam sem enim sit amet tellus. Donec vel nibh sed sapiensim pellentesque. Integer vel quam ut purus eleifenesque&nbsp;<a href="" class="none">Reply</a>
+  				</div>
+
+  				<!-- ATTACH BLOCK -->
+  				<div class="attach_list"> 
+  					<? include('_instrument_block.php') ?>				
+  				</div>
+  				<!-- end attach -->
+  			</div>
+  		</div>
+	
