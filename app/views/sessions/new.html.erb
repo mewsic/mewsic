@@ -1,0 +1,9 @@
+<h1>Log in</h1>
+
+<% form_tag sessions_path, :method => :post do %>
+  login: <%= text_field_tag :login %><br/>
+  passwd: <%= text_field_tag :password %><br/>
+  remember: <%= check_box_tag 'remember_me', '1', true %><br/>
+
+  <%= submit_tag 'diocane' %>
+<% end %>
