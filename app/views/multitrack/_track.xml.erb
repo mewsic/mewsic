@@ -4,7 +4,7 @@
   <title><%= h(track.title) %></title>     
   <author><%= h(track.author) %></author>
   <tags><%= h(track.tag_list.join(',')) %></tags>
-  <instrument><%= track.instrument.id %></instrument>  
+  <instrument><%= track.instrument ? track.instrument.id : 0 %></instrument>  
   <rating><%= track.rating_avg.to_f %></rating>     
   <filename><%= track.public_filename %></filename>
   <waveform><%= formatted_track_path track, 'png' %></waveform>

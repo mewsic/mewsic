@@ -15,6 +15,8 @@
 class MultitrackController < ApplicationController  
   
   before_filter :login_required, :only => :edit
+  before_filter :updateable_mixable_required, :only => [:update_song, :update_track]
+  # before_filter :localhost_required, :only => [:update_song, :update_track]
 
   protect_from_forgery :except => [:authorize, :update_song] # Called only locally
 
@@ -31,7 +33,7 @@ class MultitrackController < ApplicationController
       current_user.enter_multitrack!
       @song = current_user.songs.create_temporary!
     else
-      flash.now[:notice] = %(You are not logged in. Saving will be disabled, please <a href="/login">log in</a> or <a href="/signup">sign up</a> if you want to save your work!)
+      flash.now[:notice] = %(You are not logged in. Save and record will be disabled, please <a href="/login">log in</a> or <a href="/signup">sign up</a> if you want to save your work!)
       store_location
       @song = Song.new
     end
@@ -46,10 +48,9 @@ class MultitrackController < ApplicationController
   def edit
     @song = Song.find(params[:id])
     if @song.private? && @song.editable_by?(current_user)
-      @edit = true # XXX remove me, if possible
       render :action => 'index'
     elsif @song.public?
-      @remix = @song.create_remix
+      @remix = @song.create_remix_by(current_user)
       redirect_to multitrack_edit_path(@remix)
     else
       redirect_to '/'
@@ -104,25 +105,41 @@ class MultitrackController < ApplicationController
   # song is completed, in order to not make the user wait for it, after hitting "save
   # & close" in the editor.
   #
-  # This action URI should never be made public.
+  # All the logic is inside the +updateable_mixable_required+ filter. DRY!
   #
   def update_song
-    unless params[:user_id] && params[:filename] && params[:length]
-      head :bad_request and return
-    end
-    user = User.find(params[:user_id]) 
-    song = user.songs.private.find(params[:song_id]) # XXX FIXME .private is wrong
-    song.filename = params[:filename]
-    song.seconds = params[:length]
-    song.save!
-
     head :ok
-
-  rescue ActiveRecord::RecordNotFound
-    head :not_found
-
-  rescue ActiveRecord::ActiveRecordError
-    head :bad_request
   end
+
+  def update_track
+    head :ok
+  end
+
+  private
+    def updateable_mixable_required
+      unless params[:user_id] && params[:filename] && params[:length]
+        head :bad_request and return
+      end
+
+      @user = User.find params[:user_id]
+      @mixable =
+        if params[:song_id]
+          @user.songs.find params[:song_id]
+        elsif params[:track_id]
+          @user.tracks.find params[:track_id]
+        end
+
+      head :bad_request and return unless @mixable
+
+      @mixable.filename = params[:filename]
+      @mixable.seconds = params[:length]
+      @mixable.save!
+
+    rescue ActiveRecord::RecordNotFound
+      head :not_found
+
+    rescue ActiveRecord::ActiveRecordError
+      head :forbidden
+    end
 
 end

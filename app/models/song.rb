@@ -141,7 +141,9 @@ class Song < ActiveRecord::Base
   def accessible_by?(user)
     if self.status == :private
       self.user == user || self.featurings.map(&:user).include?(user)
-    elsif status == :public || status == :temporary
+    elsif status == :temporary
+      self.user == user
+    elsif status == :public
       true
     end
   end
@@ -261,9 +263,10 @@ class Song < ActiveRecord::Base
     self.user.rateable_by?(user)
   end
 
-  def create_remix
+  def create_remix_by(user)
     remix = self.clone
     remix.tracks = self.tracks
+    remix.user = user
     remix.status = :private
     remix.save!
     remix.move_to_child_of self

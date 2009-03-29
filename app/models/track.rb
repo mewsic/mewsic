@@ -43,16 +43,16 @@ class Track < ActiveRecord::Base
 
   validates_associated :user
   validates_numericality_of :user_id, :greater_than => 0
-  validates_numericality_of :seconds, :greater_than => 0
+  validates_numericality_of :seconds, :greater_than => 0,       :if => :published?
 
   validates_presence_of :title,                                 :if => :public?
   validates_numericality_of :instrument_id, :greater_than => 0, :if => :public?
   validates_associated :instrument,                             :if => :public?
 
-  validates_each :filename do |model, attr, value|
-    filename = model.absolute_filename :stream
+  validates_each :filename, :if => :published? do |track, attr, value|
+    filename = track.absolute_filename :stream
     unless filename && File.file?(filename)
-      model.errors.add(attr, "not found in media path (#{filename})")
+      track.errors.add(attr, "not found in media path (#{filename})")
     end
   end
 
@@ -64,7 +64,7 @@ class Track < ActiveRecord::Base
   
   has_playable_stream
 
-  has_multiple_statuses :public => 1, :private => 2, :deleted => -1
+  has_multiple_statuses :public => 1, :private => 2, :deleted => -1, :temporary => -2
 
   # Track statuses
   named_scope :public, :conditions => {:status => statuses.public}
@@ -79,6 +79,10 @@ class Track < ActiveRecord::Base
     #set_property :delta => true
   end
 
+  def published?
+    [:public, :private].include?(self.status)
+  end
+
   # A private track is accessible by its owner, or if a song is specified and the given
   # user is a collaborator of it.
   # Public tracks are accessible by everyone.
@@ -86,6 +90,8 @@ class Track < ActiveRecord::Base
   def accessible_by?(user, song = nil)
     if self.status == :private
       (song && song.private? && song.tracks.include?(self)) ? song.accessible_by?(user) : (self.user == user)
+    elsif status == :temporary
+      self.user == user
     elsif self.status == :public
       true
     end
@@ -94,6 +100,10 @@ class Track < ActiveRecord::Base
   # Tracks are editable only by its owners
   def editable_by?(user)
     self.user == user
+  end
+
+  def self.create_temporary!
+    self.create! :status => statuses.temporary
   end
 
   # Finds most collaborated tracks and sets a virtual <tt>song_count</tt> attribute that yields

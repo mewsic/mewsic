@@ -80,6 +80,7 @@ ActionController::Routing::Routes.draw do |map|
   map.multitrack_refresh '/multitrack/refresh/:id', :controller => 'multitrack', :action => 'refresh'
   map.multitrack_auth    '/multitrack/_/:user_id',  :controller => 'multitrack', :action => 'authorize'
   map.multitrack_song    '/multitrack/s/:user_id',  :controller => 'multitrack', :action => 'update_song'
+  map.multitrack_track   '/multitrack/t/:user_id',  :controller => 'multitrack', :action => 'update_track'
 
   # XML output - Podcasts, RSS, Sitemap
   #
