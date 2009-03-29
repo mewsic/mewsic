@@ -26,11 +26,11 @@
 .item_count:hover, .footer_name_link:hover,
 .expl_links li a:hover, #expl_hide:hover,
 .mband_count:hover, .mband_more:hover, .mband_more_tag a:hover, .mband_name:hover,
-.shadow_big a:hover, .mband_browse span:hover {
+.shadow_big a:hover, .mband_browse span:hover, .song_show p a:hover {
 	text-decoration: underline;
 }
 
-
+.white,
 .join_button, .login_button,
 #bottom_footer li a:link, #bottom_footer li,
 #top_footer h2, .footer_copy,
@@ -70,18 +70,20 @@
 .pick_page_anchors .song { color: #C0E8FF; }
 .pick_page_anchors .song:hover { color: #FFFFFF; border-bottom: 0; }
 
-.item_count, .mband_count, .mband_more, .mband_browse {
+.item_count, .mband_count, .mband_more, .mband_browse, .more {
 	color: #0071BC;
 }
 
-.gray_spec, .footer_right_content .lastfm_lists {
-	color: #999999;
-}
+.gray_spec, .footer_right_content .lastfm_lists,
+label { color: #999999; }
+
+.sixsixsix { color: #666666; }
+
+.video_thumb .gray_spec:hover { color: #CCCCCC }
 
 .control_add { background-color: #999999; }
 .control_mix { background-color: #FF5600; }
 .control_play { background-color: #00AC00; }
-
 
 h2, .rightCol h2, .mband_name, .subtitle {
 	color: #064970;
@@ -116,7 +118,8 @@ h2, .rightCol h2, .mband_name, .subtitle {
 	color: #C0D4E8;
 }
 
-#bottom_footer, .mband_pick_footer .snip, .mband_more_tag a {
+#bottom_footer, .mband_pick_footer .snip, .mband_more_tag a, .song_pick_footer .snip,
+.answer_pick_footer .snip {
 	background-color: #001E35;
 }
 .bottom_footer_grad {
@@ -130,7 +133,8 @@ h2, .rightCol h2, .mband_name, .subtitle {
 	background-color: #D4D4D4;
 }
 
-.pick_wrap h1, #playlist_container h2 {
+.pick_wrap h1, #playlist_container h2, 
+.song_show h3, .song_show p a, .author_info h2, .heading_blue {
 	color: #0A385D;
 }
 
@@ -156,6 +160,7 @@ h2, .rightCol h2, .mband_name, .subtitle {
 .you_know span {
 	color: #282828;
 }
+
 .you_know span a:link, .you_know a:visited {
 	color: #5794C6;
 }
@@ -167,3 +172,17 @@ h2, .rightCol h2, .mband_name, .subtitle {
 .shadow_big a, #instr_list_box .instr_type li a:hover {
 	color: #ADD9FF;
 }
+
+.cat_title, .keyword_lists a:hover {
+	color: #014D70;
+}
+
+.answer_pick_footer .snip p {
+	color: #B2D4E2;
+}
+
+.gray5 { background-color: #F2F2F2; }
+.blue7 { background-color: #EDF5F8; }
+
+.sidebar_balloon { background-color: #FFFF9F; }
+.status_balloon { background-color: #FFFFC7; }

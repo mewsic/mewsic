@@ -1,0 +1,310 @@
+/* PROFILE PAGE 
+   Upper part show */
+
+.profile_upshow {
+	overflow: hidden;
+	margin-bottom: 20px;
+}
+
+.avatar_change { 
+	padding: 2px 4px; 
+	background-color: #00B3D7;
+	color: #FFFFFF;
+	position: absolute;
+}
+.avatar_change:hover {
+	text-decoration: none;
+	background-color: #2691BD;
+}
+#user_avatar {
+	width:200px;
+	height:200px;
+	background: #D4D4D4 url("../images/temp/profile_main_thumb.jpg") no-repeat;
+}
+.user_name { margin: 8px 0 12px 27px; }
+
+.user_status { 
+	width: 300px;
+	padding: 12px 19px 10px 18px;
+	border-bottom: 1px solid #D4D4D4;
+}
+.status_container { margin-left: -13px; }
+.status_container .blurp_status { margin-top: 7px; }
+
+
+/* STATUS FORM */
+.status_input {
+	border: 0;
+	margin: 0 5px 0 0;
+	height: 15px;
+	width: 210px;
+	font-size: 12px;
+	font-weight: bold;
+	color: #696969;
+	padding: 5px 9px;
+	border: 1px solid #CCC;
+}
+
+.status_submit {
+	border: 0;
+	font-size: 13px;
+	font-weight: bold;
+	cursor: pointer;
+	height: 26px;
+	color: #FFFFFF;
+	background: url('../images/go_bg.png') repeat-x left top;
+	padding: 0 7px;
+}
+
+
+.invisible { display: none; }
+.visible { display: visible; }
+
+
+/* user blurp balloon sprites */
+.blurp_status, .blurp_sidebar { width: 10px; height: 16px; }
+.blurp_status { background: url('../images/icons/profile/users_balloon_sprites.png') no-repeat bottom; }
+.blurp_sidebar { background: url('../images/icons/profile/users_balloon_sprites.png') no-repeat top; }
+.blurp_author { width: 15px; height: 10px; background: url('../images/icons/profile/author_balloon_sprite.png') no-repeat bottom; }
+
+
+
+/* WALL */
+.upper_part { 
+	width: 434px;
+	overflow: hidden; 
+}
+.wall_box { 
+	width: 375px;
+	height: 13px;
+	display: inline !important;
+	position: relative !important;
+	border: 1px solid #CCCCCC;
+	padding: 4px;
+	font-size: 13px !important;
+}
+.wall_avatars { padding: 1px 5px 0 0; width: 44px; height: 44px; }
+.wall_heading { margin-bottom: 15px; border-bottom: 1px solid #CCCCCC; width: 434px; }
+
+.wall_post { 
+	padding: 1px 7px; 
+	color: #ffffff; 
+	font-family: Helvetica;
+	margin-top: -13px;
+	cursor: pointer;
+}
+.wall_post { background: url('../images/go_bg.png') repeat-x top; }
+.wall_post:hover { background: url('../images/go_bg.png') repeat-x bottom; }
+
+/* share links wall */
+.share_links_wall { 
+	margin: -5px 0 0 49px !important;
+	position: absolute left;
+}
+.share_links_wall li {
+	margin: 0px;
+	display: inline;
+	margin-left: 4px;
+	height: 16px;
+}
+/* icons */
+.share_links_wall .share_song_icon { background: url('../images/icons/music.png') no-repeat left; }
+.share_links_wall .share_picture_icon { background: url('../images/icons/picture.png') no-repeat left; }
+.share_links_wall .share_video_icon { background: url('../images/icons/television.png') no-repeat left; }
+.share_links_wall li a { padding-left: 21px; }
+
+
+/* wall posts */
+.posted_date {
+	border-top: 1px solid #CCCCCC;
+	color: #8B9298;
+	margin-top: 10px;
+	padding-top: 2px;
+}
+
+.message { margin: 0 20px 0 49px; }
+.posted_comment {
+	margin: 6px 0 10px 0;
+	overflow: hidden;
+	padding-bottom: 10px;
+	border-bottom: 1px dashed #D6D6D6;
+}
+.post_balloon {
+	width: 90%;
+	min-height: 12px;
+	border-bottom: 1px solid #D5D5D5;
+	padding: 7px 12px;
+	margin-left: 14px;
+	color: #333333;
+}
+.gray_sprite, .blue_sprite {
+	width: 14px;
+	height: 15px;
+	margin-top: 5px;
+}
+.gray_sprite { background: url('../images/balloon_gray_sprite.gif') no-repeat top; }
+.blue_sprite { background: url('../images/balloon_blue_sprite.gif') no-repeat top; }
+
+.post_delete {
+	width: 13px;
+	height: 13px;
+	background: url('../images/icons/bullet_remove.gif') no-repeat top;
+	cursor: pointer;
+}
+.day_last { border-bottom: none; }
+
+.attach_list {
+	overflow: hidden;
+	background: url('../images/icons/attach.png') no-repeat top left;
+	width: 371px;
+	padding-left: 17px;
+	margin-left: -3px;
+}
+
+
+/* profile lists */
+#profile_tabs .extended_wall li, .user_actions { 
+	margin: 0 0 10px 5px;
+	list-style: none;	
+	overflow: hidden;
+}
+.user_actions { 
+	width: 130px;
+	margin-top: 25px;
+}
+.user_actions li {
+	display: block;
+	padding: 2px 0 0 23px;
+	margin-bottom: 5px;
+	height: 18px;
+}
+.action_notice { 
+	padding: 2px 10px; 
+	font-weight: normal;
+	margin-top: 15px;
+	line-height: 16px;
+}
+
+
+#profile_tabs .extended_wall li a { padding: 0 !important; }
+.extended_wall {
+	list-style: none;
+	overflow: hidden;
+	width: 208px;
+	margin-top: 22px;
+}
+.extended_wall h2 { margin-bottom: 2px; }
+.extended_wall span { padding-left: 21px; }
+.extended_wall p { margin-top: 0; padding-bottom: 8px; border-bottom: 1px dotted #999999; }
+
+
+/* Users Tabs */
+.profile .ui-tabs-nav li a {
+	padding: .4em 1.5em !important;
+}
+.force_right { float: right !important; }
+
+
+/* MAILBOX 
+   Unread Message Count Badge */
+
+.mailbox_unread {
+background-image:url('../images/mailbox_unread.png');
+display:inline-block;
+color: #FFFFFF;
+line-height: 15px;
+font-size: 11px !important;
+margin-top: -15px;
+}
+.mailbox_unread span {
+background-image:url('../images/mailbox_unread.png');
+display:inline-block;
+}
+
+.mailbox_unread .tl {
+background-position:left top;
+}
+.mailbox_unread .tr {
+background-position:right top;
+}
+.mailbox_unread .br {
+background-position:right bottom;
+}
+.mailbox_unread .bl {
+background-position:left bottom;
+padding:0 6px 1px;
+}
+
+
+/* dataTables Custom */
+#mailbox_wrapper {
+	clear: none;
+}
+#mailbox_wrapper a {
+	color: #064970;
+	text-decoration: none;
+}
+#mailbox_filter input {
+	width: 193px;
+	padding: 4px 4px 4px 23px;
+	margin: 0;
+	border: 1px solid #999999;
+	background: #FFFFFF url('../images/icons/input_search.gif') no-repeat left;
+}
+
+#mailbox_wrapper .dataTables_filter {
+	width: 222px !important;
+}
+
+#mailbox_processing {
+	position: relative;
+	margin-left: 0;
+	left: 0;
+}
+
+#mailbox  thead th {
+	border-bottom: 1px solid #CCCCCC;
+}
+
+/* Mail Content */
+#mail_content {
+	width: 511px;
+}
+.inbox_avatar { padding-right: 5px; }
+
+
+
+
+
+
+/* Accounts Icons */
+.inbox_accounts { 
+	list-style: none;  
+	width: 164px;
+	margin: 18px 16px 0 0;
+}
+.inbox_accounts li { cursor: pointer; }
+.inbox_accounts li:hover { color: #0296C2; }
+.inbox_accounts li {
+	display: block;
+	padding: 5px 0 5px 23px;
+}
+.inbox_accounts .seclevel { 
+	padding: 2px 0 2px 35px;
+}
+
+
+.newmail_icon { border-bottom: 1px solid #CCCCCC; background: url('../images/icons/mailbox/email_add.png') no-repeat center left; }
+.inbox_icon, .share_icon { margin-top: 10px; background: url('../images/icons/mailbox/email.png') no-repeat center left; }
+.collab_icon { background: url('../images/icons/mailbox/arrow_in.png') no-repeat center left; }
+.freq_icon { background: url('../images/icons/mailbox/group.png') no-repeat center left; }
+.mbands_icon { background: url('../images/icons/mband_big.png') no-repeat center left; }
+.admire_icon { background: url('../images/icons/heart.png') no-repeat center left;}
+.sendmessage_icon { background: url('../images/icons/mailbox/email_go.png') no-repeat center left;}
+.podcast_icon { background: url('../images/icons/podcast.png') no-repeat center left;}
+.tag_add_icon { background: url('../images/icons/tag_add.png') no-repeat center left; }
+.download_icon { background: url('../images/icons/disk.png') no-repeat center left; }
+
+
+
+

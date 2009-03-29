@@ -1,0 +1,93 @@
+<div class="pick_wrap">
+	<!-- SONG BLOCK -->
+	<div class="w343 fleft">			
+		<p class="pick_info block">
+			<strong>FRANK ZAPPA</strong>				
+		</p>
+		<p class="pick_info secline block">
+			<strong>TENGO NA MINCHIA TANTA</strong>
+		</p>
+		
+		<p class="tag_genre body12">
+			<a href="">Rock,</a><a href="">Alternative</a><a href="">Acid Jazz/Fusion,</a>  <a href="">Acoustic,</a>   <a href="">Ambient Folk,</a> <a href="">Revival</a> 
+		</p>
+
+		<p class="song_interview body12">
+			<strong>Lorem ipsum dolor sit amet,</strong><br />
+			consectetur adipiscing elit. <a href="">Maecenas</a> nunc pede, facilisis feugiat, posuere a, tempus in, urna. Curabitur sapien. Aliquam elementum mauris. Aenean porttito nec massa mattis rutrum. Maecenas pharetra mi in nunc. Nuarcu sit amet lectus Aliquam
+		</p>												
+
+			<h2 style="margin-bottom: 7px">Most popular cover of this song on Mewsic</h2>
+      <% 3.times do %>
+          <%= render :partial => 'shared/song_block' %>
+      <% end %>
+			<a href="" class="mband_more fright">
+				Listen more version (126)
+			</a>
+	</div>
+	<!-- END SONG BLOCK -->
+
+
+	<div class="w343 fright">
+		<div class="fleft">
+			<a href="" class="song_ad block fleft" title="Frank Zappa" style="background-image: url('images/temp/pick_song.jpg');">
+				<span class="today_badge block"> </span>
+				<span class="video_play_badge block"> </span>
+			</a>
+		</div>
+
+		<!-- VIDEO BOXES -->
+		<div class="video_thumb fleft">
+			<span class="still_play"> </span>
+			<img src="images/temp/video_still.jpg" />
+			<span class="gray_spec"><strong>Gerardo Palla</strong><br />
+			Lorem ipsum do...</span>
+		</div>
+		<div class="video_thumb fleft">
+			<span class="still_play"> </span>
+			<img src="images/temp/video_still.jpg" />
+			<span class="gray_spec"><strong>Gino il Pazzo</strong><br />
+			Playing Bananos</span>
+		</div>
+		<div class="video_thumb fleft">
+			<span class="still_play"> </span>
+			<img src="images/temp/video_still.jpg" />
+			<span class="gray_spec"><strong>Gerardo Palla</strong><br />
+			Lorem ipsum do...</span>
+		</div>
+		<!-- END VIDEO BOXES -->
+
+
+		<!-- PICKED RELATED -->
+		<ul class="related_list alright fleft">
+			<h2>Users playing this artist</h2>
+			<li class="user_thumb">
+				<img src="images/thumb_loader_white.gif" width="39" height="39" />
+			</li>
+			<li class="user_thumb">
+				<img src="images/thumb_loader_white.gif" width="39" height="39" />
+			</li>
+			<li class="user_thumb">
+				<img src="images/thumb_loader_white.gif" width="39" height="39" />
+				<img src="images/user_thumb.jpg" width="40" height="40" class="loaded" />
+			</li>
+			<li class="user_thumb">
+				<img src="images/thumb_loader_white.gif" width="39" height="39" />
+				<img src="images/user_thumb.jpg" width="40" height="40" class="loaded" />
+			</li>
+			<li class="user_thumb">
+				<img src="images/thumb_loader_white.gif" width="39" height="39" />
+				<img src="images/user_thumb.jpg" width="40" height="40" class="loaded" />
+			</li>
+		<a class="item_count block" href="">(109)</a>			
+		</ul>
+
+
+	</div>
+
+	<div class="bottom_tools fleft">
+      <%= render :partial => 'shared/bullet_paging' %>
+	</div>
+		
+</div>
+<div class="clear"> </div>

@@ -66,9 +66,11 @@
   <ul class="footer_right_content fright">
     <h2>Last Songs</h2>
     <span class="subtitle block">Lorem ipsum dolor</span>
-    <div class=".w440">
+    <div class="w440">
       <% 3.times do %>
-        <li class="border_list"><%= render :partial => 'shared/song_block' %></li>
+        <li class='border_list'>
+          <%= render :partial => 'shared/song_block' %>
+        </li>
       <% end %>
     </div>
   </ul>

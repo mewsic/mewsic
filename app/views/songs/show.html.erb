@@ -1,0 +1,112 @@
+<!-- CONTENT -->
+<div id="content">
+
+	<!-- LEFTCOL -->
+	<div class="leftCol leftColMin fleft">
+		<div class="leftColWrapper">
+
+			<!-- EXPL BANNER -->
+
+			<!-- END EXPL BANNER -->
+
+			<div class="song_show fleft">
+				<h3 class="heading_21">&ldquo;&nbsp;Tretonsidosh Nereshtenz&nbsp;&bdquo;</h3>
+				<p class="authors gray_spec body12">
+					by <a href="">NDSTR</a> feat. <a href="">Reginald</a>
+				</p>
+				<div class="song_actions round7">
+					<ul class="actions weight-bold">
+						<li class="share_icon"><a href="" class="none">Share</a></li>
+						<li class="download_icon"><a href="" class="none">Download</a></li>						
+						<li class="tag_add_icon last"><a href="" class="none">Add Tags</a></li>						
+					</ul>
+				</div>
+			</div>
+
+
+			<div class="author_info fright">
+				<div class="block">
+					<h2 class="lucida">NDSTR</h2>
+					<a href="" class="wall_avatars fleft">
+						<img src="/images/temp/avatar_ndstr.jpg" class=" border" width="40" />					
+					</a>
+					<a href="" class="none heading_blue block" style="margin:11px 0 4px 0">
+						(22) Published Songs</a>
+					<a href="" class="none podcast_icon weight-bold">Subscribe to Podcast</a>
+				</div>
+				<div class="balloon">
+					<span class="blurp_author block"> </span>
+					<div class="status_show">
+						Ho parcheggiato in doppia fila, con il cazzo che mi tira
+					</div>
+				</div>
+			</div>
+			
+      <%= render :partial => 'shared/song_show_block' %>
+      
+			<div class="clear"> </div>
+			<div class="stats_list round7">
+				<ul class="stats subtitle">
+					<li class="stats_icon">Stats:</li>
+					<li>Listened <strong>4</strong></li>						
+					<li>Votes <strong>8</strong></li>						
+					<li>Comments <strong>15</strong></li>						
+					<li class="last">Downloaded <strong>16</strong></li>
+				</ul>
+			</div>
+			
+
+			<h2 class="wall_heading">Wall of this song</h2>
+			
+      <%= render :partial => 'shared/wall' %>
+
+		</div>
+	</div>
+	<!-- END LEFTCOL -->	
+
+	<!-- RIGHTCOL -->	
+	<div class="rightCol rightColMax fright">
+
+		<h2 class="nomargin">Tags</h2>
+		<p class="subtitle nomargin">
+			for <strong>Tretonsidosh Nereshtenz</strong>
+		</p>
+		<br />
+		
+		<p class="tag_genre">
+			<a href="">Acid Jazz/Fusion,</a>  <a href="">Acoustic,</a>  <a href="">Alternative 	Rock,</a>  <a href="">Ambient,</a>  <a href="">Blues,</a>  
+			<a href="">British Pop,</a>  <a href="">Classic Rock,</a>  <a href="">Country,</a>  <a href="">Country Rock,</a>  <a href="">Crossover,</a>  <a href="">Dance,</a>  
+			<a href="">Disco,</a>  <a href="">Drum & Bass,</a>  <a href="">EBM,</a>  <a 	href="">Electro-Rock,</a>  <a href="">Electronic,</a>  <a href="">Folk Rock,</a>  <a href="">Funk</a><a href="">Acid Jazz/Fusion,</a>  <a href="">Acoustic,</a>  <a href="">Alternative 	Rock,</a>  <a href="">Ambient,</a>  <a href="">Blues</a>
+		</p>
+		<ul class="actions weight-bold" style="margin-bottom: 4px;">
+			<li class="tag_add_icon last">
+				<a href="" class="none">Add tags for this song</a>
+			</li>						
+		</ul>
+		<span class="gray_spec block" style="margin-left: 19px;">
+			tag songs helps you searching<br /> what you're looking for
+		</span> 
+		
+		<span class="divider block"> </span>	
+
+
+      <%= render :partial => 'songs/mixable' %>
+			<span class="divider block"> </span>
+
+      <%= render :partial => 'shared/video_sidebar_max' %>
+			<span class="divider block"> </span>
+
+      <%= render :partial => 'users/sidebar_status' %>
+			<span class="divider block"> </span>
+			
+      <%= render :partial => 'shared/did_you_know' %>
+
+	</div>
+	<!-- END RIGHTCOL -->	
+	
+	<div class="clear"> </div>
+
+  <% content_for :footer do %>
+    <%= render :partial => 'songs/footer' %>
+  <% end %>
+	

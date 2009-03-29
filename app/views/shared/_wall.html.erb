@@ -1,0 +1,171 @@
+<!-- WALL has fluid layout :_) -->
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function(){
+  $('#grow').simpleautogrow()
+});
+</script>
+
+	<!-- POST TO WALL FORM -->
+	<div class="upper_part">
+		<a href="" class="wall_avatars fleft">
+			<img src="/images/temp/avatar_ndstr.jpg" class=" border" width="40" />					
+		</a>
+		<span class="subtitle fleft">Write or share something on <strong>Pinca Palla</strong>'s 	wall</span>
+		<form class="">
+			<textarea id="grow" class="wall_box"> </textarea>
+			<ul class="share_links_wall">	
+				<li class="weight-bold">Share:</li>
+				<li class="share_song_icon">
+					<a href="#share_song" id="share_song_link" class="none">Songs</a>
+				</li>
+				<li class="share_picture_icon">
+					<a href="#share_media" id="share_picture_link" class="none">Picture</a>
+				</li>
+				<li class="share_video_icon">
+					<a href="#share_media" id="share_video_link" class="none">Video</a>
+				</li>
+			</ul>
+			<input type="submit" class="wall_post fright" value="Share">
+		</form>
+		<!-- END FORM -->
+	</div>
+		<div class="clear"> </div>
+	
+	
+	<!-- BEGIN OF POSTED ITEMS -->
+	<span class="posted_date block ten">Today</span>
+
+	<!-- posted comment block -->
+	<div class="posted_comment">
+		<div class="post_delete fright"> </div>
+		<a href="" class="wall_avatars avatar fleft">
+			<img src="/images/temp/avatar_alvarez.jpg" class=" border" width="40" height="40" />					
+		</a>
+		<div class="message">
+			<span class="gray_sprite fleft"> </span>
+			<div class="post_balloon gray5">
+				<span class="sixsixsix">5 mins ago
+				<a href="" class="song_author weight-bold">Alvarez de la Fonzeca</a> said:</span> 
+				Ciao, sei davvero una bella figa !&nbsp;<a href="" class="none">Reply</a>
+			</div>
+		</div>
+	</div>
+	<!-- end posted comment block -->
+
+
+	<!-- class day_last to remove border bottom -->
+	<div class="posted_comment day_last">
+		<div class="post_delete fright"> </div>
+		<a href="" class="wall_avatars avatar fleft">
+
+		</a>
+		<div class="message">
+			<span class="gray_sprite fleft"> </span>
+			<div class="post_balloon gray5">
+				<span class="sixsixsix">1 hour ago
+				<a href="" class="song_author weight-bold">Reginald</a> said:</span> 
+				Mi domando e mi rispondo facendo una elucubrazione sulla tua eiaculazione, la risposta sta nel mezzo, come il pezzo tra le gambe che in virtu' e' celata ai piu'.&nbsp;<a href="" class="none">Reply</a>
+			</div>
+		</div>
+	</div>
+
+
+
+	<span class="posted_date block ten">Yesterday</span>
+
+	<div class="posted_comment">
+		<div class="post_delete fright"> </div>
+		<a href="" class="wall_avatars avatar fleft">
+			<img src="/images/temp/avatar_fabio.jpg" class=" border" width="40" height="40" />					
+		</a>
+		<div class="message">
+			<span class="gray_sprite fleft"> </span>
+			<!-- class blue7 for comment with attachment -->
+			<div class="post_balloon blue7">
+				<span class="sixsixsix">at 3:14PM
+				<a href="" class="song_author weight-bold">Fabio Grande</a> said:</span> 
+Questa e' la mia ultima composizione, ascoltala! magari potremmo collaborare per evolverla, che ne dici ?&nbsp;<a href="" class="none">Reply</a>
+			</div>
+			
+			<!-- ATTACH BLOCK -->
+			<div class="attach_list"> 
+      <%= render :partial => 'shared/song_block' %>
+      <%= render :partial => 'shared/instrument_block' %>
+			</div>
+			<!-- end attach -->
+		</div>
+	</div>
+
+
+		<!-- RP -->
+		<div class="posted_comment day_last">
+			<div class="post_delete fright"> </div>
+			<a href="" class="wall_avatars avatar fleft">
+				<img src="/images/temp/avatar_enzo.jpg" class=" border" width="40" height="40" />					
+			</a>
+			<div class="message">
+				<span class="gray_sprite fleft"> </span>
+				<!-- class blue7 for comment with attachment -->
+				<div class="post_balloon blue7">
+					<span class="sixsixsix">at 3:14PM
+					<a href="" class="song_author weight-bold">Enzo's Untouchable Quintet</a> said:</span> 
+Altro che le merdate che fai di solito.Sed sagittis. Aenean tristique, enim id placerat volutpat, tortor dui accumsan felis, sodales aliquam sem enim sit amet tellus. Donec vel nibh sed sapiensim pellentesque. Integer vel quam ut purus eleifenesque&nbsp;<a href="" class="none">Reply</a>
+				</div>
+
+				<!-- ATTACH BLOCK -->
+				<div class="attach_list"> 
+					<? include('_instrument_block.php') ?>				
+				</div>
+				<!-- end attach -->
+			</div>
+		</div>
+
+	<span class="posted_date block ten">March 21, 2009</span>
+	
+  	<div class="posted_comment">
+  		<div class="post_delete fright"> </div>
+  		<a href="" class="wall_avatars avatar fleft">
+  			<img src="/images/temp/avatar_fabio.jpg" class=" border" width="40" height="40" />					
+  		</a>
+  		<div class="message">
+  			<span class="gray_sprite fleft"> </span>
+  			<!-- class blue7 for comment with attachment -->
+  			<div class="post_balloon blue7">
+  				<span class="sixsixsix">at 3:14PM
+  				<a href="" class="song_author weight-bold">Fabio Grande</a> said:</span> 
+  Questa e' la mia ultima composizione, ascoltala! magari potremmo collaborare per evolverla, che ne dici ?&nbsp;<a href="" class="none">Reply</a>
+  			</div>
+
+  			<!-- ATTACH BLOCK -->
+  			<div class="attach_list"> 
+        <%= render :partial => 'shared/song_block' %>
+        <%= render :partial => 'shared/instrument_block' %>
+  			</div>
+  			<!-- end attach -->
+  		</div>
+  	</div>
+
+
+  		<!-- RP -->
+  		<div class="posted_comment day_last">
+  			<div class="post_delete fright"> </div>
+  			<a href="" class="wall_avatars avatar fleft">
+  				<img src="/images/temp/avatar_enzo.jpg" class=" border" width="40" height="40" />					
+  			</a>
+  			<div class="message">
+  				<span class="gray_sprite fleft"> </span>
+  				<!-- class blue7 for comment with attachment -->
+  				<div class="post_balloon blue7">
+  					<span class="sixsixsix">at 3:14PM
+  					<a href="" class="song_author weight-bold">Enzo's Untouchable Quintet</a> said:</span> 
+  Altro che le merdate che fai di solito.Sed sagittis. Aenean tristique, enim id placerat volutpat, tortor dui accumsan felis, sodales aliquam sem enim sit amet tellus. Donec vel nibh sed sapiensim pellentesque. Integer vel quam ut purus eleifenesque&nbsp;<a href="" class="none">Reply</a>
+  				</div>
+
+  				<!-- ATTACH BLOCK -->
+  				<div class="attach_list"> 
+  					<? include('_instrument_block.php') ?>				
+  				</div>
+  				<!-- end attach -->
+  			</div>
+  		</div>
+	

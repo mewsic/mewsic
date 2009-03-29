@@ -32,7 +32,30 @@ img { border: 0px; }
 ul { padding: 0; margin:0; }
 .margin30 { margin-top: 30px }
 .margin7 { margin-top: 7px }
+input { border: 0; font-size: 12px; }
+.border { padding: 1px; border: 1px solid #CCCCCC; display: block; }
+.nomargin { margin: 0 !important; }
 
+
+/* DIALOGS FORMS */
+label, input { display:block; }
+input.text { margin-bottom:12px; width:93%; padding: .4em; border: 1px solid #CCCCCC; 
+font-size: 15px !important;
+font-weight: bold;
+color: #696969;
+padding: 6px 9px;
+ }
+fieldset { padding:0; border:0; margin-top:25px; }
+div#users-contain {  width: 350px; margin: 20px 0; }
+div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+#validateTips { padding: 5px; }
+
+/* DIALOGS borders */
+.dialog_join { border: 7px solid #94BD5E; }
+.change_avatar { border: 7px solid #6F9ABD; }
+.share_song { border: 7px solid #E56F33; }
+.share_media { border: 7px solid  #B4D3E3; }
 
 /* MENU */
 .navigation {
@@ -65,14 +88,13 @@ ul { padding: 0; margin:0; }
 	list-style: none;
 	padding-right: 5px;
 }
-.login .divider {
+.login .spacer {
 	border-right: 1px dotted #CCCCCC;
-	display: inline;
 	margin-left: 6px;
 }
 .login_button {
-		padding: 1px 10px;
-		margin-left: 15px;
+	padding: 1px 10px;
+	margin-left: 15px;
 }
 
 
@@ -161,18 +183,23 @@ ul { padding: 0; margin:0; }
 	overflow: hidden;
 	padding: 13px 10px 10px 16px;
 }
+.leftColMin {
+	width: 850px;
+}
 .rightCol {
 	width: 210px;
 	position: relative;
 	display: inline;
 	padding: 18px 16px;
 }
-
+.rightColMax {
+	width: 330px;
+}
 
 /* PICK OF THE WEEK LAYOUT */
 .pick_wrap {
 	width: 697px;
-	padding: 3px 0 30px 0;
+	padding: 3px 0 15px 0;
 	background: transparent url('../images/pick_head_bg.gif') repeat-x top;
 	overflow: hidden;
 }
@@ -180,6 +207,26 @@ ul { padding: 0; margin:0; }
 	width: 454px;
 	height: 255px;
 }
+
+/* SONG PICK AD */
+.pick_wrap .song_ad {
+	width: 343px;
+	height: 191px;
+}
+.today_badge {
+	width: 100%;
+	height: 43px;
+	background: url('../images/today_badge.png') no-repeat right;
+}
+.video_play_badge {
+	width: 100%;
+	height: 48px;
+	background: url('../images/video_play_badge.png') no-repeat left;
+	margin-top: 100px;
+}
+
+
+
 .pick_info { 
 	margin: 0;
 	position: relative;
@@ -190,6 +237,14 @@ ul { padding: 0; margin:0; }
 	padding: 5px 11px;
 	line-height: 17px;
 }
+.secline {
+	margin: 10px 0 20px 0;
+	font-size: 21px;
+}
+.song_interview { margin: 22px 0 22px 0; }
+
+
+
 .pick_details {
 	margin-left: 10px;
 	width: 233px;
@@ -209,19 +264,51 @@ ul { padding: 0; margin:0; }
 
 /* most player artist related */
 .item_count { margin-top: 4px; }
+
+.rightCol .video_thumb {
+	width: 200px;
+	height: auto;
+	padding: 2px;
+	margin: 2px 3px 0 4px;
+	cursor: pointer;
+	overflow: hidden;
+}
 .video_thumb {
-	width: 110px;
+	width: 103px;
 	height: 90px;
 	padding: 2px;
-	margin-top: 17px;
+	margin: 17px 3px 0 4px;
 	cursor: pointer;	
 }
+.max_sidebar_videos .video_thumb {
+	width: 102px;
+	margin: 0 !important;
+}
+
+
+.bands_new img:hover, .video_thumb img:hover { border: 1px solid #999; }
+.bands_new img, .video_thumb img {
+	border: 1px solid #ccc;
+	padding: 1px;
+}
+
+
+.rightCol .video_thumb img, .rightCol .bands_new img { margin-right: 5px; }
+
 .video_thumb .still_play {
 	background: url('../images/video_still_play.png') no-repeat right center;
-	width: 107px;
+	width: 99px;
 	height: 29px;
 	position: absolute;
 }
+
+.sidebar_videos li { overflow: hidden; margin-left: 0 !important; }
+.max_sidebar_videos li { 
+	overflow: hidden; 
+	margin: 0 !important; 
+	display: inline-block;
+}
+
 
 /* lastfm link box */
 .lastfm_box {
@@ -235,6 +322,12 @@ ul { padding: 0; margin:0; }
 	width: 205px;
 }
 .footer_right_content .fmlinks { margin: -4px 4px 3px 0 ; padding: 0; }
+.song_pick_footer .fmlinks { 
+	margin: -53px 4px 3px 0 ; 
+	padding-left: 10px; 
+	border-left: 1px dotted #006F9F;
+}
+
 
 .fmlinks li, .footer_right_content .fmlinks li {
 	list-style: none;
@@ -268,11 +361,21 @@ ul { padding: 0; margin:0; }
 
 .mband_pick_footer .item_count { margin-top: 6px; padding-left: 85px; }
 
-.mband_pick_footer .snip { 
+.mband_pick_footer .snip, .song_pick_footer .snip { 
 	padding: 7px 8px 6px 5px;
 	width: 420px;
 	height: 55px;
  }
+.answer_pick_footer .snip { 
+	padding: 3px 8px 6px 5px;
+	width: 420px;
+	height: 59px;
+ }
+.answer_pick_footer .snip p {
+	padding-left: 76px;
+	margin-top: 11px;
+}
+
 
 .footer_right_content .mband_more_tag { border-top: 1px solid #001E35 !important; }
 .mband_more_tag a { padding: 1px 10px 2px 10px; }
@@ -288,6 +391,7 @@ ul { padding: 0; margin:0; }
 /* SONG BLOCK CONTAINER DIMENSION SPEC */
 .w454 { width: 454px; } /* pick of the week, most player artist */
 .w440 { width: 440px; } /* footer right content */
+.w343 { width: 343px; } /* song pick */
 
 /* SONG BLOCK */
 .song_block, #top_footer .song_block {
@@ -310,6 +414,34 @@ ul { padding: 0; margin:0; }
 
 
 
+
+/* SONG SHOW PAGE EXPANDED BLOCK */
+.song_expanded {
+	background-color: #F2F2F2;
+	border-bottom: 1px solid #64BEE0;
+}
+.song_expanded .song_controls a { padding: 2px 4px; }
+.tree_conn {
+	width: 509px;
+	background: url('../images/song_tree.gif') repeat-y left top;
+}
+.tree_conn_last {
+	width: 509px;
+	background: url('../images/song_tree_last.gif') no-repeat left top;
+	margin-bottom: 15px;
+}
+
+.tree_conn p { 
+	margin: 6px 0 0 24px;
+	padding-bottom: 3px;
+	border-bottom: 1px solid #E6E6E6;
+}
+.tree_elem {
+	width: 488px;
+}
+.mix_invite h1 { margin: 5px; }
+
+
 #top_footer .song_block .avatar {
 	background: url('../images/thumb_loader.gif') no-repeat center;
 }
@@ -328,14 +460,32 @@ ul { padding: 0; margin:0; }
 .song_details {
 	padding: 2px 0 0 7px;
 }
-.song_details .song_title { line-height: 7px; }
-.song_details .song_author { line-height: 19px; }
+.song_details .song_title { line-height: 10px; }
+.song_details .song_author { line-height: 13px; }
 
 .song_controls {
 	padding: 0;
-	margin: 2px 4px 0 0;
+	margin: 24px 4px 0 0 !important;
 	direction: rtl;
 }
+.controls_sidebar {
+	direction: ltr !important;
+}
+.sidebar_moremixable .song_controls {
+	direction: ltr;
+	position: relative;
+	width: 40px;
+	margin: 4px 0 0 5px;
+}
+.sidebar_moremixable li {
+	float: left;
+	margin: 0 0 5px 0 !important;
+	width: 100%;
+}
+.sidebar_moremixable li:hover {
+	background-color: #F2F2F3;
+}
+
 .song_controls li {
 	list-style: none;
 	display: inline;
@@ -347,10 +497,18 @@ ul { padding: 0; margin:0; }
 	display: block;
 	padding-bottom: 10px;
 }
-/* useless ? */
-.star_container {
-	display: inline;
+
+
+/* SIDEBAR MIXABLE SONG */
+.mixable_genre {
+	overflow: hidden;
+	margin-top: 10px;
+	padding: 5px 12px;
+	border-bottom: 1px solid #CCCCCC;
+	line-height: 21px;
 }
+
+
 
 
 /* SIDEBAR COOLEST PEOPLE CHART */
@@ -367,31 +525,50 @@ ul { padding: 0; margin:0; }
 	background: url('../images/chart_bar.gif') no-repeat bottom right;
 }
 
+/* COOLEST SONG LIST CHART */
+.song_chart {
+	border-bottom: 1px solid #E6E6E6;
+	width: 231px;
+	height: 41px;
+	margin-top: 6px;
+	padding-left: 5px;
+}
 
 
 
 /* RIGHTCOL SIDEBAR LISTS RULES */
 .rightCol ul {
 	width: 202px;
-	padding: 0;
 	margin: 0;	
 }
+.rightColMax ul { width: 100% !important; }
+
+
 .rightCol li {
 	margin: 0 0 10px 5px;
 	list-style: none;	
+	overflow: hidden;
 }
 .rightCol h2 {
 	margin: 0 0 10px 0;
 }
-.rightCol .avatar { margin-right: 4px; }
 
+.divider {
+	border-bottom: 1px dashed #CCCCCC;
+	margin: 15px 0 15px -16px;
+	padding-right: 28px; 
+	width: 100%;
+}
+
+.rightCol .avatar { margin-right: 4px; }
 .rightCol .tag_genre { margin-bottom: 10px; }
 
 
 /* RELATED LISTS */
 .related_list {
 	padding: 0;
-	margin: 0;
+	margin-top: 20px;
+	width: 100%;
 }
 .related_list h2 {
 	margin: 0 0 8px 0;
@@ -410,13 +587,9 @@ ul { padding: 0; margin:0; }
 
 /* LIST ICONS */
 .icons { display: block; }
-.lightbulb {
-	background: url('../images/icons/lightbulb.png') no-repeat left top;
-}
-.world {
-	background: url('../images/icons/world.png') no-repeat left top;
-}
-
+.lightbulb { background: url('../images/icons/lightbulb.png') no-repeat left top; }
+.world { background: url('../images/icons/world.png') no-repeat left top; }
+.stats { background: url('../images/icons/chart_line.png') no-repeat left top; }
 
 
 
@@ -458,18 +631,10 @@ ul { padding: 0; margin:0; }
 .follow_us a {
 	padding: 1px 0 1px 20px;
 }
-.follow_us .rss {
-	background: url('../images/icons/feed.png') no-repeat;
-}
-.follow_us .podcast {
-	background: url('../images/icons/transmit_blue.png') no-repeat;
-}
-.follow_us .myspace {
-	background: url('../images/icons/user.png') no-repeat;
-}
-.follow_us .facebook {
-	background: url('../images/icons/shape_square.png') no-repeat;
-}
+.follow_us .rss { background: url('../images/icons/feed.png') no-repeat; }
+.follow_us .podcast { background: url('../images/icons/podcast.png') no-repeat; }
+.follow_us .myspace { background: url('../images/icons/user.png') no-repeat; }
+.follow_us .facebook { background: url('../images/icons/facebook.gif') no-repeat; }
 
 h2 {
 	margin: 0;
@@ -479,7 +644,7 @@ h2 {
 .top_tags {
 	width: 433px;
 	margin: 20px 0 14px 0;
-	position: absolute;
+
 	padding-left: 25px;
 }
 .footer_right_content .tag_genre { display: inline; }
@@ -508,20 +673,17 @@ h2 {
 
 .best_people, .new_band {
 	padding: 0;
-	margin: 120px 0 0 25px;
-	position: absolute;
-}
-.new_band {
-	padding-left: 265px;
+	margin: 0 0 0 25px;
+
 }
 .best_people li, .new_band li {
 	list-style: none;
 	display: inline;
 }
 
-.subtitle {
-	margin-bottom: 7px;
-}
+.subtitle { margin-bottom: 7px; }
+.song_lists_head .subtitle { margin-top: 15px; }
+
 .best_people .user_thumb, .new_band .user_thumb {
 	margin-right: 9px;	
 }
@@ -574,6 +736,7 @@ h2 {
 	color: #696969;
 	padding: 6px 9px;
 }
+
 .search_call_submit {
 	border: 0;
 	font-size: 15px;
@@ -593,6 +756,11 @@ h2 {
 	margin-bottom: 10px;
 	padding: 25px 25px 14px 37px;
 }
+.expl_answers {
+	height: 80px !important;
+	padding: 15px 25px 14px 37px !important;
+}
+
 .expl_band { 
 	width: 89px;
 	height: 79px;
@@ -676,7 +844,7 @@ h2 {
 	margin: 4px 0 0 43px;
 	padding-left: 18px;
 }
-.bands_new .mband_name, .bands_new .tag_genre { margin-left: 90px; }
+.bands_new .mband_name, .bands_new .tag_genre { margin-left: 93px; }
 .bands_new .tag_genre { margin-top: 5px; margin-bottom: 5px; }
 
 
@@ -684,19 +852,14 @@ h2 {
 
 
 /* INSTRUMENTS SEARCH */
-#instr_search_box, #instr_list_box {
+#instr_search_box { padding-bottom: 15px; }
+#instr_search_box, #instr_list_box, #song_list_box {
 	width: 697px;
 	overflow: hidden;
 }
-
-.browse_pane {
-	width: 592px;
-	overflow: hidden;
-}
-.list_head {
-	width: 592px;
-	margin-top: 10px;
-}
+.browse_pane, .list_head, .song_lists_head { width: 592px; }
+.browse_pane {	overflow: hidden; }
+.list_head { margin-top: 10px; }
 
 .pane_heading {
 	padding: 10px 0 5px 0;
@@ -718,24 +881,25 @@ h2 {
 	width: 592px;
 }
 #instr_list_box .browse_pane_right { margin-top: 23px; }
+#song_list_box .browse_pane_right, #song_list_box .browse_pane_left { margin-top: 3px; }
 
 .maingenre_type li {
 	display: inline;
 	float: left;
-}
-.maingenre_type li { 
 	padding: 4px 8px;
- }
+}
 
 
 .instr_type li, .maingenre_type li {
 	list-style: none;
 	font-weight: bold;
 }
-#instr_search_box .instr_type li:hover, #instr_search_box .maingenre_type li:hover {
+#instr_search_box .instr_type li:hover, #instr_search_box .maingenre_type li:hover,
+#song_list_box .instr_type li:hover, #song_list_box .maingenre_type li:hover {
 	background-color: #E8E8E8;
 }
-#instr_search_box .instr_type .current, #instr_search_box .maingenre_type .current {
+#instr_search_box .instr_type .current, #instr_search_box .maingenre_type .current,
+#song_list_box .instr_type .current, #song_list_box .maingenre_type .current {
 	background-color: #D9D9D9;
 }
 
@@ -752,11 +916,18 @@ h2 {
 }
 
 
-/* NEWEST INSTRUMENTS */
+/* NEWEST LISTS */
 #newest_list {
 	border-left: 1px dashed #999999;
 	padding-left: 19px;
+} 
+#song_newest_list {
+	border-left: 1px solid #D4D4D4;
+	border-top: 1px solid #D4D4D4;	
+	padding: 5px 0 0 5px;
+	width: 586px;
 }
+
 
 /* BULLET PAGING */
 .paging_bg {
@@ -768,6 +939,7 @@ h2 {
 	list-style: none;
 }
 .bullet_paging li {
+	margin: 0 !important;
 	display: inline;
 	float: left;
 }
@@ -797,3 +969,177 @@ h2 {
 .pager .prev:hover { background: url('../images/paging_prev.gif') no-repeat bottom; }
 .pager .next { background: url('../images/paging_next.gif') no-repeat top; }
 .pager .next:hover { background: url('../images/paging_next.gif') no-repeat bottom; }
+
+
+
+/* ANSWERS */
+ .answers_input {
+	width: 331px;
+	height: 18px;
+	border: 1px solid #4D4D4D;
+}
+.question_search { margin: 20px 0 23px 0; }
+.question_search h1 { margin: 0; }
+
+
+.question_ask {
+	padding-top: 2px; 	
+	border-top: 1px solid #CCCCCC;
+}
+.question_ask, .question_reply { width: 344px; margin-bottom: 15px; }
+
+.question_ask h1, .question_reply h1 { padding: 10px 0 10px 0; margin:0; color: #222222; }
+.question_ask .inset, .question_reply .inset { 
+	padding: 0 10px 8px 10px;
+	overflow: hidden;
+}
+.question_ask .inset { background-color: #D6ECFF; }
+.question_reply .inset { background: url('../images/pick_head_bg.gif') repeat-x top; }
+
+.question_box { 
+	width: 96%;
+	height: 82px;
+	border: 1px solid #CCCCCC;
+	padding: 4px;
+}
+
+.posted_question {
+	margin: 11px 28px 0 38px;
+	color: #444444;
+}
+
+.quote_open, .quote_close {
+	width: 22px;
+	height: 20px;
+}
+.quote_open { background: url('../images/icons/quotes.png') no-repeat top; }
+.quote_close { margin-top: -8px; background: url('../images/icons/quotes.png') no-repeat bottom; }
+
+#tag_box {
+	border: 1px solid #CCCCCC;
+	height: 20px;
+	width: 90%;
+	font-size: 13px;
+	color: #222222;
+	padding: 3px 0 3px 30px;	
+	margin: 10px 0 5px 0;
+	background: #FFFFFF url('../images/icons/input_tag_purple.gif') no-repeat top left;
+}
+
+.ask_button, .reply_button { 
+	padding: 1px 13px; 
+	color: #ffffff; 
+	font-family: Helvetica;
+	margin: 5px 2px 0 0;
+	cursor: pointer;
+}
+.ask_button { background: url('../images/go_bg.png') repeat-x top; }
+.ask_button:hover { background: url('../images/go_bg.png') repeat-x bottom; }
+
+.reply_button { background: url('../images/go_bg.png') repeat-x bottom; margin-top: 10px; }
+.reply_button:hover { background: url('../images/go_bg.png') repeat-x top; }
+
+/* answers caterogies */
+.last_answer_box {
+	width: 226px;
+	min-height: 300px;
+	border-left: 1px solid #E6E6E6;
+}
+.last_answer_box .inset {
+	background: url('../images/answers_box_bg.gif') repeat-x top;
+	width: 100%;
+	min-height: 300px;
+	margin: -3px 0 5px 2px;
+}
+.central_box { margin: 0 7px; }
+
+.cat_title {
+	position: absolute;
+	margin-top: -5px;
+	padding: 0 0 0 5px;
+	width: 214px;
+	line-height: 12px;
+}
+.cat_title img { margin-right: 5px; }
+.cat_title strong { display: block; margin-top: 14px; }
+
+.last_answer_box .lists { padding: 44px 10px 0 10px; }
+.question_snip {
+	width: 100%;
+	overflow: hidden;
+	padding: 5px 0;
+	border-bottom: 1px dashed #D4D4D4;
+}
+.question_snip span { padding-left: 48px; }
+.question_snip p { margin: 0; }
+
+.keyword_lists {
+	list-style: none;
+}
+
+
+/* SONG DETAIL PAGE SONGSHOW */
+.song_show { 
+	margin-bottom: 10px;
+	width: 308px;
+}
+.song_show h3, .song_show p { margin: 0; }
+.song_show p { margin-top: 4px; }
+.song_show p a { font-weight: bold; text-decoration: none; }
+
+.author_info {
+	width: 220px;
+}
+.author_info .podcast_icon {
+	padding-left: 18px;
+}
+
+.author_info .balloon {
+	width: 100%;
+	min-height: 30px;
+	margin: 6px 0 10px 0;
+}
+.author_info .balloon .blurp_author { margin-left: 13px; }
+.author_info .balloon .status_show {
+	background-color: #FFFF9F;
+	padding: 5px 8px;
+	color: #014D70;
+	border-bottom: 1px solid #CCCCCC;
+}
+
+/* song show actions */
+.song_actions {
+	height: 14px;
+	padding: 7px 10px;
+	margin-top: 15px;
+	background-color: #DCF2FF;
+}
+.song_actions .actions {
+	list-style: none;
+}
+.actions li {
+	display: inline;
+	padding-left: 19px;
+	margin: 0 38px 0 0;
+}
+.actions .last { margin-right: 0 !important;}
+
+/* stats list */
+.stats_list {
+	height: 12px;
+	padding: 5px 10px;
+	margin-bottom: 35px;
+	background-color: #DCF2FF;
+}
+.stats_list .stats {
+	list-style: disc;
+}
+.stats .stats_icon { padding-left: 22px; }
+.stats li {
+	display: inline;
+	margin: 0 8px 0 0;
+}
+.stats .last { margin-right: 0 !important;}
+
+.sidebar_user_status .list_status .user_name { margin: 0 0 3px 15px; }
+.sidebar_user_status .list_status .blurp_sidebar { margin-top: 4px; }

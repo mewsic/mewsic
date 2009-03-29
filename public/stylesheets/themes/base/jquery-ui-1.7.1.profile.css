@@ -1,0 +1,129 @@
+/*
+* jQuery UI CSS Framework
+* Copyright (c) 2009 AUTHORS.txt (http://jqueryui.com/about)
+* Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
+*/
+
+/* Layout helpers
+----------------------------------*/
+.profile .ui-helper-hidden { display: none; }
+.profile .ui-helper-hidden-accessible { position: absolute; left: -99999999px; }
+.profile .ui-helper-reset { margin: 0; padding: 0; border: 0; outline: 0; line-height: 1.3; text-decoration: none; font-size: 100%; list-style: none; }
+.profile .ui-helper-clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.profile .ui-helper-clearfix { display: inline-block; }
+/* required comment for clearfix to work in Opera \*/
+* html .ui-helper-clearfix { height:1%; }
+.profile .ui-helper-clearfix { display:block; }
+/* end clearfix */
+.profile .ui-helper-zfix { width: 100%; height: 100%; top: 0; left: 0; position: absolute; opacity: 0; filter:Alpha(Opacity=0); }
+
+
+/* Interaction Cues
+----------------------------------*/
+.profile .ui-state-disabled { cursor: default !important; }
+
+
+/* Icons
+----------------------------------*/
+
+/* states and images */
+.profile .ui-icon { display: block; text-indent: -99999px; overflow: hidden; background-repeat: no-repeat; }
+
+
+/* Misc visuals
+----------------------------------*/
+
+/* Overlays */
+.profile .ui-widget-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+/*
+* jQuery UI CSS Framework
+* Copyright (c) 2009 AUTHORS.txt (http://jqueryui.com/about)
+* Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
+* To view and modify this theme, visit http://jqueryui.com/themeroller/?ffDefault=Helvetica&fwDefault=bold&fsDefault=13px&cornerRadius=0px&bgColorHeader=d9d9d9&bgTextureHeader=04_highlight_hard.png&bgImgOpacityHeader=100&borderColorHeader=ffffff&fcHeader=222222&iconColorHeader=222222&bgColorContent=ffffff&bgTextureContent=01_flat.png&bgImgOpacityContent=75&borderColorContent=aaaaaa&fcContent=222222&iconColorContent=222222&bgColorDefault=00385D&bgTextureDefault=01_flat.png&bgImgOpacityDefault=75&borderColorDefault=00385D&fcDefault=ffffff&iconColorDefault=888888&bgColorHover=014D70&bgTextureHover=01_flat.png&bgImgOpacityHover=75&borderColorHover=014D70&fcHover=ffffff&iconColorHover=454545&bgColorActive=ffffff&bgTextureActive=02_glass.png&bgImgOpacityActive=65&borderColorActive=00385D&fcActive=00385D&iconColorActive=454545&bgColorHighlight=fbf9ee&bgTextureHighlight=02_glass.png&bgImgOpacityHighlight=55&borderColorHighlight=fcefa1&fcHighlight=363636&iconColorHighlight=2e83ff&bgColorError=fef1ec&bgTextureError=05_inset_soft.png&bgImgOpacityError=95&borderColorError=cd0a0a&fcError=cd0a0a&iconColorError=cd0a0a&bgColorOverlay=aaaaaa&bgTextureOverlay=01_flat.png&bgImgOpacityOverlay=0&opacityOverlay=30&bgColorShadow=aaaaaa&bgTextureShadow=01_flat.png&bgImgOpacityShadow=0&opacityShadow=30&thicknessShadow=8px&offsetTopShadow=-8px&offsetLeftShadow=-8px&cornerRadiusShadow=8px
+*/
+
+
+/* Component containers
+----------------------------------*/
+.profile .ui-widget { font-family: Helvetica; font-size: 13px; }
+.profile .ui-widget input, .profile .ui-widget select, .profile .ui-widget textarea, .profile .ui-widget button { font-family: Helvetica; font-size: 1em; }
+.profile .ui-widget-content {  background: #ffffff url(profile/ui-bg_flat_75_ffffff_40x100.png) 50% 50% repeat-x; color: #222222; }
+/* .profile .ui-widget-content a { color: #222222; } */
+.profile .ui-widget-header { border-bottom: 1px solid #00385D; background: #d9d9d9 url(profile/ui-bg_highlight-hard_100_d9d9d9_1x100.png) 50% 50% repeat-x; color: #222222; font-weight: bold; }
+.profile .ui-widget-header a { color: #222222; }
+
+/* Interaction states
+----------------------------------*/
+.profile .ui-state-default, .profile .ui-widget-content .ui-state-default { border: 1px solid #00385D; background: #00385D url(profile/ui-bg_flat_75_00385D_40x100.png) 50% 50% repeat-x; font-weight: bold; color: #ffffff; outline: none; }
+.profile .ui-state-default a, .profile .ui-state-default a:link, .profile .ui-state-default a:visited { color: #ffffff; text-decoration: none; outline: none; }
+.profile .ui-state-hover, .profile .ui-widget-content .ui-state-hover, .profile .ui-state-focus, .profile .ui-widget-content .ui-state-focus { border: 1px solid #014D70; background: #014D70 url(profile/ui-bg_flat_75_014D70_40x100.png) 50% 50% repeat-x; font-weight: bold; color: #ffffff; outline: none; }
+.profile .ui-state-hover a, .profile .ui-state-hover a:hover { color: #ffffff; text-decoration: none; outline: none; }
+.profile .ui-state-active, .profile .ui-widget-content .ui-state-active { border: 1px solid #00385D; background: #ffffff url(profile/ui-bg_glass_65_ffffff_1x400.png) 50% 50% repeat-x; font-weight: bold; color: #00385D; outline: none; }
+.profile .ui-state-active a, .profile .ui-state-active a:link, .profile .ui-state-active a:visited { color: #00385D; outline: none; text-decoration: none; }
+
+/* Interaction Cues
+----------------------------------*/
+.profile .ui-state-highlight, .profile .ui-widget-content .ui-state-highlight {border: 1px solid #fcefa1; background: #fbf9ee url(profile/ui-bg_glass_55_fbf9ee_1x400.png) 50% 50% repeat-x; color: #363636; }
+.profile .ui-state-highlight a, .profile .ui-widget-content .ui-state-highlight a { color: #363636; }
+.profile .ui-state-error, .profile .ui-widget-content .ui-state-error {border: 1px solid #cd0a0a; background: #fef1ec url(profile/ui-bg_inset-soft_95_fef1ec_1x100.png) 50% bottom repeat-x; color: #cd0a0a; }
+.profile .ui-state-error a, .profile .ui-widget-content .ui-state-error a { color: #cd0a0a; }
+.profile .ui-state-error-text, .profile .ui-widget-content .ui-state-error-text { color: #cd0a0a; }
+.profile .ui-state-disabled, .profile .ui-widget-content .ui-state-disabled { opacity: .35; filter:Alpha(Opacity=35); background-image: none; }
+.profile .ui-priority-primary, .profile .ui-widget-content .ui-priority-primary { font-weight: bold; }
+.profile .ui-priority-secondary, .profile .ui-widget-content .ui-priority-secondary { opacity: .7; filter:Alpha(Opacity=70); font-weight: normal; }
+
+/* Icons
+----------------------------------*/
+
+/* states and images */
+.profile .ui-icon { width: 16px; height: 16px; background-image: url(profile/ui-icons_222222_256x240.png); }
+.profile .ui-widget-content .ui-icon {background-image: url(profile/ui-icons_222222_256x240.png); }
+.profile .ui-widget-header .ui-icon {background-image: url(profile/ui-icons_222222_256x240.png); }
+.profile .ui-state-default .ui-icon { background-image: url(profile/ui-icons_888888_256x240.png); }
+.profile .ui-state-hover .ui-icon, .profile .ui-state-focus .ui-icon {background-image: url(profile/ui-icons_454545_256x240.png); }
+.profile .ui-state-active .ui-icon {background-image: url(profile/ui-icons_454545_256x240.png); }
+.profile .ui-state-highlight .ui-icon {background-image: url(profile/ui-icons_2e83ff_256x240.png); }
+.profile .ui-state-error .ui-icon, .profile .ui-state-error-text .ui-icon {background-image: url(profile/ui-icons_cd0a0a_256x240.png); }
+
+
+/* Misc visuals
+----------------------------------*/
+
+/* Corner radius */
+.profile .ui-corner-tl { -moz-border-radius-topleft: 0px; -webkit-border-top-left-radius: 0px; }
+.profile .ui-corner-tr { -moz-border-radius-topright: 0px; -webkit-border-top-right-radius: 0px; }
+.profile .ui-corner-bl { -moz-border-radius-bottomleft: 0px; -webkit-border-bottom-left-radius: 0px; }
+.profile .ui-corner-br { -moz-border-radius-bottomright: 0px; -webkit-border-bottom-right-radius: 0px; }
+.profile .ui-corner-top { -moz-border-radius-topleft: 0px; -webkit-border-top-left-radius: 0px; -moz-border-radius-topright: 0px; -webkit-border-top-right-radius: 0px; }
+.profile .ui-corner-bottom { -moz-border-radius-bottomleft: 0px; -webkit-border-bottom-left-radius: 0px; -moz-border-radius-bottomright: 0px; -webkit-border-bottom-right-radius: 0px; }
+.profile .ui-corner-right {  -moz-border-radius-topright: 0px; -webkit-border-top-right-radius: 0px; -moz-border-radius-bottomright: 0px; -webkit-border-bottom-right-radius: 0px; }
+.profile .ui-corner-left { -moz-border-radius-topleft: 0px; -webkit-border-top-left-radius: 0px; -moz-border-radius-bottomleft: 0px; -webkit-border-bottom-left-radius: 0px; }
+.profile .ui-corner-all { -moz-border-radius: 0px; -webkit-border-radius: 0px; }
+
+/* Overlays */
+.profile .ui-widget-overlay { background: #aaaaaa url(profile/ui-bg_flat_0_aaaaaa_40x100.png) 50% 50% repeat-x; opacity: .30;filter:Alpha(Opacity=30); }
+.profile .ui-widget-shadow { margin: -8px 0 0 -8px; padding: 8px; background: #aaaaaa url(profile/ui-bg_flat_0_aaaaaa_40x100.png) 50% 50% repeat-x; opacity: .30;filter:Alpha(Opacity=30); -moz-border-radius: 8px; -webkit-border-radius: 8px; }
+
+/* Accordion
+----------------------------------*/
+.profile .ui-accordion .ui-accordion-header { cursor: pointer; position: relative; margin-top: 1px; zoom: 1; }
+.profile .ui-accordion .ui-accordion-li-fix { display: inline; }
+.profile .ui-accordion .ui-accordion-header-active { border-bottom: 0 !important; }
+.profile .ui-accordion .ui-accordion-header a { display: block; font-size: 1em; padding: .5em .5em .5em 2.2em; }
+.profile .ui-accordion .ui-accordion-header .ui-icon { position: absolute; left: .5em; top: 50%; margin-top: -8px; }
+.profile .ui-accordion .ui-accordion-content { padding: 1em 2.2em; border-top: 0; margin-top: -2px; position: relative; top: 1px; margin-bottom: 2px; overflow: auto; display: none; }
+.profile .ui-accordion .ui-accordion-content-active { display: block; }
+
+
+/* Tabs
+----------------------------------*/
+.profile .ui-tabs { padding: .2em; zoom: 1; }
+.profile .ui-tabs .ui-tabs-nav { list-style: none; position: relative; padding: .2em .2em 0; }
+.profile .ui-tabs .ui-tabs-nav li { position: relative; float: left; border-bottom-width: 0 !important; margin: 0 .2em -1px 0; padding: 0; }
+.profile .ui-tabs .ui-tabs-nav li a { float: left; text-decoration: none; padding: .5em 1em; }
+.profile .ui-tabs .ui-tabs-nav li.ui-tabs-selected { padding-bottom: 0px; border-bottom-width: 0; }
+.profile .ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .profile .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .profile .ui-tabs .ui-tabs-nav li.ui-state-processing a { cursor: text; }
+.profile .ui-tabs .ui-tabs-nav li a, .profile .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a { cursor: pointer; } /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
+.profile .ui-tabs .ui-tabs-panel { padding: 1em 1.4em; display: block; border-width: 0; background: none; }
+.profile .ui-tabs .ui-tabs-hide { display: none !important; }
