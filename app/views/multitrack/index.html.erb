@@ -1,10 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US" debug="true">
-<head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<meta http-equiv="imagetoolbar" content="no" />
-	<meta name="MSSmartTagsPreventParsing" content="true" />
-
+<% content_for :head do %>
   <%= javascript_include_tag 'swfobject/swfobject' %>
 	<script type="text/javascript">// <![CDATA[
 	
@@ -26,69 +20,33 @@
 
 		var params = {};
 		var attributes = { name: 'multitrackObject' };
-		swfobject.embedSWF( '/multitrack/multitrack.swf', 'flash', '700', '100%', '9.0.0', 'scripts/swfobject/express-install.swf', flashvars, params, attributes );
+		swfobject.embedSWF( '/multitrack/multitrack.swf', 'flash', '690', '100%', '9.0.0', 'scripts/swfobject/express-install.swf', flashvars, params, attributes );
 			
 		$(document).ready(function() {
-			setTimeout(function() { $('#flash')[0].loadSong(917598278); }, 5000);
+			setTimeout(function() { $('#flash')[0].loadSong(917598278); }, 8000);
 		});
 			
 	// ]]></script>
 
-	<title>MewLab</title>
-
 	<style type="text/css">
 	
-		* {
-			margin: 0;
-			padding: 0;
-		}
-		
-		html {
-			height: 100%;
-			background: #f5f5f5;
-			font: 11px/17px "Lucida Grande", Helvetica, sans-serif;
-		}
-		
-		body {
-			height: 100%;
-			background: #f5f5f5;
-		}
-		
-		#content {
-			padding: 30px 0 0;
-			margin: 0 auto;
-			width: 900px;
-			text-align: center
+		#multitrack {
+      padding: 20px;
 		}
 		
 		#flash {
-			width: 700px;
+      margin: 0 auto;
+			width: 690px;
 			height: 40px;
 			position: relative;
+      z-index: 0;
 		}
 		
-		p {
-			text-align: left;
-		}
-
 	</style>
-</head>
 
+<% end %>
 
-
-<body>
-
-
-
-<div id="content">
+<div id="multitrack">
 	<div id="flash"></div>
 	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean et odio quis lacus consectetuer cursus. Pellentesque consectetuer euismod orci. Morbi eu massa vitae dolor semper semper. Pellentesque at nibh. Pellentesque a tellus sed enim auctor elementum. Fusce elit turpis, vehicula ut, dignissim in, porttitor eget, tortor. Ut vel tortor nec metus commodo convallis. Vestibulum condimentum lectus. Duis cursus magna a mauris. Nulla justo mauris, venenatis consequat, suscipit vel, cursus in, dui. Integer consectetuer aliquet felis. Nam in mauris. Ut leo arcu, sodales ac, vestibulum nec, tincidunt ut, nulla. Nam in lectus ac magna aliquet pretium. Cras et ligula. Phasellus a ipsum. Morbi in pede ultricies nulla varius tincidunt.</p>
 </div>
-
-
-
-</body>
-
-
-
-</html>
