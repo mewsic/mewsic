@@ -18,24 +18,7 @@
 #  rating_total   :decimal(10, 2 
 #  rating_avg     :decimal(10, 2 
 #
-
-<% 
-  def shuffle(array)
-    array.sort_by{rand}[0..rand(array.size)].join(' ')
-  end
-
-  def random_rating
-    rand * 5
-  end
-
-  def random_title
-    shuffle(%w( Nec quis lorem. Aliquam erat volutpat. Nullam euismod magna in nulla. Nullam interdum ipsum vitae tellus. Quisque hendrerit, ligula iaculis cursus tincidunt, quam )).capitalize + '.'
-  end
-
-  def random_description
-    %w( Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam consectetur, purus molestie rutrum vestibulum, orci sapien scelerisque dolor, et eleifend risus lacus eu lacus. Donec non nulla laoreet dui tempor tempus. Nam ullamcorper velit a nulla. Nunc at risus non sem vehicula ullamcorper. Donec quis lorem. Aliquam erat volutpat. Nullam euismod magna in nulla. Nullam interdum ipsum vitae tellus. Quisque hendrerit, ligula iaculis cursus tincidunt, quam ipsum scelerisque lacus, eu accumsan magna urna ac felis. Mauris porttitor nibh at mauris. Suspendisse neque mauris, fringilla nec, auctor vitae, semper nec, sapien. <br/> <br/> Donec at ligula blandit velit molestie fermentum. Quisque cursus vulputate tellus. Vestibulum ac lectus vel turpis venenatis auctor. Quisque fringilla quam ac ipsum. Aliquam tempus, metus ac porta cursus, nibh arcu consectetur purus, non tincidunt elit metus quis augue. Fusce sodales, mauris at scelerisque fermentum, ipsum tortor aliquam lectus, vitae euismod tortor enim id metus. Aenean interdum risus eget enim. Curabitur id est. Aliquam mi elit, facilisis eget, sagittis in, mollis sit amet, risus. Quisque rutrum laoreet justo. Nunc dictum lorem sit amet tellus. Quisque non quam. Sed tempus mi sit amet augue. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut molestie quam eu massa condimentum hendrerit. ).sort_by{rand}.join(' ').capitalize
-  end
-%>
+<% require File.join(RAILS_ROOT, 'test', 'fixtures_helpers') %>
 
 let_it_be:
   title: Let It Be
