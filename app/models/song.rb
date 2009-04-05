@@ -113,9 +113,6 @@ class Song < ActiveRecord::Base
     #set_property :delta => true
   end
 
-  # XXX just testing, maybe will replace the find_newest finder
-  named_scope :newest, :order => 'songs.created_at DESC', :conditions => ['songs.created_at < ?', 1.month.ago]
-
   # Returns whether a song is accessible by an user via the frontend, so if
   # its status is "public" or "private". Being +published?+ triggers additional
   # validation (presence of title, associated user, minimum 1 track)
@@ -148,30 +145,26 @@ class Song < ActiveRecord::Base
     end
   end
 
-  # Finds all "best" public songs, ordered by play count and rating average.
+  # Finds all "best" public songs, ordering them by play count and rating average.
   #
+  named_scope :best, :order => 'songs.listened_times DESC, songs.rating_avg DESC'
+
   def self.find_best(options = {})
-    self.public.find(:all, options.merge(:order => 'songs.listened_times DESC, songs.rating_avg DESC'))
+    self.public.best.find(:all, options)
   end
   
-  # Finds all "newest" public songs, ordered by creation time.
+  # Finds all newest public songs, ordered by creation time.
   #
+  named_scope :newest, :order => 'songs.created_at DESC' #, :conditions => ['songs.created_at < ?', 1.month.ago] <<- XXX EVIL
+
   def self.find_newest(options = {})
-    self.public.find(:all, options.merge(:order => 'songs.created_at DESC'))
+    self.public.newest.find(:all, options)
   end
 
-  # Paginates the public songs created in the last month, ordered by creation time.
-  # By default, the first of 7 elements pages is returned.
-  # All the <tt>paginate</tt> options are overridable. See the <tt>will_paginate</tt>
-  # plugin documentation for details:
-  # https://stage.lime5.it/rdoc/mewsic/plugins/will_paginate
+  # Paginates newest public songs
   #
-  def self.find_newest_paginated(options = {})
-    self.public.paginate(options.reverse_merge(
-             :conditions => ['songs.created_at > ?', 1.month.ago],
-             :order => 'songs.created_at DESC',
-             :per_page => 7,
-             :page => 1))
+  def self.paginate_newest(options = {})
+    self.public.newest.paginate(:all, options)
   end
   
   # Shorthand to create an temporary Song. Used by MultitrackController#show, when an user
@@ -332,6 +325,7 @@ class Song < ActiveRecord::Base
     0.7
   end
 
+private
   def copy_author_information_from_user
     self.author = self.user.login if self.author.blank?
   end
