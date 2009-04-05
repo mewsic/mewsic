@@ -1,3 +1,5 @@
+<% require File.join(RAILS_ROOT, 'test', 'fixtures_helpers') %>
+
 # Song tags
 let_it_be_rock_by_quentin:
   tag: rock
@@ -79,3 +81,29 @@ voice_for_radio_ga_ga_cool_by_quentin:
   tagger: quentin
   tagger_type: User
   context: tags
+
+# Random taggings for user songs
+# XXX FIXME every amount should reside into a fixtures_helpers constant.
+# e.g. SONG_COUNT=200 MBAND_SONG_COUNT=50 USER_COUNT=500 and so on
+#
+<% 500.times do |i| %>
+song_random_tagging_<%= i %>:
+  tag: <%= random_genre %>
+  taggable: song_<%= rand(200) %>
+  taggable_type: Song
+  tagger: <%= random_user %>
+  tagger_type: User
+  context: tags
+<% end %>
+
+# Random taggings for mband songs
+#
+<% 100.times do |i| %>
+mband_song_random_tagging_<%= i %>:
+  tag: <%= random_genre %>
+  taggable: mband_song_<%= rand(50) %>
+  taggable_type: Song
+  tagger: <%= random_user %>
+  tagger_type: User
+  context: tags
+<% end %>

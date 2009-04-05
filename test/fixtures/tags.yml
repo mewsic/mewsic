@@ -1,3 +1,5 @@
+<% require File.join(RAILS_ROOT, 'test', 'fixtures_helpers') %>
+
 rock:
   name: rock
 
@@ -9,3 +11,8 @@ _120bpm:
 
 cool:
   name: cool
+
+<% genres.each do |genre| %>
+<%= genre %>:
+  name: <%= genre.humanize %>
+<% end %>
