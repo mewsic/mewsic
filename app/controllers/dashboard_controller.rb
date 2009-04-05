@@ -16,8 +16,14 @@ class DashboardController < ApplicationController
   # The home page contains banners, swf objects and a list of top myousicians
   #
   def index
-    @people = User.find_top_mewsicians :limit => 4
-    @mbands = Mband.find_newest :limit => 4
+    @best_musicians = User.find_top_musicians :limit => 4
+    @newest_mbands = Mband.find_newest :limit => 4
+    @newest_songs = Song.find_newest :limit => 3
+    @top_tags = Tag.find_top :limit => 20
+
+    #@pick_of_the_week = User.find_pick_of_the_week, :include => [:photos, :videos, :songs]
+    #@knowledge_items = Knowledge.find_top_rated
+
     @origin = params[:origin] # For landing pages
 
     respond_to { |format| format.html }

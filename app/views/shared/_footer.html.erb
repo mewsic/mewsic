@@ -7,46 +7,50 @@
   				<h2>Top Tags</h2>
   				<span class="subtitle block">Lorem ipsum dolor</span>
   				<p class="tag_genre">
-  					<a href="">Acid Jazz/Fusion</a>  <a href="">Acoustic</a>  <a href="">Alternative 	Rock</a>  <a href="">Ambient</a>  <a href="">Blues</a>  
-  					<a href="">British Pop</a>  <a href="">Classic Rock</a>  <a href="">Country</a>  <a href="">Country Rock</a>  <a href="">Crossover</a>  <a href="">Dance</a>  
-  					<a href="">Disco</a>  <a href="">Drum & Bass</a>  <a href="">EBM</a>  <a 	href="">Electro-Rock</a>  <a href="">Electronic</a>  <a href="">Folk Rock</a>  <a href="">Funk</a>
+
+          <% if @top_tags %>
+            <% for tag in @top_tags %>
+              <%= link_to tag, '' %>
+            <% end %>
+          <% else %>
+            <code>@top_tags</code> variable missing!
+          <% end %>
+
   				</p>
   			</div>
   			<ul class="best_people fleft">
   				<h2>Best Mewsicians</h2>
   				<span class="subtitle block">Lorem ipsum dolor</span>
-  				<li class="user_thumb">
-  					<img src="images/thumb_loader.gif" width="39" height="39" />
-  				</li>
-  				<li class="user_thumb">
-  					<img src="images/thumb_loader.gif" width="39" height="39" />
-  				</li>
-  				<li class="user_thumb">
-  					<img src="images/thumb_loader.gif" width="39" height="39" />
-  					<img src="images/user_thumb.jpg" width="40" height="40" class="loaded" />
-  				</li>
-  				<li class="user_thumb">
-  					<img src="images/thumb_loader.gif" width="39" height="39" />
-  					<img src="images/user_thumb.jpg" width="40" height="40" class="loaded" />
-  				</li>
+
+          <% if @best_musicians %>
+            <% for user in @best_musicians %>
+              <li class="user_thumb">
+                <%= link_to image_tag('thumb_loader.gif') +
+                      image_tag(user.avatar.public_filename(:small),
+                      :size => '39x39', :class => 'loaded'), user %>
+              </li>
+            <% end %>
+          <% else %>
+            <code>@best_musicians</code> variable missing!
+          <% end %>
+
   			</ul>
   			<ul class="new_band fleft">
   				<h2>Newest M-Bands</h2>
   				<span class="subtitle block">Lorem ipsum dolor</span>
-  				<li class="user_thumb">
-  					<img src="images/thumb_loader.gif" width="39" height="39" />
-  					<img src="images/user_thumb.jpg" width="40" height="40" class="loaded" />
-  				</li>
-  				<li class="user_thumb">
-  					<img src="images/thumb_loader.gif" width="39" height="39" />
-  					<img src="images/user_thumb.jpg" width="40" height="40" class="loaded" />
-  				</li>
-  				<li class="user_thumb">
-  					<img src="images/thumb_loader.gif" width="39" height="39" />
-  				</li>
-  				<li class="user_thumb">
-  					<img src="images/thumb_loader.gif" width="39" height="39" />
-  				</li>
+
+          <% if @newest_mbands %>
+            <% for mband in @newest_mbands %>
+              <li class="user_thumb">
+                <%= link_to image_tag('thumb_loader.gif') +
+                      image_tag(mband.avatar.public_filename(:small),
+                      :size => '39x39', :class => 'loaded'), mband %>
+              </li>
+            <% end %>
+          <% else %>
+            <code>@newest_mbands</code> variable missing!
+          <% end %>
+
   			</ul>
   	</div>
   	
