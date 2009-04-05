@@ -8,6 +8,13 @@ class Tag < ActiveRecord::Base
   def self.find_or_create_with_like_by_name(name)
     find(:first, :conditions => ["name LIKE ?", name]) || create(:name => name)
   end
+
+  # Count top taggings, and construct an array of Tag objects sorted by taggings count.
+  # -vjt
+  def self.find_top(options = {})
+    tag_ids = Tagging.count_top(options).map(&:first)
+    self.find(tag_ids).sort_by { |tag| tag_ids.index(tag.id) }
+  end
   
   def ==(object)
     super || (object.is_a?(Tag) && name == object.name)
