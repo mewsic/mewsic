@@ -41,13 +41,13 @@ end
 # Returns lorem_ipsum as an array
 #
 def lorem_ipsum
-  @lipsum ||= File.read(txt'lorem_ipsum').split(' ')
+  @lipsum ||= File.read(txt('lorem_ipsum')).split(' ')
 end
 
 # Returns an array with genres residing in genres.txt
 #
 def genres
-  @genres ||= File.readlines(txt'genres').map(&:strip)
+  @genres ||= File.readlines(txt('genres')).map(&:strip)
 end
 
 # Read a txt file from test/fixtures/name.txt
