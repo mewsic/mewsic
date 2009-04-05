@@ -35,7 +35,6 @@
 #  rating_count              :integer(4)    
 #  rating_total              :decimal(10, 2 
 #  rating_avg                :decimal(10, 2 
-#  nickname                  :string(20)    
 #  is_admin                  :boolean(1)    
 #  status                    :string(3)     default("off")
 #  name_public               :boolean(1)    
@@ -50,7 +49,7 @@ require 'digest/sha1'
 class User < ActiveRecord::Base
   
   define_index do
-    indexes :login, :nickname, :motto, :tastes, :country
+    indexes :login, :motto, :tastes, :country
     where 'activated_at IS NOT NULL'
     #set_property :delta => true
   end
@@ -134,11 +133,10 @@ class User < ActiveRecord::Base
   # anything else you want your user to change should be added here.
   attr_accessible :password, :password_confirmation, :first_name, :last_name, :name_public,
     :gender, :motto, :tastes, :country, :city, :age, :photos_url, :blog_url, :myspace_url,
-    :skype, :msn, :skype_public, :msn_public, :nickname, :podcast_public
+    :skype, :msn, :skype_public, :msn_public, :podcast_public
   attr_readonly :comments_count, :writings_count, :profile_views
   
   before_save :check_links
-  before_save :check_nickname
 
   def forgot_password
     @forgotten_password = true
@@ -493,9 +491,5 @@ class User < ActiveRecord::Base
           self.send("#{attr}=", "http://#{self.send(attr)}") unless self.send(attr) =~ /^http:\/\//
         end
       end
-    end
-
-    def check_nickname
-      self.nickname = self.login if self.nickname.blank?
     end
 end

@@ -35,7 +35,6 @@
 #  rating_count              :integer(4)    
 #  rating_total              :decimal(10, 2 
 #  rating_avg                :decimal(10, 2 
-#  nickname                  :string(20)    
 #  is_admin                  :boolean(1)    
 #  status                    :string(3)     default("off")
 #  name_public               :boolean(1)    
@@ -65,7 +64,6 @@ quentin:
   country: Italy
   city: Bari
   motto: Arma Virumque Cano Troiae qui primus ab oris
-  nickname: quentin
   profile_views: 1516
   writings_count: 1
 
@@ -99,7 +97,6 @@ john:
 <% for i in 0..500 %>
 user_<%= i %>:
   login: user<%= i %>
-  nickname: user<%= i %>
   email: user<%= i %>@example.net
   salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
   crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
