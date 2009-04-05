@@ -114,7 +114,7 @@ class User < ActiveRecord::Base
   has_many :writings, :source => :comment, :class_name => 'Comment'
 
   has_one :avatar, :as => :pictureable
-  
+
   # If you're getting a EagerLoadPolymorphicError because of
   # this :include => :mixable, try to avoid your .count on
   # the association if possible (e.g. use .size), or if you
@@ -137,6 +137,17 @@ class User < ActiveRecord::Base
   attr_readonly :comments_count, :writings_count, :profile_views
   
   before_save :check_links
+
+  # Returns the user avatar if it's set, or the default avatar if not.
+  #
+  def avatar_with_default
+    avatar_without_default || Avatar.find_by_filename('default_avatar.png')
+  end
+  alias_method_chain :avatar, :default
+
+  def nickname
+    self.login
+  end
 
   def forgot_password
     @forgotten_password = true
@@ -355,7 +366,7 @@ class User < ActiveRecord::Base
   # Finds all the activated users that have an avatar and have created most
   # tracks, ordering by track count.
   #
-  def self.find_top_mewsicians(options = {})
+  def self.find_top_musicians(options = {})
     options.assert_valid_keys :limit
     qry = "SELECT COUNT(tracks.id) AS tracks_count, users.*
            FROM users INNER JOIN tracks ON tracks.user_id = users.id

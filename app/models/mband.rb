@@ -84,23 +84,32 @@ class Mband < ActiveRecord::Base
   xss_terminate :except => [:name, :photos_url, :blog_url, :myspace_url],
                 :sanitize => [:motto, :tastes]
 
+  # Returns the mband avatar if it's set, or the default avatar if not.
+  #
+  def avatar_with_default
+    avatar_without_default || Avatar.find_by_filename('default_avatar.png')
+  end
+  alias_method_chain :avatar, :default
+
+  # Finds mbands with at least two members
+  #
   named_scope :real, :conditions => 'members_count > 1'
   
+  # Finds newly created mbands.
+  #
+  named_scope :newest, :order => 'mbands.created_at DESC'
+
   def self.find_newest(options = {})
-    real.find(:all, options.merge(:order => 'created_at'))
+    self.newest.real.find(:all, options)
   end
 
   # Finds the coolest Mbands, that is, Mbands sorted by <tt>rating_avg</tt>. Only Mbands with
   # more than one member are returned.
   #
-  def self.find_coolest(options = {})
-    find_real options.reverse_merge(:order => 'rating_avg DESC')
-  end
+  named_scope :coolest, :order => 'mbands.rating_avg DESC'
 
-  # Finds all the mbands with at least one member
-  # XXX deprecated #
-  def self.find_real(options = {})
-    self.real
+  def self.find_coolest(options = {})
+    self.coolest.find(:all, options)
   end
 
   # Checks whether the passed <tt>user</tt> is a member of this Mband
