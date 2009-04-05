@@ -18,53 +18,49 @@
 #  created_at       :datetime      
 #  updated_at       :datetime      
 
-<%
-  def random_avatar
-    "test/fixtures/files/" + %w( dharma_ndstr.jpg myousica_avatar.png code_avatar.png ).rand
-  end
-%>
+<% require File.join(RAILS_ROOT, 'test', 'fixtures_helpers') %>
 
 first_photo_for_quentin:
   pictureable: quentin
   pictureable_type: User
   type: Photo
   content_type: image/gif
-  attachment_file: test/fixtures/files/chord_1000_random.gif
+  attachment_file: <%= picture 'chord_1000_random.gif' %>
 
 second_photo_for_quentin:
   pictureable: quentin 
   pictureable_type: User
   type: Photo
   content_type: image/jpeg
-  attachment_file: test/fixtures/files/photo_user_test.jpg
+  attachment_file: <%= picture 'photo_user_test.jpg' %>
 
 third_photo_for_quentin:
   pictureable: quentin
   pictureable_type: User
   type: Photo
   content_type: image/jpeg
-  attachment_file: test/fixtures/files/unix_magic.jpg
+  attachment_file: <%= picture 'unix_magic.jpg' %>
 
 dharma_photo_for_quentin:
   pictureable: quentin 
   pictureable_type: User
   type: Photo
   content_type: image/jpeg
-  attachment_file: test/fixtures/files/dharma_ndstr.jpg
+  attachment_file: <%= picture 'avatars/dharma.jpg' %>
 
 dharma_photo_for_john:
   pictureable: john
   pictureable_type: User
   type: Photo
   content_type: image/jpeg
-  attachment_file: test/fixtures/files/dharma_ndstr.jpg
+  attachment_file: <%= picture 'avatars/dharma.jpg' %>
 
 first_photo_for_users_1:
   pictureable: user_1
   pictureable_type: User
   type: Photo
   content_type: image/jpeg
-  attachment_file: test/fixtures/files/unix_magic.jpg
+  attachment_file: <%= picture 'unix_magic.jpg' %>
 
 avatar_for_quentin:
   pictureable: quentin
@@ -96,3 +92,7 @@ avatar_for_mband_<%= i %>:
   type: Avatar
   attachment_file: <%= random_avatar %>
 <% end %>
+
+default_avatar:
+  type: Avatar
+  attachment_file: 'public/images/default_avatar.png'
