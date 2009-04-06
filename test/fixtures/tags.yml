@@ -1,10 +1,7 @@
 <% require File.join(RAILS_ROOT, 'test', 'fixtures_helpers') %>
 
-rock:
-  name: rock
-
-electro:
-  name: electronic
+grasshopper_rock:
+  name: Grasshopper Rock
 
 _120bpm:
   name: 120 bpm

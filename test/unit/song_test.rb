@@ -93,9 +93,11 @@ class SongTest < ActiveSupport::TestCase
   def test_remix_tree
     song = songs(:let_it_be)
     remix = nil
+    user = users(:user_420)
 
-    assert_nothing_raised { remix = song.create_remix }
+    assert_nothing_raised { remix = song.create_remix_by(user) }
     assert remix.valid?
+    assert_equal user, remix.user
 
     assert remix.remix_of?(song)
     assert song.remixes.include?(remix)
@@ -111,7 +113,7 @@ class SongTest < ActiveSupport::TestCase
 
   def test_taggings
     assert_equal 3, songs(:let_it_be).tag_list.size
-    assert_equal 2, songs(:let_it_be).tag_counts.first.count
+    assert_equal [1, 1, 2], songs(:let_it_be).tag_counts.map(&:count).sort
     assert_equal [songs(:radio_ga_ga)], songs(:let_it_be).find_related_tags
   end
 

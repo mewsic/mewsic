@@ -1,8 +1,8 @@
 <% require File.join(RAILS_ROOT, 'test', 'fixtures_helpers') %>
 
 # Song tags
-let_it_be_rock_by_quentin:
-  tag: rock
+let_it_be_grasshopper_rock_by_quentin:
+  tag: grasshopper_rock
   taggable: let_it_be
   taggable_type: Song
   tagger: quentin
@@ -17,8 +17,8 @@ let_it_be_120bpm_by_quentin:
   tagger_type: User
   context: tags
 
-let_it_be_rock_by_john:
-  tag: rock
+let_it_be_grasshopper_rock_by_john:
+  tag: grasshopper_rock
   taggable: let_it_be
   taggable_type: Song
   tagger: john
@@ -42,8 +42,8 @@ radio_ga_ga_cool_by_quentin:
   context: tags
 
 # Track tags
-guitar_for_let_it_be_rock_by_quentin:
-  tag: rock
+guitar_for_let_it_be_grasshopper_rock_by_quentin:
+  tag: grasshopper_rock
   taggable: guitar_for_let_it_be
   taggable_type: Track
   tagger: quentin
@@ -58,8 +58,8 @@ guitar_for_let_it_be_120bpm_by_quentin:
   tagger_type: User
   context: tags
 
-guitar_for_let_it_be_rock_by_john:
-  tag: rock
+guitar_for_let_it_be_grasshopper_rock_by_john:
+  tag: grasshopper_rock
   taggable: guitar_for_let_it_be
   taggable_type: Track
   tagger: john
