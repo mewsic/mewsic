@@ -26,16 +26,20 @@ class SongsController < ApplicationController
   # # FIXME # Only public songs are returned.
   #
   def index
-    return
-    redirect_to '/' and return unless request.xhr?
-   
+    if [:user_id, :mband_id].any? { |k| params.has_key? k }
+      show_user_or_mband_songs
+    else
+      show_songs_index
+    end
+  end
+
+  protected
+  def show_user_or_mband_songs_index
     @author =
       if params[:user_id]
         User.find_from_param(params[:user_id])
       elsif params[:mband_id]
         Mband.find_from_param(params[:mband_id])
-      else
-        head :bad_request and return
       end
    
     @songs = @author.songs.public.paginate(:page => params[:page], :per_page => 3)
@@ -44,7 +48,13 @@ class SongsController < ApplicationController
   rescue ActiveRecord::RecordNotFound
     head :not_found
   end
+
+  def show_songs_index
+    @newest_songs = Song.find_newest :limit => 5
+    @coolest_songs = Song.find_best :limit => 5
+  end
   
+  public
   # ==== GET /songs/:song_id
   # ==== GET /songs/:song_id.xml
   # ==== GET /songs/:song_id.png
