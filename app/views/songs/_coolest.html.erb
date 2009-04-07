@@ -30,14 +30,10 @@
 					<li><a href="">Country</a></li>																																													
 				</ul>
 				<div id="song_newest_list" class="fleft">
-					
-        <% 5.times do %>
-            <%= render :partial => 'shared/song_block_chart' %>
-        <% end %>
-					
+          <%= render :partial => 'shared/song_block_chart', :collection => @coolest_songs %>
 				</div>
 
-          <%= render :partial => 'shared/bullet_paging' %>				
+        <%= render :partial => 'shared/bullet_paging' %>				
 
 			</div>
 		</div>

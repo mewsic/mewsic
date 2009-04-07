@@ -1,4 +1,7 @@
-<%- song = song_block # XXX FIXME -%>
+<%-
+  song = song_block
+  return '<code>&lt;_song_block.html.erb&gt;</code>' unless song
+-%>
 <div class="song_block fleft">
   <div class="avatar fleft">
     <%= image_tag song.user.avatar.public_filename(:small), :size => '40x40' %>

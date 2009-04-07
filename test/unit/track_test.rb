@@ -50,7 +50,7 @@ class TrackTest < ActiveSupport::TestCase
 
   def test_taggings
     assert_equal 3, tracks(:guitar_for_let_it_be).tag_list.size
-    assert_equal 2, tracks(:guitar_for_let_it_be).tag_counts.first.count
+    assert_equal [1, 1, 2], tracks(:guitar_for_let_it_be).tag_counts.map(&:count).sort
     assert_equal [tracks(:voice_for_radio_ga_ga)], tracks(:guitar_for_let_it_be).find_related_tags
   end
 
