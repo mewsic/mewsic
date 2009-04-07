@@ -9,6 +9,33 @@
 # This controller handles the login/logout function of the site.  
 #
 class SessionsController < ApplicationController
+  
+  def connect
+    if (params[:fname]=='_opener')
+      jsoned = params[:session]
+      data = JSON.parse(jsoned)
+      session[:connect] = data
+
+      user = User.find_by_facebook_uid(data['uid'])
+
+      if (!user)
+        # create a new user for the Facebook User if not present
+        user = User.new
+        user.facebook_uid = data['uid']
+        user.login = 'fb_' + data['uid'].to_s
+        user.country = "unknown"
+        user.password = Time.now.to_i.to_s
+        user.password_confirmation = user.password
+        user.email = data['uid'].to_s + '@users.facebook.com'
+        user.save!
+      end
+
+       self.current_user = user
+    end
+    render :layout => false
+    # render the cross-domain communication channel
+    
+  end
 
   # ==== GET /login
   #

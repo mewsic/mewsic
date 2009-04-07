@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090328030858) do
+ActiveRecord::Schema.define(:version => 20090406163850) do
 
   create_table "abuses", :force => true do |t|
     t.integer  "abuseable_id"
@@ -33,6 +33,14 @@ ActiveRecord::Schema.define(:version => 20090328030858) do
     t.boolean  "closed",                                          :default => false, :null => false
     t.datetime "last_activity_at"
     t.boolean  "delta",                                           :default => false
+  end
+
+  create_table "band_members", :force => true do |t|
+    t.string   "name"
+    t.integer  "instrument_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "comments", :force => true do |t|
@@ -65,6 +73,12 @@ ActiveRecord::Schema.define(:version => 20090328030858) do
     t.datetime "created_at"
     t.datetime "accepted_at"
   end
+
+  create_table "genres", :force => true do |t|
+    t.string "name"
+  end
+
+  add_index "genres", ["name"], :name => "index_genres_on_name"
 
   create_table "help_pages", :force => true do |t|
     t.string   "title"
@@ -180,6 +194,14 @@ ActiveRecord::Schema.define(:version => 20090328030858) do
   add_index "ratings", ["rated_type", "rated_id"], :name => "index_ratings_on_rated_type_and_rated_id"
   add_index "ratings", ["rater_id"], :name => "index_ratings_on_rater_id"
 
+  create_table "replies", :force => true do |t|
+    t.integer  "answer_id"
+    t.integer  "user_id"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "songs", :force => true do |t|
     t.string   "title",          :limit => 60
     t.string   "author",         :limit => 60
@@ -279,7 +301,6 @@ ActiveRecord::Schema.define(:version => 20090328030858) do
     t.decimal  "rating_total",                            :precision => 10, :scale => 2
     t.decimal  "rating_avg",                              :precision => 10, :scale => 2
     t.integer  "writings_count",                                                         :default => 0
-    t.string   "nickname",                  :limit => 20
     t.boolean  "is_admin",                                                               :default => false
     t.string   "status",                    :limit => 3,                                 :default => "off"
     t.boolean  "name_public",                                                            :default => false
@@ -288,6 +309,7 @@ ActiveRecord::Schema.define(:version => 20090328030858) do
     t.integer  "profile_views",                                                          :default => 0
     t.boolean  "delta",                                                                  :default => false
     t.integer  "comments_count",                                                         :default => 0
+    t.integer  "facebook_uid"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

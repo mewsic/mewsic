@@ -141,5 +141,10 @@ module UsersHelper
       image_tag("move_arrow_#{direction}.png", :class => 'faded')
     end
   end
+  
+  def fb_connected?
+    (session[:connect] ? true : false)
+  end
+  
 
 end

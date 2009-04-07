@@ -63,6 +63,8 @@ ActionController::Routing::Routes.draw do |map|
 
   # Login / logout
   #
+  map.facebook_connect '/sessions/connect', :controller => 'sessions', :action => 'connect'
+  
   map.resources :sessions
   map.login '/login', :controller => 'sessions', :action => 'new'
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'

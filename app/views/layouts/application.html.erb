@@ -25,12 +25,16 @@
   <link rel="stylesheet" type="text/css" href="stylesheets/jquery.Jcrop.css" />    
 
 
+
+
+
   <%= javascript_include_tag *%w( application home ) %>
 
   <%= yield :head %>
 
 </head>
 <body>
+
 
 <!-- HEADER -->
 <div id="header">
@@ -47,9 +51,13 @@
   
 	<ul class="login fright">
 		<li><a href="#join" id="create-user" class="join_button">JOIN NOW</a></li>
-		<li>or connect with <a href="" class="facebook">Facebook</a></li>
+		<li>or <fb:login-button size="small" background="light" ></fb:login-button> Connect with <a href="" class="facebook">Facebook</a></li>
 		<li><a href="profile.php" class="login_button">LOGIN</a></li>
 	</ul>
+	<% if fb_connected? %>
+          <fb:profile-pic uid="<%= session[:connect]['uid'] %>" size="square" facebook-logo="true"></fb:profile-pic>
+          <b> <fb:name uid="<%= session[:connect]['uid'] %>" useyou="false" capitalize="true" /> </b>
+  <% end %>
   <div class="clear"> </div>
   <div id="breadcrumb_bar">
     <div class="corner_lt_blue fleft"> </div>
@@ -79,6 +87,27 @@
 
 <%= render :partial => 'shared/application_bar' %>
 <%= render :partial => 'shared/footer' %>
+
+
+<script src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript"></script>
+
+<script type="text/javascript">
+FB_RequireFeatures(["XFBML", "CanvasUtil", "Api"], function(){
+  FB.Facebook.init('8b03aa5c7dae2e65e155bdcd41634d25', '/sessions/connect');
+  
+  FB.Facebook.get_sessionState().waitUntilReady(function(session) {
+
+  var is_now_logged_into_facebook = session ? true : false;
+  var is_session_loaded = <%= (session[:connect] ? true : false) %>
+
+  if (is_now_logged_into_facebook!=is_session_loaded) {
+    // user logged in and changed status
+    window.location = '/';
+  }
+});
+  
+})
+</script>
 
 </body>
 </html>
