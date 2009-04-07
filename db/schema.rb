@@ -35,14 +35,6 @@ ActiveRecord::Schema.define(:version => 20090406163850) do
     t.boolean  "delta",                                           :default => false
   end
 
-  create_table "band_members", :force => true do |t|
-    t.string   "name"
-    t.integer  "instrument_id"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "comments", :force => true do |t|
     t.string   "title",            :limit => 60
     t.text     "body"
@@ -73,12 +65,6 @@ ActiveRecord::Schema.define(:version => 20090406163850) do
     t.datetime "created_at"
     t.datetime "accepted_at"
   end
-
-  create_table "genres", :force => true do |t|
-    t.string "name"
-  end
-
-  add_index "genres", ["name"], :name => "index_genres_on_name"
 
   create_table "help_pages", :force => true do |t|
     t.string   "title"
@@ -193,14 +179,6 @@ ActiveRecord::Schema.define(:version => 20090406163850) do
 
   add_index "ratings", ["rated_type", "rated_id"], :name => "index_ratings_on_rated_type_and_rated_id"
   add_index "ratings", ["rater_id"], :name => "index_ratings_on_rater_id"
-
-  create_table "replies", :force => true do |t|
-    t.integer  "answer_id"
-    t.integer  "user_id"
-    t.text     "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "songs", :force => true do |t|
     t.string   "title",          :limit => 60
