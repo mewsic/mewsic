@@ -6,6 +6,10 @@ def random_rating
   rand * 5
 end
 
+def random_rating_count
+  (1 / Math.log(rand(2**12)) * 2**8).to_i rescue 0
+end
+
 def random_title
   shuffle(lorem_ipsum[0..64]).capitalize + '.'
 end

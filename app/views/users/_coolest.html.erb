@@ -3,60 +3,20 @@
      Max value is 105px, Min value 16px  -->
 <ul class="people_chart">
 	<h2>Coolest People</h2>
+  <% for user in @coolest_users %>
+
 	<li>
 		<div class="votes_chart">
 			<div class="avatar fleft">
-				<a href="">
-				<img src="images/temp/avatar_alvarez.jpg" width="40" height="40" />					
-				</a>
+        <%= link_to image_tag(user.avatar.public_filename(:small), :size => '40x40'), user %>
 			</div>
-				<span class="chart_value alright" style="padding-left: 105px;">481 votes</span>
-			<a href="" class="song_author block"><strong>Alvarez de la Fonzeca</strong></a>
+      <span class="chart_value alright" style="padding-left: <%= 105 * user.rating_count / @max_votes %>px;"><%= user.rating_count %> votes</span>
+      <a href="" class="song_author block"><strong><%= user.nickname %></strong></a>
 			
       <%# rating %>
 			
 		</div>					
 	</li>
-	<li>
-		<div class="votes_chart">
-			<div class="avatar fleft">
-				<a href="">
-				<img src="images/temp/avatar_enzo.jpg" width="40" height="40" />					
-				</a>
-			</div>
-				<span class="chart_value alright" style="padding-left: 80px;">151 votes</span>
-			<a href="" class="song_author block"><strong>ENZO</strong></a>
 
-      <%# rating %>
-
-		</div>					
-	</li>
-	<li>
-		<div class="votes_chart">
-			<div class="avatar fleft">
-				<a href="">
-				<img src="images/temp/avatar_fabio.jpg" width="40" height="40" />					
-				</a>
-			</div>
-				<span class="chart_value alright" style="padding-left: 30px;">98 votes</span>
-			<a href="" class="song_author block"><strong>Babongo</strong></a>
-
-      <%# rating %>
-
-		</div>					
-	</li>
-	<li>
-		<div class="votes_chart">
-			<div class="avatar fleft">
-				<a href="">
-				<img src="images/temp/avatar_ndstr.jpg" width="40" height="40" />					
-				</a>
-			</div>
-					<span class="chart_value alright" style="padding-left: 16px;">23 votes</span>
-			<a href="" class="song_author block"><strong>NDSTR</strong></a>
-
-      <%# rating %>
-
-		</div>					
-	</li>
+  <% end %>
 </ul>

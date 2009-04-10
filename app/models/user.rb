@@ -138,6 +138,10 @@ class User < ActiveRecord::Base
   
   before_save :check_links
 
+  named_scope :active, :conditions => 'activated_at IS NOT NULL'
+  named_scope :coolest, :order => 'rating_count DESC, rating_avg DESC'
+  named_scope :newest, :order => 'activated_at DESC'
+
   # Returns the user avatar if it's set, or the default avatar if not.
   #
   def avatar_with_default
@@ -293,9 +297,9 @@ class User < ActiveRecord::Base
   end
 
   def self.find_coolest(options = {})
-    self.find(:all, options.merge({:conditions => ['activated_at IS NOT NULL'], :order => 'rating_avg DESC'})) 
+    self.active.coolest.find(:all, options)
   end
-  
+
   def self.find_best(options = {})
     self.find(:all, options.merge({:conditions => ["songs.id IS NOT NULL AND songs.status = ? AND users.activated_at IS NOT NULL", Song.statuses.public], :joins => "LEFT OUTER JOIN songs ON users.id = songs.user_id", :order => 'songs.rating_avg DESC', :include => :avatar})) 
   end

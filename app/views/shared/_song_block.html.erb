@@ -11,7 +11,7 @@
     Instr.s
   </div>
 	<div class="song_details fleft">
-    <%= link_to song.title, song, :class => 'song_title' %><br/>
+    <%= link_to truncate(song.title, :length => 40), song, :class => 'song_title' %><br/>
     <strong><%= link_to song.user.nickname, song.user, :class => 'song_author' %></strong><br />
     <%= link_to "Mixable songs (#{song.collaboration_count})", '#FIXME', :class => 'mixable_link' %>
 	</div>

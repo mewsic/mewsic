@@ -27,17 +27,21 @@ class UsersController < ApplicationController
 
   # ==== GET /users
   #
-  # Renders the users index page, using User#find_coolest, User#find_best, User#find_prolific
-  # User#find_friendliest, User#find_newest, User#find_most_instruments and Mband#find_coolest.
+  # Renders the users index page.
   #
   def index
-    #@coolest = User.find_paginated_coolest          :limit => 9    
-    #@best = User.find_paginated_best                :page => 1, :per_page => 3    
-    #@prolific = User.find_paginated_prolific        :limit => 3
-    #@friendliest = User.find_friendliest            :limit => 1
-    #@coolest_mbands = Mband.find_coolest            :limit => 1
-    #@newest = User.find_paginated_newest            :page => 1, :per_page => 3
-    #@most_instruments = User.find_most_instruments  :limit => 1
+    @most_played_artist = Song.most_played_artist
+    @most_played_by_artist = Song.find_most_played_by_artist :limit => 3
+
+    # MMMH.. this code stinks.
+    @most_played_tags = Tag.find(
+      Tagging.count(:group => :tag_id, :limit => 3, :order => 'count_all DESC',
+                    :conditions => {'taggable_type' => 'song',
+                      'taggable_id' => @most_played_by_artist.map(&:id)}).map(&:first)
+    )
+
+    @coolest_users = User.find_coolest :limit => 4
+    @max_votes = @coolest_users.map(&:rating_count).max
   end
 
   # ==== XHR GET /users/newest?page=N

@@ -1,15 +1,17 @@
 <div class="pick_wrap margin30">
-		<a href="" class="pick_ad block fleft" title="David Bowie" style="background-image: url('images/temp/pick_bowie.jpg');">
+  <a href="" class="pick_ad block fleft" title="<%= @most_played_artist %>" style="background-image: url('images/temp/pick_bowie.jpg');">
 			<p class="pick_info block">
 				<strong>MOST PLAYED ARTIST</strong>
 			</p>
 		</a>
 		<div class="pick_details fright">
-			<h1>David Bowie</h1>
+      <h1><%= @most_played_artist %></h1>
 			<p class="tag_genre">
-				<a href="">Acid Jazz</a><a href="">Acoustic</a><a href="">Alternative</a>
+      <% for tag in @most_played_tags %>
+        <%= link_to tag.name, '#FIXME' %>
+      <% end %>
 			</p>
-			<a class="item_count block" href="">(109) songs</a>
+      <a class="item_count block" href="">(<%= @most_played_by_artist.total_entries %>) songs</a>
 			
 			<!-- VIDEO BOXES -->
 			<div class="video_thumb fleft">
@@ -65,9 +67,7 @@
 
 		<!-- SONG BLOCK -->
 		<div class="w454 fleft">
-      <% 3.times do %>
-        <%= render :partial => 'shared/song_block' %>
-      <% end %>
+      <%= render :partial => 'shared/song_block', :collection => @most_played_by_artist %>
 		</div>
 		<!-- END SONG BLOCK -->
 </div>

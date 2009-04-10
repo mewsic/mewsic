@@ -41,14 +41,16 @@
 	<div class="w440">
 	<h2>Most played artist</h2>
 	<div class="snip fleft">
-		<a href=""  title="David Bowie" class="fleft">
+    <a href=""  title="<%= @most_played_artist %>" class="fleft">
 			<img src="images/temp/pick_bowie.jpg" width="100" />
 		</a>
-		<a href="" class="footer_name_link" title="David Bowie">
-			David Bowie
+    <a href="" class="footer_name_link" title="<%= @most_played_artist %>">
+      <%= @most_played_artist %>
 		</a><br />
 		<p class="tag_genre fleft">
-			<a href="">Acid Jazz</a><a href="">Acoustic</a><a href="">Alternative</a>
+    <% for tag in @most_played_tags %>
+      <%= link_to tag.name, '#FIXME' %>
+    <% end %>
 		</p>
 		<br />
 		<a class="item_count" href="">(109) songs</a>

@@ -200,6 +200,17 @@ class Song < ActiveRecord::Base
 
     return songs
   end
+
+  def self.most_played_artist
+    @_mpa ||= self.public.count(:group => 'author', :order => 'count_all DESC').first.first
+  end
+
+  def self.find_most_played_by_artist(options = {})
+    options[:per_page] ||= options.delete(:limit)
+    options[:page] ||= 1
+
+    self.public.paginate(:all, options.merge(:conditions => {'author' => most_played_artist}))
+  end
  
   # Returns an array of all instruments used into this song.
   #

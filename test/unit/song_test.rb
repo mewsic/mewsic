@@ -143,4 +143,9 @@ class SongTest < ActiveSupport::TestCase
     assert !File.exists?(s.absolute_filename)
   end
 
+  def test_most_played_artist
+    artist = Song.most_played_artist # XXX this stinks, but with the current fixtures is a no-go
+    assert Song.find_most_played_by_artist.all? { |s| s.author == artist }
+  end
+
 end
