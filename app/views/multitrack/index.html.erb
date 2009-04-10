@@ -6,10 +6,6 @@
       $('#flash').css({height: height.toString() + 'px'});
 		}
 	
-		function isLoggerAvailable() {
-			var isfb = false; try { isfb = console.log != undefined; } catch( e ) {}; return( isfb );
-		}
-
 		var flashvars = {
 			serverPath: '<%= APPLICATION[:url] %>',
 			settingsXMLPath: '/multitrack.xml',

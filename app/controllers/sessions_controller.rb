@@ -6,37 +6,13 @@
 #
 # == Description
 #
-# This controller handles the login/logout function of the site.  
+# This controller handles the login/logout function of the site, and implements bare support
+# for facebook connect.
 #
 class SessionsController < ApplicationController
+
+  before_filter :check_facebook_request, :only => :connect
   
-  def connect
-    if (params[:fname]=='_opener')
-      jsoned = params[:session]
-      data = JSON.parse(jsoned)
-      session[:connect] = data
-
-      user = User.find_by_facebook_uid(data['uid'])
-
-      if (!user)
-        # create a new user for the Facebook User if not present
-        user = User.new
-        user.facebook_uid = data['uid']
-        user.login = 'fb_' + data['uid'].to_s
-        user.country = "unknown"
-        user.password = Time.now.to_i.to_s
-        user.password_confirmation = user.password
-        user.email = data['uid'].to_s + '@users.facebook.com'
-        user.save!
-      end
-
-       self.current_user = user
-    end
-    render :layout => false
-    # render the cross-domain communication channel
-    
-  end
-
   # ==== GET /login
   #
   # Show login page.
@@ -81,8 +57,56 @@ class SessionsController < ApplicationController
     redirect_back_or_default('/')
   end
 
+  # === GET /connect
+  #
+  # Callback for the facebook connect service (http://connect.facebook.com)
+  #
+  def connect
+    raise ArgumentError unless (params[:fname] == '_opener')
+    raise ArgumentError unless connect = ActiveSupport::JSON.decode(params[:session])
+
+    session[:connect] = connect
+
+    user = User.find_by_facebook_uid(connect['uid'])
+
+    if user.nil?
+      # create a new user for the Facebook User if not present
+      @user = User.new
+      @user.facebook_uid = connect['uid']
+
+      # XXX  this is crap: login, country and email should be fetched from the facebook. Why?
+      # because: login clashes could occur (if an user names itself fb_123456), the "unknown"
+      # country is BAD design, because it's a corner case to cope with in views, and the fake
+      # email is USELESS to send mewsic e-mail notifications to the user.
+      #
+      @user.login = "fb_#{@user.facebook_uid}"                 # XXX
+      @user.country = "unknown"                                # XXX
+      @user.email = "#{@user.facebook_uid}@users.facebook.com" # XXX
+
+      @user.password = @user.password_confirmation = rand(2**32).to_s
+      @user.save!
+    end
+
+    self.current_user = @user
+
+    # render the cross-domain communication channel, nothing for now.
+    head :ok
+
+  rescue ActiveRecord::ActiveRecordError
+    debugger
+    head :forbidden
+
+  rescue ArgumentError
+    head :bad_request
+  end
+
   def to_breadcrumb_link
     ['Log in', nil]
+  end
+
+  private
+  def check_facebook_request
+    # XXX TODO check that the request is actually coming from facebook.
   end
 
 end

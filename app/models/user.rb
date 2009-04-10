@@ -92,7 +92,7 @@ class User < ActiveRecord::Base
   # are run through sanitize, that uses the white-list
   # sanitizer configured in environment.rb 
   #
-  xss_terminate :except => [:email, :msn, :gender, :photos_url, :blog_url, :myspace_url],
+  xss_terminate :except => [:email, :msn, :gender, :photos_url, :blog_url, :myspace_url, :facebook_uid],
                 :sanitize => [:motto, :tastes]
   
   has_many :mband_memberships
@@ -134,7 +134,7 @@ class User < ActiveRecord::Base
   attr_accessible :password, :password_confirmation, :first_name, :last_name, :name_public,
     :gender, :motto, :tastes, :country, :city, :age, :photos_url, :blog_url, :myspace_url,
     :skype, :msn, :skype_public, :msn_public, :podcast_public
-  attr_readonly :comments_count, :writings_count, :profile_views
+  attr_readonly :comments_count, :writings_count, :profile_views, :facebook_uid
   
   before_save :check_links
 

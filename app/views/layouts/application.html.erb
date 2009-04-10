@@ -16,6 +16,9 @@
   <script type="text/javascript" src="javascripts/jquery.simpleautogrow.js"></script>  
   <script type="text/javascript" src="javascripts/jquery.MetaData.js"></script>
   <script type="text/javascript" src="javascripts/jquery.rating.pack.js"></script>
+
+  <script type="text/javascript" src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" defer="true"></script>
+
   <link rel="stylesheet" type="text/css" href="stylesheets/jquery.rating.css" />
   
   <script type="text/javascript" src="javascripts/jquery.dataTables.min.js"></script>  
@@ -23,10 +26,6 @@
 
   <script type="text/javascript" src="javascripts/jquery.Jcrop.pack.js"></script>  
   <link rel="stylesheet" type="text/css" href="stylesheets/jquery.Jcrop.css" />    
-
-
-
-
 
   <%= javascript_include_tag *%w( application home ) %>
 
@@ -50,14 +49,21 @@
   </ul>
   
 	<ul class="login fright">
+  <% unless logged_in? %>
 		<li><a href="#join" id="create-user" class="join_button">JOIN NOW</a></li>
-		<li>or <fb:login-button size="small" background="light" ></fb:login-button> Connect with <a href="" class="facebook">Facebook</a></li>
+		<li>or <fb:login-button size="small" background="light"></fb:login-button> Connect with <a href="" class="facebook">Facebook</a></li>
 		<li><a href="profile.php" class="login_button">LOGIN</a></li>
-	</ul>
-	<% if fb_connected? %>
-          <fb:profile-pic uid="<%= session[:connect]['uid'] %>" size="square" facebook-logo="true"></fb:profile-pic>
-          <b> <fb:name uid="<%= session[:connect]['uid'] %>" useyou="false" capitalize="true" /> </b>
+  <% else %>
+    <% if fb_connected? %>
+      <li><fb:profile-pic uid="<%= current_user.facebook_uid %>" size="square" facebook-logo="true"></fb:profile-pic></li>
+      <li><fb:name uid="<%= current_user.facebook_uid %>" useyou="false" capitalize="true" /></li>
+    <% else %>
+      <li><%= image_tag current_user.avatar.public_filename(:icon) %></li>
+      <li>Hi, <%= current_user.login %>!</li>
+    <% end %>
   <% end %>
+	</ul>
+    
   <div class="clear"> </div>
   <div id="breadcrumb_bar">
     <div class="corner_lt_blue fleft"> </div>
@@ -88,25 +94,8 @@
 <%= render :partial => 'shared/application_bar' %>
 <%= render :partial => 'shared/footer' %>
 
-
-<script src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript"></script>
-
 <script type="text/javascript">
-FB_RequireFeatures(["XFBML", "CanvasUtil", "Api"], function(){
-  FB.Facebook.init('8b03aa5c7dae2e65e155bdcd41634d25', '/sessions/connect');
-  
-  FB.Facebook.get_sessionState().waitUntilReady(function(session) {
-
-  var is_now_logged_into_facebook = session ? true : false;
-  var is_session_loaded = <%= (session[:connect] ? true : false) %>
-
-  if (is_now_logged_into_facebook!=is_session_loaded) {
-    // user logged in and changed status
-    window.location = '/';
-  }
-});
-  
-})
+  loadFacebookFeatures(<%= fb_connected? %>); // XXX REMOVE ME
 </script>
 
 </body>

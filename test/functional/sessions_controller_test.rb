@@ -81,6 +81,44 @@ class SessionsControllerTest < Test::Unit::TestCase
     assert !@controller.send(:logged_in?)
   end
 
+
+  def test_should_not_allow_connect_if_request_is_not_coming_from_facebook
+    # XXX TODO
+  end
+
+  def test_should_connect_to_facebook_and_create_a_new_user
+
+    assert_difference 'User.count' do
+      request_facebook_connect(:uid => 31337)
+    end
+
+    assert_not_nil assigns(:user)
+    assert_not_nil session[:user]
+
+    user = User.find(session[:user])
+    assert_equal assigns(:user), user
+
+    assert user.valid?
+
+    assert_equal 'fb_31337', user.login                 # XXX
+    assert_equal 'unknown', user.country                # XXX
+    assert_equal '31337@users.facebook.com', user.email # XXX
+  end
+
+  def test_should_connect_to_facebook_and_reuse_existing_user
+    assert_difference 'User.count' do
+      request_facebook_connect(:uid => 1234567)
+    end
+
+    logout
+
+    assert_no_difference 'User.count' do
+      request_facebook_connect(:uid => 1234567)
+    end
+
+    assert_not_nil session[:user]
+  end
+
   protected
     def auth_token(token)
       CGI::Cookie.new('name' => 'auth_token', 'value' => token)
@@ -88,5 +126,10 @@ class SessionsControllerTest < Test::Unit::TestCase
     
     def cookie_for(user)
       auth_token users(user).remember_token
+    end
+
+    def request_facebook_connect(options)
+      get :connect, :fname => '_opener', :session => "{uid:#{options[:uid]}}"
+      assert_response :success
     end
 end

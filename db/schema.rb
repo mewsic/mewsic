@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090406163850) do
+ActiveRecord::Schema.define(:version => 20090410174759) do
 
   create_table "abuses", :force => true do |t|
     t.integer  "abuseable_id"
@@ -287,7 +287,7 @@ ActiveRecord::Schema.define(:version => 20090406163850) do
     t.integer  "profile_views",                                                          :default => 0
     t.boolean  "delta",                                                                  :default => false
     t.integer  "comments_count",                                                         :default => 0
-    t.integer  "facebook_uid"
+    t.string   "facebook_uid"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
