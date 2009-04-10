@@ -30,6 +30,8 @@ function loadFacebookFeatures(is_session_loaded) {
   } catch(e) {
     if (isLoggerAvailable())
       console.log("Facebook connect support is not available");
+
+    $('#facebook-connect-button').hide();
   }
 
 }

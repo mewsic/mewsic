@@ -12,21 +12,12 @@
   <%= jquery_javascript_tags %>
   <%= jquery_stylesheet_tags %>
 
-  <script type="text/javascript" src="javascripts/jquery.corner.js"></script>
-  <script type="text/javascript" src="javascripts/jquery.simpleautogrow.js"></script>  
-  <script type="text/javascript" src="javascripts/jquery.MetaData.js"></script>
-  <script type="text/javascript" src="javascripts/jquery.rating.pack.js"></script>
+  <%= javascript_include_tag *%w( jquery.corner.js jquery.simpleautogrow.js jquery.MetaData.js ) %>
 
-  <script type="text/javascript" src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" defer="true"></script>
+  <%= javascript_include_tag *%w( jquery.rating.pack.js jquery.dataTables.min.js jquery.Jcrop.pack.js ) %>
+  <%= stylesheet_link_tag    *%w( jquery.rating.css     dataTables.css           jquery.Jcrop.css     ) %>
 
-  <link rel="stylesheet" type="text/css" href="stylesheets/jquery.rating.css" />
-  
-  <script type="text/javascript" src="javascripts/jquery.dataTables.min.js"></script>  
-  <link rel="stylesheet" type="text/css" href="stylesheets/dataTables.css" />    
-
-  <script type="text/javascript" src="javascripts/jquery.Jcrop.pack.js"></script>  
-  <link rel="stylesheet" type="text/css" href="stylesheets/jquery.Jcrop.css" />    
-
+  <!--script type="text/javascript" src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" defer="true"></script-->
   <%= javascript_include_tag *%w( application home ) %>
 
   <%= yield :head %>
@@ -51,7 +42,7 @@
 	<ul class="login fright">
   <% unless logged_in? %>
 		<li><a href="#join" id="create-user" class="join_button">JOIN NOW</a></li>
-		<li>or <fb:login-button size="small" background="light"></fb:login-button> Connect with <a href="" class="facebook">Facebook</a></li>
+		<li id="facebook-connect-button">or <fb:login-button size="small" background="light"></fb:login-button> Connect with <a href="" class="facebook">Facebook</a></li>
 		<li><a href="profile.php" class="login_button">LOGIN</a></li>
   <% else %>
     <% if fb_connected? %>
