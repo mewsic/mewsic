@@ -13,7 +13,7 @@
 	<div class="song_details fleft">
     <%= link_to truncate(song.title, :length => 40), song, :class => 'song_title' %><br/>
     <strong><%= link_to song.user.nickname, song.user, :class => 'song_author' %></strong><br />
-    <%= link_to "Mixable songs (#{song.collaboration_count})", '#FIXME', :class => 'mixable_link' %>
+    <%= link_to "Mixable songs (#{song.collaboration_count})", '#FIXME', :class => 'mixable_link' unless song.collaboration_count.zero? %>
 	</div>
 
 	<div class="fright" style="margin: 4px 4px 0 0">
