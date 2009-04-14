@@ -53,7 +53,7 @@
     <% end %>
 		</p>
 		<br />
-		<a class="item_count" href="">(109) songs</a>
+    <a class="item_count" href="">(<%= @most_played_by_artist.total_entries %>) songs</a>
 	</div>
 
 	
@@ -65,9 +65,9 @@
 	</ul>													
 	<div class="clear"> </div>
 
-  <% 2.times do %>
+  <% @most_played_by_artist[0..1].each do |song| %>
     <li class="border_list">
-      <%= render :partial => 'shared/song_block' %>
+      <%= render :partial => 'shared/song_block', :object => song %>
     </li>
   <% end %>
 

@@ -384,6 +384,12 @@ class User < ActiveRecord::Base
     find(:all, :select => 'country', :group => 'country', :order => 'country').map(&:country)
   end
 
+  def self.find_players_of_artist(artist, options = {})
+    options[:order] ||= SQL_RANDOM_FUNCTION
+    self.active.find(:all, options.merge(:include => :songs, :group => 'songs.id',
+                                         :conditions => ['songs.author = ?', artist]))
+  end
+
   def is_pending_friends_by_me_with?(user)
     Friendship.find(:first, :conditions => ["user_id = ? AND friend_id = ? AND accepted_at IS NULL", self.id, user.id])
   end

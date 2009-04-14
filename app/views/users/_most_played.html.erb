@@ -47,21 +47,13 @@
 			<!-- PICKED RELATED -->
 			<ul class="related_list alright">
 				<h2>Users playing this artist</h2>
+        <% @most_played_players.each do |user| %>
 				<li class="user_thumb">
-					<img src="images/thumb_loader_white.gif" width="39" height="39" />
+          <%= image_tag 'thumb_loader_white.gif', :size => '39x39' %>
+          <%= link_to image_tag(user.avatar.public_filename(:small), :size => '40x40', :class => 'loaded'), user %>
 				</li>
-				<li class="user_thumb">
-					<img src="images/thumb_loader_white.gif" width="39" height="39" />
-				</li>
-				<li class="user_thumb">
-					<img src="images/thumb_loader_white.gif" width="39" height="39" />
-					<img src="images/user_thumb.jpg" width="40" height="40" class="loaded" />
-				</li>
-				<li class="user_thumb">
-					<img src="images/thumb_loader_white.gif" width="39" height="39" />
-					<img src="images/user_thumb.jpg" width="40" height="40" class="loaded" />
-				</li>
-			<a class="item_count block" href="">(109) songs</a>			
+        <% end %>
+        <a class="item_count block" href="">(<%= @most_played_by_artist.total_entries %>) songs</a>
 			</ul>
 		</div>
 

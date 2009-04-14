@@ -33,6 +33,8 @@ class UsersController < ApplicationController
     @most_played_artist = Song.most_played_artist
     @most_played_by_artist = Song.find_most_played_by_artist :limit => 3
 
+    @most_played_players = User.find_players_of_artist(@most_played_artist, :limit => 4)
+
     # MMMH.. this code stinks.
     @most_played_tags = Tag.find(
       Tagging.count(:group => :tag_id, :limit => 3, :order => 'count_all DESC',
