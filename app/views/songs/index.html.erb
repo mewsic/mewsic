@@ -29,9 +29,9 @@
 
 		<h2>Popular Tags</h2>
 		<p class="tag_genre">
-			<a href="">Acid Jazz/Fusion,</a>  <a href="">Acoustic,</a>  <a href="">Alternative 	Rock,</a>  <a href="">Ambient,</a>  <a href="">Blues,</a>  
-			<a href="">British Pop,</a>  <a href="">Classic Rock,</a>  <a href="">Country,</a>  <a href="">Country Rock,</a>  <a href="">Crossover,</a>  <a href="">Dance,</a>  
-			<a href="">Disco,</a>  <a href="">Drum & Bass,</a>  <a href="">EBM,</a>  <a 	href="">Electro-Rock,</a>  <a href="">Electronic,</a>  <a href="">Folk Rock,</a>  <a href="">Funk</a><a href="">Acid Jazz/Fusion,</a>  <a href="">Acoustic,</a>  <a href="">Alternative 	Rock,</a>  <a href="">Ambient,</a>  <a href="">Blues</a>
+			<% for tag in @popular_tags %>
+				<%= link_to tag, "##{e(tag)}" %>
+			<% end %>
 		</p>
 		<span class="divider block"> </span>	
 

@@ -51,14 +51,16 @@ class SongsController < ApplicationController
 
   def show_songs_index
     @newest_songs = Song.find_newest :limit => 5
-    @newest_tags = Tag.find_top :limit => 7, :conditions => {:taggable_type => 'song'}
     @newest_dates = [ ['Today', Date.today], ['Yesterday', Date.yesterday] ] +
       (2..7).map { |i| day = Date.today - i; [ day.strftime("%d %B"), day ]} +
       [ [ 'Past week',  ((Date.today - 14)..(Date.today - 8))  ],
         [ 'Last month', ((Date.today - 45)..(Date.today - 15)) ] ]
 
     @coolest_songs = Song.find_best :limit => 5
-    @coolest_tags = @newest_tags # XXX FIXME
+
+    @popular_tags = Tag.find_top :limit => 20, :conditions => {:taggable_type => 'song'}
+
+    @newest_tags = @coolest_tags = @popular_tags # XXX FIXME
   end
   
   public

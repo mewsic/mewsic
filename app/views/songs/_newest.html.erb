@@ -19,7 +19,7 @@
 			<div class="browse_pane_right fleft">
 				<ul class="maingenre_type alleft">
 					<li class="current"><a href="">All</a></li>
-					<% @newest_tags.each do |tag| %>
+					<% @newest_tags[0..6].each do |tag| %>
 						<li><%= link_to tag, "#newest/#{e(tag)}" %></li>
 					<% end %>
 				</ul>
