@@ -11,6 +11,7 @@
 class SongsController < ApplicationController
   
   before_filter :login_required, :only => [:update, :rate, :mix, :destroy, :confirm_destroy]
+  before_filter :find_author, :only => :index
   before_filter :accessible_song_required, :only => [:show, :tracks, :download]
   before_filter :writable_song_required, :only => [:update, :mix]
   before_filter :destroyable_song_required, :only => [:destroy, :confirm_destroy]
@@ -18,6 +19,7 @@ class SongsController < ApplicationController
 
   protect_from_forgery
   
+  # ==== XHR GET /songs
   # ==== XHR GET /songs?[user_id|mband_id]=ID
   #
   # * HTML format: renders a paginated index of songs by User or Mband. Every
@@ -26,7 +28,7 @@ class SongsController < ApplicationController
   # # FIXME # Only public songs are returned.
   #
   def index
-    if [:user_id, :mband_id].any? { |k| params.has_key? k }
+    if @author
       show_user_or_mband_songs_index
     else
       show_songs_index
@@ -34,34 +36,27 @@ class SongsController < ApplicationController
   end
 
   protected
-  def show_user_or_mband_songs_index
-    @author =
-      if params[:user_id]
-        User.find_from_param(params[:user_id])
-      elsif params[:mband_id]
-        Mband.find_from_param(params[:mband_id])
-      end
-   
-    @songs = @author.songs.public.paginate(:page => params[:page], :per_page => 3)
-    render :layout => false
+    def show_user_or_mband_songs_index 
+      @songs = @author.songs.public.paginate(:page => params[:page], :per_page => 3)
+      render :layout => false
 
-  rescue ActiveRecord::RecordNotFound
-    head :not_found
-  end
+    rescue ActiveRecord::RecordNotFound
+      head :not_found
+    end
 
-  def show_songs_index
-    @newest_songs = Song.find_newest :limit => 5
-    @newest_dates = [ ['Today', Date.today], ['Yesterday', Date.yesterday] ] +
-      (2..7).map { |i| day = Date.today - i; [ day.strftime("%d %B"), day ]} +
-      [ [ 'Past week',  ((Date.today - 14)..(Date.today - 8))  ],
-        [ 'Last month', ((Date.today - 45)..(Date.today - 15)) ] ]
+    def show_songs_index
+      @newest_songs = Song.find_newest :limit => 5
+      @newest_dates = [ ['Today', Date.today], ['Yesterday', Date.yesterday] ] +
+        (2..7).map { |i| day = Date.today - i; [ day.strftime("%d %B"), day ]} +
+        [ [ 'Past week',  ((Date.today - 14)..(Date.today - 8))  ],
+          [ 'Last month', ((Date.today - 45)..(Date.today - 15)) ] ]
 
-    @coolest_songs = Song.find_best :limit => 5
+      @coolest_songs = Song.find_best :limit => 5
 
-    @popular_tags = Tag.find_top :limit => 20, :conditions => {:taggable_type => 'song'}
+      @popular_tags = Tag.find_top :limit => 20, :conditions => {:taggable_type => 'song'}
 
-    @newest_tags = @coolest_tags = @popular_tags # XXX FIXME
-  end
+      @newest_tags = @coolest_tags = @popular_tags # XXX FIXME
+    end
   
   public
   # ==== GET /songs/:song_id
@@ -231,6 +226,15 @@ protected
   #
   def to_breadcrumb_link
     ['Music', music_path]
+  end
+
+  def find_author
+    @author =
+      if params[:user_id]
+        User.find_from_param(params[:user_id])
+      elsif params[:mband_id]
+        Mband.find_from_param(params[:mband_id])
+      end
   end
 
   def accessible_song_required
