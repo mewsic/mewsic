@@ -1,6 +1,10 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
 
+  def e(obj)
+    CGI.escape(obj.to_s)
+  end
+
   def jquery_javascript_tags
     if RAILS_ENV == 'production'
       # Load from google APIs
