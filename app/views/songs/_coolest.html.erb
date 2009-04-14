@@ -12,22 +12,16 @@
 				<div class="loader"> </div>
 				<ul class="instr_type alright">
 					<li class="current"><a href="">ALL</a></li>
-					<li><a href="">M-Bands</a></li>
-					<li><a href="">Users</a></li>
+					<li><%= link_to 'M-Bands', '#coolest/mbands' %></li>
+					<li><%= link_to 'Users', '#coolest/users' %></li>
 				</ul>
 			</div>
 			<div class="browse_pane_right fleft">
 				<ul class="maingenre_type alleft">
 					<li class="current"><a href="">All</a></li>
-					<li><a href="">Rock</a></li>
-					<li><a href="">Indie</a></li>
-					<li><a href="">Electronic</a></li>
-					<li><a href="">Pop</a></li>
-					<li><a href="">Metal</a></li>																									
-					<li><a href="">Hip-Hop</a></li>																									
-					<li><a href="">Jazz</a></li>																									
-					<li><a href="">Classical</a></li>																									
-					<li><a href="">Country</a></li>																																													
+					<% @coolest_tags.each do |tag| %>
+						<li><%= link_to tag, "#coolest/#{e(tag)}" %></li>
+					<% end %>
 				</ul>
 				<div id="song_newest_list" class="fleft">
           <%= render :partial => 'shared/song_block_chart', :collection => @coolest_songs %>

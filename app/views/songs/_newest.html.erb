@@ -11,29 +11,17 @@
 			<div class="browse_pane_left fleft">
 				<div class="loader"> </div>
 				<ul class="instr_type alright">
-					<li class="current"><a href="">Today</a></li>
-					<li><a href="">Yesterday</a></li>
-					<li><a href="">20 March</a></li>
-					<li><a href="">19 March</a></li>
-					<li><a href="">18 March</a></li>
-					<li><a href="">17 March</a></li>																									
-					<li><a href="">16 March</a></li>																									
-					<li><a href="">Past week</a></li>																									
-					<li><a href="">Last Month</a></li>																									
+					<% @newest_dates.each do |label, day| %>
+						<li class="<%= 'current' if day.today? rescue false %>"><%= link_to label, "#newest/#{day}" %></li>
+					<% end %>
 				</ul>
 			</div>
 			<div class="browse_pane_right fleft">
 				<ul class="maingenre_type alleft">
 					<li class="current"><a href="">All</a></li>
-					<li><a href="">Rock</a></li>
-					<li><a href="">Indie</a></li>
-					<li><a href="">Electronic</a></li>
-					<li><a href="">Pop</a></li>
-					<li><a href="">Metal</a></li>																									
-					<li><a href="">Hip-Hop</a></li>																									
-					<li><a href="">Jazz</a></li>																									
-					<li><a href="">Classical</a></li>																									
-					<li><a href="">Country</a></li>																																													
+					<% @newest_tags.each do |tag| %>
+						<li><%= link_to tag, "#newest/#{e(tag)}" %></li>
+					<% end %>
 				</ul>
 				<div id="song_newest_list" class="fleft">
           <%= render :partial => 'shared/song_block', :collection => @newest_songs %>

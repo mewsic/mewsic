@@ -35,12 +35,8 @@ class UsersController < ApplicationController
 
     @most_played_players = User.find_players_of_artist(@most_played_artist, :limit => 4)
 
-    # MMMH.. this code stinks.
-    @most_played_tags = Tag.find(
-      Tagging.count(:group => :tag_id, :limit => 3, :order => 'count_all DESC',
-                    :conditions => {'taggable_type' => 'song',
-                      'taggable_id' => @most_played_by_artist.map(&:id)}).map(&:first)
-    )
+    @most_played_tags = Tag.find_top(:limit => 3, :conditions => {
+      :taggable_type => 'song', :taggable_id => @most_played_by_artist.map(&:id)})
 
     @coolest_users = User.find_coolest :limit => 4
     @max_votes = @coolest_users.map(&:rating_count).max
