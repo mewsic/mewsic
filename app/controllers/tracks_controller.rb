@@ -43,7 +43,7 @@ class TracksController < ApplicationController
     end
 
     def show_tracks_index
-      @tracks = Track.public.find(:all, :order => 'created_at DESC')
+      @newest_tracks = Track.newest.public.find :all, :limit => 6
       @popular_tags = Tag.find_top :limit => 10, :conditions => {:taggable_type => 'track'}
       @categories = InstrumentCategory.by_name
       @instruments = Instrument.by_name

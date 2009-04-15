@@ -1,10 +1,11 @@
-<div class="instr_avatar shadow_big  fleft">
-  <span class="instr big <%= instrument_big.code %>"> 
+<% instrument = instrument_big %>
+<div class="instr_avatar shadow_big fleft">
+  <span class="instr big <%= instrument.code %>"> 
     <span class="instr_counter">
       <span class="tl">
         <span class="tr">
           <span class="br">
-            <span class="bl"><strong><%= instrument_big.tracks.public.count %></strong></span>
+            <span class="bl"><strong><%= instrument.tracks.public.count %></strong></span>
             <!-- max 5 digit numbers for this layout ;\ -->
             <!-- is it absolutely necessary to have 6 nested spans?! -->
           </span>

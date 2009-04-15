@@ -1,19 +1,20 @@
+<% track = instruments_tree %>
 <!-- add class tree_elem change fleft -> fright -->
 <div class="song_block tree_elem fright">
 	<div class="avatar fleft">
-		<img src="/images/temp/avatar_ndstr.jpg" width="40" height="40" />					
+		<%= track.user.avatar.public_filename(:small), :size => '40x40' %>
 	</div>
 	<div class="instr_avatar fleft">
-		<span class="instr icon_<%= rand(35) + 1 %>"> 
+		<span class="instr white <%= track.instrument.code %>"> 
 			<span class="instr_flag fright">
 				<img src="/images/icons/flags/<%= rand(54) + 1 %>.gif" width="16" />
 			</span>	
 		</span>
 	</div>
 	<div class="song_details fleft">
-		<a href="" class="song_title">Lorem ipsum dolor sit amet</a><br />
-		<a href="" class="song_author"><strong>Alvarez de la Fonzeca</strong></a><br />
-		<a href="" class="mixable_link">Mixable instruments (23)</a>
+		<a href="" class="song_title"><%= track.title %></a><br />
+		<a href="" class="song_author"><strong><%= track.user.nickname %></strong></a><br />
+		<a href="" class="mixable_link">Mixable instruments (FIXME)</a>
 	</div>
 
 	<div class="fright" style="margin: 4px 4px 0 0">

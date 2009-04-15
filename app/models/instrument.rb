@@ -42,7 +42,6 @@ class Instrument < ActiveRecord::Base
   validates_presence_of :description
   validates_uniqueness_of :description, :case_sensitive => false
 
-  validates_numericality_of :category_id, :greater_than => 0
   validates_associated :category
 
   before_save :set_default_icon

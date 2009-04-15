@@ -1,15 +1,16 @@
+<% song = song_show_block %>
 <div class="song_block song_expanded fleft">
 	<div class="avatar fleft">
-		<img src="/images/temp/avatar_ndstr.jpg" width="40" height="40" />					
+		<%= image_tag song.user.avatar.public_filename(:small), :size => '40x40' %>
 	</div>
 	<div class="tracks_count fleft">
-		<h3><%= rand(23) %></h3>
+		<h3><%= song.instruments.count %></h3>
 		Instr.s
 	</div>
 	<div class="song_details fleft">
-		<a href="" class="song_title">Lorem ipsum dolor sit amet</a><br />
-		<a href="" class="song_author"><strong>Gerardo Palla</strong></a><br />
-		<a href="" class="mixable_link">Mixable songs (23)</a>
+		<a href="" class="song_title"><%= song.title %></a><br />
+		<a href="" class="song_author"><strong><%= song.user.nickname %></strong></a><br />
+		<a href="" class="mixable_link">Mixable songs (<%= song.collaboration_count %>)</a>
 	</div>
 
 	<div class="fright" style="margin: 4px 4px 0 0">
@@ -25,19 +26,20 @@
 	<p class="block">
 		<span class="profile ui-icon ui-icon-triangle-1-s fleft" style="margin-right:4px;">			
 		</span>		
-		Intrsuments of this song
+		Instruments of this song
 	</p>
-  <% 3.times do %>
-      <%= render :partial => 'shared/instruments_tree' %>
-  <% end %>
+	<%= render :partial => 'shared/instruments_tree', :collection => song.instruments %>
 </div>
+
+<% if logged_in? %>
 <div class="tree_conn_last fright">
 <div class="song_block tree_elem mix_invite blue7 fright">
 	<div class="avatar fleft">
-		<img src="/images/temp/avatar_enzo.jpg" width="40" height="40" />					
+		<%= image_tag current_user.avatar.public_filename(:small), :size => '40x40' %>
 	</div>
 	<div class="song_details fleft">
 		<h1 class="sixsixsix">Record your instrument now!</h1>
 	</div>
 </div>
 </div>
+<% end %>

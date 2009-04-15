@@ -11,18 +11,14 @@
 				<div class="loader"> </div>
 				<ul class="instr_type alright">
 					<li class="current"><a href="">All</a></li>
-					<li><a href="">Cordofoni</a></li>
-					<li><a href="">Membranofoni</a></li>
-					<li><a href="">Idiofoni</a></li>
-					<li><a href="">Aerofoni</a></li>
-					<li><a href="">Elettrofoni</a></li>																									
+					<% for category in @categories %>
+						<li><%= link_to category, "#newest/#{e(category)}" %></li>
+					<% end %>
 				</ul>
 			</div>
 			<div class="browse_pane_right fleft">
 				<div id="newest_list" class="fleft">
-          <% 6.times do %>
-            <%= render :partial => 'shared/instrument_block' %>
-          <% end %>
+					<%= render :partial => 'shared/instrument_block', :collection => @newest_tracks %>
 				</div>
 			</div>
 		</div>

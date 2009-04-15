@@ -40,11 +40,11 @@
     <li><%= link_to 'Answers', answers_path,  :class => active_class('answers') %></li>
   </ul>
   
-	<ul class="login fright">
+  <ul class="login fright">
   <% unless logged_in? %>
-		<li><a href="#join" id="create-user" class="join_button">JOIN NOW</a></li>
-		<li id="facebook-connect-button">or <fb:login-button size="small" background="light"></fb:login-button> Connect with <a href="" class="facebook">Facebook</a></li>
-		<li><a href="profile.php" class="login_button">LOGIN</a></li>
+    <li><a href="#join" id="create-user" class="join_button">JOIN NOW</a></li>
+    <li id="facebook-connect-button">or <fb:login-button size="small" background="light"></fb:login-button> Connect with <a href="" class="facebook">Facebook</a></li>
+    <li><a href="profile.php" class="login_button">LOGIN</a></li>
   <% else %>
     <% if fb_connected? %>
       <li><fb:profile-pic uid="<%= current_user.facebook_uid %>" size="square" facebook-logo="true"></fb:profile-pic></li>
@@ -54,7 +54,7 @@
       <li>Hi, <%= current_user.login %>!</li>
     <% end %>
   <% end %>
-	</ul>
+  </ul>
     
   <div class="clear"> </div>
   <div id="breadcrumb_bar">

@@ -70,6 +70,8 @@ class Track < ActiveRecord::Base
   named_scope :public, :conditions => {:status => statuses.public}
   named_scope :private, :conditions => {:status => statuses.private}
 
+  named_scope :newest, :order => 'tracks.created_at DESC'
+
   define_index do
     has :instrument_id
     indexes :title, :description

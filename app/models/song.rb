@@ -215,7 +215,7 @@ class Song < ActiveRecord::Base
   # Returns an array of all instruments used into this song.
   #
   def instruments
-    self.tracks.count('instrument', :include => :instrument, :group => 'instrument_id').map { |id, count| Instrument.find(id) }
+    @instruments ||= Instrument.find self.tracks.count(:include => :instrument, :group => 'instrument_id').map(&:id)
   end    
   
   # Returns mixable songs, that share at least one track with this one.
