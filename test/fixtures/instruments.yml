@@ -1,223 +1,211 @@
-# == Schema Information
-# Schema version: 20090312174538
+# GENERATED FROM test/fixtures/instruments.txt
+# @Wed Apr 15 23:32:39 +0200 2009
 #
-# Table name: instruments
-#
-#  id          :integer(4)    not null, primary key
-#  description :string(255)   
-#  icon        :string(255)   
-#  created_at  :datetime      
-#  updated_at  :datetime      
-#  category_id :integer(4)    
-#
-
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
 mandolin:
   description: Mandolin
   icon: mandolin.png
   category: chordophones
-  position: 1
+  position: 0
 
 double_bass:
-  description: Double Bass 
+  description: Double bass
   icon: double_bass.png
+  category: chordophones
+  position: 1
+
+nylon_stringed_guitar:
+  description: Nylon stringed guitar
+  icon: nylon_stringed_guitar.png
   category: chordophones
   position: 2
 
-nylon_stringed_guitar:
-  description: Nylon Stringed Guitar
-  icon: nylon_stringed_guitar.png
+steel_stringed_guitar:
+  description: Steel stringed guitar
+  icon: steel_stringed_guitar.png
   category: chordophones
   position: 3
 
-steel_stringed_guitar:
-  description: Steel Stringed Guitar
-  icon: steel_stringed_guitar.png
+acoustic_bass:
+  description: Acoustic bass
+  icon: acoustic_bass.png
   category: chordophones
   position: 4
 
-acoustic_bass:
-  description: Acoustic Bass
-  icon: acoustic_bass.png
+electric_bass:
+  description: Electric bass
+  icon: electric_bass.png
   category: chordophones
   position: 5
 
-electric_bass:
-  description: Electric Bass
-  icon: electric_bass.png
+electric_guitar:
+  description: Electric guitar
+  icon: electric_guitar.png
   category: chordophones
   position: 6
 
-electric_guitar:
-  description: Electric Guitar 
-  icon: electric_guitar.png
-  category: chordophones
-  position: 7
-
 harpischord:
   description: Harpischord
-  icon: harp.png
+  icon: harpischord.png
   category: chordophones
-  position: 8
+  position: 7
 
 piano:
   description: Piano
   icon: piano.png
   category: chordophones
-  position: 9
+  position: 8
 
 electric_piano:
-  description: Electric Piano
+  description: Electric piano
   icon: electric_piano.png
   category: chordophones
-  position: 10
+  position: 9
 
 violin:
   description: Violin
   icon: violin.png
   category: chordophones
-  position: 11
+  position: 10
 
 viola:
   description: Viola
   icon: viola.png
   category: chordophones
-  position: 12
+  position: 11
 
 cello:
   description: Cello
   icon: cello.png
   category: chordophones
-  position: 13
+  position: 12
 
 harmonica:
   description: Harmonica
   icon: harmonica.png
-  category: petophones
-  position: 14
+  category: aerophones
+  position: 13
 
 xylophone:
   description: Xylophone
   icon: xylophone.png
-  category: membranophones
-  position: 15
+  category: idiophones
+  position: 14
 
 castanets:
-  description: castanets
+  description: Castanets
   icon: castanets.png
-  category: petophones
-  position: 16
+  category: idiophones
+  position: 15
 
 maracas:
   description: Maracas
   icon: maracas.png
-  category: petophones
-  position: 17
+  category: idiophones
+  position: 16
 
 djembe:
   description: Djembe
   icon: djembe.png
-  category: petophones
-  position: 18
+  category: membranophones
+  position: 17
 
 bongos:
   description: Bongos
   icon: bongos.png
-  category: petophones
-  position: 19
+  category: membranophones
+  position: 18
 
 conga:
   description: Conga
   icon: conga.png
-  category: petophones
-  position: 20
+  category: membranophones
+  position: 19
 
 clarinet:
   description: Clarinet
   icon: clarinet.png
-  category: petophones
-  position: 21
+  category: aerophones
+  position: 20
 
 saxophone:
   description: Saxophone
   icon: saxophone.png
-  category: idiophones
-  position: 22
+  category: aerophones
+  position: 21
 
 tuba:
   description: Tuba
   icon: tuba.png
-  category: idiophones
-  position: 23
+  category: aerophones
+  position: 22
 
 trumpet:
   description: Trumpet
   icon: trumpet.png
-  category: petophones
-  position: 24
+  category: aerophones
+  position: 23
 
 transverse_flute:
-  description: Transverse Flute
+  description: Transverse flute
   icon: transverse_flute.png
-  category: idiophones
-  position: 25
+  category: aerophones
+  position: 24
 
 recorder:
   description: Recorder
   icon: recorder.png
-  category: idiophones
-  position: 26
+  category: aerophones
+  position: 25
 
 accordion:
   description: Accordion
   icon: accordion.png
-  category: idiophones
-  position: 27
+  category: aerophones
+  position: 26
 
 bassoon:
   description: Bassoon
   icon: bassoon.png
-  category: idiophones
-  position: 28
+  category: aerophones
+  position: 27
 
 turntables:
   description: Turntables
   icon: turntables.png
-  category: idiophones
-  position: 29
+  category: electrophones
+  position: 28
 
 electronic_drums:
-  description: Electronic Drums
+  description: Electronic drums
   icon: electronic_drums.png
-  category: idiophones
-  position: 30
+  category: electrophones
+  position: 29
 
 synth:
   description: Synth
   icon: synth.png
-  category: membranophones
-  position: 31
+  category: electrophones
+  position: 30
 
 drum_machine:
-  description: Drum Machine
+  description: Drum machine
   icon: drum_machine.png
-  category: membranophones
-  position: 32
+  category: electrophones
+  position: 31
 
 voice:
   description: Voice
   icon: voice.png
-  position: 33
+  position: 32
 
 harp:
   description: Harp
   icon: harp.png
   category: chordophones
-  position: 34
+  position: 33
 
 drums:
   description: Drums
   icon: drums.png
   category: membranophones
-  position: 35
+  position: 34

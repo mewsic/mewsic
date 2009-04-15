@@ -53,6 +53,10 @@ class Instrument < ActiveRecord::Base
     description
   end
 
+  def code
+    description.downcase.tr(' ', '_')
+  end
+
 private
   # Sets the default icon inferring it by the current instrument description. Instrument
   # icons are located in <tt>public/images/instruments</tt>.
