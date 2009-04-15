@@ -30,13 +30,26 @@ class TracksController < ApplicationController
   #
   def index
     if @author
-      @tracks = @author.tracks.public.paginate(:page => params[:page], :per_page => 10)
-      render :partial => 'shared/instrument_block', :collection => @tracks
+      show_user_or_mband_tracks_index
     else
-      @tracks = Track.public.find(:all, :order => 'created_at DESC')
+      show_tracks_index
     end
   end
 
+  protected
+    def show_user_or_mband_tracks_index
+      @tracks = @author.tracks.public.paginate(:page => params[:page], :per_page => 10)
+      render :partial => 'shared/instrument_block', :collection => @tracks
+    end
+
+    def show_tracks_index
+      @tracks = Track.public.find(:all, :order => 'created_at DESC')
+      @popular_tags = Tag.find_top :limit => 10, :conditions => {:taggable_type => 'track'}
+      @categories = InstrumentCategory.by_name
+      @instruments = Instrument.by_name
+    end
+
+  public
   # ==== GET /tracks/:id.html
   # ==== GET /tracks/:id.xml
   # ==== GET /tracks/:id.png

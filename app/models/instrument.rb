@@ -49,6 +49,10 @@ class Instrument < ActiveRecord::Base
 
   named_scope :by_name, :order => 'instruments.description'
 
+  def to_s
+    description
+  end
+
 private
   # Sets the default icon inferring it by the current instrument description. Instrument
   # icons are located in <tt>public/images/instruments</tt>.

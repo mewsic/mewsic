@@ -10,30 +10,20 @@
         <div class="loader"> </div>
         <ul class="instr_type alright">
           <li class="current"><a href="">All</a></li>
-          <li><a href="">Cordofoni</a></li>
-          <li><a href="">Membranofoni</a></li>
-          <li><a href="">Idiofoni</a></li>
-          <li><a href="">Aerofoni</a></li>
-          <li><a href="">Elettrofoni</a></li>                                                  
+          <% for category in @categories %>
+            <li><%= link_to category, "##{e(category)}" %></li>
+          <% end %>
         </ul>
       </div>
       <div class="browse_pane_right fleft">
         <ul class="maingenre_type alleft">
           <li class="current"><a href="">All</a></li>
-          <li><a href="">Rock</a></li>
-          <li><a href="">Indie</a></li>
-          <li><a href="">Electronic</a></li>
-          <li><a href="">Pop</a></li>
-          <li><a href="">Metal</a></li>                                                  
-          <li><a href="">Hip-Hop</a></li>                                                  
-          <li><a href="">Jazz</a></li>                                                  
-          <li><a href="">Classical</a></li>                                                  
-          <li><a href="">Country</a></li>                                                                                          
+          <% for tag in @popular_tags %>
+            <li><%= link_to tag, "##{e(tag)}" %></li>
+          <% end %>
         </ul>
         <div id="instr_show" class="fleft">
-          <% rand(20).times do %>
-            <%= render :partial => 'tracks/instrument_big' %>
-          <% end %>
+          <%= render :partial => 'tracks/instrument_big', :collection => @instruments %>
         </div>
       </div>
     </div>
