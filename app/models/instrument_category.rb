@@ -30,7 +30,7 @@ class InstrumentCategory < ActiveRecord::Base
   has_many :instruments, :foreign_key => 'category_id'
   validates_presence_of :description
 
-  named_scope :by_name, :order => 'instrument_category.description'
+  named_scope :by_name, :order => 'instrument_categories.description'
 
   def to_s
     description
