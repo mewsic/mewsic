@@ -47,6 +47,7 @@ class Instrument < ActiveRecord::Base
   before_save :set_default_icon
 
   named_scope :by_name, :order => 'instruments.description'
+  named_scope :played, :include => :tracks, :conditions => 'tracks.id IS NOT NULL'
 
   def to_s
     description

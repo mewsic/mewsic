@@ -46,7 +46,7 @@ class TracksController < ApplicationController
       @newest_tracks = Track.newest.public.find :all, :limit => 6
       @popular_tags = Tag.find_top :limit => 10, :conditions => {:taggable_type => 'track'}
       @categories = InstrumentCategory.by_name
-      @instruments = Instrument.by_name
+      @instruments = Instrument.played.by_name
     end
 
   public
