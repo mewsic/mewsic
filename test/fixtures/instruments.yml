@@ -13,57 +13,211 @@
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-drums:
-  description: Drums
-  icon: instruments/drums.png
-  category: membranophones
-
-guitar:
-  description: Guitar
-  icon: instruments/electric_guitar.png
+mandolin:
+  description: Mandolin
+  icon: mandolin.png
   category: chordophones
+  position: 1
 
-microphone:
-  description: Voice
-  icon: instruments/voice.png
-  category: petophones
-  
-saxophone:
-  description: Saxophone
-  icon: instruments/saxophone.png
-  category: idiophones
+double_bass:
+  description: Double Bass 
+  icon: double_bass.png
+  category: chordophones
+  position: 2
 
-trumpet:
-  description: Trumpeg
-  icon: instruments/trumpet.png
-  category: petophones
+nylon_stringed_guitar:
+  description: Nylon Stringed Guitar
+  icon: nylon_stringed_guitar.png
+  category: chordophones
+  position: 3
+
+steel_stringed_guitar:
+  description: Steel Stringed Guitar
+  icon: steel_stringed_guitar.png
+  category: chordophones
+  position: 4
+
+acoustic_bass:
+  description: Acoustic Bass
+  icon: acoustic_bass.png
+  category: chordophones
+  position: 5
+
+electric_bass:
+  description: Electric Bass
+  icon: electric_bass.png
+  category: chordophones
+  position: 6
+
+electric_guitar:
+  description: Electric Guitar 
+  icon: electric_guitar.png
+  category: chordophones
+  position: 7
+
+harpischord:
+  description: Harpischord
+  icon: harp.png
+  category: chordophones
+  position: 8
 
 piano:
   description: Piano
-  icon: instruments/piano.png
+  icon: piano.png
   category: chordophones
+  position: 9
 
-mandolin:
-  description: Mandolin
-  icon: instruments/mandolin.png
+electric_piano:
+  description: Electric Piano
+  icon: electric_piano.png
   category: chordophones
+  position: 10
+
+violin:
+  description: Violin
+  icon: violin.png
+  category: chordophones
+  position: 11
+
+viola:
+  description: Viola
+  icon: viola.png
+  category: chordophones
+  position: 12
+
+cello:
+  description: Cello
+  icon: cello.png
+  category: chordophones
+  position: 13
+
+harmonica:
+  description: Harmonica
+  icon: harmonica.png
+  category: petophones
+  position: 14
+
+xylophone:
+  description: Xylophone
+  icon: xylophone.png
+  category: membranophones
+  position: 15
+
+castanets:
+  description: castanets
+  icon: castanets.png
+  category: petophones
+  position: 16
+
+maracas:
+  description: Maracas
+  icon: maracas.png
+  category: petophones
+  position: 17
+
+djembe:
+  description: Djembe
+  icon: djembe.png
+  category: petophones
+  position: 18
+
+bongos:
+  description: Bongos
+  icon: bongos.png
+  category: petophones
+  position: 19
 
 conga:
   description: Conga
-  icon: instruments/conga.png
-  category: membranophones
+  icon: conga.png
+  category: petophones
+  position: 20
 
-harp:
-  description: Harp
-  icon: instruments/harp.png
-  category: chordophones
+clarinet:
+  description: Clarinet
+  icon: clarinet.png
+  category: petophones
+  position: 21
+
+saxophone:
+  description: Saxophone
+  icon: saxophone.png
+  category: idiophones
+  position: 22
+
+tuba:
+  description: Tuba
+  icon: tuba.png
+  category: idiophones
+  position: 23
+
+trumpet:
+  description: Trumpet
+  icon: trumpet.png
+  category: petophones
+  position: 24
+
+transverse_flute:
+  description: Transverse Flute
+  icon: transverse_flute.png
+  category: idiophones
+  position: 25
+
+recorder:
+  description: Recorder
+  icon: recorder.png
+  category: idiophones
+  position: 26
+
+accordion:
+  description: Accordion
+  icon: accordion.png
+  category: idiophones
+  position: 27
+
+bassoon:
+  description: Bassoon
+  icon: bassoon.png
+  category: idiophones
+  position: 28
 
 turntables:
   description: Turntables
-  icon: instruments/turntables.png
-  category: membranophones
+  icon: turntables.png
+  category: idiophones
+  position: 29
 
-synthetizer:
-  description: Synthetizer
-  icon: instruments/syntethizer.png
+electronic_drums:
+  description: Electronic Drums
+  icon: electronic_drums.png
+  category: idiophones
+  position: 30
+
+synth:
+  description: Synth
+  icon: synth.png
   category: membranophones
+  position: 31
+
+drum_machine:
+  description: Drum Machine
+  icon: drum_machine.png
+  category: membranophones
+  position: 32
+
+voice:
+  description: Voice
+  icon: voice.png
+  position: 33
+
+harp:
+  description: Harp
+  icon: harp.png
+  category: chordophones
+  position: 34
+
+drums:
+  description: Drums
+  icon: drums.png
+  category: membranophones
+  position: 35

@@ -15,8 +15,11 @@ membranophones:
 chordophones:
   description: Chordophones
 
-petophones:
-  description: Petophones
+aerophones:
+  description: Aerophones
 
 idiophones:
   description: Idiophones
+
+electrophones:
+  description: Electrophones
