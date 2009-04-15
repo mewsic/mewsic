@@ -31,6 +31,11 @@ def random_avatar
   @avatars.rand
 end
 
+def random_instrument
+  @instruments ||= File.readlines('test/fixtures/instruments.txt').map { |l| l.split(/\s+/).first }
+  @instruments.rand
+end
+
 def picture(name)
   "test/fixtures/files/#{name}"
 end

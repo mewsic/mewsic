@@ -18,18 +18,7 @@
 #  user_id        :integer(4)    
 #  author         :string(60)    
 #
-
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-<% 
-  def random_instrument
-    %w(drums guitar microphone saxophone trumpet piano mandolin conga harp).rand
-  end
-
-  def random_rating
-    rand * 5
-  end
-%>
+<% require File.join(RAILS_ROOT, 'test', 'fixtures_helpers') %>
 
 sax_for_let_it_be:
   title: Sassofono
@@ -44,7 +33,7 @@ sax_for_let_it_be:
 guitar_for_let_it_be:
   title: Chitarra
   author: Beatles
-  instrument: guitar
+  instrument: electric_guitar
   user: quentin
   seconds: <%= rand(100) + 90 %>
   filename: test.mp3
@@ -53,7 +42,7 @@ guitar_for_let_it_be:
 
 voice_for_let_it_be:
   title: Voce
-  instrument: microphone
+  instrument: voice
   user: quentin
   seconds: <%= rand(100) + 90 %>
   filename: test.mp3
@@ -61,8 +50,8 @@ voice_for_let_it_be:
   status: <%= Track.statuses.public %>
 
 voice_for_red_red_wine:
-  title: red red wine
-  instrument: microphone
+  title: red red wine voice
+  instrument: voice
   user: john
   seconds: <%= rand(100) + 90 %>
   filename: test.mp3
@@ -70,8 +59,8 @@ voice_for_red_red_wine:
   status: <%= Track.statuses.private %>
 
 guitar_for_red_red_wine:
-  title: red red wine
-  instrument: guitar
+  title: red red wine guitar
+  instrument: nylon_stringed_guitar
   user: john
   seconds: <%= rand(100) + 90 %>
   filename: test.mp3
@@ -80,7 +69,7 @@ guitar_for_red_red_wine:
 
 voice_for_radio_ga_ga:
   title: Voce
-  instrument: microphone
+  instrument: voice
   user: quentin
   seconds: <%= rand(100) + 90 %>
   filename: test.mp3
@@ -89,7 +78,7 @@ voice_for_radio_ga_ga:
 
 synthetizer_for_space_cowboy:
   title: Space cowboy
-  instrument: synthetizer
+  instrument: synth
   user: john
   seconds: <%= rand(200) + 90 %>
   filename: test.mp3
@@ -98,7 +87,7 @@ synthetizer_for_space_cowboy:
 
 turntables_for_space_cowboy:
   title: Space cowboy
-  instrument: turntables 
+  instrument: turntables
   user: john
   seconds: <%= rand(200) + 90 %>
   filename: test.mp3
@@ -107,7 +96,7 @@ turntables_for_space_cowboy:
 
 guitar_for_closer:
   title: Chitarra
-  instrument: guitar
+  instrument: nylon_stringed_guitar
   user: quentin
   seconds: <%= rand(100) + 90 %>
   filename: test.mp3
@@ -134,7 +123,7 @@ drum_for_closer:
 
 voice_for_white_christmas:
   title: Voice
-  instrument: microphone
+  instrument: voice
   user: john
   seconds: <%= rand(100) + 90 %>
   filename: test.mp3
@@ -144,7 +133,7 @@ voice_for_white_christmas:
 <% 10.times do |i| %>
 voice_for_closer_<%= i + 4 %>:
   title: Voice
-  instrument: microphone
+  instrument: voice
   seconds: <%= rand(100) + 90 %>
   created_at: <%= rand(30).days.ago.to_s :db %>
   user: <%= %w(quentin john).rand %>
@@ -156,7 +145,7 @@ voice_for_closer_<%= i + 4 %>:
 <% 2.times do |i| %>
 voice_for_closer_by_john_<%= i %>:
   title: Voice
-  instrument: microphone
+  instrument: voice
   seconds: <%= rand(100) + 90 %>
   created_at: <%= rand(30).days.ago.to_s :db %>
   user: john
@@ -176,7 +165,7 @@ drum_for_single_track_song:
 
 guitar_for_single_track_song:
   title: Guitar for single track song
-  instrument: guitar
+  instrument: steel_stringed_guitar
   seconds: 205
   user: john
   filename: test.mp3
@@ -185,7 +174,7 @@ guitar_for_single_track_song:
 
 voice_for_single_track_song:
   title: Voice for single track song
-  instrument: microphone
+  instrument: voice
   seconds: 205
   user: quentin
   filename: test.mp3

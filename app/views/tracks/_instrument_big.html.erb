@@ -1,10 +1,10 @@
 <div class="instr_avatar shadow_big  fleft">
-  <span class="instr instr_big icon_<%= rand(35) + 41 %>"> 
+  <span class="instr big <%= instrument_big.code %>"> 
     <span class="instr_counter">
       <span class="tl">
         <span class="tr">
           <span class="br">
-            <span class="bl"><strong><%= rand(1000) + 10 %></strong></span>
+            <span class="bl"><strong><%= instrument_big.tracks.public.count %></strong></span>
             <!-- max 5 digit numbers for this layout ;\ -->
             <!-- is it absolutely necessary to have 6 nested spans?! -->
           </span>
