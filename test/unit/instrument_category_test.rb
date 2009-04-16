@@ -5,7 +5,7 @@ class InstrumentCategoryTest < ActiveSupport::TestCase
   fixtures :instrument_categories, :instruments
 
   def test_associations
-    cat = instrument_categories(:petophones)
+    cat = instrument_categories(:idiophones)
     assert_not_nil cat.instruments.find(:first)
   end
 
@@ -13,7 +13,7 @@ class InstrumentCategoryTest < ActiveSupport::TestCase
     cat = InstrumentCategory.new
     deny cat.save
     assert cat.errors.on(:description)
-    cat.description = 'suxophones'
+    cat.description = 'petophones'
     assert cat.save
   end
 

@@ -18,7 +18,7 @@ class TrackTest < ActiveSupport::TestCase
   end
 
   def test_association_with_instrument
-    assert instruments(:guitar), tracks(:guitar_for_let_it_be).instrument
+    assert instruments(:electric_guitar), tracks(:guitar_for_let_it_be).instrument
   end
 
   def test_public_and_private_named_scopes

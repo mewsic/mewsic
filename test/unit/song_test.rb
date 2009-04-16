@@ -20,7 +20,7 @@ class SongTest < ActiveSupport::TestCase
 
   def test_instruments
     instruments = songs(:let_it_be).instruments
-    expected = [instruments(:saxophone), instruments(:guitar), instruments(:microphone)]
+    expected = [instruments(:saxophone), instruments(:electric_guitar), instruments(:voice)]
     assert_equal instruments.map(&:id).sort, expected.map(&:id).sort
   end
 

@@ -235,7 +235,7 @@ class UserTest < Test::Unit::TestCase
   end
         
   def test_should_retrieve_distinct_instrument
-    expected = [:guitar, :microphone, :synthetizer, :turntables].map { |i| instruments(i) }
+    expected = [:nylon_stringed_guitar, :steel_stringed_guitar, :voice, :synth, :turntables].map { |i| instruments(i) }
     assert_equal [], expected - users(:john).instruments
   end
   
