@@ -83,7 +83,7 @@ class Song < ActiveRecord::Base
   has_many :mlabs, :as => :mixable
   has_many :abuses, :as => :abuseable, :class_name => 'Abuse'
   has_many :comments, :as => :commentable, :order => 'comments.created_at DESC'
- 
+
   validates_presence_of :title, :author,      :if => :published?
   validates_associated :user,                 :if => :published?
   validates_length_of :tracks, :minimum => 1, :if => :published?

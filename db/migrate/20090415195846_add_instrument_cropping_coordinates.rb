@@ -4,6 +4,6 @@ class AddInstrumentCroppingCoordinates < ActiveRecord::Migration
   end
 
   def self.down
-    remove_column :instruments, :position, :integer
+    remove_column :instruments, :position
   end
 end

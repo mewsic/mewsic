@@ -1,0 +1,9 @@
+let_it_be_posted_on_quentins_wall_by_john:
+  comment: john_posts_a_song_to_quentins_wall
+  attachment: let_it_be
+  attachment_type: Song
+
+radio_ga_ga_posted_on_johns_wall_by_user10:
+  comment: user10_posts_a_song_to_johns_wall
+  attachment: radio_ga_ga
+  attachment_type: Song

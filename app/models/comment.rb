@@ -2,6 +2,9 @@ class Comment < ActiveRecord::Base
   belongs_to :commentable, :polymorphic => true, :counter_cache => :comments_count
   belongs_to :user, :counter_cache => :writings_count
 
+  has_many_polymorphs :attachments, :from => [:songs, :tracks, :photos],
+    :through => :comment_attachment
+
   acts_as_rated :rating_range => 0..5
 
   attr_accessible :title, :body

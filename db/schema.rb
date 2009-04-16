@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090415195846) do
+ActiveRecord::Schema.define(:version => 20090416154624) do
 
   create_table "abuses", :force => true do |t|
     t.integer  "abuseable_id"
@@ -33,6 +33,12 @@ ActiveRecord::Schema.define(:version => 20090415195846) do
     t.boolean  "closed",                                          :default => false, :null => false
     t.datetime "last_activity_at"
     t.boolean  "delta",                                           :default => false
+  end
+
+  create_table "comment_attachments", :force => true do |t|
+    t.integer "comment_id"
+    t.integer "attachment_id"
+    t.string  "attachment_type"
   end
 
   create_table "comments", :force => true do |t|
@@ -266,7 +272,6 @@ ActiveRecord::Schema.define(:version => 20090415195846) do
     t.boolean  "skype_public",                                                           :default => false
     t.string   "crypted_password",          :limit => 40
     t.string   "salt",                      :limit => 40
-    t.string   "string",                    :limit => 40
     t.text     "motto"
     t.text     "tastes"
     t.datetime "remember_token_expires_at"

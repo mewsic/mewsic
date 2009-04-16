@@ -28,3 +28,14 @@ quentin_replies_to_user_10s_religion_question:
   commentable_type: Answer
   body: "The bad news is that there is no God. The good news is that you don't need it."
 
+john_posts_a_song_to_quentins_wall:
+  user: john
+  commentable: quentin
+  commentable_type: User
+  body: "Hey quentin, listen to this cool let it be cover!"
+
+user10_posts_a_song_to_johns_wall:
+  user: user_10
+  commentable: john
+  commentable_type: User
+  body: "Hey john, this song shits the hell out of me!"
