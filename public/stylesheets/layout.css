@@ -35,27 +35,40 @@ ul { padding: 0; margin:0; }
 input { border: 0; font-size: 12px; }
 .border { padding: 1px; border: 1px solid #CCCCCC; display: block; }
 .nomargin { margin: 0 !important; }
+.nopad { padding: 0 !important; }
+.invisible { display: none !important; }
+.visible { display: visible !important; }
+.overflow-hidden { overflow: hidden; }
+
+/* BLOCK  DIMENSION SPEC */
+.w454 { width: 454px; } /* pick of the week, most player artist */
+.w440 { width: 440px; } /* footer right content */
+.w343 { width: 343px; } /* song pick */
+.w500 { width: 500px; } /* friends list */
 
 
 /* DIALOGS FORMS */
 label, input { display:block; }
-input.text { margin-bottom:12px; width:93%; padding: .4em; border: 1px solid #CCCCCC; 
-font-size: 15px !important;
-font-weight: bold;
-color: #696969;
-padding: 6px 9px;
- }
+input.text { 
+	margin-bottom:12px; 
+	width:93%; 
+	border: 1px solid #CCCCCC; 
+	font-size: 15px !important;
+	font-weight: bold;
+	color: #696969;
+	padding: 6px 9px;
+}
+
+
 fieldset { padding:0; border:0; margin-top:25px; }
 div#users-contain {  width: 350px; margin: 20px 0; }
 div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
 div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
 #validateTips { padding: 5px; }
 
-/* DIALOGS borders */
-.dialog_join { border: 7px solid #94BD5E; }
-.change_avatar { border: 7px solid #6F9ABD; }
-.share_song { border: 7px solid #E56F33; }
-.share_media { border: 7px solid  #B4D3E3; }
+.dialog_help { margin: 0 0 10px 0; }
+
+
 
 /* MENU */
 .navigation {
@@ -74,24 +87,26 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 
 
 /* HEADER LOGIN JOIN BAR */
-.join_button, .pick_page_anchors .anchors {
+.pick_page_anchors .anchors {
 	padding: 1px 7px;
 }
+.join_button { padding: 3px 11px; }
 
 .login {
 	padding: 0;
 	margin-top: 13px;
 }
 .login li {
-	margin: 10px 0 0 0;
+	margin: 0;
 	display: inline;
 	list-style: none;
 	padding-right: 5px;
 }
-.login .spacer {
-	border-right: 1px dotted #CCCCCC;
-	margin-left: 6px;
+.facebook_img {
+	position: absolute;
+	margin-top: -1px;
 }
+
 .login_button {
 	padding: 1px 10px;
 	margin-left: 15px;
@@ -196,6 +211,11 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 	width: 330px;
 }
 
+
+/* HOME CALL TO ACTION */
+
+
+
 /* PICK OF THE WEEK LAYOUT */
 .pick_wrap {
 	width: 697px;
@@ -281,7 +301,7 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 	cursor: pointer;	
 }
 .max_sidebar_videos .video_thumb {
-	width: 102px;
+	width: 104px;
 	margin: 0 !important;
 }
 
@@ -388,10 +408,6 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 }
 
 
-/* SONG BLOCK CONTAINER DIMENSION SPEC */
-.w454 { width: 454px; } /* pick of the week, most player artist */
-.w440 { width: 440px; } /* footer right content */
-.w343 { width: 343px; } /* song pick */
 
 /* SONG BLOCK */
 .song_block, #top_footer .song_block {
@@ -399,6 +415,8 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 	height: 43px;
 	padding-top: 4px;
 }
+.sidebar_block { width: 205px !important; }
+
 .song_block { border-bottom: 1px solid #E6E6E6;}
 #top_footer .song_block { border-top: 1px solid #305A78 !important; border-bottom: none !important; }
 
@@ -471,6 +489,10 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 .controls_sidebar {
 	direction: ltr !important;
 }
+.profile_controls_sidebar {
+	margin-top: -14px !important;
+}
+
 .sidebar_moremixable .song_controls {
 	direction: ltr;
 	position: relative;
@@ -522,7 +544,7 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 .chart_value {
 	margin-left: -4px;
 	padding-right: 4px;
-	background: url('../images/chart_bar.gif') no-repeat bottom right;
+	background: url('../images/chart_bar.gif') no-repeat center right;
 }
 
 /* COOLEST SONG LIST CHART */
@@ -585,11 +607,6 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 	padding-left: 21px;
 }
 
-/* LIST ICONS */
-.icons { display: block; }
-.lightbulb { background: url('../images/icons/lightbulb.png') no-repeat left top; }
-.world { background: url('../images/icons/world.png') no-repeat left top; }
-.stats { background: url('../images/icons/chart_line.png') no-repeat left top; }
 
 
 
@@ -631,10 +648,6 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 .follow_us a {
 	padding: 1px 0 1px 20px;
 }
-.follow_us .rss { background: url('../images/icons/feed.png') no-repeat; }
-.follow_us .podcast { background: url('../images/icons/podcast.png') no-repeat; }
-.follow_us .myspace { background: url('../images/icons/user.png') no-repeat; }
-.follow_us .facebook { background: url('../images/icons/facebook.gif') no-repeat; }
 
 h2 {
 	margin: 0;
@@ -752,13 +765,9 @@ h2 {
 /* EXPLANATION BANNER */
 #expl_banner {
 	width: 635px;
-	height: 95px;
+	height: 80px;
 	margin-bottom: 10px;
-	padding: 25px 25px 14px 37px;
-}
-.expl_answers {
-	height: 80px !important;
-	padding: 15px 25px 14px 37px !important;
+	padding: 15px 25px 14px 37px;
 }
 
 .expl_band { 
@@ -768,7 +777,7 @@ h2 {
 	background: url('../images/icons/expl_band_icon.jpg') no-repeat left; 
 }
 
-#expl_hide { margin-top: -15px; cursor: pointer; }
+#expl_hide { margin-top: -5px; cursor: pointer; }
 #expl_banner h1 {
 	margin: 0 0 10px 0;
 }
@@ -853,10 +862,11 @@ h2 {
 
 /* INSTRUMENTS SEARCH */
 #instr_search_box { padding-bottom: 15px; }
-#instr_search_box, #instr_list_box, #song_list_box {
+#instr_search_box, #instr_list_box, #song_list_box, #user_songs_list {
 	width: 697px;
 	overflow: hidden;
 }
+
 .browse_pane, .list_head, .song_lists_head { width: 592px; }
 .browse_pane {	overflow: hidden; }
 .list_head { margin-top: 10px; }
@@ -865,21 +875,22 @@ h2 {
 	padding: 10px 0 5px 0;
 	border-top: 2px solid #E3F5FF;	
 }
-.pane_content {
-	width: 100%;
-}
+.pane_content { width: 100%; }
 
 #instr_show {
 	width: 100%;
 	padding-bottom: 8px;
 }
 
-.browse_pane_left {
-	width: 105px;
-}
-.browse_pane_right {
-	width: 592px;
-}
+#user_songs_list { margin-top: 25px; }
+
+#user_songs_list .browse_pane_left, #user_friends_list .browse_pane_left { width: 143px; }
+#user_songs_list .browse_pane_right { width: 545px; }
+#user_friends_list .browse_pane_right { width: 355px; }
+
+.browse_pane_left { width: 105px; }
+.browse_pane_right { width: 592px; }
+
 #instr_list_box .browse_pane_right { margin-top: 23px; }
 #song_list_box .browse_pane_right, #song_list_box .browse_pane_left { margin-top: 3px; }
 
@@ -890,23 +901,33 @@ h2 {
 }
 
 
-.instr_type li, .maingenre_type li {
+.instr_type li, .maingenre_type li, .music_type li {
 	list-style: none;
 	font-weight: bold;
 }
+
 #instr_search_box .instr_type li:hover, #instr_search_box .maingenre_type li:hover,
-#song_list_box .instr_type li:hover, #song_list_box .maingenre_type li:hover {
+#song_list_box .instr_type li:hover, #song_list_box .maingenre_type li:hover,
+.music_type li:hover, #gear-tabs li:hover {
 	background-color: #E8E8E8;
 }
 #instr_search_box .instr_type .current, #instr_search_box .maingenre_type .current,
-#song_list_box .instr_type .current, #song_list_box .maingenre_type .current {
+#song_list_box .instr_type .current, #song_list_box .maingenre_type .current, 
+.music_type .current, #gear-tabs .current {
 	background-color: #D9D9D9;
 }
+.music_type .current { color: #FFFFFF; }
 
 .instr_type li a {
 	display: block;
 	padding: 2px 10px 2px 2px;
 }
+.music_type li {
+	display: block;
+	padding: 4px 10px 4px 5px;
+	margin-bottom: 3px;
+}
+.music_type li a { text-decoration: none; color: #00385D; }
 
 .loader {
 	background: url('../images/loader_small.gif') no-repeat right;
@@ -914,6 +935,12 @@ h2 {
 	height: 16px;
 	margin-bottom: 6px;
 }
+
+#music_list, #friends_list {
+	border-left: 1px solid #D9D9D9;
+	padding-left: 12px;
+} 
+
 
 
 /* NEWEST LISTS */
@@ -933,6 +960,9 @@ h2 {
 .paging_bg {
 	padding: 5px 4px 6px 6px;
 	background-color: #F3F3F3;
+}
+.profile_music_pager {
+	padding: 13px 76px 6px 6px;
 }
 
 .bullet_paging {
@@ -960,15 +990,22 @@ h2 {
 	background: url('../images/paging_bullets.png') no-repeat bottom;	
 }
 
-.pager .prev, .pager .next {
+.pager .prev, .pager .next,
+.pager_vert .prev, .pager_vert .next,
+.mailbox_prev, .mailbox_next {
 	width: 30px;
 	height: 15px;
 	display: block;
 }
-.pager .prev { background: url('../images/paging_prev.gif') no-repeat top; }
-.pager .prev:hover { background: url('../images/paging_prev.gif') no-repeat bottom; }
-.pager .next { background: url('../images/paging_next.gif') no-repeat top; }
-.pager .next:hover { background: url('../images/paging_next.gif') no-repeat bottom; }
+.pager .prev, .mailbox_prev { background: url('../images/paging_prev.gif') no-repeat top; }
+.pager .prev:hover, .mailbox_prev:hover { background: url('../images/paging_prev.gif') no-repeat bottom; }
+.pager .next, .mailbox_next { background: url('../images/paging_next.gif') no-repeat top; }
+.pager .next:hover, .mailbox_next:hover { background: url('../images/paging_next.gif') no-repeat bottom; }
+
+.pager_vert .prev { background: url('../images/paging_prev_vert.gif') no-repeat top; }
+.pager_vert .prev:hover { background: url('../images/paging_prev_vert.gif') no-repeat bottom; }
+.pager_vert .next { background: url('../images/paging_next_vert.gif') no-repeat top; }
+.pager_vert .next:hover { background: url('../images/paging_next_vert.gif') no-repeat bottom; }
 
 
 
@@ -1143,3 +1180,206 @@ h2 {
 
 .sidebar_user_status .list_status .user_name { margin: 0 0 3px 15px; }
 .sidebar_user_status .list_status .blurp_sidebar { margin-top: 4px; }
+
+
+
+
+
+
+
+/* MULTITRACK */
+#project {
+	width: 100%;
+	height: 80px;
+	margin-top: 6px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #D9D9D9;
+}
+#project span.title { 
+	padding-bottom: 2px;
+	margin-bottom: 4px;
+	border-bottom: 1px solid #D9D9D9;
+	color: #999999;
+}
+.project_info, .project_publish { margin-right: 15px; }
+.project_info { width: 366px; }
+.project_publish { width: 197px; }
+.project_save { width: 104px; }
+.show_cc { margin: -16px 0 0 180px; }
+.project_data label { color: #222222; }
+.project_data label, .project_data input {
+	display: inline !important;
+	float: left;
+}
+.project_data .radios { margin: 7px 0; }
+.project_save_submit {
+	border: 0;
+	width: 71px;
+	height: 41px;
+	cursor: pointer;
+	margin: 11px 0 0 16px;
+	background: url('../images/project_save_button.gif') no-repeat top;
+}
+.project_save_submit:hover {
+		background: url('../images/project_save_button.gif') no-repeat bottom;
+}
+
+.project_info .avatar { width: 60px; height: 60px; }
+	
+#user_identity, #user_identity_ms { width: 65px !important; float: left;}
+#user_identity_ms_child {
+	top: 16px !important;
+	left:0 !important;
+	width: 160px !important;
+}
+
+.priv_icon_abs { margin-top: -5px; } /* need review */
+
+/*form input*/
+.project_data .project_title, .project_data .project_author {
+	width: 270px;
+	font-size: 13px !important;
+	padding: 4px 9px;
+	margin: 3px 0 3px 6px; 
+}
+
+
+/* MULTITRACK SIDEBAR */
+.insidebar_paging ul {
+	width: auto;
+}
+
+.full_width_sidebar {
+	margin: -18px 0 20px -16px !important;
+	padding: 12px 20px 7px 16px;
+}
+.project_overview span { padding-left: 21px; }
+.project_overview a { text-decoration: none; }
+
+
+/* MULTITRACK MIXABLE SEARCH */
+.multitrack_search .search_head_title { margin-bottom: 6px; }
+.multitrack_search .browse_pane_left { width: 160px; margin-top: 35px; } /* instr left */
+.multitrack_search .browse_pane_left .loader { width: 154px; }
+.multitrack_search .browse_pane_right { width: 530px; }
+.multitrack_search .search_head { width: 550px; }
+.multitrack_search .instr_type li a { padding: 3px 3px 3px 5px; }
+.multitrack_search .instr_type li { 
+	overflow: hidden; 
+	padding: 2px 10px 2px 2px; 
+	cursor: pointer; 
+	margin: 3px 0;
+}
+.multitrack_search .instr_type .all { border-bottom: 1px solid #E8E8E8; }
+.multitrack_search .instr_type .instr_name { 
+	color: #014D70; 
+	padding: 5px 3px 3px 5px;
+}
+
+/* apple search */
+.multitrack_search #applesearch .sbox input { width: 200px !important; }
+
+.multitrack_search .instr_type .current, #mlab_search_tabs .mlab_search { 
+	background-color: #014D70 !important; 
+}
+#searched_instruments, #searched_songs { padding: 5px 10px; }
+#searched_instruments, #searched_songs, #mlab_search_tabs .mlab_search {
+	border-left: 1px solid #014D70;
+}
+
+#search_filters_genre { padding: 6px; }
+#search_filters_genre .selector_last { margin-right: 15px !important; }
+
+
+
+/* search tabs custom */
+#mlab_search_tabs #search_filters_genre { height: 18px; }
+#mlab_search_tabs .ui-tabs-nav { padding: 2px 0 0 0; }
+#mlab_search_tabs .ui-tabs-nav li { width: 263px; }
+#mlab_search_tabs .ui-tabs-nav li a { width: 95%; }
+
+#mlab_search_tabs .ui-tabs-nav .ui-state-active, 
+#mlab_search_tabs .ui-tabs-nav .ui-state-default
+ { margin-right: 0; }
+
+#mlab_search_tabs .ui-tabs-selected  { padding-top: 4px; }
+#mlab_search_tabs .ui-state-default  { margin-top: 4px; }
+#mlab_search_tabs .ui-tabs-nav .ui-tabs-selected { margin-top: 0; }
+
+#tag_more_icon { padding: 1px 3px 0 0; float: left; }
+
+#search_filters_genre #tag_remove { cursor: pointer; }
+#search_filters_genre #tag_more { color: #2E83FF !important; cursor: pointer; }
+
+.search_tools { margin-top: 5px; }
+.search_tools a { margin-right: 5px; }
+
+
+
+
+/* TAGGING DIALOG */
+.tags_heading {
+	border-bottom: 1px dashed #CCCCCC;
+}
+
+.action_notice_dialog { 
+	padding: 2px 9px; 
+	font-weight: normal;
+	margin: 0 0 10px 0;
+	line-height: 16px;
+	width: 93%;
+	border-top: none !important;
+}
+
+
+
+
+/* GEARS TAB */
+#gear-tabs { margin-right: 20px; }
+#gear-tabs li { padding: 1px 5px; margin-bottom: 5px; }
+#gear-tabs li a { font-weight: bold; text-decoration: none; }
+#gear-tabs .loading:hover { background-color: none !important; }
+
+.instr_gear_list { margin: 0 10px 10px 0; }
+.my_gear {
+	padding: 4px 0;
+	background-color: #DDDDDD;
+	border-bottom: 1px solid #999999;
+	/* width: 237px; */
+}
+#drag-handle { cursor: move; margin-top: 8px; }
+#submitted_gear { list-style: none; }
+#submitted_gear li { margin: 2px; /* display: inline-block */ }
+
+input.geartext { 
+	width:269px; 
+	color: #696969;
+	padding: 1px 4px;
+	margin: 1px 0;
+}
+
+.gear_infos {
+	margin: 0 10px 0 10px;
+	padding: 2px 0;
+}
+
+
+
+/* APPLE SEARCH */
+#applesearch .sbox_l  {
+	/*default styling*/
+}
+
+#applesearch .sbox_r  {
+	/*default styling*/
+}
+
+#applesearch .sbox input {
+	/*default styling*/
+	width: 180px;
+	float:left;
+}
+
+#content {
+	clear: both;
+}

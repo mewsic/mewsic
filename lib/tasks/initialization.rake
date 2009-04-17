@@ -98,7 +98,7 @@ namespace :mewsic do
   task(:generate_instruments_assets => :environment) do
     require 'image_science'
 
-    SIZES = {:white => 40, :big => 60}
+    SIZES = {:blue => 40, :white => 40, :blue_big => 60, :white_big => 60}
     PER_ROW = 7
 
     SIZES.each do |name, size|

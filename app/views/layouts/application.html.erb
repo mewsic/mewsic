@@ -7,19 +7,19 @@
 
   <title>MEWSIC</title>
 
-  <%= stylesheet_link_tag *%w( type layout color appbar profile ) %>
-  <%= stylesheet_link_tag *%w( instruments instruments/white instruments/big ) %>
+  <%= stylesheet_link_tag *%w( type layout color appbar profile applesearch dd dummy ) %>
+  <%= stylesheet_link_tag *%w( icons instruments/white instruments/white_big instruments/big instruments/blue_big ) %>
 
   <%= jquery_javascript_tags %>
   <%= jquery_stylesheet_tags %>
 
-  <%= javascript_include_tag *%w( jquery.corner.js jquery.simpleautogrow.js jquery.MetaData.js ) %>
+  <%= javascript_include_tag *%w( jquery.corner.js jquery.simpleautogrow.js jquery.MetaData.js dd_uncompressed.js  ) %>
 
-  <%= javascript_include_tag *%w( jquery.rating.pack.js jquery.dataTables.min.js jquery.Jcrop.pack.js ) %>
+  <%= javascript_include_tag *%w( jquery.rating.pack.js jquery.dataTables.js jquery.Jcrop.pack.js jquery.cycle.all.min.js ) %>
   <%= stylesheet_link_tag    *%w( jquery.rating.css     dataTables.css           jquery.Jcrop.css     ) %>
 
   <script type="text/javascript" src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" defer="true"></script>
-  <%= javascript_include_tag *%w( application home ) %>
+  <%= javascript_include_tag *%w( application home applesearch ) %>
 
   <%= yield :head %>
 
@@ -38,6 +38,7 @@
     <li><%= link_to 'Songs', songs_path, :class => active_class('songs') %></li>
     <li><%= link_to 'Instruments', tracks_path, :class => active_class('tracks') %></li>
     <li><%= link_to 'Answers', answers_path,  :class => active_class('answers') %></li>
+    <li><%= link_to 'Multitrack', multitrack_path,  :class => active_class('multitrack') %></li>    
   </ul>
   
   <ul class="login fright">

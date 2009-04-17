@@ -8,7 +8,7 @@
 ----------------------------------*/
 .profile .ui-helper-hidden { display: none; }
 .profile .ui-helper-hidden-accessible { position: absolute; left: -99999999px; }
-.profile .ui-helper-reset { margin: 0; padding: 0; border: 0; outline: 0; line-height: 1.3; text-decoration: none; font-size: 100%; list-style: none; }
+.profile .ui-helper-reset { margin: 0; padding: 0 4px 0 6px; border: 0; outline: 0; line-height: 1.3; text-decoration: none; font-size: 100%; list-style: none; }
 .profile .ui-helper-clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
 .profile .ui-helper-clearfix { display: inline-block; }
 /* required comment for clearfix to work in Opera \*/
@@ -50,7 +50,7 @@
 .profile .ui-widget input, .profile .ui-widget select, .profile .ui-widget textarea, .profile .ui-widget button { font-family: Helvetica; font-size: 1em; }
 .profile .ui-widget-content {  background: #ffffff url(profile/ui-bg_flat_75_ffffff_40x100.png) 50% 50% repeat-x; color: #222222; }
 /* .profile .ui-widget-content a { color: #222222; } */
-.profile .ui-widget-header { border-bottom: 1px solid #00385D; background: #d9d9d9 url(profile/ui-bg_highlight-hard_100_d9d9d9_1x100.png) 50% 50% repeat-x; color: #222222; font-weight: bold; }
+.profile .ui-widget-header { border-bottom: 1px solid #00385D; background: transparent url(profile/ui-bg_highlight-profile.gif) repeat-x bottom; color: #222222; font-weight: bold; }
 .profile .ui-widget-header a { color: #222222; }
 
 /* Interaction states
@@ -64,7 +64,7 @@
 
 /* Interaction Cues
 ----------------------------------*/
-.profile .ui-state-highlight, .profile .ui-widget-content .ui-state-highlight {border: 1px solid #fcefa1; background: #fbf9ee url(profile/ui-bg_glass_55_fbf9ee_1x400.png) 50% 50% repeat-x; color: #363636; }
+.profile .ui-state-highlight, .profile .ui-widget-content .ui-state-highlight {border: 1px solid #fcefa1; background: #fbf9ee url(profile/ui-bg_glass_55_fbf9ee_1x400.png) 50% 50% repeat-x; color: #777777; }
 .profile .ui-state-highlight a, .profile .ui-widget-content .ui-state-highlight a { color: #363636; }
 .profile .ui-state-error, .profile .ui-widget-content .ui-state-error {border: 1px solid #cd0a0a; background: #fef1ec url(profile/ui-bg_inset-soft_95_fef1ec_1x100.png) 50% bottom repeat-x; color: #cd0a0a; }
 .profile .ui-state-error a, .profile .ui-widget-content .ui-state-error a { color: #cd0a0a; }

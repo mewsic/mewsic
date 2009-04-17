@@ -57,15 +57,24 @@
 }
 
 
-.invisible { display: none; }
-.visible { display: visible; }
-
 
 /* user blurp balloon sprites */
-.blurp_status, .blurp_sidebar { width: 10px; height: 16px; }
+.blurp_status, .blurp_sidebar, .blurp_friends { width: 10px; height: 16px; }
 .blurp_status { background: url('../images/icons/profile/users_balloon_sprites.png') no-repeat bottom; }
 .blurp_sidebar { background: url('../images/icons/profile/users_balloon_sprites.png') no-repeat top; }
+.blurp_friends { margin-top: 7px; background: url('../images/icons/profile/friends_balloon_sprite.gif') no-repeat top; }
 .blurp_author { width: 15px; height: 10px; background: url('../images/icons/profile/author_balloon_sprite.png') no-repeat bottom; }
+
+
+/* lists before jquery tabs style  */
+.preload_style { margin: 15px 0 22px 0; }
+.preload_style li {
+	list-style: none;
+	display: inline;
+	padding: 0.3em 0.5em;
+}
+.preload_style li a { color: #00385D; text-decoration: none; }
+
 
 
 
@@ -96,6 +105,7 @@
 .wall_post { background: url('../images/go_bg.png') repeat-x top; }
 .wall_post:hover { background: url('../images/go_bg.png') repeat-x bottom; }
 
+
 /* share links wall */
 .share_links_wall { 
 	margin: -5px 0 0 49px !important;
@@ -107,11 +117,7 @@
 	margin-left: 4px;
 	height: 16px;
 }
-/* icons */
-.share_links_wall .share_song_icon { background: url('../images/icons/music.png') no-repeat left; }
-.share_links_wall .share_picture_icon { background: url('../images/icons/picture.png') no-repeat left; }
-.share_links_wall .share_video_icon { background: url('../images/icons/television.png') no-repeat left; }
-.share_links_wall li a { padding-left: 21px; }
+
 
 
 /* wall posts */
@@ -130,7 +136,7 @@
 	border-bottom: 1px dashed #D6D6D6;
 }
 .post_balloon {
-	width: 90%;
+	width: 85%;
 	min-height: 12px;
 	border-bottom: 1px solid #D5D5D5;
 	padding: 7px 12px;
@@ -156,7 +162,7 @@
 .attach_list {
 	overflow: hidden;
 	background: url('../images/icons/attach.png') no-repeat top left;
-	width: 371px;
+	width: 351px;
 	padding-left: 17px;
 	margin-left: -3px;
 }
@@ -191,7 +197,6 @@
 	list-style: none;
 	overflow: hidden;
 	width: 208px;
-	margin-top: 22px;
 }
 .extended_wall h2 { margin-bottom: 2px; }
 .extended_wall span { padding-left: 21px; }
@@ -200,9 +205,11 @@
 
 /* Users Tabs */
 .profile .ui-tabs-nav li a {
-	padding: .4em 1.5em !important;
+	padding: .3em 1.2em !important;
 }
+
 .force_right { float: right !important; }
+
 
 
 /* MAILBOX 
@@ -210,11 +217,9 @@
 
 .mailbox_unread {
 background-image:url('../images/mailbox_unread.png');
-display:inline-block;
 color: #FFFFFF;
 line-height: 15px;
 font-size: 11px !important;
-margin-top: -15px;
 }
 .mailbox_unread span {
 background-image:url('../images/mailbox_unread.png');
@@ -254,6 +259,7 @@ padding:0 6px 1px;
 
 #mailbox_wrapper .dataTables_filter {
 	width: 222px !important;
+	margin-bottom: 15px;
 }
 
 #mailbox_processing {
@@ -261,17 +267,37 @@ padding:0 6px 1px;
 	margin-left: 0;
 	left: 0;
 }
-
 #mailbox  thead th {
 	border-bottom: 1px solid #CCCCCC;
+	text-align: left;
 }
+table.display td {
+	padding: 3px 5px !important;
+}
+#mailbox .unread_icon { margin: 13px 0 0 -19px; }
+
+#mailbox_info {
+	color: #666666;
+	margin: 11px 0 0 11px;
+	float: left;
+	width: 48%;
+}
+
+#mailbox .even { background: #EDF5F8; }
+#mailbox .even:hover, #mailbox .odd:hover { background: #EFFFF0; }
+
+#mailbox_wrapper .bullet_paging {
+	float: right;
+	margin: 11px 8px 0 0;
+}
+
 
 /* Mail Content */
 #mail_content {
-	width: 511px;
+	width: 500px;
+	margin-left: 4px;
 }
 .inbox_avatar { padding-right: 5px; }
-
 
 
 
@@ -280,31 +306,238 @@ padding:0 6px 1px;
 /* Accounts Icons */
 .inbox_accounts { 
 	list-style: none;  
-	width: 164px;
-	margin: 18px 16px 0 0;
+	width: 172px;
+	margin: 33px 16px 0 0;
 }
 .inbox_accounts li { cursor: pointer; }
 .inbox_accounts li:hover { color: #0296C2; }
 .inbox_accounts li {
 	display: block;
 	padding: 5px 0 5px 23px;
+	overflow: hidden;
 }
 .inbox_accounts .seclevel { 
-	padding: 2px 0 2px 35px;
+	padding: 4px 0 4px 22px;
+	margin-left: 15px;
+}
+.inbox_accounts .thirdlevel { 
+	padding: 2px 0 2px 45px;
+}
+.inbox_accounts .mailbox_mband-name { width: 93px; }
+
+
+
+/* PROFILE SIDEBAR LISTS */
+.profile_sidebar { margin-bottom: 25px !important; }
+.sidebar_count { margin-left: 4px !important; }
+
+.profile_sidebar .gray_spec {
+	border-bottom: 1px solid #CCCCCC;
+	padding-bottom: 2px;
+}
+.profile_sidebar li {
+	padding-top: 8px;
+}
+.edit_lists {
+	padding-left: 19px;
+	height: 20px;
+}
+
+.gear_spec {
+	padding: 2px 0 0 7px;
+	width: 150px;
+}
+.gear_spec a, .gear_spec span {
+	padding-left: 19px;
+	margin-top: 2px;
+	height: 16px;
+}
+
+/* sidebar newest song tabs */
+.ui-tabs-nav li a {
+	padding: .2em .6em !important;
+}
+.profile_newest_tabs {
+	margin-top: 5px;
 }
 
 
-.newmail_icon { border-bottom: 1px solid #CCCCCC; background: url('../images/icons/mailbox/email_add.png') no-repeat center left; }
-.inbox_icon, .share_icon { margin-top: 10px; background: url('../images/icons/mailbox/email.png') no-repeat center left; }
-.collab_icon { background: url('../images/icons/mailbox/arrow_in.png') no-repeat center left; }
-.freq_icon { background: url('../images/icons/mailbox/group.png') no-repeat center left; }
-.mbands_icon { background: url('../images/icons/mband_big.png') no-repeat center left; }
-.admire_icon { background: url('../images/icons/heart.png') no-repeat center left;}
-.sendmessage_icon { background: url('../images/icons/mailbox/email_go.png') no-repeat center left;}
-.podcast_icon { background: url('../images/icons/podcast.png') no-repeat center left;}
-.tag_add_icon { background: url('../images/icons/tag_add.png') no-repeat center left; }
-.download_icon { background: url('../images/icons/disk.png') no-repeat center left; }
+
+
+
+/* INFOS, IAM / INFLUENCES */
+.iam_box, .influences_box {
+	width: 330px;
+	margin: 18px 8px 0 8px;
+}
+.iam_box h2, .influences_box h2 {
+	border-bottom: 1px solid #CCCCCC;
+	padding-left: 8px;
+}
+.iam_box .inner, .influences_box .inner { padding: 10px 5px 0 15px; }
+
+dl.info { overflow: hidden; margin: 0 0 40px 0; }
+dl.info dt {
+	width: 100px;
+	clear: left;
+	float: left;
+	color: #999999;
+}
+dl.info dd {
+	width: 190px;
+	margin: 0;
+	padding-left: 10px;
+	float: left;
+}
+dl.info dd a { 	color: #00385D; font-weight: bold; text-decoration: none; }
+dl.info dt, dl.info dd { padding-bottom: 4px; }
+
+.info_text_group { margin: 0 0 20px 0; }
+.info_text_group span { margin-bottom: 3px; }
+
+
+/* inslide tagged instr list */
+.tagged_instr_list {
+	padding-top: 4px;
+	overflow: hidden;
+	width: 362px;
+}
+.tagged_instr_list li {
+	display: inline;
+	width: 160px;
+	padding: 6px 10px;
+	background-color: #D6F0FF;
+	border-bottom: 1px solid #ADD9FF;
+	float: left;
+	margin: 3px 1px 0 0;
+	cursor: pointer;
+}
+.tagged_instr_list li:hover {
+	background-color: #BAE6FF;
+}
+
+/* PICTURES GALLERY */
+#pictures_gal {
+	overflow: hidden;
+	margin-top: 20px;
+}
+
+table#gallery td, table#gallery-show td,
+table#flickr_gallery td {
+	background-color: #EDEDED;
+	cursor: pointer;
+}
+table#gallery td:hover, table#flickr_gallery td img:hover { background-color: #88AED2; }
+
+table#gallery td img, #slide img, 
+table#flickr_gallery td img {
+	padding: 3px;
+	background-color: #FFFFFF;
+}
+
+table#gallery { margin-bottom: 20px; }
+table#flickr_gallery { margin-top: 7px; }
+
+.slide_container {
+	background-color: #EDEDED;
+	margin: auto;
+	padding: 20px;
+	margin-top: 7px;
+}
+.slideshow {
+	margin: auto;
+}
+
+.pic_descr {
+	border: 1px solid #EDEDED;
+	padding: 10px 15px;
+	margin-bottom: 8px;
+}
+.flickr_badge {
+	background: url('../images/flickr_badge.jpg') no-repeat left;
+	padding: 5px 0 0 55px;
+}
+
+
+/* User song tools, Search tools */
+.user_song_tools { width: 70px; }
+.user_song_tools a, .search_tools a {
+	font-size: 10px;
+	text-decoration: none;
+	color: #888888;
+}
+
+
+/* Users lists */
+.profile_mband_block { margin: 5px 0 15px 0; }
+.profile_mband { width: 159px; }
+.profile_mband, .profile_mband_pic { margin: 5px; }
+.profile_mband_pic img {
+	padding: 1px;
+	border: 1px solid #E6E6E6;
+}
+
+
+/* Friends lists */
+.friend_status { margin: 0 0 10px 49px; }
+.friend_balloon {
+	min-height: 12px;
+	border-bottom: 1px solid #CCCCCC;
+	padding: 7px 12px;
+	margin: 3px 0 0 10px;
+	color: #333333;
+}
+
+.inner_sidebar {
+	margin-left: 30px;
+	width: 160px;
+}
+.inner_sidebar_divider {
+	width: 100%;
+	border-top: 1px dotted #888888;
+	padding-top: 5px;
+	margin-top: 7px;
+}
+
+.fb_friend { margin-top: 7px; }
+.fb_thumb { margin-bottom: -16px; }
+.fb_avatar {
+	width: 16px; height: 16px;
+	cursor: pointer;
+	margin: 0 0 0 28px;
+}
+
+/* general in-avatar icon placement */
+.inavatar_icon {
+	position: absolute;
+	margin: -5px 0 0 -5px;
+}
+
+
+.invite_from_facebook { border: 1px solid #405E9A; }
+.invite_from_facebook, .invite_from_other {
+	margin-top: 17px;
+	padding: 6px 12px 6px 8px;
+}
 
 
 
 
+/* VIDEOS */
+.video_stage_full {
+	margin-top: 15px;
+	width: 100%;
+}
+
+.profile_video_lists {
+
+}
+.profile_video_lists li { padding-left: 7px; }
+.profile_video_lists .video_thumb {
+	width: 124px;
+	height: 100px;
+}
+.profile_video_lists .still_play { width: 118px; }
+.profile_video_lists .now_playing .video_thumb img {
+	border: 1px solid #2e83ff;
+}

@@ -81,6 +81,10 @@
 .ui-widget-content .ui-icon {background-image: url(images/ui-icons_222222_256x240.png); }
 .ui-widget-header .ui-icon {background-image: url(images/ui-icons_222222_256x240.png); }
 .ui-state-default .ui-icon { background-image: url(images/ui-icons_888888_256x240.png); }
+.ui-state-light {background-image: url(images/ui-icons_d6efff_256x240.png); }
+.ui-state-cyan {background-image: url(images/ui-icons_2e83ff_256x240.png); }
+.ui-state-tools { background-image: url(images/ui-icons_888888_256x240.png); }
+.ui-state-tools-hover { background-image: url(images/ui-icons_222222_256x240.png); }
 .ui-state-hover .ui-icon, .ui-state-focus .ui-icon {background-image: url(images/ui-icons_454545_256x240.png); }
 .ui-state-active .ui-icon {background-image: url(images/ui-icons_454545_256x240.png); }
 .ui-state-highlight .ui-icon {background-image: url(images/ui-icons_2e83ff_256x240.png); }
@@ -265,7 +269,7 @@
 /* Misc visuals
 ----------------------------------*/
 
-/* Corner radius */
+/* Corner radius 
 .ui-corner-tl { -moz-border-radius-topleft: 5px; -webkit-border-top-left-radius: 5px; }
 .ui-corner-tr { -moz-border-radius-topright: 5px; -webkit-border-top-right-radius: 5px; }
 .ui-corner-bl { -moz-border-radius-bottomleft: 5px; -webkit-border-bottom-left-radius: 5px; }
@@ -275,10 +279,14 @@
 .ui-corner-right {  -moz-border-radius-topright: 5px; -webkit-border-top-right-radius: 5px; -moz-border-radius-bottomright: 5px; -webkit-border-bottom-right-radius: 5px; }
 .ui-corner-left { -moz-border-radius-topleft: 5px; -webkit-border-top-left-radius: 5px; -moz-border-radius-bottomleft: 5px; -webkit-border-bottom-left-radius: 5px; }
 .ui-corner-all { -moz-border-radius: 5px; -webkit-border-radius: 5px; }
+*/
 
 /* Overlays */
 .ui-widget-overlay { background: #aaaaaa url(images/ui-bg_flat_0_aaaaaa_40x100.png) 50% 50% repeat-x; opacity: .30;filter:Alpha(Opacity=30); }
-.ui-widget-shadow { margin: -8px 0 0 -8px; padding: 8px; background: #006F9F url(images/ui-bg_flat_0_006F9F_40x100.png) 50% 50% repeat-x; opacity: .30;filter:Alpha(Opacity=30); -moz-border-radius: 8px; -webkit-border-radius: 8px; }/* Resizable
+.ui-widget-shadow { margin: -8px 0 0 -8px; padding: 8px; background: #006F9F url(images/ui-bg_flat_0_006F9F_40x100.png) 50% 50% repeat-x; opacity: .30;filter:Alpha(Opacity=30); -moz-border-radius: 8px; -webkit-border-radius: 8px; }
+
+
+/* Resizable
 ----------------------------------*/
 .ui-resizable { position: relative;}
 .ui-resizable-handle { position: absolute;font-size: 0.1px;z-index: 99999; display: block;}
@@ -290,7 +298,9 @@
 .ui-resizable-se { cursor: se-resize; width: 12px; height: 12px; right: 1px; bottom: 1px; }
 .ui-resizable-sw { cursor: sw-resize; width: 9px; height: 9px; left: -5px; bottom: -5px; }
 .ui-resizable-nw { cursor: nw-resize; width: 9px; height: 9px; left: -5px; top: -5px; }
-.ui-resizable-ne { cursor: ne-resize; width: 9px; height: 9px; right: -5px; top: -5px;}/* Accordion
+.ui-resizable-ne { cursor: ne-resize; width: 9px; height: 9px; right: -5px; top: -5px;}
+
+/* Accordion
 ----------------------------------*/
 .ui-accordion .ui-accordion-header { cursor: pointer; position: relative; margin-top: 1px; zoom: 1; }
 .ui-accordion .ui-accordion-li-fix { display: inline; }
@@ -298,7 +308,9 @@
 .ui-accordion .ui-accordion-header a { display: block; font-size: 1em; padding: .5em .5em .5em 2.2em; }
 .ui-accordion .ui-accordion-header .ui-icon { position: absolute; left: .5em; top: 50%; margin-top: -8px; }
 .ui-accordion .ui-accordion-content { padding: 1em 2.2em; border-top: 0; margin-top: -2px; position: relative; top: 1px; margin-bottom: 2px; overflow: auto; display: none; }
-.ui-accordion .ui-accordion-content-active { display: block; }/* Dialog
+.ui-accordion .ui-accordion-content-active { display: block; }
+
+/* Dialog
 ----------------------------------*/
 .ui-dialog { position: relative; padding: .2em; width: 300px; }
 .ui-dialog .ui-dialog-titlebar { padding: .5em .3em .3em 1em; position: relative;  }
@@ -311,6 +323,8 @@
 .ui-dialog .ui-dialog-buttonpane button { float: right; margin: .5em .4em .5em 0; cursor: pointer; padding: .2em .6em .3em .6em; line-height: 1.4em; width:auto; overflow:visible; }
 .ui-dialog .ui-resizable-se { width: 14px; height: 14px; right: 3px; bottom: 3px; }
 .ui-draggable .ui-dialog-titlebar { cursor: move; }
+
+
 /* Slider
 ----------------------------------*/
 .ui-slider { position: relative; text-align: left; }
@@ -327,10 +341,14 @@
 .ui-slider-vertical .ui-slider-handle { left: -.3em; margin-left: 0; margin-bottom: -.6em; }
 .ui-slider-vertical .ui-slider-range { left: 0; width: 100%; }
 .ui-slider-vertical .ui-slider-range-min { bottom: 0; }
-.ui-slider-vertical .ui-slider-range-max { top: 0; }/* Tabs
+.ui-slider-vertical .ui-slider-range-max { top: 0; }
+
+
+
+/* Tabs
 ----------------------------------*/
 .ui-tabs { padding: .2em; zoom: 1; overflow: hidden; }
-.ui-tabs .ui-tabs-nav { list-style: none; position: relative; padding: .2em .2em 0; border-bottom: 1px solid #014D70; }
+.ui-tabs .ui-tabs-nav { list-style: none; position: relative; padding: .2em .2em 0 .4em; border-bottom: 1px solid #014D70; }
 .ui-tabs .ui-tabs-nav li { position: relative; float: left; border-bottom-width: 0 !important; margin: 0 .2em -1px 0; padding: 0; }
 .ui-tabs .ui-tabs-nav li a { float: left; text-decoration: none; padding: .4em .7em; }
 .ui-tabs .ui-tabs-nav li.ui-tabs-selected { padding-bottom: 1px; border-bottom-width: 0; }
@@ -338,6 +356,9 @@
 .ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a { cursor: pointer; } /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
 .ui-tabs .ui-tabs-panel { padding: 2em 0em; overflow: hidden; display: block; border-width: 0; background: none; }
 .ui-tabs .ui-tabs-hide { display: none !important; }
+
+
+
 /* Datepicker
 ----------------------------------*/
 .ui-datepicker { width: 17em; padding: .2em .2em 0; }

@@ -104,7 +104,7 @@ $(function() {
 		autoOpen: false,
 		dialogClass: 'change_avatar',
 		modal: true,
-		width: 350,
+		width: 550,
 		resizable: false
 	})
 	
@@ -113,6 +113,34 @@ $(function() {
 	})
 	
 });
+
+	// JCROP
+	// Remember to invoke within jQuery(window).load(...)
+	// If you don't, Jcrop may not initialize properly
+	jQuery(window).load(function(){
+
+		jQuery('#cropbox').Jcrop({
+			onChange: showPreview,
+			onSelect: showPreview,
+			aspectRatio: 1
+		});
+
+	});
+
+	// Our simple event handler, called from onChange and onSelect
+	// event handlers, as per the Jcrop invocation above
+	function showPreview(coords)
+	{
+		var rx = 200 / coords.w;
+		var ry = 200 / coords.h;
+
+		jQuery('#preview').css({
+			width: Math.round(rx * 380) + 'px',
+			height: Math.round(ry * 600) + 'px',
+			marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+			marginTop: '-' + Math.round(ry * coords.y) + 'px'
+		});
+	}
 
 
 
@@ -124,21 +152,28 @@ $(function() {
 		modal: true,
 		width: 450,
 		resizable: false,
+		buttons: {
+					Attach: function() {
+					$(this).dialog('close');
+					}
+				}
 	});
 	
 	$('#share_song_link').click(function() {
 		$('#share_songs_dialog').dialog('open');
-	})
+	});
 	
 });
 
 $(function() {
+
+	/* WALL, SHARE MEDIA */
 	$("#share_media_dialog").dialog({
 		autoOpen: false,
 		dialogClass: 'share_media',
 		modal: true,
 		width: 450,
-		resizable: false,
+		resizable: false
 	});
 	
 	$('#share_picture_link').click(function() {
@@ -147,6 +182,28 @@ $(function() {
 	
 	$('#share_video_link').click(function() {
 		$('#share_media_dialog').dialog('open');
-	})
+	});
 	
+	
+	/* TAGGING DIALOG */
+	$("#add_tags").dialog({
+		autoOpen: false,
+		dialogClass: 'tagging',
+		modal: true,
+		width: 510,
+		resizable: false,
+		buttons: {
+					Save: function() {
+					$(this).dialog('close');
+					},
+					Cancel: function() {
+					$(this).dialog('close');
+					}					
+				}		
+	});
+
+	$('#add_tags_link').click(function() {
+		$('#add_tags').dialog('open');
+	});
+
 });
