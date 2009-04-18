@@ -1,0 +1,285 @@
+<div class="fleft">
+	<span class="gray_spec">Pinca Palla use the following</span>
+	<span class="fleft heading s13 weight-bold">Gears</span>
+</div>
+
+<div class="clear"> </div>
+
+
+<div class="fleft margin30" style="width:315px;">
+<div id="add_gear">
+	<p class="gray_spec dialog_help">Show off your gear! Select an <strong>Instrument icon</strong> to add details of your stuff and tag it in your pictures.
+	</p>
+	<script type="text/javascript" charset="utf-8">
+	$(function() {
+		//$("#instruments_icons").tabs();
+		$("#instr_group_01").selectable({
+			filter: '.instr'
+		});
+		
+		$(".instr_gear_list").click(function() {
+					$(this).effect("pulsate", {
+						times: 1
+					}, 500);
+				});		
+	});
+	</script>
+
+	<div id="instruments_icons">
+		<ul id="gear-tabs" class="fleft">
+			<li class="current">
+				<a class="gear-tab-links" href="#instr_group_01">Cordofoni</a>
+			</li>
+			<li><a class="gear-tab-links" href="#instr_group_02">Membranofoni</a></li>
+			<li><a class="gear-tab-links" href="#instr_group_03">Idiofoni</a></li>			
+			<li><a class="gear-tab-links" href="#instr_group_04">Aerofoni</a></li>
+			<li><a class="gear-tab-links" href="#instr_group_05">Elettrofoni</a></li>
+			<li><a class="gear-tab-links" href="#instr_group_06">Other</a></li>	
+			<!-- use classes visible, invisible -->
+			<span class="fleft instr_avatar visible">
+				<img src="/images/loader_small.gif" />
+			</span>
+		</ul>
+
+		<div id="instr_group_01" class="overflow-hidden">
+			<!-- instr icon + instr name tooltip -->
+			<div class="shadow_white instr_gear_list fleft">
+				<div class="tooltip_instr" style="display: ">
+					<strong>Harp</strong>
+				</div>
+				<span class="instr icon_34"> </span>
+			</div>				
+			<div class="shadow_white instr_gear_list fleft">
+				<div class="tooltip_instr" style="display: ">
+					<strong>Acoustic Bass</strong>
+				</div>
+				<span class="instr icon_5"> </span>
+			</div>				
+			<div class="shadow_white instr_gear_list fleft">
+				<div class="tooltip_instr" style="display: ">
+					<strong>Electric Bass</strong>
+				</div>
+				<span class="instr icon_6"> </span>
+			</div>				
+			<div class="shadow_white instr_gear_list fleft">
+				<div class="tooltip_instr" style="display: ">
+					<strong>Steel Stringed Guitar</strong>
+				</div>
+				<span class="instr icon_4"> </span>
+			</div>				
+			<div class="shadow_white instr_gear_list fleft">
+				<div class="tooltip_instr" style="display: ">
+					<strong>Nylon Stringed Guitar</strong>
+				</div>
+				<span class="instr icon_3"> </span>
+			</div>				
+			<div class="shadow_white instr_gear_list fleft">
+				<div class="tooltip_instr" style="display: ">
+					<strong>Electric Guitar</strong>
+				</div>
+				<span class="instr icon_7"> </span>
+			</div>				
+			<div class="shadow_white instr_gear_list fleft">
+				<div class="tooltip_instr" style="display: ">
+					<strong>Double Bass</strong>
+				</div>
+				<span class="instr icon_2"> </span>
+			</div>				
+			<div class="shadow_white instr_gear_list fleft">
+				<div class="tooltip_instr" style="display: ">
+					<strong>Mandolin</strong>
+				</div>
+				<span class="instr icon_1"> </span>
+			</div>				
+			<div class="shadow_white instr_gear_list fleft">
+				<div class="tooltip_instr" style="display: ">
+					<strong>Piano</strong>
+				</div>
+				<span class="instr icon_9"> </span>
+			</div>				
+			<div class="shadow_white instr_gear_list fleft">
+				<div class="tooltip_instr" style="display: ">
+					<strong>Harpishcord</strong>
+				</div>
+				<span class="instr icon_8"> </span>
+			</div>				
+			<div class="shadow_white instr_gear_list fleft">
+				<div class="tooltip_instr" style="display: ">
+					<strong>Viola</strong>
+				</div>
+				<span class="instr icon_12"> </span>
+			</div>				
+			<div class="shadow_white instr_gear_list fleft">
+				<div class="tooltip_instr" style="display: ">
+					<strong>Violin</strong>
+				</div>
+				<span class="instr icon_11"> </span>
+			</div>				
+			<div class="shadow_white instr_gear_list fleft">
+				<div class="tooltip_instr" style="display: ">
+					<strong>Cello</strong>
+				</div>
+				<span class="instr icon_13"> </span>
+			</div>				
+		</div>
+		<div id="instr_group_02" class="overflow-hidden">
+
+		</div>
+		<div id="instr_group_03" class="overflow-hidden">
+
+		</div>
+		<div id="instr_group_04" class="overflow-hidden">
+
+		</div>
+		<div id="instr_group_05" class="overflow-hidden">
+
+		</div>
+		<div id="instr_group_06" class="overflow-hidden">
+
+		</div>
+	</div>
+	
+</div>
+</div>
+
+
+<div class="fleft margin30 padleft7">
+<script type="text/javascript">
+	$(function() {
+		$("#submitted_gear").sortable({
+			containment: '#submitted_gear',
+			opacity: 0.7,
+			revert: true,
+			tolerance: 'pointer'
+		});
+		$("#drag_gear").draggable({
+			connectToSortable: '#submitted_gear',
+			revert: 'invalid',
+			handle: '#drag-handle'
+		});
+		$("#submitted_gear, #drag_gear").disableSelection();
+	});
+
+</script>
+
+<p class="tags_heading gray_spec weight-bold dialog_help">MY GEAR</p>
+<ul id="submitted_gear">
+	<li id="drag_gear">
+		<div class="my_gear overflow-hidden">
+			<div class="fleft">
+				<div class="fleft instr_avatar">
+					<span class="instr icon_9"> </span>
+				</div>				
+					<div class="fleft gear_infos overflow-hidden">
+						<div class="fleft">
+							<form>
+								<input type="text" value="Brand" class="geartext fleft">
+						</div>
+						<div class="fleft clear">
+								<input type="text" value="Model" class="geartext fleft">		
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="fright" style="margin-right:4px;">
+					<span class="icons16 ui-state-tools ui-icon-circle-close"> </span>
+					<span id="drag-handle" class="icons16 ui-state-tools ui-icon-arrow-4"> </span>							
+				</div>
+		</div>	
+	</li>
+
+	<li id="drag_gear">
+		<div class="my_gear overflow-hidden">
+			<div class="fleft">
+				<div class="fleft instr_avatar">
+					<span class="instr icon_29"> </span>
+				</div>				
+					<div class="fleft gear_infos overflow-hidden">
+						<div class="fleft">
+							<form>
+								<input type="text" value="Brand" class="geartext fleft">
+						</div>
+						<div class="fleft clear">
+								<input type="text" value="Model" class="geartext fleft">		
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="fright" style="margin-right:4px;">
+					<span class="icons16 ui-state-tools ui-icon-circle-close"> </span>
+					<span id="drag-handle" class="icons16 ui-state-tools ui-icon-arrow-4"> </span>							
+				</div>
+		</div>	
+	</li>
+
+	<li id="drag_gear">
+		<div class="my_gear overflow-hidden">
+			<div class="fleft">
+				<div class="fleft instr_avatar">
+					<span class="instr icon_31"> </span>
+				</div>				
+					<div class="fleft gear_infos">
+						<div class="fleft">
+							<span class="fleft">
+								<strong class="heading_blue fleft">I want this Access</strong>
+								<span class="fleft padleft7 ten">
+									<a href="" class="icons16 edit_icon padleft23 none">
+										Edit
+									</a>
+								</span>
+							</span>
+								<div class="clear"> </div>
+							<span class="fleft">
+								<span class="heading_blue fleft">Virus T1 Polar Limited Edition</span>
+								<span class="fleft padleft7 ten">
+									<a href="" class="icons16 edit_icon padleft23 none">
+										Edit
+									</a>
+								</span>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="fright" style="margin-right:4px;">
+					<span class="icons16 ui-state-tools ui-icon-circle-close"> </span>
+					<span id="drag-handle" class="icons16 ui-state-tools ui-icon-arrow-4"> </span>							
+				</div>
+		</div>
+	</li>
+
+	<li id="drag_gear">
+		<div class="my_gear overflow-hidden">
+			<div class="fleft">
+				<div class="fleft instr_avatar">
+					<span class="instr icon_7"> </span>
+				</div>				
+					<div class="fleft gear_infos">
+						<div class="fleft">
+							<span class="fleft">
+								<strong class="heading_blue fleft">Fender</strong>
+								<span class="fleft padleft7 ten">
+									<a href="" class="icons16 edit_icon padleft23 none">
+										Edit
+									</a>
+								</span>
+							</span>
+								<div class="clear"> </div>
+							<span class="fleft">
+								<span class="heading_blue fleft">Stratocaster</span>
+								<span class="fleft padleft7 ten">
+									<a href="" class="icons16 edit_icon padleft23 none">
+										Edit
+									</a>
+								</span>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="fright" style="margin-right:4px;">
+					<span class="icons16 ui-state-tools ui-icon-circle-close"> </span>
+					<span id="drag-handle" class="icons16 ui-state-tools ui-icon-arrow-4"> </span>							
+				</div>
+		</div>
+	</li>
+</ul>
+</div>

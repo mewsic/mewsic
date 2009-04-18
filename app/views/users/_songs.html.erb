@@ -1,0 +1,46 @@
+<div class="fleft">
+	<span class="gray_spec">Pinca Palla have:</span>
+	<span class="fleft heading s13 weight-bold">43 Songs</span>
+</div>
+
+<!--
+<a href="#add_gear" id="add_gear_link" class="edit_lists tag_yellow_icon none fright">
+	Add your Gear
+</a>
+-->
+<div class="clear"> </div>
+
+<!-- USER SONGS -->
+<div id="user_songs_list">
+		<div class="browse_pane pane_content">
+			<div class="browse_pane_left fleft" id="user_songs_tabs">
+				<ul class="music_type alright s13">
+					<li class="current">All <small class="sixsixsix">43</small></li>
+					<li class="">
+						<span class="fleft icons16 private_icon"> </span>
+						<a href="#proj-private">Private <small class="gray_spec">4</small></a>
+					</li>
+					<li class="">
+						<span class="fleft icons16 music_icon"> </span>
+						<a href="#proj-songs">Songs <small class="gray_spec">8</small></a>
+					</li>
+					<li class="">
+						<span class="fleft icons16 instruments_icon"> </span>
+						<a href="#proj-instr">Instruments <small class="gray_spec">15</small></a>
+					</li>
+				</ul>
+			</div>
+			<div class="browse_pane_right fleft" id="proj-songs">
+				<div id="music_list" class="fleft">
+          <% 6.times do %>
+              <%= render :partial => 'users/song_block' %>
+          <% end %>
+				</div>
+			</div>
+		</div>
+</div>
+<div class="profile_music_pager fright">
+      <%= render :partial => 'shared/paging_vert' %>
+</div>
+
+<div class="clear"> </div>

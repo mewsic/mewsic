@@ -1,0 +1,94 @@
+<!-- USER FRIENDS -->
+<div id="user_friends_list" class="fleft w500 overflow-hidden">
+	<div class="fleft" style="margin-bottom: 25px;">
+		<span class="gray_spec">Pinca Palla have</span>
+		<span class="fleft heading s13 weight-bold">69 Friends</span>
+	</div>
+
+		<div class="browse_pane pane_content fleft">
+			<div class="browse_pane_left fleft" id="user_friends_tabs">
+				<ul class="music_type alright s13">
+					<li class="current">All</li>
+					<li class="">
+						<span class="fleft icons18 mbands_icon"> </span>
+						<a href="#proj-private">M-Bands</a>
+					</li>
+					<li class="">
+						<span class="fleft icons16 collab_icon"> </span>
+						<a href="#proj-songs">Featured</a>
+					</li>
+				</ul>
+			</div>
+			<div class="browse_pane_right fleft" id="proj-songs">
+				<div id="friends_list" class="fleft">					
+        <% 4.times do %>
+            <%= render :partial => 'users/friends_list' %>
+        <% end %>
+				</div>
+			</div>
+		</div>
+		<div class="fright">
+        <%= render :partial => 'shared/paging_vert' %>
+		</div>	
+</div>
+
+
+<!-- inner sidebar -->
+<div class="inner_sidebar fleft">
+	
+	<!-- Already on Mewsic -->
+	<h2>Facebook</h2>
+	<span class="gray_spec nomargin">
+		23 of your friends are already on Mewsic
+	</span>
+
+
+	<div class="fb_friend fleft">
+		<span class="fleft">
+			<a href="">
+				<img src="/images/temp/avatar_fabio.jpg" class="fb_thumb border avatar" width="40" height="40" />					
+				<img src="/images/icons/facebook.gif" class="fb_avatar" />		
+			</a>
+		</span>
+		<a href="" class="heading none weight-bold padleft7">Fabio Grande</a><br />
+		<a href="" class="none block" style="padding-left:51px;">Do something</a>
+	</div>
+	<div class="fb_friend fleft">
+		<span class="fleft">
+			<a href="">
+				<img src="/images/temp/avatar_ndstr.jpg" class="fb_thumb border avatar" width="40" height="40" />					
+				<img src="/images/icons/facebook.gif" class="fb_avatar" />		
+			</a>
+		</span>
+		<a href="" class="heading none weight-bold padleft7">NDSTR Photogr...</a><br />
+		<a href="" class="none block" style="padding-left:51px;">Do something</a>		
+	</div>
+
+	<div class="more_expandable inner_sidebar_divider fright">
+		<a href="#" class="fright weight-bold none">	
+			<span class="fleft icons16 ui-state-cyan ui-icon-arrowrefresh-1-s"> </span>
+			see more
+		</a>	
+	</div>
+	
+	
+	<!-- invite boxes -->
+	<div class="invite_from_facebook fright facebook_icon" style="background-position:bottom right">
+			<a href="#" class="fright weight-bold none">	
+				Invite on Mewsic your friends from Facebook
+			</a>		
+	</div>
+	
+	<div class="invite_from_other fright blue7">
+			<a href="#" class="fright weight-bold none heading">	
+				Invite in Mewsic your friends from
+				<!-- invite module -->
+			</a>		
+	</div>
+
+	
+</div>
+<!-- end inner sidebar -->
+
+
+<div class="clear"> </div>

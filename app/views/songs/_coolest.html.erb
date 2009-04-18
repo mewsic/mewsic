@@ -26,8 +26,9 @@
 				<div id="song_newest_list" class="fleft">
           <%= render :partial => 'shared/song_block_chart', :collection => @coolest_songs %>
 				</div>
-
-        <%= render :partial => 'shared/bullet_paging' %>				
+        <div class="paging_bg fright">
+          <%= render :partial => 'shared/paging_horiz' %>				
+        </div>
 
 			</div>
 		</div>

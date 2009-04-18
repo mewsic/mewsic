@@ -121,19 +121,12 @@
 
 <div id="show_mixable">
 <% 7.times do %>
-    <%= render :partial => 'shared/song_block_sidebar' %>
+    <%= render :partial => 'shared/song_block_sidebar_max' %>
 <% end %>
 
 
 	<div class="paging_bg fright">
-		<ul class="bullet_paging">
-			<li class="bullet"><a href="" class="on"> </a></li>
-			<li class="bullet"><a href="" class="off"> </a></li>
-			<li class="bullet"><a href="" class="off"> </a></li>								
-			<li class="pager"><a href="" class="prev"> </a></li>												
-			<li class="pager"><a href="" class="next"> </a></li>																
-		</ul>
-	</div>
+    <%= render :partial => 'shared/paging_vert' %>	</div>
 </div>
 <div class="clear"> </div>
 

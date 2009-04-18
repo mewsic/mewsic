@@ -1,0 +1,125 @@
+<script type="text/javascript" charset="utf-8">
+	$(document).ready(function() {
+		$('.mailbox').dataTable( {
+			"bLengthChange": true,
+			"bFilter": true,
+			"bInfo": true,
+			"bAutoWidth": false,
+			"sPaginationType": "full_numbers",
+			
+			"oLanguage": {
+						"sUrl": "/javascripts/dataTables_EN.txt"
+					},
+			"aoData": [ 
+						/* From */ { "sType": "html" },
+						/* Subject */ { "sType": "html" },
+						/* Date Received */ { "bSearchable": false }
+					]					
+			} );
+		} );
+</script>
+
+
+<div class="fleft">
+	<ul class="inbox_accounts weight-bold fleft">
+		<li class="newmail_icon s13">New Message</li>
+		<li class="inbox_icon">
+			<span class="fleft">Inbox</span> 
+          <%= render :partial => 'users/mailbox_unread' %>
+		</li>
+		<li class="seclevel collab_icon">
+			<span class="fleft">Collaborations</span> 
+          <%= render :partial => 'users/mailbox_unread' %>
+		</li>
+		<li class="seclevel freq_icon">
+			<span class="fleft">Friend Requests</span> 
+          <%= render :partial => 'users/mailbox_unread' %>
+		</li>
+		<li class="seclevel mbands_icon">Mbands</li>
+			<li class="thirdlevel">
+				<span class="fleft mailbox_mband-name">Enzo's Untouchable Quintet</span> 
+          <%= render :partial => 'users/mailbox_unread' %>
+			</li>
+			<li class="thirdlevel">
+				<span class="fleft mailbox_mband-name">Sblandons</span> 
+          <%= render :partial => 'users/mailbox_unread' %>
+			</li>
+			<li class="thirdlevel">
+				<span class="fleft mailbox_mband-name">Rustelli</span> 
+          <%= render :partial => 'users/mailbox_unread' %>
+			</li>
+	</ul>
+</div>
+
+<div id="mail_content" class="fleft">
+<table cellpadding="0" cellspacing="0" border="0"  class="display mailbox" id="mailbox">
+	<thead>
+		<tr>
+			<th>From</th>
+			<th>Subject</th>
+			<th>Date Received</th>			
+		</tr>
+	</thead>
+	<tbody>
+      <% 3.times do %>
+		<tr>
+			<td>
+				<span class="icons16 unread_icon fleft"> </span>
+				<a href="" class="inbox_avatar fleft">
+				<img src="/images/temp/avatar_pino.jpg" class=" border" width="40" />					
+				</a>
+				<a href="" class="weight-bold">Pino e il mare</a>
+			</td>
+			<td>
+				<a href="" class="weight-bold">Congrats! great songs</a>
+			</td>
+			<td>
+				Today  8:08PM
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="" class="inbox_avatar fleft">
+				<img src="/images/temp/avatar_ndstr.jpg" class=" border" width="40" />					
+				</a>
+				<a href="">NDSTR</a>
+			</td>
+			<td>
+				<a href="">Hi, i want to share something with you.</a>
+			</td>
+			<td>
+				Today  4:08AM
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="" class="inbox_avatar fleft">
+				<img src="/images/temp/avatar_enzo.jpg" class=" border" width="40" />					
+				</a>
+				<a href="">Enzo</a>
+			</td>
+			<td>
+				<a href="">Re: Nice to Meet you</a>
+			</td>
+			<td>
+				Yesterday  1:51PM
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="" class="inbox_avatar fleft">
+				<img src="/images/temp/avatar_alvarez.jpg" class=" border" width="40" />					
+				</a>
+				<a href="">Alavrez de la Fonzeca</a>
+			</td>
+			<td>
+				<a href="">Friend Request</a>
+			</td>
+			<td>
+				March 6  2:342PM
+			</td>
+		</tr>
+      <% end %>
+		</tbody>
+	</table>
+</div>

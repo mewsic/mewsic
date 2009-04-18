@@ -1,0 +1,1 @@
+[ 	'images/temp/gallery/01/image/05.jpg', 	'images/temp/gallery/01/image/07.jpg', 	'images/temp/gallery/01/image/12.jpg', 	'images/temp/gallery/01/image/16.jpg', 	'images/temp/gallery/01/image/18.jpg', 	'images/temp/gallery/01/image/19.jpg', 	'images/temp/gallery/01/image/30.jpg', 	'images/temp/gallery/01/image/32.jpg'	]

@@ -50,51 +50,52 @@
 
 				<script type="text/javascript" charset="utf-8">
 				$(function() {
-					$("#profile_tabs").tabs({
-						selected: 0
-					});
+					$("#profile_tabs").tabs();
 				});
 				</script>
 				<div id="profile_tabs" class="profile">
-					<ul class="profile">
-						<li class="profile"><a href="#profile-wall">WALL</a></li>
-						<li class="profile"><a href="#profile-info">INFO</a></li>
-						<li class="profile"><a href="#profile-songs">SONGS</a></li>
-						<li class="profile"><a href="#profile-media">PHOTOS & VIDEOS</a></li>						
-						<li class="profile force_right"><a href="#profile-inbox">MAILBOX</a></li>						
-					</ul>
+				<ul class="profile preload_style">
+					<li class="profile"><a href="#profile-wall">WALL</a></li>
+					<li class="profile"><a href="#profile-info">INFO</a></li>
+					<li class="profile"><a href="#profile-songs">MUSIC</a></li>
+					<li class="profile"><a href="#profile-bands">M-BANDS</a></li>
+					<li class="profile"><a href="#profile-gear">GEAR</a></li>												
+					<li class="profile"><a href="#profile-photo">PHOTO</a></li>						
+					<li class="profile"><a href="#profile-video">VIDEO</a></li>
+					<li class="profile"><a href="#profile-friend">FRIENDS</a></li>
+					<li class="profile force_right"><a href="#profile-inbox">MAILBOX</a></li>						
+				</ul>
 					<div id="profile-wall" class="profile">
-						<div class="w454 fleft">
+					  <div class="w454 fleft">
                 <%= render :partial => 'shared/wall' %>
-						</div>
-						<div class="fright">              
-              NOTIFICATIONS
-						</div>
+					  </div>
+					  <div class="fright">
+                <%= render :partial => 'users/notifications' %>
+					  </div>
 					</div>
 					<div id="profile-info" class="profile">
-            <!-- JCROP TEST put it in change avatar dialog -->
-						<table>
-						<tr>
-						<td>
-						<img src="images/temp/profile_main_orig.jpg" id="cropbox" />
-						</td>
-						<td>
-						<div style="width:200px;height:200px;overflow:hidden;">
-							<img src="images/temp/profile_main_orig.jpg" id="preview" />
-						</div>
-
-						</td>
-						</tr>
-						</table>
+                <%= render :partial => 'users/info' %>
 					</div>
 					<div id="profile-songs" class="profile">
-						SONGS
+                <%= render :partial => 'users/songs' %>
 					</div>
-					<div id="profile-media" class="profile">
-						MEDIA
+					<div id="profile-bands" class="profile">
+                <%= render :partial => 'users/bands' %>
+					</div>
+					<div id="profile-gear" class="profile">
+                <%= render :partial => 'users/gear' %>
+					</div>
+					<div id="profile-photo" class="profile">
+                <%= render :partial => 'users/pictures' %>
 					</div>					
+					<div id="profile-video" class="profile">
+                <%= render :partial => 'users/videos' %>
+					</div>	
+					<div id="profile-friend" class="profile">
+                <%= render :partial => 'users/friends' %>
+					</div>														
 					<div id="profile-inbox" class="profile">
-              MAILBOX
+                <%= render :partial => 'users/mailbox' %>
 					</div>
 				</div>
 				
@@ -106,8 +107,9 @@
 
 	<!-- RIGHTCOL -->	
 	<div class="rightCol fright">
-	
-    <%= render :partial => 'shared/did_you_know' %>
+	  
+        <%= render :partial => 'users/gear_sidebar' %>
+        <%= render :partial => 'users/songs_newest_sidebar' %>        
 
 	</div>
 	<!-- END RIGHTCOL -->	

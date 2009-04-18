@@ -1,0 +1,32 @@
+<!-- NEWEST SONGS -->
+<div class="">
+	<a href="" class="edit_lists edit_icon none fright">Edit</a>
+	<h2 class="nomargin">Newest songs</h2>
+	<p class="gray_spec nomargin">from Pinca Palla</p>
+
+
+	<script type="text/javascript" charset="utf-8">
+	$(document).ready(function() {
+		$("#profile_songs").tabs()
+	});
+	</script>
+	<div id="profile_songs" class="profile_newest_tabs">
+		<ul class="profile_sidebar preload_style" style="margin-bottom:0 !important;">
+			<li><a href="#newest_song">Songs</a></li>
+			<li><a href="#newest_instr">Instruments</a></li>
+		</ul>
+		<div id="newest_song" class="nopad">
+      <% 3.times do %>
+          <%= render :partial => 'shared/song_block_sidebar' %>
+      <% end %>
+		</div>
+		<div id="newest_instr" class="nopad">
+      <% 3.times do %>
+          <%= render :partial => 'shared/instrument_block_sidebar' %>
+      <% end %>
+		</div>
+	</div>
+	<a href=""  class="block alright none weight-bold" style="margin-top: 5px;">
+		More music
+	</a>
+</div>

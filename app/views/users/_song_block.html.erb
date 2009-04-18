@@ -1,0 +1,44 @@
+<%-
+  song = song_block
+  return '<code>&lt;_song_block.html.erb&gt;</code>' unless song
+-%>
+<div class="song_block fleft" style="width:460px">
+	<div class="avatar fleft">
+		  <!-- if mband song -->
+		  <span class="icons16 mbands_small_icon inavatar_icon">	</span>
+      <%= image_tag song.user.avatar.public_filename(:small), :size => '40x40' %>
+  </div>
+	<div class="tracks_count fleft">
+		<h3><%= song.instruments.size %></h3>
+		Instr.s
+	</div>
+	<div class="song_details fleft">
+    <%= link_to truncate(song.title, :length => 40), song, :class => 'song_title' %><br/>
+    <strong><%= link_to song.user.nickname, song.user, :class => 'song_author' %></strong><br />
+    <%= link_to "Mixable songs (#{song.collaboration_count})", '#FIXME', :class => 'mixable_link' unless song.collaboration_count.zero? %>
+	</div>
+
+	<div class="fright" style="margin: 4px 4px 0 0">
+	  <%# rating %>	
+	</div>
+	<ul class="song_controls">
+		<li><a href="" class="control_add">ADD</a></li>
+		<li><a href="" class="control_mix">MIX</a></li>
+		<li><a href="" class="control_play">PLAY</a></li>
+	</ul>
+</div>
+<!-- Show OnMouseOver -->
+<div class="fleft user_song_tools">
+	<a href="#" class="fleft">
+		<span class="fleft icons16 ui-state-tools ui-icon-trash"> </span>
+		delete
+	</a>
+	<a href="#" class="fleft">
+		<span class="fleft icons16 ui-state-tools ui-icon-pencil"> </span>
+		rename
+	</a>
+	<a href="#add_tags" id="add_tags_link" class="fleft">
+		<span class="fleft icons16 ui-state-tools ui-icon-tag"> </span>
+		add tags
+	</a>
+</div>

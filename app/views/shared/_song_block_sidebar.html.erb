@@ -1,24 +1,19 @@
-<div class="song_block fleft">
-	<div class="avatar fleft">
-		<img src="/images/user_thumb.jpg" width="40" height="40" />					
-	</div>
-	<div class="tracks_count fleft">
+<div class="song_block sidebar_block">
+	<div class="tracks_count sidebar_count fleft">
 		<h3><%= rand(23) %></h3>
 		Instr.s
 	</div>
 	<div class="song_details fleft">
 		<a href="" class="song_title">Lorem ipsum dolor</a><br />
-		<a href="" class="song_author"><strong>Gerardo Palla</strong></a><br />
-		<a href="" class="mixable_link">Mixable songs (23)</a>
+		<a href="" class="song_author"><strong>Pinca Palla</strong></a><br />
+		<div style="margin-top: 3px;">
+		    <%# rating %>
+		</div>
 	</div>
 
-	<div class="fright">
-		<%# rating %>
-		<ul class="song_controls controls_sidebar">
+		<ul class="song_controls profile_controls_sidebar fright">
 			<li class="nomargin"><a href="" class="control_add">ADD</a></li>
 			<li class="nomargin"><a href="" class="control_mix">MIX</a></li>
 			<li class="nomargin"><a href="" class="control_play">PLAY</a></li>
 		</ul>
-	</div>
 </div>
-
