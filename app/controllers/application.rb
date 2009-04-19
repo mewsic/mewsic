@@ -19,6 +19,7 @@ class ApplicationController < ActionController::Base
   #before_filter :check_user_inbox
   before_filter :update_user_status
   before_filter :set_tracking_cookie
+  before_filter :sso_via_facebook_connect_cookie
   
 protected    
   
@@ -51,6 +52,58 @@ protected
 
   def tracked_user
     cookies[:__mt] || @tracked_user
+  end
+
+  # Reference: Verifying the Signature on the Facebook developers wiki
+  # http://wiki.developers.facebook.com/index.php/Verifying_The_Signature#Signatures_and_Facebook_Connect_Sites
+  require 'digest/md5'
+  FB_api_key    = '8b03aa5c7dae2e65e155bdcd41634d25' # XXX MOVE ME ELSEWHERE
+  FB_secret_key = '7f46738b08178dcdefea905d677a91d1'
+  def sso_via_facebook_connect_cookie
+    # Check that all cookies are present, and log out if previously logged in via connect.
+    #
+    unless fb_sig_cookie && %w(user session_key expires ss).all? { |id| fb_sig_cookie(id) }
+      if session[:fb_connect]
+        self.current_user = nil
+        session[:fb_connect] = false
+      end
+      return
+    end
+
+    # Obivously don't attempt to do SSO if the user is still logged in.
+    #
+    return if logged_in?
+    
+    # Calculate the expected signature
+    #
+    expected_sig = Digest::MD5.hexdigest([
+      :expires=,     fb_sig_cookie(:expires),
+      :session_key=, fb_sig_cookie(:session_key),
+      :ss=,          fb_sig_cookie(:ss),
+      :user=,        fb_sig_cookie(:user),
+      FB_secret_key
+    ].join)
+
+    if expected_sig == fb_sig_cookie
+      # Match! Check for a facebook user with this UID and log in if it's present
+      self.current_user = User.find_by_facebook_uid(fb_sig_cookie(:user))
+      session[:fb_connect] = true
+    else
+      # Kick off the attacker's ass out from here.
+      %w(user session_key expires ss).each { |id| cookies.delete(fb_sig_cookie_name(id)) }
+      cookies.delete(fb_sig_cookie_name)
+    end
+
+  end
+
+  def fb_sig_cookie(id = nil)
+    cookies[fb_sig_cookie_name(id)]
+  end
+
+  def fb_sig_cookie_name(id = nil)
+    name = FB_api_key
+    name += '_' + id.to_s if id
+    name
   end
 
   #def check_user_inbox

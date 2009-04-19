@@ -143,7 +143,7 @@ module UsersHelper
   end
   
   def fb_connected?
-    !!session[:connect]
+    session[:fb_connect]
   end
 
 end

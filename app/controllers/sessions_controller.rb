@@ -50,6 +50,7 @@ class SessionsController < ApplicationController
     if logged_in?
       self.current_user.forget_me
       self.current_user = nil
+      session[:fb_connect] = false
       cookies.delete :auth_token
       flash[:notice] = "You have been logged out"
     end
@@ -65,11 +66,9 @@ class SessionsController < ApplicationController
     raise ArgumentError unless (params[:fname] == '_opener')
     raise ArgumentError unless connect = ActiveSupport::JSON.decode(params[:session])
 
-    session[:connect] = connect
+    @user = User.find_by_facebook_uid(connect['uid'])
 
-    user = User.find_by_facebook_uid(connect['uid'])
-
-    if user.nil?
+    if @user.nil?
       # create a new user for the Facebook User if not present
       @user = User.new
       @user.facebook_uid = connect['uid']
@@ -87,10 +86,11 @@ class SessionsController < ApplicationController
       @user.save!
     end
 
+    session[:fb_connect] = true
     self.current_user = @user
 
-    # render the cross-domain communication channel, nothing for now.
-    head :ok
+    # render the cross-domain communication channel
+    render :layout => false
 
   rescue ActiveRecord::ActiveRecordError
     debugger

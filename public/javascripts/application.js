@@ -9,23 +9,12 @@ $(function() {
 
 // Facebook connect stuff
 //
-function loadFacebookFeatures(is_session_loaded) {
+function initializeFacebook() {
   try {
 
-    FB_RequireFeatures(["XFBML", "CanvasUtil", "Api"], function(){
-      FB.Facebook.init('8b03aa5c7dae2e65e155bdcd41634d25', '/sessions/connect');
-      
-      FB.Facebook.get_sessionState().waitUntilReady(function(session) {
-        var is_now_logged_into_facebook = !!session;
-
-        if (is_now_logged_into_facebook != is_session_loaded) {
-          // user logged in and changed status
-          //
-          // XXX this code isn't solid, FIX IT
-          window.location = '/';
-        }
-      });
-    })
+    //FB_RequireFeatures(["XFBML", "CanvasUtil", "Api"], function(){
+      FB.init('8b03aa5c7dae2e65e155bdcd41634d25', '/sessions/connect');
+    //});
 
   } catch(e) {
     if (isLoggerAvailable())
@@ -34,6 +23,10 @@ function loadFacebookFeatures(is_session_loaded) {
     $('#facebook-connect-button').hide();
   }
 
+}
+
+function reload() {
+  window.location.href = window.location.href;
 }
 
 function isLoggerAvailable() {
