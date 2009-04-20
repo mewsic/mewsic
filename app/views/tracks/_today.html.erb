@@ -1,0 +1,28 @@
+<div class="pick_wrap today_instrument">
+	<div class="w343 fleft">			
+		<div class="fleft">
+				<p class="pick_info block">
+					<strong>TODAY'S INSTRUMENT</strong>
+				</p>
+				<p class="pick_info secline block">
+					<strong>PIANO</strong>
+				</p>				
+				<div class="instr_avatar fleft">
+					<span class="instr blue_big piano">  </span>
+				</div>						
+				<p class="overflow-hidden" style="padding-left: 10px;">
+						<strong class="s14">Debussy or Chopin?</strong><br />
+						consectetur adipiscing elit. <a href="">Maecenas</a> nunc pede, facilisis feugiat, posuere a, tempus in, urna. Curabitur sapien. Maecenas pharetra mi in nunc tempus in, urna. Curabitur sapien. Aliquam elementum mauris. Aliquam <a href="">Search More</a> nunc pede, facilisis feugiat, posuere.						
+				</p>															
+		</div>
+
+	</div>
+
+	<div class="w343 fright">
+  <% 4.times do %>
+    <%= render :partial => 'shared/instrument_block' %>        
+  <% end %>
+	</div>
+
+</div>
+<div class="clear"> </div>

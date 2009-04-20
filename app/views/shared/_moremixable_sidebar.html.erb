@@ -1,54 +1,13 @@
 <!-- MORE MIXABLE SONGS -->
-<ul class="sidebar_moremixable">
-	<h2>More Mixable songs</h2>
-	<p class="gray_spec">&lt;!-- Da rivedere --&gt; </p>
-	<li>
-		<div class="song_details fleft">
-			<a href="" class="song_title fleft"><strong>Bella Ciao</strong></a><br />
-			<a href="" class="mixable_link fleft">
-				<span style="font-size:16px;"><%= rand(200) %></span>
-				Mixable
-			</a>
-			<ul class="song_controls fleft">
-				<li><a href="" class="control_play">PLAY</a></li>
-			</ul>
-		</div>
-	</li>
-	<li>
-		<div class="song_details fleft">
-			<a href="" class="song_title fleft"><strong>Ma chi te se 'Ncula</strong></a><br />
-			<a href="" class="mixable_link fleft">
-				<span style="font-size:16px;"><%= rand(200) %></span>
-				Mixable
-			</a>
-			<ul class="song_controls fleft">
-				<li><a href="" class="control_play">PLAY</a></li>
-			</ul>
-		</div>
-	</li>
-	<li>
-		<div class="song_details fleft">
-			<a href="" class="song_title fleft"><strong>Ao Ciai un ber culo Signori'</strong></a><br />
-			<a href="" class="mixable_link fleft">
-				<span style="font-size:16px;"><%= rand(200) %></span>
-				Mixable
-			</a>
-			<ul class="song_controls fleft">
-				<li><a href="" class="control_play">PLAY</a></li>
-			</ul>
-		</div>
-	</li>
-	<li>
-		<div class="song_details fleft">
-			<a href="" class="song_title fleft"><strong>Ma vedi danna' a mori' briciato</strong></a><br />
-			<a href="" class="mixable_link fleft">
-				<span style="font-size:16px;"><%= rand(200) %></span>
-				Mixable
-			</a>
-			<ul class="song_controls fleft">
-				<li><a href="" class="control_play">PLAY</a></li>
-			</ul>
-		</div>
-	</li>
-</ul>
+<h2>More Mixable songs</h2>
+
+<% 4.times do %>
+  <%= render :partial => 'shared/song_block_sidebar' %>
+<% end %>
+
+	<a href="#" class="fright weight-bold none margin7">	
+		<span class="fleft icons16 ui-state-cyan ui-icon-arrowrefresh-1-s"> 					
+		</span>see more
+	</a>	
+
 <div class="clear"> </div>

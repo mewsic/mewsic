@@ -1,6 +1,9 @@
 <% instrument = instrument_big %>
 <div class="instr_avatar shadow_big fleft">
-  <span class="instr big <%= instrument.code %>"> 
+  <div class="tooltip_instr invisible">
+	  <strong><%= instrument.code %></strong>
+  </div>
+  <span class="instr_big instr white_big <%= instrument.code %>"> 
     <span class="instr_counter">
       <span class="tl">
         <span class="tr">
@@ -13,5 +16,4 @@
       </span>
     </span>  
   </span>
-  <!-- display instruments name with overlay tooltip -->
 </div>        
