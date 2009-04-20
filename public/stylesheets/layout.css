@@ -369,7 +369,7 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 .sidebar_videos li { overflow: hidden; margin-left: 0 !important; }
 .max_sidebar_videos li { 
 	overflow: hidden; 
-	margin: 0 !important; 
+	margin: -1px !important; 
 	display: inline-block;
 }
 

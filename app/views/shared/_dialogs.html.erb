@@ -45,22 +45,45 @@
 
 <!-- SHARE TO WALL -->
 <div id="share_songs_dialog" title="Share your songs" style="display:none">
-	<script type="text/javascript" charset="utf-8">
-	$(function() {
-		$("#share_songs_actions").tabs();
-	});
-	</script>
+<script type="text/javascript" charset="utf-8">
+$(function() {
+	$("#share_songs_actions").tabs();
+	$("#action_song, #action_instr").selectable({
+				stop: function(){
+					var result = $("#select-result").empty();
+					$(".ui-selected", this).each(function(){
+					var index = $("#action_song .song_block, #action_instr .song_block").index(this);
+						//show total count instead
+						result.append(" #" + (index + 1));
+					});
+				}
+			});
+});
+</script>
 
 	<div id="share_songs_actions">
 		<ul>
 			<li><a href="#action_song">Songs</a></li>
 			<li><a href="#action_instr">Instruments</a></li>
 		</ul>
+		<p id="feedback">
+		You've selected: <span id="select-result" class="attach_list">0</span>
+		</p>			
 		<div id="action_song">
-			song list
+        <% 5.times do %>
+          <%= render :partial => 'shared/song_block' %>
+        <% end %>
+        <div class="paging_bg fright">
+          <%= render :partial => 'shared/paging_vert' %>
+        </div>
 		</div>
 		<div id="action_instr">
-			instr list
+      <% 5.times do %>
+        <%= render :partial => 'shared/instrument_block' %>
+      <% end %>
+      <div class="paging_bg fright">
+        <%= render :partial => 'shared/paging_vert' %>
+      </div>
 		</div>
 	</div>
 </div>
@@ -86,4 +109,42 @@
 			video list
 		</div>
 	</div>
+</div>
+
+
+
+
+<!-- TAGGING DIALOG ~ MURS(tm) -->
+<div id="add_tags" title="Add Tags" style="display:none">
+	<p class="gray_spec dialog_help">Tag instruments or songs is easy and helps you find what you're looking for. 
+	Select from <strong>Most user tags</strong> to see other suggestions, or write your own.
+	</p>
+
+	<p class="tags_heading gray_spec weight-bold nomargin">YOU ARE TAGGING</p>
+    <%= render :partial => 'shared/song_block' %>
+	<div class="clear"> </div>
+
+	<center>
+		<form>
+			<fieldset>
+				<input type="text" name="tags" id="tags" class="text ui-widget-content" 	style="margin-bottom: 0;" value="Es: Jazz, Improvisation"/>
+				<div class="ui-state-highlight action_notice_dialog alleft">
+					<span class="fleft icons16 profile ui-icon ui-icon-lightbulb"> </span>
+					Write tags, separated by commas.
+				</div>
+			</fieldset>
+		</form>
+	</center>
+
+	<div id="search_filters_genre" class="">
+		<p class="tags_heading gray_spec weight-bold dialog_help">Most used tags in Mewsic</p>
+      <%= render :partial => 'shared/genres_tags_main_selectors' %>
+	</div>
+	<div id="search_filters_genre" class="related overflow-hidden">
+		<p class="tags_heading gray_spec weight-bold dialog_help">
+			You choosed "Electronic", try with these other tags
+		</p>
+      <%= render :partial => 'shared/genres_tags_related_selectors' %>
+	</div>
+	
 </div>

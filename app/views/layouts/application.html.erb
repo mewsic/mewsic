@@ -9,8 +9,8 @@
 
   <title>MEWSIC</title>
 
-  <%= stylesheet_link_tag *%w( type layout color appbar profile applesearch dd dummy ) %>
-  <%= stylesheet_link_tag *%w( icons instruments/white instruments/white_big instruments/big instruments/blue_big ) %>
+  <%= stylesheet_link_tag *%w( type layout color appbar profile applesearch dd  ) %>
+  <%= stylesheet_link_tag *%w( icons instruments/white instruments/white_big instruments/blue instruments/blue_big ) %>
 
   <%= jquery_javascript_tags %>
   <%= jquery_stylesheet_tags %>
@@ -21,6 +21,13 @@
   <%= stylesheet_link_tag    *%w( jquery.rating.css     dataTables.css           jquery.Jcrop.css     ) %>
 
   <%= javascript_include_tag *%w( application home applesearch ) %>
+
+	<link rel="stylesheet" type="text/css" href="/stylesheets/dummy.css" id="dummy_css" />	
+	<script type="text/javascript">
+		//<![CDATA[
+			window.onload = function () { applesearch.init(); }
+		//]]>
+	</script>	
 
   <%= yield :head %>
 
