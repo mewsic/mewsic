@@ -212,7 +212,49 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 }
 
 
+
+
 /* HOME CALL TO ACTION */
+#call-block { margin: 10px 0 0 5px; }
+.callbox_text { 
+	background: url('../images/calltoaction_text.jpg') no-repeat;
+	width: 247px; height: 90px; 
+	margin: 0 10px 0 0; 
+}
+
+.calltoaction .song_block { border: none; width: 380px; }
+.calltoaction .song_block:hover { background: none; }
+.calltoaction { 
+	background-image: url('../images/calltoaction_bg.jpg'); 
+	height: 57px; padding-top: 8px;
+	margin-top: 13px;
+}
+.calltoaction.left { 
+	background-position: left; 
+	background-repeat: no-repeat; 
+	width: 6px; 
+	margin-left: 20px; 
+}
+.calltoaction.repeat { background-image: url('../images/calltoaction_rp.jpg') ; background-repeat: repeat-x; }
+.calltoaction.right { background-position: right; background-repeat: no-repeat; width: 6px; }
+
+.action_pager { 
+	background-image: url('../images/calltoaction_pager.png');
+	width: 10px; height: 28px;
+	cursor: pointer;
+	margin: 9px 7px;
+}
+.action_pager.prev { background-position: top left; }
+.action_pager.prev:hover { background-position: bottom left; }
+.action_pager.next { background-position: top right; }
+.action_pager.next:hover { background-position: bottom right; }
+
+.action_start { 
+	background: url('../images/calltoaction_start.png') no-repeat;
+	width: 138px; height: 51px;
+	margin: 0 15px 0 10px;
+	cursor: pointer;
+}
 
 
 
@@ -227,6 +269,8 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 	width: 454px;
 	height: 255px;
 }
+
+.pick_wrap.today_instrument { background: none; border-top: 1px solid #CCCCCC; }
 
 /* SONG PICK AD */
 .pick_wrap .song_ad {
@@ -300,7 +344,7 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 	margin: 17px 3px 0 4px;
 	cursor: pointer;	
 }
-.max_sidebar_videos .video_thumb {
+.max_sidebar_videos .video_thumb, .video_lists .video_thumb {
 	width: 104px;
 	margin: 0 !important;
 }
@@ -328,6 +372,15 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 	margin: 0 !important; 
 	display: inline-block;
 }
+
+.video_lists li {
+	display:inline-block;
+	margin:0 !important;
+	overflow:hidden;
+	padding-left: 3px;
+}
+
+
 
 
 /* lastfm link box */
@@ -388,7 +441,7 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
  }
 .answer_pick_footer .snip { 
 	padding: 3px 8px 6px 5px;
-	width: 420px;
+	width: 427px;
 	height: 59px;
  }
 .answer_pick_footer .snip p {
@@ -1277,7 +1330,8 @@ h2 {
 }
 
 /* apple search */
-.multitrack_search #applesearch .sbox input { width: 200px !important; }
+.multitrack_search #applesearch .sbox input,
+#instr_search_box #applesearch .sbox input { width: 200px !important; }
 
 .multitrack_search .instr_type .current, #mlab_search_tabs .mlab_search { 
 	background-color: #014D70 !important; 

@@ -538,6 +538,6 @@ table#flickr_gallery { margin-top: 7px; }
 	height: 100px;
 }
 .profile_video_lists .still_play { width: 118px; }
-.profile_video_lists .now_playing .video_thumb img {
+.now_playing .video_thumb img {
 	border: 1px solid #2e83ff;
 }

@@ -23,7 +23,7 @@ h2, #top_footer .subtitle, h1, #expl_banner p, .cat_title  {
 	font-size: 21px !important;
 }
 
-#expl_banner p {
+#expl_banner p, .s14 {
 	font-size: 14px;
 }
 
