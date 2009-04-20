@@ -42,7 +42,48 @@
 
 <% end %>
 
-<div id="multitrack">
-	<div id="flash"></div>
-	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean et odio quis lacus consectetuer cursus. Pellentesque consectetuer euismod orci. Morbi eu massa vitae dolor semper semper. Pellentesque at nibh. Pellentesque a tellus sed enim auctor elementum. Fusce elit turpis, vehicula ut, dignissim in, porttitor eget, tortor. Ut vel tortor nec metus commodo convallis. Vestibulum condimentum lectus. Duis cursus magna a mauris. Nulla justo mauris, venenatis consequat, suscipit vel, cursus in, dui. Integer consectetuer aliquet felis. Nam in mauris. Ut leo arcu, sodales ac, vestibulum nec, tincidunt ut, nulla. Nam in lectus ac magna aliquet pretium. Cras et ligula. Phasellus a ipsum. Morbi in pede ultricies nulla varius tincidunt.</p>
+
+
+<!-- LEFTCOL -->
+<div class="leftCol fleft">
+	<div class="leftColWrapper">
+
+	<!-- EXPL BANNER -->
+		<div id="expl_banner">
+			<span id="expl_hide" class="fright">hide</span>
+			<span class="expl_band fleft"> </span>
+			<h1>Record your performance in one click.</h1>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean semper, ipsum<br />
+			eget dapibus sagittis, nunc nunc feugiat neque, vel blandit.</p>
+			<ul class="expl_links fright">
+				<li><a href=""><strong>Learn More</strong></a></li>
+			</ul>
+		</div>
+	<!-- END EXPL BANNER -->
+
+      <%= render :partial => 'multitrack/project' %>
+      
+      <div id="multitrack">
+    	  <div id="flash"></div>
+      </div>
+  
+      <%= render :partial => 'multitrack/mixable_search' %>  
+  
+	</div>
 </div>
+<!-- END LEFTCOL -->
+
+<!-- RIGHTCOL -->	
+<div class="rightCol fright">
+
+      <%= render :partial => 'multitrack/overview' %>
+      <%= render :partial => 'multitrack/user_stuff' %>      
+
+</div>
+<!-- END RIGHTCOL -->	
+
+<div class="clear"> </div>
+
+<% content_for :footer do %>
+  <%= render :partial => 'songs/footer' %>
+<% end %>

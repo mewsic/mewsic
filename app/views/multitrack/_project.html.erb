@@ -1,0 +1,83 @@
+	<script language="javascript">
+		$(document).ready(function(e) {
+			try {
+				MSDropDown.init("#user_identity");
+			} catch(e) {
+				alert(e);
+			}
+		})
+	</script>
+	<!-- BEGIN PROJECT FORM -->
+	<form class="project_data">
+		
+	<div id="project">
+		<div class="project_info fleft">
+			<span class="title block">Project info</span>
+
+				<span class="fleft">
+					<img src="/images/temp/avatar_pino.jpg" class="border avatar" width="60" height="60" />					
+
+				 <select name="user_identity" id="user_identity">
+					<option value="mband/909" icon="/images/identities/avatar_pino.jpg">
+						Pino
+					</option>
+					<optgroup label="YOUR M-BANDS">
+					<option value="mband/910" icon="/images/identities/avatar_fabio.jpg">
+						Big's Band
+					</option>
+					<option value="mband/911" icon="/images/identities/avatar_ndstr.jpg">
+						NDSTR
+					</option>
+					<option value="mband/912" icon="/images/identities/avatar_alvarez.jpg">
+						Alvarez de la Fonzeca
+					</option>
+					<option value="mband/913" icon="/images/identities/avatar_enzo.jpg">
+						Enzo's untouchable Quintet
+					</option>
+					</optgroup>
+				 </select>					
+
+				</span>
+
+				
+				<input type="text" name="project_title" value="Untitled Project" class="text ui-widget-content ui-corner-all project_title">
+				<!--<input type="text" name="project_author" value="Pino" class="text ui-widget-content ui-corner-all project_author">-->
+				<div class="project_author fleft inplace-edit">
+					<span class="fleft">
+						<h2>Pino</h2>
+					</span>
+					<span class="fright ten">
+						<a href="" class="icons16 edit_icon padleft23 none">Edit</a>
+					</span>
+				</div>
+
+		</div>
+		<div class="project_publish fleft">
+			<span class="title block">Publishing options
+				<div class="show_cc icons16 creativecommons_icon"> </div>
+			</span>
+				
+				<div class="radios">
+					<input type="radio" name="publish_option" value="Public">
+						<label class="weight-bold">Public</label><br />
+						<span class="gray_spec ten">Publish your work on Mewsic</span>
+				</div>
+				<div class="clear"> </div>
+				<div class="radios">						
+					<input type="radio" name="publish_option" value="Private" checked>
+						<label class="weight-bold">Private
+						<img src="/images/icons/bullet_key.png" class="priv_icon_abs" />
+						</label><br />
+						<span class="gray_spec ten">Will work again on it</span>							
+				</div>
+									
+		</div>
+		<div class="project_save fleft">
+			<span class="title block">Save project</span>
+			
+				<input type="submit" class="project_save_submit fleft" value="">					
+				
+		</div>
+	</div>
+</form>
+<!-- END FORM -->

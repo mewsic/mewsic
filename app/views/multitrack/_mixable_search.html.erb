@@ -1,0 +1,106 @@
+<!-- State Zero -->
+<div id="instr_search_box" class="multitrack_search">
+		<div class="browse_pane search_head fright">
+			<h2 class="fleft search_head_title">Search for Mixable</h2>
+      <%= render :partial => 'shared/rounded_searchbox' %>
+			<div class="clear"> </div>		
+			<span class="subtitle block">You can search for tags, artists, songs or instruments names. You can even search <strong>Impaled Nazaren</strong>
+			</span>
+		</div>
+</div>
+<div class="clear"> </div>
+
+
+
+<br /><br />
+
+
+<div id="instr_search_box" class="multitrack_search">
+		<div class="browse_pane search_head fright">
+			<h2 class="fleft search_head_title">Search for Mixable</h2>
+      <%= render :partial => 'shared/rounded_searchbox' %>
+			<div class="clear"> </div>			
+
+			<span class="subtitle block">There are 58 mixable instruments for 
+				<strong>"Song name"</strong>
+			</span>
+		</div>
+		<div class="clear"> </div>
+
+		<div class="browse_pane pane_content">
+			<div class="browse_pane_left fleft">
+				<div class="loader"> </div>
+				<!-- on instruments li .current switch class .instr, .instr_white
+					 on hover and .current remove class .shadow_white -->
+				<ul class="instr_type alleft">
+					<li class="all">
+						<a href="" class="instr_name">All<br/>Instruments</a>
+					</li>
+					<li>
+						<div class="instr_avatar shadow_white fright">
+							<span class="instr icon_35"> </span>
+						</div>
+						<a href="" class="instr_name">Drums</a>
+					</li>
+					<li class="current">
+						<div class="instr_avatar  fright">
+							<span class="instr_white icon_5"> </span>
+						</div>
+						<a href="" class="instr_name">Nylon stringed Guitars</a>
+					</li>
+					<li>
+						<div class="instr_avatar shadow_white fright">
+							<span class="instr icon_33"> </span>
+						</div>
+						<a href="" class="instr_name">Voices</a>
+					</li>
+				</ul>
+			</div>
+			<div class="browse_pane_right fleft">
+
+				<script type="text/javascript" charset="utf-8">
+				$(document).ready(function() {
+					$("#mlab_search_tabs").tabs()
+				});
+				</script>
+				<div id="mlab_search_tabs" class="nopad">
+					<ul class="preload_style" style="margin-bottom:0 !important;">
+						<li><a href="#searched_instruments">Instruments</a></li>
+						<li><a href="#searched_songs">Songs</a></li>
+					</ul>
+					
+					<div id="search_filters_genre" class="mlab_search">
+						<span class="selector_disabled" >
+							<span class="tl">
+								<span class="tr">
+									<span class="br">
+										<span class="bl">All</span>
+									</span>
+								</span>
+							</span>
+						</span>	
+            <%= render :partial => 'shared/genres_tags_main_selectors' %>
+					</div>
+					
+					<div id="searched_instruments" class="fleft">
+						<!-- RESULTS sorted by "used times" value -->
+            <% 8.times do %>
+                <%= render :partial => 'shared/instrument_block' %>
+            <% end %>
+					</div>
+					<div id="searched_songs" class="fleft">
+						<!-- RESULTS sorted by "used times" value -->
+            <% 8.times do %>
+                <%= render :partial => 'shared/song_block' %>
+            <% end %>
+					</div>
+					<div class="paging_bg fright" style="margin:-5px 10px 0 0;">
+              <%= render :partial => 'shared/paging_horiz' %>
+					</div>				
+
+				</div>
+
+			</div>
+		</div>
+</div>
+<div class="clear"> </div>

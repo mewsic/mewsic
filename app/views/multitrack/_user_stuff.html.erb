@@ -1,0 +1,32 @@
+<!-- USER PROJECTS -->
+<div class="">
+	<a href="" class="edit_lists edit_icon none fright">Edit</a>
+	<h2 class="nomargin">My Stuff</h2>
+	<p class="gray_spec nomargin">Here's the list of all your projects</p>
+
+
+	<script type="text/javascript" charset="utf-8">
+	$(document).ready(function() {
+		$("#profile_songs_mlab").tabs()
+	});
+	</script>
+	<div id="profile_songs_mlab" class="profile_newest_tabs">
+		<ul class="profile_sidebar preload_style" style="margin-bottom:0 !important;">
+			<li><a href="#newest_song">Songs</a></li>
+			<li><a href="#newest_instr">Instruments</a></li>
+		</ul>
+		<div id="newest_song" class="nopad">
+    <% 6.times do %>
+        <%= render :partial => 'multitrack/song_block_mtrack_sidebar' %>
+    <% end %>
+		</div>
+		<div id="newest_instr" class="nopad">
+    <% 6.times do %>
+        <%= render :partial => 'multitrack/instr_block_mtrack_sidebar' %>
+    <% end %>
+		</div>
+	</div>
+	<div class="insidebar_paging fright" style="margin-top: 5px;">
+      <%= render :partial => 'shared/paging_horiz' %>
+	</div>
+</div>
