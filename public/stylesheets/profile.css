@@ -21,14 +21,13 @@
 	height:200px;
 	background: #D4D4D4 url("../images/temp/profile_main_thumb.jpg") no-repeat;
 }
-.user_name { margin: 8px 0 12px 27px; }
+.user_name { margin: 8px 0 10px 14px; }
 
 .user_status { 
-	width: 300px;
-	padding: 12px 19px 10px 18px;
-	border-bottom: 1px solid #D4D4D4;
+	padding: 10px 21px 10px 19px;
+	border-right: 1px dashed #F5DC5F;
 }
-.status_container { margin-left: -13px; }
+.status_container { width: 305px; }
 .status_container .blurp_status { margin-top: 7px; }
 
 
@@ -36,24 +35,62 @@
 .status_input {
 	border: 0;
 	margin: 0 5px 0 0;
-	height: 15px;
-	width: 210px;
-	font-size: 12px;
-	font-weight: bold;
+	height: 13px;
+	width: 233px;
+	font-size: 13px;
 	color: #696969;
-	padding: 5px 9px;
+	padding: 3px 5px;
 	border: 1px solid #CCC;
 }
 
 .status_submit {
 	border: 0;
-	font-size: 13px;
+	font-size: 12px;
 	font-weight: bold;
 	cursor: pointer;
-	height: 26px;
 	color: #FFFFFF;
 	background: url('../images/go_bg.png') repeat-x left top;
-	padding: 0 7px;
+	padding: 2px 7px;
+}
+.status_submit:hover {	background: url('../images/go_bg.png') repeat-x left bottom; }
+
+
+
+/* PROFILE PAGE  MBAND PROFILE
+   Upper part show */
+
+#mband_profile .user_name { margin: 0 0 10px 0; }
+#mband_profile #user_avatar { 
+	background: #D4D4D4 url("../images/temp/pick_enzo.jpg") no-repeat;
+	width: 356px; 
+}
+#mband_profile .user_status { width: 154px; }
+#mband_profile .user_actions { margin-top: 0; }
+#mband_profile .status_input { width: 145px; }
+#mband_profile .status_submit {
+	margin: 3px -2px 0 0;
+	padding: 1px 6px;
+}
+
+.lquote, .rquote { position: absolute; }
+.lquote {  margin: -4px 0 0 -12px; }
+.rquote { margin: 4px 0 0 3px; }
+
+.status_outside { padding: 1px 0 2px 8px; }
+.status_outside .lquote { padding-left: 3px; }
+.status_outside .rquote { margin-left: 2px; padding:0; }
+
+
+
+.mband_member_list li { 
+	list-style: none;
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+.member_specs span { padding-left: 10px; }
+
+.status_tools {
+	padding: 3px 7px 2px 4px;
 }
 
 
@@ -176,7 +213,7 @@
 }
 .user_actions { 
 	width: 130px;
-	margin-top: 25px;
+	margin-top: 10px;
 }
 .user_actions li {
 	display: block;
@@ -541,3 +578,37 @@ table#flickr_gallery { margin-top: 7px; }
 .now_playing .video_thumb img {
 	border: 1px solid #2e83ff;
 }
+
+
+
+
+/* Tag cloud */
+
+#tags ul {
+	margin:0;
+	padding:0;
+	text-align:left;
+}
+#tags li {
+	margin:0;
+	padding:0;
+	list-style:none;
+	display:inline-block;
+}
+#tags li a {
+	text-decoration:none;
+	padding:0 2px;	
+}
+#tags li a:hover {	
+	text-decoration:underline;
+}		
+	
+.tag1{font-size:100%;}
+.tag2{font-size:120%;}
+.tag3{font-size:140%;}
+.tag4{font-size:160%;}
+.tag5{font-size:180%;}
+	
+.cloud_buttons { margin-top: 4px; }
+.btn {	margin-left: 5px; }
+.btn.dot_spacer { border-left: 1px dotted #CCC; padding-left: 5px; }

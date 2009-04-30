@@ -1,0 +1,173 @@
+	<!-- LEFTCOL -->
+	<div class="leftCol fleft">
+		<div class="leftColWrapper">
+
+
+
+<table class="question_search" border="0" align="center" width="100%" cellspacing="0" cellpadding="0">
+	<tr>
+		<td align="right">
+			<h1 class="sixsixsix">Search everything</h1>
+		</td>
+		<td align="right">
+			<form>
+				<input type="text" class="search_call_input answers_input fleft" 	value="">
+				<input type="submit" class="search_call_submit fleft" value="Search">
+			</form>
+		</td>
+	</tr>
+</table>
+
+
+	<script type="text/javascript" charset="utf-8">
+	$(function() {
+		$("#search_tabs").tabs({
+			selected: 2
+		});
+		
+		$('#search_tabs').highlight(['Gerardo','dolor','macchina','Alternative']);					
+	});
+	</script>
+	<div id="search_tabs" class="profile">
+		<ul class="profile preload_style">
+			<li class="profile"><a href="#search-songs">Songs (16)</a></li>
+			<li class="profile"><a href="#search-instr">Instruments (23)</a></li>
+			<li class="profile"><a href="#search-people">People (42)</a></li>												
+			<li class="profile"><a href="#search-answ">Answers (15)</a></li>						
+			<li class="profile"><a href="#search-media">Foto / Video (8)</a></li>
+		</ul>
+		
+
+		<div id="search-songs" class="profile">
+			<span class="s13 heading search_results block">
+				Results for <strong>Gerardo dolor macchina Alternative</strong>
+				16 Songs
+			</span>
+
+      <% 10.times do %>
+					<%= render :partial => 'shared/song_block' %>
+			<% end %>
+				<div class="fright margin7">
+					<%= render :partial => 'shared/paging_numbers' %>																	
+				</div>
+		</div>
+		<div id="search-instr" class="profile">
+			<span class="s13 heading search_results block">
+				Results for <strong>Gerardo dolor macchina Alternative</strong>
+				23 Instruments
+			</span>
+
+      <% 10.times do %>
+					<%= render :partial => 'shared/instrument_block' %>
+			<% end %>
+				<div class="fright margin7">
+					<%= render :partial => 'shared/paging_numbers' %>																	
+				</div>
+		</div>
+		<div id="search-people" class="profile">
+			<span class="s13 heading search_results block">
+				Results for <strong>Gerardo dolor macchina Alternative</strong>
+				42 People
+			</span>
+
+			<ul class="searched">
+        <% 5.times do %>
+					  <%= render :partial => 'search/people' %>
+			  <% end %>
+			</ul>
+			<div class="fright margin7">
+				<%= render :partial => 'shared/paging_numbers' %>																	
+			</div>
+		</div>
+		<div id="search-answ" class="profile">
+			<span class="s13 heading search_results block">
+				Results for <strong>Gerardo dolor macchina Alternative</strong>
+				15 Answers
+			</span>
+
+			<ul class="searched">
+        <% 5.times do %>
+					  <%= render :partial => 'search/answers' %>
+			  <% end %>
+			</ul>
+			<div class="fright margin7">
+				<%= render :partial => 'shared/paging_numbers' %>																	
+			</div>
+		</div>
+		<div id="search-media" class="profile">
+			<span class="s13 heading search_results block overflow-hidden">
+				<div class="fleft">
+					Results for <strong>Gerardo dolor macchina Alternative</strong>
+					2 Photos 6 Videos
+				</div>
+				<div class="fright"> 
+					<select class="fleft searched_filter">
+						<option value="00">Photo / Video</option>
+						<option value="01">Photo</option>									
+						<option value="02">Video</option>
+					</select>
+					<div class="fright icons16 marginleft10 loader_white"> </div>
+				</div>
+			</span>
+			
+      <%= render :partial => 'search/media' %>
+			<div class="fright margin7">
+				<%= render :partial => 'shared/paging_numbers' %>																	
+			</div>						
+		</div>					
+	</div>
+
+
+		</div>
+	</div>
+	<!-- END LEFTCOL -->	
+
+	<!-- RIGHTCOL -->	
+	<div class="rightCol fright">
+	
+	<script type="text/javascript">
+	$(document).ready(function(){	
+		$('#tags ul li').tsort({order:"desc",attr:"class"});
+
+		// create a sort by alphabet button
+		var sortabc = $('<a href="javascript:void(0)" class="btn none ten dot_spacer">AZ</a>').toggle(
+			function(){
+				$("#tags ul li").tsort({order:"asc"});
+			},
+			function(){
+				$("#tags ul li").tsort({order:"desc"});
+			}
+			);
+	 	$('#tag_cloud .cloud_buttons').prepend(sortabc);		
+
+		// create a sort by strenght button	
+		var sortstrength = $('<a href="javascript:void(0)" class="btn none ten">+-</a>').toggle(
+			function(){
+				$("#tags ul li").tsort({order:"asc",attr:"class"});
+			},
+			function(){
+				$("#tags ul li").tsort({order:"desc",attr:"class"});
+			}					
+			);
+	 	$('#tag_cloud .cloud_buttons').prepend(sortstrength);			
+
+	});
+	</script>		
+	<div id="tag_cloud">
+		<div class="fright cloud_buttons"> </div>
+		<h2 class="nomargin">Search related tags</h2>
+		<p class="gray_spec nomargin">James Brown belli capelli</p>
+        <%= render :partial => 'shared/tagcloud' %>
+	</div>
+	
+	
+	
+	</div>
+	<!-- END RIGHTCOL -->	
+	
+	<div class="clear"> </div>
+
+  <% content_for :footer do %>
+    <%= render :partial => 'answers/footer' %>
+  <% end %>	
+  <!-- E' UNA MMERDA (sparo) -->

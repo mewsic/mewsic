@@ -32,6 +32,8 @@ img { border: 0px; }
 ul { padding: 0; margin:0; }
 .margin30 { margin-top: 30px }
 .margin7 { margin-top: 7px }
+.paddingtop5 { padding-top: 5px; }
+.marginleft10 { margin-left: 10px; }
 input { border: 0; font-size: 12px; }
 .border { padding: 1px; border: 1px solid #CCCCCC; display: block; }
 .nomargin { margin: 0 !important; }
@@ -80,6 +82,7 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 	list-style: none;
 	padding: 0 30px 10px 0;
 }
+.navigation li.last { padding-right: 0; }
 .navigation .current {
 	background: transparent url('../images/menu_current.gif') no-repeat bottom center;
 	padding: 0 0 10px 0;
@@ -112,6 +115,54 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 	margin-left: 15px;
 }
 
+
+/* SITE SEARCH */
+.main_search_box {
+	width: 390px;
+	height: 25px;
+	margin: 2px 5px 0 0;
+}
+.search_input {
+	margin-right: 5px;
+	width: 310px;
+	font-size: 13px;
+	color: #696969;
+	padding: 3px 7px;
+	border: 1px solid #CCCCCC;
+}
+
+.search_submit {
+	border: 0;
+	font-size: 13px;
+	font-weight: bold;
+	cursor: pointer;
+	color: #FFFFFF;
+	background: url('../images/go_bg.png') repeat-x left top;
+	padding: 3px 7px;
+}
+.search_submit:hover { background: url('../images/go_bg.png') repeat-x left bottom; }
+
+
+/* results page */
+.searched li { 
+	list-style: none;
+	overflow: hidden;
+	padding: 15px 4px;
+	border-bottom: 1px solid #E6E6E6;
+}
+
+.search_results {
+	padding: 0 0 22px 6px;
+	border-bottom: 1px solid #E6E6E6;
+}
+.result_lane { width: 80%; }
+
+table#search_table .video_thumb {
+	margin: 0;
+	height: 60px; 
+}
+table#search_table .photo_thumb img { padding: 1px; border: 1px solid #FFF; }
+table#search_table .photo_thumb img:hover { border: 1px solid #88AED2; }
 
 
 /* IMAGE ROUND CORNER LAYOUT */
@@ -345,9 +396,11 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 	cursor: pointer;	
 }
 .max_sidebar_videos .video_thumb, .video_lists .video_thumb {
-	width: 104px;
+	width: 102px;
 	margin: 0 !important;
 }
+.max_sidebar_videos .video_thumb img { margin: 0 !important; }
+.max_sidebar_videos .video_lists li { padding: 0 !important; }
 
 
 .bands_new img:hover, .video_thumb img:hover { border: 1px solid #999; }
@@ -369,7 +422,7 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 .sidebar_videos li { overflow: hidden; margin-left: 0 !important; }
 .max_sidebar_videos li { 
 	overflow: hidden; 
-	margin: -1px !important; 
+	margin: -1px !important;
 	display: inline-block;
 }
 
@@ -628,6 +681,11 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 	margin: 0 0 10px 0;
 }
 
+ul.icon_lists li {
+	padding-left: 20px !important;
+}
+
+
 .divider {
 	border-bottom: 1px dashed #CCCCCC;
 	margin: 15px 0 15px -16px;
@@ -719,7 +777,7 @@ h2 {
 	margin: 0;
 }
 .tag_genre a {
-	padding-right: 8px;
+	padding-right: 2px;
 }
 .pick_wrap .tag_genre a {
 	padding: 1;
@@ -1009,7 +1067,7 @@ h2 {
 }
 
 
-/* BULLET PAGING */
+/* PAGING */
 .paging_bg {
 	padding: 5px 4px 6px 6px;
 	background-color: #F3F3F3;
@@ -1018,14 +1076,19 @@ h2 {
 	padding: 13px 76px 6px 6px;
 }
 
-.bullet_paging {
+.bullet_paging, .number_paging {
 	list-style: none;
 }
-.bullet_paging li {
+.bullet_paging li, .number_paging li {
 	margin: 0 !important;
 	display: inline;
 	float: left;
 }
+.number_paging li { margin: 0 2px !important; }
+.number_paging li a { font-weight: bold; text-decoration: none; }
+.number_paging li a:hover { text-decoration: underline; }
+.number_paging .pager .prev { margin-right: 5px; }
+.number_paging .pager .next { margin-left: 5px; }
 
 .bullet .on, .bullet .off {
 	width: 8px;
@@ -1168,6 +1231,33 @@ h2 {
 }
 
 
+
+
+/* ANSWER_SHOW */
+.question_show { border-top: 1px solid #CCCCCC; }
+.question_show, .question_replies {
+	padding: 8px 5px;
+	border-bottom: 1px dotted #999999;	
+}
+
+.left_section { width: 21%; padding: 5px 10px; }
+.right_section { width: 72%; }
+
+.question_show h1 { margin: 5px 0 22px 0; }
+.form_reply { width: 90%; }
+.form_reply .reply_box { 
+	width: 445px; 
+	border: 1px solid #CCCCCC;
+	height: 30px;
+	padding: 5px;
+	font-size: 1.2em;
+}
+.form_reply .wall_post { margin: 3px -12px 0 0; }
+
+
+
+
+
 /* SONG DETAIL PAGE SONGSHOW */
 .song_show { 
 	margin-bottom: 10px;
@@ -1231,7 +1321,7 @@ h2 {
 }
 .stats .last { margin-right: 0 !important;}
 
-.sidebar_user_status .list_status .user_name { margin: 0 0 3px 15px; }
+.sidebar_user_status .list_status .user_name { margin: 0 0 3px 0; }
 .sidebar_user_status .list_status .blurp_sidebar { margin-top: 4px; }
 
 
@@ -1258,13 +1348,22 @@ h2 {
 .project_info { width: 366px; }
 .project_publish { width: 197px; }
 .project_save { width: 104px; }
-.show_cc { margin: -16px 0 0 180px; }
+.show_options {
+	width: 127px;
+	padding-left: 6px;
+}
+.show_cc { 
+	margin-left: 25px;
+	padding: 11px;
+	border-left: 1px dotted #CCCCCC;
+	height: 43px;
+}
 .project_data label { color: #222222; }
 .project_data label, .project_data input {
 	display: inline !important;
 	float: left;
 }
-.project_data .radios { margin: 7px 0; }
+.project_data .radios { margin: 8px 0; }
 .project_save_submit {
 	border: 0;
 	width: 71px;
@@ -1368,6 +1467,9 @@ h2 {
 .search_tools { margin-top: 5px; }
 .search_tools a { margin-right: 5px; }
 
+.searched_filter {
+	font-size: .7em !important;
+}
 
 
 

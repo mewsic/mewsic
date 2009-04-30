@@ -54,6 +54,10 @@ h2 a {
 #mission_tutorial, #mission_search {
 	background: #8CC63F;
 }
+.status_green { color: #8CC63F; }
+.highlight { background: #D4EDFF; }
+
+
 .join_button {
 	background-color: #8CC63F;
 	border-bottom: 1px solid #8CC63F;
@@ -193,7 +197,6 @@ h2, h2 a, .rightCol h2, .mband_name, .subtitle {
 .status_balloon { background-color: #FFFFC7; }
 
 
-
 /* DIALOGS borders */
 .ui-dialog { border-width: 7px; border-style: solid; }
 .dialog_join { border-color: #94BD5E; }
@@ -211,3 +214,7 @@ h2, h2 a, .rightCol h2, .mband_name, .subtitle {
 
 .stage_bg { background-color: #88AED2; }
 .stage_bar { background-color: #EDEDED; }
+
+.question_blue { color: #0070A0; }
+.dark_gray { color: #4D4D4D; }
+.lighter_gray { background-color: #F1F1F1; }

@@ -38,6 +38,7 @@ class SearchController < ApplicationController
   #  * <tt>title</tt>: a title string, searched full-text via sphinx
   #
   def show
+    return
     respond_to do |format|
       format.html do
         def @q.to_breadcrumb; self; end
