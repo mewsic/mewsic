@@ -30,21 +30,25 @@
 .instruments_icon { background: url('../images/icons/instruments.png') no-repeat top left; }
 .creativecommons_icon { background: url('../images/icons/creative_commons.gif') no-repeat top left; }
 .user_icon { background: url('../images/icons/user.png') no-repeat top left; }
+.user_add { background: url('../images/icons/user_add.png') no-repeat top left; }
 .alert-bullet_icon { background: url('../images/icons/bullet_error.png') no-repeat top left; }
 .add_icon { background: url('../images/icons/add.png') no-repeat top left; }
-
+.comments_icon { background: url('../images/icons/comments.png') no-repeat top left; }
+.comment_add_icon { background: url('../images/icons/comment_add.png') no-repeat top left; }
 
 
 /* lists */
-.icons { display: block; }
+.icons { display: block; height: 16px; }
 .icons16 { display: block; width: 16px; height: 16px; }
 .icons18 { display: block; width: 18px; height: 18px; }
 .padleft23 { padding-left: 23px; }
 .padleft16 { padding-left: 16px; }
+.padleft18 { padding-left: 18px; }
 .padleft7 { padding-left: 7px; }
 
 .user_online_icon { background: url('../images/icons/profile/bullet_green.png') no-repeat top left; }
 
+.loader_white { background: url('../images/loader_small.gif') no-repeat; }
 .lightbulb { background: url('../images/icons/lightbulb.png') no-repeat left top; }
 .world { background: url('../images/icons/world.png') no-repeat left top; }
 .stats { background: url('../images/icons/chart_line.png') no-repeat left top; }
@@ -103,7 +107,3 @@
 	text-align: center;
 	cursor: pointer;
 }
-
-
-
-/* INSTR Positioning */

@@ -17,10 +17,10 @@
 
   <%= javascript_include_tag *%w( jquery.corner.js jquery.simpleautogrow.js jquery.MetaData.js dd_uncompressed.js  ) %>
 
-  <%= javascript_include_tag *%w( jquery.rating.pack.js jquery.dataTables.js jquery.Jcrop.pack.js jquery.cycle.all.min.js ) %>
+  <%= javascript_include_tag *%w( jquery.rating.pack.js jquery.dataTables.js jquery.Jcrop.pack.js jquery.cycle.all.min.js jquery.highlight-1.0.js ) %>
   <%= stylesheet_link_tag    *%w( jquery.rating.css     dataTables.css           jquery.Jcrop.css     ) %>
 
-  <%= javascript_include_tag *%w( application home applesearch ) %>
+  <%= javascript_include_tag *%w( application home applesearch tinysort ) %>
 
 	<link rel="stylesheet" type="text/css" href="/stylesheets/dummy.css" id="dummy_css" />	
 	<script type="text/javascript">
@@ -67,6 +67,15 @@
     <% end %>
   <% end %>
   </ul>
+    
+	<!-- SEARCH -->
+	<div class="fright main_search_box">
+		<form class="fright">
+			<input type="text" class="search_input fleft" value="Search in Mewsic">
+			<input type="submit" class="search_submit fleft" value="Go">
+		</form>
+	</div>
+    
     
   <div class="clear"> </div>
   <div id="breadcrumb_bar">

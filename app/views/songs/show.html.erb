@@ -34,12 +34,11 @@
 						(22) Published Songs</a>
 					<a href="" class="none podcast_icon weight-bold">Subscribe to Podcast</a>
 				</div>
-				<div class="balloon">
-					<span class="blurp_author block"> </span>
-					<div class="status_show">
-						Ho parcheggiato in doppia fila, con il cazzo che mi tira
-					</div>
-				</div>
+				<p class="margin7 status_outside">
+					<span class="lquote status_green s21">&ldquo;</span>
+					Ho la macchina in doppia fila, di solito la lascio in terza...
+					<span class="rquote status_green s21">&rdquo;</span>						
+				</p>
 			</div>
 			
       <%= render :partial => 'shared/song_show_block' %>
@@ -71,18 +70,11 @@
 		<p class="subtitle nomargin">
 			for <strong>Tretonsidosh Nereshtenz</strong>
 		</p>
-		<br />
-		
-		<p class="tag_genre">
-			<a href="">Acid Jazz/Fusion,</a>  <a href="">Acoustic,</a>  <a href="">Alternative 	Rock,</a>  <a href="">Ambient,</a>  <a href="">Blues,</a>  
-			<a href="">British Pop,</a>  <a href="">Classic Rock,</a>  <a href="">Country,</a>  <a href="">Country Rock,</a>  <a href="">Crossover,</a>  <a href="">Dance,</a>  
-			<a href="">Disco,</a>  <a href="">Drum & Bass,</a>  <a href="">EBM,</a>  <a 	href="">Electro-Rock,</a>  <a href="">Electronic,</a>  <a href="">Folk Rock,</a>  <a href="">Funk</a><a href="">Acid Jazz/Fusion,</a>  <a href="">Acoustic,</a>  <a href="">Alternative 	Rock,</a>  <a href="">Ambient,</a>  <a href="">Blues</a>
-		</p>
-		<ul class="actions weight-bold" style="margin-bottom: 4px;">
-			<li class="tag_add_icon last">
-				<a href="#add_tags" id="add_tags_link" class="none">Add tags for this song</a>
-			</li>						
-		</ul>
+    <%= render :partial => 'shared/tags' %>
+    
+		<span class="margin7 icons tag_add_icon last"> 
+			<a href="#add_tags" id="add_tags_link" class="padleft18 none">Add tags for this song</a>			
+		</span>
 		<span class="gray_spec block" style="margin-left: 19px;">
 			tag songs helps you searching<br /> what you're looking for
 		</span> 
@@ -93,7 +85,13 @@
       <%= render :partial => 'songs/mixable' %>
 			<span class="divider block"> </span>
 
-      <%= render :partial => 'shared/video_sidebar_max' %>
+  		<div class="max_sidebar_videos overflow-hidden">
+  			<p class="subtitle nomargin">
+  			<strong>Tretonsidosh Nereshtenz's</strong>
+  			</p>
+  			<h2>Related videos</h2>
+        <%= render :partial => 'shared/video_lists' %>
+  		</div>
 			<span class="divider block"> </span>
 
       <%= render :partial => 'users/sidebar_status' %>
