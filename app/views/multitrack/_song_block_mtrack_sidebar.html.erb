@@ -1,13 +1,16 @@
+<%- song = song_block_mtrack_sidebar -%>
 <div class="song_block sidebar_block">
-<span class="fright icons16 ui-state-tools  ui-icon-trash"> </span> <!-- mouse over -->
+	<span class="fright icons16 <%= 'ui-state-tools ui-icon-trash' if song.private? %>"> </span>
 	<div class="tracks_count sidebar_count fleft">
-		<h3>4</h3>
+		<h3><%= song.tracks.count %></h3>
 		Instr.s
 	</div>
 	<div class="song_details fleft">
-	  <a href="" class="song_title">Lorem ipsum dolor</a><br />
-	  <a href="" class="song_author"><strong>Pinca Palla</strong></a><br />
-		<img src="images/icons/bullet_key.png" />
+		<a href="" class="song_title"><%= truncate(song.title, :length => 20) %></a><br />
+		<a href="" class="song_author"><strong><%= song.user.nickname %></strong></a><br />
+		<%- if song.private? -%>
+			<img src="images/icons/bullet_key.png" />
+		<%- end -%>
 	</div>
 		<ul class="song_controls profile_controls_sidebar fright">
 			<li class="nomargin"><a href="" class="control_mix">MIX</a></li>

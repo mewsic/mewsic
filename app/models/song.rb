@@ -105,6 +105,7 @@ class Song < ActiveRecord::Base
 
   named_scope :public, :conditions => {:status => statuses.public}
   named_scope :private, :conditions => {:status => statuses.private}
+  named_scope :stuffable, :conditions => 'status > 0'
 
   define_index do
     indexes :title, :author, :description

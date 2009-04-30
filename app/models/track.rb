@@ -69,6 +69,7 @@ class Track < ActiveRecord::Base
   # Track statuses
   named_scope :public, :conditions => {:status => statuses.public}
   named_scope :private, :conditions => {:status => statuses.private}
+  named_scope :stuffable, :conditions => 'status > 0'
 
   named_scope :newest, :order => 'tracks.created_at DESC'
 

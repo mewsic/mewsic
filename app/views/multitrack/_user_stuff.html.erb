@@ -16,14 +16,10 @@
 			<li><a href="#newest_instr">Instruments</a></li>
 		</ul>
 		<div id="newest_song" class="nopad">
-    <% 6.times do %>
-        <%= render :partial => 'multitrack/song_block_mtrack_sidebar' %>
-    <% end %>
+			<%= render :partial => 'multitrack/song_block_mtrack_sidebar', :collection => @songs %>
 		</div>
 		<div id="newest_instr" class="nopad">
-    <% 6.times do %>
-        <%= render :partial => 'multitrack/instr_block_mtrack_sidebar' %>
-    <% end %>
+			<%= render :partial => 'multitrack/instr_block_mtrack_sidebar', :collection => @tracks %>
 		</div>
 	</div>
 	<div class="insidebar_paging fright" style="margin-top: 5px;">

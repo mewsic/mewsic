@@ -30,6 +30,7 @@ class MultitrackController < ApplicationController
   #
   def index    
     if logged_in?
+      load_user_stuff
       current_user.enter_multitrack!
       @song = current_user.songs.create_temporary!
     else
@@ -48,6 +49,8 @@ class MultitrackController < ApplicationController
   def edit
     @song = Song.find(params[:id])
     if @song.private? && @song.editable_by?(current_user)
+      load_user_stuff
+      current_user.enter_multitrack!
       render :action => 'index'
     elsif @song.public?
       @remix = @song.create_remix_by(current_user)
@@ -140,6 +143,11 @@ class MultitrackController < ApplicationController
 
     rescue ActiveRecord::ActiveRecordError
       head :forbidden
+    end
+
+    def load_user_stuff
+      @songs = current_user.songs.stuffable.newest
+      @tracks = current_user.tracks.stuffable.newest
     end
 
 end

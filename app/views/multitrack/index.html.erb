@@ -1,4 +1,5 @@
 <% content_for :head do %>
+	<%= javascript_include_tag 'multitrack' %>
   <%= javascript_include_tag 'swfobject/swfobject' %>
 	<script type="text/javascript">// <![CDATA[
 	
@@ -10,7 +11,7 @@
 			serverPath: '<%= APPLICATION[:url] %>',
 			settingsXMLPath: '/multitrack.xml',
 			isLogEnabled: 'yes',
-			isServiceDumpEnabled: 'no',
+			isServiceDumpEnabled: 'yes',
       songID: <%= @song.published? ? @song.id : 0 %>
 		};
 
@@ -77,7 +78,7 @@
 <div class="rightCol fright">
 
       <%= render :partial => 'multitrack/overview' %>
-      <%= render :partial => 'multitrack/user_stuff' %>      
+      <%= render :partial => 'multitrack/user_stuff' if logged_in? %>
 
 </div>
 <!-- END RIGHTCOL -->	

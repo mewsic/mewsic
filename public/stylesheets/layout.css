@@ -463,18 +463,18 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 
 
 /* SONG BLOCK */
-.song_block, #top_footer .song_block {
+.song_block, .instr_block, #top_footer .song_block {
 	width: 100%;
 	height: 43px;
 	padding-top: 4px;
 }
 .sidebar_block { width: 205px !important; }
 
-.song_block { border-bottom: 1px solid #E6E6E6;}
+.song_block, .instr_block { border-bottom: 1px solid #E6E6E6;}
 #top_footer .song_block { border-top: 1px solid #305A78 !important; border-bottom: none !important; }
 
 #top_footer .song_block:hover { background-color: #104063; }
-.song_block:hover { background-color: #F2F2F3; }
+.song_block:hover, .instr_block:hover { background-color: #F2F2F3; }
 .song_block .avatar, .song_block .tracks_count, .avatar {
 	width: 40px;
 	height: 40px;
