@@ -21,7 +21,7 @@ quentin_for_quentin_mband:
 
 john_for_quentin_mband:
   mband: quentin_mband
-  user: quentin
+  user: john
   instrument: voice
   accepted_at: <%= rand(5).days.ago.to_s :db %>
 
