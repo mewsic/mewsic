@@ -18,9 +18,15 @@ $(document).ready(function() {
   MSDropDown.init("#identity"); // This one *stinks*
   $('#identity').change(function() {
     var sel  = $(this)[0];
-    var icon = $(sel.options[sel.selectedIndex]).attr('icon');
-    //alert($(this).val() + "\n" + icon);
-    $('.project_info .avatar').attr('src', icon);
+    var opt  = $(sel.options[sel.selectedIndex]);
+
+    $('.project_info .avatar').attr('src', opt.attr('icon'));
+    $('.project_author h2').text(opt.text());
+  });
+
+  $('.project_author .edit_icon, .project_overview .user_icon a').click(function() {
+    MSDropDown.openDropDown('identity_ms'); // THIS STINKS EVEN MORE
+    return false;
   });
 
   // Callbacks
