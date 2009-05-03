@@ -8,9 +8,7 @@
 	<div class="song_details fleft">
 		<a href="" class="song_title"><%= truncate(song.title, :length => 20) %></a><br />
 		<a href="" class="song_author"><strong><%= song.user.nickname %></strong></a><br />
-		<%- if song.private? -%>
-			<img src="images/icons/bullet_key.png" />
-		<%- end -%>
+		<%= image_tag 'icons/bullet_key.png' if song.private? %>
 	</div>
 		<ul class="song_controls profile_controls_sidebar fright">
 			<li class="nomargin"><a href="" class="control_mix">MIX</a></li>

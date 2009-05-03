@@ -27,7 +27,7 @@ MSDropDown = {
 	styles: {
 			ddclass:'msDropDown',
 			childclass:'msDropDown_Child',
-			arrow: 'images/dd_arrow.gif',
+			arrow: '/images/dd_arrow.gif',
 			arrowclass: 'msArrow',
 			titleclass: 'msDropdownTitle',
 			disabled:'msDisabled',
