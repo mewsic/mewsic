@@ -8,4 +8,8 @@ module MultitrackHelper
       h("id=#{current_user.id}&token=#{current_user.multitrack_token}")
     end
   end
+
+  def instrument_image_path(instrument)
+    image_path File.join('instruments', 'blue_big', instrument.icon)
+  end
 end
