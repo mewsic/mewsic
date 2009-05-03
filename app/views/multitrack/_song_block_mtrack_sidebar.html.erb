@@ -6,12 +6,12 @@
 		Instr.s
 	</div>
 	<div class="song_details fleft">
-		<a href="" class="song_title"><%= truncate(song.title, :length => 20) %></a><br />
-		<a href="" class="song_author"><strong><%= song.user.nickname %></strong></a><br />
+		<%= link_to truncate(song.title, :length => 20), song, :class => 'song_title', :target => '_blank' %><br />
+		<%= link_to truncate(song.user.nickname, :length => 20), song.user, :class => 'song_author', :target => '_blank' %><br />
 		<%= image_tag 'icons/bullet_key.png' if song.private? %>
 	</div>
 		<ul class="song_controls profile_controls_sidebar fright">
-			<li class="nomargin"><a href="" class="control_mix">MIX</a></li>
+			<li class="nomargin"><%= link_to 'MIX', '#', :rel => song.id, :class => 'control_mix' %></li>
 			<li class="nomargin"><a href="" class="control_play">PLAY</a></li>
 		</ul>
 </div>

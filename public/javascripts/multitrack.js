@@ -3,6 +3,16 @@ $(document).ready(function() {
     function() { $(this).children('.instr_avatar').removeClass('shadow_white'); },
     function() { $(this).children('.instr_avatar').addClass('shadow_white'); }
   );
+
+  $('.song_controls .control_mix').click(function() {
+    $('#flash')[0].loadSong(this.rel);
+    return false;
+  });
+
+  $('.track_controls .control_mix').click(function() {
+    $('#flash')[0].loadTrack(this.rel);
+    return false;
+  });
 });
 
 function refreshStatus(status) {

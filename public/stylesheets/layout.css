@@ -585,9 +585,9 @@ table#search_table .photo_thumb img:hover { border: 1px solid #88AED2; }
 	padding: 2px 0 0 7px;
 }
 .song_details .song_title { line-height: 10px; }
-.song_details .song_author { line-height: 13px; }
+.song_details .song_author { line-height: 13px; font-weight: bold; }
 
-.song_controls {
+.song_controls, .track_controls {
 	padding: 0;
 	margin: 24px 4px 0 0 !important;
 	direction: rtl;
@@ -614,7 +614,8 @@ table#search_table .photo_thumb img:hover { border: 1px solid #88AED2; }
 	background-color: #F2F2F3;
 }
 
-.song_controls li {
+.song_controls li,
+.track_controls li {
 	list-style: none;
 	display: inline;
 	padding-right: 0;

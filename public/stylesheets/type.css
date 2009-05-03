@@ -60,7 +60,8 @@ h3, textarea {
 }
 
 .pick_page_anchors li a,
-.song_controls li a {
+.song_controls li a,
+.track_controls li a {
 	font-size: 9px;
 	font-weight: bold;
 }

@@ -4,6 +4,8 @@ $(function() {
 	$('.roundBottom10').corner("bottom 10px");
 	$('.round10').corner("cc:#ffffff 10px");
 	$('.round7').corner("cc:#ffffff 7px");		
+
+  applesearch.init();
 });
 
 
