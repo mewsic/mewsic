@@ -1379,8 +1379,8 @@ h2 {
 
 .project_info .avatar { width: 60px; height: 60px; }
 	
-#user_identity, #user_identity_ms { width: 65px !important; float: left;}
-#user_identity_ms_child {
+#identity, #identity_ms { width: 65px !important; float: left;}
+#identity_ms_child {
 	top: 16px !important;
 	left:0 !important;
 	width: 160px !important;

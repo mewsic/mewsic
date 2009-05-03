@@ -187,7 +187,7 @@ MSDropDown = {
 				};
 				if(icon != undefined) {img = "<img class='icon' align='left' src='"+icon+"' />";};
 				if(isDisabled == undefined || isDisabled==false) {
-					ahtml += "<a id='"+aID+"' title='"+sTitle+"' style='display:block;"+innerStyle+"'+ href='javascript:void(0);' value='"+(value)+"' onclick=\"MSDropDown.setSelected('"+dd_id+"', '"+text+"', '"+aID+"', '"+value+"')\">";//a tag start
+					ahtml += "<a id='"+aID+"' title='"+sTitle+"' style='display:block;"+innerStyle+"'+ href='javascript:void(0);' value='"+(value)+"' onclick=\"MSDropDown.setSelected('"+dd_id+"', '"+text+"', '"+aID+"', '"+value+"', '"+icon+"')\">";//a tag start
 				} else {
 					ahtml += "<a id='"+aID+"' title='"+sTitle+"' style='cursor:pointer;filter:alpha(opacity=50);-moz-opacity:.50;opacity:.50;display:block;"+innerStyle+"' href='javascript:void(0);' value='"+(value)+"'>";//a tag start
 				};
@@ -304,7 +304,7 @@ MSDropDown = {
 		this.selected[id].previous = this.selected[id].selected;
 	},
 	/**** manage selection ***/
-	setSelected: function(id, value, aID, val) {
+	setSelected: function(id, value, aID, val, icon) {
 		var parentID = id.split("_")[0];
 		this.selected[parentID].current = aID;
 		var sID = id;
@@ -316,6 +316,7 @@ MSDropDown = {
 		$("#"+parentID + " option:selected").text(value.toString());
 		//working here... (problem in ie if value is not defined)
 		$("#"+parentID + " option:selected").val(val.toString());
+    $("#"+parentID + " option:selected").attr('icon', icon);
 		//check if there is any method;
 		if($("#"+parentID).attr("onfocus")!=undefined) {
 			$("#"+parentID).focus();

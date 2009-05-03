@@ -1,12 +1,3 @@
-	<script language="javascript">
-		$(document).ready(function(e) {
-			try {
-				MSDropDown.init("#user_identity");
-			} catch(e) {
-				alert(e);
-			}
-		})
-	</script>
 	<!-- BEGIN PROJECT FORM -->
 	<form class="project_data">
 		
@@ -15,28 +6,20 @@
 			<span class="title block">Project info</span>
 
 				<span class="fleft">
-					<img src="/images/temp/avatar_pino.jpg" class="border avatar" width="60" height="60" />					
+					<%= image_tag current_user.avatar.public_filename(:medium), :class => 'border avatar', :size => '60x60' %>
 
-				 <select name="user_identity" id="user_identity">
-					<option value="mband/909" icon="/images/identities/avatar_pino.jpg">
-						Pino
+				<select name="identity" id="identity" style="display:none" onchange="void(0)">
+					<option value="user/<%= current_user.id %>" icon="<%= current_user.avatar.public_filename(:medium) %>">
+						<%= current_user.nickname %>
 					</option>
 					<optgroup label="YOUR M-BANDS">
-					<option value="mband/910" icon="/images/identities/avatar_fabio.jpg">
-						Big's Band
-					</option>
-					<option value="mband/911" icon="/images/identities/avatar_ndstr.jpg">
-						NDSTR
-					</option>
-					<option value="mband/912" icon="/images/identities/avatar_alvarez.jpg">
-						Alvarez de la Fonzeca
-					</option>
-					<option value="mband/913" icon="/images/identities/avatar_enzo.jpg">
-						Enzo's untouchable Quintet
-					</option>
+						<% for mband in current_user.mbands do %>
+							<option value="mband/<%= mband.id %>" icon="<%= mband.avatar.public_filename(:medium) %>">
+								<%= mband.name %>
+							</option>
+						<% end %>
 					</optgroup>
-				 </select>					
-
+				</select>
 				</span>
 
 				
@@ -44,7 +27,7 @@
 				<!--<input type="text" name="project_author" value="Pino" class="text ui-widget-content ui-corner-all project_author">-->
 				<div class="project_author fleft inplace-edit">
 					<span class="fleft">
-						<h2>Pino</h2>
+						<h2><%= current_user.nickname %></h2>
 					</span>
 					<span class="fright ten">
 						<a href="" class="icons16 edit_icon padleft23 none">Edit</a>
