@@ -57,6 +57,7 @@ class AnswersController < ApplicationController
   # Action to show an answer, along with similar ones (see Answer#find_similar for details).
   #
   def show
+    return
     @has_abuse = @answer.abuses.exists? ['user_id = ?', current_user.id] if logged_in?
     @similar_answers = @answer.find_similar 11
     @other_answers_by_author = Answer.find_paginated_by_user @answer.user, 1, :per_page => 6, :conditions => ['answers.id != ?', @answer.id]

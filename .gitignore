@@ -17,3 +17,5 @@ index
 .gitconfig
 .subversion
 .gem
+.DS_Store
+.AppleDouble/
