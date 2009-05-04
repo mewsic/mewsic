@@ -35,14 +35,11 @@ class MbandsController < ApplicationController
   def show
     current_user_mband_page = @mband.band_membership_with(current_user)
 
-    @songs = Song.find_paginated_by_mband(1, @mband, :skip_blank => !current_user_mband_page)
-    @songs_count = @mband.songs_count(:skip_blank => !current_user_mband_page)
-    @tracks, @tracks_count =
-      if current_user_mband_page
-        [Track.find_paginated_by_mband(1, @mband), @mband.tracks_count]
-      else
-        [Track.find_paginated_ideas_by_mband(1, @mband), @mband.ideas_count]
-      end
+    @songs = @mband.songs.public.paginate(:page => 1, :per_page => 7)
+    @songs_count = @mband.songs.public.count
+
+    @tracks = @mband.tracks.public.paginate(:page => 1, :per_page => 7)
+    @tracks_count = @mband.tracks.public.size
   end
 
   # ==== POST /mbands

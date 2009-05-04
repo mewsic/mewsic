@@ -62,8 +62,8 @@ class Mband < ActiveRecord::Base
 
   has_one :avatar, :as => :pictureable, :dependent => :destroy
   has_many :photos, :as => :pictureable, :dependent => :destroy
-  has_many :memberships, :class_name => 'MbandMembership', :dependent => :destroy
-  has_many :members, :through => :memberships, :class_name => 'User', :source => :user, :conditions => "accepted_at IS NOT NULL"
+  has_many :memberships, :class_name => 'MbandMembership', :conditions => "accepted_at IS NOT NULL", :dependent => :destroy
+  has_many :members, :through => :memberships, :class_name => 'User', :source => :user
 
   has_many :songs, :as => :user
 
