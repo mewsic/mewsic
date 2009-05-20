@@ -5,33 +5,41 @@
 
 
 <div class="fleft w343">
-	<h1>Login</h1>
+	<h1>Create an account on Mewsic</h1>
 	
+	<div id="validateTips" class="ui-state-highlight alleft">
+		<span class="fleft icons16 profile ui-icon ui-icon-lightbulb"> </span>
+		All form fields are required.
+	</div>
+	<!-- 
 	<div id="validateTips" class="ui-state-error alleft">
 		<span class="fleft icons16 profile ui-icon ui-icon-lightbulb"> </span>
-		Wrog password. Have you <a href="">Forgotten</a> your password ?
+		Email field must be a valid email address.
 	</div>
-
+	-->
+	
+	
 <% form_tag sessions_path, :id => 'signup_form', :method => :post do %>
-	<fieldset>
-		<label for="name">Username</label>
-      <%= text_field_tag :login, nil,  :class => 'text ui-widget-content' %>
+		<fieldset>
+			<label for="name">Username</label>
+			  <input type="text" name="name" id="name" class="text ui-widget-content" />
+			<label for="email">Email</label>
+			  <input type="text" name="email" id="email" value="" class="text ui-widget-content" />
+			<label for="password">Password</label>
+			  <input type="password" name="password" id="password" value="" class="text ui-widget-content" />
+			<label for="password">Check Password</label>
+			  <input type="password" name="password" id="password" value="" class="text ui-widget-content" />
 
-		<label for="password">Password</label>
-      <%= password_field_tag :password, nil, :class => 'text ui-widget-content' %>
+	    <input type="submit" value="Register" class="join_button mailbox_send fright">
+	    <input type="reset" value="Cancel" class="mailbox_cancel cancel_button gray_spec fright">
 
-		<label for="remember" class="fleft">Remember me&nbsp;&nbsp;</label>
-      <%= check_box_tag 'remember_me', '1', true, :class => 'fleft nomargin' %>
+		<div class="fright icons16 loader_white" style="margin:3px 5px 0 0"> </div>				
 		
-      <%= submit_tag 'Login', :class => 'join_button mailbox_send fright' %>
-      
-	<div class="fright icons16 loader_white" style="margin:3px 5px 0 0"> </div>				
-	</fieldset>
-	</form>
+		</fieldset>	</form>
 <% end %>	
 	
 	<p class="sixsixsix">
-		Don't have an account? <%= link_to 'Create one now', signup_path %>,<br />
+		Already have an account? <%= link_to 'Login now', login_path %>,<br />
 		or <strong>Connect with Facebook</strong> here on the right.
 	</p>
 </div>

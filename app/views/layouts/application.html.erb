@@ -47,7 +47,7 @@
   
   <ul class="login fright">
   <% unless logged_in? %>
-		<li><%= link_to 'JOIN NOW', '#join', :id => 'create-user', :class => 'join_button' %></li>
+		<li><%= link_to 'JOIN NOW', signup_path, :class => 'join_button' %></li>
 		<li id="facebook-connect-button">or
 			<fb:login-button onlogin='window.location = "/";' size="small" background="light"></fb:login-button>
 			Connect with Facebook

@@ -80,7 +80,10 @@
 .status_outside .lquote { padding-left: 3px; }
 .status_outside .rquote { margin-left: 2px; padding:0; }
 
-
+.friend_list { 
+	overflow: hidden;
+	margin-bottom: 8px; 
+}
 
 .mband_member_list li { 
 	list-style: none;
@@ -123,20 +126,18 @@
 .wall_box { 
 	width: 375px;
 	height: 13px;
-	display: inline !important;
-	position: relative !important;
 	border: 1px solid #CCCCCC;
 	padding: 4px;
-	font-size: 13px !important;
+	font-size: 12px !important;
+	margin: 6px 0 4px 0;
 }
 .wall_avatars { padding: 1px 5px 0 0; width: 44px; height: 44px; }
 .wall_heading { margin-bottom: 15px; border-bottom: 1px solid #CCCCCC; width: 434px; }
 
 .wall_post { 
-	padding: 1px 7px; 
+	padding: 2px 9px; 
 	color: #ffffff; 
 	font-family: Helvetica;
-	margin-top: -13px;
 	cursor: pointer;
 }
 .wall_post { background: url('../images/go_bg.png') repeat-x top; }
@@ -145,17 +146,8 @@
 
 /* share links wall */
 .share_links_wall { 
-	margin: -5px 0 0 49px !important;
-	position: absolute left;
-}
-.share_links_wall li {
-	margin: 0px;
-	display: inline;
-	margin-left: 4px;
-	height: 16px;
-}
 
-
+}
 
 /* wall posts */
 .posted_date {
@@ -311,7 +303,7 @@ padding:0 6px 1px;
 table.display td {
 	padding: 3px 5px !important;
 }
-#mailbox .unread_icon { margin: 13px 0 0 -19px; }
+#mailbox .unread_icon { margin: 13px 0 0 0; }
 
 #mailbox_info {
 	color: #666666;
@@ -335,19 +327,31 @@ table.display td {
 	margin-left: 4px;
 }
 .inbox_avatar { padding-right: 5px; }
+.mail_trash { margin-right: 7px; }
 
 
+/* New message */
+#new_message .message_body {
+	width: 488px;
+	height: 100px;
+	padding: 5px;
+	font-size: 12px;
+}
 
+.mailbox_send, .mailbox_cancel {
+	padding: 2px 9px;
+	margin-left: 5px;
+}
 
 
 /* Accounts Icons */
 .inbox_accounts { 
 	list-style: none;  
 	width: 172px;
-	margin: 33px 16px 0 0;
+	margin: 35px 16px 0 0;
 }
 .inbox_accounts li { cursor: pointer; }
-.inbox_accounts li:hover { color: #0296C2; }
+.inbox_accounts li:hover, .inbox_accounts li.selected { color: #0296C2; }
 .inbox_accounts li {
 	display: block;
 	padding: 5px 0 5px 23px;
@@ -356,6 +360,9 @@ table.display td {
 .inbox_accounts .seclevel { 
 	padding: 4px 0 4px 22px;
 	margin-left: 15px;
+}
+.inbox_accounts .seclevel-tool { 
+	padding: 1px 0 1px 22px;
 }
 .inbox_accounts .thirdlevel { 
 	padding: 2px 0 2px 45px;
@@ -433,6 +440,14 @@ dl.info dt, dl.info dd { padding-bottom: 4px; }
 .info_text_group span { margin-bottom: 3px; }
 
 
+.influences_box textarea, .iam_box textarea {
+	font-size: 11px;
+	font-weight: normal;
+	color: #222222;
+	width: 285px;
+}
+
+
 /* inslide tagged instr list */
 .tagged_instr_list {
 	padding-top: 4px;
@@ -453,6 +468,10 @@ dl.info dt, dl.info dd { padding-bottom: 4px; }
 	background-color: #BAE6FF;
 }
 
+
+
+
+
 /* PICTURES GALLERY */
 #pictures_gal {
 	overflow: hidden;
@@ -464,7 +483,15 @@ table#flickr_gallery td {
 	background-color: #EDEDED;
 	cursor: pointer;
 }
-table#gallery td:hover, table#flickr_gallery td img:hover { background-color: #88AED2; }
+table#gallery td:hover, table#flickr_gallery td img:hover,
+.sidebar_photo_thumb:hover { background-color: #88AED2; }
+
+.sidebar_photo_thumb { 
+	padding: 3px; 
+	border: 1px solid #CCC; 
+	float: left;
+	margin: 5px 0 0 5px;
+}
 
 table#gallery td img, #slide img, 
 table#flickr_gallery td img {
@@ -496,6 +523,33 @@ table#flickr_gallery { margin-top: 7px; }
 }
 
 
+
+
+/* GALLERY EDIT, ORGANIZE, TAG */
+#edit_photos li {
+	list-style: none;
+	margin: 4px 0;
+	padding: 5px;
+	background: #F1F1F1;
+	border-bottom: 1px solid #DDDDDD;
+	overflow: hidden;
+}
+
+#edit_photos .photo_tag_list li {
+	margin: 0;
+	padding: 0;
+	list-style: disc;
+	list-style-position: inside;
+	overflow: visible;
+	border: none;
+}
+.photo_tag_list {
+	margin: 4px 0 0 3px;
+}
+
+
+
+
 /* User song tools, Search tools */
 .user_song_tools { width: 70px; }
 .user_song_tools a, .search_tools a {
@@ -508,7 +562,7 @@ table#flickr_gallery { margin-top: 7px; }
 /* Users lists */
 .profile_mband_block { margin: 5px 0 15px 0; }
 .profile_mband { width: 159px; }
-.profile_mband, .profile_mband_pic { margin: 5px; }
+.profile_mband, .profile_mband_pic { margin: 6px 6px 0 0; }
 .profile_mband_pic img {
 	padding: 1px;
 	border: 1px solid #E6E6E6;
@@ -516,7 +570,7 @@ table#flickr_gallery { margin-top: 7px; }
 
 
 /* Friends lists */
-.friend_status { margin: 0 0 10px 49px; }
+.friend_status { margin: 0 0 0 51px; }
 .friend_balloon {
 	min-height: 12px;
 	border-bottom: 1px solid #CCCCCC;

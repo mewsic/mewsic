@@ -4,7 +4,7 @@
 
 
 /* profile + */
-.newmail_icon { border-bottom: 1px solid #CCCCCC; background: url('../images/icons/mailbox/email_add.png') no-repeat center left; }
+.newmail_icon { background: url('../images/icons/mailbox/email_add.png') no-repeat center left; }
 .unread_icon { background: url('../images/icons/mailbox/bullet_blue.png') no-repeat left; }
 .inbox_icon, .share_icon { margin-top: 10px; background: url('../images/icons/mailbox/email.png') no-repeat center left; }
 .collab_icon { background: url('../images/icons/mailbox/arrow_in.png') no-repeat center left; }
@@ -13,11 +13,14 @@
 .mbands_small_icon { background: url('../images/icons/mband_small.png') no-repeat center left; }
 .admire_icon { background: url('../images/icons/heart.png') no-repeat center left;}
 .sendmessage_icon { background: url('../images/icons/mailbox/email_go.png') no-repeat center left;}
+.bin_icon { background: url('../images/icons/mailbox/bin.png') no-repeat center left;}
+.bin-empty_icon { background: url('../images/icons/mailbox/bin_empty.png') no-repeat center left;}
 .podcast_icon { background: url('../images/icons/podcast.png') no-repeat top left;}
 .tag_add_icon { background: url('../images/icons/tag_add.png') no-repeat top left; }
 .download_icon { background: url('../images/icons/disk.png') no-repeat center left; }
 .pictures_icon { background: url('../images/icons/pictures.png') no-repeat top left; }
 .edit_icon { background: url('../images/icons/pencil.png') no-repeat top left; }
+.cogedit_icon { background: url('../images/icons/cog_edit.png') no-repeat top left; }
 .wall_icon { background: url('../images/icons/report.png') no-repeat top left; }
 .tag_yellow_icon { background: url('../images/icons/tag_yellow.png') no-repeat top left; }
 .private_icon { background: url('../images/icons/key.png') no-repeat top left; }
@@ -35,7 +38,7 @@
 .add_icon { background: url('../images/icons/add.png') no-repeat top left; }
 .comments_icon { background: url('../images/icons/comments.png') no-repeat top left; }
 .comment_add_icon { background: url('../images/icons/comment_add.png') no-repeat top left; }
-
+.attach_icon { 	background: url('../images/icons/attach.png') no-repeat top left; }
 
 /* lists */
 .icons { display: block; height: 16px; }
