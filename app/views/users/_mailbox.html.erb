@@ -11,9 +11,11 @@
 						"sUrl": "/javascripts/dataTables_EN.txt"
 					},
 			"aoData": [ 
-						/* From */ { "sType": "html" },
-						/* Subject */ { "sType": "html" },
-						/* Date Received */ { "bSearchable": false }
+			            /* Unread */ { "bSearchable": false },
+			            /* From */ { "sType": "html" },
+			            /* Subject */ { "sType": "html" },
+			            /* Received */ { "bSearchable": false },
+			            /* Trash */ { "bSearchable": false, "bSortable": false }					
 					]					
 			} );
 		} );
@@ -22,8 +24,8 @@
 
 <div class="fleft">
 	<ul class="inbox_accounts weight-bold fleft">
-		<li class="newmail_icon s13">New Message</li>
-		<li class="inbox_icon">
+		<li class="border_bottom newmail_icon s13">New Message</li>
+		<li class="inbox_icon selected">
 			<span class="fleft">Inbox</span> 
           <%= render :partial => 'users/mailbox_unread' %>
 		</li>
@@ -48,6 +50,24 @@
 				<span class="fleft mailbox_mband-name">Rustelli</span> 
           <%= render :partial => 'users/mailbox_unread' %>
 			</li>
+			
+  		<li class="border_top margin7 sendmessage_icon">Sent</li>			
+  		<li class="border_top  bin_icon">
+  			<span class="fleft">Trash</span>
+  			<span class="font-weight gray_spec fright">33</span>
+  		</li>
+  			<li class="seclevel-tool weight-normal">
+  				<span class="fleft icons16 ui-state-tools ui-icon-circle-check"> </span>
+  				<a href="" class="none sixsixsix">select all</a>
+  			</li>
+  			<li class="seclevel-tool weight-normal">
+  				<span class="fleft icons16 ui-state-tools ui-icon-trash"> </span>
+  				<a href="" class="none sixsixsix">trash selected</a>
+  			</li>			
+  			<li class="seclevel-tool weight-normal">
+  				<span class="fleft icons16 ui-state-tools ui-icon-cancel"> </span>
+  				<a href="" class="none sixsixsix">empty trash</a>
+  			</li>
 	</ul>
 </div>
 
@@ -55,71 +75,101 @@
 <table cellpadding="0" cellspacing="0" border="0"  class="display mailbox" id="mailbox">
 	<thead>
 		<tr>
-			<th>From</th>
-			<th>Subject</th>
-			<th>Date Received</th>			
+		  <th> </th>
+		  <th>From</th>
+		  <th>Subject</th>
+		  <th>Received</th>	
+		  <th><span class="fleft icons16 ui-state-tools ui-icon-trash"> </span></th>		
 		</tr>
 	</thead>
 	<tbody>
       <% 3.times do %>
-		<tr>
-			<td>
-				<span class="icons16 unread_icon fleft"> </span>
-				<a href="" class="inbox_avatar fleft">
-				<img src="/images/temp/avatar_pino.jpg" class=" border" width="40" />					
-				</a>
-				<a href="" class="weight-bold">Pino e il mare</a>
-			</td>
-			<td>
-				<a href="" class="weight-bold">Congrats! great songs</a>
-			</td>
-			<td>
-				Today  8:08PM
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<a href="" class="inbox_avatar fleft">
-				<img src="/images/temp/avatar_ndstr.jpg" class=" border" width="40" />					
-				</a>
-				<a href="">NDSTR</a>
-			</td>
-			<td>
-				<a href="">Hi, i want to share something with you.</a>
-			</td>
-			<td>
-				Today  4:08AM
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<a href="" class="inbox_avatar fleft">
-				<img src="/images/temp/avatar_enzo.jpg" class=" border" width="40" />					
-				</a>
-				<a href="">Enzo</a>
-			</td>
-			<td>
-				<a href="">Re: Nice to Meet you</a>
-			</td>
-			<td>
-				Yesterday  1:51PM
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<a href="" class="inbox_avatar fleft">
-				<img src="/images/temp/avatar_alvarez.jpg" class=" border" width="40" />					
-				</a>
-				<a href="">Alavrez de la Fonzeca</a>
-			</td>
-			<td>
-				<a href="">Friend Request</a>
-			</td>
-			<td>
-				March 6  2:342PM
-			</td>
-		</tr>
+    		<tr>
+    			<td>
+    				<span class="icons16 unread_icon fleft"> </span>
+    			</td>				
+    			<td>
+    				<a href="" class="inbox_avatar fleft">
+    				<img src="/images/temp/avatar_pino.jpg" class=" border" width="40" />					
+    				</a>
+    				<a href="" class="weight-bold">Pino e il mare</a>
+    			</td>
+    			<td>
+    				<a href="" class="weight-bold">Congrats! great songs</a>
+    			</td>
+    			<td>
+    				Today  8:08PM
+    			</td>
+    			<td>
+    					<span class=""><input type="checkbox"></span>				
+    			</td>							
+    		</tr>
+    		<tr>
+    			<td>
+
+    			</td>				
+    			<td>
+    				<a href="" class="inbox_avatar fleft">
+    				<img src="/images/temp/avatar_ndstr.jpg" class=" border" width="40" />					
+    				</a>
+    				<a href="">NDSTR</a>
+    			</td>
+    			<td>
+    				<a href="">Hi, i want to share something with you.</a>
+    			</td>
+    			<td>
+    				Today  4:08AM
+    			</td>
+    			<td>
+    					<span class=""><input type="checkbox"></span>				
+    			</td>			
+    		</tr>
+    		<tr>
+    			<td>
+
+    			</td>				
+    			<td>
+    				<a href="" class="inbox_avatar fleft">
+    				<img src="/images/temp/avatar_enzo.jpg" class=" border" width="40" />					
+    				</a>
+    				<a href="">Enzo</a>
+    			</td>
+    			<td>
+    				<a href="">Re: Nice to Meet you</a>
+    			</td>
+    			<td>
+    				Yesterday  1:51PM
+    			</td>
+    			<td>
+    					<span class=""><input type="checkbox"></span>				
+    			</td>										
+    		</tr>
+    		<tr>
+    			<td>
+
+    			</td>				
+    			<td>
+    				<a href="" class="inbox_avatar fleft">
+    				<img src="/images/temp/avatar_alvarez.jpg" class=" border" width="40" />					
+    				</a>
+    				<a href="">Alavrez de la Fonzeca</a>
+    			</td>
+    			<td>
+    				<a href="">Friend Request</a>
+    			</td>
+    			<td>
+    				March 6  2:342PM
+    			</td>
+    			<td>
+    					<span class=""><input type="checkbox"></span>				
+    			</td>										
+    		</tr>
+
       <% end %>
 		</tbody>
 	</table>
+	
+	<div class="clear"> </div>
+  <%= render :partial => 'users/mailbox_readreply' %>                
+  
 </div>

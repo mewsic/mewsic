@@ -1,0 +1,171 @@
+<!-- MESSAGE COMPOSE -->
+    <form action="test_submit" id="new_message" method="get" accept-charset="utf-8" class="overflow-hidden">
+      <ol>        
+        <li id="facebook-list" class="input-text">
+          <label>To:</label>
+          <input type="text" value="" id="message-to" />
+          <ul id="preadded" style="display:none">
+
+          </ul>
+          <div id="facebook-auto">
+            <div class="default">Type the name of your friends or mbands</div> 
+            <ul id="feed">
+
+            </ul>
+          </div>
+        </li>
+		<li class="input-text">
+			<label>Subject:</label>
+			<input type="text" name="mail-subject">
+		</li>
+		<li class="input-text">
+			<label>Message:</label>
+			<textarea name="mail-message" id="body_grow" class="message_body"></textarea>
+		</li>
+		<li class="input-text overflow-hidden fleft w343">
+			<label class="fleft">Share:</label>
+			<span class="fleft marginleft10 icons share_song_icon">
+				 <a href="#share_song" id="share_song_link" class="padleft18 none">Songs</a>
+			</span>
+			<span class="fleft marginleft10 icons share_picture_icon"> 
+				<a href="#share_media" id="share_picture_link" class="padleft18 none">Picture</a>						
+			</span>			
+			<span class="fleft marginleft10 icons share_video_icon">
+				<a href="#share_media" id="share_video_link" class="padleft18 none">Video</a>	
+			</span>			
+			<span class="fleft marginleft10 icons attach_icon">
+				<a href="#attachments" id="attachments_dialog" class="padleft18 none heading">3 items</a>	
+			</span>
+		</li>
+      </ol>   
+		<input type="reset" class="mailbox_cancel cancel_button gray_spec fright" value="Cancel">	
+		<input type="submit" class="mailbox_send  join_button fright" value="Send">
+		<div class="fright icons16 loader_white" style="margin:3px 5px 0 0"> </div>	
+    </form> 
+
+    <script language="JavaScript">
+        $(document).ready(function() {        
+          $.facebooklist('#message-to', '#preadded', '#facebook-auto',{url:'/_fcbk_fetched.php',cache:1}, 10, {userfilter:1,casesensetive:0});
+        });    
+    </script>
+
+
+
+<!-- NOTIFICATIONS -->
+<div class="ui-state-highlight action_notice">
+<span class="profile ui-icon ui-icon-info fleft" style="margin-right:4px;"> </span>
+Message sent succesfully to: 
+<a href="" class="none">Alejandra Pizarnik</a>, 
+<a href="" class="none">Manuel Puig</a> 
+</div>
+
+
+
+
+
+
+
+
+<!-- MESSAGE VIEW / REPLY -->
+
+<div class="border_bottom overflow-hidden" style="padding:4px;">
+	<div class="fleft">
+		<span class="fright marginleft10">
+			<span class="fleft icons16 ui-state-tools ui-icon-arrowreturnthick-1-w"> </span>
+			<a href="profile.php" class="none sixsixsix">back to inbox</a>
+		</span>
+		<span class="fright">	
+			<span class="fleft icons16 ui-state-tools ui-icon-trash"> </span>
+			<a href="" class="none sixsixsix">delete</a>
+		</span>			
+	</div>
+	<div class="fright">
+		<span class="fleft">
+			<span class="fleft icons16 ui-state-tools ui-icon-triangle-1-w"> </span>
+			<span class="sixsixsix fleft"> 4 of 33 </span>	
+			<span class="fleft icons16 ui-state-tools ui-icon-triangle-1-e"> </span>
+		</span>
+	</div>
+</div>
+<div class="clear"> </div>
+
+    <form action="test_submit" id="new_message" method="get" accept-charset="utf-8" class="overflow-hidden margin7">
+      <ol>        
+        <li id="facebook-list" class="input-text fleft w240">
+          <label>From:</label>
+			<a href="" class="inbox_avatar fleft">
+			<img src="/images/temp/avatar_pino.jpg" class=" border" width="40" />					
+			</a>
+			<a href="" class="none">Pino e il mare</a><br />
+			<span class="gray_spec">March 20</span><br />
+			<span class="gray_spec">at 1:40AM</span>			
+        </li>
+		<li class="input-text fleft marginleft10 w240">
+			<label>Subject:</label>
+			<span class="weight-bold">Congrats! great songs</span>
+		</li>
+		<div class="clear"> </div>
+		<li class="input-text">
+			<p class="nomargin">
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+			</p>
+			<!-- ATTACH BLOCK -->
+			<div class="attach_list margin7" style="margin-left:0"> 
+				<? include('_song_block.php') ?>
+			</div>
+			<!-- end attach -->			
+		</li>
+		<li class="input-text">			
+			<!-- REPLIES -->
+				<a href="" class="inbox_avatar fleft">
+					<img src="/images/temp/avatar_ndstr.jpg" class=" border" width="40" />					
+				</a>
+				<a href="" class="none">NDSTR</a><br />
+				<span class="gray_spec">March 20</span><br />
+				<span class="gray_spec">at 1:45AM</span>			
+				<p class="clear">
+					Si ma che cazzo mi shari, la canzone fa cagare e tu sei un cesso
+				</p>
+			<!-- end replies -->
+		</li>
+		<li class="input-text">			
+			<!-- REPLIES -->
+				<a href="" class="inbox_avatar fleft">
+					<img src="/images/temp/avatar_pino.jpg" class=" border" width="40" />					
+				</a>
+				<a href="" class="none">Pino e il mare</a><br />
+				<span class="gray_spec">March 21</span><br />
+				<span class="gray_spec">at 4:30PM</span>			
+				<p class="clear">
+					Ma fatti i cazzi tuoi
+				</p>
+			<!-- end replies -->
+		</li>
+		<li class="input-text">
+			<label>Reply:</label>
+			<textarea name="mail-reply" id="reply_grow" class="message_body"></textarea>
+		</li>		
+		<li class="input-text overflow-hidden fleft w343">
+			<label class="fleft">Share:</label>
+			<span class="fleft marginleft10 icons share_song_icon">
+				 <a href="#share_song" id="share_song_link" class="padleft18 none">Songs</a>
+			</span>
+			<span class="fleft marginleft10 icons share_picture_icon"> 
+				<a href="#share_media" id="share_picture_link" class="padleft18 none">Picture</a>						
+			</span>			
+			<span class="fleft marginleft10 icons share_video_icon">
+				<a href="#share_media" id="share_video_link" class="padleft18 none">Video</a>	
+			</span>			
+		</li>
+      </ol>   
+		<input type="submit" class="mailbox_send  join_button fright" value="Send Reply">
+		<div class="fright icons16 loader_white" style="margin:3px 5px 0 0"> </div>	
+						
+    </form> 
+
+
+    <script language="JavaScript">
+		$(document).ready(function(){
+		  $('#body_grow, #reply_grow').simpleautogrow();
+		});
+    </script>

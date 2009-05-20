@@ -5,31 +5,36 @@ $(document).ready(function(){
 });
 </script>
 
-	<!-- POST TO WALL FORM -->
-	<div class="upper_part">
-		<a href="" class="wall_avatars fleft">
-			<img src="/images/temp/avatar_ndstr.jpg" class=" border" width="40" />					
-		</a>
-		<span class="subtitle fleft">Write or share something on <strong>Pinca Palla</strong>'s 	wall</span>
-		<form class="">
-			<textarea id="grow" class="wall_box"> </textarea>
-			<ul class="share_links_wall">	
-				<li class="weight-bold">Share:</li>
-				<li class="share_song_icon">
-					<a href="#share_song" id="share_song_link" class="none">Songs</a>
-				</li>
-				<li class="share_picture_icon">
-					<a href="#share_media" id="share_picture_link" class="none">Picture</a>
-				</li>
-				<li class="share_video_icon">
-					<a href="#share_media" id="share_video_link" class="none">Video</a>
-				</li>
-			</ul>
-			<input type="submit" class="wall_post fright" value="Share">
-		</form>
-		<!-- END FORM -->
+<!-- POST TO WALL FORM -->
+<div class="upper_part">
+	<a href="" class="wall_avatars fleft">
+		<img src="/images/temp/avatar_ndstr.jpg" class=" border" width="40" />					
+	</a>
+	<div class="fleft">
+	<span class="subtitle">Write or share something on <strong>Pinca Palla</strong>'s 	wall</span>
+	<form class="">
+		<textarea id="grow" class="wall_box"> </textarea>
+		<div class="share_links_wall fleft">	
+			<span class="fleft weight-bold">Share:</span>
+			<span class="fleft marginleft10 icons share_song_icon">
+				 <a href="#share_song" id="share_song_link" class="padleft18 none">Songs</a>
+			</span>
+			<span class="fleft marginleft10 icons share_picture_icon"> 
+				<a href="#share_media" id="share_picture_link" class="padleft18 none">Picture</a>						
+			</span>			
+			<span class="fleft marginleft10 icons share_video_icon">
+				<a href="#share_media" id="share_video_link" class="padleft18 none">Video</a>	
+			</span>
+			<span class="fleft marginleft10 icons attach_icon">
+				<a href="#attachments" id="attachments_dialog" class="padleft18 none heading">3 items</a>	
+			</span>									
+		</div>
+		<input type="submit" class="wall_post fright" value="Share">
+	</form>
 	</div>
-		<div class="clear"> </div>
+	<!-- END FORM -->
+</div>
+	<div class="clear"> </div>
 	
 	
 	<!-- BEGIN OF POSTED ITEMS -->
