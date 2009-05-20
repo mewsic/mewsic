@@ -95,7 +95,7 @@ task :mewsic_symlinks, :roles => [:app, :web], :except => {:no_release => true, 
   symlink_avatars
   symlink_audio
   symlink_videos
-  symlink_multitrack
+#  symlink_multitrack
   symlink_splash
   symlink_players
 end
