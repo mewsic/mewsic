@@ -59,8 +59,8 @@
       <li><fb:name uid="<%= current_user.facebook_uid %>" useyou="false" capitalize="true" /></li>
       <li><a href="#" onclick="FB.Connect.logoutAndRedirect('<%= logout_path %>')">logout</a></li>
     <% else %>
-      <li><%= image_tag current_user.avatar.public_filename(:icon) %></li>
-      <li>Hi, <%= current_user.login %>!</li>
+      <li><%= link_to image_tag(current_user.avatar.public_filename(:icon)), current_user %></li>
+      <li>Hi, <%= link_to current_user.login, current_user %>!</li>
       <li><%= link_to 'logout', logout_path %></li>
     <% end %>
   <% end %>
