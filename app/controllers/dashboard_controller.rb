@@ -20,6 +20,7 @@ class DashboardController < ApplicationController
     @newest_mbands = Mband.find_newest :limit => 4
     @newest_songs = Song.find_newest :limit => 3
     @top_tags = Tag.find_top :limit => 20
+    @random_song = Song.public.find :first, :order => 'rand()'
 
     #@pick_of_the_week = User.find_pick_of_the_week, :include => [:photos, :videos, :songs]
     #@knowledge_items = Knowledge.find_top_rated
