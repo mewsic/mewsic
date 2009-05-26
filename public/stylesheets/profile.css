@@ -517,16 +517,12 @@ table#flickr_gallery { margin-top: 7px; }
 	padding: 10px 15px;
 	margin-bottom: 8px;
 }
-.flickr_badge {
-	background: url('../images/flickr_badge.jpg') no-repeat left;
-	padding: 5px 0 0 55px;
-}
 
 
 
 
 /* GALLERY EDIT, ORGANIZE, TAG */
-#edit_photos li {
+#edit_photos li, #edit_videos li {
 	list-style: none;
 	margin: 4px 0;
 	padding: 5px;
@@ -534,19 +530,28 @@ table#flickr_gallery { margin-top: 7px; }
 	border-bottom: 1px solid #DDDDDD;
 	overflow: hidden;
 }
+.clear_style {
+	background: none !important;
+	border: none !important;
+}
 
 #edit_photos .photo_tag_list li {
 	margin: 0;
-	padding: 0;
+	padding: 0 0 4px 0;
 	list-style: disc;
-	list-style-position: inside;
+	list-style-position: outside;
 	overflow: visible;
 	border: none;
 }
 .photo_tag_list {
-	margin: 4px 0 0 3px;
+	margin: 4px 0 0 17px;
 }
 
+
+#edit_videos .video_thumb {
+	height: 88px;
+	padding: 0; margin: 0;
+}
 
 
 

@@ -46,7 +46,7 @@
 
 /* Component containers
 ----------------------------------*/
-.profile .ui-widget { font-family: Helvetica; font-size: 13px; }
+.profile .ui-widget {  }
 .profile .ui-widget input, .profile .ui-widget select, .profile .ui-widget textarea, .profile .ui-widget button { font-family: Helvetica; font-size: 1em; }
 .profile .ui-widget-content {  background: #ffffff url(profile/ui-bg_flat_75_ffffff_40x100.png) 50% 50% repeat-x; color: #222222; }
 /* .profile .ui-widget-content a { color: #222222; } */
