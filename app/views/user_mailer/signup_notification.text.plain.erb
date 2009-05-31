@@ -1,10 +1,10 @@
-Dear <%= @user.login %>,
-Welcome in the most open and innovative community about music!
+Welcome aboard, <%= @user.login %>!
 
-Please click this link to activate your account:
+Click on the following link to activate your account:
 
-  <%= notification_url activate_path(@user.activation_code) %>
+  <%= notification_link_to activate_path(@user.activation_code) %>
 
 Your login data:
+
 Username: <%= @user.login %>
 Password: <%= @user.password %>

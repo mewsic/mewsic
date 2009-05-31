@@ -92,10 +92,10 @@ class UserMailer < ActionMailer::Base
         p.body render_message("#{template_name}.text.plain.erb", @body)
       end
 
-      attachment 'image/png' do |a|
-        a.body = File.read(File.join(RAILS_ROOT, 'public', 'images', 'logo.jpg'))
-        a.content_disposition = 'inline'
-        a.headers['Content-ID'] = '<logo>'
-      end
+      #attachment 'image/png' do |a|
+      #  a.body = File.read(File.join(RAILS_ROOT, 'public', 'images', 'logo.jpg'))
+      #  a.content_disposition = 'inline'
+      #  a.headers['Content-ID'] = '<logo>'
+      #end
     end
 end

@@ -1,10 +1,10 @@
-<p class="p4"><span class="s2">Dear <%= @user.login %>,</span></p>
-<p class="p5"><span class="s2">Welcome in the most open and innovative community about music!</span></p>
-<p class="p6"><span class="s2"></span><br></p>
-<p class="p5"><span class="s2">Please click this link to activate your account:</span></p>
-<p class="p6"><span class="s2"></span><br></p>
-<p class="p5"><span class="s2"><%= notification_link_to activate_path(@user.activation_code) %></span></p>
-<p class="p3"><span class="s2"></span><br></p>
-<p class="p5"><span class="s2">Your login data:</span></p>
-<p class="p5"><span class="s2">Username: <%= @user.login %></span></p>
-<p class="p5"><span class="s2">Password: <%= @user.password %></span></p>
+Welcome aboard, <%= @user.login %>!
+
+Click on the following link to activate your account:
+
+  <%= notification_link_to activate_path(@user.activation_code) %>
+
+Your login data:
+
+Username: <%= @user.login %>
+Password: <%= @user.password %>

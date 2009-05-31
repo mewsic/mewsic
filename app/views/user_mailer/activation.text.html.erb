@@ -1,14 +1,5 @@
-<p class="p2"><span class="s2">Welcome <%= @user.login %>,</span></p>
-<p class="p5"><span class="s2">You have just joined the coolest worldwide community about open music!</span></p>
-<p class="p6"><span class="s2"></span><br></p>
-<p class="p5"><span class="s2">Enjoy <b>creating</b> and listening to unreleased version of your favourite song,</span></p>
-<p class="p5"><span class="s2"><b>Mix</b> tracks from other Myousicians, create your own M-band and</span></p>
-<p class="p5"><span class="s2"><b>Record</b> new songs through the Myousica multitrack.</span></p>
-<p class="p6"><span class="s2"></span><br></p>
-<p class="p5"><span class="s2">In just one click!</span></p>
-<p class="p6"><span class="s2"></span><br></p>
-<p class="p6"><span class="s2"><%= notification_link_to root_path %></span><br></p>
-<p class="p6"><span class="s2"></span><br></p>
-<p class="p5"><span class="s2">Remember to set your "User Type" in your profile.</span></p>
-<p class="p5"><span class="s2">In Myousica you can be a <strong>User,</strong> a <strong>Band</strong> or a <strong>Dj</strong>.</span></p>
-<p class="p5"><span class="s2">For more information, please read the <%= link_to 'help pages', help_index_path %>. Have fun on Myousica!</span></p>
+Welcome <%= @user.login %>!
+
+Click here to get started:
+
+  <%= notification_url root_path %>
