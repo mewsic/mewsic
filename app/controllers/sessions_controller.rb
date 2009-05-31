@@ -34,7 +34,7 @@ class SessionsController < ApplicationController
         cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
       end
       flash[:notice] = "Welcome back, #{self.current_user.login}!"
-      forget_location if stored_location == root_path
+      #forget_location if stored_location == root_path
       redirect_back_or_default(user_url(current_user))
     else
       flash[:error] = true

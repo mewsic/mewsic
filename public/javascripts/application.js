@@ -35,3 +35,34 @@ function isLoggerAvailable() {
   var ret = false; try { ret = console.log != undefined; } catch (e) {}; return (ret);
 }
 
+
+
+/// LIBRARY, move in separate file
+//
+$.fn.addErrorIfEmpty = function() {
+  return this.filter(function() {
+    if ($(this).val() == '') {
+      $(this).addClass('error');
+      return true;
+    }
+  });
+}
+
+$.fn.addErrorWhenEmptied = function() {
+  var checkEmpty = function() {
+    if ($(this).val() == '')
+      $(this).addClass('error');
+    else
+      $(this).removeClass('error');
+  };
+
+  return this.each(function() {
+    $(this).blur(checkEmpty).focus(function() {
+      if (!this.firstChecked)
+        this.firstChecked = true;
+      else
+        checkEmpty();
+    });
+  });
+}
+

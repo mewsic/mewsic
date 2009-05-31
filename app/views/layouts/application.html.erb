@@ -73,9 +73,16 @@
 			<input type="submit" class="search_submit fleft" value="Go">
 		</form>
 	</div>
-    
-    
-  <div class="clear"> </div>
+  <div class="clear"></div>
+
+	<%= yield :header %>
+
+	<div class="flash">
+		<% flash.each do |type, message| next unless message.kind_of? String %>
+			<p class="<%= type %>"><%= message %></p>
+		<% end %>
+	</div>
+
   <div id="breadcrumb_bar">
     <div class="corner_lt_blue fleft"> </div>
     <div class="bar_rp_blue fleft"> </div>

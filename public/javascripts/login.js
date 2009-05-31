@@ -1,34 +1,16 @@
 $(document).ready(function() {
+
+  $('#login, #password').addErrorWhenEmptied();
+
   $('#login-form').submit(function() {
-    var username = $('#login');
-    var password = $('#password');
-    var err = false;
+    var err = $('#login, #password').addErrorIfEmpty().length;
 
-    if (username.val() == '') {
-      username.addClass('error');
-      err = true;
-    }
-
-    if (password.val() == '') {
-      password.addClass('error');
-      err = true;
-    }
-
-    if (err) {
+    if (err > 0) {
       $('.validateTips').show();
       return false;
     } else {
       $('#login-spinner').show();
       return true;
     }
-  });
-
-  $('#login, #password').change(function() {
-    if ($(this).val() == '')
-      $(this).addClass('error');
-    else
-      $(this).removeClass('error');
-  }).focus(function() {
-    $(this).removeClass('error');
   });
 });

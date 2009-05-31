@@ -1,8 +1,9 @@
+<% content_for :head do %>
+	<%= javascript_include_tag 'signup' %>
+<% end %>
 <!-- LEFTCOL -->
 <div class="leftCol fleft">
 	<div class="leftColWrapper">
-
-
 
 <div class="fleft w343">
 	<h1>Create an account on Mewsic</h1>
@@ -11,32 +12,33 @@
 		<span class="fleft icons16 profile ui-icon ui-icon-lightbulb"> </span>
 		All form fields are required.
 	</div>
-	<!-- 
+	
+	<% @user.errors.each do |field, error| %>
 	<div id="validateTips" class="ui-state-error alleft">
 		<span class="fleft icons16 profile ui-icon ui-icon-lightbulb"> </span>
-		Email field must be a valid email address.
+		<%= field %> <%= error %>
 	</div>
-	-->
+	<% end %>
 	
 	
-<% form_tag sessions_path, :id => 'signup_form', :method => :post do %>
+	<% form_for @user, users_path, :id => 'signup-form', :method => :post do |f| %>
 		<fieldset>
 			<label for="name">Username</label>
-			  <input type="text" name="name" id="name" class="text ui-widget-content" />
+			<%= f.text_field 'login', :class => 'text ui-widget-content' %>
 			<label for="email">Email</label>
-			  <input type="text" name="email" id="email" value="" class="text ui-widget-content" />
+			<%= f.text_field 'email', :class => 'text ui-widget-content' %>
 			<label for="password">Password</label>
-			  <input type="password" name="password" id="password" value="" class="text ui-widget-content" />
+			<%= f.password_field 'password', :class => 'text ui-widget-content' %>
 			<label for="password">Check Password</label>
-			  <input type="password" name="password" id="password" value="" class="text ui-widget-content" />
+			<%= f.password_field 'password_confirmation', :class => 'text ui-widget-content' %>
 
-	    <input type="submit" value="Register" class="join_button mailbox_send fright">
-	    <input type="reset" value="Cancel" class="mailbox_cancel cancel_button gray_spec fright">
+			<%= submit_tag 'Register', :class => 'join_button mailbox_send fright' %>
+	    <input id="reset" type="reset" value="Cancel" class="mailbox_cancel cancel_button gray_spec fright">
 
-		<div class="fright icons16 loader_white" style="margin:3px 5px 0 0"> </div>				
+			<div id="signup-spinner" class="fright icons16 loader_white" style="display:none;margin:3px 5px 0 0;"> </div>				
 		
-		</fieldset>	</form>
-<% end %>	
+		</fieldset>
+	<% end %>	
 	
 	<p class="sixsixsix">
 		Already have an account? <%= link_to 'Login now', login_path %>,<br />
