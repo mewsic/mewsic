@@ -37,7 +37,7 @@ class SessionsController < ApplicationController
       forget_location if stored_location == root_path
       redirect_back_or_default(user_url(current_user))
     else
-      flash[:error] = "User not found or wrong password.."
+      flash[:error] = true
       redirect_to login_path
     end
   end

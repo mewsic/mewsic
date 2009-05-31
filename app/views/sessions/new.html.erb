@@ -1,3 +1,6 @@
+<% content_for(:head) do %>
+	<%= javascript_include_tag 'login' %>
+<% end %>
 <!-- LEFTCOL -->
 <div class="leftCol fleft">
 	<div class="leftColWrapper">
@@ -7,25 +10,32 @@
 <div class="fleft w343">
 	<h1>Login</h1>
 	
-	<div id="validateTips" class="ui-state-error alleft">
+	<% if flash[:error] %>
+	<div class="validateTips ui-state-error alleft">
 		<span class="fleft icons16 profile ui-icon ui-icon-lightbulb"> </span>
-		Wrog password. Have you <a href="">Forgotten</a> your password ?
+		Wrong password. Have you <%= link_to 'Forgotten', forgot_password_path %> your password?
+	</div>
+	<% end %>
+
+	<div class="validateTips ui-state-error alleft" style="display:none">
+		<span class="fleft icons16 profile ui-icon ui-icon-lightbulb"> </span>
+		Please enter a username and password
 	</div>
 
-<% form_tag sessions_path, :id => 'signup_form', :method => :post do %>
+<% form_tag sessions_path, :id => 'login-form', :method => :post do %>
 	<fieldset>
 		<label for="name">Username</label>
-      <%= text_field_tag :login, nil,  :class => 'text ui-widget-content' %>
+		<%= text_field_tag :login, nil,  :class => 'text ui-widget-content' %>
 
 		<label for="password">Password</label>
-      <%= password_field_tag :password, nil, :class => 'text ui-widget-content' %>
+		<%= password_field_tag :password, nil, :class => 'text ui-widget-content' %>
 
 		<label for="remember" class="fleft">Remember me&nbsp;&nbsp;</label>
-      <%= check_box_tag 'remember_me', '1', true, :class => 'fleft nomargin' %>
-		
-      <%= submit_tag 'Login', :class => 'join_button mailbox_send fright' %>
+		<%= check_box_tag 'remember_me', '1', true, :class => 'fleft nomargin' %>
+
+		<%= submit_tag 'Login', :class => 'join_button mailbox_send fright' %>
       
-	<div class="fright icons16 loader_white" style="margin:3px 5px 0 0"> </div>				
+		<div id="login-spinner" class="fright icons16 loader_white" style="display:none;margin:3px 5px 0 0"> </div>				
 	</fieldset>
 	</form>
 <% end %>	
