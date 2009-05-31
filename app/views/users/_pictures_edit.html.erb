@@ -1,0 +1,204 @@
+<!-- PICTURE EDIT -->
+<div class="fleft">
+	<span class="gray_spec">You have:</span>
+	<span class="fleft heading s13 weight-bold">23 Pictures</span>
+</div>
+
+<div class="fright">
+	<span class="fleft ui-icon ui-icon-arrowreturnthick-1-w"> </span>
+	<a href="" class="none fright heading">Back to pictures</a>
+</div>	
+
+<div class="clear"> </div>
+
+
+
+<script type="text/javascript">
+	$(function() {
+		$("#edit_photos").sortable({
+			containment: '#edit_photos',
+			opacity: 0.7,
+			revert: true,
+			tolerance: 'pointer'
+		});
+		$("#drag_photo").draggable({
+			connectToSortable: '#edit_photos',
+			revert: 'invalid'
+		});
+		$("#edit_photos, #drag_photo").disableSelection();
+	});
+
+	$(document).ready(function(){
+	  $('#photo-descr').simpleautogrow();
+	});
+	
+	$(window).load(function() {
+		$("#toAnnotate01").annotateImage({
+			getUrl: "/images/temp/gallery/01/annotations.php",
+			saveUrl: "/images/temp/gallery/01/annotations-save.php",
+			deleteUrl: "/images/temp/gallery/01/annotations-delete.php",
+			editable: true
+		});
+	});	
+
+
+	$(document).ready(function() {
+		$("#editing_tabs").tabs()
+	});
+
+	$(document).ready(function() { 
+	 $('#mewsic-add').fileUpload({ 
+	  		'uploader':  '/images/temp/gallery/01/uploadify.uploader.swf', 
+	  		'script':    '/images/temp/gallery/01/uploadify.upload.php', 
+	  		'folder':    '/images/temp/gallery/', 
+	  		'cancelImg': '/images/uploadify_cancel.png',
+	  		'multi':true
+		}); 
+	}); 
+
+</script>
+
+<div id="editing_tabs" class="">
+	<ul class="inner_tabs preload_style" style="margin-bottom:0 !important;">
+		<li><a href="#edit_organize">Mewsic Album</a></li>
+		<li><a href="#edit_flickr">Flickr Stream</a></li>
+	</ul>
+	<div id="edit_organize" class="nopad">
+		<div class="fleft w343 margintop20">
+			<span class="edit_lists cogedit_icon fleft"> </span>
+			<span class="fleft heading s13 weight-bold">Tag Gear, Edit & Organize your Photos</span>
+			<span class="gray_spec margin7 fleft">Lorem ipsum dolor sit amet blah blah dolore imet lorm ipsum del cristus mortus lorem banana ipsum in croce dolor nel cul dolor nel pen dolot in figa</span>	
+		</div>
+		<div class="fleft w343 margintop20">
+			<span class="fright heading s13 weight-bold">Add new pictures</span>
+			<span class="edit_lists add_icon fright"> </span>			
+		<div class="clear"> </div>
+
+			<div class="fright margin7">
+				<input type="file" id="mewsic-add" name="mewsic-add">
+			</div>
+			<div class="clear"> </div>
+			
+			<div class="margin7 alright">
+		 		<a href="javascript:$('#mewsic-add').fileUploadStart();">Upload Files</a> | 
+				<a href="javascript:$('#mewsic-add').fileUploadClearQueue();">Clear Queue</a>
+			</div>
+
+			
+		</div>
+		<div class="clear"> </div>
+
+		<ul id="edit_photos" class="margintop20">
+			<li class="clear_style nomargin overflow-hidden">
+				<input type="reset" value="Cancel" class="mailbox_cancel cancel_button gray_spec fright">
+				<input type="submit" value="Save all changes" class="login_button mailbox_send fright">
+				<div class="fright icons16 loader_white" style="margin:1px 5px 0 0"> </div>				
+			</li>		
+			<li id="drag_photo">
+				<span class="fleft">
+				<img id="toAnnotate01" src="/images/temp/gallery/01/preview/05.jpg" alt="05" border="0" />
+				</span>
+				<div class="fleft w240 padleft18">
+						<label class="weight-bold">Tags in this photo:</label>
+						<ul class="photo_tag_list">
+							<li>
+								<a href="#">Fender Stratocaster</a>
+								&nbsp;<a href="" class="gray_spec none ten">remove</a>
+							</li>
+							<li>
+								<a href="#">Access Virus T1 Polar</a>
+								&nbsp;<a href="" class="gray_spec none ten">remove</a>						
+							</li>
+						</ul>
+				</div>
+				<div class="fleft w240 padleft23">
+						<label class="weight-bold">Description:</label>
+						<textarea id="photo-descr" style="margin-bottom: 0;" ></textarea>
+				</div>
+				<div class="fright" style="margin-right:4px;">
+					<span class="icons16 ui-state-tools ui-icon-circle-close"> </span>
+					<span id="drag-handle" class="icons16 ui-state-tools ui-icon-arrow-4"> </span>							
+				</div>
+			</li>
+			<li class="clear_style overflow-hidden">
+				<input type="reset" value="Cancel" class="mailbox_cancel cancel_button gray_spec fright">
+				<input type="submit" value="Save all changes" class="login_button mailbox_send fright">
+				<div class="fright icons16 loader_white" style="margin:1px 5px 0 0"> </div>				
+			</li>		
+		</ul>
+	</div>
+	
+	
+	
+	
+	<div id="edit_flickr" class="nopad">
+			<div class="fleft w343 margintop20">
+				<span class="edit_lists flickr_icon fleft"> </span>
+				<span class="fleft heading s13 weight-bold">Tag Gear, Edit & Organize your Flickr's photos</span>
+				<span class="gray_spec margin7 fleft">Lorem ipsum dolor sit amet blah blah dolore imet lorm ipsum del cristus mortus lorem banana ipsum in croce dolor nel cul dolor nel pen dolot in figa</span>	
+			</div>
+			<div class="fleft w343 margintop20">
+				<span class="fright heading s13 weight-bold">Add new pictures</span>
+				<span class="edit_lists add_icon fright"> </span>			
+			<div class="clear"> </div>
+
+				<select id="flickr-from" name="flickr-from" class="fright margin7 body12">
+					<option value="00">Photo ID</option>
+					<option value="00">Flickr Tags</option>					
+				</select>
+			<div class="clear"> </div>
+
+				<input type="submit" class="text-aligned_submit fright margin7 marginleft10" value="Add">
+				<input type="text" class="text margin7 fright" name="flick-data" style="width:66%">
+
+
+			</div>
+			<div class="clear"> </div>		
+			
+			
+			<ul id="edit_photos" class="margintop20">
+			<li class="clear_style overflow-hidden">
+				<input type="reset" value="Cancel" class="mailbox_cancel cancel_button gray_spec fright">
+				<input type="submit" value="Save all changes" class="login_button mailbox_send fright">
+				<div class="fright icons16 loader_white" style="margin:1px 5px 0 0"> </div>				
+			</li>		
+			<li id="drag_photo">
+				<span class="fleft">
+				<img id="toAnnotate02" src="/images/temp/gallery/01/preview/07.jpg" alt="07" border="0" />
+				</span>
+				<div class="fleft w240 padleft18">
+						<label class="weight-bold">Tags in this photo:</label>
+						<ul class="photo_tag_list">
+							<li>
+								Bongo banale in pelle di marocchino essiccata
+								&nbsp;<a href="" class="gray_spec none ten">remove</a>
+							</li>
+							<li>
+								<a href="#">Access Virus T1 Polar</a>
+								&nbsp;<a href="" class="gray_spec none ten">remove</a>						
+							</li>
+							<li>
+								<a href="#">Flauto in plastica</a>
+								&nbsp;<a href="" class="gray_spec none ten">remove</a>						
+							</li>
+						</ul>
+				</div>
+				<div class="fleft w240 padleft23">
+						<label class="weight-bold block">Description:</label>
+						<textarea id="photo-descr" style="margin-bottom: 0;" ></textarea>
+						<label class="weight-bold fleft margin7">ID:</label>
+						<input type="text" value="29309" class="small-text marginleft10 margin7">
+				</div>
+				<div class="fright" style="margin-right:4px;">
+					<span class="icons16 ui-state-tools ui-icon-circle-close"> </span>
+					<span id="drag-handle" class="icons16 ui-state-tools ui-icon-arrow-4"> </span>							
+				</div>
+			</li>
+			<li class="clear_style overflow-hidden">
+				<input type="reset" value="Cancel" class="mailbox_cancel cancel_button gray_spec fright">
+				<input type="submit" value="Save all changes" class="login_button mailbox_send fright">
+				<div class="fright icons16 loader_white" style="margin:1px 5px 0 0"> </div>				
+			</li>		
+		</ul>		
+	</div>
+</div>

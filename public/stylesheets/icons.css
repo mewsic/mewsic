@@ -39,6 +39,8 @@
 .comments_icon { background: url('../images/icons/comments.png') no-repeat top left; }
 .comment_add_icon { background: url('../images/icons/comment_add.png') no-repeat top left; }
 .attach_icon { 	background: url('../images/icons/attach.png') no-repeat top left; }
+.flickr_icon { 	background: url('../images/icons/flickr.png') no-repeat top left; }
+
 
 /* lists */
 .icons { display: block; height: 16px; }

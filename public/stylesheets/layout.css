@@ -34,6 +34,7 @@ ul { padding: 0; margin:0; }
 .margin7 { margin-top: 7px }
 .paddingtop5 { padding-top: 5px; }
 .marginleft10 { margin-left: 10px; }
+.margintop20 { margin-top: 20px; }
 input { border: 0; font-size: 12px; }
 .border { padding: 1px; border: 1px solid #CCCCCC; display: block; }
 .border_bottom { border-bottom: 1px solid #CCCCCC; }
@@ -63,6 +64,12 @@ input.text {
 	color: #696969;
 	padding: 6px 9px;
 }
+input.small-text {
+	font-size: 11px !important;
+	border: 1px solid #CCCCCC;
+	padding: 3px 6px;
+}
+
 
 textarea { 
 	width:93%; 
@@ -143,7 +150,7 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 	border: 1px solid #CCCCCC;
 }
 
-.search_submit {
+.search_submit, .text-aligned_submit {
 	border: 0;
 	font-size: 13px;
 	font-weight: bold;
@@ -152,8 +159,9 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 	background: url('../images/go_bg.png') repeat-x left top;
 	padding: 3px 7px;
 }
-.search_submit:hover { background: url('../images/go_bg.png') repeat-x left bottom; }
+.search_submit:hover, .text-aligned_submit:hover { background: url('../images/go_bg.png') repeat-x left bottom; }
 
+.text-aligned_submit { padding: 5px 8px; font-size: 12px !important; }
 
 /* results page */
 .searched li { 
@@ -1390,8 +1398,8 @@ h2 {
 
 .project_info .avatar { width: 60px; height: 60px; }
 	
-#user_identity, #user_identity_ms { width: 65px !important; float: left;}
-#user_identity_ms_child {
+#identity, #identity_ms { width: 65px !important; float: left;}
+#identity_ms_child {
 	top: 16px !important;
 	left:0 !important;
 	width: 160px !important;
@@ -1550,5 +1558,11 @@ input.geartext {
 
 #content {
 	clear: both;
+}
+
+
+.inner_tabs {
+	font-size: 11px !important;
+	margin-top: 30px !important;
 }
 
