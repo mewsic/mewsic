@@ -16,7 +16,7 @@ uploads and MP3 encoding and downmixing using ffmpeg (http://ffmpeg.mplayerhq.hu
 
 * Ruby >= 1.8.6, Rubygems >= 1.3
 * The freeimage library (http://freeimage.sf.net)
-* The following gems: Rails == 2.0.4, image_science >= 1.1.3, mongrel, redgreen, ruby-debug, mime-types and wirble
+* The following gems: Rails == 2.2.2, image_science >= 1.1.3, mongrel, redgreen, ruby-debug, mime-types and wirble
 * The Sphinx full text search engine (http://sphinxsearch.com/)
 
 == Quickstart
