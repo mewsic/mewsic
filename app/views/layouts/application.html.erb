@@ -17,8 +17,8 @@
 
   <%= javascript_include_tag *%w( jquery.corner.js jquery.simpleautogrow.js jquery.MetaData.js dd_uncompressed.js  ) %>
 
-  <%= javascript_include_tag *%w( jquery.rating.pack.js jquery.dataTables.js jquery.Jcrop.pack.js   fcbkcomplete.js  jquery.annotate.js  jquery.uploadify.js jquery.cycle.all.min.js jquery.highlight-1.0.js ) %>
-  <%= stylesheet_link_tag    *%w( jquery.rating.css     dataTables.css           jquery.Jcrop.css   fcbkcomplete.css jquery.annotate.css jquery.uploadify.css ) %>
+  <%= javascript_include_tag *%w( jquery.rating.pack.js jquery.dataTables.js jquery.Jcrop.pack.js   fcbkcomplete.js  jquery.annotate.js  jquery.uploadify.js  jquery.bt.js jquery.cycle.all.min.js jquery.highlight-1.0.js ) %>
+  <%= stylesheet_link_tag    *%w( jquery.rating.css     dataTables.css           jquery.Jcrop.css   fcbkcomplete.css jquery.annotate.css jquery.uploadify.css jquery.bt.css ) %>
 
   <%= javascript_include_tag *%w( application home applesearch tinysort ) %>
 
@@ -37,8 +37,8 @@
     <%= clickable_logo 'header_logo.jpg' %>
   </div>
   <ul class="navigation fleft">
-    <li><%= link_to 'People', users_path, :class => active_class('users') %></li>
-    <li><%= link_to 'Bands', mbands_path, :class => active_class('mbands') %> </li>
+    <li><%= link_to 'Mewsicians', users_path, :class => active_class('users') %></li>
+    <li><%= link_to 'MBands', mbands_path, :class => active_class('mbands') %> </li>
     <li><%= link_to 'Songs', songs_path, :class => active_class('songs') %></li>
     <li><%= link_to 'Instruments', tracks_path, :class => active_class('tracks') %></li>
     <li><%= link_to 'Answers', answers_path,  :class => active_class('answers') %></li>

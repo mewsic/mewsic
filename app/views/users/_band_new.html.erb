@@ -1,0 +1,61 @@
+<div class="fleft">
+	<span class="gray_spec">Create a new</span>
+	<span class="fleft heading s13 weight-bold">M-Band</span>
+</div>
+
+<div class="fright">
+	<span class="fleft ui-icon ui-icon-arrowreturnthick-1-w"> </span>
+	<a href="" class="none fright heading">Back to MBands</a>
+</div>	
+
+<div class="clear"> </div>
+
+
+<script type="text/javascript" charset="utf-8">
+$(function() {
+	$("#friends_select").selectable();
+});
+$(document).ready(function(){
+  $('#mband-create-message').simpleautogrow();
+});
+</script>
+	<p class="gray_spec">
+		Here you can <strong>Create</strong> or <strong>Invite</strong> your friends to a new MBand or in MBands you're already in. Simply select one or more of your friends Choose Lorem Ipsum dolor sit Amet sul palo della cuccagna ride sempre la Cagna, sul palo del cuculo ride sempre il tuo Culo! 
+	</p>	
+	
+	
+	<div class="fleft w240" style="margin-top: 3px;">
+		<h2 class="overflow-hidden">
+			<span class="icons18 mbands_small_icon fleft"> </span>
+			<a href="" class="fleft">Write your MBand name</a>
+		</h2>
+		<input type="text" name="mband-name" id="mband-name" class="text ui-widget-content margin7" />
+
+		<label>Add an optional invitation message:</label>
+		<textarea id="mband-create-message" style="margin-bottom: 0;" class="margin7"></textarea>		
+
+	</div>
+
+<div class="fright w440">
+	<div class="friend_select_head">
+		<div class="fleft">
+			<label style="display:block; margin:3px 0 0 3px;">Select one or more friends to start with:</label>		
+		</div>
+		<div class="fright">
+      <%= render :partial => 'shared/rounded_searchbox' %>
+		</div>
+	</div>
+	<ul id="friends_select">
+    <% 8.times do %>
+      <%= render :partial => 'users/friends_boxes' %>    
+    <% end %>
+	</ul>
+	
+	<div class="margin7">
+		<input type="submit" value="Create" class="join_button mailbox_send fright">
+		<input type="reset" value="Cancel" class="mailbox_cancel cancel_button gray_spec 	fright">
+		<div class="fright icons16 loader_white" style="margin:3px 5px 0 0"> </div>				
+	</div>
+</div>
+
+<div class="clear"> </div>

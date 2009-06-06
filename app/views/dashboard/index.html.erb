@@ -2,30 +2,62 @@
   <%= javascript_include_tag 'home' %>
 <% end %>
 
-  <!-- MISSION TUTORIAL -->
-  <div id="mission_tutorial" class="fleft">
+<script type="text/javascript">
+	$(function() {
+		$('#step1bt, #step2bt, #step3bt').bt({
+		  fill: 'rgba(0, 0, 0, .6)',
+		  spikeLength: 8, 
+		  spikeGirth: 10,
+	 		strokeWidth: 0,
+		  padding: 8, 
+		  cornerRadius: 0,
+		  positions: ['top'],
+		  cssStyles: {
+		    fontFamily: '"lucida grande",tahoma,verdana,arial,sans-serif', 
+		    fontSize: '12px',
+			color: '#FFF'
+		  }	
+		});
+	});
+</script>
 
-  </div>
-  <div id="mission_search" class="fleft">
-    <h1 class="search_call">
-      Look if someone have<br />already played your<br />favourite song!
-    </h1>
-    <form>
-      <input type="text" class="search_call_input fleft" value="Type a Song/Artist">
-      <input type="submit" class="search_call_submit fleft" value="Go">
-    </form>
-  </div>
-  <div class="clear"> </div>
-  <!-- END MISSION TUTORIAL -->
+
+<!-- MISSION TUTORIAL -->
+<div id="mission_tutorial" class="fleft">
+	<div id="step1">
+		<div class="step1icon">
+		</div>
+		<h1 id="step1bt" title="Listen to all the songs in mewsic (find your favorites) and add your own instruments. Now music is really open" class="target">Record your<br />tracks live.</h1>
+	</div>
+	<div id="step2">
+		<div class="step2icon">
+		</div>			
+		<h1 id="step2bt" title="Listen to all the songs in mewsic (find your favorites) and add your own instruments. Now music is really open" class="target">Mix your tracks with<br />other Mewsicians.</h1>
+	</div>
+	<div id="step3">
+		<div class="step3icon">
+		</div>		
+		<h1 id="step3bt" title="Listen to all the songs in mewsic (find your favorites) and add your own instruments. Now music is really open" class="target">Create Mbands<br />with all the world.</h1>
+	</div>		
+</div>
+<div id="mission_search" class="fleft">
+	<h1 class="search_call">
+		Look if someone have<br />already played your<br />favourite song!
+	</h1>
+	<form>
+		<input type="text" class="search_call_input fleft" value="Type a Song/Artist">
+		<input type="submit" class="search_call_submit fleft" value="Go">
+	</form>
+</div>
+<div class="clear"> </div>
+<!-- END MISSION TUTORIAL -->
 
       <%= render :partial => 'dashboard/call_to_action' %>
             
-  <!-- LEFTCOL -->
-  <div class="leftCol fleft">
-    <div class="leftColWrapper">
-
+	<div class="overflow-hidden" style="margin:10px 0 0 20px;">
+	
       <!-- ARTIST PICK, NO SONG -->
-      <div class="pick_wrap">
+      <div class="pick_wrap fleft">
           <a href="" class="pick_ad block fleft" title="Gerardo Palla" style="background-image: url('images/temp/pick_gerardo.jpg');">
             <p class="pick_info block">
               <strong>PICK OF THE WEEK</strong>
@@ -50,17 +82,11 @@
       </div>
       <!-- END PICK -->
 
+		<div class="fleft noCol padleft23">
+      <%= render :partial => 'shared/did_you_know' %>
     </div>
-  </div>
-  <!-- END LEFTCOL -->
-
-  <!-- RIGHTCOL -->
-  <div class="rightCol fright">
-
-    <%= render :partial => 'shared/did_you_know' %>
 
   </div>
-  <!-- END RIGHTCOL -->
 
   <div class="clear"> </div>
 

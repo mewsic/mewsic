@@ -104,7 +104,7 @@ $(function() {
 		autoOpen: false,
 		dialogClass: 'change_avatar',
 		modal: true,
-		width: 550,
+		width: 590,
 		resizable: false
 	})
 	
@@ -113,6 +113,17 @@ $(function() {
 	})
 	
 });
+
+/* CHANGE AVATAR UPLOADIFY */
+
+$(document).ready(function() { 
+ $('#avatar-add').fileUpload({ 
+  		'uploader':  '/images/temp/gallery/01/uploadify.uploader.swf', 
+  		'script':    '/images/temp/gallery/01/uploadify.upload.php', 
+  		'folder':    '/images/', 
+  		'cancelImg': '/images/uploadify_cancel.png'
+	}); 
+}); 
 
 	// JCROP
 	// Remember to invoke within jQuery(window).load(...)
@@ -131,12 +142,12 @@ $(function() {
 	// event handlers, as per the Jcrop invocation above
 	function showPreview(coords)
 	{
-		var rx = 200 / coords.w;
-		var ry = 200 / coords.h;
+		var rx = 100 / coords.w;
+		var ry = 100 / coords.h;
 
 		jQuery('#preview').css({
-			width: Math.round(rx * 380) + 'px',
-			height: Math.round(ry * 600) + 'px',
+			width: Math.round(rx * 454) + 'px',
+			height: Math.round(ry * 254) + 'px',
 			marginLeft: '-' + Math.round(rx * coords.x) + 'px',
 			marginTop: '-' + Math.round(ry * coords.y) + 'px'
 		});
@@ -204,6 +215,20 @@ $(function() {
 
 	$('#add_tags_link').click(function() {
 		$('#add_tags').dialog('open');
+	});
+
+
+	/* INVITE/CREATE MBAND DIALOG */
+	$("#mband_dialog").dialog({
+		autoOpen: false,
+		dialogClass: 'mband_dialog',
+		modal: true,
+		width: 550,
+		resizable: false
+	});
+
+	$('#mband_dialog_link').click(function() {
+		$('#mband_dialog').dialog('open');
 	});
 
 });

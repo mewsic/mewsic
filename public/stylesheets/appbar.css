@@ -13,15 +13,53 @@
 	margin: auto;
 	overflow: visible !important;
 	position: relative;
+	border-top: 1px solid #1AA8CE;	
+	border-left: 1px solid #1AA8CE;
+	border-right: 1px solid #1AA8CE;			
 }
+#app_bar_content {
+	width: 961px;
+	height: 54px;
+	margin: auto;
+	overflow: visible !important;
+	position: relative;	
+	padding: 0 12px;
+	border-left: 1px solid #1AA8CE;
+	border-right: 1px solid #1AA8CE;		
+}
+
+.player_divider {
+	border-left: 1px solid #1AA8CE;
+	border-right: 1px solid #0186B6;
+	height: 48px;
+	width: 0;
+	margin: 0 7px;
+}
+
+.inplayer_songinstr .song_block {
+	background-color: #FFFFFF;
+}
+
+.player_list {
+	list-style: none;
+}
+.player_list li {
+	padding-left: 21px;
+	margin: 6px 0;
+}
+
+
+
+
 .tab_app_icons {
-	width: 66px;
 	height: 24px;
-	margin-top: -24px;
+	margin-top: -27px;
 	cursor: pointer;
 	text-align: right;
 	background-color: #014D70;	
+	border: 1px solid #014D70;
 }
+
 
 /* NOTIFICATION BADGE */
 .notification_red {
@@ -192,18 +230,23 @@ margin-top: 1px;
 	font-weight: normal;
 }
 
+
+
+
+
 /* PLAYLIST */
 #playlist_container {
 	width: 232px;
 	background-color: #CCCCCC;
 	position: absolute;
-	right: 0;
-	margin-top: -300px; /* RISOLVERE POSIZIONAMENTO PLAYLIST ;\ */
-	border: 1px solid #B3B3B3;
+	right: -1px;
+	bottom: 6px;
+	/*border: 1px solid #B3B3B3;*/
+	border: 1px solid #1AA8CE; 
 }
 table.display .song_controls {
 	width: 100%;
-	margin: 12px 0 0 0;
+	margin: 14px 0 0 0 !important;
 }
 
 
@@ -211,9 +254,9 @@ table.display .song_controls {
 
 #playlist_tabs, #playlist-songs, #playlist-instr { padding: 0; }
 
-#playlist_container h2 {
-	margin: 7px 0 6px 8px;
-}
+#playlist_container h2 { margin: 7px 0 6px 8px; }
+#playlist_edit { margin: 7px 8px 6px 0; }
+
 
 
 /* DATA TABLES CUSTOM */

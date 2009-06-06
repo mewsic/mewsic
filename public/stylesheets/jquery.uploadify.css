@@ -48,7 +48,8 @@ THE SOFTWARE.
 
 
 /* MEWSIC CUSTOM */
-#mewsic-addUploader, #mewsic-addQueue { float: right; }
+#mewsic-addUploader, #mewsic-addQueue, #avatar-addUploader, #avatar-addQueue { float: right; }
+.fileUploadQueue  { clear: both; }
 .fileUploadQueueItem .cancel { 
 	display: block; 
 	overflow: visible;

@@ -7,20 +7,112 @@
 	});
 	</script>
 
-	<div id="avatar_actions">
-		<ul>
-			<li><a href="#avatar-upload">Upload</a></li>
-			<li><a href="#avatar-adjust">Adjust</a></li>
-		</ul>
-		<div id="avatar-upload">
-	
-		</div>
-		<div id="avatar-adjust">
+  	<div id="avatar_actions">
+  		<ul>
+  			<li><a href="#avatar-upload">Upload / Adjust</a></li>
+  			<li><a href="#avatar-browse">Browse</a></li>
+  		</ul>
+  		<div id="avatar-upload">
 
-		</div>
-	</div>
-</div>
+  			<div class="fleft w240">
+  				<span class="edit_lists cogedit_icon fleft"> </span>
+  				<span class="fleft heading s13 weight-bold">Edit current avatar</span>
+  				<span class="gray_spec margin7 fleft">Lorem ipsum dolor sit amet blah blah dolore imet lorm ipsum del cristus mortus lorem banana ipsum in croce dolor nel cul dolor nel pen dolot in figa</span>	
+  			</div>
+  			<div class="fright">
+  				<span class="fright heading s13 weight-bold">Add new avatar</span>
+  				<span class="edit_lists add_icon fright"> </span>			
+  			<div class="clear"> </div>
 
+  				<div class="fright margin7">
+  					<input type="file" id="avatar-add" name="avatar-add">
+  				</div>
+  				<div class="clear"> </div>
+
+  				<div class="margin7 alright">
+  					<input type="checkbox"> <span class="gray_spec">Add to gallery</span> | 
+  			 		<a href="javascript:$('#avatar-add').fileUploadStart();">Upload File</a>
+  				</div>
+
+  			</div>
+  			<div class="clear"> </div>
+
+
+  			<!-- This is the image we're attaching Jcrop to -->
+  			<table cellpadding="0" cellspacing="0" border="0" class="margin30">
+  			<tr>
+  			<td>
+  				<img src="/images/temp/pick_enzo.jpg" id="cropbox" />
+  			</td>
+
+  			<td valign="top" align="center">
+  				<div style="width:100px;height:100px;overflow:hidden;margin-left:5px;">
+  					<img src="/images/temp/pick_enzo.jpg" id="preview" />				
+  				</div>
+  				<input type="submit" value="Set avatar" class="margin7 login_button mailbox_send">
+  			</td>
+  			</tr>
+  			</table>
+
+
+
+  		</div>
+  		<div id="avatar-browse">
+
+  			<span class="gray_spec">Lorem ipsum dolor sit amet blah blah dolore imet lorm ipsum del cristus mortus lorem banana ipsum in croce dolor nel cul dolor nel pen dolot in figa</span>	
+
+  			<center>
+  				<table id="gallery" border="0" cellspacing="5" cellpadding="5" width="100%" class="margin7">
+  					<tr>
+  						<td align="center" valign="middle">
+  							<a href="profile.php?im=05">
+  								<img src="/images/temp/gallery/01/preview/05.jpg" alt="05" border="0" />
+  							</a>
+  						</td>
+  						<td align="center" valign="middle">
+  							<a href="profile.php?im=07">
+  								<img src="/images/temp/gallery/01/preview/07.jpg" alt="07" border="0" />
+  							</a>
+  						</td>
+  						<td align="center" valign="middle">
+  							<a href="profile.php?im=12">
+  								<img src="/images/temp/gallery/01/preview/12.jpg" alt="12" border="0" />
+  							</a>
+  						</td>
+  						<td align="center" valign="middle">
+  							<a href="profile.php?im=16">
+  								<img src="/images/temp/gallery/01/preview/16.jpg" alt="16" border="0" />
+  							</a>
+  						</td>
+  					</tr>
+  					<tr>
+  						<td align="center" valign="middle">
+  							<a href="profile.php?im=18">
+  								<img src="/images/temp/gallery/01/preview/18.jpg" alt="18" border="0" />
+  							</a>
+  						</td>
+  						<td align="center" valign="middle">
+  							<a href="profile.php?im=19">
+  								<img src="/images/temp/gallery/01/preview/19.jpg" alt="19" border="0" />
+  							</a>
+  						</td>
+  						<td align="center" valign="middle">
+  							<a href="profile.php?im=30">
+  								<img src="/images/temp/gallery/01/preview/30.jpg" alt="30" border="0" />
+  							</a>
+  						</td>
+  						<td align="center" valign="middle">
+  							<a href="profile.php?im=32">
+  								<img src="/images/temp/gallery/01/preview/32.jpg" alt="32" border="0" />
+  							</a>
+  						</td>
+  					</tr>
+  				</table>
+
+
+  		</div>
+  	</div>
+  </div>
 
 
 <!-- SHARE TO WALL -->

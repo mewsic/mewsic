@@ -9,7 +9,7 @@ body {
 	top: 0;
 	margin: auto;
 	width: 969px;
-	/*height: 100px;*/
+	height: 100px;
 }
 
 .logo {
@@ -50,6 +50,7 @@ input { border: 0; font-size: 12px; }
 .w454 { width: 454px; } /* pick of the week, most player artist */
 .w440 { width: 440px; } /* footer right content */
 .w343 { width: 343px; } /* song pick */
+.w380 { width: 380px; } /* player song block */
 .w500 { width: 500px; } /* friends list */
 
 
@@ -63,9 +64,6 @@ input.text {
 	font-weight: bold;
 	color: #696969;
 	padding: 6px 9px;
-}
-input.text.error {
-	border: 1px solid #f00;
 }
 input.small-text {
 	font-size: 11px !important;
@@ -86,7 +84,7 @@ fieldset { padding:0; border:0; margin-top:25px; }
 div#users-contain {  width: 350px; margin: 20px 0; }
 div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
 div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
-.validateTips { padding: 5px; }
+#validateTips { padding: 5px; }
 
 .dialog_help { margin: 0 0 10px 0; }
 
@@ -140,13 +138,15 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 
 /* SITE SEARCH */
 .main_search_box {
-	width: 390px;
+	width: 370px;
 	height: 25px;
 	margin: 50px 5px 0 0;
+	position: absolute;
+	right: 0;
 }
 .search_input {
 	margin-right: 5px;
-	width: 310px;
+	width: 291px;
 	font-size: 13px;
 	color: #696969;
 	padding: 3px 7px;
@@ -688,19 +688,19 @@ table#search_table .photo_thumb img:hover { border: 1px solid #88AED2; }
 
 
 /* RIGHTCOL SIDEBAR LISTS RULES */
-.rightCol ul {
+.rightCol ul, .noCol ul {
 	width: 202px;
 	margin: 0;	
 }
 .rightColMax ul { width: 100% !important; }
 
 
-.rightCol li {
+.rightCol li, .noCol li {
 	margin: 0 0 10px 5px;
 	list-style: none;	
 	overflow: hidden;
 }
-.rightCol h2 {
+.rightCol h2, .noCol h2 {
 	margin: 0 0 10px 0;
 }
 
@@ -747,7 +747,7 @@ ul.icon_lists li {
 /* FOOTER */
 #bottom_footer, .bottom_footer_grad {
 	width: 960px;
-	height: 188px;
+	height: 215px;
 }
 .bottom_footer_grad {
 	margin-top: 8px;	
@@ -854,22 +854,40 @@ h2 {
 .footer_copy {
 	width: 100%;
 	text-align: center;
-	margin-top: 10px;
+	margin-top: 30px;
 }
 
 
 
 /* MISSION TUTORIAL */
+#mission_tutorial, #mission_search {
+	height: 219px;
+}
+
 #mission_tutorial {
 	width: 720px;
-	height: 226px;
 	margin-left: 5px;
+	background: url('../images/mission_tutorial_bg.gif') repeat-x top;
 }
 #mission_search {
 	width: 238px;
-	height: 226px;
 	margin-left: 2px;
+	background: url('../images/mission_search_bg.gif') repeat-x top;	
 }
+
+#step1, #step2, #step3 {
+	text-align: center;
+	width: 240px;
+	float: left;
+	padding-top: 21px;
+}
+.step1icon, .step2icon, .step3icon {
+	height: 120px;
+}
+.step1icon { background: url('../images/mission_waveform.png') no-repeat top center; }
+.step2icon { background: url('../images/mission_mixing.png') no-repeat top center; }
+.step3icon { background: url('../images/mission_band.png') no-repeat top center; }
+
 .search_call {
 	margin: 46px 0 18px 11px;
 }
@@ -898,24 +916,27 @@ h2 {
 
 /* EXPLANATION BANNER */
 #expl_banner {
-	width: 635px;
-	height: 80px;
 	margin-bottom: 10px;
-	padding: 15px 25px 14px 37px;
+	padding: 8px 25px 22px 0;
 }
 
-.expl_band { 
-	width: 89px;
-	height: 79px;
-	margin: 5px 20px 0 0;
-	background: url('../images/icons/expl_band_icon.jpg') no-repeat left; 
+.expl_logo { 
+	width: 126px;
+	height: 87px;
+	margin: 0;
 }
+.expl_logo.mixing { 	background: url('../images/icons/expl_mixing_logo.jpg') no-repeat top center; }
+.expl_logo.waveform { background: url('../images/icons/expl_waveform_logo.jpg') no-repeat top center; }
+.expl_logo.bar { background: url('../images/icons/expl_bar_logo.jpg') no-repeat top center; }
+.expl_logo.speaker { background: url('../images/icons/expl_speaker_logo.jpg') no-repeat top center; }
+.expl_logo.van { background: url('../images/icons/expl_van_logo.jpg') no-repeat top center; }
+.expl_logo.question { background: url('../images/icons/expl_question_logo.jpg') no-repeat top center; }
 
-#expl_hide { margin-top: -5px; cursor: pointer; }
+#expl_hide { cursor: pointer; }
 #expl_banner h1 {
-	margin: 0 0 10px 0;
+	margin: 8px 0 0 0;
 }
-#expl_banner p { margin: 0; line-height: 16px; }
+#expl_banner p { margin: 3px 0 0 0; line-height: 16px; }
 
 .expl_links {
 	padding: 0;

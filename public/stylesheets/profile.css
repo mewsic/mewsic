@@ -85,6 +85,40 @@
 	margin-bottom: 8px; 
 }
 
+.friend_select_head {
+	height: 20px;
+	padding: 4px;
+	border: 1px solid #DDDDDD;
+	border-bottom: 0;
+}
+#friends_select {
+	overflow: auto;
+	list-style: none;
+	height: 200px;
+	border: 1px solid #DDDDDD;
+	padding: 3px;
+}
+#friends_select li {
+	display: inline;
+	padding: 3px;
+	margin: 3px;
+	width: 29%;
+	height: 44px;
+	float: left;
+	border: 1px solid #FFFFFF;
+	cursor: pointer;	
+}
+#friends_select li:hover {
+	background: #F2F2F2;
+	border: 1px solid #CCCCCC;
+}
+#friends_select li.ui-selected {
+	background: #FFFFC7;
+	border: 1px solid #F5DC5F;
+}
+#friends_select li.disabled { opacity: 0.5; }
+
+
 .mband_member_list li { 
 	list-style: none;
 	overflow: hidden;

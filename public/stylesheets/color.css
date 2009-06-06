@@ -51,9 +51,6 @@ h2 a {
 	color: #FFFFFF; /* change it! */
 }
 
-#mission_tutorial, #mission_search {
-	background: #8CC63F;
-}
 .status_green { color: #8CC63F; }
 .highlight { background: #D4EDFF; }
 
@@ -78,7 +75,8 @@ h2 a {
 .pick_page_anchors .anchors, 
 .song_title, .song_author, 
 .lastfm_lists, 
-.gear_spec strong, .heading {
+.gear_spec strong, .heading,
+#mission_tutorial h1, #mission_search h1 {
 	color: #00385D;
 }
 .pick_page_anchors .song { color: #C0E8FF; }
@@ -107,7 +105,7 @@ h2, h2 a, .rightCol h2, .mband_name, .subtitle {
 	color: #EAF7FF;
 }
 
-#app_bar {
+#app_bar, #app_bar_content {
 	background-color: #0296C2;
 }
 
@@ -206,15 +204,17 @@ h2, h2 a, .rightCol h2, .mband_name, .subtitle {
 /* DIALOGS borders */
 .ui-dialog { border-width: 7px; border-style: solid; }
 .dialog_join { border-color: #94BD5E; }
-.change_avatar { border-color: #6F9ABD; }
+.change_avatar, .mband_dialog { border-color: #6F9ABD; }
 .share_song { border-color: #E56F33; }
 .share_media { border-color:  #B4D3E3; }
 .tagging { border-color: #0296C2; }
 .gears { border-color: #6F5E40; }
 
+
+
 /* share_songs_action dialog selectable */
-#action_song .ui-selected, #action_instr .ui-selected { background-color: #FFFF9F; }
-#action_song .ui-selecting, #action_instr .ui-selecting { background-color: #FFFFC7; }
+#action_song .ui-selected, #action_instr .ui-selected, { background-color: #FFFF9F; }
+#action_song .ui-selecting, #action_instr .ui-selecting, { background-color: #FFFFC7; }
 
 
 

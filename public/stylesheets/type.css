@@ -13,7 +13,7 @@ h2, #top_footer .subtitle, h1, #expl_banner p, .cat_title  {
 .weight-bold { font-weight: bold; }
 .weight-normal { font-weight: normal !important;}
 
-.cat_title, .s13 {
+.cat_title, .s13, #expl_banner p {
 	font-size: 13px;
 }
 .s15 {
@@ -23,7 +23,7 @@ h2, #top_footer .subtitle, h1, #expl_banner p, .cat_title  {
 	font-size: 21px !important;
 }
 
-#expl_banner p, .s14 {
+.s14 {
 	font-size: 14px;
 }
 
