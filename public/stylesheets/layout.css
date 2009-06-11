@@ -426,7 +426,7 @@ table#search_table .photo_thumb img:hover { border: 1px solid #88AED2; }
 .max_sidebar_videos .video_lists li { padding: 0 !important; }
 
 
-.bands_new img:hover, .video_thumb img:hover { border: 1px solid #999; }
+.bands_new img:hover, .video_thumb img:hover, .border:hover { border: 1px solid #999; }
 .bands_new img, .video_thumb img {
 	border: 1px solid #ccc;
 	padding: 1px;

@@ -154,11 +154,10 @@
 
 /* WALL */
 .upper_part { 
-	width: 434px;
 	overflow: hidden; 
 }
 .wall_box { 
-	width: 375px;
+	width: 415px;
 	height: 13px;
 	border: 1px solid #CCCCCC;
 	padding: 4px;
@@ -199,7 +198,7 @@
 	border-bottom: 1px dashed #D6D6D6;
 }
 .post_balloon {
-	width: 85%;
+	width: 90%;
 	min-height: 12px;
 	border-bottom: 1px solid #D5D5D5;
 	padding: 7px 12px;
@@ -230,6 +229,8 @@
 	margin-left: -3px;
 }
 
+.attach_spacer { margin: 4px 5px 0; }
+
 
 /* profile lists */
 #profile_tabs .extended_wall li, .user_actions { 
@@ -254,6 +255,21 @@
 	line-height: 16px;
 }
 
+.wall_notice { 
+	padding: 2px 10px; 
+	font-weight: normal;
+	line-height: 16px;
+}
+
+.wall_notifications { margin-left: 45px; }
+.wall_notifications li {
+	list-style: none;
+	padding: 2px;
+	margin: 3px;
+	overflow: hidden;
+}
+
+
 
 #profile_tabs .extended_wall li a { padding: 0 !important; }
 .extended_wall {
@@ -262,8 +278,29 @@
 	width: 208px;
 }
 .extended_wall h2 { margin-bottom: 2px; }
-.extended_wall span { padding-left: 21px; }
+.extended_wall span, .wall_notifications span { padding-left: 21px; }
 .extended_wall p { margin-top: 0; padding-bottom: 8px; border-bottom: 1px dotted #999999; }
+
+.extended_wall, .wall_filters {
+	list-style: none;
+	overflow: hidden;
+	width: 170px;
+}
+.wall_filters li {
+	list-style: none;	
+	overflow: hidden;
+	border-bottom: 1px solid #E6E6E6;
+	font-weight: bold;
+	padding: 4px;
+	cursor: pointer; 
+}
+.wall_filters li:hover { background-color: #F2F2F2; }
+.wall_filters .filter_check { float: left; margin: 0; }
+.wall_filters label { 
+	margin: 1px 0 0 21px; 
+	display: block;
+}
+
 
 
 /* Users Tabs */

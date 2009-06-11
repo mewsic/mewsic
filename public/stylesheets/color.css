@@ -160,9 +160,11 @@ h2, h2 a, .rightCol h2, .mband_name, .subtitle {
 }
 
 /* GLOBAL LINK COLOR */
-.tag_genre a, a, #expl_hide {
+.tag_genre a, a, #expl_hide, .wall_filters label {
 	color: #0099FF;
 }
+.link { color: #0099FF !important; }
+
 .mixable_link a {
 	color: #0099FF !important;
 	font-size: 10px !important;

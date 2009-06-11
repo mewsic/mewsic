@@ -58,6 +58,119 @@ $(document).ready(function(){
 	<!-- end posted comment block -->
 
 
+
+      <!-- IN WALL EVENTS -->
+      <!-- undo -->
+      <div class="posted_comment">
+			  <div class="ui-state-highlight wall_notice">
+			    <span class="profile ui-icon ui-icon-arrowstop-1-w fleft" style="margin-right:4px;"> </span>
+			    Message by <a href="" class="song_author weight-bold">Alvarez de la Fonzeca</a> removed. <a href="#" class="none link">Undo</a>
+			  </div>
+      </div>
+      
+      <!-- status -->
+      <div class="posted_comment">
+  		  <a href="" class="nopad wall_avatars avatar fleft">
+  			  <img src="/images/temp/profile_main_thumb.jpg" class=" border" width="40" height="40" />					
+  		  </a>
+				<div class="user_status status_balloon" style="margin-left: 44px;">
+					<p class="nomargin dark_gray weight-bold fleft">
+						<span class="lquote status_green s21">&ldquo;</span>
+						Ho la macchina in doppia fila, di solito la lascio in terza fila, ma 	questa volta credo proprio d’averla lasciata in seconda.
+						<span class="rquote status_green s21">&rdquo;</span>
+					</p>
+					  <br />
+            <span class="sixsixsix">Tue 21, 2009</span>&nbsp;<a href="" class="none">Reply</a>					
+				</div>
+      </div>
+      
+      
+      <!-- notifications -->
+      <div class="posted_comment">
+        <ul class="wall_notifications">
+      	  <li class="wall_icon">
+      		  <span class="w343 fleft gray_spec">Pinca Palla wrote on <a href="">Pinco Pallo's</a> wall</span>
+      	  </li>
+      	  <li class="podcast_icon">
+      		  <span class="w343 fleft gray_spec">Pinca Palla subscribed to <a href="">Bananos</a> podcast</span> 
+      	  </li>
+      	  <li class="admire_icon">
+      		  <span class="w343 fleft gray_spec">Pinca Palla became friend of <a href="">Gianni Panucci</a> </span> 
+      	  </li>
+      	  <li class="comments_icon">
+      		  <span class="w343 fleft gray_spec">Pinca Palla commented on <a href="">Tretonsidosh Nereztek</a> song by <a href="">Alvarez de la Fonzeca</a></span>
+      		  <span class="fright"><a href="#" class="none gray_spec ten">remove</a></span>
+      	  </li>      	  
+        </ul>
+      </div>
+
+      <!-- attachments -->
+      	<div class="posted_comment">
+      		<div class="post_delete fright"> </div>
+      		<a href="" class="wall_avatars avatar fleft">
+      			<img src="/images/temp/avatar_pino.jpg" class=" border" width="40" height="40" />					
+      		</a>
+      		<div class="message">
+      			<span class="gray_sprite fleft"> </span>
+      			<!-- class blue7 for comment with attachment -->
+      			<div class="post_balloon blue7">
+      				<span class="sixsixsix">at 3:14PM
+      				<a href="" class="song_author weight-bold">Pino e il Mare</a> said:</span> 
+                Guarda la mia nuova chitarra!&nbsp;<a href="" class="none">Reply</a>
+      			</div>
+
+      			<!-- ATTACH BLOCK -->
+      			<div class="attach_list"> 
+						  <a href="profile.php?im=12" class="border fleft attach_spacer">
+							  <img src="/images/temp/gallery/01/preview/32.jpg" alt="12" border="0" />
+						  </a>              						  
+          		<div class="video_thumb fleft attach_spacer">
+          			<div class="fleft">
+          				<span class="still_play"> </span>
+          				<img src="/images/temp/pick_enzo.jpg" width="100" />
+          			</div>
+          			<span class="gray_spec"><strong>Pino e il mare</strong><br />
+          			Lor sit amet pa...</span>
+          		</div>
+      			</div>
+      			<!-- end attach -->
+      		</div>
+      	</div>
+
+
+        <!-- attachments w/ no comment -->
+      	<div class="posted_comment">
+      		<div class="post_delete fright"> </div>
+      		<a href="" class="wall_avatars avatar fleft">
+      			<img src="/images/temp/avatar_pino.jpg" class=" border" width="40" height="40" />					
+      		</a>
+      		<div class="message">
+      				<span class="sixsixsix padleft23">at 3:14PM
+      				<a href="" class="song_author weight-bold">Pino e il Mare</a> shared this:</span> 
+      				&nbsp;<a href="" class="none">Reply</a>
+      		</div>
+
+      			<!-- ATTACH BLOCK -->
+      			<div class="attach_list"> 
+						  <a href="profile.php?im=12" class="border fleft attach_spacer">
+							  <img src="/images/temp/gallery/01/preview/18.jpg" alt="12" border="0" />
+						  </a>              						  
+						  <a href="profile.php?im=12" class="border fleft attach_spacer">
+							  <img src="/images/temp/gallery/01/preview/16.jpg" alt="12" border="0" />
+						  </a>             
+          		<a href="#" class="fleft weight-bold none attach_spacer">	
+          			<span class="fleft icons16 ui-state-cyan ui-icon-arrowrefresh-1-s"> </span>
+          			and 5 more
+          		</a>							   						  
+      			</div>
+      			<!-- end attach -->
+    		</div>
+
+
+
+
+
+
 	<!-- class day_last to remove border bottom -->
 	<div class="posted_comment day_last">
 		<div class="post_delete fright"> </div>
@@ -84,7 +197,7 @@ $(document).ready(function(){
 			<img src="/images/temp/avatar_fabio.jpg" class=" border" width="40" height="40" />					
 		</a>
 		<div class="message">
-			<span class="gray_sprite fleft"> </span>
+			<span class="blue_sprite fleft"> </span>
 			<!-- class blue7 for comment with attachment -->
 			<div class="post_balloon blue7">
 				<span class="sixsixsix">at 3:14PM
@@ -110,18 +223,12 @@ Questa e' la mia ultima composizione, ascoltala! magari potremmo collaborare per
 			</a>
 			<div class="message">
 				<span class="gray_sprite fleft"> </span>
-				<!-- class blue7 for comment with attachment -->
-				<div class="post_balloon blue7">
+				<div class="post_balloon gray5">
 					<span class="sixsixsix">at 3:14PM
 					<a href="" class="song_author weight-bold">Enzo's Untouchable Quintet</a> said:</span> 
 Altro che le merdate che fai di solito.Sed sagittis. Aenean tristique, enim id placerat volutpat, tortor dui accumsan felis, sodales aliquam sem enim sit amet tellus. Donec vel nibh sed sapiensim pellentesque. Integer vel quam ut purus eleifenesque&nbsp;<a href="" class="none">Reply</a>
 				</div>
 
-				<!-- ATTACH BLOCK -->
-				<div class="attach_list"> 
-					<? include('_instrument_block.php') ?>				
-				</div>
-				<!-- end attach -->
 			</div>
 		</div>
 
@@ -135,7 +242,7 @@ Altro che le merdate che fai di solito.Sed sagittis. Aenean tristique, enim id p
   		<div class="message">
   			<span class="gray_sprite fleft"> </span>
   			<!-- class blue7 for comment with attachment -->
-  			<div class="post_balloon blue7">
+  			<div class="post_balloon gray5">
   				<span class="sixsixsix">at 3:14PM
   				<a href="" class="song_author weight-bold">Fabio Grande</a> said:</span> 
   Questa e' la mia ultima composizione, ascoltala! magari potremmo collaborare per evolverla, che ne dici ?&nbsp;<a href="" class="none">Reply</a>
@@ -159,18 +266,12 @@ Altro che le merdate che fai di solito.Sed sagittis. Aenean tristique, enim id p
   			</a>
   			<div class="message">
   				<span class="gray_sprite fleft"> </span>
-  				<!-- class blue7 for comment with attachment -->
-  				<div class="post_balloon blue7">
+  				<div class="post_balloon gray5">
   					<span class="sixsixsix">at 3:14PM
   					<a href="" class="song_author weight-bold">Enzo's Untouchable Quintet</a> said:</span> 
   Altro che le merdate che fai di solito.Sed sagittis. Aenean tristique, enim id placerat volutpat, tortor dui accumsan felis, sodales aliquam sem enim sit amet tellus. Donec vel nibh sed sapiensim pellentesque. Integer vel quam ut purus eleifenesque&nbsp;<a href="" class="none">Reply</a>
   				</div>
 
-  				<!-- ATTACH BLOCK -->
-  				<div class="attach_list"> 
-  					<? include('_instrument_block.php') ?>				
-  				</div>
-  				<!-- end attach -->
   			</div>
   		</div>
 	
