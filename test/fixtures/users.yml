@@ -23,12 +23,12 @@
 #  crypted_password          :string(40)    
 #  salt                      :string(40)    
 #  string                    :string(40)    
-#  motto                     :text          
+#  biography                     :text          
 #  tastes                    :text          
 #  remember_token_expires_at :datetime      
 #  activated_at              :datetime      
 #  friends_count             :integer(4)    
-#  age                       :integer(4)    
+#  birth_date                :date
 #  password_reset_code       :string(255)   
 #  created_at                :datetime      
 #  updated_at                :datetime      
@@ -65,9 +65,10 @@ quentin:
   msn_public: true
   country: Italy
   city: Bari
-  motto: Arma Virumque Cano Troiae qui primus ab oris
+  biography: Arma Virumque Cano Troiae qui primus ab oris
   profile_views: 1516
   writings_count: 1
+  birth_date: '1981-04-11'
 
 aaron:
   login: aaron
@@ -78,7 +79,7 @@ aaron:
   gender: male
   country: Italy
   city: Bari
-  motto: Nel mezzo del cammin di nostra vita mi ritrovai nel culo una matita. Ahi, che dolor! Era una carioca a dodici color.
+  biography: Nel mezzo del cammin di nostra vita mi ritrovai nel culo una matita. Ahi, che dolor! Era una carioca a dodici color.
   msn: aaron@example.org
 
 john:
@@ -91,10 +92,11 @@ john:
   gender: male
   country: Italy
   city: Bari
-  motto: in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni.  
+  biography: in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni. in girum imus nocte et consumimur igni.  
   is_admin: true
   profile_views: 2342
   writings_count: 1
+  birth_date: '1986-06-16'
 
 <% for i in 0..500 %>
 user_<%= i %>:
@@ -108,5 +110,5 @@ user_<%= i %>:
   gender: <%= ['male', 'female', 'other'].rand %>  
   country: <%= ['Italy', 'Usa', 'Canada', 'Japan', 'Germany', 'Portugal', 'Spain'].rand %>
   city: <%= ['Rome', 'Geneve', 'Seattle', 'Milan', 'Bari', 'Modugno', 'Tokyo', 'Beijing'].rand %>
-  motto: <%= %w( Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultricies blandit nisi. Nullam malesuada. Curabitur orci. Donec congue dolor vitae diam. Vestibulum sagittis, erat non commodo bibendum, sapien mauris vulputate sapien, id aliquam sapien lacus eu justo. Nam vitae turpis. Suspendisse potenti. Quisque ornare, nulla vel blandit ultricies, ligula quam tincidunt orci, et malesuada sapien ipsum eu mi. Proin at nibh vitae mi elementum fringilla. Phasellus sit amet enim sit amet dolor porttitor molestie. Nam fringilla. Sed id purus. Ut ullamcorper nulla a elit. Integer mauris odio, dictum quis, convallis id, aliquam vitae, turpis. Praesent elementum, elit sed bibendum lobortis, massa dui gravida lectus, id accumsan justo elit ac lorem. Phasellus cursus dui id neque. In feugiat. In sagittis egestas nisl. ).sort_by {rand}.join(" ").capitalize %>
+  biography: <%= %w( Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultricies blandit nisi. Nullam malesuada. Curabitur orci. Donec congue dolor vitae diam. Vestibulum sagittis, erat non commodo bibendum, sapien mauris vulputate sapien, id aliquam sapien lacus eu justo. Nam vitae turpis. Suspendisse potenti. Quisque ornare, nulla vel blandit ultricies, ligula quam tincidunt orci, et malesuada sapien ipsum eu mi. Proin at nibh vitae mi elementum fringilla. Phasellus sit amet enim sit amet dolor porttitor molestie. Nam fringilla. Sed id purus. Ut ullamcorper nulla a elit. Integer mauris odio, dictum quis, convallis id, aliquam vitae, turpis. Praesent elementum, elit sed bibendum lobortis, massa dui gravida lectus, id accumsan justo elit ac lorem. Phasellus cursus dui id neque. In feugiat. In sagittis egestas nisl. ).sort_by {rand}.join(" ").capitalize %>
 <% end %>

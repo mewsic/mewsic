@@ -1,34 +1,41 @@
 <!-- USER INFO -->
-<!-- <a href="" class="edit_lists edit_icon none fright">Edit Informations</a> -->
 <div class="clear"> </div>
 <div class="iam_box fleft">
-	<a href="" class="edit_lists edit_icon none fright">Edit</a>
+	<a href="#" class="edit_lists edit_icon none fright">Edit</a>
 	<h2>I'm</h2>
 	<div class="inner">
 
-
 		<dl class="info">
+			<%- if @user.gender -%>
 			<dt>Sex:</dt>
-			<dd>Male</dd>
+			<dd><%= @user.gender.capitalize %></dd>
+			<%- end -%>
+			<%- if @user.country -%>
 			<dt>Country:</dt>
-			<dd>Italy</dd>
+			<dd><%= @user.country.capitalize %></dd>
+			<%- end -%>
+			<%- if @user.birth_date -%>
 			<dt>Date of birth:</dt>
-			<dd>19/01/1982</dd>
+			<dd><%= @user.birth_date.strftime '%d %B %Y' %></dd>
+			<%- end -%>
 			<dt>E-mail:</dt>
-			<dd><a href="">babongo@babolandia.org</a></dd>
+			<dd><%= link_to @user.email, "mailto:#{@user.email}" %></dd>
 			<dt>Gears:</dt>
 			<dd><a href="">Fender Stratocaster,</a> <a href="">Access Virus T1 Polar,</a> 
 				<a href="">Bongo Banale,</a> <a href="">Flauto in plastica</a>
 			</dd>
+			<%- unless @user.mbands.empty? -%>
 			<dt>M-Bands:</dt>
-			<dd><a href="">Sblandons</a></dd>
+			<dd><%= @user.mbands.map { |m| link_to(m.name, m) }.join ',' %></dd>
+			<%- end -%>
 		</dl>
 		
+		<%- if @user.biography -%>
 		<p class="info_text_group gray_spec">
 			<span class="s13 heading block">Biography</span>
-			Suspendisse sed elit. Etiam varius, libero eget consectetur auctor, eros felis egestas lectus, quis convallis nunc enim eget enim. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nullam dictum lacus ut libero. Donec enim justo, pulvinar et, tincidunt non, imperdiet ac, urna. Nulla posuere pretium eros. Integer sed velit. Praesent auctor. Phasellus aliquam malesuada erat. Vestibulum ac felis eget tortor sollicitudin hendrerit. Duis fringilla metus ut tortor. Sed ac turpis.	
+			<%=h @user.biography %>
 		</p>
-
+		<%- end -%>
 
 	</div>
 </div>

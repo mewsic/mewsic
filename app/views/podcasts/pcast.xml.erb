@@ -3,8 +3,8 @@
 <pcast version="1.0">
   <channel>
     <link rel="feed" type="application/rss+xml" href="<%= user_podcast_url @user %>" />
-    <title><%= @user.nickname %> podcast on Myousica.com</title>
-    <subtitle><%= @user.motto %></subtitle>
+    <title><%= @user.nickname %> podcast on MEWSIC</title>
+		<subtitle><%= truncate(@user.biography, :length => 200) %></subtitle>
     <category>Music</category>
   </channel>
 </pcast>

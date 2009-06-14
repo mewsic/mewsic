@@ -23,7 +23,7 @@
 #  crypted_password          :string(40)    
 #  salt                      :string(40)    
 #  string                    :string(40)    
-#  motto                     :text          
+#  biography                 :text          
 #  tastes                    :text          
 #  remember_token_expires_at :datetime      
 #  activated_at              :datetime      
@@ -49,7 +49,7 @@ require 'digest/sha1'
 class User < ActiveRecord::Base
   
   define_index do
-    indexes :login, :motto, :tastes, :country
+    indexes :login, :biography, :tastes, :country
     where 'activated_at IS NOT NULL'
     #set_property :delta => true
   end
@@ -69,7 +69,7 @@ class User < ActiveRecord::Base
                                        :too_long => 'too long! maximum {{count}} chars'
   validates_length_of       :city,     :maximum => 25,  :allow_nil => true, :allow_blank => true, :message => 'too long! max {{count}} chars'
   validates_length_of       :country,  :maximum => 45,  :allow_nil => true, :allow_blank => true, :message => 'too long! max {{count}} chars!'
-  validates_length_of       :motto,    :maximum => 1500, :allow_nil => true, :allow_blank => true, :message => 'too long.. sorry! max {{count}} chars'
+  validates_length_of       :biography, :maximum => 1500, :allow_nil => true, :allow_blank => true, :message => 'too long.. sorry! max {{count}} chars'
   validates_length_of       :tastes,   :maximum => 1500, :allow_nil => true, :allow_blank => true, :message => 'too long.. sorry! max {{count}} chars'
 
   validates_format_of       :email,    :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :on => :create, :message => 'invalid e-mail'
@@ -93,7 +93,7 @@ class User < ActiveRecord::Base
   # sanitizer configured in environment.rb 
   #
   xss_terminate :except => [:email, :msn, :gender, :photos_url, :blog_url, :myspace_url, :facebook_uid],
-                :sanitize => [:motto, :tastes]
+                :sanitize => [:biography, :tastes]
   
   has_many :mband_memberships
   has_many :mbands, :through => :mband_memberships, :class_name => 'Mband', :source => :mband,
@@ -132,7 +132,8 @@ class User < ActiveRecord::Base
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
   attr_accessible :password, :password_confirmation, :first_name, :last_name, :name_public,
-    :gender, :motto, :tastes, :country, :city, :age, :photos_url, :blog_url, :myspace_url,
+    :gender, :biography, :tastes, :country, :city, :birth_date,
+    :photos_url, :blog_url, :myspace_url,
     :skype, :msn, :skype_public, :msn_public, :podcast_public
   attr_readonly :comments_count, :writings_count, :profile_views, :facebook_uid
   
