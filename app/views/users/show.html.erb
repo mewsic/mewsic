@@ -1,3 +1,6 @@
+<%- content_for :head do -%>
+	<%= javascript_include_tag 'user' %>
+<%- end -%>
 	<!-- LEFTCOL -->
 	<div class="leftCol fleft">
 		<div class="leftColWrapper">
@@ -90,8 +93,8 @@
 					  </div>
 					</div>
 					<div id="profile-info" class="profile">
-                <%= render :partial => 'users/info' %>
-                <%= render :partial => 'users/info_edit' %>                
+						<%= render :partial => 'users/info/basic' %>
+						<%= render :partial => 'users/info/influences' %>
 					</div>
 					<div id="profile-songs" class="profile">
                 <%= render :partial => 'users/songs' %>

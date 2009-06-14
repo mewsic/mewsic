@@ -1,0 +1,51 @@
+<div class="influences_box fleft">
+	<%- if current_user_page? -%>
+	<a href="" class="edit_lists edit_icon none fright">Edit</a>
+	<%- end -%>
+	<h2>Influences</h2>
+	<div class="inner">
+
+		<p class="info_text_group">
+			<span class="s13 heading block">Genre</span>
+			<span class="tag_genre nomargin">
+				<a href="">Acid Jazz/Fusion,</a> <a href="">Acoustic,</a> <a href="">Alternative 	Rock,</a> <a href="">Ambient,</a> <a href="">Blues,</a>  
+				<a href="">British Pop,</a> <a href="">Classic Rock,</a> <a href="">Country,</a>  <a href="">Country Rock,</a> <a href="">Crossover,</a> <a href="">Dance,</a>  
+				<a href="">Disco,</a> <a href="">Drum & Bass,</a> <a href="">EBM,</a> <a 	href="">Electro-Rock,</a> <a href="">Electronic,</a> <a href="">Folk Rock,</a> <a href="">Funk,</a> <a href="">Acid Jazz/Fusion,</a> <a href="">Acoustic,</a> <a href="">Alternative 	Rock,</a> <a href="">Ambient,</a> <a href="">Blues</a>
+			</span>			
+		</p>
+
+		<p class="info_text_group">
+			<span class="s13 heading block">Artists</span>
+			<span class="tag_genre body12 nomargin">
+				<a href="">Tommy Califano,</a> <a href="">Barac Mobil,</a> <a href="">Dustin Pinkerlake,</a>  <a href="">Pino,</a> <a href="">Angelo & Cirillo,</a> 
+				<a href="">Alvarez de la Fonzeca,</a> <a href="">XXX84,</a> <a href="">B 52,</a> <a href="">Pane e Pomodoro,</a> <a href="">Ajira Airlines,</a> <a href="">Vincent Burd</a>  
+			</span>
+		</p>
+
+
+		<p class="info_text_group">
+			<span class="s13 heading block">Movies</span>
+			<span class="gray_spec nomargin">
+				The Snatch, Matrix, Loredana tutta tana, L'incredibile voglia "di cazzo" di Babette
+			</span>
+		</p>
+
+		<p class="info_text_group">
+			<span class="s13 heading block">Books</span>
+			<span class="gray_spec nomargin">
+				The three stigmata of Palmer Eldrich
+			</span>
+		</p>
+			
+	</div>
+
+	<script type="text/javascript">
+		$(function() {
+			$('div.influences_box').replaceOnClickWith({
+				anchor: 'a.edit_lists',
+				url: "<%= user_url(@user, :partial => 'influences_edit') %>"
+			});
+		});
+	</script>
+
+</div>

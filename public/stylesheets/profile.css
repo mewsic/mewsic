@@ -310,6 +310,10 @@
 
 .force_right { float: right !important; }
 
+#user_country { width: 195px; }
+#user_birth_date_1i { width: 64px; } /* year */
+#user_birth_date_2i { width: 70px; } /* month */
+#user_birth_date_3i { width: 54px; } /* day */
 
 
 /* MAILBOX 

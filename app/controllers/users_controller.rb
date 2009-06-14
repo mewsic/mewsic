@@ -125,29 +125,34 @@ class UsersController < ApplicationController
       format.html do
         current_user_page = current_user == @user
 
-        @user.profile_viewed_by(tracked_user) unless current_user_page
+        if request.xhr?
+          # Request partials
+          #
+          partial = params[:partial]
+          unless current_user_page && %w(basic basic_edit influences influences_edit).include?(partial)
+            render :nothing => true, :status => :bad_request and return
+          end
 
-        @songs = @user.songs.public.paginate(:page => 1, :per_page => 5)
-        @songs_count = @user.songs.public.count
-
-        @tracks = @user.tracks.public.paginate(:page => 1, :per_page => 7)
-        @tracks_count = @user.tracks.public.count
-
-        @answers = @user.answers.paginate(:page => 1, :per_page => 6)
-
-        @mbands = @user.mbands
-
-        @new_membership = MbandMembership.new
-
-        @has_abuse = @user.abuses.exists? ['user_id = ?', current_user.id] if logged_in?
-
-        #@tracks, @tracks_count, @mbands = 
-        #  if current_user_page
-        #    @mband_invitations = @user.pending_mband_invitations
-        #    [Track.find_paginated_by_user(1, @user), @user.tracks_count, @user.mbands]
-        #  else
-        #    [Track.find_paginated_ideas_by_user(1, @user), @user.ideas_count, @user.mbands_with_more_than_one_member]
-        #  end
+          render :partial => "users/info/#{partial}"
+        else
+          # Request page
+          #
+          @user.profile_viewed_by(tracked_user) unless current_user_page
+        
+          @songs = @user.songs.public.paginate(:page => 1, :per_page => 5)
+          @songs_count = @user.songs.public.count
+        
+          @tracks = @user.tracks.public.paginate(:page => 1, :per_page => 7)
+          @tracks_count = @user.tracks.public.count
+        
+          @answers = @user.answers.paginate(:page => 1, :per_page => 6)
+        
+          @mbands = @user.mbands
+        
+          @new_membership = MbandMembership.new
+        
+          @has_abuse = @user.abuses.exists? ['user_id = ?', current_user.id] if logged_in?
+        end
       end
 
       format.xml { render :partial => 'multitrack/user' }
@@ -157,7 +162,7 @@ class UsersController < ApplicationController
     flash[:error] = 'User not found..'
     redirect_to '/'
   end
-  
+
   # ==== GET /activate/:activation_code
   #
   # Processes the initial user activation: a link with a valid activation_code is sent out in the

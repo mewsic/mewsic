@@ -1,0 +1,52 @@
+<!-- USER INFO -->
+<div class="clear"> </div>
+<div class="iam_box fleft">
+	<%- if current_user_page? -%>
+	<a href="#" class="edit_lists edit_icon none fright">Edit</a>
+	<%- end -%>
+	<h2>I'm</h2>
+	<div class="inner">
+
+		<dl class="info">
+			<%- if @user.gender -%>
+			<dt>Sex:</dt>
+			<dd><%= @user.gender.capitalize %></dd>
+			<%- end -%>
+			<%- if @user.country -%>
+			<dt>Country:</dt>
+			<dd><%= @user.country.capitalize %></dd>
+			<%- end -%>
+			<%- if @user.birth_date -%>
+			<dt>Date of birth:</dt>
+			<dd><%= @user.birth_date.strftime '%d %B %Y' %></dd>
+			<%- end -%>
+			<dt>E-mail:</dt>
+			<dd><%= link_to @user.email, "mailto:#{@user.email}" %></dd>
+			<dt>Gears:</dt>
+			<dd><a href="">Fender Stratocaster,</a> <a href="">Access Virus T1 Polar,</a> 
+				<a href="">Bongo Banale,</a> <a href="">Flauto in plastica</a>
+			</dd>
+			<%- unless @user.mbands.empty? -%>
+			<dt>M-Bands:</dt>
+			<dd><%= @user.mbands.map { |m| link_to(m.name, m) }.join ',' %></dd>
+			<%- end -%>
+		</dl>
+		
+		<%- if @user.biography -%>
+		<p class="info_text_group gray_spec">
+			<span class="s13 heading block">Biography</span>
+			<%=h @user.biography %>
+		</p>
+		<%- end -%>
+	</div>
+
+	<script type="text/javascript">
+		$(function() {
+			$('div.iam_box').replaceOnClickWith({
+				anchor: 'a.edit_lists',
+				url: "<%= user_url(@user, :partial => 'basic_edit') %>"
+			});
+		});
+	</script>
+
+</div>
