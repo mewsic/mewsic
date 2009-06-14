@@ -25,6 +25,8 @@ class UsersController < ApplicationController
 
   protect_from_forgery :except => :update
 
+  @@ajax_partials = %w(info/basic info/basic_edit info/influences info/influences_edit)
+
   # ==== GET /users
   #
   # Renders the users index page.
@@ -129,11 +131,11 @@ class UsersController < ApplicationController
           # Request partials
           #
           partial = params[:partial]
-          unless current_user_page && %w(basic basic_edit influences influences_edit).include?(partial)
+          unless current_user_page && @@ajax_partials.include?(partial)
             render :nothing => true, :status => :bad_request and return
           end
 
-          render :partial => "users/info/#{partial}"
+          render :partial => "users/#{partial}"
         else
           # Request page
           #
@@ -185,19 +187,24 @@ class UsersController < ApplicationController
   # Updates an user record with the given parameters. An user can change only its own data,
   # because this method has got the +check_if_current_user_page+ filter attached.
   #
-  # If updating a single attribute, this action renders the new value of it.
-  # If updating multiple ones, nothing is rendered with a 200 status.
+  # If the <tt>partial</tt> parameter is passed, and the given partial name is included into
+  #   the <tt>@@ajax_partials</tt> array, the partial is rendered.
+  # Else if updating a single attribute, this action renders the new value.
+  # Else nothing is rendered with a 200 status.
   #
   def update
     @user = User.find_from_param(params[:id])
     if @user.update_attributes(params[:user])
       @user.reload
-      if params[:user] && params[:user].keys.size <= 2
-        render(:text => @user.send(params[:user].keys.first)) and return
+      if params[:user] && (partial = params[:partial]) && @@ajax_partials.include?(partial)
+        render :partial => "users/#{partial}"
+      elsif params[:user] && params[:user].keys.size <= 2
+        render(:text => @user.send(params[:user].keys.first))
+      else
+        render :nothing => true
       end
-      render :nothing => true
     else
-      render :text => @user.errors.map(&:last).join("\n"), :status => :bad_request
+      render :text => @user.errors.join("\n"), :status => :bad_request
     end  
 
   rescue NoMethodError # non existing field

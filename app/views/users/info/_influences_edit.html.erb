@@ -37,8 +37,6 @@
 
 				<input type="submit" class="margin30 mailbox_cancel cancel_button gray_spec fright" value="Cancel">	
 				<input type="submit" value="Save my influences" class="margin30 mailbox_send login_button fright">
-				<div class="fright icons16 loader_white" style="margin:32px 5px 0 0"> </div>				
-
 			</fieldset>			
 		<%- end #form -%>
 		<script type="text/javascript" charset="utf-8">
@@ -46,8 +44,8 @@
 				$('#infl-genres, #infl-artists, #infl-movies, #infl-books').simpleautogrow();
 
 				$('div.influences_box').replaceOnClickWith({
-					anchor: 'a.edit_lists',
-					url: "<%= user_url(@user, :partial => 'influences') %>"
+					anchor: 'a.edit_lists, input.cancel_button',
+					url: "<%= user_url(@user, :partial => 'info/influences') %>"
 				});
 			});
 		</script>
