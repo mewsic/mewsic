@@ -1091,7 +1091,7 @@ h2 {
 	margin-bottom: 6px;
 }
 
-#music_list, #friends_list {
+.music_list, #friends_list {
 	border-left: 1px solid #D9D9D9;
 	padding-left: 12px;
 } 

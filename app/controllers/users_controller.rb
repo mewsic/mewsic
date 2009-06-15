@@ -141,11 +141,14 @@ class UsersController < ApplicationController
           #
           @user.profile_viewed_by(tracked_user) unless current_user_page
         
-          @songs = @user.songs.public.paginate(:page => 1, :per_page => 5)
-          @songs_count = @user.songs.public.count
-        
-          @tracks = @user.tracks.public.paginate(:page => 1, :per_page => 7)
-          @tracks_count = @user.tracks.public.count
+          @songs = @user.songs.public.paginate(:page => 1, :per_page => 10)
+
+          if current_user_page
+            @private_songs = @user.songs.private.paginate(:page => 1, :per_page => 10)
+            @tracks = @user.tracks.stuffable.paginate(:page => 1, :per_page => 10)
+          else
+            @tracks = @user.tracks.public.paginate(:page => 1, :per_page => 10)
+          end
         
           @answers = @user.answers.paginate(:page => 1, :per_page => 6)
         

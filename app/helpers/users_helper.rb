@@ -152,4 +152,29 @@ module UsersHelper
     influences.split(/ *,+ */).compact.map{ |tag| link_to(tag, search_path(:q => tag)) }.join(', ')
   end
 
+  # This method_missing defines the following methods (self-explanatory):
+  # - private_tracks_count
+  # - public_tracks_count
+  # - tracks_count (private + public)
+  #
+  # - private_songs_count
+  # - public_songs_count
+  # - songs_count (private + public)
+  #
+  # It requires the +@user+ instance variable and the +current_user+ method
+  #
+  def method_missing(meth, *args, &block)
+    if @user && current_user && meth.to_s =~ /^(private_|public_)?(songs|tracks)_count$/
+      acl, type = $1, $2
+      if acl == 'private_'
+        @user == current_user ? @user.send(type).private.count : 0
+      elsif acl == 'public_'
+        @user.send(type).public.count
+      else
+        send("public_#{type}_count".intern) + send("private_#{type}_count".intern)
+      end
+    else
+      super meth, *args, &block
+    end
+  end
 end

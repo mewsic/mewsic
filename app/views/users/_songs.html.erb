@@ -1,6 +1,6 @@
 <div class="fleft">
-	<span class="gray_spec">Pinca Palla have:</span>
-	<span class="fleft heading s13 weight-bold">43 Songs</span>
+	<span class="gray_spec"><%= if current_user_page? then 'You have' else "#{@user.login} has" end %>:</span>
+	<span class="fleft heading s13 weight-bold"><%= songs_count :all %> Songs</span>
 </div>
 
 <!--
@@ -13,30 +13,50 @@
 <!-- USER SONGS -->
 <div id="user_songs_list">
 		<div class="browse_pane pane_content">
-			<div class="browse_pane_left fleft" id="user_songs_tabs">
-				<ul class="music_type alright s13">
-					<li class="current">All <small class="sixsixsix">43</small></li>
+			<script type="text/javascript">
+				$(function() {
+					$('#profile-songs-tabs').simpleTabs();
+				});
+			</script>
+			<div id="profile-songs-tabs">
+				<ul class="music_type alright s13 browse_pane_left fleft">
+					<%- if current_user_page? -%>
+					<li class="">All <small class="sixsixsix"><%= songs_count %></small></li>
 					<li class="">
 						<span class="fleft icons16 private_icon"> </span>
-						<a href="#proj-private">Private <small class="gray_spec">4</small></a>
+						<a href="#profile-songs-private">Private <small class="gray_spec"><%= private_songs_count %></small></a>
 					</li>
-					<li class="">
+					<%- end -%>
+					<li class="current">
 						<span class="fleft icons16 music_icon"> </span>
-						<a href="#proj-songs">Songs <small class="gray_spec">8</small></a>
+						<a href="#profile-songs-public">Songs <small class="gray_spec"><%= public_songs_count %></small></a>
 					</li>
 					<li class="">
 						<span class="fleft icons16 instruments_icon"> </span>
-						<a href="#proj-instr">Instruments <small class="gray_spec">15</small></a>
+						<a href="#profile-instruments">Instruments <small class="gray_spec"><%= tracks_count %></small></a>
 					</li>
 				</ul>
-			</div>
-			<div class="browse_pane_right fleft" id="proj-songs">
-				<div id="music_list" class="fleft">
-          <% 6.times do %>
-              <%= render :partial => 'users/song_block' %>
-          <% end %>
+
+				<%- if current_user_page? -%>
+				<div class="browse_pane_right fleft" id="profile-songs-public" style="display:none">
+					<div class="music_list fleft">
+						<%= render :partial => 'users/song_block', :collection => @private_songs %>
+					</div>
 				</div>
+				<%- end -%>
+				<div class="browse_pane_right fleft" id="profile-songs-public">
+					<div class="music_list fleft">
+						<%= render :partial => (current_user_page? ? 'users/song_block' : 'shared/song_block'), :collection => @songs %>
+					</div>
+				</div>
+				<div class="browse_pane_right fleft" id="profile-instruments" style="display:none">
+					<div class="music_list fleft">
+						<%= render :partial => 'shared/instrument_block', :collection => @tracks %>
+					</div>
+				</div>
+
 			</div>
+			
 		</div>
 </div>
 <div class="profile_music_pager fright">
