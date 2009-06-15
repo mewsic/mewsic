@@ -141,9 +141,15 @@ module UsersHelper
       image_tag("move_arrow_#{direction}.png", :class => 'faded')
     end
   end
-  
+
+  # Mew stuff
   def fb_connected?
     session[:fb_connect]
+  end
+
+  def influences_links(influences)
+    return if influences.blank?
+    influences.split(/ *,+ */).compact.map{ |tag| link_to(tag, search_path(:q => tag)) }.join(', ')
   end
 
 end

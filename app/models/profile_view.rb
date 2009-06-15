@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090614112927
+# Schema version: 20090615124539
 #
 # Table name: profile_views
 #
