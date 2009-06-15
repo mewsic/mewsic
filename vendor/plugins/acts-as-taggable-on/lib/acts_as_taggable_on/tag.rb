@@ -15,6 +15,11 @@ class Tag < ActiveRecord::Base
     tag_ids = Tagging.count_top(options).map(&:first)
     self.find(tag_ids).sort_by { |tag| tag_ids.index(tag.id) }
   end
+
+  def self.find_from_collection(collection)
+    tag_ids = Tagging.find_from_collection(collection).map(&:tag_id)
+    self.find(tag_ids)
+  end
   
   def ==(object)
     super || (object.is_a?(Tag) && name == object.name)
