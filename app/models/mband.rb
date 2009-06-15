@@ -1,24 +1,25 @@
 # == Schema Information
-# Schema version: 20090312174538
+# Schema version: 20090614112927
 #
 # Table name: mbands
 #
-#  id            :integer(4)    not null, primary key
-#  name          :string(255)   
-#  photos_url    :string(255)   
-#  blog_url      :string(255)   
-#  myspace_url   :string(255)   
-#  motto         :text          
-#  tastes        :text          
-#  friends_count :integer(4)    
-#  user_id       :integer(4)    
-#  created_at    :datetime      
-#  updated_at    :datetime      
-#  rating_count  :integer(4)    
-#  rating_total  :decimal(10, 2 
-#  rating_avg    :decimal(10, 2 
-#  members_count :integer(4)    default(0)
-#  comments_count :integer(4)   default(0)
+#  id             :integer(4)    not null, primary key
+#  name           :string(255)   
+#  photos_url     :string(255)   
+#  blog_url       :string(255)   
+#  myspace_url    :string(255)   
+#  motto          :text          
+#  tastes         :text          
+#  friends_count  :integer(4)    
+#  user_id        :integer(4)    
+#  created_at     :datetime      
+#  updated_at     :datetime      
+#  rating_count   :integer(4)    
+#  rating_total   :decimal(10, 2 
+#  rating_avg     :decimal(10, 2 
+#  members_count  :integer(4)    default(0)
+#  delta          :boolean(1)    
+#  comments_count :integer(4)    default(0)
 #
 
 # Copyright:: (C) 2008 Medlar s.r.l.

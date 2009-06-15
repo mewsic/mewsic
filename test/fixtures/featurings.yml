@@ -1,3 +1,15 @@
+# == Schema Information
+# Schema version: 20090614112927
+#
+# Table name: featurings
+#
+#  id         :integer(4)    not null, primary key
+#  song_id    :integer(4)    
+#  user_id    :integer(4)    
+#  created_at :datetime      
+#  updated_at :datetime      
+#
+
 red_red_wine_unpublished_by_quentin_feat_john:
   song: red_red_wine_unpublished
   user: john

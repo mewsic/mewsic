@@ -1,3 +1,21 @@
+# == Schema Information
+# Schema version: 20090614112927
+#
+# Table name: comments
+#
+#  id               :integer(4)    not null, primary key
+#  title            :string(60)    
+#  body             :text          
+#  commentable_id   :integer(4)    
+#  commentable_type :string(255)   
+#  user_id          :integer(4)    
+#  rating_count     :integer(4)    
+#  rating_total     :decimal(10, 2 
+#  rating_avg       :decimal(10, 2 
+#  created_at       :datetime      
+#  updated_at       :datetime      
+#
+
 class Comment < ActiveRecord::Base
   belongs_to :commentable, :polymorphic => true, :counter_cache => :comments_count
   belongs_to :user, :counter_cache => :writings_count

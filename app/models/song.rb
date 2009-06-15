@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090312174538
+# Schema version: 20090614112927
 #
 # Table name: songs
 #
@@ -17,6 +17,12 @@
 #  rating_count   :integer(4)    
 #  rating_total   :decimal(10, 2 
 #  rating_avg     :decimal(10, 2 
+#  user_type      :string(10)    
+#  delta          :boolean(1)    
+#  parent_id      :integer(4)    
+#  lft            :integer(4)    
+#  rgt            :integer(4)    
+#  comments_count :integer(4)    default(0)
 #
 
 # Copyright:: (C) 2008 Medlar s.r.l.

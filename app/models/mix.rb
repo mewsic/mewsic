@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090312174538
+# Schema version: 20090614112927
 #
 # Table name: mixes
 #
@@ -9,6 +9,7 @@
 #  volume     :float         default(1.0)
 #  created_at :datetime      
 #  updated_at :datetime      
+#  deleted    :boolean(1)    
 #
 
 # Copyright:: (C) 2008 Medlar s.r.l.

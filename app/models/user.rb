@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090312174538
+# Schema version: 20090614112927
 #
 # Table name: users
 #
@@ -22,27 +22,28 @@
 #  skype_public              :boolean(1)    
 #  crypted_password          :string(40)    
 #  salt                      :string(40)    
-#  string                    :string(40)    
 #  biography                 :text          
 #  tastes                    :text          
 #  remember_token_expires_at :datetime      
 #  activated_at              :datetime      
 #  friends_count             :integer(4)    
-#  age                       :integer(4)    
 #  password_reset_code       :string(255)   
 #  created_at                :datetime      
 #  updated_at                :datetime      
 #  rating_count              :integer(4)    
 #  rating_total              :decimal(10, 2 
 #  rating_avg                :decimal(10, 2 
+#  writings_count            :integer(4)    default(0)
 #  is_admin                  :boolean(1)    
 #  status                    :string(3)     default("off")
 #  name_public               :boolean(1)    
 #  multitrack_token          :string(64)    
 #  podcast_public            :boolean(1)    default(TRUE)
 #  profile_views             :integer(4)    default(0)
+#  delta                     :boolean(1)    
 #  comments_count            :integer(4)    default(0)
-#  writings_count            :integer(4)    default(0)
+#  facebook_uid              :string(255)   
+#  birth_date                :date          
 #
 
 require 'digest/sha1'

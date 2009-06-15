@@ -1,13 +1,12 @@
 # == Schema Information
-# Schema version: 20090312174538
+# Schema version: 20090614112927
 #
 # Table name: tracks
 #
 #  id             :integer(4)    not null, primary key
-#  title          :string(60)    
+#  title          :string(255)   default("Untitled")
 #  filename       :string(64)    
 #  description    :text          
-#  song_id        :integer(4)    
 #  instrument_id  :integer(4)    
 #  listened_times :integer(4)    default(0)
 #  seconds        :integer(4)    default(0)
@@ -18,6 +17,9 @@
 #  rating_avg     :decimal(10, 2 
 #  user_id        :integer(4)    
 #  author         :string(60)    
+#  status         :integer(4)    default(-2)
+#  delta          :boolean(1)    
+#  comments_count :integer(4)    default(0)
 #
 
 require 'numeric_to_runtime'

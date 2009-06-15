@@ -1,3 +1,14 @@
+# == Schema Information
+# Schema version: 20090614112927
+#
+# Table name: comment_attachments
+#
+#  id              :integer(4)    not null, primary key
+#  comment_id      :integer(4)    
+#  attachment_id   :integer(4)    
+#  attachment_type :string(255)   
+#
+
 let_it_be_posted_on_quentins_wall_by_john:
   comment: john_posts_a_song_to_quentins_wall
   attachment: let_it_be

@@ -10,17 +10,19 @@
 					<dt>Sex:</dt>
 					<dd><%= f.select :gender, [['Male', 'male'], ['Female', 'female']], :include_blank => true %></dd>
 					<dt>Country:</dt>
-					<dd><%= f.country_select :country, :include_blank => true %>
+					<dd><%= f.country_select :country, '', :include_blank => true %>
 					<dt>Date of birth:</dt>
-					<dd><%= f.date_select :birth_date, :start_year => 1930, :end_year => Time.now.year - 15, :user_short_month => true %></dd>
+					<dd><%= f.date_select :birth_date, :start_year => 1930, :end_year => Time.now.year - 15, :use_short_month => true %></dd>
 					<!-- <label for="user_email">E-mail:</label> e-mail is not editable! -->
 					<%#= f.text_field :email, :class => 'text ui-widget-content', :style => 'margin-bottom:0' %>
 				</dl>
 				<span class="s13 heading block">Biography</span>
-				<%= f.text_area :biography, :style => 'margin-bottom:0' %>
+				<%= f.text_area :biography, :style => 'margin-bottom:0', :rows => 5, :cols => 40 %>
 
-				<input type="submit" class="margin30 mailbox_cancel cancel_button gray_spec fright" value="Cancel" />	
-				<input type="submit" value="Save personal infos" class="margin30 mailbox_send login_button fright" />	
+				<div class="fright">
+					<input type="submit" value="Save personal infos" class="margin30 mailbox_send login_button" />	
+					<input type="submit" class="margin30 mailbox_cancel cancel_button gray_spec" value="Cancel" />	
+				</div>
 			</fieldset>			
 		<%- end #form -%>
 	</div>

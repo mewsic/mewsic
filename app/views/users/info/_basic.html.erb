@@ -8,11 +8,11 @@
 	<div class="inner">
 
 		<dl class="info">
-			<%- if @user.gender -%>
+			<%- unless @user.gender.empty? -%>
 			<dt>Sex:</dt>
 			<dd><%= @user.gender.capitalize %></dd>
 			<%- end -%>
-			<%- if @user.country -%>
+			<%- unless @user.country.empty? -%>
 			<dt>Country:</dt>
 			<dd><%= @user.country.capitalize %></dd>
 			<%- end -%>

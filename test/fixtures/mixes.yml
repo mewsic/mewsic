@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090312174538
+# Schema version: 20090614112927
 #
 # Table name: mixes
 #
@@ -7,11 +7,9 @@
 #  song_id    :integer(4)    
 #  track_id   :integer(4)    
 #  volume     :float         default(1.0)
-#  loop       :integer(4)    
-#  balance    :float         default(0.0)
-#  time_shift :integer(4)    
 #  created_at :datetime      
 #  updated_at :datetime      
+#  deleted    :boolean(1)    
 #
 
 let_it_be_sax:

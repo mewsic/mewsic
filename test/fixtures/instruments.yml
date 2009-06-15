@@ -1,3 +1,17 @@
+# == Schema Information
+# Schema version: 20090614112927
+#
+# Table name: instruments
+#
+#  id          :integer(4)    not null, primary key
+#  description :string(255)   
+#  icon        :string(255)   
+#  created_at  :datetime      
+#  updated_at  :datetime      
+#  category_id :integer(4)    
+#  position    :integer(4)    
+#
+
 # GENERATED FROM test/fixtures/instruments.txt
 # @Thu Jun 04 00:24:19 +0200 2009
 #

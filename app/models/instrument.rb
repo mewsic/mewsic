@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090312174538
+# Schema version: 20090614112927
 #
 # Table name: instruments
 #
@@ -9,6 +9,7 @@
 #  created_at  :datetime      
 #  updated_at  :datetime      
 #  category_id :integer(4)    
+#  position    :integer(4)    
 #
 
 # Copyright:: (C) 2008 Medlar s.r.l.

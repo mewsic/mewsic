@@ -1,11 +1,12 @@
 # == Schema Information
-# Schema version: 20090312174538
+# Schema version: 20090614112927
 #
 # Table name: answers
 #
 #  id               :integer(4)    not null, primary key
 #  user_id          :integer(4)    
 #  body             :text          
+#  comments_count   :integer(4)    default(0)
 #  created_at       :datetime      
 #  updated_at       :datetime      
 #  rating_count     :integer(4)    
@@ -13,7 +14,7 @@
 #  rating_avg       :decimal(10, 2 
 #  closed           :boolean(1)    not null
 #  last_activity_at :datetime      
-#  comments_count   :integer(4)    default(0)
+#  delta            :boolean(1)    
 #
 
 # Copyright:: (C) 2008 Medlar s.r.l.
