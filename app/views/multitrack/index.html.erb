@@ -62,7 +62,7 @@
 		</div>
 	<!-- END EXPL BANNER -->
 
-      <%= render :partial => 'multitrack/project' %>
+      <%= render :partial => 'multitrack/project' if logged_in? %>
       
       <div id="multitrack">
     	  <div id="flash"></div>

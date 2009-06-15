@@ -1,12 +1,11 @@
-	<!-- BEGIN PROJECT FORM -->
-	<form class="project_data">
+<!-- BEGIN PROJECT FORM -->
+<form class="project_data">
 		
 	<div id="project">
 		<div class="project_info fleft">
 			<span class="title block">Project info</span>
-
-				<span class="fleft">
-					<%= image_tag current_user.avatar.public_filename(:medium), :class => 'border avatar', :size => '60x60' %>
+			<span class="fleft">
+				<%= image_tag current_user.avatar.public_filename(:medium), :class => 'border avatar', :size => '60x60' %>
 
 				<select name="identity" id="identity" style="display:none" onchange="void(0)">
 					<option value="user/<%= current_user.id %>" icon="<%= current_user.avatar.public_filename(:medium) %>">
@@ -20,21 +19,20 @@
 						<% end %>
 					</optgroup>
 				</select>
+			</span>
+
+			<input type="text" name="project_title" value="Untitled Project" class="text ui-widget-content ui-corner-all project_title" />
+			<!--<input type="text" name="project_author" value="Pino" class="text ui-widget-content ui-corner-all project_author">-->
+			<div class="project_author fleft inplace-edit">
+				<span class="fleft">
+					<h2><%= logged_in? ? current_user.nickname : 'Guest'%></h2>
 				</span>
-
-				
-				<input type="text" name="project_title" value="Untitled Project" class="text ui-widget-content ui-corner-all project_title">
-				<!--<input type="text" name="project_author" value="Pino" class="text ui-widget-content ui-corner-all project_author">-->
-				<div class="project_author fleft inplace-edit">
-					<span class="fleft">
-						<h2><%= current_user.nickname %></h2>
-					</span>
-					<span class="fright ten">
-						<a href="#" class="icons16 edit_icon padleft23 none">Edit</a>
-					</span>
-				</div>
-
+				<span class="fright ten">
+					<a href="#" class="icons16 edit_icon padleft23 none">Edit</a>
+				</span>
+			</div>
 		</div>
+
 		<div class="project_publish fleft">
 			<span class="title block">Publishing options</span>
 				<div class="fleft show_options">				
@@ -59,5 +57,6 @@
 				
 		</div>
 	</div>
+
 </form>
 <!-- END FORM -->
