@@ -1,21 +1,21 @@
-<div class="influences_box fleft">
+<div class="comma_separated_box fleft">
 	<%- if current_user_page? -%>
 	<a href="" class="edit_lists edit_icon none fright">Edit</a>
 	<%- end -%>
-	<h2>Influences</h2>
+	<h2>comma_separated</h2>
 	<div class="inner">
 
 		<p class="info_text_group">
 			<span class="s13 heading block">Genre</span>
 			<span class="tag_genre nomargin">
-				<%= influences_links(@user.influences_genres) || "<em>No influences</em>" %>
+				<%= comma_separated_links(@user.influences_genres) || "<em>No influences</em>" %>
 			</span>			
 		</p>
 
 		<p class="info_text_group">
 			<span class="s13 heading block">Artists</span>
 			<span class="tag_genre body12 nomargin">
-				<%= influences_links(@user.influences_artists) || "<em>No influences</em>" %>
+				<%= comma_separated_links(@user.influences_artists) || "<em>No influences</em>" %>
 			</span>
 		</p>
 
@@ -23,14 +23,14 @@
 		<p class="info_text_group">
 			<span class="s13 heading block">Movies</span>
 			<span class="gray_spec nomargin">
-				<%= influences_links(@user.influences_movies) || "<em>No influences</em>" %>
+				<%= comma_separated_links(@user.influences_movies) || "<em>No influences</em>" %>
 			</span>
 		</p>
 
 		<p class="info_text_group">
 			<span class="s13 heading block">Books</span>
 			<span class="gray_spec nomargin">
-				<%= influences_links(@user.influences_books) || "<em>No influences</em>" %>
+				<%= comma_separated_links(@user.influences_books) || "<em>No influences</em>" %>
 			</span>
 		</p>
 			

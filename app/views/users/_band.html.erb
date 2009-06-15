@@ -1,0 +1,43 @@
+<div class="margin30">
+	<div class="fleft">
+		<h2 class="overflow-hidden">
+			<span class="icons18 mbands_small_icon fleft"> </span>
+			<a href="" class="fleft">Enzo's untouchable Quintet</a>
+		</h2>
+		<p class="tag_genre">
+			<%= mband_tags_for(band) %>
+		</p>
+	</div>
+	<div class="clear"> </div>
+	<div class="profile_mband_block overflow-hidden">
+		<div class="fleft">
+			<%= link_to image_tag(band.avatar.public_filename(:medium), :size => '160x89'), band, :class => 'profile_mband_pic fleft' %>
+		</div>	
+		<div class="fleft">
+			<div class="margin7">
+
+				<%- instrument = mband_membership_instrument_on(@user, band) -%>
+				<!-- this code need a function lineup() -->
+				<div class="instr_avatar instr_shadow fleft">
+					<span class="instr white <%= instrument.description.downcase %>"> 
+						<span class="instr_flag fright">
+							<img src="/images/icons/flags/<%= rand(54) + 1 %>.gif" width="16" />
+						</span>  
+					</span>
+				</div>
+				<!-- end -->
+
+			</div>
+
+			<div class="fleft margin7">
+				<%= image_tag @user.avatar.public_filename(:small), :class => 'border', :width => 40 %>
+				<div class="fleft">
+					<p class="gray_spec nomargin">
+						<strong><%= @user.login %></strong> is at the <strong><%= instrument.description %></strong>
+					</p>
+				</div>		
+			</div>				
+
+		</div>
+	</div>
+</div>

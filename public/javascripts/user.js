@@ -27,12 +27,15 @@ $.fn.replaceOnClickWith = function(options) {
 
 $.fn.simpleTabs = function() {
   var container = $(this);
-  var choices = container.children('ul')
+  var choices = container.children('ul');
+	var options = arguments[0] || {};
+  var current = options.current || 'current';
+
   choices.find('li a').click(function() {
-    choices.find('li').removeClass('current');
+    choices.find('li').removeClass(current);
     container.children('div').hide();
 
-    $(this).parent('li').addClass('current');
+    $(this).parent('li').addClass(current);
     $($(this).attr('href')).show();
     return false;
   })

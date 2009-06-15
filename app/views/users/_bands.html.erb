@@ -1,107 +1,30 @@
-<div class="fleft">
-	<span class="gray_spec">Pinca Palla plays in these</span>
-	<span class="fleft heading s13 weight-bold">M-Bands</span>
-</div>
+<script type="text/javascript">
+	$(function() { 
+		$('#mbands-tabs').simpleTabs({current: 'weight-bold'});
+	});
+</script>
+<div id="mbands-tabs">
+	<ul class="fright" style="list-style:none">
+		<li><a href="#mbands-create" class="edit_lists add_icon none s13">Create a new MBand</a></li>
+		<li><a href="#mbands-listing" class="edit_lists cogedit_icon none clear">Manage your MBands</a></li>
+	</ul>
 
-<div class="fright">
-	<a href="" class="edit_lists add_icon none fright weight-bold s13">Create a new MBand</a>
-	<a href="" class="edit_lists cogedit_icon none fright clear">Manage your MBands</a>
-</div>	
-
-<div class="clear"> </div>
-
-
-
-<div class="margin30">
-	<div class="fleft">
-		<h2 class="overflow-hidden">
-			<span class="icons18 mbands_small_icon fleft"> </span>
-			<a href="" class="fleft">Enzo's untouchable Quintet</a>
-		</h2>
-		<p class="tag_genre">
-			<a href="">Ska,</a><a href="">Punk,</a><a href="">Ska-Core,</a>
-			<a href="">Post Hardcore,</a><a href="">Minimal,</a><a href="">Thrash,</a>
-			<a href="">Electro-Rock</a>				
-		</p>
-	</div>
-	<div class="clear"> </div>
-	<div class="profile_mband_block overflow-hidden">
+	<div id="mbands-listing">
 		<div class="fleft">
-			<a href="" class="profile_mband_pic fleft">
-				<img src="/images/temp/pick_song.jpg" width="160" height="89" />
-			</a>
-		</div>	
-		<div class="fleft">
-			<div class="margin7">
-
-			<!-- this code need a function lineup() -->
-			<div class="instr_avatar instr_shadow fleft">
-        <span class="instr white drums"> 
-          <span class="instr_flag fright">
-            <img src="/images/icons/flags/<%= rand(54) + 1 %>.gif" width="16" />
-          </span>  
-        </span>
-      </div>
-      <!-- end -->
-
-			</div>
-			<div class="fleft margin7">
-				<a href="" class="wall_avatars fleft">
-					<img src="/images/temp/avatar_pino.jpg" class=" border" width="40" />					
-				</a>
-				<div class="fleft">
-					<p class="gray_spec nomargin">
-						<strong>Pinca Palla</strong> is at the <strong>Drums</strong>
-					</p>
-				</div>		
-			</div>				
+			<span class="gray_spec"><%= if current_user_page? then "You play" else "#{@user.login} plays" end %> in these</span>
+			<span class="fleft heading s13 weight-bold">M-Bands</span>
 		</div>
-	</div>
-</div>
+		<div class="clear"> </div>
 
-
-<!-- RP -->
-<div class="margin30">
-	<div class="fleft">
-		<h2 class="overflow-hidden">
-			<span class="icons18 mbands_small_icon fleft"> </span>
-			<a href="" class="fleft">Sblandons</a>
-		</h2>
-		<p class="tag_genre">
-			<a href="">Techno,</a><a href="">Trance,</a><a href="">Electronic,</a><a href="">Experimental</a></a><a href="">House,</a><a href="">Minimal,</a><a href="">Pop</a>			
-		</p>
+		<%= render :partial => 'users/band', :collection => @mbands %>
 	</div>
-	<div class="clear"> </div>
-	<div class="profile_mband_block overflow-hidden">
+	<div id="mbands-create" style="display:none">
 		<div class="fleft">
-			<a href="" class="profile_mband_pic fleft">
-				<img src="/images/temp/coolest_mband.jpg" width="160" height="89" />
-			</a>
-		</div>	
-		<div class="fleft">
-			<div class="margin7">
-				
-				<!-- this code need a function lineup() -->
-				<div class="instr_avatar instr_shadow fleft">
-          <span class="instr white synth"> 
-            <span class="instr_flag fright">
-              <img src="/images/icons/flags/<%= rand(54) + 1 %>.gif" width="16" />
-            </span>  
-          </span>
-        </div>
-        <!-- end -->
-        
-			</div>
-			<div class="fleft margin7">
-				<a href="" class="wall_avatars fleft">
-					<img src="/images/temp/avatar_pino.jpg" class=" border" width="40" />					
-				</a>
-				<div class="fleft">
-					<p class="gray_spec nomargin">
-						<strong>Pinca Palla</strong> is at the <strong>Synth</strong>
-					</p>
-				</div>		
-			</div>				
+			<span class="gray_spec">Create a new</span>
+			<span class="fleft heading s13 weight-bold">M-Band</span>
 		</div>
+		<div class="clear"> </div>
+
+		<%= render :partial => 'users/band_new' %>                
 	</div>
 </div>

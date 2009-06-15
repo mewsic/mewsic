@@ -147,9 +147,17 @@ module UsersHelper
     session[:fb_connect]
   end
 
-  def influences_links(influences)
-    return if influences.blank?
-    influences.split(/ *,+ */).compact.map{ |tag| link_to(tag, search_path(:q => tag)) }.join(', ')
+  def comma_separated_links(text)
+    return if text.blank?
+    text.split(/ *,+ */).compact.map{ |tag| link_to(tag, search_path(:q => tag)) }.join(', ')
+  end
+
+  def mband_tags_for(mband)
+    Tag.find_from_collection(mband.songs).map { |tag| link_to tag.name, search_path(:q => tag.name) }.join(', ')
+  end
+
+  def mband_membership_instrument_on(user, mband)
+    user.mband_memberships.find_by_mband_id(mband.id).instrument
   end
 
   # This method_missing defines the following methods (self-explanatory):
