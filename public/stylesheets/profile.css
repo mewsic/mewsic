@@ -522,6 +522,10 @@ dl.info dt, dl.info dd { padding-bottom: 4px; }
 	width: 285px;
 }
 
+.influences_box a, .iam_box a {
+	padding-right: 0;
+}
+
 
 /* inslide tagged instr list */
 .tagged_instr_list {

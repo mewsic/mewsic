@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090614112927) do
+ActiveRecord::Schema.define(:version => 20090615124539) do
 
   create_table "abuses", :force => true do |t|
     t.integer  "abuseable_id"
@@ -273,7 +273,6 @@ ActiveRecord::Schema.define(:version => 20090614112927) do
     t.string   "crypted_password",          :limit => 40
     t.string   "salt",                      :limit => 40
     t.text     "biography"
-    t.text     "tastes"
     t.datetime "remember_token_expires_at"
     t.datetime "activated_at"
     t.integer  "friends_count"
@@ -294,6 +293,10 @@ ActiveRecord::Schema.define(:version => 20090614112927) do
     t.integer  "comments_count",                                                         :default => 0
     t.string   "facebook_uid"
     t.date     "birth_date"
+    t.text     "influences_genres"
+    t.text     "influences_artists"
+    t.text     "influences_movies"
+    t.text     "influences_books"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090614112927
+# Schema version: 20090615124539
 #
 # Table name: users
 #
@@ -23,7 +23,6 @@
 #  crypted_password          :string(40)    
 #  salt                      :string(40)    
 #  biography                 :text          
-#  tastes                    :text          
 #  remember_token_expires_at :datetime      
 #  activated_at              :datetime      
 #  friends_count             :integer(4)    
@@ -44,13 +43,18 @@
 #  comments_count            :integer(4)    default(0)
 #  facebook_uid              :string(255)   
 #  birth_date                :date          
+#  influences_genres         :text          
+#  influences_artists        :text          
+#  influences_movies         :text          
+#  influences_books          :text          
 #
 
 require 'digest/sha1'
 class User < ActiveRecord::Base
   
   define_index do
-    indexes :login, :biography, :tastes, :country
+    indexes :login, :biography, :country,  :influences_genres,
+      :influences_artists, :influences_movies, :influences_books
     where 'activated_at IS NOT NULL'
     #set_property :delta => true
   end
@@ -62,6 +66,9 @@ class User < ActiveRecord::Base
   validates_presence_of     :password,                   :if => :password_required?
   validates_presence_of     :password_confirmation,      :if => :password_required?
   validates_confirmation_of :password,                   :if => :password_required?
+
+  validates_uniqueness_of   :login, :email, :case_sensitive => false
+
   validates_length_of       :password, :within => 6..20, :if => :password_required?,
                                        :too_short => 'too short! minimum {{count}} chars',
                                        :too_long => 'too long! maximum {{count}} chars'
@@ -71,7 +78,8 @@ class User < ActiveRecord::Base
   validates_length_of       :city,     :maximum => 25,  :allow_nil => true, :allow_blank => true, :message => 'too long! max {{count}} chars'
   validates_length_of       :country,  :maximum => 45,  :allow_nil => true, :allow_blank => true, :message => 'too long! max {{count}} chars!'
   validates_length_of       :biography, :maximum => 1500, :allow_nil => true, :allow_blank => true, :message => 'too long.. sorry! max {{count}} chars'
-  validates_length_of       :tastes,   :maximum => 1500, :allow_nil => true, :allow_blank => true, :message => 'too long.. sorry! max {{count}} chars'
+  validates_length_of       :influences_genres, :influences_artists, :influences_movies, :influences_books,
+                                        :maximum => 1500, :allow_nil => true, :allow_blank => true, :message => 'too long.. sorry! max {{count}} chars'
 
   validates_format_of       :email,    :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :on => :create, :message => 'invalid e-mail'
   validates_format_of       :login,    :with => /^[a-z][\w_-]+$/i, :if => Proc.new{|u| !u.login.blank?}, :message => 'only letters, numbers and underscore allowed!'
@@ -80,8 +88,6 @@ class User < ActiveRecord::Base
   validates_format_of       :photos_url, :blog_url, :myspace_url,
                                        :with => /^(((http|https):\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?)?$/ix, 
                                        :message => 'invalid internet address'
-
-  validates_uniqueness_of   :login, :email, :case_sensitive => false
 
   validates_inclusion_of    :gender, :in => %w(male female other), :allow_nil => true, :allow_blank => true
 
@@ -94,7 +100,7 @@ class User < ActiveRecord::Base
   # sanitizer configured in environment.rb 
   #
   xss_terminate :except => [:email, :msn, :gender, :photos_url, :blog_url, :myspace_url, :facebook_uid],
-                :sanitize => [:biography, :tastes]
+                :sanitize => [:biography, :influences_genres, :influences_artists, :influences_movies, :influences_books]
   
   has_many :mband_memberships
   has_many :mbands, :through => :mband_memberships, :class_name => 'Mband', :source => :mband,
@@ -132,9 +138,9 @@ class User < ActiveRecord::Base
   
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :password, :password_confirmation, :first_name, :last_name, :name_public,
-    :gender, :biography, :tastes, :country, :city, :birth_date,
-    :photos_url, :blog_url, :myspace_url,
+  attr_accessible :password, :password_confirmation, :first_name, :last_name, :name_public, :gender,
+    :biography, :influences_genres, :influences_artists, :influences_movies, :influences_books,
+    :country, :city, :birth_date, :photos_url, :blog_url, :myspace_url,
     :skype, :msn, :skype_public, :msn_public, :podcast_public
   attr_readonly :comments_count, :writings_count, :profile_views, :facebook_uid
   

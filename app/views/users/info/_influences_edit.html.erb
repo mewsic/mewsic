@@ -5,43 +5,42 @@
 		<%- form_for @user do |f| -%>
 			<fieldset>
 				<span class="s13 heading block">Genre</span>
-				<textarea id="infl-genres" style="margin-bottom: 0;">Es: Rock, Electronic</textarea>
+				<%= f.text_area :influences_genres, :style => 'margin-bottom:0', :rows => 5 %>
 				<div class="ui-state-highlight action_notice_dialog alleft">
 					<span class="fleft icons16 profile ui-icon ui-icon-lightbulb"> </span>
 					Type musical genres you like the most.
 				</div>
 
-
 				<span class="s13 heading block">Artists</span>
-				<textarea id="infl-artists" style="margin-bottom: 0;" >Es: The Beatles, ACDC</textarea>
+				<%= f.text_area :influences_artists, :style => 'margin-bottom:0', :rows => 5 %>
 				<div class="ui-state-highlight action_notice_dialog alleft">
 					<span class="fleft icons16 profile ui-icon ui-icon-lightbulb"> </span>
 					Type your favourite Band/Artist name.
 				</div>
 
-
 				<span class="s13 heading block">Movies</span>
-				<textarea id="infl-movies" style="margin-bottom: 0;" ></textarea>
+				<%= f.text_area :influences_movies, :style => 'margin-bottom:0', :rows => 5 %>
 				<div class="ui-state-highlight action_notice_dialog alleft">
 					<span class="fleft icons16 profile ui-icon ui-icon-lightbulb"> </span>
 					Movies you've seen the most.
 				</div>
 
-
 				<span class="s13 heading block">Books</span>
-				<textarea id="infl-books" style="margin-bottom: 0;" ></textarea>
+				<%= f.text_area :influences_books, :style => 'margin-bottom:0', :rows => 5 %>
 				<div class="ui-state-highlight action_notice_dialog alleft">
 					<span class="fleft icons16 profile ui-icon ui-icon-lightbulb"> </span>
 					Books you're reading or loved to.
 				</div>
 
-				<input type="submit" class="margin30 mailbox_cancel cancel_button gray_spec fright" value="Cancel">	
-				<input type="submit" value="Save my influences" class="margin30 mailbox_send login_button fright">
+				<div class="fright">
+					<input type="submit" class="margin30 mailbox_cancel cancel_button gray_spec" value="Cancel">	
+					<input type="submit" value="Save my influences" class="margin30">
+				</div>
 			</fieldset>			
 		<%- end #form -%>
 		<script type="text/javascript" charset="utf-8">
 			$(function(){
-				$('#infl-genres, #infl-artists, #infl-movies, #infl-books').simpleautogrow();
+				$('div.influences_box textarea').simpleautogrow();
 
 				$('div.influences_box').replaceOnClickWith({
 					anchor: 'a.edit_lists, input.cancel_button',
