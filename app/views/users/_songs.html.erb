@@ -38,7 +38,7 @@
 				</ul>
 
 				<%- if current_user_page? -%>
-				<div class="browse_pane_right fleft" id="profile-songs-public" style="display:none">
+				<div class="browse_pane_right fleft" id="profile-songs-private" style="display:none">
 					<div class="music_list fleft">
 						<%= render :partial => 'users/song_block', :collection => @private_songs %>
 					</div>
