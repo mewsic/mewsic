@@ -13,10 +13,12 @@
 #  instrument_id    :integer(4)    
 #
 
+<% require File.join(RAILS_ROOT, 'test', 'fixtures_helpers') %>
+
 quentin_for_quentin_mband:
   mband: quentin_mband
   user: quentin
-  instrument: guitar
+  instrument: nylon_stringed_guitar
   accepted_at: <%= 5.days.ago.to_s :db %>
 
 john_for_quentin_mband:
@@ -28,7 +30,7 @@ john_for_quentin_mband:
 john_for_scapokkier:
   mband: scapokkier
   user: john
-  instrument: guitar
+  instrument: steel_stringed_guitar
   accepted_at: <%= 4.days.ago.to_s :db %>
 
 quentin_for_scapokkier:
@@ -47,6 +49,6 @@ user_42_for_scapokkier:
 mband_membership_<%= i %>:
   mband: mband_<%= i / 4 %>
   user: user_<%= rand(497) + 3 %> 
-  instrument: <%= %w( guitar drums microphone saxophone trumpet ).sort_by{rand}.first %>
+  instrument: <%= %w( steel_stringed_guitar nylon_stringed_guitar electric_guitar drums voice saxophone trumpet tuba ).rand %>
   accepted_at: <%= rand(20).days.ago.to_s :db %>
 <% end %>
