@@ -1,0 +1,134 @@
+<div class="fleft">
+	<span class="gray_spec">Pinca Palla use the following</span>
+	<span class="fleft heading s13 weight-bold">Gears</span>
+</div>
+
+<div class="clear"> </div>
+
+<div class="fleft margin30" style="width:315px;">
+	<div id="add_gear">
+		<p class="gray_spec dialog_help">Show off your gear! Select an <strong>Instrument icon</strong> to add details of your stuff and tag it in your pictures.</p>
+
+		<div id="instruments_icons">
+			<ul id="gear-tabs" class="fleft">
+				<%- for category in @instrument_categories do -%>
+					<li><%= link_to category, "#instr-group-#{category.code}" %></li>
+				<%- end %>
+				<!-- use classes visible, invisible -->
+				<span class="fleft instr_avatar invisible">
+					<%= image_tag 'loader_small.gif' -%>
+				</span>
+			</ul>
+
+			<%- for category in @instrument_categories do -%>
+			<div id="instr-group-<%= category.code %>" class="overflow-hidden" style="display:none">
+
+				<%- for instrument in category.instruments do -%>
+				<div class="shadow_white instr_gear_list fleft">
+					<a href="#" class="instr white <%= instrument.code %>" title="<%= instrument.description %>"> </a>
+				</div>				
+				<%- end -%>
+
+			</div>
+			<%- end -%>
+
+		</div>
+	
+	</div>
+</div>
+
+
+<div class="fleft margin30 padleft7" style="width:360px">
+<%= javascript_include_tag 'ui/effects.core.js', 'jquery.jeditable.js' %>
+<script type="text/javascript">
+	$(function() {
+		$('#instruments_icons').simpleTabs();
+		$('#instruments_icons ul li a:first').click()
+
+		$('#instruments_icons a.instr').click(function() {
+			var instrument = $(this).attr('class').replace(/(instr|white|blue) */ig, '')
+			var new_gear = $('#new_gear li').clone();
+
+			new_gear.find('a.instr').addClass(instrument);
+			new_gear.find('a.ui-pointer').click(function() {
+				$(this).parents('li').fadeOut('fast', function() { $(this).remove(); });
+				return false;
+			});
+
+			$('#submitted_gear').prepend(new_gear);
+
+			new_gear.fadeIn();
+			$(this).fadeOut('fast').fadeIn('fast');
+
+			return false;
+		});
+
+		$("#submitted_gear").sortable({
+			axis: 'y',
+			items: 'li.drag_gear',
+			containment: 'parent',
+			opacity: 0.7,
+			revert: true,
+			tolerance: 'pointer'
+		});
+
+		$('#submitted_gear .edit_link').click(function() {
+			$(this).parent().siblings().trigger('mewsic.gear.edit');
+			return false;
+		});
+
+		$('#submitted_gear .edit').editable(function(v) { return v; }, {
+			event: 'mewsic.gear.edit',
+			submit: 'OK',
+			cancel: 'cancel',
+			type: 'text',
+			width: 150,
+			onedit:   function(o, self) { $(self).siblings().hide(); },
+			onsubmit: function(o, self) { $(self).siblings().show(); },
+			onreset:  function(o, self) { $(self).siblings().show(); },
+		});
+
+	});
+
+</script>
+
+<p class="tags_heading gray_spec weight-bold dialog_help">MY GEAR</p>
+
+<ul id="new_gear" style="display:none">
+	<li class="new_gear" style="display:none">
+		<div class="my_gear overflow-hidden">
+			<div class="fleft">
+				<div class="fleft instr_avatar">
+					<a href="#" class="instr white"> </a>
+				</div>				
+					<div class="fleft gear_infos overflow-hidden">
+						<div class="fleft">
+							<input type="text" value="Brand" class="geartext fleft">
+						</div>
+						<div class="fleft clear">
+							<input type="text" value="Model" class="geartext fleft">		
+						</div>
+					</div>
+				</div>
+				<div class="fright" style="margin-right:4px;">
+					<a href="#" class="icons16 ui-state-tools ui-icon-circle-close ui-pointer"> </a>
+				</div>
+		</div>	
+	</li>
+</ul>
+
+<%- form_tag user_gears_path(@user), :method => :put do -%>
+	<div>
+		<ul id="submitted_gear">
+			<%= render :partial => 'users/gear', :collection => @gears %>
+		</ul>
+	</div>
+
+	<div class="fright">
+		<input type="reset" value="Cancel" class="margin7 mailbox_cancel cancel_button gray_spec fright">
+		<input type="submit" value="Save gears" class="margin7 login_button mailbox_send fright">
+		<div class="fright icons16 loader_white" style="margin:10px 5px 0 0"> </div>				
+	</div>
+<%- end -%>
+
+</div>

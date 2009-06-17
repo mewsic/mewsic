@@ -23,10 +23,10 @@ config.action_mailer.default_content_type = 'text/html'
 config.action_mailer.delivery_method = :sendmail
 
 APPLICATION = {
-  :url => 'http://localhost:3000',
+  :url => 'http://192.168.78.1:3000',
   :email => 'no-reply@mewsic.local',
-  :fms_url => 'rtmp://localhost/',
-  :media_url => 'http://localhost:3001',
+  :fms_url => 'rtmp://192.168.78.1/',
+  :media_url => 'http://192.168.78.1:3001',
   :audio_url => '/audio',
   :video_url => '/videos',
   :media_path => File.join(RAILS_ROOT, 'public', 'audio')

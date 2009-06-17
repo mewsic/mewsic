@@ -30,6 +30,7 @@ ActionController::Routing::Routes.draw do |map|
     user.resources :messages, :collection => { :delete_selected => :post, :sent => :get, :unread => :get }
     user.resources :abuses
     user.resources :comments
+    user.resources :gears, :collection => { :sort => :put }
   end
 
   # Mbands && memberships

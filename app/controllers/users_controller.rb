@@ -149,6 +149,9 @@ class UsersController < ApplicationController
           else
             @tracks = @user.tracks.public.paginate(:page => 1, :per_page => 10)
           end
+
+          @instrument_categories = InstrumentCategory.by_name.with_instruments
+          @gears = @user.gears
         
           @answers = @user.answers.paginate(:page => 1, :per_page => 6)
         

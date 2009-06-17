@@ -1547,12 +1547,12 @@ h2 {
 	border-bottom: 1px solid #999999;
 	/* width: 237px; */
 }
-#drag-handle { cursor: move; margin-top: 8px; }
 #submitted_gear { list-style: none; }
 #submitted_gear li { margin: 2px; /* display: inline-block */ }
+#submitted_gear .drag-handle { cursor: move; margin-top: 8px; }
 
 input.geartext { 
-	width:269px; 
+	width:260px; 
 	color: #696969;
 	padding: 1px 4px;
 	margin: 1px 0;

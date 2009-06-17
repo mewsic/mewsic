@@ -10,6 +10,8 @@ h2, #top_footer .subtitle, h1, #expl_banner p, .cat_title  {
 	font-family: "Trebuchet MS";
 }
 
+.ui-pointer { cursor: pointer; }
+
 .weight-bold { font-weight: bold; }
 .weight-normal { font-weight: normal !important;}
 
