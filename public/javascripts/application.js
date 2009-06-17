@@ -66,3 +66,38 @@ $.fn.addErrorWhenEmptied = function() {
   });
 }
 
+$.fn.hideDefaultValueOnBlur = function() {
+  return this.each(function() {
+    var self = $(this);
+    var defaultValue = self.attr('value');
+
+    self.focus(function() {
+      if(self.attr('value') == defaultValue) {
+        self.attr('value', '');
+      }
+    }).blur(function() {
+      if(self.attr('value') == '') {
+        self.attr('value', defaultValue);
+      }
+    });
+
+  });
+}
+
+$.rand = function() {
+	return Math.pow(Math.random()*10, 10);
+}
+
+$.randInt = function() {
+	return Math.floor($.rand());
+}
+
+$.randInt(); // Seed it.
+
+$.fn.fadeTo = function(amount) {
+	var params = arguments[1] || {duration: 'slow'};
+
+	return this.each(function() {
+		$(this).animate({opacity: amount}, params)
+	});
+}

@@ -25,7 +25,7 @@
 
 				<%- for instrument in category.instruments do -%>
 				<div class="shadow_white instr_gear_list fleft">
-					<a href="#" class="instr white <%= instrument.code %>" title="<%= instrument.description %>"> </a>
+					<a href="#" rel=<%= instrument.id %> class="instr white <%= instrument.code %>" title="<%= instrument.description %>"> </a>
 				</div>				
 				<%- end -%>
 
@@ -42,27 +42,49 @@
 <%= javascript_include_tag 'ui/effects.core.js', 'jquery.jeditable.js' %>
 <script type="text/javascript">
 	$(function() {
+		// The instrument icons are simple tabs (http://gist.github.com/131191)
+		// Upon initialization, the first element is clicked from JS, to make it highlighted.
+		//
 		$('#instruments_icons').simpleTabs();
 		$('#instruments_icons ul li a:first').click()
 
+		// When clicking an instrument icon, a new <li> is created inside the #submitted_gear
+		// div, cloning it from the hidden #new_gear ul. The instrument is set via CSS class,
+		// the instrument ID is fetched from the link "rel" attribute, and eventually a new
+		// a random ID for this gear is generated and added to the text inputs. The close icon
+		// simply removes the cloned element. A nifty fade effect is an added bonus.
+		//
 		$('#instruments_icons a.instr').click(function() {
 			var instrument = $(this).attr('class').replace(/(instr|white|blue) */ig, '')
 			var new_gear = $('#new_gear li').clone();
 
-			new_gear.find('a.instr').addClass(instrument);
+			new_gear.find('.instr').addClass(instrument).find('input').attr('value', $(this).attr('rel'));
+
+			var id = $.randInt();
+			new_gear.find('input').hideDefaultValueOnBlur().each(function(i, elem) {
+				$(elem).attr('name', "new_gear["+ id +"]["+ $(elem).attr('name') +"]");
+			});
+
+			// Close btn
 			new_gear.find('a.ui-pointer').click(function() {
 				$(this).parents('li').fadeOut('fast', function() { $(this).remove(); });
 				return false;
 			});
 
+			// Append the content
 			$('#submitted_gear').prepend(new_gear);
 
+			// fade it in
 			new_gear.fadeIn();
+
+			// And flash the triggering icon.
 			$(this).fadeOut('fast').fadeIn('fast');
 
 			return false;
 		});
 
+		// The #submitted_gear div is .sortable on the y axis
+		//
 		$("#submitted_gear").sortable({
 			axis: 'y',
 			items: 'li.drag_gear',
@@ -72,20 +94,68 @@
 			tolerance: 'pointer'
 		});
 
+		// Each .edit element inside the #submitted_gear div is editable. Upon submit, no AJAX
+		// call is made, instead the new value is stored into an adjacent input type=hidden
+		// element. The original value is saved inside a .data('mewsic.originalValue'), to make
+		// possible to restore it later if the user clicks on the "cancel" button.
+		//
+		$('#submitted_gear .edit').editable(function(v) {
+				var input = $(this).siblings('input');
+				if (!input.data('mewsic.originalValue')) {
+					input.data('mewsic.originalValue', input.val());
+				}
+				input.val(v);
+				return v;
+			}, {
+			event: 'mewsic.gear.edit',
+			submit: 'OK',
+			cancel: 'Cancel',
+			type: 'text',
+			width: 150,
+			onedit:   function(o, self) { $(self).siblings().hide(); },
+			onreset:  function(o, self) { $(self).siblings().show(); },
+			onsubmit: function(o, self) { $(self).siblings().show(); },
+		});
+
+		// The edit_link triggers a 'mewsic.gear.edit' event on the siblings, so that the
+		// .editable() above takes actual place.
+		//
 		$('#submitted_gear .edit_link').click(function() {
 			$(this).parent().siblings().trigger('mewsic.gear.edit');
 			return false;
 		});
 
-		$('#submitted_gear .edit').editable(function(v) { return v; }, {
-			event: 'mewsic.gear.edit',
-			submit: 'OK',
-			cancel: 'cancel',
-			type: 'text',
-			width: 150,
-			onedit:   function(o, self) { $(self).siblings().hide(); },
-			onsubmit: function(o, self) { $(self).siblings().show(); },
-			onreset:  function(o, self) { $(self).siblings().show(); },
+
+		// Reset form: remove all the newly added instruments, retrieve the original value
+		// from the hidden inputs and place it as well into the '.edit' elements.
+		// Return false to prevent a .resetForm(), which is useless.
+		//
+		$('form#gears input[type=reset]').click(function() {
+			$('#submitted_gear .new_gear').fadeOut('slow', function() { $(this).remove(); });
+			$('#submitted_gear .drag_gear').fadeOut('slow').fadeIn('slow');
+
+			$('#submitted_gear input[type=hidden]').each(function() {
+				var original_value = $(this).data('mewsic.originalValue');
+				if (original_value) {
+					$(this).val(original_value);
+				}
+				$(this).siblings('.edit').text($(this).val());
+			})
+
+			return false;
+		});
+
+		$('form#gears').submit(function() {
+			var positions = {};
+			$('#submitted_gear .drag_gear').each(function(idx, elem) { positions[elem.id] = idx + 1; });
+
+			$(this).ajaxSubmit({
+				data: positions,
+				target: '#submitted_gear',
+				beforeSubmit: function() { $('#submitted_gear').fadeTo(0.3); },
+				success: function() { $('#submitted_gear').fadeTo(1.0); }
+			});
+			return false;
 		});
 
 	});
@@ -99,14 +169,16 @@
 		<div class="my_gear overflow-hidden">
 			<div class="fleft">
 				<div class="fleft instr_avatar">
-					<a href="#" class="instr white"> </a>
+					<span href="#" class="instr white">
+						<input type="hidden" name="instrument_id" value="" />
+					</span>
 				</div>				
 					<div class="fleft gear_infos overflow-hidden">
 						<div class="fleft">
-							<input type="text" value="Brand" class="geartext fleft">
+							<input type="text" name="brand" value="Brand" class="geartext fleft" />
 						</div>
 						<div class="fleft clear">
-							<input type="text" value="Model" class="geartext fleft">		
+							<input type="text" name="model" value="Model" class="geartext fleft" />		
 						</div>
 					</div>
 				</div>
@@ -117,7 +189,7 @@
 	</li>
 </ul>
 
-<%- form_tag user_gears_path(@user), :method => :put do -%>
+<%- form_tag user_gears_path(@user), :id => 'gears' do -%>
 	<div>
 		<ul id="submitted_gear">
 			<%= render :partial => 'users/gear', :collection => @gears %>
@@ -125,8 +197,8 @@
 	</div>
 
 	<div class="fright">
-		<input type="reset" value="Cancel" class="margin7 mailbox_cancel cancel_button gray_spec fright">
-		<input type="submit" value="Save gears" class="margin7 login_button mailbox_send fright">
+		<input type="reset" value="Cancel" class="margin7 mailbox_cancel cancel_button gray_spec fright" />
+		<input type="submit" value="Save gears" class="margin7 login_button mailbox_send fright" />
 		<div class="fright icons16 loader_white" style="margin:10px 5px 0 0"> </div>				
 	</div>
 <%- end -%>

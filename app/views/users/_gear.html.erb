@@ -1,13 +1,16 @@
-	<li id="gearpos_<%= gear.id %>" class="drag_gear">
+	<li id="gear[<%= gear.id %>][position]" class="drag_gear">
 		<div class="my_gear overflow-hidden">
 			<div class="fleft">
 				<div class="fleft instr_avatar">
-					<a href="#" class="instr white <%= gear.instrument.code %>"> </a>
+					<span href="#" class="instr white <%= gear.instrument.code %>">
+						<%= hidden_field_tag "gear[#{gear.id}][instrument_id]", gear.instrument.id %>
+					</span>
 				</div>				
 					<div class="fleft gear_infos">
 						<div class="fleft">
 							<span class="fleft">
 								<strong class="heading_blue fleft edit"><%= gear.brand %></strong>
+								<%= hidden_field_tag "gear[#{gear.id}][brand]", gear.brand %>
 								<span class="fleft padleft7 ten">
 									<a href="#" class="icons16 edit_icon padleft23 none edit_link">Edit</a>
 								</span>
@@ -15,6 +18,7 @@
 								<div class="clear"> </div>
 							<span class="fleft">
 								<span class="heading_blue fleft edit"><%= gear.model %></span>
+								<%= hidden_field_tag "gear[#{gear.id}][model]", gear.model %>
 								<span class="fleft padleft7 ten">
 									<a href="#" class="icons16 edit_icon padleft23 none edit_link">Edit</a>
 								</span>
