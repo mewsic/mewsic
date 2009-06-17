@@ -2,6 +2,8 @@ class Gear < ActiveRecord::Base
   belongs_to :user
   belongs_to :instrument
 
+  acts_as_list
+
   validates_presence_of :brand, :model, :user, :instrument
   validates_associated :user, :instrument
 

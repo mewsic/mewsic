@@ -282,6 +282,7 @@ ActiveRecord::Schema.define(:version => 20090616184156) do
     t.boolean  "skype_public",                                                           :default => false
     t.string   "crypted_password",          :limit => 40
     t.string   "salt",                      :limit => 40
+    t.string   "string",                    :limit => 40
     t.text     "biography"
     t.datetime "remember_token_expires_at"
     t.datetime "activated_at"
