@@ -31,8 +31,13 @@ class InstrumentCategory < ActiveRecord::Base
   validates_presence_of :description
 
   named_scope :by_name, :order => 'instrument_categories.description'
+  named_scope :with_instruments, :include => :instruments
 
   def to_s
     description
+  end
+
+  def code
+    description.downcase
   end
 end

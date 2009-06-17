@@ -1,0 +1,41 @@
+<%
+  require 'json'
+  brands = JSON.parse(File.read('test/fixtures/gear_brands.json'))
+  instrs = File.read('test/fixtures/instruments.txt').scan(/^\w+/)
+%>
+
+quentin_guitar:
+  brand: Fender
+  model: Stratocaster
+  user: quentin
+  instrument: electric_guitar
+  position: 1
+
+quentin_double_bass:
+  brand: Washburn
+  model: "T14 Left-handed Bass Guitar (black)"
+  user: quentin
+  instrument: double_bass
+  position: 2
+
+john_guitar:
+  brand: Alvarez
+  model: AD70SC
+  user: john
+  instrument: double_bass
+  position: 1
+
+john_drums:
+  brand: "Percussion Plus"
+  model: "PP3800 Deluxe"
+  user: john
+  instrument: drums
+  position: 2
+
+<% 1024.times do |i| %>
+user_<%= n = rand(500) %>_instr_<%= i %>:
+  brand: <%= brands.rand %>
+  model: "<%= %w( lorem ipsum dolor sit amet consecuetur adipiscing elit ).shuffle.join(' ').capitalize %>"
+  user: user_<%= n %>
+  instrument: <%= instrs.rand %>
+<% end %>
