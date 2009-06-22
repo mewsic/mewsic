@@ -39,7 +39,7 @@ class GearsControllerTest < ActionController::TestCase
     assert_not_equal '', guitar.reload.brand
   end
 
-  def test_create_should_create_and_update_existing
+  def test_create_should_create_delete_and_update_existing
     login_as :quentin
 
     quentin = users(:quentin)
@@ -58,11 +58,15 @@ class GearsControllerTest < ActionController::TestCase
     assert_equal instrument, guitar.instrument
 
     quentin.reload
-    assert_equal 3, quentin.gears.count
 
-    new_gear = quentin.gears.to_a.last
-    assert_equal 'tapioca', new_gear.model
-    assert_equal 'antani', new_gear.brand
-    assert_equal instruments(:double_bass), new_gear.instrument
+    assert_equal 2, quentin.gears.count
+
+    assert_equal [['tapioca', 'antani', instruments(:double_bass)], ['sux', 'prot', instrument]],
+      quentin.gears.map { |g| [g.model, g.brand, g.instrument] }
+
+    #new_gear = quentin.gears.to_a.first
+    #assert_equal 'tapioca', new_gear.model
+    #assert_equal 'antani', new_gear.brand
+    #assert_equal instruments(:double_bass), new_gear.instrument
   end
 end

@@ -95,9 +95,9 @@ $.randInt = function() {
 $.randInt(); // Seed it.
 
 $.fn.fadeTo = function(amount) {
-	var params = arguments[1] || {duration: 'slow'};
+	var params = $.extend({duration: 'slow'}, arguments[1] || {});
 
 	return this.each(function() {
-		$(this).animate({opacity: amount}, params)
+		$(this).animate({opacity: amount}, params);
 	});
 }

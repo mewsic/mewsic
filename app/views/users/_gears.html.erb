@@ -39,7 +39,7 @@
 
 
 <div class="fleft margin30 padleft7" style="width:360px">
-<%= javascript_include_tag 'ui/effects.core.js', 'jquery.jeditable.js' %>
+<%= javascript_include_tag 'ui/effects.core.js', 'jquery.jeditable.js', 'jquery.livequery.pack.js' %>
 <script type="text/javascript">
 	$(function() {
 		// The instrument icons are simple tabs (http://gist.github.com/131191)
@@ -47,6 +47,14 @@
 		//
 		$('#instruments_icons').simpleTabs();
 		$('#instruments_icons ul li a:first').click()
+
+		// Close callback, fired by the close buttons dynamically cloned and the ones
+		// generated via ERb. DRY, but a bit ugly.
+		// 
+		var close_callback = function() {
+			$(this).parents('li').fadeOut('fast', function() { $(this).remove(); });
+			return false;
+		}
 
 		// When clicking an instrument icon, a new <li> is created inside the #submitted_gear
 		// div, cloning it from the hidden #new_gear ul. The instrument is set via CSS class,
@@ -66,10 +74,7 @@
 			});
 
 			// Close btn
-			new_gear.find('a.ui-pointer').click(function() {
-				$(this).parents('li').fadeOut('fast', function() { $(this).remove(); });
-				return false;
-			});
+			new_gear.find('a.ui-pointer').click(close_callback);
 
 			// Append the content
 			$('#submitted_gear').prepend(new_gear);
@@ -83,6 +88,10 @@
 			return false;
 		});
 
+		// Close btn
+		//
+		$('#submitted_gear a.ui-pointer').livequery('click', close_callback);
+
 		// The #submitted_gear div is .sortable on the y axis
 		//
 		$("#submitted_gear").sortable({
@@ -94,53 +103,50 @@
 			tolerance: 'pointer'
 		});
 
+
 		// Each .edit element inside the #submitted_gear div is editable. Upon submit, no AJAX
 		// call is made, instead the new value is stored into an adjacent input type=hidden
-		// element. The original value is saved inside a .data('mewsic.originalValue'), to make
-		// possible to restore it later if the user clicks on the "cancel" button.
+		// element. 
 		//
-		$('#submitted_gear .edit').editable(function(v) {
-				var input = $(this).siblings('input');
-				if (!input.data('mewsic.originalValue')) {
-					input.data('mewsic.originalValue', input.val());
-				}
-				input.val(v);
-				return v;
-			}, {
-			event: 'mewsic.gear.edit',
-			submit: 'OK',
-			cancel: 'Cancel',
-			type: 'text',
-			width: 150,
-			onedit:   function(o, self) { $(self).siblings().hide(); },
-			onreset:  function(o, self) { $(self).siblings().show(); },
-			onsubmit: function(o, self) { $(self).siblings().show(); },
+		$('#submitted_gear .edit').livequery(function() {
+			$(this).editable(function(v) {
+					$(this).siblings('input').val(v);
+					return v;
+				}, {
+				event: 'mewsic.gear.edit',
+				submit: 'OK',
+				cancel: 'Cancel',
+				type: 'text',
+				width: 150,
+				onedit:   function(o, self) { $(self).siblings().hide(); },
+				onreset:  function(o, self) { $(self).siblings().show(); },
+				onsubmit: function(o, self) { $(self).siblings().show(); },
+			})
 		});
 
 		// The edit_link triggers a 'mewsic.gear.edit' event on the siblings, so that the
 		// .editable() above takes actual place.
 		//
-		$('#submitted_gear .edit_link').click(function() {
+		$('#submitted_gear .edit_link').livequery('click', function() {
 			$(this).parent().siblings().trigger('mewsic.gear.edit');
 			return false;
 		});
 
 
-		// Reset form: remove all the newly added instruments, retrieve the original value
-		// from the hidden inputs and place it as well into the '.edit' elements.
-		// Return false to prevent a .resetForm(), which is useless.
+		// Reset form: remove all the newly added instruments, and refetch everything
+		// from the server. Return false to prevent a .resetForm(), which is useless.
 		//
 		$('form#gears input[type=reset]').click(function() {
-			$('#submitted_gear .new_gear').fadeOut('slow', function() { $(this).remove(); });
-			$('#submitted_gear .drag_gear').fadeOut('slow').fadeIn('slow');
+			$('#submitted_gear .new_gear').fadeOut('fast', function() { $(this).remove(); });
 
-			$('#submitted_gear input[type=hidden]').each(function() {
-				var original_value = $(this).data('mewsic.originalValue');
-				if (original_value) {
-					$(this).val(original_value);
-				}
-				$(this).siblings('.edit').text($(this).val());
-			})
+			var gear = $('#submitted_gear');
+			var spinner = $('form#gears .loader_white');
+
+			$.ajax({
+				url: $('form#gears').attr('action'),
+				beforeSend: function() { gear.fadeTo(0.3); spinner.show(); },
+				success: function(html) { gear.html(html).fadeTo(1.0); spinner.hide(); }
+			});
 
 			return false;
 		});
@@ -199,7 +205,7 @@
 	<div class="fright">
 		<input type="reset" value="Cancel" class="margin7 mailbox_cancel cancel_button gray_spec fright" />
 		<input type="submit" value="Save gears" class="margin7 login_button mailbox_send fright" />
-		<div class="fright icons16 loader_white" style="margin:10px 5px 0 0"> </div>				
+		<div class="fright icons16 loader_white" style="display:none;margin:10px 5px 0 0"> </div>
 	</div>
 <%- end -%>
 
