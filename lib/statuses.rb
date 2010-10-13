@@ -1,5 +1,29 @@
-#  (C) 2009 Marcello Barnaba <vjt@openssl.it>
+# (C) 2009 Marcello Barnaba  <vjt@openssl.it>
 # Released under the terms of the MIT License
+# http://sindro.me/
+# 
+# == Usage ==
+#
+# Put this file in lib/ (or pluginize it)
+#
+# <tt>model.rb:</tt>
+#   require 'statuses'
+#
+#   class Model < ActiveRecord::Base
+#     has_multiple_statuses :public => 1, :private => 2, :whatever => 3
+#   end
+#
+# <tt>migration.rb:</tt>
+#   add_column :models, :status, :integer, :default => [your choice]
+#
+# You get:
+#   model.public?, model.private? and model.whatever? that return a Boolean
+#   model.status returns the status Symbol (ah ah): model.status #=> :public
+#   model.status(:db) return the status Integer: model.status(:db) #=> 1
+#   model.status= makes you able to set the status via a Symbol or an Integer:
+#     model.status = :public or model.status = 1
+#
+# Have fun! :) -vjt
 #
 module MultipleStatuses
   def self.included(target)
