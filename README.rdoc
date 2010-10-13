@@ -1,12 +1,30 @@
-== Welcome to MEWSIC development
+== Preface
+
+This application was developed by http://mikamai.com/ and http://lime5.it/, reached a hiatus
+and its source code is now released in the public domain. Of course, forks and contributions
+are accepted and promoted.
+
+This source tree contains a fully configured and working Rails 2.2 application, that can be
+used by young developers to learn how a production Rails app is built and implemented.
+
+The frontend is not complete, because the work on this app has been stopped abruptly, but
+most of the backend works.
+
+You'll find API keys and IPs in the sources, but don't bother trying to use them: they're
+expired and no more valid :-) but full source and history has been preserved for educational
+purposes.
+
+
+== Welcome to MEWSIC
 
 The mewsic application is a RESTful Rails 2.0 app that implements an open platform for
 creating and composing music online. The whole mewsic infrastructure is composed of:
 
-* This RESTful app;
-* The multitrack-server app, located on github at http://github.com/vjt/multitrack-server;
+* This RESTful app, implementing the HTML/JS frontend and the core backend
+* The uploader app, for long-running encoding tasks, located on github at
+  http://github.com/mewsic/mewsic-uploader;
 * 4 SWF components that consume the services of both apps, located on github;
-* Flash Media Server 3, that interacts with the multitrack-server app and the multitrack.
+* A Red5 instance, that interacts with the uploader app and the multitrack.
 
 This app implements most of the business logic, while the multitrack-server one handles file
 uploads and MP3 encoding and downmixing using ffmpeg (http://ffmpeg.mplayerhq.hu) and sox
@@ -21,7 +39,7 @@ uploads and MP3 encoding and downmixing using ffmpeg (http://ffmpeg.mplayerhq.hu
 
 == Quickstart
 
-* Clone the git repository (git clone git@github.com:vjt/mewsic.git)
+* Clone the git repository (git clone git://github.com/mewsic/mewsic.git)
 * Create a config/database.yml (example in config/database.yml.example)
 * Create the mewsic_development, mewsic_test and mewsic_production DBs
 * Verify that database connectivity is working by running script/console
@@ -29,9 +47,6 @@ uploads and MP3 encoding and downmixing using ffmpeg (http://ffmpeg.mplayerhq.hu
 * Run ruby script/server and connect to http://localhost:3000/ and you're set.
 
 == Goodies
-
-* If using vim, update your .vimrc with these instructions: https://github.com/vjt/mewsic/wikis/vimrc
-* Update your .irbrc with these instructions: https://github.com/vjt/mewsic/wikis/irbrc
 
 The "mewsic:initialize" rake task is a shorthand for 
 * rake db:migrate               - migrates the database schema to the latest version
@@ -47,10 +62,5 @@ Other useful tasks are defined in lib/tasks/utils.rake:
 * rake mewsic:clean_up_mp3s   - cleans up unreferenced mp3s in ENV['MP3DIR']
 * rake mewsic:update_friends_count
 * rake mewsic:update_replies_count
-
-== Now?
-
-Complete Rdoc is available at https://stage.lime5.it/rdoc/mewsic
-C0 test coverage report is at https://stage.lime5.it/rcov/mewsic
 
 Enjoy!
