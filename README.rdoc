@@ -1,8 +1,8 @@
 == Preface
 
-This application was developed by http://mikamai.com/ and http://lime5.it/, reached a hiatus
-and its source code is now released in the public domain. Of course, forks and contributions
-are accepted and promoted.
+This application was developed by http://medlar.it/ http://mikamai.com/ http://adelao.it/ and
+http://lime5.it/, reached a hiatus and its source code is now released in the public domain.
+Of course, forks and contributions are accepted and endorsed.
 
 This source tree contains a fully configured and working Rails 2.2 application, that can be
 used by young developers to learn how a production Rails app is built and implemented.
@@ -10,9 +10,9 @@ used by young developers to learn how a production Rails app is built and implem
 The frontend is not complete, because the work on this app has been stopped abruptly, but
 most of the backend works.
 
-You'll find API keys and IPs in the sources, but don't bother trying to use them: they're
-expired and no more valid :-) but full source and history has been preserved for educational
-purposes.
+You'll find API keys, passwords and IPs in the sources, but don't bother trying to use them:
+they're expired and no more valid :-). Full source and history have been preserved only for
+educational purposes.
 
 
 == Welcome to MEWSIC
